@@ -1,16 +1,18 @@
 const SUBJECTS = [
-  { id: "mathematics", name: "Mathematics", description: "Numbers, algebra and applied reasoning" },
-  { id: "biology", name: "Biology", description: "Living systems and the natural world" },
   { id: "english", name: "English Language", description: "Usage, comprehension and oral forms" },
+  { id: "general-paper", name: "General Paper", description: "Civics, current affairs and general knowledge" },
+  { id: "mathematics", name: "Mathematics", description: "Numbers, algebra and applied reasoning" },
 ];
 
 const FAQS = [
   { group: "Getting started", q: "What is Seomtorch designed for?", a: "Seomtorch is a personal study companion for structured JAMB, WAEC, NECO and Post-UTME preparation. It helps you practise by topic, learn from corrections and see where your next study session will matter most." },
   { group: "Getting started", q: "Do I need an account or internet connection?", a: "No account is required. After the first successful load, the installable app can work offline. Your profile and practice records are kept in this browser on this device." },
   { group: "Practice and review", q: "How are questions selected?", a: "Sessions prioritise questions you have not seen, topics where your accuracy is lower, and questions you previously missed. Recently answered questions receive less priority, which reduces unnecessary repetition." },
-  { group: "Practice and review", q: "Can I practise one topic only?", a: "Yes. Open Practice, select a subject, then choose a topic. You can also choose All topics for a mixed session." },
+  { group: "Practice and review", q: "Which subjects are available?", a: "English Language and General Paper are the two main preparation areas. A smaller Mathematics bank remains available as an additional practice option." },
+  { group: "Practice and review", q: "Can I practise one topic only?", a: "Yes. Open Practice, select English Language or General Paper, then choose a topic. You can also choose All topics for a mixed session." },
   { group: "Practice and review", q: "What does Save for review do?", a: "It bookmarks the current question locally. Bookmarked-question practice is planned for a later release; your saved list is already included when you export your data." },
-  { group: "Progress and scoring", q: "How is my study rhythm calculated?", a: "A study day counts when you answer at least one question. Consecutive active days build your rhythm. Missing a day resets the current rhythm, but your best rhythm remains recorded." },
+  { group: "Progress and scoring", q: "How is my streak calculated?", a: "A study day counts when you answer at least one question. Consecutive active days build your streak. Missing a day resets the current streak, but your best streak remains recorded." },
+  { group: "Progress and scoring", q: "How do XP and levels work?", a: "You earn 5 XP for each correct answer. Incorrect answers do not award XP. Every 250 XP advances your level, while accuracy shows how well you understand the material." },
   { group: "Progress and scoring", q: "What is a focus area?", a: "A focus area is a topic with enough attempts to measure and an accuracy rate that needs attention. It is guidance for your next session, not a judgement of your ability." },
   { group: "Progress and scoring", q: "Are these scores official exam predictions?", a: "No. Your dashboard reflects only your activity in Seomtorch. Use it to guide revision, not as an official predicted examination score." },
   { group: "Data and offline use", q: "Where is my progress stored?", a: "It is stored in IndexedDB, a database built into your browser. Seomtorch has no access to progress stored on another device or browser." },
@@ -94,6 +96,12 @@ function initials() { return profile?.name?.trim().split(/\s+/).slice(0, 2).map(
 function accuracy(list = attempts) { return list.length ? Math.round(list.filter(item => item.correct).length / list.length * 100) : 0; }
 function subjectName(id) { return SUBJECTS.find(subject => subject.id === id)?.name || id; }
 function questionById(id) { return questions.find(question => question.id === id); }
+function xpState() {
+  const xp = profile?.xp || 0;
+  const level = 1 + Math.floor(xp / 250);
+  const levelProgress = xp % 250;
+  return { xp, level, levelProgress, remaining: 250 - levelProgress, percent: levelProgress / 250 * 100 };
+}
 
 function showToast(message) {
   const toast = document.createElement("div");
@@ -111,6 +119,7 @@ function navigate(nextRoute) {
 }
 
 function shell(content) {
+  const xp = xpState();
   const nav = [
     ["home", "Home"], ["practice", "Practice"], ["progress", "Progress"], ["guide", "Guide"]
   ];
@@ -123,10 +132,10 @@ function shell(content) {
       <nav class="nav" aria-label="Primary navigation">
         ${nav.map(([id, label]) => `<button class="nav-button ${route === id ? "active" : ""}" data-route="${id}">${ICONS[id]}<span>${label}</span></button>`).join("")}
       </nav>
-      <div class="sidebar-foot"><div class="rhythm"><strong>${profile.rhythm || 0}</strong><span>day study rhythm</span></div><p>Consistency is built one useful session at a time.</p></div>
+      <div class="sidebar-foot"><div class="streak-panel"><svg class="streak-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/><path d="M12 19.2c-1.7 0-2.9-1.1-3-2.7-.1-1.2.5-2.3 1.5-3.2.1 1 .6 1.5 1.1 1.8-.2-1.7.7-2.7 1.6-3.7 1.2 1.5 1.8 3.1 1.7 4.6-.1 1.9-1.2 3.2-2.9 3.2Z"/></svg><div><span>Current streak</span><strong>${profile.rhythm || 0}<small> day${profile.rhythm === 1 ? "" : "s"}</small></strong></div></div><div class="xp-panel"><div><strong>Level ${xp.level}</strong><span>${xp.xp} XP</span></div><div class="xp-track"><i style="width:${xp.percent}%"></i></div><small>${xp.remaining} XP to next level</small></div><p>Come back tomorrow and keep it alive.</p></div>
     </aside>
     <div class="content-wrap">
-      <header class="topbar"><span class="mobile-brand">Seomtorch</span><div class="top-stat"><strong>${attempts.length}</strong><span>answered</span></div><div class="top-stat"><strong>${accuracy()}%</strong><span>accuracy</span></div><div class="avatar" title="${escapeHtml(profile.name)}">${initials()}</div></header>
+      <header class="topbar"><span class="mobile-brand">Seomtorch</span><div class="top-stat"><strong>${attempts.length}</strong><span>answered</span></div><div class="top-stat"><strong>${accuracy()}%</strong><span>accuracy</span></div><div class="top-xp" title="Level ${xp.level} · ${xp.remaining} XP to next level"><small>LV ${xp.level}</small><strong>${xp.xp} XP</strong></div><div class="top-streak" title="${profile.rhythm || 0}-day streak"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/></svg><span><small>Streak</small><strong>${profile.rhythm || 0}</strong></span></div><div class="avatar" title="${escapeHtml(profile.name)}">${initials()}</div></header>
       <main id="main">${content}</main>
     </div>
   </div>`;
@@ -166,7 +175,7 @@ function renderHome() {
     <div class="metric-strip">
       <div class="metric"><strong>${todayAttempts.length}</strong><span>answered today</span></div>
       <div class="metric"><strong>${accuracy(todayAttempts)}%</strong><span>today’s accuracy</span></div>
-      <div class="metric"><strong>${profile.rhythm || 0}</strong><span>day rhythm</span></div>
+      <div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> day${profile.rhythm === 1 ? "" : "s"}</small></strong><span>Current streak</span></div>
     </div>
     <div class="section-head"><h2>Subjects</h2><p>${questions.length} questions available</p></div>
     <div class="subject-list">
@@ -225,9 +234,9 @@ function renderSession() {
   const question = activeSession.queue[activeSession.index];
   const isBookmarked = bookmarks.some(item => item.questionId === question.id);
   const content = `<section class="page page-narrow">
-    <div class="question-header"><div class="question-topline"><span>${subjectName(question.subject)} · ${escapeHtml(question.topic)}</span><span>${activeSession.index + 1} of ${activeSession.queue.length}</span></div><div class="question-progress"><i style="width:${(activeSession.index + (activeSession.answered ? 1 : 0)) / activeSession.queue.length * 100}%"></i></div></div>
+    <div class="question-header"><div class="question-topline"><span>${subjectName(question.subject)} · ${escapeHtml(question.topic)}${question.questionYear ? ` · ${question.questionYear} source` : ""}</span><span>${activeSession.index + 1} of ${activeSession.queue.length}</span></div><div class="question-progress"><i style="width:${(activeSession.index + (activeSession.answered ? 1 : 0)) / activeSession.queue.length * 100}%"></i></div></div>
     <article class="question-paper"><p class="eyebrow">Question ${String(activeSession.index + 1).padStart(2, "0")}</p><h2>${escapeHtml(question.text)}</h2><div class="options">${question.options.map((option, index) => { let state = ""; if (activeSession.answered && index === question.correct) state = "correct"; else if (activeSession.answered && index === activeSession.selected) state = "incorrect"; return `<button class="option ${state}" data-option="${index}" ${activeSession.answered ? "disabled" : ""}><span class="option-letter">${String.fromCharCode(65 + index)}</span><span>${escapeHtml(option)}</span></button>`; }).join("")}</div>
-      ${activeSession.answered ? `<div class="feedback"><div class="feedback-label ${activeSession.selected === question.correct ? "" : "wrong"}">${activeSession.selected === question.correct ? "Correct" : "Review this"}</div><p>${escapeHtml(question.explanation)}</p></div>` : ""}
+      ${activeSession.answered ? `<div class="feedback"><div class="feedback-head"><div class="feedback-label ${activeSession.selected === question.correct ? "" : "wrong"}">${activeSession.selected === question.correct ? "Correct" : "Review this"}</div>${activeSession.selected === question.correct ? '<span class="xp-earned">+5 XP</span>' : ""}</div><p>${escapeHtml(question.explanation)}</p></div>` : ""}
       <div class="question-actions"><button class="button outline" id="bookmark">${isBookmarked ? "Saved for review" : "Save for review"}</button>${activeSession.answered ? '<button class="button" id="next-question">Next question →</button>' : '<button class="button outline" id="exit-session">Exit session</button>'}</div>
     </article>
   </section>`;
@@ -245,6 +254,8 @@ async function answerQuestion(selected) {
   activeSession.answered = true; activeSession.selected = selected; if (correct) activeSession.correct++;
   const attempt = { questionId: question.id, subject: question.subject, correct, selected, timestamp: Date.now() };
   attempt.id = await add("attempts", attempt); attempts.push(attempt);
+  profile.xp = (profile.xp || 0) + (correct ? 5 : 0);
+  await put("profile", profile);
   await registerStudyDay();
   render();
 }
@@ -279,13 +290,14 @@ function renderResult() {
 }
 
 function renderProgress() {
+  const xp = xpState();
   const topicMap = new Map();
   for (const attempt of attempts) {
     const question = questionById(attempt.questionId); if (!question) continue;
     const key = `${question.subject}|${question.topic}`; const item = topicMap.get(key) || { subject: question.subject, topic: question.topic, list: [] }; item.list.push(attempt); topicMap.set(key, item);
   }
   const focus = [...topicMap.values()].filter(item => item.list.length >= 2).map(item => ({ ...item, accuracy: accuracy(item.list) })).sort((a, b) => a.accuracy - b.accuracy).slice(0, 4);
-  const content = `<section class="page"><p class="eyebrow">Progress</p><h1>Your work, made useful.</h1><p class="lede">Results are organised to help you decide what to study next—not to decorate a dashboard.</p><div class="metric-strip" style="margin-top:38px"><div class="metric"><strong>${attempts.length}</strong><span>total attempts</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric"><strong>${profile.bestRhythm || 0}</strong><span>best rhythm</span></div></div><div class="section-head"><h2>Academic report</h2><p>Based on local practice history</p></div><div class="report-grid"><div class="report-panel"><h3>Subject performance</h3>${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<div class="report-row"><span>${subject.name}<small>${stat.count} attempts</small></span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong></div>`; }).join("")}</div><div class="report-panel"><h3>Topics needing attention</h3>${focus.length ? focus.map(item => `<div class="report-row"><span>${escapeHtml(item.topic)}<small>${subjectName(item.subject)} · ${item.list.length} attempts</small></span><strong class="${item.accuracy < 50 ? "attention" : ""}">${item.accuracy}%</strong></div>`).join("") : '<div class="empty">Complete at least two questions in a topic and Seomtorch will begin identifying useful focus areas.</div>'}</div></div></section>`;
+  const content = `<section class="page"><p class="eyebrow">Progress</p><h1>Your work, made useful.</h1><p class="lede">Results are organised to help you decide what to study next—not to decorate a dashboard.</p><div class="metric-strip four" style="margin-top:38px"><div class="metric"><strong>${attempts.length}</strong><span>total attempts</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric xp-metric"><strong>${xp.xp}<small> XP</small></strong><span>Level ${xp.level}</span></div><div class="metric streak-metric"><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>best streak</span></div></div><div class="section-head"><h2>Academic report</h2><p>Based on local practice history</p></div><div class="report-grid"><div class="report-panel"><h3>Subject performance</h3>${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<div class="report-row"><span>${subject.name}<small>${stat.count} attempts</small></span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong></div>`; }).join("")}</div><div class="report-panel"><h3>Topics needing attention</h3>${focus.length ? focus.map(item => `<div class="report-row"><span>${escapeHtml(item.topic)}<small>${subjectName(item.subject)} · ${item.list.length} attempts</small></span><strong class="${item.accuracy < 50 ? "attention" : ""}">${item.accuracy}%</strong></div>`).join("") : '<div class="empty">Complete at least two questions in a topic and Seomtorch will begin identifying useful focus areas.</div>'}</div></div></section>`;
   app.innerHTML = shell(content); bindShell();
 }
 
@@ -326,13 +338,13 @@ async function importData(file) {
 async function resetData() {
   if (!confirm("Reset all practice history and bookmarks on this device? Your name will be kept.")) return;
   await clearStore("attempts"); await clearStore("bookmarks");
-  profile.rhythm = 0; profile.bestRhythm = 0; profile.lastStudyDate = null; await put("profile", profile);
+  profile.rhythm = 0; profile.bestRhythm = 0; profile.lastStudyDate = null; profile.xp = 0; await put("profile", profile);
   attempts = []; bookmarks = []; showToast("Progress reset"); renderGuide();
 }
 
 function renderOnboarding() {
   app.innerHTML = `<main class="onboarding"><section class="onboard-brand"><button class="brand" aria-label="Seomtorch"><span class="brand-mark"><i></i><i></i><i></i></span><span class="brand-name">Seomtorch<small>Prepare with purpose</small></span></button><div><blockquote>Preparation should feel clear, not crowded.</blockquote><p>A focused study companion built around useful practice, honest feedback and steady progress.</p></div><small>Designed for JAMB · WAEC · NECO · Post-UTME</small></section><section class="onboard-form"><div><p class="eyebrow">Welcome</p><h1>Your study desk is ready.</h1><p class="lede">Tell us what to call you. Your details and progress stay on this device.</p><form id="onboard-form"><div class="field"><label for="student-name">Your name</label><input id="student-name" type="text" maxlength="60" autocomplete="name" placeholder="e.g. Ada Okafor" required></div><button class="button" type="submit">Enter Seomtorch →</button></form></div></section></main>`;
-  document.querySelector("#onboard-form").addEventListener("submit", async event => { event.preventDefault(); const name = document.querySelector("#student-name").value.trim(); if (!name) return; profile = { id: "local-user", name, rhythm: 0, bestRhythm: 0, lastStudyDate: null, createdAt: Date.now() }; await put("profile", profile); renderHome(); });
+  document.querySelector("#onboard-form").addEventListener("submit", async event => { event.preventDefault(); const name = document.querySelector("#student-name").value.trim(); if (!name) return; profile = { id: "local-user", name, rhythm: 0, bestRhythm: 0, lastStudyDate: null, xp: 0, createdAt: Date.now() }; await put("profile", profile); renderHome(); });
 }
 
 function render() {

@@ -1,0 +1,56 @@
+{
+  "sources": [
+    {
+      "file": "2019GRAMMARDAY1.txt",
+      "sourceRecords": 438,
+      "imported": 438,
+      "errors": 0
+    },
+    {
+      "file": "2019IDIOMSDAY1.txt",
+      "sourceRecords": 97,
+      "imported": 97,
+      "errors": 0
+    },
+    {
+      "file": "2019PHONOLOGYDAY1-1.txt",
+      "sourceRecords": 89,
+      "imported": 89,
+      "errors": 0
+    },
+    {
+      "file": "2019PUTMEGENDAY1GENERAL PAPER.txt",
+      "sourceRecords": 154,
+      "imported": 154,
+      "errors": 0
+    },
+    {
+      "file": "2019SPELLINGDAY1-1.txt",
+      "sourceRecords": 132,
+      "imported": 132,
+      "errors": 0
+    },
+    {
+      "file": "2019VOCABULARYDAY1-1.txt",
+      "sourceRecords": 158,
+      "imported": 158,
+      "errors": 0
+    },
+    {
+      "file": "2019_DAY3-1.txt",
+      "sourceRecords": 996,
+      "imported": 996,
+      "errors": 0
+    }
+  ],
+  "retainedMathematics": 14,
+  "importedBeforeDeduplication": 2064,
+  "duplicatesRemoved": 53,
+  "rejectedRecords": [],
+  "finalQuestions": 2025,
+  "bySubject": {
+    "mathematics": 14,
+    "english": 1715,
+    "general-paper": 296
+  }
+}
