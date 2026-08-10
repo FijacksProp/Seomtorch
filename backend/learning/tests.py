@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.core.management import call_command
 from django.test import TestCase
 from rest_framework.authtoken.models import Token
-from rest_framework.test import APITestCase
+from rest_framework.test import APIClient, APITestCase
 
 from .models import Attempt, Question, UserStats
 
@@ -39,6 +39,26 @@ class LearningApiTests(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Attempt.objects.filter(user=self.user).count(), 1)
         self.assertEqual(UserStats.objects.get(user=self.user).xp, 5)
+
+    def test_session_accepts_supported_hundred_question_length(self):
+        response = self.client.post("/api/sessions/", {"subject": "english", "limit": 100}, format="json")
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(len(response.data["questions"]), 100)
+
+    def test_session_rejects_unsupported_length(self):
+        response = self.client.post("/api/sessions/", {"subject": "english", "limit": 30}, format="json")
+        self.assertEqual(response.status_code, 400)
+
+    def test_progress_submitted_on_one_device_is_visible_on_another(self):
+        question = Question.objects.first()
+        self.client.post("/api/attempts/", {"question_id": question.external_id, "selected_index": question.correct_index, "client_id": str(uuid.uuid4())}, format="json")
+        second_device = APIClient()
+        second_device.credentials(HTTP_AUTHORIZATION=f"Token {self.token.key}")
+        response = second_device.get("/api/attempts/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.data["attempts"]), 1)
+        self.assertEqual(response.data["stats"]["xp"], 5)
+        self.assertEqual(response.data["stats"]["current_streak"], 1)
 
 class MonitorPermissionTests(TestCase):
     def test_student_cannot_access_monitor(self):

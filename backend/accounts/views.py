@@ -38,7 +38,8 @@ class LoginView(APIView):
 class LogoutView(APIView):
     def post(self, request):
         ActivityEvent.objects.create(user=request.user, event_type=ActivityEvent.Type.SIGNED_OUT)
-        request.auth.delete()
+        # DRF's built-in token is shared by a user's signed-in devices. Keep it
+        # valid here so signing out on one browser does not disconnect the rest.
         logout(request)
         return Response(status=status.HTTP_204_NO_CONTENT)
 

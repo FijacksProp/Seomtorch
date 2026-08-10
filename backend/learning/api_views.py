@@ -16,7 +16,7 @@ def stats_payload(user):
     stats, _ = UserStats.objects.get_or_create(user=user)
     total = user.attempts.count()
     correct = user.attempts.filter(is_correct=True).count()
-    return {"xp": stats.xp, "level": stats.level, "current_streak": stats.current_streak, "best_streak": stats.best_streak, "total_attempts": total, "accuracy": round(correct / total * 100) if total else 0}
+    return {"xp": stats.xp, "level": stats.level, "current_streak": stats.live_current_streak, "best_streak": stats.best_streak, "last_study_date": stats.last_study_date, "total_attempts": total, "accuracy": round(correct / total * 100) if total else 0}
 
 class SubjectListView(APIView):
     def get(self, request):
@@ -31,8 +31,10 @@ class StartSessionView(APIView):
         subject = get_object_or_404(Subject, slug=request.data.get("subject"), is_active=True)
         topic_slug = request.data.get("topic")
         topic = get_object_or_404(Topic, subject=subject, slug=topic_slug) if topic_slug else None
-        try: limit = min(max(int(request.data.get("limit", 10)), 1), 30)
+        try: limit = int(request.data.get("limit", 10))
         except (TypeError, ValueError): limit = 10
+        if limit not in {10, 20, 50, 100}:
+            return Response({"limit": ["Choose 10, 20, 50 or 100 questions."]}, status=400)
         pool = Question.objects.filter(topic__subject=subject, is_active=True)
         if topic: pool = pool.filter(topic=topic)
         seen = set(request.user.attempts.filter(question__in=pool).values_list("question_id", flat=True))

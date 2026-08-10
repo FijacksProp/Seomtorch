@@ -7,7 +7,7 @@ export class ApiError extends Error {
 async function request(path, { token, method = "GET", body } = {}) {
   let response;
   try {
-    response = await fetch(`${API_URL}${path}`, { method, headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Token ${token}` } : {}) }, ...(body !== undefined ? { body: JSON.stringify(body) } : {}) });
+    response = await fetch(`${API_URL}${path}`, { method, cache: "no-store", headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Token ${token}` } : {}) }, ...(body !== undefined ? { body: JSON.stringify(body) } : {}) });
   } catch { throw new ApiError("The server could not be reached. Check your connection and try again."); }
   const data = response.status === 204 ? null : await response.json().catch(() => ({}));
   if (!response.ok) {

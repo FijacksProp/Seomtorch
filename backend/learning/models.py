@@ -106,6 +106,12 @@ class UserStats(models.Model):
     @property
     def level(self): return 1 + self.xp // 250
 
+    @property
+    def live_current_streak(self):
+        if not self.last_study_date or self.last_study_date < timezone.localdate() - timedelta(days=1):
+            return 0
+        return self.current_streak
+
     def register_correct_answer(self):
         current_date = timezone.localdate()
         self.xp += 5

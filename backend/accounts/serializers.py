@@ -13,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_stats(self, user):
         stats, _ = UserStats.objects.get_or_create(user=user)
-        return {"xp": stats.xp, "level": stats.level, "current_streak": stats.current_streak, "best_streak": stats.best_streak}
+        return {"xp": stats.xp, "level": stats.level, "current_streak": stats.live_current_streak, "best_streak": stats.best_streak, "last_study_date": stats.last_study_date}
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, min_length=8, trim_whitespace=False)

@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
 class AuthenticationTests(APITestCase):
@@ -19,3 +20,11 @@ class AuthenticationTests(APITestCase):
         get_user_model().objects.create_user(email="student@example.com", username="first", password="Securepass934!")
         response = self.client.post("/api/auth/register/", {"email": "STUDENT@example.com", "username": "second", "password": "Securepass934!"}, format="json")
         self.assertEqual(response.status_code, 400)
+
+    def test_signing_out_one_device_keeps_shared_account_token_valid(self):
+        user = get_user_model().objects.create_user(email="multi@example.com", username="multi", password="Securepass934!")
+        token = Token.objects.create(user=user)
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {token.key}")
+        response = self.client.post("/api/auth/logout/")
+        self.assertEqual(response.status_code, 204)
+        self.assertTrue(Token.objects.filter(key=token.key).exists())
