@@ -19,17 +19,35 @@ The API runs at `http://127.0.0.1:8000/api/`. The professional monitoring centre
 
 ## Render deployment
 
-The repository-level `render.yaml` creates the Django web service and PostgreSQL database. In the Render Blueprint configuration, set these secret/manual variables:
+Create the PostgreSQL database and Python Web Service manually in Render. Do not use a Blueprint: free services do not support Render pre-deploy commands.
+
+Create a free PostgreSQL database first. Then create a Web Service from the GitHub repository with these settings:
+
+```text
+Language: Python 3
+Root Directory: backend
+Build Command: bash build.sh
+Start Command: bash start.sh
+Health Check Path: /api/health/
+```
+
+Set these environment variables on the Web Service:
 
 ```text
 CORS_ALLOWED_ORIGINS=https://your-vercel-domain.vercel.app
 CSRF_TRUSTED_ORIGINS=https://your-vercel-domain.vercel.app
+DATABASE_URL=<the Render PostgreSQL internal database URL>
+DJANGO_ALLOWED_HOSTS=<your-service-name>.onrender.com
+DJANGO_DEBUG=False
+DJANGO_SECRET_KEY=<a long random secret>
 DJANGO_SUPERUSER_EMAIL=<initial administrator email>
 DJANGO_SUPERUSER_USERNAME=<initial administrator username>
 DJANGO_SUPERUSER_PASSWORD=<initial administrator password>
+SECURE_HSTS_SECONDS=31536000
+SECURE_SSL_REDIRECT=True
 ```
 
-Do not add the password to Git, `render.yaml`, or `.env.example`. The build invokes `create_initial_superuser`, which creates the account once and leaves an existing account intact on later deployments.
+Do not add the password or secret key to Git. `start.sh` runs migrations, imports or updates the question bank, and creates the initial administrator before starting Gunicorn. All three setup commands are idempotent, so later deploys do not duplicate data or overwrite the administrator password.
 
 Render's Free PostgreSQL instance expires 30 days after creation and does not include backups. It is suitable for initial testing only; upgrade the database before relying on it for durable student records.
 

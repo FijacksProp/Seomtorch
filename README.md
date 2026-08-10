@@ -26,7 +26,7 @@ The frontend expects the Render service at `https://seomtorch-api.onrender.com`.
 
 ## Deploy the backend to Render
 
-Create a Render Blueprint from this repository. The included `render.yaml` provisions the Python service and PostgreSQL database, runs migrations, imports the question bank, collects static files, and creates the initial administrator from secret environment variables. See `backend/README.md` for the exact settings and local commands.
+Create a PostgreSQL database and a Python Web Service manually in Render. Set the service root directory to `backend`, the build command to `bash build.sh`, and the start command to `bash start.sh`. The startup script performs the idempotent migrations, question import and initial administrator setup required on Render's free tier. See `backend/README.md` for the environment variables and exact settings.
 
 Render's Free PostgreSQL database expires after 30 days and has no backups. Use it to validate the platform, then move to a persistent paid database before storing records you cannot afford to lose.
 
