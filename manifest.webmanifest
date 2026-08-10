@@ -1,0 +1,12 @@
+{
+  "name": "Seomtorch — Prepare with purpose",
+  "short_name": "Seomtorch",
+  "description": "A focused, offline-first exam preparation companion.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f0e7",
+  "theme_color": "#173d30",
+  "icons": [
+    { "src": "assets/mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

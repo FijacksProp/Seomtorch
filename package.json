@@ -1,0 +1,12 @@
+{
+  "name": "seomtorch",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "serve .",
+    "check": "node --check app.js"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}
