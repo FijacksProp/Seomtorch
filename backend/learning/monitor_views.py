@@ -1,0 +1,80 @@
+from datetime import timedelta
+
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.db.models import Avg, Count, Q
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.http import require_http_methods, require_POST
+from django.utils import timezone
+
+from .models import ActivityEvent, Attempt, Question, Subject, UserStats
+
+User = get_user_model()
+
+def percentage(correct, total): return round(correct / total * 100) if total else 0
+
+@require_http_methods(["GET", "POST"])
+def monitor_login(request):
+    if request.user.is_authenticated and request.user.is_staff:
+        return redirect("monitor:dashboard")
+    error = ""
+    if request.method == "POST":
+        email = request.POST.get("email", "").lower().strip()
+        user = authenticate(request, email=email, password=request.POST.get("password", ""))
+        if user and user.is_active and user.is_staff:
+            login(request, user)
+            return redirect("monitor:dashboard")
+        error = "The email or password is incorrect, or this account is not an administrator."
+    return render(request, "monitor/login.html", {"error": error})
+
+@require_POST
+def monitor_logout(request):
+    logout(request)
+    return redirect("monitor:login")
+
+@staff_member_required
+def dashboard(request):
+    today = timezone.localdate()
+    since_week = timezone.now() - timedelta(days=7)
+    student_filter = Q(is_staff=False)
+    total_students = User.objects.filter(student_filter).count()
+    active_today = ActivityEvent.objects.filter(user__is_staff=False, created_at__date=today).values("user_id").distinct().count()
+    active_week = ActivityEvent.objects.filter(user__is_staff=False, created_at__gte=since_week).values("user_id").distinct().count()
+    today_attempts = Attempt.objects.filter(answered_at__date=today)
+    total_today = today_attempts.count(); correct_today = today_attempts.filter(is_correct=True).count()
+    subjects = Subject.objects.filter(is_active=True).annotate(total_attempts=Count("topics__questions__attempts"), correct_attempts=Count("topics__questions__attempts", filter=Q(topics__questions__attempts__is_correct=True)), student_count=Count("topics__questions__attempts__user", distinct=True))
+    for subject in subjects: subject.accuracy = percentage(subject.correct_attempts, subject.total_attempts)
+    recent_students = User.objects.filter(is_staff=False).select_related("learning_stats").order_by("-date_joined")[:7]
+    recent_events = ActivityEvent.objects.select_related("user").filter(user__is_staff=False)[:12]
+    context = {"total_students": total_students, "active_today": active_today, "active_week": active_week, "attempts_today": total_today, "accuracy_today": percentage(correct_today, total_today), "subjects": subjects, "recent_students": recent_students, "recent_events": recent_events}
+    return render(request, "monitor/dashboard.html", context)
+
+@staff_member_required
+def students(request):
+    query = request.GET.get("q", "").strip()
+    users = User.objects.filter(is_staff=False).select_related("learning_stats").annotate(attempt_count=Count("attempts"), correct_count=Count("attempts", filter=Q(attempts__is_correct=True)), session_count=Count("practice_sessions", distinct=True)).order_by("-date_joined")
+    if query: users = users.filter(Q(public_id__iexact=query) | Q(username__icontains=query) | Q(email__icontains=query))
+    for user in users: user.accuracy = percentage(user.correct_count, user.attempt_count)
+    return render(request, "monitor/students.html", {"students": users[:250], "query": query})
+
+@staff_member_required
+def student_detail(request, public_id):
+    student = get_object_or_404(User.objects.select_related("learning_stats"), public_id=public_id, is_staff=False)
+    attempts = student.attempts.select_related("question__topic__subject")
+    subject_rows = attempts.values("question__topic__subject__name", "question__topic__subject__slug").annotate(total=Count("id"), correct=Count("id", filter=Q(is_correct=True))).order_by("question__topic__subject__position")
+    topic_rows = attempts.values("question__topic__name", "question__topic__subject__name").annotate(total=Count("id"), correct=Count("id", filter=Q(is_correct=True))).order_by("correct", "-total")[:12]
+    for row in subject_rows: row["accuracy"] = percentage(row["correct"], row["total"])
+    for row in topic_rows: row["accuracy"] = percentage(row["correct"], row["total"])
+    total = attempts.count(); correct = attempts.filter(is_correct=True).count()
+    return render(request, "monitor/student_detail.html", {"student": student, "total": total, "correct": correct, "accuracy": percentage(correct, total), "subject_rows": subject_rows, "topic_rows": topic_rows, "recent_attempts": attempts[:15], "recent_events": student.activity_events.all()[:15]})
+
+@staff_member_required
+def subject_detail(request, slug):
+    subject = get_object_or_404(Subject, slug=slug)
+    attempts = Attempt.objects.filter(question__topic__subject=subject)
+    total = attempts.count(); correct = attempts.filter(is_correct=True).count()
+    topics = subject.topics.annotate(total_attempts=Count("questions__attempts"), correct_attempts=Count("questions__attempts", filter=Q(questions__attempts__is_correct=True)), student_count=Count("questions__attempts__user", distinct=True))
+    for topic in topics: topic.accuracy = percentage(topic.correct_attempts, topic.total_attempts)
+    difficult = Question.objects.filter(topic__subject=subject, attempts__isnull=False).annotate(total_attempts=Count("attempts"), correct_attempts=Count("attempts", filter=Q(attempts__is_correct=True))).order_by("correct_attempts", "-total_attempts")[:12]
+    for question in difficult: question.accuracy = percentage(question.correct_attempts, question.total_attempts)
+    return render(request, "monitor/subject_detail.html", {"subject": subject, "total": total, "accuracy": percentage(correct, total), "student_count": attempts.values("user_id").distinct().count(), "topics": topics, "difficult": difficult})

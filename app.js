@@ -1,3 +1,5 @@
+import { api, ApiError } from "./api-client.js";
+
 const SUBJECTS = [
   { id: "english", name: "English Language", description: "Usage, comprehension and oral forms" },
   { id: "general-paper", name: "General Paper", description: "Civics, current affairs and general knowledge" },
@@ -6,7 +8,7 @@ const SUBJECTS = [
 
 const FAQS = [
   { group: "Getting started", q: "What is Seomtorch designed for?", a: "Seomtorch is a personal study companion for structured JAMB, WAEC, NECO and Post-UTME preparation. It helps you practise by topic, learn from corrections and see where your next study session will matter most." },
-  { group: "Getting started", q: "Do I need an account or internet connection?", a: "No account is required. After the first successful load, the installable app can work offline. Your profile and practice records are kept in this browser on this device." },
+  { group: "Getting started", q: "Do I need an account or internet connection?", a: "An account is required so your progress can be monitored and restored across devices. After signing in once, practice can continue offline and pending answers synchronize when the connection returns." },
   { group: "Practice and review", q: "How are questions selected?", a: "Sessions prioritise questions you have not seen, topics where your accuracy is lower, and questions you previously missed. Recently answered questions receive less priority, which reduces unnecessary repetition." },
   { group: "Practice and review", q: "Which subjects are available?", a: "English Language and General Paper are the two main preparation areas. A smaller Mathematics bank remains available as an additional practice option." },
   { group: "Practice and review", q: "Can I practise one topic only?", a: "Yes. Open Practice, select English Language or General Paper, then choose a topic. You can also choose All topics for a mixed session." },
@@ -15,7 +17,7 @@ const FAQS = [
   { group: "Progress and scoring", q: "How do XP and levels work?", a: "You earn 5 XP for each correct answer. Incorrect answers do not award XP. Every 250 XP advances your level, while accuracy shows how well you understand the material." },
   { group: "Progress and scoring", q: "What is a focus area?", a: "A focus area is a topic with enough attempts to measure and an accuracy rate that needs attention. It is guidance for your next session, not a judgement of your ability." },
   { group: "Progress and scoring", q: "Are these scores official exam predictions?", a: "No. Your dashboard reflects only your activity in Seomtorch. Use it to guide revision, not as an official predicted examination score." },
-  { group: "Data and offline use", q: "Where is my progress stored?", a: "It is stored in IndexedDB, a database built into your browser. Seomtorch has no access to progress stored on another device or browser." },
+  { group: "Data and offline use", q: "Where is my progress stored?", a: "Progress is stored securely in your Seomtorch account and cached in IndexedDB on this device for offline use. Pending offline activity synchronizes when the server is reachable." },
   { group: "Data and offline use", q: "How do I protect my progress?", a: "Use Export data in this Guide to download a backup. Keep that file somewhere safe. You can restore it later with Import data." },
   { group: "Data and offline use", q: "What happens if I clear browser data?", a: "Clearing this site’s storage can remove your profile and results. Export a backup first if you plan to clear browser data or change devices." },
 ];
@@ -28,18 +30,26 @@ const ICONS = {
 };
 
 const DB_NAME = "seomtorch";
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 const app = document.querySelector("#app");
 const toastRegion = document.querySelector("#toast-region");
 
 let db;
 let questions = [];
 let profile = null;
+let authToken = localStorage.getItem("seomtorch-auth-token");
+let currentUser = readCachedUser();
 let attempts = [];
 let bookmarks = [];
 let route = "home";
 let selectedSubject = null;
 let activeSession = null;
+let authMode = "signin";
+
+function readCachedUser() {
+  try { return JSON.parse(localStorage.getItem("seomtorch-auth-user") || "null"); }
+  catch { localStorage.removeItem("seomtorch-auth-user"); return null; }
+}
 
 function openDatabase() {
   return new Promise((resolve, reject) => {
@@ -54,6 +64,7 @@ function openDatabase() {
       }
       if (!database.objectStoreNames.contains("bookmarks")) database.createObjectStore("bookmarks", { keyPath: "questionId" });
       if (!database.objectStoreNames.contains("meta")) database.createObjectStore("meta", { keyPath: "key" });
+      if (!database.objectStoreNames.contains("auth")) database.createObjectStore("auth", { keyPath: "key" });
     };
     request.onsuccess = () => resolve(request.result);
     request.onerror = () => reject(request.error);
@@ -224,8 +235,17 @@ function weightedQuestions(subject, topic, limit = 10) {
   }).sort((a, b) => b.key - a.key).slice(0, Math.min(limit, pool.length)).map(item => item.question);
 }
 
-function startSession(subject, topic) {
-  activeSession = { subject, topic, queue: weightedQuestions(subject, topic), index: 0, correct: 0, answered: false, selected: null };
+function topicSlug(value) { return String(value || "").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+
+async function startSession(subject, topic) {
+  let queue = weightedQuestions(subject, topic); let remoteId = null;
+  try {
+    const remote = await api.startSession(authToken, { subject, topic: topic ? topicSlug(topic) : null, limit: 10 });
+    remoteId = remote.session_id;
+    const selected = remote.questions.map(item => questionById(item.external_id)).filter(Boolean);
+    if (selected.length) queue = selected;
+  } catch { showToast("Working offline. This session will sync when connected."); }
+  activeSession = { subject, topic, queue, remoteId, index: 0, correct: 0, answered: false, selected: null, reportedComplete: false };
   route = "session"; render();
 }
 
@@ -252,12 +272,39 @@ async function answerQuestion(selected) {
   const question = activeSession.queue[activeSession.index];
   const correct = selected === question.correct;
   activeSession.answered = true; activeSession.selected = selected; if (correct) activeSession.correct++;
-  const attempt = { questionId: question.id, subject: question.subject, correct, selected, timestamp: Date.now() };
+  const attempt = { questionId: question.id, subject: question.subject, correct, selected, timestamp: Date.now(), clientId: crypto.randomUUID(), sessionId: activeSession.remoteId, synced: false };
   attempt.id = await add("attempts", attempt); attempts.push(attempt);
   profile.xp = (profile.xp || 0) + (correct ? 5 : 0);
   await put("profile", profile);
   await registerStudyDay();
+  syncAttemptRecord(attempt);
   render();
+}
+
+async function syncAttemptRecord(attempt) {
+  if (!authToken || attempt.synced) return;
+  if (!attempt.clientId) attempt.clientId = crypto.randomUUID();
+  try {
+    const response = await api.syncAttempt(authToken, { question_id: attempt.questionId, selected_index: attempt.selected, client_id: attempt.clientId, session_id: attempt.sessionId || null });
+    attempt.synced = true; attempt.correct = response.correct; await put("attempts", attempt);
+    const stats = response.stats; profile.xp = stats.xp; profile.rhythm = stats.current_streak; profile.bestRhythm = stats.best_streak; await put("profile", profile);
+  } catch (error) { if (error instanceof ApiError && error.status >= 400 && error.status < 500 && error.status !== 401) { attempt.syncError = error.message; await put("attempts", attempt); } }
+}
+
+async function syncPendingAttempts() {
+  for (const attempt of attempts.filter(item => !item.synced)) await syncAttemptRecord(attempt);
+  try {
+    const remote = await api.attempts(authToken);
+    const known = new Set(attempts.map(item => item.clientId).filter(Boolean));
+    for (const item of remote.attempts) {
+      if (known.has(item.client_id)) continue;
+      const local = { questionId: item.question_id, subject: item.subject, correct: item.is_correct, selected: item.selected_index, timestamp: new Date(item.answered_at).getTime(), clientId: item.client_id, synced: true };
+      local.id = await add("attempts", local); attempts.push(local); known.add(item.client_id);
+    }
+    profile.xp = remote.stats.xp; profile.rhythm = remote.stats.current_streak; profile.bestRhythm = remote.stats.best_streak; await put("profile", profile);
+    const remoteBookmarks = await api.bookmarks(authToken);
+    for (const item of remoteBookmarks) if (!bookmarks.some(bookmark => bookmark.questionId === item.question_id)) { const bookmark = { questionId: item.question_id, savedAt: new Date(item.created_at).getTime() }; await put("bookmarks", bookmark); bookmarks.push(bookmark); }
+  } catch {}
 }
 
 async function registerStudyDay() {
@@ -274,13 +321,16 @@ async function toggleBookmark(questionId) {
   if (existing) {
     await storeAction("bookmarks", "readwrite", store => store.delete(questionId));
     bookmarks = bookmarks.filter(item => item.questionId !== questionId); showToast("Removed from review list");
+    api.removeBookmark(authToken, questionId).catch(() => {});
   } else {
     const item = { questionId, savedAt: Date.now() }; await put("bookmarks", item); bookmarks.push(item); showToast("Saved for later review");
+    api.addBookmark(authToken, questionId).catch(() => {});
   }
   render();
 }
 
 function renderResult() {
+  if (activeSession.remoteId && !activeSession.reportedComplete) { activeSession.reportedComplete = true; api.completeSession(authToken, activeSession.remoteId).catch(() => { activeSession.reportedComplete = false; }); }
   const score = activeSession.queue.length ? Math.round(activeSession.correct / activeSession.queue.length * 100) : 0;
   const note = score >= 80 ? "A strong session. Keep the standard steady." : score >= 50 ? "Good work. Review the corrections before moving on." : "This topic needs another careful pass. That is useful information.";
   const content = `<section class="page page-narrow"><div class="session-result"><p class="eyebrow">Session complete</p><div class="result-score">${score}%</div><h2>${activeSession.correct} of ${activeSession.queue.length} correct</h2><p class="lede" style="margin-inline:auto">${note}</p><div class="button-row" style="justify-content:center;margin-top:28px"><button class="button outline" id="return-practice">Choose another topic</button><button class="button" id="retry-session">Practise this again</button></div></div></section>`;
@@ -305,7 +355,7 @@ function renderGuide(filter = "") {
   const normalized = filter.trim().toLowerCase();
   const matches = FAQS.filter(item => !normalized || `${item.q} ${item.a} ${item.group}`.toLowerCase().includes(normalized));
   const groups = [...new Set(matches.map(item => item.group))];
-  const content = `<section class="page page-narrow"><p class="eyebrow">Guide</p><h1>Answers, without the noise.</h1><p class="lede">Find help with practice, progress and keeping your study records safe.</p><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="faq-search" value="${escapeHtml(filter)}" placeholder="Search the guide" aria-label="Search the guide"></div><div id="faq-results">${groups.length ? groups.map(group => `<section class="faq-group"><h2>${group}</h2>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("") : '<div class="empty">No guide entries match that search.</div>'}</div><section class="settings-panel"><p class="eyebrow">Your local data</p><h2>Backup and restore</h2><p class="lede">Your progress belongs to this browser. Export a backup before clearing site data or moving to another device.</p><div class="button-row"><button class="button" id="export-data">Export data</button><label class="button outline" for="import-data">Import data</label><input class="file-input" id="import-data" type="file" accept="application/json"><button class="button danger" id="reset-data">Reset progress</button></div></section></section>`;
+  const content = `<section class="page page-narrow"><p class="eyebrow">Guide</p><h1>Answers, without the noise.</h1><p class="lede">Find help with practice, progress and keeping your study records safe.</p><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="faq-search" value="${escapeHtml(filter)}" placeholder="Search the guide" aria-label="Search the guide"></div><div id="faq-results">${groups.length ? groups.map(group => `<section class="faq-group"><h2>${group}</h2>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("") : '<div class="empty">No guide entries match that search.</div>'}</div><section class="settings-panel account-summary"><p class="eyebrow">Signed-in account</p><h2>${escapeHtml(currentUser?.username || profile.name)}</h2><p class="lede">Student ID <strong>${escapeHtml(currentUser?.public_id || "—")}</strong> · ${escapeHtml(currentUser?.email || "")}</p><div class="button-row"><button class="button outline" id="sign-out">Sign out</button></div></section><section class="settings-panel"><p class="eyebrow">Your local data</p><h2>Backup and restore</h2><p class="lede">Progress synchronizes to your account when online. Export is also available as a personal backup.</p><div class="button-row"><button class="button" id="export-data">Export data</button><label class="button outline" for="import-data">Import data</label><input class="file-input" id="import-data" type="file" accept="application/json"><button class="button danger" id="reset-data">Reset local progress</button></div></section></section>`;
   app.innerHTML = shell(content); bindShell(); bindGuide();
 }
 
@@ -315,6 +365,7 @@ function bindGuide() {
   document.querySelector("#export-data").addEventListener("click", exportData);
   document.querySelector("#import-data").addEventListener("change", event => importData(event.target.files[0]));
   document.querySelector("#reset-data").addEventListener("click", resetData);
+  document.querySelector("#sign-out").addEventListener("click", signOut);
 }
 
 function exportData() {
@@ -331,7 +382,7 @@ async function importData(file) {
     await put("profile", data.profile);
     for (const attempt of data.attempts) { const clean = { ...attempt }; delete clean.id; await add("attempts", clean); }
     for (const bookmark of data.bookmarks || []) await put("bookmarks", bookmark);
-    await loadData(); showToast("Backup restored"); renderGuide();
+    await loadData(); await syncPendingAttempts(); showToast("Backup restored"); renderGuide();
   } catch { showToast("That file is not a valid Seomtorch backup"); }
 }
 
@@ -342,13 +393,51 @@ async function resetData() {
   attempts = []; bookmarks = []; showToast("Progress reset"); renderGuide();
 }
 
-function renderOnboarding() {
-  app.innerHTML = `<main class="onboarding"><section class="onboard-brand"><button class="brand" aria-label="Seomtorch"><span class="brand-mark"><i></i><i></i><i></i></span><span class="brand-name">Seomtorch<small>Prepare with purpose</small></span></button><div><blockquote>Preparation should feel clear, not crowded.</blockquote><p>A focused study companion built around useful practice, honest feedback and steady progress.</p></div><small>Designed for JAMB · WAEC · NECO · Post-UTME</small></section><section class="onboard-form"><div><p class="eyebrow">Welcome</p><h1>Your study desk is ready.</h1><p class="lede">Tell us what to call you. Your details and progress stay on this device.</p><form id="onboard-form"><div class="field"><label for="student-name">Your name</label><input id="student-name" type="text" maxlength="60" autocomplete="name" placeholder="e.g. Ada Okafor" required></div><button class="button" type="submit">Enter Seomtorch →</button></form></div></section></main>`;
-  document.querySelector("#onboard-form").addEventListener("submit", async event => { event.preventDefault(); const name = document.querySelector("#student-name").value.trim(); if (!name) return; profile = { id: "local-user", name, rhythm: 0, bestRhythm: 0, lastStudyDate: null, xp: 0, createdAt: Date.now() }; await put("profile", profile); renderHome(); });
+function renderAuth() {
+  const register = authMode === "register";
+  app.innerHTML = `<main class="onboarding auth-screen"><section class="onboard-brand"><span class="brand"><span class="brand-mark"><i></i><i></i><i></i></span><span class="brand-name">Seomtorch<small>Prepare with purpose</small></span></span><div><blockquote>Your progress should follow you.</blockquote><p>Sign in to keep every answer, streak and milestone connected to your account.</p></div><small>English Language · General Paper · Mathematics</small></section><section class="onboard-form"><div><div class="auth-tabs"><button class="${!register ? "active" : ""}" data-auth-mode="signin">Sign in</button><button class="${register ? "active" : ""}" data-auth-mode="register">Register</button></div><p class="eyebrow">${register ? "Create your account" : "Welcome back"}</p><h1>${register ? "Begin your preparation." : "Return to your study desk."}</h1><p class="lede">${register ? "Use an email, username and secure password." : "Sign in with your email address and password."}</p><form id="auth-form" class="auth-form">${register ? '<div class="field"><label for="auth-username">Username</label><input id="auth-username" name="username" type="text" maxlength="150" autocomplete="username" required></div>' : ""}<div class="field"><label for="auth-email">Email address</label><input id="auth-email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="auth-password">Password</label><input id="auth-password" name="password" type="password" minlength="8" autocomplete="${register ? "new-password" : "current-password"}" required></div><div id="auth-error" class="auth-error" role="alert"></div><button class="button auth-submit" type="submit">${register ? "Create account" : "Sign in"} →</button></form></div></section></main>`;
+  document.querySelectorAll("[data-auth-mode]").forEach(button => button.addEventListener("click", () => { authMode = button.dataset.authMode; renderAuth(); }));
+  document.querySelector("#auth-form").addEventListener("submit", submitAuth);
+}
+
+async function submitAuth(event) {
+  event.preventDefault();
+  const form = event.currentTarget; const button = form.querySelector("button[type=submit]"); const error = document.querySelector("#auth-error");
+  const body = Object.fromEntries(new FormData(form)); button.disabled = true; button.textContent = "Please wait…"; error.textContent = "";
+  try {
+    const data = authMode === "register" ? await api.register(body) : await api.login(body);
+    authToken = data.token; currentUser = data.user;
+    localStorage.setItem("seomtorch-auth-token", authToken); localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
+    await prepareLocalUser(currentUser); await syncPendingAttempts(); route = "home"; render();
+  } catch (caught) { error.textContent = caught instanceof ApiError ? caught.message : "Something went wrong. Please try again."; button.disabled = false; button.textContent = authMode === "register" ? "Create account →" : "Sign in →"; }
+}
+
+async function prepareLocalUser(user) {
+  if (profile?.remoteId && profile.remoteId !== user.public_id) {
+    await clearStore("profile"); await clearStore("attempts"); await clearStore("bookmarks"); attempts = []; bookmarks = [];
+  }
+  const stats = user.stats || {};
+  profile = { id: "local-user", remoteId: user.public_id, name: user.username, email: user.email, xp: stats.xp ?? profile?.xp ?? 0, rhythm: stats.current_streak ?? profile?.rhythm ?? 0, bestRhythm: stats.best_streak ?? profile?.bestRhythm ?? 0, lastStudyDate: profile?.lastStudyDate || null, createdAt: profile?.createdAt || Date.now() };
+  await put("profile", profile);
+}
+
+async function restoreAuth() {
+  if (!authToken) return false;
+  try { currentUser = await api.me(authToken); localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser)); await prepareLocalUser(currentUser); return true; }
+  catch (error) {
+    if (error instanceof ApiError && error.status === 401) { authToken = null; currentUser = null; localStorage.removeItem("seomtorch-auth-token"); localStorage.removeItem("seomtorch-auth-user"); return false; }
+    if (currentUser) { await prepareLocalUser(currentUser); return true; }
+    return false;
+  }
+}
+
+async function signOut() {
+  try { await api.logout(authToken); } catch {}
+  authToken = null; currentUser = null; profile = null; attempts = []; bookmarks = []; localStorage.removeItem("seomtorch-auth-token"); localStorage.removeItem("seomtorch-auth-user"); renderAuth();
 }
 
 function render() {
-  if (!profile) return renderOnboarding();
+  if (!authToken || !currentUser || !profile) return renderAuth();
   if (route === "home") return renderHome();
   if (route === "practice") return renderPractice();
   if (route === "session") return renderSession();
@@ -360,6 +449,8 @@ async function init() {
   try {
     db = await openDatabase();
     await Promise.all([loadQuestions(), loadData()]);
+    const authenticated = await restoreAuth();
+    if (authenticated) await syncPendingAttempts();
     render();
     if ("serviceWorker" in navigator && location.protocol !== "file:") navigator.serviceWorker.register("sw.js").catch(() => {});
   } catch (error) {
