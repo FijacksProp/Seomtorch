@@ -22,7 +22,7 @@ Open the localhost address printed by the server. A local server is required bec
 
 Import the GitHub repository into Vercel and leave the framework preset as **Other**. No build command or output directory is required. The included `vercel.json` configures safe caching for the service worker and question bank, long-lived caching for versioned visual assets, and baseline security headers.
 
-The frontend expects the Render service at `https://seomtorch-api.onrender.com`. If Render assigns another address, update `config.js`.
+The frontend expects the Render service at `https://seomtorch.onrender.com`. If Render assigns another address, update `config.js` and bump the service-worker cache version in `sw.js`.
 
 ## Deploy the backend to Render
 
