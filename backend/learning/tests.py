@@ -6,7 +6,7 @@ from django.test import TestCase
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient, APITestCase
 
-from .models import Attempt, Question, UserStats
+from .models import Attempt, Bookmark, Question, UserStats
 
 class LearningApiTests(APITestCase):
     @classmethod
@@ -62,6 +62,25 @@ class LearningApiTests(APITestCase):
         session = self.user.practice_sessions.first()
         self.assertIsNone(session.subject)
         self.assertEqual(session.duration_minutes, 10)
+
+    def test_saved_questions_can_form_a_review_session(self):
+        saved_questions = list(Question.objects.filter(topic__subject__slug="english")[:3])
+        for question in saved_questions:
+            Bookmark.objects.create(user=self.user, question=question)
+        response = self.client.post("/api/sessions/", {"subject": "saved", "limit": 3, "duration_minutes": 8}, format="json")
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(len(response.data["questions"]), 3)
+        self.assertEqual({item["external_id"] for item in response.data["questions"]}, {item.external_id for item in saved_questions})
+
+    def test_bookmark_is_visible_and_removable_across_devices(self):
+        question = Question.objects.first()
+        response = self.client.post("/api/bookmarks/", {"question_id": question.external_id}, format="json")
+        self.assertEqual(response.status_code, 201)
+        second_device = APIClient()
+        second_device.credentials(HTTP_AUTHORIZATION=f"Token {self.token.key}")
+        self.assertEqual(second_device.get("/api/bookmarks/").data[0]["question_id"], question.external_id)
+        second_device.delete("/api/bookmarks/", {"question_id": question.external_id}, format="json")
+        self.assertEqual(self.client.get("/api/bookmarks/").data, [])
 
     def test_progress_submitted_on_one_device_is_visible_on_another(self):
         question = Question.objects.first()

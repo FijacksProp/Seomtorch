@@ -15,7 +15,7 @@ const FAQS = [
   { group: "Practice and review", q: "Can I practise one topic only?", a: "Yes. Open Practice, select English Language or General Paper, then choose a topic. You can also choose All topics for a mixed session." },
   { group: "Practice and review", q: "How do timed sessions work?", a: "Choose any question count from 10 to 100 and enter the number of minutes you want to study. One overall countdown runs across the complete session." },
   { group: "Practice and review", q: "Can I practise every subject together?", a: "Yes. Choose All subjects to build one balanced session. Questions are grouped into clear subject sections under one overall timer." },
-  { group: "Practice and review", q: "What does Save for review do?", a: "It bookmarks the current question in your account, making the saved list available when you sign in on another device." },
+  { group: "Practice and review", q: "What does Save for review do?", a: "It bookmarks the current question in your account, making it available on every device. Open Practice, then Saved for review, to browse, remove or practise the collection." },
   { group: "Progress and scoring", q: "How is my streak calculated?", a: "A study day counts when you answer at least one question. Consecutive active days build your streak. Missing a day resets the current streak, but your best streak remains recorded." },
   { group: "Progress and scoring", q: "How do XP and levels work?", a: "You earn 5 XP for each correct answer. Incorrect answers do not award XP. Every 250 XP advances your level, while accuracy shows how well you understand the material." },
   { group: "Progress and scoring", q: "What is a focus area?", a: "A focus area is a topic with enough attempts to measure and an accuracy rate that needs attention. It is guidance for your next session, not a judgement of your ability." },
@@ -88,6 +88,7 @@ function storeAction(storeName, mode, action) {
 }
 
 const getAll = name => storeAction(name, "readonly", store => store.getAll());
+const get = (name, key) => storeAction(name, "readonly", store => store.get(key));
 const put = (name, value) => storeAction(name, "readwrite", store => store.put(value));
 const add = (name, value) => storeAction(name, "readwrite", store => store.add(value));
 const clearStore = name => storeAction(name, "readwrite", store => store.clear());
@@ -213,11 +214,12 @@ function topicAccuracy(subject, topic) {
 
 function renderPractice() {
   if (!selectedSubject) {
-    const content = `<section class="page"><p class="eyebrow">Practice</p><h1>Choose your focus.</h1><p class="lede">Build one timed session across every subject, or concentrate on a specific subject and topic.</p><div class="section-head"><h2>Practice mode</h2><p>Configure the details on the next step</p></div><div class="subject-list"><button class="subject-row all-subject-row" data-subject="all"><span class="subject-num">ALL</span><span><span class="subject-title">All subjects</span><span class="subject-meta">Balanced, grouped sections across English Language, General Paper and Mathematics</span></span><span class="mini-progress"><i style="width:${accuracy()}%"></i></span><span class="row-arrow">→</span></button>${SUBJECTS.map((subject, index) => `<button class="subject-row" data-subject="${subject.id}"><span class="subject-num">0${index + 1}</span><span><span class="subject-title">${subject.name}</span><span class="subject-meta">${subject.description}</span></span><span class="mini-progress"><i style="width:${subjectStats(subject.id).accuracy}%"></i></span><span class="row-arrow">→</span></button>`).join("")}</div></section>`;
+    const content = `<section class="page"><p class="eyebrow">Practice</p><h1>Choose your focus.</h1><p class="lede">Build one timed session across every subject, concentrate on a topic, or return to questions you deliberately saved.</p><div class="review-entry"><div><span class="review-entry-count">${bookmarks.length}</span><div><p class="eyebrow">Your review library</p><h2>Saved for review</h2><p>${bookmarks.length ? `${bookmarks.length} question${bookmarks.length === 1 ? " is" : "s are"} ready to revisit.` : "Save useful or difficult questions during practice and they will appear here."}</p></div></div><button class="button ${bookmarks.length ? "" : "outline"}" data-subject="saved">${bookmarks.length ? "Open saved questions" : "View review library"} →</button></div><div class="section-head"><h2>Practice mode</h2><p>Configure the details on the next step</p></div><div class="subject-list"><button class="subject-row all-subject-row" data-subject="all"><span class="subject-num">ALL</span><span><span class="subject-title">All subjects</span><span class="subject-meta">Balanced, grouped sections across English Language, General Paper and Mathematics</span></span><span class="mini-progress"><i style="width:${accuracy()}%"></i></span><span class="row-arrow">→</span></button>${SUBJECTS.map((subject, index) => `<button class="subject-row" data-subject="${subject.id}"><span class="subject-num">0${index + 1}</span><span><span class="subject-title">${subject.name}</span><span class="subject-meta">${subject.description}</span></span><span class="mini-progress"><i style="width:${subjectStats(subject.id).accuracy}%"></i></span><span class="row-arrow">→</span></button>`).join("")}</div></section>`;
     app.innerHTML = shell(content); bindShell();
     document.querySelectorAll("[data-subject]").forEach(button => button.addEventListener("click", () => { selectedSubject = button.dataset.subject; render(); }));
     return;
   }
+  if (selectedSubject === "saved") return renderSavedReview();
   const allSubjects = selectedSubject === "all";
   const subject = allSubjects ? { name: "All subjects" } : SUBJECTS.find(item => item.id === selectedSubject);
   const topics = allSubjects ? [] : [...new Set(questions.filter(item => item.subject === selectedSubject).map(item => item.topic))];
@@ -239,6 +241,21 @@ function readSessionConfiguration() {
   if (!questionInput.reportValidity() || !timeInput.reportValidity()) return null;
   selectedQuestionCount = Number(questionInput.value); selectedStudyMinutes = Number(timeInput.value);
   return { count: selectedQuestionCount, minutes: selectedStudyMinutes };
+}
+
+function renderSavedReview() {
+  const saved = bookmarks.map(bookmark => ({ ...bookmark, question: questionById(bookmark.questionId) })).filter(item => item.question).sort((a, b) => b.savedAt - a.savedAt);
+  const maximum = Math.min(100, saved.length);
+  const reviewCount = maximum ? Math.min(Math.max(1, selectedQuestionCount), maximum) : 1;
+  const groups = ALL_SUBJECT_ORDER.map(subject => ({ subject, items: saved.filter(item => item.question.subject === subject.id) })).filter(group => group.items.length);
+  const content = `<section class="page"><button class="button outline" id="back-subjects">← Practice modes</button><div class="practice-heading"><p class="eyebrow">Review library</p><h1>Saved for review.</h1><p class="lede">A synchronized collection of the questions you chose to revisit. Remove anything you no longer need, or turn the collection into a focused timed session.</p></div>${saved.length ? `<section class="session-builder review-builder" aria-label="Review session settings"><div class="session-input"><label for="question-count">Questions to review</label><div><input id="question-count" type="number" min="1" max="${maximum}" step="1" value="${reviewCount}" inputmode="numeric" required><span>of ${saved.length}</span></div><small>Up to 100 saved questions per session.</small></div><div class="session-input"><label for="study-minutes">Study time</label><div><input id="study-minutes" type="number" min="1" max="600" step="1" value="${selectedStudyMinutes}" inputmode="numeric" required><span>minutes</span></div><small>One timer covers the complete review session.</small></div><button class="button start-review-button" id="start-review-session">Start saved review →</button></section><div class="section-head"><h2>Your saved questions</h2><p>${saved.length} synchronized</p></div><div class="saved-groups">${groups.map(group => `<section class="saved-group"><div class="saved-group-head"><h3>${group.subject.name}</h3><span>${group.items.length}</span></div>${group.items.map((item, index) => `<article class="saved-question"><span class="saved-index">${String(index + 1).padStart(2, "0")}</span><div><small>${escapeHtml(item.question.topic)}</small><p>${escapeHtml(item.question.text)}</p></div><button class="saved-remove" data-review-remove="${escapeHtml(item.questionId)}" aria-label="Remove question from saved review">Remove</button></article>`).join("")}</section>`).join("")}</div>` : `<div class="review-empty"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><h2>Your review library is ready.</h2><p>While answering questions, select <strong>Save for review</strong>. The question will synchronize to this account and appear here on every device.</p><button class="button" id="find-questions">Find questions to practise →</button></div>`}</section>`;
+  app.innerHTML = shell(content); bindShell();
+  document.querySelector("#back-subjects").addEventListener("click", () => { selectedSubject = null; render(); });
+  document.querySelector("#find-questions")?.addEventListener("click", () => { selectedSubject = null; render(); });
+  document.querySelector("#start-review-session")?.addEventListener("click", () => { const config = readSessionConfiguration(); if (config) startSession("saved", null, config.count, config.minutes); });
+  document.querySelectorAll("[data-review-remove]").forEach(button => button.addEventListener("click", () => toggleBookmark(button.dataset.reviewRemove)));
+  document.querySelector("#question-count")?.addEventListener("input", event => { if (event.target.validity.valid) selectedQuestionCount = Number(event.target.value); });
+  document.querySelector("#study-minutes")?.addEventListener("input", event => { if (event.target.validity.valid) selectedStudyMinutes = Number(event.target.value); });
 }
 
 function weightedQuestions(subject, topic, limit = 10) {
@@ -285,6 +302,11 @@ function weightedAllSubjects(limit) {
   return ALL_SUBJECT_ORDER.flatMap(subject => weightedQuestions(subject.id, null, allocation.get(subject.id)));
 }
 
+function savedSessionQuestions(limit) {
+  const saved = [...bookmarks].sort((a, b) => b.savedAt - a.savedAt).slice(0, limit).map(bookmark => questionById(bookmark.questionId)).filter(Boolean);
+  return ALL_SUBJECT_ORDER.flatMap(subject => saved.filter(question => question.subject === subject.id));
+}
+
 function buildSessionSections(queue) {
   const sections = [];
   for (const question of queue) {
@@ -298,7 +320,7 @@ function buildSessionSections(queue) {
 function topicSlug(value) { return String(value || "").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
 
 async function startSession(subject, topic, count = 10, durationMinutes = 10) {
-  let queue = subject === "all" ? weightedAllSubjects(count) : weightedQuestions(subject, topic, count); let remoteId = null;
+  let queue = subject === "all" ? weightedAllSubjects(count) : subject === "saved" ? savedSessionQuestions(count) : weightedQuestions(subject, topic, count); let remoteId = null;
   try {
     const remote = await api.startSession(authToken, { subject, topic: topic ? topicSlug(topic) : null, limit: count, duration_minutes: durationMinutes });
     remoteId = remote.session_id;
@@ -307,7 +329,7 @@ async function startSession(subject, topic, count = 10, durationMinutes = 10) {
   } catch { showToast("Working offline. This session will sync when connected."); }
   if (queue.length < count) showToast(`${queue.length} questions are currently available in this selection.`);
   const sections = buildSessionSections(queue);
-  activeSession = { subject, topic, requestedCount: count, durationMinutes, deadline: Date.now() + durationMinutes * 60000, queue, sections, showSectionIntro: subject === "all", remoteId, index: 0, correct: 0, answered: false, selected: null, questionStartedAt: Date.now(), reportedComplete: false, timedOut: false };
+  activeSession = { subject, topic, requestedCount: count, durationMinutes, deadline: Date.now() + durationMinutes * 60000, queue, sections, showSectionIntro: ["all", "saved"].includes(subject), remoteId, index: 0, correct: 0, answered: false, selected: null, questionStartedAt: Date.now(), reportedComplete: false, timedOut: false };
   route = "session"; render();
 }
 
@@ -345,7 +367,7 @@ function currentSection() {
 function renderSectionIntro() {
   const section = currentSection();
   const sectionIndex = activeSession.sections.indexOf(section);
-  const content = `<section class="page page-narrow"><div class="section-intro"><p class="eyebrow">Section ${sectionIndex + 1} of ${activeSession.sections.length}</p><span class="section-kicker">Grouped practice</span><h1>${escapeHtml(section.name)}</h1><p class="lede">${section.count} questions are grouped in this section. Your overall session timer continues throughout.</p><div class="section-intro-meta"><span><small>Questions</small><strong>${section.count}</strong></span><span class="session-clock" role="timer" aria-label="Session time remaining"><small>Time left</small><strong id="session-timer">${formatTime(Math.ceil((activeSession.deadline - Date.now()) / 1000))}</strong></span></div><div class="section-track">${activeSession.sections.map((item, index) => `<i class="${index < sectionIndex ? "complete" : index === sectionIndex ? "active" : ""}" title="${escapeHtml(item.name)}"></i>`).join("")}</div><div class="button-row"><button class="button" id="begin-section">${sectionIndex ? "Continue to section" : "Begin session"} →</button><button class="button outline" id="exit-session">Exit session</button></div></div></section>`;
+  const content = `<section class="page page-narrow"><div class="section-intro"><p class="eyebrow">Section ${sectionIndex + 1} of ${activeSession.sections.length}</p><span class="section-kicker">${activeSession.subject === "saved" ? "Saved review" : "Grouped practice"}</span><h1>${escapeHtml(section.name)}</h1><p class="lede">${section.count} questions are grouped in this section. Your overall session timer continues throughout.</p><div class="section-intro-meta"><span><small>Questions</small><strong>${section.count}</strong></span><span class="session-clock" role="timer" aria-label="Session time remaining"><small>Time left</small><strong id="session-timer">${formatTime(Math.ceil((activeSession.deadline - Date.now()) / 1000))}</strong></span></div><div class="section-track">${activeSession.sections.map((item, index) => `<i class="${index < sectionIndex ? "complete" : index === sectionIndex ? "active" : ""}" title="${escapeHtml(item.name)}"></i>`).join("")}</div><div class="button-row"><button class="button" id="begin-section">${sectionIndex ? "Continue to section" : "Begin session"} →</button><button class="button outline" id="exit-session">Exit session</button></div></div></section>`;
   app.innerHTML = shell(content); bindShell(); runSessionTimer();
   document.querySelector("#begin-section").addEventListener("click", () => { activeSession.showSectionIntro = false; activeSession.questionStartedAt = Date.now(); render(); });
   document.querySelector("#exit-session").addEventListener("click", () => { clearInterval(sessionTimer); activeSession = null; route = "practice"; render(); });
@@ -362,14 +384,14 @@ function renderSession() {
     ${activeSession.sections.length > 1 ? `<div class="active-section"><span>Section ${sectionIndex + 1} of ${activeSession.sections.length}</span><strong>${escapeHtml(section.name)}</strong><small>${activeSession.index - section.start + 1} of ${section.count} in this section</small></div>` : ""}<div class="question-header"><div class="question-topline"><span>${subjectName(question.subject)} · ${escapeHtml(question.topic)}${question.questionYear ? ` · ${question.questionYear} source` : ""}</span><div class="session-status"><span>${activeSession.index + 1} of ${activeSession.queue.length}</span><span class="session-clock" role="timer" aria-label="Session time remaining"><small>Time left</small><strong id="session-timer">${formatTime(Math.ceil((activeSession.deadline - Date.now()) / 1000))}</strong></span></div></div><div class="question-progress"><i style="width:${(activeSession.index + (activeSession.answered ? 1 : 0)) / activeSession.queue.length * 100}%"></i></div></div>
     <article class="question-paper"><p class="eyebrow">Question ${String(activeSession.index + 1).padStart(2, "0")}</p><h2>${escapeHtml(question.text)}</h2><div class="options">${question.options.map((option, index) => { let state = ""; if (activeSession.answered && index === question.correct) state = "correct"; else if (activeSession.answered && index === activeSession.selected) state = "incorrect"; return `<button class="option ${state}" data-option="${index}" ${activeSession.answered ? "disabled" : ""}><span class="option-letter">${String.fromCharCode(65 + index)}</span><span>${escapeHtml(option)}</span></button>`; }).join("")}</div>
       ${activeSession.answered ? `<div class="feedback"><div class="feedback-head"><div class="feedback-label ${activeSession.selected === question.correct ? "" : "wrong"}">${activeSession.selected === question.correct ? "Correct" : "Review this"}</div>${activeSession.selected === question.correct ? '<span class="xp-earned">+5 XP</span>' : ""}</div><p>${escapeHtml(question.explanation)}</p></div>` : ""}
-      <div class="question-actions"><button class="button outline" id="bookmark">${isBookmarked ? "Saved for review" : "Save for review"}</button>${activeSession.answered ? '<button class="button" id="next-question">Next question →</button>' : '<button class="button outline" id="exit-session">Exit session</button>'}</div>
+      <div class="question-actions"><button class="button outline" id="bookmark">${isBookmarked ? "Remove from saved" : "Save for review"}</button>${activeSession.answered ? '<button class="button" id="next-question">Next question →</button>' : '<button class="button outline" id="exit-session">Exit session</button>'}</div>
     </article>
   </section>`;
   app.innerHTML = shell(content); bindShell();
   runSessionTimer();
   document.querySelectorAll("[data-option]").forEach(button => button.addEventListener("click", () => answerQuestion(Number(button.dataset.option))));
   document.querySelector("#bookmark").addEventListener("click", () => toggleBookmark(question.id));
-  document.querySelector("#next-question")?.addEventListener("click", () => { const previousSubject = question.subject; activeSession.index++; activeSession.answered = false; activeSession.selected = null; activeSession.questionStartedAt = Date.now(); activeSession.showSectionIntro = activeSession.subject === "all" && activeSession.queue[activeSession.index]?.subject !== previousSubject; render(); });
+  document.querySelector("#next-question")?.addEventListener("click", () => { const previousSubject = question.subject; activeSession.index++; activeSession.answered = false; activeSession.selected = null; activeSession.questionStartedAt = Date.now(); activeSession.showSectionIntro = ["all", "saved"].includes(activeSession.subject) && activeSession.queue[activeSession.index]?.subject !== previousSubject; render(); });
   document.querySelector("#exit-session")?.addEventListener("click", () => { clearInterval(sessionTimer); activeSession = null; route = "practice"; render(); });
 }
 
@@ -421,11 +443,42 @@ async function syncPendingAttempts() {
     for (const item of [...canonical, ...unresolved.filter(item => !known.has(item.clientId))]) { const clean = { ...item }; delete clean.id; clean.id = await add("attempts", clean); attempts.push(clean); }
     applyRemoteStats(remote.stats); await put("profile", profile);
 
+    const pendingBookmarks = await syncBookmarkQueue();
     const remoteBookmarks = await api.bookmarks(authToken);
     await clearStore("bookmarks"); bookmarks = [];
     for (const item of remoteBookmarks) { const bookmark = { questionId: item.question_id, savedAt: new Date(item.created_at).getTime() }; await put("bookmarks", bookmark); bookmarks.push(bookmark); }
+    for (const item of pendingBookmarks) {
+      if (item.action === "add" && !bookmarks.some(bookmark => bookmark.questionId === item.questionId)) { const bookmark = { questionId: item.questionId, savedAt: item.queuedAt }; await put("bookmarks", bookmark); bookmarks.push(bookmark); }
+      if (item.action === "remove") { await storeAction("bookmarks", "readwrite", store => store.delete(item.questionId)); bookmarks = bookmarks.filter(bookmark => bookmark.questionId !== item.questionId); }
+    }
   })().then(() => true).catch(() => false).finally(() => { syncPromise = null; });
   return syncPromise;
+}
+
+async function queueBookmarkAction(questionId, action) {
+  const record = await get("meta", "bookmarkQueue") || { key: "bookmarkQueue", actions: [] };
+  record.actions = record.actions.filter(item => item.questionId !== questionId);
+  record.actions.push({ questionId, action, queuedAt: Date.now() });
+  await put("meta", record);
+}
+
+async function clearBookmarkAction(questionId) {
+  const record = await get("meta", "bookmarkQueue") || { key: "bookmarkQueue", actions: [] };
+  record.actions = record.actions.filter(item => item.questionId !== questionId);
+  await put("meta", record);
+}
+
+async function syncBookmarkQueue() {
+  const record = await get("meta", "bookmarkQueue") || { key: "bookmarkQueue", actions: [] };
+  const remaining = [];
+  for (const item of record.actions) {
+    try {
+      if (item.action === "add") await api.addBookmark(authToken, item.questionId);
+      else await api.removeBookmark(authToken, item.questionId);
+    } catch { remaining.push(item); }
+  }
+  await put("meta", { key: "bookmarkQueue", actions: remaining });
+  return remaining;
 }
 
 async function registerStudyDay() {
@@ -442,12 +495,17 @@ async function toggleBookmark(questionId) {
   if (existing) {
     await storeAction("bookmarks", "readwrite", store => store.delete(questionId));
     bookmarks = bookmarks.filter(item => item.questionId !== questionId); showToast("Removed from review list");
-    api.removeBookmark(authToken, questionId).catch(() => {});
+    await queueBookmarkAction(questionId, "remove");
+    render();
+    try { await api.removeBookmark(authToken, questionId); await clearBookmarkAction(questionId); }
+    catch {}
   } else {
     const item = { questionId, savedAt: Date.now() }; await put("bookmarks", item); bookmarks.push(item); showToast("Saved for later review");
-    api.addBookmark(authToken, questionId).catch(() => {});
+    await queueBookmarkAction(questionId, "add");
+    render();
+    try { await api.addBookmark(authToken, questionId); await clearBookmarkAction(questionId); }
+    catch {}
   }
-  render();
 }
 
 function renderResult() {
@@ -507,7 +565,7 @@ async function importData(file) {
     await clearStore("profile"); await clearStore("attempts"); await clearStore("bookmarks");
     await put("profile", data.profile);
     for (const attempt of data.attempts) { const clean = { ...attempt }; delete clean.id; await add("attempts", clean); }
-    for (const bookmark of data.bookmarks || []) await put("bookmarks", bookmark);
+    for (const bookmark of data.bookmarks || []) { await put("bookmarks", bookmark); await queueBookmarkAction(bookmark.questionId, "add"); }
     await loadData(); await syncPendingAttempts(); showToast("Backup restored"); renderProfile();
   } catch { showToast("That file is not a valid Seomtorch backup"); }
 }
@@ -539,7 +597,7 @@ async function submitAuth(event) {
 
 async function prepareLocalUser(user) {
   if (profile && profile.remoteId !== user.public_id) {
-    await clearStore("profile"); await clearStore("attempts"); await clearStore("bookmarks"); attempts = []; bookmarks = [];
+    await clearStore("profile"); await clearStore("attempts"); await clearStore("bookmarks"); await put("meta", { key: "bookmarkQueue", actions: [] }); attempts = []; bookmarks = [];
   }
   const stats = user.stats || {};
   profile = { id: "local-user", remoteId: user.public_id, name: user.username, email: user.email, xp: stats.xp ?? 0, rhythm: stats.current_streak ?? 0, bestRhythm: stats.best_streak ?? 0, lastStudyDate: stats.last_study_date || null, createdAt: profile?.createdAt || Date.now() };
@@ -557,8 +615,8 @@ async function restoreAuth() {
 }
 
 async function signOut() {
-  try { await api.logout(authToken); } catch {}
-  await clearStore("profile"); await clearStore("attempts"); await clearStore("bookmarks");
+  try { await syncBookmarkQueue(); await api.logout(authToken); } catch {}
+  await clearStore("profile"); await clearStore("attempts"); await clearStore("bookmarks"); await put("meta", { key: "bookmarkQueue", actions: [] });
   authToken = null; currentUser = null; profile = null; attempts = []; bookmarks = []; localStorage.removeItem("seomtorch-auth-token"); localStorage.removeItem("seomtorch-auth-user"); renderAuth();
 }
 

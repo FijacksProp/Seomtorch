@@ -51,13 +51,15 @@ class StartSessionView(APIView):
     def post(self, request):
         subject_slug = request.data.get("subject")
         all_subjects = subject_slug == "all"
-        subject = None if all_subjects else get_object_or_404(Subject, slug=subject_slug, is_active=True)
+        saved_questions = subject_slug == "saved"
+        subject = None if all_subjects or saved_questions else get_object_or_404(Subject, slug=subject_slug, is_active=True)
         topic_slug = request.data.get("topic")
         topic = get_object_or_404(Topic, subject=subject, slug=topic_slug) if topic_slug and subject else None
         try: limit = int(request.data.get("limit", 10))
         except (TypeError, ValueError): limit = 10
-        if not 10 <= limit <= 100:
-            return Response({"limit": ["Choose any number from 10 to 100 questions."]}, status=400)
+        minimum = 1 if saved_questions else 10
+        if not minimum <= limit <= 100:
+            return Response({"limit": [f"Choose any number from {minimum} to 100 questions."]}, status=400)
         try: duration_minutes = int(request.data.get("duration_minutes"))
         except (TypeError, ValueError):
             return Response({"duration_minutes": ["Enter a valid study duration in minutes."]}, status=400)
@@ -65,7 +67,19 @@ class StartSessionView(APIView):
             return Response({"duration_minutes": ["Study duration must be between 1 and 600 minutes."]}, status=400)
 
         sections = []
-        if all_subjects:
+        if saved_questions:
+            saved = list(request.user.bookmarks.select_related("question__topic__subject").order_by("-created_at")[:limit])
+            if not saved:
+                return Response({"detail": "Save at least one question before starting a review session."}, status=400)
+            priority = {"english": 0, "mathematics": 1, "general-paper": 2}
+            selected = [bookmark.question for bookmark in saved]
+            selected.sort(key=lambda question: (priority.get(question.topic.subject.slug, 99), question.topic.subject.position))
+            for item in selected:
+                if sections and sections[-1]["subject"] == item.topic.subject.slug:
+                    sections[-1]["count"] += 1
+                else:
+                    sections.append({"subject": item.topic.subject.slug, "name": item.topic.subject.name, "count": 1})
+        elif all_subjects:
             subjects = list(Subject.objects.filter(is_active=True))
             priority = {"english": 0, "mathematics": 1, "general-paper": 2}
             subjects.sort(key=lambda item: (priority.get(item.slug, 99), item.position, item.name))
@@ -86,7 +100,8 @@ class StartSessionView(APIView):
             sections.append({"subject": subject.slug, "name": subject.name, "count": len(selected)})
 
         session = PracticeSession.objects.create(user=request.user, subject=subject, topic=topic, question_ids=[q.external_id for q in selected], total_questions=len(selected), duration_minutes=duration_minutes)
-        ActivityEvent.objects.create(user=request.user, event_type=ActivityEvent.Type.SESSION_STARTED, metadata={"session_id": str(session.id), "subject": "all" if all_subjects else subject.slug, "topic": topic.slug if topic else None, "duration_minutes": duration_minutes, "sections": sections})
+        mode = "saved" if saved_questions else "all" if all_subjects else subject.slug
+        ActivityEvent.objects.create(user=request.user, event_type=ActivityEvent.Type.SESSION_STARTED, metadata={"session_id": str(session.id), "subject": mode, "topic": topic.slug if topic else None, "duration_minutes": duration_minutes, "sections": sections})
         return Response({"session_id": session.id, "questions": QuestionPracticeSerializer(selected, many=True).data, "sections": sections, "duration_minutes": duration_minutes}, status=status.HTTP_201_CREATED)
 
 class SubmitAttemptView(APIView):
@@ -147,7 +162,7 @@ class ProgressView(APIView):
         return Response({"stats": stats_payload(request.user), "subjects": rows(subject_rows, "question__topic__subject__slug", "question__topic__subject__name"), "topics": rows(topic_rows, "question__topic__subject__slug", "question__topic__name")})
 
 class BookmarkView(APIView):
-    def get(self, request): return Response(BookmarkSerializer(request.user.bookmarks.select_related("question"), many=True).data)
+    def get(self, request): return Response(BookmarkSerializer(request.user.bookmarks.select_related("question").order_by("-created_at"), many=True).data)
     def post(self, request):
         question = get_object_or_404(Question, external_id=request.data.get("question_id"))
         bookmark, created = Bookmark.objects.get_or_create(user=request.user, question=question)
