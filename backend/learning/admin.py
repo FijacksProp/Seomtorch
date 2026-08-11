@@ -36,7 +36,7 @@ class AttemptAdmin(admin.ModelAdmin):
 
 @admin.register(PracticeSession)
 class PracticeSessionAdmin(admin.ModelAdmin):
-    list_display = ("id", "user", "subject", "topic", "status", "correct_answers", "total_questions", "started_at")
+    list_display = ("id", "user", "subject", "topic", "status", "correct_answers", "total_questions", "duration_minutes", "started_at")
     list_filter = ("status", "subject", "started_at")
     search_fields = ("id", "user__public_id", "user__username", "user__email")
     readonly_fields = ("id", "question_ids", "started_at", "completed_at")

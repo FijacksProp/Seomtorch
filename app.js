@@ -5,13 +5,7 @@ const SUBJECTS = [
   { id: "general-paper", name: "General Paper", description: "Civics, current affairs and general knowledge" },
   { id: "mathematics", name: "Mathematics", description: "Numbers, algebra and applied reasoning" },
 ];
-
-const SESSION_OPTIONS = [
-  { questions: 10, minutes: 10, label: "Quick focus" },
-  { questions: 20, minutes: 20, label: "Standard practice" },
-  { questions: 50, minutes: 50, label: "Deep revision" },
-  { questions: 100, minutes: 100, label: "Full challenge" },
-];
+const ALL_SUBJECT_ORDER = ["english", "mathematics", "general-paper"].map(id => SUBJECTS.find(subject => subject.id === id));
 
 const FAQS = [
   { group: "Getting started", q: "What is Seomtorch designed for?", a: "Seomtorch is a personal study companion for structured JAMB, WAEC, NECO and Post-UTME preparation. It helps you practise by topic, learn from corrections and see where your next study session will matter most." },
@@ -19,7 +13,8 @@ const FAQS = [
   { group: "Practice and review", q: "How are questions selected?", a: "Sessions prioritise questions you have not seen, topics where your accuracy is lower, and questions you previously missed. Recently answered questions receive less priority, which reduces unnecessary repetition." },
   { group: "Practice and review", q: "Which subjects are available?", a: "English Language and General Paper are the two main preparation areas. A smaller Mathematics bank remains available as an additional practice option." },
   { group: "Practice and review", q: "Can I practise one topic only?", a: "Yes. Open Practice, select English Language or General Paper, then choose a topic. You can also choose All topics for a mixed session." },
-  { group: "Practice and review", q: "How do timed sessions work?", a: "Choose 10, 20, 50 or 100 questions. Each question contributes one minute to the overall countdown, so you can manage your pace across the full session." },
+  { group: "Practice and review", q: "How do timed sessions work?", a: "Choose any question count from 10 to 100 and enter the number of minutes you want to study. One overall countdown runs across the complete session." },
+  { group: "Practice and review", q: "Can I practise every subject together?", a: "Yes. Choose All subjects to build one balanced session. Questions are grouped into clear subject sections under one overall timer." },
   { group: "Practice and review", q: "What does Save for review do?", a: "It bookmarks the current question in your account, making the saved list available when you sign in on another device." },
   { group: "Progress and scoring", q: "How is my streak calculated?", a: "A study day counts when you answer at least one question. Consecutive active days build your streak. Missing a day resets the current streak, but your best streak remains recorded." },
   { group: "Progress and scoring", q: "How do XP and levels work?", a: "You earn 5 XP for each correct answer. Incorrect answers do not award XP. Every 250 XP advances your level, while accuracy shows how well you understand the material." },
@@ -52,6 +47,7 @@ let bookmarks = [];
 let route = "home";
 let selectedSubject = null;
 let selectedQuestionCount = 10;
+let selectedStudyMinutes = 10;
 let activeSession = null;
 let sessionTimer = null;
 let syncPromise = null;
@@ -217,19 +213,32 @@ function topicAccuracy(subject, topic) {
 
 function renderPractice() {
   if (!selectedSubject) {
-    const content = `<section class="page"><p class="eyebrow">Practice</p><h1>Choose your focus.</h1><p class="lede">Build a timed session around the subject, topic and question count that suits today's work.</p><div class="section-head"><h2>Available subjects</h2><p>Select one to configure a session</p></div><div class="subject-list">${SUBJECTS.map((subject, index) => `<button class="subject-row" data-subject="${subject.id}"><span class="subject-num">0${index + 1}</span><span><span class="subject-title">${subject.name}</span><span class="subject-meta">${subject.description}</span></span><span class="mini-progress"><i style="width:${subjectStats(subject.id).accuracy}%"></i></span><span class="row-arrow">→</span></button>`).join("")}</div></section>`;
+    const content = `<section class="page"><p class="eyebrow">Practice</p><h1>Choose your focus.</h1><p class="lede">Build one timed session across every subject, or concentrate on a specific subject and topic.</p><div class="section-head"><h2>Practice mode</h2><p>Configure the details on the next step</p></div><div class="subject-list"><button class="subject-row all-subject-row" data-subject="all"><span class="subject-num">ALL</span><span><span class="subject-title">All subjects</span><span class="subject-meta">Balanced, grouped sections across English Language, General Paper and Mathematics</span></span><span class="mini-progress"><i style="width:${accuracy()}%"></i></span><span class="row-arrow">→</span></button>${SUBJECTS.map((subject, index) => `<button class="subject-row" data-subject="${subject.id}"><span class="subject-num">0${index + 1}</span><span><span class="subject-title">${subject.name}</span><span class="subject-meta">${subject.description}</span></span><span class="mini-progress"><i style="width:${subjectStats(subject.id).accuracy}%"></i></span><span class="row-arrow">→</span></button>`).join("")}</div></section>`;
     app.innerHTML = shell(content); bindShell();
     document.querySelectorAll("[data-subject]").forEach(button => button.addEventListener("click", () => { selectedSubject = button.dataset.subject; render(); }));
     return;
   }
-  const subject = SUBJECTS.find(item => item.id === selectedSubject);
-  const topics = [...new Set(questions.filter(item => item.subject === selectedSubject).map(item => item.topic))];
-  const chosen = SESSION_OPTIONS.find(option => option.questions === selectedQuestionCount);
-  const content = `<section class="page"><button class="button outline" id="back-subjects">← All subjects</button><div class="practice-heading"><p class="eyebrow">${subject.name}</p><h1>Build your session.</h1><p class="lede">Choose the length first, then start with one topic or a balanced subject mix.</p></div><div class="section-head"><h2>Question count</h2><p>${chosen.minutes} minute timer selected</p></div><div class="session-options">${SESSION_OPTIONS.map(option => `<button class="session-option ${option.questions === selectedQuestionCount ? "active" : ""}" data-count="${option.questions}"><strong>${option.questions}</strong><span>${option.label}</span><small>${option.minutes} minutes</small></button>`).join("")}</div><div class="section-head"><h2>Topic</h2><p>Timer begins when the questions open</p></div><div class="topic-grid"><button class="topic-card" data-topic=""><strong>All topics</strong><span>Balanced mix · ${questions.filter(q => q.subject === selectedSubject).length} available</span></button>${topics.map(topic => `<button class="topic-card" data-topic="${escapeHtml(topic)}"><strong>${escapeHtml(topic)}</strong><span>${topicAccuracy(selectedSubject, topic)}</span></button>`).join("")}</div></section>`;
+  const allSubjects = selectedSubject === "all";
+  const subject = allSubjects ? { name: "All subjects" } : SUBJECTS.find(item => item.id === selectedSubject);
+  const topics = allSubjects ? [] : [...new Set(questions.filter(item => item.subject === selectedSubject).map(item => item.topic))];
+  const content = `<section class="page"><button class="button outline" id="back-subjects">← Practice modes</button><div class="practice-heading"><p class="eyebrow">${subject.name}</p><h1>Build your session.</h1><p class="lede">Set exactly how many questions you want and how long you want to study.${allSubjects ? " Seomtorch will divide the questions into balanced subject sections." : " Then choose the topic you want to practise."}</p></div><section class="session-builder" aria-label="Session settings"><div class="session-input"><label for="question-count">Questions</label><div><input id="question-count" type="number" min="10" max="100" step="1" value="${selectedQuestionCount}" inputmode="numeric" required><span>10–100</span></div><small>Choose any whole number from 10 to 100.</small></div><div class="session-input"><label for="study-minutes">Study time</label><div><input id="study-minutes" type="number" min="1" max="600" step="1" value="${selectedStudyMinutes}" inputmode="numeric" required><span>minutes</span></div><small>Choose any whole number from 1 to 600 minutes.</small></div></section>${allSubjects ? `<section class="grouped-preview"><div class="section-head"><h2>Subject sections</h2><p>One timer for the complete session</p></div><div class="section-plan" id="section-plan"></div><button class="button start-session-button" id="start-all-session">Start grouped session →</button></section>` : `<div class="section-head"><h2>Choose a topic</h2><p>The timer begins when questions open</p></div><div class="topic-grid"><button class="topic-card" data-topic=""><strong>All topics</strong><span>Balanced mix · ${questions.filter(q => q.subject === selectedSubject).length} available</span></button>${topics.map(topic => `<button class="topic-card" data-topic="${escapeHtml(topic)}"><strong>${escapeHtml(topic)}</strong><span>${topicAccuracy(selectedSubject, topic)}</span></button>`).join("")}</div>`}</section>`;
   app.innerHTML = shell(content); bindShell();
   document.querySelector("#back-subjects").addEventListener("click", () => { selectedSubject = null; render(); });
-  document.querySelectorAll("[data-count]").forEach(button => button.addEventListener("click", () => { selectedQuestionCount = Number(button.dataset.count); render(); }));
-  document.querySelectorAll("[data-topic]").forEach(button => button.addEventListener("click", () => startSession(selectedSubject, button.dataset.topic || null, selectedQuestionCount)));
+  const questionInput = document.querySelector("#question-count");
+  const timeInput = document.querySelector("#study-minutes");
+  const persistConfiguration = () => { if (questionInput.validity.valid) selectedQuestionCount = Number(questionInput.value); if (timeInput.validity.valid) selectedStudyMinutes = Number(timeInput.value); if (allSubjects) renderSectionPlan(selectedQuestionCount); };
+  questionInput.addEventListener("input", persistConfiguration); timeInput.addEventListener("input", persistConfiguration);
+  if (allSubjects) renderSectionPlan(selectedQuestionCount);
+  document.querySelector("#start-all-session")?.addEventListener("click", () => { const config = readSessionConfiguration(); if (config) startSession("all", null, config.count, config.minutes); });
+  document.querySelectorAll("[data-topic]").forEach(button => button.addEventListener("click", () => { const config = readSessionConfiguration(); if (config) startSession(selectedSubject, button.dataset.topic || null, config.count, config.minutes); }));
+}
+
+function readSessionConfiguration() {
+  const questionInput = document.querySelector("#question-count");
+  const timeInput = document.querySelector("#study-minutes");
+  if (!questionInput.reportValidity() || !timeInput.reportValidity()) return null;
+  selectedQuestionCount = Number(questionInput.value); selectedStudyMinutes = Number(timeInput.value);
+  return { count: selectedQuestionCount, minutes: selectedStudyMinutes };
 }
 
 function weightedQuestions(subject, topic, limit = 10) {
@@ -248,20 +257,57 @@ function weightedQuestions(subject, topic, limit = 10) {
   }).sort((a, b) => b.key - a.key).slice(0, Math.min(limit, pool.length)).map(item => item.question);
 }
 
+function balancedSubjectCounts(limit) {
+  const counts = new Map(ALL_SUBJECT_ORDER.map(subject => [subject.id, 0]));
+  const available = new Map(ALL_SUBJECT_ORDER.map(subject => [subject.id, questions.filter(question => question.subject === subject.id).length]));
+  let allocated = 0;
+  while (allocated < limit) {
+    let progressed = false;
+    for (const subject of ALL_SUBJECT_ORDER) {
+      if (counts.get(subject.id) < available.get(subject.id) && allocated < limit) {
+        counts.set(subject.id, counts.get(subject.id) + 1); allocated++; progressed = true;
+      }
+    }
+    if (!progressed) break;
+  }
+  return counts;
+}
+
+function renderSectionPlan(limit) {
+  const target = document.querySelector("#section-plan");
+  if (!target) return;
+  const allocation = balancedSubjectCounts(limit);
+  target.innerHTML = ALL_SUBJECT_ORDER.map((subject, index) => `<article><span>Section ${String(index + 1).padStart(2, "0")}</span><strong>${subject.name}</strong><small>${allocation.get(subject.id)} questions</small></article>`).join("");
+}
+
+function weightedAllSubjects(limit) {
+  const allocation = balancedSubjectCounts(limit);
+  return ALL_SUBJECT_ORDER.flatMap(subject => weightedQuestions(subject.id, null, allocation.get(subject.id)));
+}
+
+function buildSessionSections(queue) {
+  const sections = [];
+  for (const question of queue) {
+    const last = sections.at(-1);
+    if (last?.subject === question.subject) last.count++;
+    else sections.push({ subject: question.subject, name: subjectName(question.subject), count: 1, start: sections.reduce((total, section) => total + section.count, 0) });
+  }
+  return sections;
+}
+
 function topicSlug(value) { return String(value || "").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
 
-async function startSession(subject, topic, count = 10) {
-  const option = SESSION_OPTIONS.find(item => item.questions === count) || SESSION_OPTIONS[0];
-  let queue = weightedQuestions(subject, topic, option.questions); let remoteId = null;
+async function startSession(subject, topic, count = 10, durationMinutes = 10) {
+  let queue = subject === "all" ? weightedAllSubjects(count) : weightedQuestions(subject, topic, count); let remoteId = null;
   try {
-    const remote = await api.startSession(authToken, { subject, topic: topic ? topicSlug(topic) : null, limit: option.questions });
+    const remote = await api.startSession(authToken, { subject, topic: topic ? topicSlug(topic) : null, limit: count, duration_minutes: durationMinutes });
     remoteId = remote.session_id;
     const selected = remote.questions.map(item => questionById(item.external_id)).filter(Boolean);
     if (selected.length) queue = selected;
   } catch { showToast("Working offline. This session will sync when connected."); }
-  const durationMinutes = Math.max(1, Math.ceil(option.minutes * queue.length / option.questions));
-  if (queue.length < option.questions) showToast(`${queue.length} questions are available here. The timer has been adjusted.`);
-  activeSession = { subject, topic, requestedCount: option.questions, durationMinutes, deadline: Date.now() + durationMinutes * 60000, queue, remoteId, index: 0, correct: 0, answered: false, selected: null, questionStartedAt: Date.now(), reportedComplete: false, timedOut: false };
+  if (queue.length < count) showToast(`${queue.length} questions are currently available in this selection.`);
+  const sections = buildSessionSections(queue);
+  activeSession = { subject, topic, requestedCount: count, durationMinutes, deadline: Date.now() + durationMinutes * 60000, queue, sections, showSectionIntro: subject === "all", remoteId, index: 0, correct: 0, answered: false, selected: null, questionStartedAt: Date.now(), reportedComplete: false, timedOut: false };
   route = "session"; render();
 }
 
@@ -292,12 +338,28 @@ function runSessionTimer() {
   sessionTimer = setInterval(update, 1000);
 }
 
+function currentSection() {
+  return activeSession?.sections.find(section => activeSession.index >= section.start && activeSession.index < section.start + section.count) || activeSession?.sections[0];
+}
+
+function renderSectionIntro() {
+  const section = currentSection();
+  const sectionIndex = activeSession.sections.indexOf(section);
+  const content = `<section class="page page-narrow"><div class="section-intro"><p class="eyebrow">Section ${sectionIndex + 1} of ${activeSession.sections.length}</p><span class="section-kicker">Grouped practice</span><h1>${escapeHtml(section.name)}</h1><p class="lede">${section.count} questions are grouped in this section. Your overall session timer continues throughout.</p><div class="section-intro-meta"><span><small>Questions</small><strong>${section.count}</strong></span><span class="session-clock" role="timer" aria-label="Session time remaining"><small>Time left</small><strong id="session-timer">${formatTime(Math.ceil((activeSession.deadline - Date.now()) / 1000))}</strong></span></div><div class="section-track">${activeSession.sections.map((item, index) => `<i class="${index < sectionIndex ? "complete" : index === sectionIndex ? "active" : ""}" title="${escapeHtml(item.name)}"></i>`).join("")}</div><div class="button-row"><button class="button" id="begin-section">${sectionIndex ? "Continue to section" : "Begin session"} →</button><button class="button outline" id="exit-session">Exit session</button></div></div></section>`;
+  app.innerHTML = shell(content); bindShell(); runSessionTimer();
+  document.querySelector("#begin-section").addEventListener("click", () => { activeSession.showSectionIntro = false; activeSession.questionStartedAt = Date.now(); render(); });
+  document.querySelector("#exit-session").addEventListener("click", () => { clearInterval(sessionTimer); activeSession = null; route = "practice"; render(); });
+}
+
 function renderSession() {
   if (!activeSession || activeSession.index >= activeSession.queue.length) return renderResult();
+  if (activeSession.showSectionIntro) return renderSectionIntro();
   const question = activeSession.queue[activeSession.index];
+  const section = currentSection();
+  const sectionIndex = activeSession.sections.indexOf(section);
   const isBookmarked = bookmarks.some(item => item.questionId === question.id);
   const content = `<section class="page page-narrow">
-    <div class="question-header"><div class="question-topline"><span>${subjectName(question.subject)} · ${escapeHtml(question.topic)}${question.questionYear ? ` · ${question.questionYear} source` : ""}</span><div class="session-status"><span>${activeSession.index + 1} of ${activeSession.queue.length}</span><span class="session-clock" role="timer" aria-label="Session time remaining"><small>Time left</small><strong id="session-timer">${formatTime(Math.ceil((activeSession.deadline - Date.now()) / 1000))}</strong></span></div></div><div class="question-progress"><i style="width:${(activeSession.index + (activeSession.answered ? 1 : 0)) / activeSession.queue.length * 100}%"></i></div></div>
+    ${activeSession.sections.length > 1 ? `<div class="active-section"><span>Section ${sectionIndex + 1} of ${activeSession.sections.length}</span><strong>${escapeHtml(section.name)}</strong><small>${activeSession.index - section.start + 1} of ${section.count} in this section</small></div>` : ""}<div class="question-header"><div class="question-topline"><span>${subjectName(question.subject)} · ${escapeHtml(question.topic)}${question.questionYear ? ` · ${question.questionYear} source` : ""}</span><div class="session-status"><span>${activeSession.index + 1} of ${activeSession.queue.length}</span><span class="session-clock" role="timer" aria-label="Session time remaining"><small>Time left</small><strong id="session-timer">${formatTime(Math.ceil((activeSession.deadline - Date.now()) / 1000))}</strong></span></div></div><div class="question-progress"><i style="width:${(activeSession.index + (activeSession.answered ? 1 : 0)) / activeSession.queue.length * 100}%"></i></div></div>
     <article class="question-paper"><p class="eyebrow">Question ${String(activeSession.index + 1).padStart(2, "0")}</p><h2>${escapeHtml(question.text)}</h2><div class="options">${question.options.map((option, index) => { let state = ""; if (activeSession.answered && index === question.correct) state = "correct"; else if (activeSession.answered && index === activeSession.selected) state = "incorrect"; return `<button class="option ${state}" data-option="${index}" ${activeSession.answered ? "disabled" : ""}><span class="option-letter">${String.fromCharCode(65 + index)}</span><span>${escapeHtml(option)}</span></button>`; }).join("")}</div>
       ${activeSession.answered ? `<div class="feedback"><div class="feedback-head"><div class="feedback-label ${activeSession.selected === question.correct ? "" : "wrong"}">${activeSession.selected === question.correct ? "Correct" : "Review this"}</div>${activeSession.selected === question.correct ? '<span class="xp-earned">+5 XP</span>' : ""}</div><p>${escapeHtml(question.explanation)}</p></div>` : ""}
       <div class="question-actions"><button class="button outline" id="bookmark">${isBookmarked ? "Saved for review" : "Save for review"}</button>${activeSession.answered ? '<button class="button" id="next-question">Next question →</button>' : '<button class="button outline" id="exit-session">Exit session</button>'}</div>
@@ -307,7 +369,7 @@ function renderSession() {
   runSessionTimer();
   document.querySelectorAll("[data-option]").forEach(button => button.addEventListener("click", () => answerQuestion(Number(button.dataset.option))));
   document.querySelector("#bookmark").addEventListener("click", () => toggleBookmark(question.id));
-  document.querySelector("#next-question")?.addEventListener("click", () => { activeSession.index++; activeSession.answered = false; activeSession.selected = null; activeSession.questionStartedAt = Date.now(); render(); });
+  document.querySelector("#next-question")?.addEventListener("click", () => { const previousSubject = question.subject; activeSession.index++; activeSession.answered = false; activeSession.selected = null; activeSession.questionStartedAt = Date.now(); activeSession.showSectionIntro = activeSession.subject === "all" && activeSession.queue[activeSession.index]?.subject !== previousSubject; render(); });
   document.querySelector("#exit-session")?.addEventListener("click", () => { clearInterval(sessionTimer); activeSession = null; route = "practice"; render(); });
 }
 
@@ -396,7 +458,7 @@ function renderResult() {
   const content = `<section class="page page-narrow"><div class="session-result"><p class="eyebrow">${activeSession.timedOut ? "Time expired" : "Session complete"}</p><div class="result-score">${score}%</div><h2>${activeSession.correct} of ${activeSession.queue.length} correct</h2><p class="lede" style="margin-inline:auto">${note}</p><div class="result-meta"><span>${activeSession.queue.length} questions in session</span><span>${activeSession.durationMinutes} minute timer</span></div><div class="button-row" style="justify-content:center;margin-top:28px"><button class="button outline" id="return-practice">Choose another topic</button><button class="button" id="retry-session">Practise this again</button></div></div></section>`;
   app.innerHTML = shell(content); bindShell();
   document.querySelector("#return-practice").addEventListener("click", () => { activeSession = null; route = "practice"; render(); });
-  document.querySelector("#retry-session").addEventListener("click", () => startSession(activeSession.subject, activeSession.topic, activeSession.requestedCount));
+  document.querySelector("#retry-session").addEventListener("click", () => startSession(activeSession.subject, activeSession.topic, activeSession.requestedCount, activeSession.durationMinutes));
 }
 
 function renderProgress() {

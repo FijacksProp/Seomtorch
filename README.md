@@ -39,7 +39,8 @@ Render's Free PostgreSQL database expires after 30 days and has no backups. Use 
 - Versioned JSON question bank in `data/questions.json`
 - Reproducible source importer in `scripts/build-question-bank.mjs`
 - Weighted question selection based on unseen, incorrect and recently answered questions
-- Timed 10, 20, 50 and 100-question practice sessions
+- Freely configured 10–100-question sessions with a student-selected timer
+- Balanced all-subject practice grouped into clear subject sections
 - Installable PWA with offline caching
 - Full student Profile with synchronized account stats and embedded searchable Guide
 - JSON progress export and import

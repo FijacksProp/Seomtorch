@@ -41,13 +41,27 @@ class LearningApiTests(APITestCase):
         self.assertEqual(UserStats.objects.get(user=self.user).xp, 5)
 
     def test_session_accepts_supported_hundred_question_length(self):
-        response = self.client.post("/api/sessions/", {"subject": "english", "limit": 100}, format="json")
+        response = self.client.post("/api/sessions/", {"subject": "english", "limit": 100, "duration_minutes": 45}, format="json")
         self.assertEqual(response.status_code, 201)
         self.assertEqual(len(response.data["questions"]), 100)
 
-    def test_session_rejects_unsupported_length(self):
-        response = self.client.post("/api/sessions/", {"subject": "english", "limit": 30}, format="json")
+    def test_session_accepts_every_count_between_ten_and_hundred(self):
+        response = self.client.post("/api/sessions/", {"subject": "english", "limit": 37, "duration_minutes": 18}, format="json")
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(len(response.data["questions"]), 37)
+
+    def test_session_rejects_out_of_range_length(self):
+        response = self.client.post("/api/sessions/", {"subject": "english", "limit": 9, "duration_minutes": 10}, format="json")
         self.assertEqual(response.status_code, 400)
+
+    def test_all_subject_session_is_balanced_and_grouped(self):
+        response = self.client.post("/api/sessions/", {"subject": "all", "limit": 20, "duration_minutes": 10}, format="json")
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual([section["count"] for section in response.data["sections"]], [7, 7, 6])
+        self.assertEqual([question["subject"] for question in response.data["questions"]], ["english"] * 7 + ["mathematics"] * 7 + ["general-paper"] * 6)
+        session = self.user.practice_sessions.first()
+        self.assertIsNone(session.subject)
+        self.assertEqual(session.duration_minutes, 10)
 
     def test_progress_submitted_on_one_device_is_visible_on_another(self):
         question = Question.objects.first()

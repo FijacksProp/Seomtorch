@@ -55,7 +55,7 @@ class PracticeSession(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="practice_sessions")
-    subject = models.ForeignKey(Subject, on_delete=models.PROTECT, related_name="practice_sessions")
+    subject = models.ForeignKey(Subject, on_delete=models.PROTECT, related_name="practice_sessions", null=True, blank=True)
     topic = models.ForeignKey(Topic, on_delete=models.PROTECT, related_name="practice_sessions", null=True, blank=True)
     question_ids = models.JSONField(default=list)
     status = models.CharField(max_length=12, choices=Status.choices, default=Status.ACTIVE)
@@ -63,6 +63,7 @@ class PracticeSession(models.Model):
     completed_at = models.DateTimeField(null=True, blank=True)
     total_questions = models.PositiveSmallIntegerField(default=0)
     correct_answers = models.PositiveSmallIntegerField(default=0)
+    duration_minutes = models.PositiveSmallIntegerField(null=True, blank=True)
 
     class Meta:
         ordering = ("-started_at",)
