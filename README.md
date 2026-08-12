@@ -44,6 +44,7 @@ Render's Free PostgreSQL database expires after 30 days and has no backups. Use 
 - Installable PWA with offline caching
 - Full student Profile with synchronized account stats and embedded searchable Guide
 - Synchronized Saved for review library with offline retries and timed review sessions
+- Exam-style numbered navigation, answer locking, start/finish confirmations and PWA installation
 - JSON progress export and import
 
 To scale the bank, add valid question objects to the JSON file or split it into packs and list those packs in a small manifest. Question IDs must remain stable so historical attempts continue to match the correct question.

@@ -10,6 +10,7 @@ const ALL_SUBJECT_ORDER = ["english", "mathematics", "general-paper"].map(id => 
 const FAQS = [
   { group: "Getting started", q: "What is Seomtorch designed for?", a: "Seomtorch is a personal study companion for structured JAMB, WAEC, NECO and Post-UTME preparation. It helps you practise by topic, learn from corrections and see where your next study session will matter most." },
   { group: "Getting started", q: "Do I need an account or internet connection?", a: "An account is required so your progress can be monitored and restored across devices. After signing in once, practice can continue offline and pending answers synchronize when the connection returns." },
+  { group: "Getting started", q: "Can I install Seomtorch on my device?", a: "Yes. Use the Install app button. On iPhone or iPad, open Seomtorch in Safari, tap Share, then choose Add to Home Screen." },
   { group: "Practice and review", q: "How are questions selected?", a: "Sessions prioritise questions you have not seen, topics where your accuracy is lower, and questions you previously missed. Recently answered questions receive less priority, which reduces unnecessary repetition." },
   { group: "Practice and review", q: "Which subjects are available?", a: "English Language and General Paper are the two main preparation areas. A smaller Mathematics bank remains available as an additional practice option." },
   { group: "Practice and review", q: "Can I practise one topic only?", a: "Yes. Open Practice, select English Language or General Paper, then choose a topic. You can also choose All topics for a mixed session." },
@@ -51,7 +52,14 @@ let selectedStudyMinutes = 10;
 let activeSession = null;
 let sessionTimer = null;
 let syncPromise = null;
+let deferredInstallPrompt = null;
 let authMode = "signin";
+
+window.addEventListener("beforeinstallprompt", event => {
+  event.preventDefault(); deferredInstallPrompt = event;
+  if (authToken && currentUser && profile && route !== "session") render();
+});
+window.addEventListener("appinstalled", () => { deferredInstallPrompt = null; showToast("Seomtorch installed successfully"); if (route !== "session") render(); });
 
 function readCachedUser() {
   try { return JSON.parse(localStorage.getItem("seomtorch-auth-user") || "null"); }
@@ -130,7 +138,28 @@ function showToast(message) {
   setTimeout(() => toast.remove(), 3200);
 }
 
+function isStandalone() { return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true; }
+function isIos() { return /iphone|ipad|ipod/i.test(navigator.userAgent); }
+
+function showConfirmDialog({ title, message, detail = "", confirmLabel = "Confirm", cancelLabel = "Go back", tone = "default", onConfirm, onCancel, dismissible = true }) {
+  document.querySelector("#app-dialog")?.remove();
+  const dialog = document.createElement("div");
+  dialog.id = "app-dialog"; dialog.className = "dialog-backdrop";
+  dialog.innerHTML = `<section class="confirm-dialog ${tone}" role="dialog" aria-modal="true" aria-labelledby="dialog-title"><p class="eyebrow">${tone === "timeup" ? "Session ended" : "Please confirm"}</p><h2 id="dialog-title">${escapeHtml(title)}</h2><p>${escapeHtml(message)}</p>${detail ? `<div class="dialog-detail">${detail}</div>` : ""}<div class="button-row">${dismissible ? `<button class="button outline" data-dialog-cancel>${escapeHtml(cancelLabel)}</button>` : ""}<button class="button" data-dialog-confirm>${escapeHtml(confirmLabel)}</button></div></section>`;
+  document.body.appendChild(dialog);
+  const close = callback => { dialog.remove(); callback?.(); };
+  dialog.querySelector("[data-dialog-cancel]")?.addEventListener("click", () => close(onCancel));
+  dialog.querySelector("[data-dialog-confirm]").addEventListener("click", () => close(onConfirm));
+  dialog.addEventListener("click", event => { if (dismissible && event.target === dialog) close(onCancel); });
+  dialog.querySelector("[data-dialog-confirm]").focus();
+}
+
 function navigate(nextRoute) {
+  if (activeSession?.started && !activeSession.finished && route === "session") {
+    showConfirmDialog({ title: "Leave this active session?", message: "Your timer is still running. Leaving now will end this session and preserve only answers you have already confirmed.", confirmLabel: "Leave session", cancelLabel: "Keep studying", tone: "warning", onConfirm: () => { clearInterval(sessionTimer); activeSession.finished = true; route = nextRoute; activeSession = null; if (nextRoute !== "practice") selectedSubject = null; render(); } });
+    return;
+  }
+  if (route === "session" && activeSession && !activeSession.started) activeSession = null;
   route = nextRoute;
   if (nextRoute !== "practice") selectedSubject = null;
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -157,7 +186,7 @@ function shell(content) {
       <header class="topbar"><span class="mobile-brand">Seomtorch</span><div class="top-stat"><strong>${attempts.length}</strong><span>answered</span></div><div class="top-stat"><strong>${accuracy()}%</strong><span>accuracy</span></div><div class="top-xp" title="Level ${xp.level} · ${xp.remaining} XP to next level"><small>LV ${xp.level}</small><strong>${xp.xp} XP</strong></div><div class="top-streak" title="${profile.rhythm || 0}-day streak"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/></svg><span><small>Streak</small><strong>${profile.rhythm || 0}</strong></span></div><button class="avatar" data-route="profile" title="Open ${escapeHtml(profile.name)}'s profile">${initials()}</button></header>
       <main id="main">${content}</main>
     </div>
-  </div>`;
+  </div>${!isStandalone() && route !== "session" ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ""}`;
 }
 
 function escapeHtml(value = "") {
@@ -166,6 +195,20 @@ function escapeHtml(value = "") {
 
 function bindShell() {
   document.querySelectorAll("[data-route]").forEach(button => button.addEventListener("click", () => navigate(button.dataset.route)));
+  document.querySelectorAll("[data-install-app]").forEach(button => button.addEventListener("click", installApp));
+}
+
+async function installApp() {
+  if (deferredInstallPrompt) {
+    deferredInstallPrompt.prompt();
+    const choice = await deferredInstallPrompt.userChoice;
+    if (choice.outcome === "accepted") deferredInstallPrompt = null;
+    return;
+  }
+  const message = isIos()
+    ? "To install Seomtorch: tap the Share button in Safari, then choose ‘Add to Home Screen’."
+    : "Open your browser menu and choose ‘Install app’ or ‘Add to Home screen’.";
+  showConfirmDialog({ title: "Install Seomtorch", message, confirmLabel: "Got it", cancelLabel: "Close", onConfirm: () => {} });
 }
 
 function lastTopic() {
@@ -319,7 +362,14 @@ function buildSessionSections(queue) {
 
 function topicSlug(value) { return String(value || "").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
 
-async function startSession(subject, topic, count = 10, durationMinutes = 10) {
+function startSession(subject, topic, count = 10, durationMinutes = 10) {
+  const label = subject === "all" ? "All subjects" : subject === "saved" ? "Saved for review" : subjectName(subject);
+  const topicLabel = topic || (subject === "all" ? "Grouped subject sections" : subject === "saved" ? "Saved question collection" : "All topics");
+  const detail = `<dl class="session-confirm-summary"><div><dt>Mode</dt><dd>${escapeHtml(label)}</dd></div><div><dt>Focus</dt><dd>${escapeHtml(topicLabel)}</dd></div><div><dt>Questions</dt><dd>${count}</dd></div><div><dt>Time</dt><dd>${durationMinutes} minutes</dd></div></dl>`;
+  showConfirmDialog({ title: "Start this practice session?", message: "Review your choices carefully. The timer will remain paused until you press Begin session on the next screen.", detail, confirmLabel: "Proceed", cancelLabel: "Change selections", onConfirm: () => createSession(subject, topic, count, durationMinutes) });
+}
+
+async function createSession(subject, topic, count = 10, durationMinutes = 10) {
   let queue = subject === "all" ? weightedAllSubjects(count) : subject === "saved" ? savedSessionQuestions(count) : weightedQuestions(subject, topic, count); let remoteId = null;
   try {
     const remote = await api.startSession(authToken, { subject, topic: topic ? topicSlug(topic) : null, limit: count, duration_minutes: durationMinutes });
@@ -329,7 +379,7 @@ async function startSession(subject, topic, count = 10, durationMinutes = 10) {
   } catch { showToast("Working offline. This session will sync when connected."); }
   if (queue.length < count) showToast(`${queue.length} questions are currently available in this selection.`);
   const sections = buildSessionSections(queue);
-  activeSession = { subject, topic, requestedCount: count, durationMinutes, deadline: Date.now() + durationMinutes * 60000, queue, sections, showSectionIntro: ["all", "saved"].includes(subject), remoteId, index: 0, correct: 0, answered: false, selected: null, questionStartedAt: Date.now(), reportedComplete: false, timedOut: false };
+  activeSession = { subject, topic, requestedCount: count, durationMinutes, deadline: null, started: false, finished: false, queue, sections, answers: queue.map(() => ({ selected: null, confirmed: false, correct: false })), remoteId, index: 0, correct: 0, questionStartedAt: null, reportedComplete: false, timedOut: false, timeUpAcknowledged: false };
   route = "session"; render();
 }
 
@@ -341,7 +391,7 @@ function formatTime(totalSeconds) {
 function runSessionTimer() {
   clearInterval(sessionTimer);
   const update = () => {
-    if (!activeSession || route !== "session") return clearInterval(sessionTimer);
+    if (!activeSession?.started || activeSession.finished || route !== "session") return clearInterval(sessionTimer);
     const remaining = Math.max(0, Math.ceil((activeSession.deadline - Date.now()) / 1000));
     const display = document.querySelector("#session-timer");
     if (display) {
@@ -350,10 +400,8 @@ function runSessionTimer() {
     }
     if (remaining === 0) {
       clearInterval(sessionTimer);
-      activeSession.timedOut = true;
-      activeSession.index = activeSession.queue.length;
-      activeSession.answered = false;
-      render();
+      activeSession.timedOut = true; activeSession.finished = true;
+      showConfirmDialog({ title: "Time’s up.", message: "Your study time has ended. Confirmed answers have been recorded; unanswered questions will remain unanswered.", confirmLabel: "View results", tone: "timeup", dismissible: false, onConfirm: () => { activeSession.timeUpAcknowledged = true; render(); } });
     }
   };
   update();
@@ -364,42 +412,56 @@ function currentSection() {
   return activeSession?.sections.find(section => activeSession.index >= section.start && activeSession.index < section.start + section.count) || activeSession?.sections[0];
 }
 
-function renderSectionIntro() {
-  const section = currentSection();
-  const sectionIndex = activeSession.sections.indexOf(section);
-  const content = `<section class="page page-narrow"><div class="section-intro"><p class="eyebrow">Section ${sectionIndex + 1} of ${activeSession.sections.length}</p><span class="section-kicker">${activeSession.subject === "saved" ? "Saved review" : "Grouped practice"}</span><h1>${escapeHtml(section.name)}</h1><p class="lede">${section.count} questions are grouped in this section. Your overall session timer continues throughout.</p><div class="section-intro-meta"><span><small>Questions</small><strong>${section.count}</strong></span><span class="session-clock" role="timer" aria-label="Session time remaining"><small>Time left</small><strong id="session-timer">${formatTime(Math.ceil((activeSession.deadline - Date.now()) / 1000))}</strong></span></div><div class="section-track">${activeSession.sections.map((item, index) => `<i class="${index < sectionIndex ? "complete" : index === sectionIndex ? "active" : ""}" title="${escapeHtml(item.name)}"></i>`).join("")}</div><div class="button-row"><button class="button" id="begin-section">${sectionIndex ? "Continue to section" : "Begin session"} →</button><button class="button outline" id="exit-session">Exit session</button></div></div></section>`;
-  app.innerHTML = shell(content); bindShell(); runSessionTimer();
-  document.querySelector("#begin-section").addEventListener("click", () => { activeSession.showSectionIntro = false; activeSession.questionStartedAt = Date.now(); render(); });
-  document.querySelector("#exit-session").addEventListener("click", () => { clearInterval(sessionTimer); activeSession = null; route = "practice"; render(); });
+function renderSessionStart() {
+  const mode = activeSession.subject === "all" ? "All subjects" : activeSession.subject === "saved" ? "Saved for review" : subjectName(activeSession.subject);
+  const content = `<section class="page page-narrow"><div class="session-ready"><p class="eyebrow">Ready when you are</p><h1>Your session is prepared.</h1><p class="lede">The countdown has not started. Once you begin, you may skip between questions and return using the numbered navigator.</p><div class="ready-summary"><article><span>Mode</span><strong>${escapeHtml(mode)}</strong></article><article><span>Questions</span><strong>${activeSession.queue.length}</strong></article><article><span>Study time</span><strong>${activeSession.durationMinutes} minutes</strong></article></div>${activeSession.sections.length > 1 ? `<div class="ready-sections">${activeSession.sections.map((section, index) => `<div><span>${String(index + 1).padStart(2, "0")}</span><strong>${escapeHtml(section.name)}</strong><small>${section.count} questions</small></div>`).join("")}</div>` : ""}<div class="button-row"><button class="button" id="begin-session">Begin session →</button><button class="button outline" id="cancel-session">Change selections</button></div></div></section>`;
+  app.innerHTML = shell(content); bindShell();
+  document.querySelector("#begin-session").addEventListener("click", () => { activeSession.started = true; activeSession.deadline = Date.now() + activeSession.durationMinutes * 60000; activeSession.questionStartedAt = Date.now(); render(); });
+  document.querySelector("#cancel-session").addEventListener("click", () => { activeSession = null; route = "practice"; render(); });
 }
 
 function renderSession() {
-  if (!activeSession || activeSession.index >= activeSession.queue.length) return renderResult();
-  if (activeSession.showSectionIntro) return renderSectionIntro();
+  if (!activeSession) { route = "practice"; return render(); }
+  if (activeSession.finished) { if (!activeSession.timedOut || activeSession.timeUpAcknowledged) return renderResult(); return; }
+  if (!activeSession.started) return renderSessionStart();
   const question = activeSession.queue[activeSession.index];
+  const answer = activeSession.answers[activeSession.index];
   const section = currentSection();
   const sectionIndex = activeSession.sections.indexOf(section);
   const isBookmarked = bookmarks.some(item => item.questionId === question.id);
-  const content = `<section class="page page-narrow">
-    ${activeSession.sections.length > 1 ? `<div class="active-section"><span>Section ${sectionIndex + 1} of ${activeSession.sections.length}</span><strong>${escapeHtml(section.name)}</strong><small>${activeSession.index - section.start + 1} of ${section.count} in this section</small></div>` : ""}<div class="question-header"><div class="question-topline"><span>${subjectName(question.subject)} · ${escapeHtml(question.topic)}${question.questionYear ? ` · ${question.questionYear} source` : ""}</span><div class="session-status"><span>${activeSession.index + 1} of ${activeSession.queue.length}</span><span class="session-clock" role="timer" aria-label="Session time remaining"><small>Time left</small><strong id="session-timer">${formatTime(Math.ceil((activeSession.deadline - Date.now()) / 1000))}</strong></span></div></div><div class="question-progress"><i style="width:${(activeSession.index + (activeSession.answered ? 1 : 0)) / activeSession.queue.length * 100}%"></i></div></div>
-    <article class="question-paper"><p class="eyebrow">Question ${String(activeSession.index + 1).padStart(2, "0")}</p><h2>${escapeHtml(question.text)}</h2><div class="options">${question.options.map((option, index) => { let state = ""; if (activeSession.answered && index === question.correct) state = "correct"; else if (activeSession.answered && index === activeSession.selected) state = "incorrect"; return `<button class="option ${state}" data-option="${index}" ${activeSession.answered ? "disabled" : ""}><span class="option-letter">${String.fromCharCode(65 + index)}</span><span>${escapeHtml(option)}</span></button>`; }).join("")}</div>
-      ${activeSession.answered ? `<div class="feedback"><div class="feedback-head"><div class="feedback-label ${activeSession.selected === question.correct ? "" : "wrong"}">${activeSession.selected === question.correct ? "Correct" : "Review this"}</div>${activeSession.selected === question.correct ? '<span class="xp-earned">+5 XP</span>' : ""}</div><p>${escapeHtml(question.explanation)}</p></div>` : ""}
-      <div class="question-actions"><button class="button outline" id="bookmark">${isBookmarked ? "Remove from saved" : "Save for review"}</button>${activeSession.answered ? '<button class="button" id="next-question">Next question →</button>' : '<button class="button outline" id="exit-session">Exit session</button>'}</div>
-    </article>
-  </section>`;
+  const confirmed = activeSession.answers.filter(item => item.confirmed).length;
+  const content = `<section class="page session-page"><aside class="question-navigator"><div><p class="eyebrow">Question navigator</p><strong>${confirmed} of ${activeSession.queue.length} answered</strong><span>Select any number to move between questions.</span></div><div class="question-number-grid">${activeSession.answers.map((item, index) => `<button class="question-number ${index === activeSession.index ? "current" : ""} ${item.confirmed ? item.correct ? "correct" : "incorrect" : item.selected !== null ? "selected" : ""}" data-question-index="${index}" aria-label="Question ${index + 1}${item.confirmed ? item.correct ? ", correct" : ", incorrect" : ", unanswered"}">${index + 1}</button>`).join("")}</div><div class="navigator-key"><span><i class="correct"></i>Correct</span><span><i class="incorrect"></i>Incorrect</span><span><i class="selected"></i>Selected</span><span><i class="unanswered"></i>Unanswered</span></div><button class="button outline finish-session" id="finish-session">Finish session</button></aside><div class="session-workspace">${activeSession.sections.length > 1 ? `<div class="active-section"><span>Section ${sectionIndex + 1} of ${activeSession.sections.length}</span><strong>${escapeHtml(section.name)}</strong><small>${activeSession.index - section.start + 1} of ${section.count} in this section</small></div>` : ""}<div class="question-header"><div class="question-topline"><span>${subjectName(question.subject)} · ${escapeHtml(question.topic)}${question.questionYear ? ` · ${question.questionYear} source` : ""}</span><div class="session-status"><span>${activeSession.index + 1} of ${activeSession.queue.length}</span><span class="session-clock" role="timer" aria-label="Session time remaining"><small>Time left</small><strong id="session-timer">${formatTime(Math.ceil((activeSession.deadline - Date.now()) / 1000))}</strong></span></div></div><div class="question-progress"><i style="width:${confirmed / activeSession.queue.length * 100}%"></i></div></div><article class="question-paper"><p class="eyebrow">Question ${String(activeSession.index + 1).padStart(2, "0")}</p><h2>${escapeHtml(question.text)}</h2><div class="options">${question.options.map((option, index) => { let state = ""; if (answer.confirmed && index === question.correct) state = "correct"; else if (answer.confirmed && index === answer.selected) state = "incorrect"; else if (!answer.confirmed && index === answer.selected) state = "selected"; return `<button class="option ${state}" data-option="${index}" ${answer.confirmed ? "disabled" : ""}><span class="option-letter">${String.fromCharCode(65 + index)}</span><span>${escapeHtml(option)}</span></button>`; }).join("")}</div>${answer.confirmed ? `<div class="feedback"><div class="feedback-head"><div class="feedback-label ${answer.correct ? "" : "wrong"}">${answer.correct ? "Correct" : "Review this"}</div>${answer.correct ? '<span class="xp-earned">+5 XP</span>' : ""}</div><p>${escapeHtml(question.explanation)}</p></div>` : answer.selected !== null ? '<p class="selection-note">Your selection is not recorded until you confirm it.</p>' : ""}<div class="question-actions"><button class="button outline" id="previous-question" ${activeSession.index === 0 ? "disabled" : ""}>← Previous</button><button class="button outline" id="bookmark">${isBookmarked ? "Remove from saved" : "Save for review"}</button><button class="button" id="next-question">${activeSession.index === activeSession.queue.length - 1 ? "Review session" : answer.confirmed ? "Next question →" : "Skip for now →"}</button></div></article></div></section>`;
   app.innerHTML = shell(content); bindShell();
   runSessionTimer();
-  document.querySelectorAll("[data-option]").forEach(button => button.addEventListener("click", () => answerQuestion(Number(button.dataset.option))));
+  document.querySelectorAll("[data-question-index]").forEach(button => button.addEventListener("click", () => goToQuestion(Number(button.dataset.questionIndex))));
+  document.querySelectorAll("[data-option]").forEach(button => button.addEventListener("click", () => selectAnswer(Number(button.dataset.option))));
   document.querySelector("#bookmark").addEventListener("click", () => toggleBookmark(question.id));
-  document.querySelector("#next-question")?.addEventListener("click", () => { const previousSubject = question.subject; activeSession.index++; activeSession.answered = false; activeSession.selected = null; activeSession.questionStartedAt = Date.now(); activeSession.showSectionIntro = ["all", "saved"].includes(activeSession.subject) && activeSession.queue[activeSession.index]?.subject !== previousSubject; render(); });
-  document.querySelector("#exit-session")?.addEventListener("click", () => { clearInterval(sessionTimer); activeSession = null; route = "practice"; render(); });
+  document.querySelector("#previous-question").addEventListener("click", () => goToQuestion(activeSession.index - 1));
+  document.querySelector("#next-question").addEventListener("click", () => activeSession.index === activeSession.queue.length - 1 ? confirmFinishSession() : goToQuestion(activeSession.index + 1));
+  document.querySelector("#finish-session").addEventListener("click", confirmFinishSession);
 }
 
-async function answerQuestion(selected) {
-  if (activeSession.answered) return;
+function goToQuestion(index) {
+  if (index < 0 || index >= activeSession.queue.length) return;
+  activeSession.index = index; activeSession.questionStartedAt = Date.now(); render();
+}
+
+function selectAnswer(selected) {
+  const answer = activeSession.answers[activeSession.index];
+  if (answer.confirmed) return;
   const question = activeSession.queue[activeSession.index];
+  answer.selected = selected; render();
+  showConfirmDialog({ title: `Confirm option ${String.fromCharCode(65 + selected)}?`, message: "Once confirmed, this answer will be graded and locked. You will not be able to change it afterward.", detail: `<div class="selected-answer-preview"><span>${String.fromCharCode(65 + selected)}</span><p>${escapeHtml(question.options[selected])}</p></div>`, confirmLabel: "Yes, confirm answer", cancelLabel: "Change option", onConfirm: () => submitConfirmedAnswer(activeSession.index) });
+}
+
+async function submitConfirmedAnswer(questionIndex) {
+  if (!activeSession || activeSession.finished) return;
+  const answer = activeSession.answers[questionIndex];
+  if (answer.confirmed || answer.selected === null) return;
+  const question = activeSession.queue[questionIndex];
+  const selected = answer.selected;
   const correct = selected === question.correct;
-  activeSession.answered = true; activeSession.selected = selected; if (correct) activeSession.correct++;
+  answer.confirmed = true; answer.correct = correct; if (correct) activeSession.correct++;
   const attempt = { questionId: question.id, subject: question.subject, correct, selected, timestamp: Date.now(), durationMs: Date.now() - activeSession.questionStartedAt, clientId: crypto.randomUUID(), sessionId: activeSession.remoteId, synced: false };
   attempt.id = await add("attempts", attempt); attempts.push(attempt);
   profile.xp = (profile.xp || 0) + (correct ? 5 : 0);
@@ -407,7 +469,13 @@ async function answerQuestion(selected) {
   await registerStudyDay();
   render();
   await syncAttemptRecord(attempt);
-  if (route === "session" && activeSession?.queue[activeSession.index]?.id === question.id) render();
+  if (route === "session" && activeSession?.queue[questionIndex]?.id === question.id) render();
+}
+
+function confirmFinishSession() {
+  const answered = activeSession.answers.filter(item => item.confirmed).length;
+  const unanswered = activeSession.queue.length - answered;
+  showConfirmDialog({ title: "Finish this session?", message: unanswered ? `${unanswered} question${unanswered === 1 ? " is" : "s are"} still unanswered. You can return to them using the numbered navigator.` : "Every question has been answered and locked.", detail: `<div class="finish-summary"><span><strong>${answered}</strong> answered</span><span><strong>${unanswered}</strong> unanswered</span></div>`, confirmLabel: "Finish and view results", cancelLabel: "Continue session", onConfirm: () => { activeSession.finished = true; render(); } });
 }
 
 async function syncAttemptRecord(attempt) {
@@ -490,7 +558,13 @@ async function registerStudyDay() {
   await put("profile", profile);
 }
 
-async function toggleBookmark(questionId) {
+function toggleBookmark(questionId) {
+  const existing = bookmarks.find(item => item.questionId === questionId);
+  const question = questionById(questionId);
+  showConfirmDialog({ title: existing ? "Remove this saved question?" : "Save this question for review?", message: existing ? "It will be removed from your synchronized review library on every device." : "It will be added to your synchronized review library so you can return to it later.", detail: question ? `<p class="dialog-question-preview">${escapeHtml(question.text)}</p>` : "", confirmLabel: existing ? "Yes, remove it" : "Yes, save it", cancelLabel: "Keep as it is", onConfirm: () => performBookmarkToggle(questionId) });
+}
+
+async function performBookmarkToggle(questionId) {
   const existing = bookmarks.find(item => item.questionId === questionId);
   if (existing) {
     await storeAction("bookmarks", "readwrite", store => store.delete(questionId));
@@ -512,8 +586,10 @@ function renderResult() {
   clearInterval(sessionTimer);
   if (activeSession.remoteId && !activeSession.reportedComplete) { activeSession.reportedComplete = true; api.completeSession(authToken, activeSession.remoteId).catch(() => { activeSession.reportedComplete = false; }); }
   const score = activeSession.queue.length ? Math.round(activeSession.correct / activeSession.queue.length * 100) : 0;
+  const answered = activeSession.answers.filter(item => item.confirmed).length;
+  const unanswered = activeSession.queue.length - answered;
   const note = activeSession.timedOut ? "Time is up. Review the result, then try a shorter session or return when you can give it a full window." : score >= 80 ? "A strong session. Keep the standard steady." : score >= 50 ? "Good work. Review the corrections before moving on." : "This topic needs another careful pass. That is useful information.";
-  const content = `<section class="page page-narrow"><div class="session-result"><p class="eyebrow">${activeSession.timedOut ? "Time expired" : "Session complete"}</p><div class="result-score">${score}%</div><h2>${activeSession.correct} of ${activeSession.queue.length} correct</h2><p class="lede" style="margin-inline:auto">${note}</p><div class="result-meta"><span>${activeSession.queue.length} questions in session</span><span>${activeSession.durationMinutes} minute timer</span></div><div class="button-row" style="justify-content:center;margin-top:28px"><button class="button outline" id="return-practice">Choose another topic</button><button class="button" id="retry-session">Practise this again</button></div></div></section>`;
+  const content = `<section class="page page-narrow"><div class="session-result"><p class="eyebrow">${activeSession.timedOut ? "Time expired" : "Session complete"}</p><div class="result-score">${score}%</div><h2>${activeSession.correct} of ${activeSession.queue.length} correct</h2><p class="lede" style="margin-inline:auto">${note}</p><div class="result-meta"><span>${answered} answered</span><span>${unanswered} unanswered</span><span>${activeSession.durationMinutes} minute timer</span></div><div class="button-row" style="justify-content:center;margin-top:28px"><button class="button outline" id="return-practice">Choose another topic</button><button class="button" id="retry-session">Practise this again</button></div></div></section>`;
   app.innerHTML = shell(content); bindShell();
   document.querySelector("#return-practice").addEventListener("click", () => { activeSession = null; route = "practice"; render(); });
   document.querySelector("#retry-session").addEventListener("click", () => startSession(activeSession.subject, activeSession.topic, activeSession.requestedCount, activeSession.durationMinutes));
