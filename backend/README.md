@@ -50,7 +50,7 @@ SECURE_HSTS_SECONDS=31536000
 SECURE_SSL_REDIRECT=True
 ```
 
-Do not add the database password or secret key to Git. Use Supabase's Session pooler rather than its transaction pooler: this is a persistent Django service, and the Session pooler is available over IPv4. `start.sh` runs migrations, imports or updates the question bank, and creates the initial administrator before starting Gunicorn. All three setup commands are idempotent, so later deploys do not duplicate data or overwrite the administrator password.
+Do not add the database password or secret key to Git. Use Supabase's Session pooler rather than its transaction pooler: this is a persistent Django service, and the Session pooler is available over IPv4. `start.sh` runs migrations and creates the initial administrator before starting Gunicorn. The question bank import runs in the background so a large remote-database import cannot prevent Render from detecting the web port. It imports automatically when the bank is empty; set `IMPORT_QUESTIONS_ON_START=True` for one deployment when an existing question bank needs to be refreshed, then return it to `False`.
 
 If the existing administrator password is lost, set a new `DJANGO_SUPERUSER_PASSWORD`, temporarily set `DJANGO_SUPERUSER_RESET_PASSWORD=True`, and deploy once. After confirming access, immediately change `DJANGO_SUPERUSER_RESET_PASSWORD` back to `False` so future deploys cannot reset the account unexpectedly.
 

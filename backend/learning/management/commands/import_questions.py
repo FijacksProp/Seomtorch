@@ -19,9 +19,18 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         default = Path(__file__).resolve().parents[4] / "data" / "questions.json"
         parser.add_argument("path", nargs="?", default=str(default))
+        parser.add_argument(
+            "--if-empty",
+            action="store_true",
+            help="Skip the import when the question bank already contains questions.",
+        )
 
     @transaction.atomic
     def handle(self, *args, **options):
+        if options["if_empty"] and Question.objects.exists():
+            self.stdout.write("Question bank already populated; skipping import.")
+            return
+
         repo_root = Path(__file__).resolve().parents[4]
         manifest_path = repo_root / "data" / "manifest.json"
 
