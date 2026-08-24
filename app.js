@@ -305,18 +305,24 @@ function renderPractice() {
       <p class="eyebrow">Practice</p>
       <h1>Choose your focus.</h1>
 
-      <div class="mode-cards" style="display: flex; gap: 1rem; margin-bottom: 2rem;">
-        <button class="mode-card ${selectedPracticeMode === 'timed' ? 'active' : ''}" data-mode="timed" style="flex: 1; padding: 1rem; border: 1px solid var(--border); border-radius: 8px; text-align: left; background: ${selectedPracticeMode === 'timed' ? 'var(--accent-light)' : 'transparent'};">
-          <strong style="display: block; margin-bottom: 0.5rem;">Timed Practice</strong>
-          <span style="font-size: 0.875rem;">Exam simulation. Answer everything first, see results and solutions at the end.</span>
+      <div class="practice-modes" aria-label="Choose a practice mode">
+        <button class="mode-card ${selectedPracticeMode === 'timed' ? 'selected' : ''}" data-mode="timed" aria-pressed="${selectedPracticeMode === 'timed'}">
+          <span class="mode-kicker">01 · Exam conditions</span>
+          <h3>Timed Practice</h3>
+          <p>Answer the complete paper before viewing your score and solutions.</p>
+          <span class="mode-badge exam">Custom questions & time</span>
         </button>
-        <button class="mode-card ${selectedPracticeMode === 'normal' ? 'active' : ''}" data-mode="normal" style="flex: 1; padding: 1rem; border: 1px solid var(--border); border-radius: 8px; text-align: left; background: ${selectedPracticeMode === 'normal' ? 'var(--accent-light)' : 'transparent'};">
-          <strong style="display: block; margin-bottom: 0.5rem;">Normal Practice</strong>
-          <span style="font-size: 0.875rem;">Step-by-step study. Answer one question, immediately see the answer, explanation, video and discussion, then continue.</span>
+        <button class="mode-card ${selectedPracticeMode === 'normal' ? 'selected' : ''}" data-mode="normal" aria-pressed="${selectedPracticeMode === 'normal'}">
+          <span class="mode-kicker">02 · Learn as you go</span>
+          <h3>Normal Practice</h3>
+          <p>Work question by question with immediate answers and explanations.</p>
+          <span class="mode-badge study">Untimed study</span>
         </button>
-        <button class="mode-card" data-route="daily-sprint" style="flex: 1; padding: 1rem; border: 1px solid var(--border); border-radius: 8px; text-align: left; cursor: pointer;">
-          <strong style="display: block; margin-bottom: 0.5rem;">Daily 5-Minute Sprint</strong>
-          <span style="font-size: 0.875rem;">5 questions, one daily attempt, and up to 25 XP from correct answers. ${dailySprintCompleted ? '<strong>Completed today ✓</strong>' : ''}</span>
+        <button class="mode-card sprint-mode-card" data-route="daily-sprint">
+          <span class="mode-kicker">03 · Daily challenge</span>
+          <h3>5-Minute Sprint</h3>
+          <p>Five quick questions, one attempt each day, and up to 25 XP.</p>
+          <span class="mode-badge sprint-badge">${dailySprintCompleted ? 'Completed today ✓' : 'Ready today'}</span>
         </button>
       </div>
 

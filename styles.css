@@ -444,6 +444,26 @@ select:focus, input:focus { border-color: var(--forest); box-shadow: 0 0 0 3px r
   border-color: #173d30;
   background: #f0f7f4;
 }
+.mode-card.selected::after {
+  content: "Selected";
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  color: #173d30;
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.mode-kicker {
+  display: block;
+  margin-bottom: 24px;
+  color: #7a867f;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
 .mode-card .mode-icon {
   width: 48px;
   height: 48px;
@@ -1002,7 +1022,14 @@ select:focus, input:focus { border-color: var(--forest); box-shadow: 0 0 0 3px r
 .flag-button:hover { border-color: #e53935; color: #e53935; background: #ffebee; }
 
 @media (max-width: 600px) {
-  .practice-modes { grid-template-columns: 1fr; }
+  .practice-modes { grid-template-columns: 1fr; gap: 10px; margin: 22px 0 28px; }
+  .mode-card { min-height: 0; padding: 20px; border-width: 1px; border-radius: 14px; }
+  .mode-card:hover { transform: none; }
+  .mode-kicker { margin-bottom: 12px; }
+  .mode-card h3 { padding-right: 72px; font-size: 1.05rem; }
+  .mode-card p { max-width: 34ch; }
+  .mode-card .mode-badge { margin-top: 12px; }
+  .mode-card.selected::after { top: 20px; right: 18px; }
   .sprint-card { flex-direction: column; text-align: center; }
   .normal-question-paper { padding: 20px; }
   .instant-feedback { padding: 18px; }
