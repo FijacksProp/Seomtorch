@@ -5,7 +5,8 @@
   "scripts": {
     "start": "serve .",
     "check": "node --check app.js && node --check scripts/build-question-bank.mjs",
-    "questions:build": "node scripts/build-question-bank.mjs"
+    "questions:build": "node scripts/build-question-bank.mjs",
+    "questions:split": "node scripts/split-question-bank.mjs"
   },
   "devDependencies": {
     "serve": "^14.2.4"

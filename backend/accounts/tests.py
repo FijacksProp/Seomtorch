@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
+from django.core.management import call_command
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
+from unittest.mock import patch
 
 class AuthenticationTests(APITestCase):
     def test_register_returns_token_and_six_character_id(self):
@@ -28,3 +30,44 @@ class AuthenticationTests(APITestCase):
         response = self.client.post("/api/auth/logout/")
         self.assertEqual(response.status_code, 204)
         self.assertTrue(Token.objects.filter(key=token.key).exists())
+
+    def test_initial_superuser_password_can_only_reset_with_explicit_flag(self):
+        user = get_user_model().objects.create_superuser(email="admin@example.com", username="admin", password="OldSecure934!")
+        environment = {
+            "DJANGO_SUPERUSER_EMAIL": "admin@example.com",
+            "DJANGO_SUPERUSER_USERNAME": "admin",
+            "DJANGO_SUPERUSER_PASSWORD": "NewSecure934!",
+            "DJANGO_SUPERUSER_RESET_PASSWORD": "True",
+        }
+        with patch.dict("os.environ", environment, clear=False):
+            call_command("create_initial_superuser", verbosity=0)
+        user.refresh_from_db()
+        self.assertTrue(user.check_password("NewSecure934!"))
+
+    def test_student_can_replace_a_temporary_password(self):
+        user = get_user_model().objects.create_user(email="reset@example.com", username="reset", password="Temporary934!", must_change_password=True)
+        token = Token.objects.create(user=user)
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {token.key}")
+        response = self.client.post("/api/auth/change-password/", {"current_password": "Temporary934!", "new_password": "Permanent934!Safe"}, format="json")
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.data["user"]["must_change_password"])
+        user.refresh_from_db()
+        self.assertFalse(user.must_change_password)
+        self.assertTrue(user.check_password("Permanent934!Safe"))
+
+    def test_password_change_rejects_the_wrong_current_password(self):
+        user = get_user_model().objects.create_user(email="secure@example.com", username="secure", password="Current934!Safe")
+        token = Token.objects.create(user=user)
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {token.key}")
+        response = self.client.post("/api/auth/change-password/", {"current_password": "Wrong934!", "new_password": "Replacement934!Safe"}, format="json")
+        self.assertEqual(response.status_code, 400)
+        user.refresh_from_db()
+        self.assertTrue(user.check_password("Current934!Safe"))
+
+    def test_temporary_password_account_cannot_use_learning_api_before_change(self):
+        user = get_user_model().objects.create_user(email="blocked@example.com", username="blocked", password="Temporary934!", must_change_password=True)
+        token = Token.objects.create(user=user)
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {token.key}")
+        response = self.client.get("/api/subjects/")
+        self.assertEqual(response.status_code, 403)
+        self.assertIn("temporary password", response.data["detail"])

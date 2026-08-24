@@ -1,4 +1,4 @@
-const CACHE = "seomtorch-v12";
+const CACHE = "seomtorch-v14";
 const APP_ASSETS = [
   "./",
   "index.html",
@@ -8,7 +8,10 @@ const APP_ASSETS = [
   "manifest.webmanifest",
   "assets/mark.svg",
   "config.js",
-  "data/questions.json"
+  "data/manifest.json",
+  "data/questions-english.json",
+  "data/questions-general-paper.json",
+  "data/questions-mathematics.json"
 ];
 
 self.addEventListener("install", event => {
@@ -25,16 +28,18 @@ self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
   const url = new URL(event.request.url);
 
+  const isKaTeX = url.href.startsWith("https://cdn.jsdelivr.net/npm/katex");
+
   // Account data is private and changes frequently. Never put cross-origin API
   // responses in the shared application cache (cache keys ignore auth headers).
-  if (url.origin !== self.location.origin || url.pathname.startsWith("/api/")) {
+  if (!isKaTeX && (url.origin !== self.location.origin || url.pathname.startsWith("/api/"))) {
     event.respondWith(fetch(event.request));
     return;
   }
 
   // Fetch application code and configuration first so deployments reach users
   // promptly, with the existing cache retained as an offline fallback.
-  if (["/", "/index.html", "/app.js", "/api-client.js", "/config.js", "/sw.js"].includes(url.pathname)) {
+  if (["/", "/index.html", "/app.js", "/api-client.js", "/config.js", "/sw.js", "/data/manifest.json"].includes(url.pathname) || isKaTeX) {
     event.respondWith(fetch(event.request).then(response => {
       const copy = response.clone();
       caches.open(CACHE).then(cache => cache.put(event.request, copy));

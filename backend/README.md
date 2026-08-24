@@ -45,11 +45,14 @@ DJANGO_SECRET_KEY=<a long random secret>
 DJANGO_SUPERUSER_EMAIL=<initial administrator email>
 DJANGO_SUPERUSER_USERNAME=<initial administrator username>
 DJANGO_SUPERUSER_PASSWORD=<initial administrator password>
+DJANGO_SUPERUSER_RESET_PASSWORD=False
 SECURE_HSTS_SECONDS=31536000
 SECURE_SSL_REDIRECT=True
 ```
 
 Do not add the database password or secret key to Git. Use Supabase's Session pooler rather than its transaction pooler: this is a persistent Django service, and the Session pooler is available over IPv4. `start.sh` runs migrations, imports or updates the question bank, and creates the initial administrator before starting Gunicorn. All three setup commands are idempotent, so later deploys do not duplicate data or overwrite the administrator password.
+
+If the existing administrator password is lost, set a new `DJANGO_SUPERUSER_PASSWORD`, temporarily set `DJANGO_SUPERUSER_RESET_PASSWORD=True`, and deploy once. After confirming access, immediately change `DJANGO_SUPERUSER_RESET_PASSWORD` back to `False` so future deploys cannot reset the account unexpectedly.
 
 For a new empty Supabase database, deploying with these variables creates the Django tables automatically. To retain existing Render users and progress, migrate the old database before changing `DATABASE_URL`. Follow [SUPABASE.md](SUPABASE.md) for the complete migration and cutover procedure.
 

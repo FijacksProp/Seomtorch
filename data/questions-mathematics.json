@@ -1,0 +1,215 @@
+{
+  "version": 2,
+  "questions": [
+    {
+      "id": "mat-alg-001",
+      "subject": "mathematics",
+      "topic": "Algebra",
+      "difficulty": "foundation",
+      "text": "If 3x + 5 = 20, what is the value of x?",
+      "options": [
+        "3",
+        "5",
+        "8",
+        "15"
+      ],
+      "correct": 1,
+      "explanation": "Subtract 5 from both sides to get 3x = 15, then divide both sides by 3. Therefore, x = 5."
+    },
+    {
+      "id": "mat-alg-002",
+      "subject": "mathematics",
+      "topic": "Algebra",
+      "difficulty": "foundation",
+      "text": "Factorise x² - 7x + 12.",
+      "options": [
+        "(x - 3)(x - 4)",
+        "(x + 3)(x + 4)",
+        "(x - 2)(x - 6)",
+        "(x + 2)(x - 6)"
+      ],
+      "correct": 0,
+      "explanation": "We need two numbers whose product is 12 and whose sum is -7. Those numbers are -3 and -4, giving (x - 3)(x - 4)."
+    },
+    {
+      "id": "mat-alg-003",
+      "subject": "mathematics",
+      "topic": "Algebra",
+      "difficulty": "standard",
+      "text": "The sum of the roots of 2x² - 8x + 3 = 0 is:",
+      "options": [
+        "-4",
+        "4",
+        "3/2",
+        "8"
+      ],
+      "correct": 1,
+      "explanation": "For ax² + bx + c = 0, the sum of the roots is -b/a. Here it is -(-8)/2 = 4."
+    },
+    {
+      "id": "mat-alg-004",
+      "subject": "mathematics",
+      "topic": "Algebra",
+      "difficulty": "standard",
+      "text": "If y varies directly as x and y = 18 when x = 6, find y when x = 11.",
+      "options": [
+        "23",
+        "30",
+        "33",
+        "66"
+      ],
+      "correct": 2,
+      "explanation": "Direct variation gives y = kx. Since 18 = 6k, k = 3. When x = 11, y = 3 × 11 = 33."
+    },
+    {
+      "id": "mat-alg-005",
+      "subject": "mathematics",
+      "topic": "Algebra",
+      "difficulty": "standard",
+      "text": "Solve simultaneously: x + y = 9 and x - y = 3.",
+      "options": [
+        "x = 6, y = 3",
+        "x = 3, y = 6",
+        "x = 9, y = 3",
+        "x = 6, y = 6"
+      ],
+      "correct": 0,
+      "explanation": "Add the equations to get 2x = 12, so x = 6. Substituting into x + y = 9 gives y = 3."
+    },
+    {
+      "id": "mat-num-001",
+      "subject": "mathematics",
+      "topic": "Numbers and indices",
+      "difficulty": "foundation",
+      "text": "Evaluate 2³ × 2⁴.",
+      "options": [
+        "2⁷",
+        "4⁷",
+        "2¹²",
+        "4¹²"
+      ],
+      "correct": 0,
+      "explanation": "When multiplying powers with the same base, add their indices: 2³ × 2⁴ = 2³⁺⁴ = 2⁷."
+    },
+    {
+      "id": "mat-num-002",
+      "subject": "mathematics",
+      "topic": "Numbers and indices",
+      "difficulty": "foundation",
+      "text": "Express 0.00056 in standard form.",
+      "options": [
+        "5.6 × 10⁻⁴",
+        "5.6 × 10⁴",
+        "56 × 10⁻⁴",
+        "0.56 × 10⁻³"
+      ],
+      "correct": 0,
+      "explanation": "Move the decimal four places to the right to obtain 5.6, so the power is -4: 5.6 × 10⁻⁴."
+    },
+    {
+      "id": "mat-num-003",
+      "subject": "mathematics",
+      "topic": "Numbers and indices",
+      "difficulty": "standard",
+      "text": "If log₂ 32 = n, find n.",
+      "options": [
+        "4",
+        "5",
+        "8",
+        "16"
+      ],
+      "correct": 1,
+      "explanation": "The statement asks for the power to which 2 must be raised to give 32. Since 2⁵ = 32, n = 5."
+    },
+    {
+      "id": "mat-num-004",
+      "subject": "mathematics",
+      "topic": "Numbers and indices",
+      "difficulty": "standard",
+      "text": "Find the highest common factor of 36, 48 and 60.",
+      "options": [
+        "6",
+        "12",
+        "18",
+        "24"
+      ],
+      "correct": 1,
+      "explanation": "The common factors include 1, 2, 3, 4, 6 and 12. The greatest of these is 12."
+    },
+    {
+      "id": "mat-num-005",
+      "subject": "mathematics",
+      "topic": "Numbers and indices",
+      "difficulty": "standard",
+      "text": "A trader increases a price of ₦8,000 by 15%. What is the new price?",
+      "options": [
+        "₦8,150",
+        "₦8,800",
+        "₦9,000",
+        "₦9,200"
+      ],
+      "correct": 3,
+      "explanation": "15% of ₦8,000 is ₦1,200. Adding the increase gives ₦9,200."
+    },
+    {
+      "id": "mat-geo-001",
+      "subject": "mathematics",
+      "topic": "Geometry and mensuration",
+      "difficulty": "foundation",
+      "text": "The angles of a triangle are 2x, 3x and 4x. Find x.",
+      "options": [
+        "15°",
+        "20°",
+        "30°",
+        "45°"
+      ],
+      "correct": 1,
+      "explanation": "Angles in a triangle sum to 180°. Thus 2x + 3x + 4x = 9x = 180°, so x = 20°."
+    },
+    {
+      "id": "mat-geo-002",
+      "subject": "mathematics",
+      "topic": "Geometry and mensuration",
+      "difficulty": "foundation",
+      "text": "Find the area of a circle of radius 7 cm, taking π = 22/7.",
+      "options": [
+        "44 cm²",
+        "77 cm²",
+        "154 cm²",
+        "308 cm²"
+      ],
+      "correct": 2,
+      "explanation": "Area = πr² = 22/7 × 7 × 7 = 154 cm²."
+    },
+    {
+      "id": "mat-geo-003",
+      "subject": "mathematics",
+      "topic": "Geometry and mensuration",
+      "difficulty": "standard",
+      "text": "A right-angled triangle has shorter sides of 6 cm and 8 cm. Find its hypotenuse.",
+      "options": [
+        "10 cm",
+        "12 cm",
+        "14 cm",
+        "16 cm"
+      ],
+      "correct": 0,
+      "explanation": "By Pythagoras, c² = 6² + 8² = 36 + 64 = 100. Therefore c = 10 cm."
+    },
+    {
+      "id": "mat-geo-004",
+      "subject": "mathematics",
+      "topic": "Geometry and mensuration",
+      "difficulty": "standard",
+      "text": "The volume of a cuboid measuring 8 cm by 5 cm by 3 cm is:",
+      "options": [
+        "16 cm³",
+        "40 cm³",
+        "120 cm³",
+        "240 cm³"
+      ],
+      "correct": 2,
+      "explanation": "Volume of a cuboid is length × width × height: 8 × 5 × 3 = 120 cm³."
+    }
+  ]
+}

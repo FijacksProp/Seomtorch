@@ -1,0 +1,5037 @@
+{
+  "version": 2,
+  "questions": [
+    {
+      "id": "gp-science-health-and-technolog-2019-0001-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Exercises are undertaken basically to",
+      "options": [
+        "Look beautiful",
+        "Gain energy",
+        "Increase appetite",
+        "Keep fit"
+      ],
+      "correct": 3,
+      "explanation": "The relevant scientific or health fact identifies “Keep fit” as the correct response.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-science-health-and-technolog-2019-0002-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Protein can best be obtained from",
+      "options": [
+        "Bean balls, lettuce, carrot",
+        "Pounded yam, Garri, rice",
+        "Milk, eggs, fish",
+        "Wheat, lettuce. carrots"
+      ],
+      "correct": 2,
+      "explanation": "The relevant scientific or health fact identifies “Milk, eggs, fish” as the correct response.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0003-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these countries does not Share boundary with Nigeria",
+      "options": [
+        "Niger",
+        "Chad",
+        "Togo",
+        "Benin"
+      ],
+      "correct": 2,
+      "explanation": "Togo is the location or geographical relationship requested by the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0004-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Abraham Lincoln was the president of which of the following countries?",
+      "options": [
+        "South Africa",
+        "Great Britain",
+        "United States",
+        "Uganda"
+      ],
+      "correct": 2,
+      "explanation": "The historical figure named in the question served as president of United States.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0005-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The 2015 gubernatorial election in Nigeria was held on",
+      "options": [
+        "February 14",
+        "March 28",
+        "April 11",
+        "March 21"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “April 11” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0006-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these bodies is not remunerated by the government",
+      "options": [
+        "State Security Service",
+        "Boy Scout",
+        "Civil Defence",
+        "Defence Intelligence Agency"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Boy Scout” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0007-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The leader of the Federal House of Representatives in Nigeria is known as",
+      "options": [
+        "Chairman",
+        "Clerk",
+        "Majority leader",
+        "Speaker"
+      ],
+      "correct": 3,
+      "explanation": "The accepted term for the description in the question is “Speaker”.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0008-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these groups constitutes the Nigerian Bar Association",
+      "options": [
+        "Doctors",
+        "Activists",
+        "Lecturers",
+        "Lawyers"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Lawyers” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0009-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these religion is not practiced in Nigeria",
+      "options": [
+        "Islam",
+        "Christianity",
+        "Buddhism",
+        "Idol worship"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Buddhism” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0010-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "One of these dates is odd in the history of general elections in Nigeria",
+      "options": [
+        "1993",
+        "1999",
+        "2004",
+        "2011"
+      ],
+      "correct": 2,
+      "explanation": "2004 is the date recorded for the event described in the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0011-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Robert Mugabe was president of which country?",
+      "options": [
+        "Uganda",
+        "Libya",
+        "Niger",
+        "Zimbabwe"
+      ],
+      "correct": 3,
+      "explanation": "The historical figure named in the question served as president of Zimbabwe.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-science-health-and-technolog-2019-0012-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "A Kangaroo has......... toes on each of its two legs",
+      "options": [
+        "2",
+        "4",
+        "5",
+        "8"
+      ],
+      "correct": 0,
+      "explanation": "The relevant scientific or health fact identifies “2” as the correct response.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0013-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Ebola Disease was first known throughout the world in ....",
+      "options": [
+        "Guinea",
+        "Sierra Leone",
+        "Democratic Republic of Congo",
+        "Liberia"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Democratic Republic of Congo” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0014-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Snake Island a popular Tourist Attraction is located in",
+      "options": [
+        "Oyo State",
+        "Lagos State",
+        "Rivers State",
+        "Lokoja."
+      ],
+      "correct": 1,
+      "explanation": "Lagos State is the location or geographical relationship requested by the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0015-2019putmeg",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Who was the first Chairman of ICPC?",
+      "options": [
+        "Nuhu Ribadu",
+        "Attairu Jega",
+        "Mustapha Akanbi",
+        "Musa Usman Abubakar"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Mustapha Akanbi” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0016-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following stars is a Satellite to the Earth in the Solar system?",
+      "options": [
+        "Sun",
+        "Flying Saucers",
+        "Moon",
+        "shooting stars"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Moon” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0017-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following is not part of the Geo-Political Zones in Nigeria?",
+      "options": [
+        "South-South",
+        "North-North",
+        "North Central",
+        "South-West"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “North-North” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0018-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following Missionaries was known for eradication of killing of Twins in Calabar, Nigeria?",
+      "options": [
+        "Mary Slessor",
+        "Williams Wilberforce",
+        "Mungo Park",
+        "christie Mann"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Mary Slessor” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0019-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following countries enjoys both Temperate and Tropical Climate in Africa?",
+      "options": [
+        "South Sudan",
+        "Morroco",
+        "Namibia",
+        "South Africa"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “South Africa” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0020-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which colour is usually associated with Hot Temperature?",
+      "options": [
+        "Red",
+        "Yellow",
+        "Green",
+        "Blue"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Red” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0021-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following is not a statutory function of the Local Government Administration in Nigeria?",
+      "options": [
+        "Giving prompt and regulated Political recommendations to the State",
+        "Establishment and maintenance of cemeteries, burial grounds and homes for the destitute or infirm",
+        "Naming of roads and streets and numbering of houses",
+        "Provision and maintenance of public transportation and refuse disposal"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Giving prompt and regulated Political recommendations to the State” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0022-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Mount Everest is in which country?",
+      "options": [
+        "Bahrain",
+        "India",
+        "Nepal",
+        "Switzerland"
+      ],
+      "correct": 2,
+      "explanation": "Nepal is the location or geographical relationship requested by the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0023-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The full meaning of IMF is ..........",
+      "options": [
+        "International Monetary Fund",
+        "Internet Money Fraud",
+        "International Maintenance Fund",
+        "Import Management Financing"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “International Monetary Fund” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0024-2019putmeg",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Complete this excerpt from the Nigeria National Anthem Arise O........",
+      "options": [
+        "Conpatriots",
+        "Conpatrorts",
+        "Compatriots",
+        "Counpatriots"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Compatriots” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0025-2019putmeg",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The Nigerian Civil war ended in the year .........",
+      "options": [
+        "1968",
+        "1969",
+        "1970",
+        "1971"
+      ],
+      "correct": 2,
+      "explanation": "1970 is the date recorded for the event described in the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0026-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which Nigeria leader ruled Nigeria between 29th May 2007 and 6th May 2010?",
+      "options": [
+        "Alhaji Musa Yar’Adua",
+        "Theophilus Danjuma",
+        "Alhaji Umaru Yar’Adua",
+        "Chief Olusegun Obasanjo"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Alhaji Umaru Yar’Adua” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0027-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which form of government is Nigeria running currently?",
+      "options": [
+        "Theocracy",
+        "Presidencial",
+        "Presidential",
+        "Monarchical"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Presidential” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0028-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "A special document which every Nigerian respects and is bound to obey is called.........",
+      "options": [
+        "Treaties",
+        "Edict",
+        "Constitution",
+        "Decree"
+      ],
+      "correct": 2,
+      "explanation": "The accepted term for the description in the question is “Constitution”.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0029-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Into which of the following is Nigeria Universities categorized?",
+      "options": [
+        "Local, National, International",
+        "National, Regional and International",
+        "Federal, State and Private",
+        "Local, Regional, and Private"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Federal, State and Private” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0030-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The Boko Haram that took away the Chibok School Girls were said to have .......... the girls",
+      "options": [
+        "stolen",
+        "jailed",
+        "abducted",
+        "religionise"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “abducted” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0031-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following lunar calendar months has 30 days?",
+      "options": [
+        "January, February, March and April",
+        "April, May, June, July",
+        "April, June, September and November",
+        "August, September, November and December"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “April, June, September and November” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0032-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "In Nigeria, the Monarchs are collectively referred to as .........",
+      "options": [
+        "Local institution",
+        "Obaship",
+        "Traditional rulers",
+        "Chiefs"
+      ],
+      "correct": 2,
+      "explanation": "The accepted term for the description in the question is “Traditional rulers”.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0033-2019putmeg",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following Nigeria notes was introduced in year 2005?",
+      "options": [
+        "N100 note",
+        "N200 note",
+        "N1000 note",
+        "N500 note"
+      ],
+      "correct": 2,
+      "explanation": "N1000 note is the date recorded for the event described in the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0034-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Western Education was introduced in Nigeria through which of the followings?",
+      "options": [
+        "Colonialists and Merchants",
+        "European travelers and Merchants",
+        "Colonialists and Missionaries",
+        "Missionaries and Masses"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Colonialists and Missionaries” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0035-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The civilian democratic government period that started in 1999 in Nigeria is generally referred to as .........",
+      "options": [
+        "Civil Regime",
+        "3rd Republic",
+        "4th Republic",
+        "5th Republic"
+      ],
+      "correct": 2,
+      "explanation": "The accepted term for the description in the question is “4th Republic”.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-science-health-and-technolog-2019-0036-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following is not a registered professional body in Nigeria?",
+      "options": [
+        "Nigeria Union of Teachers NUT",
+        "Nigeria Union of Journalist NUJ",
+        "State Security Service SSS",
+        "Academic Staff Union of Universities ASUU"
+      ],
+      "correct": 2,
+      "explanation": "The relevant scientific or health fact identifies “State Security Service SSS” as the correct response.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0037-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following National Honours is reserved for the President and Commander –in- Chief of the Armed Forces of Nigeria?",
+      "options": [
+        "Order of the Federal Republic, OFR",
+        "Office of Order of Niger, OON",
+        "Grand Commander of Federal Republic, GCFR",
+        "Grand Commander of the Order of the Niger, GCON"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Grand Commander of Federal Republic, GCFR” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0038-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The current senate of the Federal Republic of Nigeria is the ......... senate",
+      "options": [
+        "sixth",
+        "seventh",
+        "eighth",
+        "ninth"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “eighth” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0039-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Athens is an ancient city in .........",
+      "options": [
+        "Italy",
+        "Bulgaria",
+        "Greece",
+        "Romania"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Greece” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0040-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The theory of evolution was propounded by .........",
+      "options": [
+        "Gregor Mendel",
+        "Rachel Carson",
+        "Charles Darwin",
+        "Robert Hooke"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Charles Darwin” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0041-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The capital of the United States of America is .........",
+      "options": [
+        "Boston",
+        "Los Angeles",
+        "Washington D.C.",
+        "New York"
+      ],
+      "correct": 2,
+      "explanation": "Washington D.C. is the capital relevant to the place named in the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0042-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The full meaning of EFCC is ..........",
+      "options": [
+        "Educational Fund for Crime Commission",
+        "Ecological Fund for Crime Commission",
+        "Economic and Financial Crimes Commission",
+        "Economic and Financial Criminal Commission"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Economic and Financial Crimes Commission” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0043-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Where in Nigeria did Mary Slessor live and engage in humanitarian activities?",
+      "options": [
+        "Benin",
+        "Uyo",
+        "Calabar",
+        "Enugu"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Calabar” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0044-2019putmeg",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The first Sultan of the Sokoto caliphate is ............",
+      "options": [
+        "Ado Bayero",
+        "Abubakar Tafawa Balewa",
+        "Uthman Dan Fodio",
+        "Ahmadu Bello"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Uthman Dan Fodio” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0045-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The country with the largest economy in the world is ...........",
+      "options": [
+        "China",
+        "Germany",
+        "USA",
+        "Japan"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “USA” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0046-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these companies is not a mobile phone manufacturer?",
+      "options": [
+        "Cannon",
+        "Nokia",
+        "Samsung",
+        "Tecno"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Cannon” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0047-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The colour that absorbs sun rays the most is .....................",
+      "options": [
+        "White",
+        "Blue",
+        "Black",
+        "Yellow"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Black” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0048-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Electricity can be generated from all of these except ..................",
+      "options": [
+        "Gas",
+        "Sun",
+        "Sand",
+        "Wind"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Sand” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0049-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The country with the largest population of black people is .........................",
+      "options": [
+        "USA",
+        "India",
+        "Nigeria",
+        "Africa"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Nigeria” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0050-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following is not a vegetation belt in Nigeria?",
+      "options": [
+        "Sudan savannah",
+        "Rain forest",
+        "Sahara savannah",
+        "Mangrove swamp"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Sahara savannah” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0051-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The country with the largest population in the world is",
+      "options": [
+        "Australia",
+        "India",
+        "China",
+        "United Kingdom"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “China” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-science-health-and-technolog-2019-0052-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The earth solar system is made up of ... planets",
+      "options": [
+        "3",
+        "2",
+        "8",
+        "12"
+      ],
+      "correct": 2,
+      "explanation": "The relevant scientific or health fact identifies “8” as the correct response.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-science-health-and-technolog-2019-0053-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these animals can be found in the artic region?",
+      "options": [
+        "Hyena",
+        "Polar bear",
+        "Cheetah",
+        "None of the above"
+      ],
+      "correct": 1,
+      "explanation": "The relevant scientific or health fact identifies “Polar bear” as the correct response.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0054-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these Universities is referred to as the Premier University?",
+      "options": [
+        "University of Nigeria, Nsukka",
+        "University of Ilorin",
+        "University of Ibadan",
+        "University of Jos"
+      ],
+      "correct": 2,
+      "explanation": "The accepted term for the description in the question is “University of Ibadan”.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0055-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": ".............. is a popular Confluence Town.",
+      "options": [
+        "Ilorin",
+        "Lokoja",
+        "Kano",
+        "Ife"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Lokoja” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0056-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The World Economic Forum for Africa Conference was held in May 2014 in which of the following countries?",
+      "options": [
+        "Nigeria",
+        "South Africa",
+        "Ghana",
+        "Togo"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Nigeria” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0057-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Nigeria became a Republic on...........",
+      "options": [
+        "1st October 1960",
+        "1st October 1963",
+        "1st October 1966",
+        "1st October 1970"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “1st October 1963” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0058-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "President Goodluck’s Administration was best known for its ......",
+      "options": [
+        "Seven point agenda",
+        "Revolution agenda",
+        "Transformation Agenda",
+        "Transparent Agenda"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Transformation Agenda” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0059-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The total value (in monetary terms) of all goods and services produced in a country within a period of one year is known as",
+      "options": [
+        "Gross Domestic Product",
+        "Gross National Product",
+        "Net National Product",
+        "Per Capita Income"
+      ],
+      "correct": 0,
+      "explanation": "Gross Domestic Product is the date recorded for the event described in the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0060-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Air pressure is measured by",
+      "options": [
+        "Thermometer",
+        "Barometer",
+        "photometer",
+        "protometer"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Barometer” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-science-health-and-technolog-2019-0061-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "A deposit of water droplets on plants or objects on calm nights is known as",
+      "options": [
+        "rain",
+        "hail",
+        "snow",
+        "dew"
+      ],
+      "correct": 3,
+      "explanation": "The accepted term for the description in the question is “dew”.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0062-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these is not a River in Nigeria?",
+      "options": [
+        "River Gongola",
+        "River Kaduna",
+        "Kano River",
+        "Volta River"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Volta River” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0063-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Chibok is located in which of the following states",
+      "options": [
+        "Yobe",
+        "Adamawa",
+        "Gombe",
+        "Borno"
+      ],
+      "correct": 3,
+      "explanation": "Borno is the location or geographical relationship requested by the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0064-2019putmeg",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The centenary celebration of the Amalgamation of Nigeria was officially celebrated in",
+      "options": [
+        "January 2014",
+        "January 2013",
+        "January 2011",
+        "January 2012"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “January 2014” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0065-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "All except one of the following are provided for in the Nigerian Constitution",
+      "options": [
+        "Right to non fair hearing",
+        "Right to life",
+        "Right to freedom of thought, conscience and religion",
+        "Right to privacy"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Right to non fair hearing” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0066-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "NIMETS, an acronym for the Nigerian Organization involved in Monitoring of Climate in Nigeria is",
+      "options": [
+        "National and International Meteorological Eminent Technocrats Society",
+        "Nigerian Meteorological Society",
+        "National Meteorological Society",
+        "Nigerian International Meteorological Emeritus Technical Society"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Nigerian Meteorological Society” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0067-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Ikogosi Spring in Ekiti State , Nigeria is known for its",
+      "options": [
+        "Natural water falls",
+        "extreme cold water force",
+        "warm and cold water spring",
+        "unique taste"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “warm and cold water spring” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0068-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The first Television station in Africa was",
+      "options": [
+        "NTA International, Lagos",
+        "Western Nigerian Television Ibadan",
+        "Nigerian Television Authority Channel 10, Lagos",
+        "Lagos State Television"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Western Nigerian Television Ibadan” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0069-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Who is the only Nigerian to have received the Nobel Prize in Literature?",
+      "options": [
+        "Chinua Achebe",
+        "Chimamanda Adieze",
+        "Wole Soyinka",
+        "Ola Rotimi"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Wole Soyinka” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0070-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following is not an example of a mineral?",
+      "options": [
+        "diamond",
+        "salt",
+        "gold",
+        "silver"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “salt” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0071-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Recycling refers to",
+      "options": [
+        "burning trash completely",
+        "burying trash in a landfill",
+        "reducing the amount of waste left over from using a product",
+        "re-using a resource to make something new"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “re-using a resource to make something new” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0072-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "A solar eclipse occurs when",
+      "options": [
+        "the earth’s shadow falls on the moon",
+        "the moon’s shadow falls on the earth",
+        "the earth moves between the sun and the moon",
+        "Venus is between the sun and the earth"
+      ],
+      "correct": 1,
+      "explanation": "the moon’s shadow falls on the earth is the date recorded for the event described in the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0073-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Who among these is an octogenarian?",
+      "options": [
+        "a 74 year old man",
+        "a 96 year old woman",
+        "an 87 year old woman",
+        "a 69 year old man"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “an 87 year old woman” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0074-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Who is the first black president of USA?",
+      "options": [
+        "Jesse Jackson",
+        "Martin Luther King",
+        "Jimmy Carter",
+        "Barack Obama"
+      ],
+      "correct": 3,
+      "explanation": "The historical figure named in the question served as president of Barack Obama.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0075-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Who propounded the laws of motion?",
+      "options": [
+        "Mungo Park",
+        "Henry Townsend",
+        "Isaac Newton",
+        "Enid Blyton"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Isaac Newton” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0076-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The sun rises in the ------ and sets in the -------",
+      "options": [
+        "West and East",
+        "East and West",
+        "North and South",
+        "South and North"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “East and West” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0077-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Every state in Nigeria has ----- number of seats in the Senate",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “3” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0078-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "If gold is to 50th anniversary, ------ is to 60th anniversary",
+      "options": [
+        "silver",
+        "pearl",
+        "ruby",
+        "diamond"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “diamond” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0079-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "A lumberjack is a person whose work is",
+      "options": [
+        "Shoe making",
+        "Tree felling",
+        "Tree planting",
+        "Leather making"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Tree felling” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0080-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The former female presidents in Africa are",
+      "options": [
+        "Ellen Johnson Sirleaf and Joyce Banda",
+        "Ellen Johnson Sirleaf and Joyce Ganda",
+        "Ellen Johnson Sirleaf and Joy Banda",
+        "Ellen Johnson Sirlif and Joice Banda"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Ellen Johnson Sirleaf and Joyce Banda” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0081-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Joyce Banda was the former President of which country?",
+      "options": [
+        "Liberia",
+        "Canada",
+        "Malawi",
+        "Gambia"
+      ],
+      "correct": 2,
+      "explanation": "The historical figure named in the question served as president of Malawi.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0082-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these is a confluence state?",
+      "options": [
+        "Kogi",
+        "Niger",
+        "Lagos",
+        "Cross River"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Kogi” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0083-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these is called the State of the caliphate?",
+      "options": [
+        "Kebbi",
+        "Kano",
+        "Kaduna",
+        "Sokoto"
+      ],
+      "correct": 3,
+      "explanation": "The accepted term for the description in the question is “Sokoto”.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0084-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "How many geo-political zones do we have in Nigeria?",
+      "options": [
+        "36",
+        "6",
+        "16",
+        "12"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “6” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0085-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The author of the book, Things Fall Apart is?",
+      "options": [
+        "Chinua Achebe",
+        "Ola Rotimi",
+        "Wole Soyinka",
+        "Enechi Amachi"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Chinua Achebe” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0086-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The most populous state in Nigeria is",
+      "options": [
+        "Oyo",
+        "Niger",
+        "Kano",
+        "Sokoto"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Kano” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-science-health-and-technolog-2019-0087-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "In the computer browser address field, what does the abbreviation 'www' stands for",
+      "options": [
+        "world wide web",
+        "word wide web",
+        "web wide world",
+        "wide web world"
+      ],
+      "correct": 0,
+      "explanation": "The relevant scientific or health fact identifies “world wide web” as the correct response.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0088-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The following have at one time or the other been Speakers of the Nigerian House of Representatives except",
+      "options": [
+        "Ghali Na’Abba",
+        "Dimeji Bankole",
+        "Ume Ezeoke",
+        "Joseph Wayas"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Joseph Wayas” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0089-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Who was the head of state when Nigeria first won the African Cup of Nations",
+      "options": [
+        "Shehu Shagari",
+        "Muhammadu Buhari",
+        "Muritala Muhammed",
+        "Ibrahim Babangida"
+      ],
+      "correct": 0,
+      "explanation": "Shehu Shagari is the date recorded for the event described in the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0090-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "This artiste was known as the KING OF POP",
+      "options": [
+        "Phil Collins",
+        "Tupac Shakkur",
+        "JaRule",
+        "Michael Jackson"
+      ],
+      "correct": 3,
+      "explanation": "The accepted term for the description in the question is “Michael Jackson”.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0091-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": ". One of these does not belong to this family",
+      "options": [
+        "Lion",
+        "Wolf",
+        "Deer",
+        "Hyena"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Deer” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0092-2019putmeg",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "In what year was Nigeria amalgamated?",
+      "options": [
+        "1920",
+        "1914",
+        "1960",
+        "1923"
+      ],
+      "correct": 1,
+      "explanation": "1914 is the date recorded for the event described in the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0093-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Gen. Murtala Ramat Mohammed was assassinated in",
+      "options": [
+        "1978",
+        "1975",
+        "1976",
+        "1974"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “1976” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0094-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which state is also known as the PACESETTER?",
+      "options": [
+        "Oyo State",
+        "Adamawa State",
+        "Anambra State",
+        "Edo State"
+      ],
+      "correct": 0,
+      "explanation": "Oyo State is the location or geographical relationship requested by the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0095-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Who uses both a palette and an easel in his profession?",
+      "options": [
+        "An Artist",
+        "A Cobbler",
+        "A Dentist",
+        "An Architect"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “An Artist” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0096-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which state in America is known as the LONE STAR state?",
+      "options": [
+        "Texas",
+        "New York",
+        "New Jersey",
+        "Ohio"
+      ],
+      "correct": 0,
+      "explanation": "Texas is the location or geographical relationship requested by the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0097-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "This country is also a continent",
+      "options": [
+        "Africa",
+        "America",
+        "Australia",
+        "Asia"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Australia” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0098-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Ellen Johnson Sirleaf was the President of which country?",
+      "options": [
+        "Argentina",
+        "Canada",
+        "Liberia",
+        "Gambia"
+      ],
+      "correct": 2,
+      "explanation": "The historical figure named in the question served as president of Liberia.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0099-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these birds in NOT a flightless bird?",
+      "options": [
+        "Ostrich",
+        "Sparrow",
+        "Emu",
+        "Cassowaries"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Sparrow” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0100-2019putmeg",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Who invented facebook?",
+      "options": [
+        "Mark Zuckerberg",
+        "Bill Gates",
+        "Orlando Bloom",
+        "Brad Pitt"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Mark Zuckerberg” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0101-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "What does NSCDC mean?",
+      "options": [
+        "National Security and Civilian Defence Corporation",
+        "Nigeria Security and Civil Defence Corps",
+        "National Security and Civil Defence Corps",
+        "National Social and Cultural Development corporation"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Nigeria Security and Civil Defence Corps” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0102-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The largest city in Uganda is ..... ?",
+      "options": [
+        "Kampala",
+        "Namataba",
+        "Mukono",
+        "Kakiri"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Kampala” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0103-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Who painted the 'Monalisa'?",
+      "options": [
+        "Leonardo de Capulet",
+        "Leonardo di Caprio",
+        "Jean Claude vanDamme",
+        "Leonardo Da Vinci"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Leonardo Da Vinci” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0104-2019putmeg",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The last census in Nigeria was conducted in the year",
+      "options": [
+        "2005",
+        "2006",
+        "2007",
+        "2004"
+      ],
+      "correct": 1,
+      "explanation": "2006 is the date recorded for the event described in the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0105-2019putmeg",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The first plane crash occured in Nigeria in the year",
+      "options": [
+        "1968",
+        "1969",
+        "1970",
+        "1972"
+      ],
+      "correct": 1,
+      "explanation": "1969 is the date recorded for the event described in the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0106-2019putmeg",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The first school established in Nigeria is",
+      "options": [
+        "Methodist boys High School, Lagos",
+        "St Gregory College, Lagos",
+        "CMS Grammar School, Lagos",
+        "Baptist High School, Lagos"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “CMS Grammar School, Lagos” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0107-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Ebonyi State was created from",
+      "options": [
+        "Enugu and Imo State",
+        "Abia and Delta State",
+        "Enugu and Abia",
+        "Imo and Delta"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Enugu and Abia” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0108-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The National Security Adviser to the Nigerian President is",
+      "options": [
+        "Sambo Mohammed Dasuki",
+        "Lawal Musa Daura",
+        "Mathew B. Seiyefa",
+        "Mohammed Babagana Monguno"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Mohammed Babagana Monguno” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0109-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The yellow in Nigerian Police Force flag represents",
+      "options": [
+        "Loyalty and unity",
+        "Energy and life",
+        "Discipline and Resourcefulness",
+        "Love and energy"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Discipline and Resourcefulness” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0110-2019putmeg",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Slogan for Kwara State is",
+      "options": [
+        "The Power State",
+        "Confluence State",
+        "State of Harmony",
+        "Food Basket"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “State of Harmony” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0111-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The current Registrar of University of Ilorin is",
+      "options": [
+        "Dr. F. M. Olowoleni",
+        "Mr. E. D. Obafemi",
+        "Mrs. O. O. Oyeyemi",
+        "Mr. M. Balogun"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Dr. F. M. Olowoleni” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0112-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Brass is a local government in",
+      "options": [
+        "Akwa Ibom",
+        "Rivers",
+        "Bayelsa",
+        "Cross Rivers"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Bayelsa” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0113-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The ten naira note has the image of",
+      "options": [
+        "Alvan Ikoku",
+        "Obafemi Awolowo",
+        "Tafawa Balewaa",
+        "Muritala Muhammed"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Alvan Ikoku” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0114-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these past senate presidents resigned from office",
+      "options": [
+        "Ken Nnamani",
+        "Adolphus Wabara",
+        "Evan Enwerem",
+        "David Mark"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Adolphus Wabara” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0115-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "In which year was an Interim Government in Place in Nigeria",
+      "options": [
+        "1991",
+        "1992",
+        "1994",
+        "1993"
+      ],
+      "correct": 3,
+      "explanation": "1993 is the date recorded for the event described in the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0116-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these was a former chairman of Petroleum Trust Fund",
+      "options": [
+        "Muhammadu Buhari",
+        "Sani Abacha",
+        "Olusegun Obasanjo",
+        "Ibrahim Babangida"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Muhammadu Buhari” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0117-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The chairman of INEC in the 4th republic is",
+      "options": [
+        "Justice Ovie Whiskey",
+        "Chief Michael Ani",
+        "Dr. Abel Guobadia",
+        "Prof. Maurice Iwu"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Prof. Maurice Iwu” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0118-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The current chairman of INEC is",
+      "options": [
+        "Prof. Attairu Jega",
+        "Prof. Maurice Iwu",
+        "Dr. Abel Guobadia",
+        "Prof. Mahmood Yakubu"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Prof. Mahmood Yakubu” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0119-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "An oncologist is a doctor that specialises in the treatment of",
+      "options": [
+        "Cancers",
+        "Tuberculosis",
+        "Bones",
+        "Malaria"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Cancers” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0120-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "An ecologist is a scientist that specialises in",
+      "options": [
+        "Econometrics",
+        "Echoes of sounds and waves",
+        "Relationship of organisms and their environments",
+        "Matter and its nature"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Relationship of organisms and their environments” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0121-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Who among the following does not belong?",
+      "options": [
+        "Dimeji Bankole",
+        "Ghali Umar NaAbba",
+        "Ume Ezeoke",
+        "Joseph Wayas"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Joseph Wayas” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0122-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Nelson Mandela, the first Black Democratically elected President of South Africa, died in",
+      "options": [
+        "2012",
+        "2011",
+        "2013",
+        "2014"
+      ],
+      "correct": 2,
+      "explanation": "The historical figure named in the question served as president of 2013.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0123-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The Horse in the Nigerian Coat of Arm represents",
+      "options": [
+        "Type of Animals in Nigeria",
+        "Strength and Dignity",
+        "Strength and Unity",
+        "Strength and Obedience"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Strength and Dignity” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0124-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Nomadic Education in Nigeria was established to target which of the following group?",
+      "options": [
+        "The Fulanis",
+        "The Alimajiris",
+        "The Kanuris",
+        "The farmers in the North"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “The Fulanis” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0125-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The Headquarters of the African Union is located in",
+      "options": [
+        "Lagos",
+        "Accra",
+        "Addis-Ababa",
+        "Cairo"
+      ],
+      "correct": 2,
+      "explanation": "Addis-Ababa is the location or geographical relationship requested by the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0126-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The Northernmost Terminus of the Nigerian Railway is",
+      "options": [
+        "Maiduguri",
+        "Sokoto",
+        "Katsina",
+        "Kano"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Maiduguri” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-science-health-and-technolog-2019-0127-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which one of the following animals is not classified as a cat",
+      "options": [
+        "Bear",
+        "Cougar",
+        "Lion",
+        "Tiger"
+      ],
+      "correct": 0,
+      "explanation": "The relevant scientific or health fact identifies “Bear” as the correct response.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0128-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "What is the meaning of the word Polyandry",
+      "options": [
+        "Marriage between a man and many wives",
+        "Marriage between a woman and many husbands",
+        "A lady having mutiple boy friends",
+        "A boy having mutiple girl friends"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Marriage between a woman and many husbands” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0129-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which one of the following is not used to measure temperature",
+      "options": [
+        "Thermometer",
+        "Pyrometer",
+        "Thermocouple",
+        "Pyranometer"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Pyranometer” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0130-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following is not an African Country?",
+      "options": [
+        "South Sudan",
+        "Mauritius",
+        "Papua New Guinea",
+        "Madagascar"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Papua New Guinea” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0131-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The Atlantic Ocean is on the ......of Africa.",
+      "options": [
+        "North",
+        "East",
+        "South",
+        "West"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “West” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0132-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Casablanca is in which African country?",
+      "options": [
+        "Niger",
+        "Sudan",
+        "Morocco",
+        "Egypt"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Morocco” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0133-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these West African countries is not an Anglophone country?",
+      "options": [
+        "Nigeria",
+        "Ghana",
+        "Sierra Leone",
+        "Senegal"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Senegal” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0134-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these is not a river in Nigeria?",
+      "options": [
+        "Chad",
+        "Cross",
+        "Niger",
+        "Benue"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Chad” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0135-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Sultan is to Sokoto what ...... is to Onitsha.",
+      "options": [
+        "Oba",
+        "Obi",
+        "Etsu",
+        "Emir"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Obi” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0136-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these Nigerian cities is known as the Centre of Excellence?",
+      "options": [
+        "Benin",
+        "Enugu",
+        "Lagos",
+        "Yola"
+      ],
+      "correct": 2,
+      "explanation": "The accepted term for the description in the question is “Lagos”.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0137-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following countries is not in Europe?",
+      "options": [
+        "Australia",
+        "France",
+        "Portugal",
+        "Norway"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Australia” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0138-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The winner of the 2019 Wimbledon Women’s Tennis Grand slam was ......",
+      "options": [
+        "Serena Williams",
+        "Simona Halep",
+        "Naomi Osaka",
+        "Venus Williams"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Simona Halep” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0139-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The 2019 Men’s Golf Masters tournament was won by ......",
+      "options": [
+        "Arnold Palmer",
+        "Phil Mickelson",
+        "Tiger Woods",
+        "Justin Rose"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Tiger Woods” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0140-2019putmeg",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The Nigerian civil war ended in ......",
+      "options": [
+        "1965",
+        "1967",
+        "1970",
+        "1973"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “1970” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0141-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The Ibibio ethnic group is found in the ...... geopolitical zone of Nigeria.",
+      "options": [
+        "South.South",
+        "South.west",
+        "North.central",
+        "South.central"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “South.South” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0142-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Damaturu is the capital of ...... State.",
+      "options": [
+        "Jigawa",
+        "Katsina",
+        "Yobe",
+        "Zamfara"
+      ],
+      "correct": 2,
+      "explanation": "Yobe is the capital relevant to the place named in the question.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0143-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The electrical system in Nigeria operates on ......",
+      "options": [
+        "100V",
+        "110V",
+        "240V",
+        "300V"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “240V” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-science-health-and-technolog-2019-0144-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following in not an internet search engine?",
+      "options": [
+        "Google",
+        "Yahoo",
+        "Explorer",
+        "Bing"
+      ],
+      "correct": 2,
+      "explanation": "The relevant scientific or health fact identifies “Explorer” as the correct response.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0145-2019putmeg",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following is not a category in the Nobel Prize awards?",
+      "options": [
+        "Peace",
+        "Economics",
+        "Literature",
+        "Science"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Science” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0146-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following countries is in the southern hemisphere of the earth?",
+      "options": [
+        "New Zealand",
+        "Cyprus",
+        "Mongolia",
+        "Sweden"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “New Zealand” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0147-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these statements is correct?",
+      "options": [
+        "Light is faster than sound.",
+        "Sound is faster than light.",
+        "Light and sound have the same speed.",
+        "There is light in sound."
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Light is faster than sound.” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0148-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The late musician Bob Marley is from ......",
+      "options": [
+        "Ethiopia",
+        "Jamaica",
+        "Cuba",
+        "USA"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Jamaica” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-science-health-and-technolog-2019-0151-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following is not a Nigerian national examination body?",
+      "options": [
+        "JAMB",
+        "NABTEB",
+        "NECO",
+        "WAEC"
+      ],
+      "correct": 3,
+      "explanation": "The relevant scientific or health fact identifies “WAEC” as the correct response.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0152-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following is not a primary pigment?",
+      "options": [
+        "Red",
+        "Green",
+        "Blue",
+        "Yellow"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Green” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0153-2019putmeg",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The longest reigning Monarch in the world as at June 2019 is ......",
+      "options": [
+        "Queen of England",
+        "King of Thailand",
+        "Queen of Denmark",
+        "Emperor of Japan"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Queen of England” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0154-2019putmeg",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which Monarch abdicated the throne in April 2019 .......",
+      "options": [
+        "Queen of England",
+        "King of Saudi Arabia",
+        "Queen of Denmark",
+        "Emperor of Japan"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Emperor of Japan” as the fact that correctly completes this General Paper item.",
+      "source": "2019PUTMEGENDAY1GENERAL PAPER.txt"
+    },
+    {
+      "id": "gp-economics-and-commerce-2019-0592-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Economics and commerce",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "A company of dancers are referred to as",
+      "options": [
+        "Troop",
+        "Troupe",
+        "Bunch",
+        "Ballets"
+      ],
+      "correct": 1,
+      "explanation": "The accepted term for the description in the question is “Troupe”.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-economics-and-commerce-2019-0593-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Economics and commerce",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Nigeria changed her currency to naira and kobo in the year",
+      "options": [
+        "1970",
+        "1972",
+        "1975",
+        "1973"
+      ],
+      "correct": 3,
+      "explanation": "1973 is the currency or currency fact requested in the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-science-health-and-technolog-2019-0594-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these statements is not true of clay soil",
+      "options": [
+        "Particles are fine",
+        "It has high capillarity",
+        "It is particles are sticky",
+        "It is difficult to cultivate"
+      ],
+      "correct": 1,
+      "explanation": "The relevant scientific or health fact identifies “It has high capillarity” as the correct response.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0595-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Daura is in ---------- state of Nigeria",
+      "options": [
+        "Nassarawa",
+        "Kebbi",
+        "Katsina",
+        "Sokoto"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Katsina” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0596-2019-day3-",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "In which year was the current National anthem of Nigeria adopted?",
+      "options": [
+        "1979",
+        "1972",
+        "1978",
+        "1976"
+      ],
+      "correct": 2,
+      "explanation": "1978 is the date recorded for the event described in the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0597-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The chief executive of the Independent National Electoral Commission is called",
+      "options": [
+        "Director General",
+        "Chairman",
+        "Director",
+        "President"
+      ],
+      "correct": 1,
+      "explanation": "The accepted term for the description in the question is “Chairman”.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0598-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Who was the president of Nigeria between 2003 and 2007?",
+      "options": [
+        "Goodluck Ebele Jonathan",
+        "Olusegun Obasanjo",
+        "Umaru Musa Yar’adua",
+        "Shehu Shagari"
+      ],
+      "correct": 1,
+      "explanation": "The historical figure named in the question served as president of Olusegun Obasanjo.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0599-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The smallest social unit in the society is the",
+      "options": [
+        "Hamlet",
+        "Family",
+        "Church",
+        "School"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Family” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0600-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The two major rivers in Nigeria are",
+      "options": [
+        "Benue and Kaduna",
+        "Niger and Benue",
+        "Hadeja and Sokoto",
+        "Kaduna and Cross River"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Niger and Benue” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0601-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these towns is noted for pottery in Nigeria",
+      "options": [
+        "Ibadan",
+        "Bida",
+        "Oyo",
+        "Calabar"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Bida” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-science-health-and-technolog-2019-0602-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Killer Whales are species of-------------",
+      "options": [
+        "Shark",
+        "Dolphins",
+        "Dragon Fish",
+        "Cat Fish"
+      ],
+      "correct": 1,
+      "explanation": "The relevant scientific or health fact identifies “Dolphins” as the correct response.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0603-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Kuramo Waters, a popular tourist attraction in Nigeria is located in......",
+      "options": [
+        "Ondo State",
+        "Ogun State",
+        "Oyo State",
+        "Lagos State"
+      ],
+      "correct": 3,
+      "explanation": "Lagos State is the location or geographical relationship requested by the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0604-2019-day3-",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The Centenary Celebration in Nigeria refers to ----------- years of existence",
+      "options": [
+        "200",
+        "150",
+        "100",
+        "50"
+      ],
+      "correct": 2,
+      "explanation": "100 is the date recorded for the event described in the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0605-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following Countries is not a member of the Commonwealth of Nations?",
+      "options": [
+        "Ghana",
+        "Nigeria",
+        "Canada",
+        "Liberia"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Liberia” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0606-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The Trans-Atlantic Trade route passed through which of the following towns?",
+      "options": [
+        "Bamako",
+        "Accra",
+        "Kano",
+        "Ibadan"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Bamako” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0607-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following is a high Plateau in Nigeria?",
+      "options": [
+        "Hadejia",
+        "Mambila",
+        "Jos",
+        "Yobe"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Mambila” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0608-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "In which of the following towns do we have Tin and Columbite mined in commercial quantities?",
+      "options": [
+        "Kaduna",
+        "Ilesa",
+        "Oyo",
+        "Jos"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Jos” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0609-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following Rivers is a Tributary of the River Benue?",
+      "options": [
+        "Orange River",
+        "Rima River",
+        "Cross River",
+        "Katsina Ala"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Katsina Ala” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0610-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The Second democratically elected black President in the Republic of South Africa is ........",
+      "options": [
+        "Nelson Mandela",
+        "Thabo Mbeki",
+        "Jacob Zuma",
+        "Frederik de Klerk"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Thabo Mbeki” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0611-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The PVC introduced by INEC during the 2015 Election in Nigeria refers to ........",
+      "options": [
+        "Personal Voter Card",
+        "People’s Voter Card",
+        "Permanent Voter Card",
+        "Plastic Voter Card"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Permanent Voter Card” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0612-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following Federal Government Parastatals is in charge of disaster management in any part of the Nigerian Federation?",
+      "options": [
+        "National Environmental Standard and Regulation Enforcement Agency, NESREA",
+        "National Oil Spill Detection and Response Agency,NOSDRA",
+        "National Space Research Development Agency,NASRDA",
+        "National Emergency Management Agency,NEMA"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “National Emergency Management Agency,NEMA” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0613-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Eritrea is a country in .......",
+      "options": [
+        "Asia",
+        "Europe",
+        "Africa",
+        "South America"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Africa” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0614-2019-day3-",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The Principal actors in the Nigerian Civil war were ..........",
+      "options": [
+        "General Shehu Yar'adua and General Aguiyi Ironsi",
+        "Alhaji Aliyu Shehu Shagari and Major Okpala",
+        "General Yakubu Gowon and Major Ojukwu",
+        "Dr. Nnamdi Azikwe and Chief Obafemi Awolowo"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “General Yakubu Gowon and Major Ojukwu” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0615-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The First Head of State to handover government to a Civilian President was .........",
+      "options": [
+        "General Abdulsalam Abubakar",
+        "General Sani Abacha",
+        "General Olusegun Obasanjo",
+        "General Yakubu Gowon"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “General Olusegun Obasanjo” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0616-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Nigeria general election to presidency is every -----------",
+      "options": [
+        "3 years",
+        "5 years",
+        "4 years",
+        "3-5 years"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “4 years” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0617-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "A document that must be prepared and defended before the legislative prior to the execution of governmental activities is referred to as......",
+      "options": [
+        "Manifestoes",
+        "Constitution",
+        "Budget",
+        "Account"
+      ],
+      "correct": 2,
+      "explanation": "The accepted term for the description in the question is “Budget”.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0618-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The money used in Nigeria as legal tender is generally referred to as ............",
+      "options": [
+        "Notes",
+        "Currencies",
+        "Currency",
+        "Mint"
+      ],
+      "correct": 2,
+      "explanation": "The accepted term for the description in the question is “Currency”.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0619-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The major organ authorized to control civil crises in Nigeria",
+      "options": [
+        "Nigeria Immigration Service",
+        "State Security Service",
+        "The Nigerian Police Force",
+        "The Nigerian Army"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “The Nigerian Police Force” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0620-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the capital cities of the states of the Federation has a former Central Bank Governor as its monarch?",
+      "options": [
+        "Kaduna",
+        "Katsina",
+        "Kano",
+        "Kebbi"
+      ],
+      "correct": 2,
+      "explanation": "Kano is the capital relevant to the place named in the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0621-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Cocoa is one of the stable export crops in Nigeria commonly grown in .........",
+      "options": [
+        "Eastern Part of Nigeria",
+        "North Eastern Part of Nigeria",
+        "South Western Part of Nigeria",
+        "North Western Nigeria"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “South Western Part of Nigeria” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0622-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these African countries share border with Nigeria?",
+      "options": [
+        "Ghana",
+        "Burkina Faso",
+        "Niger",
+        "Togo"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Niger” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0623-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "A Principal is said to be the head of a secondary school while the head of a university in Nigeria is known as",
+      "options": [
+        "Pro-Chancellor",
+        "Rector",
+        "Vice-Chancellor",
+        "Chancellor"
+      ],
+      "correct": 2,
+      "explanation": "The accepted term for the description in the question is “Vice-Chancellor”.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0624-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The people that make use of telephone are known as",
+      "options": [
+        "Users",
+        "Consumers",
+        "Subscribers",
+        "Purchasers"
+      ],
+      "correct": 2,
+      "explanation": "The accepted term for the description in the question is “Subscribers”.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0625-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these is not a musical instrument?",
+      "options": [
+        "Clarinet",
+        "Trombone",
+        "Crowbar",
+        "Xylophone"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Crowbar” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0626-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these is not an ape?",
+      "options": [
+        "Gorilla",
+        "Chimpanzee",
+        "Giraffe",
+        "Orangutan"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Giraffe” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0627-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The word Lagos is from the ------------language",
+      "options": [
+        "French",
+        "Latin",
+        "Portuguese",
+        "Spanish"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Portuguese” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-science-health-and-technolog-2019-0628-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Microorganisms that cause diseases are called ...........",
+      "options": [
+        "Agents",
+        "Parasites",
+        "Pathogens",
+        "Microbes"
+      ],
+      "correct": 2,
+      "explanation": "The accepted term for the description in the question is “Pathogens”.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0629-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The most popular online video site is ...........",
+      "options": [
+        "Youtube",
+        "Facebook",
+        "Myspace",
+        "Instagram"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Youtube” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0630-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these is not a hand held device?",
+      "options": [
+        "ipad",
+        "iphone",
+        "PC tablet",
+        "Flash drive"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Flash drive” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0631-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Eritrea is a country in ...............",
+      "options": [
+        "Asia",
+        "Europe",
+        "Africa",
+        "South America"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Africa” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0632-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The largest oil producing country in South America is ..............",
+      "options": [
+        "Argentina",
+        "Brazil",
+        "Chile",
+        "Venezuela"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Venezuela” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0633-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which country is the home of the panda bear?",
+      "options": [
+        "China",
+        "Australia",
+        "France",
+        "Uganda"
+      ],
+      "correct": 0,
+      "explanation": "China is the location or geographical relationship requested by the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0634-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "----------- is used to measure the amount of rainfall in a place",
+      "options": [
+        "Rain bar",
+        "Rain meter",
+        "Rain vane",
+        "Rain guage"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Rain guage” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0635-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which territory of Ukraine was annexed by Russia?",
+      "options": [
+        "Donetsk",
+        "Crimea",
+        "St. Petersburg",
+        "None of the above"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Crimea” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0636-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The minimum age for eligibility to vote in Nigeria is",
+      "options": [
+        "18 years",
+        "12 years",
+        "21 years",
+        "22 years"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “18 years” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0637-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The full meaning of INEC is ..................",
+      "options": [
+        "Interim Nigeria Electoral Commission",
+        "Interim National Electoral Commission",
+        "Independent Nigeria Electoral Commission",
+        "Independent National Electoral Commission"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Independent National Electoral Commission” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0638-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these States in Nigeria is referred to as the ‘Food basket’ of Nigeria?",
+      "options": [
+        "Benue",
+        "Oyo",
+        "Kogi",
+        "Enugu"
+      ],
+      "correct": 0,
+      "explanation": "The accepted term for the description in the question is “Benue”.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0639-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Olumo Rock is Synonymous with ............ .",
+      "options": [
+        "Lagos",
+        "Oyo",
+        "Ondo",
+        "Abeokuta"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Abeokuta” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0640-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "A group of Baboons in the forest is known as",
+      "options": [
+        "assembly",
+        "congregation",
+        "college",
+        "elite"
+      ],
+      "correct": 0,
+      "explanation": "The accepted term for the description in the question is “assembly”.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-science-health-and-technolog-2019-0641-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "In computer operation, which is bigger?",
+      "options": [
+        "Gigabyte",
+        "Terabyte",
+        "Megabyte",
+        "kilobyte"
+      ],
+      "correct": 1,
+      "explanation": "The relevant scientific or health fact identifies “Terabyte” as the correct response.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0642-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "What does hygrometer measure?",
+      "options": [
+        "air humidity",
+        "air temperature",
+        "air weight",
+        "air strength"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “air humidity” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0643-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following Countries is not a Member of Organization of Petroleum Producing Countries (OPEC)?",
+      "options": [
+        "Saudi Arabia",
+        "Nigeria",
+        "Venezuela",
+        "Gambia"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Gambia” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0644-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following States is not named after a River in Nigeria?",
+      "options": [
+        "Anambra",
+        "Cross River",
+        "Ogun",
+        "Enugu"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Enugu” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0645-2019-day3-",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The Millennium Development Goals target year was",
+      "options": [
+        "2015",
+        "2017",
+        "2016",
+        "2014"
+      ],
+      "correct": 0,
+      "explanation": "2015 is the date recorded for the event described in the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0646-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Where is Tin Can Island located in Nigeria?",
+      "options": [
+        "Portharcourt",
+        "Calabar",
+        "Bakassi",
+        "Lagos"
+      ],
+      "correct": 3,
+      "explanation": "Lagos is the location or geographical relationship requested by the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-economics-and-commerce-2019-0647-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Economics and commerce",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The main Iron Ore reserve for the Nigerian Steel Industry is found in",
+      "options": [
+        "Itakpe in Kogi State",
+        "Jos in Plateau State",
+        "Osogbo in Osun State",
+        "Kainji In Niger State"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Itakpe in Kogi State” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-science-health-and-technolog-2019-0648-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "What part of a person's body would you grab if you are going 'for the Jugular'?",
+      "options": [
+        "Arm",
+        "Neck",
+        "Leg",
+        "Eyes"
+      ],
+      "correct": 1,
+      "explanation": "The relevant scientific or health fact identifies “Neck” as the correct response.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0649-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "What vitamins do we get from sunlight?",
+      "options": [
+        "Vitamin D",
+        "Vitamin E",
+        "Vitamin A",
+        "Vitamin C"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Vitamin D” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-economics-and-commerce-2019-0650-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Economics and commerce",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Jaja of Opobo was one of the traditional rulers who played active roles during the slave trade and subsequent colonial Administration. In which state of the Federation is Opobo?",
+      "options": [
+        "Kogi",
+        "Anambra",
+        "Enugu",
+        "Rivers"
+      ],
+      "correct": 3,
+      "explanation": "Rivers is the location or geographical relationship requested by the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0651-2019-day3-",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Aba women riot of 1929 was directed against",
+      "options": [
+        "agreement on a day for Nigeria’s Independence",
+        "non inclusion of women in voting right before Independence",
+        "the imposition of poll tax on women",
+        "traditional rulers who were harassing the females in their local kingdom"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “the imposition of poll tax on women” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0652-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The fear of heights is also known as",
+      "options": [
+        "phobia",
+        "height phobia",
+        "hydrophobia",
+        "altophobia"
+      ],
+      "correct": 3,
+      "explanation": "The accepted term for the description in the question is “altophobia”.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0653-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which country colonized Ghana?",
+      "options": [
+        "Britain",
+        "France",
+        "America",
+        "Belgium"
+      ],
+      "correct": 0,
+      "explanation": "Britain is the location or geographical relationship requested by the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0654-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The young of a cat is called",
+      "options": [
+        "poult",
+        "kid",
+        "kitten",
+        "puppy"
+      ],
+      "correct": 2,
+      "explanation": "The accepted term for the description in the question is “kitten”.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-science-health-and-technolog-2019-0655-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following is not a computer Antivirus?",
+      "options": [
+        "Bitdefender",
+        "McAfee",
+        "Kleanpad",
+        "Karspersky"
+      ],
+      "correct": 2,
+      "explanation": "The relevant scientific or health fact identifies “Kleanpad” as the correct response.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0656-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "When a player scores three goals in a football game, it is called",
+      "options": [
+        "brace",
+        "hat trick",
+        "flush",
+        "penalty"
+      ],
+      "correct": 1,
+      "explanation": "hat trick is the date recorded for the event described in the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0657-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The 2018 FIFA World cup was held in",
+      "options": [
+        "England",
+        "Argentina",
+        "Russia",
+        "Spain"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Russia” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0658-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Sanusi Lamido Sanusi was preceded by ------- as the CBN Governor.",
+      "options": [
+        "Charles Chukwuma Soludo",
+        "Dr Sarah Omotunde Alabi",
+        "Joseph Oladele Sanusi",
+        "Ola Vincent"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Charles Chukwuma Soludo” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0659-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The current Emir of Kano assumed office in",
+      "options": [
+        "2014",
+        "1990",
+        "2013",
+        "1987"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “2014” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0660-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Minister of Information in Nigeria is",
+      "options": [
+        "Alhaji Lai Mohammed",
+        "Mr Labaran Maku",
+        "Alhaji Mohammed Wakil",
+        "Ambassador Bashir Yugudu"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Alhaji Lai Mohammed” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0661-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "yerima@ymail.org is an example of an --------------- address",
+      "options": [
+        "Website",
+        "e-mail",
+        "twitter",
+        "facebook"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “e-mail” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0662-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "An Orthopedic surgeon specialises in the treatment of",
+      "options": [
+        "Internal organs",
+        "Tumours",
+        "Blood",
+        "Bones"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Bones” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0663-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "What is the meaning of the acronym UTME?",
+      "options": [
+        "Unified Total Matriculations Examinations",
+        "Unified Tertiary Matriculations Examinations",
+        "Unified Tertiary Matriculates Examinations",
+        "Unified Tertiary Major Examinations"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Unified Tertiary Matriculations Examinations” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0664-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The body set up by the Federal Government of Nigeria to conduct National Census in Nigeria is ------------",
+      "options": [
+        "Nigerian Population Census",
+        "Nigeria Population Commission",
+        "National Population Commission",
+        "Nigeria Census Organization"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “National Population Commission” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0665-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the Oceans is situated in the Eastern coast of Africa",
+      "options": [
+        "Atlantic Ocean",
+        "Indian Ocean",
+        "Pacific Ocean",
+        "Mediterranean Ocean"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Indian Ocean” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0666-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these is the most populous Country?",
+      "options": [
+        "Russia",
+        "Nigeria",
+        "India",
+        "China"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “China” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0667-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these are in the same geo - political zone in Nigeria",
+      "options": [
+        "Kwara, Plateau, Nassarawa, Niger",
+        "Nassarawa, Borno, Yobe, Plateau",
+        "Kaduna, Kastina, Nassarawa, FCT",
+        "Sokoto, Kano, Borno, Yobe"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Kwara, Plateau, Nassarawa, Niger” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0668-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The idea of \"government for the people\" was proposed by",
+      "options": [
+        "George Bush",
+        "Barak Obama",
+        "Abraham Lincoln",
+        "George Washsington"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Abraham Lincoln” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0669-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these is not a manifestation of National identity",
+      "options": [
+        "National Youth service Corp",
+        "National Pledge",
+        "National Electric Power Authourity",
+        "National Theatre"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “National Electric Power Authourity” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0670-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "He failed many times but never gave up, he eventually became a president in the United States",
+      "options": [
+        "George Bush",
+        "Abraham Lincoln",
+        "George Washington",
+        "Barak Obama"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Abraham Lincoln” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0671-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these does not belong to the group?",
+      "options": [
+        "Tam David West",
+        "Deziani Allison–Madueke",
+        "Rukkayyatu Ruffai",
+        "Lukman Rilwan"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Rukkayyatu Ruffai” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0672-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The longest serving President of the Republic of Zimbabwe was",
+      "options": [
+        "Clifford Tagoe",
+        "Robert Mugabe",
+        "Saddam Hussein",
+        "Oliver Tambo"
+      ],
+      "correct": 1,
+      "explanation": "The historical figure named in the question served as president of Robert Mugabe.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0673-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The capital of Guinea is",
+      "options": [
+        "Khartoum",
+        "Niamey",
+        "Windhoek",
+        "Conakry"
+      ],
+      "correct": 3,
+      "explanation": "Conakry is the capital relevant to the place named in the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0674-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these is the smallest continent?",
+      "options": [
+        "Asia",
+        "Europe",
+        "Australia",
+        "Africa"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Australia” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0675-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Kofi Annan, the former Secretary General of United Nations and Nobel Peace Laureate died on",
+      "options": [
+        "Saturday 25th August, 2018",
+        "Saturday 18th August, 2018",
+        "Saturday 11th August, 2018",
+        "Saturday 4th August, 2018"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Saturday 18th August, 2018” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0676-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Complete the following; Ooni and Osun, Sultan and Sokoto, Obi and Anambra, El-Kanemi and ------",
+      "options": [
+        "Kaduna",
+        "Borno",
+        "Katsina",
+        "Yobe"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Borno” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0677-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The Titular head of a University is the",
+      "options": [
+        "Vice–Chancellor",
+        "Pro–Chancellor",
+        "Chancellor",
+        "Deputy Vice–Chancellor"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Chancellor” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0678-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which state in Nigeria is also known as the GATEWAY STATE?",
+      "options": [
+        "Ogun",
+        "Kaduna",
+        "Osun",
+        "Adamawa"
+      ],
+      "correct": 0,
+      "explanation": "Ogun is the location or geographical relationship requested by the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0679-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "There are how many days in the month of November?",
+      "options": [
+        "31",
+        "30",
+        "28",
+        "29"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “30” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0680-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "One of these does not belong to this family",
+      "options": [
+        "Lion",
+        "Wolf",
+        "Tiger",
+        "Puma"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Wolf” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0681-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Africans have received Nobel Prizes in all the following categories except?",
+      "options": [
+        "Economics",
+        "Peace",
+        "Medicine",
+        "Chemistry"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Economics” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0682-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The following West African Countries have won Nobel Prizes except",
+      "options": [
+        "Cote d'Ivoire",
+        "Nigeria",
+        "Ghana",
+        "Liberia"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Cote d'Ivoire” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-economics-and-commerce-2019-0683-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Economics and commerce",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The following are challenges to doing business in Nigeria EXCEPT",
+      "options": [
+        "Inconsistent government policies",
+        "Poor and inadequate infrastructures",
+        "Environmental friendliness",
+        "Lack of government support"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Environmental friendliness” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0684-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "An entrepreneur must always be",
+      "options": [
+        "Compulsive",
+        "Funny",
+        "Agressive",
+        "Initiative"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Initiative” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0685-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Smallest State in Nigeria in terms of land mass is",
+      "options": [
+        "Bayelsa",
+        "Ogun",
+        "Imo",
+        "Lagos"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Lagos” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0686-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The largest State in Nigeria in terms of land mass is",
+      "options": [
+        "Kwara",
+        "Oyo",
+        "Bauchi",
+        "Niger"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Niger” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0687-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these leaders in Nigeria did not create a State",
+      "options": [
+        "Gen Olusegun Obasanjo",
+        "Gen Ibrahim Babangida",
+        "General Sani Abacha",
+        "General Yakubu Gowon"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Gen Olusegun Obasanjo” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0688-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Dana air crash in Nigeria occurred on",
+      "options": [
+        "3rd June, 2012",
+        "3rd May, 2012",
+        "3rd July, 2012",
+        "3rd August, 2012"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “3rd June, 2012” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0689-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these Nigerian leaders was not ECOWAS chairman",
+      "options": [
+        "Mohammadu Buhari",
+        "Íbrahim Babagida",
+        "Yakubu Gowon",
+        "Goodluck Jonathan"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Yakubu Gowon” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0690-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these dams is located in Sokoto State",
+      "options": [
+        "Kainji dam",
+        "Bakora dam",
+        "Tungerm Kawo dam",
+        "Goronyo dam"
+      ],
+      "correct": 3,
+      "explanation": "Goronyo dam is the location or geographical relationship requested by the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0691-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these leaders did not increase the pump price of fuel in Nigeria",
+      "options": [
+        "Muhamadu Buhari",
+        "Musa Yar'Adua",
+        "Abdulsalam Abubakar",
+        "Goodluck Jonathan"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Musa Yar'Adua” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0692-2019-day3-",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "First female Vice Chancellor in Nigeria is",
+      "options": [
+        "Grace Alele Williams",
+        "Ruqayyah Rufai",
+        "Aize Obayan",
+        "Nike Sidikat Ijaiya"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Grace Alele Williams” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-history-and-culture-2019-0693-2019-day3-",
+      "subject": "general-paper",
+      "topic": "History and culture",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "First female Brigadier in Nigeria is",
+      "options": [
+        "Ronke Kale",
+        "Doyin Abiola",
+        "Efuroye Tinubu",
+        "Alele Williams"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Ronke Kale” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0694-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these is not a State Institution?",
+      "options": [
+        "Tai Solarin University",
+        "Olabisi Onabanjo University",
+        "Ibrahim Babangida University",
+        "Joseph Ayo Babalola University"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Joseph Ayo Babalola University” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0695-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Slogan for Oyo State is",
+      "options": [
+        "Sunshine State",
+        "Centre of Excellence",
+        "Pacesetter",
+        "Land of Virtue"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Pacesetter” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0696-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "What is the meaning of the acronym JAMB?",
+      "options": [
+        "Joint Admission and Matriculating Board",
+        "Joint Admissions and Matriculation Board",
+        "Joint Admissions and Matriculations Board",
+        "Joint Admission and Matriculation Board"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Joint Admissions and Matriculation Board” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0697-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "In the Nigerian Legal system, the meaning of the word SAN is",
+      "options": [
+        "Senior Advocate of Nation",
+        "Senior Advocate of Nigerians",
+        "Senior Advisor of Nation",
+        "Senior Advocate of Nigeria"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Senior Advocate of Nigeria” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0698-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "In which state of Nigeria would you find Obudu Cattle Ranch?",
+      "options": [
+        "Anambra",
+        "Cross River",
+        "Akwa Ibom",
+        "Rivers"
+      ],
+      "correct": 1,
+      "explanation": "Cross River is the location or geographical relationship requested by the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0699-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "What is the meaning of the acronym SIM as used in mobile communications?",
+      "options": [
+        "Subscriber Introduction Module",
+        "Subscriber Index Module",
+        "Subscriber Information Module",
+        "Subscriber Interest Module"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Subscriber Information Module” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0700-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "UNESCO is an organ of",
+      "options": [
+        "AU",
+        "ECOWAS",
+        "UNO",
+        "US"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “UNO” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0701-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "A female comedian is called",
+      "options": [
+        "Comedianess",
+        "Comedieness",
+        "Comedienne",
+        "Comediene"
+      ],
+      "correct": 2,
+      "explanation": "The accepted term for the description in the question is “Comedienne”.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0702-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following about the Sun is not true? It is",
+      "options": [
+        "a star",
+        "stationary",
+        "made up of hot gases",
+        "bigger than the earth"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “stationary” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0703-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "In which part of Africa will you find the country Djibouti?",
+      "options": [
+        "West Africa",
+        "North Africa",
+        "East Africa",
+        "Southern Africa"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “East Africa” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0704-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The two political parties that participated in the Nigerian elections in 1993 are",
+      "options": [
+        "PDP and AD",
+        "UNDP and ACN",
+        "SDP and NRC",
+        "ANPP and APGA"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “SDP and NRC” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0705-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The act of taking a drug without or in excess of prescription is called drug",
+      "options": [
+        "Addiction",
+        "Abuse",
+        "Trafficker",
+        "Dealer"
+      ],
+      "correct": 1,
+      "explanation": "The accepted term for the description in the question is “Abuse”.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0706-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The body set up by the Federal Government of Nigeria to conduct National Census in Nigeria is",
+      "options": [
+        "Nigerian Population Census",
+        "Nigeria Population Commission",
+        "National Population Commission",
+        "Nigeria Census Organization"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “National Population Commission” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0707-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Nigeria became a Republic in",
+      "options": [
+        "1st October, 1960",
+        "1st October, 1963",
+        "1st October, 1999",
+        "1st October, 1914"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “1st October, 1963” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0708-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Yankari game Reserve is located in which of the following State?",
+      "options": [
+        "Bauchi",
+        "Kaduna",
+        "Nasarawa",
+        "Kano"
+      ],
+      "correct": 0,
+      "explanation": "Bauchi is the location or geographical relationship requested by the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0709-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The source of the River Niger is",
+      "options": [
+        "Futa Djallon Island",
+        "Futa Djallon Highland",
+        "Futa Djallon Inland",
+        "Futa Djallon lake"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Futa Djallon Highland” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0710-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The former name of Burkina-Faso is",
+      "options": [
+        "Ivory Coast",
+        "Lower Volta",
+        "Upper Volta",
+        "Volta Upland"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Upper Volta” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0711-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Mt. Kilimanjaro is in which African country?",
+      "options": [
+        "Kenya",
+        "Tanzania",
+        "Ethiopia",
+        "Eritrea"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Tanzania” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0712-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The Mediterranean Sea is on the ...... of Africa.",
+      "options": [
+        "North",
+        "East",
+        "South",
+        "West"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “North” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0713-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following is not a country in West Africa?",
+      "options": [
+        "Mauritania",
+        "Gabon",
+        "Gambia",
+        "Togo"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Gabon” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0714-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Ouagadougou is the capital of ......",
+      "options": [
+        "Mali",
+        "Burkina Faso",
+        "Benin",
+        "Chad"
+      ],
+      "correct": 1,
+      "explanation": "Burkina Faso is the capital relevant to the place named in the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0715-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The most populous state in Northern Nigeria is ......",
+      "options": [
+        "Kaduna",
+        "Kano",
+        "Yobe",
+        "Sokoto"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Kano” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0716-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these states is not an oil.producing state in Nigeria?",
+      "options": [
+        "Akwa Ibom",
+        "Delta",
+        "Kogi",
+        "Ondo"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “Kogi” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0717-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these countries is not a Spanish.speaking country?",
+      "options": [
+        "Argentina",
+        "Brazil",
+        "Cuba",
+        "Mexico"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Brazil” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0718-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The 2019 FIFA Women's World Cup was hosted by ......",
+      "options": [
+        "Russia",
+        "France",
+        "Brazil",
+        "USA"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “France” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0719-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The 2020 Olympic Games is to be hosted by ......",
+      "options": [
+        "Japan",
+        "UAE",
+        "Canada",
+        "Spain"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Japan” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0720-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The Nigeria Women National Football Team is popularly known as ......",
+      "options": [
+        "Super Eagles",
+        "Women Eagles",
+        "Women Falcons",
+        "Super Falcons"
+      ],
+      "correct": 3,
+      "explanation": "The accepted term for the description in the question is “Super Falcons”.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0721-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The Speaker of the ninth National Assembly of the Federal Republic of Nigeria is ......",
+      "options": [
+        "Femi Gbajabiamila",
+        "Ahmed Lawan",
+        "Bukola Saraki",
+        "Yakubu Dogara"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Femi Gbajabiamila” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0722-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The Jukun ethnic group is found in the ------------ geopolitical zone of Nigeria.",
+      "options": [
+        "South.east",
+        "North.west",
+        "North.central",
+        "North.east"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “North.east” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-science-health-and-technolog-2019-0723-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "----------- is an example of a microcomputer operating system.",
+      "options": [
+        "MS Windows",
+        "Google Android",
+        "Apple Writer",
+        "iTunes"
+      ],
+      "correct": 0,
+      "explanation": "The relevant scientific or health fact identifies “MS Windows” as the correct response.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0724-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The founder of Facebook is ......",
+      "options": [
+        "Bill Gates",
+        "Page",
+        "Steve Jobs",
+        "Mark Zuckerberg"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Mark Zuckerberg” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0725-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of the following is a digital audio file format?",
+      "options": [
+        "MP3",
+        "MP4",
+        "AVI",
+        "WMV"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “MP3” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0726-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "As at June 2019, who was the world's richest man?",
+      "options": [
+        "Jeff Bezos",
+        "Bill Gates",
+        "Larry Page",
+        "Aliko Dangote"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Jeff Bezos” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0727-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The International Court of Justice, The Hague, is located in which country?",
+      "options": [
+        "Austria",
+        "Germany",
+        "Spain",
+        "Switzerland"
+      ],
+      "correct": 3,
+      "explanation": "Switzerland is the location or geographical relationship requested by the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0728-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Toyota is to Japan, what Mercedes Benz is to ......",
+      "options": [
+        "Austria",
+        "Germany",
+        "Russia",
+        "Switzerland"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Germany” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-government-and-civics-2019-0729-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Government and civics",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The head of a parliamentary system of government is a ......",
+      "options": [
+        "Prime Minister",
+        "President",
+        "Senate President",
+        "Speaker"
+      ],
+      "correct": 0,
+      "explanation": "The answer key identifies “Prime Minister” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0730-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Siberia is in which country?",
+      "options": [
+        "Canada",
+        "China",
+        "Russia",
+        "USA"
+      ],
+      "correct": 2,
+      "explanation": "Russia is the location or geographical relationship requested by the question.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-science-health-and-technolog-2019-0731-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Science, health and technology",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Which of these countries is best known for Kangaroos?",
+      "options": [
+        "China",
+        "Australia",
+        "Spain",
+        "Brazil"
+      ],
+      "correct": 1,
+      "explanation": "The relevant scientific or health fact identifies “Australia” as the correct response.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-general-knowledge-2019-0732-2019-day3-",
+      "subject": "general-paper",
+      "topic": "General knowledge",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The ill.treatment of a group of people by another group because of perceived differences is ......",
+      "options": [
+        "Anthrophobia",
+        "Claustrophobia",
+        "Gendophobia",
+        "Xenophobia"
+      ],
+      "correct": 3,
+      "explanation": "The answer key identifies “Xenophobia” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-economics-and-commerce-2019-0733-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Economics and commerce",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "In a monopoly market, ......",
+      "options": [
+        "There are many suppliers of a product",
+        "There is only one supplier of a product",
+        "There are many consumers of a product",
+        "There is only one consumer of a product"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “There is only one supplier of a product” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-economics-and-commerce-2019-0734-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Economics and commerce",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "Inflation in an economy is marked by an ......",
+      "options": [
+        "increase in population",
+        "increase in jobs created",
+        "increase in prices of commodities",
+        "increase in goods exported"
+      ],
+      "correct": 2,
+      "explanation": "The answer key identifies “increase in prices of commodities” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    },
+    {
+      "id": "gp-geography-and-world-affairs-2019-0735-2019-day3-",
+      "subject": "general-paper",
+      "topic": "Geography and world affairs",
+      "difficulty": "standard",
+      "questionYear": 2019,
+      "text": "The largest economy in Africa is ......",
+      "options": [
+        "Egypt",
+        "Nigeria",
+        "South Africa",
+        "Zimbabwe"
+      ],
+      "correct": 1,
+      "explanation": "The answer key identifies “Nigeria” as the fact that correctly completes this General Paper item.",
+      "source": "2019_DAY3-1.txt"
+    }
+  ]
+}

@@ -78,3 +78,78 @@ def subject_detail(request, slug):
     difficult = Question.objects.filter(topic__subject=subject, attempts__isnull=False).annotate(total_attempts=Count("attempts"), correct_attempts=Count("attempts", filter=Q(attempts__is_correct=True))).order_by("correct_attempts", "-total_attempts")[:12]
     for question in difficult: question.accuracy = percentage(question.correct_attempts, question.total_attempts)
     return render(request, "monitor/subject_detail.html", {"subject": subject, "total": total, "accuracy": percentage(correct, total), "student_count": attempts.values("user_id").distinct().count(), "topics": topics, "difficult": difficult})
+
+import csv
+import secrets
+import string
+
+from django.http import HttpResponse
+from django.views.decorators.cache import never_cache
+from rest_framework.authtoken.models import Token
+
+def csv_safe(value):
+    text = str(value or "")
+    return f"'{text}" if text.startswith(("=", "+", "-", "@")) else text
+
+def temporary_password():
+    required = [secrets.choice(string.ascii_uppercase), secrets.choice(string.ascii_lowercase), secrets.choice(string.digits), secrets.choice("!@#$%&*?")]
+    characters = required + [secrets.choice(string.ascii_letters + string.digits + "!@#$%&*?") for _ in range(10)]
+    secrets.SystemRandom().shuffle(characters)
+    return "".join(characters)
+
+@staff_member_required
+@require_POST
+@never_cache
+def reset_student_password(request, public_id):
+    student = get_object_or_404(User, public_id=public_id, is_staff=False)
+    generated_password = temporary_password()
+    student.set_password(generated_password)
+    student.must_change_password = True
+    student.save(update_fields=("password", "must_change_password"))
+    Token.objects.filter(user=student).delete()
+    response = render(request, "monitor/password_reset_result.html", {"student": student, "temporary_password": generated_password})
+    response["Cache-Control"] = "no-store, no-cache, must-revalidate, private"
+    response["Pragma"] = "no-cache"
+    return response
+
+@staff_member_required
+def export_students_csv(request):
+    response = HttpResponse(content_type="text/csv")
+    response["Content-Disposition"] = f'attachment; filename="seomtorch-students-{timezone.localdate()}.csv"'
+    writer = csv.writer(response)
+    writer.writerow(["Student ID", "Username", "Email", "Attempts", "Correct", "Accuracy %", "XP", "Level", "Current Streak", "Best Streak", "Joined"])
+    users = User.objects.filter(is_staff=False).select_related("learning_stats").annotate(
+        attempt_count=Count("attempts"),
+        correct_count=Count("attempts", filter=Q(attempts__is_correct=True))
+    ).order_by("-date_joined")
+    for user in users:
+        total = user.attempt_count
+        correct = user.correct_count
+        accuracy = percentage(correct, total)
+        stats = getattr(user, "learning_stats", None)
+        writer.writerow([
+            user.public_id, csv_safe(user.username), csv_safe(user.email), total, correct, accuracy,
+            stats.xp if stats else 0, stats.level if stats else 1,
+            stats.live_current_streak if stats else 0, stats.best_streak if stats else 0,
+            user.date_joined.strftime("%Y-%m-%d")
+        ])
+    return response
+
+@staff_member_required
+def question_flags(request):
+    from .models import QuestionReport
+    status_filter = request.GET.get("status", "open")
+    reports = QuestionReport.objects.select_related("question__topic__subject", "user").filter(status=status_filter).order_by("-created_at")[:200]
+    return render(request, "monitor/flags.html", {"reports": reports, "status_filter": status_filter})
+
+@staff_member_required
+@require_POST
+def resolve_flag(request, report_id):
+    import uuid as uuid_mod
+    from .models import QuestionReport
+    report = get_object_or_404(QuestionReport, id=report_id)
+    new_status = request.POST.get("status", "reviewed")
+    if new_status in [c[0] for c in QuestionReport.Status.choices]:
+        report.status = new_status
+        report.save(update_fields=["status"])
+    return redirect("monitor:flags")

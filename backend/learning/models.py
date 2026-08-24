@@ -28,9 +28,23 @@ class Topic(models.Model):
 
     def __str__(self): return f"{self.subject.name} · {self.name}"
 
+class Passage(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="passages")
+    title = models.CharField(max_length=200, blank=True)
+    body = models.TextField()
+    source = models.CharField(max_length=180, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ("subject__position", "title")
+
+    def __str__(self): return self.title or f"Passage ({self.subject.name})"
+
 class Question(models.Model):
     external_id = models.CharField(max_length=120, unique=True, db_index=True)
     topic = models.ForeignKey(Topic, on_delete=models.PROTECT, related_name="questions")
+    passage = models.ForeignKey(Passage, on_delete=models.SET_NULL, null=True, blank=True, related_name="questions")
     text = models.TextField()
     options = models.JSONField()
     correct_index = models.PositiveSmallIntegerField()
@@ -38,6 +52,8 @@ class Question(models.Model):
     difficulty = models.CharField(max_length=30, default="standard")
     source = models.CharField(max_length=180, blank=True)
     question_year = models.PositiveSmallIntegerField(null=True, blank=True)
+    video_url = models.URLField(blank=True, default="")
+    image_url = models.CharField(max_length=500, blank=True, default="")
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -53,12 +69,19 @@ class PracticeSession(models.Model):
         COMPLETED = "completed", "Completed"
         ABANDONED = "abandoned", "Abandoned"
 
+    class Mode(models.TextChoices):
+        TIMED = "timed", "Timed Practice"
+        NORMAL = "normal", "Normal Practice"
+        DAILY = "daily", "Daily Sprint"
+        SAVED = "saved", "Saved Review"
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="practice_sessions")
     subject = models.ForeignKey(Subject, on_delete=models.PROTECT, related_name="practice_sessions", null=True, blank=True)
     topic = models.ForeignKey(Topic, on_delete=models.PROTECT, related_name="practice_sessions", null=True, blank=True)
     question_ids = models.JSONField(default=list)
     status = models.CharField(max_length=12, choices=Status.choices, default=Status.ACTIVE)
+    mode = models.CharField(max_length=12, choices=Mode.choices, default=Mode.TIMED)
     started_at = models.DateTimeField(auto_now_add=True)
     completed_at = models.DateTimeField(null=True, blank=True)
     total_questions = models.PositiveSmallIntegerField(default=0)
@@ -95,6 +118,45 @@ class Bookmark(models.Model):
 
     class Meta:
         constraints = [models.UniqueConstraint(fields=("user", "question"), name="unique_user_bookmark")]
+
+class QuestionComment(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="comments")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="question_comments")
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ("created_at",)
+
+    def __str__(self): return f"{self.user} on {self.question.text[:40]}"
+
+class QuestionReport(models.Model):
+    class Reason(models.TextChoices):
+        TYPO = "typo", "Typo"
+        WRONG_KEY = "wrong_key", "Wrong Answer Key"
+        BROKEN_MATH = "broken_math", "Broken Math/Formula"
+        UNCLEAR = "unclear", "Unclear Explanation"
+        OTHER = "other", "Other"
+
+    class Status(models.TextChoices):
+        OPEN = "open", "Open"
+        REVIEWED = "reviewed", "Reviewed"
+        RESOLVED = "resolved", "Resolved"
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="reports")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="question_reports")
+    reason = models.CharField(max_length=20, choices=Reason.choices)
+    details = models.TextField(blank=True)
+    status = models.CharField(max_length=12, choices=Status.choices, default=Status.OPEN)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ("-created_at",)
+        constraints = [models.UniqueConstraint(fields=("user", "question", "reason"), name="unique_user_question_report")]
+
+    def __str__(self): return f"{self.get_reason_display()} — {self.question.text[:40]}"
 
 class UserStats(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="learning_stats")

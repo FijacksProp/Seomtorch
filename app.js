@@ -52,8 +52,11 @@ let selectedStudyMinutes = 10;
 let activeSession = null;
 let sessionTimer = null;
 let syncPromise = null;
+let pendingSyncCount = 0;
 let deferredInstallPrompt = null;
 let authMode = "signin";
+let selectedPracticeMode = "timed"; // 'timed' or 'normal'
+let dailySprintCompleted = localStorage.getItem("seomtorch-sprint-" + new Date().toISOString().slice(0,10)) === "done";
 
 window.addEventListener("beforeinstallprompt", event => {
   event.preventDefault(); deferredInstallPrompt = event;
@@ -102,6 +105,21 @@ const add = (name, value) => storeAction(name, "readwrite", store => store.add(v
 const clearStore = name => storeAction(name, "readwrite", store => store.clear());
 
 async function loadQuestions() {
+  try {
+    const manifestResponse = await fetch("data/manifest.json");
+    if (manifestResponse.ok) {
+      const manifest = await manifestResponse.json();
+      const packs = await Promise.all(manifest.packs.map(async pack => {
+        const packResponse = await fetch(pack.file);
+        if (!packResponse.ok) throw new Error(`Question pack could not be loaded: ${pack.id}`);
+        return (await packResponse.json()).questions;
+      }));
+      questions = packs.flat();
+      await put("meta", { key: "questionBank", version: manifest.version, loadedAt: Date.now() });
+      return;
+    }
+  } catch {}
+  // Fallback to single file
   const response = await fetch("data/questions.json");
   if (!response.ok) throw new Error("Question bank could not be loaded");
   const data = await response.json();
@@ -123,6 +141,9 @@ function initials() { return profile?.name?.trim().split(/\s+/).slice(0, 2).map(
 function accuracy(list = attempts) { return list.length ? Math.round(list.filter(item => item.correct).length / list.length * 100) : 0; }
 function subjectName(id) { return SUBJECTS.find(subject => subject.id === id)?.name || id; }
 function questionById(id) { return questions.find(question => question.id === id); }
+function questionPassage(question) { return question?.passage_body || question?.passageBody || question?.passage || ""; }
+function questionImage(question) { return question?.image_url || question?.imageUrl || ""; }
+function questionVideo(question) { return question?.video_url || question?.videoUrl || ""; }
 function xpState() {
   const xp = profile?.xp || 0;
   const level = 1 + Math.floor(xp / 250);
@@ -183,7 +204,7 @@ function shell(content) {
       <div class="sidebar-foot"><div class="streak-panel"><svg class="streak-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/><path d="M12 19.2c-1.7 0-2.9-1.1-3-2.7-.1-1.2.5-2.3 1.5-3.2.1 1 .6 1.5 1.1 1.8-.2-1.7.7-2.7 1.6-3.7 1.2 1.5 1.8 3.1 1.7 4.6-.1 1.9-1.2 3.2-2.9 3.2Z"/></svg><div><span>Current streak</span><strong>${profile.rhythm || 0}<small> day${profile.rhythm === 1 ? "" : "s"}</small></strong></div></div><div class="xp-panel"><div><strong>Level ${xp.level}</strong><span>${xp.xp} XP</span></div><div class="xp-track"><i style="width:${xp.percent}%"></i></div><small>${xp.remaining} XP to next level</small></div><p>Come back tomorrow and keep it alive.</p></div>
     </aside>
     <div class="content-wrap">
-      <header class="topbar"><span class="mobile-brand">Seomtorch</span><div class="top-stat"><strong>${attempts.length}</strong><span>answered</span></div><div class="top-stat"><strong>${accuracy()}%</strong><span>accuracy</span></div><div class="top-xp" title="Level ${xp.level} · ${xp.remaining} XP to next level"><small>LV ${xp.level}</small><strong>${xp.xp} XP</strong></div><div class="top-streak" title="${profile.rhythm || 0}-day streak"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/></svg><span><small>Streak</small><strong>${profile.rhythm || 0}</strong></span></div><button class="avatar" data-route="profile" title="Open ${escapeHtml(profile.name)}'s profile">${initials()}</button></header>
+      <header class="topbar"><span class="mobile-brand">Seomtorch</span><span class="sync-indicator ${pendingSyncCount > 0 ? 'pending' : navigator.onLine ? 'synced' : 'offline'}" title="${pendingSyncCount > 0 ? `${pendingSyncCount} items pending sync` : navigator.onLine ? 'Synced' : 'Offline'}"><i></i>${pendingSyncCount > 0 ? `<small>${pendingSyncCount}</small>` : ''}</span><div class="top-stat"><strong>${attempts.length}</strong><span>answered</span></div><div class="top-stat"><strong>${accuracy()}%</strong><span>accuracy</span></div><div class="top-xp" title="Level ${xp.level} · ${xp.remaining} XP to next level"><small>LV ${xp.level}</small><strong>${xp.xp} XP</strong></div><div class="top-streak" title="${profile.rhythm || 0}-day streak"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/></svg><span><small>Streak</small><strong>${profile.rhythm || 0}</strong></span></div><button class="avatar" data-route="profile" title="Open ${escapeHtml(profile.name)}'s profile">${initials()}</button></header>
       <main id="main">${content}</main>
     </div>
   </div>${!isStandalone() && route !== "session" ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ""}`;
@@ -191,6 +212,24 @@ function shell(content) {
 
 function escapeHtml(value = "") {
   return String(value).replace(/[&<>'"]/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char]);
+}
+
+function renderMath(html) {
+  if (typeof renderMathInElement === "undefined") return html;
+  const container = document.createElement("div");
+  container.innerHTML = html;
+  try {
+    renderMathInElement(container, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+      throwOnError: false
+    });
+  } catch {}
+  return container.innerHTML;
 }
 
 function bindShell() {
@@ -233,6 +272,10 @@ function renderHome() {
       <div><span class="label">${recent ? "Continue where you stopped" : "Begin your preparation"}</span><h2>${recent ? escapeHtml(recent.topic) : "Start with a focused session"}</h2><p>${recent ? `${subjectName(recent.subject)} · personalised question selection` : "Choose a subject and work through a short set of questions."}</p></div>
       <button class="button accent" id="continue-study">${recent ? "Continue studying" : "Choose a subject"}<span aria-hidden="true">→</span></button>
     </article>
+    <article class="sprint-card" style="margin-top: 1rem;">
+      <div><span class="label">Daily challenge</span><h2>5-Minute Sprint</h2><p>5 quick questions worth up to 25 XP. ${dailySprintCompleted ? 'Completed today ✓' : 'Ready to attempt'}</p></div>
+      <button class="button ${dailySprintCompleted ? 'outline' : 'accent'}" id="start-sprint">${dailySprintCompleted ? 'Sprint completed ✓' : 'Start sprint →'}</button>
+    </article>
     <div class="section-head"><h2>Today, at a glance</h2><p>Synchronized account activity</p></div>
     <div class="metric-strip">
       <div class="metric"><strong>${todayAttempts.length}</strong><span>answered today</span></div>
@@ -247,6 +290,7 @@ function renderHome() {
   app.innerHTML = shell(content);
   bindShell();
   document.querySelector("#continue-study").addEventListener("click", () => { route = "practice"; selectedSubject = recent?.subject || null; render(); });
+  document.querySelector("#start-sprint").addEventListener("click", () => { if (!dailySprintCompleted) { route = "daily-sprint"; render(); } });
   document.querySelectorAll("[data-subject]").forEach(button => button.addEventListener("click", () => { route = "practice"; selectedSubject = button.dataset.subject; render(); }));
 }
 
@@ -257,8 +301,34 @@ function topicAccuracy(subject, topic) {
 
 function renderPractice() {
   if (!selectedSubject) {
-    const content = `<section class="page"><p class="eyebrow">Practice</p><h1>Choose your focus.</h1><p class="lede">Build one timed session across every subject, concentrate on a topic, or return to questions you deliberately saved.</p><div class="review-entry"><div><span class="review-entry-count">${bookmarks.length}</span><div><p class="eyebrow">Your review library</p><h2>Saved for review</h2><p>${bookmarks.length ? `${bookmarks.length} question${bookmarks.length === 1 ? " is" : "s are"} ready to revisit.` : "Save useful or difficult questions during practice and they will appear here."}</p></div></div><button class="button ${bookmarks.length ? "" : "outline"}" data-subject="saved">${bookmarks.length ? "Open saved questions" : "View review library"} →</button></div><div class="section-head"><h2>Practice mode</h2><p>Configure the details on the next step</p></div><div class="subject-list"><button class="subject-row all-subject-row" data-subject="all"><span class="subject-num">ALL</span><span><span class="subject-title">All subjects</span><span class="subject-meta">Balanced, grouped sections across English Language, General Paper and Mathematics</span></span><span class="mini-progress"><i style="width:${accuracy()}%"></i></span><span class="row-arrow">→</span></button>${SUBJECTS.map((subject, index) => `<button class="subject-row" data-subject="${subject.id}"><span class="subject-num">0${index + 1}</span><span><span class="subject-title">${subject.name}</span><span class="subject-meta">${subject.description}</span></span><span class="mini-progress"><i style="width:${subjectStats(subject.id).accuracy}%"></i></span><span class="row-arrow">→</span></button>`).join("")}</div></section>`;
+    const content = `<section class="page">
+      <p class="eyebrow">Practice</p>
+      <h1>Choose your focus.</h1>
+
+      <div class="mode-cards" style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+        <button class="mode-card ${selectedPracticeMode === 'timed' ? 'active' : ''}" data-mode="timed" style="flex: 1; padding: 1rem; border: 1px solid var(--border); border-radius: 8px; text-align: left; background: ${selectedPracticeMode === 'timed' ? 'var(--accent-light)' : 'transparent'};">
+          <strong style="display: block; margin-bottom: 0.5rem;">Timed Practice</strong>
+          <span style="font-size: 0.875rem;">Exam simulation. Answer everything first, see results and solutions at the end.</span>
+        </button>
+        <button class="mode-card ${selectedPracticeMode === 'normal' ? 'active' : ''}" data-mode="normal" style="flex: 1; padding: 1rem; border: 1px solid var(--border); border-radius: 8px; text-align: left; background: ${selectedPracticeMode === 'normal' ? 'var(--accent-light)' : 'transparent'};">
+          <strong style="display: block; margin-bottom: 0.5rem;">Normal Practice</strong>
+          <span style="font-size: 0.875rem;">Step-by-step study. Answer one question, immediately see the answer, explanation, video and discussion, then continue.</span>
+        </button>
+        <button class="mode-card" data-route="daily-sprint" style="flex: 1; padding: 1rem; border: 1px solid var(--border); border-radius: 8px; text-align: left; cursor: pointer;">
+          <strong style="display: block; margin-bottom: 0.5rem;">Daily 5-Minute Sprint</strong>
+          <span style="font-size: 0.875rem;">5 questions, one daily attempt, and up to 25 XP from correct answers. ${dailySprintCompleted ? '<strong>Completed today ✓</strong>' : ''}</span>
+        </button>
+      </div>
+
+      <div class="review-entry"><div><span class="review-entry-count">${bookmarks.length}</span><div><p class="eyebrow">Your review library</p><h2>Saved for review</h2><p>${bookmarks.length ? `${bookmarks.length} question${bookmarks.length === 1 ? " is" : "s are"} ready to revisit.` : "Save useful or difficult questions during practice and they will appear here."}</p></div></div><button class="button ${bookmarks.length ? "" : "outline"}" data-subject="saved">${bookmarks.length ? "Open saved questions" : "View review library"} →</button></div>
+      <div class="section-head"><h2>Subjects</h2><p>Choose a subject for ${selectedPracticeMode} practice</p></div>
+      <div class="subject-list">
+        <button class="subject-row all-subject-row" data-subject="all"><span class="subject-num">ALL</span><span><span class="subject-title">All subjects</span><span class="subject-meta">Balanced, grouped sections across English Language, General Paper and Mathematics</span></span><span class="mini-progress"><i style="width:${accuracy()}%"></i></span><span class="row-arrow">→</span></button>
+        ${SUBJECTS.map((subject, index) => `<button class="subject-row" data-subject="${subject.id}"><span class="subject-num">0${index + 1}</span><span><span class="subject-title">${subject.name}</span><span class="subject-meta">${subject.description}</span></span><span class="mini-progress"><i style="width:${subjectStats(subject.id).accuracy}%"></i></span><span class="row-arrow">→</span></button>`).join("")}
+      </div>
+    </section>`;
     app.innerHTML = shell(content); bindShell();
+    document.querySelectorAll("[data-mode]").forEach(button => button.addEventListener("click", () => { selectedPracticeMode = button.dataset.mode; render(); }));
     document.querySelectorAll("[data-subject]").forEach(button => button.addEventListener("click", () => { selectedSubject = button.dataset.subject; render(); }));
     return;
   }
@@ -266,13 +336,14 @@ function renderPractice() {
   const allSubjects = selectedSubject === "all";
   const subject = allSubjects ? { name: "All subjects" } : SUBJECTS.find(item => item.id === selectedSubject);
   const topics = allSubjects ? [] : [...new Set(questions.filter(item => item.subject === selectedSubject).map(item => item.topic))];
-  const content = `<section class="page"><button class="button outline" id="back-subjects">← Practice modes</button><div class="practice-heading"><p class="eyebrow">${subject.name}</p><h1>Build your session.</h1><p class="lede">Set exactly how many questions you want and how long you want to study.${allSubjects ? " Seomtorch will divide the questions into balanced subject sections." : " Then choose the topic you want to practise."}</p></div><section class="session-builder" aria-label="Session settings"><div class="session-input"><label for="question-count">Questions</label><div><input id="question-count" type="number" min="10" max="100" step="1" value="${selectedQuestionCount}" inputmode="numeric" required><span>10–100</span></div><small>Choose any whole number from 10 to 100.</small></div><div class="session-input"><label for="study-minutes">Study time</label><div><input id="study-minutes" type="number" min="1" max="600" step="1" value="${selectedStudyMinutes}" inputmode="numeric" required><span>minutes</span></div><small>Choose any whole number from 1 to 600 minutes.</small></div></section>${allSubjects ? `<section class="grouped-preview"><div class="section-head"><h2>Subject sections</h2><p>One timer for the complete session</p></div><div class="section-plan" id="section-plan"></div><button class="button start-session-button" id="start-all-session">Start grouped session →</button></section>` : `<div class="section-head"><h2>Choose a topic</h2><p>The timer begins when questions open</p></div><div class="topic-grid"><button class="topic-card" data-topic=""><strong>All topics</strong><span>Balanced mix · ${questions.filter(q => q.subject === selectedSubject).length} available</span></button>${topics.map(topic => `<button class="topic-card" data-topic="${escapeHtml(topic)}"><strong>${escapeHtml(topic)}</strong><span>${topicAccuracy(selectedSubject, topic)}</span></button>`).join("")}</div>`}</section>`;
+  const settings = `<section class="session-builder" aria-label="Session settings"><div class="session-input"><label for="question-count">Questions</label><div><input id="question-count" type="number" min="10" max="100" step="1" value="${selectedQuestionCount}" inputmode="numeric" required><span>10–100</span></div><small>Choose any whole number from 10 to 100.</small></div>${selectedPracticeMode === "timed" ? `<div class="session-input"><label for="study-minutes">Study time</label><div><input id="study-minutes" type="number" min="1" max="600" step="1" value="${selectedStudyMinutes}" inputmode="numeric" required><span>minutes</span></div><small>Choose any whole number from 1 to 600 minutes.</small></div>` : `<div class="session-input"><label>Study time</label><div><strong>Untimed</strong></div><small>Work at your own pace with feedback after every answer.</small></div>`}</section>`;
+  const content = `<section class="page"><button class="button outline" id="back-subjects">← Practice modes</button><div class="practice-heading"><p class="eyebrow">${subject.name}</p><h1>Build your session.</h1><p class="lede">Choose how many questions you want.${selectedPracticeMode === "timed" ? " Set the study time, then begin when you are ready." : " Guided practice has no countdown."}${allSubjects ? " Seomtorch will divide the questions into balanced subject sections." : " Then choose the topic you want to practise."}</p></div>${settings}${allSubjects ? `<section class="grouped-preview"><div class="section-head"><h2>Subject sections</h2><p>${selectedPracticeMode === "timed" ? "One timer for the complete session" : "Grouped guided practice"}</p></div><div class="section-plan" id="section-plan"></div><button class="button start-session-button" id="start-all-session">Start grouped session →</button></section>` : `<div class="section-head"><h2>Choose a topic</h2><p>${selectedPracticeMode === "timed" ? "The timer begins when questions open" : "Feedback appears after each answer"}</p></div><div class="topic-grid"><button class="topic-card" data-topic=""><strong>All topics</strong><span>Balanced mix · ${questions.filter(q => q.subject === selectedSubject).length} available</span></button>${topics.map(topic => `<button class="topic-card" data-topic="${escapeHtml(topic)}"><strong>${escapeHtml(topic)}</strong><span>${topicAccuracy(selectedSubject, topic)}</span></button>`).join("")}</div>`}</section>`;
   app.innerHTML = shell(content); bindShell();
   document.querySelector("#back-subjects").addEventListener("click", () => { selectedSubject = null; render(); });
   const questionInput = document.querySelector("#question-count");
   const timeInput = document.querySelector("#study-minutes");
-  const persistConfiguration = () => { if (questionInput.validity.valid) selectedQuestionCount = Number(questionInput.value); if (timeInput.validity.valid) selectedStudyMinutes = Number(timeInput.value); if (allSubjects) renderSectionPlan(selectedQuestionCount); };
-  questionInput.addEventListener("input", persistConfiguration); timeInput.addEventListener("input", persistConfiguration);
+  const persistConfiguration = () => { if (questionInput?.validity.valid) selectedQuestionCount = Number(questionInput.value); if (timeInput?.validity.valid) selectedStudyMinutes = Number(timeInput.value); if (allSubjects) renderSectionPlan(selectedQuestionCount); };
+  questionInput?.addEventListener("input", persistConfiguration); timeInput?.addEventListener("input", persistConfiguration);
   if (allSubjects) renderSectionPlan(selectedQuestionCount);
   document.querySelector("#start-all-session")?.addEventListener("click", () => { const config = readSessionConfiguration(); if (config) startSession("all", null, config.count, config.minutes); });
   document.querySelectorAll("[data-topic]").forEach(button => button.addEventListener("click", () => { const config = readSessionConfiguration(); if (config) startSession(selectedSubject, button.dataset.topic || null, config.count, config.minutes); }));
@@ -281,8 +352,10 @@ function renderPractice() {
 function readSessionConfiguration() {
   const questionInput = document.querySelector("#question-count");
   const timeInput = document.querySelector("#study-minutes");
-  if (!questionInput.reportValidity() || !timeInput.reportValidity()) return null;
-  selectedQuestionCount = Number(questionInput.value); selectedStudyMinutes = Number(timeInput.value);
+  if (!questionInput || !questionInput.reportValidity()) return null;
+  if (selectedPracticeMode === "timed" && (!timeInput || !timeInput.reportValidity())) return null;
+  selectedQuestionCount = Number(questionInput.value);
+  if (timeInput) selectedStudyMinutes = Number(timeInput.value);
   return { count: selectedQuestionCount, minutes: selectedStudyMinutes };
 }
 
@@ -362,24 +435,26 @@ function buildSessionSections(queue) {
 
 function topicSlug(value) { return String(value || "").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
 
-function startSession(subject, topic, count = 10, durationMinutes = 10) {
+function startSession(subject, topic, count = 10, durationMinutes = 10, mode = selectedPracticeMode) {
   const label = subject === "all" ? "All subjects" : subject === "saved" ? "Saved for review" : subjectName(subject);
   const topicLabel = topic || (subject === "all" ? "Grouped subject sections" : subject === "saved" ? "Saved question collection" : "All topics");
-  const detail = `<dl class="session-confirm-summary"><div><dt>Mode</dt><dd>${escapeHtml(label)}</dd></div><div><dt>Focus</dt><dd>${escapeHtml(topicLabel)}</dd></div><div><dt>Questions</dt><dd>${count}</dd></div><div><dt>Time</dt><dd>${durationMinutes} minutes</dd></div></dl>`;
-  showConfirmDialog({ title: "Start this practice session?", message: "Review your choices carefully. The timer will remain paused until you press Begin session on the next screen.", detail, confirmLabel: "Proceed", cancelLabel: "Change selections", onConfirm: () => createSession(subject, topic, count, durationMinutes) });
+  const detail = `<dl class="session-confirm-summary"><div><dt>Mode</dt><dd>${mode === "normal" ? "Guided practice" : "Timed practice"}</dd></div><div><dt>Focus</dt><dd>${escapeHtml(topicLabel)}</dd></div><div><dt>Questions</dt><dd>${count}</dd></div><div><dt>Time</dt><dd>${mode === "normal" ? "Untimed" : `${durationMinutes} minutes`}</dd></div></dl>`;
+  showConfirmDialog({ title: "Start this practice session?", message: mode === "normal" ? "Review your choices, then begin an untimed guided session with feedback after each answer." : "Review your choices carefully. The timer will remain paused until you press Begin session on the next screen.", detail, confirmLabel: "Proceed", cancelLabel: "Change selections", onConfirm: () => createSession(subject, topic, count, durationMinutes, mode) });
 }
 
-async function createSession(subject, topic, count = 10, durationMinutes = 10) {
+async function createSession(subject, topic, count = 10, durationMinutes = 10, mode = selectedPracticeMode) {
   let queue = subject === "all" ? weightedAllSubjects(count) : subject === "saved" ? savedSessionQuestions(count) : weightedQuestions(subject, topic, count); let remoteId = null;
   try {
-    const remote = await api.startSession(authToken, { subject, topic: topic ? topicSlug(topic) : null, limit: count, duration_minutes: durationMinutes });
+    const remote = await api.startSession(authToken, { subject, topic: topic ? topicSlug(topic) : null, limit: count, duration_minutes: durationMinutes, mode });
     remoteId = remote.session_id;
     const selected = remote.questions.map(item => questionById(item.external_id)).filter(Boolean);
     if (selected.length) queue = selected;
   } catch { showToast("Working offline. This session will sync when connected."); }
   if (queue.length < count) showToast(`${queue.length} questions are currently available in this selection.`);
   const sections = buildSessionSections(queue);
-  activeSession = { subject, topic, requestedCount: count, durationMinutes, deadline: null, started: false, finished: false, queue, sections, answers: queue.map(() => ({ selected: null, confirmed: false, correct: false })), remoteId, index: 0, correct: 0, questionStartedAt: null, reportedComplete: false, timedOut: false, timeUpAcknowledged: false };
+  if (mode === "normal") durationMinutes = 0;
+
+  activeSession = { subject, topic, requestedCount: count, durationMinutes, deadline: null, started: false, finished: false, queue, sections, answers: queue.map(() => ({ selected: null, confirmed: false, correct: false })), remoteId, index: 0, correct: 0, questionStartedAt: null, reportedComplete: false, timedOut: false, timeUpAcknowledged: false, mode };
   route = "session"; render();
 }
 
@@ -400,8 +475,7 @@ function runSessionTimer() {
     }
     if (remaining === 0) {
       clearInterval(sessionTimer);
-      activeSession.timedOut = true; activeSession.finished = true;
-      showConfirmDialog({ title: "Time’s up.", message: "Your study time has ended. Confirmed answers have been recorded; unanswered questions will remain unanswered.", confirmLabel: "View results", tone: "timeup", dismissible: false, onConfirm: () => { activeSession.timeUpAcknowledged = true; render(); } });
+      finalizeSelectedAnswers(true);
     }
   };
   update();
@@ -414,9 +488,10 @@ function currentSection() {
 
 function renderSessionStart() {
   const mode = activeSession.subject === "all" ? "All subjects" : activeSession.subject === "saved" ? "Saved for review" : subjectName(activeSession.subject);
-  const content = `<section class="page page-narrow"><div class="session-ready"><p class="eyebrow">Ready when you are</p><h1>Your session is prepared.</h1><p class="lede">The countdown has not started. Once you begin, you may skip between questions and return using the numbered navigator.</p><div class="ready-summary"><article><span>Mode</span><strong>${escapeHtml(mode)}</strong></article><article><span>Questions</span><strong>${activeSession.queue.length}</strong></article><article><span>Study time</span><strong>${activeSession.durationMinutes} minutes</strong></article></div>${activeSession.sections.length > 1 ? `<div class="ready-sections">${activeSession.sections.map((section, index) => `<div><span>${String(index + 1).padStart(2, "0")}</span><strong>${escapeHtml(section.name)}</strong><small>${section.count} questions</small></div>`).join("")}</div>` : ""}<div class="button-row"><button class="button" id="begin-session">Begin session →</button><button class="button outline" id="cancel-session">Change selections</button></div></div></section>`;
+  const isNormal = activeSession.mode === "normal";
+  const content = `<section class="page page-narrow"><div class="session-ready"><p class="eyebrow">Ready when you are</p><h1>Your session is prepared.</h1><p class="lede">${isNormal ? "This guided session is untimed. You will see feedback after each answer." : "The countdown has not started. Once you begin, you may skip between questions and return using the numbered navigator."}</p><div class="ready-summary"><article><span>Focus</span><strong>${escapeHtml(mode)}</strong></article><article><span>Questions</span><strong>${activeSession.queue.length}</strong></article><article><span>Study time</span><strong>${isNormal ? "Untimed" : `${activeSession.durationMinutes} minutes`}</strong></article></div>${activeSession.sections.length > 1 ? `<div class="ready-sections">${activeSession.sections.map((section, index) => `<div><span>${String(index + 1).padStart(2, "0")}</span><strong>${escapeHtml(section.name)}</strong><small>${section.count} questions</small></div>`).join("")}</div>` : ""}<div class="button-row"><button class="button" id="begin-session">Begin session →</button><button class="button outline" id="cancel-session">Change selections</button></div></div></section>`;
   app.innerHTML = shell(content); bindShell();
-  document.querySelector("#begin-session").addEventListener("click", () => { activeSession.started = true; activeSession.deadline = Date.now() + activeSession.durationMinutes * 60000; activeSession.questionStartedAt = Date.now(); render(); });
+  document.querySelector("#begin-session").addEventListener("click", () => { activeSession.started = true; activeSession.deadline = isNormal ? null : Date.now() + activeSession.durationMinutes * 60000; activeSession.questionStartedAt = Date.now(); render(); });
   document.querySelector("#cancel-session").addEventListener("click", () => { activeSession = null; route = "practice"; render(); });
 }
 
@@ -424,13 +499,19 @@ function renderSession() {
   if (!activeSession) { route = "practice"; return render(); }
   if (activeSession.finished) { if (!activeSession.timedOut || activeSession.timeUpAcknowledged) return renderResult(); return; }
   if (!activeSession.started) return renderSessionStart();
+  if (activeSession.mode === 'normal') return renderNormalSession();
   const question = activeSession.queue[activeSession.index];
   const answer = activeSession.answers[activeSession.index];
   const section = currentSection();
   const sectionIndex = activeSession.sections.indexOf(section);
   const isBookmarked = bookmarks.some(item => item.questionId === question.id);
-  const confirmed = activeSession.answers.filter(item => item.confirmed).length;
-  const content = `<section class="page session-page"><aside class="question-navigator"><div><p class="eyebrow">Question navigator</p><strong>${confirmed} of ${activeSession.queue.length} answered</strong><span>Select any number to move between questions.</span></div><div class="question-number-grid">${activeSession.answers.map((item, index) => `<button class="question-number ${index === activeSession.index ? "current" : ""} ${item.confirmed ? item.correct ? "correct" : "incorrect" : item.selected !== null ? "selected" : ""}" data-question-index="${index}" aria-label="Question ${index + 1}${item.confirmed ? item.correct ? ", correct" : ", incorrect" : ", unanswered"}">${index + 1}</button>`).join("")}</div><div class="navigator-key"><span><i class="correct"></i>Correct</span><span><i class="incorrect"></i>Incorrect</span><span><i class="selected"></i>Selected</span><span><i class="unanswered"></i>Unanswered</span></div><button class="button outline finish-session" id="finish-session">Finish session</button></aside><div class="session-workspace">${activeSession.sections.length > 1 ? `<div class="active-section"><span>Section ${sectionIndex + 1} of ${activeSession.sections.length}</span><strong>${escapeHtml(section.name)}</strong><small>${activeSession.index - section.start + 1} of ${section.count} in this section</small></div>` : ""}<div class="question-header"><div class="question-topline"><span>${subjectName(question.subject)} · ${escapeHtml(question.topic)}${question.questionYear ? ` · ${question.questionYear} source` : ""}</span><div class="session-status"><span>${activeSession.index + 1} of ${activeSession.queue.length}</span><span class="session-clock" role="timer" aria-label="Session time remaining"><small>Time left</small><strong id="session-timer">${formatTime(Math.ceil((activeSession.deadline - Date.now()) / 1000))}</strong></span></div></div><div class="question-progress"><i style="width:${confirmed / activeSession.queue.length * 100}%"></i></div></div><article class="question-paper"><p class="eyebrow">Question ${String(activeSession.index + 1).padStart(2, "0")}</p><h2>${escapeHtml(question.text)}</h2><div class="options">${question.options.map((option, index) => { let state = ""; if (answer.confirmed && index === question.correct) state = "correct"; else if (answer.confirmed && index === answer.selected) state = "incorrect"; else if (!answer.confirmed && index === answer.selected) state = "selected"; return `<button class="option ${state}" data-option="${index}" ${answer.confirmed ? "disabled" : ""}><span class="option-letter">${String.fromCharCode(65 + index)}</span><span>${escapeHtml(option)}</span></button>`; }).join("")}</div>${answer.confirmed ? `<div class="feedback"><div class="feedback-head"><div class="feedback-label ${answer.correct ? "" : "wrong"}">${answer.correct ? "Correct" : "Review this"}</div>${answer.correct ? '<span class="xp-earned">+5 XP</span>' : ""}</div><p>${escapeHtml(question.explanation)}</p></div>` : answer.selected !== null ? '<p class="selection-note">Your selection is not recorded until you confirm it.</p>' : ""}<div class="question-actions"><button class="button outline" id="previous-question" ${activeSession.index === 0 ? "disabled" : ""}>← Previous</button><button class="button outline" id="bookmark">${isBookmarked ? "Remove from saved" : "Save for review"}</button><button class="button" id="next-question">${activeSession.index === activeSession.queue.length - 1 ? "Review session" : answer.confirmed ? "Next question →" : "Skip for now →"}</button></div></article></div></section>`;
+  const confirmed = activeSession.answers.filter(item => item.selected !== null).length;
+  const passage = questionPassage(question);
+  const imageUrl = questionImage(question);
+  const content = `<section class="page session-page"><aside class="question-navigator"><div><p class="eyebrow">Question navigator</p><strong>${confirmed} of ${activeSession.queue.length} answered</strong><span>Select any number to move between questions.</span></div><div class="question-number-grid">${activeSession.answers.map((item, index) => `<button class="question-number ${index === activeSession.index ? "current" : ""} ${item.selected !== null ? "selected" : ""}" data-question-index="${index}" aria-label="Question ${index + 1}${item.selected !== null ? ", selected" : ", unanswered"}">${index + 1}</button>`).join("")}</div><div class="navigator-key"><span><i class="selected"></i>Selected</span><span><i class="unanswered"></i>Unanswered</span></div><button class="button outline finish-session" id="finish-session">Finish session</button></aside><div class="session-workspace">${activeSession.sections.length > 1 ? `<div class="active-section"><span>Section ${sectionIndex + 1} of ${activeSession.sections.length}</span><strong>${escapeHtml(section.name)}</strong><small>${activeSession.index - section.start + 1} of ${section.count} in this section</small></div>` : ""}<div class="question-header"><div class="question-topline"><span>${subjectName(question.subject)} · ${escapeHtml(question.topic)}${question.questionYear ? ` · ${question.questionYear} source` : ""}</span><div class="session-status"><span>${activeSession.index + 1} of ${activeSession.queue.length}</span><span class="session-clock" role="timer" aria-label="Session time remaining"><small>Time left</small><strong id="session-timer">${formatTime(Math.ceil((activeSession.deadline - Date.now()) / 1000))}</strong></span></div></div><div class="question-progress"><i style="width:${confirmed / activeSession.queue.length * 100}%"></i></div></div><article class="question-paper" style="${passage ? 'display:flex; flex-direction:column; gap:1rem;' : ''}">
+  ${passage ? `<details class="passage-details"><summary>View reading passage</summary><div class="passage-content">${renderMath(escapeHtml(passage))}</div></details>` : ""}
+  ${imageUrl ? `<img class="question-image" src="${escapeHtml(imageUrl)}" alt="Illustration for this question" loading="lazy">` : ""}
+  <div><p class="eyebrow">Question ${String(activeSession.index + 1).padStart(2, "0")}</p><h2>${renderMath(escapeHtml(question.text))}</h2></div><div class="options">${question.options.map((option, index) => { let state = ""; if (answer.confirmed && index === question.correct) state = "correct"; else if (answer.confirmed && index === answer.selected) state = "incorrect"; else if (!answer.confirmed && index === answer.selected) state = "selected"; return `<button class="option ${state}" data-option="${index}" ${answer.confirmed ? "disabled" : ""}><span class="option-letter">${String.fromCharCode(65 + index)}</span><span>${renderMath(escapeHtml(option))}</span></button>`; }).join("")}</div>${answer.confirmed ? `<div class="feedback"><div class="feedback-head"><div class="feedback-label ${answer.correct ? "" : "wrong"}">${answer.correct ? "Correct" : "Review this"}</div>${answer.correct ? '<span class="xp-earned">+5 XP</span>' : ""}</div><p>${renderMath(escapeHtml(question.explanation))}</p></div>` : answer.selected !== null ? '<p class="selection-note">Your selection is not recorded until you finish the session.</p>' : ""}<div class="question-actions"><button class="button outline" id="previous-question" ${activeSession.index === 0 ? "disabled" : ""}>← Previous</button><button class="button outline" id="bookmark">${isBookmarked ? "Remove from saved" : "Save for review"}</button><button class="button" id="next-question">${activeSession.index === activeSession.queue.length - 1 ? "Review session" : answer.selected !== null ? "Next question →" : "Skip for now →"}</button></div></article></div></section>`;
   app.innerHTML = shell(content); bindShell();
   runSessionTimer();
   document.querySelectorAll("[data-question-index]").forEach(button => button.addEventListener("click", () => goToQuestion(Number(button.dataset.questionIndex))));
@@ -450,11 +531,16 @@ function selectAnswer(selected) {
   const answer = activeSession.answers[activeSession.index];
   if (answer.confirmed) return;
   const question = activeSession.queue[activeSession.index];
-  answer.selected = selected; render();
-  showConfirmDialog({ title: `Confirm option ${String.fromCharCode(65 + selected)}?`, message: "Once confirmed, this answer will be graded and locked. You will not be able to change it afterward.", detail: `<div class="selected-answer-preview"><span>${String.fromCharCode(65 + selected)}</span><p>${escapeHtml(question.options[selected])}</p></div>`, confirmLabel: "Yes, confirm answer", cancelLabel: "Change option", onConfirm: () => submitConfirmedAnswer(activeSession.index) });
+  answer.selected = selected;
+  if (activeSession.mode === 'timed' || activeSession.mode === 'sprint') {
+    render(); // Deferred grading
+  } else {
+    // Normal mode: immediate feedback
+    submitConfirmedAnswer(activeSession.index);
+  }
 }
 
-async function submitConfirmedAnswer(questionIndex) {
+async function submitConfirmedAnswer(questionIndex, shouldRender = true, syncNow = true) {
   if (!activeSession || activeSession.finished) return;
   const answer = activeSession.answers[questionIndex];
   if (answer.confirmed || answer.selected === null) return;
@@ -467,15 +553,36 @@ async function submitConfirmedAnswer(questionIndex) {
   profile.xp = (profile.xp || 0) + (correct ? 5 : 0);
   await put("profile", profile);
   await registerStudyDay();
-  render();
-  await syncAttemptRecord(attempt);
-  if (route === "session" && activeSession?.queue[questionIndex]?.id === question.id) render();
+  if (shouldRender) render();
+  if (syncNow) await syncAttemptRecord(attempt);
+  if (syncNow && shouldRender && route === "session" && activeSession?.queue[questionIndex]?.id === question.id) render();
 }
 
 function confirmFinishSession() {
-  const answered = activeSession.answers.filter(item => item.confirmed).length;
+  const answered = activeSession.answers.filter(item => item.selected !== null).length;
   const unanswered = activeSession.queue.length - answered;
-  showConfirmDialog({ title: "Finish this session?", message: unanswered ? `${unanswered} question${unanswered === 1 ? " is" : "s are"} still unanswered. You can return to them using the numbered navigator.` : "Every question has been answered and locked.", detail: `<div class="finish-summary"><span><strong>${answered}</strong> answered</span><span><strong>${unanswered}</strong> unanswered</span></div>`, confirmLabel: "Finish and view results", cancelLabel: "Continue session", onConfirm: () => { activeSession.finished = true; render(); } });
+  showConfirmDialog({ title: "Finish this session?", message: unanswered ? `${unanswered} question${unanswered === 1 ? " is" : "s are"} still unanswered. You can return to them using the numbered navigator.` : "Every question has a selected answer.", detail: `<div class="finish-summary"><span><strong>${answered}</strong> answered</span><span><strong>${unanswered}</strong> unanswered</span></div>`, confirmLabel: "Finish and view results", cancelLabel: "Continue session", onConfirm: () => activeSession.mode === "normal" ? finishNormalSession() : finalizeSelectedAnswers(false) });
+}
+
+function finishNormalSession() {
+  activeSession.finished = true;
+  render();
+}
+
+async function finalizeSelectedAnswers(timedOut = false) {
+  if (!activeSession || activeSession.finalizing) return;
+  activeSession.finalizing = true;
+  const selected = activeSession.answers.map((answer, index) => answer.selected !== null && !answer.confirmed ? index : -1).filter(index => index >= 0);
+  for (const index of selected) await submitConfirmedAnswer(index, false, false);
+  activeSession.timedOut = timedOut;
+  activeSession.finished = true;
+  activeSession.finalizing = false;
+  syncPendingAttempts();
+  if (timedOut) {
+    showConfirmDialog({ title: "Time’s up.", message: "Your study time has ended. Selected answers have been recorded; questions without a selection remain unanswered.", confirmLabel: "View results", tone: "timeup", dismissible: false, onConfirm: () => { activeSession.timeUpAcknowledged = true; render(); } });
+  } else {
+    render();
+  }
 }
 
 async function syncAttemptRecord(attempt) {
@@ -501,6 +608,8 @@ function applyRemoteStats(stats = {}) {
 
 async function syncPendingAttempts() {
   if (syncPromise) return syncPromise;
+  pendingSyncCount = attempts.filter(item => !item.synced && !item.syncError).length;
+  if (pendingSyncCount > 0) render();
   syncPromise = (async () => {
     for (const attempt of attempts.filter(item => !item.synced && !item.syncError)) await syncAttemptRecord(attempt);
     const remote = await api.attempts(authToken);
@@ -519,7 +628,7 @@ async function syncPendingAttempts() {
       if (item.action === "add" && !bookmarks.some(bookmark => bookmark.questionId === item.questionId)) { const bookmark = { questionId: item.questionId, savedAt: item.queuedAt }; await put("bookmarks", bookmark); bookmarks.push(bookmark); }
       if (item.action === "remove") { await storeAction("bookmarks", "readwrite", store => store.delete(item.questionId)); bookmarks = bookmarks.filter(bookmark => bookmark.questionId !== item.questionId); }
     }
-  })().then(() => true).catch(() => false).finally(() => { syncPromise = null; });
+  })().then(() => { pendingSyncCount = 0; if (route !== "session") render(); return true; }).catch(() => false).finally(() => { syncPromise = null; });
   return syncPromise;
 }
 
@@ -584,15 +693,23 @@ async function performBookmarkToggle(questionId) {
 
 function renderResult() {
   clearInterval(sessionTimer);
-  if (activeSession.remoteId && !activeSession.reportedComplete) { activeSession.reportedComplete = true; api.completeSession(authToken, activeSession.remoteId).catch(() => { activeSession.reportedComplete = false; }); }
+  if (activeSession.remoteId && !activeSession.reportedComplete) {
+    activeSession.reportedComplete = true;
+    syncPendingAttempts().then(() => api.completeSession(authToken, activeSession.remoteId)).catch(() => { activeSession.reportedComplete = false; });
+  }
+  if (activeSession.mode === "sprint" && !dailySprintCompleted) {
+    dailySprintCompleted = true;
+    localStorage.setItem("seomtorch-sprint-" + new Date().toISOString().slice(0, 10), "done");
+  }
   const score = activeSession.queue.length ? Math.round(activeSession.correct / activeSession.queue.length * 100) : 0;
   const answered = activeSession.answers.filter(item => item.confirmed).length;
   const unanswered = activeSession.queue.length - answered;
   const note = activeSession.timedOut ? "Time is up. Review the result, then try a shorter session or return when you can give it a full window." : score >= 80 ? "A strong session. Keep the standard steady." : score >= 50 ? "Good work. Review the corrections before moving on." : "This topic needs another careful pass. That is useful information.";
-  const content = `<section class="page page-narrow"><div class="session-result"><p class="eyebrow">${activeSession.timedOut ? "Time expired" : "Session complete"}</p><div class="result-score">${score}%</div><h2>${activeSession.correct} of ${activeSession.queue.length} correct</h2><p class="lede" style="margin-inline:auto">${note}</p><div class="result-meta"><span>${answered} answered</span><span>${unanswered} unanswered</span><span>${activeSession.durationMinutes} minute timer</span></div><div class="button-row" style="justify-content:center;margin-top:28px"><button class="button outline" id="return-practice">Choose another topic</button><button class="button" id="retry-session">Practise this again</button></div></div></section>`;
+  const review = activeSession.answers.map((answer, index) => { const question = activeSession.queue[index]; if (!answer.confirmed) return ""; return `<article class="result-review-item ${answer.correct ? "correct" : "incorrect"}"><div><span>Question ${index + 1}</span><strong>${answer.correct ? "Correct" : "Review"}</strong></div><p>${renderMath(escapeHtml(question.text))}</p><small>Your answer: ${escapeHtml(question.options[answer.selected] || "—")}</small>${answer.correct ? "" : `<small>Correct answer: ${escapeHtml(question.options[question.correct] || "—")}</small>`}<div>${renderMath(escapeHtml(question.explanation))}</div></article>`; }).join("");
+  const content = `<section class="page page-narrow"><div class="session-result"><p class="eyebrow">${activeSession.timedOut ? "Time expired" : "Session complete"}</p><div class="result-score">${score}%</div><h2>${activeSession.correct} of ${activeSession.queue.length} correct</h2><p class="lede" style="margin-inline:auto">${note}</p><div class="result-meta"><span>${answered} answered</span><span>${unanswered} unanswered</span><span>${activeSession.mode === "normal" ? "Untimed practice" : `${activeSession.durationMinutes} minute timer`}</span></div><div class="button-row" style="justify-content:center;margin-top:28px"><button class="button outline" id="return-practice">Choose another topic</button>${activeSession.mode === "sprint" ? "" : '<button class="button" id="retry-session">Practise this again</button>'}</div></div>${review ? `<div class="result-review"><div class="section-head"><h2>Solutions</h2><p>Review every recorded answer</p></div>${review}</div>` : ""}</section>`;
   app.innerHTML = shell(content); bindShell();
   document.querySelector("#return-practice").addEventListener("click", () => { activeSession = null; route = "practice"; render(); });
-  document.querySelector("#retry-session").addEventListener("click", () => startSession(activeSession.subject, activeSession.topic, activeSession.requestedCount, activeSession.durationMinutes));
+  document.querySelector("#retry-session")?.addEventListener("click", () => startSession(activeSession.subject, activeSession.topic, activeSession.requestedCount, activeSession.durationMinutes, activeSession.mode));
 }
 
 function renderProgress() {
@@ -625,6 +742,44 @@ function bindProfile() {
   document.querySelector("#refresh-account").addEventListener("click", async () => { const synced = await syncPendingAttempts(); showToast(synced ? "Account is up to date" : "Could not reach the account server"); renderProfile(); });
   document.querySelector("#clear-cache").addEventListener("click", refreshDeviceCache);
   document.querySelector("#sign-out").addEventListener("click", signOut);
+  const accountActions = document.querySelector(".settings-panel .button-row");
+  if (accountActions) {
+    const changePassword = document.createElement("button");
+    changePassword.className = "button outline";
+    changePassword.type = "button";
+    changePassword.textContent = "Change password";
+    changePassword.addEventListener("click", () => navigate("change-password"));
+    accountActions.prepend(changePassword);
+  }
+}
+
+function renderPasswordChange(required = false) {
+  const content = `<section class="page page-narrow"><div class="password-change-card"><p class="eyebrow">${required ? "Security step required" : "Account security"}</p><h1>${required ? "Create your new password." : "Change your password."}</h1><p class="lede">${required ? "You signed in with a temporary password issued by an administrator. Replace it before continuing to your account." : "Enter your current password, then choose a strong new one."}</p><form id="change-password-form" class="auth-form"><div class="field"><label for="current-password">Current password</label><input id="current-password" name="current_password" type="password" autocomplete="current-password" required></div><div class="field"><label for="new-password">New password</label><input id="new-password" name="new_password" type="password" minlength="8" autocomplete="new-password" required></div><div class="field"><label for="confirm-password">Confirm new password</label><input id="confirm-password" name="confirm_password" type="password" minlength="8" autocomplete="new-password" required></div><div id="password-change-error" class="auth-error" role="alert"></div><div class="button-row"><button class="button" type="submit">Save new password</button>${required ? '<button class="button outline" type="button" id="password-change-signout">Sign out</button>' : '<button class="button outline" type="button" id="cancel-password-change">Cancel</button>'}</div></form></div></section>`;
+  app.innerHTML = shell(content);
+  bindShell();
+  document.querySelector("#cancel-password-change")?.addEventListener("click", () => navigate("profile"));
+  document.querySelector("#password-change-signout")?.addEventListener("click", signOut);
+  document.querySelector("#change-password-form").addEventListener("submit", async event => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const submit = form.querySelector('button[type="submit"]');
+    const error = document.querySelector("#password-change-error");
+    const values = Object.fromEntries(new FormData(form));
+    if (values.new_password !== values.confirm_password) { error.textContent = "The new passwords do not match."; return; }
+    submit.disabled = true; submit.textContent = "Saving…"; error.textContent = "";
+    try {
+      const response = await api.changePassword(authToken, { current_password: values.current_password, new_password: values.new_password });
+      currentUser = response.user;
+      localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
+      await syncPendingAttempts();
+      route = required ? "home" : "profile";
+      showToast("Password changed successfully");
+      render();
+    } catch (caught) {
+      error.textContent = caught instanceof ApiError ? caught.message : "The password could not be changed.";
+      submit.disabled = false; submit.textContent = "Save new password";
+    }
+  });
 }
 
 function exportData() {
@@ -698,11 +853,14 @@ async function signOut() {
 
 function render() {
   if (!authToken || !currentUser || !profile) return renderAuth();
+  if (currentUser.must_change_password) return renderPasswordChange(true);
+  if (route === "daily-sprint") return renderDailySprint();
   if (route === "home") return renderHome();
   if (route === "practice") return renderPractice();
   if (route === "session") return renderSession();
   if (route === "progress") return renderProgress();
   if (route === "profile") return renderProfile();
+  if (route === "change-password") return renderPasswordChange(false);
 }
 
 async function init() {
@@ -713,6 +871,7 @@ async function init() {
     if (authenticated) await syncPendingAttempts();
     render();
     window.addEventListener("online", async () => { if (authToken) { await syncPendingAttempts(); render(); } });
+    window.addEventListener("offline", () => { if (route !== "session") render(); });
     document.addEventListener("visibilitychange", async () => { if (document.visibilityState === "visible" && authToken && route !== "session") { await syncPendingAttempts(); render(); } });
     if ("serviceWorker" in navigator && location.protocol !== "file:") navigator.serviceWorker.register("sw.js").catch(() => {});
   } catch (error) {
@@ -722,3 +881,175 @@ async function init() {
 }
 
 init();
+
+
+async function renderDailySprint() {
+  const content = `<section class="page"><div class="session-ready"><p class="eyebrow">Daily Challenge</p><h1>5-Minute Sprint</h1><p class="lede">Loading your daily sprint questions...</p></div></section>`;
+  app.innerHTML = shell(content); bindShell();
+
+  try {
+    const remote = await api.dailySprint(authToken);
+    const sprintQuestions = remote.questions.map(item => questionById(item.external_id)).filter(Boolean);
+    if (sprintQuestions.length > 0) {
+      activeSession = { subject: 'sprint', topic: null, requestedCount: 5, durationMinutes: 5, deadline: Date.now() + 5 * 60000, started: true, finished: false, queue: sprintQuestions, sections: [{subject: 'sprint', name: 'Sprint', count: sprintQuestions.length, start: 0}], answers: sprintQuestions.map(() => ({ selected: null, confirmed: false, correct: false })), remoteId: remote.session_id, index: 0, correct: 0, questionStartedAt: Date.now(), reportedComplete: false, timedOut: false, timeUpAcknowledged: false, mode: 'sprint' };
+      route = "session"; render();
+    } else {
+      throw new Error("No questions");
+    }
+  } catch (err) {
+    if (err instanceof ApiError && err.status === 409) {
+      dailySprintCompleted = true;
+      localStorage.setItem("seomtorch-sprint-" + new Date().toISOString().slice(0, 10), "done");
+    }
+    const message = err instanceof ApiError ? err.message : "Could not load the sprint. Check your connection and try again.";
+    app.innerHTML = shell(`<section class="page page-narrow"><div class="session-ready"><p class="eyebrow">Daily challenge</p><h1>${dailySprintCompleted ? "Sprint already started." : "Sprint unavailable."}</h1><p class="lede">${escapeHtml(message)}</p><button class="button" data-route="home">Return home</button></div></section>`);
+    bindShell();
+  }
+}
+
+function showReportModal(questionId) {
+  document.querySelector("#app-dialog")?.remove();
+  const dialog = document.createElement("div");
+  dialog.id = "app-dialog"; dialog.className = "dialog-backdrop";
+  dialog.innerHTML = `<section class="confirm-dialog default" role="dialog">
+    <h2>Report an issue</h2>
+    <p>Help us improve by selecting a reason below.</p>
+    <div style="display:flex; flex-direction:column; gap:0.5rem; margin:1rem 0;">
+      <label><input type="radio" name="reportReason" value="typo" checked> Typo</label>
+      <label><input type="radio" name="reportReason" value="wrong_key"> Wrong Answer Key</label>
+      <label><input type="radio" name="reportReason" value="broken_math"> Broken Math/Formula</label>
+      <label><input type="radio" name="reportReason" value="unclear"> Unclear Explanation</label>
+      <label><input type="radio" name="reportReason" value="other"> Other</label>
+    </div>
+    <textarea id="reportDetails" placeholder="Optional details..." style="width:100%; min-height:60px; margin-bottom:1rem; padding:0.5rem;"></textarea>
+    <div class="button-row">
+      <button class="button outline" data-dialog-cancel>Cancel</button>
+      <button class="button" data-dialog-confirm>Submit Report</button>
+    </div>
+  </section>`;
+  document.body.appendChild(dialog);
+  const close = () => dialog.remove();
+  dialog.querySelector("[data-dialog-cancel]")?.addEventListener("click", close);
+  dialog.querySelector("[data-dialog-confirm]")?.addEventListener("click", async () => {
+    const reason = dialog.querySelector('input[name="reportReason"]:checked').value;
+    const details = dialog.querySelector('#reportDetails').value;
+    try {
+      await api.reportQuestion(authToken, questionId, reason, details);
+      showToast("Issue reported. Thank you.");
+      close();
+    } catch (error) {
+      showToast(error instanceof ApiError ? error.message : "Could not submit the report");
+    }
+  });
+}
+
+function renderNormalSession() {
+  const question = activeSession.queue[activeSession.index];
+  const answer = activeSession.answers[activeSession.index];
+  const isBookmarked = bookmarks.some(item => item.questionId === question.id);
+  const confirmed = activeSession.answers.filter(item => item.confirmed).length;
+  const passage = questionPassage(question);
+  const imageUrl = questionImage(question);
+  const videoUrl = questionVideo(question);
+
+  const content = `<section class="page session-page">
+    <div class="session-workspace" style="max-width:800px; margin:0 auto; padding-top:1rem;">
+      <div class="question-header">
+        <div class="question-topline">
+          <span>${subjectName(question.subject)} · ${escapeHtml(question.topic)}${question.questionYear ? ` · ${question.questionYear} source` : ""}</span>
+          <div class="session-status"><span>${activeSession.index + 1} of ${activeSession.queue.length}</span></div>
+        </div>
+        <div class="question-progress"><i style="width:${confirmed / activeSession.queue.length * 100}%"></i></div>
+      </div>
+
+      <article class="question-paper" style="${passage ? 'display:flex; flex-direction:column; gap:1rem;' : ''}">
+        ${passage ? `<details class="passage-details"><summary>View reading passage</summary><div class="passage-content">${renderMath(escapeHtml(passage))}</div></details>` : ""}
+        ${imageUrl ? `<img class="question-image" src="${escapeHtml(imageUrl)}" alt="Illustration for this question" loading="lazy">` : ""}
+
+        <div><p class="eyebrow">Question ${String(activeSession.index + 1).padStart(2, "0")}</p>
+        <h2>${renderMath(escapeHtml(question.text))}</h2></div>
+
+        <div class="options">
+          ${question.options.map((option, index) => {
+            let state = "";
+            if (answer.confirmed && index === question.correct) state = "correct";
+            else if (answer.confirmed && index === answer.selected) state = "incorrect";
+            else if (!answer.confirmed && index === answer.selected) state = "selected";
+            return `<button class="option ${state}" data-option="${index}" ${answer.confirmed ? "disabled" : ""}><span class="option-letter">${String.fromCharCode(65 + index)}</span><span>${renderMath(escapeHtml(option))}</span></button>`;
+          }).join("")}
+        </div>
+
+        ${answer.confirmed ? `
+          <div class="feedback">
+            <div class="feedback-head">
+              <div class="feedback-label ${answer.correct ? "" : "wrong"}">${answer.correct ? "Correct" : "Review this"}</div>
+              ${answer.correct ? '<span class="xp-earned">+5 XP</span>' : ""}
+            </div>
+            <p>${renderMath(escapeHtml(question.explanation))}</p>
+            ${videoUrl ? `<div class="question-video"><iframe src="${escapeHtml(videoUrl)}" title="Video explanation" loading="lazy" allowfullscreen></iframe></div>` : ""}
+
+            <div style="margin-top:2rem; border-top:1px solid var(--border); padding-top:1rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                <h3>Comments & Discussion</h3>
+                <button class="button outline" id="report-question">Report issue</button>
+              </div>
+              <div id="comments-container" style="display:flex; flex-direction:column; gap:1rem; margin-bottom:1rem;">
+                <p>Loading comments...</p>
+              </div>
+              <div style="display:flex; gap:0.5rem;">
+                <input type="text" id="new-comment-text" placeholder="Add a comment..." style="flex:1; padding:0.5rem; border-radius:4px; border:1px solid var(--border);">
+                <button class="button" id="post-comment-btn">Post</button>
+              </div>
+            </div>
+          </div>
+        ` : ''}
+
+        <div class="question-actions" style="margin-top:2rem; padding-top:1rem; border-top:1px solid var(--border);">
+          <button class="button outline" id="previous-question" ${activeSession.index === 0 ? "disabled" : ""}>← Previous</button>
+          <button class="button outline" id="bookmark">${isBookmarked ? "Remove from saved" : "Save for review"}</button>
+          <button class="button" id="next-question">${activeSession.index === activeSession.queue.length - 1 ? "Finish practice" : "Next question →"}</button>
+        </div>
+      </article>
+    </div>
+  </section>`;
+
+  app.innerHTML = shell(content); bindShell();
+
+  document.querySelectorAll("[data-option]").forEach(button => button.addEventListener("click", () => selectAnswer(Number(button.dataset.option))));
+  document.querySelector("#bookmark").addEventListener("click", () => toggleBookmark(question.id));
+  document.querySelector("#previous-question").addEventListener("click", () => goToQuestion(activeSession.index - 1));
+  document.querySelector("#next-question").addEventListener("click", () => activeSession.index === activeSession.queue.length - 1 ? confirmFinishSession() : goToQuestion(activeSession.index + 1));
+  document.querySelector("#report-question")?.addEventListener("click", () => showReportModal(question.id));
+
+  if (answer.confirmed) {
+    // Load comments
+    const container = document.getElementById('comments-container');
+    if (api.questionComments) {
+      api.questionComments(authToken, question.id).then(comments => {
+        if (!comments || comments.length === 0) {
+          container.innerHTML = "<p>No comments yet. Be the first to discuss!</p>";
+        } else {
+          container.innerHTML = comments.map(c => `<div style="background:var(--surface-light); padding:0.75rem; border-radius:4px;"><strong style="font-size:0.85rem;">${escapeHtml(c.username)}</strong> <span style="font-size:0.75rem; opacity:0.7;">${new Date(c.created_at).toLocaleString()}</span><p style="margin-top:0.25rem;">${escapeHtml(c.text)}</p></div>`).join("");
+        }
+      }).catch(err => {
+        container.innerHTML = "<p>Could not load comments.</p>";
+      });
+    } else {
+      container.innerHTML = "<p>Comments unavailable.</p>";
+    }
+
+    document.getElementById('post-comment-btn')?.addEventListener("click", async () => {
+      const input = document.getElementById('new-comment-text');
+      const text = input.value.trim();
+      if (!text) return;
+      try {
+        if (api.addComment) await api.addComment(authToken, question.id, text);
+        showToast("Comment posted");
+        input.value = "";
+        renderNormalSession(); // Reload to show new comment
+      } catch {
+        showToast("Could not post comment");
+      }
+    });
+  }
+}

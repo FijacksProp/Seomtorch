@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from learning.models import ActivityEvent, UserStats
-from .serializers import LoginSerializer, RegisterSerializer, UserSerializer
+from .serializers import ChangePasswordSerializer, LoginSerializer, RegisterSerializer, UserSerializer
 
 class AuthThrottle(throttling.AnonRateThrottle):
     scope = "auth"
@@ -46,3 +46,10 @@ class LogoutView(APIView):
 class MeView(APIView):
     def get(self, request):
         return Response(UserSerializer(request.user).data)
+
+class ChangePasswordView(APIView):
+    def post(self, request):
+        serializer = ChangePasswordSerializer(data=request.data, context={"request": request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        return Response({"user": UserSerializer(user).data})

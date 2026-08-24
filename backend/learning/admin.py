@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ActivityEvent, Attempt, Bookmark, PracticeSession, Question, Subject, Topic, UserStats
+from .models import ActivityEvent, Attempt, Bookmark, PracticeSession, Question, Subject, Topic, UserStats, Passage, QuestionComment, QuestionReport
 
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
@@ -17,12 +17,12 @@ class TopicAdmin(admin.ModelAdmin):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ("short_text", "topic", "question_year", "difficulty", "is_active")
+    list_display = ("short_text", "topic", "passage", "question_year", "difficulty", "is_active")
     list_filter = ("topic__subject", "topic", "question_year", "difficulty", "is_active")
     search_fields = ("external_id", "text", "explanation")
     list_editable = ("is_active",)
     readonly_fields = ("external_id", "created_at", "updated_at")
-    list_select_related = ("topic__subject",)
+    list_select_related = ("topic__subject", "passage")
     def short_text(self, obj): return obj.text[:75]
 
 @admin.register(Attempt)
@@ -49,3 +49,6 @@ class UserStatsAdmin(admin.ModelAdmin):
 
 admin.site.register(Bookmark)
 admin.site.register(ActivityEvent)
+admin.site.register(Passage)
+admin.site.register(QuestionComment)
+admin.site.register(QuestionReport)

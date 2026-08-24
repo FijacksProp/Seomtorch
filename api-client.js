@@ -21,6 +21,7 @@ export const api = {
   register: body => request("/auth/register/", { method: "POST", body }),
   login: body => request("/auth/login/", { method: "POST", body }),
   me: token => request("/auth/me/", { token }),
+  changePassword: (token, body) => request("/auth/change-password/", { token, method: "POST", body }),
   logout: token => request("/auth/logout/", { token, method: "POST" }),
   startSession: (token, body) => request("/sessions/", { token, method: "POST", body }),
   completeSession: (token, id) => request(`/sessions/${id}/complete/`, { token, method: "POST" }),
@@ -29,4 +30,11 @@ export const api = {
   bookmarks: token => request("/bookmarks/", { token }),
   addBookmark: (token, question_id) => request("/bookmarks/", { token, method: "POST", body: { question_id } }),
   removeBookmark: (token, question_id) => request("/bookmarks/", { token, method: "DELETE", body: { question_id } }),
+  // Question comments
+  questionComments: (token, questionId) => request(`/questions/${questionId}/comments/`, { token }),
+  addComment: (token, questionId, text) => request(`/questions/${questionId}/comments/`, { token, method: "POST", body: { text } }),
+  // Question flagging/reporting
+  reportQuestion: (token, questionId, reason, details) => request(`/questions/${questionId}/report/`, { token, method: "POST", body: { reason, details } }),
+  // Daily sprint
+  dailySprint: token => request("/daily-sprint/", { token, method: "POST" }),
 };
