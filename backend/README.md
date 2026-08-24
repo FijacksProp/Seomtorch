@@ -17,11 +17,11 @@ python -m venv .venv
 
 The API runs at `http://127.0.0.1:8000/api/`. The professional monitoring centre is at `http://127.0.0.1:8000/monitor/`; raw content management is at `http://127.0.0.1:8000/internal-admin/`.
 
-## Render deployment
+## Production deployment: Render + Supabase
 
-Create the PostgreSQL database and Python Web Service manually in Render. Do not use a Blueprint: free services do not support Render pre-deploy commands.
+The Python Web Service runs on Render and the production PostgreSQL database runs on Supabase. Django remains responsible for accounts and authentication; Supabase Auth is not used.
 
-Create a free PostgreSQL database first. Then create a Web Service from the GitHub repository with these settings:
+Create a Web Service from the GitHub repository with these settings:
 
 ```text
 Language: Python 3
@@ -36,7 +36,9 @@ Set these environment variables on the Web Service:
 ```text
 CORS_ALLOWED_ORIGINS=https://your-vercel-domain.vercel.app
 CSRF_TRUSTED_ORIGINS=https://your-vercel-domain.vercel.app
-DATABASE_URL=<the Render PostgreSQL internal database URL>
+DATABASE_URL=<the Supabase Session pooler connection string, port 5432>
+DATABASE_CONN_MAX_AGE=60
+DATABASE_SSL_REQUIRE=True
 DJANGO_ALLOWED_HOSTS=<your-service-name>.onrender.com
 DJANGO_DEBUG=False
 DJANGO_SECRET_KEY=<a long random secret>
@@ -47,9 +49,9 @@ SECURE_HSTS_SECONDS=31536000
 SECURE_SSL_REDIRECT=True
 ```
 
-Do not add the password or secret key to Git. `start.sh` runs migrations, imports or updates the question bank, and creates the initial administrator before starting Gunicorn. All three setup commands are idempotent, so later deploys do not duplicate data or overwrite the administrator password.
+Do not add the database password or secret key to Git. Use Supabase's Session pooler rather than its transaction pooler: this is a persistent Django service, and the Session pooler is available over IPv4. `start.sh` runs migrations, imports or updates the question bank, and creates the initial administrator before starting Gunicorn. All three setup commands are idempotent, so later deploys do not duplicate data or overwrite the administrator password.
 
-Render's Free PostgreSQL instance expires 30 days after creation and does not include backups. It is suitable for initial testing only; upgrade the database before relying on it for durable student records.
+For a new empty Supabase database, deploying with these variables creates the Django tables automatically. To retain existing Render users and progress, migrate the old database before changing `DATABASE_URL`. Follow [SUPABASE.md](SUPABASE.md) for the complete migration and cutover procedure.
 
 If Render assigns a URL other than `https://seomtorch-api.onrender.com`, update `config.js` in the Vercel frontend.
 
