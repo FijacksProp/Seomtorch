@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ActivityEvent, Attempt, Bookmark, PracticeSession, Question, Subject, Topic, UserStats, Passage, QuestionComment, QuestionReport
+from .models import ActivityEvent, Attempt, BadgeDefinition, Bookmark, Challenge, ChallengeParticipant, PracticeSession, Question, Subject, Topic, UserBadge, UserStats, Passage, QuestionComment, QuestionReport
 
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
@@ -52,3 +52,36 @@ admin.site.register(ActivityEvent)
 admin.site.register(Passage)
 admin.site.register(QuestionComment)
 admin.site.register(QuestionReport)
+
+@admin.register(BadgeDefinition)
+class BadgeDefinitionAdmin(admin.ModelAdmin):
+    list_display = ("name", "category", "tier", "target", "is_active")
+    list_filter = ("category", "tier", "is_active")
+    search_fields = ("code", "name", "description")
+
+@admin.register(UserBadge)
+class UserBadgeAdmin(admin.ModelAdmin):
+    list_display = ("user", "badge", "earned_at", "seen_at")
+    list_filter = ("badge__category", "badge", "earned_at")
+    search_fields = ("user__public_id", "user__username", "badge__name")
+    list_select_related = ("user", "badge")
+
+class ChallengeParticipantInline(admin.TabularInline):
+    model = ChallengeParticipant
+    extra = 0
+    readonly_fields = ("user", "status", "practice_session", "started_at", "deadline_at", "completed_at", "correct_answers", "answered_questions", "duration_seconds", "bonus_xp", "bonus_awarded_at")
+
+@admin.register(Challenge)
+class ChallengeAdmin(admin.ModelAdmin):
+    list_display = ("title", "creator", "subject_label", "question_count", "duration_minutes", "starts_at", "ends_at")
+    list_filter = ("subject", "starts_at", "ends_at")
+    search_fields = ("title", "creator__public_id", "creator__username")
+    readonly_fields = ("id", "question_payload", "created_at")
+    inlines = (ChallengeParticipantInline,)
+
+@admin.register(ChallengeParticipant)
+class ChallengeParticipantAdmin(admin.ModelAdmin):
+    list_display = ("user", "challenge", "status", "correct_answers", "answered_questions", "bonus_xp", "started_at", "completed_at")
+    list_filter = ("status", "challenge__subject", "started_at")
+    search_fields = ("user__public_id", "user__username", "challenge__title")
+    list_select_related = ("user", "challenge")

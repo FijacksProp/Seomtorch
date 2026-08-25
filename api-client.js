@@ -37,4 +37,12 @@ export const api = {
   reportQuestion: (token, questionId, reason, details) => request(`/questions/${questionId}/report/`, { token, method: "POST", body: { reason, details } }),
   // Daily sprint
   dailySprint: token => request("/daily-sprint/", { token, method: "POST" }),
+  achievements: token => request("/achievements/", { token }),
+  markBadgesSeen: (token, codes) => request("/achievements/", { token, method: "POST", body: { codes } }),
+  lookupStudent: (token, publicId) => request(`/students/lookup/?id=${encodeURIComponent(publicId)}`, { token }),
+  challenges: token => request("/challenges/", { token }),
+  createChallenge: (token, body) => request("/challenges/", { token, method: "POST", body }),
+  challenge: (token, id) => request(`/challenges/${id}/`, { token }),
+  respondChallenge: (token, id, response) => request(`/challenges/${id}/respond/`, { token, method: "POST", body: { response } }),
+  startChallenge: (token, id) => request(`/challenges/${id}/start/`, { token, method: "POST" }),
 };

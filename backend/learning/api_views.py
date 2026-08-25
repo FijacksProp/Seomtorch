@@ -1,5 +1,6 @@
 import random
 import uuid
+from datetime import timedelta
 
 from django.db import transaction
 from django.db.models import Count, Q
@@ -9,7 +10,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import ActivityEvent, Attempt, Bookmark, PracticeSession, Question, Subject, Topic, UserStats, QuestionComment, QuestionReport
+from .badges import achievements_payload, evaluate_badges, mark_badges_seen
+from .models import ActivityEvent, Attempt, Bookmark, ChallengeParticipant, PracticeSession, Question, Subject, Topic, UserStats, QuestionComment, QuestionReport
 from .serializers import AttemptSerializer, BookmarkSerializer, QuestionPracticeSerializer, SubjectSerializer, QuestionCommentSerializer, QuestionReportSerializer
 
 def stats_payload(user):
@@ -128,7 +130,21 @@ class SubmitAttemptView(APIView):
         if request.data.get("session_id"):
             session = get_object_or_404(PracticeSession, id=request.data["session_id"], user=request.user)
             if question.external_id not in session.question_ids: return Response({"question_id": ["Question is not part of this session."]}, status=400)
-        correct = selected == question.correct_index
+        correct_index = question.correct_index
+        challenge_participant = None
+        if session and session.mode == PracticeSession.Mode.CHALLENGE:
+            challenge_participant = get_object_or_404(ChallengeParticipant.objects.select_for_update().select_related("challenge"), practice_session=session, user=request.user)
+            if challenge_participant.status != ChallengeParticipant.Status.STARTED:
+                return Response({"detail": "This challenge attempt is no longer active."}, status=409)
+            if timezone.now() >= challenge_participant.deadline_at + timedelta(seconds=90):
+                return Response({"detail": "The challenge timer has expired."}, status=409)
+            snapshot = next((item for item in challenge_participant.challenge.question_payload if item["external_id"] == question.external_id), None)
+            if not snapshot:
+                return Response({"detail": "This challenge question is unavailable."}, status=409)
+            correct_index = snapshot["correct"]
+            if session.attempts.filter(question=question).exists():
+                return Response({"detail": "This challenge question has already been recorded."}, status=409)
+        correct = selected == correct_index
         attempt = Attempt.objects.create(user=request.user, question=question, session=session, client_id=client_id, selected_index=selected, is_correct=correct, xp_earned=5 if correct else 0, duration_ms=request.data.get("duration_ms"))
         stats, _ = UserStats.objects.select_for_update().get_or_create(user=request.user)
         if correct: stats.register_correct_answer()
@@ -137,20 +153,42 @@ class SubmitAttemptView(APIView):
             session.correct_answers = session.attempts.filter(is_correct=True).count()
             session.save(update_fields=("correct_answers",))
         ActivityEvent.objects.create(user=request.user, event_type=ActivityEvent.Type.ANSWERED, metadata={"question_id": question.external_id, "subject": question.topic.subject.slug, "correct": correct, "xp": attempt.xp_earned})
-        return Response(self._response(attempt), status=status.HTTP_201_CREATED)
+        payload = self._response(attempt)
+        payload["badges_earned"] = []
+        return Response(payload, status=status.HTTP_201_CREATED)
 
     def _response(self, attempt):
+        if attempt.session and attempt.session.mode == PracticeSession.Mode.CHALLENGE:
+            return {
+                "attempt": {"client_id": attempt.client_id, "question_id": attempt.question.external_id, "selected_index": attempt.selected_index, "answered_at": attempt.answered_at},
+                "accepted": True,
+                "stats": stats_payload(attempt.user),
+            }
         return {"attempt": AttemptSerializer(attempt).data, "correct": attempt.is_correct, "correct_index": attempt.question.correct_index, "explanation": attempt.question.explanation, "stats": stats_payload(attempt.user)}
 
 class CompleteSessionView(APIView):
+    @transaction.atomic
     def post(self, request, session_id):
         session = get_object_or_404(PracticeSession, id=session_id, user=request.user)
         session.status = PracticeSession.Status.COMPLETED
         session.completed_at = timezone.now()
         session.correct_answers = session.attempts.filter(is_correct=True).count()
         session.save(update_fields=("status", "completed_at", "correct_answers"))
+        challenge_id = None
+        if session.mode == PracticeSession.Mode.CHALLENGE:
+            participant = get_object_or_404(ChallengeParticipant.objects.select_for_update().select_related("challenge"), practice_session=session, user=request.user)
+            if participant.status != ChallengeParticipant.Status.COMPLETED:
+                participant.status = ChallengeParticipant.Status.COMPLETED
+                participant.completed_at = session.completed_at
+                participant.correct_answers = session.correct_answers
+                participant.answered_questions = session.attempts.count()
+                participant.duration_seconds = max(1, int((session.completed_at - participant.started_at).total_seconds()))
+                participant.save(update_fields=("status", "completed_at", "correct_answers", "answered_questions", "duration_seconds"))
+                ActivityEvent.objects.create(user=request.user, event_type=ActivityEvent.Type.CHALLENGE_COMPLETED, metadata={"challenge_id": str(participant.challenge_id), "score": participant.correct_answers})
+            challenge_id = str(participant.challenge_id)
         ActivityEvent.objects.create(user=request.user, event_type=ActivityEvent.Type.SESSION_COMPLETED, metadata={"session_id": str(session.id), "accuracy": session.accuracy})
-        return Response({"session_id": session.id, "correct": session.correct_answers, "total": session.total_questions, "accuracy": session.accuracy})
+        earned = evaluate_badges(request.user)
+        return Response({"session_id": session.id, "correct": session.correct_answers, "total": session.total_questions, "accuracy": session.accuracy, "challenge_id": challenge_id, "badges_earned": [{"code": item.badge.code, "name": item.badge.name, "description": item.badge.description, "tier": item.badge.tier} for item in earned]})
 
 class AttemptSyncView(APIView):
     def get(self, request):
@@ -237,3 +275,14 @@ class DailySprintView(APIView):
             "questions": QuestionPracticeSerializer(selected, many=True).data,
             "maximum_xp": len(selected) * 5,
         }, status=status.HTTP_201_CREATED)
+
+
+class AchievementView(APIView):
+    def get(self, request):
+        badges = achievements_payload(request.user)
+        return Response({"badges": badges, "earned_count": sum(1 for item in badges if item["earned"]), "total_count": len(badges)})
+
+    def post(self, request):
+        codes = request.data.get("codes")
+        mark_badges_seen(request.user, codes if isinstance(codes, list) else None)
+        return Response(status=status.HTTP_204_NO_CONTENT)

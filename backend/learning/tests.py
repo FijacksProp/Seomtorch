@@ -1,12 +1,14 @@
 import uuid
+from datetime import timedelta
 
 from django.contrib.auth import get_user_model
 from django.core.management import call_command
 from django.test import TestCase
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient, APITestCase
+from django.utils import timezone
 
-from .models import Attempt, Bookmark, Question, UserStats
+from .models import Attempt, Bookmark, Challenge, ChallengeParticipant, PracticeSession, Question, UserBadge, UserStats
 
 class LearningApiTests(APITestCase):
     @classmethod
@@ -125,6 +127,85 @@ class LearningApiTests(APITestCase):
         self.assertEqual(report.data["reason"], "wrong_key")
         duplicate = self.client.post(f"/api/questions/{question.external_id}/report/", {"reason": "wrong_key"}, format="json")
         self.assertEqual(duplicate.status_code, 409)
+
+    def test_completed_session_awards_first_step_badge(self):
+        session = PracticeSession.objects.create(user=self.user, total_questions=10, question_ids=[])
+        response = self.client.post(f"/api/sessions/{session.id}/complete/", {}, format="json")
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("First Step", [item["name"] for item in response.data["badges_earned"]])
+        achievements = self.client.get("/api/achievements/")
+        first_step = next(item for item in achievements.data["badges"] if item["code"] == "first-step")
+        self.assertTrue(first_step["earned"])
+        self.assertTrue(UserBadge.objects.filter(user=self.user, badge__code="first-step").exists())
+
+    def test_friend_challenge_freezes_paper_and_hides_group_scores_until_everyone_finishes(self):
+        friend = get_user_model().objects.create_user(email="friend@example.com", username="studyfriend", password="Securepass934!")
+        friend_token = Token.objects.create(user=friend)
+        starts_at = timezone.now() + timedelta(minutes=5)
+        ends_at = starts_at + timedelta(hours=2)
+        create = self.client.post("/api/challenges/", {
+            "title": "Saturday English Circle", "subject": "english", "question_count": 10,
+            "duration_minutes": 15, "starts_at": starts_at.isoformat(), "ends_at": ends_at.isoformat(),
+            "participant_ids": [friend.public_id],
+        }, format="json")
+        self.assertEqual(create.status_code, 201)
+        challenge = Challenge.objects.get(id=create.data["id"])
+        self.assertEqual(len(challenge.question_payload), 10)
+        self.assertIn("correct", challenge.question_payload[0])
+
+        friend_client = APIClient()
+        friend_client.credentials(HTTP_AUTHORIZATION=f"Token {friend_token.key}")
+        accepted = friend_client.post(f"/api/challenges/{challenge.id}/respond/", {"response": "accept"}, format="json")
+        self.assertEqual(accepted.status_code, 200)
+        challenge.starts_at = timezone.now() - timedelta(minutes=1)
+        challenge.save(update_fields=("starts_at",))
+        started = friend_client.post(f"/api/challenges/{challenge.id}/start/", {}, format="json")
+        self.assertEqual(started.status_code, 201)
+        self.assertNotIn("correct", started.data["questions"][0])
+        self.assertNotIn("explanation", started.data["questions"][0])
+        snapshot = challenge.question_payload[0]
+        answer = friend_client.post("/api/attempts/", {
+            "question_id": snapshot["external_id"], "selected_index": snapshot["correct"],
+            "client_id": str(uuid.uuid4()), "session_id": started.data["session_id"],
+        }, format="json")
+        self.assertTrue(answer.data["accepted"])
+        self.assertNotIn("correct", answer.data)
+        self.assertNotIn("correct_index", answer.data)
+        self.assertTrue(Attempt.objects.get(session_id=started.data["session_id"]).is_correct)
+        resumed = friend_client.post(f"/api/challenges/{challenge.id}/start/", {}, format="json")
+        self.assertEqual(resumed.data["answers"][snapshot["external_id"]], snapshot["correct"])
+        duplicate_answer = friend_client.post("/api/attempts/", {
+            "question_id": snapshot["external_id"], "selected_index": snapshot["correct"],
+            "client_id": str(uuid.uuid4()), "session_id": started.data["session_id"],
+        }, format="json")
+        self.assertEqual(duplicate_answer.status_code, 409)
+        completed = friend_client.post(f"/api/sessions/{started.data['session_id']}/complete/", {}, format="json")
+        self.assertEqual(completed.status_code, 200)
+        detail = friend_client.get(f"/api/challenges/{challenge.id}/")
+        self.assertFalse(detail.data["results_unlocked"])
+        self.assertEqual(detail.data["results"], [])
+        self.assertEqual(detail.data["my_result"]["correct"], 1)
+        creator_started = self.client.post(f"/api/challenges/{challenge.id}/start/", {}, format="json")
+        self.client.post(f"/api/sessions/{creator_started.data['session_id']}/complete/", {}, format="json")
+        unlocked = friend_client.get(f"/api/challenges/{challenge.id}/")
+        self.assertTrue(unlocked.data["results_unlocked"])
+        self.assertEqual(len(unlocked.data["results"]), 2)
+        self.assertEqual(unlocked.data["my_result"]["bonus_xp"], 15)
+        self.assertEqual(UserStats.objects.get(user=friend).xp, 20)
+
+    def test_challenge_invitation_can_be_declined(self):
+        friend = get_user_model().objects.create_user(email="decline@example.com", username="decliner", password="Securepass934!")
+        token = Token.objects.create(user=friend)
+        starts_at = timezone.now() + timedelta(minutes=10)
+        response = self.client.post("/api/challenges/", {
+            "title": "Quick Group Paper", "subject": "all", "question_count": 12,
+            "duration_minutes": 10, "starts_at": starts_at.isoformat(),
+            "ends_at": (starts_at + timedelta(hours=3)).isoformat(), "participant_ids": [friend.public_id],
+        }, format="json")
+        other = APIClient(); other.credentials(HTTP_AUTHORIZATION=f"Token {token.key}")
+        declined = other.post(f"/api/challenges/{response.data['id']}/respond/", {"response": "decline"}, format="json")
+        self.assertEqual(declined.status_code, 200)
+        self.assertEqual(declined.data["my_status"], ChallengeParticipant.Status.DECLINED)
 
 class MonitorPermissionTests(TestCase):
     def test_student_cannot_access_monitor(self):

@@ -15,7 +15,7 @@ Open the localhost address printed by the server. A local server is required bec
 
 - Vercel hosts the installable student PWA.
 - Render hosts the Django API and professional monitoring centre.
-- PostgreSQL is the source of truth for accounts, attempts, XP, streaks, sessions and bookmarks.
+- Supabase PostgreSQL is the source of truth for accounts, attempts, XP, streaks, sessions, challenges, badges and bookmarks.
 - IndexedDB keeps the student experience usable offline and queues pending attempts.
 
 ## Deploy the student app to Vercel
@@ -26,9 +26,7 @@ The frontend expects the Render service at `https://seomtorch.onrender.com`. If 
 
 ## Deploy the backend to Render
 
-Create a PostgreSQL database and a Python Web Service manually in Render. Set the service root directory to `backend`, the build command to `bash build.sh`, and the start command to `bash start.sh`. The startup script performs the idempotent migrations, question import and initial administrator setup required on Render's free tier. See `backend/README.md` for the environment variables and exact settings.
-
-Render's Free PostgreSQL database expires after 30 days and has no backups. Use it to validate the platform, then move to a persistent paid database before storing records you cannot afford to lose.
+Create a Python Web Service manually in Render and connect it to Supabase PostgreSQL. Set the service root directory to `backend`, the build command to `bash build.sh`, and the start command to `bash start.sh`. The startup script runs migrations and initial administrator setup before opening the web port; question-bank initialization runs in the background. See `backend/README.md` and `backend/SUPABASE.md` for the environment variables and exact settings.
 
 ## Architecture
 
@@ -45,6 +43,9 @@ Render's Free PostgreSQL database expires after 30 days and has no backups. Use 
 - Full student Profile with synchronized account stats and embedded searchable Guide
 - Synchronized Saved for review library with offline retries and timed review sessions
 - Exam-style numbered navigation, answer locking, start/finish confirmations and PWA installation
+- Private scheduled friend challenges with invitations, frozen shared papers, server-controlled timers and supportive group results
+- Extensible server-awarded achievements with progress tracking and animated badge unlocks
+- Branded, reduced-motion-aware application pre-loader
 - JSON progress export and import
 
 To scale the bank, add valid question objects to the JSON file or split it into packs and list those packs in a small manifest. Question IDs must remain stable so historical attempts continue to match the correct question.

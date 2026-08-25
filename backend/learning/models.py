@@ -74,6 +74,7 @@ class PracticeSession(models.Model):
         NORMAL = "normal", "Normal Practice"
         DAILY = "daily", "Daily Sprint"
         SAVED = "saved", "Saved Review"
+        CHALLENGE = "challenge", "Friend Challenge"
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="practice_sessions")
@@ -202,6 +203,10 @@ class ActivityEvent(models.Model):
         SESSION_COMPLETED = "session_completed", "Session completed"
         ANSWERED = "answered", "Question answered"
         BOOKMARKED = "bookmarked", "Question bookmarked"
+        BADGE_EARNED = "badge_earned", "Badge earned"
+        CHALLENGE_CREATED = "challenge_created", "Challenge created"
+        CHALLENGE_RESPONDED = "challenge_responded", "Challenge responded"
+        CHALLENGE_COMPLETED = "challenge_completed", "Challenge completed"
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="activity_events")
     event_type = models.CharField(max_length=30, choices=Type.choices)
@@ -211,3 +216,93 @@ class ActivityEvent(models.Model):
     class Meta:
         ordering = ("-created_at",)
         indexes = [models.Index(fields=("user", "-created_at")), models.Index(fields=("event_type", "-created_at"))]
+
+
+class BadgeDefinition(models.Model):
+    code = models.SlugField(max_length=60, unique=True)
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=240)
+    category = models.CharField(max_length=30)
+    tier = models.CharField(max_length=20, default="field")
+    target = models.PositiveIntegerField(default=1)
+    position = models.PositiveSmallIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ("position", "name")
+
+    def __str__(self):
+        return self.name
+
+
+class UserBadge(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="earned_badges")
+    badge = models.ForeignKey(BadgeDefinition, on_delete=models.PROTECT, related_name="awards")
+    earned_at = models.DateTimeField(auto_now_add=True)
+    seen_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ("-earned_at",)
+        constraints = [models.UniqueConstraint(fields=("user", "badge"), name="unique_user_badge")]
+
+
+class Challenge(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="created_challenges")
+    title = models.CharField(max_length=100)
+    message = models.CharField(max_length=280, blank=True)
+    subject = models.ForeignKey(Subject, on_delete=models.PROTECT, related_name="challenges", null=True, blank=True)
+    subject_label = models.CharField(max_length=120)
+    question_payload = models.JSONField(default=list)
+    question_count = models.PositiveSmallIntegerField()
+    duration_minutes = models.PositiveSmallIntegerField()
+    starts_at = models.DateTimeField()
+    ends_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    cancelled_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ("-created_at",)
+        indexes = [models.Index(fields=("starts_at", "ends_at"))]
+
+    @property
+    def results_unlocked(self):
+        if timezone.now() >= self.ends_at:
+            return True
+        return not self.participants.exclude(status__in=(ChallengeParticipant.Status.COMPLETED, ChallengeParticipant.Status.DECLINED)).exists()
+
+    def __str__(self):
+        return self.title
+
+
+class ChallengeParticipant(models.Model):
+    class Status(models.TextChoices):
+        INVITED = "invited", "Invited"
+        ACCEPTED = "accepted", "Accepted"
+        DECLINED = "declined", "Declined"
+        STARTED = "started", "Started"
+        COMPLETED = "completed", "Completed"
+
+    challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE, related_name="participants")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="challenge_participations")
+    status = models.CharField(max_length=12, choices=Status.choices, default=Status.INVITED)
+    practice_session = models.OneToOneField(PracticeSession, on_delete=models.SET_NULL, null=True, blank=True, related_name="challenge_participation")
+    invited_at = models.DateTimeField(auto_now_add=True)
+    responded_at = models.DateTimeField(null=True, blank=True)
+    started_at = models.DateTimeField(null=True, blank=True)
+    deadline_at = models.DateTimeField(null=True, blank=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
+    correct_answers = models.PositiveSmallIntegerField(default=0)
+    answered_questions = models.PositiveSmallIntegerField(default=0)
+    duration_seconds = models.PositiveIntegerField(null=True, blank=True)
+    bonus_xp = models.PositiveSmallIntegerField(default=0)
+    bonus_awarded_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ("invited_at",)
+        constraints = [models.UniqueConstraint(fields=("challenge", "user"), name="unique_challenge_participant")]
+        indexes = [models.Index(fields=("user", "status"))]
+
+    @property
+    def accuracy(self):
+        return round(self.correct_answers / self.challenge.question_count * 100) if self.challenge.question_count else 0

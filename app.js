@@ -30,6 +30,7 @@ const ICONS = {
   home: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20H4Z"/><path d="M9 20v-6h6v6"/></svg>',
   practice: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M6 3.5h9l3 3V20.5H6Z"/><path d="M15 3.5v4h4M9 12h6M9 16h6"/></svg>',
   progress: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
+  challenges: '<svg class="nav-icon" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 20a4 4 0 0 1 8 0"/></svg>',
   profile: '<svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></svg>',
 };
 
@@ -57,6 +58,14 @@ let deferredInstallPrompt = null;
 let authMode = "signin";
 let selectedPracticeMode = "timed"; // 'timed' or 'normal'
 let dailySprintCompleted = localStorage.getItem("seomtorch-sprint-" + new Date().toISOString().slice(0,10)) === "done";
+let challengesData = null;
+let selectedChallengeId = null;
+let challengeComposerOpen = false;
+let challengeInvitees = [];
+let achievementsData = null;
+let badgeCelebrationQueue = [];
+let badgeCelebrationActive = false;
+let badgeCelebrationKnown = new Set();
 
 window.addEventListener("beforeinstallprompt", event => {
   event.preventDefault(); deferredInstallPrompt = event;
@@ -181,6 +190,7 @@ function navigate(nextRoute) {
     return;
   }
   if (route === "session" && activeSession && !activeSession.started) activeSession = null;
+  if (nextRoute === "challenges") { selectedChallengeId = null; challengesData = null; }
   route = nextRoute;
   if (nextRoute !== "practice") selectedSubject = null;
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -190,7 +200,7 @@ function navigate(nextRoute) {
 function shell(content) {
   const xp = xpState();
   const nav = [
-    ["home", "Home"], ["practice", "Practice"], ["progress", "Progress"], ["profile", "Profile"]
+    ["home", "Home"], ["practice", "Practice"], ["challenges", "Challenges"], ["progress", "Progress"], ["profile", "Profile"]
   ];
   return `<div class="layout">
     <aside class="sidebar">
@@ -264,10 +274,12 @@ function renderHome() {
   const recent = lastTopic();
   const greeting = new Date().getHours() < 12 ? "Good morning" : new Date().getHours() < 17 ? "Good afternoon" : "Good evening";
   const todayAttempts = attempts.filter(item => new Date(item.timestamp).toISOString().slice(0, 10) === today());
+  const urgentChallenge = challengesData?.find(item => item.can_respond) || challengesData?.find(item => item.can_start);
   const content = `<section class="page">
     <p class="eyebrow">Your study desk</p>
     <h1>${greeting}, ${escapeHtml(firstName())}.</h1>
     <p class="lede">A clear view of what you have done, where to focus, and the next useful step.</p>
+    ${urgentChallenge ? `<article class="challenge-nudge"><div><span>${urgentChallenge.can_respond ? "Challenge invitation" : urgentChallenge.my_status === "started" ? "Attempt in progress" : "Challenge ready"}</span><h2>${escapeHtml(urgentChallenge.title)}</h2><p>${escapeHtml(urgentChallenge.creator.username)} · ${urgentChallenge.question_count} questions · ${urgentChallenge.duration_minutes} minutes</p></div><button class="button" id="open-urgent-challenge">${urgentChallenge.can_respond ? "Review invitation" : urgentChallenge.my_status === "started" ? "Continue attempt" : "Open challenge"} →</button></article>` : ""}
     <article class="continue-card">
       <div><span class="label">${recent ? "Continue where you stopped" : "Begin your preparation"}</span><h2>${recent ? escapeHtml(recent.topic) : "Start with a focused session"}</h2><p>${recent ? `${subjectName(recent.subject)} · personalised question selection` : "Choose a subject and work through a short set of questions."}</p></div>
       <button class="button accent" id="continue-study">${recent ? "Continue studying" : "Choose a subject"}<span aria-hidden="true">→</span></button>
@@ -291,6 +303,7 @@ function renderHome() {
   bindShell();
   document.querySelector("#continue-study").addEventListener("click", () => { route = "practice"; selectedSubject = recent?.subject || null; render(); });
   document.querySelector("#start-sprint").addEventListener("click", () => { if (!dailySprintCompleted) { route = "daily-sprint"; render(); } });
+  document.querySelector("#open-urgent-challenge")?.addEventListener("click", () => { selectedChallengeId = urgentChallenge.id; route = "challenges"; renderChallenges(); });
   document.querySelectorAll("[data-subject]").forEach(button => button.addEventListener("click", () => { route = "practice"; selectedSubject = button.dataset.subject; render(); }));
 }
 
@@ -517,7 +530,7 @@ function renderSession() {
   const content = `<section class="page session-page"><aside class="question-navigator"><div><p class="eyebrow">Question navigator</p><strong>${confirmed} of ${activeSession.queue.length} answered</strong><span>Select any number to move between questions.</span></div><div class="question-number-grid">${activeSession.answers.map((item, index) => `<button class="question-number ${index === activeSession.index ? "current" : ""} ${item.selected !== null ? "selected" : ""}" data-question-index="${index}" aria-label="Question ${index + 1}${item.selected !== null ? ", selected" : ", unanswered"}">${index + 1}</button>`).join("")}</div><div class="navigator-key"><span><i class="selected"></i>Selected</span><span><i class="unanswered"></i>Unanswered</span></div><button class="button outline finish-session" id="finish-session">Finish session</button></aside><div class="session-workspace">${activeSession.sections.length > 1 ? `<div class="active-section"><span>Section ${sectionIndex + 1} of ${activeSession.sections.length}</span><strong>${escapeHtml(section.name)}</strong><small>${activeSession.index - section.start + 1} of ${section.count} in this section</small></div>` : ""}<div class="question-header"><div class="question-topline"><span>${subjectName(question.subject)} · ${escapeHtml(question.topic)}${question.questionYear ? ` · ${question.questionYear} source` : ""}</span><div class="session-status"><span>${activeSession.index + 1} of ${activeSession.queue.length}</span><span class="session-clock" role="timer" aria-label="Session time remaining"><small>Time left</small><strong id="session-timer">${formatTime(Math.ceil((activeSession.deadline - Date.now()) / 1000))}</strong></span></div></div><div class="question-progress"><i style="width:${confirmed / activeSession.queue.length * 100}%"></i></div></div><article class="question-paper" style="${passage ? 'display:flex; flex-direction:column; gap:1rem;' : ''}">
   ${passage ? `<details class="passage-details"><summary>View reading passage</summary><div class="passage-content">${renderMath(escapeHtml(passage))}</div></details>` : ""}
   ${imageUrl ? `<img class="question-image" src="${escapeHtml(imageUrl)}" alt="Illustration for this question" loading="lazy">` : ""}
-  <div><p class="eyebrow">Question ${String(activeSession.index + 1).padStart(2, "0")}</p><h2>${renderMath(escapeHtml(question.text))}</h2></div><div class="options">${question.options.map((option, index) => { let state = ""; if (answer.confirmed && index === question.correct) state = "correct"; else if (answer.confirmed && index === answer.selected) state = "incorrect"; else if (!answer.confirmed && index === answer.selected) state = "selected"; return `<button class="option ${state}" data-option="${index}" ${answer.confirmed ? "disabled" : ""}><span class="option-letter">${String.fromCharCode(65 + index)}</span><span>${renderMath(escapeHtml(option))}</span></button>`; }).join("")}</div>${answer.confirmed ? `<div class="feedback"><div class="feedback-head"><div class="feedback-label ${answer.correct ? "" : "wrong"}">${answer.correct ? "Correct" : "Review this"}</div>${answer.correct ? '<span class="xp-earned">+5 XP</span>' : ""}</div><p>${renderMath(escapeHtml(question.explanation))}</p></div>` : answer.selected !== null ? '<p class="selection-note">Your selection is not recorded until you finish the session.</p>' : ""}<div class="question-actions"><button class="button outline" id="previous-question" ${activeSession.index === 0 ? "disabled" : ""}>← Previous</button><button class="button outline" id="bookmark">${isBookmarked ? "Remove from saved" : "Save for review"}</button><button class="button" id="next-question">${activeSession.index === activeSession.queue.length - 1 ? "Review session" : answer.selected !== null ? "Next question →" : "Skip for now →"}</button></div></article></div></section>`;
+  <div><p class="eyebrow">Question ${String(activeSession.index + 1).padStart(2, "0")}</p><h2>${renderMath(escapeHtml(question.text))}</h2></div><div class="options">${question.options.map((option, index) => { let state = ""; if (activeSession.mode === "challenge" && answer.confirmed && index === answer.selected) state = "selected"; else if (answer.confirmed && index === question.correct) state = "correct"; else if (answer.confirmed && index === answer.selected) state = "incorrect"; else if (!answer.confirmed && index === answer.selected) state = "selected"; return `<button class="option ${state}" data-option="${index}" ${answer.confirmed ? "disabled" : ""}><span class="option-letter">${String.fromCharCode(65 + index)}</span><span>${renderMath(escapeHtml(option))}</span></button>`; }).join("")}</div>${answer.confirmed && activeSession.mode !== "challenge" ? `<div class="feedback"><div class="feedback-head"><div class="feedback-label ${answer.correct ? "" : "wrong"}">${answer.correct ? "Correct" : "Review this"}</div>${answer.correct ? '<span class="xp-earned">+5 XP</span>' : ""}</div><p>${renderMath(escapeHtml(question.explanation))}</p></div>` : answer.confirmed ? '<p class="selection-note">This answer was already recorded and is locked.</p>' : answer.selected !== null ? '<p class="selection-note">Your selection is not recorded until you finish the session.</p>' : ""}<div class="question-actions"><button class="button outline" id="previous-question" ${activeSession.index === 0 ? "disabled" : ""}>← Previous</button><button class="button outline" id="bookmark">${isBookmarked ? "Remove from saved" : "Save for review"}</button><button class="button" id="next-question">${activeSession.index === activeSession.queue.length - 1 ? "Review session" : answer.selected !== null ? "Next question →" : "Skip for now →"}</button></div></article></div></section>`;
   app.innerHTML = shell(content); bindShell();
   runSessionTimer();
   document.querySelectorAll("[data-question-index]").forEach(button => button.addEventListener("click", () => goToQuestion(Number(button.dataset.questionIndex))));
@@ -538,7 +551,7 @@ function selectAnswer(selected) {
   if (answer.confirmed) return;
   const question = activeSession.queue[activeSession.index];
   answer.selected = selected;
-  if (activeSession.mode === 'timed' || activeSession.mode === 'sprint') {
+  if (activeSession.mode === 'timed' || activeSession.mode === 'sprint' || activeSession.mode === 'challenge') {
     render(); // Deferred grading
   } else {
     // Normal mode: immediate feedback
@@ -596,8 +609,9 @@ async function syncAttemptRecord(attempt) {
   if (!attempt.clientId) attempt.clientId = crypto.randomUUID();
   try {
     const response = await api.syncAttempt(authToken, { question_id: attempt.questionId, selected_index: attempt.selected, client_id: attempt.clientId, session_id: attempt.sessionId || null, duration_ms: attempt.durationMs || null });
-    attempt.synced = true; attempt.correct = response.correct; await put("attempts", attempt);
+    attempt.synced = true; if (typeof response.correct === "boolean") attempt.correct = response.correct; await put("attempts", attempt);
     applyRemoteStats(response.stats); await put("profile", profile);
+    handleEarnedBadges(response.badges_earned || []);
   } catch (error) { if (error instanceof ApiError && error.status >= 400 && error.status < 500 && error.status !== 401) { attempt.syncError = error.message; await put("attempts", attempt); } }
 }
 
@@ -699,9 +713,10 @@ async function performBookmarkToggle(questionId) {
 
 function renderResult() {
   clearInterval(sessionTimer);
+  if (activeSession.mode === "challenge") return renderChallengeSubmission();
   if (activeSession.remoteId && !activeSession.reportedComplete) {
     activeSession.reportedComplete = true;
-    syncPendingAttempts().then(() => api.completeSession(authToken, activeSession.remoteId)).catch(() => { activeSession.reportedComplete = false; });
+    syncPendingAttempts().then(() => api.completeSession(authToken, activeSession.remoteId)).then(response => handleEarnedBadges(response.badges_earned || [])).catch(() => { activeSession.reportedComplete = false; });
   }
   if (activeSession.mode === "sprint" && !dailySprintCompleted) {
     dailySprintCompleted = true;
@@ -716,6 +731,40 @@ function renderResult() {
   app.innerHTML = shell(content); bindShell();
   document.querySelector("#return-practice").addEventListener("click", () => { activeSession = null; route = "practice"; render(); });
   document.querySelector("#retry-session")?.addEventListener("click", () => startSession(activeSession.subject, activeSession.topic, activeSession.requestedCount, activeSession.durationMinutes, activeSession.mode));
+}
+
+function renderChallengeSubmission() {
+  const result = activeSession.challengeResult;
+  const content = result ? `<section class="page page-narrow"><div class="challenge-submitted"><span class="submission-mark"><i></i><i></i><i></i></span><p class="eyebrow">Challenge submitted</p><h1>${escapeHtml(activeSession.challengeTitle)}</h1><div class="submitted-score"><strong>${result.my_result?.correct ?? activeSession.correct}<small> / ${result.question_count}</small></strong><span>${result.my_result?.accuracy ?? Math.round(activeSession.correct / result.question_count * 100)}% accuracy</span></div><p class="lede">${result.results_unlocked ? "The private group result is ready. See how everyone progressed and the recognition each participant earned." : "Your work is recorded. Other scores remain hidden until everyone finishes or the challenge deadline passes."}</p><div class="button-row"><button class="button" id="view-challenge-result">${result.results_unlocked ? "View group result" : "Return to challenges"} →</button><button class="button outline" data-route="home">Return home</button></div></div></section>` : `<section class="page page-narrow"><div class="challenge-submitted sending"><span class="submission-mark"><i></i><i></i><i></i></span><p class="eyebrow">Securing your paper</p><h1>Submitting your challenge.</h1><p class="lede">Your confirmed answers are being synchronized before the result is sealed.</p></div></section>`;
+  app.innerHTML = shell(content); bindShell();
+  document.querySelector("#view-challenge-result")?.addEventListener("click", () => { challengesData = challengesData ? challengesData.map(item => item.id === result.id ? result : item) : [result]; selectedChallengeId = result.id; activeSession = null; route = "challenges"; renderChallenges(); });
+  if (result || activeSession.challengeCompletionStarted) return;
+  activeSession.challengeCompletionStarted = true;
+  syncPendingAttempts()
+    .then(() => api.completeSession(authToken, activeSession.remoteId))
+    .then(response => { handleEarnedBadges(response.badges_earned || []); return api.challenge(authToken, activeSession.challengeId); })
+    .then(challenge => { activeSession.challengeResult = challenge; applyRemoteStats(challenge.stats); put("profile", profile); challengesData = null; achievementsData = null; renderChallengeSubmission(); })
+    .catch(() => { activeSession.challengeCompletionStarted = false; showToast("Your paper is saved locally. Reconnect to submit it."); });
+}
+
+function handleEarnedBadges(badges) {
+  if (!badges?.length) return;
+  const fresh = badges.filter(item => !badgeCelebrationKnown.has(item.code));
+  fresh.forEach(item => badgeCelebrationKnown.add(item.code));
+  badgeCelebrationQueue.push(...fresh);
+  achievementsData = null;
+  showNextBadgeCelebration();
+}
+
+function showNextBadgeCelebration() {
+  if (badgeCelebrationActive || !badgeCelebrationQueue.length) return;
+  badgeCelebrationActive = true;
+  const badge = badgeCelebrationQueue.shift();
+  const overlay = document.createElement("div");
+  overlay.className = "badge-unlock-backdrop";
+  overlay.innerHTML = `<section class="badge-unlock" role="dialog" aria-modal="true" aria-labelledby="badge-unlock-title"><div class="badge-unlock-seal ${escapeHtml(badge.tier)}"><span>${escapeHtml(badge.name.split(/\s+/).map(word => word[0]).slice(0, 2).join(""))}</span><i></i></div><p class="eyebrow">Achievement earned</p><h2 id="badge-unlock-title">${escapeHtml(badge.name)}</h2><p>${escapeHtml(badge.description)}</p><button class="button">Keep going</button></section>`;
+  document.body.appendChild(overlay);
+  overlay.querySelector("button").addEventListener("click", async () => { overlay.classList.add("leaving"); await api.markBadgesSeen(authToken, [badge.code]).catch(() => {}); setTimeout(() => { overlay.remove(); badgeCelebrationActive = false; showNextBadgeCelebration(); }, 220); });
 }
 
 function renderProgress() {
@@ -736,8 +785,147 @@ function renderProfile(filter = "") {
   const groups = [...new Set(matches.map(item => item.group))];
   const xp = xpState();
   const joined = currentUser?.date_joined ? new Date(currentUser.date_joined).toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) : "—";
-  const content = `<section class="page profile-page"><div class="profile-hero"><div class="profile-monogram">${initials()}</div><div><p class="eyebrow">Student profile</p><h1>${escapeHtml(currentUser?.username || profile.name)}</h1><p>${escapeHtml(currentUser?.email || profile.email)} · Member since ${joined}</p></div><button class="button outline" id="refresh-account">Refresh account</button></div><div class="profile-grid"><section class="profile-card identity-card"><span class="card-label">Student ID</span><strong>${escapeHtml(currentUser?.public_id || "—")}</strong><p>Use this six-character ID when an administrator needs to find your record.</p></section><section class="profile-card level-card"><span class="card-label">Level ${xp.level}</span><strong>${xp.xp} <small>XP</small></strong><div class="xp-track light"><i style="width:${xp.percent}%"></i></div><p>${xp.remaining} XP until level ${xp.level + 1}</p></section></div><div class="metric-strip four profile-metrics"><div class="metric"><strong>${attempts.length}</strong><span>answers recorded</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> days</small></strong><span>current streak</span></div><div class="metric"><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>best streak</span></div></div><div class="section-head"><h2>Subject record</h2><p>Synchronized account history</p></div><div class="profile-subjects">${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<article><span>${subject.name}</span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong><small>${stat.count} answer${stat.count === 1 ? "" : "s"}</small></article>`; }).join("")}</div><section class="settings-panel"><p class="eyebrow">Account data</p><h2>Portable, private and recoverable.</h2><p class="lede">The server keeps the authoritative account record. This device stores an offline copy and queues answers whenever the connection drops.</p><div class="button-row"><button class="button" id="export-data">Export backup</button><label class="button outline" for="import-data">Import backup</label><input class="file-input" id="import-data" type="file" accept="application/json"><button class="button outline" id="clear-cache">Refresh device cache</button><button class="button danger" id="sign-out">Sign out</button></div></section><section class="settings-panel guide-section"><p class="eyebrow">Guide and support</p><h2>Answers, without the noise.</h2><p class="lede">Quick guidance about practice, progress and account data.</p><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="faq-search" value="${escapeHtml(filter)}" placeholder="Search help topics" aria-label="Search help topics"></div><div id="faq-results">${groups.length ? groups.map(group => `<section class="faq-group"><h3>${group}</h3>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("") : '<div class="empty">No help entries match that search.</div>'}</div></section></section>`;
+  const content = `<section class="page profile-page"><div class="profile-hero"><div class="profile-monogram">${initials()}</div><div><p class="eyebrow">Student profile</p><h1>${escapeHtml(currentUser?.username || profile.name)}</h1><p>${escapeHtml(currentUser?.email || profile.email)} · Member since ${joined}</p></div><button class="button outline" id="refresh-account">Refresh account</button></div><div class="profile-grid"><section class="profile-card identity-card"><span class="card-label">Student ID</span><strong>${escapeHtml(currentUser?.public_id || "—")}</strong><p>Share this ID with people you know when they invite you to a challenge.</p></section><section class="profile-card level-card"><span class="card-label">Level ${xp.level}</span><strong>${xp.xp} <small>XP</small></strong><div class="xp-track light"><i style="width:${xp.percent}%"></i></div><p>${xp.remaining} XP until level ${xp.level + 1}</p></section></div><div class="metric-strip four profile-metrics"><div class="metric"><strong>${attempts.length}</strong><span>answers recorded</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> days</small></strong><span>current streak</span></div><div class="metric"><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>best streak</span></div></div>${renderAchievementCabinet()}<div class="section-head"><h2>Subject record</h2><p>Synchronized account history</p></div><div class="profile-subjects">${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<article><span>${subject.name}</span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong><small>${stat.count} answer${stat.count === 1 ? "" : "s"}</small></article>`; }).join("")}</div><section class="settings-panel"><p class="eyebrow">Account data</p><h2>Portable, private and recoverable.</h2><p class="lede">The server keeps the authoritative account record. This device stores an offline copy and queues answers whenever the connection drops.</p><div class="button-row"><button class="button" id="export-data">Export backup</button><label class="button outline" for="import-data">Import backup</label><input class="file-input" id="import-data" type="file" accept="application/json"><button class="button outline" id="clear-cache">Refresh device cache</button><button class="button danger" id="sign-out">Sign out</button></div></section><section class="settings-panel guide-section"><p class="eyebrow">Guide and support</p><h2>Answers, without the noise.</h2><p class="lede">Quick guidance about practice, progress and account data.</p><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="faq-search" value="${escapeHtml(filter)}" placeholder="Search help topics" aria-label="Search help topics"></div><div id="faq-results">${groups.length ? groups.map(group => `<section class="faq-group"><h3>${group}</h3>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("") : '<div class="empty">No help entries match that search.</div>'}</div></section></section>`;
   app.innerHTML = shell(content); bindShell(); bindProfile();
+  if (!achievementsData) loadAchievements(filter);
+}
+
+function localDateTimeValue(date) {
+  const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+  return local.toISOString().slice(0, 16);
+}
+
+function challengeTime(value) {
+  return new Date(value).toLocaleString(undefined, { weekday: "short", day: "numeric", month: "short", hour: "numeric", minute: "2-digit" });
+}
+
+function challengeStatusLabel(status) {
+  return ({ invited: "Awaiting your reply", accepted: "Ready", declined: "Declined", started: "In progress", completed: "Completed" })[status] || status;
+}
+
+function challengeCard(item) {
+  const participantCount = item.participants.filter(person => person.status !== "declined").length;
+  const urgent = item.can_respond || item.can_start;
+  return `<button class="challenge-card ${urgent ? "urgent" : ""}" data-challenge-id="${item.id}"><div class="challenge-card-top"><span class="challenge-state ${item.state}">${item.can_respond ? "Invitation" : item.state}</span><span>${participantCount} participant${participantCount === 1 ? "" : "s"}</span></div><h3>${escapeHtml(item.title)}</h3><p>By ${escapeHtml(item.creator.username)} · ${escapeHtml(item.subject_label)}</p><div class="challenge-facts"><span><strong>${item.question_count}</strong> questions</span><span><strong>${item.duration_minutes}</strong> minutes</span></div><div class="challenge-card-foot"><span>${challengeStatusLabel(item.my_status)}</span><strong>${item.state === "upcoming" ? challengeTime(item.starts_at) : item.state === "open" ? `Closes ${challengeTime(item.ends_at)}` : "View result"} →</strong></div></button>`;
+}
+
+function renderChallengeComposer() {
+  const starts = new Date(Date.now() + 30 * 60000);
+  const ends = new Date(Date.now() + 24 * 60 * 60000);
+  return `<section class="challenge-composer"><div class="composer-intro"><p class="eyebrow">Create a private challenge</p><h2>Set the paper. Invite your people.</h2><p>Everyone receives the same frozen question set. Each accepted friend gets one timed attempt inside your chosen window.</p></div><form id="challenge-form"><div class="challenge-form-grid"><div class="field"><label for="challenge-title">Challenge title</label><input id="challenge-title" name="title" maxlength="100" value="Weekend study circle" required></div><div class="field"><label for="challenge-subject">Focus</label><select id="challenge-subject" name="subject"><option value="all">All subjects</option>${SUBJECTS.map(subject => `<option value="${subject.id}">${subject.name}</option>`).join("")}</select></div><div class="field"><label for="challenge-count">Questions</label><input id="challenge-count" name="question_count" type="number" min="10" max="100" value="20" required></div><div class="field"><label for="challenge-duration">Timer in minutes</label><input id="challenge-duration" name="duration_minutes" type="number" min="1" max="180" value="20" required></div><div class="field"><label for="challenge-start">Opens</label><input id="challenge-start" name="starts_at" type="datetime-local" value="${localDateTimeValue(starts)}" required></div><div class="field"><label for="challenge-end">Completion deadline</label><input id="challenge-end" name="ends_at" type="datetime-local" value="${localDateTimeValue(ends)}" required></div></div><div class="field"><label for="challenge-message">Invitation note <span>optional</span></label><textarea id="challenge-message" name="message" maxlength="280" placeholder="A short note for the group"></textarea></div><div class="invite-builder"><label for="friend-id">Invite with Student ID</label><div><input id="friend-id" maxlength="6" autocomplete="off" placeholder="e.g. A7B2Q9"><button class="button outline" type="button" id="add-friend">Add friend</button></div><small>Invite up to nine registered friends you know.</small><div class="invitee-list">${challengeInvitees.length ? challengeInvitees.map(item => `<span>${escapeHtml(item.username)} <small>${item.public_id}</small><button type="button" data-remove-invitee="${item.public_id}" aria-label="Remove ${escapeHtml(item.username)}">×</button></span>`).join("") : '<p>No friends added yet.</p>'}</div></div><div id="challenge-error" class="auth-error" role="alert"></div><div class="button-row"><button class="button" type="submit">Review challenge →</button><button class="button outline" type="button" id="close-composer">Cancel</button></div></form></section>`;
+}
+
+function renderChallengeDetail(item) {
+  const statusCopy = item.results_unlocked ? "The group result is ready." : item.my_status === "completed" ? "Your paper is submitted. Group results unlock when everyone responds and finishes, or when the deadline passes." : item.state === "upcoming" ? `This challenge opens ${challengeTime(item.starts_at)}.` : item.state === "open" ? "Your attempt timer starts only when you confirm Begin challenge." : "This challenge window is closed.";
+  const myResult = item.my_result ? `<section class="my-challenge-result"><p class="eyebrow">Your work</p><strong>${item.my_result.correct}<small> / ${item.my_result.total}</small></strong><div><h3>${item.my_result.accuracy}% accuracy${item.my_result.bonus_xp ? ` · +${item.my_result.bonus_xp} challenge XP` : ""}</h3><p>${item.my_result.change_from_average === null ? "Your first personal comparison will appear after more practice." : item.my_result.change_from_average >= 0 ? `${item.my_result.change_from_average} points above your recent average.` : "Use the challenge review to choose your next focus."}</p></div></section>` : "";
+  const resultBoard = item.results_unlocked && item.results.length ? `<section class="challenge-results"><div class="section-head"><div><p class="eyebrow">Private group result</p><h2>Challenge Results</h2></div><p>Accuracy first. Time breaks ties only.</p></div>${item.results.map(row => `<article class="result-person ${row.public_id === currentUser.public_id ? "you" : ""}"><span class="result-position">${String(row.position).padStart(2, "0")}</span><div><h3>${escapeHtml(row.username)}${row.public_id === currentUser.public_id ? " · You" : ""}</h3><p>${escapeHtml(row.recognition)}${row.bonus_xp ? ` · +${row.bonus_xp} XP` : ""}</p></div><strong>${row.correct}/${row.total}<small>${row.accuracy}%</small></strong></article>`).join("")}</section>` : `<section class="results-quiet"><span class="quiet-lines"><i></i><i></i><i></i></span><h3>Scores stay quiet for now.</h3><p>${escapeHtml(statusCopy)}</p></section>`;
+  return `<section class="page"><button class="button outline" id="back-challenges">← All challenges</button><div class="challenge-detail-head"><div><p class="eyebrow">${item.can_respond ? "Challenge invitation" : "Friend challenge"}</p><h1>${escapeHtml(item.title)}</h1><p class="lede">${escapeHtml(item.message || `${item.creator.username} invited this group to practise together.`)}</p></div><span class="challenge-state ${item.state}">${item.state}</span></div><div class="challenge-detail-grid"><section class="challenge-brief"><span>Created by</span><strong>${escapeHtml(item.creator.username)}</strong><span>Focus</span><strong>${escapeHtml(item.subject_label)}</strong><span>Paper</span><strong>${item.question_count} questions · ${item.duration_minutes} minutes</strong><span>Challenge window</span><strong>${challengeTime(item.starts_at)}<br>to ${challengeTime(item.ends_at)}</strong></section><section class="participant-panel"><div class="section-head"><h2>Study circle</h2><p>${item.participants.length} invited</p></div>${item.participants.map(person => `<div class="participant-row"><span class="participant-monogram">${escapeHtml(person.username.slice(0, 2).toUpperCase())}</span><div><strong>${escapeHtml(person.username)}${person.public_id === currentUser.public_id ? " · You" : ""}</strong><small>${person.is_creator ? "Creator" : person.public_id}</small></div><span class="participant-status ${person.status}">${challengeStatusLabel(person.status)}</span></div>`).join("")}</section></div><div class="challenge-actions">${item.can_respond ? '<button class="button" data-challenge-response="accept">Accept invitation</button><button class="button outline" data-challenge-response="decline">Decline</button>' : ""}${item.can_start ? `<button class="button challenge-start" id="begin-challenge">${item.my_status === "started" ? "Continue attempt" : "Begin challenge"} →</button>` : ""}</div>${myResult}${resultBoard}</section>`;
+}
+
+function renderChallenges() {
+  const selected = challengesData?.find(item => item.id === selectedChallengeId);
+  if (selected) {
+    app.innerHTML = shell(renderChallengeDetail(selected)); bindShell(); bindChallengeDetail(selected); return;
+  }
+  const invitations = challengesData?.filter(item => item.can_respond) || [];
+  const current = challengesData?.filter(item => !item.can_respond && ["upcoming", "open"].includes(item.state) && !["declined", "completed"].includes(item.my_status)) || [];
+  const history = challengesData?.filter(item => item.state === "closed" || item.my_status === "completed" || item.my_status === "declined") || [];
+  const content = `<section class="page challenges-page"><div class="challenge-page-head"><div><p class="eyebrow">Study together</p><h1>Challenges.</h1><p class="lede">A private place to invite people you know, sit the same paper and compare progress without public pressure.</p></div><button class="button" id="toggle-challenge-composer">${challengeComposerOpen ? "Close creator" : "Create a challenge"}</button></div>${challengeComposerOpen ? renderChallengeComposer() : ""}${!challengesData ? '<div class="challenge-loading"><i></i><i></i><i></i><p>Gathering your study circle…</p></div>' : `${invitations.length ? `<div class="section-head"><h2>Invitations</h2><p>Waiting for your response</p></div><div class="challenge-grid">${invitations.map(challengeCard).join("")}</div>` : ""}<div class="section-head"><h2>Upcoming and active</h2><p>${current.length ? `${current.length} challenge${current.length === 1 ? "" : "s"}` : "Nothing scheduled"}</p></div>${current.length ? `<div class="challenge-grid">${current.map(challengeCard).join("")}</div>` : '<div class="challenge-empty"><span>Make room for shared effort.</span><p>Create a private challenge or ask a friend to invite you with your Student ID.</p></div>'}${history.length ? `<div class="section-head"><h2>Completed</h2><p>Your private challenge record</p></div><div class="challenge-grid history">${history.map(challengeCard).join("")}</div>` : ""}`}</section>`;
+  app.innerHTML = shell(content); bindShell(); bindChallenges();
+  if (!challengesData) loadChallenges();
+}
+
+async function loadChallenges() {
+  try { challengesData = await api.challenges(authToken); if (challengesData.at(-1)?.stats) { applyRemoteStats(challengesData.at(-1).stats); put("profile", profile); } if (route === "challenges") renderChallenges(); else if (route === "home") renderHome(); }
+  catch { if (route === "challenges") showToast("Challenges could not be loaded"); }
+}
+
+function bindChallenges() {
+  document.querySelector("#toggle-challenge-composer")?.addEventListener("click", () => { challengeComposerOpen = !challengeComposerOpen; renderChallenges(); });
+  document.querySelector("#close-composer")?.addEventListener("click", () => { challengeComposerOpen = false; challengeInvitees = []; renderChallenges(); });
+  document.querySelectorAll("[data-challenge-id]").forEach(button => button.addEventListener("click", () => { selectedChallengeId = button.dataset.challengeId; renderChallenges(); }));
+  document.querySelector("#add-friend")?.addEventListener("click", addChallengeFriend);
+  bindInviteeRemoval();
+  document.querySelector("#challenge-form")?.addEventListener("submit", reviewChallengeForm);
+}
+
+async function addChallengeFriend() {
+  const input = document.querySelector("#friend-id");
+  const error = document.querySelector("#challenge-error");
+  const publicId = input.value.trim().toUpperCase();
+  if (challengeInvitees.some(item => item.public_id === publicId)) { error.textContent = "That friend is already included."; return; }
+  if (challengeInvitees.length >= 9) { error.textContent = "A challenge can include up to nine invited friends."; return; }
+  try { const student = await api.lookupStudent(authToken, publicId); challengeInvitees.push(student); input.value = ""; error.textContent = ""; renderInviteeList(); }
+  catch (caught) { error.textContent = caught instanceof ApiError ? caught.message : "That student could not be found."; }
+}
+
+function bindInviteeRemoval() {
+  document.querySelectorAll("[data-remove-invitee]").forEach(button => button.addEventListener("click", () => { challengeInvitees = challengeInvitees.filter(item => item.public_id !== button.dataset.removeInvitee); renderInviteeList(); }));
+}
+
+function renderInviteeList() {
+  const list = document.querySelector(".invitee-list");
+  if (!list) return;
+  list.innerHTML = challengeInvitees.length ? challengeInvitees.map(item => `<span>${escapeHtml(item.username)} <small>${item.public_id}</small><button type="button" data-remove-invitee="${item.public_id}" aria-label="Remove ${escapeHtml(item.username)}">×</button></span>`).join("") : '<p>No friends added yet.</p>';
+  bindInviteeRemoval();
+}
+
+function reviewChallengeForm(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const values = Object.fromEntries(new FormData(form));
+  const error = document.querySelector("#challenge-error");
+  if (!challengeInvitees.length) { error.textContent = "Add at least one friend before sending the challenge."; return; }
+  const body = { ...values, question_count: Number(values.question_count), duration_minutes: Number(values.duration_minutes), starts_at: new Date(values.starts_at).toISOString(), ends_at: new Date(values.ends_at).toISOString(), participant_ids: challengeInvitees.map(item => item.public_id) };
+  const detail = `<dl class="session-confirm-summary"><div><dt>Focus</dt><dd>${escapeHtml(values.subject === "all" ? "All subjects" : subjectName(values.subject))}</dd></div><div><dt>Paper</dt><dd>${body.question_count} questions · ${body.duration_minutes} minutes</dd></div><div><dt>Friends</dt><dd>${challengeInvitees.map(item => escapeHtml(item.username)).join(", ")}</dd></div><div><dt>Opens</dt><dd>${challengeTime(body.starts_at)}</dd></div><div><dt>Deadline</dt><dd>${challengeTime(body.ends_at)}</dd></div></dl>`;
+  showConfirmDialog({ title: "Send this challenge?", message: "The question set will be frozen after sending, so everyone receives the same paper.", detail, confirmLabel: "Send invitations", cancelLabel: "Keep editing", onConfirm: () => createChallenge(body) });
+}
+
+async function createChallenge(body) {
+  try {
+    const challenge = await api.createChallenge(authToken, body);
+    challengesData = [challenge, ...(challengesData || [])]; challengeInvitees = []; challengeComposerOpen = false; selectedChallengeId = challenge.id;
+    showToast("Challenge invitations sent"); renderChallenges();
+  } catch (caught) { showToast(caught instanceof ApiError ? caught.message : "The challenge could not be created"); }
+}
+
+function bindChallengeDetail(item) {
+  document.querySelector("#back-challenges")?.addEventListener("click", () => { selectedChallengeId = null; renderChallenges(); });
+  document.querySelectorAll("[data-challenge-response]").forEach(button => button.addEventListener("click", () => { const response = button.dataset.challengeResponse; showConfirmDialog({ title: `${response === "accept" ? "Accept" : "Decline"} this challenge?`, message: response === "accept" ? "It will be added to your study schedule. Your timer starts only when you begin inside the challenge window." : "The creator will see that you declined, but no academic score will be recorded.", confirmLabel: response === "accept" ? "Accept invitation" : "Decline invitation", tone: response === "decline" ? "warning" : "default", onConfirm: () => respondToChallenge(item.id, response) }); }));
+  document.querySelector("#begin-challenge")?.addEventListener("click", () => showConfirmDialog({ title: "Begin your challenge attempt?", message: `Your ${item.duration_minutes}-minute timer will start immediately. You have one attempt at the shared paper.`, detail: `<p class="dialog-question-preview">${item.question_count} questions · ${escapeHtml(item.subject_label)} · results stay private until the group finishes.</p>`, confirmLabel: "Begin challenge", cancelLabel: "Not yet", onConfirm: () => beginChallenge(item) }));
+}
+
+async function respondToChallenge(id, response) {
+  try { const updated = await api.respondChallenge(authToken, id, response); challengesData = challengesData.map(item => item.id === id ? updated : item); showToast(response === "accept" ? "Challenge accepted" : "Invitation declined"); renderChallenges(); }
+  catch (caught) { showToast(caught instanceof ApiError ? caught.message : "The invitation could not be updated"); }
+}
+
+async function beginChallenge(item) {
+  try {
+    const remote = await api.startChallenge(authToken, item.id);
+    const queue = remote.questions.map(question => ({ ...(questionById(question.external_id) || {}), ...question, id: question.external_id })).filter(question => question.id);
+    if (!queue.length) throw new Error("The shared paper could not be prepared on this device.");
+    activeSession = { subject: item.subject, topic: null, requestedCount: queue.length, durationMinutes: item.duration_minutes, deadline: new Date(remote.deadline_at).getTime(), started: true, finished: false, queue, sections: buildSessionSections(queue), answers: queue.map(question => remote.answers?.[question.id] === undefined ? ({ selected: null, confirmed: false, correct: false }) : ({ selected: remote.answers[question.id], confirmed: true, correct: false })), remoteId: remote.session_id, challengeId: item.id, challengeTitle: item.title, index: 0, correct: 0, questionStartedAt: Date.now(), reportedComplete: false, timedOut: false, timeUpAcknowledged: false, mode: "challenge" };
+    route = "session"; render();
+  } catch (caught) { showToast(caught instanceof ApiError ? caught.message : caught.message); challengesData = null; renderChallenges(); }
+}
+
+function renderAchievementCabinet() {
+  if (!achievementsData) return `<section class="achievement-cabinet"><div class="section-head"><h2>Achievements</h2><p>Loading your record…</p></div><div class="achievement-loading"><i></i><i></i><i></i></div></section>`;
+  const earned = achievementsData.badges.filter(item => item.earned);
+  const locked = achievementsData.badges.filter(item => !item.earned).sort((a, b) => b.percent - a.percent);
+  return `<section class="achievement-cabinet"><div class="section-head"><div><p class="eyebrow">Evidence of practice</p><h2>Achievements</h2></div><p>${achievementsData.earned_count} of ${achievementsData.total_count} earned</p></div><div class="badge-grid">${[...earned, ...locked].map(item => `<article class="badge-card ${item.earned ? `earned ${item.tier}` : "locked"}"><div class="badge-seal"><span>${escapeHtml(item.name.split(/\s+/).map(word => word[0]).slice(0, 2).join(""))}</span></div><div><small>${escapeHtml(item.category)}</small><h3>${escapeHtml(item.name)}</h3><p>${escapeHtml(item.description)}</p>${item.earned ? `<strong>Earned ${new Date(item.earned_at).toLocaleDateString(undefined, { day: "numeric", month: "short" })}</strong>` : `<div class="badge-progress"><i style="width:${item.percent}%"></i></div><strong>${item.current} / ${item.target}</strong>`}</div></article>`).join("")}</div></section>`;
+}
+
+async function loadAchievements(filter = "") {
+  try {
+    achievementsData = await api.achievements(authToken);
+    if (route === "profile") renderProfile(filter);
+    const unseen = achievementsData.badges.filter(item => item.unseen);
+    if (unseen.length) handleEarnedBadges(unseen);
+  } catch {
+    if (route === "profile") document.querySelector(".achievement-cabinet")?.classList.add("unavailable");
+  }
 }
 
 function bindProfile() {
@@ -854,7 +1042,7 @@ async function restoreAuth() {
 async function signOut() {
   try { await syncBookmarkQueue(); await api.logout(authToken); } catch {}
   await clearStore("profile"); await clearStore("attempts"); await clearStore("bookmarks"); await put("meta", { key: "bookmarkQueue", actions: [] });
-  authToken = null; currentUser = null; profile = null; attempts = []; bookmarks = []; localStorage.removeItem("seomtorch-auth-token"); localStorage.removeItem("seomtorch-auth-user"); renderAuth();
+  authToken = null; currentUser = null; profile = null; attempts = []; bookmarks = []; challengesData = null; achievementsData = null; selectedChallengeId = null; badgeCelebrationKnown.clear(); badgeCelebrationQueue = []; localStorage.removeItem("seomtorch-auth-token"); localStorage.removeItem("seomtorch-auth-user"); renderAuth();
 }
 
 function render() {
@@ -863,6 +1051,7 @@ function render() {
   if (route === "daily-sprint") return renderDailySprint();
   if (route === "home") return renderHome();
   if (route === "practice") return renderPractice();
+  if (route === "challenges") return renderChallenges();
   if (route === "session") return renderSession();
   if (route === "progress") return renderProgress();
   if (route === "profile") return renderProfile();
@@ -876,6 +1065,7 @@ async function init() {
     const authenticated = await restoreAuth();
     if (authenticated) await syncPendingAttempts();
     render();
+    if (authenticated) loadChallenges();
     window.addEventListener("online", async () => { if (authToken) { await syncPendingAttempts(); render(); } });
     window.addEventListener("offline", () => { if (route !== "session") render(); });
     document.addEventListener("visibilitychange", async () => { if (document.visibilityState === "visible" && authToken && route !== "session") { await syncPendingAttempts(); render(); } });
@@ -883,6 +1073,9 @@ async function init() {
   } catch (error) {
     console.error(error);
     app.innerHTML = `<main class="onboard-form" style="min-height:100dvh"><div><p class="eyebrow">Unable to start</p><h1>Seomtorch needs a local web server.</h1><p class="lede">Open this project through localhost or a secure website so its question bank and offline storage can load correctly.</p><p><code>npx serve .</code></p></div></main>`;
+  } finally {
+    const loader = document.querySelector("#app-loader");
+    requestAnimationFrame(() => setTimeout(() => { loader?.classList.add("dismissed"); setTimeout(() => loader?.remove(), 500); }, 260));
   }
 }
 
