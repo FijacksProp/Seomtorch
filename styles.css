@@ -44,11 +44,11 @@ a { color: inherit; }
 
 .layout { min-height: 100dvh; display: grid; grid-template-columns: 252px minmax(0, 1fr); }
 .sidebar { position: sticky; top: 0; height: 100dvh; padding: 34px 24px 24px; color: #f7fbf7; background: linear-gradient(165deg, var(--forest) 0%, var(--forest-deep) 72%); display: flex; flex-direction: column; }
-.brand { border: 0; background: none; padding: 0; display: inline-flex; align-items: center; gap: 11px; color: inherit; cursor: pointer; text-align: left; }
-.brand-symbol { width: 42px; height: 42px; flex: 0 0 42px; overflow: hidden; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.28); border-radius: 13px; background: rgba(250,253,250,.96); box-shadow: 0 8px 26px rgba(0,0,0,.12); }
-.brand-symbol img { width: 54px; height: 54px; max-width: none; object-fit: contain; }
-.brand-name { font-size: 21px; font-weight: 700; letter-spacing: -.025em; }
-.brand-name small { display: block; margin-top: -3px; font-family: var(--sans); color: rgba(255,255,255,.55); font-size: 8px; letter-spacing: .18em; text-transform: uppercase; }
+.brand { border: 0; background: none; padding: 0; display: inline-flex; align-items: center; gap: 13px; color: inherit; cursor: pointer; text-align: left; }
+.brand-symbol { width: 50px; height: 50px; flex: 0 0 50px; overflow: hidden; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.25); border-radius: 15px; background: rgba(250,253,250,.98); box-shadow: 0 9px 28px rgba(0,0,0,.14); }
+.brand-symbol img { width: 60px; height: 60px; max-width: none; object-fit: contain; }
+.brand-name { font-size: 21px; font-weight: 700; line-height: 1; letter-spacing: -.025em; }
+.brand-name small { display: block; margin-top: 5px; font-family: var(--sans); color: rgba(255,255,255,.58); font-size: 8px; line-height: 1; letter-spacing: .16em; text-transform: uppercase; }
 .nav { margin-top: 52px; display: grid; gap: 7px; }
 .nav-button { border: 0; border-radius: 9px; padding: 12px 13px; display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,.64); background: transparent; cursor: pointer; text-align: left; transition: .18s ease; }
 .nav-button:hover { color: white; background: rgba(255,255,255,.06); }
@@ -175,7 +175,7 @@ select:focus, textarea:focus, input:focus { border-color: var(--forest); backgro
 .saved-remove { padding: 7px 9px; border: 1px solid #d9aca4; border-radius: 7px; color: var(--brick); background: transparent; font-size: 10px; font-weight: 700; cursor: pointer; }
 .review-empty { margin-top: 35px; padding: clamp(30px, 6vw, 58px); border: 1px dashed var(--line-dark); border-radius: var(--radius-lg); text-align: center; }
 .empty-brand-symbol { width: 68px; height: 68px; margin: 0 auto 25px; overflow: hidden; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 20px; background: var(--surface); box-shadow: 0 14px 34px rgba(3,57,42,.1); }
-.empty-brand-symbol img { width: 88px; height: 88px; max-width: none; object-fit: contain; }
+.empty-brand-symbol img { width: 84px; height: 84px; max-width: none; object-fit: contain; }
 .review-empty h2 { margin-bottom: 10px; }
 .review-empty p { max-width: 570px; margin: 0 auto 24px; color: var(--muted); line-height: 1.7; }
 .topic-card { padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(252,254,251,.72); cursor: pointer; text-align: left; box-shadow: 0 8px 28px rgba(3,57,42,.035); transition: border-color .16s ease, transform .16s ease, box-shadow .16s ease; }
@@ -596,7 +596,7 @@ select:focus, textarea:focus, input:focus { border-color: var(--forest); backgro
 .loader-emblem { width: 92px; height: 92px; position: relative; display: grid; place-items: center; animation: loader-emblem-arrive .75s cubic-bezier(.2,.85,.25,1) both; }
 .loader-halo { position: absolute; inset: -7px; border: 1px solid rgba(255,255,255,.14); border-radius: 28px; transform: rotate(7deg); animation: loader-halo 3.4s ease-in-out infinite alternate; }
 .loader-logo-frame { width: 78px; height: 78px; overflow: hidden; display: grid; place-items: center; border-radius: 23px; background: rgba(250,253,250,.98); box-shadow: 0 18px 48px rgba(0,0,0,.22); }
-.loader-logo-frame img { width: 102px; height: 102px; max-width: none; object-fit: contain; }
+.loader-logo-frame img { width: 96px; height: 96px; max-width: none; object-fit: contain; }
 .loader-copy > span { display: block; margin-bottom: 8px; color: #a8d4af; font-size: 9px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; animation: loader-copy-in .65s .12s both; }
 .loader-copy strong { display: block; font-size: clamp(35px, 8vw, 52px); font-weight: 700; line-height: .92; letter-spacing: -.05em; animation: loader-copy-in .65s .2s both; }
 .loader-copy p { margin: 10px 0 0; color: rgba(255,255,255,.56); font-size: 11px; animation: loader-copy-in .65s .3s both; }
@@ -813,7 +813,7 @@ select:focus, textarea:focus, input:focus { border-color: var(--forest); backgro
   .loader-composition { width: min(340px, calc(100vw - 42px)); grid-template-columns: 72px 1fr; gap: 17px 18px; }
   .loader-emblem { width: 72px; height: 72px; }
   .loader-logo-frame { width: 62px; height: 62px; border-radius: 18px; }
-  .loader-logo-frame img { width: 82px; height: 82px; }
+  .loader-logo-frame img { width: 76px; height: 76px; }
   .loader-copy strong { font-size: clamp(31px, 10vw, 42px); }
 }
 .mode-badge.done { background: #e8f5e9; color: #2e7d32; }
