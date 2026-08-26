@@ -38,6 +38,18 @@ const DB_NAME = "seomtorch";
 const DB_VERSION = 2;
 const app = document.querySelector("#app");
 const toastRegion = document.querySelector("#toast-region");
+let loaderDismissed = false;
+
+function dismissAppLoader() {
+  if (loaderDismissed) return;
+  loaderDismissed = true;
+  clearTimeout(window.__seomtorchLoaderFailsafe);
+  const loader = document.querySelector("#app-loader");
+  requestAnimationFrame(() => {
+    loader?.classList.add("dismissed");
+    setTimeout(() => loader?.remove(), 500);
+  });
+}
 
 let db;
 let questions = [];
@@ -785,7 +797,7 @@ function renderProfile(filter = "") {
   const groups = [...new Set(matches.map(item => item.group))];
   const xp = xpState();
   const joined = currentUser?.date_joined ? new Date(currentUser.date_joined).toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) : "—";
-  const content = `<section class="page profile-page"><div class="profile-hero"><div class="profile-monogram">${initials()}</div><div><p class="eyebrow">Student profile</p><h1>${escapeHtml(currentUser?.username || profile.name)}</h1><p>${escapeHtml(currentUser?.email || profile.email)} · Member since ${joined}</p></div><button class="button outline" id="refresh-account">Refresh account</button></div><div class="profile-grid"><section class="profile-card identity-card"><span class="card-label">Student ID</span><strong>${escapeHtml(currentUser?.public_id || "—")}</strong><p>Share this ID with people you know when they invite you to a challenge.</p></section><section class="profile-card level-card"><span class="card-label">Level ${xp.level}</span><strong>${xp.xp} <small>XP</small></strong><div class="xp-track light"><i style="width:${xp.percent}%"></i></div><p>${xp.remaining} XP until level ${xp.level + 1}</p></section></div><div class="metric-strip four profile-metrics"><div class="metric"><strong>${attempts.length}</strong><span>answers recorded</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> days</small></strong><span>current streak</span></div><div class="metric"><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>best streak</span></div></div>${renderAchievementCabinet()}<div class="section-head"><h2>Subject record</h2><p>Synchronized account history</p></div><div class="profile-subjects">${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<article><span>${subject.name}</span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong><small>${stat.count} answer${stat.count === 1 ? "" : "s"}</small></article>`; }).join("")}</div><section class="settings-panel"><p class="eyebrow">Account data</p><h2>Portable, private and recoverable.</h2><p class="lede">The server keeps the authoritative account record. This device stores an offline copy and queues answers whenever the connection drops.</p><div class="button-row"><button class="button" id="export-data">Export backup</button><label class="button outline" for="import-data">Import backup</label><input class="file-input" id="import-data" type="file" accept="application/json"><button class="button outline" id="clear-cache">Refresh device cache</button><button class="button danger" id="sign-out">Sign out</button></div></section><section class="settings-panel guide-section"><p class="eyebrow">Guide and support</p><h2>Answers, without the noise.</h2><p class="lede">Quick guidance about practice, progress and account data.</p><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="faq-search" value="${escapeHtml(filter)}" placeholder="Search help topics" aria-label="Search help topics"></div><div id="faq-results">${groups.length ? groups.map(group => `<section class="faq-group"><h3>${group}</h3>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("") : '<div class="empty">No help entries match that search.</div>'}</div></section></section>`;
+  const content = `<section class="page profile-page"><div class="profile-hero"><div class="profile-monogram">${initials()}</div><div><p class="eyebrow">Student profile</p><h1>${escapeHtml(currentUser?.username || profile.name)}</h1><p>${escapeHtml(currentUser?.email || profile.email)} · Member since ${joined}</p></div><button class="button outline" id="refresh-account">Refresh account</button></div><div class="profile-grid"><section class="profile-card identity-card"><span class="card-label">Student ID</span><strong>${escapeHtml(currentUser?.public_id || "—")}</strong><p>Share this ID with people you know when they invite you to a challenge.</p></section><section class="profile-card level-card"><span class="card-label">Level ${xp.level}</span><strong>${xp.xp} <small>XP</small></strong><div class="xp-track light"><i style="width:${xp.percent}%"></i></div><p>${xp.remaining} XP until level ${xp.level + 1}</p></section></div><div class="metric-strip four profile-metrics"><div class="metric"><strong>${attempts.length}</strong><span>answers recorded</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> days</small></strong><span>current streak</span></div><div class="metric"><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>best streak</span></div></div>${renderAchievementSummary()}<div class="section-head"><h2>Subject record</h2><p>Synchronized account history</p></div><div class="profile-subjects">${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<article><span>${subject.name}</span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong><small>${stat.count} answer${stat.count === 1 ? "" : "s"}</small></article>`; }).join("")}</div><section class="settings-panel"><p class="eyebrow">Account data</p><h2>Portable, private and recoverable.</h2><p class="lede">The server keeps the authoritative account record. This device stores an offline copy and queues answers whenever the connection drops.</p><div class="button-row"><button class="button" id="export-data">Export backup</button><label class="button outline" for="import-data">Import backup</label><input class="file-input" id="import-data" type="file" accept="application/json"><button class="button outline" id="clear-cache">Refresh device cache</button><button class="button danger" id="sign-out">Sign out</button></div></section><section class="settings-panel guide-section"><p class="eyebrow">Guide and support</p><h2>Answers, without the noise.</h2><p class="lede">Quick guidance about practice, progress and account data.</p><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="faq-search" value="${escapeHtml(filter)}" placeholder="Search help topics" aria-label="Search help topics"></div><div id="faq-results">${groups.length ? groups.map(group => `<section class="faq-group"><h3>${group}</h3>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("") : '<div class="empty">No help entries match that search.</div>'}</div></section></section>`;
   app.innerHTML = shell(content); bindShell(); bindProfile();
   if (!achievementsData) loadAchievements(filter);
 }
@@ -910,21 +922,57 @@ async function beginChallenge(item) {
   } catch (caught) { showToast(caught instanceof ApiError ? caught.message : caught.message); challengesData = null; renderChallenges(); }
 }
 
-function renderAchievementCabinet() {
-  if (!achievementsData) return `<section class="achievement-cabinet"><div class="section-head"><h2>Achievements</h2><p>Loading your record…</p></div><div class="achievement-loading"><i></i><i></i><i></i></div></section>`;
-  const earned = achievementsData.badges.filter(item => item.earned);
-  const locked = achievementsData.badges.filter(item => !item.earned).sort((a, b) => b.percent - a.percent);
-  return `<section class="achievement-cabinet"><div class="section-head"><div><p class="eyebrow">Evidence of practice</p><h2>Achievements</h2></div><p>${achievementsData.earned_count} of ${achievementsData.total_count} earned</p></div><div class="badge-grid">${[...earned, ...locked].map(item => `<article class="badge-card ${item.earned ? `earned ${item.tier}` : "locked"}"><div class="badge-seal"><span>${escapeHtml(item.name.split(/\s+/).map(word => word[0]).slice(0, 2).join(""))}</span></div><div><small>${escapeHtml(item.category)}</small><h3>${escapeHtml(item.name)}</h3><p>${escapeHtml(item.description)}</p>${item.earned ? `<strong>Earned ${new Date(item.earned_at).toLocaleDateString(undefined, { day: "numeric", month: "short" })}</strong>` : `<div class="badge-progress"><i style="width:${item.percent}%"></i></div><strong>${item.current} / ${item.target}</strong>`}</div></article>`).join("")}</div></section>`;
+function badgeInitials(item) {
+  return item.name.split(/\s+/).map(word => word[0]).slice(0, 2).join("");
+}
+
+function renderAchievementSummary() {
+  if (!achievementsData) return `<section class="achievement-summary loading"><div><p class="eyebrow">Achievements</p><h2>Your record is loading.</h2></div><div class="achievement-loading"><i></i><i></i><i></i></div></section>`;
+  const earned = achievementsData.badges.filter(item => item.earned).slice(0, 7);
+  return `<section class="achievement-summary"><div class="achievement-summary-copy"><p class="eyebrow">Achievements</p><h2>${achievementsData.earned_count ? `${achievementsData.earned_count} earned so far.` : "Your first badge is ahead."}</h2><p>${achievementsData.earned_count ? "A compact record of the work you have already put in." : "Every completed session moves an achievement closer."}</p></div><div class="earned-badge-strip">${earned.length ? earned.map(item => `<span class="mini-badge ${item.tier}" title="${escapeHtml(item.name)}"><i>${escapeHtml(badgeInitials(item))}</i><small>${escapeHtml(item.name)}</small></span>`).join("") : '<span class="no-badges-yet">No badges earned yet</span>'}</div><button class="achievement-open" id="open-achievements"><span>Explore all badges</span><strong>${achievementsData.earned_count} / ${achievementsData.total_count}</strong><i aria-hidden="true">→</i></button></section>`;
+}
+
+function renderAchievements() {
+  if (!achievementsData) {
+    app.innerHTML = shell(`<section class="page achievements-page"><button class="button outline" data-route="profile">← Profile</button><div class="achievement-page-head"><p class="eyebrow">Personal record</p><h1>Achievements.</h1><p class="lede">A clear record of consistency, learning habits and milestones—not a public ranking.</p></div><div class="achievement-loading page-loading"><i></i><i></i><i></i></div></section>`);
+    bindShell(); loadAchievements(); return;
+  }
+  const categories = [...new Set(achievementsData.badges.map(item => item.category))];
+  const content = `<section class="page achievements-page"><button class="button outline" data-route="profile">← Profile</button><div class="achievement-page-head"><div><p class="eyebrow">Personal record</p><h1>Achievements.</h1><p class="lede">A clear record of consistency, learning habits and milestones—not a public ranking.</p></div><div class="achievement-tally"><strong>${achievementsData.earned_count}</strong><span>earned from ${achievementsData.total_count}</span></div></div>${categories.map(category => { const items = achievementsData.badges.filter(item => item.category === category); return `<section class="badge-category"><div class="section-head"><h2>${escapeHtml(category)}</h2><p>${items.filter(item => item.earned).length} of ${items.length} earned</p></div><div class="badge-ledger">${items.map(item => `<button class="badge-ledger-row ${item.earned ? `earned ${item.tier}` : "locked"}" data-badge-code="${item.code}"><span class="badge-ledger-seal">${escapeHtml(badgeInitials(item))}</span><span><strong>${escapeHtml(item.name)}</strong><small>${item.earned ? `Earned ${new Date(item.earned_at).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" })}` : `${item.current} of ${item.target}`}</small></span><span class="badge-ledger-progress"><i style="width:${item.percent}%"></i></span><span class="badge-ledger-arrow" aria-hidden="true">→</span></button>`).join("")}</div></section>`; }).join("")}</section>`;
+  app.innerHTML = shell(content); bindShell();
+  document.querySelectorAll("[data-badge-code]").forEach(button => button.addEventListener("click", () => showBadgeDetail(button.dataset.badgeCode)));
+}
+
+function showBadgeDetail(code) {
+  const badge = achievementsData?.badges.find(item => item.code === code);
+  if (!badge) return;
+  document.querySelector("#badge-detail")?.remove();
+  const overlay = document.createElement("div");
+  overlay.id = "badge-detail"; overlay.className = "badge-detail-backdrop";
+  overlay.innerHTML = `<section class="badge-detail" role="dialog" aria-modal="true" aria-labelledby="badge-detail-title"><button class="badge-detail-close" aria-label="Close badge details">×</button><div class="badge-detail-seal ${badge.earned ? `earned ${badge.tier}` : "locked"}">${escapeHtml(badgeInitials(badge))}</div><p class="eyebrow">${escapeHtml(badge.category)}</p><h2 id="badge-detail-title">${escapeHtml(badge.name)}</h2><p>${escapeHtml(badge.description)}</p><div class="badge-detail-status"><span>${badge.earned ? "Earned" : "Progress"}</span><strong>${badge.earned ? new Date(badge.earned_at).toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) : `${badge.current} of ${badge.target}`}</strong></div>${badge.earned ? "" : `<div class="badge-progress detail"><i style="width:${badge.percent}%"></i></div>`}<button class="button" data-close-badge>Done</button></section>`;
+  document.body.appendChild(overlay);
+  const onKeydown = event => { if (event.key === "Escape") close(); };
+  const close = () => {
+    document.removeEventListener("keydown", onKeydown);
+    overlay.classList.add("leaving");
+    setTimeout(() => overlay.remove(), 180);
+  };
+  overlay.querySelector(".badge-detail-close").addEventListener("click", close);
+  overlay.querySelector("[data-close-badge]").addEventListener("click", close);
+  overlay.addEventListener("click", event => { if (event.target === overlay) close(); });
+  document.addEventListener("keydown", onKeydown);
+  overlay.querySelector(".badge-detail-close").focus();
 }
 
 async function loadAchievements(filter = "") {
   try {
     achievementsData = await api.achievements(authToken);
     if (route === "profile") renderProfile(filter);
+    if (route === "achievements") renderAchievements();
     const unseen = achievementsData.badges.filter(item => item.unseen);
     if (unseen.length) handleEarnedBadges(unseen);
   } catch {
-    if (route === "profile") document.querySelector(".achievement-cabinet")?.classList.add("unavailable");
+    if (route === "profile") document.querySelector(".achievement-summary")?.classList.add("unavailable");
   }
 }
 
@@ -936,6 +984,7 @@ function bindProfile() {
   document.querySelector("#refresh-account").addEventListener("click", async () => { const synced = await syncPendingAttempts(); showToast(synced ? "Account is up to date" : "Could not reach the account server"); renderProfile(); });
   document.querySelector("#clear-cache").addEventListener("click", refreshDeviceCache);
   document.querySelector("#sign-out").addEventListener("click", signOut);
+  document.querySelector("#open-achievements")?.addEventListener("click", () => navigate("achievements"));
   const accountActions = document.querySelector(".settings-panel .button-row");
   if (accountActions) {
     const changePassword = document.createElement("button");
@@ -1055,6 +1104,7 @@ function render() {
   if (route === "session") return renderSession();
   if (route === "progress") return renderProgress();
   if (route === "profile") return renderProfile();
+  if (route === "achievements") return renderAchievements();
   if (route === "change-password") return renderPasswordChange(false);
 }
 
@@ -1062,10 +1112,19 @@ async function init() {
   try {
     db = await openDatabase();
     await Promise.all([loadQuestions(), loadData()]);
+    if (authToken && currentUser) {
+      await prepareLocalUser(currentUser);
+      render();
+    } else {
+      renderAuth();
+    }
+    dismissAppLoader();
     const authenticated = await restoreAuth();
-    if (authenticated) await syncPendingAttempts();
     render();
-    if (authenticated) loadChallenges();
+    if (authenticated) {
+      syncPendingAttempts();
+      loadChallenges();
+    }
     window.addEventListener("online", async () => { if (authToken) { await syncPendingAttempts(); render(); } });
     window.addEventListener("offline", () => { if (route !== "session") render(); });
     document.addEventListener("visibilitychange", async () => { if (document.visibilityState === "visible" && authToken && route !== "session") { await syncPendingAttempts(); render(); } });
@@ -1074,8 +1133,7 @@ async function init() {
     console.error(error);
     app.innerHTML = `<main class="onboard-form" style="min-height:100dvh"><div><p class="eyebrow">Unable to start</p><h1>Seomtorch needs a local web server.</h1><p class="lede">Open this project through localhost or a secure website so its question bank and offline storage can load correctly.</p><p><code>npx serve .</code></p></div></main>`;
   } finally {
-    const loader = document.querySelector("#app-loader");
-    requestAnimationFrame(() => setTimeout(() => { loader?.classList.add("dismissed"); setTimeout(() => loader?.remove(), 500); }, 260));
+    dismissAppLoader();
   }
 }
 

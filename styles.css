@@ -571,9 +571,9 @@ select:focus, textarea:focus, input:focus { border-color: var(--forest); box-sha
 .invitee-list button { width: 21px; height: 21px; padding: 0; border: 0; border-radius: 50%; color: white; background: rgba(255,255,255,.14); cursor: pointer; }
 .invitee-list p { margin: 0; color: var(--muted); font-size: 11px; }
 .challenge-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 14px; }
-.challenge-card { min-height: 260px; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); display: flex; flex-direction: column; color: var(--ink); background: var(--surface); cursor: pointer; text-align: left; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
-.challenge-card:hover { transform: translateY(-3px); border-color: var(--forest); box-shadow: var(--shadow); }
-.challenge-card.urgent { border-color: var(--ochre); box-shadow: inset 0 3px 0 var(--ochre); }
+.challenge-card { min-height: 220px; padding: 21px 22px 18px; border: 1px solid var(--line); border-left: 3px solid var(--forest); border-radius: 4px; display: flex; flex-direction: column; color: var(--ink); background: rgba(255,253,248,.66); cursor: pointer; text-align: left; transition: border-color .18s ease, background .18s ease; }
+.challenge-card:hover { border-color: var(--forest); background: var(--surface); }
+.challenge-card.urgent { border-color: var(--line); border-left-color: var(--ochre); }
 .challenge-card-top, .challenge-card-foot { display: flex; justify-content: space-between; gap: 12px; align-items: center; color: var(--muted); font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
 .challenge-card h3 { margin: 24px 0 7px; font: 600 25px/1 var(--serif); }
 .challenge-card > p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
@@ -640,24 +640,65 @@ select:focus, textarea:focus, input:focus { border-color: var(--forest); box-sha
 .submitted-score span { display: block; margin-top: 15px; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
 .challenge-submitted .lede { max-width: 620px; }
 
-/* Achievement cabinet */
-.achievement-cabinet { margin: 52px 0; }
-.achievement-loading { min-height: 130px; display: flex; justify-content: center; align-items: center; gap: 7px; border: 1px dashed var(--line); border-radius: var(--radius); }
-.badge-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); gap: 12px; }
-.badge-card { min-height: 205px; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); display: grid; grid-template-columns: 58px 1fr; align-items: start; gap: 15px; background: var(--surface); }
-.badge-card.locked { opacity: .72; }
-.badge-seal { width: 58px; height: 64px; position: relative; display: grid; place-items: center; color: var(--muted); background: var(--paper-deep); clip-path: polygon(50% 0, 92% 20%, 92% 75%, 50% 100%, 8% 75%, 8% 20%); }
-.badge-seal span { font: 700 14px var(--serif); letter-spacing: .04em; }
-.badge-card.earned .badge-seal { color: white; background: var(--forest); }
-.badge-card.earned.bronze .badge-seal { background: #9c673e; }
-.badge-card.earned.silver .badge-seal { color: var(--ink); background: #c8cdc8; }
-.badge-card.earned.gold .badge-seal { color: var(--ink); background: var(--ochre); }
-.badge-card small { color: var(--muted); font-size: 8px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
-.badge-card h3 { margin: 6px 0; font: 600 21px/1 var(--serif); }
-.badge-card p { min-height: 48px; margin: 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
-.badge-card strong { display: block; margin-top: 10px; color: var(--forest); font-size: 9px; }
+/* Achievements */
+.achievement-summary { margin: 42px 0 50px; border-block: 1px solid var(--line-dark); padding: 24px 0; display: grid; grid-template-columns: minmax(190px, .9fr) minmax(240px, 1.3fr) auto; align-items: center; gap: 26px; }
+.achievement-summary-copy h2 { margin: 4px 0 5px; font-size: 27px; }
+.achievement-summary-copy > p:last-child { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
+.earned-badge-strip { min-width: 0; display: flex; align-items: center; gap: 13px; overflow: hidden; }
+.mini-badge { width: 48px; flex: 0 0 48px; display: grid; justify-items: center; gap: 5px; }
+.mini-badge i { width: 38px; height: 42px; display: grid; place-items: center; clip-path: polygon(50% 0, 92% 20%, 92% 75%, 50% 100%, 8% 75%, 8% 20%); color: white; background: var(--forest); font: 700 11px var(--serif); font-style: normal; }
+.mini-badge.bronze i { background: #9c673e; }
+.mini-badge.silver i { color: var(--ink); background: #c8cdc8; }
+.mini-badge.gold i { color: var(--ink); background: var(--ochre); }
+.mini-badge small { width: 58px; overflow: hidden; color: var(--muted); font-size: 7px; font-weight: 700; line-height: 1.2; text-align: center; white-space: nowrap; text-overflow: ellipsis; }
+.no-badges-yet { color: var(--muted); font-size: 11px; }
+.achievement-open { min-width: 155px; padding: 13px 0 13px 18px; border: 0; border-left: 1px solid var(--line); display: grid; grid-template-columns: 1fr auto; gap: 3px 14px; color: var(--ink); background: transparent; cursor: pointer; text-align: left; }
+.achievement-open span { font-size: 11px; font-weight: 800; }
+.achievement-open strong { color: var(--muted); font-size: 9px; font-weight: 600; }
+.achievement-open i { grid-column: 2; grid-row: 1 / 3; align-self: center; color: var(--ochre); font: 400 20px var(--sans); transition: transform .18s ease; }
+.achievement-open:hover i { transform: translateX(4px); }
+.achievement-summary.loading { grid-template-columns: 1fr auto; }
+.achievement-loading { min-height: 70px; display: flex; justify-content: center; align-items: center; gap: 7px; }
+.achievement-page-head { margin-top: 36px; display: flex; align-items: end; justify-content: space-between; gap: 30px; }
+.achievement-page-head .lede { max-width: 660px; }
+.achievement-tally { min-width: 150px; padding-left: 24px; border-left: 1px solid var(--line-dark); }
+.achievement-tally strong { display: block; color: var(--forest); font: 600 52px/.9 var(--serif); }
+.achievement-tally span { display: block; margin-top: 8px; color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.badge-category { margin-top: 48px; }
+.badge-ledger { border-top: 1px solid var(--line-dark); }
+.badge-ledger-row { width: 100%; min-height: 78px; padding: 13px 4px; border: 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 44px minmax(150px, 1fr) minmax(90px, 180px) 24px; align-items: center; gap: 14px; color: var(--ink); background: transparent; cursor: pointer; text-align: left; transition: background .16s ease; }
+.badge-ledger-row:hover { background: rgba(255,255,255,.48); }
+.badge-ledger-row.locked { color: #747a75; }
+.badge-ledger-seal { width: 38px; height: 42px; display: grid; place-items: center; clip-path: polygon(50% 0, 92% 20%, 92% 75%, 50% 100%, 8% 75%, 8% 20%); color: var(--muted); background: var(--paper-deep); font: 700 10px var(--serif); }
+.badge-ledger-row.earned .badge-ledger-seal { color: white; background: var(--forest); }
+.badge-ledger-row.earned.bronze .badge-ledger-seal { background: #9c673e; }
+.badge-ledger-row.earned.silver .badge-ledger-seal { color: var(--ink); background: #c8cdc8; }
+.badge-ledger-row.earned.gold .badge-ledger-seal { color: var(--ink); background: var(--ochre); }
+.badge-ledger-row strong, .badge-ledger-row small { display: block; }
+.badge-ledger-row strong { font-size: 12px; }
+.badge-ledger-row small { margin-top: 4px; color: var(--muted); font-size: 9px; }
+.badge-ledger-progress { height: 3px; overflow: hidden; background: var(--paper-deep); }
+.badge-ledger-progress i { display: block; height: 100%; background: var(--ochre); }
+.badge-ledger-row.earned .badge-ledger-progress i { background: var(--forest); }
+.badge-ledger-arrow { color: var(--ochre); font-size: 18px; transition: transform .18s ease; }
+.badge-ledger-row:hover .badge-ledger-arrow { transform: translateX(3px); }
 .badge-progress { height: 4px; margin-top: 13px; overflow: hidden; border-radius: 4px; background: var(--paper-deep); }
 .badge-progress i { display: block; height: 100%; background: var(--ochre); }
+.badge-detail-backdrop { position: fixed; z-index: 151; inset: 0; padding: 20px; display: grid; place-items: center; background: rgba(15,29,23,.68); backdrop-filter: blur(7px); animation: badge-backdrop .25s ease both; }
+.badge-detail-backdrop.leaving { animation: badge-leave .18s ease both; }
+.badge-detail { width: min(430px, 100%); padding: 34px; position: relative; border-radius: var(--radius-lg); background: var(--surface); box-shadow: 0 30px 90px rgba(0,0,0,.22); animation: badge-arrive .38s cubic-bezier(.2,.9,.25,1.1) both; }
+.badge-detail-close { position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: transparent; cursor: pointer; font-size: 20px; }
+.badge-detail-seal { width: 74px; height: 82px; margin-bottom: 26px; display: grid; place-items: center; clip-path: polygon(50% 0, 92% 20%, 92% 75%, 50% 100%, 8% 75%, 8% 20%); color: var(--muted); background: var(--paper-deep); font: 700 18px var(--serif); }
+.badge-detail-seal.earned { color: white; background: var(--forest); }
+.badge-detail-seal.earned.bronze { background: #9c673e; }
+.badge-detail-seal.earned.silver { color: var(--ink); background: #c8cdc8; }
+.badge-detail-seal.earned.gold { color: var(--ink); background: var(--ochre); }
+.badge-detail h2 { margin: 6px 0 10px; font-size: 36px; }
+.badge-detail > p:not(.eyebrow) { color: var(--muted); font-size: 12px; line-height: 1.65; }
+.badge-detail-status { margin: 24px 0 8px; padding-block: 14px; border-block: 1px solid var(--line); display: flex; justify-content: space-between; gap: 20px; font-size: 10px; }
+.badge-detail-status span { color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.badge-detail-status strong { font-size: 11px; }
+.badge-detail .button { width: 100%; margin-top: 24px; }
 .badge-unlock-backdrop { position: fixed; z-index: 150; inset: 0; padding: 20px; display: grid; place-items: center; background: rgba(15,29,23,.72); backdrop-filter: blur(8px); animation: badge-backdrop .3s ease both; }
 .badge-unlock-backdrop.leaving { animation: badge-leave .22s ease both; }
 .badge-unlock { width: min(430px, 100%); padding: 44px 36px 34px; border-radius: var(--radius-lg); color: var(--ink); background: var(--surface); box-shadow: 0 30px 90px rgba(0,0,0,.22); text-align: center; animation: badge-arrive .55s cubic-bezier(.2,.9,.25,1.2) both; }
@@ -685,14 +726,22 @@ select:focus, textarea:focus, input:focus { border-color: var(--forest); box-sha
   .invite-builder > div:first-of-type { align-items: stretch; flex-direction: column; }
   .invite-builder input { max-width: none; }
   .challenge-grid { grid-template-columns: 1fr; }
-  .challenge-card { min-height: 230px; }
+  .challenge-card { min-height: 210px; }
   .challenge-actions { flex-direction: column; }
   .challenge-actions .button { width: 100%; }
   .my-challenge-result { grid-template-columns: 1fr; }
   .my-challenge-result .eyebrow { grid-column: auto; }
   .participant-row { grid-template-columns: 36px 1fr; }
   .participant-status { grid-column: 2; }
-  .badge-grid { grid-template-columns: 1fr; }
+  .achievement-summary { grid-template-columns: 1fr auto; gap: 18px; }
+  .achievement-summary-copy { grid-column: 1 / -1; }
+  .earned-badge-strip { min-height: 52px; }
+  .achievement-open { min-width: 142px; }
+  .achievement-page-head { align-items: flex-start; flex-direction: column; }
+  .achievement-tally { padding: 0; border: 0; }
+  .badge-ledger-row { grid-template-columns: 42px minmax(0, 1fr) 22px; }
+  .badge-ledger-progress { grid-column: 2; }
+  .badge-ledger-arrow { grid-column: 3; grid-row: 1 / 3; }
   .loader-composition { grid-template-columns: 52px 1fr; gap: 16px; }
   .loader-mark { width: 52px; height: 52px; padding: 12px; border-radius: 15px; }
 }
@@ -727,6 +776,15 @@ select:focus, textarea:focus, input:focus { border-color: var(--forest); box-sha
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+@media (max-width: 560px) {
+  .topbar .sync-indicator { width: 18px; min-width: 18px; margin: 0 5px 0 0; padding: 0; justify-content: flex-start; transform: translateX(-2px); }
+  .topbar .sync-indicator i { flex: 0 0 7px; }
+}
+
+@media (max-width: 370px) {
+  .topbar .sync-indicator { width: 12px; min-width: 12px; margin-right: 6px; transform: translateX(-2px); }
 }
 
 /* Normal practice mode - immediate feedback */
