@@ -1,4 +1,4 @@
-const CACHE = "seomtorch-v20";
+const CACHE = "seomtorch-v21";
 const APP_ASSETS = [
   "./",
   "index.html",
@@ -6,7 +6,7 @@ const APP_ASSETS = [
   "app.js",
   "api-client.js",
   "manifest.webmanifest",
-  "assets/mark.svg",
+  "assets/seomtorch_logo.png",
   "config.js",
   "data/manifest.json",
   "data/questions-english.json",

@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "start": "serve .",
-    "check": "node --check app.js && node --check api-client.js && node --check scripts/build-question-bank.mjs",
+    "check": "node --check app.js && node --check api-client.js && node --check scripts/build-question-bank.mjs && node --check scripts/scrape-myschool-questions.mjs",
     "questions:build": "node scripts/build-question-bank.mjs",
+    "questions:myschool": "node scripts/scrape-myschool-questions.mjs",
+    "questions:myschool:test": "node scripts/scrape-myschool-questions.test.mjs",
     "questions:split": "node scripts/split-question-bank.mjs"
   },
   "devDependencies": {
+    "cheerio": "^1.0.0",
     "serve": "^14.2.4"
   }
 }

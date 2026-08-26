@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#173d30">
+  <meta name="theme-color" content="#064d3b">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Seomtorch">
   <meta name="description" content="Seomtorch is a focused, offline-first exam preparation companion for Nigerian students.">
   <title>Seomtorch — Prepare with purpose</title>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/seomtorch_logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/seomtorch_logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
@@ -30,15 +31,21 @@
   </div>
   <div id="app-loader" class="app-loader" role="status" aria-live="polite" aria-label="Preparing Seomtorch">
     <div class="loader-composition">
-      <span class="loader-index">ST / 01</span>
-      <div class="loader-mark" aria-hidden="true"><i></i><i></i><i></i></div>
-      <div class="loader-copy"><strong>Seomtorch</strong><span>Preparing your study desk</span></div>
+      <div class="loader-emblem" aria-hidden="true">
+        <span class="loader-halo"></span>
+        <span class="loader-logo-frame"><img src="assets/seomtorch_logo.png" alt=""></span>
+      </div>
+      <div class="loader-copy">
+        <span>Focused preparation</span>
+        <strong>Seomtorch</strong>
+        <p>Opening your study space</p>
+      </div>
       <div class="loader-rule" aria-hidden="true"><i></i></div>
     </div>
   </div>
   <div id="app" class="app-shell" aria-live="polite"></div>
   <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
-  <script>window.__seomtorchLoaderFailsafe = window.setTimeout(function () { var loader = document.getElementById("app-loader"); if (loader) loader.classList.add("dismissed"); }, 5000);</script>
+  <script>window.__seomtorchLoaderFailsafe = window.setTimeout(function () { var loader = document.getElementById("app-loader"); if (!loader) return; loader.classList.add("dismissed"); window.setTimeout(function () { if (loader.parentNode) loader.remove(); }, 700); }, 5000);</script>
   <script src="config.js"></script>
   <script type="module" src="app.js"></script>
 </body>

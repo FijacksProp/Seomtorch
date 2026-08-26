@@ -244,6 +244,65 @@ class LearningApiTests(APITestCase):
         self.assertEqual(declined.status_code, 200)
         self.assertEqual(declined.data["my_status"], ChallengeParticipant.Status.DECLINED)
 
+        removed = other.delete(f"/api/challenges/{response.data['id']}/")
+        self.assertEqual(removed.status_code, 204)
+        participation = ChallengeParticipant.objects.get(challenge_id=response.data["id"], user=friend)
+        self.assertIsNotNone(participation.hidden_at)
+        self.assertEqual(other.get("/api/challenges/").data, [])
+        self.assertEqual(other.get(f"/api/challenges/{response.data['id']}/").status_code, 404)
+
+    def test_started_challenge_can_be_abandoned_without_erasing_answers(self):
+        friend = get_user_model().objects.create_user(email="leave@example.com", username="leaver", password="Securepass934!")
+        token = Token.objects.create(user=friend)
+        starts_at = timezone.now() + timedelta(minutes=5)
+        created = self.client.post("/api/challenges/", {
+            "title": "Leave safely", "subject": "english", "question_count": 10,
+            "duration_minutes": 15, "starts_at": starts_at.isoformat(),
+            "ends_at": (starts_at + timedelta(hours=2)).isoformat(), "participant_ids": [friend.public_id],
+        }, format="json")
+        challenge = Challenge.objects.get(id=created.data["id"])
+        other = APIClient(); other.credentials(HTTP_AUTHORIZATION=f"Token {token.key}")
+        other.post(f"/api/challenges/{challenge.id}/respond/", {"response": "accept"}, format="json")
+        challenge.starts_at = timezone.now() - timedelta(minutes=1)
+        challenge.save(update_fields=("starts_at",))
+        started = other.post(f"/api/challenges/{challenge.id}/start/", {}, format="json")
+        snapshot = challenge.question_payload[0]
+        answer = other.post("/api/attempts/", {
+            "question_id": snapshot["external_id"], "selected_index": snapshot["correct"],
+            "client_id": str(uuid.uuid4()), "session_id": started.data["session_id"],
+        }, format="json")
+        self.assertEqual(answer.status_code, 201)
+
+        removed = other.delete(f"/api/challenges/{challenge.id}/")
+        self.assertEqual(removed.status_code, 204)
+        participant = ChallengeParticipant.objects.get(challenge=challenge, user=friend)
+        participant.practice_session.refresh_from_db()
+        self.assertEqual(participant.status, ChallengeParticipant.Status.ABANDONED)
+        self.assertIsNotNone(participant.hidden_at)
+        self.assertEqual(participant.practice_session.status, PracticeSession.Status.ABANDONED)
+        self.assertEqual(Attempt.objects.filter(session=participant.practice_session).count(), 1)
+
+    def test_creator_leaving_unstarted_challenge_cancels_it_for_invitees(self):
+        friend = get_user_model().objects.create_user(email="cancelled@example.com", username="cancelled", password="Securepass934!")
+        token = Token.objects.create(user=friend)
+        starts_at = timezone.now() + timedelta(minutes=15)
+        created = self.client.post("/api/challenges/", {
+            "title": "Cancelled circle", "subject": "all", "question_count": 10,
+            "duration_minutes": 10, "starts_at": starts_at.isoformat(),
+            "ends_at": (starts_at + timedelta(hours=2)).isoformat(), "participant_ids": [friend.public_id],
+        }, format="json")
+        challenge_id = created.data["id"]
+        self.assertEqual(self.client.delete(f"/api/challenges/{challenge_id}/").status_code, 204)
+        challenge = Challenge.objects.get(id=challenge_id)
+        self.assertIsNotNone(challenge.cancelled_at)
+
+        other = APIClient(); other.credentials(HTTP_AUTHORIZATION=f"Token {token.key}")
+        detail = other.get(f"/api/challenges/{challenge_id}/")
+        self.assertEqual(detail.data["state"], "cancelled")
+        self.assertFalse(detail.data["can_respond"])
+        self.assertFalse(detail.data["can_start"])
+        self.assertEqual(other.post(f"/api/challenges/{challenge_id}/respond/", {"response": "accept"}, format="json").status_code, 409)
+
     def test_challenge_accept_and_start_continue_when_activity_logging_fails(self):
         friend = get_user_model().objects.create_user(email="resilient@example.com", username="resilient", password="Securepass934!")
         friend_token = Token.objects.create(user=friend)

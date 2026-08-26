@@ -181,8 +181,14 @@ def challenge_payload(challenge, user):
         "question_count": challenge.question_count, "duration_minutes": challenge.duration_minutes,
         "starts_at": challenge.starts_at, "ends_at": challenge.ends_at, "state": _challenge_state(challenge, now),
         "my_status": mine.status, "is_creator": challenge.creator_id == user.id,
-        "can_respond": mine.status == ChallengeParticipant.Status.INVITED and now < challenge.ends_at,
-        "can_start": mine.status in {ChallengeParticipant.Status.ACCEPTED, ChallengeParticipant.Status.STARTED} and challenge.starts_at <= now < challenge.ends_at,
+        "can_respond": not challenge.cancelled_at and mine.status == ChallengeParticipant.Status.INVITED and now < challenge.ends_at,
+        "can_start": not challenge.cancelled_at and mine.status in {ChallengeParticipant.Status.ACCEPTED, ChallengeParticipant.Status.STARTED} and challenge.starts_at <= now < challenge.ends_at,
+        "can_remove": True,
+        "removal_mode": (
+            "remove" if mine.status in {ChallengeParticipant.Status.DECLINED, ChallengeParticipant.Status.COMPLETED, ChallengeParticipant.Status.ABANDONED} or _challenge_state(challenge, now) in {"closed", "cancelled"}
+            else "cancel" if challenge.creator_id == user.id
+            else "abandon"
+        ),
         "results_unlocked": unlocked, "my_result": my_result,
         "participants": participant_rows, "results": group_results,
         "stats": {"xp": stats.xp, "level": stats.level, "current_streak": stats.live_current_streak, "best_streak": stats.best_streak, "last_study_date": stats.last_study_date},
@@ -202,7 +208,7 @@ class StudentLookupView(APIView):
 
 class ChallengeListCreateView(APIView):
     def get(self, request):
-        participations = ChallengeParticipant.objects.filter(user=request.user).select_related("challenge__creator", "challenge__subject")
+        participations = ChallengeParticipant.objects.filter(user=request.user, hidden_at__isnull=True).select_related("challenge__creator", "challenge__subject")
         return Response([challenge_payload(item.challenge, request.user) for item in participations])
 
     @transaction.atomic
@@ -258,8 +264,51 @@ class ChallengeListCreateView(APIView):
 
 class ChallengeDetailView(APIView):
     def get(self, request, challenge_id):
-        participation = get_object_or_404(ChallengeParticipant.objects.select_related("challenge__creator", "challenge__subject"), challenge_id=challenge_id, user=request.user)
+        participation = get_object_or_404(ChallengeParticipant.objects.select_related("challenge__creator", "challenge__subject"), challenge_id=challenge_id, user=request.user, hidden_at__isnull=True)
         return Response(challenge_payload(participation.challenge, request.user))
+
+    @transaction.atomic
+    def delete(self, request, challenge_id):
+        participant = get_object_or_404(
+            ChallengeParticipant.objects.select_for_update().select_related("challenge__creator"),
+            challenge_id=challenge_id,
+            user=request.user,
+            hidden_at__isnull=True,
+        )
+        challenge = participant.challenge
+        now = timezone.now()
+        original_status = participant.status
+        active_statuses = {
+            ChallengeParticipant.Status.INVITED,
+            ChallengeParticipant.Status.ACCEPTED,
+            ChallengeParticipant.Status.STARTED,
+        }
+
+        if participant.status in active_statuses:
+            participant.status = ChallengeParticipant.Status.ABANDONED
+            if not participant.responded_at:
+                participant.responded_at = now
+            if participant.practice_session and participant.practice_session.status == PracticeSession.Status.ACTIVE:
+                participant.practice_session.status = PracticeSession.Status.ABANDONED
+                participant.practice_session.completed_at = now
+                participant.practice_session.save(update_fields=("status", "completed_at"))
+
+        if challenge.creator_id == request.user.id and not challenge.cancelled_at:
+            others_have_progress = challenge.participants.exclude(user=request.user).filter(
+                status__in=(ChallengeParticipant.Status.STARTED, ChallengeParticipant.Status.COMPLETED)
+            ).exists()
+            if not others_have_progress and _challenge_state(challenge, now) in {"upcoming", "open"}:
+                challenge.cancelled_at = now
+                challenge.save(update_fields=("cancelled_at",))
+
+        participant.hidden_at = now
+        participant.save(update_fields=("status", "responded_at", "hidden_at"))
+        _record_activity(request.user, ActivityEvent.Type.CHALLENGE_ABANDONED, {
+            "challenge_id": str(challenge_id),
+            "previous_status": original_status,
+            "creator": challenge.creator_id == request.user.id,
+        })
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class ChallengeRespondView(APIView):
@@ -273,6 +322,8 @@ class ChallengeRespondView(APIView):
             user=request.user,
         )
         response = request.data.get("response")
+        if participant.challenge.cancelled_at:
+            return Response({"detail": "This challenge was cancelled by its creator."}, status=409)
         if participant.status != ChallengeParticipant.Status.INVITED:
             return Response({"detail": "This invitation has already been answered."}, status=409)
         if timezone.now() >= participant.challenge.ends_at:
@@ -298,10 +349,14 @@ class ChallengeStartView(APIView):
         )
         challenge = participant.challenge
         now = timezone.now()
+        if challenge.cancelled_at:
+            return Response({"detail": "This challenge was cancelled by its creator."}, status=409)
         if participant.status == ChallengeParticipant.Status.INVITED:
             return Response({"detail": "Accept this invitation before beginning."}, status=409)
         if participant.status == ChallengeParticipant.Status.DECLINED:
             return Response({"detail": "You declined this challenge."}, status=409)
+        if participant.status == ChallengeParticipant.Status.ABANDONED:
+            return Response({"detail": "You left this challenge."}, status=409)
         if now < challenge.starts_at:
             return Response({"detail": "This challenge has not opened yet."}, status=409)
         if now >= challenge.ends_at:

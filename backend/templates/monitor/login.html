@@ -1,1 +1,43 @@
-{% load static %}<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Administrator sign in · Seomtorch</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet"><link rel="stylesheet" href="{% static 'monitor/monitor.css' %}"></head><body class="admin-auth"><main><section class="auth-identity"><a class="monitor-brand" href="/"><span class="monitor-mark"><i></i><i></i><i></i></span><span>Seomtorch<small>Monitoring centre</small></span></a><blockquote>Clarity for every learner, at every level.</blockquote><p>Secure administrative access to progress, engagement and academic performance.</p></section><section class="admin-login"><div><p class="kicker">Restricted access</p><h1>Administrator sign in.</h1><p>Use an authorized staff account to continue.</p><form method="post">{% csrf_token %}<label>Email address<input type="email" name="email" autocomplete="email" required autofocus></label><label>Password<input type="password" name="password" autocomplete="current-password" required></label>{% if error %}<div class="login-error">{{ error }}</div>{% endif %}<button>Enter monitoring centre →</button></form><small>Student accounts cannot access this area.</small></div></section></main></body></html>
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#064d3b">
+  <title>Administrator sign in · Seomtorch</title>
+  <link rel="icon" href="{% static 'seomtorch_logo.png' %}" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'monitor/monitor.css' %}">
+  <link rel="stylesheet" href="{% static 'monitor/brand-refresh.css' %}">
+</head>
+<body class="admin-auth">
+  <main>
+    <section class="auth-identity">
+      <a class="monitor-brand" href="/">
+        <span class="monitor-logo"><img src="{% static 'seomtorch_logo.png' %}" alt=""></span>
+        <span>Seomtorch<small>Monitoring centre</small></span>
+      </a>
+      <blockquote>Clarity for every learner, at every level.</blockquote>
+      <p>Secure administrative access to progress, engagement and academic performance.</p>
+    </section>
+    <section class="admin-login">
+      <div>
+        <p class="kicker">Restricted access</p>
+        <h1>Administrator sign in.</h1>
+        <p>Use an authorized staff account to continue.</p>
+        <form method="post">
+          {% csrf_token %}
+          <label>Email address<input type="email" name="email" autocomplete="email" required autofocus></label>
+          <label>Password<input type="password" name="password" autocomplete="current-password" required></label>
+          {% if error %}<div class="login-error">{{ error }}</div>{% endif %}
+          <button>Enter monitoring centre →</button>
+        </form>
+        <small>Student accounts cannot access this area.</small>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

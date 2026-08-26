@@ -69,7 +69,7 @@ class UserBadgeAdmin(admin.ModelAdmin):
 class ChallengeParticipantInline(admin.TabularInline):
     model = ChallengeParticipant
     extra = 0
-    readonly_fields = ("user", "status", "practice_session", "started_at", "deadline_at", "completed_at", "correct_answers", "answered_questions", "duration_seconds", "bonus_xp", "bonus_awarded_at")
+    readonly_fields = ("user", "status", "practice_session", "started_at", "deadline_at", "completed_at", "correct_answers", "answered_questions", "duration_seconds", "bonus_xp", "bonus_awarded_at", "hidden_at")
 
 @admin.register(Challenge)
 class ChallengeAdmin(admin.ModelAdmin):
@@ -81,7 +81,7 @@ class ChallengeAdmin(admin.ModelAdmin):
 
 @admin.register(ChallengeParticipant)
 class ChallengeParticipantAdmin(admin.ModelAdmin):
-    list_display = ("user", "challenge", "status", "correct_answers", "answered_questions", "bonus_xp", "started_at", "completed_at")
+    list_display = ("user", "challenge", "status", "correct_answers", "answered_questions", "bonus_xp", "started_at", "completed_at", "hidden_at")
     list_filter = ("status", "challenge__subject", "started_at")
     search_fields = ("user__public_id", "user__username", "challenge__title")
     list_select_related = ("user", "challenge")

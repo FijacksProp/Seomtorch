@@ -207,6 +207,7 @@ class ActivityEvent(models.Model):
         CHALLENGE_CREATED = "challenge_created", "Challenge created"
         CHALLENGE_RESPONDED = "challenge_responded", "Challenge responded"
         CHALLENGE_COMPLETED = "challenge_completed", "Challenge completed"
+        CHALLENGE_ABANDONED = "challenge_abandoned", "Challenge abandoned"
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="activity_events")
     event_type = models.CharField(max_length=30, choices=Type.choices)
@@ -269,7 +270,7 @@ class Challenge(models.Model):
     def results_unlocked(self):
         if timezone.now() >= self.ends_at:
             return True
-        return not self.participants.exclude(status__in=(ChallengeParticipant.Status.COMPLETED, ChallengeParticipant.Status.DECLINED)).exists()
+        return not self.participants.exclude(status__in=(ChallengeParticipant.Status.COMPLETED, ChallengeParticipant.Status.DECLINED, ChallengeParticipant.Status.ABANDONED)).exists()
 
     def __str__(self):
         return self.title
@@ -282,6 +283,7 @@ class ChallengeParticipant(models.Model):
         DECLINED = "declined", "Declined"
         STARTED = "started", "Started"
         COMPLETED = "completed", "Completed"
+        ABANDONED = "abandoned", "Abandoned"
 
     challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE, related_name="participants")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="challenge_participations")
@@ -297,6 +299,7 @@ class ChallengeParticipant(models.Model):
     duration_seconds = models.PositiveIntegerField(null=True, blank=True)
     bonus_xp = models.PositiveSmallIntegerField(default=0)
     bonus_awarded_at = models.DateTimeField(null=True, blank=True)
+    hidden_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         ordering = ("invited_at",)
