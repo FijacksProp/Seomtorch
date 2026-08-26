@@ -2,45 +2,8 @@
 {% block title %}{{ student.username }}{% endblock %}
 {% block content %}
 <a class="back-link" href="{% url 'monitor:students' %}">← Student directory</a>
-<div class="student-hero">
-  <div class="hero-avatar">{{ student.username|slice:":1"|upper }}</div>
-  <div>
-    <p class="kicker">Student profile · {{ student.public_id }}</p>
-    <h1>{{ student.username }}</h1>
-    <p>{{ student.email }} · joined {{ student.date_joined|date:"j F Y" }}</p>
-    <form method="post" action="{% url 'monitor:reset-student-password' student.public_id %}" onsubmit="return confirm('Reset this student’s password and sign them out on every device?');">
-      {% csrf_token %}
-      <button class="button password-reset-button" type="submit">Generate temporary password</button>
-    </form>
-  </div>
-</div>
-<section class="metric-grid">
-  <article><span>Total attempts</span><strong>{{ total }}</strong><small>{{ correct }} correct</small></article>
-  <article><span>Overall accuracy</span><strong>{{ accuracy }}%</strong><small>Across all subjects</small></article>
-  <article><span>Experience</span><strong>{{ student.learning_stats.xp }} <em>XP</em></strong><small>Level {{ student.learning_stats.level }}</small></article>
-  <article class="accent"><span>Current streak</span><strong>{{ student.learning_stats.live_current_streak }}</strong><small>Best: {{ student.learning_stats.best_streak }} days</small></article>
-</section>
-<div class="dashboard-grid">
-  <section class="panel wide">
-    <div class="panel-head"><div><p class="kicker">Performance</p><h2>By subject</h2></div></div>
-    <div class="subject-report">
-      {% for row in subject_rows %}<a href="{% url 'monitor:subject-detail' row.question__topic__subject__slug %}"><div><strong>{{ row.question__topic__subject__name }}</strong><small>{{ row.correct }} correct · {{ row.total }} attempts</small></div><div class="bar"><i style="width:{{ row.accuracy }}%"></i></div><b>{{ row.accuracy }}%</b><span>→</span></a>
-      {% empty %}<div class="empty">No answers submitted yet.</div>{% endfor %}
-    </div>
-  </section>
-  <section class="panel">
-    <div class="panel-head"><div><p class="kicker">Focus areas</p><h2>Topic detail</h2></div></div>
-    <div class="simple-list">
-      {% for row in topic_rows %}<div><span>{{ row.question__topic__name }}<small>{{ row.question__topic__subject__name }} · {{ row.total }} attempts</small></span><b>{{ row.accuracy }}%</b></div>
-      {% empty %}<div class="empty">No topic data yet.</div>{% endfor %}
-    </div>
-  </section>
-  <section class="panel wide">
-    <div class="panel-head"><div><p class="kicker">Answer history</p><h2>Recent attempts</h2></div></div>
-    <div class="attempt-list">
-      {% for attempt in recent_attempts %}<div><i class="{% if attempt.is_correct %}correct{% else %}wrong{% endif %}"></i><p>{{ attempt.question.text|truncatechars:100 }}<small>{{ attempt.question.topic.subject.name }} · {{ attempt.question.topic.name }} · {{ attempt.answered_at|timesince }} ago</small></p><b>{% if attempt.is_correct %}+5 XP{% else %}Review{% endif %}</b></div>
-      {% empty %}<div class="empty">No attempts yet.</div>{% endfor %}
-    </div>
-  </section>
-</div>
+<div class="student-hero"><div class="hero-avatar">{{ student.username|slice:":1"|upper }}</div><div><p class="kicker">Student profile · {{ student.public_id }}</p><h1>{{ student.username }}</h1><p>{{ student.email }} · joined {{ student.date_joined|date:"j F Y" }}</p><form method="post" action="{% url 'monitor:reset-student-password' student.public_id %}" onsubmit="return confirm('Reset this student’s password and sign them out on every device?');">{% csrf_token %}<button class="button password-reset-button" type="submit">Generate temporary password</button></form></div></div>
+<section class="metric-grid"><article><span>Tests taken</span><strong>{{ tests.tests_taken }}</strong><small>{{ tests.in_progress }} currently in progress</small></article><article><span>Average test score</span><strong>{{ tests.average_score }}%</strong><small>Across completed papers</small></article><article><span>Best test score</span><strong>{{ tests.best_score }}%</strong><small>{{ tests.questions_in_tests }} questions inside tests</small></article><article class="accent"><span>Completion rate</span><strong>{{ tests.completion_rate }}%</strong><small>{{ tests.unfinished }} unfinished sessions</small></article></section>
+<div class="support-line"><span>{{ total }} questions answered</span><span>{{ correct }} correct</span><span>{{ accuracy }}% answer accuracy</span><span>{{ student.learning_stats.xp }} XP · Level {{ student.learning_stats.level }}</span><span>{{ student.learning_stats.live_current_streak }}-day streak</span></div>
+<div class="dashboard-grid"><section class="panel wide"><div class="panel-head"><div><p class="kicker">Completed papers</p><h2>Recent tests</h2></div></div><div class="test-record-list">{% for test in tests.recent_tests %}<div><time>{{ test.completed_at|date:"j M Y" }}</time><p><strong>{{ test.focus }}</strong><small>{{ test.mode_label }} · {{ test.answered }}/{{ test.total }} answered</small></p><b>{{ test.score }}%</b></div>{% empty %}<div class="empty">No completed tests yet.</div>{% endfor %}</div></section><section class="panel"><div class="panel-head"><div><p class="kicker">Practice composition</p><h2>Test formats</h2></div></div><div class="simple-list">{% for mode in tests.by_mode %}<div><span>{{ mode.label }}<small>{{ mode.count }} completed</small></span><b>{{ mode.average_score }}%</b></div>{% empty %}<div class="empty">No format data yet.</div>{% endfor %}</div></section><section class="panel wide"><div class="panel-head"><div><p class="kicker">Question-level evidence</p><h2>By subject</h2></div></div><div class="subject-report">{% for row in subject_rows %}<a href="{% url 'monitor:subject-detail' row.question__topic__subject__slug %}"><div><strong>{{ row.question__topic__subject__name }}</strong><small>{{ row.correct }} correct · {{ row.total }} answers</small></div><div class="bar"><i style="width:{{ row.accuracy }}%"></i></div><b>{{ row.accuracy }}%</b><span>→</span></a>{% empty %}<div class="empty">No answers submitted yet.</div>{% endfor %}</div></section><section class="panel"><div class="panel-head"><div><p class="kicker">Focus areas</p><h2>Topic detail</h2></div></div><div class="simple-list">{% for row in topic_rows %}<div><span>{{ row.question__topic__name }}<small>{{ row.question__topic__subject__name }} · {{ row.total }} answers</small></span><b>{{ row.accuracy }}%</b></div>{% empty %}<div class="empty">No topic data yet.</div>{% endfor %}</div></section><section class="panel wide"><div class="panel-head"><div><p class="kicker">Answer history</p><h2>Recent questions</h2></div></div><div class="attempt-list">{% for attempt in recent_attempts %}<div><i class="{% if attempt.is_correct %}correct{% else %}wrong{% endif %}"></i><p>{{ attempt.question.text|truncatechars:100 }}<small>{{ attempt.question.topic.subject.name }} · {{ attempt.question.topic.name }} · {{ attempt.answered_at|timesince }} ago</small></p><b>{% if attempt.is_correct %}+5 XP{% else %}Review{% endif %}</b></div>{% empty %}<div class="empty">No attempts yet.</div>{% endfor %}</div></section></div>
 {% endblock %}

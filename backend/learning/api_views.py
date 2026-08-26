@@ -11,14 +11,18 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .badges import achievements_payload, evaluate_badges, mark_badges_seen
+from .analytics import user_test_analytics
 from .models import ActivityEvent, Attempt, Bookmark, ChallengeParticipant, PracticeSession, Question, Subject, Topic, UserStats, QuestionComment, QuestionReport
 from .serializers import AttemptSerializer, BookmarkSerializer, QuestionPracticeSerializer, SubjectSerializer, QuestionCommentSerializer, QuestionReportSerializer
 
-def stats_payload(user):
+def stats_payload(user, include_tests=True):
     stats, _ = UserStats.objects.get_or_create(user=user)
     total = user.attempts.count()
     correct = user.attempts.filter(is_correct=True).count()
-    return {"xp": stats.xp, "level": stats.level, "current_streak": stats.live_current_streak, "best_streak": stats.best_streak, "last_study_date": stats.last_study_date, "total_attempts": total, "accuracy": round(correct / total * 100) if total else 0}
+    payload = {"xp": stats.xp, "level": stats.level, "current_streak": stats.live_current_streak, "best_streak": stats.best_streak, "last_study_date": stats.last_study_date, "total_attempts": total, "accuracy": round(correct / total * 100) if total else 0}
+    if include_tests:
+        payload["tests"] = user_test_analytics(user)
+    return payload
 
 class SubjectListView(APIView):
     def get(self, request):
@@ -162,9 +166,9 @@ class SubmitAttemptView(APIView):
             return {
                 "attempt": {"client_id": attempt.client_id, "question_id": attempt.question.external_id, "selected_index": attempt.selected_index, "answered_at": attempt.answered_at},
                 "accepted": True,
-                "stats": stats_payload(attempt.user),
+                "stats": stats_payload(attempt.user, include_tests=False),
             }
-        return {"attempt": AttemptSerializer(attempt).data, "correct": attempt.is_correct, "correct_index": attempt.question.correct_index, "explanation": attempt.question.explanation, "stats": stats_payload(attempt.user)}
+        return {"attempt": AttemptSerializer(attempt).data, "correct": attempt.is_correct, "correct_index": attempt.question.correct_index, "explanation": attempt.question.explanation, "stats": stats_payload(attempt.user, include_tests=False)}
 
 class CompleteSessionView(APIView):
     @transaction.atomic
@@ -188,7 +192,7 @@ class CompleteSessionView(APIView):
             challenge_id = str(participant.challenge_id)
         ActivityEvent.objects.create(user=request.user, event_type=ActivityEvent.Type.SESSION_COMPLETED, metadata={"session_id": str(session.id), "accuracy": session.accuracy})
         earned = evaluate_badges(request.user)
-        return Response({"session_id": session.id, "correct": session.correct_answers, "total": session.total_questions, "accuracy": session.accuracy, "challenge_id": challenge_id, "badges_earned": [{"code": item.badge.code, "name": item.badge.name, "description": item.badge.description, "tier": item.badge.tier} for item in earned]})
+        return Response({"session_id": session.id, "correct": session.correct_answers, "total": session.total_questions, "accuracy": session.accuracy, "challenge_id": challenge_id, "stats": stats_payload(request.user), "badges_earned": [{"code": item.badge.code, "name": item.badge.name, "description": item.badge.description, "tier": item.badge.tier} for item in earned]})
 
 class AttemptSyncView(APIView):
     def get(self, request):
@@ -205,7 +209,7 @@ class ProgressView(APIView):
         topic_rows = attempts.values("question__topic__subject__slug", "question__topic__name").annotate(total=Count("id"), correct=Count("id", filter=Q(is_correct=True))).order_by("question__topic__subject__slug", "question__topic__name")
         def rows(values, subject_key, name_key):
             return [{"subject": row[subject_key], "name": row[name_key], "total": row["total"], "correct": row["correct"], "accuracy": round(row["correct"] / row["total"] * 100)} for row in values]
-        return Response({"stats": stats_payload(request.user), "subjects": rows(subject_rows, "question__topic__subject__slug", "question__topic__subject__name"), "topics": rows(topic_rows, "question__topic__subject__slug", "question__topic__name")})
+        return Response({"stats": stats_payload(request.user), "tests": user_test_analytics(request.user, include_recent=True), "subjects": rows(subject_rows, "question__topic__subject__slug", "question__topic__subject__name"), "topics": rows(topic_rows, "question__topic__subject__slug", "question__topic__name")})
 
 class BookmarkView(APIView):
     def get(self, request): return Response(BookmarkSerializer(request.user.bookmarks.select_related("question").order_by("-created_at"), many=True).data)

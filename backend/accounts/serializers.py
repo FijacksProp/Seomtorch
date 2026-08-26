@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, password_validation
 from rest_framework import serializers
 
 from learning.models import UserStats
+from learning.analytics import user_test_analytics
 from .models import User
 
 class UserSerializer(serializers.ModelSerializer):
@@ -13,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_stats(self, user):
         stats, _ = UserStats.objects.get_or_create(user=user)
-        return {"xp": stats.xp, "level": stats.level, "current_streak": stats.live_current_streak, "best_streak": stats.best_streak, "last_study_date": stats.last_study_date}
+        return {"xp": stats.xp, "level": stats.level, "current_streak": stats.live_current_streak, "best_streak": stats.best_streak, "last_study_date": stats.last_study_date, "tests": user_test_analytics(user)}
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, min_length=8, trim_whitespace=False)

@@ -140,6 +140,41 @@ class LearningApiTests(APITestCase):
         self.assertTrue(first_step["earned"])
         self.assertTrue(UserBadge.objects.filter(user=self.user, badge__code="first-step").exists())
 
+    def test_progress_reports_completed_tests_as_primary_analysis(self):
+        questions = list(Question.objects.all()[:20])
+        for offset, correct_count in ((0, 8), (10, 5)):
+            selected = questions[offset:offset + 10]
+            session = PracticeSession.objects.create(
+                user=self.user, status=PracticeSession.Status.COMPLETED,
+                completed_at=timezone.now(), total_questions=10,
+                question_ids=[item.external_id for item in selected],
+            )
+            for index, question in enumerate(selected):
+                is_correct = index < correct_count
+                Attempt.objects.create(
+                    user=self.user, question=question, session=session, client_id=uuid.uuid4(),
+                    selected_index=question.correct_index if is_correct else (question.correct_index + 1) % len(question.options),
+                    is_correct=is_correct, xp_earned=5 if is_correct else 0,
+                )
+        response = self.client.get("/api/progress/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data["tests"]["tests_taken"], 2)
+        self.assertEqual(response.data["tests"]["average_score"], 65)
+        self.assertEqual(response.data["tests"]["best_score"], 80)
+        self.assertEqual(len(response.data["tests"]["recent_tests"]), 2)
+        self.assertEqual(response.data["stats"]["tests"]["tests_taken"], 2)
+
+    def test_five_completed_tests_award_test_milestone_badge(self):
+        for _ in range(5):
+            PracticeSession.objects.create(
+                user=self.user, status=PracticeSession.Status.COMPLETED,
+                completed_at=timezone.now(), total_questions=10, question_ids=[],
+            )
+        response = self.client.get("/api/achievements/")
+        badge = next(item for item in response.data["badges"] if item["code"] == "five-papers")
+        self.assertTrue(badge["earned"])
+        self.assertEqual(badge["current"], 5)
+
     def test_friend_challenge_freezes_paper_and_hides_group_scores_until_everyone_finishes(self):
         friend = get_user_model().objects.create_user(email="friend@example.com", username="studyfriend", password="Securepass934!")
         friend_token = Token.objects.create(user=friend)

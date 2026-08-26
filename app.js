@@ -75,6 +75,7 @@ let selectedChallengeId = null;
 let challengeComposerOpen = false;
 let challengeInvitees = [];
 let achievementsData = null;
+let progressData = null;
 let badgeCelebrationQueue = [];
 let badgeCelebrationActive = false;
 let badgeCelebrationKnown = new Set();
@@ -211,6 +212,7 @@ function navigate(nextRoute) {
 
 function shell(content) {
   const xp = xpState();
+  const testStats = profile.tests || { tests_taken: 0, average_score: 0 };
   const nav = [
     ["home", "Home"], ["practice", "Practice"], ["challenges", "Challenges"], ["progress", "Progress"], ["profile", "Profile"]
   ];
@@ -226,7 +228,7 @@ function shell(content) {
       <div class="sidebar-foot"><div class="streak-panel"><svg class="streak-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/><path d="M12 19.2c-1.7 0-2.9-1.1-3-2.7-.1-1.2.5-2.3 1.5-3.2.1 1 .6 1.5 1.1 1.8-.2-1.7.7-2.7 1.6-3.7 1.2 1.5 1.8 3.1 1.7 4.6-.1 1.9-1.2 3.2-2.9 3.2Z"/></svg><div><span>Current streak</span><strong>${profile.rhythm || 0}<small> day${profile.rhythm === 1 ? "" : "s"}</small></strong></div></div><div class="xp-panel"><div><strong>Level ${xp.level}</strong><span>${xp.xp} XP</span></div><div class="xp-track"><i style="width:${xp.percent}%"></i></div><small>${xp.remaining} XP to next level</small></div><p>Come back tomorrow and keep it alive.</p></div>
     </aside>
     <div class="content-wrap">
-      <header class="topbar"><span class="mobile-brand">Seomtorch</span><span class="sync-indicator ${pendingSyncCount > 0 ? 'pending' : navigator.onLine ? 'synced' : 'offline'}" title="${pendingSyncCount > 0 ? `${pendingSyncCount} items pending sync` : navigator.onLine ? 'Synced' : 'Offline'}"><i></i>${pendingSyncCount > 0 ? `<small>${pendingSyncCount}</small>` : ''}</span><div class="top-stat"><strong>${attempts.length}</strong><span>answered</span></div><div class="top-stat"><strong>${accuracy()}%</strong><span>accuracy</span></div><div class="top-xp" title="Level ${xp.level} · ${xp.remaining} XP to next level"><small>LV ${xp.level}</small><strong>${xp.xp} XP</strong></div><div class="top-streak" title="${profile.rhythm || 0}-day streak"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/></svg><span><small>Streak</small><strong>${profile.rhythm || 0}</strong></span></div><button class="avatar" data-route="profile" title="Open ${escapeHtml(profile.name)}'s profile">${initials()}</button></header>
+      <header class="topbar"><span class="mobile-brand">Seomtorch</span><span class="sync-indicator ${pendingSyncCount > 0 ? 'pending' : navigator.onLine ? 'synced' : 'offline'}" title="${pendingSyncCount > 0 ? `${pendingSyncCount} items pending sync` : navigator.onLine ? 'Synced' : 'Offline'}"><i></i>${pendingSyncCount > 0 ? `<small>${pendingSyncCount}</small>` : ''}</span><div class="top-stat"><strong>${testStats.tests_taken}</strong><span>tests</span></div><div class="top-stat"><strong>${testStats.average_score}%</strong><span>test average</span></div><div class="top-xp" title="Level ${xp.level} · ${xp.remaining} XP to next level"><small>LV ${xp.level}</small><strong>${xp.xp} XP</strong></div><div class="top-streak" title="${profile.rhythm || 0}-day streak"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/></svg><span><small>Streak</small><strong>${profile.rhythm || 0}</strong></span></div><button class="avatar" data-route="profile" title="Open ${escapeHtml(profile.name)}'s profile">${initials()}</button></header>
       <main id="main">${content}</main>
     </div>
   </div>${!isStandalone() && route !== "session" ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ""}`;
@@ -286,6 +288,7 @@ function renderHome() {
   const recent = lastTopic();
   const greeting = new Date().getHours() < 12 ? "Good morning" : new Date().getHours() < 17 ? "Good afternoon" : "Good evening";
   const todayAttempts = attempts.filter(item => new Date(item.timestamp).toISOString().slice(0, 10) === today());
+  const testStats = profile.tests || { tests_today: 0, average_score: 0 };
   const urgentChallenge = challengesData?.find(item => item.can_respond) || challengesData?.find(item => item.can_start);
   const content = `<section class="page">
     <p class="eyebrow">Your study desk</p>
@@ -301,9 +304,10 @@ function renderHome() {
       <button class="button ${dailySprintCompleted ? 'outline' : 'accent'}" id="start-sprint">${dailySprintCompleted ? 'Sprint completed ✓' : 'Start sprint →'}</button>
     </article>
     <div class="section-head"><h2>Today, at a glance</h2><p>Synchronized account activity</p></div>
-    <div class="metric-strip">
-      <div class="metric"><strong>${todayAttempts.length}</strong><span>answered today</span></div>
-      <div class="metric"><strong>${accuracy(todayAttempts)}%</strong><span>today’s accuracy</span></div>
+    <div class="metric-strip four">
+      <div class="metric"><strong>${testStats.tests_today}</strong><span>tests completed today</span></div>
+      <div class="metric"><strong>${testStats.average_score}%</strong><span>average test score</span></div>
+      <div class="metric"><strong>${todayAttempts.length}</strong><span>questions today</span></div>
       <div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> day${profile.rhythm === 1 ? "" : "s"}</small></strong><span>Current streak</span></div>
     </div>
     <div class="section-head"><h2>Subjects</h2><p>${questions.length} questions available</p></div>
@@ -632,6 +636,7 @@ function applyRemoteStats(stats = {}) {
   profile.rhythm = stats.current_streak ?? 0;
   profile.bestRhythm = stats.best_streak ?? 0;
   profile.lastStudyDate = stats.last_study_date || null;
+  if (stats.tests) profile.tests = stats.tests;
   if (currentUser) {
     currentUser.stats = { ...(currentUser.stats || {}), ...stats };
     localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
@@ -728,7 +733,7 @@ function renderResult() {
   if (activeSession.mode === "challenge") return renderChallengeSubmission();
   if (activeSession.remoteId && !activeSession.reportedComplete) {
     activeSession.reportedComplete = true;
-    syncPendingAttempts().then(() => api.completeSession(authToken, activeSession.remoteId)).then(response => handleEarnedBadges(response.badges_earned || [])).catch(() => { activeSession.reportedComplete = false; });
+    syncPendingAttempts().then(() => api.completeSession(authToken, activeSession.remoteId)).then(async response => { applyRemoteStats(response.stats); progressData = null; await put("profile", profile); handleEarnedBadges(response.badges_earned || []); }).catch(() => { activeSession.reportedComplete = false; });
   }
   if (activeSession.mode === "sprint" && !dailySprintCompleted) {
     dailySprintCompleted = true;
@@ -754,7 +759,7 @@ function renderChallengeSubmission() {
   activeSession.challengeCompletionStarted = true;
   syncPendingAttempts()
     .then(() => api.completeSession(authToken, activeSession.remoteId))
-    .then(response => { handleEarnedBadges(response.badges_earned || []); return api.challenge(authToken, activeSession.challengeId); })
+    .then(async response => { applyRemoteStats(response.stats); progressData = null; await put("profile", profile); handleEarnedBadges(response.badges_earned || []); return api.challenge(authToken, activeSession.challengeId); })
     .then(challenge => { activeSession.challengeResult = challenge; applyRemoteStats(challenge.stats); put("profile", profile); challengesData = null; achievementsData = null; renderChallengeSubmission(); })
     .catch(() => { activeSession.challengeCompletionStarted = false; showToast("Your paper is saved locally. Reconnect to submit it."); });
 }
@@ -780,15 +785,24 @@ function showNextBadgeCelebration() {
 }
 
 function renderProgress() {
-  const xp = xpState();
-  const topicMap = new Map();
-  for (const attempt of attempts) {
-    const question = questionById(attempt.questionId); if (!question) continue;
-    const key = `${question.subject}|${question.topic}`; const item = topicMap.get(key) || { subject: question.subject, topic: question.topic, list: [] }; item.list.push(attempt); topicMap.set(key, item);
+  if (!progressData) {
+    app.innerHTML = shell(`<section class="page"><p class="eyebrow">Progress</p><h1>Your test record.</h1><p class="lede">Preparing completed papers, score trends and subject analysis.</p><div class="progress-loading"><i></i><i></i><i></i></div></section>`);
+    bindShell(); loadProgress(); return;
   }
-  const focus = [...topicMap.values()].filter(item => item.list.length >= 2).map(item => ({ ...item, accuracy: accuracy(item.list) })).sort((a, b) => a.accuracy - b.accuracy).slice(0, 4);
-  const content = `<section class="page"><p class="eyebrow">Progress</p><h1>Your work, made useful.</h1><p class="lede">Results are organised to help you decide what to study next—not to decorate a dashboard.</p><div class="metric-strip four" style="margin-top:38px"><div class="metric"><strong>${attempts.length}</strong><span>total attempts</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric xp-metric"><strong>${xp.xp}<small> XP</small></strong><span>Level ${xp.level}</span></div><div class="metric streak-metric"><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>best streak</span></div></div><div class="section-head"><h2>Academic report</h2><p>Based on synchronized account history</p></div><div class="report-grid"><div class="report-panel"><h3>Subject performance</h3>${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<div class="report-row"><span>${subject.name}<small>${stat.count} attempts</small></span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong></div>`; }).join("")}</div><div class="report-panel"><h3>Topics needing attention</h3>${focus.length ? focus.map(item => `<div class="report-row"><span>${escapeHtml(item.topic)}<small>${subjectName(item.subject)} · ${item.list.length} attempts</small></span><strong class="${item.accuracy < 50 ? "attention" : ""}">${item.accuracy}%</strong></div>`).join("") : '<div class="empty">Complete at least two questions in a topic and Seomtorch will begin identifying useful focus areas.</div>'}</div></div></section>`;
+  const xp = xpState();
+  const tests = progressData.tests;
+  const movement = tests.improvement === null ? "Building" : `${tests.improvement >= 0 ? "+" : ""}${tests.improvement}`;
+  const content = `<section class="page progress-page"><p class="eyebrow">Progress</p><h1>Your test record.</h1><p class="lede">Completed papers lead the analysis. Individual answers remain available as supporting evidence.</p><div class="metric-strip four test-metrics"><div class="metric"><strong>${tests.tests_taken}</strong><span>tests taken</span></div><div class="metric"><strong>${tests.average_score}%</strong><span>average test score</span></div><div class="metric"><strong>${tests.best_score}%</strong><span>best test score</span></div><div class="metric ${tests.improvement !== null && tests.improvement >= 0 ? "xp-metric" : ""}"><strong>${movement}${tests.improvement === null ? "" : "<small> pts</small>"}</strong><span>recent movement</span></div></div><div class="test-analysis-grid"><section class="report-panel test-trend"><div class="section-head compact"><div><p class="eyebrow">Last ${tests.trend.length} tests</p><h2>Score movement</h2></div><p>${tests.completion_rate}% completion rate</p></div>${tests.trend.length ? `<div class="trend-bars">${tests.trend.map((item, index) => `<div title="${escapeHtml(item.focus)} · ${item.score}%"><span style="height:${Math.max(4, item.score)}%"></span><small>${index + 1}</small></div>`).join("")}</div>` : '<div class="empty">Your score movement will appear after your first completed test.</div>'}</section><section class="report-panel"><div class="section-head compact"><div><p class="eyebrow">Test formats</p><h2>How you practise</h2></div></div><div class="test-mode-list">${tests.by_mode.length ? tests.by_mode.map(item => `<div><span><strong>${escapeHtml(item.label)}</strong><small>${item.count} test${item.count === 1 ? "" : "s"}</small></span><b>${item.average_score}%</b></div>`).join("") : '<div class="empty">No completed formats yet.</div>'}</div></section></div><div class="section-head"><h2>Test history</h2><p>${tests.questions_in_tests} questions answered within completed tests</p></div><div class="test-history">${tests.recent_tests.length ? tests.recent_tests.map(item => `<article><time>${new Date(item.completed_at).toLocaleDateString(undefined, { day: "numeric", month: "short" })}</time><div><strong>${escapeHtml(item.focus)}</strong><small>${escapeHtml(item.mode_label)} · ${item.answered}/${item.total} answered</small></div><span>${item.score}%</span></article>`).join("") : '<div class="empty">Complete a test and it will appear here.</div>'}</div><div class="section-head"><h2>Academic detail</h2><p>${progressData.stats.total_attempts} individual answers recorded</p></div><div class="report-grid"><div class="report-panel"><h3>Subject performance</h3>${progressData.subjects.map(item => `<div class="report-row"><span>${escapeHtml(item.name)}<small>${item.total} answers</small></span><strong>${item.accuracy}%</strong></div>`).join("") || '<div class="empty">No subject results yet.</div>'}</div><div class="report-panel"><h3>Topics needing attention</h3>${progressData.topics.filter(item => item.total >= 2).sort((a, b) => a.accuracy - b.accuracy).slice(0, 5).map(item => `<div class="report-row"><span>${escapeHtml(item.name)}<small>${subjectName(item.subject)} · ${item.total} answers</small></span><strong class="${item.accuracy < 50 ? "attention" : ""}">${item.accuracy}%</strong></div>`).join("") || '<div class="empty">Complete at least two questions in a topic to identify focus areas.</div>'}</div></div><div class="supporting-stat"><span>Supporting activity</span><strong>${progressData.stats.total_attempts} questions answered · ${progressData.stats.accuracy}% answer accuracy · ${xp.xp} XP</strong></div></section>`;
   app.innerHTML = shell(content); bindShell();
+}
+
+async function loadProgress() {
+  try {
+    progressData = await api.progress(authToken);
+    applyRemoteStats(progressData.stats);
+    await put("profile", profile);
+    if (route === "progress") renderProgress();
+  } catch { if (route === "progress") showToast("Test analysis could not be loaded"); }
 }
 
 function renderProfile(filter = "") {
@@ -796,9 +810,14 @@ function renderProfile(filter = "") {
   const matches = FAQS.filter(item => !normalized || `${item.q} ${item.a} ${item.group}`.toLowerCase().includes(normalized));
   const groups = [...new Set(matches.map(item => item.group))];
   const xp = xpState();
+  const testStats = profile.tests || { tests_taken: 0, average_score: 0 };
   const joined = currentUser?.date_joined ? new Date(currentUser.date_joined).toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) : "—";
   const content = `<section class="page profile-page"><div class="profile-hero"><div class="profile-monogram">${initials()}</div><div><p class="eyebrow">Student profile</p><h1>${escapeHtml(currentUser?.username || profile.name)}</h1><p>${escapeHtml(currentUser?.email || profile.email)} · Member since ${joined}</p></div><button class="button outline" id="refresh-account">Refresh account</button></div><div class="profile-grid"><section class="profile-card identity-card"><span class="card-label">Student ID</span><strong>${escapeHtml(currentUser?.public_id || "—")}</strong><p>Share this ID with people you know when they invite you to a challenge.</p></section><section class="profile-card level-card"><span class="card-label">Level ${xp.level}</span><strong>${xp.xp} <small>XP</small></strong><div class="xp-track light"><i style="width:${xp.percent}%"></i></div><p>${xp.remaining} XP until level ${xp.level + 1}</p></section></div><div class="metric-strip four profile-metrics"><div class="metric"><strong>${attempts.length}</strong><span>answers recorded</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> days</small></strong><span>current streak</span></div><div class="metric"><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>best streak</span></div></div>${renderAchievementSummary()}<div class="section-head"><h2>Subject record</h2><p>Synchronized account history</p></div><div class="profile-subjects">${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<article><span>${subject.name}</span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong><small>${stat.count} answer${stat.count === 1 ? "" : "s"}</small></article>`; }).join("")}</div><section class="settings-panel"><p class="eyebrow">Account data</p><h2>Portable, private and recoverable.</h2><p class="lede">The server keeps the authoritative account record. This device stores an offline copy and queues answers whenever the connection drops.</p><div class="button-row"><button class="button" id="export-data">Export backup</button><label class="button outline" for="import-data">Import backup</label><input class="file-input" id="import-data" type="file" accept="application/json"><button class="button outline" id="clear-cache">Refresh device cache</button><button class="button danger" id="sign-out">Sign out</button></div></section><section class="settings-panel guide-section"><p class="eyebrow">Guide and support</p><h2>Answers, without the noise.</h2><p class="lede">Quick guidance about practice, progress and account data.</p><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="faq-search" value="${escapeHtml(filter)}" placeholder="Search help topics" aria-label="Search help topics"></div><div id="faq-results">${groups.length ? groups.map(group => `<section class="faq-group"><h3>${group}</h3>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("") : '<div class="empty">No help entries match that search.</div>'}</div></section></section>`;
-  app.innerHTML = shell(content); bindShell(); bindProfile();
+  app.innerHTML = shell(content);
+  const profileMetrics = document.querySelectorAll(".profile-metrics .metric");
+  if (profileMetrics[0]) profileMetrics[0].innerHTML = `<strong>${testStats.tests_taken}</strong><span>tests taken</span>`;
+  if (profileMetrics[1]) profileMetrics[1].innerHTML = `<strong>${testStats.average_score}%</strong><span>average test score</span>`;
+  bindShell(); bindProfile();
   if (!achievementsData) loadAchievements(filter);
 }
 
@@ -1074,7 +1093,7 @@ async function prepareLocalUser(user) {
     await clearStore("profile"); await clearStore("attempts"); await clearStore("bookmarks"); await put("meta", { key: "bookmarkQueue", actions: [] }); attempts = []; bookmarks = [];
   }
   const stats = user.stats || {};
-  profile = { id: "local-user", remoteId: user.public_id, name: user.username, email: user.email, xp: stats.xp ?? 0, rhythm: stats.current_streak ?? 0, bestRhythm: stats.best_streak ?? 0, lastStudyDate: stats.last_study_date || null, createdAt: profile?.createdAt || Date.now() };
+  profile = { id: "local-user", remoteId: user.public_id, name: user.username, email: user.email, xp: stats.xp ?? 0, rhythm: stats.current_streak ?? 0, bestRhythm: stats.best_streak ?? 0, lastStudyDate: stats.last_study_date || null, tests: stats.tests || profile?.tests || null, createdAt: profile?.createdAt || Date.now() };
   await put("profile", profile);
 }
 
@@ -1091,7 +1110,7 @@ async function restoreAuth() {
 async function signOut() {
   try { await syncBookmarkQueue(); await api.logout(authToken); } catch {}
   await clearStore("profile"); await clearStore("attempts"); await clearStore("bookmarks"); await put("meta", { key: "bookmarkQueue", actions: [] });
-  authToken = null; currentUser = null; profile = null; attempts = []; bookmarks = []; challengesData = null; achievementsData = null; selectedChallengeId = null; badgeCelebrationKnown.clear(); badgeCelebrationQueue = []; localStorage.removeItem("seomtorch-auth-token"); localStorage.removeItem("seomtorch-auth-user"); renderAuth();
+  authToken = null; currentUser = null; profile = null; attempts = []; bookmarks = []; challengesData = null; achievementsData = null; progressData = null; selectedChallengeId = null; badgeCelebrationKnown.clear(); badgeCelebrationQueue = []; localStorage.removeItem("seomtorch-auth-token"); localStorage.removeItem("seomtorch-auth-user"); renderAuth();
 }
 
 function render() {

@@ -28,6 +28,7 @@ export const api = {
   completeSession: (token, id) => request(`/sessions/${id}/complete/`, { token, method: "POST" }),
   syncAttempt: (token, body) => request("/attempts/", { token, method: "POST", body }),
   attempts: token => request("/attempts/", { token }),
+  progress: token => request("/progress/", { token }),
   bookmarks: token => request("/bookmarks/", { token }),
   addBookmark: (token, question_id) => request("/bookmarks/", { token, method: "POST", body: { question_id } }),
   removeBookmark: (token, question_id) => request("/bookmarks/", { token, method: "DELETE", body: { question_id } }),

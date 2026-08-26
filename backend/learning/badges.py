@@ -10,6 +10,9 @@ BADGE_CATALOG = [
     {"code": "ten-down", "name": "Ten Down", "description": "Record your first 10 answers.", "category": "Getting started", "tier": "field", "target": 10},
     {"code": "century-scholar", "name": "Century Scholar", "description": "Answer 100 questions.", "category": "Milestones", "tier": "bronze", "target": 100},
     {"code": "question-veteran", "name": "Question Veteran", "description": "Answer 500 questions.", "category": "Milestones", "tier": "gold", "target": 500},
+    {"code": "five-papers", "name": "Five in the Books", "description": "Complete five full practice tests.", "category": "Test milestones", "tier": "field", "target": 5},
+    {"code": "test-regular", "name": "Test Regular", "description": "Build a record of twenty-five completed tests.", "category": "Test milestones", "tier": "bronze", "target": 25},
+    {"code": "hundred-papers", "name": "Hundred Papers", "description": "Complete one hundred practice tests.", "category": "Test milestones", "tier": "gold", "target": 100},
     {"code": "three-day-flame", "name": "Three-Day Flame", "description": "Build a three-day study streak.", "category": "Consistency", "tier": "field", "target": 3},
     {"code": "week-of-focus", "name": "Week of Focus", "description": "Study for seven consecutive days.", "category": "Consistency", "tier": "bronze", "target": 7},
     {"code": "fortnight-focus", "name": "Fortnight Focus", "description": "Study for fourteen consecutive days.", "category": "Consistency", "tier": "silver", "target": 14},
@@ -63,7 +66,8 @@ def badge_progress(user):
             wins += 1
     return {
         "first-step": completed.count(), "ten-down": total_attempts, "century-scholar": total_attempts,
-        "question-veteran": total_attempts, "three-day-flame": stats.best_streak, "week-of-focus": stats.best_streak,
+        "question-veteran": total_attempts, "five-papers": completed.count(), "test-regular": completed.count(),
+        "hundred-papers": completed.count(), "three-day-flame": stats.best_streak, "week-of-focus": stats.best_streak,
         "fortnight-focus": stats.best_streak, "monthly-discipline": stats.best_streak,
         "clean-sheet": int(clean_sheet), "sharp-mind": strong_count, "second-look": completed.filter(mode=PracticeSession.Mode.SAVED).count(),
         "mistake-turner": corrected_mistakes, "balanced-learner": subject_count,
