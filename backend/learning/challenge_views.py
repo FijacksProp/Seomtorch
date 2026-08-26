@@ -1,8 +1,9 @@
+import logging
 import random
 from datetime import timedelta
 
 from django.contrib.auth import get_user_model
-from django.db import transaction
+from django.db import DatabaseError, transaction
 from django.db.models import Sum
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
@@ -12,6 +13,21 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import ActivityEvent, Challenge, ChallengeParticipant, PracticeSession, Question, Subject, UserStats
+
+logger = logging.getLogger(__name__)
+
+
+def _record_activity(user, event_type, metadata):
+    """Keep optional monitoring writes from rolling back a student's action."""
+    def write_event():
+        try:
+            ActivityEvent.objects.create(user=user, event_type=event_type, metadata=metadata)
+        except DatabaseError:
+            logger.exception("Challenge activity could not be recorded", extra={"user_id": user.pk, "event_type": event_type})
+
+    # Monitoring is useful, but it must happen after the student-facing
+    # transaction commits and must never decide whether that action succeeds.
+    transaction.on_commit(write_event)
 
 
 def _aware_datetime(value):
@@ -236,7 +252,7 @@ class ChallengeListCreateView(APIView):
         )
         ChallengeParticipant.objects.create(challenge=challenge, user=request.user, status=ChallengeParticipant.Status.ACCEPTED, responded_at=now)
         ChallengeParticipant.objects.bulk_create([ChallengeParticipant(challenge=challenge, user=user) for user in invitees])
-        ActivityEvent.objects.create(user=request.user, event_type=ActivityEvent.Type.CHALLENGE_CREATED, metadata={"challenge_id": str(challenge.id), "invitees": normalized_ids})
+        _record_activity(request.user, ActivityEvent.Type.CHALLENGE_CREATED, {"challenge_id": str(challenge.id), "invitees": normalized_ids})
         return Response(challenge_payload(challenge, request.user), status=status.HTTP_201_CREATED)
 
 
@@ -260,7 +276,7 @@ class ChallengeRespondView(APIView):
         participant.status = ChallengeParticipant.Status.ACCEPTED if response == "accept" else ChallengeParticipant.Status.DECLINED
         participant.responded_at = timezone.now()
         participant.save(update_fields=("status", "responded_at"))
-        ActivityEvent.objects.create(user=request.user, event_type=ActivityEvent.Type.CHALLENGE_RESPONDED, metadata={"challenge_id": str(challenge_id), "response": response})
+        _record_activity(request.user, ActivityEvent.Type.CHALLENGE_RESPONDED, {"challenge_id": str(challenge_id), "response": response})
         return Response(challenge_payload(participant.challenge, request.user))
 
 
@@ -290,7 +306,7 @@ class ChallengeStartView(APIView):
             participant.started_at = now
             participant.deadline_at = min(now + timedelta(minutes=challenge.duration_minutes), challenge.ends_at)
             participant.save(update_fields=("practice_session", "status", "started_at", "deadline_at"))
-            ActivityEvent.objects.create(user=request.user, event_type=ActivityEvent.Type.SESSION_STARTED, metadata={"session_id": str(session.id), "challenge_id": str(challenge.id), "subject": challenge.subject_label})
+            _record_activity(request.user, ActivityEvent.Type.SESSION_STARTED, {"session_id": str(session.id), "challenge_id": str(challenge.id), "subject": challenge.subject_label})
         return Response({
             "challenge_id": str(challenge.id), "session_id": str(participant.practice_session_id),
             "questions": _public_questions(challenge), "duration_minutes": challenge.duration_minutes,

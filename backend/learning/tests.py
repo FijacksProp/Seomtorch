@@ -1,14 +1,16 @@
 import uuid
 from datetime import timedelta
+from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
 from django.core.management import call_command
+from django.db import DatabaseError
 from django.test import TestCase
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient, APITestCase
 from django.utils import timezone
 
-from .models import Attempt, Bookmark, Challenge, ChallengeParticipant, PracticeSession, Question, UserBadge, UserStats
+from .models import ActivityEvent, Attempt, Bookmark, Challenge, ChallengeParticipant, PracticeSession, Question, UserBadge, UserStats
 
 class LearningApiTests(APITestCase):
     @classmethod
@@ -206,6 +208,33 @@ class LearningApiTests(APITestCase):
         declined = other.post(f"/api/challenges/{response.data['id']}/respond/", {"response": "decline"}, format="json")
         self.assertEqual(declined.status_code, 200)
         self.assertEqual(declined.data["my_status"], ChallengeParticipant.Status.DECLINED)
+
+    def test_challenge_accept_and_start_continue_when_activity_logging_fails(self):
+        friend = get_user_model().objects.create_user(email="resilient@example.com", username="resilient", password="Securepass934!")
+        friend_token = Token.objects.create(user=friend)
+        starts_at = timezone.now() + timedelta(minutes=5)
+        create = self.client.post("/api/challenges/", {
+            "title": "Resilient Study Circle", "subject": "english", "question_count": 10,
+            "duration_minutes": 15, "starts_at": starts_at.isoformat(),
+            "ends_at": (starts_at + timedelta(hours=2)).isoformat(), "participant_ids": [friend.public_id],
+        }, format="json")
+        self.assertEqual(create.status_code, 201)
+        challenge = Challenge.objects.get(id=create.data["id"])
+        friend_client = APIClient()
+        friend_client.credentials(HTTP_AUTHORIZATION=f"Token {friend_token.key}")
+
+        with patch.object(ActivityEvent.objects, "create", side_effect=DatabaseError("monitoring unavailable")):
+            accepted = friend_client.post(f"/api/challenges/{challenge.id}/respond/", {"response": "accept"}, format="json")
+        self.assertEqual(accepted.status_code, 200)
+        self.assertEqual(accepted.data["my_status"], ChallengeParticipant.Status.ACCEPTED)
+
+        challenge.starts_at = timezone.now() - timedelta(minutes=1)
+        challenge.save(update_fields=("starts_at",))
+        with patch.object(ActivityEvent.objects, "create", side_effect=DatabaseError("monitoring unavailable")):
+            started = friend_client.post(f"/api/challenges/{challenge.id}/start/", {}, format="json")
+        self.assertEqual(started.status_code, 201)
+        self.assertTrue(started.data["session_id"])
+        self.assertEqual(ChallengeParticipant.objects.get(challenge=challenge, user=friend).status, ChallengeParticipant.Status.STARTED)
 
 class MonitorPermissionTests(TestCase):
     def test_student_cannot_access_monitor(self):

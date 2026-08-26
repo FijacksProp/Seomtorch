@@ -44,5 +44,5 @@ export const api = {
   createChallenge: (token, body) => request("/challenges/", { token, method: "POST", body }),
   challenge: (token, id) => request(`/challenges/${id}/`, { token }),
   respondChallenge: (token, id, response) => request(`/challenges/${id}/respond/`, { token, method: "POST", body: { response } }),
-  startChallenge: (token, id) => request(`/challenges/${id}/start/`, { token, method: "POST" }),
+  startChallenge: (token, id) => request(`/challenges/${id}/start/`, { token, method: "POST", body: {} }),
 };
