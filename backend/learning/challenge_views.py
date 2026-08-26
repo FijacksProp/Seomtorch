@@ -265,7 +265,13 @@ class ChallengeDetailView(APIView):
 class ChallengeRespondView(APIView):
     @transaction.atomic
     def post(self, request, challenge_id):
-        participant = get_object_or_404(ChallengeParticipant.objects.select_for_update().select_related("challenge__creator", "challenge__subject"), challenge_id=challenge_id, user=request.user)
+        # Do not join challenge__subject in this locked query. Subject is
+        # nullable, and PostgreSQL rejects FOR UPDATE over that outer join.
+        participant = get_object_or_404(
+            ChallengeParticipant.objects.select_for_update().select_related("challenge__creator"),
+            challenge_id=challenge_id,
+            user=request.user,
+        )
         response = request.data.get("response")
         if participant.status != ChallengeParticipant.Status.INVITED:
             return Response({"detail": "This invitation has already been answered."}, status=409)
@@ -283,7 +289,13 @@ class ChallengeRespondView(APIView):
 class ChallengeStartView(APIView):
     @transaction.atomic
     def post(self, request, challenge_id):
-        participant = get_object_or_404(ChallengeParticipant.objects.select_for_update().select_related("challenge__creator", "challenge__subject"), challenge_id=challenge_id, user=request.user)
+        # Keep the row lock on non-nullable joins only. Accessing subject later
+        # as a separate query is safe and works on both PostgreSQL and SQLite.
+        participant = get_object_or_404(
+            ChallengeParticipant.objects.select_for_update().select_related("challenge__creator"),
+            challenge_id=challenge_id,
+            user=request.user,
+        )
         challenge = participant.challenge
         now = timezone.now()
         if participant.status == ChallengeParticipant.Status.INVITED:

@@ -11,7 +11,8 @@ async function request(path, { token, method = "GET", body } = {}) {
   } catch { throw new ApiError("The server could not be reached. Check your connection and try again."); }
   const data = response.status === 204 ? null : await response.json().catch(() => ({}));
   if (!response.ok) {
-    const message = data?.non_field_errors?.[0] || data?.detail || Object.values(data || {}).flat()[0] || "The request could not be completed.";
+    const baseMessage = data?.non_field_errors?.[0] || data?.detail || Object.values(data || {}).flat()[0] || "The request could not be completed.";
+    const message = data?.reference ? `${baseMessage} Reference: ${data.reference}` : baseMessage;
     throw new ApiError(String(message), response.status, data);
   }
   return data;
