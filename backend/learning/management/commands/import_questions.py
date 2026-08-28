@@ -37,10 +37,22 @@ class Command(BaseCommand):
             self.stdout.write("Question bank already populated; skipping import.")
             return
 
+        candidate_roots = [
+            Path(__file__).resolve().parents[4],
+            Path(__file__).resolve().parents[3],
+            Path.cwd(),
+            Path.cwd().parent,
+        ]
+        manifest_path = None
         repo_root = Path(__file__).resolve().parents[4]
-        manifest_path = repo_root / "data" / "manifest.json"
+        for candidate in candidate_roots:
+            p = candidate / "data" / "manifest.json"
+            if p.exists():
+                manifest_path = p
+                repo_root = candidate
+                break
 
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else None
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path and manifest_path.exists() else None
         release_version = str(manifest.get("version")) if manifest else None
         if options["if_current"] and release_version and QuestionBankRelease.objects.filter(version=release_version).exists():
             self.stdout.write(f"Question bank v{release_version} already imported; skipping.")

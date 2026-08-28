@@ -52,6 +52,24 @@ function dismissAppLoader() {
   });
 }
 
+function showLoadingOverlay(title = "Preparing your session", subtitle = "Loading questions and syncing...") {
+  hideLoadingOverlay();
+  const overlay = document.createElement("div");
+  overlay.id = "session-loading-overlay";
+  overlay.className = "app-loader";
+  overlay.style.zIndex = "300";
+  overlay.innerHTML = `<div class="loader-composition"><div class="loader-emblem" aria-hidden="true"><span class="loader-halo"></span><span class="loader-logo-frame"><img src="assets/seomtorch_logo.png" alt=""></span></div><div class="loader-copy"><span>Please wait</span><strong style="font-size:clamp(22px, 5vw, 30px);">${escapeHtml(title)}</strong><p>${escapeHtml(subtitle)}</p></div><div class="loader-rule" aria-hidden="true"><i></i></div></div>`;
+  document.body.appendChild(overlay);
+}
+
+function hideLoadingOverlay() {
+  const overlay = document.querySelector("#session-loading-overlay");
+  if (overlay) {
+    overlay.classList.add("dismissed");
+    setTimeout(() => overlay.remove(), 400);
+  }
+}
+
 let db;
 let questions = [];
 let profile = null;
@@ -522,19 +540,62 @@ function startSession(subject, topic, count = 10, durationMinutes = 10, mode = s
 }
 
 async function createSession(subject, topic, count = 10, durationMinutes = 10, mode = selectedPracticeMode) {
-  let queue = subject === "all" ? weightedAllSubjects(count) : subject === "saved" ? savedSessionQuestions(count) : weightedQuestions(subject, topic, count); let remoteId = null;
+  showLoadingOverlay("Preparing practice", "Selecting questions for your session...");
   try {
-    const remote = await api.startSession(authToken, { subject, topic: topic ? topicSlug(topic) : null, limit: count, duration_minutes: durationMinutes, mode });
-    remoteId = remote.session_id;
-    const selected = remote.questions.map(item => questionById(item.external_id)).filter(Boolean);
-    if (selected.length) queue = selected;
-  } catch { showToast("Working offline. This session will sync when connected."); }
-  if (queue.length < count) showToast(`${queue.length} questions are currently available in this selection.`);
-  const sections = buildSessionSections(queue);
-  if (mode === "normal") durationMinutes = 0;
+    let queue = subject === "all" ? weightedAllSubjects(count) : subject === "saved" ? savedSessionQuestions(count) : weightedQuestions(subject, topic, count);
+    let remoteId = null;
+    if (authToken && navigator.onLine) {
+      try {
+        const startPromise = api.startSession(authToken, { subject, topic: topic ? topicSlug(topic) : null, limit: count, duration_minutes: durationMinutes, mode });
+        const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), 5000));
+        const remote = await Promise.race([startPromise, timeoutPromise]);
+        remoteId = remote?.session_id || null;
+        const selected = (remote?.questions || []).map(item => questionById(item.external_id)).filter(Boolean);
+        if (selected.length) queue = selected;
+      } catch {
+        // Smooth local offline fallback
+      }
+    }
+    if (!queue || queue.length === 0) {
+      queue = questions.filter(q => subject === "all" || q.subject === subject).slice(0, count);
+    }
+    if (!queue || queue.length === 0) {
+      showToast("No questions found for this selection.");
+      route = "practice";
+      render();
+      return;
+    }
+    if (queue.length < count) {
+      showToast(`${queue.length} question${queue.length === 1 ? "" : "s"} available in this selection.`);
+    }
+    const sections = buildSessionSections(queue);
+    if (mode === "normal") durationMinutes = 0;
 
-  activeSession = { subject, topic, requestedCount: count, durationMinutes, deadline: null, started: false, finished: false, queue, sections, answers: queue.map(() => ({ selected: null, confirmed: false, correct: false })), remoteId, index: 0, correct: 0, questionStartedAt: null, reportedComplete: false, timedOut: false, timeUpAcknowledged: false, mode };
-  route = "session"; render();
+    activeSession = {
+      subject,
+      topic,
+      requestedCount: count,
+      durationMinutes,
+      deadline: null,
+      started: false,
+      finished: false,
+      queue,
+      sections,
+      answers: queue.map(() => ({ selected: null, confirmed: false, correct: false })),
+      remoteId,
+      index: 0,
+      correct: 0,
+      questionStartedAt: null,
+      reportedComplete: false,
+      timedOut: false,
+      timeUpAcknowledged: false,
+      mode
+    };
+    route = "session";
+    render();
+  } finally {
+    hideLoadingOverlay();
+  }
 }
 
 function formatTime(totalSeconds) {
@@ -1244,15 +1305,33 @@ init();
 async function renderDailySprint() {
   const content = `<section class="page"><div class="session-ready"><p class="eyebrow">Daily Challenge</p><h1>5-Minute Sprint</h1><p class="lede">Loading your daily sprint questions...</p></div></section>`;
   app.innerHTML = shell(content); bindShell();
+  showLoadingOverlay("Daily Sprint", "Loading your 5-minute sprint questions...");
 
   try {
-    const remote = await api.dailySprint(authToken);
-    const sprintQuestions = remote.questions.map(item => questionById(item.external_id)).filter(Boolean);
+    let sprintQuestions = [];
+    let remoteId = null;
+    try {
+      const sprintPromise = api.dailySprint(authToken);
+      const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), 6000));
+      const remote = await Promise.race([sprintPromise, timeoutPromise]);
+      remoteId = remote?.session_id || null;
+      sprintQuestions = (remote?.questions || []).map(item => questionById(item.external_id)).filter(Boolean);
+    } catch (e) {
+      if (e instanceof ApiError && e.status === 409) {
+        dailySprintCompleted = true;
+        localStorage.setItem("seomtorch-sprint-" + new Date().toISOString().slice(0, 10), "done");
+        throw e;
+      }
+      // Offline fallback: pick 5 random questions across subjects
+      const shuffled = [...questions].sort(() => 0.5 - Math.random());
+      sprintQuestions = shuffled.slice(0, 5);
+    }
+
     if (sprintQuestions.length > 0) {
-      activeSession = { subject: 'sprint', topic: null, requestedCount: 5, durationMinutes: 5, deadline: Date.now() + 5 * 60000, started: true, finished: false, queue: sprintQuestions, sections: [{subject: 'sprint', name: 'Sprint', count: sprintQuestions.length, start: 0}], answers: sprintQuestions.map(() => ({ selected: null, confirmed: false, correct: false })), remoteId: remote.session_id, index: 0, correct: 0, questionStartedAt: Date.now(), reportedComplete: false, timedOut: false, timeUpAcknowledged: false, mode: 'sprint' };
+      activeSession = { subject: 'sprint', topic: null, requestedCount: 5, durationMinutes: 5, deadline: Date.now() + 5 * 60000, started: true, finished: false, queue: sprintQuestions, sections: [{subject: 'sprint', name: 'Sprint', count: sprintQuestions.length, start: 0}], answers: sprintQuestions.map(() => ({ selected: null, confirmed: false, correct: false })), remoteId, index: 0, correct: 0, questionStartedAt: Date.now(), reportedComplete: false, timedOut: false, timeUpAcknowledged: false, mode: 'sprint' };
       route = "session"; render();
     } else {
-      throw new Error("No questions");
+      throw new Error("No questions available");
     }
   } catch (err) {
     if (err instanceof ApiError && err.status === 409) {
@@ -1262,6 +1341,8 @@ async function renderDailySprint() {
     const message = err instanceof ApiError ? err.message : "Could not load the sprint. Check your connection and try again.";
     app.innerHTML = shell(`<section class="page page-narrow"><div class="session-ready"><p class="eyebrow">Daily challenge</p><h1>${dailySprintCompleted ? "Sprint already started." : "Sprint unavailable."}</h1><p class="lede">${escapeHtml(message)}</p><button class="button" data-route="home">Return home</button></div></section>`);
     bindShell();
+  } finally {
+    hideLoadingOverlay();
   }
 }
 
