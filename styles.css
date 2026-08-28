@@ -860,8 +860,14 @@ select:focus, textarea:focus, input:focus { border-color: var(--forest); backgro
 
 /* Normal practice mode - immediate feedback */
 .normal-session-page {
-  max-width: 780px;
+  width: min(1080px, 100%);
+  max-width: 1080px;
   margin: 0 auto;
+  display: block;
+}
+.normal-session-page .session-workspace {
+  width: 100%;
+  max-width: 100%;
 }
 .normal-question-header {
   display: flex;
@@ -887,16 +893,18 @@ select:focus, textarea:focus, input:focus { border-color: var(--forest); backgro
 .normal-question-paper {
   background: #fff;
   border-radius: 16px;
-  padding: 32px;
+  padding: 32px clamp(24px, 4vw, 48px);
   border: 1px solid #e8e4db;
   margin-bottom: 24px;
+  width: 100%;
 }
 .normal-question-paper h2 {
-  font-size: 1.15rem;
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
   font-weight: 600;
-  line-height: 1.6;
+  line-height: 1.55;
   color: #1a1a1a;
   margin: 0 0 24px;
+  max-width: 100%;
 }
 /* Instant feedback styles */
 .instant-feedback {

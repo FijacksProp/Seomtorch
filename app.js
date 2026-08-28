@@ -1,19 +1,20 @@
 import { api, ApiError } from "./api-client.js";
 
 const SUBJECTS = [
+  { id: "biology", name: "Biology", description: "JAMB cell biology, physiology, ecology, genetics and evolution" },
   { id: "english", name: "English Language", description: "Usage, comprehension and oral forms" },
   { id: "general-paper", name: "General Paper", description: "Civics, current affairs and general knowledge" },
   { id: "mathematics", name: "Mathematics", description: "Numbers, algebra and applied reasoning" },
   { id: "physics", name: "Physics", description: "JAMB mechanics, waves, electricity and modern physics" },
 ];
-const ALL_SUBJECT_ORDER = ["english", "mathematics", "general-paper", "physics"].map(id => SUBJECTS.find(subject => subject.id === id));
+const ALL_SUBJECT_ORDER = ["biology", "english", "mathematics", "general-paper", "physics"].map(id => SUBJECTS.find(subject => subject.id === id));
 
 const FAQS = [
   { group: "Getting started", q: "What is Seomtorch designed for?", a: "Seomtorch is a personal study companion for structured JAMB, WAEC, NECO and Post-UTME preparation. It helps you practise by topic, learn from corrections and see where your next study session will matter most." },
   { group: "Getting started", q: "Do I need an account or internet connection?", a: "An account is required so your progress can be monitored and restored across devices. After signing in once, practice can continue offline and pending answers synchronize when the connection returns." },
   { group: "Getting started", q: "Can I install Seomtorch on my device?", a: "Yes. Use the Install app button. On iPhone or iPad, open Seomtorch in Safari, tap Share, then choose Add to Home Screen." },
   { group: "Practice and review", q: "How are questions selected?", a: "Sessions prioritise questions you have not seen, topics where your accuracy is lower, and questions you previously missed. Recently answered questions receive less priority, which reduces unnecessary repetition." },
-  { group: "Practice and review", q: "Which subjects are available?", a: "English Language, General Paper, Mathematics and Physics are available. Physics currently includes a broad JAMB question bank, with detailed written explanations being added in reviewed batches." },
+  { group: "Practice and review", q: "Which subjects are available?", a: "Biology, English Language, General Paper, Mathematics and Physics are available. Biology and Physics include broad JAMB question banks with detailed written explanations." },
   { group: "Practice and review", q: "Can I practise one topic only?", a: "Yes. Open Practice, select a subject, then choose a listed topic. You can also choose All topics for a mixed session within that subject." },
   { group: "Practice and review", q: "How do timed sessions work?", a: "Choose any question count from 10 to 100 and enter the number of minutes you want to study. One overall countdown runs across the complete session." },
   { group: "Practice and review", q: "Can I practise every subject together?", a: "Yes. Choose All subjects to build one balanced session. Questions are grouped into clear subject sections under one overall timer." },
@@ -1391,8 +1392,8 @@ function renderNormalSession() {
   const passage = questionPassage(question);
   const videoUrl = questionVideo(question);
 
-  const content = `<section class="page session-page">
-    <div class="session-workspace" style="max-width:800px; margin:0 auto; padding-top:1rem;">
+  const content = `<section class="page normal-session-page">
+    <div class="session-workspace">
       <div class="question-header">
         <div class="question-topline">
           <span>${subjectName(question.subject)} · ${escapeHtml(question.topic)}${question.questionYear ? ` · ${question.questionYear} source` : ""}</span>
@@ -1401,7 +1402,7 @@ function renderNormalSession() {
         <div class="question-progress"><i style="width:${confirmed / activeSession.queue.length * 100}%"></i></div>
       </div>
 
-      <article class="question-paper" style="${passage ? 'display:flex; flex-direction:column; gap:1rem;' : ''}">
+      <article class="question-paper normal-question-paper" style="${passage ? 'display:flex; flex-direction:column; gap:1rem;' : ''}">
         ${passage ? `<details class="passage-details"><summary>View reading passage</summary><div class="passage-content">${renderMath(escapeHtml(passage))}</div></details>` : ""}
         ${renderQuestionImage(question)}
 
