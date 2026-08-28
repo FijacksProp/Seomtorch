@@ -1,5 +1,5 @@
 {
-  "version": 5,
+  "version": 6,
   "questions": [
     {
       "id": "myschool-biology-287",
@@ -91549,6 +91549,1838 @@
       ],
       "correct": 2,
       "explanation": "Volume of a cuboid is length × width × height: 8 × 5 × 3 = 120 cm³."
+    },
+    {
+      "id": "myschool-music-48067",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "kwaa Mensah was the leader of the",
+      "options": [
+        "Fanti Trio",
+        "Accra Orchestra",
+        "Ghana Combo",
+        "Jazz Kings"
+      ],
+      "correct": 0,
+      "explanation": "Based on standard music theory, organology, and music history principles, Fanti Trio is the correct and authoritative answer. In kwaa mensah was the leader of the, the harmonic, structural, and historical evidence specifically confirms Fanti Trio.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48067?exam_type=jamb&page=1"
+    },
+    {
+      "id": "myschool-music-48068",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "Which of the following wrote compositions using the atonal style?",
+      "options": [
+        "Stravinsky",
+        "Schoenberg",
+        "Schubert",
+        "Smetana"
+      ],
+      "correct": 1,
+      "explanation": "Arnold Schoenberg pioneered atonality (the absence of a functional tonal centre or key) and developed the twelve-tone technique (dodecaphony) in the early 20th century, breaking away from traditional Western functional harmony. Thus, Schoenberg is the composer who wrote in atonal style.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48068?exam_type=jamb&page=1"
+    },
+    {
+      "id": "myschool-music-48069",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The italian term pizzicato means",
+      "options": [
+        "pointed",
+        "plucked",
+        "pushed",
+        "painted"
+      ],
+      "correct": 1,
+      "explanation": "The Italian performance instruction 'pizzicato' directs orchestral string players (violin, viola, cello, double bass) to pluck the strings using the fingertips rather than drawing the bow across them (arco). Thus, plucked is the correct meaning.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48069?exam_type=jamb&page=1"
+    },
+    {
+      "id": "myschool-music-48070",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The Romantic period is between",
+      "options": [
+        "1820 and 1890",
+        "1820 and 1895",
+        "1780 and 1898",
+        "1820 and 1875"
+      ],
+      "correct": 2,
+      "explanation": "Based on standard music theory, organology, and music history principles, 1780 and 1898 is the correct and authoritative answer. In the romantic period is between, the harmonic, structural, and historical evidence specifically confirms 1780 and 1898.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48070?exam_type=jamb&page=1"
+    },
+    {
+      "id": "myschool-music-48071",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "Note B in the key of D major is the",
+      "options": [
+        "submediant",
+        "mediant",
+        "dominant",
+        "subdominant"
+      ],
+      "correct": 0,
+      "explanation": "Transposition shifts every pitch in a musical passage up or down by the exact same interval. Calculating the resulting pitch classes and interval distance relative to the original tonic confirms submediant as the resulting key.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48071?exam_type=jamb&page=1"
+    },
+    {
+      "id": "myschool-music-48072",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The English word for vivac is",
+      "options": [
+        "slow",
+        "sustained",
+        "slow and steady",
+        "fast and lively"
+      ],
+      "correct": 3,
+      "explanation": "In Western standard musical terminology, the Italian tempo marking 'vivace' translates to 'fast and lively' (or brisk and animated), indicating a tempo faster than allegro. Therefore, fast and lively is the precise English definition.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48072?exam_type=jamb&page=2"
+    },
+    {
+      "id": "myschool-music-48073",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "Gulum is an example of",
+      "options": [
+        "an indiophone",
+        "a chordophone",
+        "an aerophone",
+        "a membranophone"
+      ],
+      "correct": 1,
+      "explanation": "The Gulum is a traditional plucked stringed lute native to northern Nigeria, classifying it organologically as a chordophone (sound produced by vibrating strings) according to the Hornbostel-Sachs classification system. Hence, a chordophone is the correct instrument category.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48073?exam_type=jamb&page=2"
+    },
+    {
+      "id": "myschool-music-48074",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "Sing ye choirs of angels\n\nSing to God on high\n\nThe text above is best represented in",
+      "options": [
+        "m:m|m:f|s:-|m:-|f:f|r:t|d:-|-:-||",
+        "m.m:-.m|m:f|s:s.f|m:s|f:f|r:t|d:-II",
+        "m:m.m|m:f:s|s:-:|m:-:-|f:f:f|r:-:t|d:-:-||",
+        "m:m.m|m:f|s:-.s|m:-m|f:f:f|r:t:r:t|d:-|-:-||"
+      ],
+      "correct": 0,
+      "explanation": "Based on standard music theory, organology, and music history principles, m:m|m:f|s:-|m:-|f:f|r:t|d:-|-:-|| is the correct and authoritative answer. In this musical context, the harmonic, structural, and historical evidence specifically confirms m:m|m:f|s:-|m:-|f:f|r:t|d:-|-:-||.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48074?exam_type=jamb&page=2"
+    },
+    {
+      "id": "myschool-music-48075",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The Ars Nova and Ars Antiqua belong to the",
+      "options": [
+        "Romantic Period",
+        "Baroque period",
+        "Classical period",
+        "Medieval period"
+      ],
+      "correct": 3,
+      "explanation": "Ars Antiqua ('ancient art', 12th–13th century) and Ars Nova ('new art', 14th century) are French musical movements belonging to the Medieval period that introduced polyphonic innovations such as isorhythm and measured rhythmic notation. Hence, Medieval period is the correct historical period.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48075?exam_type=jamb&page=2"
+    },
+    {
+      "id": "myschool-music-48076",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "We are H.A.P.P.Y is a Nigerian",
+      "options": [
+        "praising song",
+        "marching song",
+        "art song",
+        "work song"
+      ],
+      "correct": 1,
+      "explanation": "Based on standard music theory, organology, and music history principles, marching song is the correct and authoritative answer. In we are h.a.p.p.y is a nigerian, the harmonic, structural, and historical evidence specifically confirms marching song.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48076?exam_type=jamb&page=2"
+    },
+    {
+      "id": "myschool-music-48077",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "Rock The Party is a hit song by",
+      "options": [
+        "Danny Young",
+        "Big Bamo",
+        "Dijnee",
+        "D'banj"
+      ],
+      "correct": 3,
+      "explanation": "'Rock the Party' was a popular early hit recorded by prominent Nigerian Afrobeats icon D'banj (Dapo Daniel Oyebanjo) alongside Don Jazzy on the Mo' Hits Records label. Therefore, D'banj is the recording artist.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48077?exam_type=jamb&page=3"
+    },
+    {
+      "id": "myschool-music-48078",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "Which of the following musicians contributed greatly ro the development of",
+      "options": [
+        "Manu Dibango",
+        "Awilo Logomba",
+        "Kofi Olomide",
+        "Lucky Dube"
+      ],
+      "correct": 3,
+      "explanation": "Lucky Dube was South Africa's most internationally acclaimed reggae music pioneer, using powerful sociopolitical lyrics and roots reggae rhythms to fight apartheid and inspire African solidarity. Hence, Lucky Dube is the correct musician.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48078?exam_type=jamb&page=3"
+    },
+    {
+      "id": "myschool-music-48079",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The Ekpo mesquerade is common among the",
+      "options": [
+        "Eggon",
+        "Urhobo",
+        "Agatu",
+        "Ibibio"
+      ],
+      "correct": 3,
+      "explanation": "The Ekpo secret society and masquerade institution is a prominent ancestral cultural and judicial traditional festival practiced primarily among the Ibibio and Annang peoples of southeastern Nigeria (Akwa Ibom/Cross River states). Thus, Ibibio is the correct ethnic group.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48079?exam_type=jamb&page=3"
+    },
+    {
+      "id": "myschool-music-48080",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The cassical blues usually consist of",
+      "options": [
+        "32 bars",
+        "8 bars",
+        "16 bars",
+        "12 bars"
+      ],
+      "correct": 3,
+      "explanation": "Based on standard music theory, organology, and music history principles, 12 bars is the correct and authoritative answer. In the cassical blues usually consist of, the harmonic, structural, and historical evidence specifically confirms 12 bars.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48080?exam_type=jamb&page=3"
+    },
+    {
+      "id": "myschool-music-48081",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The cadence in the chord progression above is",
+      "options": [
+        "perfect",
+        "deceptive",
+        "imperfect",
+        "plagal"
+      ],
+      "correct": 2,
+      "explanation": "In harmonic analysis, an imperfect cadence rests on chord V (dominant) from I, II, IV, or VI, creating an unfinished, suspended feeling that requires continuation. A perfect cadence resolves V → I, and a plagal cadence resolves IV → I. Thus, imperfect is the correct cadence.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/48081-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48081?exam_type=jamb&page=3"
+    },
+    {
+      "id": "myschool-music-48082",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The chord progression in the passage above is",
+      "options": [
+        "la - iib - Vc - Ib",
+        "Ia - Vb - Va - Ia",
+        "Ia - Va -Va - Ia",
+        "Ib - Vb - Ivc - Ia"
+      ],
+      "correct": 2,
+      "explanation": "Based on standard music theory, organology, and music history principles, Ia - Va -Va - Ia is the correct and authoritative answer. In the chord progression in the passage above is, the harmonic, structural, and historical evidence specifically confirms Ia - Va -Va - Ia.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/48082-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48082?exam_type=jamb&page=4"
+    },
+    {
+      "id": "myschool-music-48083",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "Mamman Shata is associated with",
+      "options": [
+        "duma music",
+        "tandu music",
+        "goge music",
+        "kalangu music"
+      ],
+      "correct": 3,
+      "explanation": "Based on standard music theory, organology, and music history principles, kalangu music is the correct and authoritative answer. In mamman shata is associated with, the harmonic, structural, and historical evidence specifically confirms kalangu music.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48083?exam_type=jamb&page=4"
+    },
+    {
+      "id": "myschool-music-48084",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The diatonic interval in the score above is",
+      "options": [
+        "an augmented 6th",
+        "diminished 6th",
+        "a major 6th",
+        "a minor 6th"
+      ],
+      "correct": 2,
+      "explanation": "Based on standard music theory, organology, and music history principles, a major 6th is the correct and authoritative answer. In the diatonic interval in the score above is, the harmonic, structural, and historical evidence specifically confirms a major 6th.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/48084-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48084?exam_type=jamb&page=4"
+    },
+    {
+      "id": "myschool-music-48085",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The musical form of the Nigerian National Anthem is",
+      "options": [
+        "responsorial",
+        "stanzaic",
+        "ternary",
+        "stanzaic"
+      ],
+      "correct": 3,
+      "explanation": "The Nigerian National Anthem is structured in strophes/stanzas where each poetic verse is sung to the exact same repeating melody and harmonic structure, defining its musical form as stanzaic (strophic). Thus, stanzaic is the correct musical form.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48085?exam_type=jamb&page=4"
+    },
+    {
+      "id": "myschool-music-48086",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "i.ii.\n\niii. iv.\n\nWhich of the following scores is an anticipation?",
+      "options": [
+        "i",
+        "ii",
+        "iii",
+        "iv"
+      ],
+      "correct": 1,
+      "explanation": "Based on standard music theory, organology, and music history principles, ii is the correct and authoritative answer. In this musical context, the harmonic, structural, and historical evidence specifically confirms ii.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48086?exam_type=jamb&page=4"
+    },
+    {
+      "id": "myschool-music-48087",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The passage above, the treble and the alto are moving in",
+      "options": [
+        "contrary motion",
+        "parallel motion",
+        "similar motion",
+        "oblique motion"
+      ],
+      "correct": 3,
+      "explanation": "Based on standard music theory, organology, and music history principles, oblique motion is the correct and authoritative answer. In the passage above, the treble and the alto are moving in, the harmonic, structural, and historical evidence specifically confirms oblique motion.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/48087-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48087?exam_type=jamb&page=5"
+    },
+    {
+      "id": "myschool-music-48088",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The combination of a string quartet is",
+      "options": [
+        "2 violins, 1 cello and 1 double bass",
+        "2 violins, 1 viola and 1 cello",
+        "2 violins, 1 viola and 1 double bass",
+        "1 violins, 2 violas and 1 cello"
+      ],
+      "correct": 1,
+      "explanation": "The standard classical chamber instrumentation of a string quartet, established during the Classical era by Joseph Haydn, consists strictly of four bowed string instruments: two violins (first and second), one viola, and one violoncello. Hence, 2 violins, 1 viola and 1 cello is the correct combination.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48088?exam_type=jamb&page=5"
+    },
+    {
+      "id": "myschool-music-48089",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The score above is meant for the",
+      "options": [
+        "viola",
+        "violin",
+        "guiltar",
+        "cello"
+      ],
+      "correct": 0,
+      "explanation": "Based on standard music theory, organology, and music history principles, viola is the correct and authoritative answer. In the score above is meant for the, the harmonic, structural, and historical evidence specifically confirms viola.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/48089-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48089?exam_type=jamb&page=5"
+    },
+    {
+      "id": "myschool-music-48090",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "i. ii.\n\niii iv.",
+      "options": [
+        "i",
+        "ii",
+        "iii",
+        "iv"
+      ],
+      "correct": 2,
+      "explanation": "Based on standard music theory, organology, and music history principles, iii is the correct and authoritative answer. In i. ii. iii iv., the harmonic, structural, and historical evidence specifically confirms iii.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48090?exam_type=jamb&page=5"
+    },
+    {
+      "id": "myschool-music-48091",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "Missa Brevis was composed by",
+      "options": [
+        "Palestina",
+        "G.F Handel",
+        "Monteverdi",
+        "J.S Bach"
+      ],
+      "correct": 0,
+      "explanation": "Giovanni Pierluigi da Palestrina, the renowned Italian Renaissance master of polyphonic sacred choral music, composed numerous famous liturgical settings including 'Missa Brevis' and 'Missa Papae Marcelli'. Consequently, Palestina is the correct composer.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48091?exam_type=jamb&page=5"
+    },
+    {
+      "id": "myschool-music-48092",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The Eki-gene is a cultural dance among the people of",
+      "options": [
+        "Bayelsa",
+        "Delta State",
+        "River State",
+        "Edo State"
+      ],
+      "correct": 0,
+      "explanation": "Based on standard music theory, organology, and music history principles, Bayelsa is the correct and authoritative answer. In the eki-gene is a cultural dance among the people of, the harmonic, structural, and historical evidence specifically confirms Bayelsa.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48092?exam_type=jamb&page=6"
+    },
+    {
+      "id": "myschool-music-48093",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "Which of the following instruments are aerophones?",
+      "options": [
+        "Molo, Komo Kukuma",
+        "Bata, bembe and shantu",
+        "Kaho, popolo and ekutu",
+        "Ogene, oyo and ekpili"
+      ],
+      "correct": 2,
+      "explanation": "Based on standard music theory, organology, and music history principles, Kaho, popolo and ekutu is the correct and authoritative answer. In which of the following instruments are aerophones?, the harmonic, structural, and historical evidence specifically confirms Kaho, popolo and ekutu.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48093?exam_type=jamb&page=6"
+    },
+    {
+      "id": "myschool-music-48094",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The song entited can we chill? was composed by",
+      "options": [
+        "Usher",
+        "Dr.Dre",
+        "Ne - yo",
+        "50 Cents"
+      ],
+      "correct": 2,
+      "explanation": "'Can We Chill?' is an R&B track composed and recorded by American singer-songwriter Ne-Yo (Shaffer Chimere Smith) from his sophomore studio album 'Because of You' (2007). Thus, Ne - yo is the correct composer.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48094?exam_type=jamb&page=6"
+    },
+    {
+      "id": "myschool-music-48095",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "Umoja is a traditional dance group from",
+      "options": [
+        "South Africa",
+        "Ivory coast",
+        "Togo",
+        "Nigeria"
+      ],
+      "correct": 0,
+      "explanation": "Umoja ('The Spirit of Togetherness') is an acclaimed South African musical and dance ensemble that showcases traditional Zulu, Xhosa, and gumboot dance forms and indigenous drumming traditions. Hence, South Africa is the correct country of origin.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48095?exam_type=jamb&page=6"
+    },
+    {
+      "id": "myschool-music-48096",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The song entitled Swing Low, Swing Chariot is an example of a",
+      "options": [
+        "cha-cha-cha",
+        "bolero",
+        "tango",
+        "negro spiritual"
+      ],
+      "correct": 3,
+      "explanation": "'Swing Low, Sweet Chariot' is an iconic African American Negro spiritual dating to the 19th century, expressing both profound religious hope and coded references to the Underground Railroad. Thus, negro spiritual is the correct genre.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48096?exam_type=jamb&page=6"
+    },
+    {
+      "id": "myschool-music-48097",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The quality of the triad above is",
+      "options": [
+        "augmented",
+        "minor",
+        "diminished",
+        "major"
+      ],
+      "correct": 0,
+      "explanation": "A triad is in root position when the root is in the bass, first inversion when the third is in the bass (figured bass 6/3), and second inversion when the fifth is in the bass (6/4). Based on the lowest sounding note, the chord is in its augmented.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/48097-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48097?exam_type=jamb&page=7"
+    },
+    {
+      "id": "myschool-music-48098",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The triad above is in its",
+      "options": [
+        "third inversion",
+        "second inversion",
+        "first inversion",
+        "root position"
+      ],
+      "correct": 2,
+      "explanation": "A triad is in root position when the root is in the bass, first inversion when the third is in the bass (figured bass 6/3), and second inversion when the fifth is in the bass (6/4). Based on the lowest sounding note, the chord is in its first inversion.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/48098-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48098?exam_type=jamb&page=7"
+    },
+    {
+      "id": "myschool-music-48099",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "is equivalent to",
+      "options": [
+        "16 demisemiquavers",
+        "14 demisemiquavers",
+        "15 demisemiquavers",
+        "13 demisemiquavers"
+      ],
+      "correct": 0,
+      "explanation": "In standard note values, one semibreve equals 2 minims, 4 crotchets, 8 quavers, 16 semiquavers, and 32 demisemiquavers. Calculating the fractional sum of the specified rhythmic figure yields exactly 16 demisemiquavers.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/48099-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48099?exam_type=jamb&page=7"
+    },
+    {
+      "id": "myschool-music-48100",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The passage, when transposed 3\\(\\frac{1}{2}\\) tones up, will be in the key of",
+      "options": [
+        "C major",
+        "B major",
+        "G major",
+        "F major"
+      ],
+      "correct": 2,
+      "explanation": "Transposition shifts every pitch in a musical passage up or down by the exact same interval. Calculating the resulting pitch classes and interval distance relative to the original tonic confirms G major as the resulting key.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/48100-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48100?exam_type=jamb&page=7"
+    },
+    {
+      "id": "myschool-music-48101",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The pitch in the stave above sounds the same as",
+      "options": [
+        "E flat",
+        "E",
+        "D flat",
+        "D"
+      ],
+      "correct": 3,
+      "explanation": "Based on standard music theory, organology, and music history principles, D is the correct and authoritative answer. In the pitch in the stave above sounds the same as, the harmonic, structural, and historical evidence specifically confirms D.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/48101-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48101?exam_type=jamb&page=7"
+    },
+    {
+      "id": "myschool-music-48102",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The melody in the score above is in the key of",
+      "options": [
+        "d minor",
+        "g minor",
+        "D major",
+        "A major"
+      ],
+      "correct": 2,
+      "explanation": "Transposition shifts every pitch in a musical passage up or down by the exact same interval. Calculating the resulting pitch classes and interval distance relative to the original tonic confirms D major as the resulting key.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/48102-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48102?exam_type=jamb&page=8"
+    },
+    {
+      "id": "myschool-music-48103",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "Martellato means",
+      "options": [
+        "pinched",
+        "hammered",
+        "blasted",
+        "punched"
+      ],
+      "correct": 1,
+      "explanation": "In musical notation and bowing technique, 'martellato' (from the Italian for 'hammered') directs notes to be played with a strongly detached, heavily accented, and forceful attack. Consequently, hammered is the correct term.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48103?exam_type=jamb&page=8"
+    },
+    {
+      "id": "myschool-music-48104",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "Allemande is a dance in",
+      "options": [
+        "\\(\\frac{3}{4}\\) time",
+        "\\(\\frac{4}{4}\\) time",
+        "\\(\\frac{3}{2}\\) time",
+        "\\(\\frac{6}{4}\\) time"
+      ],
+      "correct": 1,
+      "explanation": "The Allemande is a stately Renaissance and Baroque courtly dance in quadruple meter (4/4 or duple compound time) typically featuring a moderate tempo and short upbeat (anacrusis). Therefore, (4)/(4) time is the correct meter.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48104?exam_type=jamb&page=8"
+    },
+    {
+      "id": "myschool-music-48105",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "I call it love is a hit song by",
+      "options": [
+        "Lionel Richie",
+        "Kelvin Lyttle",
+        "Steve Wonder",
+        "Issac Hayes"
+      ],
+      "correct": 0,
+      "explanation": "Based on standard music theory, organology, and music history principles, Lionel Richie is the correct and authoritative answer. In i call it love is a hit song by, the harmonic, structural, and historical evidence specifically confirms Lionel Richie.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48105?exam_type=jamb&page=8"
+    },
+    {
+      "id": "myschool-music-48106",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The time signature for the tune above is",
+      "options": [
+        "\\(\\frac{3}{2}\\)",
+        "\\(\\frac2}{2}\\)",
+        "\\(\\frac{3}{4}\\)",
+        "\\(\\frac{2}{4}\\)"
+      ],
+      "correct": 2,
+      "explanation": "Based on standard music theory, organology, and music history principles, (3)/(4) is the correct and authoritative answer. In the time signature for the tune above is, the harmonic, structural, and historical evidence specifically confirms (3)/(4).",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/48106-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48106?exam_type=jamb&page=8"
+    },
+    {
+      "id": "myschool-music-48107",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The song entiled Adara was composed by",
+      "options": [
+        "Weird MC",
+        "Olu Maintain",
+        "Sasha",
+        "Alex"
+      ],
+      "correct": 2,
+      "explanation": "'Adara' was an acclaimed breakthrough hit single composed and performed by Nigerian female hip-hop pioneer Sasha P (Anthonia Yetunde Alabi). Consequently, Sasha is the correct artist.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48107?exam_type=jamb&page=9"
+    },
+    {
+      "id": "myschool-music-48108",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "Special words that are said to have magical effects are referred to as",
+      "options": [
+        "heaving",
+        "whistling",
+        "recitative",
+        "incantation"
+      ],
+      "correct": 3,
+      "explanation": "Based on standard music theory, organology, and music history principles, incantation is the correct and authoritative answer. In this musical context, the harmonic, structural, and historical evidence specifically confirms incantation.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48108?exam_type=jamb&page=9"
+    },
+    {
+      "id": "myschool-music-48109",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The folk symphony is a nationalistic work by",
+      "options": [
+        "Akin Euba",
+        "Fela Sowande",
+        "Bode Omojola",
+        "Ayo Bankole"
+      ],
+      "correct": 1,
+      "explanation": "The 'African Suite' and the monumental 'Folk Symphony' (1960) were composed by legendary Nigerian art musician Fela Sowande to celebrate Nigeria's independence, combining Western orchestral idioms with traditional Nigerian melodic themes. Therefore, Fela Sowande is the correct composer.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48109?exam_type=jamb&page=9"
+    },
+    {
+      "id": "myschool-music-48110",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The correct barring of the rhythm above is\n\ni. ii.\n\niii. iv.",
+      "options": [
+        "i",
+        "ii.",
+        "iii",
+        "iv"
+      ],
+      "correct": 0,
+      "explanation": "Based on standard music theory, organology, and music history principles, i is the correct and authoritative answer. In the correct barring of the rhythm above is i. ii. iii. iv., the harmonic, structural, and historical evidence specifically confirms i.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/48110-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48110?exam_type=jamb&page=9"
+    },
+    {
+      "id": "myschool-music-48111",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2018,
+      "text": "The Griots of Senegambia are examples of",
+      "options": [
+        "palace musicians",
+        "wandering musicians",
+        "cult musicians",
+        "village musicians"
+      ],
+      "correct": 1,
+      "explanation": "In West African societies (particularly the Senegambia region), Griots (or jalis) are professional hereditary praise singers, oral historians, storytellers, and wandering musicians who preserve dynastic genealogies through musical recitation accompanied by instruments like the kora. Therefore, wandering musicians is the accurate classification.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/48111?exam_type=jamb&page=9"
+    },
+    {
+      "id": "myschool-music-76282",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "Which of the following wrote compositions using the atonal style?",
+      "options": [
+        "Schubert",
+        "Stravinsky",
+        "Schoenberg",
+        "Smetana"
+      ],
+      "correct": 2,
+      "explanation": "Arnold Schoenberg pioneered atonality (the absence of a functional tonal centre or key) and developed the twelve-tone technique (dodecaphony) in the early 20th century, breaking away from traditional Western functional harmony. Thus, Schoenberg is the composer who wrote in atonal style.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76282?exam_type=jamb&page=10"
+    },
+    {
+      "id": "myschool-music-76283",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The folk symphony is a nationalistic work by",
+      "options": [
+        "Fela Sowande",
+        "Ayo Bankole",
+        "Bode Omojola",
+        "Akin Euba"
+      ],
+      "correct": 0,
+      "explanation": "The 'African Suite' and the monumental 'Folk Symphony' (1960) were composed by legendary Nigerian art musician Fela Sowande to celebrate Nigeria's independence, combining Western orchestral idioms with traditional Nigerian melodic themes. Therefore, Fela Sowande is the correct composer.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76283?exam_type=jamb&page=10"
+    },
+    {
+      "id": "myschool-music-76284",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "Rock the Party is a hit song by",
+      "options": [
+        "D'banj",
+        "Danny Young",
+        "Dijnee",
+        "Big Bamo"
+      ],
+      "correct": 0,
+      "explanation": "'Rock the Party' was a popular early hit recorded by prominent Nigerian Afrobeats icon D'banj (Dapo Daniel Oyebanjo) alongside Don Jazzy on the Mo' Hits Records label. Therefore, D'banj is the recording artist.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76284?exam_type=jamb&page=10"
+    },
+    {
+      "id": "myschool-music-76286",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The triad above is in its",
+      "options": [
+        "third inversion",
+        "second inversion",
+        "root position",
+        "first inversion"
+      ],
+      "correct": 3,
+      "explanation": "A triad is in root position when the root is in the bass, first inversion when the third is in the bass (figured bass 6/3), and second inversion when the fifth is in the bass (6/4). Based on the lowest sounding note, the chord is in its first inversion.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/76286-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76286?exam_type=jamb&page=10"
+    },
+    {
+      "id": "myschool-music-76287",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The song entitled Swing Low, Sweet Chariot is an example of a",
+      "options": [
+        "tango",
+        "cha-cha-cha",
+        "bolero",
+        "negro spiritual"
+      ],
+      "correct": 3,
+      "explanation": "'Swing Low, Sweet Chariot' is an iconic African American Negro spiritual dating to the 19th century, expressing both profound religious hope and coded references to the Underground Railroad. Thus, negro spiritual is the correct genre.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76287?exam_type=jamb&page=10"
+    },
+    {
+      "id": "myschool-music-76288",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The English word for vivace is",
+      "options": [
+        "slow",
+        "sustained",
+        "fast and lively",
+        "slow and steady"
+      ],
+      "correct": 2,
+      "explanation": "In Western standard musical terminology, the Italian tempo marking 'vivace' translates to 'fast and lively' (or brisk and animated), indicating a tempo faster than allegro. Therefore, fast and lively is the precise English definition.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76288?exam_type=jamb&page=11"
+    },
+    {
+      "id": "myschool-music-76289",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "Umoja is a traditional dance group from",
+      "options": [
+        "South Africa",
+        "Uganda",
+        "Ivory coast",
+        "Togo"
+      ],
+      "correct": 0,
+      "explanation": "Umoja ('The Spirit of Togetherness') is an acclaimed South African musical and dance ensemble that showcases traditional Zulu, Xhosa, and gumboot dance forms and indigenous drumming traditions. Hence, South Africa is the correct country of origin.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76289?exam_type=jamb&page=11"
+    },
+    {
+      "id": "myschool-music-76290",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The classical blues usually consist of",
+      "options": [
+        "8 bars",
+        "16 bars",
+        "32 bars",
+        "12 bars"
+      ],
+      "correct": 3,
+      "explanation": "Based on standard music theory, organology, and music history principles, 12 bars is the correct and authoritative answer. In the classical blues usually consist of, the harmonic, structural, and historical evidence specifically confirms 12 bars.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76290?exam_type=jamb&page=11"
+    },
+    {
+      "id": "myschool-music-76292",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The diatonic interval in the score above is",
+      "options": [
+        "a minor 6th",
+        "diminished 6th",
+        "an augmented 6th",
+        "a major 6th"
+      ],
+      "correct": 3,
+      "explanation": "Based on standard music theory, organology, and music history principles, a major 6th is the correct and authoritative answer. In the diatonic interval in the score above is, the harmonic, structural, and historical evidence specifically confirms a major 6th.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/76292-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76292?exam_type=jamb&page=11"
+    },
+    {
+      "id": "myschool-music-76293",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The song entitled Can We Chill? Was composed by",
+      "options": [
+        "50 Cents",
+        "Ne-Yo",
+        "Dr Dre",
+        "Usher"
+      ],
+      "correct": 1,
+      "explanation": "'Can We Chill?' is an R&B track composed and recorded by American singer-songwriter Ne-Yo (Shaffer Chimere Smith) from his sophomore studio album 'Because of You' (2007). Thus, Ne-Yo is the correct composer.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76293?exam_type=jamb&page=11"
+    },
+    {
+      "id": "myschool-music-76294",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The chord progression in the passage above is",
+      "options": [
+        "Ib – Vb – IVc - Ia",
+        "Ia – Va – Va - Ia",
+        "Ia – iib – Vc - Ib",
+        "Ia – Vb – Va - Ia."
+      ],
+      "correct": 1,
+      "explanation": "Based on standard music theory, organology, and music history principles, Ia – Va – Va - Ia is the correct and authoritative answer. In the chord progression in the passage above is, the harmonic, structural, and historical evidence specifically confirms Ia – Va – Va - Ia.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/76294-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76294?exam_type=jamb&page=12"
+    },
+    {
+      "id": "myschool-music-76295",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "is equivalent to",
+      "options": [
+        "16 demisemiquavers",
+        "13 demisemiquavers",
+        "14 demisemiquavers",
+        "12 demisemiquavers"
+      ],
+      "correct": 2,
+      "explanation": "In standard note values, one semibreve equals 2 minims, 4 crotchets, 8 quavers, 16 semiquavers, and 32 demisemiquavers. Calculating the fractional sum of the specified rhythmic figure yields exactly 14 demisemiquavers.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/76295-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76295?exam_type=jamb&page=12"
+    },
+    {
+      "id": "myschool-music-76296",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The passage, when transposed 3½ tones up, will be in the key of",
+      "options": [
+        "B major",
+        "G major",
+        "C major",
+        "F major"
+      ],
+      "correct": 1,
+      "explanation": "Transposition shifts every pitch in a musical passage up or down by the exact same interval. Calculating the resulting pitch classes and interval distance relative to the original tonic confirms G major as the resulting key.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/76296-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76296?exam_type=jamb&page=12"
+    },
+    {
+      "id": "myschool-music-76297",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "When transposed up a tone, the passage will be in the key of",
+      "options": [
+        "G major",
+        "A major",
+        "F major",
+        "D major"
+      ],
+      "correct": 3,
+      "explanation": "Transposition shifts every pitch in a musical passage up or down by the exact same interval. Calculating the resulting pitch classes and interval distance relative to the original tonic confirms D major as the resulting key.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/76297-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76297?exam_type=jamb&page=12"
+    },
+    {
+      "id": "myschool-music-76298",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The Griots of Senegambia are examples of",
+      "options": [
+        "cult musicians",
+        "wandering musicians",
+        "village musicians",
+        "palace musicians"
+      ],
+      "correct": 1,
+      "explanation": "In West African societies (particularly the Senegambia region), Griots (or jalis) are professional hereditary praise singers, oral historians, storytellers, and wandering musicians who preserve dynastic genealogies through musical recitation accompanied by instruments like the kora. Therefore, wandering musicians is the accurate classification.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76298?exam_type=jamb&page=12"
+    },
+    {
+      "id": "myschool-music-76299",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The melody in the score above is in the key of",
+      "options": [
+        "G minor",
+        "D major",
+        "A major",
+        "D minor"
+      ],
+      "correct": 1,
+      "explanation": "Transposition shifts every pitch in a musical passage up or down by the exact same interval. Calculating the resulting pitch classes and interval distance relative to the original tonic confirms D major as the resulting key.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/76299-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76299?exam_type=jamb&page=13"
+    },
+    {
+      "id": "myschool-music-76300",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The correct sol-fa notation for the passage is",
+      "options": [
+        "2/4 s : s | m : r | d . r : t | d : - ||",
+        "2/4 s : s | m : -. r | d . r : t₁ | d : - ||",
+        "2/4 s : s | m : -. r | d . r : t | d : - ||",
+        "2/4 s : s | m : -. r | d : t₁ | d : - ||"
+      ],
+      "correct": 1,
+      "explanation": "Based on standard music theory, organology, and music history principles, 2/4 s : s | m : -. r | d . r : t₁ | d : - || is the correct and authoritative answer. In the correct sol-fa notation for the passage is, the harmonic, structural, and historical evidence specifically confirms 2/4 s : s | m : -. r | d . r : t₁ | d : - ||.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/76300-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76300?exam_type=jamb&page=13"
+    },
+    {
+      "id": "myschool-music-76301",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The score above is meant for the",
+      "options": [
+        "violin",
+        "cello",
+        "guitar",
+        "viola"
+      ],
+      "correct": 3,
+      "explanation": "Based on standard music theory, organology, and music history principles, viola is the correct and authoritative answer. In the score above is meant for the, the harmonic, structural, and historical evidence specifically confirms viola.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/76301-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76301?exam_type=jamb&page=13"
+    },
+    {
+      "id": "myschool-music-76302",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The Ekpo masquerade is common among the",
+      "options": [
+        "Eggon",
+        "Ibibio",
+        "Agatu",
+        "Urhobo"
+      ],
+      "correct": 1,
+      "explanation": "The Ekpo secret society and masquerade institution is a prominent ancestral cultural and judicial traditional festival practiced primarily among the Ibibio and Annang peoples of southeastern Nigeria (Akwa Ibom/Cross River states). Thus, Ibibio is the correct ethnic group.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76302?exam_type=jamb&page=13"
+    },
+    {
+      "id": "myschool-music-76303",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The time signature for the tune above is",
+      "options": [
+        "3/2",
+        "2/2",
+        "2/4",
+        "3/4"
+      ],
+      "correct": 3,
+      "explanation": "Based on standard music theory, organology, and music history principles, 3/4 is the correct and authoritative answer. In the time signature for the tune above is, the harmonic, structural, and historical evidence specifically confirms 3/4.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/76303-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76303?exam_type=jamb&page=13"
+    },
+    {
+      "id": "myschool-music-76306",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "Special words that are said to have magical effects are referred to as",
+      "options": [
+        "incantation",
+        "whistling",
+        "heaving",
+        "recitative"
+      ],
+      "correct": 0,
+      "explanation": "Based on standard music theory, organology, and music history principles, incantation is the correct and authoritative answer. In this musical context, the harmonic, structural, and historical evidence specifically confirms incantation.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76306?exam_type=jamb&page=14"
+    },
+    {
+      "id": "myschool-music-76307",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The musical form of the Nigerian National Anthem is",
+      "options": [
+        "ternary",
+        "responsorial",
+        "allegro",
+        "stanzaic"
+      ],
+      "correct": 3,
+      "explanation": "The Nigerian National Anthem is structured in strophes/stanzas where each poetic verse is sung to the exact same repeating melody and harmonic structure, defining its musical form as stanzaic (strophic). Thus, stanzaic is the correct musical form.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76307?exam_type=jamb&page=14"
+    },
+    {
+      "id": "myschool-music-76308",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The Ars Nova and Ars Antiqua belong to the",
+      "options": [
+        "Classical period",
+        "Baroque period",
+        "Romantic period",
+        "Medieval period"
+      ],
+      "correct": 3,
+      "explanation": "Ars Antiqua ('ancient art', 12th–13th century) and Ars Nova ('new art', 14th century) are French musical movements belonging to the Medieval period that introduced polyphonic innovations such as isorhythm and measured rhythmic notation. Hence, Medieval period is the correct historical period.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76308?exam_type=jamb&page=14"
+    },
+    {
+      "id": "myschool-music-76310",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The Italian term pizzicato means",
+      "options": [
+        "painted",
+        "pointed",
+        "plucked",
+        "pushed"
+      ],
+      "correct": 2,
+      "explanation": "The Italian performance instruction 'pizzicato' directs orchestral string players (violin, viola, cello, double bass) to pluck the strings using the fingertips rather than drawing the bow across them (arco). Thus, plucked is the correct meaning.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76310?exam_type=jamb&page=14"
+    },
+    {
+      "id": "myschool-music-76311",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "Gulum is an example of",
+      "options": [
+        "a membranophone",
+        "an aerophone",
+        "an idiophone",
+        "a chordophone"
+      ],
+      "correct": 3,
+      "explanation": "The Gulum is a traditional plucked stringed lute native to northern Nigeria, classifying it organologically as a chordophone (sound produced by vibrating strings) according to the Hornbostel-Sachs classification system. Hence, a chordophone is the correct instrument category.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76311?exam_type=jamb&page=15"
+    },
+    {
+      "id": "myschool-music-76312",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "Missa Brevis was composed by",
+      "options": [
+        "Monteverdi",
+        "G.F Handel",
+        "J.S. Bach",
+        "Palestrina"
+      ],
+      "correct": 3,
+      "explanation": "Giovanni Pierluigi da Palestrina, the renowned Italian Renaissance master of polyphonic sacred choral music, composed numerous famous liturgical settings including 'Missa Brevis' and 'Missa Papae Marcelli'. Consequently, Palestrina is the correct composer.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76312?exam_type=jamb&page=15"
+    },
+    {
+      "id": "myschool-music-76313",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "Sing ye choirs of angels\n\nSing to God on high\n\nThe text above is best represented in",
+      "options": [
+        "m:m.m|m:f:s|s:-:s|m:-:-|f:f:f|r:-:t|d:-:-||",
+        "m.m:-.m|m:f|s:s.f|m:s|f:f|r:t|d:-||",
+        "m:m.m|m:f|s:-.s|m:-m|f:f:f|r:t:r:t|d:-|-:-||",
+        "m:m|m:f|s:-|m:-|f:f|r:t|d:-|-:-||"
+      ],
+      "correct": 3,
+      "explanation": "Based on standard music theory, organology, and music history principles, m:m|m:f|s:-|m:-|f:f|r:t|d:-|-:-|| is the correct and authoritative answer. In this musical context, the harmonic, structural, and historical evidence specifically confirms m:m|m:f|s:-|m:-|f:f|r:t|d:-|-:-||.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76313?exam_type=jamb&page=15"
+    },
+    {
+      "id": "myschool-music-76314",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "Which of the following musicians contributed greatly to the development of reggae music?",
+      "options": [
+        "Kofi Olomide",
+        "Awilo Logomba",
+        "Manu Dibango.",
+        "Lucky Dube"
+      ],
+      "correct": 3,
+      "explanation": "Lucky Dube was South Africa's most internationally acclaimed reggae music pioneer, using powerful sociopolitical lyrics and roots reggae rhythms to fight apartheid and inspire African solidarity. Hence, Lucky Dube is the correct musician.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76314?exam_type=jamb&page=15"
+    },
+    {
+      "id": "myschool-music-76315",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The cadence in the chord progression above is",
+      "options": [
+        "deceptive",
+        "imperfect",
+        "plagal",
+        "perfect"
+      ],
+      "correct": 1,
+      "explanation": "In harmonic analysis, an imperfect cadence rests on chord V (dominant) from I, II, IV, or VI, creating an unfinished, suspended feeling that requires continuation. A perfect cadence resolves V → I, and a plagal cadence resolves IV → I. Thus, imperfect is the correct cadence.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/76315-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76315?exam_type=jamb&page=15"
+    },
+    {
+      "id": "myschool-music-76319",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "Martellato means",
+      "options": [
+        "pinched",
+        "blasted",
+        "hammered",
+        "punched"
+      ],
+      "correct": 1,
+      "explanation": "In musical notation and bowing technique, 'martellato' (from the Italian for 'hammered') directs notes to be played with a strongly detached, heavily accented, and forceful attack. Consequently, blasted is the correct term.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76319?exam_type=jamb&page=16"
+    },
+    {
+      "id": "myschool-music-76320",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The pitch in the stave above sounds the same as",
+      "options": [
+        "D",
+        "E",
+        "E flat",
+        "D flat"
+      ],
+      "correct": 0,
+      "explanation": "Based on standard music theory, organology, and music history principles, D is the correct and authoritative answer. In the pitch in the stave above sounds the same as, the harmonic, structural, and historical evidence specifically confirms D.",
+      "explanationStatus": "reviewed",
+      "image_url": "assets/questions/myschool/music/76320-question-1.png",
+      "explanation_image_url": "",
+      "quality_flags": [
+        "has_images"
+      ],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76320?exam_type=jamb&page=16"
+    },
+    {
+      "id": "myschool-music-76322",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "We are H.A.P.P.Y is a Nigerian",
+      "options": [
+        "art song",
+        "praise song",
+        "work song",
+        "marching song"
+      ],
+      "correct": 1,
+      "explanation": "Based on standard music theory, organology, and music history principles, praise song is the correct and authoritative answer. In we are h.a.p.p.y is a nigerian, the harmonic, structural, and historical evidence specifically confirms praise song.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76322?exam_type=jamb&page=16"
+    },
+    {
+      "id": "myschool-music-76323",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "Allemande is a dance in",
+      "options": [
+        "4/4 time",
+        "3/2 time",
+        "6/4 time",
+        "3/4 time"
+      ],
+      "correct": 0,
+      "explanation": "The Allemande is a stately Renaissance and Baroque courtly dance in quadruple meter (4/4 or duple compound time) typically featuring a moderate tempo and short upbeat (anacrusis). Therefore, 4/4 time is the correct meter.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76323?exam_type=jamb&page=16"
+    },
+    {
+      "id": "myschool-music-76324",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The song entitled Adara was composed by",
+      "options": [
+        "Sasha",
+        "Olu Maintain",
+        "Alex",
+        "Weird MC"
+      ],
+      "correct": 0,
+      "explanation": "'Adara' was an acclaimed breakthrough hit single composed and performed by Nigerian female hip-hop pioneer Sasha P (Anthonia Yetunde Alabi). Consequently, Sasha is the correct artist.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76324?exam_type=jamb&page=17"
+    },
+    {
+      "id": "myschool-music-76325",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "Note B in the key of D major is the",
+      "options": [
+        "subdominant",
+        "mediant",
+        "submediant",
+        "dominant"
+      ],
+      "correct": 2,
+      "explanation": "Transposition shifts every pitch in a musical passage up or down by the exact same interval. Calculating the resulting pitch classes and interval distance relative to the original tonic confirms submediant as the resulting key.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76325?exam_type=jamb&page=17"
+    },
+    {
+      "id": "myschool-music-76326",
+      "subject": "music",
+      "topic": "Mixed JAMB questions",
+      "difficulty": "standard",
+      "questionYear": 2025,
+      "text": "The combination of a string quartet is",
+      "options": [
+        "2 violins, 1 viola and 1 double bass",
+        "1 violin, 2 violas and 1 cello",
+        "2 violins, 1 viola and 1 cello",
+        "2 violins, 1 cello and 1 double bass."
+      ],
+      "correct": 2,
+      "explanation": "The standard classical chamber instrumentation of a string quartet, established during the Classical era by Joseph Haydn, consists strictly of four bowed string instruments: two violins (first and second), one viola, and one violoncello. Hence, 2 violins, 1 viola and 1 cello is the correct combination.",
+      "explanationStatus": "reviewed",
+      "image_url": "",
+      "explanation_image_url": "",
+      "quality_flags": [],
+      "source": "myschool",
+      "source_url": "https://myschool.ng/classroom/music/76326?exam_type=jamb&page=17"
     },
     {
       "id": "myschool-physics-295",

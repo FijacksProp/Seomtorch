@@ -1,5 +1,5 @@
 {
-  "version": 5,
+  "version": 6,
   "packs": [
     {
       "id": "biology",
@@ -20,6 +20,11 @@
       "id": "mathematics",
       "name": "Mathematics",
       "file": "data/questions-mathematics.json"
+    },
+    {
+      "id": "music",
+      "name": "Music",
+      "file": "data/questions-music.json"
     },
     {
       "id": "physics",

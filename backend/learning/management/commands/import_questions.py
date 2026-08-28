@@ -12,7 +12,8 @@ SUBJECT_DETAILS = {
     "english": ("English Language", "Usage, comprehension and oral forms", 2),
     "general-paper": ("General Paper", "Civics, current affairs and general knowledge", 3),
     "mathematics": ("Mathematics", "Numbers, algebra and applied reasoning", 4),
-    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 5),
+    "music": ("Music", "JAMB music theory, African music and Western art music", 5),
+    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 6),
 }
 
 class Command(BaseCommand):
