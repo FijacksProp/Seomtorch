@@ -188,6 +188,7 @@ function questionVideo(question) { return question?.video_url || question?.video
 function questionExplanationImage(question) { return question?.explanation_image_url || question?.explanationImageUrl || ""; }
 function imageContext(question) { return String(question?.text || "Physics question").replace(/\s+/g, " ").trim().slice(0, 140); }
 function renderQuestionImage(question) {
+  const imageUrl = questionImage(question);
   if (!imageUrl) return "";
   const alt = `Question diagram for: ${imageContext(question)}`;
   return `<figure class="question-figure" data-media-figure><button type="button" class="media-preview-trigger" data-image-preview="${escapeHtml(imageUrl)}" data-image-caption="Question diagram" aria-label="Open question diagram at full size"><span class="media-loading">Loading diagram…</span><img class="question-image" src="${escapeHtml(imageUrl)}" alt="${escapeHtml(alt)}" loading="lazy"></button><figcaption><span>Question diagram</span><small>Tap to enlarge</small></figcaption></figure>`;
