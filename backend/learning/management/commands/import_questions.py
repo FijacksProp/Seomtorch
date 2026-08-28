@@ -8,10 +8,11 @@ from django.utils.text import slugify
 from learning.models import Question, QuestionBankRelease, Subject, Topic
 
 SUBJECT_DETAILS = {
-    "english": ("English Language", "Usage, comprehension and oral forms", 1),
-    "general-paper": ("General Paper", "Civics, current affairs and general knowledge", 2),
-    "mathematics": ("Mathematics", "Numbers, algebra and applied reasoning", 3),
-    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 4),
+    "biology": ("Biology", "JAMB cell biology, physiology, ecology, genetics and evolution", 1),
+    "english": ("English Language", "Usage, comprehension and oral forms", 2),
+    "general-paper": ("General Paper", "Civics, current affairs and general knowledge", 3),
+    "mathematics": ("Mathematics", "Numbers, algebra and applied reasoning", 4),
+    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 5),
 }
 
 class Command(BaseCommand):

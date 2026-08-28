@@ -1,6 +1,11 @@
 {
-  "version": 4,
+  "version": 5,
   "packs": [
+    {
+      "id": "biology",
+      "name": "Biology",
+      "file": "data/questions-biology.json"
+    },
     {
       "id": "english",
       "name": "English Language",
