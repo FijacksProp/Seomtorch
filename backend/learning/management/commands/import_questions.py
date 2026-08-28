@@ -9,11 +9,12 @@ from learning.models import Question, QuestionBankRelease, Subject, Topic
 
 SUBJECT_DETAILS = {
     "biology": ("Biology", "JAMB cell biology, physiology, ecology, genetics and evolution", 1),
-    "english": ("English Language", "Usage, comprehension and oral forms", 2),
-    "general-paper": ("General Paper", "Civics, current affairs and general knowledge", 3),
-    "mathematics": ("Mathematics", "Numbers, algebra and applied reasoning", 4),
-    "music": ("Music", "JAMB music theory, African music and Western art music", 5),
-    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 6),
+    "civic-education": ("Civic Education", "WAEC & JAMB citizenship, human rights, democracy and governance", 2),
+    "english": ("English Language", "Usage, comprehension and oral forms", 3),
+    "general-paper": ("General Paper", "Civics, current affairs and general knowledge", 4),
+    "mathematics": ("Mathematics", "Numbers, algebra and applied reasoning", 5),
+    "music": ("Music", "JAMB music theory, African music and Western art music", 6),
+    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 7),
 }
 
 class Command(BaseCommand):
