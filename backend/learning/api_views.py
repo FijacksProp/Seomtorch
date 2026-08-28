@@ -85,7 +85,7 @@ class StartSessionView(APIView):
             saved = list(request.user.bookmarks.select_related("question__topic__subject").order_by("-created_at")[:limit])
             if not saved:
                 return Response({"detail": "Save at least one question before starting a review session."}, status=400)
-            priority = {"english": 0, "mathematics": 1, "general-paper": 2}
+            priority = {"english": 0, "mathematics": 1, "general-paper": 2, "physics": 3}
             selected = [bookmark.question for bookmark in saved]
             selected.sort(key=lambda question: (priority.get(question.topic.subject.slug, 99), question.topic.subject.position))
             for item in selected:
@@ -95,7 +95,7 @@ class StartSessionView(APIView):
                     sections.append({"subject": item.topic.subject.slug, "name": item.topic.subject.name, "count": 1})
         elif all_subjects:
             subjects = list(Subject.objects.filter(is_active=True))
-            priority = {"english": 0, "mathematics": 1, "general-paper": 2}
+            priority = {"english": 0, "mathematics": 1, "general-paper": 2, "physics": 3}
             subjects.sort(key=lambda item: (priority.get(item.slug, 99), item.position, item.name))
             allocations = self._balanced_counts(subjects, limit)
             selected = []
@@ -168,7 +168,7 @@ class SubmitAttemptView(APIView):
                 "accepted": True,
                 "stats": stats_payload(attempt.user, include_tests=False),
             }
-        return {"attempt": AttemptSerializer(attempt).data, "correct": attempt.is_correct, "correct_index": attempt.question.correct_index, "explanation": attempt.question.explanation, "stats": stats_payload(attempt.user, include_tests=False)}
+        return {"attempt": AttemptSerializer(attempt).data, "correct": attempt.is_correct, "correct_index": attempt.question.correct_index, "explanation": attempt.question.explanation, "explanation_status": attempt.question.explanation_status, "explanation_image_url": attempt.question.explanation_image_url, "stats": stats_payload(attempt.user, include_tests=False)}
 
 class CompleteSessionView(APIView):
     @transaction.atomic

@@ -4,16 +4,17 @@ const SUBJECTS = [
   { id: "english", name: "English Language", description: "Usage, comprehension and oral forms" },
   { id: "general-paper", name: "General Paper", description: "Civics, current affairs and general knowledge" },
   { id: "mathematics", name: "Mathematics", description: "Numbers, algebra and applied reasoning" },
+  { id: "physics", name: "Physics", description: "JAMB mechanics, waves, electricity and modern physics" },
 ];
-const ALL_SUBJECT_ORDER = ["english", "mathematics", "general-paper"].map(id => SUBJECTS.find(subject => subject.id === id));
+const ALL_SUBJECT_ORDER = ["english", "mathematics", "general-paper", "physics"].map(id => SUBJECTS.find(subject => subject.id === id));
 
 const FAQS = [
   { group: "Getting started", q: "What is Seomtorch designed for?", a: "Seomtorch is a personal study companion for structured JAMB, WAEC, NECO and Post-UTME preparation. It helps you practise by topic, learn from corrections and see where your next study session will matter most." },
   { group: "Getting started", q: "Do I need an account or internet connection?", a: "An account is required so your progress can be monitored and restored across devices. After signing in once, practice can continue offline and pending answers synchronize when the connection returns." },
   { group: "Getting started", q: "Can I install Seomtorch on my device?", a: "Yes. Use the Install app button. On iPhone or iPad, open Seomtorch in Safari, tap Share, then choose Add to Home Screen." },
   { group: "Practice and review", q: "How are questions selected?", a: "Sessions prioritise questions you have not seen, topics where your accuracy is lower, and questions you previously missed. Recently answered questions receive less priority, which reduces unnecessary repetition." },
-  { group: "Practice and review", q: "Which subjects are available?", a: "English Language and General Paper are the two main preparation areas. A smaller Mathematics bank remains available as an additional practice option." },
-  { group: "Practice and review", q: "Can I practise one topic only?", a: "Yes. Open Practice, select English Language or General Paper, then choose a topic. You can also choose All topics for a mixed session." },
+  { group: "Practice and review", q: "Which subjects are available?", a: "English Language, General Paper, Mathematics and Physics are available. Physics currently includes a broad JAMB question bank, with detailed written explanations being added in reviewed batches." },
+  { group: "Practice and review", q: "Can I practise one topic only?", a: "Yes. Open Practice, select a subject, then choose a listed topic. You can also choose All topics for a mixed session within that subject." },
   { group: "Practice and review", q: "How do timed sessions work?", a: "Choose any question count from 10 to 100 and enter the number of minutes you want to study. One overall countdown runs across the complete session." },
   { group: "Practice and review", q: "Can I practise every subject together?", a: "Yes. Choose All subjects to build one balanced session. Questions are grouped into clear subject sections under one overall timer." },
   { group: "Practice and review", q: "What does Save for review do?", a: "It bookmarks the current question in your account, making it available on every device. Open Practice, then Saved for review, to browse, remove or practise the collection." },
@@ -166,6 +167,49 @@ function questionById(id) { return questions.find(question => question.id === id
 function questionPassage(question) { return question?.passage_body || question?.passageBody || question?.passage || ""; }
 function questionImage(question) { return question?.image_url || question?.imageUrl || ""; }
 function questionVideo(question) { return question?.video_url || question?.videoUrl || ""; }
+function questionExplanationImage(question) { return question?.explanation_image_url || question?.explanationImageUrl || ""; }
+function imageContext(question) { return String(question?.text || "Physics question").replace(/\s+/g, " ").trim().slice(0, 140); }
+function renderQuestionImage(question) {
+  if (!imageUrl) return "";
+  const alt = `Question diagram for: ${imageContext(question)}`;
+  return `<figure class="question-figure" data-media-figure><button type="button" class="media-preview-trigger" data-image-preview="${escapeHtml(imageUrl)}" data-image-caption="Question diagram" aria-label="Open question diagram at full size"><span class="media-loading">Loading diagram…</span><img class="question-image" src="${escapeHtml(imageUrl)}" alt="${escapeHtml(alt)}" loading="lazy"></button><figcaption><span>Question diagram</span><small>Tap to enlarge</small></figcaption></figure>`;
+}
+function renderExplanation(question) {
+  const explanation = String(question?.explanation || "").trim();
+  const imageUrl = questionExplanationImage(question);
+  return `<div class="explanation-content">${explanation
+    ? `<p>${renderMath(escapeHtml(explanation))}</p>`
+    : `<div class="explanation-pending"><strong>Detailed explanation coming soon</strong><span>The correct answer is available now. This explanation is being completed as part of the Physics editorial release.</span></div>`}${imageUrl ? `<figure class="explanation-figure" data-media-figure><button type="button" class="media-preview-trigger" data-image-preview="${escapeHtml(imageUrl)}" data-image-caption="Worked solution" aria-label="Open worked solution at full size"><span class="media-loading">Loading solution…</span><img src="${escapeHtml(imageUrl)}" alt="Worked solution for: ${escapeHtml(imageContext(question))}" loading="lazy"></button><figcaption><span>Worked solution</span><small>Tap to enlarge</small></figcaption></figure>` : ""}</div>`;
+}
+
+function openImagePreview(source, caption) {
+  document.querySelector("#image-preview")?.remove();
+  const preview = document.createElement("div");
+  preview.id = "image-preview";
+  preview.className = "image-preview-backdrop";
+  preview.innerHTML = `<section class="image-preview-dialog" role="dialog" aria-modal="true" aria-label="${escapeHtml(caption)}"><header><span>${escapeHtml(caption)}</span><button type="button" aria-label="Close image preview">×</button></header><div><img src="${escapeHtml(source)}" alt="${escapeHtml(caption)} at full size"></div></section>`;
+  const close = () => { document.removeEventListener("keydown", onKeydown); preview.remove(); };
+  const onKeydown = event => { if (event.key === "Escape") close(); };
+  preview.querySelector("button").addEventListener("click", close);
+  preview.addEventListener("click", event => { if (event.target === preview) close(); });
+  document.addEventListener("keydown", onKeydown);
+  document.body.appendChild(preview);
+  preview.querySelector("button").focus();
+}
+
+function bindQuestionMedia() {
+  document.querySelectorAll("[data-image-preview]").forEach(button => {
+    const image = button.querySelector("img");
+    const finishLoading = () => button.classList.add("loaded");
+    if (image?.complete && image.naturalWidth) finishLoading();
+    else image?.addEventListener("load", finishLoading, { once: true });
+    image?.addEventListener("error", () => {
+      const figure = button.closest("[data-media-figure]");
+      if (figure) figure.innerHTML = '<div class="media-unavailable"><strong>Diagram unavailable</strong><span>This question has been reported for media repair.</span></div>';
+    }, { once: true });
+    button.addEventListener("click", () => openImagePreview(button.dataset.imagePreview, button.dataset.imageCaption || "Question image"));
+  });
+}
 function xpState() {
   const xp = profile?.xp || 0;
   const level = 1 + Math.floor(xp / 250);
@@ -358,7 +402,7 @@ function renderPractice() {
       <div class="review-entry"><div><span class="review-entry-count">${bookmarks.length}</span><div><p class="eyebrow">Your review library</p><h2>Saved for review</h2><p>${bookmarks.length ? `${bookmarks.length} question${bookmarks.length === 1 ? " is" : "s are"} ready to revisit.` : "Save useful or difficult questions during practice and they will appear here."}</p></div></div><button class="button ${bookmarks.length ? "" : "outline"}" data-subject="saved">${bookmarks.length ? "Open saved questions" : "View review library"} →</button></div>
       <div class="section-head"><h2>Subjects</h2><p>Choose a subject for ${selectedPracticeMode} practice</p></div>
       <div class="subject-list">
-        <button class="subject-row all-subject-row" data-subject="all"><span class="subject-num">ALL</span><span><span class="subject-title">All subjects</span><span class="subject-meta">Balanced, grouped sections across English Language, General Paper and Mathematics</span></span><span class="mini-progress"><i style="width:${accuracy()}%"></i></span><span class="row-arrow">→</span></button>
+        <button class="subject-row all-subject-row" data-subject="all"><span class="subject-num">ALL</span><span><span class="subject-title">All subjects</span><span class="subject-meta">Balanced, grouped sections across all four available subjects</span></span><span class="mini-progress"><i style="width:${accuracy()}%"></i></span><span class="row-arrow">→</span></button>
         ${SUBJECTS.map((subject, index) => `<button class="subject-row" data-subject="${subject.id}"><span class="subject-num">0${index + 1}</span><span><span class="subject-title">${subject.name}</span><span class="subject-meta">${subject.description}</span></span><span class="mini-progress"><i style="width:${subjectStats(subject.id).accuracy}%"></i></span><span class="row-arrow">→</span></button>`).join("")}
       </div>
     </section>`;
@@ -545,9 +589,10 @@ function renderSession() {
   const imageUrl = questionImage(question);
   const content = `<section class="page session-page"><aside class="question-navigator"><div><p class="eyebrow">Question navigator</p><strong>${confirmed} of ${activeSession.queue.length} answered</strong><span>Select any number to move between questions.</span></div><div class="question-number-grid">${activeSession.answers.map((item, index) => `<button class="question-number ${index === activeSession.index ? "current" : ""} ${item.selected !== null ? "selected" : ""}" data-question-index="${index}" aria-label="Question ${index + 1}${item.selected !== null ? ", selected" : ", unanswered"}">${index + 1}</button>`).join("")}</div><div class="navigator-key"><span><i class="selected"></i>Selected</span><span><i class="unanswered"></i>Unanswered</span></div><button class="button outline finish-session" id="finish-session">Finish session</button></aside><div class="session-workspace">${activeSession.sections.length > 1 ? `<div class="active-section"><span>Section ${sectionIndex + 1} of ${activeSession.sections.length}</span><strong>${escapeHtml(section.name)}</strong><small>${activeSession.index - section.start + 1} of ${section.count} in this section</small></div>` : ""}<div class="question-header"><div class="question-topline"><span>${subjectName(question.subject)} · ${escapeHtml(question.topic)}${question.questionYear ? ` · ${question.questionYear} source` : ""}</span><div class="session-status"><span>${activeSession.index + 1} of ${activeSession.queue.length}</span><span class="session-clock" role="timer" aria-label="Session time remaining"><small>Time left</small><strong id="session-timer">${formatTime(Math.ceil((activeSession.deadline - Date.now()) / 1000))}</strong></span></div></div><div class="question-progress"><i style="width:${confirmed / activeSession.queue.length * 100}%"></i></div></div><article class="question-paper" style="${passage ? 'display:flex; flex-direction:column; gap:1rem;' : ''}">
   ${passage ? `<details class="passage-details"><summary>View reading passage</summary><div class="passage-content">${renderMath(escapeHtml(passage))}</div></details>` : ""}
-  ${imageUrl ? `<img class="question-image" src="${escapeHtml(imageUrl)}" alt="Illustration for this question" loading="lazy">` : ""}
-  <div><p class="eyebrow">Question ${String(activeSession.index + 1).padStart(2, "0")}</p><h2>${renderMath(escapeHtml(question.text))}</h2></div><div class="options">${question.options.map((option, index) => { let state = ""; if (activeSession.mode === "challenge" && answer.confirmed && index === answer.selected) state = "selected"; else if (answer.confirmed && index === question.correct) state = "correct"; else if (answer.confirmed && index === answer.selected) state = "incorrect"; else if (!answer.confirmed && index === answer.selected) state = "selected"; return `<button class="option ${state}" data-option="${index}" ${answer.confirmed ? "disabled" : ""}><span class="option-letter">${String.fromCharCode(65 + index)}</span><span>${renderMath(escapeHtml(option))}</span></button>`; }).join("")}</div>${answer.confirmed && activeSession.mode !== "challenge" ? `<div class="feedback"><div class="feedback-head"><div class="feedback-label ${answer.correct ? "" : "wrong"}">${answer.correct ? "Correct" : "Review this"}</div>${answer.correct ? '<span class="xp-earned">+5 XP</span>' : ""}</div><p>${renderMath(escapeHtml(question.explanation))}</p></div>` : answer.confirmed ? '<p class="selection-note">This answer was already recorded and is locked.</p>' : answer.selected !== null ? '<p class="selection-note">Your selection is not recorded until you finish the session.</p>' : ""}<div class="question-actions"><button class="button outline" id="previous-question" ${activeSession.index === 0 ? "disabled" : ""}>← Previous</button><button class="button outline" id="bookmark">${isBookmarked ? "Remove from saved" : "Save for review"}</button><button class="button" id="next-question">${activeSession.index === activeSession.queue.length - 1 ? "Review session" : answer.selected !== null ? "Next question →" : "Skip for now →"}</button></div></article></div></section>`;
+  ${renderQuestionImage(question)}
+  <div><p class="eyebrow">Question ${String(activeSession.index + 1).padStart(2, "0")}</p><h2>${renderMath(escapeHtml(question.text))}</h2></div><div class="options">${question.options.map((option, index) => { let state = ""; if (activeSession.mode === "challenge" && answer.confirmed && index === answer.selected) state = "selected"; else if (answer.confirmed && index === question.correct) state = "correct"; else if (answer.confirmed && index === answer.selected) state = "incorrect"; else if (!answer.confirmed && index === answer.selected) state = "selected"; return `<button class="option ${state}" data-option="${index}" ${answer.confirmed ? "disabled" : ""}><span class="option-letter">${String.fromCharCode(65 + index)}</span><span>${renderMath(escapeHtml(option))}</span></button>`; }).join("")}</div>${answer.confirmed && activeSession.mode !== "challenge" ? `<div class="feedback"><div class="feedback-head"><div class="feedback-label ${answer.correct ? "" : "wrong"}">${answer.correct ? "Correct" : "Review this"}</div>${answer.correct ? '<span class="xp-earned">+5 XP</span>' : ""}</div>${renderExplanation(question)}</div>` : answer.confirmed ? '<p class="selection-note">This answer was already recorded and is locked.</p>' : answer.selected !== null ? '<p class="selection-note">Your selection is not recorded until you finish the session.</p>' : ""}<div class="question-actions"><button class="button outline" id="previous-question" ${activeSession.index === 0 ? "disabled" : ""}>← Previous</button><button class="button outline" id="bookmark">${isBookmarked ? "Remove from saved" : "Save for review"}</button><button class="button" id="next-question">${activeSession.index === activeSession.queue.length - 1 ? "Review session" : answer.selected !== null ? "Next question →" : "Skip for now →"}</button></div></article></div></section>`;
   app.innerHTML = shell(content); bindShell();
+  bindQuestionMedia();
   runSessionTimer();
   document.querySelectorAll("[data-question-index]").forEach(button => button.addEventListener("click", () => goToQuestion(Number(button.dataset.questionIndex))));
   document.querySelectorAll("[data-option]").forEach(button => button.addEventListener("click", () => selectAnswer(Number(button.dataset.option))));
@@ -625,7 +670,14 @@ async function syncAttemptRecord(attempt) {
   if (!attempt.clientId) attempt.clientId = crypto.randomUUID();
   try {
     const response = await api.syncAttempt(authToken, { question_id: attempt.questionId, selected_index: attempt.selected, client_id: attempt.clientId, session_id: attempt.sessionId || null, duration_ms: attempt.durationMs || null });
-    attempt.synced = true; if (typeof response.correct === "boolean") attempt.correct = response.correct; await put("attempts", attempt);
+    attempt.synced = true; if (typeof response.correct === "boolean") attempt.correct = response.correct;
+    const localQuestion = questionById(attempt.questionId);
+    if (localQuestion && response.explanation !== undefined) {
+      localQuestion.explanation = response.explanation || "";
+      localQuestion.explanationStatus = response.explanation_status || localQuestion.explanationStatus;
+      localQuestion.explanation_image_url = response.explanation_image_url || localQuestion.explanation_image_url || "";
+    }
+    await put("attempts", attempt);
     applyRemoteStats(response.stats); await put("profile", profile);
     handleEarnedBadges(response.badges_earned || []);
   } catch (error) { if (error instanceof ApiError && error.status >= 400 && error.status < 500 && error.status !== 401) { attempt.syncError = error.message; await put("attempts", attempt); } }
@@ -743,9 +795,10 @@ function renderResult() {
   const answered = activeSession.answers.filter(item => item.confirmed).length;
   const unanswered = activeSession.queue.length - answered;
   const note = activeSession.timedOut ? "Time is up. Review the result, then try a shorter session or return when you can give it a full window." : score >= 80 ? "A strong session. Keep the standard steady." : score >= 50 ? "Good work. Review the corrections before moving on." : "This topic needs another careful pass. That is useful information.";
-  const review = activeSession.answers.map((answer, index) => { const question = activeSession.queue[index]; if (!answer.confirmed) return ""; return `<article class="result-review-item ${answer.correct ? "correct" : "incorrect"}"><div><span>Question ${index + 1}</span><strong>${answer.correct ? "Correct" : "Review"}</strong></div><p>${renderMath(escapeHtml(question.text))}</p><small>Your answer: ${escapeHtml(question.options[answer.selected] || "—")}</small>${answer.correct ? "" : `<small>Correct answer: ${escapeHtml(question.options[question.correct] || "—")}</small>`}<div>${renderMath(escapeHtml(question.explanation))}</div></article>`; }).join("");
+  const review = activeSession.answers.map((answer, index) => { const question = activeSession.queue[index]; if (!answer.confirmed) return ""; return `<article class="result-review-item ${answer.correct ? "correct" : "incorrect"}"><div><span>Question ${index + 1}</span><strong>${answer.correct ? "Correct" : "Review"}</strong></div><p>${renderMath(escapeHtml(question.text))}</p><small>Your answer: ${escapeHtml(question.options[answer.selected] || "—")}</small>${answer.correct ? "" : `<small>Correct answer: ${escapeHtml(question.options[question.correct] || "—")}</small>`}${renderExplanation(question)}</article>`; }).join("");
   const content = `<section class="page page-narrow"><div class="session-result"><p class="eyebrow">${activeSession.timedOut ? "Time expired" : "Session complete"}</p><div class="result-score">${score}%</div><h2>${activeSession.correct} of ${activeSession.queue.length} correct</h2><p class="lede" style="margin-inline:auto">${note}</p><div class="result-meta"><span>${answered} answered</span><span>${unanswered} unanswered</span><span>${activeSession.mode === "normal" ? "Untimed practice" : `${activeSession.durationMinutes} minute timer`}</span></div><div class="button-row" style="justify-content:center;margin-top:28px"><button class="button outline" id="return-practice">Choose another topic</button>${activeSession.mode === "sprint" ? "" : '<button class="button" id="retry-session">Practise this again</button>'}</div></div>${review ? `<div class="result-review"><div class="section-head"><h2>Solutions</h2><p>Review every recorded answer</p></div>${review}</div>` : ""}</section>`;
   app.innerHTML = shell(content); bindShell();
+  bindQuestionMedia();
   document.querySelector("#return-practice").addEventListener("click", () => { activeSession = null; route = "practice"; render(); });
   document.querySelector("#retry-session")?.addEventListener("click", () => startSession(activeSession.subject, activeSession.topic, activeSession.requestedCount, activeSession.durationMinutes, activeSession.mode));
 }
@@ -1100,7 +1153,7 @@ async function refreshDeviceCache() {
 
 function renderAuth() {
   const register = authMode === "register";
-  app.innerHTML = `<main class="onboarding auth-screen"><section class="onboard-brand"><span class="brand"><span class="brand-symbol" aria-hidden="true"><img src="assets/seomtorch_logo.png" alt=""></span><span class="brand-name">Seomtorch<small>Prepare with purpose</small></span></span><div><blockquote>Your progress should follow you.</blockquote><p>Sign in to keep every answer, streak and milestone connected to your account.</p></div><small>English Language · General Paper · Mathematics</small></section><section class="onboard-form"><div><div class="auth-tabs"><button class="${!register ? "active" : ""}" data-auth-mode="signin">Sign in</button><button class="${register ? "active" : ""}" data-auth-mode="register">Register</button></div><p class="eyebrow">${register ? "Create your account" : "Welcome back"}</p><h1>${register ? "Begin your preparation." : "Return to your study desk."}</h1><p class="lede">${register ? "Use an email, username and secure password." : "Sign in with your email address and password."}</p><form id="auth-form" class="auth-form">${register ? '<div class="field"><label for="auth-username">Username</label><input id="auth-username" name="username" type="text" maxlength="150" autocomplete="username" required></div>' : ""}<div class="field"><label for="auth-email">Email address</label><input id="auth-email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="auth-password">Password</label><input id="auth-password" name="password" type="password" minlength="8" autocomplete="${register ? "new-password" : "current-password"}" required></div><div id="auth-error" class="auth-error" role="alert"></div><button class="button auth-submit" type="submit">${register ? "Create account" : "Sign in"} →</button></form></div></section></main>`;
+  app.innerHTML = `<main class="onboarding auth-screen"><section class="onboard-brand"><span class="brand"><span class="brand-symbol" aria-hidden="true"><img src="assets/seomtorch_logo.png" alt=""></span><span class="brand-name">Seomtorch<small>Prepare with purpose</small></span></span><div><blockquote>Your progress should follow you.</blockquote><p>Sign in to keep every answer, streak and milestone connected to your account.</p></div><small>English Language · General Paper · Mathematics · Physics</small></section><section class="onboard-form"><div><div class="auth-tabs"><button class="${!register ? "active" : ""}" data-auth-mode="signin">Sign in</button><button class="${register ? "active" : ""}" data-auth-mode="register">Register</button></div><p class="eyebrow">${register ? "Create your account" : "Welcome back"}</p><h1>${register ? "Begin your preparation." : "Return to your study desk."}</h1><p class="lede">${register ? "Use an email, username and secure password." : "Sign in with your email address and password."}</p><form id="auth-form" class="auth-form">${register ? '<div class="field"><label for="auth-username">Username</label><input id="auth-username" name="username" type="text" maxlength="150" autocomplete="username" required></div>' : ""}<div class="field"><label for="auth-email">Email address</label><input id="auth-email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="auth-password">Password</label><input id="auth-password" name="password" type="password" minlength="8" autocomplete="${register ? "new-password" : "current-password"}" required></div><div id="auth-error" class="auth-error" role="alert"></div><button class="button auth-submit" type="submit">${register ? "Create account" : "Sign in"} →</button></form></div></section></main>`;
   document.querySelectorAll("[data-auth-mode]").forEach(button => button.addEventListener("click", () => { authMode = button.dataset.authMode; renderAuth(); }));
   document.querySelector("#auth-form").addEventListener("submit", submitAuth);
 }
@@ -1254,7 +1307,6 @@ function renderNormalSession() {
   const isBookmarked = bookmarks.some(item => item.questionId === question.id);
   const confirmed = activeSession.answers.filter(item => item.confirmed).length;
   const passage = questionPassage(question);
-  const imageUrl = questionImage(question);
   const videoUrl = questionVideo(question);
 
   const content = `<section class="page session-page">
@@ -1269,7 +1321,7 @@ function renderNormalSession() {
 
       <article class="question-paper" style="${passage ? 'display:flex; flex-direction:column; gap:1rem;' : ''}">
         ${passage ? `<details class="passage-details"><summary>View reading passage</summary><div class="passage-content">${renderMath(escapeHtml(passage))}</div></details>` : ""}
-        ${imageUrl ? `<img class="question-image" src="${escapeHtml(imageUrl)}" alt="Illustration for this question" loading="lazy">` : ""}
+        ${renderQuestionImage(question)}
 
         <div><p class="eyebrow">Question ${String(activeSession.index + 1).padStart(2, "0")}</p>
         <h2>${renderMath(escapeHtml(question.text))}</h2></div>
@@ -1290,7 +1342,7 @@ function renderNormalSession() {
               <div class="feedback-label ${answer.correct ? "" : "wrong"}">${answer.correct ? "Correct" : "Review this"}</div>
               ${answer.correct ? '<span class="xp-earned">+5 XP</span>' : ""}
             </div>
-            <p>${renderMath(escapeHtml(question.explanation))}</p>
+            ${renderExplanation(question)}
             ${videoUrl ? `<div class="question-video"><iframe src="${escapeHtml(videoUrl)}" title="Video explanation" loading="lazy" allowfullscreen></iframe></div>` : ""}
 
             <div style="margin-top:2rem; border-top:1px solid var(--border); padding-top:1rem;">
@@ -1319,6 +1371,7 @@ function renderNormalSession() {
   </section>`;
 
   app.innerHTML = shell(content); bindShell();
+  bindQuestionMedia();
 
   document.querySelectorAll("[data-option]").forEach(button => button.addEventListener("click", () => selectAnswer(Number(button.dataset.option))));
   document.querySelector("#bookmark").addEventListener("click", () => toggleBookmark(question.id));

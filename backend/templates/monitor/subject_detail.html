@@ -1,3 +1,21 @@
-{% extends 'monitor/base.html' %}{% block title %}{{ subject.name }}{% endblock %}{% block content %}
-<a class="back-link" href="{% url 'monitor:dashboard' %}">← Overview</a><div class="page-heading"><div><p class="kicker">Subject report</p><h1>{{ subject.name }}</h1><p>{{ subject.description }}</p></div></div><section class="metric-grid"><article><span>Tests completed</span><strong>{{ tests.tests_taken }}</strong><small>Subject-focused papers</small></article><article><span>Average test score</span><strong>{{ tests.average_score }}%</strong><small>Across completed tests</small></article><article><span>Answer accuracy</span><strong>{{ accuracy }}%</strong><small>{{ total }} recorded answers</small></article><article class="accent"><span>Students reached</span><strong>{{ student_count }}</strong><small>Unique learners</small></article></section><div class="dashboard-grid"><section class="panel"><div class="panel-head"><div><p class="kicker">Topic comparison</p><h2>Collective progress</h2></div></div><div class="simple-list">{% for topic in topics %}<div><span>{{ topic.name }}<small>{{ topic.student_count }} students · {{ topic.total_attempts }} answers</small></span><b>{{ topic.accuracy }}%</b></div>{% empty %}<div class="empty">No topic activity yet.</div>{% endfor %}</div></section><section class="panel wide"><div class="panel-head"><div><p class="kicker">Question intelligence</p><h2>Most difficult questions</h2></div></div><div class="attempt-list">{% for question in difficult %}<div><i class="{% if question.accuracy >= 60 %}correct{% else %}wrong{% endif %}"></i><p>{{ question.text|truncatechars:120 }}<small>{{ question.topic.name }} · {{ question.total_attempts }} answers</small></p><b>{{ question.accuracy }}%</b></div>{% empty %}<div class="empty">Question difficulty will appear after students submit answers.</div>{% endfor %}</div></section></div>
+{% extends 'monitor/base.html' %}
+{% block title %}{{ subject.name }}{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'monitor:dashboard' %}">← Overview</a>
+<div class="page-heading"><div><p class="kicker">Subject report</p><h1>{{ subject.name }}</h1><p>{{ subject.description }}</p></div></div>
+<section class="metric-grid">
+  <article><span>Tests completed</span><strong>{{ tests.tests_taken }}</strong><small>Subject-focused papers</small></article>
+  <article><span>Average test score</span><strong>{{ tests.average_score }}%</strong><small>Across completed tests</small></article>
+  <article><span>Answer accuracy</span><strong>{{ accuracy }}%</strong><small>{{ total }} recorded answers</small></article>
+  <article class="accent"><span>Students reached</span><strong>{{ student_count }}</strong><small>Unique learners</small></article>
+</section>
+<section class="editorial-panel">
+  <div><p class="kicker">Question-bank readiness</p><h2>{{ explanation_coverage }}% explanation coverage</h2><p>{{ reviewed_count }} reviewed and {{ pending_count }} awaiting editorial explanation across {{ question_count }} active questions.</p></div>
+  <div class="editorial-progress" aria-label="{{ explanation_coverage }} percent complete"><i style="width:{{ explanation_coverage }}%"></i></div>
+  <a class="button" href="/internal-admin/learning/question/?topic__subject__id__exact={{ subject.id }}">Manage questions</a>
+</section>
+<div class="dashboard-grid">
+  <section class="panel"><div class="panel-head"><div><p class="kicker">Topic comparison</p><h2>Collective progress</h2></div></div><div class="simple-list">{% for topic in topics %}<div><span>{{ topic.name }}<small>{{ topic.student_count }} students · {{ topic.total_attempts }} answers</small></span><b>{{ topic.accuracy }}%</b></div>{% empty %}<div class="empty">No topic activity yet.</div>{% endfor %}</div></section>
+  <section class="panel wide"><div class="panel-head"><div><p class="kicker">Question intelligence</p><h2>Most difficult questions</h2></div></div><div class="attempt-list">{% for question in difficult %}<div><i class="{% if question.accuracy >= 60 %}correct{% else %}wrong{% endif %}"></i><p>{{ question.text|truncatechars:120 }}<small>{{ question.topic.name }} · {{ question.total_attempts }} answers</small></p><b>{{ question.accuracy }}%</b></div>{% empty %}<div class="empty">Question difficulty will appear after students submit answers.</div>{% endfor %}</div></section>
+</div>
 {% endblock %}

@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 4,
   "packs": [
     {
       "id": "english",
@@ -15,6 +15,11 @@
       "id": "mathematics",
       "name": "Mathematics",
       "file": "data/questions-mathematics.json"
+    },
+    {
+      "id": "physics",
+      "name": "Physics",
+      "file": "data/questions-physics.json"
     }
   ]
 }

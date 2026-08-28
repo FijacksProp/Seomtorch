@@ -35,3 +35,15 @@ body { background: var(--paper); }
   .monitor-logo { width: 44px; height: 44px; flex-basis: 44px; }
   .monitor-logo img { width: 52px; height: 52px; }
 }
+
+.editorial-status { color: #8a5612 !important; }
+.editorial-panel { margin-top: 26px; padding: 22px 24px; border: 1px solid var(--line); background: linear-gradient(105deg,var(--ochre-soft),var(--surface)); display: grid; grid-template-columns: minmax(230px,1fr) minmax(180px,320px) auto; align-items: center; gap: 24px; }
+.editorial-panel h2 { margin: 4px 0; font: 600 27px var(--serif); }
+.editorial-panel p:not(.kicker) { margin: 0; color: var(--muted); font-size: 11px; }
+.editorial-progress { height: 7px; background: rgba(255,255,255,.66); border-radius: 99px; overflow: hidden; }
+.editorial-progress i { display: block; height: 100%; background: var(--forest); border-radius: inherit; }
+
+@media (max-width: 800px) {
+  .editorial-panel { grid-template-columns: 1fr; }
+  .editorial-panel .button { justify-self: start; }
+}

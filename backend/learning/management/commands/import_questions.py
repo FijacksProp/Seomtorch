@@ -5,12 +5,13 @@ from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 from django.utils.text import slugify
 
-from learning.models import Question, Subject, Topic
+from learning.models import Question, QuestionBankRelease, Subject, Topic
 
 SUBJECT_DETAILS = {
     "english": ("English Language", "Usage, comprehension and oral forms", 1),
     "general-paper": ("General Paper", "Civics, current affairs and general knowledge", 2),
     "mathematics": ("Mathematics", "Numbers, algebra and applied reasoning", 3),
+    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 4),
 }
 
 class Command(BaseCommand):
@@ -24,6 +25,11 @@ class Command(BaseCommand):
             action="store_true",
             help="Skip the import when the question bank already contains questions.",
         )
+        parser.add_argument(
+            "--if-current",
+            action="store_true",
+            help="Skip when this manifest version has already been imported.",
+        )
 
     @transaction.atomic
     def handle(self, *args, **options):
@@ -34,10 +40,15 @@ class Command(BaseCommand):
         repo_root = Path(__file__).resolve().parents[4]
         manifest_path = repo_root / "data" / "manifest.json"
 
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else None
+        release_version = str(manifest.get("version")) if manifest else None
+        if options["if_current"] and release_version and QuestionBankRelease.objects.filter(version=release_version).exists():
+            self.stdout.write(f"Question bank v{release_version} already imported; skipping.")
+            return
+
         seen = set(); created = updated = 0
 
-        if manifest_path.exists():
-            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        if manifest:
             for pack in manifest.get("packs", []):
                 pack_file = repo_root / pack["file"]
                 if pack_file.exists():
@@ -52,6 +63,8 @@ class Command(BaseCommand):
             created += c; updated += u
 
         deactivated = Question.objects.exclude(external_id__in=seen).update(is_active=False)
+        if release_version:
+            QuestionBankRelease.objects.update_or_create(version=release_version, defaults={"question_count": len(seen)})
         self.stdout.write(self.style.SUCCESS(f"Imported {len(seen)} questions: {created} created, {updated} updated, {deactivated} deactivated."))
 
     def _process_questions(self, questions, seen):
@@ -80,12 +93,16 @@ class Command(BaseCommand):
                 "text": item["text"],
                 "options": item["options"],
                 "correct_index": item["correct"],
-                "explanation": item["explanation"],
+                "explanation": item.get("explanation", ""),
+                "explanation_status": item.get("explanationStatus", "reviewed"),
+                "explanation_image_url": item.get("explanation_image_url", ""),
+                "quality_flags": item.get("quality_flags", []),
                 "difficulty": item.get("difficulty", "standard"),
                 "source": item.get("source", ""),
                 "question_year": item.get("questionYear"),
                 "video_url": item.get("video_url", ""),
                 "image_url": item.get("image_url", ""),
+                "source_url": item.get("source_url", ""),
                 "is_active": True
             }
             _, was_created = Question.objects.update_or_create(external_id=item["id"], defaults=defaults)

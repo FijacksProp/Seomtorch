@@ -75,8 +75,8 @@ class LearningApiTests(APITestCase):
     def test_all_subject_session_is_balanced_and_grouped(self):
         response = self.client.post("/api/sessions/", {"subject": "all", "limit": 20, "duration_minutes": 10}, format="json")
         self.assertEqual(response.status_code, 201)
-        self.assertEqual([section["count"] for section in response.data["sections"]], [7, 7, 6])
-        self.assertEqual([question["subject"] for question in response.data["questions"]], ["english"] * 7 + ["mathematics"] * 7 + ["general-paper"] * 6)
+        self.assertEqual([section["count"] for section in response.data["sections"]], [5, 5, 5, 5])
+        self.assertEqual([question["subject"] for question in response.data["questions"]], ["english"] * 5 + ["mathematics"] * 5 + ["general-paper"] * 5 + ["physics"] * 5)
         session = self.user.practice_sessions.first()
         self.assertIsNone(session.subject)
         self.assertEqual(session.duration_minutes, 10)

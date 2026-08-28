@@ -42,18 +42,27 @@ class Passage(models.Model):
     def __str__(self): return self.title or f"Passage ({self.subject.name})"
 
 class Question(models.Model):
+    class ExplanationStatus(models.TextChoices):
+        MISSING = "missing", "Pending explanation"
+        SOURCE_UNREVIEWED = "source_unreviewed", "Source explanation (unreviewed)"
+        REVIEWED = "reviewed", "Reviewed"
+
     external_id = models.CharField(max_length=120, unique=True, db_index=True)
     topic = models.ForeignKey(Topic, on_delete=models.PROTECT, related_name="questions")
     passage = models.ForeignKey(Passage, on_delete=models.SET_NULL, null=True, blank=True, related_name="questions")
     text = models.TextField()
     options = models.JSONField()
     correct_index = models.PositiveSmallIntegerField()
-    explanation = models.TextField()
+    explanation = models.TextField(blank=True, default="")
+    explanation_status = models.CharField(max_length=24, choices=ExplanationStatus.choices, default=ExplanationStatus.REVIEWED)
+    explanation_image_url = models.CharField(max_length=500, blank=True, default="")
+    quality_flags = models.JSONField(default=list, blank=True)
     difficulty = models.CharField(max_length=30, default="standard")
     source = models.CharField(max_length=180, blank=True)
     question_year = models.PositiveSmallIntegerField(null=True, blank=True)
     video_url = models.URLField(blank=True, default="")
     image_url = models.CharField(max_length=500, blank=True, default="")
+    source_url = models.URLField(max_length=500, blank=True, default="")
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -62,6 +71,16 @@ class Question(models.Model):
         ordering = ("topic__subject__position", "topic__name", "external_id")
 
     def __str__(self): return self.text[:90]
+
+class QuestionBankRelease(models.Model):
+    version = models.CharField(max_length=40, unique=True)
+    question_count = models.PositiveIntegerField(default=0)
+    imported_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ("-imported_at",)
+
+    def __str__(self): return f"Question bank v{self.version}"
 
 class PracticeSession(models.Model):
     class Status(models.TextChoices):

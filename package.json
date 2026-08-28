@@ -4,10 +4,15 @@
   "private": true,
   "scripts": {
     "start": "serve .",
-    "check": "node --check app.js && node --check api-client.js && node --check scripts/build-question-bank.mjs && node --check scripts/scrape-myschool-questions.mjs",
+    "check": "node --check app.js && node --check api-client.js && node --check scripts/build-question-bank.mjs && node --check scripts/scrape-myschool-questions.mjs && node --check scripts/prepare-myschool-questions.mjs && node --check scripts/build-myschool-pack.mjs && node --check scripts/generate-physics-explanations.mjs",
     "questions:build": "node scripts/build-question-bank.mjs",
     "questions:myschool": "node scripts/scrape-myschool-questions.mjs",
     "questions:myschool:test": "node scripts/scrape-myschool-questions.test.mjs",
+    "questions:myschool:prepare": "node scripts/prepare-myschool-questions.mjs",
+    "questions:myschool:prepare:test": "node scripts/prepare-myschool-questions.test.mjs",
+    "questions:myschool:pack": "node scripts/build-myschool-pack.mjs",
+    "questions:myschool:pack:test": "node scripts/build-myschool-pack.test.mjs",
+    "questions:physics:explain": "node scripts/generate-physics-explanations.mjs",
     "questions:split": "node scripts/split-question-bank.mjs"
   },
   "devDependencies": {

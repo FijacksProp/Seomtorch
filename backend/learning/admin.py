@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ActivityEvent, Attempt, BadgeDefinition, Bookmark, Challenge, ChallengeParticipant, PracticeSession, Question, Subject, Topic, UserBadge, UserStats, Passage, QuestionComment, QuestionReport
+from .models import ActivityEvent, Attempt, BadgeDefinition, Bookmark, Challenge, ChallengeParticipant, PracticeSession, Question, QuestionBankRelease, Subject, Topic, UserBadge, UserStats, Passage, QuestionComment, QuestionReport
 
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
@@ -17,13 +17,20 @@ class TopicAdmin(admin.ModelAdmin):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ("short_text", "topic", "passage", "question_year", "difficulty", "is_active")
-    list_filter = ("topic__subject", "topic", "question_year", "difficulty", "is_active")
+    list_display = ("short_text", "topic", "question_year", "explanation_status", "has_question_image", "is_active")
+    list_filter = ("topic__subject", "topic", "question_year", "explanation_status", "difficulty", "is_active")
     search_fields = ("external_id", "text", "explanation")
     list_editable = ("is_active",)
     readonly_fields = ("external_id", "created_at", "updated_at")
     list_select_related = ("topic__subject", "passage")
     def short_text(self, obj): return obj.text[:75]
+    @admin.display(boolean=True, description="Image")
+    def has_question_image(self, obj): return bool(obj.image_url)
+
+@admin.register(QuestionBankRelease)
+class QuestionBankReleaseAdmin(admin.ModelAdmin):
+    list_display = ("version", "question_count", "imported_at")
+    readonly_fields = ("version", "question_count", "imported_at")
 
 @admin.register(Attempt)
 class AttemptAdmin(admin.ModelAdmin):

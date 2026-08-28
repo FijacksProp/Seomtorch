@@ -8,6 +8,8 @@ const BASE_URL = "https://myschool.ng";
 const DEFAULT_SUBJECTS = ["physics", "biology"];
 const CHECKPOINT_VERSION = 2;
 const USER_AGENT = "SeomtorchQuestionImporter/1.0 (+authorized educational archive)";
+const PLACEHOLDER_EXPLANATION = /^(?:no explanation available|no official explanation is available(?:\s+for this question)?(?:\s+at this time)?[.!]?)$/i;
+const VISUAL_REFERENCE = /\b(?:diagram|figure|graph|illustration|waveform|circuit\s+(?:above|below)|as\s+shown|shown\s+(?:above|below|in)|arrangement\s+(?:above|below))\b/i;
 
 function usage() {
   console.log(`
@@ -28,6 +30,10 @@ Options:
   --retries NUMBER            Retries for transient failures (default: 4)
   --timeout-ms NUMBER         Per-request timeout (default: 30000)
   --refresh                   Fetch pages/questions already in the checkpoint again
+  --details-only              Reuse checkpointed listing URLs; do not fetch listing pages
+  --refresh-media             Re-fetch only records that refer to uncaptured visual media
+  --download-images           Download question/option/solution media into the project
+  --images-dir PATH           Download directory (default: assets/questions/myschool)
   --help                      Show this help
 
 The importer is resumable. Re-run the same command after interruption and it will
@@ -37,6 +43,7 @@ Examples:
   npm run questions:myschool -- "https://myschool.ng/classroom/chemistry?exam_type=jamb"
   npm run questions:myschool -- --url "https://myschool.ng/classroom/mathematics?exam_type=jamb" --url "https://myschool.ng/classroom/government?exam_type=jamb"
   npm run questions:myschool -- --links-file myschool-links.txt
+  npm run questions:myschool -- "https://myschool.ng/classroom/physics?exam_type=jamb" --details-only --refresh-media --download-images
 `);
 }
 
@@ -62,6 +69,10 @@ function parseArgs(argv) {
     retries: 4,
     timeoutMs: 30_000,
     refresh: false,
+    detailsOnly: false,
+    refreshMedia: false,
+    downloadImages: false,
+    imagesDir: path.join(process.cwd(), "assets", "questions", "myschool"),
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -74,10 +85,14 @@ function parseArgs(argv) {
     };
     if (argument === "--help") return { ...config, help: true };
     if (argument === "--refresh") config.refresh = true;
+    else if (argument === "--details-only") config.detailsOnly = true;
+    else if (argument === "--refresh-media") config.refreshMedia = true;
+    else if (argument === "--download-images") config.downloadImages = true;
     else if (argument === "--subjects") config.subjects = next().split(",").map(value => value.trim().toLowerCase()).filter(Boolean);
     else if (argument === "--url") config.sourceUrls.push(next());
     else if (argument === "--links-file") config.linksFile = path.resolve(next());
     else if (argument === "--output-dir") config.outputDir = path.resolve(next());
+    else if (argument === "--images-dir") config.imagesDir = path.resolve(next());
     else if (argument === "--delay-ms") config.delayMs = parsePositiveInteger(next(), argument, { allowZero: true });
     else if (argument === "--start-page") config.startPage = parsePositiveInteger(next(), argument);
     else if (argument === "--max-pages") config.maxPages = parsePositiveInteger(next(), argument);
@@ -185,15 +200,32 @@ function absoluteUrl(value, baseUrl) {
   }
 }
 
-function imageUrls($, scope, baseUrl) {
+function imageUrls($, scope, baseUrl, accept = () => true) {
   const urls = [];
   scope.find("img").addBack("img").each((_, image) => {
     const element = $(image);
     const candidate = element.attr("src") || element.attr("data-src") || element.attr("data-lazy-src");
     const resolved = absoluteUrl(candidate, baseUrl);
-    if (resolved && !urls.includes(resolved)) urls.push(resolved);
+    if (resolved && accept(new URL(resolved), element) && !urls.includes(resolved)) urls.push(resolved);
   });
   return urls;
+}
+
+function isQuestionMedia(url) {
+  return /(^|\.)myschool\.ng$/i.test(url.hostname) && url.pathname.startsWith("/storage/classroom/");
+}
+
+function isExplanationMedia(url) {
+  return /(^|\.)myschool\.ng$/i.test(url.hostname) && url.pathname.startsWith("/storage/classroom_answers/");
+}
+
+function normalizeExplanation(value) {
+  const text = cleanText(value);
+  return !text || PLACEHOLDER_EXPLANATION.test(text) ? null : text;
+}
+
+function referencesVisual(questionText) {
+  return VISUAL_REFERENCE.test(questionText || "");
 }
 
 function getQuestionId(url, subject) {
@@ -234,8 +266,8 @@ function findExplanation($, sourceUrl) {
     text = nodeText($, directParagraph);
   }
   return {
-    text: text || null,
-    imageUrls: imageUrls($, section, sourceUrl),
+    text: normalizeExplanation(text),
+    imageUrls: imageUrls($, section, sourceUrl, isExplanationMedia),
   };
 }
 
@@ -260,11 +292,12 @@ function parseDetail(html, expectedSubject, sourceUrl, expectedExamType = null) 
     const label = cardElement.find("span").map((__, span) => cleanText($(span).text()).toUpperCase()).get().find(value => /^[A-E]$/.test(value));
     const textElement = cardElement.find("p.font-medium").first();
     const text = nodeText($, textElement);
-    if (!label || (!text && !imageUrls($, cardElement, sourceUrl).length)) return;
+    const optionImages = imageUrls($, cardElement, sourceUrl, isQuestionMedia);
+    if (!label || (!text && !optionImages.length)) return;
     options.push({
       label,
       text: text || null,
-      image_urls: imageUrls($, cardElement, sourceUrl),
+      image_urls: optionImages,
     });
   });
 
@@ -279,7 +312,7 @@ function parseDetail(html, expectedSubject, sourceUrl, expectedExamType = null) 
   const year = Number(yearText.match(/(?:19|20)\d{2}/)?.[0]) || null;
   const explanation = findExplanation($, sourceUrl);
   const sourceId = getQuestionId(sourceUrl, expectedSubject);
-  const questionImages = imageUrls($, heading, sourceUrl);
+  const questionImages = imageUrls($, questionContainer, sourceUrl, isQuestionMedia);
   const correctIndex = options.findIndex(option => option.label === correctOption);
 
   if (!questionText) throw new Error("Question text was empty.");
@@ -290,6 +323,8 @@ function parseDetail(html, expectedSubject, sourceUrl, expectedExamType = null) 
   if (!year) qualityFlags.push("missing_year");
   if (!explanation.text) qualityFlags.push("missing_explanation");
   if (questionImages.length || options.some(option => option.image_urls.length)) qualityFlags.push("has_images");
+  if (explanation.imageUrls.length) qualityFlags.push("has_explanation_images");
+  if (referencesVisual(questionText) && !questionImages.length && !options.some(option => option.image_urls.length)) qualityFlags.push("missing_visual_media");
   if (options.length < 4 || options.length > 5) qualityFlags.push("unusual_option_count");
 
   return {
@@ -310,6 +345,101 @@ function parseDetail(html, expectedSubject, sourceUrl, expectedExamType = null) 
     quality_flags: qualityFlags,
     scraped_at: new Date().toISOString(),
   };
+}
+
+function sniffImageExtension(buffer) {
+  if (buffer.length >= 3 && buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff) return "jpg";
+  if (buffer.length >= 8 && buffer.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))) return "png";
+  if (buffer.length >= 6 && ["GIF87a", "GIF89a"].includes(buffer.subarray(0, 6).toString("ascii"))) return "gif";
+  if (buffer.length >= 12 && buffer.subarray(0, 4).toString("ascii") === "RIFF" && buffer.subarray(8, 12).toString("ascii") === "WEBP") return "webp";
+  if (/^\s*<svg[\s>]/i.test(buffer.subarray(0, 512).toString("utf8"))) return "svg";
+  return null;
+}
+
+function mediaExtension(url, contentType, buffer) {
+  const sniffed = sniffImageExtension(buffer);
+  if (sniffed) return sniffed;
+  const byType = {
+    "image/jpeg": "jpg",
+    "image/jpg": "jpg",
+    "image/png": "png",
+    "image/gif": "gif",
+    "image/webp": "webp",
+    "image/svg+xml": "svg",
+  };
+  const normalizedType = String(contentType || "").split(";", 1)[0].trim().toLowerCase();
+  if (byType[normalizedType]) return byType[normalizedType];
+  const fromPath = path.extname(new URL(url).pathname).slice(1).toLowerCase();
+  return ["jpg", "jpeg", "png", "gif", "webp", "svg"].includes(fromPath) ? fromPath.replace("jpeg", "jpg") : "img";
+}
+
+function projectPath(filename) {
+  return path.relative(process.cwd(), filename).split(path.sep).join("/");
+}
+
+async function downloadMediaGroup(urls, role, question, config, request) {
+  const files = [];
+  const failures = [];
+  for (let index = 0; index < urls.length; index += 1) {
+    const url = urls[index];
+    try {
+      const media = await request(url, { binary: true });
+      const sniffedExtension = sniffImageExtension(media.buffer);
+      if ((!media.contentType.toLowerCase().startsWith("image/") && !sniffedExtension) || !media.buffer.length) {
+        throw new Error(`Expected image content but received ${media.contentType || "an unknown type"}.`);
+      }
+      const extension = mediaExtension(media.finalUrl || url, media.contentType, media.buffer);
+      const directory = path.join(config.imagesDir, question.subject);
+      const filename = path.join(directory, `${question.source_id}-${role}-${index + 1}.${extension}`);
+      fs.mkdirSync(directory, { recursive: true });
+      fs.writeFileSync(filename, media.buffer);
+      files.push(projectPath(filename));
+    } catch (error) {
+      files.push(null);
+      failures.push({ role, index, url, error: error.message });
+    }
+  }
+  return { files, failures };
+}
+
+async function downloadQuestionMedia(question, config, request) {
+  const failures = [];
+  const questionMedia = await downloadMediaGroup(question.question_image_urls || [], "question", question, config, request);
+  question.question_image_files = questionMedia.files;
+  failures.push(...questionMedia.failures);
+  for (let index = 0; index < question.options.length; index += 1) {
+    const option = question.options[index];
+    const optionMedia = await downloadMediaGroup(option.image_urls || [], `option-${option.label.toLowerCase()}`, question, config, request);
+    option.image_files = optionMedia.files;
+    failures.push(...optionMedia.failures);
+  }
+  const explanationMedia = await downloadMediaGroup(question.explanation_image_urls || [], "explanation", question, config, request);
+  question.explanation_image_files = explanationMedia.files;
+  failures.push(...explanationMedia.failures);
+  question.media_download_failures = failures;
+  question.quality_flags = question.quality_flags.filter(flag => flag !== "image_download_failed");
+  if (failures.length) question.quality_flags.push("image_download_failed");
+  return question;
+}
+
+function needsMediaRefresh(question) {
+  const optionImages = (question.options || []).flatMap(option => option.image_urls || []);
+  return referencesVisual(question.question) && !(question.question_image_urls || []).length && !optionImages.length;
+}
+
+function localMediaExists(filename) {
+  if (!filename) return false;
+  const absolute = path.isAbsolute(filename) ? filename : path.resolve(process.cwd(), filename);
+  return fs.existsSync(absolute);
+}
+
+function needsMediaDownload(question) {
+  const groups = [
+    [question.question_image_urls || [], question.question_image_files || []],
+    ...((question.options || []).map(option => [option.image_urls || [], option.image_files || []])),
+    [question.explanation_image_urls || [], question.explanation_image_files || []],
+  ];
+  return groups.some(([urls, files]) => urls.some((_, index) => !localMediaExists(files[index])));
 }
 
 function emptyState(collection) {
@@ -364,7 +494,15 @@ function summarize(collection, state, expectedPages, pageRange) {
     if (duplicateKeys.has(key)) duplicates.push({ id: question.id, duplicate_of: duplicateKeys.get(key) });
     else duplicateKeys.set(key, question.id);
   }
-  const counts = flag => questions.filter(question => question.quality_flags.includes(flag)).length;
+  const counts = flag => questions.filter(question => (question.quality_flags || []).includes(flag)).length;
+  const meaningfulExplanations = questions.filter(question => normalizeExplanation(question.explanation)).length;
+  const placeholderExplanations = questions.filter(question => cleanText(question.explanation) && !normalizeExplanation(question.explanation)).length;
+  const recordsWithQuestionMedia = questions.filter(question =>
+    (question.question_image_urls || []).length || (question.options || []).some(option => (option.image_urls || []).length)).length;
+  const recordsWithDownloadedMedia = questions.filter(question =>
+    (question.question_image_files || []).some(Boolean)
+    || (question.options || []).some(option => (option.image_files || []).some(Boolean))
+    || (question.explanation_image_files || []).some(Boolean)).length;
   const collectedPages = Object.keys(state.pages).filter(page => Number(page) >= pageRange.start && Number(page) <= pageRange.end);
   const discoveredUrls = new Set(collectedPages.flatMap(page => state.pages[page] || []));
   const discoveredIds = [...discoveredUrls].map(url => getQuestionId(url, collection.subject)).filter(Boolean);
@@ -389,9 +527,12 @@ function summarize(collection, state, expectedPages, pageRange) {
     exam_type: collection.examType,
     generated_at: new Date().toISOString(),
     quality: {
-      with_explanations: questions.length - counts("missing_explanation"),
-      missing_explanations: counts("missing_explanation"),
-      with_images: counts("has_images"),
+      with_explanations: meaningfulExplanations,
+      missing_explanations: questions.length - meaningfulExplanations,
+      placeholder_explanations: placeholderExplanations,
+      with_images: recordsWithQuestionMedia,
+      with_downloaded_images: recordsWithDownloadedMedia,
+      missing_visual_media: questions.filter(needsMediaRefresh).length,
       missing_years: counts("missing_year"),
       unusual_option_counts: counts("unusual_option_count"),
       exact_duplicates: duplicates,
@@ -403,7 +544,7 @@ function summarize(collection, state, expectedPages, pageRange) {
 
 function createRequester(config) {
   let lastRequestAt = 0;
-  return async function request(url) {
+  return async function request(url, { binary = false } = {}) {
     let lastError;
     for (let attempt = 0; attempt <= config.retries; attempt += 1) {
       const wait = Math.max(0, config.delayMs - (Date.now() - lastRequestAt));
@@ -421,6 +562,13 @@ function createRequester(config) {
           const error = new Error(`HTTP ${response.status} ${response.statusText}`);
           error.status = response.status;
           throw error;
+        }
+        if (binary) {
+          return {
+            buffer: Buffer.from(await response.arrayBuffer()),
+            contentType: response.headers.get("content-type") || "",
+            finalUrl: response.url,
+          };
         }
         return await response.text();
       } catch (error) {
@@ -453,14 +601,19 @@ async function collectCollection(collection, config, request) {
   };
 
   const label = `${subject}${examType ? ` · ${examType}` : ""}`.toUpperCase();
-  console.log(`\n${label}: collecting listing pages`);
-  const firstUrl = listingPageUrl(collection, config.startPage);
-  if (config.refresh || !state.pages[config.startPage]) {
-    const parsed = parseListing(await request(firstUrl), subject, firstUrl);
-    if (!parsed.urls.length) throw new Error(`No ${subject} question links were found on page ${config.startPage}.`);
-    state.pages[config.startPage] = parsed.urls;
-    if (parsed.totalPages) state.discovered_total_pages = parsed.totalPages;
-    save();
+  if (config.detailsOnly && !Object.keys(state.pages).length) {
+    throw new Error(`No checkpointed ${subject} listing pages exist. Run once without --details-only.`);
+  }
+  if (!config.detailsOnly) {
+    console.log(`\n${label}: collecting listing pages`);
+    const firstUrl = listingPageUrl(collection, config.startPage);
+    if (config.refresh || !state.pages[config.startPage]) {
+      const parsed = parseListing(await request(firstUrl), subject, firstUrl);
+      if (!parsed.urls.length) throw new Error(`No ${subject} question links were found on page ${config.startPage}.`);
+      state.pages[config.startPage] = parsed.urls;
+      if (parsed.totalPages) state.discovered_total_pages = parsed.totalPages;
+      save();
+    }
   }
 
   const discoveredPages = state.discovered_total_pages;
@@ -472,6 +625,7 @@ async function collectCollection(collection, config, request) {
     : discoveredPages;
 
   for (let page = config.startPage; page <= finalPage; page += 1) {
+    if (config.detailsOnly) continue;
     if (!config.refresh && state.pages[page]) continue;
     const url = listingPageUrl(collection, page);
     const parsed = parseListing(await request(url), subject, url);
@@ -492,12 +646,19 @@ async function collectCollection(collection, config, request) {
   let processed = 0;
   for (const url of urls) {
     const sourceId = getQuestionId(url, subject);
-    if (!config.refresh && state.questions[sourceId]) {
+    const existing = state.questions[sourceId];
+    const shouldFetch = config.refresh || !existing || (config.refreshMedia && needsMediaRefresh(existing));
+    if (!shouldFetch) {
+      if (config.downloadImages && needsMediaDownload(existing)) {
+        await downloadQuestionMedia(existing, config, request);
+        save();
+      }
       processed += 1;
       continue;
     }
     try {
-      const question = parseDetail(await request(url), subject, url, examType);
+      let question = parseDetail(await request(url), subject, url, examType);
+      if (config.downloadImages) question = await downloadQuestionMedia(question, config, request);
       state.questions[sourceId] = question;
       delete state.failures[sourceId];
     } catch (error) {

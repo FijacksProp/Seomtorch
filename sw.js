@@ -1,4 +1,4 @@
-const CACHE = "seomtorch-v22";
+const CACHE = "seomtorch-v23";
 const APP_ASSETS = [
   "./",
   "index.html",
@@ -11,7 +11,8 @@ const APP_ASSETS = [
   "data/manifest.json",
   "data/questions-english.json",
   "data/questions-general-paper.json",
-  "data/questions-mathematics.json"
+  "data/questions-mathematics.json",
+  "data/questions-physics.json"
 ];
 
 self.addEventListener("install", event => {

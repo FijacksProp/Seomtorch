@@ -1,6 +1,6 @@
 # Seomtorch
 
-An offline-first Post-UTME preparation companion focused on English Language and General Paper, with Mathematics retained as an additional practice area.
+An offline-first examination preparation companion for English Language, General Paper, Mathematics and Physics.
 
 ## Run locally
 

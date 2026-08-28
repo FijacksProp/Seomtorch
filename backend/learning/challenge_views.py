@@ -62,7 +62,7 @@ def _public_questions(challenge):
 
 def _select_questions(subject_slug, limit):
     subjects = list(Subject.objects.filter(is_active=True).order_by("position", "name"))
-    priority = {"english": 0, "mathematics": 1, "general-paper": 2}
+    priority = {"english": 0, "mathematics": 1, "general-paper": 2, "physics": 3}
     subjects.sort(key=lambda item: (priority.get(item.slug, 99), item.position))
     if subject_slug != "all":
         subject = get_object_or_404(Subject, slug=subject_slug, is_active=True)

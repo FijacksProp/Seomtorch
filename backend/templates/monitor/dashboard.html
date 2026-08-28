@@ -1,5 +1,35 @@
-{% extends 'monitor/base.html' %}{% block title %}Overview{% endblock %}{% block content %}
-<div class="page-heading"><div><p class="kicker">Platform overview</p><h1>Learning, at a glance.</h1><p>Completed tests lead the academic view, with question activity retained for diagnosis.</p></div><span>{% now "j F Y" %}</span></div>
-<section class="metric-grid"><article><span>Tests completed today</span><strong>{{ tests_today }}</strong><small>{{ total_tests }} completed across the platform</small></article><article><span>Average test score</span><strong>{{ average_test_score_today }}%</strong><small>Across today’s completed papers</small></article><article><span>Active students</span><strong>{{ active_today }}</strong><small>{{ active_week }} active in seven days</small></article><article class="accent"><span>Registered students</span><strong>{{ total_students }}</strong><small>{{ attempts_today }} answers submitted today</small></article></section>
-<div class="dashboard-grid"><section class="panel wide"><div class="panel-head"><div><p class="kicker">Academic performance</p><h2>Subjects</h2></div></div><div class="subject-report">{% for subject in subjects %}<a href="{% url 'monitor:subject-detail' subject.slug %}"><div><strong>{{ subject.name }}</strong><small>{{ subject.test_count }} completed tests · {{ subject.student_count }} students · {{ subject.total_attempts }} answers</small></div><div class="bar"><i style="width:{{ subject.accuracy }}%"></i></div><b>{{ subject.accuracy }}%</b><span>→</span></a>{% empty %}<div class="empty">Question data will appear after the first import.</div>{% endfor %}</div></section><section class="panel"><div class="panel-head"><div><p class="kicker">New accounts</p><h2>Recent students</h2></div><a href="{% url 'monitor:students' %}">View all</a></div><div class="person-list">{% for student in recent_students %}<a href="{% url 'monitor:student-detail' student.public_id %}"><span>{{ student.username|slice:":1"|upper }}</span><div><strong>{{ student.username }}</strong><small>{{ student.public_id }} · {{ student.date_joined|timesince }} ago</small></div></a>{% empty %}<div class="empty">No students yet.</div>{% endfor %}</div></section><section class="panel wide"><div class="panel-head"><div><p class="kicker">Live activity</p><h2>Recent events</h2></div></div><div class="event-list">{% for event in recent_events %}<div><span class="event-mark"></span><p><a href="{% url 'monitor:student-detail' event.user.public_id %}">{{ event.user.username }}</a> {{ event.get_event_type_display|lower }}<small>{{ event.created_at|timesince }} ago</small></p></div>{% empty %}<div class="empty">Activity will appear as students use the app.</div>{% endfor %}</div></section></div>
+{% extends 'monitor/base.html' %}
+{% block title %}Overview{% endblock %}
+{% block content %}
+<div class="page-heading">
+  <div><p class="kicker">Platform overview</p><h1>Learning, at a glance.</h1><p>Completed tests lead the academic view, with question activity retained for diagnosis.</p></div>
+  <span>{% now "j F Y" %}</span>
+</div>
+<section class="metric-grid">
+  <article><span>Tests completed today</span><strong>{{ tests_today }}</strong><small>{{ total_tests }} completed across the platform</small></article>
+  <article><span>Average test score</span><strong>{{ average_test_score_today }}%</strong><small>Across today’s completed papers</small></article>
+  <article><span>Active students</span><strong>{{ active_today }}</strong><small>{{ active_week }} active in seven days</small></article>
+  <article class="accent"><span>Registered students</span><strong>{{ total_students }}</strong><small>{{ attempts_today }} answers submitted today</small></article>
+</section>
+<div class="dashboard-grid">
+  <section class="panel wide">
+    <div class="panel-head"><div><p class="kicker">Academic performance</p><h2>Subjects</h2></div></div>
+    <div class="subject-report">
+      {% for subject in subjects %}
+      <a href="{% url 'monitor:subject-detail' subject.slug %}">
+        <div><strong>{{ subject.name }}</strong><small>{{ subject.test_count }} completed tests · {{ subject.student_count }} students · {{ subject.question_count }} live questions</small><small class="editorial-status">{{ subject.explanation_coverage }}% explanation coverage</small></div>
+        <div class="bar"><i style="width:{{ subject.accuracy }}%"></i></div><b>{{ subject.accuracy }}%</b><span>→</span>
+      </a>
+      {% empty %}<div class="empty">Question data will appear after the first import.</div>{% endfor %}
+    </div>
+  </section>
+  <section class="panel">
+    <div class="panel-head"><div><p class="kicker">New accounts</p><h2>Recent students</h2></div><a href="{% url 'monitor:students' %}">View all</a></div>
+    <div class="person-list">{% for student in recent_students %}<a href="{% url 'monitor:student-detail' student.public_id %}"><span>{{ student.username|slice:":1"|upper }}</span><div><strong>{{ student.username }}</strong><small>{{ student.public_id }} · {{ student.date_joined|timesince }} ago</small></div></a>{% empty %}<div class="empty">No students yet.</div>{% endfor %}</div>
+  </section>
+  <section class="panel wide">
+    <div class="panel-head"><div><p class="kicker">Live activity</p><h2>Recent events</h2></div></div>
+    <div class="event-list">{% for event in recent_events %}<div><span class="event-mark"></span><p><a href="{% url 'monitor:student-detail' event.user.public_id %}">{{ event.user.username }}</a> {{ event.get_event_type_display|lower }}<small>{{ event.created_at|timesince }} ago</small></p></div>{% empty %}<div class="empty">Activity will appear as students use the app.</div>{% endfor %}</div>
+  </section>
+</div>
 {% endblock %}

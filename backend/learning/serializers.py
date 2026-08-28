@@ -23,10 +23,14 @@ class QuestionPracticeSerializer(serializers.ModelSerializer):
     passage_body = serializers.CharField(source="passage.body", read_only=True, default="")
     video_url = serializers.URLField(read_only=True)
     image_url = serializers.CharField(read_only=True)
+    explanation_available = serializers.SerializerMethodField()
 
     class Meta:
         model = Question
-        fields = ("external_id", "subject", "topic", "text", "options", "difficulty", "questionYear", "passage_id", "passage_title", "passage_body", "video_url", "image_url")
+        fields = ("external_id", "subject", "topic", "text", "options", "difficulty", "questionYear", "passage_id", "passage_title", "passage_body", "video_url", "image_url", "explanation_available")
+
+    def get_explanation_available(self, obj):
+        return obj.explanation_status == Question.ExplanationStatus.REVIEWED and bool(obj.explanation.strip())
 
 class AttemptSerializer(serializers.ModelSerializer):
     question_id = serializers.CharField(source="question.external_id")

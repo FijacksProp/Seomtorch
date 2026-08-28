@@ -87,6 +87,9 @@ npm run questions:myschool -- "PASTE_URL_HERE" --delay-ms 2000
 # Re-fetch records when the source has changed
 npm run questions:myschool -- "PASTE_URL_HERE" --refresh
 
+# Re-check only questions that refer to a missing diagram and download media
+npm run questions:myschool -- "PASTE_URL_HERE" --details-only --refresh-media --download-images
+
 # Store the working JSON elsewhere
 npm run questions:myschool -- "PASTE_URL_HERE" --output-dir C:\question-imports\myschool
 ```
@@ -125,3 +128,89 @@ A missing explanation is recorded as a quality flag rather than an extraction
 failure because many source records contain only an answer key. Diagram URLs are
 retained and flagged so image-dependent questions are never mistaken for
 complete text-only questions.
+
+## Recover and store diagrams locally
+
+Question pages can place diagrams beside the question heading rather than inside
+it. The importer classifies `/storage/classroom/` files as question/option media
+and `/storage/classroom_answers/` files as solution media. Member avatars,
+discussion images, emojis and placeholders are excluded.
+
+After a full collection has a checkpoint, recover only visually incomplete
+records without repeating the listing-page crawl:
+
+```powershell
+npm run questions:myschool -- `
+  "https://myschool.ng/classroom/physics?exam_type=jamb" `
+  --details-only `
+  --refresh-media `
+  --download-images
+```
+
+Downloaded files use stable source IDs under
+`assets/questions/myschool/<subject>/`. Raw records retain both the original URL
+and the local path for provenance and deployment.
+
+## Prepare a reviewable question bank
+
+The preparation step removes exact duplicates, converts explanation placeholders
+to `null`, recomputes media flags and produces a guarded explanation queue:
+
+```powershell
+npm run questions:myschool:prepare -- `
+  --input data/imports/myschool/physics-jamb.raw.json
+```
+
+This creates:
+
+- `physics-jamb.prepared.json`: deduplicated, quality-labelled records;
+- `physics-jamb.explanations.todo.json`: questions requiring editorial work.
+
+For the Physics release, the resumable local editorial generator can produce
+concise explanations and independently challenge answer keys without sending
+the bank to an external API:
+
+```powershell
+npm run questions:physics:explain -- `
+  --input data/imports/myschool/physics-jamb.prepared.json `
+  --output data/imports/myschool/physics-jamb.editorial.json
+```
+
+The checkpoint records completed explanations, excluded ambiguous questions and
+every proposed answer change. A changed answer is applied only when a separate
+skeptical verification pass reaches the same answer with high confidence.
+Interrupted runs resume from the last completed batch.
+
+Generated explanations are not trusted automatically. To merge explanations,
+provide a keyed JSON file in which every entry contains `explanation`,
+`reviewed_by` and `reviewed_at`, then rerun with `--explanations PATH`. The
+preparer rejects short or unattributed entries and records their editorial
+provenance in the prepared question.
+
+The generator checkpoint can be supplied directly:
+
+```powershell
+npm run questions:myschool:prepare -- `
+  --input data/imports/myschool/physics-jamb.raw.json `
+  --explanations data/imports/myschool/physics-jamb.editorial.json
+```
+
+## Publish an approved pack
+
+Convert the prepared file into the compact schema used by the web app and
+Django importer:
+
+```powershell
+npm run questions:myschool:pack -- `
+  --input data/imports/myschool/physics-jamb.prepared.json `
+  --output data/questions-physics.json
+```
+
+The pack builder excludes questions flagged `missing_visual_media`, retains
+local question and worked-solution images, and marks explanations as reviewed or
+pending. Add the resulting pack to `data/manifest.json` and increase the
+manifest version for each production release.
+
+On Render, `backend/start.sh` imports a new manifest version once and records it
+in `QuestionBankRelease`. Subsequent cold starts skip the unchanged bank, while
+an existing non-empty database still receives newly released subjects.

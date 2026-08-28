@@ -13,11 +13,12 @@ fs.writeFileSync("data/questions-general-paper.json", JSON.stringify({ version, 
 fs.writeFileSync("data/questions-mathematics.json", JSON.stringify({ version, questions: mathematics }, null, 2));
 
 const manifest = {
-  version: 2,
+  version: 3,
   packs: [
     { id: "english", name: "English Language", file: "data/questions-english.json" },
     { id: "general-paper", name: "General Paper", file: "data/questions-general-paper.json" },
-    { id: "mathematics", name: "Mathematics", file: "data/questions-mathematics.json" }
+    { id: "mathematics", name: "Mathematics", file: "data/questions-mathematics.json" },
+    { id: "physics", name: "Physics", file: "data/questions-physics.json" }
   ]
 };
 

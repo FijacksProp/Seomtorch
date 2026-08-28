@@ -45,8 +45,10 @@ def dashboard(request):
     total_today = today_attempts.count(); correct_today = today_attempts.filter(is_correct=True).count()
     tests_today = session_analytics(PracticeSession.objects.filter(completed_at__date=today))
     total_tests = PracticeSession.objects.filter(status=PracticeSession.Status.COMPLETED).count()
-    subjects = Subject.objects.filter(is_active=True).annotate(total_attempts=Count("topics__questions__attempts", distinct=True), correct_attempts=Count("topics__questions__attempts", filter=Q(topics__questions__attempts__is_correct=True), distinct=True), student_count=Count("topics__questions__attempts__user", distinct=True), test_count=Count("practice_sessions", filter=Q(practice_sessions__status=PracticeSession.Status.COMPLETED), distinct=True))
-    for subject in subjects: subject.accuracy = percentage(subject.correct_attempts, subject.total_attempts)
+    subjects = Subject.objects.filter(is_active=True).annotate(total_attempts=Count("topics__questions__attempts", distinct=True), correct_attempts=Count("topics__questions__attempts", filter=Q(topics__questions__attempts__is_correct=True), distinct=True), student_count=Count("topics__questions__attempts__user", distinct=True), test_count=Count("practice_sessions", filter=Q(practice_sessions__status=PracticeSession.Status.COMPLETED), distinct=True), question_count=Count("topics__questions", filter=Q(topics__questions__is_active=True), distinct=True), reviewed_count=Count("topics__questions", filter=Q(topics__questions__is_active=True, topics__questions__explanation_status=Question.ExplanationStatus.REVIEWED), distinct=True))
+    for subject in subjects:
+        subject.accuracy = percentage(subject.correct_attempts, subject.total_attempts)
+        subject.explanation_coverage = percentage(subject.reviewed_count, subject.question_count)
     recent_students = User.objects.filter(is_staff=False).select_related("learning_stats").order_by("-date_joined")[:7]
     recent_events = ActivityEvent.objects.select_related("user").filter(user__is_staff=False)[:12]
     context = {"total_students": total_students, "active_today": active_today, "active_week": active_week, "tests_today": tests_today["tests_taken"], "average_test_score_today": tests_today["average_score"], "total_tests": total_tests, "attempts_today": total_today, "accuracy_today": percentage(correct_today, total_today), "subjects": subjects, "recent_students": recent_students, "recent_events": recent_events}
@@ -86,7 +88,11 @@ def subject_detail(request, slug):
     difficult = Question.objects.filter(topic__subject=subject, attempts__isnull=False).annotate(total_attempts=Count("attempts"), correct_attempts=Count("attempts", filter=Q(attempts__is_correct=True))).order_by("correct_attempts", "-total_attempts")[:12]
     for question in difficult: question.accuracy = percentage(question.correct_attempts, question.total_attempts)
     tests = session_analytics(PracticeSession.objects.filter(subject=subject))
-    return render(request, "monitor/subject_detail.html", {"subject": subject, "total": total, "accuracy": percentage(correct, total), "student_count": attempts.values("user_id").distinct().count(), "tests": tests, "topics": topics, "difficult": difficult})
+    active_questions = Question.objects.filter(topic__subject=subject, is_active=True)
+    question_count = active_questions.count()
+    reviewed_count = active_questions.filter(explanation_status=Question.ExplanationStatus.REVIEWED).count()
+    pending_count = question_count - reviewed_count
+    return render(request, "monitor/subject_detail.html", {"subject": subject, "total": total, "accuracy": percentage(correct, total), "student_count": attempts.values("user_id").distinct().count(), "tests": tests, "topics": topics, "difficult": difficult, "question_count": question_count, "reviewed_count": reviewed_count, "pending_count": pending_count, "explanation_coverage": percentage(reviewed_count, question_count)})
 
 import csv
 import secrets
