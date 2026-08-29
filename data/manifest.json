@@ -1,5 +1,5 @@
 {
-  "version": 8,
+  "version": 9,
   "packs": [
     {
       "id": "biology",
@@ -10,6 +10,11 @@
       "id": "civic-education",
       "name": "Civic Education",
       "file": "data/questions-civic-education.json"
+    },
+    {
+      "id": "computer-studies",
+      "name": "Computer Studies",
+      "file": "data/questions-computer-studies.json"
     },
     {
       "id": "english",
