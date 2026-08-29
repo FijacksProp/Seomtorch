@@ -188,6 +188,14 @@ function nodeText($, node) {
   if (!node?.length) return "";
   const clone = node.clone();
   clone.find("br").replaceWith("\n");
+  clone.find("sup").each((_, el) => {
+    const text = cleanText($(el).text());
+    if (text) $(el).replaceWith(`^(${text})`);
+  });
+  clone.find("sub").each((_, el) => {
+    const text = cleanText($(el).text());
+    if (text) $(el).replaceWith(`_(${text})`);
+  });
   return cleanText(clone.text());
 }
 
