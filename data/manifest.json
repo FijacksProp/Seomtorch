@@ -1,5 +1,5 @@
 {
-  "version": 7,
+  "version": 8,
   "packs": [
     {
       "id": "biology",
@@ -20,6 +20,11 @@
       "id": "general-paper",
       "name": "General Paper",
       "file": "data/questions-general-paper.json"
+    },
+    {
+      "id": "history",
+      "name": "History",
+      "file": "data/questions-history.json"
     },
     {
       "id": "mathematics",

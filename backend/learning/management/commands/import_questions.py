@@ -12,9 +12,10 @@ SUBJECT_DETAILS = {
     "civic-education": ("Civic Education", "WAEC & JAMB citizenship, human rights, democracy and governance", 2),
     "english": ("English Language", "Usage, comprehension and oral forms", 3),
     "general-paper": ("General Paper", "Civics, current affairs and general knowledge", 4),
-    "mathematics": ("Mathematics", "Numbers, algebra and applied reasoning", 5),
-    "music": ("Music", "JAMB music theory, African music and Western art music", 6),
-    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 7),
+    "history": ("History", "Nigerian, African and world history from pre-colonial to modern times", 5),
+    "mathematics": ("Mathematics", "Numbers, algebra, geometry and calculus", 6),
+    "music": ("Music", "JAMB music theory, African music and Western art music", 7),
+    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 8),
 }
 
 class Command(BaseCommand):
