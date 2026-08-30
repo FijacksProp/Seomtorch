@@ -1,4 +1,4 @@
-const CACHE = "seomtorch-v34";
+const CACHE = "seomtorch-v35";
 const APP_ASSETS = [
   "./",
   "index.html",
@@ -11,6 +11,7 @@ const APP_ASSETS = [
   "data/manifest.json",
   "data/questions.json",
   "data/questions-biology.json",
+  "data/questions-chemistry.json",
   "data/questions-civic-education.json",
   "data/questions-computer-studies.json",
   "data/questions-english.json",

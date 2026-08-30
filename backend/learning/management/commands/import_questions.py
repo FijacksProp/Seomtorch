@@ -9,14 +9,15 @@ from learning.models import Question, QuestionBankRelease, Subject, Topic
 
 SUBJECT_DETAILS = {
     "biology": ("Biology", "JAMB cell biology, physiology, ecology, genetics and evolution", 1),
-    "civic-education": ("Civic Education", "WAEC & JAMB citizenship, human rights, democracy and governance", 2),
-    "computer-studies": ("Computer Studies", "Hardware, software, networking, logic, programming and data processing", 3),
-    "english": ("English Language", "Usage, comprehension and oral forms", 4),
-    "general-paper": ("General Paper", "Civics, current affairs and general knowledge", 5),
-    "history": ("History", "Nigerian, African and world history from pre-colonial to modern times", 6),
-    "mathematics": ("Mathematics", "Numbers, algebra, geometry and calculus", 7),
-    "music": ("Music", "JAMB music theory, African music and Western art music", 8),
-    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 9),
+    "chemistry": ("Chemistry", "JAMB physical, inorganic and organic chemistry", 2),
+    "civic-education": ("Civic Education", "WAEC & JAMB citizenship, human rights, democracy and governance", 3),
+    "computer-studies": ("Computer Studies", "Hardware, software, networking, logic, programming and data processing", 4),
+    "english": ("English Language", "Usage, comprehension and oral forms", 5),
+    "general-paper": ("General Paper", "Civics, current affairs and general knowledge", 6),
+    "history": ("History", "Nigerian, African and world history from pre-colonial to modern times", 7),
+    "mathematics": ("Mathematics", "Numbers, algebra, geometry and calculus", 8),
+    "music": ("Music", "JAMB music theory, African music and Western art music", 9),
+    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 10),
 }
 
 class Command(BaseCommand):

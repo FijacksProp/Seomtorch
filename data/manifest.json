@@ -1,10 +1,15 @@
 {
-  "version": 9,
+  "version": 10,
   "packs": [
     {
       "id": "biology",
       "name": "Biology",
       "file": "data/questions-biology.json"
+    },
+    {
+      "id": "chemistry",
+      "name": "Chemistry",
+      "file": "data/questions-chemistry.json"
     },
     {
       "id": "civic-education",
