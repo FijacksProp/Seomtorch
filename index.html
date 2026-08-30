@@ -4,14 +4,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#064d3b">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Seomtorch">
+  <meta name="application-name" content="Seomtorch">
   <meta name="description" content="Seomtorch is a focused, offline-first exam preparation companion for Nigerian students.">
   <title>Seomtorch — Prepare with purpose</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="assets/seomtorch_logo.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/seomtorch_logo.png">
+  <script>
+    window.__deferredInstallPrompt = null;
+    window.addEventListener("beforeinstallprompt", function (e) {
+      e.preventDefault();
+      window.__deferredInstallPrompt = e;
+      window.dispatchEvent(new CustomEvent("pwa-install-ready", { detail: e }));
+    });
+    if ("serviceWorker" in navigator && location.protocol !== "file:") {
+      navigator.serviceWorker.register("sw.js").catch(function () {});
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">

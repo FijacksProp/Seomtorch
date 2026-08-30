@@ -92,7 +92,7 @@ let activeSession = null;
 let sessionTimer = null;
 let syncPromise = null;
 let pendingSyncCount = 0;
-let deferredInstallPrompt = null;
+let deferredInstallPrompt = window.__deferredInstallPrompt || null;
 let authMode = "signin";
 let selectedPracticeMode = "timed"; // 'timed' or 'normal'
 let dailySprintCompleted = localStorage.getItem("seomtorch-sprint-" + new Date().toISOString().slice(0,10)) === "done";
@@ -107,10 +107,21 @@ let badgeCelebrationActive = false;
 let badgeCelebrationKnown = new Set();
 
 window.addEventListener("beforeinstallprompt", event => {
-  event.preventDefault(); deferredInstallPrompt = event;
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  window.__deferredInstallPrompt = event;
   if (authToken && currentUser && profile && route !== "session") render();
 });
-window.addEventListener("appinstalled", () => { deferredInstallPrompt = null; showToast("Seomtorch installed successfully"); if (route !== "session") render(); });
+window.addEventListener("pwa-install-ready", event => {
+  deferredInstallPrompt = event.detail || window.__deferredInstallPrompt;
+  if (authToken && currentUser && profile && route !== "session") render();
+});
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+  window.__deferredInstallPrompt = null;
+  showToast("Seomtorch installed successfully");
+  if (route !== "session") render();
+});
 
 function readCachedUser() {
   try { return JSON.parse(localStorage.getItem("seomtorch-auth-user") || "null"); }
@@ -332,16 +343,30 @@ function bindShell() {
 }
 
 async function installApp() {
-  if (deferredInstallPrompt) {
-    deferredInstallPrompt.prompt();
-    const choice = await deferredInstallPrompt.userChoice;
-    if (choice.outcome === "accepted") deferredInstallPrompt = null;
+  if (isStandalone()) {
+    showToast("Seomtorch is already installed as an app.");
     return;
   }
-  const message = isIos()
-    ? "To install Seomtorch: tap the Share button in Safari, then choose ‘Add to Home Screen’."
-    : "Open your browser menu and choose ‘Install app’ or ‘Add to Home screen’.";
-  showConfirmDialog({ title: "Install Seomtorch", message, confirmLabel: "Got it", cancelLabel: "Close", onConfirm: () => {} });
+  const promptEvent = deferredInstallPrompt || window.__deferredInstallPrompt;
+  if (promptEvent) {
+    try {
+      await promptEvent.prompt();
+      const choice = await promptEvent.userChoice;
+      if (choice && choice.outcome === "accepted") {
+        deferredInstallPrompt = null;
+        window.__deferredInstallPrompt = null;
+        showToast("Installing Seomtorch...");
+      }
+      return;
+    } catch (err) {
+      console.warn("Direct install prompt error:", err);
+    }
+  }
+  if (isIos()) {
+    showToast("Tap Safari Share (square with arrow), then 'Add to Home Screen'");
+    return;
+  }
+  showToast("Preparing direct app installation... Tap again in a moment.");
 }
 
 function lastTopic() {
@@ -1222,8 +1247,9 @@ async function refreshDeviceCache() {
 
 function renderAuth() {
   const register = authMode === "register";
-  app.innerHTML = `<main class="onboarding auth-screen"><section class="onboard-brand"><span class="brand"><span class="brand-symbol" aria-hidden="true"><img src="assets/seomtorch_logo.png" alt=""></span><span class="brand-name">Seomtorch<small>Prepare with purpose</small></span></span><div><blockquote>Your progress should follow you.</blockquote><p>Sign in to keep every answer, streak and milestone connected to your account.</p></div><small>Biology · Chemistry · Civic Education · Computer Studies · Economics · English Language · General Paper · History · Mathematics · Music · Physics</small></section><section class="onboard-form"><div><div class="auth-tabs"><button class="${!register ? "active" : ""}" data-auth-mode="signin">Sign in</button><button class="${register ? "active" : ""}" data-auth-mode="register">Register</button></div><p class="eyebrow">${register ? "Create your account" : "Welcome back"}</p><h1>${register ? "Begin your preparation." : "Return to your study desk."}</h1><p class="lede">${register ? "Use an email, username and secure password." : "Sign in with your email address and password."}</p><form id="auth-form" class="auth-form">${register ? '<div class="field"><label for="auth-username">Username</label><input id="auth-username" name="username" type="text" maxlength="150" autocomplete="username" required></div>' : ""}<div class="field"><label for="auth-email">Email address</label><input id="auth-email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="auth-password">Password</label><input id="auth-password" name="password" type="password" minlength="8" autocomplete="${register ? "new-password" : "current-password"}" required></div><div id="auth-error" class="auth-error" role="alert"></div><button class="button auth-submit" type="submit">${register ? "Create account" : "Sign in"} →</button></form></div></section></main>`;
+  app.innerHTML = `<main class="onboarding auth-screen"><section class="onboard-brand"><span class="brand"><span class="brand-symbol" aria-hidden="true"><img src="assets/seomtorch_logo.png" alt=""></span><span class="brand-name">Seomtorch<small>Prepare with purpose</small></span></span><div><blockquote>Your progress should follow you.</blockquote><p>Sign in to keep every answer, streak and milestone connected to your account.</p></div><small>Biology · Chemistry · Civic Education · Computer Studies · Economics · English Language · General Paper · History · Mathematics · Music · Physics</small></section><section class="onboard-form"><div><div class="auth-tabs"><button class="${!register ? "active" : ""}" data-auth-mode="signin">Sign in</button><button class="${register ? "active" : ""}" data-auth-mode="register">Register</button></div><p class="eyebrow">${register ? "Create your account" : "Welcome back"}</p><h1>${register ? "Begin your preparation." : "Return to your study desk."}</h1><p class="lede">${register ? "Use an email, username and secure password." : "Sign in with your email address and password."}</p><form id="auth-form" class="auth-form">${register ? '<div class="field"><label for="auth-username">Username</label><input id="auth-username" name="username" type="text" maxlength="150" autocomplete="username" required></div>' : ""}<div class="field"><label for="auth-email">Email address</label><input id="auth-email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="auth-password">Password</label><input id="auth-password" name="password" type="password" minlength="8" autocomplete="${register ? "new-password" : "current-password"}" required></div><div id="auth-error" class="auth-error" role="alert"></div><button class="button auth-submit" type="submit">${register ? "Create account" : "Sign in"} →</button></form></div></section></main>${!isStandalone() ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ''}`;
   document.querySelectorAll("[data-auth-mode]").forEach(button => button.addEventListener("click", () => { authMode = button.dataset.authMode; renderAuth(); }));
+  document.querySelectorAll("[data-install-app]").forEach(button => button.addEventListener("click", installApp));
   document.querySelector("#auth-form").addEventListener("submit", submitAuth);
 }
 

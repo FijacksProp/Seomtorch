@@ -6,9 +6,23 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#f2f6f2",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#064d3b",
   "theme_color": "#064d3b",
+  "categories": ["education", "books", "productivity"],
   "icons": [
-    { "src": "assets/seomtorch_logo.png", "sizes": "1254x1254", "type": "image/png", "purpose": "any maskable" }
+    {
+      "src": "assets/seomtorch_logo.png",
+      "sizes": "192x192 512x512 1254x1254",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/seomtorch_logo.png",
+      "sizes": "192x192 512x512 1254x1254",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }
