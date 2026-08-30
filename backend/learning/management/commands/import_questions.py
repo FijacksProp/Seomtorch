@@ -12,12 +12,13 @@ SUBJECT_DETAILS = {
     "chemistry": ("Chemistry", "JAMB physical, inorganic and organic chemistry", 2),
     "civic-education": ("Civic Education", "WAEC & JAMB citizenship, human rights, democracy and governance", 3),
     "computer-studies": ("Computer Studies", "Hardware, software, networking, logic, programming and data processing", 4),
-    "english": ("English Language", "Usage, comprehension and oral forms", 5),
-    "general-paper": ("General Paper", "Civics, current affairs and general knowledge", 6),
-    "history": ("History", "Nigerian, African and world history from pre-colonial to modern times", 7),
-    "mathematics": ("Mathematics", "Numbers, algebra, geometry and calculus", 8),
-    "music": ("Music", "JAMB music theory, African music and Western art music", 9),
-    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 10),
+    "economics": ("Economics", "Microeconomics, macroeconomics, national income, trade and public finance", 5),
+    "english": ("English Language", "Usage, comprehension and oral forms", 6),
+    "general-paper": ("General Paper", "Civics, current affairs and general knowledge", 7),
+    "history": ("History", "Nigerian, African and world history from pre-colonial to modern times", 8),
+    "mathematics": ("Mathematics", "Numbers, algebra, geometry and calculus", 9),
+    "music": ("Music", "JAMB music theory, African music and Western art music", 10),
+    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 11),
 }
 
 class Command(BaseCommand):

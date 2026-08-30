@@ -1,5 +1,5 @@
 {
-  "version": 10,
+  "version": 11,
   "packs": [
     {
       "id": "biology",
@@ -20,6 +20,11 @@
       "id": "computer-studies",
       "name": "Computer Studies",
       "file": "data/questions-computer-studies.json"
+    },
+    {
+      "id": "economics",
+      "name": "Economics",
+      "file": "data/questions-economics.json"
     },
     {
       "id": "english",
