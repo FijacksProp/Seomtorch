@@ -1,5 +1,5 @@
 {
-  "version": 11,
+  "version": 12,
   "packs": [
     {
       "id": "biology",
@@ -35,6 +35,11 @@
       "id": "general-paper",
       "name": "General Paper",
       "file": "data/questions-general-paper.json"
+    },
+    {
+      "id": "government",
+      "name": "Government",
+      "file": "data/questions-government.json"
     },
     {
       "id": "history",

@@ -15,10 +15,11 @@ SUBJECT_DETAILS = {
     "economics": ("Economics", "Microeconomics, macroeconomics, national income, trade and public finance", 5),
     "english": ("English Language", "Usage, comprehension and oral forms", 6),
     "general-paper": ("General Paper", "Civics, current affairs and general knowledge", 7),
-    "history": ("History", "Nigerian, African and world history from pre-colonial to modern times", 8),
-    "mathematics": ("Mathematics", "Numbers, algebra, geometry and calculus", 9),
-    "music": ("Music", "JAMB music theory, African music and Western art music", 10),
-    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 11),
+    "government": ("Government", "Political theories, Nigerian constitutional development, institutions and foreign policy", 8),
+    "history": ("History", "Nigerian, African and world history from pre-colonial to modern times", 9),
+    "mathematics": ("Mathematics", "Numbers, algebra, geometry and calculus", 10),
+    "music": ("Music", "JAMB music theory, African music and Western art music", 11),
+    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 12),
 }
 
 class Command(BaseCommand):
