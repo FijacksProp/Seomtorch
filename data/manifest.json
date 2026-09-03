@@ -1,5 +1,5 @@
 {
-  "version": 12,
+  "version": 13,
   "packs": [
     {
       "id": "biology",
@@ -45,6 +45,11 @@
       "id": "history",
       "name": "History",
       "file": "data/questions-history.json"
+    },
+    {
+      "id": "marketing",
+      "name": "Marketing",
+      "file": "data/questions-marketing.json"
     },
     {
       "id": "mathematics",
