@@ -17,10 +17,11 @@ SUBJECT_DETAILS = {
     "general-paper": ("General Paper", "Civics, current affairs and general knowledge", 7),
     "government": ("Government", "Political theories, Nigerian constitutional development, institutions and foreign policy", 8),
     "history": ("History", "Nigerian, African and world history from pre-colonial to modern times", 9),
-    "marketing": ("Marketing", "Marketing concepts, 4Ps, distribution channels, promotion and consumer behavior", 10),
-    "mathematics": ("Mathematics", "Numbers, algebra, geometry and calculus", 11),
-    "music": ("Music", "JAMB music theory, African music and Western art music", 12),
-    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 13),
+    "literature-in-english": ("Literature in English", "Literary devices, African and non-African prose, drama, and poetry", 10),
+    "marketing": ("Marketing", "Marketing concepts, 4Ps, distribution channels, promotion and consumer behavior", 11),
+    "mathematics": ("Mathematics", "Numbers, algebra, geometry and calculus", 12),
+    "music": ("Music", "JAMB music theory, African music and Western art music", 13),
+    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 14),
 }
 
 class Command(BaseCommand):
