@@ -1,0 +1,33 @@
+{
+  "id": "ana203",
+  "code": "ANA 203",
+  "title": "General and Systemic Embryology",
+  "department": "anatomy",
+  "level": 200,
+  "description": "Study of early human development, gametogenesis, embryonic periods, and organogenesis across major body systems.",
+  "sections": [
+    {
+      "title": "General Embryology",
+      "topics": [
+        { "id": "ge-gametes", "title": "Male and Female Gamete", "status": "coming-soon" },
+        { "id": "ge-spermatogenesis", "title": "Spermatogenesis", "status": "coming-soon" },
+        { "id": "ge-oogenesis", "title": "Oogenesis", "status": "coming-soon" },
+        { "id": "ge-ovarian-menstrual-cycle", "title": "Ovarian and Menstrual Cycle", "status": "coming-soon" },
+        { "id": "ge-week-one", "title": "Week One of Development", "status": "coming-soon" },
+        { "id": "ge-week-two", "title": "Week Two", "status": "coming-soon" },
+        { "id": "ge-week-three", "title": "Week Three", "status": "coming-soon" },
+        { "id": "ge-week-three-to-eight", "title": "Week Three to Eight", "status": "coming-soon" }
+      ]
+    },
+    {
+      "title": "Systemic Embryology",
+      "topics": [
+        { "id": "se-cardiovascular-system", "title": "Cardiovascular System", "status": "coming-soon" },
+        { "id": "se-respiratory-system", "title": "Respiratory System", "status": "coming-soon" },
+        { "id": "se-urogenital-system", "title": "Urogenital System", "status": "coming-soon" },
+        { "id": "se-nervous-system", "title": "Nervous System", "status": "coming-soon" },
+        { "id": "se-gastrointestinal-system", "title": "Gastrointestinal System", "status": "coming-soon" }
+      ]
+    }
+  ]
+}

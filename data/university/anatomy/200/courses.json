@@ -7,6 +7,12 @@
       "code": "ANA 201",
       "title": "Upper and Lower Limb",
       "description": "Comprehensive study of the bones, muscles, joints, nerves, and blood supply of the upper and lower limbs."
+    },
+    {
+      "id": "ana203",
+      "code": "ANA 203",
+      "title": "General and Systemic Embryology",
+      "description": "Study of early human development, gametogenesis, embryonic periods, and organogenesis across major body systems."
     }
   ]
 }
