@@ -9,6 +9,12 @@
       "description": "Comprehensive study of the bones, muscles, joints, nerves, and blood supply of the upper and lower limbs."
     },
     {
+      "id": "ana202",
+      "code": "ANA 202 / ANA 203",
+      "title": "Histology of Basic Tissue",
+      "description": "Study of the microscopic structure, organization, and function of cells and the four fundamental body tissues."
+    },
+    {
       "id": "ana203",
       "code": "ANA 203",
       "title": "General and Systemic Embryology",

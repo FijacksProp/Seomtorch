@@ -1,0 +1,50 @@
+{
+  "id": "ana202",
+  "code": "ANA 202 / ANA 203",
+  "title": "Histology of Basic Tissue",
+  "department": "anatomy",
+  "level": 200,
+  "description": "Study of the microscopic structure, organization, and function of cells and the four fundamental body tissues.",
+  "sections": [
+    {
+      "title": "Histology of Basic Tissue",
+      "topics": [
+        {
+          "id": "hbt-cell-organelles",
+          "title": "Cell and Its Organelles",
+          "status": "coming-soon"
+        },
+        {
+          "id": "hbt-cell-cycle",
+          "title": "Cell Cycle",
+          "status": "coming-soon"
+        },
+        {
+          "id": "hbt-intercellular-junction",
+          "title": "Intercellular Junction",
+          "status": "coming-soon"
+        },
+        {
+          "id": "hbt-epithelia-tissue",
+          "title": "Epithelia Tissue",
+          "status": "coming-soon"
+        },
+        {
+          "id": "hbt-connective-tissue",
+          "title": "Connective Tissue",
+          "status": "coming-soon"
+        },
+        {
+          "id": "hbt-nervous-tissue",
+          "title": "Nervous Tissue",
+          "status": "coming-soon"
+        },
+        {
+          "id": "hbt-muscle-tissue",
+          "title": "Muscle Tissue",
+          "status": "coming-soon"
+        }
+      ]
+    }
+  ]
+}
