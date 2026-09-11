@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "departments": [
+    {
+      "id": "anatomy",
+      "name": "Anatomy",
+      "tagline": "Study of the structure of the human body",
+      "description": "Human Anatomy examines the form and structure of the body — from macroscopic organs and systems down to microscopic tissue and cellular organization. It is foundational for all clinical disciplines.",
+      "icon": "🦴",
+      "color": "#0f2d56",
+      "accentColor": "#c9a84c",
+      "levels": [200],
+      "faculty": "Basic Medical Sciences"
+    }
+  ]
+}

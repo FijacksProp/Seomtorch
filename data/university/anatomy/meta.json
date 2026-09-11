@@ -1,0 +1,9 @@
+{
+  "id": "anatomy",
+  "name": "Anatomy",
+  "faculty": "Basic Medical Sciences",
+  "description": "Human Anatomy is the scientific study of the structure of the human body. It encompasses gross anatomy, microscopic anatomy, developmental anatomy, and neuroanatomy. Anatomy is the cornerstone of medical education.",
+  "levels": [200],
+  "color": "#0f2d56",
+  "accentColor": "#c9a84c"
+}

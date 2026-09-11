@@ -1,0 +1,38 @@
+{
+  "id": "ana201",
+  "code": "ANA 201",
+  "title": "Upper and Lower Limb",
+  "department": "anatomy",
+  "level": 200,
+  "description": "Comprehensive study of the bones, muscles, joints, nerves, and blood supply of the upper and lower limbs.",
+  "sections": [
+    {
+      "title": "Upper Limb",
+      "topics": [
+        { "id": "ul-bones", "title": "Bones of the Upper Limb", "status": "coming-soon" },
+        { "id": "ul-muscles", "title": "Muscles of the Upper Limb", "status": "coming-soon" },
+        { "id": "ul-joints", "title": "Joints of the Upper Limb", "status": "coming-soon" },
+        { "id": "ul-brachial-plexus", "title": "Brachial Plexus", "status": "coming-soon" },
+        { "id": "ul-anatomical-snuffbox", "title": "Anatomical Snuffbox", "status": "coming-soon" },
+        { "id": "ul-axilla", "title": "Axilla", "status": "coming-soon" },
+        { "id": "ul-blood-supply", "title": "Blood Supply of the Upper Limb", "status": "coming-soon" },
+        { "id": "ul-cubital-fossa", "title": "Cubital Fossa", "status": "coming-soon" },
+        { "id": "ul-carpal-tunnel", "title": "Carpal Tunnel", "status": "coming-soon" }
+      ]
+    },
+    {
+      "title": "Lower Limb",
+      "topics": [
+        { "id": "ll-bones", "title": "Bones of the Lower Limb", "status": "coming-soon" },
+        { "id": "ll-muscles", "title": "Muscles of the Lower Limb", "status": "coming-soon" },
+        { "id": "ll-joints", "title": "Joints of the Lower Limb", "status": "coming-soon" },
+        { "id": "ll-popliteal-fossa", "title": "Popliteal Fossa", "status": "coming-soon" },
+        { "id": "ll-femoral-triangle", "title": "Femoral Triangle", "status": "coming-soon" },
+        { "id": "ll-arches-of-foot", "title": "Arches of the Foot", "status": "coming-soon" },
+        { "id": "ll-adductor-canal", "title": "Adductor Canal", "status": "coming-soon" },
+        { "id": "ll-walking-gait", "title": "Walking Gait", "status": "coming-soon" },
+        { "id": "ll-blood-supply", "title": "Blood Supply of the Lower Limb", "status": "coming-soon" }
+      ]
+    }
+  ]
+}

@@ -43,6 +43,7 @@ const ICONS = {
   progress: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
   challenges: '<svg class="nav-icon" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 20a4 4 0 0 1 8 0"/></svg>',
   profile: '<svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></svg>',
+  university: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 3 2 9l10 6 10-6Z"/><path d="M2 9v8"/><path d="M6 11.2V17c0 1.1 2.7 3 6 3s6-1.9 6-3v-5.8"/></svg>',
 };
 
 const DB_NAME = "seomtorch";
@@ -108,6 +109,12 @@ let progressData = null;
 let badgeCelebrationQueue = [];
 let badgeCelebrationActive = false;
 let badgeCelebrationKnown = new Set();
+let uniRoute = "departments"; // departments | levels | courses | course
+let uniDeptId = null;
+let uniLevel = null;
+let uniCourseId = null;
+let uniContentCache = {};
+let uniDepartments = null;
 
 window.addEventListener("beforeinstallprompt", event => {
   event.preventDefault();
@@ -288,6 +295,7 @@ function navigate(nextRoute) {
   }
   if (route === "session" && activeSession && !activeSession.started) activeSession = null;
   if (nextRoute === "challenges") { selectedChallengeId = null; challengesData = null; }
+  if (nextRoute === "university") { uniRoute = "departments"; uniDeptId = null; uniLevel = null; uniCourseId = null; }
   route = nextRoute;
   if (nextRoute !== "practice") selectedSubject = null;
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -298,7 +306,7 @@ function shell(content) {
   const xp = xpState();
   const testStats = profile.tests || { tests_taken: 0, average_score: 0 };
   const nav = [
-    ["home", "Home"], ["practice", "Practice"], ["challenges", "Challenges"], ["progress", "Progress"], ["profile", "Profile"]
+    ["home", "Home"], ["practice", "Practice"], ["challenges", "Challenges"], ["progress", "Progress"], ["university", "University"], ["profile", "Profile"]
   ];
   return `<div class="layout">
     <aside class="sidebar">
@@ -1293,6 +1301,183 @@ async function signOut() {
   authToken = null; currentUser = null; profile = null; attempts = []; bookmarks = []; challengesData = null; achievementsData = null; progressData = null; selectedChallengeId = null; badgeCelebrationKnown.clear(); badgeCelebrationQueue = []; localStorage.removeItem("seomtorch-auth-token"); localStorage.removeItem("seomtorch-auth-user"); renderAuth();
 }
 
+
+// ─── University Module ──────────────────────────────────────────────────────
+
+function uniShell(content, breadcrumbs = []) {
+  const crumbHtml = breadcrumbs.length ? `<nav class="uni-breadcrumb" aria-label="University navigation">${breadcrumbs.map((c, i) => i < breadcrumbs.length - 1 ? `<button data-uni-crumb="${i}">${escapeHtml(c.label)}</button><span aria-hidden="true">›</span>` : `<span class="current">${escapeHtml(c.label)}</span>`).join("")}</nav>` : "";
+  return shell(`<section class="uni-page"><div class="uni-header"><div class="uni-header-inner"><span class="uni-badge">🎓 University Mode</span><h1 class="uni-title">${breadcrumbs.length ? escapeHtml(breadcrumbs[breadcrumbs.length - 1].label) : "University"}</h1>${crumbHtml}</div></div><div class="uni-body">${content}</div></section>`);
+}
+
+function bindUniCrumbs(breadcrumbs) {
+  document.querySelectorAll("[data-uni-crumb]").forEach(button => {
+    button.addEventListener("click", () => {
+      const idx = Number(button.dataset.uniCrumb);
+      const target = breadcrumbs[idx];
+      if (target.action) target.action();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      render();
+    });
+  });
+}
+
+async function fetchUniJson(path) {
+  if (uniContentCache[path]) return uniContentCache[path];
+  try {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error(`Failed to load: ${path}`);
+    const data = await response.json();
+    uniContentCache[path] = data;
+    return data;
+  } catch (error) {
+    console.error("University fetch error:", error);
+    return null;
+  }
+}
+
+async function renderUniversity() {
+  if (uniRoute === "levels" && uniDeptId) return renderUniLevels();
+  if (uniRoute === "courses" && uniDeptId && uniLevel) return renderUniCourses();
+  if (uniRoute === "course" && uniDeptId && uniLevel && uniCourseId) return renderUniCourse();
+  return renderUniDepartments();
+}
+
+async function renderUniDepartments() {
+  const data = await fetchUniJson("data/university/index.json");
+  if (!data) {
+    app.innerHTML = uniShell(`<div class="uni-empty"><h2>Unable to load departments</h2><p>Please check your connection and try again.</p><button class="button uni-btn" id="uni-retry">Retry</button></div>`);
+    bindShell();
+    document.querySelector("#uni-retry")?.addEventListener("click", () => renderUniDepartments());
+    return;
+  }
+  uniDepartments = data.departments;
+  const cards = data.departments.map(dept => `<button class="uni-dept-card" data-uni-dept="${dept.id}" style="--dept-color:${dept.color};--dept-accent:${dept.accentColor}"><span class="uni-dept-icon">${dept.icon}</span><div class="uni-dept-info"><h3>${escapeHtml(dept.name)}</h3><span class="uni-dept-faculty">${escapeHtml(dept.faculty)}</span><p>${escapeHtml(dept.tagline)}</p></div><span class="uni-dept-levels">${dept.levels.length} level${dept.levels.length > 1 ? "s" : ""} available</span><span class="row-arrow" aria-hidden="true">→</span></button>`).join("");
+
+  const breadcrumbs = [{ label: "University" }];
+  app.innerHTML = uniShell(`<p class="uni-subtitle">Select a department to begin studying.</p><div class="uni-dept-list">${cards}</div>`, breadcrumbs);
+  bindShell();
+  document.querySelectorAll("[data-uni-dept]").forEach(button => {
+    button.addEventListener("click", () => {
+      uniDeptId = button.dataset.uniDept;
+      uniRoute = "levels";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      render();
+    });
+  });
+}
+
+async function renderUniLevels() {
+  const dept = uniDepartments?.find(d => d.id === uniDeptId);
+  if (!dept) { uniRoute = "departments"; return renderUniDepartments(); }
+
+  const meta = await fetchUniJson(`data/university/${uniDeptId}/meta.json`);
+  const description = meta?.description || dept.tagline;
+  const levels = dept.levels;
+
+  const levelCards = levels.map(level => `<button class="uni-level-card" data-uni-level="${level}"><span class="uni-level-num">${level}</span><span class="uni-level-label">${level} Level</span></button>`).join("");
+
+  const breadcrumbs = [
+    { label: "University", action: () => { uniRoute = "departments"; uniDeptId = null; } },
+    { label: dept.name }
+  ];
+
+  app.innerHTML = uniShell(`<div class="uni-dept-hero" style="--dept-color:${dept.color};--dept-accent:${dept.accentColor}"><span class="uni-dept-icon-lg">${dept.icon}</span><p class="uni-dept-desc">${escapeHtml(description)}</p><span class="uni-dept-faculty-tag">${escapeHtml(dept.faculty)}</span></div><h2 class="uni-section-title">Select your level</h2><div class="uni-level-grid">${levelCards}</div>`, breadcrumbs);
+  bindShell();
+  bindUniCrumbs(breadcrumbs);
+
+  document.querySelectorAll("[data-uni-level]").forEach(button => {
+    button.addEventListener("click", () => {
+      uniLevel = Number(button.dataset.uniLevel);
+      uniRoute = "courses";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      render();
+    });
+  });
+}
+
+async function renderUniCourses() {
+  const dept = uniDepartments?.find(d => d.id === uniDeptId);
+  if (!dept) { uniRoute = "departments"; return renderUniDepartments(); }
+
+  const data = await fetchUniJson(`data/university/${uniDeptId}/${uniLevel}/courses.json`);
+  if (!data || !data.courses.length) {
+    const breadcrumbs = [
+      { label: "University", action: () => { uniRoute = "departments"; uniDeptId = null; uniLevel = null; } },
+      { label: dept.name, action: () => { uniRoute = "levels"; uniLevel = null; } },
+      { label: `${uniLevel} Level` }
+    ];
+    app.innerHTML = uniShell(`<div class="uni-empty"><h2>No courses yet</h2><p>Courses for ${escapeHtml(dept.name)} ${uniLevel} Level are being prepared. Check back soon!</p><button class="button uni-btn" id="uni-back-levels">← Back to levels</button></div>`, breadcrumbs);
+    bindShell(); bindUniCrumbs(breadcrumbs);
+    document.querySelector("#uni-back-levels")?.addEventListener("click", () => { uniRoute = "levels"; uniLevel = null; render(); });
+    return;
+  }
+
+  const courseCards = data.courses.map(course => `<button class="uni-course-card" data-uni-course="${course.id}"><div class="uni-course-code">${escapeHtml(course.code)}</div><div class="uni-course-info"><h3>${escapeHtml(course.title)}</h3><p>${escapeHtml(course.description)}</p></div><span class="row-arrow" aria-hidden="true">→</span></button>`).join("");
+
+  const breadcrumbs = [
+    { label: "University", action: () => { uniRoute = "departments"; uniDeptId = null; uniLevel = null; } },
+    { label: dept.name, action: () => { uniRoute = "levels"; uniLevel = null; } },
+    { label: `${uniLevel} Level` }
+  ];
+
+  app.innerHTML = uniShell(`<div class="uni-course-list">${courseCards}</div>`, breadcrumbs);
+  bindShell(); bindUniCrumbs(breadcrumbs);
+
+  document.querySelectorAll("[data-uni-course]").forEach(button => {
+    button.addEventListener("click", () => {
+      uniCourseId = button.dataset.uniCourse;
+      uniRoute = "course";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      render();
+    });
+  });
+}
+
+async function renderUniCourse() {
+  const dept = uniDepartments?.find(d => d.id === uniDeptId);
+  if (!dept) { uniRoute = "departments"; return renderUniDepartments(); }
+
+  const data = await fetchUniJson(`data/university/${uniDeptId}/${uniLevel}/${uniCourseId}.json`);
+  if (!data) {
+    const breadcrumbs = [
+      { label: "University", action: () => { uniRoute = "departments"; uniDeptId = null; uniLevel = null; uniCourseId = null; } },
+      { label: dept.name, action: () => { uniRoute = "levels"; uniLevel = null; uniCourseId = null; } },
+      { label: `${uniLevel} Level`, action: () => { uniRoute = "courses"; uniCourseId = null; } },
+      { label: "Course" }
+    ];
+    app.innerHTML = uniShell(`<div class="uni-empty"><h2>Unable to load course</h2><p>Please check your connection and try again.</p><button class="button uni-btn" id="uni-back-courses">← Back to courses</button></div>`, breadcrumbs);
+    bindShell(); bindUniCrumbs(breadcrumbs);
+    document.querySelector("#uni-back-courses")?.addEventListener("click", () => { uniRoute = "courses"; uniCourseId = null; render(); });
+    return;
+  }
+
+  const sections = data.sections || [];
+  const topicsHtml = sections.map(section => {
+    const topicItems = section.topics.map(topic => {
+      const isAvailable = topic.status !== "coming-soon";
+      return `<div class="uni-topic-item ${isAvailable ? "available" : "coming-soon"}"><span class="uni-topic-status">${isAvailable ? "📖" : "🔒"}</span><div class="uni-topic-info"><h4>${escapeHtml(topic.title)}</h4><span class="uni-topic-tag">${isAvailable ? "Available" : "Coming soon"}</span></div></div>`;
+    }).join("");
+    return `<div class="uni-section"><h3 class="uni-section-heading">${escapeHtml(section.title)}</h3><div class="uni-topic-list">${topicItems}</div></div>`;
+  }).join("");
+
+  const totalTopics = sections.reduce((sum, s) => sum + s.topics.length, 0);
+  const availableTopics = sections.reduce((sum, s) => sum + s.topics.filter(t => t.status !== "coming-soon").length, 0);
+
+  const breadcrumbs = [
+    { label: "University", action: () => { uniRoute = "departments"; uniDeptId = null; uniLevel = null; uniCourseId = null; } },
+    { label: dept.name, action: () => { uniRoute = "levels"; uniLevel = null; uniCourseId = null; } },
+    { label: `${uniLevel} Level`, action: () => { uniRoute = "courses"; uniCourseId = null; } },
+    { label: data.code }
+  ];
+
+  const statsHtml = `<div class="uni-course-stats"><div class="uni-stat"><strong>${totalTopics}</strong><span>Topics</span></div><div class="uni-stat"><strong>${availableTopics}</strong><span>Available</span></div><div class="uni-stat"><strong>${totalTopics - availableTopics}</strong><span>Coming soon</span></div></div>`;
+
+  app.innerHTML = uniShell(`<div class="uni-course-hero"><div class="uni-course-code-lg">${escapeHtml(data.code)}</div><p class="uni-course-desc">${escapeHtml(data.description)}</p>${statsHtml}</div>${topicsHtml}`, breadcrumbs);
+  bindShell(); bindUniCrumbs(breadcrumbs);
+}
+
+// ─── End University Module ──────────────────────────────────────────────────
+
 function render() {
   if (!authToken || !currentUser || !profile) return renderAuth();
   if (currentUser.must_change_password) return renderPasswordChange(true);
@@ -1302,6 +1487,7 @@ function render() {
   if (route === "challenges") return renderChallenges();
   if (route === "session") return renderSession();
   if (route === "progress") return renderProgress();
+  if (route === "university") return renderUniversity();
   if (route === "profile") return renderProfile();
   if (route === "achievements") return renderAchievements();
   if (route === "change-password") return renderPasswordChange(false);

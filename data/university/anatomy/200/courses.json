@@ -1,0 +1,12 @@
+{
+  "department": "anatomy",
+  "level": 200,
+  "courses": [
+    {
+      "id": "ana201",
+      "code": "ANA 201",
+      "title": "Upper and Lower Limb",
+      "description": "Comprehensive study of the bones, muscles, joints, nerves, and blood supply of the upper and lower limbs."
+    }
+  ]
+}
