@@ -1,0 +1,11 @@
+{
+  "id": "physiology",
+  "name": "Physiology",
+  "faculty": "Basic Medical Sciences",
+  "description": "Human Physiology investigates the functions of living organisms and their parts, explaining the physical and chemical processes that enable growth, adaptation, and survival.",
+  "levels": [
+    200
+  ],
+  "color": "#881337",
+  "accentColor": "#e11d48"
+}

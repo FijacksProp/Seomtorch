@@ -1,0 +1,12 @@
+{
+  "department": "physiology",
+  "level": 200,
+  "courses": [
+    {
+      "id": "pio201",
+      "code": "PIO 201",
+      "title": "Introduction to Physiology and Blood",
+      "description": "Foundational study of transport mechanisms, homeostasis, blood cellular components, plasma proteins, immunity, and blood grouping."
+    }
+  ]
+}

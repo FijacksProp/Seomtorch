@@ -1,0 +1,50 @@
+{
+  "id": "pio201",
+  "code": "PIO 201",
+  "title": "Introduction to Physiology and Blood",
+  "department": "physiology",
+  "level": 200,
+  "description": "Foundational study of transport mechanisms, homeostasis, blood cellular components, plasma proteins, immunity, and blood grouping.",
+  "sections": [
+    {
+      "title": "Introduction to Physiology and Blood",
+      "topics": [
+        {
+          "id": "pio-transport-homeostasis",
+          "title": "Transport Mechanism and Homeostasis",
+          "status": "coming-soon"
+        },
+        {
+          "id": "pio-wbc",
+          "title": "White Blood Cell",
+          "status": "coming-soon"
+        },
+        {
+          "id": "pio-plasma-protein",
+          "title": "Plasma Protein",
+          "status": "coming-soon"
+        },
+        {
+          "id": "pio-rbc",
+          "title": "Red Blood Cell",
+          "status": "coming-soon"
+        },
+        {
+          "id": "pio-platelet",
+          "title": "Platelet",
+          "status": "coming-soon"
+        },
+        {
+          "id": "pio-immunity",
+          "title": "Immunity",
+          "status": "coming-soon"
+        },
+        {
+          "id": "pio-blood-group",
+          "title": "Blood Group",
+          "status": "coming-soon"
+        }
+      ]
+    }
+  ]
+}

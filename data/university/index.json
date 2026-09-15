@@ -9,7 +9,22 @@
       "icon": "🦴",
       "color": "#0f2d56",
       "accentColor": "#c9a84c",
-      "levels": [200],
+      "levels": [
+        200
+      ],
+      "faculty": "Basic Medical Sciences"
+    },
+    {
+      "id": "physiology",
+      "name": "Physiology",
+      "tagline": "Study of normal body functions and mechanisms",
+      "description": "Human Physiology explores the physical and biochemical mechanisms that support human life — including cellular transport, organ function, systemic coordination, and homeostasis.",
+      "icon": "🫀",
+      "color": "#881337",
+      "accentColor": "#e11d48",
+      "levels": [
+        200
+      ],
       "faculty": "Basic Medical Sciences"
     }
   ]
