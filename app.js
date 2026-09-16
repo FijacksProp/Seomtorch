@@ -910,9 +910,11 @@ function renderResult() {
 
 function renderChallengeSubmission() {
   const result = activeSession.challengeResult;
-  const content = result ? `<section class="page page-narrow"><div class="challenge-submitted"><span class="submission-mark"><i></i><i></i><i></i></span><p class="eyebrow">Challenge submitted</p><h1>${escapeHtml(activeSession.challengeTitle)}</h1><div class="submitted-score"><strong>${result.my_result?.correct ?? activeSession.correct}<small> / ${result.question_count}</small></strong><span>${result.my_result?.accuracy ?? Math.round(activeSession.correct / result.question_count * 100)}% accuracy</span></div><p class="lede">${result.results_unlocked ? "The private group result is ready. See how everyone progressed and the recognition each participant earned." : "Your work is recorded. Other scores remain hidden until everyone finishes or the challenge deadline passes."}</p><div class="button-row"><button class="button" id="view-challenge-result">${result.results_unlocked ? "View group result" : "Return to challenges"} →</button><button class="button outline" data-route="home">Return home</button></div></div></section>` : `<section class="page page-narrow"><div class="challenge-submitted sending"><span class="submission-mark"><i></i><i></i><i></i></span><p class="eyebrow">Securing your paper</p><h1>Submitting your challenge.</h1><p class="lede">Your confirmed answers are being synchronized before the result is sealed.</p></div></section>`;
+  const shareBtn = result?.results_unlocked ? `<button class="button outline challenge-share-btn" id="share-submission-win"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg><span>Share Win</span></button>` : "";
+  const content = result ? `<section class="page page-narrow"><div class="challenge-submitted"><span class="submission-mark"><i></i><i></i><i></i></span><p class="eyebrow">Challenge submitted</p><h1>${escapeHtml(activeSession.challengeTitle)}</h1><div class="submitted-score"><strong>${result.my_result?.correct ?? activeSession.correct}<small> / ${result.question_count}</small></strong><span>${result.my_result?.accuracy ?? Math.round(activeSession.correct / result.question_count * 100)}% accuracy</span></div><p class="lede">${result.results_unlocked ? "The private group result is ready. See how everyone progressed and the recognition each participant earned." : "Your work is recorded. Other scores remain hidden until everyone finishes or the challenge deadline passes."}</p><div class="button-row"><button class="button" id="view-challenge-result">${result.results_unlocked ? "View group result" : "Return to challenges"} →</button>${shareBtn}<button class="button outline" data-route="home">Return home</button></div></div></section>` : `<section class="page page-narrow"><div class="challenge-submitted sending"><span class="submission-mark"><i></i><i></i><i></i></span><p class="eyebrow">Securing your paper</p><h1>Submitting your challenge.</h1><p class="lede">Your confirmed answers are being synchronized before the result is sealed.</p></div></section>`;
   app.innerHTML = shell(content); bindShell();
   document.querySelector("#view-challenge-result")?.addEventListener("click", () => { challengesData = challengesData ? challengesData.map(item => item.id === result.id ? result : item) : [result]; selectedChallengeId = result.id; activeSession = null; route = "challenges"; renderChallenges(); });
+  document.querySelector("#share-submission-win")?.addEventListener("click", () => openChallengeShareModal(result));
   if (result || activeSession.challengeCompletionStarted) return;
   activeSession.challengeCompletionStarted = true;
   syncPendingAttempts()
@@ -1006,8 +1008,9 @@ function renderChallengeComposer() {
 
 function renderChallengeDetail(item) {
   const statusCopy = item.results_unlocked ? "The group result is ready." : item.my_status === "completed" ? "Your paper is submitted. Group results unlock when everyone responds and finishes, or when the deadline passes." : item.state === "upcoming" ? `This challenge opens ${challengeTime(item.starts_at)}.` : item.state === "open" ? "Your attempt timer starts only when you confirm Begin challenge." : "This challenge window is closed.";
-  const myResult = item.my_result ? `<section class="my-challenge-result"><p class="eyebrow">Your work</p><strong>${item.my_result.correct}<small> / ${item.my_result.total}</small></strong><div><h3>${item.my_result.accuracy}% accuracy${item.my_result.bonus_xp ? ` · +${item.my_result.bonus_xp} challenge XP` : ""}</h3><p>${item.my_result.change_from_average === null ? "Your first personal comparison will appear after more practice." : item.my_result.change_from_average >= 0 ? `${item.my_result.change_from_average} points above your recent average.` : "Use the challenge review to choose your next focus."}</p></div></section>` : "";
-  const resultBoard = item.results_unlocked && item.results.length ? `<section class="challenge-results"><div class="section-head"><div><p class="eyebrow">Private group result</p><h2>Challenge Results</h2></div><p>Accuracy first. Time breaks ties only.</p></div>${item.results.map(row => `<article class="result-person ${row.public_id === currentUser.public_id ? "you" : ""}"><span class="result-position">${String(row.position).padStart(2, "0")}</span><div><h3>${escapeHtml(row.username)}${row.public_id === currentUser.public_id ? " · You" : ""}</h3><p>${escapeHtml(row.recognition)}${row.bonus_xp ? ` · +${row.bonus_xp} XP` : ""}</p></div><strong>${row.correct}/${row.total}<small>${row.accuracy}%</small></strong></article>`).join("")}</section>` : `<section class="results-quiet"><span class="quiet-lines"><i></i><i></i><i></i></span><h3>Scores stay quiet for now.</h3><p>${escapeHtml(statusCopy)}</p></section>`;
+  const shareBtn = item.results_unlocked && item.results?.length ? `<button class="button challenge-share-btn" data-share-challenge="${item.id}" title="Share challenge win on social media"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg><span>Share Win</span></button>` : "";
+  const myResult = item.my_result ? `<section class="my-challenge-result"><div class="my-challenge-result-top"><p class="eyebrow">Your work</p>${shareBtn}</div><strong>${item.my_result.correct}<small> / ${item.my_result.total}</small></strong><div><h3>${item.my_result.accuracy}% accuracy${item.my_result.bonus_xp ? ` · +${item.my_result.bonus_xp} challenge XP` : ""}</h3><p>${item.my_result.change_from_average === null ? "Your first personal comparison will appear after more practice." : item.my_result.change_from_average >= 0 ? `${item.my_result.change_from_average} points above your recent average.` : "Use the challenge review to choose your next focus."}</p></div></section>` : "";
+  const resultBoard = item.results_unlocked && item.results.length ? `<section class="challenge-results"><div class="section-head"><div class="challenge-result-heading"><p class="eyebrow">Private group result</p><h2>Challenge Results</h2></div><div class="challenge-result-actions">${shareBtn}<p>Accuracy first. Time breaks ties only.</p></div></div>${item.results.map(row => `<article class="result-person ${row.public_id === currentUser.public_id ? "you" : ""}"><span class="result-position">${String(row.position).padStart(2, "0")}</span><div><h3>${escapeHtml(row.username)}${row.public_id === currentUser.public_id ? " · You" : ""}</h3><p>${escapeHtml(row.recognition)}${row.bonus_xp ? ` · +${row.bonus_xp} XP` : ""}</p></div><strong>${row.correct}/${row.total}<small>${row.accuracy}%</small></strong></article>`).join("")}</section>` : `<section class="results-quiet"><span class="quiet-lines"><i></i><i></i><i></i></span><h3>Scores stay quiet for now.</h3><p>${escapeHtml(statusCopy)}</p></section>`;
   const removeLabel = item.removal_mode === "cancel" ? "Cancel and leave challenge" : item.removal_mode === "abandon" ? "Leave challenge" : "Remove from my challenges";
   return `<section class="page"><button class="button outline" id="back-challenges">← All challenges</button><div class="challenge-detail-head"><div><p class="eyebrow">${item.can_respond ? "Challenge invitation" : "Friend challenge"}</p><h1>${escapeHtml(item.title)}</h1><p class="lede">${escapeHtml(item.message || `${item.creator.username} invited this group to practise together.`)}</p></div><span class="challenge-state ${item.state}">${item.state}</span></div><div class="challenge-detail-grid"><section class="challenge-brief"><span>Created by</span><strong>${escapeHtml(item.creator.username)}</strong><span>Focus</span><strong>${escapeHtml(item.subject_label)}</strong><span>Paper</span><strong>${item.question_count} questions · ${item.duration_minutes} minutes</strong><span>Challenge window</span><strong>${challengeTime(item.starts_at)}<br>to ${challengeTime(item.ends_at)}</strong></section><section class="participant-panel"><div class="section-head"><h2>Study circle</h2><p>${item.participants.length} invited</p></div>${item.participants.map(person => `<div class="participant-row"><span class="participant-monogram">${escapeHtml(person.username.slice(0, 2).toUpperCase())}</span><div><strong>${escapeHtml(person.username)}${person.public_id === currentUser.public_id ? " · You" : ""}</strong><small>${person.is_creator ? "Creator" : person.public_id}</small></div><span class="participant-status ${person.status}">${challengeStatusLabel(person.status)}</span></div>`).join("")}</section></div><div class="challenge-actions">${item.can_respond ? '<button class="button" data-challenge-response="accept">Accept invitation</button><button class="button outline" data-challenge-response="decline">Decline</button>' : ""}${item.can_start ? `<button class="button challenge-start" id="begin-challenge">${item.my_status === "started" ? "Continue attempt" : "Begin challenge"} →</button>` : ""}${item.can_remove ? `<button class="button danger challenge-remove" id="remove-challenge">${removeLabel}</button>` : ""}</div>${myResult}${resultBoard}</section>`;
 }
@@ -1081,6 +1084,7 @@ async function createChallenge(body) {
 
 function bindChallengeDetail(item) {
   document.querySelector("#back-challenges")?.addEventListener("click", () => { selectedChallengeId = null; renderChallenges(); });
+  document.querySelectorAll("[data-share-challenge]").forEach(button => button.addEventListener("click", () => openChallengeShareModal(item)));
   document.querySelectorAll("[data-challenge-response]").forEach(button => button.addEventListener("click", () => { const response = button.dataset.challengeResponse; showConfirmDialog({ title: `${response === "accept" ? "Accept" : "Decline"} this challenge?`, message: response === "accept" ? "It will be added to your study schedule. Your timer starts only when you begin inside the challenge window." : "The creator will see that you declined, but no academic score will be recorded.", confirmLabel: response === "accept" ? "Accept invitation" : "Decline invitation", tone: response === "decline" ? "warning" : "default", onConfirm: () => respondToChallenge(item.id, response) }); }));
   document.querySelector("#begin-challenge")?.addEventListener("click", () => showConfirmDialog({ title: "Begin your challenge attempt?", message: `Your ${item.duration_minutes}-minute timer will start immediately. You have one attempt at the shared paper.`, detail: `<p class="dialog-question-preview">${item.question_count} questions · ${escapeHtml(item.subject_label)} · results stay private until the group finishes.</p>`, confirmLabel: "Begin challenge", cancelLabel: "Not yet", onConfirm: () => beginChallenge(item) }));
   document.querySelector("#remove-challenge")?.addEventListener("click", () => {
@@ -1126,6 +1130,502 @@ async function beginChallenge(item) {
     activeSession = { subject: item.subject, topic: null, requestedCount: queue.length, durationMinutes: item.duration_minutes, deadline: new Date(remote.deadline_at).getTime(), started: true, finished: false, queue, sections: buildSessionSections(queue), answers: queue.map(question => remote.answers?.[question.id] === undefined ? ({ selected: null, confirmed: false, correct: false }) : ({ selected: remote.answers[question.id], confirmed: true, correct: false })), remoteId: remote.session_id, challengeId: item.id, challengeTitle: item.title, index: 0, correct: 0, questionStartedAt: Date.now(), reportedComplete: false, timedOut: false, timeUpAcknowledged: false, mode: "challenge" };
     route = "session"; render();
   } catch (caught) { showToast(caught instanceof ApiError ? caught.message : caught.message); challengesData = null; renderChallenges(); }
+}
+
+async function generateChallengeShareCard(item) {
+  const canvas = document.createElement("canvas");
+  const width = 800;
+  const height = 1000;
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext("2d");
+
+  function drawRoundRect(x, y, w, h, r) {
+    ctx.beginPath();
+    if (typeof ctx.roundRect === "function") {
+      ctx.roundRect(x, y, w, h, r);
+    } else {
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+  }
+
+  // 1. Deep brand gradient background
+  const bgGrad = ctx.createLinearGradient(0, 0, width, height);
+  bgGrad.addColorStop(0, "#05201a");
+  bgGrad.addColorStop(0.5, "#081d27");
+  bgGrad.addColorStop(1, "#04141d");
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, width, height);
+
+  // Ambient radial glows
+  const glow1 = ctx.createRadialGradient(700, 100, 10, 700, 100, 450);
+  glow1.addColorStop(0, "rgba(16, 185, 129, 0.22)");
+  glow1.addColorStop(1, "rgba(16, 185, 129, 0)");
+  ctx.fillStyle = glow1;
+  ctx.fillRect(0, 0, width, height);
+
+  const glow2 = ctx.createRadialGradient(100, 900, 10, 100, 900, 400);
+  glow2.addColorStop(0, "rgba(217, 119, 6, 0.16)");
+  glow2.addColorStop(1, "rgba(217, 119, 6, 0)");
+  ctx.fillStyle = glow2;
+  ctx.fillRect(0, 0, width, height);
+
+  // Outer border frame
+  drawRoundRect(24, 24, width - 48, height - 48, 28);
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // 2. Header: Logo & Branding
+  let logoDrawn = false;
+  try {
+    const logoImg = new Image();
+    logoImg.crossOrigin = "anonymous";
+    logoImg.src = "assets/seomtorch_logo.png";
+    await new Promise(resolve => {
+      if (logoImg.complete && logoImg.naturalWidth) return resolve();
+      logoImg.onload = resolve;
+      logoImg.onerror = resolve;
+      setTimeout(resolve, 350);
+    });
+    if (logoImg.naturalWidth) {
+      drawRoundRect(52, 52, 44, 44, 12);
+      ctx.save();
+      ctx.clip();
+      ctx.drawImage(logoImg, 52, 52, 44, 44);
+      ctx.restore();
+      logoDrawn = true;
+    }
+  } catch {}
+
+  if (!logoDrawn) {
+    drawRoundRect(52, 52, 44, 44, 12);
+    ctx.fillStyle = "#10b981";
+    ctx.fill();
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "800 20px 'Plus Jakarta Sans', sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("S", 74, 74);
+  }
+
+  // Brand Name & Subtitle
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "800 22px 'Plus Jakarta Sans', sans-serif";
+  ctx.textAlign = "left";
+  ctx.textBaseline = "middle";
+  ctx.fillText("SEOMTORCH", 108, 64);
+
+  ctx.fillStyle = "#fbbf24";
+  ctx.font = "700 10.5px 'Plus Jakarta Sans', sans-serif";
+  ctx.fillText("STUDY CIRCLE CHALLENGE", 108, 84);
+
+  // Focus Category Pill at top right
+  const pillText = (item.subject_label || "Exam Focus").toUpperCase();
+  ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif";
+  const pillW = ctx.measureText(pillText).width + 24;
+  const pillX = width - 52 - pillW;
+  drawRoundRect(pillX, 56, pillW, 32, 16);
+  ctx.fillStyle = "rgba(16, 185, 129, 0.2)";
+  ctx.fill();
+  ctx.strokeStyle = "rgba(16, 185, 129, 0.4)";
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  ctx.fillStyle = "#34d399";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(pillText, pillX + pillW / 2, 72);
+
+  // Header Divider
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(52, 116);
+  ctx.lineTo(width - 52, 116);
+  ctx.stroke();
+
+  // 3. Challenge Title & Format Info
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "700 30px 'Newsreader', 'Plus Jakarta Sans', serif";
+  ctx.textAlign = "left";
+  ctx.textBaseline = "top";
+
+  let title = item.title || "Study Circle Challenge";
+  if (ctx.measureText(title).width > 680) {
+    while (title.length > 5 && ctx.measureText(title + "...").width > 680) {
+      title = title.slice(0, -1);
+    }
+    title += "...";
+  }
+  ctx.fillText(title, 52, 134);
+
+  ctx.fillStyle = "rgba(255, 255, 255, 0.65)";
+  ctx.font = "500 13px 'DM Sans', sans-serif";
+  ctx.fillText(`${item.question_count || 20} Questions · ${item.duration_minutes || 20} Min Timer · Shared Paper`, 52, 174);
+
+  // 4. User Spotlight Box
+  const myRow = item.results?.find(r => r.public_id === currentUser?.public_id) || item.my_result;
+  const myPos = myRow?.position || 1;
+  const myScore = myRow?.correct ?? item.my_result?.correct ?? 0;
+  const myTotal = myRow?.total ?? item.my_result?.total ?? item.question_count ?? 20;
+  const myAcc = myRow?.accuracy ?? item.my_result?.accuracy ?? Math.round((myScore / myTotal) * 100);
+  const myXp = myRow?.bonus_xp ?? item.my_result?.bonus_xp ?? 0;
+
+  const boxX = 52;
+  const boxY = 210;
+  const boxW = width - 104;
+  const boxH = 205;
+
+  drawRoundRect(boxX, boxY, boxW, boxH, 20);
+  const boxGrad = ctx.createLinearGradient(boxX, boxY, boxX + boxW, boxY + boxH);
+  boxGrad.addColorStop(0, "rgba(16, 185, 129, 0.16)");
+  boxGrad.addColorStop(1, "rgba(6, 38, 31, 0.65)");
+  ctx.fillStyle = boxGrad;
+  ctx.fill();
+  ctx.strokeStyle = myPos === 1 ? "rgba(251, 191, 36, 0.6)" : "rgba(16, 185, 129, 0.4)";
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Rank / Placement Tag
+  let rankTag = "STUDY CIRCLE PARTICIPANT";
+  let rankColor = "#34d399";
+  if (myPos === 1) {
+    rankTag = "🏆 1ST PLACE WINNER";
+    rankColor = "#fbbf24";
+  } else if (myPos === 2) {
+    rankTag = "🥈 2ND PLACE FINISHER";
+    rankColor = "#e2e8f0";
+  } else if (myPos === 3) {
+    rankTag = "🥉 3RD PLACE FINISHER";
+    rankColor = "#fed7aa";
+  } else if (myPos) {
+    rankTag = `RANK #${myPos} IN CIRCLE`;
+    rankColor = "#34d399";
+  }
+
+  ctx.font = "800 11px 'Plus Jakarta Sans', sans-serif";
+  const rankW = ctx.measureText(rankTag).width + 20;
+  drawRoundRect(boxX + 26, boxY + 22, rankW, 26, 13);
+  ctx.fillStyle = myPos === 1 ? "rgba(251, 191, 36, 0.18)" : "rgba(16, 185, 129, 0.18)";
+  ctx.fill();
+  ctx.strokeStyle = myPos === 1 ? "rgba(251, 191, 36, 0.45)" : "rgba(16, 185, 129, 0.45)";
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  ctx.fillStyle = rankColor;
+  ctx.textAlign = "left";
+  ctx.textBaseline = "middle";
+  ctx.fillText(rankTag, boxX + 36, boxY + 35);
+
+  // User Name
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "800 24px 'Plus Jakarta Sans', sans-serif";
+  ctx.textBaseline = "top";
+  ctx.fillText(currentUser?.username || "Student", boxX + 26, boxY + 60);
+
+  // Subtitle / Recognition
+  const recog = myRow?.recognition || (myPos === 1 ? "Top accuracy & speed" : "Challenge completed");
+  ctx.fillStyle = "rgba(255, 255, 255, 0.65)";
+  ctx.font = "500 13px 'DM Sans', sans-serif";
+  ctx.fillText(recog, boxX + 26, boxY + 95);
+
+  // Bonus XP badge if any
+  if (myXp) {
+    const xpText = `+${myXp} BONUS XP`;
+    ctx.font = "800 11px 'Plus Jakarta Sans', sans-serif";
+    const xpW = ctx.measureText(xpText).width + 18;
+    drawRoundRect(boxX + 26, boxY + 128, xpW, 26, 13);
+    ctx.fillStyle = "rgba(251, 191, 36, 0.18)";
+    ctx.fill();
+    ctx.fillStyle = "#fbbf24";
+    ctx.textBaseline = "middle";
+    ctx.fillText(xpText, boxX + 35, boxY + 141);
+  }
+
+  // Large Score on Right of Box
+  ctx.textAlign = "right";
+  ctx.textBaseline = "top";
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "800 56px 'Plus Jakarta Sans', sans-serif";
+  ctx.fillText(`${myScore}`, boxX + boxW - 84, boxY + 30);
+
+  ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+  ctx.font = "600 26px 'Plus Jakarta Sans', sans-serif";
+  ctx.fillText(`/${myTotal}`, boxX + boxW - 28, boxY + 54);
+
+  ctx.fillStyle = "#34d399";
+  ctx.font = "700 18px 'Plus Jakarta Sans', sans-serif";
+  ctx.fillText(`${myAcc}% Accuracy`, boxX + boxW - 28, boxY + 102);
+
+  // 5. Group Leaderboard Section
+  const boardY = 440;
+  ctx.fillStyle = "rgba(255, 255, 255, 0.55)";
+  ctx.font = "800 11px 'Plus Jakarta Sans', sans-serif";
+  ctx.textAlign = "left";
+  ctx.textBaseline = "top";
+  ctx.fillText("GROUP LEADERBOARD", 52, boardY);
+
+  const results = item.results || [];
+  const displayResults = results.slice(0, 5);
+  const rowStartY = boardY + 24;
+  const rowHeight = 58;
+
+  displayResults.forEach((row, i) => {
+    const curY = rowStartY + i * (rowHeight + 8);
+    const isMe = row.public_id === currentUser?.public_id;
+
+    drawRoundRect(52, curY, width - 104, rowHeight, 14);
+    if (isMe) {
+      ctx.fillStyle = "rgba(16, 185, 129, 0.16)";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(16, 185, 129, 0.35)";
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+    } else {
+      ctx.fillStyle = "rgba(255, 255, 255, 0.04)";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.07)";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    // Rank Medal / Number
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = "800 15px 'Plus Jakarta Sans', sans-serif";
+    if (row.position === 1) {
+      ctx.fillStyle = "#fbbf24";
+      ctx.fillText("🥇", 80, curY + rowHeight / 2);
+    } else if (row.position === 2) {
+      ctx.fillStyle = "#e2e8f0";
+      ctx.fillText("🥈", 80, curY + rowHeight / 2);
+    } else if (row.position === 3) {
+      ctx.fillStyle = "#fed7aa";
+      ctx.fillText("🥉", 80, curY + rowHeight / 2);
+    } else {
+      ctx.fillStyle = "rgba(255, 255, 255, 0.45)";
+      ctx.fillText(String(row.position).padStart(2, "0"), 80, curY + rowHeight / 2);
+    }
+
+    // Participant Name + Badge
+    ctx.textAlign = "left";
+    ctx.font = "700 15px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillStyle = isMe ? "#34d399" : "#ffffff";
+    const nameX = 114;
+    let dispName = row.username;
+    while (dispName.length > 3 && ctx.measureText(dispName).width > 320) {
+      dispName = dispName.slice(0, -1);
+    }
+    if (dispName !== row.username) dispName += "…";
+    ctx.fillText(dispName, nameX, curY + 22);
+
+    if (isMe) {
+      const nameW = ctx.measureText(dispName).width;
+      drawRoundRect(nameX + nameW + 8, curY + 12, 42, 18, 9);
+      ctx.fillStyle = "rgba(16, 185, 129, 0.25)";
+      ctx.fill();
+      ctx.fillStyle = "#34d399";
+      ctx.font = "800 9px 'Plus Jakarta Sans', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("YOU", nameX + nameW + 29, curY + 21);
+    }
+
+    // Recognition
+    ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+    ctx.font = "500 11px 'DM Sans', sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillText(row.recognition || "Completed", nameX, curY + 40);
+
+    // Score on Right
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "700 15px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText(`${row.correct}/${row.total}`, width - 126, curY + rowHeight / 2);
+
+    // Accuracy pill
+    const accText = `${row.accuracy}%`;
+    ctx.font = "800 11px 'Plus Jakarta Sans', sans-serif";
+    drawRoundRect(width - 114, curY + 16, 52, 26, 13);
+    ctx.fillStyle = isMe ? "rgba(16, 185, 129, 0.22)" : "rgba(255, 255, 255, 0.08)";
+    ctx.fill();
+    ctx.fillStyle = isMe ? "#34d399" : "rgba(255, 255, 255, 0.8)";
+    ctx.textAlign = "center";
+    ctx.fillText(accText, width - 88, curY + 29);
+  });
+
+  if (results.length > 5) {
+    const extraCount = results.length - 5;
+    ctx.fillStyle = "rgba(255, 255, 255, 0.45)";
+    ctx.font = "600 11.5px 'DM Sans', sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    ctx.fillText(`+ ${extraCount} more participant${extraCount === 1 ? "" : "s"} in study circle`, width / 2, rowStartY + 5 * (rowHeight + 8) + 6);
+  }
+
+  // 6. Footer & Watermark
+  const footY = height - 88;
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(52, footY);
+  ctx.lineTo(width - 52, footY);
+  ctx.stroke();
+
+  ctx.fillStyle = "rgba(255, 255, 255, 0.65)";
+  ctx.font = "600 12.5px 'DM Sans', sans-serif";
+  ctx.textAlign = "left";
+  ctx.textBaseline = "middle";
+  ctx.fillText("Prepare with purpose · Challenge your circle", 52, footY + 36);
+
+  ctx.fillStyle = "#34d399";
+  ctx.font = "800 13px 'Plus Jakarta Sans', sans-serif";
+  ctx.textAlign = "right";
+  ctx.fillText("seomtorch.com", width - 52, footY + 36);
+
+  const dataUrl = canvas.toDataURL("image/png");
+  const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+  return { canvas, dataUrl, blob };
+}
+
+function triggerDownload(url, filename) {
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+async function openChallengeShareModal(item) {
+  document.querySelector("#challenge-share-dialog")?.remove();
+  showToast("Generating share card…");
+
+  const { dataUrl, blob } = await generateChallengeShareCard(item);
+
+  const myRow = item.results?.find(r => r.public_id === currentUser?.public_id) || item.my_result;
+  const myPos = myRow?.position;
+  const posText = myPos === 1 ? "🏆 1st place" : myPos ? `Rank #${myPos}` : "completed";
+  const scoreText = myRow ? `${myRow.correct}/${myRow.total} (${myRow.accuracy}%)` : "a high score";
+  const shareText = `🏆 I scored ${scoreText} in the "${item.title}" challenge on Seomtorch (${posText})! Can you beat my score? Prepare with purpose on Seomtorch.`;
+  const shareUrl = window.location.origin;
+
+  const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + "\n" + shareUrl)}`;
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+  const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
+
+  const dialog = document.createElement("div");
+  dialog.id = "challenge-share-dialog";
+  dialog.className = "share-modal-backdrop";
+  dialog.innerHTML = `
+    <section class="share-modal" role="dialog" aria-modal="true" aria-labelledby="share-modal-title">
+      <div class="share-modal-header">
+        <div>
+          <p class="eyebrow">Share Challenge Win</p>
+          <h2 id="share-modal-title">${escapeHtml(item.title)}</h2>
+        </div>
+        <button class="share-modal-close" aria-label="Close share dialog">×</button>
+      </div>
+
+      <div class="share-card-preview-wrap">
+        <img src="${dataUrl}" alt="Challenge win card" class="share-card-preview-img" />
+      </div>
+
+      <div class="share-modal-actions">
+        <button class="button share-primary-btn" id="btn-share-native">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          <span>Share Photo to Social</span>
+        </button>
+        <button class="button outline share-download-btn" id="btn-download-card">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Save Photo</span>
+        </button>
+        <button class="button outline share-copy-btn" id="btn-copy-share-text">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span>Copy Text</span>
+        </button>
+      </div>
+
+      <div class="share-social-row">
+        <span class="share-social-label">Quick share:</span>
+        <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="social-share-pill whatsapp" aria-label="Share to WhatsApp">
+          WhatsApp
+        </a>
+        <a href="${twitterUrl}" target="_blank" rel="noopener noreferrer" class="social-share-pill twitter" aria-label="Share to X">
+          X / Twitter
+        </a>
+        <a href="${telegramUrl}" target="_blank" rel="noopener noreferrer" class="social-share-pill telegram" aria-label="Share to Telegram">
+          Telegram
+        </a>
+      </div>
+    </section>
+  `;
+
+  document.body.appendChild(dialog);
+
+  const close = () => {
+    dialog.remove();
+    document.removeEventListener("keydown", onKeyDown);
+  };
+  const onKeyDown = (e) => { if (e.key === "Escape") close(); };
+  dialog.querySelector(".share-modal-close").addEventListener("click", close);
+  dialog.addEventListener("click", (e) => { if (e.target === dialog) close(); });
+  document.addEventListener("keydown", onKeyDown);
+
+  const baseFileName = `seomtorch-${(item.title || "challenge").toLowerCase().replace(/[^a-z0-9]+/g, "-")}-win.png`;
+
+  // Native Web Share API
+  dialog.querySelector("#btn-share-native").addEventListener("click", async () => {
+    try {
+      const file = new File([blob], baseFileName, { type: "image/png" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          title: `Challenge Win: ${item.title}`,
+          text: shareText,
+          files: [file]
+        });
+        showToast("Card shared successfully!");
+      } else if (navigator.share) {
+        await navigator.share({
+          title: `Challenge Win: ${item.title}`,
+          text: shareText,
+          url: shareUrl
+        });
+        showToast("Shared successfully!");
+      } else {
+        triggerDownload(dataUrl, baseFileName);
+        await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`).catch(() => {});
+        showToast("Photo saved & message copied to clipboard!");
+      }
+    } catch (err) {
+      if (err.name !== "AbortError") {
+        triggerDownload(dataUrl, baseFileName);
+        showToast("Photo saved to downloads!");
+      }
+    }
+  });
+
+  // Download Card Photo
+  dialog.querySelector("#btn-download-card").addEventListener("click", () => {
+    triggerDownload(dataUrl, baseFileName);
+    showToast("Challenge card photo saved!");
+  });
+
+  // Copy Text
+  dialog.querySelector("#btn-copy-share-text").addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
+      showToast("Score & challenge text copied!");
+    } catch {
+      showToast("Unable to copy to clipboard");
+    }
+  });
 }
 
 function badgeInitials(item) {
