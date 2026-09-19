@@ -139,6 +139,44 @@ function readCachedUser() {
   catch { localStorage.removeItem("seomtorch-auth-user"); return null; }
 }
 
+function saveActiveSession() {
+  if (!activeSession || activeSession.finished) {
+    localStorage.removeItem("seomtorch-active-session");
+    return;
+  }
+  try {
+    localStorage.setItem("seomtorch-active-session", JSON.stringify(activeSession));
+  } catch (err) {
+    console.warn("Could not persist active session:", err);
+  }
+}
+
+function clearActiveSession() {
+  activeSession = null;
+  localStorage.removeItem("seomtorch-active-session");
+}
+
+function restoreActiveSession() {
+  try {
+    const raw = localStorage.getItem("seomtorch-active-session");
+    if (!raw) return null;
+    const session = JSON.parse(raw);
+    if (!session || !session.queue || session.queue.length === 0 || session.finished) {
+      localStorage.removeItem("seomtorch-active-session");
+      return null;
+    }
+    // Re-hydrate full question data from question bank
+    session.queue = session.queue.map(q => {
+      const full = questionById(q.id);
+      return full ? { ...full, ...q } : q;
+    });
+    return session;
+  } catch {
+    localStorage.removeItem("seomtorch-active-session");
+    return null;
+  }
+}
+
 function openDatabase() {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(DB_NAME, DB_VERSION);
@@ -291,10 +329,10 @@ function showConfirmDialog({ title, message, detail = "", confirmLabel = "Confir
 
 function navigate(nextRoute) {
   if (activeSession?.started && !activeSession.finished && route === "session") {
-    showConfirmDialog({ title: "Leave this active session?", message: "Your timer is still running. Leaving now will end this session and preserve only answers you have already confirmed.", confirmLabel: "Leave session", cancelLabel: "Keep studying", tone: "warning", onConfirm: () => { clearInterval(sessionTimer); activeSession.finished = true; route = nextRoute; activeSession = null; if (nextRoute !== "practice") selectedSubject = null; render(); } });
+    showConfirmDialog({ title: "Leave this active session?", message: "Your timer is still running. Leaving now will end this session and preserve only answers you have already confirmed.", confirmLabel: "Leave session", cancelLabel: "Keep studying", tone: "warning", onConfirm: () => { clearInterval(sessionTimer); activeSession.finished = true; route = nextRoute; clearActiveSession(); if (nextRoute !== "practice") selectedSubject = null; render(); } });
     return;
   }
-  if (route === "session" && activeSession && !activeSession.started) activeSession = null;
+  if (route === "session" && activeSession && !activeSession.started) clearActiveSession();
   if (nextRoute === "challenges") { selectedChallengeId = null; challengesData = null; }
   if (nextRoute === "university") { uniRoute = "departments"; uniDeptId = null; uniLevel = null; uniCourseId = null; }
   route = nextRoute;
@@ -352,7 +390,7 @@ function renderMath(html) {
 function bindShell() {
   document.querySelectorAll("[data-route]").forEach(button => button.addEventListener("click", () => navigate(button.dataset.route)));
   document.querySelectorAll("[data-install-app]").forEach(button => button.addEventListener("click", installApp));
-  document.querySelectorAll("#sidebar-calc-toggle, #session-calc-toggle").forEach(btn => {
+  document.querySelectorAll("#sidebar-calc-toggle, #session-calc-toggle, #mobile-calc-fab").forEach(btn => {
     btn.addEventListener("click", () => jambCalculator.toggle());
   });
 }
@@ -639,6 +677,7 @@ async function createSession(subject, topic, count = 10, durationMinutes = 10, m
       timeUpAcknowledged: false,
       mode
     };
+    saveActiveSession();
     route = "session";
     render();
   } finally {
@@ -679,8 +718,8 @@ function renderSessionStart() {
   const isNormal = activeSession.mode === "normal";
   const content = `<section class="page page-narrow"><div class="session-ready"><p class="eyebrow">Ready when you are</p><h1>Your session is prepared.</h1><p class="lede">${isNormal ? "This guided session is untimed. You will see feedback after each answer." : "The countdown has not started. Once you begin, you may skip between questions and return using the numbered navigator."}</p><div class="ready-summary"><article><span>Focus</span><strong>${escapeHtml(mode)}</strong></article><article><span>Questions</span><strong>${activeSession.queue.length}</strong></article><article><span>Study time</span><strong>${isNormal ? "Untimed" : `${activeSession.durationMinutes} minutes`}</strong></article></div>${activeSession.sections.length > 1 ? `<div class="ready-sections">${activeSession.sections.map((section, index) => `<div><span>${String(index + 1).padStart(2, "0")}</span><strong>${escapeHtml(section.name)}</strong><small>${section.count} questions</small></div>`).join("")}</div>` : ""}<div class="button-row"><button class="button" id="begin-session">Begin session →</button><button class="button outline" id="cancel-session">Change selections</button></div></div></section>`;
   app.innerHTML = shell(content); bindShell();
-  document.querySelector("#begin-session").addEventListener("click", () => { activeSession.started = true; activeSession.deadline = isNormal ? null : Date.now() + activeSession.durationMinutes * 60000; activeSession.questionStartedAt = Date.now(); render(); });
-  document.querySelector("#cancel-session").addEventListener("click", () => { activeSession = null; route = "practice"; render(); });
+  document.querySelector("#begin-session").addEventListener("click", () => { activeSession.started = true; activeSession.deadline = isNormal ? null : Date.now() + activeSession.durationMinutes * 60000; activeSession.questionStartedAt = Date.now(); saveActiveSession(); render(); });
+  document.querySelector("#cancel-session").addEventListener("click", () => { clearActiveSession(); route = "practice"; render(); });
 }
 
 function renderSession() {
@@ -699,7 +738,7 @@ function renderSession() {
   const content = `<section class="page session-page"><aside class="question-navigator"><div><p class="eyebrow">Question navigator</p><strong>${confirmed} of ${activeSession.queue.length} answered</strong><span>Select any number to move between questions.</span></div><div class="question-number-grid">${activeSession.answers.map((item, index) => `<button class="question-number ${index === activeSession.index ? "current" : ""} ${item.selected !== null ? "selected" : ""}" data-question-index="${index}" aria-label="Question ${index + 1}${item.selected !== null ? ", selected" : ", unanswered"}">${index + 1}</button>`).join("")}</div><div class="navigator-key"><span><i class="selected"></i>Selected</span><span><i class="unanswered"></i>Unanswered</span></div><button class="button outline finish-session" id="finish-session">Finish session</button></aside><div class="session-workspace">${activeSession.sections.length > 1 ? `<div class="active-section"><span>Section ${sectionIndex + 1} of ${activeSession.sections.length}</span><strong>${escapeHtml(section.name)}</strong><small>${activeSession.index - section.start + 1} of ${section.count} in this section</small></div>` : ""}<div class="question-header"><div class="question-topline"><span>${subjectName(question.subject)} · ${escapeHtml(question.topic)}${question.questionYear ? ` · ${question.questionYear} source` : ""}</span><div class="session-status"><span>${activeSession.index + 1} of ${activeSession.queue.length}</span><span class="session-clock" role="timer" aria-label="Session time remaining"><small>Time left</small><strong id="session-timer">${formatTime(Math.ceil((activeSession.deadline - Date.now()) / 1000))}</strong></span><button class="session-calculator-btn" id="session-calc-toggle" type="button" aria-label="JAMB Calculator" title="JAMB Calculator (Alt+C)"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg><span>Calculator</span></button></div></div><div class="question-progress"><i style="width:${confirmed / activeSession.queue.length * 100}%"></i></div></div><article class="question-paper" style="${passage ? 'display:flex; flex-direction:column; gap:1rem;' : ''}">
   ${passage ? `<details class="passage-details"><summary>View reading passage</summary><div class="passage-content">${renderMath(escapeHtml(passage))}</div></details>` : ""}
   ${renderQuestionImage(question)}
-  <div><p class="eyebrow">Question ${String(activeSession.index + 1).padStart(2, "0")}</p><h2>${renderMath(escapeHtml(question.text))}</h2></div><div class="options">${question.options.map((option, index) => { let state = ""; if (activeSession.mode === "challenge" && answer.confirmed && index === answer.selected) state = "selected"; else if (answer.confirmed && index === question.correct) state = "correct"; else if (answer.confirmed && index === answer.selected) state = "incorrect"; else if (!answer.confirmed && index === answer.selected) state = "selected"; return `<button class="option ${state}" data-option="${index}" ${answer.confirmed ? "disabled" : ""}><span class="option-letter">${String.fromCharCode(65 + index)}</span><span>${renderMath(escapeHtml(option))}</span></button>`; }).join("")}</div>${answer.confirmed && activeSession.mode !== "challenge" ? `<div class="feedback"><div class="feedback-head"><div class="feedback-label ${answer.correct ? "" : "wrong"}">${answer.correct ? "Correct" : "Review this"}</div>${answer.correct ? '<span class="xp-earned">+5 XP</span>' : ""}</div>${renderExplanation(question)}</div>` : answer.confirmed ? '<p class="selection-note">This answer was already recorded and is locked.</p>' : answer.selected !== null ? '<p class="selection-note">Your selection is not recorded until you finish the session.</p>' : ""}<div class="question-actions"><button class="button outline" id="previous-question" ${activeSession.index === 0 ? "disabled" : ""}>← Previous</button><button class="button outline" id="bookmark">${isBookmarked ? "Remove from saved" : "Save for review"}</button><button class="button" id="next-question">${activeSession.index === activeSession.queue.length - 1 ? "Review session" : answer.selected !== null ? "Next question →" : "Skip for now →"}</button></div></article></div></section>`;
+  <div><p class="eyebrow">Question ${String(activeSession.index + 1).padStart(2, "0")}</p><h2>${renderMath(escapeHtml(question.text))}</h2></div><div class="options">${question.options.map((option, index) => { let state = ""; if (activeSession.mode === "challenge" && answer.confirmed && index === answer.selected) state = "selected"; else if (answer.confirmed && index === question.correct) state = "correct"; else if (answer.confirmed && index === answer.selected) state = "incorrect"; else if (!answer.confirmed && index === answer.selected) state = "selected"; return `<button class="option ${state}" data-option="${index}" ${answer.confirmed ? "disabled" : ""}><span class="option-letter">${String.fromCharCode(65 + index)}</span><span>${renderMath(escapeHtml(option))}</span></button>`; }).join("")}</div>${answer.confirmed && activeSession.mode !== "challenge" ? `<div class="feedback"><div class="feedback-head"><div class="feedback-label ${answer.correct ? "" : "wrong"}">${answer.correct ? "Correct" : "Review this"}</div>${answer.correct ? '<span class="xp-earned">+5 XP</span>' : ""}</div>${renderExplanation(question)}</div>` : answer.confirmed ? '<p class="selection-note">This answer was already recorded and is locked.</p>' : answer.selected !== null ? '<p class="selection-note">Your selection is not recorded until you finish the session.</p>' : ""}<div class="question-actions"><button class="button outline" id="previous-question" ${activeSession.index === 0 ? "disabled" : ""}>← Previous</button><button class="button outline" id="bookmark">${isBookmarked ? "Remove from saved" : "Save for review"}</button><button class="button" id="next-question">${activeSession.index === activeSession.queue.length - 1 ? "Review session" : answer.selected !== null ? "Next question →" : "Skip for now →"}</button></div></article></div><button class="mobile-calc-fab" id="mobile-calc-fab" type="button" aria-label="Open JAMB Calculator" title="JAMB Calculator"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg><span>Calculator</span></button></section>`;
   app.innerHTML = shell(content); bindShell();
   bindQuestionMedia();
   runSessionTimer();
@@ -713,7 +752,7 @@ function renderSession() {
 
 function goToQuestion(index) {
   if (index < 0 || index >= activeSession.queue.length) return;
-  activeSession.index = index; activeSession.questionStartedAt = Date.now(); render();
+  activeSession.index = index; activeSession.questionStartedAt = Date.now(); saveActiveSession(); render();
 }
 
 function selectAnswer(selected) {
@@ -721,6 +760,7 @@ function selectAnswer(selected) {
   if (answer.confirmed) return;
   const question = activeSession.queue[activeSession.index];
   answer.selected = selected;
+  saveActiveSession();
   if (activeSession.mode === 'timed' || activeSession.mode === 'sprint' || activeSession.mode === 'challenge') {
     render(); // Deferred grading
   } else {
@@ -737,6 +777,7 @@ async function submitConfirmedAnswer(questionIndex, shouldRender = true, syncNow
   const selected = answer.selected;
   const correct = selected === question.correct;
   answer.confirmed = true; answer.correct = correct; if (correct) activeSession.correct++;
+  saveActiveSession();
   const attempt = { questionId: question.id, subject: question.subject, correct, selected, timestamp: Date.now(), durationMs: Date.now() - activeSession.questionStartedAt, clientId: crypto.randomUUID(), sessionId: activeSession.remoteId, synced: false };
   attempt.id = await add("attempts", attempt); attempts.push(attempt);
   profile.xp = (profile.xp || 0) + (correct ? 5 : 0);
@@ -755,6 +796,7 @@ function confirmFinishSession() {
 
 function finishNormalSession() {
   activeSession.finished = true;
+  clearActiveSession();
   render();
 }
 
@@ -766,6 +808,7 @@ async function finalizeSelectedAnswers(timedOut = false) {
   activeSession.timedOut = timedOut;
   activeSession.finished = true;
   activeSession.finalizing = false;
+  clearActiveSession();
   syncPendingAttempts();
   if (timedOut) {
     showConfirmDialog({ title: "Time’s up.", message: "Your study time has ended. Selected answers have been recorded; questions without a selection remain unanswered.", confirmLabel: "View results", tone: "timeup", dismissible: false, onConfirm: () => { activeSession.timeUpAcknowledged = true; render(); } });
@@ -1132,6 +1175,7 @@ async function beginChallenge(item) {
     const queue = remote.questions.map(question => ({ ...(questionById(question.external_id) || {}), ...question, id: question.external_id })).filter(question => question.id);
     if (!queue.length) throw new Error("The shared paper could not be prepared on this device.");
     activeSession = { subject: item.subject, topic: null, requestedCount: queue.length, durationMinutes: item.duration_minutes, deadline: new Date(remote.deadline_at).getTime(), started: true, finished: false, queue, sections: buildSessionSections(queue), answers: queue.map(question => remote.answers?.[question.id] === undefined ? ({ selected: null, confirmed: false, correct: false }) : ({ selected: remote.answers[question.id], confirmed: true, correct: false })), remoteId: remote.session_id, challengeId: item.id, challengeTitle: item.title, index: 0, correct: 0, questionStartedAt: Date.now(), reportedComplete: false, timedOut: false, timeUpAcknowledged: false, mode: "challenge" };
+    saveActiveSession();
     route = "session"; render();
   } catch (caught) { showToast(caught instanceof ApiError ? caught.message : caught.message); challengesData = null; renderChallenges(); }
 }
@@ -2003,6 +2047,19 @@ async function init() {
     await Promise.all([loadQuestions(), loadData()]);
     if (authToken && currentUser) {
       await prepareLocalUser(currentUser);
+      const savedSession = restoreActiveSession();
+      if (savedSession) {
+        activeSession = savedSession;
+        route = "session";
+        if (activeSession.started && activeSession.mode !== "normal" && activeSession.deadline) {
+          if (Date.now() >= activeSession.deadline) {
+            activeSession.timedOut = true;
+            activeSession.finished = true;
+            clearActiveSession();
+          }
+        }
+        showToast("Resumed your active practice session.");
+      }
       render();
     } else {
       renderAuth();
@@ -2017,6 +2074,13 @@ async function init() {
     window.addEventListener("online", async () => { if (authToken) { await syncPendingAttempts(); render(); } });
     window.addEventListener("offline", () => { if (route !== "session") render(); });
     document.addEventListener("visibilitychange", async () => { if (document.visibilityState === "visible" && authToken && route !== "session") { await syncPendingAttempts(); render(); } });
+    window.addEventListener("beforeunload", (e) => {
+      if (activeSession?.started && !activeSession.finished && route === "session") {
+        saveActiveSession();
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    });
     if ("serviceWorker" in navigator && location.protocol !== "file:") navigator.serviceWorker.register("sw.js").catch(() => {});
   } catch (error) {
     console.error(error);
@@ -2056,6 +2120,7 @@ async function renderDailySprint() {
 
     if (sprintQuestions.length > 0) {
       activeSession = { subject: 'sprint', topic: null, requestedCount: 5, durationMinutes: 5, deadline: Date.now() + 5 * 60000, started: true, finished: false, queue: sprintQuestions, sections: [{subject: 'sprint', name: 'Sprint', count: sprintQuestions.length, start: 0}], answers: sprintQuestions.map(() => ({ selected: null, confirmed: false, correct: false })), remoteId, index: 0, correct: 0, questionStartedAt: Date.now(), reportedComplete: false, timedOut: false, timeUpAcknowledged: false, mode: 'sprint' };
+      saveActiveSession();
       route = "session"; render();
     } else {
       throw new Error("No questions available");
@@ -2176,6 +2241,7 @@ function renderNormalSession() {
         </div>
       </article>
     </div>
+    <button class="mobile-calc-fab" id="mobile-calc-fab" type="button" aria-label="Open JAMB Calculator" title="JAMB Calculator"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg><span>Calculator</span></button>
   </section>`;
 
   app.innerHTML = shell(content); bindShell();

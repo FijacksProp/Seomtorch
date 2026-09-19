@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Seomtorch — Authentic JAMB CBT Basic Calculator
  * Strictly simulates the official JAMB on-screen 8-key/basic calculator
  * with standard arithmetic, memory operations, square root, percentage,
@@ -206,6 +206,7 @@ class JambCalculator {
 
     const onPointerDown = (e) => {
       if (e.target.closest("button")) return;
+      if (window.innerWidth <= 600) return;
       this.isDragging = true;
       this.dragStart = { x: e.clientX, y: e.clientY };
 
@@ -221,7 +222,7 @@ class JambCalculator {
   }
 
   onPointerMove(e) {
-    if (!this.isDragging) return;
+    if (!this.isDragging || window.innerWidth <= 600) return;
     const dx = e.clientX - this.dragStart.x;
     const dy = e.clientY - this.dragStart.y;
 
@@ -252,7 +253,7 @@ class JambCalculator {
   }
 
   clampPosition() {
-    if (!this.rootEl || this.pos.x === null) return;
+    if (!this.rootEl || window.innerWidth <= 600 || this.pos.x === null) return;
     const pad = 12;
     const rect = this.rootEl.getBoundingClientRect();
     const maxX = window.innerWidth - rect.width - pad;
@@ -268,27 +269,29 @@ class JambCalculator {
   }
 
   setDefaultPosition() {
-    if (this.pos.x !== null) {
-      this.clampPosition();
-      return;
-    }
     if (window.innerWidth <= 600) {
+      this.pos.x = null;
+      this.pos.y = null;
       this.rootEl.style.left = "";
       this.rootEl.style.top = "";
       this.rootEl.style.right = "";
       this.rootEl.style.bottom = "";
-    } else {
-      const pad = 24;
-      const w = 310;
-      const x = Math.max(pad, window.innerWidth - w - pad);
-      const y = 84;
-      this.pos.x = x;
-      this.pos.y = y;
-      this.rootEl.style.left = `${x}px`;
-      this.rootEl.style.top = `${y}px`;
-      this.rootEl.style.right = "auto";
-      this.rootEl.style.bottom = "auto";
+      return;
     }
+    if (this.pos.x !== null) {
+      this.clampPosition();
+      return;
+    }
+    const pad = 24;
+    const w = 310;
+    const x = Math.max(pad, window.innerWidth - w - pad);
+    const y = 84;
+    this.pos.x = x;
+    this.pos.y = y;
+    this.rootEl.style.left = `${x}px`;
+    this.rootEl.style.top = `${y}px`;
+    this.rootEl.style.right = "auto";
+    this.rootEl.style.bottom = "auto";
   }
 
   updateDisplay() {
@@ -534,12 +537,14 @@ class JambCalculator {
     }
     this.setDefaultPosition();
     this.updateDisplay();
+    document.querySelectorAll(".mobile-calc-fab").forEach(el => el.classList.add("hidden-by-calc"));
   }
 
   close() {
     if (!this.rootEl) return;
     this.isOpen = false;
     this.rootEl.classList.add("hidden");
+    document.querySelectorAll(".mobile-calc-fab").forEach(el => el.classList.remove("hidden-by-calc"));
   }
 
   toggle() {
