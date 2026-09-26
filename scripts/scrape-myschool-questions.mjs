@@ -73,6 +73,7 @@ function parseArgs(argv) {
     refreshMedia: false,
     downloadImages: false,
     imagesDir: path.join(process.cwd(), "assets", "questions", "myschool"),
+    concurrency: 1,
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -94,6 +95,7 @@ function parseArgs(argv) {
     else if (argument === "--output-dir") config.outputDir = path.resolve(next());
     else if (argument === "--images-dir") config.imagesDir = path.resolve(next());
     else if (argument === "--delay-ms") config.delayMs = parsePositiveInteger(next(), argument, { allowZero: true });
+    else if (argument === "--concurrency") config.concurrency = parsePositiveInteger(next(), argument);
     else if (argument === "--start-page") config.startPage = parsePositiveInteger(next(), argument);
     else if (argument === "--max-pages") config.maxPages = parsePositiveInteger(next(), argument);
     else if (argument === "--max-questions") config.maxQuestions = parsePositiveInteger(next(), argument);
@@ -555,8 +557,12 @@ function createRequester(config) {
   return async function request(url, { binary = false } = {}) {
     let lastError;
     for (let attempt = 0; attempt <= config.retries; attempt += 1) {
-      const wait = Math.max(0, config.delayMs - (Date.now() - lastRequestAt));
-      if (wait) await new Promise(resolve => setTimeout(resolve, wait));
+      if (config.concurrency <= 1) {
+        const wait = Math.max(0, config.delayMs - (Date.now() - lastRequestAt));
+        if (wait) await new Promise(resolve => setTimeout(resolve, wait));
+      } else if (config.delayMs > 0) {
+        await new Promise(resolve => setTimeout(resolve, config.delayMs));
+      }
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), config.timeoutMs);
       try {
@@ -632,16 +638,39 @@ async function collectCollection(collection, config, request) {
     ? Math.min(discoveredPages || Infinity, config.startPage + config.maxPages - 1)
     : discoveredPages;
 
+  const pagesToCollect = [];
   for (let page = config.startPage; page <= finalPage; page += 1) {
     if (config.detailsOnly) continue;
     if (!config.refresh && state.pages[page]) continue;
-    const url = listingPageUrl(collection, page);
-    const parsed = parseListing(await request(url), subject, url);
-    if (!parsed.urls.length) throw new Error(`No ${subject} question links were found on listing page ${page}.`);
-    state.pages[page] = parsed.urls;
-    if (parsed.totalPages) state.discovered_total_pages = Math.max(state.discovered_total_pages || 0, parsed.totalPages);
+    pagesToCollect.push(page);
+  }
+
+  if (pagesToCollect.length) {
+    const pageConcurrency = Math.min(config.concurrency || 1, 6);
+    let pageCursor = 0;
+    let pagesProcessed = 0;
+    async function pageWorker() {
+      while (pageCursor < pagesToCollect.length) {
+        const page = pagesToCollect[pageCursor++];
+        const url = listingPageUrl(collection, page);
+        try {
+          const parsed = parseListing(await request(url), subject, url);
+          if (parsed.urls.length) {
+            state.pages[page] = parsed.urls;
+            if (parsed.totalPages) state.discovered_total_pages = Math.max(state.discovered_total_pages || 0, parsed.totalPages);
+          }
+        } catch (err) {
+          console.warn(`  Failed listing page ${page}: ${err.message}`);
+        }
+        pagesProcessed += 1;
+        if (pagesProcessed % 10 === 0 || pagesProcessed === pagesToCollect.length) {
+          save();
+          console.log(`  Collected ${pagesProcessed}/${pagesToCollect.length} listing pages...`);
+        }
+      }
+    }
+    await Promise.all(Array.from({ length: Math.min(pageConcurrency, pagesToCollect.length) }, () => pageWorker()));
     save();
-    console.log(`  Page ${page}/${finalPage}: ${parsed.urls.length} question links`);
   }
 
   let urls = [...new Set(Object.entries(state.pages)
@@ -652,38 +681,49 @@ async function collectCollection(collection, config, request) {
 
   console.log(`${label}: extracting ${urls.length} question detail pages`);
   let processed = 0;
-  for (const url of urls) {
-    const sourceId = getQuestionId(url, subject);
-    const existing = state.questions[sourceId];
-    const shouldFetch = config.refresh || !existing || (config.refreshMedia && needsMediaRefresh(existing));
-    if (!shouldFetch) {
-      if (config.downloadImages && needsMediaDownload(existing)) {
-        await downloadQuestionMedia(existing, config, request);
-        save();
+  let urlCursor = 0;
+  const detailConcurrency = config.concurrency || 1;
+
+  async function detailWorker() {
+    while (urlCursor < urls.length) {
+      const url = urls[urlCursor++];
+      const sourceId = getQuestionId(url, subject);
+      const existing = state.questions[sourceId];
+      const shouldFetch = config.refresh || !existing || (config.refreshMedia && needsMediaRefresh(existing));
+      if (!shouldFetch) {
+        if (config.downloadImages && needsMediaDownload(existing)) {
+          await downloadQuestionMedia(existing, config, request);
+          save();
+        }
+        processed += 1;
+        continue;
+      }
+      try {
+        let question = parseDetail(await request(url), subject, url, examType);
+        if (config.downloadImages) question = await downloadQuestionMedia(question, config, request);
+        state.questions[sourceId] = question;
+        delete state.failures[sourceId];
+      } catch (error) {
+        state.failures[sourceId] = {
+          source_id: sourceId,
+          source_url: url,
+          error: error.message,
+          failed_at: new Date().toISOString(),
+        };
+        console.warn(`  Question ${sourceId} failed: ${error.message}`);
       }
       processed += 1;
-      continue;
-    }
-    try {
-      let question = parseDetail(await request(url), subject, url, examType);
-      if (config.downloadImages) question = await downloadQuestionMedia(question, config, request);
-      state.questions[sourceId] = question;
-      delete state.failures[sourceId];
-    } catch (error) {
-      state.failures[sourceId] = {
-        source_id: sourceId,
-        source_url: url,
-        error: error.message,
-        failed_at: new Date().toISOString(),
-      };
-      console.warn(`  Question ${sourceId} failed: ${error.message}`);
-    }
-    processed += 1;
-    save();
-    if (processed === 1 || processed % 10 === 0 || processed === urls.length) {
-      console.log(`  ${processed}/${urls.length} processed; ${Object.keys(state.failures).length} unresolved failure(s)`);
+      if (processed % 10 === 0 || processed === urls.length) {
+        save();
+      }
+      if (processed === 1 || processed % 50 === 0 || processed === urls.length) {
+        console.log(`  ${processed}/${urls.length} processed; ${Object.keys(state.failures).length} unresolved failure(s)`);
+      }
     }
   }
+
+  await Promise.all(Array.from({ length: Math.min(detailConcurrency, urls.length || 1) }, () => detailWorker()));
+  save();
 
   const expectedPages = config.maxPages ? finalPage - config.startPage + 1 : discoveredPages;
   const output = summarize(collection, state, expectedPages, { start: config.startPage, end: finalPage });

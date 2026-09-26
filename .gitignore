@@ -11,3 +11,5 @@ backend/staticfiles/
 __pycache__/
 *.py[cod]
 .env
+exports/
+assets/questions_raw_backup/

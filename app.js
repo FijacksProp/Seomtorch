@@ -8,6 +8,7 @@ const SUBJECTS = [
   { id: "computer-studies", name: "Computer Studies", description: "Hardware, software, networking, logic, programming and data processing" },
   { id: "economics", name: "Economics", description: "Microeconomics, macroeconomics, national income, trade and public finance" },
   { id: "english", name: "English Language", description: "Usage, comprehension and oral forms" },
+  { id: "further-mathematics", name: "Further Mathematics", description: "Pure mathematics, mechanics, statistics, vectors, matrices and calculus" },
   { id: "general-paper", name: "General Paper", description: "Civics, current affairs and general knowledge" },
   { id: "government", name: "Government", description: "Political theories, Nigerian constitutional development, institutions and foreign policy" },
   { id: "history", name: "History", description: "Nigerian, African and world history from pre-colonial to modern times" },
@@ -17,14 +18,14 @@ const SUBJECTS = [
   { id: "music", name: "Music", description: "JAMB music theory, African music and Western art music" },
   { id: "physics", name: "Physics", description: "JAMB mechanics, waves, electricity and modern physics" },
 ];
-const ALL_SUBJECT_ORDER = ["biology", "chemistry", "civic-education", "computer-studies", "economics", "english", "general-paper", "government", "history", "literature-in-english", "marketing", "mathematics", "music", "physics"].map(id => SUBJECTS.find(subject => subject.id === id));
+const ALL_SUBJECT_ORDER = ["biology", "chemistry", "civic-education", "computer-studies", "economics", "english", "further-mathematics", "general-paper", "government", "history", "literature-in-english", "marketing", "mathematics", "music", "physics"].map(id => SUBJECTS.find(subject => subject.id === id));
 
 const FAQS = [
   { group: "Getting started", q: "What is Seomtorch designed for?", a: "Seomtorch is a personal study companion for structured JAMB, WAEC, NECO and Post-UTME preparation. It helps you practise by topic, learn from corrections and see where your next study session will matter most." },
   { group: "Getting started", q: "Do I need an account or internet connection?", a: "An account is required so your progress can be monitored and restored across devices. After signing in once, practice can continue offline and pending answers synchronize when the connection returns." },
   { group: "Getting started", q: "Can I install Seomtorch on my device?", a: "Yes. Use the Install app button. On iPhone or iPad, open Seomtorch in Safari, tap Share, then choose Add to Home Screen." },
   { group: "Practice and review", q: "How are questions selected?", a: "Sessions prioritise questions you have not seen, topics where your accuracy is lower, and questions you previously missed. Recently answered questions receive less priority, which reduces unnecessary repetition." },
-  { group: "Practice and review", q: "Which subjects are available?", a: "Biology, Chemistry, Civic Education, Computer Studies, Economics, English Language, General Paper, Government, History, Literature in English, Marketing, Mathematics, Music and Physics are available. Question banks include verified questions with detailed written explanations." },
+  { group: "Practice and review", q: "Which subjects are available?", a: "Biology, Chemistry, Civic Education, Computer Studies, Economics, English Language, Further Mathematics, General Paper, Government, History, Literature in English, Marketing, Mathematics, Music and Physics are available. Question banks include verified questions with detailed written explanations." },
   { group: "Practice and review", q: "Can I practise one topic only?", a: "Yes. Open Practice, select a subject, then choose a listed topic. You can also choose All topics for a mixed session within that subject." },
   { group: "Practice and review", q: "How do timed sessions work?", a: "Choose any question count from 10 to 100 and enter the number of minutes you want to study. One overall countdown runs across the complete session." },
   { group: "Practice and review", q: "Can I practise every subject together?", a: "Yes. Choose All subjects to build one balanced session. Questions are grouped into clear subject sections under one overall timer." },
@@ -152,7 +153,6 @@ function saveActiveSession() {
 }
 
 function clearActiveSession() {
-  activeSession = null;
   localStorage.removeItem("seomtorch-active-session");
 }
 
@@ -247,7 +247,10 @@ function yesterday() { const date = new Date(); date.setDate(date.getDate() - 1)
 function firstName() { return profile?.name?.trim().split(/\s+/)[0] || "Student"; }
 function initials() { return profile?.name?.trim().split(/\s+/).slice(0, 2).map(word => word[0]).join("").toUpperCase() || "ST"; }
 function accuracy(list = attempts) { return list.length ? Math.round(list.filter(item => item.correct).length / list.length * 100) : 0; }
-function subjectName(id) { return SUBJECTS.find(subject => subject.id === id)?.name || id; }
+function subjectName(id) {
+  if (id === "ana201" || id === "ANA 201") return "ANA 201";
+  return SUBJECTS.find(subject => subject.id === id)?.name || (typeof id === "string" && id.toLowerCase().startsWith("ana") ? id.toUpperCase() : id);
+}
 function questionById(id) { return questions.find(question => question.id === id); }
 function questionPassage(question) { return question?.passage_body || question?.passageBody || question?.passage || ""; }
 function questionImage(question) { return question?.image_url || question?.imageUrl || ""; }
@@ -719,7 +722,7 @@ function renderSessionStart() {
   const content = `<section class="page page-narrow"><div class="session-ready"><p class="eyebrow">Ready when you are</p><h1>Your session is prepared.</h1><p class="lede">${isNormal ? "This guided session is untimed. You will see feedback after each answer." : "The countdown has not started. Once you begin, you may skip between questions and return using the numbered navigator."}</p><div class="ready-summary"><article><span>Focus</span><strong>${escapeHtml(mode)}</strong></article><article><span>Questions</span><strong>${activeSession.queue.length}</strong></article><article><span>Study time</span><strong>${isNormal ? "Untimed" : `${activeSession.durationMinutes} minutes`}</strong></article></div>${activeSession.sections.length > 1 ? `<div class="ready-sections">${activeSession.sections.map((section, index) => `<div><span>${String(index + 1).padStart(2, "0")}</span><strong>${escapeHtml(section.name)}</strong><small>${section.count} questions</small></div>`).join("")}</div>` : ""}<div class="button-row"><button class="button" id="begin-session">Begin session →</button><button class="button outline" id="cancel-session">Change selections</button></div></div></section>`;
   app.innerHTML = shell(content); bindShell();
   document.querySelector("#begin-session").addEventListener("click", () => { activeSession.started = true; activeSession.deadline = isNormal ? null : Date.now() + activeSession.durationMinutes * 60000; activeSession.questionStartedAt = Date.now(); saveActiveSession(); render(); });
-  document.querySelector("#cancel-session").addEventListener("click", () => { clearActiveSession(); route = "practice"; render(); });
+  document.querySelector("#cancel-session").addEventListener("click", () => { const wasUni = activeSession?.isUniversity; activeSession = null; clearActiveSession(); route = wasUni ? "university" : "practice"; render(); });
 }
 
 function renderSession() {
@@ -818,7 +821,7 @@ async function finalizeSelectedAnswers(timedOut = false) {
 }
 
 async function syncAttemptRecord(attempt) {
-  if (!authToken || attempt.synced) return;
+  if (!authToken || attempt.synced || activeSession?.isUniversity || String(attempt.questionId || "").startsWith("ana201-")) return;
   if (!attempt.clientId) attempt.clientId = crypto.randomUUID();
   try {
     const response = await api.syncAttempt(authToken, { question_id: attempt.questionId, selected_index: attempt.selected, client_id: attempt.clientId, session_id: attempt.sessionId || null, duration_ms: attempt.durationMs || null });
@@ -948,11 +951,25 @@ function renderResult() {
   const unanswered = activeSession.queue.length - answered;
   const note = activeSession.timedOut ? "Time is up. Review the result, then try a shorter session or return when you can give it a full window." : score >= 80 ? "A strong session. Keep the standard steady." : score >= 50 ? "Good work. Review the corrections before moving on." : "This topic needs another careful pass. That is useful information.";
   const review = activeSession.answers.map((answer, index) => { const question = activeSession.queue[index]; if (!answer.confirmed) return ""; return `<article class="result-review-item ${answer.correct ? "correct" : "incorrect"}"><div><span>Question ${index + 1}</span><strong>${answer.correct ? "Correct" : "Review"}</strong></div><p>${renderMath(escapeHtml(question.text))}</p><small>Your answer: ${escapeHtml(question.options[answer.selected] || "—")}</small>${answer.correct ? "" : `<small>Correct answer: ${escapeHtml(question.options[question.correct] || "—")}</small>`}${renderExplanation(question)}</article>`; }).join("");
-  const content = `<section class="page page-narrow"><div class="session-result"><p class="eyebrow">${activeSession.timedOut ? "Time expired" : "Session complete"}</p><div class="result-score">${score}%</div><h2>${activeSession.correct} of ${activeSession.queue.length} correct</h2><p class="lede" style="margin-inline:auto">${note}</p><div class="result-meta"><span>${answered} answered</span><span>${unanswered} unanswered</span><span>${activeSession.mode === "normal" ? "Untimed practice" : `${activeSession.durationMinutes} minute timer`}</span></div><div class="button-row" style="justify-content:center;margin-top:28px"><button class="button outline" id="return-practice">Choose another topic</button>${activeSession.mode === "sprint" ? "" : '<button class="button" id="retry-session">Practise this again</button>'}</div></div>${review ? `<div class="result-review"><div class="section-head"><h2>Solutions</h2><p>Review every recorded answer</p></div>${review}</div>` : ""}</section>`;
+  const returnLabel = activeSession.isUniversity ? "Back to Course" : "Choose another topic";
+  const retryLabel = activeSession.isUniversity ? "Practise again" : "Practise this again";
+  const content = `<section class="page page-narrow"><div class="session-result"><p class="eyebrow">${activeSession.timedOut ? "Time expired" : "Session complete"}</p><div class="result-score">${score}%</div><h2>${activeSession.correct} of ${activeSession.queue.length} correct</h2><p class="lede" style="margin-inline:auto">${note}</p><div class="result-meta"><span>${answered} answered</span><span>${unanswered} unanswered</span><span>${activeSession.mode === "normal" ? "Untimed practice" : `${activeSession.durationMinutes} minute timer`}</span></div><div class="button-row" style="justify-content:center;margin-top:28px"><button class="button outline" id="return-practice">${returnLabel}</button>${activeSession.mode === "sprint" ? "" : `<button class="button" id="retry-session">${retryLabel}</button>`}</div></div>${review ? `<div class="result-review"><div class="section-head"><h2>Solutions</h2><p>Review every recorded answer</p></div>${review}</div>` : ""}</section>`;
   app.innerHTML = shell(content); bindShell();
   bindQuestionMedia();
-  document.querySelector("#return-practice").addEventListener("click", () => { activeSession = null; route = "practice"; render(); });
-  document.querySelector("#retry-session")?.addEventListener("click", () => startSession(activeSession.subject, activeSession.topic, activeSession.requestedCount, activeSession.durationMinutes, activeSession.mode));
+  const sessionCopy = { ...activeSession };
+  document.querySelector("#return-practice").addEventListener("click", () => {
+    const wasUni = sessionCopy.isUniversity;
+    activeSession = null;
+    route = wasUni ? "university" : "practice";
+    render();
+  });
+  document.querySelector("#retry-session")?.addEventListener("click", () => {
+    if (sessionCopy.isUniversity) {
+      startUniPractice(sessionCopy.subject, sessionCopy.topic, sessionCopy.dataFile);
+    } else {
+      startSession(sessionCopy.subject, sessionCopy.topic, sessionCopy.requestedCount, sessionCopy.durationMinutes, sessionCopy.mode);
+    }
+  });
 }
 
 function renderChallengeSubmission() {
@@ -2003,7 +2020,8 @@ async function renderUniCourse() {
   const topicsHtml = sections.map(section => {
     const topicItems = section.topics.map(topic => {
       const isAvailable = topic.status !== "coming-soon";
-      return `<div class="uni-topic-item ${isAvailable ? "available" : "coming-soon"}"><span class="uni-topic-status">${isAvailable ? "📖" : "🔒"}</span><div class="uni-topic-info"><h4>${escapeHtml(topic.title)}</h4><span class="uni-topic-tag">${isAvailable ? "Available" : "Coming soon"}</span></div></div>`;
+      const tagText = isAvailable ? (topic.questionsCount ? `${topic.questionsCount} MCQs` : "Available") : "Coming soon";
+      return `<div class="uni-topic-item ${isAvailable ? "available" : "coming-soon"}" ${isAvailable ? `data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" role="button" tabindex="0"` : ""}><span class="uni-topic-status">${isAvailable ? "📖" : "🔒"}</span><div class="uni-topic-info"><h4>${escapeHtml(topic.title)}</h4><span class="uni-topic-tag">${tagText}</span></div>${isAvailable ? `<button class="button uni-btn sm" type="button" style="margin-left:auto; white-space:nowrap; padding:6px 14px; font-size:12px; pointer-events:none;">Practice →</button>` : ""}</div>`;
     }).join("");
     return `<div class="uni-section"><h3 class="uni-section-heading">${escapeHtml(section.title)}</h3><div class="uni-topic-list">${topicItems}</div></div>`;
   }).join("");
@@ -2022,6 +2040,87 @@ async function renderUniCourse() {
 
   app.innerHTML = uniShell(`<div class="uni-course-hero"><div class="uni-course-code-lg">${escapeHtml(data.code)}</div><p class="uni-course-desc">${escapeHtml(data.description)}</p>${statsHtml}</div>${topicsHtml}`, breadcrumbs);
   bindShell(); bindUniCrumbs(breadcrumbs);
+
+  document.querySelectorAll(".uni-topic-item.available").forEach(item => {
+    const launch = () => {
+      const dataFile = item.dataset.uniDataFile;
+      const topicTitle = item.dataset.uniTopicTitle;
+      if (!dataFile) return;
+      startUniPractice(data.code || "ANA 201", topicTitle, dataFile);
+    };
+    item.addEventListener("click", launch);
+    item.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        launch();
+      }
+    });
+  });
+}
+
+async function startUniPractice(courseCode, topicTitle, dataFile) {
+  showLoadingOverlay("Preparing practice", "Loading questions...");
+  try {
+    const data = await fetchUniJson(dataFile);
+    if (!data || !data.questions || !data.questions.length) {
+      showToast("Questions not available yet for this topic.");
+      return;
+    }
+
+    const queue = data.questions;
+    const sections = [{
+      subject: courseCode,
+      name: `${courseCode} - ${topicTitle}`,
+      count: queue.length,
+      start: 0
+    }];
+
+    const detail = `<dl class="session-confirm-summary">
+      <div><dt>Course</dt><dd>${escapeHtml(courseCode)}</dd></div>
+      <div><dt>Focus</dt><dd>${escapeHtml(topicTitle)}</dd></div>
+      <div><dt>Questions</dt><dd>${queue.length} MCQs</dd></div>
+      <div><dt>Format</dt><dd>Guided practice (Untimed)</dd></div>
+    </dl>`;
+
+    showConfirmDialog({
+      title: `Start ${escapeHtml(courseCode)} Practice?`,
+      message: `Begin guided untimed practice on "${escapeHtml(topicTitle)}". You'll get immediate anatomical rationale and answers after each question.`,
+      detail,
+      confirmLabel: "Begin Practice",
+      cancelLabel: "Back to Course",
+      onConfirm: () => {
+        activeSession = {
+          subject: courseCode,
+          topic: topicTitle,
+          dataFile,
+          isUniversity: true,
+          requestedCount: queue.length,
+          durationMinutes: 0,
+          deadline: null,
+          started: false,
+          finished: false,
+          queue,
+          sections,
+          answers: queue.map(() => ({ selected: null, confirmed: false, correct: false })),
+          remoteId: null,
+          index: 0,
+          correct: 0,
+          questionStartedAt: null,
+          reportedComplete: false,
+          timedOut: false,
+          timeUpAcknowledged: false,
+          mode: "normal"
+        };
+        saveActiveSession();
+        route = "session";
+        render();
+      }
+    });
+  } catch (err) {
+    showToast("Error loading question bank.");
+  } finally {
+    hideLoadingOverlay();
+  }
 }
 
 // ─── End University Module ──────────────────────────────────────────────────

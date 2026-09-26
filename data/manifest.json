@@ -1,5 +1,5 @@
 {
-  "version": 14,
+  "version": 16,
   "packs": [
     {
       "id": "biology",
@@ -30,6 +30,11 @@
       "id": "english",
       "name": "English Language",
       "file": "data/questions-english.json"
+    },
+    {
+      "id": "further-mathematics",
+      "name": "Further Mathematics",
+      "file": "data/questions-further-mathematics.json"
     },
     {
       "id": "general-paper",
