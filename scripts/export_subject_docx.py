@@ -426,6 +426,16 @@ def export_subject_docx(subject, output_dir="exports"):
             img_url = q.get('image_url') or q.get('imageUrl') or q.get('image')
             if img_url:
                 clean_img_path = img_url.lstrip('/')
+                # Prefer enhanced image if available
+                enhanced_path = clean_img_path.replace(
+                    'assets/questions/myschool/',
+                    'assets/questions_enhanced/'
+                ).replace(
+                    'assets\\questions\\myschool\\',
+                    'assets\\questions_enhanced\\'
+                )
+                if os.path.exists(enhanced_path):
+                    clean_img_path = enhanced_path
                 if os.path.exists(clean_img_path):
                     try:
                         with Image.open(clean_img_path) as im:
@@ -504,7 +514,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     if args.all:
-        targets = ["biology", "mathematics", "chemistry", "physics", "english"]
+        targets = ["biology", "mathematics", "chemistry", "physics", "english", "further-mathematics"]
     else:
         targets = args.subjects
         

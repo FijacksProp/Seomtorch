@@ -1,21 +1,17 @@
 {
+  "title": "Muscles of the Upper Limb",
   "course": "ANA 201",
-  "courseTitle": "Upper and Lower Limb",
-  "topic": "Muscles of the Upper Limb",
-  "topicId": "ul-muscles",
-  "totalQuestions": 47,
-  "source": "Standard International Medical & Anatomy Quiz Competition Format",
+  "totalQuestions": 100,
+  "sections": [
+    "Pectoral Girdle & Shoulder Musculature (Q1-Q25)",
+    "Arm Musculature - Brachium (Q26-Q45)",
+    "Anterior Forearm Musculature (Q46-Q65)",
+    "Posterior Forearm Musculature (Q66-Q80)",
+    "Intrinsic Muscles of the Hand (Q81-Q100)"
+  ],
   "questions": [
     {
-      "id": "ana201-muscles-q01",
-      "number": 1,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-1",
       "text": "Which muscle inserts into the medial lip of the intertubercular (bicipital) groove of the humerus?",
       "options": [
         "Pectoralis major",
@@ -24,19 +20,13 @@
         "Subscapularis"
       ],
       "correct": 2,
-      "correctAnswer": "C",
-      "explanation": "Teres major inserts into the medial lip of the bicipital groove. Pectoralis major inserts into the lateral lip, while latissimus dorsi inserts into the floor of the groove (\"a lady between two majors\")."
+      "correctAnswer": "C. Teres major",
+      "explanation": "Teres major inserts into the medial lip of the bicipital groove. Pectoralis major inserts into the lateral lip, while latissimus dorsi inserts into the floor of the groove (\"a lady between two majors\").",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 1
     },
     {
-      "id": "ana201-muscles-q02",
-      "number": 2,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-2",
       "text": "The clavicular head of the pectoralis major originates from which part of the clavicle?",
       "options": [
         "Lateral one-third of the superior surface",
@@ -45,19 +35,13 @@
         "Acromial extremity"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "The clavicular head of pectoralis major arises from the anterior surface of the medial half of the clavicle, whereas the sternocostal head arises from the anterior manubrium, sternal body, and upper six costal cartilages."
+      "correctAnswer": "B. Medial half of the anterior border",
+      "explanation": "The clavicular head of pectoralis major arises from the anterior surface of the medial half of the clavicle, whereas the sternocostal head arises from the anterior manubrium, sternal body, and upper six costal cartilages.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 2
     },
     {
-      "id": "ana201-muscles-q03",
-      "number": 3,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-3",
       "text": "Which muscle inserts into the medial border of the coracoid process of the scapula?",
       "options": [
         "Coracobrachialis",
@@ -66,19 +50,13 @@
         "Subclavius"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "Pectoralis minor inserts onto the medial border and superior surface of the coracoid process. In contrast, coracobrachialis and the short head of biceps brachii originate from its apex."
+      "correctAnswer": "B. Pectoralis minor",
+      "explanation": "Pectoralis minor inserts onto the medial border and superior surface of the coracoid process. In contrast, coracobrachialis and the short head of biceps brachii originate from its apex.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 3
     },
     {
-      "id": "ana201-muscles-q04",
-      "number": 4,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-4",
       "text": "The tendon of latissimus dorsi inserts into which bony landmark of the humerus?",
       "options": [
         "Crest of the greater tubercle",
@@ -87,19 +65,13 @@
         "Lesser tubercle"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "Latissimus dorsi winds around the lower border of teres major to insert into the floor of the intertubercular groove of the humerus."
+      "correctAnswer": "B. Floor of the intertubercular groove",
+      "explanation": "Latissimus dorsi winds around the lower border of teres major to insert into the floor of the intertubercular groove of the humerus.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 4
     },
     {
-      "id": "ana201-muscles-q05",
-      "number": 5,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-5",
       "text": "Paralysis of which muscle produces characteristic \"winging of the scapula\" due to long thoracic nerve injury?",
       "options": [
         "Rhomboid major",
@@ -108,19 +80,13 @@
         "Levator scapulae"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "Serratus anterior anchors the costal surface of the medial border and inferior angle of the scapula against the thoracic wall. Injury to the long thoracic nerve (C5, C6, C7) causes the medial border to lift posteriorly off the thorax."
+      "correctAnswer": "B. Serratus anterior",
+      "explanation": "Serratus anterior anchors the costal surface of the medial border and inferior angle of the scapula against the thoracic wall. Injury to the long thoracic nerve (C5, C6, C7) causes the medial border to lift posteriorly off the thorax.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 5
     },
     {
-      "id": "ana201-muscles-q06",
-      "number": 6,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-6",
       "text": "Which rotator cuff muscle inserts onto the lesser tubercle of the humerus?",
       "options": [
         "Supraspinatus",
@@ -129,19 +95,13 @@
         "Subscapularis"
       ],
       "correct": 3,
-      "correctAnswer": "D",
-      "explanation": "Subscapularis is the only anterior rotator cuff muscle and the sole rotator cuff muscle inserting on the lesser tubercle. Supraspinatus, infraspinatus, and teres minor insert onto the facets of the greater tubercle."
+      "correctAnswer": "D. Subscapularis",
+      "explanation": "Subscapularis is the only anterior rotator cuff muscle and the sole rotator cuff muscle inserting on the lesser tubercle. Supraspinatus, infraspinatus, and teres minor insert onto the facets of the greater tubercle.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 6
     },
     {
-      "id": "ana201-muscles-q07",
-      "number": 7,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-7",
       "text": "What is the precise sequential insertion of muscles on the three facets of the greater tubercle of the humerus, from superior to inferior?",
       "options": [
         "Infraspinatus, Supraspinatus, Teres minor",
@@ -150,20 +110,14 @@
         "Supraspinatus, Teres minor, Infraspinatus"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "The greater tubercle of the humerus displays three muscular facets on its posterosuperior surface: superior facet (supraspinatus), middle facet (infraspinatus), and inferior facet (teres minor)."
+      "correctAnswer": "B. Supraspinatus, Infraspinatus, Teres minor",
+      "explanation": "The greater tubercle of the humerus displays three muscular facets on its posterosuperior surface: superior facet (supraspinatus), middle facet (infraspinatus), and inferior facet (teres minor).",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 7
     },
     {
-      "id": "ana201-muscles-q08",
-      "number": 8,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
-      "text": "Which muscle initiates the first 0\u00b0 to 15\u00b0 of abduction of the arm at the glenohumeral joint?",
+      "id": "ana201-muscles-8",
+      "text": "Which muscle initiates the first 0 to 15 degrees of abduction of the arm at the glenohumeral joint?",
       "options": [
         "Deltoid (acromial fibers)",
         "Supraspinatus",
@@ -171,19 +125,13 @@
         "Teres minor"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "Supraspinatus initiates abduction of the humerus (0\u00b0\u201315\u00b0) by seating the humeral head firmly against the glenoid cavity, after which the multipennate central fibers of the deltoid take over (15\u00b0\u201390\u00b0)."
+      "correctAnswer": "B. Supraspinatus",
+      "explanation": "Supraspinatus initiates abduction of the humerus (0-15 degrees) by seating the humeral head firmly against the glenoid cavity, after which the multipennate central fibers of the deltoid take over (15-90 degrees).",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 8
     },
     {
-      "id": "ana201-muscles-q09",
-      "number": 9,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-9",
       "text": "The multipennate central fibers of the deltoid muscle originate from which bony structure?",
       "options": [
         "Crest of the scapular spine",
@@ -192,19 +140,13 @@
         "Coracoid process"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "The acromial (intermediate) part of the deltoid is multipennate to maximize contractile power and originates from the lateral border of the acromion process."
+      "correctAnswer": "B. Lateral border of the acromion",
+      "explanation": "The acromial (intermediate) part of the deltoid is multipennate to maximize contractile power and originates from the lateral border of the acromion process.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 9
     },
     {
-      "id": "ana201-muscles-q10",
-      "number": 10,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-10",
       "text": "Which muscle is innervated by the dorsal scapular nerve (C5)?",
       "options": [
         "Rhomboid major",
@@ -213,19 +155,13 @@
         "Subclavius"
       ],
       "correct": 0,
-      "correctAnswer": "A",
-      "explanation": "The dorsal scapular nerve originates from the C5 root of the brachial plexus and descends along the medial border of the scapula to supply rhomboid major, rhomboid minor, and levator scapulae."
+      "correctAnswer": "A. Rhomboid major",
+      "explanation": "The dorsal scapular nerve originates from the C5 root of the brachial plexus and descends along the medial border of the scapula to supply rhomboid major, rhomboid minor, and levator scapulae.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 10
     },
     {
-      "id": "ana201-muscles-q11",
-      "number": 11,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-11",
       "text": "Teres major receives its motor innervation from the:",
       "options": [
         "Axillary nerve",
@@ -234,19 +170,13 @@
         "Thoracodorsal nerve"
       ],
       "correct": 2,
-      "correctAnswer": "C",
-      "explanation": "Teres major is innervated specifically by the lower subscapular nerve (C5, C6) arising from the posterior cord. The upper subscapular nerve supplies only subscapularis."
+      "correctAnswer": "C. Lower subscapular nerve",
+      "explanation": "Teres major is innervated specifically by the lower subscapular nerve (C5, C6) arising from the posterior cord. The upper subscapular nerve supplies only subscapularis.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 11
     },
     {
-      "id": "ana201-muscles-q12",
-      "number": 12,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-12",
       "text": "Which muscle inserts into the clavicle in the subclavian groove on its inferior surface?",
       "options": [
         "Pectoralis minor",
@@ -255,19 +185,13 @@
         "Trapezius"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "Subclavius originates at the junction of the first rib and its costal cartilage and inserts into the subclavian groove on the inferior surface of the clavicular shaft."
+      "correctAnswer": "B. Subclavius",
+      "explanation": "Subclavius originates at the junction of the first rib and its costal cartilage and inserts into the subclavian groove on the inferior surface of the clavicular shaft.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 12
     },
     {
-      "id": "ana201-muscles-q13",
-      "number": 13,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-13",
       "text": "Which nerve innervates both the supraspinatus and infraspinatus muscles?",
       "options": [
         "Dorsal scapular nerve",
@@ -276,19 +200,13 @@
         "Upper subscapular nerve"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "The suprascapular nerve (C5, C6 from the superior trunk) runs under the superior transverse scapular ligament into the supraspinous fossa to supply supraspinatus, then winds around the spinoglenoid notch to supply infraspinatus."
+      "correctAnswer": "B. Suprascapular nerve",
+      "explanation": "The suprascapular nerve (C5, C6 from the superior trunk) runs under the superior transverse scapular ligament into the supraspinous fossa to supply supraspinatus, then winds around the spinoglenoid notch to supply infraspinatus.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 13
     },
     {
-      "id": "ana201-muscles-q14",
-      "number": 14,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-14",
       "text": "The nerve supply of the teres minor muscle is derived from the:",
       "options": [
         "Radial nerve",
@@ -297,19 +215,13 @@
         "Thoracodorsal nerve"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "The posterior terminal division of the axillary nerve supplies teres minor (distinguished histologically by a pseudoganglion) and continues as the upper lateral cutaneous nerve of the arm."
+      "correctAnswer": "B. Axillary nerve",
+      "explanation": "The posterior terminal division of the axillary nerve supplies teres minor (distinguished histologically by a pseudoganglion) and continues as the upper lateral cutaneous nerve of the arm.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 14
     },
     {
-      "id": "ana201-muscles-q15",
-      "number": 15,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-15",
       "text": "Which muscle forms the anterior boundary of the axilla (anterior axillary fold)?",
       "options": [
         "Latissimus dorsi",
@@ -318,19 +230,13 @@
         "Serratus anterior"
       ],
       "correct": 2,
-      "correctAnswer": "C",
-      "explanation": "The lower rounded border of the pectoralis major muscle forms the anterior axillary fold."
+      "correctAnswer": "C. Pectoralis major",
+      "explanation": "The lower rounded border of the pectoralis major muscle forms the anterior axillary fold.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 15
     },
     {
-      "id": "ana201-muscles-q16",
-      "number": 16,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-16",
       "text": "Which pair of muscles forms the posterior axillary fold?",
       "options": [
         "Pectoralis major and pectoralis minor",
@@ -339,19 +245,13 @@
         "Coracobrachialis and biceps brachii"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "The posterior axillary fold is formed by the tendon of latissimus dorsi sweeping anteriorly around the lower border of teres major."
+      "correctAnswer": "B. Latissimus dorsi and teres major",
+      "explanation": "The posterior axillary fold is formed by the tendon of latissimus dorsi sweeping anteriorly around the lower border of teres major.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 16
     },
     {
-      "id": "ana201-muscles-q17",
-      "number": 17,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-17",
       "text": "Serratus anterior inserts along which part of the scapula?",
       "options": [
         "Entire lateral (axillary) border",
@@ -360,19 +260,13 @@
         "Superior border medial to the notch"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "Serratus anterior inserts continuously along the anterior/costal lip of the medial border of the scapula, concentrating heavily at the inferior angle."
+      "correctAnswer": "B. Entire length of the costal aspect of the medial border",
+      "explanation": "Serratus anterior inserts continuously along the anterior/costal lip of the medial border of the scapula, concentrating heavily at the inferior angle.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 17
     },
     {
-      "id": "ana201-muscles-q18",
-      "number": 18,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-18",
       "text": "Which muscle is responsible for both adduction and medial rotation of the arm at the glenohumeral joint?",
       "options": [
         "Infraspinatus",
@@ -381,19 +275,13 @@
         "Supraspinatus"
       ],
       "correct": 2,
-      "correctAnswer": "C",
-      "explanation": "Teres major adducts, medially rotates, and extends the humerus. Infraspinatus and teres minor are lateral rotators."
+      "correctAnswer": "C. Teres major",
+      "explanation": "Teres major adducts, medially rotates, and extends the humerus. Infraspinatus and teres minor are lateral rotators.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 18
     },
     {
-      "id": "ana201-muscles-q19",
-      "number": 19,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-19",
       "text": "The subscapularis muscle is innervated by which nerves?",
       "options": [
         "Upper and lower subscapular nerves",
@@ -402,19 +290,13 @@
         "Thoracodorsal nerve"
       ],
       "correct": 0,
-      "correctAnswer": "A",
-      "explanation": "Subscapularis receives both upper and lower subscapular nerves (C5, C6) arising from the posterior cord of the brachial plexus."
+      "correctAnswer": "A. Upper and lower subscapular nerves",
+      "explanation": "Subscapularis receives both upper and lower subscapular nerves (C5, C6) arising from the posterior cord of the brachial plexus.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 19
     },
     {
-      "id": "ana201-muscles-q20",
-      "number": 20,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-20",
       "text": "The primary action of the subscapularis muscle on the humerus is:",
       "options": [
         "Lateral rotation",
@@ -423,19 +305,13 @@
         "Retraction"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "Arising from the anterior subscapular fossa and inserting onto the lesser tubercle, subscapularis acts as a powerful medial (internal) rotator of the arm."
+      "correctAnswer": "B. Medial rotation",
+      "explanation": "Arising from the anterior subscapular fossa and inserting onto the lesser tubercle, subscapularis acts as a powerful medial (internal) rotator of the arm.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 20
     },
     {
-      "id": "ana201-muscles-q21",
-      "number": 21,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-21",
       "text": "Which muscle passes through the triangular space and separates teres minor from teres major?",
       "options": [
         "Short head of biceps brachii",
@@ -444,19 +320,13 @@
         "Lateral head of triceps brachii"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "The long head of triceps descends from the infraglenoid tubercle between teres minor superiorly and teres major inferiorly, dividing the interval into quadrangular and triangular spaces."
+      "correctAnswer": "B. Long head of triceps brachii",
+      "explanation": "The long head of triceps descends from the infraglenoid tubercle between teres minor superiorly and teres major inferiorly, dividing the interval into quadrangular and triangular spaces.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 21
     },
     {
-      "id": "ana201-muscles-q22",
-      "number": 22,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-22",
       "text": "Trapezius receives its motor innervation from the:",
       "options": [
         "Dorsal scapular nerve",
@@ -465,19 +335,13 @@
         "Axillary nerve"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "The spinal accessory nerve (CN XI) provides motor innervation to the trapezius, whereas cervical nerves C3 and C4 supply sensory proprioception."
+      "correctAnswer": "B. Spinal accessory nerve (CN XI)",
+      "explanation": "The spinal accessory nerve (CN XI) provides motor innervation to the trapezius, whereas cervical nerves C3 and C4 supply sensory proprioception.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 22
     },
     {
-      "id": "ana201-muscles-q23",
-      "number": 23,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-23",
       "text": "Which rotator cuff tendon is most susceptible to impingement under the coracoacromial arch?",
       "options": [
         "Infraspinatus",
@@ -486,19 +350,13 @@
         "Teres minor"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "The supraspinatus tendon travels beneath the coracoacromial arch (acromion, coracoid process, and coracoacromial ligament), making it vulnerable to subacromial friction and tears."
+      "correctAnswer": "B. Supraspinatus",
+      "explanation": "The supraspinatus tendon travels beneath the coracoacromial arch (acromion, coracoid process, and coracoacromial ligament), making it vulnerable to subacromial friction and tears.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 23
     },
     {
-      "id": "ana201-muscles-q24",
-      "number": 24,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-24",
       "text": "Levator scapulae inserts into the:",
       "options": [
         "Medial border of the scapula between superior angle and spine",
@@ -507,19 +365,13 @@
         "Coracoid process"
       ],
       "correct": 0,
-      "correctAnswer": "A",
-      "explanation": "Levator scapulae originates from the transverse processes of C1\u2013C4 and inserts onto the dorsal surface of the medial border of the scapula between the superior angle and the triangular root of the spine."
+      "correctAnswer": "A. Medial border of the scapula between superior angle and spine",
+      "explanation": "Levator scapulae originates from the transverse processes of C1-C4 and inserts onto the dorsal surface of the medial border of the scapula between the superior angle and the triangular root of the spine.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 24
     },
     {
-      "id": "ana201-muscles-q25",
-      "number": 25,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section I: Pectoral Girdle & Shoulder Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-25",
       "text": "The clavipectoral fascia is pierced by all of the following EXCEPT:",
       "options": [
         "Cephalic vein",
@@ -528,19 +380,13 @@
         "Medial pectoral nerve"
       ],
       "correct": 3,
-      "correctAnswer": "D",
-      "explanation": "The clavipectoral fascia is pierced by the cephalic vein, thoracoacromial artery, lateral pectoral nerve, and lymphatic vessels. The medial pectoral nerve pierces pectoralis minor directly."
+      "correctAnswer": "D. Medial pectoral nerve",
+      "explanation": "The clavipectoral fascia is pierced by the cephalic vein, thoracoacromial artery, lateral pectoral nerve, and lymphatic vessels. The medial pectoral nerve pierces pectoralis minor directly.",
+      "section": "Pectoral Girdle & Shoulder Musculature",
+      "questionNumber": 25
     },
     {
-      "id": "ana201-muscles-q26",
-      "number": 26,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-26",
       "text": "Which muscle is pierced by the musculocutaneous nerve?",
       "options": [
         "Biceps brachii",
@@ -549,19 +395,13 @@
         "Pronator teres"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "The musculocutaneous nerve leaves the lateral cord of the brachial plexus and enters the arm by piercing coracobrachialis."
+      "correctAnswer": "B. Coracobrachialis",
+      "explanation": "The musculocutaneous nerve leaves the lateral cord of the brachial plexus and enters the arm by piercing coracobrachialis.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 26
     },
     {
-      "id": "ana201-muscles-q27",
-      "number": 27,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-27",
       "text": "The long head of the biceps brachii originates from which bony landmark?",
       "options": [
         "Infraglenoid tubercle",
@@ -570,19 +410,13 @@
         "Greater tubercle of the humerus"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "The long head of biceps originates from the supraglenoid tubercle of the scapula and the glenoid labrum, traveling intracapsularly across the humeral head."
+      "correctAnswer": "B. Supraglenoid tubercle of the scapula",
+      "explanation": "The long head of biceps originates from the supraglenoid tubercle of the scapula and the glenoid labrum, traveling intracapsularly across the humeral head.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 27
     },
     {
-      "id": "ana201-muscles-q28",
-      "number": 28,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-28",
       "text": "The short head of the biceps brachii arises conjointly with which muscle from the apex of the coracoid process?",
       "options": [
         "Pectoralis minor",
@@ -591,19 +425,13 @@
         "Deltoid"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "The short head of biceps brachii and coracobrachialis arise together from the tip of the coracoid process of the scapula via a common conjoined tendon."
+      "correctAnswer": "B. Coracobrachialis",
+      "explanation": "The short head of biceps brachii and coracobrachialis arise together from the tip of the coracoid process of the scapula via a common conjoined tendon.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 28
     },
     {
-      "id": "ana201-muscles-q29",
-      "number": 29,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-29",
       "text": "Biceps brachii inserts primarily into the:",
       "options": [
         "Coronoid process of the ulna",
@@ -612,19 +440,13 @@
         "Styloid process of the radius"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "The tendon of the biceps brachii twists and inserts into the rough posterior aspect of the radial tuberosity, separated from the smooth anterior portion by a bursa."
+      "correctAnswer": "B. Rough posterior part of the radial tuberosity",
+      "explanation": "The tendon of the biceps brachii twists and inserts into the rough posterior aspect of the radial tuberosity, separated from the smooth anterior portion by a bursa.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 29
     },
     {
-      "id": "ana201-muscles-q30",
-      "number": 30,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-30",
       "text": "The bicipital aponeurosis extends medially from the biceps tendon to blend with the:",
       "options": [
         "Antebrachial deep fascia over the common flexor group",
@@ -633,19 +455,13 @@
         "Triceps tendon"
       ],
       "correct": 0,
-      "correctAnswer": "A",
-      "explanation": "The bicipital aponeurosis (lacertus fibrosus) passes medially across the brachial artery and median nerve to blend with the deep fascia of the anterior forearm."
+      "correctAnswer": "A. Antebrachial deep fascia over the common flexor group",
+      "explanation": "The bicipital aponeurosis (lacertus fibrosus) passes medially across the brachial artery and median nerve to blend with the deep fascia of the anterior forearm.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 30
     },
     {
-      "id": "ana201-muscles-q31",
-      "number": 31,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-31",
       "text": "Which muscle is the chief (primary) flexor of the elbow joint in all positions of forearm rotation?",
       "options": [
         "Biceps brachii",
@@ -654,19 +470,13 @@
         "Pronator teres"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "Brachialis inserts onto the ulna (coronoid process and tuberosity); because the ulna does not rotate during pronation/supination, brachialis acts as the workhorse elbow flexor in all forearm postures."
+      "correctAnswer": "B. Brachialis",
+      "explanation": "Brachialis inserts onto the ulna (coronoid process and tuberosity); because the ulna does not rotate during pronation/supination, brachialis acts as the workhorse elbow flexor in all forearm postures.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 31
     },
     {
-      "id": "ana201-muscles-q32",
-      "number": 32,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-32",
       "text": "The brachialis muscle receives dual innervation from which two nerves?",
       "options": [
         "Musculocutaneous nerve and median nerve",
@@ -675,19 +485,13 @@
         "Median nerve and ulnar nerve"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "Brachialis is supplied medially by the musculocutaneous nerve (C5, C6) and receives proprioceptive and motor innervation to its inferolateral border from the radial nerve (C7)."
+      "correctAnswer": "B. Musculocutaneous nerve and radial nerve",
+      "explanation": "Brachialis is supplied medially by the musculocutaneous nerve (C5, C6) and receives proprioceptive and motor innervation to its inferolateral border from the radial nerve (C7).",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 32
     },
     {
-      "id": "ana201-muscles-q33",
-      "number": 33,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-33",
       "text": "Coracobrachialis inserts into which site?",
       "options": [
         "Deltoid tuberosity",
@@ -696,19 +500,13 @@
         "Crest of the lesser tubercle"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "Coracobrachialis inserts into a linear impression on the medial border of the humeral shaft near its midpoint, opposite the deltoid tuberosity."
+      "correctAnswer": "B. Mid-portion of the medial border and surface of the humeral shaft",
+      "explanation": "Coracobrachialis inserts into a linear impression on the medial border of the humeral shaft near its midpoint, opposite the deltoid tuberosity.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 33
     },
     {
-      "id": "ana201-muscles-q34",
-      "number": 34,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-34",
       "text": "The long head of the triceps brachii originates from the:",
       "options": [
         "Supraglenoid tubercle",
@@ -717,19 +515,13 @@
         "Posterior humeral shaft superior to the radial groove"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "The long head of triceps brachii originates from the infraglenoid tubercle of the scapula."
+      "correctAnswer": "B. Infraglenoid tubercle of the scapula",
+      "explanation": "The long head of triceps brachii originates from the infraglenoid tubercle of the scapula.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 34
     },
     {
-      "id": "ana201-muscles-q35",
-      "number": 35,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-35",
       "text": "The lateral head of triceps brachii arises from the:",
       "options": [
         "Infraglenoid tubercle",
@@ -738,19 +530,13 @@
         "Medial intermuscular septum"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "The lateral head of triceps originates from the posterior surface of the humerus superior and lateral to the radial (spiral) groove."
+      "correctAnswer": "B. Posterior surface of the humerus superior and lateral to the radial groove",
+      "explanation": "The lateral head of triceps originates from the posterior surface of the humerus superior and lateral to the radial (spiral) groove.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 35
     },
     {
-      "id": "ana201-muscles-q36",
-      "number": 36,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-36",
       "text": "The medial head of the triceps brachii arises from the:",
       "options": [
         "Posterior surface of the humerus inferior and medial to the radial groove",
@@ -759,19 +545,13 @@
         "Lateral border of the scapula"
       ],
       "correct": 0,
-      "correctAnswer": "A",
-      "explanation": "The medial head originates from the expansive posterior surface of the humeral shaft inferior and medial to the radial groove and from both intermuscular septa."
+      "correctAnswer": "A. Posterior surface of the humerus inferior and medial to the radial groove",
+      "explanation": "The medial head originates from the expansive posterior surface of the humeral shaft inferior and medial to the radial groove and from both intermuscular septa.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 36
     },
     {
-      "id": "ana201-muscles-q37",
-      "number": 37,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-37",
       "text": "All three heads of the triceps brachii insert into which anatomical landmark?",
       "options": [
         "Coronoid process of the ulna",
@@ -780,19 +560,13 @@
         "Head of the radius"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "All three heads of triceps unite into a single tendon that inserts into the posterior aspect of the superior surface of the ulnar olecranon."
+      "correctAnswer": "B. Superior surface of the olecranon process of the ulna",
+      "explanation": "All three heads of triceps unite into a single tendon that inserts into the posterior aspect of the superior surface of the ulnar olecranon.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 37
     },
     {
-      "id": "ana201-muscles-q38",
-      "number": 38,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-38",
       "text": "The anconeus muscle is innervated by a branch from the:",
       "options": [
         "Ulnar nerve",
@@ -801,19 +575,13 @@
         "Musculocutaneous nerve"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "Anconeus is innervated by a dedicated branch of the radial nerve that arises in the spiral groove and travels through the medial head of triceps."
+      "correctAnswer": "B. Radial nerve (nerve to anconeus via radial nerve in spiral groove)",
+      "explanation": "Anconeus is innervated by a dedicated branch of the radial nerve that arises in the spiral groove and travels through the medial head of triceps.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 38
     },
     {
-      "id": "ana201-muscles-q39",
-      "number": 39,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-39",
       "text": "The anconeus muscle originates from the:",
       "options": [
         "Medial epicondyle of the humerus",
@@ -822,19 +590,13 @@
         "Coronoid process"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "Anconeus originates from the posterior surface of the lateral epicondyle of the humerus."
+      "correctAnswer": "B. Posterior surface of the lateral epicondyle of the humerus",
+      "explanation": "Anconeus originates from the posterior surface of the lateral epicondyle of the humerus.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 39
     },
     {
-      "id": "ana201-muscles-q40",
-      "number": 40,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-40",
       "text": "Anconeus inserts into the:",
       "options": [
         "Lateral surface of the olecranon and superior quarter of the posterior ulna",
@@ -843,19 +605,13 @@
         "Medial epicondyle"
       ],
       "correct": 0,
-      "correctAnswer": "A",
-      "explanation": "Anconeus inserts into the lateral aspect of the olecranon and the upper posterior shaft of the ulna, assisting in terminal elbow extension and stabilizing the joint."
+      "correctAnswer": "A. Lateral surface of the olecranon and superior quarter of the posterior ulna",
+      "explanation": "Anconeus inserts into the lateral aspect of the olecranon and the upper posterior shaft of the ulna, assisting in terminal elbow extension and stabilizing the joint.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 40
     },
     {
-      "id": "ana201-muscles-q41",
-      "number": 41,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-41",
       "text": "Which head of the triceps brachii acts across two joints (glenohumeral and elbow)?",
       "options": [
         "Lateral head",
@@ -864,19 +620,13 @@
         "All three heads equally"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "Because it originates from the infraglenoid tubercle of the scapula, only the long head crosses both the shoulder and elbow joints."
+      "correctAnswer": "B. Long head",
+      "explanation": "Because it originates from the infraglenoid tubercle of the scapula, only the long head crosses both the shoulder and elbow joints.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 41
     },
     {
-      "id": "ana201-muscles-q42",
-      "number": 42,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-42",
       "text": "In a fracture through the radial groove of the humerus, which muscle head is typically spared because its nerve branch arises proximal to the groove?",
       "options": [
         "Medial head of triceps",
@@ -885,19 +635,13 @@
         "Brachioradialis"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "Nerve branches to the long head leave the radial nerve high in the axilla proximal to the spiral groove, leaving long head contraction intact during midshaft fractures."
+      "correctAnswer": "B. Long head of triceps",
+      "explanation": "Nerve branches to the long head leave the radial nerve high in the axilla proximal to the spiral groove, leaving long head contraction intact during midshaft fractures.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 42
     },
     {
-      "id": "ana201-muscles-q43",
-      "number": 43,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-43",
       "text": "Which muscle acts as the most powerful supinator of the flexed forearm?",
       "options": [
         "Supinator",
@@ -906,19 +650,13 @@
         "Pronator quadratus"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "When the elbow is flexed to 90\u00b0, the pull of biceps brachii on the radial tuberosity creates maximal mechanical leverage for rapid, forceful supination."
+      "correctAnswer": "B. Biceps brachii",
+      "explanation": "When the elbow is flexed to 90 degrees, the pull of biceps brachii on the radial tuberosity creates maximal mechanical leverage for rapid, forceful supination.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 43
     },
     {
-      "id": "ana201-muscles-q44",
-      "number": 44,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-44",
       "text": "Brachialis inserts into the:",
       "options": [
         "Radial tuberosity",
@@ -927,19 +665,13 @@
         "Interosseous membrane"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "Brachialis inserts into the anterior surface of the coronoid process and the rough tuberosity of the ulna."
+      "correctAnswer": "B. Coronoid process and tuberosity of the ulna",
+      "explanation": "Brachialis inserts into the anterior surface of the coronoid process and the rough tuberosity of the ulna.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 44
     },
     {
-      "id": "ana201-muscles-q45",
-      "number": 45,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section II: Arm Musculature (Brachium)",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-45",
       "text": "The functional role of the coracobrachialis is primarily:",
       "options": [
         "Extension and abduction of the arm",
@@ -948,19 +680,13 @@
         "Pronation of the forearm"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "Coracobrachialis assists pectoralis major and anterior deltoid in arm flexion and adduction, and helps resist downward dislocation of the humeral head."
+      "correctAnswer": "B. Flexion and weak adduction of the arm at the glenohumeral joint",
+      "explanation": "Coracobrachialis assists pectoralis major and anterior deltoid in arm flexion and adduction, and helps resist downward dislocation of the humeral head.",
+      "section": "Arm Musculature (Brachium)",
+      "questionNumber": 45
     },
     {
-      "id": "ana201-muscles-q46",
-      "number": 46,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section III: Anterior Forearm Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-46",
       "text": "Which of the following is NOT part of the superficial group of anterior forearm muscles arising from the common flexor origin?",
       "options": [
         "Pronator teres",
@@ -969,19 +695,13 @@
         "Flexor carpi ulnaris"
       ],
       "correct": 2,
-      "correctAnswer": "C",
-      "explanation": "Flexor digitorum profundus belongs to the deep flexor layer. The superficial flexor group consists of pronator teres, flexor carpi radialis, palmaris longus, and flexor carpi ulnaris."
+      "correctAnswer": "C. Flexor digitorum profundus",
+      "explanation": "Flexor digitorum profundus belongs to the deep flexor layer. The superficial flexor group consists of pronator teres, flexor carpi radialis, palmaris longus, and flexor carpi ulnaris.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 46
     },
     {
-      "id": "ana201-muscles-q47",
-      "number": 47,
-      "subject": "ana201",
-      "courseCode": "ANA 201",
-      "courseTitle": "Upper and Lower Limb",
-      "section": "Section III: Anterior Forearm Musculature",
-      "topic": "Muscles of the Upper Limb",
-      "topicId": "ul-muscles",
-      "difficulty": "advanced",
+      "id": "ana201-muscles-47",
       "text": "The common flexor tendon originates from which humeral landmark?",
       "options": [
         "Lateral epicondyle",
@@ -990,8 +710,805 @@
         "Medial supracondylar ridge"
       ],
       "correct": 1,
-      "correctAnswer": "B",
-      "explanation": "The common flexor tendon (CFT) of the anterior forearm muscles originates from the anterior surface of the medial epicondyle of the humerus. In contrast, the common extensor tendon originates from the lateral epicondyle."
+      "correctAnswer": "B. Medial epicondyle",
+      "explanation": "The common flexor tendon attaches to the anterior aspect of the medial epicondyle of the humerus.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana201-muscles-48",
+      "text": "The median nerve passes between the two heads of origin of which muscle?",
+      "options": [
+        "Biceps brachii",
+        "Pronator teres",
+        "Supinator",
+        "Flexor digitorum profundus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Pronator teres",
+      "explanation": "The median nerve enters the forearm between the humeral and ulnar heads of pronator teres.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana201-muscles-49",
+      "text": "Pronator teres inserts into the:",
+      "options": [
+        "Coronoid process of the ulna",
+        "Roughened impression on the middle of the lateral surface of the radial shaft",
+        "Radial styloid process",
+        "Anterior surface of the distal ulna"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Roughened impression on the middle of the lateral surface of the radial shaft",
+      "explanation": "Pronator teres inserts onto the middle of the lateral surface of the radial shaft at the point of maximum radial curvature.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana201-muscles-50",
+      "text": "Flexor carpi radialis inserts into the base of which metacarpal bones?",
+      "options": [
+        "1st metacarpal",
+        "Bases of the 2nd and 3rd metacarpals",
+        "4th and 5th metacarpals",
+        "Base of the 5th metacarpal only"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Bases of the 2nd and 3rd metacarpals",
+      "explanation": "Flexor carpi radialis inserts onto the anterior (palmar) bases of the 2nd and 3rd metacarpals.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 50
+    },
+    {
+      "id": "ana201-muscles-51",
+      "text": "Palmaris longus tendon passes superficial to the flexor retinaculum to insert into the:",
+      "options": [
+        "Pisiform bone",
+        "Palmar aponeurosis",
+        "Hook of hamate",
+        "1st metacarpal"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Palmar aponeurosis",
+      "explanation": "Palmaris longus crosses superficial to the flexor retinaculum and inserts into the central palmar aponeurosis.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 51
+    },
+    {
+      "id": "ana201-muscles-52",
+      "text": "The ulnar nerve enters the forearm by passing between the two heads of origin of which muscle?",
+      "options": [
+        "Pronator teres",
+        "Flexor carpi ulnaris",
+        "Flexor digitorum superficialis",
+        "Brachialis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Flexor carpi ulnaris",
+      "explanation": "The ulnar nerve enters the anterior forearm by passing through the cubital tunnel between the humeral and ulnar heads of flexor carpi ulnaris.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 52
+    },
+    {
+      "id": "ana201-muscles-53",
+      "text": "Flexor carpi ulnaris inserts into which of the following structures?",
+      "options": [
+        "Pisiform, hook of hamate, and base of 5th metacarpal",
+        "Scaphoid and trapezium",
+        "Bases of 2nd and 3rd metacarpals",
+        "Palmar aponeurosis only"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Pisiform, hook of hamate, and base of 5th metacarpal",
+      "explanation": "FCU inserts primarily into the pisiform, which anchors force onward to the hook of hamate and base of the 5th metacarpal.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 53
+    },
+    {
+      "id": "ana201-muscles-54",
+      "text": "Which muscle constitutes the intermediate layer of the anterior forearm compartment?",
+      "options": [
+        "Flexor digitorum profundus",
+        "Flexor digitorum superficialis",
+        "Pronator quadratus",
+        "Flexor pollicis longus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Flexor digitorum superficialis",
+      "explanation": "Flexor digitorum superficialis sits between the superficial flexors and the deep layer (FDP, FPL, PQ), forming the intermediate layer.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 54
+    },
+    {
+      "id": "ana201-muscles-55",
+      "text": "The tendons of the flexor digitorum superficialis split at the level of the proximal phalanges to allow passage of the tendons of:",
+      "options": [
+        "Lumbricals",
+        "Flexor digitorum profundus",
+        "Palmar interossei",
+        "Flexor pollicis longus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Flexor digitorum profundus",
+      "explanation": "FDS tendons split (Camper's chiasm) over the proximal phalanx, allowing the deeper FDP tendons to pass through to the distal phalanges.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 55
+    },
+    {
+      "id": "ana201-muscles-56",
+      "text": "Flexor digitorum superficialis tendons insert into the:",
+      "options": [
+        "Bases of the distal phalanges",
+        "Sides of the middle phalanges of digits 2 to 5",
+        "Palmar plates of the MCP joints",
+        "Bases of the metacarpals"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Sides of the middle phalanges of digits 2 to 5",
+      "explanation": "The split slips of each FDS tendon reunite and insert onto the lateral borders of the middle phalanx of digits 2 through 5.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 56
+    },
+    {
+      "id": "ana201-muscles-57",
+      "text": "Flexor digitorum profundus inserts into the:",
+      "options": [
+        "Bases of the middle phalanges",
+        "Bases of the distal phalanges of digits 2 to 5",
+        "Extensor expansion",
+        "Base of proximal phalanges"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Bases of the distal phalanges of digits 2 to 5",
+      "explanation": "FDP tendons pass through the FDS splits to insert onto the palmar surfaces of the bases of the distal phalanges of digits 2 to 5.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 57
+    },
+    {
+      "id": "ana201-muscles-58",
+      "text": "Flexor digitorum profundus exhibits a dual nerve supply; which nerve supplies its medial half (digits 4 and 5)?",
+      "options": [
+        "Median nerve (anterior interosseous branch)",
+        "Ulnar nerve",
+        "Radial nerve",
+        "Musculocutaneous nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Ulnar nerve",
+      "explanation": "The medial half of FDP (controlling the ring and little fingers) is supplied directly by the ulnar nerve (C8, T1).",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 58
+    },
+    {
+      "id": "ana201-muscles-59",
+      "text": "The lateral half of the flexor digitorum profundus (digits 2 and 3) is innervated by the:",
+      "options": [
+        "Ulnar nerve",
+        "Anterior interosseous nerve (branch of median nerve)",
+        "Superficial radial nerve",
+        "Deep branch of ulnar nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Anterior interosseous nerve (branch of median nerve)",
+      "explanation": "The lateral half of FDP (controlling index and middle fingers) is innervated by the anterior interosseous nerve, a branch of the median nerve.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 59
+    },
+    {
+      "id": "ana201-muscles-60",
+      "text": "Flexor pollicis longus originates primarily from the:",
+      "options": [
+        "Anterior surface of the ulna",
+        "Anterior surface of the radius and adjacent interosseous membrane",
+        "Common extensor origin",
+        "Medial epicondyle only"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Anterior surface of the radius and adjacent interosseous membrane",
+      "explanation": "Flexor pollicis longus arises from the anterior surface of the radius between the tuberosity and pronator quadratus, and the interosseous membrane.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 60
+    },
+    {
+      "id": "ana201-muscles-61",
+      "text": "Flexor pollicis longus inserts into the:",
+      "options": [
+        "Base of the proximal phalanx of the thumb",
+        "Base of the distal phalanx of the thumb",
+        "First metacarpal",
+        "Radial styloid process"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Base of the distal phalanx of the thumb",
+      "explanation": "The tendon of FPL runs through the carpal tunnel to insert onto the palmar base of the distal phalanx of the thumb.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 61
+    },
+    {
+      "id": "ana201-muscles-62",
+      "text": "Pronator quadratus originates from the:",
+      "options": [
+        "Distal anterior shaft of the radius",
+        "Distal anterior shaft (lower 1/4) of the ulna",
+        "Medial epicondyle",
+        "Coronoid process"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Distal anterior shaft (lower 1/4) of the ulna",
+      "explanation": "Pronator quadratus originates from the pronator ridge on the anterior surface of the lower fourth of the ulna and inserts into the lower fourth of the radius.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 62
+    },
+    {
+      "id": "ana201-muscles-63",
+      "text": "Which muscle is the primary, initiating pronator of the forearm regardless of elbow angle?",
+      "options": [
+        "Pronator teres",
+        "Pronator quadratus",
+        "Brachioradialis",
+        "Anconeus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Pronator quadratus",
+      "explanation": "Pronator quadratus initiates pronation consistently, whereas pronator teres adds power during rapid or resisted pronation.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 63
+    },
+    {
+      "id": "ana201-muscles-64",
+      "text": "Both the flexor pollicis longus and pronator quadratus are innervated by the:",
+      "options": [
+        "Anterior interosseous nerve (branch of median nerve)",
+        "Main trunk of the ulnar nerve",
+        "Posterior interosseous nerve",
+        "Deep branch of the radial nerve"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Anterior interosseous nerve (branch of median nerve)",
+      "explanation": "The anterior interosseous nerve innervates FPL, pronator quadratus, and the lateral half of FDP.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 64
+    },
+    {
+      "id": "ana201-muscles-65",
+      "text": "A laceration just proximal to the wrist dividing the flexor digitorum profundus tendon to the index finger causes complete loss of flexion at which joint:",
+      "options": [
+        "Metacarpophalangeal (MCP) joint",
+        "Proximal interphalangeal (PIP) joint",
+        "Distal interphalangeal (DIP) joint",
+        "Carpometacarpal (CMC) joint"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Distal interphalangeal (DIP) joint",
+      "explanation": "Only the flexor digitorum profundus inserts into the distal phalanx, making it the sole flexor of the DIP joint.",
+      "section": "Anterior Forearm Musculature",
+      "questionNumber": 65
+    },
+    {
+      "id": "ana201-muscles-66",
+      "text": "The common extensor tendon originates from which bony landmark?",
+      "options": [
+        "Medial epicondyle of the humerus",
+        "Anterior surface of the lateral epicondyle of the humerus",
+        "Lateral supracondylar ridge",
+        "Olecranon process"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Anterior surface of the lateral epicondyle of the humerus",
+      "explanation": "The superficial extensor muscles originate from the lateral epicondyle via the common extensor tendon.",
+      "section": "Posterior Forearm Musculature",
+      "questionNumber": 66
+    },
+    {
+      "id": "ana201-muscles-67",
+      "text": "Which muscle arises from the upper two-thirds of the lateral supracondylar ridge of the humerus?",
+      "options": [
+        "Extensor carpi radialis longus",
+        "Brachioradialis",
+        "Extensor carpi radialis brevis",
+        "Supinator"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Brachioradialis",
+      "explanation": "Brachioradialis originates from the proximal two-thirds of the lateral supracondylar ridge of the humerus.",
+      "section": "Posterior Forearm Musculature",
+      "questionNumber": 67
+    },
+    {
+      "id": "ana201-muscles-68",
+      "text": "Despite being anatomically in the posterior (extensor) compartment, brachioradialis functions as a:",
+      "options": [
+        "Powerful wrist extensor",
+        "Flexor of the elbow joint, particularly in the midprone position",
+        "Pure supinator",
+        "Pure pronator"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Flexor of the elbow joint, particularly in the midprone position",
+      "explanation": "Crossing anterior to the elbow flexion axis, brachioradialis flexes the elbow with maximum mechanical efficiency in the midprone forearm position.",
+      "section": "Posterior Forearm Musculature",
+      "questionNumber": 68
+    },
+    {
+      "id": "ana201-muscles-69",
+      "text": "Brachioradialis is innervated directly by the:",
+      "options": [
+        "Median nerve",
+        "Musculocutaneous nerve",
+        "Radial nerve (prior to its bifurcation)",
+        "Posterior interosseous nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Radial nerve (prior to its bifurcation)",
+      "explanation": "Brachioradialis receives direct branches from the main trunk of the radial nerve in the arm prior to its bifurcation in the cubital fossa.",
+      "section": "Posterior Forearm Musculature",
+      "questionNumber": 69
+    },
+    {
+      "id": "ana201-muscles-70",
+      "text": "Extensor carpi radialis longus inserts into the:",
+      "options": [
+        "Base of the 1st metacarpal",
+        "Dorsal aspect of the base of the 2nd metacarpal",
+        "Dorsal aspect of the base of the 3rd metacarpal",
+        "Base of the 5th metacarpal"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Dorsal aspect of the base of the 2nd metacarpal",
+      "explanation": "The tendon of ECRL inserts onto the dorsal surface of the base of the 2nd metacarpal.",
+      "section": "Posterior Forearm Musculature",
+      "questionNumber": 70
+    },
+    {
+      "id": "ana201-muscles-71",
+      "text": "Extensor carpi radialis brevis inserts into the:",
+      "options": [
+        "Dorsal surface of the base of the 3rd metacarpal",
+        "Base of the 2nd metacarpal",
+        "Base of the 1st metacarpal",
+        "Trapezoid bone"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Dorsal surface of the base of the 3rd metacarpal",
+      "explanation": "ECRB originates from the common extensor origin and inserts onto the dorsal aspect of the base of the 3rd metacarpal.",
+      "section": "Posterior Forearm Musculature",
+      "questionNumber": 71
+    },
+    {
+      "id": "ana201-muscles-72",
+      "text": "The posterior interosseous nerve (deep branch of radial nerve) pierces and traverses which muscle?",
+      "options": [
+        "Pronator teres",
+        "Supinator",
+        "Anconeus",
+        "Brachialis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Supinator",
+      "explanation": "The deep branch of the radial nerve enters the posterior compartment by passing between the superficial and deep planes of the supinator muscle.",
+      "section": "Posterior Forearm Musculature",
+      "questionNumber": 72
+    },
+    {
+      "id": "ana201-muscles-73",
+      "text": "The deep layer of the posterior forearm contains all of the following muscles EXCEPT:",
+      "options": [
+        "Abductor pollicis longus",
+        "Extensor pollicis brevis",
+        "Extensor digiti minimi",
+        "Extensor indicis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Extensor digiti minimi",
+      "explanation": "Extensor digiti minimi belongs to the superficial extensor group; the deep outcropping muscles are supinator, APL, EPB, EPL, and extensor indicis.",
+      "section": "Posterior Forearm Musculature",
+      "questionNumber": 73
+    },
+    {
+      "id": "ana201-muscles-74",
+      "text": "The extensor digitorum communis tendons form dorsal digital expansions (extensor hoods) over which fingers?",
+      "options": [
+        "Thumb only",
+        "Medial four digits (index, middle, ring, little)",
+        "Little finger only",
+        "Index and thumb only"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Medial four digits (index, middle, ring, little)",
+      "explanation": "Extensor digitorum divides into four tendons that form extensor expansions over the dorsal aspect of digits 2 through 5.",
+      "section": "Posterior Forearm Musculature",
+      "questionNumber": 74
+    },
+    {
+      "id": "ana201-muscles-75",
+      "text": "Extensor carpi ulnaris inserts into the base of which bone?",
+      "options": [
+        "Pisiform",
+        "Hook of hamate",
+        "Base of the 5th metacarpal",
+        "Triquetrum"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Base of the 5th metacarpal",
+      "explanation": "Extensor carpi ulnaris inserts onto the medial tubercle on the base of the 5th metacarpal.",
+      "section": "Posterior Forearm Musculature",
+      "questionNumber": 75
+    },
+    {
+      "id": "ana201-muscles-76",
+      "text": "The tendon of which muscle hooks acutely around Lister's tubercle (dorsal tubercle of the radius)?",
+      "options": [
+        "Abductor pollicis longus",
+        "Extensor pollicis brevis",
+        "Extensor pollicis longus",
+        "Extensor carpi radialis brevis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Extensor pollicis longus",
+      "explanation": "Extensor pollicis longus hooks around the medial side of Lister's tubercle, utilizing it as a pulley to change direction toward the thumb.",
+      "section": "Posterior Forearm Musculature",
+      "questionNumber": 76
+    },
+    {
+      "id": "ana201-muscles-77",
+      "text": "The lateral (radial) boundary of the anatomical snuffbox is formed by the tendons of:",
+      "options": [
+        "Extensor pollicis longus alone",
+        "Abductor pollicis longus and extensor pollicis brevis",
+        "Extensor carpi radialis longus and brevis",
+        "Extensor indicis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Abductor pollicis longus and extensor pollicis brevis",
+      "explanation": "The lateral/anterior border of the anatomical snuffbox is formed by the tendons of abductor pollicis longus and extensor pollicis brevis.",
+      "section": "Posterior Forearm Musculature",
+      "questionNumber": 77
+    },
+    {
+      "id": "ana201-muscles-78",
+      "text": "The medial (ulnar) boundary of the anatomical snuffbox is formed by the tendon of:",
+      "options": [
+        "Extensor pollicis brevis",
+        "Abductor pollicis longus",
+        "Extensor pollicis longus",
+        "Extensor digitorum"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Extensor pollicis longus",
+      "explanation": "The medial/posterior border of the anatomical snuffbox is formed exclusively by the tendon of extensor pollicis longus.",
+      "section": "Posterior Forearm Musculature",
+      "questionNumber": 78
+    },
+    {
+      "id": "ana201-muscles-79",
+      "text": "Extensor pollicis longus inserts into the:",
+      "options": [
+        "Base of the 1st metacarpal",
+        "Base of the proximal phalanx of the thumb",
+        "Base of the distal phalanx of the thumb",
+        "Trapezium"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Base of the distal phalanx of the thumb",
+      "explanation": "EPL extends to insert onto the dorsal aspect of the base of the distal phalanx of the thumb.",
+      "section": "Posterior Forearm Musculature",
+      "questionNumber": 79
+    },
+    {
+      "id": "ana201-muscles-80",
+      "text": "All muscles of the deep layer of the posterior forearm are innervated by the:",
+      "options": [
+        "Anterior interosseous nerve",
+        "Posterior interosseous nerve (C7, C8)",
+        "Superficial radial nerve",
+        "Deep branch of the ulnar nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Posterior interosseous nerve (C7, C8)",
+      "explanation": "The posterior interosseous nerve supplies all muscles of the deep posterior forearm layer.",
+      "section": "Posterior Forearm Musculature",
+      "questionNumber": 80
+    },
+    {
+      "id": "ana201-muscles-81",
+      "text": "Which of the following is considered a thenar muscle?",
+      "options": [
+        "Adductor pollicis",
+        "Abductor pollicis brevis",
+        "Palmaris brevis",
+        "First dorsal interosseous"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Abductor pollicis brevis",
+      "explanation": "The true thenar muscles are abductor pollicis brevis, flexor pollicis brevis, and opponens pollicis. Adductor pollicis lies in a separate fascial compartment.",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 81
+    },
+    {
+      "id": "ana201-muscles-82",
+      "text": "Abductor pollicis brevis originates from the flexor retinaculum and which carpal bones?",
+      "options": [
+        "Pisiform and hamate",
+        "Tubercles of the scaphoid and trapezium",
+        "Capitate and trapezoid",
+        "Lunate and triquetrum"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Tubercles of the scaphoid and trapezium",
+      "explanation": "APB arises from the tubercles of the scaphoid and trapezium and the flexor retinaculum.",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 82
+    },
+    {
+      "id": "ana201-muscles-83",
+      "text": "The thenar muscles are primarily innervated by which nerve?",
+      "options": [
+        "Deep branch of ulnar nerve",
+        "Recurrent (motor) branch of the median nerve (C8, T1)",
+        "Posterior interosseous nerve",
+        "Superficial branch of radial nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Recurrent (motor) branch of the median nerve (C8, T1)",
+      "explanation": "The recurrent branch of the median nerve supplies the thenar muscles; compression in carpal tunnel syndrome leads to thenar atrophy.",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 83
+    },
+    {
+      "id": "ana201-muscles-84",
+      "text": "The deep head of the flexor pollicis brevis is frequently innervated by the:",
+      "options": [
+        "Recurrent branch of the median nerve",
+        "Deep branch of the ulnar nerve",
+        "Radial nerve",
+        "Musculocutaneous nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Deep branch of the ulnar nerve",
+      "explanation": "Flexor pollicis brevis typically has dual innervation: superficial head by the median nerve, and deep head by the deep branch of the ulnar nerve.",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 84
+    },
+    {
+      "id": "ana201-muscles-85",
+      "text": "Opponens pollicis inserts into which site?",
+      "options": [
+        "Base of the proximal phalanx of the thumb",
+        "Entire radial (lateral) border and anterior surface of the 1st metacarpal",
+        "Base of the distal phalanx of the thumb",
+        "Sesamoids of the thumb"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Entire radial (lateral) border and anterior surface of the 1st metacarpal",
+      "explanation": "Opponens pollicis inserts along the lateral margin and palmar surface of the entire shaft of the 1st metacarpal to rotate it into opposition.",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 85
+    },
+    {
+      "id": "ana201-muscles-86",
+      "text": "Which muscle adducts the thumb toward the middle finger and is innervated by the deep branch of the ulnar nerve?",
+      "options": [
+        "Abductor pollicis brevis",
+        "Opponens pollicis",
+        "Adductor pollicis",
+        "Flexor pollicis brevis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Adductor pollicis",
+      "explanation": "Adductor pollicis adducts the thumb and is innervated by the deep branch of the ulnar nerve.",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 86
+    },
+    {
+      "id": "ana201-muscles-87",
+      "text": "Adductor pollicis consists of two heads: oblique and transverse. The transverse head originates from the:",
+      "options": [
+        "Capitate bone",
+        "Anterior border of the shaft of the 3rd metacarpal",
+        "Base of the 2nd metacarpal",
+        "Flexor retinaculum"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Anterior border of the shaft of the 3rd metacarpal",
+      "explanation": "The transverse head of adductor pollicis arises from the anterior ridge of the shaft of the 3rd metacarpal.",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 87
+    },
+    {
+      "id": "ana201-muscles-88",
+      "text": "Which of the following is NOT an intrinsic hypothenar muscle?",
+      "options": [
+        "Abductor digiti minimi",
+        "Flexor digiti minimi brevis",
+        "Opponens digiti minimi",
+        "Palmar interosseous 1"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Palmar interosseous 1",
+      "explanation": "The hypothenar group consists of abductor digiti minimi, flexor digiti minimi brevis, and opponens digiti minimi.",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 88
+    },
+    {
+      "id": "ana201-muscles-89",
+      "text": "Abductor digiti minimi originates from the:",
+      "options": [
+        "Hook of hamate",
+        "Pisiform bone and tendon of flexor carpi ulnaris",
+        "Flexor retinaculum only",
+        "Base of 5th metacarpal"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Pisiform bone and tendon of flexor carpi ulnaris",
+      "explanation": "Abductor digiti minimi originates from the pisiform and the tendon expansion of flexor carpi ulnaris.",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 89
+    },
+    {
+      "id": "ana201-muscles-90",
+      "text": "All hypothenar muscles are innervated by the:",
+      "options": [
+        "Median nerve",
+        "Deep branch of the ulnar nerve",
+        "Radial nerve",
+        "Musculocutaneous nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Deep branch of the ulnar nerve",
+      "explanation": "All intrinsic hypothenar muscles receive motor supply from the deep branch of the ulnar nerve (C8, T1).",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 90
+    },
+    {
+      "id": "ana201-muscles-91",
+      "text": "The lumbrical muscles originate from the tendons of which muscle in the palm?",
+      "options": [
+        "Flexor digitorum superficialis",
+        "Flexor digitorum profundus",
+        "Flexor carpi radialis",
+        "Palmaris longus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Flexor digitorum profundus",
+      "explanation": "The four lumbricals arise directly from the four tendons of the flexor digitorum profundus in the palm.",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 91
+    },
+    {
+      "id": "ana201-muscles-92",
+      "text": "The 1st and 2nd lumbricals differ from the 3rd and 4th lumbricals because the 1st and 2nd are:",
+      "options": [
+        "Bipennate and ulnar-innervated",
+        "Unipennate and innervated by the median nerve",
+        "Bipennate and median-innervated",
+        "Inserted into the flexor retinaculum"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Unipennate and innervated by the median nerve",
+      "explanation": "The 1st and 2nd lumbricals are unipennate (arising from a single FDP tendon) and innervated by digital branches of the median nerve.",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 92
+    },
+    {
+      "id": "ana201-muscles-93",
+      "text": "The 3rd and 4th lumbricals are bipennate and innervated by the:",
+      "options": [
+        "Median nerve",
+        "Deep branch of the ulnar nerve",
+        "Radial nerve",
+        "Anterior interosseous nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Deep branch of the ulnar nerve",
+      "explanation": "The 3rd and 4th lumbricals arise from adjacent sides of two FDP tendons (bipennate) and are innervated by the deep branch of the ulnar nerve.",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 93
+    },
+    {
+      "id": "ana201-muscles-94",
+      "text": "The lumbricals insert into the:",
+      "options": [
+        "Bases of proximal phalanges exclusively",
+        "Lateral (radial) margins of the extensor expansions of digits 2 to 5",
+        "Palmar carpal ligament",
+        "Flexor sheaths directly"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Lateral (radial) margins of the extensor expansions of digits 2 to 5",
+      "explanation": "Lumbricals pass anterior to the MCP joint and insert into the radial side of the dorsal digital expansion of their respective digits.",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 94
+    },
+    {
+      "id": "ana201-muscles-95",
+      "text": "The primary combined action of the lumbrical muscles is:",
+      "options": [
+        "Extension of MCP and flexion of IP joints",
+        "Flexion of metacarpophalangeal (MCP) joints and extension of interphalangeal (IP) joints",
+        "Abduction of digits 2 through 5",
+        "Adduction of digits 2 through 5"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Flexion of metacarpophalangeal (MCP) joints and extension of interphalangeal (IP) joints",
+      "explanation": "By crossing anterior to MCP joints and inserting into dorsal hoods, lumbricals flex the MCP joints and extend the interphalangeal joints.",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 95
+    },
+    {
+      "id": "ana201-muscles-96",
+      "text": "How many dorsal interossei muscles are present in each human hand?",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "2"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 4",
+      "explanation": "Each hand contains 4 bipennate dorsal interossei arising from the adjacent sides of the metacarpals.",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 96
+    },
+    {
+      "id": "ana201-muscles-97",
+      "text": "How many palmar interossei muscles are typically described in classical gross anatomy?",
+      "options": [
+        "2",
+        "3 (or 4 including rudimentary first)",
+        "5",
+        "6"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 3 (or 4 including rudimentary first)",
+      "explanation": "Classical gross anatomy describes 3 palmar interossei on digits 2, 4, and 5; when a rudimentary muscle to the thumb is counted, there are 4.",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 97
+    },
+    {
+      "id": "ana201-muscles-98",
+      "text": "Regarding the actions of the interossei, which mnemonic correctly summarizes their main movements?",
+      "options": [
+        "DAB (Dorsal ABducts) and PAD (Palmar ADducts)",
+        "DAB (Dorsal ADducts) and PAD (Palmar ABducts)",
+        "Both abduct",
+        "Both adduct"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. DAB (Dorsal ABducts) and PAD (Palmar ADducts)",
+      "explanation": "Dorsal interossei ABduct digits relative to the 3rd digit (DAB), whereas palmar interossei ADduct digits toward the 3rd digit (PAD).",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 98
+    },
+    {
+      "id": "ana201-muscles-99",
+      "text": "The reference axis for abduction and adduction of the fingers by the interossei passes longitudinally through the:",
+      "options": [
+        "Index finger",
+        "Middle finger (3rd digit)",
+        "Ring finger",
+        "Thumb"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Middle finger (3rd digit)",
+      "explanation": "Movement away from the longitudinal axis of the middle finger is abduction; movement toward it is adduction.",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 99
+    },
+    {
+      "id": "ana201-muscles-100",
+      "text": "All interossei (both dorsal and palmar) receive their motor innervation from the:",
+      "options": [
+        "Recurrent branch of the median nerve",
+        "Deep branch of the ulnar nerve (C8, T1)",
+        "Superficial branch of the radial nerve",
+        "Anterior interosseous nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Deep branch of the ulnar nerve (C8, T1)",
+      "explanation": "Every interosseous muscle in the hand is supplied by the deep branch of the ulnar nerve.",
+      "section": "Intrinsic Muscles of the Hand",
+      "questionNumber": 100
     }
   ]
 }

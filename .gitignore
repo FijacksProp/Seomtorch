@@ -13,3 +13,4 @@ __pycache__/
 .env
 exports/
 assets/questions_raw_backup/
+assets/questions_enhanced/
