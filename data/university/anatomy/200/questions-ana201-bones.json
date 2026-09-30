@@ -1,0 +1,1514 @@
+{
+  "title": "Bones of the Upper Limb",
+  "course": "ANA 201",
+  "totalQuestions": 100,
+  "sections": [
+    "Clavicle & Pectoral Girdle Osteology (Q1-Q15)",
+    "Scapula Osteology & Morphology (Q16-Q32)",
+    "Humerus - Proximal, Shaft, Distal End & Fractures (Q33-Q55)",
+    "Radius & Ulna - Borders, Processes, Articulations, Fractures (Q56-Q75)",
+    "Carpal Bones, Metacarpals, Phalanges & Hand Osteology (Q76-Q100)"
+  ],
+  "questions": [
+    {
+      "id": "ana201-bones-1",
+      "text": "Which of the following statements regarding the ossification of the clavicle is correct?",
+      "options": [
+        "It is the first bone in the body to begin ossification.",
+        "It ossifies entirely via the endochondral pathway.",
+        "It has three primary ossification centers.",
+        "It is the last bone in the body to begin ossification."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It is the first bone in the body to begin ossification.",
+      "explanation": "The clavicle is the first bone to ossify (5th-6th week of fetal life). It ossifies mostly in membrane, but its ends ossify in cartilage.",
+      "section": "Clavicle & Pectoral Girdle Osteology",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana201-bones-2",
+      "text": "The conoid tubercle is located on which part of the clavicle?",
+      "options": [
+        "Superior surface, medial end",
+        "Inferior surface, lateral end",
+        "Superior surface, lateral end",
+        "Inferior surface, medial end"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Inferior surface, lateral end",
+      "explanation": "The conoid tubercle is on the inferior surface of the lateral (acromial) third, serving as an attachment for the conoid ligament.",
+      "section": "Clavicle & Pectoral Girdle Osteology",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana201-bones-3",
+      "text": "Which muscle originates from the lateral one-third of the anterior border of the clavicle?",
+      "options": [
+        "Pectoralis major",
+        "Trapezius",
+        "Deltoid",
+        "Sternocleidomastoid"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Deltoid",
+      "explanation": "The deltoid originates from the anterior border of the lateral 1/3 of the clavicle.",
+      "section": "Clavicle & Pectoral Girdle Osteology",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana201-bones-4",
+      "text": "The subclavian groove on the inferior surface of the clavicle provides insertion for which muscle?",
+      "options": [
+        "Subclavius",
+        "Pectoralis minor",
+        "Serratus anterior",
+        "Platysma"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Subclavius",
+      "explanation": "The subclavius muscle inserts into the subclavian groove in the middle third of the clavicle's inferior surface.",
+      "section": "Clavicle & Pectoral Girdle Osteology",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana201-bones-5",
+      "text": "Fractures of the clavicle most commonly occur at which site?",
+      "options": [
+        "Medial one-third",
+        "Lateral one-third",
+        "Junction of the medial two-thirds and lateral one-third",
+        "Sternoclavicular joint"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Junction of the medial two-thirds and lateral one-third",
+      "explanation": "The junction of the medial 2/3 (convex) and lateral 1/3 (concave) is the weakest point due to change in curvature and lack of muscle cover.",
+      "section": "Clavicle & Pectoral Girdle Osteology",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana201-bones-6",
+      "text": "The trapezoid line of the clavicle serves as an attachment for:",
+      "options": [
+        "The conoid ligament",
+        "The trapezoid ligament",
+        "The coracoacromial ligament",
+        "The costoclavicular ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The trapezoid ligament",
+      "explanation": "The trapezoid line is for the trapezoid ligament; together with the conoid ligament, they form the coracoclavicular ligament.",
+      "section": "Clavicle & Pectoral Girdle Osteology",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana201-bones-7",
+      "text": "Which of the following structures passes superior to the clavicle?",
+      "options": [
+        "Subclavian artery",
+        "Subclavian vein",
+        "Supraclavicular nerves",
+        "Brachial plexus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Supraclavicular nerves",
+      "explanation": "Supraclavicular nerves (C3, C4) descend anterior (superior) to the clavicle to supply skin of the shoulder.",
+      "section": "Clavicle & Pectoral Girdle Osteology",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana201-bones-8",
+      "text": "The medial end of the clavicle articulates with the manubrium sterni and which costal cartilage?",
+      "options": [
+        "First",
+        "Second",
+        "Third",
+        "None"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. First",
+      "explanation": "The sternal end articulates with the clavicular notch of the manubrium and the first costal cartilage.",
+      "section": "Clavicle & Pectoral Girdle Osteology",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana201-bones-9",
+      "text": "In a mid-shaft clavicular fracture, why is the medial fragment displaced superiorly?",
+      "options": [
+        "Weight of the arm",
+        "Action of the subclavius",
+        "Action of the sternocleidomastoid",
+        "Action of the pectoralis major"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Action of the sternocleidomastoid",
+      "explanation": "The sternocleidomastoid muscle pulls the medial fragment upwards, while the weight of the arm pulls the lateral fragment down.",
+      "section": "Clavicle & Pectoral Girdle Osteology",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana201-bones-10",
+      "text": "The nutrient foramen of the clavicle is usually located on the:",
+      "options": [
+        "Superior surface",
+        "Inferior surface, medial to the subclavian groove",
+        "Posterior border",
+        "Inferior surface, lateral to the subclavian groove"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Inferior surface, medial to the subclavian groove",
+      "explanation": "The nutrient foramen usually lies on the inferior surface near the medial end of the subclavian groove, directed laterally.",
+      "section": "Clavicle & Pectoral Girdle Osteology",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana201-bones-11",
+      "text": "Which ligament prevents the upward displacement of the medial end of the clavicle?",
+      "options": [
+        "Anterior sternoclavicular ligament",
+        "Costoclavicular ligament",
+        "Interclavicular ligament",
+        "Coracoclavicular ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Costoclavicular ligament",
+      "explanation": "The costoclavicular ligament anchors the medial end of the clavicle to the first rib.",
+      "section": "Clavicle & Pectoral Girdle Osteology",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana201-bones-12",
+      "text": "The clavicle is classified as a:",
+      "options": [
+        "Long bone",
+        "Flat bone",
+        "Irregular bone",
+        "Sesamoid bone"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Long bone",
+      "explanation": "Though it lacks a medullary cavity and ossifies in membrane, it is traditionally classified as a modified long bone.",
+      "section": "Clavicle & Pectoral Girdle Osteology",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana201-bones-13",
+      "text": "The lateral end of the clavicle is:",
+      "options": [
+        "Quadrilateral in shape",
+        "Flattened from above downwards",
+        "Rounded and bulbous",
+        "Concave anteriorly"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Flattened from above downwards",
+      "explanation": "The lateral (acromial) end is flattened superior-inferiorly to articulate with the acromion.",
+      "section": "Clavicle & Pectoral Girdle Osteology",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana201-bones-14",
+      "text": "Which muscle is attached to the medial half of the superior surface of the clavicle?",
+      "options": [
+        "Sternocleidomastoid",
+        "Pectoralis major",
+        "Sternohyoid",
+        "Trapezius"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Sternocleidomastoid",
+      "explanation": "The clavicular head of the sternocleidomastoid attaches to the medial third of the superior surface.",
+      "section": "Clavicle & Pectoral Girdle Osteology",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana201-bones-15",
+      "text": "An \"S\" shape is characteristic of the clavicle; which part is convex anteriorly?",
+      "options": [
+        "Lateral one-third",
+        "Medial two-thirds",
+        "Entire length",
+        "Only the acromial end"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Medial two-thirds",
+      "explanation": "The medial 2/3 is convex anteriorly; the lateral 1/3 is concave anteriorly.",
+      "section": "Clavicle & Pectoral Girdle Osteology",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana201-bones-16",
+      "text": "The suprascapular notch is converted into a foramen by the:",
+      "options": [
+        "Coracoacromial ligament",
+        "Superior transverse scapular ligament",
+        "Conoid ligament",
+        "Trapezoid ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Superior transverse scapular ligament",
+      "explanation": "The superior transverse scapular ligament bridges the notch; the suprascapular nerve passes under it, and the artery passes over it.",
+      "section": "Scapula Osteology & Morphology",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana201-bones-17",
+      "text": "Which muscle originates from the infraglenoid tubercle of the scapula?",
+      "options": [
+        "Short head of biceps brachii",
+        "Long head of biceps brachii",
+        "Long head of triceps brachii",
+        "Coracobrachialis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Long head of triceps brachii",
+      "explanation": "The long head of the triceps brachii originates from the infraglenoid tubercle.",
+      "section": "Scapula Osteology & Morphology",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana201-bones-18",
+      "text": "The acromion of the scapula articulates with:",
+      "options": [
+        "The humerus",
+        "The lateral end of the clavicle",
+        "The medial end of the clavicle",
+        "The coracoid process"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The lateral end of the clavicle",
+      "explanation": "The acromion articulates with the acromial end of the clavicle at the acromioclavicular joint.",
+      "section": "Scapula Osteology & Morphology",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana201-bones-19",
+      "text": "Which structure attaches to the coracoid process of the scapula?",
+      "options": [
+        "Pectoralis major",
+        "Pectoralis minor",
+        "Serratus anterior",
+        "Latissimus dorsi"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Pectoralis minor",
+      "explanation": "Pectoralis minor inserts on the medial border of the coracoid process.",
+      "section": "Scapula Osteology & Morphology",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana201-bones-20",
+      "text": "The spinoglenoid notch transmits which of the following?",
+      "options": [
+        "Suprascapular nerve and vessels",
+        "Axillary nerve",
+        "Radial nerve",
+        "Dorsal scapular nerve"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Suprascapular nerve and vessels",
+      "explanation": "The spinoglenoid notch connects the supraspinous and infraspinous fossae, transmitting the suprascapular nerve and vessels.",
+      "section": "Scapula Osteology & Morphology",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana201-bones-21",
+      "text": "Which muscle is responsible for protracting the scapula and is attached to its medial border?",
+      "options": [
+        "Levator scapulae",
+        "Rhomboid major",
+        "Serratus anterior",
+        "Trapezius"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Serratus anterior",
+      "explanation": "Serratus anterior inserts along the whole length of the medial border on the costal surface.",
+      "section": "Scapula Osteology & Morphology",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana201-bones-22",
+      "text": "The \"glenoid labrum\" is a fibrocartilaginous ring attached to the:",
+      "options": [
+        "Acromion",
+        "Coracoid process",
+        "Margin of the glenoid cavity",
+        "Supraspinous fossa"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Margin of the glenoid cavity",
+      "explanation": "The labrum deepens the glenoid cavity to improve shoulder stability.",
+      "section": "Scapula Osteology & Morphology",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana201-bones-23",
+      "text": "Which surface of the scapula is marked by three or four ridges for the attachment of the subscapularis muscle?",
+      "options": [
+        "Posterior surface",
+        "Lateral surface",
+        "Costal (anterior) surface",
+        "Superior surface"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Costal (anterior) surface",
+      "explanation": "These ridges provide attachment for the multipennate subscapularis muscle.",
+      "section": "Scapula Osteology & Morphology",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana201-bones-24",
+      "text": "The spine of the scapula continues laterally as the:",
+      "options": [
+        "Coracoid process",
+        "Acromion",
+        "Glenoid process",
+        "Neck of the scapula"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Acromion",
+      "explanation": "The spine of the scapula is a triangular plate that continues laterally as the flattened acromion.",
+      "section": "Scapula Osteology & Morphology",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana201-bones-25",
+      "text": "Ossification of the scapula typically involves how many centers?",
+      "options": [
+        "One primary and seven secondary",
+        "Two primary and two secondary",
+        "Three primary and five secondary",
+        "One primary and three secondary"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. One primary and seven secondary",
+      "explanation": "Scapula usually has 1 primary (body) and 7 secondary centers (2 for coracoid, 2 for acromion, 1 for medial border, 1 for inferior angle, 1 for glenoid).",
+      "section": "Scapula Osteology & Morphology",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana201-bones-26",
+      "text": "Winging of the scapula is caused by paralysis of the muscle attached to the:",
+      "options": [
+        "Lateral border",
+        "Superior border",
+        "Medial border",
+        "Spine of the scapula"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Medial border",
+      "explanation": "Paralysis of Serratus anterior (long thoracic nerve) causes the medial border of the scapula to protrude like a wing.",
+      "section": "Scapula Osteology & Morphology",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana201-bones-27",
+      "text": "Which muscle is attached to the supraspinous fossa of the scapula?",
+      "options": [
+        "Supraspinatus",
+        "Infraspinatus",
+        "Teres minor",
+        "Subscapularis"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Supraspinatus",
+      "explanation": "The supraspinatus muscle originates from the medial 2/3 of the supraspinous fossa.",
+      "section": "Scapula Osteology & Morphology",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana201-bones-28",
+      "text": "The lateral border of the scapula is also known as the:",
+      "options": [
+        "Vertebral border",
+        "Axillary border",
+        "Superior border",
+        "Inferior border"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Axillary border",
+      "explanation": "The lateral border is thick and directed towards the axilla.",
+      "section": "Scapula Osteology & Morphology",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana201-bones-29",
+      "text": "Which of the following muscles originates from the dorsal surface of the inferior angle of the scapula?",
+      "options": [
+        "Teres minor",
+        "Teres major",
+        "Latissimus dorsi (occasional slip)",
+        "Both B and C"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Both B and C",
+      "explanation": "Teres major originates here; occasionally, a few fibers of latissimus dorsi also attach.",
+      "section": "Scapula Osteology & Morphology",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana201-bones-30",
+      "text": "The \"Safe Zone\" for surgical exposure of the scapula often refers to avoid damaging:",
+      "options": [
+        "The suprascapular nerve",
+        "The long thoracic nerve",
+        "The thoracodorsal nerve",
+        "The spinal accessory nerve"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The suprascapular nerve",
+      "explanation": "The suprascapular nerve is at risk during dissection of the supraspinatus or in fractures involving the notch.",
+      "section": "Scapula Osteology & Morphology",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana201-bones-31",
+      "text": "Type III acromion (hooked) is clinically associated with:",
+      "options": [
+        "Frozen shoulder",
+        "Shoulder impingement syndrome",
+        "Winging of scapula",
+        "Calcific tendonitis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Shoulder impingement syndrome",
+      "explanation": "A 'hooked' acromion reduces the subacromial space, leading to impingement of the rotator cuff.",
+      "section": "Scapula Osteology & Morphology",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana201-bones-32",
+      "text": "Which ligament forms the \"arch\" above the head of the humerus to prevent upward dislocation?",
+      "options": [
+        "Coracohumeral ligament",
+        "Glenohumeral ligament",
+        "Coracoacromial ligament",
+        "Acromioclavicular ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Coracoacromial ligament",
+      "explanation": "The coracoacromial ligament, coracoid, and acromion form the coracoacromial arch, a 'secondary socket.'",
+      "section": "Scapula Osteology & Morphology",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana201-bones-33",
+      "text": "Which nerve is most likely to be injured in a fracture of the surgical neck of the humerus?",
+      "options": [
+        "Radial nerve",
+        "Axillary nerve",
+        "Ulnar nerve",
+        "Median nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Axillary nerve",
+      "explanation": "The axillary nerve and posterior circumflex humeral vessels wrap around the surgical neck.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana201-bones-34",
+      "text": "The intertubercular (bicipital) groove of the humerus transmits the tendon of:",
+      "options": [
+        "Short head of biceps brachii",
+        "Long head of biceps brachii",
+        "Coracobrachialis",
+        "Pectoralis minor"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Long head of biceps brachii",
+      "explanation": "The tendon of the long head of the biceps brachii (encased in a synovial sheath) lies in this groove.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana201-bones-35",
+      "text": "The radial groove (spiral groove) of the humerus is located on the:",
+      "options": [
+        "Anterior surface",
+        "Medial surface",
+        "Posterior surface",
+        "Lateral surface"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Posterior surface",
+      "explanation": "The radial groove (spiral groove) contains the radial nerve and profunda brachii artery on the posterior shaft.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana201-bones-36",
+      "text": "Which muscle is attached to the floor of the intertubercular groove?",
+      "options": [
+        "Pectoralis major",
+        "Teres major",
+        "Latissimus dorsi",
+        "Subscapularis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Latissimus dorsi",
+      "explanation": "Remember 'A Lady between two Majors': Latissimus dorsi (floor) between Pectoralis major (lateral lip) and Teres major (medial lip).",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana201-bones-37",
+      "text": "The \"anatomical neck\" of the humerus is:",
+      "options": [
+        "The line separating the head from the tubercles",
+        "The constricted part below the tubercles",
+        "The site of most fractures",
+        "The attachment site for the deltoid"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The line separating the head from the tubercles",
+      "explanation": "The anatomical neck is the groove separating the head from the greater and lesser tubercles.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana201-bones-38",
+      "text": "Supracondylar fractures of the humerus frequently endanger which structure?",
+      "options": [
+        "Radial nerve",
+        "Brachial artery",
+        "Deep artery of the arm",
+        "Ulnar nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Brachial artery",
+      "explanation": "The brachial artery and median nerve are at high risk of injury/compression in supracondylar fractures.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana201-bones-39",
+      "text": "The medial epicondyle of the humerus provides origin for the:",
+      "options": [
+        "Extensor muscles of the forearm",
+        "Flexor muscles of the forearm",
+        "Biceps brachii",
+        "Brachialis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Flexor muscles of the forearm",
+      "explanation": "The medial epicondyle is the 'Common Flexor Origin.'",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana201-bones-40",
+      "text": "The capitulum of the humerus articulates with the:",
+      "options": [
+        "Head of the ulna",
+        "Trochlear notch of the ulna",
+        "Head of the radius",
+        "Radial notch of the ulna"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Head of the radius",
+      "explanation": "The capitulum (little head) articulates with the superior surface of the radial head.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana201-bones-41",
+      "text": "Which nerve passes posterior to the medial epicondyle?",
+      "options": [
+        "Median nerve",
+        "Radial nerve",
+        "Ulnar nerve",
+        "Musculocutaneous nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Ulnar nerve",
+      "explanation": "The ulnar nerve (funny bone nerve) sits in a groove on the posterior aspect of the medial epicondyle.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana201-bones-42",
+      "text": "The deltoid tuberosity is located on which part of the humeral shaft?",
+      "options": [
+        "Anterolateral surface",
+        "Anteromedial surface",
+        "Posterior surface",
+        "Medial border"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Anterolateral surface",
+      "explanation": "The deltoid tuberosity is a V-shaped rough area on the lateral aspect of the middle of the humeral shaft.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana201-bones-43",
+      "text": "The \"carrying angle\" of the elbow is primarily formed by the:",
+      "options": [
+        "Medial rotation of the humerus",
+        "Downward projection of the medial flange of the trochlea",
+        "Angulation of the radial head",
+        "Shape of the olecranon process"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Downward projection of the medial flange of the trochlea",
+      "explanation": "The medial edge of the trochlea extends 6mm further distally than the lateral edge, creating an oblique joint line.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana201-bones-44",
+      "text": "Ossification of the humeral head usually involves how many secondary centers?",
+      "options": [
+        "One",
+        "Two",
+        "Three (Head, Greater Tuber, Lesser Tuber)",
+        "Four"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Three (Head, Greater Tuber, Lesser Tuber)",
+      "explanation": "Secondary centers appear for the head, greater tubercle, and lesser tubercle, which fuse to form one epiphysis.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana201-bones-45",
+      "text": "The coronoid fossa is located on the:",
+      "options": [
+        "Posterior aspect of the distal humerus",
+        "Anterior aspect of the distal humerus, above the trochlea",
+        "Lateral aspect of the proximal humerus",
+        "Medial aspect of the shaft"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Anterior aspect of the distal humerus, above the trochlea",
+      "explanation": "The coronoid fossa receives the coronoid process of the ulna during full flexion.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana201-bones-46",
+      "text": "Holstein-Lewis fracture is a fracture of the:",
+      "options": [
+        "Proximal third of the humerus",
+        "Distal third of the humeral shaft with radial nerve palsy",
+        "Medial epicondyle",
+        "Lateral condyle"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Distal third of the humeral shaft with radial nerve palsy",
+      "explanation": "This refers to a spiral fracture of the distal third of the humerus associated with radial nerve neuropraxia.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana201-bones-47",
+      "text": "Which muscle is attached to the lesser tubercle of the humerus?",
+      "options": [
+        "Supraspinatus",
+        "Infraspinatus",
+        "Teres minor",
+        "Subscapularis"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Subscapularis",
+      "explanation": "Subscapularis is the only rotator cuff muscle that inserts into the lesser tubercle.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana201-bones-48",
+      "text": "The \"Great Tuberous\" of the humerus has three impressions for muscle attachment. Which muscle attaches to the lowest (inferior) impression?",
+      "options": [
+        "Supraspinatus",
+        "Infraspinatus",
+        "Teres minor",
+        "Teres major"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Teres minor",
+      "explanation": "Superior: Supraspinatus; Middle: Infraspinatus; Inferior: Teres minor.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana201-bones-49",
+      "text": "In a fracture of the mid-shaft of the humerus, why does the hand drop?",
+      "options": [
+        "Damage to the ulnar nerve",
+        "Damage to the median nerve",
+        "Damage to the radial nerve (paralysis of extensors)",
+        "Damage to the musculocutaneous nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Damage to the radial nerve (paralysis of extensors)",
+      "explanation": "Radial nerve injury in the spiral groove paralyzes the extensors of the wrist and fingers, causing wrist drop.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana201-bones-50",
+      "text": "The nutrient foramen of the humerus is directed:",
+      "options": [
+        "Upwards",
+        "Downwards",
+        "Medially",
+        "Laterally"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Downwards",
+      "explanation": "Following the rule 'to the elbow I go, from the knee I flee,' the nutrient foramen of the humerus is directed downwards.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 50
+    },
+    {
+      "id": "ana201-bones-51",
+      "text": "Which ligament of the elbow attaches to the lateral epicondyle of the humerus?",
+      "options": [
+        "Ulnar collateral ligament",
+        "Radial collateral ligament",
+        "Annular ligament",
+        "Quadrate ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Radial collateral ligament",
+      "explanation": "The radial (lateral) collateral ligament originates from the lateral epicondyle.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 51
+    },
+    {
+      "id": "ana201-bones-52",
+      "text": "The olecranon fossa receives the olecranon process during:",
+      "options": [
+        "Flexion of the elbow",
+        "Extension of the elbow",
+        "Pronation of the forearm",
+        "Supination of the forearm"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Extension of the elbow",
+      "explanation": "The olecranon process enters the fossa on the posterior humerus during elbow extension.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 52
+    },
+    {
+      "id": "ana201-bones-53",
+      "text": "Which of the following is NOT part of the distal humerus?",
+      "options": [
+        "Capitulum",
+        "Trochlea",
+        "Deltoid tuberosity",
+        "Radial fossa"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Deltoid tuberosity",
+      "explanation": "The deltoid tuberosity is located on the shaft (mid-humerus).",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 53
+    },
+    {
+      "id": "ana201-bones-54",
+      "text": "The common extensor origin is at the:",
+      "options": [
+        "Medial epicondyle",
+        "Lateral epicondyle",
+        "Lateral supracondylar ridge",
+        "Medial supracondylar ridge"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Lateral epicondyle",
+      "explanation": "The lateral epicondyle is the 'Common Extensor Origin.'",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 54
+    },
+    {
+      "id": "ana201-bones-55",
+      "text": "Displacement in a proximal humerus fracture at the surgical neck usually results in the proximal fragment being:",
+      "options": [
+        "Adducted by Pectoralis major",
+        "Abducted by the rotator cuff",
+        "Rotated medially by Latissimus dorsi",
+        "Flexed by Biceps"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Abducted by the rotator cuff",
+      "explanation": "The proximal fragment is abducted by the supraspinatus/rotator cuff, while the distal fragment is pulled medially/upward by pectoralis major.",
+      "section": "Humerus (Proximal, Shaft, Distal End & Fractures)",
+      "questionNumber": 55
+    },
+    {
+      "id": "ana201-bones-56",
+      "text": "The radial tuberosity provides insertion for the:",
+      "options": [
+        "Brachialis",
+        "Biceps brachii",
+        "Brachioradialis",
+        "Supinator"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Biceps brachii",
+      "explanation": "The biceps brachii tendon inserts into the posterior rough part of the radial tuberosity.",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 56
+    },
+    {
+      "id": "ana201-bones-57",
+      "text": "The \"styloid process\" is found on which ends of the radius and ulna?",
+      "options": [
+        "Proximal end of both",
+        "Distal end of both",
+        "Proximal radius, distal ulna",
+        "Distal radius, proximal ulna"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Distal end of both",
+      "explanation": "Both bones have styloid processes at their distal ends; the radial styloid is more distal than the ulnar styloid.",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 57
+    },
+    {
+      "id": "ana201-bones-58",
+      "text": "Which bone is the \"stabilizing bone\" of the forearm and is longer of the two?",
+      "options": [
+        "Radius",
+        "Ulna",
+        "Humerus",
+        "Scapula"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Ulna",
+      "explanation": "The ulna acts as the stabilizing bone; the radius rotates around it.",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 58
+    },
+    {
+      "id": "ana201-bones-59",
+      "text": "The trochlear notch of the ulna articulates with the:",
+      "options": [
+        "Capitulum",
+        "Trochlea",
+        "Radial head",
+        "Coronoid process"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Trochlea",
+      "explanation": "The trochlear notch (semilunar notch) articulates with the trochlea of the humerus.",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 59
+    },
+    {
+      "id": "ana201-bones-60",
+      "text": "Colles' fracture is a fracture of the:",
+      "options": [
+        "Proximal radius",
+        "Distal end of the radius with posterior displacement",
+        "Distal end of the radius with anterior displacement",
+        "Shaft of the ulna"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Distal end of the radius with posterior displacement",
+      "explanation": "Fracture of the distal radius (within 2.5cm of the joint) with dorsal (posterior) displacement and angulation.",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 60
+    },
+    {
+      "id": "ana201-bones-61",
+      "text": "The interosseous membrane is attached to which border of the radius?",
+      "options": [
+        "Anterior border",
+        "Posterior border",
+        "Medial (internal) border",
+        "Lateral border"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Medial (internal) border",
+      "explanation": "The medial border of the radius is the interosseous border (sharp).",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 61
+    },
+    {
+      "id": "ana201-bones-62",
+      "text": "Monteggia fracture-dislocation involves:",
+      "options": [
+        "Fracture of the distal radius with dislocation of the distal radio-ulnar joint",
+        "Fracture of the proximal third of the ulna with dislocation of the radial head",
+        "Fracture of both radius and ulna",
+        "Fracture of the scaphoid"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Fracture of the proximal third of the ulna with dislocation of the radial head",
+      "explanation": "Monteggia: Fracture of the proximal ulna + anterior dislocation of the radial head.",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 62
+    },
+    {
+      "id": "ana201-bones-63",
+      "text": "The Lister's tubercle is found on the:",
+      "options": [
+        "Distal end of the ulna",
+        "Distal end of the radius, posterior surface",
+        "Proximal end of the radius",
+        "Shaft of the ulna"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Distal end of the radius, posterior surface",
+      "explanation": "Lister's tubercle acts as a pulley for the tendon of the extensor pollicis longus.",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 63
+    },
+    {
+      "id": "ana201-bones-64",
+      "text": "Which muscle inserts into the olecranon process of the ulna?",
+      "options": [
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Anconeus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Triceps brachii",
+      "explanation": "The triceps brachii inserts into the posterior part of the superior surface of the olecranon.",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 64
+    },
+    {
+      "id": "ana201-bones-65",
+      "text": "The \"oblique cord\" of the forearm extends from the ulna to the radius just below the:",
+      "options": [
+        "Radial tuberosity",
+        "Styloid process",
+        "Head of the radius",
+        "Ulnar notch"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Radial tuberosity",
+      "explanation": "The oblique cord is a fibrous band extending from the ulnar tuberosity to the radius just below the radial tuberosity.",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 65
+    },
+    {
+      "id": "ana201-bones-66",
+      "text": "Which structure articulates with the ulnar notch of the radius?",
+      "options": [
+        "Head of the ulna",
+        "Styloid process of the ulna",
+        "Olecranon",
+        "Coronoid process"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Head of the ulna",
+      "explanation": "The ulnar notch of the radius articulates with the head of the ulna (distal radioulnar joint).",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 66
+    },
+    {
+      "id": "ana201-bones-67",
+      "text": "A \"Smith's fracture\" is also known as a:",
+      "options": [
+        "Reverse Colles' fracture",
+        "Boxer's fracture",
+        "Nightstick fracture",
+        "Greenstick fracture"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Reverse Colles' fracture",
+      "explanation": "Smith's fracture involves anterior (volar) displacement of the distal radial fragment.",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 67
+    },
+    {
+      "id": "ana201-bones-68",
+      "text": "The supinator crest and supinator fossa are features of the:",
+      "options": [
+        "Radius",
+        "Ulna",
+        "Humerus",
+        "Carpal bones"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Ulna",
+      "explanation": "The supinator crest and fossa are on the lateral surface of the upper ulna.",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 68
+    },
+    {
+      "id": "ana201-bones-69",
+      "text": "Which muscle originates from the anterior surface of the distal quarter of the ulna?",
+      "options": [
+        "Flexor digitorum profundus",
+        "Flexor pollicis longus",
+        "Pronator quadratus",
+        "Pronator teres"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Pronator quadratus",
+      "explanation": "Pronator quadratus originates from the distal 1/4 of the anterior ulna and inserts into the distal 1/4 of the anterior radius.",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 69
+    },
+    {
+      "id": "ana201-bones-70",
+      "text": "The \"Radial Notch\" is a feature of which bone?",
+      "options": [
+        "Radius",
+        "Ulna",
+        "Humerus",
+        "Scaphoid"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Ulna",
+      "explanation": "The radial notch is on the lateral side of the coronoid process of the ulna for articulation with the radial head.",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 70
+    },
+    {
+      "id": "ana201-bones-71",
+      "text": "During pronation and supination, the bone that primarily moves is the:",
+      "options": [
+        "Ulna",
+        "Radius",
+        "Humerus",
+        "Scapula"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Radius",
+      "explanation": "In pronation, the radius crosses over the ulna, which remains relatively stationary.",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 71
+    },
+    {
+      "id": "ana201-bones-72",
+      "text": "The nutrient foramen of the radius is directed:",
+      "options": [
+        "Upwards",
+        "Downwards",
+        "Medially",
+        "Laterally"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Upwards",
+      "explanation": "The nutrient foramen of the radius is directed upwards (towards the elbow).",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 72
+    },
+    {
+      "id": "ana201-bones-73",
+      "text": "Galeazzi fracture involves:",
+      "options": [
+        "Fracture of the distal third of the radius with dislocation of the distal radio-ulnar joint",
+        "Fracture of the ulna shaft",
+        "Dislocation of the elbow",
+        "Fracture of the radial neck"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Fracture of the distal third of the radius with dislocation of the distal radio-ulnar joint",
+      "explanation": "Galeazzi: Fracture of the distal radius + dislocation of the distal radioulnar joint.",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 73
+    },
+    {
+      "id": "ana201-bones-74",
+      "text": "The coronoid process is part of the:",
+      "options": [
+        "Radius",
+        "Ulna",
+        "Mandible (only)",
+        "Humerus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Ulna",
+      "explanation": "The coronoid process is the anterior projection of the proximal ulna.",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 74
+    },
+    {
+      "id": "ana201-bones-75",
+      "text": "Which ligament holds the head of the radius in the radial notch of the ulna?",
+      "options": [
+        "Ulnar collateral ligament",
+        "Radial collateral ligament",
+        "Annular ligament",
+        "Oblique cord"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Annular ligament",
+      "explanation": "The annular ligament encircles the head of the radius and holds it against the ulna.",
+      "section": "Radius & Ulna (Borders, Processes, Articulations, Fractures)",
+      "questionNumber": 75
+    },
+    {
+      "id": "ana201-bones-76",
+      "text": "Which carpal bone is the most frequently fractured?",
+      "options": [
+        "Lunate",
+        "Scaphoid",
+        "Triquetrum",
+        "Pisiform"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Scaphoid",
+      "explanation": "The scaphoid is the most commonly fractured carpal bone, usually from a fall on an outstretched hand.",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 76
+    },
+    {
+      "id": "ana201-bones-77",
+      "text": "Which carpal bone is a sesamoid bone in the tendon of the flexor carpi ulnaris?",
+      "options": [
+        "Scaphoid",
+        "Pisiform",
+        "Hamate",
+        "Capitate"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Pisiform",
+      "explanation": "The pisiform is a sesamoid bone located within the Flexor Carpi Ulnaris tendon.",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 77
+    },
+    {
+      "id": "ana201-bones-78",
+      "text": "The \"Hook\" is a characteristic feature of which carpal bone?",
+      "options": [
+        "Trapezium",
+        "Trapezoid",
+        "Hamate",
+        "Capitate"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Hamate",
+      "explanation": "The hamate has a prominent process on its palmar surface called the hook (hamulus).",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 78
+    },
+    {
+      "id": "ana201-bones-79",
+      "text": "Which carpal bone is the first to ossify?",
+      "options": [
+        "Capitate",
+        "Hamate",
+        "Scaphoid",
+        "Pisiform"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Capitate",
+      "explanation": "The capitate is the first to ossify (usually in the 1st year).",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 79
+    },
+    {
+      "id": "ana201-bones-80",
+      "text": "The most commonly dislocated carpal bone is the:",
+      "options": [
+        "Scaphoid",
+        "Lunate",
+        "Triquetrum",
+        "Trapezium"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Lunate",
+      "explanation": "The lunate is the most commonly dislocated carpal bone (anteriorly).",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 80
+    },
+    {
+      "id": "ana201-bones-81",
+      "text": "Which carpal bone articulates with the first metacarpal to form a saddle joint?",
+      "options": [
+        "Trapezoid",
+        "Trapezium",
+        "Capitate",
+        "Scaphoid"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Trapezium",
+      "explanation": "The trapezium articulates with the 1st metacarpal at the thumb base (saddle joint).",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 81
+    },
+    {
+      "id": "ana201-bones-82",
+      "text": "The carpal tunnel is formed by the carpal bones and the:",
+      "options": [
+        "Palmar aponeurosis",
+        "Flexor retinaculum",
+        "Extensor retinaculum",
+        "Deep fascia of the arm"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Flexor retinaculum",
+      "explanation": "The flexor retinaculum (transverse carpal ligament) converts the carpal groove into a tunnel.",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 82
+    },
+    {
+      "id": "ana201-bones-83",
+      "text": "Guyon's canal (ulnar canal) is located between the pisiform and the:",
+      "options": [
+        "Hook of the hamate",
+        "Scaphoid tubercle",
+        "Capitate",
+        "Trapezium"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Hook of the hamate",
+      "explanation": "The ulnar nerve and artery pass through Guyon's canal between the pisiform and hamate hook.",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 83
+    },
+    {
+      "id": "ana201-bones-84",
+      "text": "The \"Boxer's fracture\" typically involves the neck of the:",
+      "options": [
+        "1st Metacarpal",
+        "2nd Metacarpal",
+        "3rd Metacarpal",
+        "5th Metacarpal"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. 5th Metacarpal",
+      "explanation": "A Boxer's fracture is a fracture of the neck of the 5th metacarpal (sometimes the 4th).",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 84
+    },
+    {
+      "id": "ana201-bones-85",
+      "text": "Which carpal bone articulates with the radius?",
+      "options": [
+        "Scaphoid and Lunate",
+        "Pisiform and Triquetrum",
+        "Hamate and Capitate",
+        "Trapezium and Trapezoid"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Scaphoid and Lunate",
+      "explanation": "The distal radius articulates with the scaphoid and lunate.",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 85
+    },
+    {
+      "id": "ana201-bones-86",
+      "text": "A \"Bennett's fracture\" is a fracture-dislocation of the base of the:",
+      "options": [
+        "1st Metacarpal",
+        "2nd Metacarpal",
+        "5th Metacarpal",
+        "Proximal phalanx of the thumb"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. 1st Metacarpal",
+      "explanation": "Bennett's fracture is an intra-articular fracture at the base of the 1st metacarpal.",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 86
+    },
+    {
+      "id": "ana201-bones-87",
+      "text": "How many phalanges are there in one human hand?",
+      "options": [
+        "12",
+        "14",
+        "15",
+        "10"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 14",
+      "explanation": "3 phalanges for each finger (12) + 2 for the thumb = 14 total.",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 87
+    },
+    {
+      "id": "ana201-bones-88",
+      "text": "The largest carpal bone is the:",
+      "options": [
+        "Scaphoid",
+        "Capitate",
+        "Hamate",
+        "Lunate"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Capitate",
+      "explanation": "The capitate is the largest carpal bone and occupies the center of the carpus.",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 88
+    },
+    {
+      "id": "ana201-bones-89",
+      "text": "Avascular necrosis is a common complication of a fracture in the:",
+      "options": [
+        "Distal pole of the scaphoid",
+        "Proximal pole of the scaphoid",
+        "Base of the 5th metacarpal",
+        "Pisiform"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Proximal pole of the scaphoid",
+      "explanation": "Blood supply to the scaphoid enters distally; a proximal pole fracture often cuts off the blood supply.",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 89
+    },
+    {
+      "id": "ana201-bones-90",
+      "text": "The tubercle of the scaphoid and the ridge of the trapezium provide attachment for the:",
+      "options": [
+        "Lateral side of the flexor retinaculum",
+        "Medial side of the flexor retinaculum",
+        "Palmaris brevis",
+        "Adductor pollicis"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Lateral side of the flexor retinaculum",
+      "explanation": "These two lateral bony landmarks serve as the lateral attachments for the flexor retinaculum.",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 90
+    },
+    {
+      "id": "ana201-bones-91",
+      "text": "Which carpal bone is wedge-shaped and located between the scaphoid and triquetrum?",
+      "options": [
+        "Lunate",
+        "Capitate",
+        "Hamate",
+        "Trapezoid"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Lunate",
+      "explanation": "The lunate (moon-shaped) is located between the scaphoid and triquetrum in the proximal row.",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 91
+    },
+    {
+      "id": "ana201-bones-92",
+      "text": "The base of the 3rd metacarpal has a styloid process on its:",
+      "options": [
+        "Lateral side",
+        "Medial side",
+        "Dorsal side",
+        "Palmar side"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Dorsal side",
+      "explanation": "The styloid process of the 3rd metacarpal is on the lateral part of its dorsal base.",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 92
+    },
+    {
+      "id": "ana201-bones-93",
+      "text": "Which carpal bone is the last to ossify?",
+      "options": [
+        "Capitate",
+        "Pisiform",
+        "Scaphoid",
+        "Trapezoid"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Pisiform",
+      "explanation": "The pisiform is the last to ossify (around age 9-12).",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 93
+    },
+    {
+      "id": "ana201-bones-94",
+      "text": "The 1st metacarpal is:",
+      "options": [
+        "The longest metacarpal",
+        "The shortest and most mobile metacarpal",
+        "Articulates with the lunate",
+        "Has no epiphysis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The shortest and most mobile metacarpal",
+      "explanation": "The 1st metacarpal is shorter, thicker, and set at an angle to the others for opposition.",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 94
+    },
+    {
+      "id": "ana201-bones-95",
+      "text": "Terrible Triad of the elbow involves a fracture of the coronoid process, a fracture of the radial head, and:",
+      "options": [
+        "Ulnar nerve palsy",
+        "Posterior dislocation of the elbow",
+        "Scaphoid fracture",
+        "Biceps tendon rupture"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Posterior dislocation of the elbow",
+      "explanation": "This is a severe elbow injury: Radial head fracture + Coronoid fracture + Posterior dislocation.",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 95
+    },
+    {
+      "id": "ana201-bones-96",
+      "text": "Which carpal bone articulates with the 2nd metacarpal?",
+      "options": [
+        "Trapezium",
+        "Trapezoid",
+        "Capitate",
+        "All of the above (primarily Trapezoid)"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Trapezoid",
+      "explanation": "The trapezoid articulates specifically with the base of the 2nd metacarpal.",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 96
+    },
+    {
+      "id": "ana201-bones-97",
+      "text": "The base of a metacarpal bone is its:",
+      "options": [
+        "Distal end",
+        "Proximal end",
+        "Shaft",
+        "Head"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Proximal end",
+      "explanation": "The base is the proximal end; the head is the distal end (knuckle).",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 97
+    },
+    {
+      "id": "ana201-bones-98",
+      "text": "Which bone is found in the floor of the \"Anatomical Snuffbox\"?",
+      "options": [
+        "Scaphoid",
+        "Trapezium",
+        "Both A and B",
+        "Lunate"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Both A and B",
+      "explanation": "Both the scaphoid (proximally) and trapezium (distally) form the floor of the snuffbox.",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 98
+    },
+    {
+      "id": "ana201-bones-99",
+      "text": "The \"dinner fork deformity\" is associated with:",
+      "options": [
+        "Colles' fracture",
+        "Smith's fracture",
+        "Scaphoid fracture",
+        "Galeazzi fracture"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Colles' fracture",
+      "explanation": "Colles' fracture produces the characteristic dinner fork deformity due to posterior displacement.",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 99
+    },
+    {
+      "id": "ana201-bones-100",
+      "text": "Ossification of the metacarpals typically involves:",
+      "options": [
+        "One primary center in the shaft",
+        "One secondary center in the head (except the 1st)",
+        "One secondary center in the base (for the 1st)",
+        "All of the above"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. All of the above",
+      "explanation": "Metacarpals have a primary center in the shaft and one secondary center (head for 2-5, base for 1).",
+      "section": "Carpal Bones, Metacarpals, Phalanges & Hand Osteology",
+      "questionNumber": 100
+    }
+  ]
+}
