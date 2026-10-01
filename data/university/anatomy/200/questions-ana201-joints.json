@@ -1,0 +1,1510 @@
+{
+  "title": "Joints of the Upper Limb",
+  "course": "ANA 201",
+  "totalQuestions": 100,
+  "sections": [
+    "Joints of the Upper Limb (Q1-Q100)"
+  ],
+  "questions": [
+    {
+      "id": "ana201-joints-1",
+      "text": "During extreme abduction of the upper limb, which of the following structures provides the most critical restraint against superior displacement of the clavicle at the sternoclavicular joint?",
+      "options": [
+        "Costoclavicular ligament",
+        "Anterior sternoclavicular ligament",
+        "Interclavicular ligament",
+        "Subclavius muscle"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Costoclavicular ligament",
+      "explanation": "The costoclavicular ligament strongly anchors the medial clavicle to the first rib, serving as the primary stabilizer against upward dislocation of the sternoclavicular joint during arm elevation.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana201-joints-2",
+      "text": "Complete rupture of the coracoclavicular ligaments results in a specific biomechanical failure at the shoulder girdle. What is the primary positional consequence of this ligamentous failure?",
+      "options": [
+        "Medial displacement of the humerus",
+        "Anterior subluxation of the humeral head",
+        "Superior displacement of the distal clavicle relative to the acromion",
+        "Inability to protract the scapula"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Superior displacement of the distal clavicle relative to the acromion",
+      "explanation": "The coracoclavicular ligament (conoid and trapezoid parts) suspends the scapula from the clavicle. Its mechanical failure causes the acromion to drop inferiorly, while the clavicle is displaced superiorly by the trapezius muscle.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana201-joints-3",
+      "text": "Which of the following intrinsic characteristics of the glenohumeral joint contributes most significantly to its high degree of mobility at the expense of stability?",
+      "options": [
+        "The presence of a voluminous subacromial bursa",
+        "The articular surface of the humeral head being substantially larger than the glenoid cavity",
+        "The tension provided by the coracohumeral ligament during external rotation",
+        "The attachment of the long head of the biceps brachii to the supraglenoid tubercle"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The articular surface of the humeral head being substantially larger than the glenoid cavity",
+      "explanation": "The humeral head has about four times the surface area of the shallow glenoid fossa. This size disparity allows extensive movement but makes the joint inherently unstable, relying heavily on dynamic muscle support.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana201-joints-4",
+      "text": "Which muscle acting across the glenohumeral joint is primarily responsible for generating the force required to initiate the first 15 degrees of abduction?",
+      "options": [
+        "Deltoid",
+        "Pectoralis major",
+        "Serratus anterior",
+        "Supraspinatus"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Supraspinatus",
+      "explanation": "The supraspinatus muscle acts across the glenohumeral joint to initiate the first 15 degrees of abduction before the deltoid becomes mechanically effective at that angle.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana201-joints-5",
+      "text": "The anterior capsule of the glenohumeral joint contains a structural weak point known as the foramen of Weitbrecht. Where is this specific anatomical gap located?",
+      "options": [
+        "Between the superior and middle glenohumeral ligaments",
+        "Between the middle and inferior glenohumeral ligaments",
+        "Deep to the coracoacromial ligament",
+        "At the primary attachment site for the subscapularis tendon"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Between the superior and middle glenohumeral ligaments",
+      "explanation": "The interval between the superior and middle glenohumeral ligaments is the foramen of Weitbrecht. It is an inherent weak point in the anterior capsule that often facilitates anterior dislocation of the humeral head.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana201-joints-6",
+      "text": "Which specific fibrocartilaginous structure attaches to the margin of the glenoid cavity to deepen the articular socket and provide an anchor for the long head of the biceps brachii tendon?",
+      "options": [
+        "Articular disc of the acromioclavicular joint",
+        "Glenoid labrum",
+        "Transverse humeral ligament",
+        "Coracoacromial ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Glenoid labrum",
+      "explanation": "The glenoid labrum is a fibrocartilaginous ring attached to the margin of the glenoid cavity, which deepens the socket and provides attachment for the joint capsule and the long head of the biceps brachii.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana201-joints-7",
+      "text": "When the elbow is fully extended, the ulna makes an angle of approximately 170 degrees with the long axis of the humerus. Which anatomical feature is the primary determinant of this normal carrying angle?",
+      "options": [
+        "The depth of the olecranon fossa",
+        "The tension of the ulnar collateral ligament",
+        "The diameter of the radial head",
+        "The oblique configuration of the humeral trochlea"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The oblique configuration of the humeral trochlea",
+      "explanation": "The medial lip of the trochlea projects further distally than the lateral lip. This tilt forces the ulna to deviate laterally when the elbow is extended, creating the natural carrying angle.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana201-joints-8",
+      "text": "Which specific ligamentous structure serves as the primary restraint resisting excessive valgus stress at the humeroulnar joint?",
+      "options": [
+        "Radial collateral ligament",
+        "Annular ligament",
+        "Ulnar collateral ligament",
+        "Quadrate ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Ulnar collateral ligament",
+      "explanation": "The ulnar collateral ligament, specifically its strong anterior band, is the primary anatomical restraint to valgus (outward angulation) stress applied to the elbow joint.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana201-joints-9",
+      "text": "In the humeroulnar articulation, which specific articular surfaces are most heavily loaded during active flexion of the elbow against resistance?",
+      "options": [
+        "The capitulum and the fovea of the radial head",
+        "The radial notch of the ulna and the articular circumference of the radius",
+        "The trochlea of the humerus and the trochlear notch of the ulna",
+        "The olecranon process and the posterior fat pad"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The trochlea of the humerus and the trochlear notch of the ulna",
+      "explanation": "The primary hinge action of the elbow occurs between the spool-shaped trochlea of the humerus and the concave trochlear notch of the ulna.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana201-joints-10",
+      "text": "The fibrous capsule of the elbow joint is uniquely attached to accommodate extensive flexion and extension. Which statement correctly describes its proximal posterior attachment?",
+      "options": [
+        "It attaches slightly above the superior limit of the olecranon fossa.",
+        "It attaches strictly to the articular margins of the capitulum.",
+        "It blends directly into the annular ligament posteriorly.",
+        "It entirely excludes the medial epicondyle."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It attaches slightly above the superior limit of the olecranon fossa.",
+      "explanation": "Posteriorly, the fibrous capsule attaches to the humerus just above the olecranon fossa to allow the large olecranon process of the ulna to freely enter the fossa during full extension.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana201-joints-11",
+      "text": "Application of sudden longitudinal traction on a pronated forearm can result in the inferior subluxation of the radial head. Which structural restraint is primarily overcome during this specific biomechanical failure?",
+      "options": [
+        "Quadrate ligament",
+        "Annular ligament",
+        "Ulnar collateral ligament",
+        "Interosseous membrane"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Annular ligament",
+      "explanation": "Longitudinal traction can pull the radial head distally out of the structural embrace of the annular ligament, resulting in subluxation.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana201-joints-12",
+      "text": "The radial collateral ligament of the elbow joint is anatomically distinct from typical collateral ligaments because of its distal attachment. Where does it primarily insert?",
+      "options": [
+        "The radial tuberosity",
+        "The interosseous membrane",
+        "The coronoid process of the ulna",
+        "The annular ligament of the radius"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The annular ligament of the radius",
+      "explanation": "To allow free rotation of the radius during pronation and supination, the radial collateral ligament does not attach directly to the radius; instead, it blends into the annular ligament.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana201-joints-13",
+      "text": "Which of the following muscles acts as the most consistently effective flexor of the elbow joint, regardless of whether the forearm is pronated or supinated?",
+      "options": [
+        "Brachialis",
+        "Biceps brachii",
+        "Brachioradialis",
+        "Pronator teres"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Brachialis",
+      "explanation": "The brachialis attaches to the ulna, which does not rotate during pronation or supination. Therefore, its mechanical advantage remains consistent, serving as the workhorse flexor of the elbow.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana201-joints-14",
+      "text": "Which muscle serves as the primary and most powerful extensor of the elbow joint?",
+      "options": [
+        "Anconeus",
+        "Coracobrachialis",
+        "Triceps brachii",
+        "Supinator"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Triceps brachii",
+      "explanation": "The triceps brachii is the primary and most powerful extensor of the elbow joint. The anconeus assists the movement but produces minimal relative force.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana201-joints-15",
+      "text": "Based on the anatomical classification of the bursae around the elbow, where is the subcutaneous olecranon bursa located?",
+      "options": [
+        "In the connective tissue directly overlying the superficial aspect of the olecranon process",
+        "Between the triceps tendon and the olecranon",
+        "Within the substance of the triceps brachii tendon",
+        "Deep to the annular ligament"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. In the connective tissue directly overlying the superficial aspect of the olecranon process",
+      "explanation": "The subcutaneous olecranon bursa is situated superficially in the subcutaneous connective tissue directly overlying the olecranon.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana201-joints-16",
+      "text": "The arterial supply to the elbow joint is derived from a complex anastomotic network. Which artery specifically descends anterior to the medial epicondyle to contribute to this network?",
+      "options": [
+        "Profunda brachii artery",
+        "Superior ulnar collateral artery",
+        "Inferior ulnar collateral artery",
+        "Radial recurrent artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Inferior ulnar collateral artery",
+      "explanation": "The inferior ulnar collateral artery typically passes anterior to the medial epicondyle, while the superior ulnar collateral artery passes posterior to it alongside the ulnar nerve.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana201-joints-17",
+      "text": "The nerve that passes directly posterior to the medial epicondyle of the humerus provides motor innervation to a primary muscle responsible for which specific movement at the wrist?",
+      "options": [
+        "Extension of the metacarpophalangeal joints",
+        "Pronation of the proximal radioulnar joint",
+        "Abduction of the thumb",
+        "Adduction of the wrist (ulnar deviation)"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Adduction of the wrist (ulnar deviation)",
+      "explanation": "The ulnar nerve passes directly behind the medial epicondyle. It innervates the flexor carpi ulnaris, which is a primary muscle responsible for adduction (ulnar deviation) and flexion of the wrist.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana201-joints-18",
+      "text": "Which type of joint classification accurately describes the proximal radioulnar articulation?",
+      "options": [
+        "Synovial hinge",
+        "Synovial pivot",
+        "Synovial plane",
+        "Fibrous syndesmosis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Synovial pivot",
+      "explanation": "The proximal radioulnar joint allows the cylindrical head of the radius to rotate within the fibro-osseous ring formed by the radial notch of the ulna and annular ligament, defining it as a synovial pivot joint.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana201-joints-19",
+      "text": "During rapid supination of the forearm against heavy mechanical resistance, which muscle provides the primary biomechanical advantage?",
+      "options": [
+        "Biceps brachii",
+        "Supinator",
+        "Brachioradialis",
+        "Extensor carpi radialis longus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Biceps brachii",
+      "explanation": "While the supinator acts alone during slow, unresisted supination, the biceps brachii is heavily recruited as the most powerful supinator when speed or heavy resistance is introduced.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana201-joints-20",
+      "text": "Which minor ligament extends from the neck of the radius to the inferior margin of the radial notch of the ulna, reinforcing the proximal radioulnar joint capsule inferiorly?",
+      "options": [
+        "Annular ligament",
+        "Oblique cord",
+        "Interosseous membrane",
+        "Quadrate ligament"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Quadrate ligament",
+      "explanation": "The quadrate ligament spans from the radial neck to the lower border of the radial notch of the ulna, providing stability to the inferior aspect of the proximal radioulnar joint.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana201-joints-21",
+      "text": "The distal radioulnar joint allows the radius to cross over the ulna during pronation. What structural component primarily separates this joint cavity from the radiocarpal joint cavity?",
+      "options": [
+        "The interosseous membrane",
+        "The articular disc (triangular ligament)",
+        "The palmar radiocarpal ligament",
+        "The flexor retinaculum"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The articular disc (triangular ligament)",
+      "explanation": "The articular disc binds the distal radius and ulna together and physically partitions the synovial cavity of the distal radioulnar joint from that of the radiocarpal (wrist) joint.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana201-joints-22",
+      "text": "The proximal articular surface of the radiocarpal (wrist) joint is primarily formed by the distal radius and the articular disc. Which carpal bones articulate directly with these proximal structures?",
+      "options": [
+        "Scaphoid and Lunate",
+        "Trapezium and Trapezoid",
+        "Triquetrum and Pisiform",
+        "Capitate and Hamate"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Scaphoid and Lunate",
+      "explanation": "The distal end of the radius articulates directly with the scaphoid and lunate bones. The triquetrum articulates with the articular disc during ulnar deviation, but the scaphoid and lunate form the primary radiocarpal articulation.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana201-joints-23",
+      "text": "The radiocarpal joint allows movement in two primary axes: flexion/extension and adduction/abduction. Which type of synovial joint does this functional mobility characterize?",
+      "options": [
+        "Hinge",
+        "Condyloid (ellipsoid)",
+        "Saddle",
+        "Plane"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Condyloid (ellipsoid)",
+      "explanation": "The radiocarpal joint is a biaxial condyloid (ellipsoid) joint, allowing movement in two planes (flexion/extension and abduction/adduction) but heavily restricting rotation.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana201-joints-24",
+      "text": "Which strong ligamentous structure crosses the anterior aspect of the radiocarpal joint to restrict excessive extension of the wrist?",
+      "options": [
+        "Dorsal radiocarpal ligament",
+        "Palmar radiocarpal ligament",
+        "Ulnar collateral ligament of the wrist",
+        "Transverse carpal ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Palmar radiocarpal ligament",
+      "explanation": "The strong palmar radiocarpal ligament runs from the anterior radius to the anterior carpal bones. It is drawn taut during wrist extension, serving as the primary check against hyperextension.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana201-joints-25",
+      "text": "During maximal adduction (ulnar deviation) of the wrist, which carpal bone shifts medially to articulate more fully with the articular disc of the distal radioulnar joint?",
+      "options": [
+        "Scaphoid",
+        "Lunate",
+        "Triquetrum",
+        "Pisiform"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Triquetrum",
+      "explanation": "During ulnar deviation, the proximal carpal row slides laterally, bringing the triquetrum into more extensive direct articulation with the articular disc.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana201-joints-26",
+      "text": "Which intrinsic intercarpal joint provides the greatest degree of mobility between the proximal and distal carpal rows, acting as a functional extension of the radiocarpal joint?",
+      "options": [
+        "Pisotriquetral joint",
+        "Midcarpal joint",
+        "Carpometacarpal joint of the thumb",
+        "Intermetacarpal joints"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Midcarpal joint",
+      "explanation": "The midcarpal joint, located between the proximal and distal rows of carpal bones, works in tandem with the radiocarpal joint to significantly increase the overall range of flexion and extension at the wrist.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana201-joints-27",
+      "text": "The carpometacarpal joint of the thumb is uniquely structured to allow a wide range of motion, including opposition. Which articular surfaces characterize this specific joint?",
+      "options": [
+        "The scaphoid and the first metacarpal",
+        "The trapezium and the first metacarpal",
+        "The trapezoid and the first metacarpal",
+        "The capitate and the first metacarpal"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The trapezium and the first metacarpal",
+      "explanation": "The first carpometacarpal joint is a classic saddle joint formed by the reciprocal saddle-shaped articular surfaces of the trapezium and the base of the first metacarpal.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana201-joints-28",
+      "text": "Flexion of the interphalangeal joints of the hand is primarily achieved by muscles originating in the forearm. Which muscle is specifically responsible for flexing the distal interphalangeal (DIP) joints?",
+      "options": [
+        "Flexor digitorum superficialis",
+        "Flexor digitorum profundus",
+        "Lumbricals",
+        "Palmar interossei"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Flexor digitorum profundus",
+      "explanation": "The tendons of the flexor digitorum profundus pass through the split tendons of the superficialis to insert on the bases of the distal phalanges, making it the sole flexor of the DIP joints.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana201-joints-29",
+      "text": "The metacarpophalangeal (MCP) joints of fingers 2-5 are structurally designed to permit significant abduction and adduction only when the joints are in which specific position?",
+      "options": [
+        "Full extension",
+        "Mid-flexion",
+        "Full flexion",
+        "Abduction is constant regardless of position"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Full extension",
+      "explanation": "The collateral ligaments of the MCP joints are relatively slack in extension, permitting abduction/adduction. When the joint flexes, these ligaments tighten (cam effect), restricting side-to-side movement.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana201-joints-30",
+      "text": "Which strong, transversely oriented ligamentous bands connect the palmar ligaments of adjacent metacarpophalangeal (MCP) joints (digits 2-5), preventing excessive splaying of the metacarpal heads?",
+      "options": [
+        "Deep transverse metacarpal ligaments",
+        "Superficial transverse metacarpal ligaments",
+        "Natatory ligaments",
+        "Palmar radiocarpal ligaments"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Deep transverse metacarpal ligaments",
+      "explanation": "The deep transverse metacarpal ligaments strongly connect the palmar plates (ligaments) of the MCP joints of the four fingers, binding the metacarpal heads together.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana201-joints-31",
+      "text": "At the sternoclavicular joint, an intra-articular disc separates the joint cavity into two compartments. Which structural role does this disc primarily fulfill during elevation of the clavicle?",
+      "options": [
+        "It provides a cushion against lateral compression.",
+        "It acts as a pivot point for the medial end of the clavicle.",
+        "It completely prevents anterior dislocation.",
+        "It fuses the clavicle to the manubrium."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It acts as a pivot point for the medial end of the clavicle.",
+      "explanation": "The articular disc binds to the first costal cartilage below and the clavicle above. During elevation of the lateral clavicle, the medial end depresses and pivots on this disc like a seesaw.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana201-joints-32",
+      "text": "The acromioclavicular (AC) joint is a plane synovial joint. Which ligament provides the primary reinforcement to the superior aspect of the AC joint capsule?",
+      "options": [
+        "Coracoclavicular ligament",
+        "Acromioclavicular ligament",
+        "Coracoacromial ligament",
+        "Superior transverse scapular ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Acromioclavicular ligament",
+      "explanation": "The acromioclavicular ligament directly thickens the superior aspect of the AC joint capsule. While the coracoclavicular ligaments provide the main vertical suspension, the AC ligament reinforces the capsule itself.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana201-joints-33",
+      "text": "The glenohumeral joint capsule is lax inferiorly to allow for full arm elevation. This redundant inferior fold of the capsule is specifically referred to as the:",
+      "options": [
+        "Axillary pouch",
+        "Subscapular recess",
+        "Foramen of Weitbrecht",
+        "Bicipital groove"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Axillary pouch",
+      "explanation": "The axillary pouch is the loose, redundant fold of the inferior joint capsule present when the arm is resting at the side; it unfolds and tightens during arm abduction and elevation.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana201-joints-34",
+      "text": "Which of the rotator cuff muscles does NOT produce a rotational force on the humerus, but rather contributes purely to the initiation of abduction and superior stability of the joint?",
+      "options": [
+        "Subscapularis",
+        "Infraspinatus",
+        "Teres minor",
+        "Supraspinatus"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Supraspinatus",
+      "explanation": "The supraspinatus runs over the top of the humeral head to the greater tubercle. It initiates abduction but, unlike the other three rotator cuff muscles, does not have a primary role in internal or external rotation.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana201-joints-35",
+      "text": "The tendon of the long head of the biceps brachii passes through the glenohumeral joint cavity. Which structure retains this tendon within the intertubercular sulcus (bicipital groove) as it exits the joint?",
+      "options": [
+        "Coracohumeral ligament",
+        "Transverse humeral ligament",
+        "Superior glenohumeral ligament",
+        "Tendon of the pectoralis major"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Transverse humeral ligament",
+      "explanation": "The transverse humeral ligament bridges the greater and lesser tubercles of the humerus, creating a canal that holds the long head of the biceps tendon in place within the intertubercular groove.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana201-joints-36",
+      "text": "The coracoacromial arch, formed by the coracoid process, acromion, and coracoacromial ligament, serves a specific mechanical function for the glenohumeral joint. What is its primary role?",
+      "options": [
+        "To prevent anterior dislocation of the humeral head",
+        "To prevent superior displacement of the humeral head",
+        "To limit internal rotation of the humerus",
+        "To provide attachment for the deltoid muscle"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. To prevent superior displacement of the humeral head",
+      "explanation": "The strong coracoacromial arch acts as a rigid, protective roof over the glenohumeral joint, mechanically blocking the humeral head from displacing superiorly out of the glenoid fossa.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana201-joints-37",
+      "text": "During abduction of the arm from 0 to 180 degrees, the scapula must rotate to maintain the glenoid fossa in alignment with the humeral head. This synchronized movement is termed scapulohumeral rhythm. What is the approximate ratio of glenohumeral movement to scapulothoracic movement during this motion?",
+      "options": [
+        "1:1",
+        "2:1",
+        "3:1",
+        "1:2"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 2:1",
+      "explanation": "For roughly every 3 degrees of total arm elevation, approximately 2 degrees occur at the glenohumeral joint and 1 degree occurs via upward rotation of the scapula on the thoracic wall (a 2:1 ratio).",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana201-joints-38",
+      "text": "The annular ligament encircles the head of the radius. Which bone does it firmly attach to anteriorly and posteriorly to maintain the radial head in position?",
+      "options": [
+        "The capitulum of the humerus",
+        "The coronoid process and olecranon of the ulna",
+        "The anterior and posterior margins of the radial notch of the ulna",
+        "The radial tuberosity"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The anterior and posterior margins of the radial notch of the ulna",
+      "explanation": "The annular ligament forms a fibrous ring that grips the radial head. Its ends attach firmly to the anterior and posterior margins of the radial notch on the ulna.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana201-joints-39",
+      "text": "The interosseous membrane of the forearm consists of oblique fibers. In which general direction do the majority of these collagen fibers run?",
+      "options": [
+        "Distally and medially from the radius to the ulna",
+        "Distally and laterally from the ulna to the radius",
+        "Transversely between the two bones",
+        "Proximally and medially from the radius to the ulna"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Distally and medially from the radius to the ulna",
+      "explanation": "The main fibers of the interosseous membrane run obliquely downward (distally) and medially from the radius to the ulna. This orientation helps transmit forces applied to the distal radius (like resting on your hands) up to the ulna and humerus.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana201-joints-40",
+      "text": "The oblique cord is a small ligamentous band in the forearm. What is its orientation relative to the primary fibers of the interosseous membrane?",
+      "options": [
+        "It runs parallel to the interosseous membrane fibers.",
+        "It runs perpendicular to the interosseous membrane fibers (downward from ulna to radius).",
+        "It runs transversely connecting the radial and ulnar tuberosities.",
+        "It replaces the interosseous membrane in the distal forearm."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It runs perpendicular to the interosseous membrane fibers (downward from ulna to radius).",
+      "explanation": "The oblique cord runs opposite to the main fibers of the interosseous membrane. It extends distally and laterally from the ulnar tuberosity to the radius, just below the radial tuberosity.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana201-joints-41",
+      "text": "Which functional movement of the forearm requires the radius to pivot on the capitulum of the humerus while its distal end swings around the relatively fixed head of the ulna?",
+      "options": [
+        "Flexion",
+        "Extension",
+        "Pronation",
+        "Ulnar deviation"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Pronation",
+      "explanation": "During pronation, the radial head spins on the capitulum, while the distal radius physically crosses over the stationary ulnar head, moving the palm to face posteriorly.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana201-joints-42",
+      "text": "The structural stability of the distal radioulnar joint (DRUJ) is primarily dependent on which complex connective tissue structure?",
+      "options": [
+        "The palmar and dorsal radioulnar ligaments",
+        "The triangular fibrocartilage complex (TFCC)",
+        "The interosseous membrane",
+        "The extensor retinaculum"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The triangular fibrocartilage complex (TFCC)",
+      "explanation": "The Triangular Fibrocartilage Complex (TFCC), which includes the articular disc and associated palmar/dorsal radioulnar ligaments, is the primary stabilizer of the distal radioulnar joint.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana201-joints-43",
+      "text": "The anatomical \"snuffbox\" on the lateral aspect of the wrist is bounded by the tendons of specific muscles. Which carpal bone is palpable within the floor of this depression and is most vulnerable to injury during a fall on an outstretched hand?",
+      "options": [
+        "Lunate",
+        "Trapezium",
+        "Scaphoid",
+        "Capitate"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Scaphoid",
+      "explanation": "The scaphoid bone sits directly in the floor of the anatomical snuffbox. Due to its position transmitting force from the radius to the hand, it is the most frequently fractured carpal bone.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana201-joints-44",
+      "text": "The pisiform bone is a sesamoid bone located in the proximal row of carpal bones. Within the tendon of which muscle is it embedded?",
+      "options": [
+        "Flexor carpi radialis",
+        "Flexor carpi ulnaris",
+        "Extensor carpi ulnaris",
+        "Palmaris longus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Flexor carpi ulnaris",
+      "explanation": "The pisiform acts as a sesamoid bone, enhancing the mechanical advantage of the flexor carpi ulnaris tendon, within which it is completely embedded.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana201-joints-45",
+      "text": "The transverse carpal ligament (flexor retinaculum) forms the roof of the carpal tunnel. To which medial carpal bones does this strong ligament attach?",
+      "options": [
+        "Scaphoid and Trapezium",
+        "Pisiform and Hook of Hamate",
+        "Lunate and Triquetrum",
+        "Capitate and Trapezoid"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Pisiform and Hook of Hamate",
+      "explanation": "Medially, the flexor retinaculum attaches to the pisiform and the hook of the hamate. Laterally, it attaches to the scaphoid tubercle and the trapezium.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana201-joints-46",
+      "text": "Which large nerve passes through the carpal tunnel alongside the long flexor tendons of the digits?",
+      "options": [
+        "Ulnar nerve",
+        "Radial nerve",
+        "Median nerve",
+        "Musculocutaneous nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Median nerve",
+      "explanation": "The median nerve travels through the confined space of the carpal tunnel along with the nine tendons of the flexor digitorum superficialis, profundus, and flexor pollicis longus.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana201-joints-47",
+      "text": "Guyon's canal (the ulnar canal) is a passageway at the wrist distinct from the carpal tunnel. Which structures define the medial and lateral boundaries of this canal?",
+      "options": [
+        "Scaphoid and Trapezium",
+        "Pisiform (medial) and Hook of Hamate (lateral)",
+        "Lunate and Capitate",
+        "Radius and Ulna"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Pisiform (medial) and Hook of Hamate (lateral)",
+      "explanation": "Guyon's canal lies superficial to the flexor retinaculum. Its medial wall is the pisiform, and its lateral wall is the hook of the hamate. The ulnar nerve and artery pass through it.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana201-joints-48",
+      "text": "Which specific joint in the hand provides the rigid central pillar around which the rest of the hand can cup (form an arch)?",
+      "options": [
+        "The first carpometacarpal joint (trapeziometacarpal)",
+        "The second and third carpometacarpal joints",
+        "The fourth and fifth carpometacarpal joints",
+        "The midcarpal joint"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The second and third carpometacarpal joints",
+      "explanation": "The 2nd and 3rd carpometacarpal joints (articulating with the trapezoid and capitate, respectively) are highly stable plane joints with minimal mobility, forming the rigid central axis of the hand.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana201-joints-49",
+      "text": "The fourth and fifth carpometacarpal joints are structurally more mobile than the second and third. What is the functional purpose of this increased mobility?",
+      "options": [
+        "It allows for tight gripping and cupping of the ulnar border of the hand.",
+        "It facilitates independent extension of the ring and small fingers.",
+        "It allows the thumb to oppose these fingers more easily.",
+        "It compensates for the lack of movement at the wrist."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It allows for tight gripping and cupping of the ulnar border of the hand.",
+      "explanation": "The mobility of the 4th and 5th CMC joints allows the ulnar side of the palm to fold inward, enabling the hand to cup around objects for a secure grip (like holding a hammer).",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana201-joints-50",
+      "text": "The palmar plates (volar plates) are thick fibrocartilaginous structures located on the palmar aspect of the MCP and IP joints. What is their primary mechanical function?",
+      "options": [
+        "To prevent excessive flexion of the digits",
+        "To prevent hyperextension of the digits",
+        "To provide a smooth surface for extensor tendons",
+        "To attach the collateral ligaments to the bone"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. To prevent hyperextension of the digits",
+      "explanation": "The strong palmar plates reinforce the anterior capsule of the MCP and IP joints, serving as check-reins to prevent the digits from bending backward (hyperextending).",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 50
+    },
+    {
+      "id": "ana201-joints-51",
+      "text": "The interphalangeal (IP) joints of the fingers are structurally classified as which type of synovial joint, permitting movement only in one plane?",
+      "options": [
+        "Condyloid",
+        "Pivot",
+        "Hinge",
+        "Plane"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Hinge",
+      "explanation": "The IP joints are true hinge joints (ginglymus joints). The head of the proximal phalanx is spool-shaped, fitting into the grooved base of the distal phalanx, allowing only flexion and extension.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 51
+    },
+    {
+      "id": "ana201-joints-52",
+      "text": "In the extensor mechanism of the fingers, the extensor digitorum tendon flattens as it crosses the MCP joint. Which fibrous structures wrap laterally around the MCP joint to anchor this extensor hood to the palmar plate?",
+      "options": [
+        "Sagittal bands",
+        "Lumbrical tendons",
+        "Central slips",
+        "Lateral bands"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Sagittal bands",
+      "explanation": "The sagittal bands are transverse fibers of the extensor hood that encircle the MCP joint, anchoring the extensor tendon centrally over the metacarpal head and attaching to the palmar plate.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 52
+    },
+    {
+      "id": "ana201-joints-53",
+      "text": "The extensor hood mechanism splits into distinct bands as it moves distally over the proximal phalanx. Which structure inserts onto the base of the middle phalanx to extend the proximal interphalangeal (PIP) joint?",
+      "options": [
+        "Lateral band",
+        "Terminal tendon",
+        "Central slip",
+        "Oblique retinacular ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Central slip",
+      "explanation": "The extensor tendon trifurcates over the proximal phalanx. The central bundle, known as the central slip, crosses the PIP joint and inserts on the base of the middle phalanx to extend it.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 53
+    },
+    {
+      "id": "ana201-joints-54",
+      "text": "The lateral bands of the extensor mechanism continue past the PIP joint. Where do they finally insert to extend the distal interphalangeal (DIP) joint?",
+      "options": [
+        "They fuse to form the terminal tendon, inserting on the base of the distal phalanx.",
+        "They insert separately on the lateral aspects of the middle phalanx.",
+        "They blend back into the central slip.",
+        "They attach to the deep transverse metacarpal ligament."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. They fuse to form the terminal tendon, inserting on the base of the distal phalanx.",
+      "explanation": "The lateral bands reunite distal to the PIP joint to form the single terminal tendon, which inserts on the dorsal base of the distal phalanx to extend the DIP joint.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 54
+    },
+    {
+      "id": "ana201-joints-55",
+      "text": "Which specific intrinsic muscles of the hand attach to the lateral bands of the extensor hood, allowing them to simultaneously flex the MCP joints and extend the IP joints?",
+      "options": [
+        "Thenar muscles",
+        "Hypothenar muscles",
+        "Lumbricals and interossei",
+        "Flexor digitorum superficialis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Lumbricals and interossei",
+      "explanation": "The lumbricals and interossei insert into the lateral aspects of the extensor hood. Contraction pulls the base of the hood palmarly (flexing the MCP) while tensioning the lateral bands dorsally (extending the PIP and DIP).",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 55
+    },
+    {
+      "id": "ana201-joints-56",
+      "text": "The sternoclavicular joint is the only true bony articulation between the upper limb and the axial skeleton. Which bones contribute to the articular surfaces of this joint?",
+      "options": [
+        "Sternal end of the clavicle, manubrium of the sternum, and 1st costal cartilage",
+        "Sternal end of the clavicle and the body of the sternum",
+        "Acromial end of the clavicle and the acromion of the scapula",
+        "Sternal end of the clavicle and the jugular notch only"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Sternal end of the clavicle, manubrium of the sternum, and 1st costal cartilage",
+      "explanation": "The sternoclavicular joint is formed by the bulbous sternal end of the clavicle articulating with the clavicular notch of the manubrium and the adjacent cartilage of the first rib.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 56
+    },
+    {
+      "id": "ana201-joints-57",
+      "text": "The coracohumeral ligament is a strong band of tissue reinforcing the superior aspect of the glenohumeral joint. From which bony landmark does it originate before blending with the joint capsule?",
+      "options": [
+        "The acromion process",
+        "The base of the coracoid process",
+        "The supraglenoid tubercle",
+        "The superior border of the scapula"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The base of the coracoid process",
+      "explanation": "The coracohumeral ligament originates from the lateral margin of the root (base) of the coracoid process and passes laterally to blend with the capsule and attach to the greater tubercle.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 57
+    },
+    {
+      "id": "ana201-joints-58",
+      "text": "During external rotation of the humerus, which specific anterior ligament of the glenohumeral joint is drawn tightest to provide restraint?",
+      "options": [
+        "Superior glenohumeral ligament",
+        "Middle glenohumeral ligament",
+        "Inferior glenohumeral ligament (anterior band)",
+        "Coracoacromial ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Middle glenohumeral ligament",
+      "explanation": "The middle glenohumeral ligament is situated to primarily restrict external rotation when the arm is in the mid-ranges of abduction (around 45 degrees).",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 58
+    },
+    {
+      "id": "ana201-joints-59",
+      "text": "The subacromial space is a critical gap between the coracoacromial arch and the humeral head. Which specific tendon is most susceptible to mechanical impingement within this space during arm elevation?",
+      "options": [
+        "Tendon of the subscapularis",
+        "Tendon of the supraspinatus",
+        "Tendon of the infraspinatus",
+        "Tendon of the long head of the triceps"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Tendon of the supraspinatus",
+      "explanation": "The supraspinatus tendon lies directly in the floor of the subacromial space. As the arm elevates, the space narrows, making this tendon highly vulnerable to impingement against the overlying acromion.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 59
+    },
+    {
+      "id": "ana201-joints-60",
+      "text": "The superior transverse scapular ligament bridges the suprascapular notch. Which crucial nerve passes inferior to this ligament, passing through the notch to supply structures of the shoulder?",
+      "options": [
+        "Suprascapular nerve",
+        "Axillary nerve",
+        "Dorsal scapular nerve",
+        "Thoracodorsal nerve"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Suprascapular nerve",
+      "explanation": "The suprascapular nerve passes through the suprascapular notch, beneath the superior transverse scapular ligament, to innervate the supraspinatus and infraspinatus muscles. (The suprascapular artery typically passes over the ligament).",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 60
+    },
+    {
+      "id": "ana201-joints-61",
+      "text": "Which large bursa separates the deep surface of the deltoid muscle and the acromion from the underlying supraspinatus tendon and joint capsule, facilitating smooth movement of the humeral head?",
+      "options": [
+        "Subscapular bursa",
+        "Subacromial (subdeltoid) bursa",
+        "Infraspinatus bursa",
+        "Subcoracoid bursa"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Subacromial (subdeltoid) bursa",
+      "explanation": "The subacromial bursa (often continuous with the subdeltoid bursa) is a large synovial sac that acts as a low-friction gliding surface between the rigid coracoacromial arch/deltoid and the moving rotator cuff below.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 61
+    },
+    {
+      "id": "ana201-joints-62",
+      "text": "The capitulum of the humerus is a rounded eminence on the distal articular surface. Which structure does it articulate with to form the humeroradial portion of the elbow joint?",
+      "options": [
+        "The trochlear notch of the ulna",
+        "The fovea (superior surface) of the radial head",
+        "The radial tuberosity",
+        "The articular circumference of the radial head"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The fovea (superior surface) of the radial head",
+      "explanation": "The capitulum (\"little head\") is a spherical surface that articulates directly with the shallow, cup-shaped fovea on the superior aspect of the radial head during flexion and extension.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 62
+    },
+    {
+      "id": "ana201-joints-63",
+      "text": "In addition to the anterior band, the ulnar collateral ligament of the elbow has a posterior band and a transverse band. Which of these bands contributes the least to valgus stability?",
+      "options": [
+        "Anterior band",
+        "Posterior band",
+        "Transverse (oblique) band",
+        "They contribute equally"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Transverse (oblique) band",
+      "explanation": "The transverse band (often called Cooper's ligament) bridges the olecranon and coronoid processes of the ulna. Because it begins and ends on the same bone, it contributes virtually nothing to joint stability.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 63
+    },
+    {
+      "id": "ana201-joints-64",
+      "text": "During full extension of the elbow, a portion of the joint capsule is pinched between the olecranon and the olecranon fossa. What fatty structure is pulled out of the way by the triceps muscle to prevent this impingement?",
+      "options": [
+        "Anterior fat pad",
+        "Posterior fat pad",
+        "Olecranon bursa",
+        "Synovial fold"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Posterior fat pad",
+      "explanation": "The posterior fat pad is located within the olecranon fossa. Fibers from the triceps brachii attach to the capsule and pull this fat pad superiorly during extension to prevent it from being crushed by the olecranon.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 64
+    },
+    {
+      "id": "ana201-joints-65",
+      "text": "The interosseous membrane of the forearm is deficient proximally to allow for the passage of vessels. What is the name of this proximal gap between the radius and ulna?",
+      "options": [
+        "Oblique cord opening",
+        "Proximal radioulnar foramen",
+        "Interosseous cleft",
+        "The space is just referred to as the proximal deficiency"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The space is just referred to as the proximal deficiency",
+      "explanation": "There is no specific named \"foramen\" for this gap. The interosseous membrane simply begins about an inch below the radial tuberosity, creating a space for the posterior interosseous vessels to pass backward.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 65
+    },
+    {
+      "id": "ana201-joints-66",
+      "text": "Which muscle originates on the lateral epicondyle of the humerus and inserts on the olecranon and posterior ulna, providing a minor assist to the triceps in elbow extension and stabilizing the joint capsule?",
+      "options": [
+        "Supinator",
+        "Brachioradialis",
+        "Anconeus",
+        "Extensor carpi radialis brevis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Anconeus",
+      "explanation": "The anconeus is a small, triangular muscle on the posterolateral elbow. It assists in extension and also tenses the posterior joint capsule to prevent it from being pinched.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 66
+    },
+    {
+      "id": "ana201-joints-67",
+      "text": "The proximal row of carpal bones includes the scaphoid, lunate, triquetrum, and pisiform. Which of these bones does NOT participate in the radiocarpal (wrist) joint or the midcarpal joint?",
+      "options": [
+        "Scaphoid",
+        "Lunate",
+        "Triquetrum",
+        "Pisiform"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Pisiform",
+      "explanation": "The pisiform is a sesamoid bone resting entirely on the palmar surface of the triquetrum. It does not articulate with the radius or the distal carpal row, only forming the pisotriquetral joint.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 67
+    },
+    {
+      "id": "ana201-joints-68",
+      "text": "The palmar aponeurosis is a thick, triangular fascia in the center of the palm. The tendon of which forearm muscle, when present, blends directly into the apex of this aponeurosis?",
+      "options": [
+        "Flexor carpi radialis",
+        "Flexor carpi ulnaris",
+        "Palmaris longus",
+        "Flexor digitorum superficialis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Palmaris longus",
+      "explanation": "The palmaris longus (absent in ~15% of people) is a superficial flexor whose long tendon passes over the flexor retinaculum and anchors directly into the palmar aponeurosis to tense the palmar fascia.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 68
+    },
+    {
+      "id": "ana201-joints-69",
+      "text": "The collateral ligaments of the proximal interphalangeal (PIP) joints consist of a proper cord and an accessory band. Where does the accessory band primarily insert?",
+      "options": [
+        "Onto the base of the middle phalanx",
+        "Onto the palmar plate",
+        "Into the extensor mechanism",
+        "Onto the base of the proximal phalanx"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Onto the palmar plate",
+      "explanation": "The thick \"proper\" collateral ligament inserts onto the bone (base of the middle phalanx), while the fan-shaped \"accessory\" collateral ligament runs more palmarly to insert into the palmar plate.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 69
+    },
+    {
+      "id": "ana201-joints-70",
+      "text": "The superficial palmar arch provides the primary arterial supply to the fingers. Which artery is the dominant contributor to the formation of this arch?",
+      "options": [
+        "Radial artery",
+        "Ulnar artery",
+        "Anterior interosseous artery",
+        "Deep palmar arch"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Ulnar artery",
+      "explanation": "The ulnar artery enters the hand via Guyon's canal and continues superficially to form the primary curve of the superficial palmar arch, usually completed laterally by a small branch of the radial artery.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 70
+    },
+    {
+      "id": "ana201-joints-71",
+      "text": "The deep palmar arch is situated deep to the flexor tendons in the hand. Which artery is the primary contributor to this deeper anastomotic network?",
+      "options": [
+        "Radial artery",
+        "Ulnar artery",
+        "Posterior interosseous artery",
+        "Superficial palmar branch of the radial artery"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Radial artery",
+      "explanation": "The radial artery passes through the anatomical snuffbox, pierces the first dorsal interosseous muscle to enter the deep palm, and forms the primary component of the deep palmar arch.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 71
+    },
+    {
+      "id": "ana201-joints-72",
+      "text": "At the carpometacarpal joint of the thumb, the saddle shape of the trapezium dictates its specific movements. In which plane does flexion and extension of the thumb occur relative to the plane of the palm?",
+      "options": [
+        "Perpendicular to the palm",
+        "Parallel to the palm",
+        "In a purely rotational plane",
+        "Obliquely at 45 degrees"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Parallel to the palm",
+      "explanation": "Due to the orientation of the trapezium, flexion (sweeping the thumb across the palm) and extension (sweeping it away) occur in a plane generally parallel to the flat surface of the palm.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 72
+    },
+    {
+      "id": "ana201-joints-73",
+      "text": "In contrast, abduction and adduction of the thumb at the carpometacarpal joint occur in which plane relative to the palm?",
+      "options": [
+        "Parallel to the palm",
+        "Perpendicular to the palm (moving away from/toward the palm anteriorly)",
+        "In a purely rotational plane",
+        "Only during opposition"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Perpendicular to the palm (moving away from/toward the palm anteriorly)",
+      "explanation": "Abduction of the thumb lifts it straight up away from the palm (anteriorly), and adduction returns it. This motion occurs in a plane roughly perpendicular to the palm.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 73
+    },
+    {
+      "id": "ana201-joints-74",
+      "text": "Which strong intrinsic ligament of the wrist links the scaphoid and lunate bones, playing a critical role in maintaining the synchronized movement of the proximal carpal row?",
+      "options": [
+        "Lunotriquetral ligament",
+        "Scapholunate interosseous ligament",
+        "Radioscaphocapitate ligament",
+        "Dorsal intercarpal ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Scapholunate interosseous ligament",
+      "explanation": "The scapholunate ligament is a vital, C-shaped interosseous ligament connecting the proximal edges of the scaphoid and lunate. Its integrity is crucial for carpal stability; its rupture leads to significant mechanical dysfunction.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 74
+    },
+    {
+      "id": "ana201-joints-75",
+      "text": "The distal transverse arch of the hand is formed by the heads of the metacarpals. Which metacarpal head forms the stable, highest point (keystone) of this arch?",
+      "options": [
+        "First metacarpal",
+        "Second metacarpal",
+        "Third metacarpal",
+        "Fifth metacarpal"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Third metacarpal",
+      "explanation": "The third metacarpal head acts as the central, most rigid pillar of the hand. The mobile first, fourth, and fifth metacarpals curve around this fixed central point to form the distal transverse arch.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 75
+    },
+    {
+      "id": "ana201-joints-76",
+      "text": "The movement of 'opposition' of the thumb is a complex, composite motion. Which three distinct movements combine at the carpometacarpal joint to produce opposition?",
+      "options": [
+        "Abduction, flexion, and medial rotation",
+        "Adduction, extension, and lateral rotation",
+        "Flexion, adduction, and lateral rotation",
+        "Extension, abduction, and medial rotation"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Abduction, flexion, and medial rotation",
+      "explanation": "To touch the tip of the pinky, the thumb must first move away from the hand (abduction), sweep across the palm (flexion), and rotate medially (pronation) so the fleshy pads meet.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 76
+    },
+    {
+      "id": "ana201-joints-77",
+      "text": "The glenohumeral joint is supplied by articular branches from specific nerves that cross the joint. Which nerve, traveling through the quadrangular space, supplies the inferior and posterior aspects of the joint capsule?",
+      "options": [
+        "Radial nerve",
+        "Axillary nerve",
+        "Musculocutaneous nerve",
+        "Ulnar nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Axillary nerve",
+      "explanation": "The axillary nerve wraps closely around the surgical neck of the humerus posteriorly, passing through the quadrangular space, and provides articular branches to the inferior and posterior capsule.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 77
+    },
+    {
+      "id": "ana201-joints-78",
+      "text": "Hilton’s Law states that the nerves supplying a joint also supply the muscles moving the joint and the skin overlying the insertions of those muscles. According to this law, which nerve would supply the articular surface of the anterior elbow joint?",
+      "options": [
+        "Median nerve",
+        "Ulnar nerve",
+        "Radial nerve",
+        "Musculocutaneous nerve"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Musculocutaneous nerve",
+      "explanation": "The musculocutaneous nerve innervates the primary anterior flexors (biceps brachii, brachialis) and therefore, adhering to Hilton's Law, sends articular branches to the anterior elbow joint capsule.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 78
+    },
+    {
+      "id": "ana201-joints-79",
+      "text": "Which specific ligament of the acromioclavicular joint complex is divided into two named parts: a posteromedial conoid part and an anterolateral trapezoid part?",
+      "options": [
+        "Coracoacromial ligament",
+        "Acromioclavicular ligament",
+        "Coracoclavicular ligament",
+        "Superior transverse scapular ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Coracoclavicular ligament",
+      "explanation": "The coracoclavicular (CC) ligament is massive and is the primary suspensory ligament of the upper limb. It is divided anatomically and functionally into the conoid and trapezoid ligaments.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 79
+    },
+    {
+      "id": "ana201-joints-80",
+      "text": "The shape of the conoid part of the coracoclavicular ligament resembles an inverted cone. Where is the apex of this cone attached?",
+      "options": [
+        "The conoid tubercle of the clavicle",
+        "The root of the coracoid process",
+        "The acromion",
+        "The trapezoid line of the clavicle"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The root of the coracoid process",
+      "explanation": "The conoid ligament has its narrow apex attached inferiorly to the root of the coracoid process, and it fans out widely (the base of the cone) to attach superiorly to the conoid tubercle on the clavicle.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 80
+    },
+    {
+      "id": "ana201-joints-81",
+      "text": "The trapezoid part of the coracoclavicular ligament is broadly quadrilateral. What is its primary biomechanical function during medial directed forces on the shoulder (like falling on the side of the shoulder)?",
+      "options": [
+        "To prevent inferior displacement of the clavicle",
+        "To resist medial displacement of the scapula relative to the clavicle",
+        "To prevent anterior rotation of the clavicle",
+        "To suspend the arm vertically"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. To resist medial displacement of the scapula relative to the clavicle",
+      "explanation": "While both parts suspend the arm vertically, the obliquely oriented fibers of the trapezoid ligament are specifically aligned to resist forces that would drive the acromion (and scapula) medially beneath the clavicle.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 81
+    },
+    {
+      "id": "ana201-joints-82",
+      "text": "During the final degrees of arm elevation (abduction above 90 degrees), the humerus must undergo a specific obligatory motion to prevent the greater tubercle from impinging on the acromion. What is this motion?",
+      "options": [
+        "Internal rotation",
+        "External rotation",
+        "Anterior translation",
+        "Posterior translation"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. External rotation",
+      "explanation": "As the arm elevates, the humerus must externally rotate. This rolls the large, prominent greater tubercle backward, allowing it to clear the underside of the coracoacromial arch.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 82
+    },
+    {
+      "id": "ana201-joints-83",
+      "text": "The articular surface of the humeral trochlea is covered in hyaline cartilage. Which aspect of the trochlea lacks cartilage and forms a small groove separating it from the capitulum?",
+      "options": [
+        "The medial lip",
+        "The lateral lip",
+        "The trochlear groove (sulcus)",
+        "The capitulotrochlear groove"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The capitulotrochlear groove",
+      "explanation": "A small, non-articular groove, called the capitulotrochlear groove, lies between the spherical capitulum laterally and the spool-shaped trochlea medially.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 83
+    },
+    {
+      "id": "ana201-joints-84",
+      "text": "The proximal row of carpal bones forms a convex articular surface that fits into the concave distal radius and articular disc. Which movement of the wrist is slightly greater due to the palmar tilt of the distal radial articular surface?",
+      "options": [
+        "Extension",
+        "Flexion",
+        "Radial deviation",
+        "Ulnar deviation"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Flexion",
+      "explanation": "The articular surface of the distal radius tilts slightly anteriorly (palmarly). This anatomical angulation allows for a slightly greater degree of wrist flexion compared to wrist extension.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 84
+    },
+    {
+      "id": "ana201-joints-85",
+      "text": "Similarly, the distal articular surface of the radius tilts slightly toward the ulna. Which movement of the wrist does this tilt facilitate?",
+      "options": [
+        "Extension",
+        "Flexion",
+        "Radial deviation",
+        "Ulnar deviation"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Ulnar deviation",
+      "explanation": "The ulnar tilt of the distal radius (the styloid process of the radius projects further distally than the ulnar styloid) allows for a significantly greater range of ulnar deviation compared to radial deviation.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 85
+    },
+    {
+      "id": "ana201-joints-86",
+      "text": "The tendon of the extensor pollicis longus (EPL) uses a specific bony prominence on the distal radius as a pulley to change its line of pull toward the thumb. What is this prominence called?",
+      "options": [
+        "Radial styloid process",
+        "Ulnar styloid process",
+        "Lister's tubercle (dorsal tubercle of the radius)",
+        "Scaphoid tubercle"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Lister's tubercle (dorsal tubercle of the radius)",
+      "explanation": "The EPL tendon hooks around Lister's tubercle on the dorsal aspect of the distal radius, acting as a biomechanical pulley that redirects the tendon to forcefully extend the thumb.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 86
+    },
+    {
+      "id": "ana201-joints-87",
+      "text": "The extensor retinaculum is a thickened band of fascia on the dorsal wrist that holds the extensor tendons in place. It forms six distinct osseofibrous compartments. Which tendon(s) reside in the first dorsal compartment?",
+      "options": [
+        "Extensor carpi radialis longus and brevis",
+        "Extensor pollicis longus",
+        "Abductor pollicis longus and extensor pollicis brevis",
+        "Extensor digitorum"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Abductor pollicis longus and extensor pollicis brevis",
+      "explanation": "The first dorsal compartment, located on the lateral aspect of the radial styloid, houses the tendons of the abductor pollicis longus and extensor pollicis brevis (the radial border of the snuffbox).",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 87
+    },
+    {
+      "id": "ana201-joints-88",
+      "text": "Which tendons pass through the second dorsal compartment beneath the extensor retinaculum?",
+      "options": [
+        "Extensor carpi radialis longus and brevis",
+        "Extensor pollicis longus",
+        "Extensor digiti minimi",
+        "Extensor carpi ulnaris"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Extensor carpi radialis longus and brevis",
+      "explanation": "The second dorsal compartment contains the tendons of the primary wrist extensors: the extensor carpi radialis longus and the extensor carpi radialis brevis.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 88
+    },
+    {
+      "id": "ana201-joints-89",
+      "text": "Which specific tendon travels completely alone within the third dorsal compartment, hooking around Lister's tubercle?",
+      "options": [
+        "Extensor indicis",
+        "Extensor pollicis longus",
+        "Extensor pollicis brevis",
+        "Extensor digiti minimi"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Extensor pollicis longus",
+      "explanation": "The third dorsal compartment uniquely houses only the tendon of the extensor pollicis longus, separating it from the other thumb extensors as it passes Lister's tubercle.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 89
+    },
+    {
+      "id": "ana201-joints-90",
+      "text": "The extensor digitorum and extensor indicis tendons share a compartment on the dorsal wrist. Which compartment is this?",
+      "options": [
+        "Third compartment",
+        "Fourth compartment",
+        "Fifth compartment",
+        "Sixth compartment"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Fourth compartment",
+      "explanation": "The large fourth dorsal compartment houses the four tendons of the extensor digitorum and the single tendon of the extensor indicis, passing over the distal radioulnar joint area.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 90
+    },
+    {
+      "id": "ana201-joints-91",
+      "text": "The fifth dorsal compartment is small and situated over the distal radioulnar joint. Which tendon passes through it?",
+      "options": [
+        "Extensor carpi ulnaris",
+        "Extensor digiti minimi",
+        "Extensor indicis",
+        "Extensor pollicis longus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Extensor digiti minimi",
+      "explanation": "The fifth compartment houses the tendon of the extensor digiti minimi, which provides independent extension of the small finger.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 91
+    },
+    {
+      "id": "ana201-joints-92",
+      "text": "The sixth and most medial dorsal compartment lies over the head of the ulna. Which tendon resides here?",
+      "options": [
+        "Flexor carpi ulnaris",
+        "Extensor digiti minimi",
+        "Extensor carpi ulnaris",
+        "Abductor digiti minimi"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Extensor carpi ulnaris",
+      "explanation": "The extensor carpi ulnaris tendon passes through the sixth dorsal compartment, located grooved into the lateral aspect of the ulnar styloid process.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 92
+    },
+    {
+      "id": "ana201-joints-93",
+      "text": "The lunotriquetral ligament connects the lunate and triquetrum in the proximal row. Together with the scapholunate ligament, they maintain the functional unit of the proximal carpus. If the lunotriquetral ligament fails, which direction does the lunate tend to abnormally rotate?",
+      "options": [
+        "It flexes palmarly (VISI)",
+        "It extends dorsally (DISI)",
+        "It shifts laterally",
+        "It drops into the radiocarpal joint space"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It flexes palmarly (VISI)",
+      "explanation": "The scaphoid inherently wants to flex, and the triquetrum wants to extend. The lunate balances them. If the link to the triquetrum (lunotriquetral ligament) breaks, the scaphoid's flexion force dominates, pulling the lunate palmarly (Volar Intercalated Segment Instability - VISI).",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 93
+    },
+    {
+      "id": "ana201-joints-94",
+      "text": "Conversely, if the scapholunate ligament fails, separating the scaphoid from the lunate, which direction does the lunate abnormally rotate?",
+      "options": [
+        "It flexes palmarly (VISI)",
+        "It extends dorsally (DISI)",
+        "It shifts medially",
+        "It fuses with the capitate"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It extends dorsally (DISI)",
+      "explanation": "If the lunate loses its connection to the scaphoid, the extending force of the triquetrum dominates, pulling the lunate into abnormal dorsal extension (Dorsal Intercalated Segment Instability - DISI).",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 94
+    },
+    {
+      "id": "ana201-joints-95",
+      "text": "The intermetacarpal joints (between the bases of metacarpals 2-5) are classified as what type of synovial joint?",
+      "options": [
+        "Saddle",
+        "Condyloid",
+        "Plane",
+        "Pivot"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Plane",
+      "explanation": "The intermetacarpal joints are plane joints with flat articular surfaces that allow only very slight gliding movements between the bases of the metacarpals.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 95
+    },
+    {
+      "id": "ana201-joints-96",
+      "text": "The deep branch of the ulnar nerve is the primary motor nerve for the intrinsic muscles of the hand. Which joint does it pass deeply to as it crosses from the ulnar to the radial side of the palm?",
+      "options": [
+        "Metacarpophalangeal joints",
+        "Carpometacarpal joints",
+        "Midcarpal joint",
+        "Radiocarpal joint"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Carpometacarpal joints",
+      "explanation": "The deep branch of the ulnar nerve curves laterally across the palm, passing deep to the flexor tendons and lying directly anterior to the bases of the metacarpals and the carpometacarpal joints.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 96
+    },
+    {
+      "id": "ana201-joints-97",
+      "text": "The flexor pollicis longus is the only muscle capable of flexing the interphalangeal joint of the thumb. Where does its tendon insert?",
+      "options": [
+        "Base of the proximal phalanx of the thumb",
+        "Base of the distal phalanx of the thumb",
+        "The palmar plate of the MCP joint",
+        "The sesamoid bones of the thumb"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Base of the distal phalanx of the thumb",
+      "explanation": "Similar to the flexor digitorum profundus in the fingers, the tendon of the flexor pollicis longus travels to the most distal bone, inserting on the base of the distal phalanx of the thumb.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 97
+    },
+    {
+      "id": "ana201-joints-98",
+      "text": "The superficial venous system of the upper limb originates from the dorsal venous network on the back of the hand. Which major vein drains the lateral (radial) side of this network and courses up the lateral aspect of the forearm?",
+      "options": [
+        "Basilic vein",
+        "Cephalic vein",
+        "Median cubital vein",
+        "Median antebrachial vein"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Cephalic vein",
+      "explanation": "The cephalic vein arises from the lateral aspect of the dorsal venous network (near the anatomical snuffbox) and travels superficially up the lateral side of the forearm and arm.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 98
+    },
+    {
+      "id": "ana201-joints-99",
+      "text": "Which major superficial vein drains the medial (ulnar) side of the dorsal venous network and travels up the medial aspect of the forearm?",
+      "options": [
+        "Basilic vein",
+        "Cephalic vein",
+        "Median cubital vein",
+        "Axillary vein"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Basilic vein",
+      "explanation": "The basilic vein arises from the medial side of the dorsal venous network and travels up the medial forearm before piercing the deep fascia in the arm to join the deep venous system.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 99
+    },
+    {
+      "id": "ana201-joints-100",
+      "text": "The median cubital vein is a common site for venipuncture. It typically forms a superficial connection across the cubital fossa between which two veins?",
+      "options": [
+        "Radial and Ulnar veins",
+        "Cephalic and Basilic veins",
+        "Brachial and Axillary veins",
+        "Median antebrachial and Basilic veins"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Cephalic and Basilic veins",
+      "explanation": "The median cubital vein shunts blood diagonally across the anterior elbow (cubital fossa) from the laterally positioned cephalic vein to the medially positioned basilic vein.",
+      "section": "Joints of the Upper Limb",
+      "questionNumber": 100
+    }
+  ]
+}

@@ -11,7 +11,7 @@
       "topics": [
         { "id": "ul-bones", "title": "Bones of the Upper Limb", "status": "available", "questionsCount": 100, "dataFile": "data/university/anatomy/200/questions-ana201-bones.json" },
         { "id": "ul-muscles", "title": "Muscles of the Upper Limb", "status": "available", "questionsCount": 100, "dataFile": "data/university/anatomy/200/questions-ana201-muscles.json" },
-        { "id": "ul-joints", "title": "Joints of the Upper Limb", "status": "coming-soon" },
+        { "id": "ul-joints", "title": "Joints of the Upper Limb", "status": "available", "questionsCount": 100, "dataFile": "data/university/anatomy/200/questions-ana201-joints.json" },
         { "id": "ul-brachial-plexus", "title": "Brachial Plexus", "status": "available", "questionsCount": 50, "dataFile": "data/university/anatomy/200/questions-ana201-brachial-plexus.json" },
         { "id": "ul-anatomical-snuffbox", "title": "Anatomical Snuffbox", "status": "coming-soon" },
         { "id": "ul-axilla", "title": "Axilla", "status": "coming-soon" },
