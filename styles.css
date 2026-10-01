@@ -3826,13 +3826,13 @@ body.shield-active #main {
   -webkit-touch-callout: none !important;
 }
 
-/* Dynamic Academic Security Watermark (Ultra-Faint Background) */
+/* Dynamic Academic Security Watermark */
 .screen-watermark-layer {
   position: fixed;
   inset: 0;
   z-index: 999998;
   pointer-events: none;
-  opacity: 0.014;
+  opacity: 0.1;
   overflow: hidden;
   user-select: none;
   display: flex;
@@ -3857,7 +3857,7 @@ body.shield-active #main {
 
 @media (max-width: 680px) {
   .screen-watermark-layer {
-    opacity: 0.014;
+    opacity: 0.1;
   }
   .watermark-stamp {
     font-size: 9px;
