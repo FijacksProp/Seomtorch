@@ -775,7 +775,7 @@ function renderUniHome() {
       <div>
         <span class="uni-featured-badge">Featured Course · 200 Level</span>
         <h3 class="uni-featured-title">ANA 201: Upper and Lower Limb</h3>
-        <p class="uni-featured-desc">200 High-Yield MCQs: Bones of the Upper Limb (100 Qs) & Muscles of the Upper Limb (100 Qs) with detailed clinical explanations.</p>
+        <p class="uni-featured-desc">High-Yield clinical practice covering Bones, Muscles, Joints, Brachial Plexus, and specialized anatomical regions with detailed rationale.</p>
       </div>
       <button class="button accent" id="uni-home-jump-ana201">Open ANA 201 →</button>
     </div>
@@ -2510,7 +2510,7 @@ async function renderUniCourse() {
   const topicsHtml = sections.map(section => {
     const topicItems = section.topics.map(topic => {
       const isAvailable = topic.status !== "coming-soon";
-      const tagText = isAvailable ? (topic.questionsCount ? `${topic.questionsCount} MCQs` : "Available") : "Coming soon";
+      const tagText = isAvailable ? "Available" : "Coming soon";
       const statusIcon = isAvailable ? `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>` : `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`;
       return `<div class="uni-topic-item ${isAvailable ? "available" : "coming-soon"}" ${isAvailable ? `data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" role="button" tabindex="0"` : ""}><span class="uni-topic-status">${statusIcon}</span><div class="uni-topic-info"><h4>${escapeHtml(topic.title)}</h4><span class="uni-topic-tag">${tagText}</span></div>${isAvailable ? `<button class="button uni-btn sm" type="button" style="margin-left:auto; white-space:nowrap; padding:6px 14px; font-size:12px; pointer-events:none;">Practice →</button>` : ""}</div>`;
     }).join("");
@@ -2569,7 +2569,6 @@ async function startUniPractice(courseCode, topicTitle, dataFile) {
     const detail = `<dl class="session-confirm-summary">
       <div><dt>Course</dt><dd>${escapeHtml(courseCode)}</dd></div>
       <div><dt>Focus</dt><dd>${escapeHtml(topicTitle)}</dd></div>
-      <div><dt>Questions</dt><dd>${queue.length} MCQs</dd></div>
       <div><dt>Format</dt><dd>Guided practice (Untimed)</dd></div>
     </dl>`;
 
@@ -2639,7 +2638,7 @@ function updateScreenWatermark() {
   const day = String(now.getDate()).padStart(2, "0");
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const dateFormatted = `${day} ${months[now.getMonth()]} ${now.getFullYear()}`;
-  const stampText = `SEOTORCH | FP | ${dateFormatted}`;
+  const stampText = `SEOMTORCH | FP | ${dateFormatted}`;
   let html = "";
   for (let i = 0; i < 40; i++) {
     html += `<span class="watermark-stamp">${escapeHtml(stampText)}</span>`;
