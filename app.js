@@ -172,6 +172,11 @@ async function handleModeSwitch(targetMode) {
 }
 
 async function performModeSwitch(targetMode) {
+  const shellEl = document.querySelector(".app-shell") || document.body;
+  shellEl.classList.add("portal-switching");
+
+  await new Promise(resolve => setTimeout(resolve, 140));
+
   if (currentUser) {
     currentUser.active_mode = targetMode;
     localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
@@ -189,8 +194,16 @@ async function performModeSwitch(targetMode) {
   } else {
     selectedSubject = null;
   }
-  showToast(targetMode === "university" ? "Switched to University Portal 🏛" : "Switched to Aspirants Portal 🎓");
   render();
+
+  requestAnimationFrame(() => {
+    const newShell = document.querySelector(".app-shell") || document.body;
+    newShell.classList.remove("portal-switching");
+    newShell.classList.add("portal-switched-in");
+    setTimeout(() => newShell.classList.remove("portal-switched-in"), 350);
+  });
+
+  showToast(targetMode === "university" ? "Switched to University Portal" : "Switched to Aspirants Portal");
 }
 
 function showUniversityRegistrationModal(onSuccess) {
@@ -202,17 +215,20 @@ function showUniversityRegistrationModal(onSuccess) {
   backdrop.className = "mode-modal-backdrop";
   backdrop.innerHTML = `
     <div class="mode-modal">
-      <span class="mode-modal-badge uni-badge">🏛 University Registration</span>
-      <h2>Set up University Profile</h2>
-      <p class="mode-modal-desc">To unlock University courses and practice modules, please register your undergraduate academic details:</p>
+      <span class="mode-modal-badge uni-badge">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3L2 8l10 5 10-5-10-5z"/><path d="M6 10.5v5c0 3 3 5.5 6 5.5s6-2.5 6-5.5v-5"/><path d="M22 8v6"/></svg>
+        <span>Academic Enrollment</span>
+      </span>
+      <h2>Register Your University Details</h2>
+      <p class="mode-modal-desc">Enter your institution, department and level to unlock your specialized undergraduate course modules and past questions.</p>
       <form id="uni-reg-modal-form" class="mode-modal-form">
         <div class="field">
           <label for="modal-uni-name">University / Institution *</label>
-          <input id="modal-uni-name" name="university_name" type="text" placeholder="e.g. University of Lagos (UNILAG)" required value="${escapeHtml(currentUser?.university_profile?.university_name || "")}">
+          <input id="modal-uni-name" name="university_name" type="text" placeholder="e.g. University of Ilorin (UNILORIN)" required value="${escapeHtml(currentUser?.university_profile?.university_name || "")}">
         </div>
         <div class="field">
-          <label for="modal-uni-faculty">Faculty *</label>
-          <input id="modal-uni-faculty" name="faculty" type="text" placeholder="e.g. Basic Medical Sciences" required value="${escapeHtml(currentUser?.university_profile?.faculty || "")}">
+          <label for="modal-uni-faculty">Faculty</label>
+          <input id="modal-uni-faculty" name="faculty" type="text" placeholder="e.g. Basic Medical Sciences" value="${escapeHtml(currentUser?.university_profile?.faculty || "")}">
         </div>
         <div class="field">
           <label for="modal-uni-dept">Department *</label>
@@ -232,7 +248,7 @@ function showUniversityRegistrationModal(onSuccess) {
         <div id="uni-modal-error" class="auth-error" role="alert"></div>
         <div class="button-row">
           <button type="button" class="button outline" id="close-uni-modal">Cancel</button>
-          <button type="submit" class="button" style="background:#0ea5e9;border-color:#0ea5e9;">Complete & Enter 🏛</button>
+          <button type="submit" class="button accent">Continue to University Portal →</button>
         </div>
       </form>
     </div>
@@ -272,7 +288,7 @@ function showUniversityRegistrationModal(onSuccess) {
       localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
       localStorage.setItem("seomtorch-active-mode", "university");
       backdrop.remove();
-      showToast("University profile registered! Welcome 🏛");
+      showToast("University profile registered!");
       if (onSuccess) onSuccess();
       else {
         route = "home";
@@ -282,7 +298,7 @@ function showUniversityRegistrationModal(onSuccess) {
     } catch (caught) {
       err.textContent = caught instanceof ApiError ? caught.message : "Failed to save profile. Please try again.";
       btn.disabled = false;
-      btn.textContent = "Complete & Enter 🏛";
+      btn.textContent = "Continue to University Portal →";
     }
   });
 }
@@ -296,9 +312,12 @@ function showAspirantRegistrationModal(onSuccess) {
   backdrop.className = "mode-modal-backdrop";
   backdrop.innerHTML = `
     <div class="mode-modal">
-      <span class="mode-modal-badge aspirant-badge">🎓 Aspirant Registration</span>
-      <h2>Set up Aspirant Profile</h2>
-      <p class="mode-modal-desc">To unlock JAMB, WAEC & NECO practice papers and challenges, please register your target exam details:</p>
+      <span class="mode-modal-badge aspirant-badge">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        <span>Exam Preparation</span>
+      </span>
+      <h2>Set up Exam Aspirant Profile</h2>
+      <p class="mode-modal-desc">Select your target examination and target year to access full syllabus question banks and timed mock practice.</p>
       <form id="aspirant-reg-modal-form" class="mode-modal-form">
         <div class="field">
           <label for="modal-exam-type">Target Examination *</label>
@@ -325,7 +344,7 @@ function showAspirantRegistrationModal(onSuccess) {
         <div id="aspirant-modal-error" class="auth-error" role="alert"></div>
         <div class="button-row">
           <button type="button" class="button outline" id="close-aspirant-modal">Cancel</button>
-          <button type="submit" class="button accent">Complete & Enter 🎓</button>
+          <button type="submit" class="button accent">Continue to Aspirants Portal →</button>
         </div>
       </form>
     </div>
@@ -364,7 +383,7 @@ function showAspirantRegistrationModal(onSuccess) {
       localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
       localStorage.setItem("seomtorch-active-mode", "aspirant");
       backdrop.remove();
-      showToast("Aspirants profile registered! Welcome 🎓");
+      showToast("Aspirants profile registered!");
       if (onSuccess) onSuccess();
       else {
         route = "home";
@@ -374,7 +393,7 @@ function showAspirantRegistrationModal(onSuccess) {
     } catch (caught) {
       err.textContent = caught instanceof ApiError ? caught.message : "Failed to save profile. Please try again.";
       btn.disabled = false;
-      btn.textContent = "Complete & Enter 🎓";
+      btn.textContent = "Continue to Aspirants Portal →";
     }
   });
 }
@@ -601,12 +620,12 @@ function shell(content) {
       <div class="mode-switcher-container">
         <div class="mode-switcher-pill" role="tablist" aria-label="Portal mode">
           <button type="button" class="mode-pill-btn ${mode === 'aspirant' ? 'active' : ''}" data-switch-mode="aspirant" role="tab" aria-selected="${mode === 'aspirant'}" title="Switch to Aspirants Portal">
-            <span class="mode-pill-icon">🎓</span>
-            <span class="mode-pill-label">Aspirant</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <span>Aspirant</span>
           </button>
           <button type="button" class="mode-pill-btn ${mode === 'university' ? 'active' : ''}" data-switch-mode="university" role="tab" aria-selected="${mode === 'university'}" title="Switch to University Portal">
-            <span class="mode-pill-icon">🏛</span>
-            <span class="mode-pill-label">University</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M4 18h16M4 10h16M12 3L2 8h20z"/><path d="M6 10v8M10 10v8M14 10v8M18 10v8"/></svg>
+            <span>University</span>
           </button>
         </div>
       </div>
@@ -617,7 +636,19 @@ function shell(content) {
       <div class="sidebar-foot"><div class="streak-panel"><svg class="streak-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/><path d="M12 19.2c-1.7 0-2.9-1.1-3-2.7-.1-1.2.5-2.3 1.5-3.2.1 1 .6 1.5 1.1 1.8-.2-1.7.7-2.7 1.6-3.7 1.2 1.5 1.8 3.1 1.7 4.6-.1 1.9-1.2 3.2-2.9 3.2Z"/></svg><div><span>Current streak</span><strong>${profile.rhythm || 0}<small> day${profile.rhythm === 1 ? "" : "s"}</small></strong></div></div><div class="xp-panel"><div><strong>Level ${xp.level}</strong><span>${xp.xp} XP</span></div><div class="xp-track"><i style="width:${xp.percent}%"></i></div><small>${xp.remaining} XP to next level</small></div>${mode === 'aspirant' ? `<button class="button outline small jamb-calc-sidebar-btn" id="sidebar-calc-toggle" type="button" style="width:100%; margin-top:14px; margin-bottom:6px; display:inline-flex; align-items:center; justify-content:center; gap:7px; font-size:11px; font-weight:700;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg><span>JAMB Calculator</span></button>` : ''}<p>Come back tomorrow and keep it alive.</p></div>
     </aside>
     <div class="content-wrap">
-      <header class="topbar"><span class="mobile-brand"><img src="assets/seomtorch_logo.png" alt=""><b>Seomtorch</b></span><button type="button" class="topbar-mode-pill ${mode === 'university' ? 'uni-mode' : ''}" data-switch-mode="${mode === 'aspirant' ? 'university' : 'aspirant'}" title="Switch to ${mode === 'aspirant' ? 'University' : 'Aspirant'} mode"><span>${mode === 'aspirant' ? '🎓 Aspirant' : '🏛 University'}</span><small>Switch ⇄</small></button><span class="sync-indicator ${pendingSyncCount > 0 ? 'pending' : navigator.onLine ? 'synced' : 'offline'}" title="${pendingSyncCount > 0 ? `${pendingSyncCount} items pending sync` : navigator.onLine ? 'Synced' : 'Offline'}"><i></i>${pendingSyncCount > 0 ? `<small>${pendingSyncCount}</small>` : ''}</span><div class="top-stat"><strong>${testStats.tests_taken}</strong><span>tests</span></div><div class="top-stat"><strong>${testStats.average_score}%</strong><span>test average</span></div><div class="top-xp" title="Level ${xp.level} · ${xp.remaining} XP to next level"><small>LV ${xp.level}</small><strong>${xp.xp} XP</strong></div><div class="top-streak" title="${profile.rhythm || 0}-day streak"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/></svg><span><small>Streak</small><strong>${profile.rhythm || 0}</strong></span></div><button class="avatar" data-route="profile" title="Open ${escapeHtml(profile.name)}'s profile">${initials()}</button></header>
+      <header class="topbar"><span class="mobile-brand"><img src="assets/seomtorch_logo.png" alt=""><b>Seomtorch</b></span><span class="sync-indicator ${pendingSyncCount > 0 ? 'pending' : navigator.onLine ? 'synced' : 'offline'}" title="${pendingSyncCount > 0 ? `${pendingSyncCount} items pending sync` : navigator.onLine ? 'Synced' : 'Offline'}"><i></i>${pendingSyncCount > 0 ? `<small>${pendingSyncCount}</small>` : ''}</span><div class="top-stat"><strong>${testStats.tests_taken}</strong><span>tests</span></div><div class="top-stat"><strong>${testStats.average_score}%</strong><span>test average</span></div><div class="top-xp" title="Level ${xp.level} · ${xp.remaining} XP to next level"><small>LV ${xp.level}</small><strong>${xp.xp} XP</strong></div><div class="top-streak" title="${profile.rhythm || 0}-day streak"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/></svg><span><small>Streak</small><strong>${profile.rhythm || 0}</strong></span></div><button class="avatar" data-route="profile" title="Open ${escapeHtml(profile.name)}'s profile">${initials()}</button></header>
+      <div class="portal-switch-bar" role="tablist" aria-label="Portal selection">
+        <div class="portal-switch-track">
+          <button type="button" class="portal-switch-tab ${mode === 'aspirant' ? 'active' : ''}" data-switch-mode="aspirant" role="tab" aria-selected="${mode === 'aspirant'}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <span>Aspirants (JAMB / SSCE)</span>
+          </button>
+          <button type="button" class="portal-switch-tab ${mode === 'university' ? 'active' : ''}" data-switch-mode="university" role="tab" aria-selected="${mode === 'university'}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M4 18h16M4 10h16M12 3L2 8h20z"/><path d="M6 10v8M10 10v8M14 10v8M18 10v8"/></svg>
+            <span>University Degree</span>
+          </button>
+        </div>
+      </div>
       <main id="main">${content}</main>
     </div>
   </div>${!isStandalone() && route !== "session" ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ""}`;
@@ -697,17 +728,41 @@ function renderUniHome() {
   const uniProf = currentUser?.university_profile || {};
   const greeting = new Date().getHours() < 12 ? "Good morning" : new Date().getHours() < 17 ? "Good afternoon" : "Good evening";
   const uniName = uniProf.university_name || "University Studies";
-  const deptName = uniProf.department ? `${uniProf.department} Department` : "Undergraduate Studies";
+  const deptTitle = uniProf.department ? `Department of ${uniProf.department}` : "Undergraduate Studies";
   const levelText = uniProf.level ? `${uniProf.level} Level` : "Undergraduate";
 
   const content = `<section class="page">
-    <div class="uni-home-banner">
-      <span class="uni-academic-tag">🏛 ${escapeHtml(uniName)} · ${escapeHtml(deptName)} · ${escapeHtml(levelText)}</span>
-      <h1>${greeting}, ${escapeHtml(firstName())}.</h1>
-      <p class="uni-banner-lead">Your University Academic Workspace. Dedicated course syllabi, specialized departmental past questions, and topic-by-topic mastery.</p>
-      <div class="uni-banner-actions">
-        <button class="button" style="background:#0ea5e9;border-color:#0ea5e9;" id="uni-home-open-courses">Explore All Departments & Courses →</button>
-        <button class="button outline" style="color:#ffffff;border-color:rgba(255,255,255,0.4);" id="uni-home-edit-profile">Academic Profile ⚙</button>
+    <div class="uni-workspace-masthead">
+      <div class="uni-institution-strip">
+        <svg class="uni-crest-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M12 3L2 8l10 5 10-5-10-5z"/><path d="M6 10.5v5c0 3 3 5.5 6 5.5s6-2.5 6-5.5v-5"/><path d="M22 8v6"/>
+        </svg>
+        <span class="uni-inst-name">${escapeHtml(uniName)}</span>
+        <span class="uni-sep-dot">·</span>
+        <span class="uni-level-pill">${escapeHtml(levelText)}</span>
+      </div>
+
+      <div class="uni-dept-block">
+        <span class="uni-dept-prefix">Academic Program</span>
+        <h2 class="uni-dept-title">${escapeHtml(deptTitle)}</h2>
+        ${uniProf.faculty ? `<span class="uni-fac-name">Faculty of ${escapeHtml(uniProf.faculty)}</span>` : ""}
+      </div>
+
+      <div class="uni-masthead-divider"></div>
+
+      <div class="uni-greeting-group">
+        <h1>${greeting}, ${escapeHtml(firstName())}.</h1>
+        <p>Review course materials, practise departmental questions, and track topic mastery.</p>
+      </div>
+
+      <div class="uni-masthead-actions">
+        <button class="button accent" id="uni-home-open-courses">
+          <span>Explore Department Courses</span>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <button class="button outline" id="uni-home-edit-profile">
+          <span>Update Academic Info</span>
+        </button>
       </div>
     </div>
 
@@ -722,7 +777,7 @@ function renderUniHome() {
         <h3 class="uni-featured-title">ANA 201: Upper and Lower Limb</h3>
         <p class="uni-featured-desc">200 High-Yield MCQs: Bones of the Upper Limb (100 Qs) & Muscles of the Upper Limb (100 Qs) with detailed clinical explanations.</p>
       </div>
-      <button class="button" style="background:#0ea5e9;border-color:#0ea5e9;white-space:nowrap;" id="uni-home-jump-ana201">Open ANA 201 →</button>
+      <button class="button accent" id="uni-home-jump-ana201">Open ANA 201 →</button>
     </div>
 
     <div class="section-head">
@@ -733,7 +788,9 @@ function renderUniHome() {
     <div class="uni-quick-grid">
       <div class="uni-portal-status-card">
         <div>
-          <span style="font-size:26px;display:block;margin-bottom:8px;">🦴</span>
+          <div class="uni-dept-svg-mark anatomy">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20M7 7l10 10M17 7L7 17"/></svg>
+          </div>
           <strong>Human Anatomy</strong>
           <p>Gross anatomy, neuroanatomy, embryology and histology with detailed anatomical landmarks and clinical correlations.</p>
         </div>
@@ -742,9 +799,11 @@ function renderUniHome() {
 
       <div class="uni-portal-status-card">
         <div>
-          <span style="font-size:26px;display:block;margin-bottom:8px;">⚡</span>
+          <div class="uni-dept-svg-mark physiology">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
           <strong>Human Physiology</strong>
-          <p>Cellular physiology, blood, cardiovascular, respiratory, renal, and endocrine organ systems.</p>
+          <p>Cellular physiology, cardiovascular, respiratory, renal, and neuro-endocrine system mechanics.</p>
         </div>
         <button class="button outline small" data-uni-browse-dept="physiology">Browse Physiology Courses →</button>
       </div>
@@ -1385,7 +1444,7 @@ function renderProfile(filter = "") {
   const xp = xpState();
   const testStats = profile.tests || { tests_taken: 0, average_score: 0 };
   const joined = currentUser?.date_joined ? new Date(currentUser.date_joined).toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) : "—";
-  const content = `<section class="page profile-page"><div class="profile-hero"><div class="profile-monogram">${initials()}</div><div><p class="eyebrow">Student profile</p><h1>${escapeHtml(currentUser?.username || profile.name)}</h1><p>${escapeHtml(currentUser?.email || profile.email)} · Member since ${joined}</p></div><button class="button outline" id="refresh-account">Refresh account</button></div><div class="profile-grid"><section class="profile-card identity-card"><span class="card-label">Student ID</span><strong>${escapeHtml(currentUser?.public_id || "—")}</strong><p>Share this ID with people you know when they invite you to a challenge.</p></section><section class="profile-card level-card"><span class="card-label">Level ${xp.level}</span><strong>${xp.xp} <small>XP</small></strong><div class="xp-track light"><i style="width:${xp.percent}%"></i></div><p>${xp.remaining} XP until level ${xp.level + 1}</p></section></div><div class="metric-strip four profile-metrics"><div class="metric"><strong>${attempts.length}</strong><span>answers recorded</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> days</small></strong><span>current streak</span></div><div class="metric"><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>best streak</span></div></div><div class="section-head"><h2>Academic Portals & Registrations</h2><p>Your enrollment across student portals</p></div><div class="uni-quick-grid" style="margin-bottom:28px;"><div class="uni-portal-status-card"><div><span style="font-size:24px;display:block;margin-bottom:6px;">🎓</span><strong>Aspirants Portal</strong><p>${hasAspirantProfile() ? `Registered for ${(currentUser?.aspirant_profile?.exam_type || "JAMB").toUpperCase()} ${currentUser?.aspirant_profile?.target_year || ""}` : "Not registered yet. Required for JAMB & SSCE practice."}</p></div><button class="button ${hasAspirantProfile() ? 'outline' : 'accent'} small" id="profile-manage-aspirant">${hasAspirantProfile() ? "Update Exam Details" : "Register for Aspirants Portal →"}</button></div><div class="uni-portal-status-card"><div><span style="font-size:24px;display:block;margin-bottom:6px;">🏛</span><strong>University Portal</strong><p>${hasUniversityProfile() ? `Enrolled at ${escapeHtml(currentUser?.university_profile?.university_name || "")} · ${escapeHtml(currentUser?.university_profile?.department || "")} (${currentUser?.university_profile?.level || 200}L)` : "Not registered yet. Required for undergraduate course banks."}</p></div><button class="button ${hasUniversityProfile() ? 'outline' : ''} small" style="${!hasUniversityProfile() ? 'background:#0ea5e9;border-color:#0ea5e9;' : ''}" id="profile-manage-university">${hasUniversityProfile() ? "Update University Details" : "Register for University Portal →"}</button></div></div>${renderAchievementSummary()}<div class="section-head"><h2>Subject record</h2><p>Synchronized account history</p></div><div class="profile-subjects">${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<article><span>${subject.name}</span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong><small>${stat.count} answer${stat.count === 1 ? "" : "s"}</small></article>`; }).join("")}</div><section class="settings-panel"><p class="eyebrow">Account data</p><h2>Portable, private and recoverable.</h2><p class="lede">The server keeps the authoritative account record. This device stores an offline copy and queues answers whenever the connection drops.</p><div class="button-row"><button class="button" id="export-data">Export backup</button><label class="button outline" for="import-data">Import backup</label><input class="file-input" id="import-data" type="file" accept="application/json"><button class="button outline" id="clear-cache">Refresh device cache</button><button class="button danger" id="sign-out">Sign out</button></div></section><section class="settings-panel guide-section"><p class="eyebrow">Guide and support</p><h2>Answers, without the noise.</h2><p class="lede">Quick guidance about practice, progress and account data.</p><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="faq-search" value="${escapeHtml(filter)}" placeholder="Search help topics" aria-label="Search help topics"></div><div id="faq-results">${groups.length ? groups.map(group => `<section class="faq-group"><h3>${group}</h3>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("") : '<div class="empty">No help entries match that search.</div>'}</div></section></section>`;
+  const content = `<section class="page profile-page"><div class="profile-hero"><div class="profile-monogram">${initials()}</div><div><p class="eyebrow">Student profile</p><h1>${escapeHtml(currentUser?.username || profile.name)}</h1><p>${escapeHtml(currentUser?.email || profile.email)} · Member since ${joined}</p></div><button class="button outline" id="refresh-account">Refresh account</button></div><div class="profile-grid"><section class="profile-card identity-card"><span class="card-label">Student ID</span><strong>${escapeHtml(currentUser?.public_id || "—")}</strong><p>Share this ID with people you know when they invite you to a challenge.</p></section><section class="profile-card level-card"><span class="card-label">Level ${xp.level}</span><strong>${xp.xp} <small>XP</small></strong><div class="xp-track light"><i style="width:${xp.percent}%"></i></div><p>${xp.remaining} XP until level ${xp.level + 1}</p></section></div><div class="metric-strip four profile-metrics"><div class="metric"><strong>${attempts.length}</strong><span>answers recorded</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> days</small></strong><span>current streak</span></div><div class="metric"><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>best streak</span></div></div><div class="section-head"><h2>Academic Portals & Registrations</h2><p>Your enrollment across student portals</p></div><div class="uni-quick-grid" style="margin-bottom:28px;"><div class="uni-portal-status-card"><div><div class="uni-dept-svg-mark anatomy"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><strong>Aspirants Portal</strong><p>${hasAspirantProfile() ? `Registered for ${(currentUser?.aspirant_profile?.exam_type || "JAMB").toUpperCase()} ${currentUser?.aspirant_profile?.target_year || ""}` : "Not registered yet. Required for JAMB & SSCE practice."}</p></div><button class="button ${hasAspirantProfile() ? 'outline' : 'accent'} small" id="profile-manage-aspirant">${hasAspirantProfile() ? "Update Exam Details" : "Register for Aspirants Portal →"}</button></div><div class="uni-portal-status-card"><div><div class="uni-dept-svg-mark physiology"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M4 18h16M4 10h16M12 3L2 8h20z"/><path d="M6 10v8M10 10v8M14 10v8M18 10v8"/></svg></div><strong>University Portal</strong><p>${hasUniversityProfile() ? `Enrolled at ${escapeHtml(currentUser?.university_profile?.university_name || "")} · ${escapeHtml(currentUser?.university_profile?.department || "")} (${currentUser?.university_profile?.level || 200}L)` : "Not registered yet. Required for undergraduate course banks."}</p></div><button class="button ${hasUniversityProfile() ? 'outline' : 'accent'} small" id="profile-manage-university">${hasUniversityProfile() ? "Update University Details" : "Register for University Portal →"}</button></div></div>${renderAchievementSummary()}<div class="section-head"><h2>Subject record</h2><p>Synchronized account history</p></div><div class="profile-subjects">${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<article><span>${subject.name}</span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong><small>${stat.count} answer${stat.count === 1 ? "" : "s"}</small></article>`; }).join("")}</div><section class="settings-panel"><p class="eyebrow">Account data</p><h2>Portable, private and recoverable.</h2><p class="lede">The server keeps the authoritative account record. This device stores an offline copy and queues answers whenever the connection drops.</p><div class="button-row"><button class="button" id="export-data">Export backup</button><label class="button outline" for="import-data">Import backup</label><input class="file-input" id="import-data" type="file" accept="application/json"><button class="button outline" id="clear-cache">Refresh device cache</button><button class="button danger" id="sign-out">Sign out</button></div></section><section class="settings-panel guide-section"><p class="eyebrow">Guide and support</p><h2>Answers, without the noise.</h2><p class="lede">Quick guidance about practice, progress and account data.</p><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="faq-search" value="${escapeHtml(filter)}" placeholder="Search help topics" aria-label="Search help topics"></div><div id="faq-results">${groups.length ? groups.map(group => `<section class="faq-group"><h3>${group}</h3>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("") : '<div class="empty">No help entries match that search.</div>'}</div></section></section>`;
   app.innerHTML = shell(content);
   const profileMetrics = document.querySelectorAll(".profile-metrics .metric");
   if (profileMetrics[0]) profileMetrics[0].innerHTML = `<strong>${testStats.tests_taken}</strong><span>tests taken</span>`;
@@ -2178,7 +2237,7 @@ async function refreshDeviceCache() {
 
 function renderAuth() {
   const register = authMode === "register";
-  app.innerHTML = `<main class="onboarding auth-screen"><section class="onboard-brand"><span class="brand"><span class="brand-symbol" aria-hidden="true"><img src="assets/seomtorch_logo.png" alt=""></span><span class="brand-name">Seomtorch<small>Prepare with purpose</small></span></span><div><blockquote>Your progress should follow you.</blockquote><p>Sign in to keep every answer, streak and milestone connected to your account.</p></div><small>Biology · Chemistry · Civic Education · Computer Studies · Economics · English Language · General Paper · Government · History · Literature in English · Marketing · Mathematics · Music · Physics · University Courses</small></section><section class="onboard-form"><div><div class="auth-tabs"><button class="${!register ? "active" : ""}" data-auth-mode="signin">Sign in</button><button class="${register ? "active" : ""}" data-auth-mode="register">Register</button></div><p class="eyebrow">${register ? "Create your account" : "Welcome back"}</p><h1>${register ? "Begin your preparation." : "Return to your study desk."}</h1><p class="lede">${register ? "Select your path and create a secure profile." : "Sign in with your email address and password."}</p><form id="auth-form" class="auth-form">${register ? '<div class="field"><label for="auth-username">Username</label><input id="auth-username" name="username" type="text" maxlength="150" autocomplete="username" required></div>' : ""}<div class="field"><label for="auth-email">Email address</label><input id="auth-email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="auth-password">Password</label><input id="auth-password" name="password" type="password" minlength="8" autocomplete="${register ? "new-password" : "current-password"}" required></div>${register ? `<div class="field"><label style="font-weight:700;margin-bottom:8px;display:block;">Choose your primary portal:</label><div class="reg-path-selector"><label class="reg-path-option"><input type="radio" name="user_type" value="aspirant" checked><div class="reg-path-card"><span class="reg-path-icon">🎓</span><strong>Exam Aspirant</strong><small>JAMB, WAEC, NECO & Post-UTME</small></div></label><label class="reg-path-option"><input type="radio" name="user_type" value="university"><div class="reg-path-card uni-path"><span class="reg-path-icon">🏛</span><strong>University Student</strong><small>Undergraduate Degree (100L - 600L)</small></div></label></div></div><div id="reg-aspirant-fields"><div class="field"><label for="auth-exam-type">Target Examination</label><select id="auth-exam-type" name="exam_type"><option value="jamb">JAMB UTME</option><option value="waec">WAEC SSCE</option><option value="neco">NECO SSCE</option><option value="post_utme">POST-UTME</option></select></div><div class="field"><label for="auth-target-year">Target Year</label><input id="auth-target-year" name="target_year" type="number" min="2024" max="2035" value="2026"></div></div><div id="reg-uni-fields" style="display:none;"><div class="field"><label for="auth-uni-name">University / Institution *</label><input id="auth-uni-name" name="university_name" type="text" placeholder="e.g. University of Lagos (UNILAG)"></div><div class="field"><label for="auth-uni-dept">Department *</label><input id="auth-uni-dept" name="department" type="text" placeholder="e.g. Anatomy"></div><div class="field"><label for="auth-uni-level">Level</label><select id="auth-uni-level" name="level"><option value="100">100 Level</option><option value="200" selected>200 Level</option><option value="300">300 Level</option><option value="400">400 Level</option><option value="500">500 Level</option><option value="600">600 Level</option></select></div></div>` : ""}<div id="auth-error" class="auth-error" role="alert"></div><button class="button auth-submit" type="submit">${register ? "Create account" : "Sign in"} →</button></form></div></section></main>${!isStandalone() ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ''}`;
+  app.innerHTML = `<main class="onboarding auth-screen"><section class="onboard-brand"><span class="brand"><span class="brand-symbol" aria-hidden="true"><img src="assets/seomtorch_logo.png" alt=""></span><span class="brand-name">Seomtorch<small>Prepare with purpose</small></span></span><div><blockquote>Your progress should follow you.</blockquote><p>Sign in to keep every answer, streak and milestone connected to your account.</p></div><small>Biology · Chemistry · Civic Education · Computer Studies · Economics · English Language · General Paper · Government · History · Literature in English · Marketing · Mathematics · Music · Physics · University Courses</small></section><section class="onboard-form"><div><div class="auth-tabs"><button class="${!register ? "active" : ""}" data-auth-mode="signin">Sign in</button><button class="${register ? "active" : ""}" data-auth-mode="register">Register</button></div><p class="eyebrow">${register ? "Create your account" : "Welcome back"}</p><h1>${register ? "Begin your preparation." : "Return to your study desk."}</h1><p class="lede">${register ? "Select your path and create a secure profile." : "Sign in with your email address and password."}</p><form id="auth-form" class="auth-form">${register ? '<div class="field"><label for="auth-username">Username</label><input id="auth-username" name="username" type="text" maxlength="150" autocomplete="username" required></div>' : ""}<div class="field"><label for="auth-email">Email address</label><input id="auth-email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="auth-password">Password</label><input id="auth-password" name="password" type="password" minlength="8" autocomplete="${register ? "new-password" : "current-password"}" required></div>${register ? `<div class="field"><label style="font-weight:700;margin-bottom:8px;display:block;">Choose your primary portal:</label><div class="reg-path-selector"><label class="reg-path-option"><input type="radio" name="user_type" value="aspirant" checked><div class="reg-path-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg><strong>Exam Aspirant</strong><small>JAMB, WAEC, NECO & Post-UTME</small></div></label><label class="reg-path-option"><input type="radio" name="user_type" value="university"><div class="reg-path-card uni-path"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M3 10h18M5 10v11M9 10v11M15 10v11M19 10v11M12 2L2 7h20L12 2z"/></svg><strong>University Student</strong><small>Undergraduate Degree (100L - 600L)</small></div></label></div></div><div id="reg-aspirant-fields"><div class="field"><label for="auth-exam-type">Target Examination</label><select id="auth-exam-type" name="exam_type"><option value="jamb">JAMB UTME</option><option value="waec">WAEC SSCE</option><option value="neco">NECO SSCE</option><option value="post_utme">POST-UTME</option></select></div><div class="field"><label for="auth-target-year">Target Year</label><input id="auth-target-year" name="target_year" type="number" min="2024" max="2035" value="2026"></div></div><div id="reg-uni-fields" style="display:none;"><div class="field"><label for="auth-uni-name">University / Institution *</label><input id="auth-uni-name" name="university_name" type="text" placeholder="e.g. University of Lagos (UNILAG)"></div><div class="field"><label for="auth-uni-dept">Department *</label><input id="auth-uni-dept" name="department" type="text" placeholder="e.g. Anatomy"></div><div class="field"><label for="auth-uni-level">Level</label><select id="auth-uni-level" name="level"><option value="100">100 Level</option><option value="200" selected>200 Level</option><option value="300">300 Level</option><option value="400">400 Level</option><option value="500">500 Level</option><option value="600">600 Level</option></select></div></div>` : ""}<div id="auth-error" class="auth-error" role="alert"></div><button class="button auth-submit" type="submit">${register ? "Create account" : "Sign in"} →</button></form></div></section></main>${!isStandalone() ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ''}`;
   document.querySelectorAll("[data-auth-mode]").forEach(button => button.addEventListener("click", () => { authMode = button.dataset.authMode; renderAuth(); }));
   document.querySelectorAll("[data-install-app]").forEach(button => button.addEventListener("click", installApp));
   if (register) {
@@ -2290,9 +2349,19 @@ async function signOut() {
 
 // ─── University Module ──────────────────────────────────────────────────────
 
+function getDeptIconSvg(deptId) {
+  if (deptId === "anatomy") {
+    return `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20M7 7l10 10M17 7L7 17"/></svg>`;
+  }
+  if (deptId === "physiology") {
+    return `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`;
+  }
+  return `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-0-5.5H20"/></svg>`;
+}
+
 function uniShell(content, breadcrumbs = []) {
   const crumbHtml = breadcrumbs.length ? `<nav class="uni-breadcrumb" aria-label="University navigation">${breadcrumbs.map((c, i) => i < breadcrumbs.length - 1 ? `<button data-uni-crumb="${i}">${escapeHtml(c.label)}</button><span aria-hidden="true">›</span>` : `<span class="current">${escapeHtml(c.label)}</span>`).join("")}</nav>` : "";
-  return shell(`<section class="uni-page"><div class="uni-header"><div class="uni-header-inner"><span class="uni-badge">🎓 University Mode</span><h1 class="uni-title">${breadcrumbs.length ? escapeHtml(breadcrumbs[breadcrumbs.length - 1].label) : "University"}</h1>${crumbHtml}</div></div><div class="uni-body">${content}</div></section>`);
+  return shell(`<section class="uni-page"><div class="uni-header"><div class="uni-header-inner"><span class="uni-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg> University Mode</span><h1 class="uni-title">${breadcrumbs.length ? escapeHtml(breadcrumbs[breadcrumbs.length - 1].label) : "University"}</h1>${crumbHtml}</div></div><div class="uni-body">${content}</div></section>`);
 }
 
 function bindUniCrumbs(breadcrumbs) {
@@ -2337,7 +2406,7 @@ async function renderUniDepartments() {
     return;
   }
   uniDepartments = data.departments;
-  const cards = data.departments.map(dept => `<button class="uni-dept-card" data-uni-dept="${dept.id}" style="--dept-color:${dept.color};--dept-accent:${dept.accentColor}"><span class="uni-dept-icon">${dept.icon}</span><div class="uni-dept-info"><h3>${escapeHtml(dept.name)}</h3><span class="uni-dept-faculty">${escapeHtml(dept.faculty)}</span><p>${escapeHtml(dept.tagline)}</p></div><span class="uni-dept-levels">${dept.levels.length} level${dept.levels.length > 1 ? "s" : ""} available</span><span class="row-arrow" aria-hidden="true">→</span></button>`).join("");
+  const cards = data.departments.map(dept => `<button class="uni-dept-card" data-uni-dept="${dept.id}" style="--dept-color:${dept.color};--dept-accent:${dept.accentColor}"><span class="uni-dept-icon">${getDeptIconSvg(dept.id)}</span><div class="uni-dept-info"><h3>${escapeHtml(dept.name)}</h3><span class="uni-dept-faculty">${escapeHtml(dept.faculty)}</span><p>${escapeHtml(dept.tagline)}</p></div><span class="uni-dept-levels">${dept.levels.length} level${dept.levels.length > 1 ? "s" : ""} available</span><span class="row-arrow" aria-hidden="true">→</span></button>`).join("");
 
   const breadcrumbs = [{ label: "University" }];
   app.innerHTML = uniShell(`<p class="uni-subtitle">Select a department to begin studying.</p><div class="uni-dept-list">${cards}</div>`, breadcrumbs);
@@ -2367,7 +2436,7 @@ async function renderUniLevels() {
     { label: dept.name }
   ];
 
-  app.innerHTML = uniShell(`<div class="uni-dept-hero" style="--dept-color:${dept.color};--dept-accent:${dept.accentColor}"><span class="uni-dept-icon-lg">${dept.icon}</span><p class="uni-dept-desc">${escapeHtml(description)}</p><span class="uni-dept-faculty-tag">${escapeHtml(dept.faculty)}</span></div><h2 class="uni-section-title">Select your level</h2><div class="uni-level-grid">${levelCards}</div>`, breadcrumbs);
+  app.innerHTML = uniShell(`<div class="uni-dept-hero" style="--dept-color:${dept.color};--dept-accent:${dept.accentColor}"><span class="uni-dept-icon-lg">${getDeptIconSvg(dept.id)}</span><p class="uni-dept-desc">${escapeHtml(description)}</p><span class="uni-dept-faculty-tag">${escapeHtml(dept.faculty)}</span></div><h2 class="uni-section-title">Select your level</h2><div class="uni-level-grid">${levelCards}</div>`, breadcrumbs);
   bindShell();
   bindUniCrumbs(breadcrumbs);
 
@@ -2442,7 +2511,8 @@ async function renderUniCourse() {
     const topicItems = section.topics.map(topic => {
       const isAvailable = topic.status !== "coming-soon";
       const tagText = isAvailable ? (topic.questionsCount ? `${topic.questionsCount} MCQs` : "Available") : "Coming soon";
-      return `<div class="uni-topic-item ${isAvailable ? "available" : "coming-soon"}" ${isAvailable ? `data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" role="button" tabindex="0"` : ""}><span class="uni-topic-status">${isAvailable ? "📖" : "🔒"}</span><div class="uni-topic-info"><h4>${escapeHtml(topic.title)}</h4><span class="uni-topic-tag">${tagText}</span></div>${isAvailable ? `<button class="button uni-btn sm" type="button" style="margin-left:auto; white-space:nowrap; padding:6px 14px; font-size:12px; pointer-events:none;">Practice →</button>` : ""}</div>`;
+      const statusIcon = isAvailable ? `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>` : `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`;
+      return `<div class="uni-topic-item ${isAvailable ? "available" : "coming-soon"}" ${isAvailable ? `data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" role="button" tabindex="0"` : ""}><span class="uni-topic-status">${statusIcon}</span><div class="uni-topic-info"><h4>${escapeHtml(topic.title)}</h4><span class="uni-topic-tag">${tagText}</span></div>${isAvailable ? `<button class="button uni-btn sm" type="button" style="margin-left:auto; white-space:nowrap; padding:6px 14px; font-size:12px; pointer-events:none;">Practice →</button>` : ""}</div>`;
     }).join("");
     return `<div class="uni-section"><h3 class="uni-section-heading">${escapeHtml(section.title)}</h3><div class="uni-topic-list">${topicItems}</div></div>`;
   }).join("");
