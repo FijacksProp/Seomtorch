@@ -140,6 +140,245 @@ function readCachedUser() {
   catch { localStorage.removeItem("seomtorch-auth-user"); return null; }
 }
 
+function getActiveMode() {
+  return currentUser?.active_mode || localStorage.getItem("seomtorch-active-mode") || "aspirant";
+}
+
+function hasAspirantProfile() {
+  return Boolean(currentUser?.has_aspirant_profile || currentUser?.aspirant_profile);
+}
+
+function hasUniversityProfile() {
+  return Boolean(currentUser?.has_university_profile || currentUser?.university_profile);
+}
+
+async function handleModeSwitch(targetMode) {
+  const currentMode = getActiveMode();
+  if (targetMode === currentMode) return;
+
+  if (targetMode === "university") {
+    if (!hasUniversityProfile()) {
+      showUniversityRegistrationModal();
+      return;
+    }
+  } else if (targetMode === "aspirant") {
+    if (!hasAspirantProfile() && currentUser?.user_type === "university") {
+      showAspirantRegistrationModal();
+      return;
+    }
+  }
+
+  await performModeSwitch(targetMode);
+}
+
+async function performModeSwitch(targetMode) {
+  if (currentUser) {
+    currentUser.active_mode = targetMode;
+    localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
+  }
+  localStorage.setItem("seomtorch-active-mode", targetMode);
+  if (authToken) {
+    api.switchMode(authToken, targetMode).catch(() => {});
+  }
+  route = "home";
+  if (targetMode === "university") {
+    uniRoute = "departments";
+    uniDeptId = null;
+    uniLevel = null;
+    uniCourseId = null;
+  } else {
+    selectedSubject = null;
+  }
+  showToast(targetMode === "university" ? "Switched to University Portal 🏛" : "Switched to Aspirants Portal 🎓");
+  render();
+}
+
+function showUniversityRegistrationModal(onSuccess) {
+  const existingModal = document.querySelector("#mode-modal-backdrop");
+  if (existingModal) existingModal.remove();
+
+  const backdrop = document.createElement("div");
+  backdrop.id = "mode-modal-backdrop";
+  backdrop.className = "mode-modal-backdrop";
+  backdrop.innerHTML = `
+    <div class="mode-modal">
+      <span class="mode-modal-badge uni-badge">🏛 University Registration</span>
+      <h2>Set up University Profile</h2>
+      <p class="mode-modal-desc">To unlock University courses and practice modules, please register your undergraduate academic details:</p>
+      <form id="uni-reg-modal-form" class="mode-modal-form">
+        <div class="field">
+          <label for="modal-uni-name">University / Institution *</label>
+          <input id="modal-uni-name" name="university_name" type="text" placeholder="e.g. University of Lagos (UNILAG)" required value="${escapeHtml(currentUser?.university_profile?.university_name || "")}">
+        </div>
+        <div class="field">
+          <label for="modal-uni-faculty">Faculty *</label>
+          <input id="modal-uni-faculty" name="faculty" type="text" placeholder="e.g. Basic Medical Sciences" required value="${escapeHtml(currentUser?.university_profile?.faculty || "")}">
+        </div>
+        <div class="field">
+          <label for="modal-uni-dept">Department *</label>
+          <input id="modal-uni-dept" name="department" type="text" placeholder="e.g. Anatomy" required value="${escapeHtml(currentUser?.university_profile?.department || "")}">
+        </div>
+        <div class="field">
+          <label for="modal-uni-level">Academic Level *</label>
+          <select id="modal-uni-level" name="level" required>
+            <option value="100" ${currentUser?.university_profile?.level === 100 ? "selected" : ""}>100 Level</option>
+            <option value="200" ${(!currentUser?.university_profile?.level || currentUser?.university_profile?.level === 200) ? "selected" : ""}>200 Level</option>
+            <option value="300" ${currentUser?.university_profile?.level === 300 ? "selected" : ""}>300 Level</option>
+            <option value="400" ${currentUser?.university_profile?.level === 400 ? "selected" : ""}>400 Level</option>
+            <option value="500" ${currentUser?.university_profile?.level === 500 ? "selected" : ""}>500 Level</option>
+            <option value="600" ${currentUser?.university_profile?.level === 600 ? "selected" : ""}>600 Level</option>
+          </select>
+        </div>
+        <div id="uni-modal-error" class="auth-error" role="alert"></div>
+        <div class="button-row">
+          <button type="button" class="button outline" id="close-uni-modal">Cancel</button>
+          <button type="submit" class="button" style="background:#0ea5e9;border-color:#0ea5e9;">Complete & Enter 🏛</button>
+        </div>
+      </form>
+    </div>
+  `;
+  document.body.appendChild(backdrop);
+
+  backdrop.querySelector("#close-uni-modal").addEventListener("click", () => backdrop.remove());
+  backdrop.addEventListener("click", e => { if (e.target === backdrop) backdrop.remove(); });
+
+  const form = backdrop.querySelector("#uni-reg-modal-form");
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const btn = form.querySelector("button[type=submit]");
+    const err = form.querySelector("#uni-modal-error");
+    btn.disabled = true;
+    btn.textContent = "Saving…";
+    err.textContent = "";
+
+    const fd = new FormData(form);
+    const payload = {
+      university_name: String(fd.get("university_name")).trim(),
+      faculty: String(fd.get("faculty")).trim(),
+      department: String(fd.get("department")).trim(),
+      level: Number(fd.get("level")),
+      current_courses: []
+    };
+
+    try {
+      if (authToken) {
+        const res = await api.saveUniversityProfile(authToken, payload);
+        if (res.user) currentUser = res.user;
+      }
+      if (!currentUser) currentUser = {};
+      currentUser.has_university_profile = true;
+      currentUser.university_profile = payload;
+      currentUser.active_mode = "university";
+      localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
+      localStorage.setItem("seomtorch-active-mode", "university");
+      backdrop.remove();
+      showToast("University profile registered! Welcome 🏛");
+      if (onSuccess) onSuccess();
+      else {
+        route = "home";
+        uniRoute = "departments";
+        render();
+      }
+    } catch (caught) {
+      err.textContent = caught instanceof ApiError ? caught.message : "Failed to save profile. Please try again.";
+      btn.disabled = false;
+      btn.textContent = "Complete & Enter 🏛";
+    }
+  });
+}
+
+function showAspirantRegistrationModal(onSuccess) {
+  const existingModal = document.querySelector("#mode-modal-backdrop");
+  if (existingModal) existingModal.remove();
+
+  const backdrop = document.createElement("div");
+  backdrop.id = "mode-modal-backdrop";
+  backdrop.className = "mode-modal-backdrop";
+  backdrop.innerHTML = `
+    <div class="mode-modal">
+      <span class="mode-modal-badge aspirant-badge">🎓 Aspirant Registration</span>
+      <h2>Set up Aspirant Profile</h2>
+      <p class="mode-modal-desc">To unlock JAMB, WAEC & NECO practice papers and challenges, please register your target exam details:</p>
+      <form id="aspirant-reg-modal-form" class="mode-modal-form">
+        <div class="field">
+          <label for="modal-exam-type">Target Examination *</label>
+          <select id="modal-exam-type" name="exam_type" required>
+            <option value="jamb">JAMB UTME</option>
+            <option value="waec">WAEC SSCE</option>
+            <option value="neco">NECO SSCE</option>
+            <option value="post_utme">POST-UTME</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="modal-target-year">Target Year *</label>
+          <input id="modal-target-year" name="target_year" type="number" min="2024" max="2035" value="2026" required>
+        </div>
+        <div class="field">
+          <label>Target Subjects <span>(Optional)</span></label>
+          <div class="subject-pills-select">
+            ${["english", "mathematics", "biology", "chemistry", "physics", "economics", "government", "literature-in-english", "computer-studies"].map(sId => {
+              const sObj = SUBJECTS.find(s => s.id === sId) || { name: sId };
+              return `<label class="subject-pill-label"><input type="checkbox" name="preferred_subjects" value="${sId}"> ${sObj.name}</label>`;
+            }).join("")}
+          </div>
+        </div>
+        <div id="aspirant-modal-error" class="auth-error" role="alert"></div>
+        <div class="button-row">
+          <button type="button" class="button outline" id="close-aspirant-modal">Cancel</button>
+          <button type="submit" class="button accent">Complete & Enter 🎓</button>
+        </div>
+      </form>
+    </div>
+  `;
+  document.body.appendChild(backdrop);
+
+  backdrop.querySelector("#close-aspirant-modal").addEventListener("click", () => backdrop.remove());
+  backdrop.addEventListener("click", e => { if (e.target === backdrop) backdrop.remove(); });
+
+  const form = backdrop.querySelector("#aspirant-reg-modal-form");
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const btn = form.querySelector("button[type=submit]");
+    const err = form.querySelector("#aspirant-modal-error");
+    btn.disabled = true;
+    btn.textContent = "Saving…";
+    err.textContent = "";
+
+    const fd = new FormData(form);
+    const preferred = Array.from(form.querySelectorAll("input[name=preferred_subjects]:checked")).map(cb => cb.value);
+    const payload = {
+      exam_type: String(fd.get("exam_type")),
+      target_year: Number(fd.get("target_year")),
+      preferred_subjects: preferred
+    };
+
+    try {
+      if (authToken) {
+        const res = await api.saveAspirantProfile(authToken, payload);
+        if (res.user) currentUser = res.user;
+      }
+      if (!currentUser) currentUser = {};
+      currentUser.has_aspirant_profile = true;
+      currentUser.aspirant_profile = payload;
+      currentUser.active_mode = "aspirant";
+      localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
+      localStorage.setItem("seomtorch-active-mode", "aspirant");
+      backdrop.remove();
+      showToast("Aspirants profile registered! Welcome 🎓");
+      if (onSuccess) onSuccess();
+      else {
+        route = "home";
+        selectedSubject = null;
+        render();
+      }
+    } catch (caught) {
+      err.textContent = caught instanceof ApiError ? caught.message : "Failed to save profile. Please try again.";
+      btn.disabled = false;
+      btn.textContent = "Complete & Enter 🎓";
+    }
+  });
+}
+
 function saveActiveSession() {
   if (!activeSession || activeSession.finished) {
     localStorage.removeItem("seomtorch-active-session");
@@ -347,22 +586,38 @@ function navigate(nextRoute) {
 function shell(content) {
   const xp = xpState();
   const testStats = profile.tests || { tests_taken: 0, average_score: 0 };
-  const nav = [
-    ["home", "Home"], ["practice", "Practice"], ["challenges", "Challenges"], ["progress", "Progress"], ["university", "University"], ["profile", "Profile"]
-  ];
-  return `<div class="layout">
+  const mode = getActiveMode();
+  const nav = mode === "university"
+    ? [["home", "Home"], ["university", "Courses"], ["progress", "Progress"], ["profile", "Profile"]]
+    : [["home", "Home"], ["practice", "Practice"], ["challenges", "Challenges"], ["progress", "Progress"], ["profile", "Profile"]];
+
+  return `<div class="layout ${mode === 'university' ? 'layout-uni' : ''}">
     <aside class="sidebar">
       <button class="brand" data-route="home" aria-label="Seomtorch home">
         <span class="brand-symbol" aria-hidden="true"><img src="assets/seomtorch_logo.png" alt=""></span>
-        <span class="brand-name">Seomtorch<small>Prepare with purpose</small></span>
+        <span class="brand-name">Seomtorch<small>${mode === "university" ? "University Portal" : "Prepare with purpose"}</small></span>
       </button>
+
+      <div class="mode-switcher-container">
+        <div class="mode-switcher-pill" role="tablist" aria-label="Portal mode">
+          <button type="button" class="mode-pill-btn ${mode === 'aspirant' ? 'active' : ''}" data-switch-mode="aspirant" role="tab" aria-selected="${mode === 'aspirant'}" title="Switch to Aspirants Portal">
+            <span class="mode-pill-icon">🎓</span>
+            <span class="mode-pill-label">Aspirant</span>
+          </button>
+          <button type="button" class="mode-pill-btn ${mode === 'university' ? 'active' : ''}" data-switch-mode="university" role="tab" aria-selected="${mode === 'university'}" title="Switch to University Portal">
+            <span class="mode-pill-icon">🏛</span>
+            <span class="mode-pill-label">University</span>
+          </button>
+        </div>
+      </div>
+
       <nav class="nav" aria-label="Primary navigation">
-        ${nav.map(([id, label]) => `<button class="nav-button ${route === id ? "active" : ""}" data-route="${id}">${ICONS[id]}<span>${label}</span></button>`).join("")}
+        ${nav.map(([id, label]) => `<button class="nav-button ${route === id ? "active" : ""}" data-route="${id}">${ICONS[id] || ICONS.university}<span>${label}</span></button>`).join("")}
       </nav>
-      <div class="sidebar-foot"><div class="streak-panel"><svg class="streak-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/><path d="M12 19.2c-1.7 0-2.9-1.1-3-2.7-.1-1.2.5-2.3 1.5-3.2.1 1 .6 1.5 1.1 1.8-.2-1.7.7-2.7 1.6-3.7 1.2 1.5 1.8 3.1 1.7 4.6-.1 1.9-1.2 3.2-2.9 3.2Z"/></svg><div><span>Current streak</span><strong>${profile.rhythm || 0}<small> day${profile.rhythm === 1 ? "" : "s"}</small></strong></div></div><div class="xp-panel"><div><strong>Level ${xp.level}</strong><span>${xp.xp} XP</span></div><div class="xp-track"><i style="width:${xp.percent}%"></i></div><small>${xp.remaining} XP to next level</small></div><button class="button outline small jamb-calc-sidebar-btn" id="sidebar-calc-toggle" type="button" style="width:100%; margin-top:14px; margin-bottom:6px; display:inline-flex; align-items:center; justify-content:center; gap:7px; font-size:11px; font-weight:700;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg><span>JAMB Calculator</span></button><p>Come back tomorrow and keep it alive.</p></div>
+      <div class="sidebar-foot"><div class="streak-panel"><svg class="streak-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/><path d="M12 19.2c-1.7 0-2.9-1.1-3-2.7-.1-1.2.5-2.3 1.5-3.2.1 1 .6 1.5 1.1 1.8-.2-1.7.7-2.7 1.6-3.7 1.2 1.5 1.8 3.1 1.7 4.6-.1 1.9-1.2 3.2-2.9 3.2Z"/></svg><div><span>Current streak</span><strong>${profile.rhythm || 0}<small> day${profile.rhythm === 1 ? "" : "s"}</small></strong></div></div><div class="xp-panel"><div><strong>Level ${xp.level}</strong><span>${xp.xp} XP</span></div><div class="xp-track"><i style="width:${xp.percent}%"></i></div><small>${xp.remaining} XP to next level</small></div>${mode === 'aspirant' ? `<button class="button outline small jamb-calc-sidebar-btn" id="sidebar-calc-toggle" type="button" style="width:100%; margin-top:14px; margin-bottom:6px; display:inline-flex; align-items:center; justify-content:center; gap:7px; font-size:11px; font-weight:700;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg><span>JAMB Calculator</span></button>` : ''}<p>Come back tomorrow and keep it alive.</p></div>
     </aside>
     <div class="content-wrap">
-      <header class="topbar"><span class="mobile-brand"><img src="assets/seomtorch_logo.png" alt=""><b>Seomtorch</b></span><span class="sync-indicator ${pendingSyncCount > 0 ? 'pending' : navigator.onLine ? 'synced' : 'offline'}" title="${pendingSyncCount > 0 ? `${pendingSyncCount} items pending sync` : navigator.onLine ? 'Synced' : 'Offline'}"><i></i>${pendingSyncCount > 0 ? `<small>${pendingSyncCount}</small>` : ''}</span><div class="top-stat"><strong>${testStats.tests_taken}</strong><span>tests</span></div><div class="top-stat"><strong>${testStats.average_score}%</strong><span>test average</span></div><div class="top-xp" title="Level ${xp.level} · ${xp.remaining} XP to next level"><small>LV ${xp.level}</small><strong>${xp.xp} XP</strong></div><div class="top-streak" title="${profile.rhythm || 0}-day streak"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/></svg><span><small>Streak</small><strong>${profile.rhythm || 0}</strong></span></div><button class="avatar" data-route="profile" title="Open ${escapeHtml(profile.name)}'s profile">${initials()}</button></header>
+      <header class="topbar"><span class="mobile-brand"><img src="assets/seomtorch_logo.png" alt=""><b>Seomtorch</b></span><button type="button" class="topbar-mode-pill ${mode === 'university' ? 'uni-mode' : ''}" data-switch-mode="${mode === 'aspirant' ? 'university' : 'aspirant'}" title="Switch to ${mode === 'aspirant' ? 'University' : 'Aspirant'} mode"><span>${mode === 'aspirant' ? '🎓 Aspirant' : '🏛 University'}</span><small>Switch ⇄</small></button><span class="sync-indicator ${pendingSyncCount > 0 ? 'pending' : navigator.onLine ? 'synced' : 'offline'}" title="${pendingSyncCount > 0 ? `${pendingSyncCount} items pending sync` : navigator.onLine ? 'Synced' : 'Offline'}"><i></i>${pendingSyncCount > 0 ? `<small>${pendingSyncCount}</small>` : ''}</span><div class="top-stat"><strong>${testStats.tests_taken}</strong><span>tests</span></div><div class="top-stat"><strong>${testStats.average_score}%</strong><span>test average</span></div><div class="top-xp" title="Level ${xp.level} · ${xp.remaining} XP to next level"><small>LV ${xp.level}</small><strong>${xp.xp} XP</strong></div><div class="top-streak" title="${profile.rhythm || 0}-day streak"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/></svg><span><small>Streak</small><strong>${profile.rhythm || 0}</strong></span></div><button class="avatar" data-route="profile" title="Open ${escapeHtml(profile.name)}'s profile">${initials()}</button></header>
       <main id="main">${content}</main>
     </div>
   </div>${!isStandalone() && route !== "session" ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ""}`;
@@ -393,6 +648,9 @@ function renderMath(html) {
 function bindShell() {
   document.querySelectorAll("[data-route]").forEach(button => button.addEventListener("click", () => navigate(button.dataset.route)));
   document.querySelectorAll("[data-install-app]").forEach(button => button.addEventListener("click", installApp));
+  document.querySelectorAll("[data-switch-mode]").forEach(button => {
+    button.addEventListener("click", () => handleModeSwitch(button.dataset.switchMode));
+  });
   document.querySelectorAll("#sidebar-calc-toggle, #session-calc-toggle, #mobile-calc-fab").forEach(btn => {
     btn.addEventListener("click", () => jambCalculator.toggle());
   });
@@ -435,7 +693,98 @@ function subjectStats(subjectId) {
   return { count: list.length, accuracy: accuracy(list) };
 }
 
+function renderUniHome() {
+  const uniProf = currentUser?.university_profile || {};
+  const greeting = new Date().getHours() < 12 ? "Good morning" : new Date().getHours() < 17 ? "Good afternoon" : "Good evening";
+  const uniName = uniProf.university_name || "University Studies";
+  const deptName = uniProf.department ? `${uniProf.department} Department` : "Undergraduate Studies";
+  const levelText = uniProf.level ? `${uniProf.level} Level` : "Undergraduate";
+
+  const content = `<section class="page">
+    <div class="uni-home-banner">
+      <span class="uni-academic-tag">🏛 ${escapeHtml(uniName)} · ${escapeHtml(deptName)} · ${escapeHtml(levelText)}</span>
+      <h1>${greeting}, ${escapeHtml(firstName())}.</h1>
+      <p class="uni-banner-lead">Your University Academic Workspace. Dedicated course syllabi, specialized departmental past questions, and topic-by-topic mastery.</p>
+      <div class="uni-banner-actions">
+        <button class="button" style="background:#0ea5e9;border-color:#0ea5e9;" id="uni-home-open-courses">Explore All Departments & Courses →</button>
+        <button class="button outline" style="color:#ffffff;border-color:rgba(255,255,255,0.4);" id="uni-home-edit-profile">Academic Profile ⚙</button>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h2>Active Department Modules</h2>
+      <p>Current semester practice banks</p>
+    </div>
+
+    <div class="uni-featured-card">
+      <div>
+        <span class="uni-featured-badge">Featured Course · 200 Level</span>
+        <h3 class="uni-featured-title">ANA 201: Upper and Lower Limb</h3>
+        <p class="uni-featured-desc">200 High-Yield MCQs: Bones of the Upper Limb (100 Qs) & Muscles of the Upper Limb (100 Qs) with detailed clinical explanations.</p>
+      </div>
+      <button class="button" style="background:#0ea5e9;border-color:#0ea5e9;white-space:nowrap;" id="uni-home-jump-ana201">Open ANA 201 →</button>
+    </div>
+
+    <div class="section-head">
+      <h2>Departments Catalog</h2>
+      <p>Browse courses by department</p>
+    </div>
+
+    <div class="uni-quick-grid">
+      <div class="uni-portal-status-card">
+        <div>
+          <span style="font-size:26px;display:block;margin-bottom:8px;">🦴</span>
+          <strong>Human Anatomy</strong>
+          <p>Gross anatomy, neuroanatomy, embryology and histology with detailed anatomical landmarks and clinical correlations.</p>
+        </div>
+        <button class="button outline small" data-uni-browse-dept="anatomy">Browse Anatomy Courses →</button>
+      </div>
+
+      <div class="uni-portal-status-card">
+        <div>
+          <span style="font-size:26px;display:block;margin-bottom:8px;">⚡</span>
+          <strong>Human Physiology</strong>
+          <p>Cellular physiology, blood, cardiovascular, respiratory, renal, and endocrine organ systems.</p>
+        </div>
+        <button class="button outline small" data-uni-browse-dept="physiology">Browse Physiology Courses →</button>
+      </div>
+    </div>
+  </section>`;
+
+  app.innerHTML = shell(content);
+  bindShell();
+
+  document.querySelector("#uni-home-open-courses")?.addEventListener("click", () => {
+    route = "university";
+    uniRoute = "departments";
+    uniDeptId = null;
+    render();
+  });
+  document.querySelector("#uni-home-jump-ana201")?.addEventListener("click", () => {
+    route = "university";
+    uniRoute = "course";
+    uniDeptId = "anatomy";
+    uniLevel = 200;
+    uniCourseId = "ana201";
+    render();
+  });
+  document.querySelector("#uni-home-edit-profile")?.addEventListener("click", () => {
+    showUniversityRegistrationModal(() => render());
+  });
+  document.querySelectorAll("[data-uni-browse-dept]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      route = "university";
+      uniRoute = "levels";
+      uniDeptId = btn.dataset.uniBrowseDept;
+      render();
+    });
+  });
+}
+
 function renderHome() {
+  if (getActiveMode() === "university") {
+    return renderUniHome();
+  }
   const recent = lastTopic();
   const greeting = new Date().getHours() < 12 ? "Good morning" : new Date().getHours() < 17 ? "Good afternoon" : "Good evening";
   const todayAttempts = attempts.filter(item => new Date(item.timestamp).toISOString().slice(0, 10) === today());
@@ -1036,12 +1385,18 @@ function renderProfile(filter = "") {
   const xp = xpState();
   const testStats = profile.tests || { tests_taken: 0, average_score: 0 };
   const joined = currentUser?.date_joined ? new Date(currentUser.date_joined).toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) : "—";
-  const content = `<section class="page profile-page"><div class="profile-hero"><div class="profile-monogram">${initials()}</div><div><p class="eyebrow">Student profile</p><h1>${escapeHtml(currentUser?.username || profile.name)}</h1><p>${escapeHtml(currentUser?.email || profile.email)} · Member since ${joined}</p></div><button class="button outline" id="refresh-account">Refresh account</button></div><div class="profile-grid"><section class="profile-card identity-card"><span class="card-label">Student ID</span><strong>${escapeHtml(currentUser?.public_id || "—")}</strong><p>Share this ID with people you know when they invite you to a challenge.</p></section><section class="profile-card level-card"><span class="card-label">Level ${xp.level}</span><strong>${xp.xp} <small>XP</small></strong><div class="xp-track light"><i style="width:${xp.percent}%"></i></div><p>${xp.remaining} XP until level ${xp.level + 1}</p></section></div><div class="metric-strip four profile-metrics"><div class="metric"><strong>${attempts.length}</strong><span>answers recorded</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> days</small></strong><span>current streak</span></div><div class="metric"><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>best streak</span></div></div>${renderAchievementSummary()}<div class="section-head"><h2>Subject record</h2><p>Synchronized account history</p></div><div class="profile-subjects">${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<article><span>${subject.name}</span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong><small>${stat.count} answer${stat.count === 1 ? "" : "s"}</small></article>`; }).join("")}</div><section class="settings-panel"><p class="eyebrow">Account data</p><h2>Portable, private and recoverable.</h2><p class="lede">The server keeps the authoritative account record. This device stores an offline copy and queues answers whenever the connection drops.</p><div class="button-row"><button class="button" id="export-data">Export backup</button><label class="button outline" for="import-data">Import backup</label><input class="file-input" id="import-data" type="file" accept="application/json"><button class="button outline" id="clear-cache">Refresh device cache</button><button class="button danger" id="sign-out">Sign out</button></div></section><section class="settings-panel guide-section"><p class="eyebrow">Guide and support</p><h2>Answers, without the noise.</h2><p class="lede">Quick guidance about practice, progress and account data.</p><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="faq-search" value="${escapeHtml(filter)}" placeholder="Search help topics" aria-label="Search help topics"></div><div id="faq-results">${groups.length ? groups.map(group => `<section class="faq-group"><h3>${group}</h3>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("") : '<div class="empty">No help entries match that search.</div>'}</div></section></section>`;
+  const content = `<section class="page profile-page"><div class="profile-hero"><div class="profile-monogram">${initials()}</div><div><p class="eyebrow">Student profile</p><h1>${escapeHtml(currentUser?.username || profile.name)}</h1><p>${escapeHtml(currentUser?.email || profile.email)} · Member since ${joined}</p></div><button class="button outline" id="refresh-account">Refresh account</button></div><div class="profile-grid"><section class="profile-card identity-card"><span class="card-label">Student ID</span><strong>${escapeHtml(currentUser?.public_id || "—")}</strong><p>Share this ID with people you know when they invite you to a challenge.</p></section><section class="profile-card level-card"><span class="card-label">Level ${xp.level}</span><strong>${xp.xp} <small>XP</small></strong><div class="xp-track light"><i style="width:${xp.percent}%"></i></div><p>${xp.remaining} XP until level ${xp.level + 1}</p></section></div><div class="metric-strip four profile-metrics"><div class="metric"><strong>${attempts.length}</strong><span>answers recorded</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> days</small></strong><span>current streak</span></div><div class="metric"><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>best streak</span></div></div><div class="section-head"><h2>Academic Portals & Registrations</h2><p>Your enrollment across student portals</p></div><div class="uni-quick-grid" style="margin-bottom:28px;"><div class="uni-portal-status-card"><div><span style="font-size:24px;display:block;margin-bottom:6px;">🎓</span><strong>Aspirants Portal</strong><p>${hasAspirantProfile() ? `Registered for ${(currentUser?.aspirant_profile?.exam_type || "JAMB").toUpperCase()} ${currentUser?.aspirant_profile?.target_year || ""}` : "Not registered yet. Required for JAMB & SSCE practice."}</p></div><button class="button ${hasAspirantProfile() ? 'outline' : 'accent'} small" id="profile-manage-aspirant">${hasAspirantProfile() ? "Update Exam Details" : "Register for Aspirants Portal →"}</button></div><div class="uni-portal-status-card"><div><span style="font-size:24px;display:block;margin-bottom:6px;">🏛</span><strong>University Portal</strong><p>${hasUniversityProfile() ? `Enrolled at ${escapeHtml(currentUser?.university_profile?.university_name || "")} · ${escapeHtml(currentUser?.university_profile?.department || "")} (${currentUser?.university_profile?.level || 200}L)` : "Not registered yet. Required for undergraduate course banks."}</p></div><button class="button ${hasUniversityProfile() ? 'outline' : ''} small" style="${!hasUniversityProfile() ? 'background:#0ea5e9;border-color:#0ea5e9;' : ''}" id="profile-manage-university">${hasUniversityProfile() ? "Update University Details" : "Register for University Portal →"}</button></div></div>${renderAchievementSummary()}<div class="section-head"><h2>Subject record</h2><p>Synchronized account history</p></div><div class="profile-subjects">${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<article><span>${subject.name}</span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong><small>${stat.count} answer${stat.count === 1 ? "" : "s"}</small></article>`; }).join("")}</div><section class="settings-panel"><p class="eyebrow">Account data</p><h2>Portable, private and recoverable.</h2><p class="lede">The server keeps the authoritative account record. This device stores an offline copy and queues answers whenever the connection drops.</p><div class="button-row"><button class="button" id="export-data">Export backup</button><label class="button outline" for="import-data">Import backup</label><input class="file-input" id="import-data" type="file" accept="application/json"><button class="button outline" id="clear-cache">Refresh device cache</button><button class="button danger" id="sign-out">Sign out</button></div></section><section class="settings-panel guide-section"><p class="eyebrow">Guide and support</p><h2>Answers, without the noise.</h2><p class="lede">Quick guidance about practice, progress and account data.</p><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="faq-search" value="${escapeHtml(filter)}" placeholder="Search help topics" aria-label="Search help topics"></div><div id="faq-results">${groups.length ? groups.map(group => `<section class="faq-group"><h3>${group}</h3>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("") : '<div class="empty">No help entries match that search.</div>'}</div></section></section>`;
   app.innerHTML = shell(content);
   const profileMetrics = document.querySelectorAll(".profile-metrics .metric");
   if (profileMetrics[0]) profileMetrics[0].innerHTML = `<strong>${testStats.tests_taken}</strong><span>tests taken</span>`;
   if (profileMetrics[1]) profileMetrics[1].innerHTML = `<strong>${testStats.average_score}%</strong><span>average test score</span>`;
   bindShell(); bindProfile();
+  document.querySelector("#profile-manage-aspirant")?.addEventListener("click", () => {
+    showAspirantRegistrationModal(() => renderProfile(filter));
+  });
+  document.querySelector("#profile-manage-university")?.addEventListener("click", () => {
+    showUniversityRegistrationModal(() => renderProfile(filter));
+  });
   if (!achievementsData) loadAchievements(filter);
 }
 
@@ -1823,9 +2178,19 @@ async function refreshDeviceCache() {
 
 function renderAuth() {
   const register = authMode === "register";
-  app.innerHTML = `<main class="onboarding auth-screen"><section class="onboard-brand"><span class="brand"><span class="brand-symbol" aria-hidden="true"><img src="assets/seomtorch_logo.png" alt=""></span><span class="brand-name">Seomtorch<small>Prepare with purpose</small></span></span><div><blockquote>Your progress should follow you.</blockquote><p>Sign in to keep every answer, streak and milestone connected to your account.</p></div><small>Biology · Chemistry · Civic Education · Computer Studies · Economics · English Language · General Paper · Government · History · Literature in English · Marketing · Mathematics · Music · Physics</small></section><section class="onboard-form"><div><div class="auth-tabs"><button class="${!register ? "active" : ""}" data-auth-mode="signin">Sign in</button><button class="${register ? "active" : ""}" data-auth-mode="register">Register</button></div><p class="eyebrow">${register ? "Create your account" : "Welcome back"}</p><h1>${register ? "Begin your preparation." : "Return to your study desk."}</h1><p class="lede">${register ? "Use an email, username and secure password." : "Sign in with your email address and password."}</p><form id="auth-form" class="auth-form">${register ? '<div class="field"><label for="auth-username">Username</label><input id="auth-username" name="username" type="text" maxlength="150" autocomplete="username" required></div>' : ""}<div class="field"><label for="auth-email">Email address</label><input id="auth-email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="auth-password">Password</label><input id="auth-password" name="password" type="password" minlength="8" autocomplete="${register ? "new-password" : "current-password"}" required></div><div id="auth-error" class="auth-error" role="alert"></div><button class="button auth-submit" type="submit">${register ? "Create account" : "Sign in"} →</button></form></div></section></main>${!isStandalone() ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ''}`;
+  app.innerHTML = `<main class="onboarding auth-screen"><section class="onboard-brand"><span class="brand"><span class="brand-symbol" aria-hidden="true"><img src="assets/seomtorch_logo.png" alt=""></span><span class="brand-name">Seomtorch<small>Prepare with purpose</small></span></span><div><blockquote>Your progress should follow you.</blockquote><p>Sign in to keep every answer, streak and milestone connected to your account.</p></div><small>Biology · Chemistry · Civic Education · Computer Studies · Economics · English Language · General Paper · Government · History · Literature in English · Marketing · Mathematics · Music · Physics · University Courses</small></section><section class="onboard-form"><div><div class="auth-tabs"><button class="${!register ? "active" : ""}" data-auth-mode="signin">Sign in</button><button class="${register ? "active" : ""}" data-auth-mode="register">Register</button></div><p class="eyebrow">${register ? "Create your account" : "Welcome back"}</p><h1>${register ? "Begin your preparation." : "Return to your study desk."}</h1><p class="lede">${register ? "Select your path and create a secure profile." : "Sign in with your email address and password."}</p><form id="auth-form" class="auth-form">${register ? '<div class="field"><label for="auth-username">Username</label><input id="auth-username" name="username" type="text" maxlength="150" autocomplete="username" required></div>' : ""}<div class="field"><label for="auth-email">Email address</label><input id="auth-email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="auth-password">Password</label><input id="auth-password" name="password" type="password" minlength="8" autocomplete="${register ? "new-password" : "current-password"}" required></div>${register ? `<div class="field"><label style="font-weight:700;margin-bottom:8px;display:block;">Choose your primary portal:</label><div class="reg-path-selector"><label class="reg-path-option"><input type="radio" name="user_type" value="aspirant" checked><div class="reg-path-card"><span class="reg-path-icon">🎓</span><strong>Exam Aspirant</strong><small>JAMB, WAEC, NECO & Post-UTME</small></div></label><label class="reg-path-option"><input type="radio" name="user_type" value="university"><div class="reg-path-card uni-path"><span class="reg-path-icon">🏛</span><strong>University Student</strong><small>Undergraduate Degree (100L - 600L)</small></div></label></div></div><div id="reg-aspirant-fields"><div class="field"><label for="auth-exam-type">Target Examination</label><select id="auth-exam-type" name="exam_type"><option value="jamb">JAMB UTME</option><option value="waec">WAEC SSCE</option><option value="neco">NECO SSCE</option><option value="post_utme">POST-UTME</option></select></div><div class="field"><label for="auth-target-year">Target Year</label><input id="auth-target-year" name="target_year" type="number" min="2024" max="2035" value="2026"></div></div><div id="reg-uni-fields" style="display:none;"><div class="field"><label for="auth-uni-name">University / Institution *</label><input id="auth-uni-name" name="university_name" type="text" placeholder="e.g. University of Lagos (UNILAG)"></div><div class="field"><label for="auth-uni-dept">Department *</label><input id="auth-uni-dept" name="department" type="text" placeholder="e.g. Anatomy"></div><div class="field"><label for="auth-uni-level">Level</label><select id="auth-uni-level" name="level"><option value="100">100 Level</option><option value="200" selected>200 Level</option><option value="300">300 Level</option><option value="400">400 Level</option><option value="500">500 Level</option><option value="600">600 Level</option></select></div></div>` : ""}<div id="auth-error" class="auth-error" role="alert"></div><button class="button auth-submit" type="submit">${register ? "Create account" : "Sign in"} →</button></form></div></section></main>${!isStandalone() ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ''}`;
   document.querySelectorAll("[data-auth-mode]").forEach(button => button.addEventListener("click", () => { authMode = button.dataset.authMode; renderAuth(); }));
   document.querySelectorAll("[data-install-app]").forEach(button => button.addEventListener("click", installApp));
+  if (register) {
+    const radioInputs = document.querySelectorAll("input[name=user_type]");
+    const aspFields = document.querySelector("#reg-aspirant-fields");
+    const uniFields = document.querySelector("#reg-uni-fields");
+    radioInputs.forEach(r => r.addEventListener("change", () => {
+      const isUni = document.querySelector("input[name=user_type]:checked")?.value === "university";
+      if (aspFields) aspFields.style.display = isUni ? "none" : "block";
+      if (uniFields) uniFields.style.display = isUni ? "block" : "none";
+    }));
+  }
   document.querySelector("#auth-form").addEventListener("submit", submitAuth);
 }
 
@@ -1834,11 +2199,67 @@ async function submitAuth(event) {
   const form = event.currentTarget; const button = form.querySelector("button[type=submit]"); const error = document.querySelector("#auth-error");
   const body = Object.fromEntries(new FormData(form)); button.disabled = true; button.textContent = "Please wait…"; error.textContent = "";
   try {
-    const data = authMode === "register" ? await api.register(body) : await api.login(body);
+    let data;
+    if (authMode === "register") {
+      const userType = body.user_type || "aspirant";
+      data = await api.register({
+        email: body.email,
+        username: body.username,
+        password: body.password,
+        user_type: userType
+      });
+      // Register initial profile according to their selected path
+      if (userType === "university") {
+        try {
+          await api.saveUniversityProfile(data.token, {
+            university_name: body.university_name || "University",
+            faculty: body.department || "Faculty",
+            department: body.department || "General Studies",
+            level: Number(body.level || 200),
+            current_courses: []
+          });
+          data.user.has_university_profile = true;
+          data.user.university_profile = {
+            university_name: body.university_name || "University",
+            faculty: body.department || "Faculty",
+            department: body.department || "General Studies",
+            level: Number(body.level || 200),
+            current_courses: []
+          };
+          data.user.active_mode = "university";
+        } catch (e) { console.error("Initial university profile save error", e); }
+      } else {
+        try {
+          await api.saveAspirantProfile(data.token, {
+            exam_type: body.exam_type || "jamb",
+            target_year: Number(body.target_year || 2026),
+            preferred_subjects: []
+          });
+          data.user.has_aspirant_profile = true;
+          data.user.aspirant_profile = {
+            exam_type: body.exam_type || "jamb",
+            target_year: Number(body.target_year || 2026),
+            preferred_subjects: []
+          };
+          data.user.active_mode = "aspirant";
+        } catch (e) { console.error("Initial aspirant profile save error", e); }
+      }
+    } else {
+      data = await api.login(body);
+    }
     authToken = data.token; currentUser = data.user;
-    localStorage.setItem("seomtorch-auth-token", authToken); localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
-    await prepareLocalUser(currentUser); await syncPendingAttempts(); route = "home"; render();
-  } catch (caught) { error.textContent = caught instanceof ApiError ? caught.message : "Something went wrong. Please try again."; button.disabled = false; button.textContent = authMode === "register" ? "Create account →" : "Sign in →"; }
+    localStorage.setItem("seomtorch-auth-token", authToken);
+    localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
+    localStorage.setItem("seomtorch-active-mode", currentUser.active_mode || "aspirant");
+    await prepareLocalUser(currentUser);
+    await syncPendingAttempts();
+    route = "home";
+    render();
+  } catch (caught) {
+    error.textContent = caught instanceof ApiError ? caught.message : "Something went wrong. Please try again.";
+    button.disabled = false;
+    button.textContent = authMode === "register" ? "Create account →" : "Sign in →";
+  }
 }
 
 async function prepareLocalUser(user) {

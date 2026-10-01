@@ -48,4 +48,8 @@ export const api = {
   removeChallenge: (token, id) => request(`/challenges/${id}/`, { token, method: "DELETE" }),
   respondChallenge: (token, id, response) => request(`/challenges/${id}/respond/`, { token, method: "POST", body: { response } }),
   startChallenge: (token, id) => request(`/challenges/${id}/start/`, { token, method: "POST", body: {} }),
+  // Segmentation
+  switchMode: (token, mode) => request("/auth/switch-mode/", { token, method: "POST", body: { mode } }),
+  saveAspirantProfile: (token, body) => request("/auth/aspirant-profile/", { token, method: "POST", body }),
+  saveUniversityProfile: (token, body) => request("/auth/university-profile/", { token, method: "POST", body }),
 };
