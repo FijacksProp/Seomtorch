@@ -1,0 +1,760 @@
+{
+  "title": "Brachial Plexus",
+  "course": "ANA 201",
+  "totalQuestions": 50,
+  "sections": [
+    "Brachial Plexus Anatomy & Clinical Correlations (Q1-Q50)"
+  ],
+  "questions": [
+    {
+      "id": "ana201-brachial-plexus-1",
+      "text": "Which of the following describes the accurate anatomical origin of the roots of the brachial plexus?",
+      "options": [
+        "They are formed by the union of the ventral rami of the 5th to 8th cervical nerves and the greater part of the 1st thoracic nerve.",
+        "They are formed by the dorsal rami of the 5th to 8th cervical nerves and the 1st thoracic nerve.",
+        "They consist exclusively of the ventral rami of the 4th to 7th cervical nerves.",
+        "They are composed of both the anterior and posterior roots of the C5 to T1 spinal nerves prior to the spinal ganglion."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. They are formed by the union of the ventral rami of the 5th to 8th cervical nerves and the greater part of the 1st thoracic nerve.",
+      "explanation": "The roots of the brachial plexus are formed by the anterior primary rami (ventral rami) of spinal nerves C5, C6, C7, C8, and T1.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana201-brachial-plexus-2",
+      "text": "In cases of Erb’s paralysis, which specific nerve roots are primarily involved?",
+      "options": [
+        "C4 and C5",
+        "C5 and C6",
+        "C7 and C8",
+        "C8 and T1"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. C5 and C6",
+      "explanation": "Erb's paralysis results from an injury to the upper trunk of the brachial plexus, which is formed by the C5 and C6 nerve roots.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana201-brachial-plexus-3",
+      "text": "Klumpke’s paralysis typically results from an injury to the lower trunk of the brachial plexus. Which nerve roots are predominantly affected?",
+      "options": [
+        "C5 and C6",
+        "C6 and C7",
+        "C8 and T1",
+        "T1 and T2"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. C8 and T1",
+      "explanation": "Klumpke’s paralysis involves the lower trunk of the brachial plexus, directly affecting the nerve roots of C8 and T1.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana201-brachial-plexus-4",
+      "text": "How is the lateral cord of the brachial plexus formed anatomically?",
+      "options": [
+        "By the union of the posterior divisions of all three trunks.",
+        "By the continuation of the anterior division of the lower trunk.",
+        "By the union of the anterior divisions of the middle and lower trunks.",
+        "By the union of the anterior divisions of the upper and middle trunks."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. By the union of the anterior divisions of the upper and middle trunks.",
+      "explanation": "The lateral cord is formed by the combination of the anterior divisions of the upper (C5, C6) and middle (C7) trunks.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana201-brachial-plexus-5",
+      "text": "Which anatomical convergence forms the posterior cord of the brachial plexus?",
+      "options": [
+        "The union of the posterior divisions of the upper, middle, and lower trunks.",
+        "The union of the anterior divisions of the upper and middle trunks.",
+        "The direct continuation of the anterior division of the lower trunk.",
+        "The union of the posterior divisions of the upper and middle trunks only."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The union of the posterior divisions of the upper, middle, and lower trunks.",
+      "explanation": "The posterior cord is uniquely formed by the convergence of the posterior divisions of all three trunks (upper, middle, and lower).",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana201-brachial-plexus-6",
+      "text": "What is the precise formation of the medial cord of the brachial plexus?",
+      "options": [
+        "It is formed by the posterior division of the lower trunk.",
+        "It is formed by the anterior division of the lower trunk.",
+        "It is formed by the anterior divisions of the middle and lower trunks.",
+        "It is formed strictly by the ventral ramus of T1 before it forms a trunk."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It is formed by the anterior division of the lower trunk.",
+      "explanation": "The anterior division of the lower trunk (carrying fibers from C8 and T1) continues independently to form the medial cord.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana201-brachial-plexus-7",
+      "text": "The long thoracic nerve (nerve to serratus anterior) is a branch that arises directly from the roots of the brachial plexus. Which roots contribute to it?",
+      "options": [
+        "C3, C4, C5",
+        "C4, C5, C6",
+        "C5, C6, C7",
+        "C6, C7, C8"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. C5, C6, C7",
+      "explanation": "The long thoracic nerve arises directly from the anterior primary rami (roots) of C5, C6, and C7.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana201-brachial-plexus-8",
+      "text": "From which specific part of the brachial plexus does the nerve to the subclavius originate?",
+      "options": [
+        "The lateral cord",
+        "The posterior cord",
+        "The medial cord",
+        "The upper trunk"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The upper trunk",
+      "explanation": "The nerve to the subclavius is one of the very few branches that originates directly from a trunk, specifically the upper trunk.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana201-brachial-plexus-9",
+      "text": "Which structure gives rise to the suprascapular nerve?",
+      "options": [
+        "Upper trunk",
+        "Middle trunk",
+        "Lateral cord",
+        "Posterior cord"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Upper trunk",
+      "explanation": "Only the upper trunk gives off branches in the brachial plexus, yielding both the nerve to the subclavius and the suprascapular nerve.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana201-brachial-plexus-10",
+      "text": "Which group of nerves represents the terminal branches of the lateral cord?",
+      "options": [
+        "Axillary nerve, radial nerve, and lower subscapular nerve.",
+        "Lateral pectoral nerve, musculocutaneous nerve, and the lateral root of the median nerve.",
+        "Medial pectoral nerve, ulnar nerve, and the medial root of the median nerve.",
+        "Thoracodorsal nerve, upper subscapular nerve, and musculocutaneous nerve."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Lateral pectoral nerve, musculocutaneous nerve, and the lateral root of the median nerve.",
+      "explanation": "The lateral cord gives off the lateral pectoral nerve, the musculocutaneous nerve, and the lateral root of the median nerve.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana201-brachial-plexus-11",
+      "text": "Which group correctly identifies branches originating from the medial cord of the brachial plexus?",
+      "options": [
+        "Musculocutaneous nerve, median nerve, and lateral pectoral nerve.",
+        "Axillary nerve, radial nerve, and thoracodorsal nerve.",
+        "Medial pectoral nerve, medial cutaneous nerves of the arm and forearm, medial root of median nerve, and ulnar nerve.",
+        "Dorsal scapular nerve, suprascapular nerve, and nerve to subclavius."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Medial pectoral nerve, medial cutaneous nerves of the arm and forearm, medial root of median nerve, and ulnar nerve.",
+      "explanation": "The medial cord gives rise to the medial pectoral nerve, medial cutaneous nerves of the arm and forearm, the medial root of the median nerve, and the ulnar nerve.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana201-brachial-plexus-12",
+      "text": "Which of the following is a characteristic of the axillary nerve?",
+      "options": [
+        "It supplies motor innervation to the pectoralis major and minor muscles.",
+        "It arises directly from the upper trunk and travels anteriorly.",
+        "It provides motor innervation to the triceps brachii muscle.",
+        "It is a branch of the posterior cord and supplies the deltoid and teres minor muscles."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. It is a branch of the posterior cord and supplies the deltoid and teres minor muscles.",
+      "explanation": "The axillary nerve originates from the posterior cord (C5, C6) and provides motor innervation to the deltoid and teres minor.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana201-brachial-plexus-13",
+      "text": "What is the primary function and origin of the radial nerve?",
+      "options": [
+        "It originates from the posterior cord and innervates the triceps brachii, supinator, and forearm extensors.",
+        "It is a terminal branch of the lateral cord and innervates the biceps brachii.",
+        "It arises from the medial cord and primarily supplies the flexor muscles of the forearm.",
+        "It stems directly from the anterior divisions of the middle and lower trunks."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It originates from the posterior cord and innervates the triceps brachii, supinator, and forearm extensors.",
+      "explanation": "The radial nerve is the major terminal branch of the posterior cord, supplying the triceps brachii, anconeus, brachioradialis, supinator, and the extensor muscles of the forearm.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana201-brachial-plexus-14",
+      "text": "Which clinical presentation is pathognomonic for Erb-Duchenne paralysis?",
+      "options": [
+        "A claw hand deformity characterized by hyperextension at the metacarpophalangeal joints.",
+        "The arm hangs by the side, adducted and medially rotated, with the forearm extended and pronated (\"waiter's tip\").",
+        "Severe winging of the scapula with a complete inability to abduct the arm past 90 degrees.",
+        "Complete flaccid paralysis of the entire upper limb with total sensory loss."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The arm hangs by the side, adducted and medially rotated, with the forearm extended and pronated (\"waiter's tip\").",
+      "explanation": "Erb's paralysis presents as a \"policeman's tip\" or \"waiter's tip\" hand, where the limb is adducted, medially rotated, extended, and pronated.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana201-brachial-plexus-15",
+      "text": "What deformity is classically associated with Klumpke’s paralysis?",
+      "options": [
+        "The \"waiter's tip\" posture of the upper limb.",
+        "Rigid pronation and extension of the forearm with medial rotation of the arm.",
+        "A claw hand deformity due to paralysis of the intrinsic muscles of the hand and ulnar flexors of the wrist and fingers.",
+        "Atrophy of the deltoid muscle with corresponding sensory loss over the lateral shoulder."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A claw hand deformity due to paralysis of the intrinsic muscles of the hand and ulnar flexors of the wrist and fingers.",
+      "explanation": "Klumpke's paralysis affects C8-T1, paralyzing the intrinsic muscles of the hand and ulnar flexors, resulting in a claw hand.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana201-brachial-plexus-16",
+      "text": "What mechanism accounts for the presentation of Horner’s syndrome in some cases of brachial plexus injury?",
+      "options": [
+        "Avulsion of the C5 and C6 nerve roots in the upper neck.",
+        "Direct injury to the long thoracic nerve during forceful axillary stretch.",
+        "Severe traction and ischemia of the middle trunk of the brachial plexus.",
+        "Injury to the sympathetic fibers to the head and neck associated with the T1 nerve root."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Injury to the sympathetic fibers to the head and neck associated with the T1 nerve root.",
+      "explanation": "Horner’s syndrome (ptosis, miosis, anhydrosis) can accompany Klumpke's paralysis because sympathetic fibers to the head and neck travel with the T1 nerve root.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana201-brachial-plexus-17",
+      "text": "Winging of the scapula is a distinct clinical sign caused by damage to which structure?",
+      "options": [
+        "Nerve to serratus anterior (long thoracic nerve)",
+        "Dorsal scapular nerve (nerve to rhomboids)",
+        "The upper trunk at Erb's point",
+        "The thoracodorsal nerve"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Nerve to serratus anterior (long thoracic nerve)",
+      "explanation": "Injury to the long thoracic nerve (nerve of Bell) paralyzes the serratus anterior, causing winging of the scapula and loss of pushing/punching ability.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana201-brachial-plexus-18",
+      "text": "How is a \"prefixed\" brachial plexus defined anatomically?",
+      "options": [
+        "The plexus has a large contribution from T2 and minimal from C4.",
+        "The plexus has a large contribution from C4 but not from T2.",
+        "The entire plexus shifts inferiorly, originating mainly from C6 through T2.",
+        "The plexus receives completely equal contributions from C3 through T2."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The plexus has a large contribution from C4 but not from T2.",
+      "explanation": "A prefixed plexus has a significant fiber contribution from C4 and lacks a contribution from T2.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana201-brachial-plexus-19",
+      "text": "Which characteristic defines a \"postfixed\" brachial plexus?",
+      "options": [
+        "A large sensory contribution from C4 and minimal motor fibers from T2.",
+        "Complete anatomical absence of the T1 contribution to the lower trunk.",
+        "A large contribution from T2 but not from C4.",
+        "The plexus originates entirely from thoracic nerve roots bypassing the cervical spine."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A large contribution from T2 but not from C4.",
+      "explanation": "A postfixed plexus is characterized by a large contribution from the T2 spinal nerve and no contribution from C4.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana201-brachial-plexus-20",
+      "text": "To what structure is the first part of the axillary artery related medially?",
+      "options": [
+        "The medial cord of the brachial plexus",
+        "The pectoralis minor muscle",
+        "The ulnar nerve",
+        "The axillary vein"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The axillary vein",
+      "explanation": "Medially, the first part of the axillary artery is related to the axillary vein.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana201-brachial-plexus-21",
+      "text": "Which of the following is true regarding sympathetic innervation of the upper limb?",
+      "options": [
+        "Sympathetic fibers supply the arteries, sweat glands, and arrector pili muscles.",
+        "Sympathetic nerves supply the skeletal muscle fibers of the upper limb.",
+        "Sympathetic fibers solely monitor nociceptive pain in the distal upper limb.",
+        "Sympathetic fibers are exclusively contained within the posterior cord of the brachial plexus."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Sympathetic fibers supply the arteries, sweat glands, and arrector pili muscles.",
+      "explanation": "Sympathetic nerves to the upper limb supply structures like sweat glands, arrector pili, and arteries, but do not supply skeletal muscles.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana201-brachial-plexus-22",
+      "text": "Generally, what is the functional distribution of the divisions of the brachial plexus?",
+      "options": [
+        "Anterior divisions supply extensor muscles; posterior divisions supply flexor muscles.",
+        "Anterior divisions supply flexor muscles; posterior divisions supply extensor muscles.",
+        "Anterior divisions innervate proximal limb muscles; posterior divisions innervate distal limb muscles.",
+        "Anterior divisions carry purely sensory information; posterior divisions carry purely motor information."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Anterior divisions supply flexor muscles; posterior divisions supply extensor muscles.",
+      "explanation": "As a general rule in the brachial plexus, the anterior divisions supply the flexor aspect of the limb, and the posterior divisions supply the extensor aspect.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana201-brachial-plexus-23",
+      "text": "Which neural structures unite to form the superior (upper) trunk?",
+      "options": [
+        "The ventral rami of C4 and C5",
+        "The ventral rami of C7 and C8",
+        "The ventral rami of C5 and C6",
+        "The anterior divisions of C5, C6, and C7"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The ventral rami of C5 and C6",
+      "explanation": "The superior (upper) trunk is formed by the union of the ventral rami (roots) of C5 and C6.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana201-brachial-plexus-24",
+      "text": "Which neural structure forms the middle trunk of the brachial plexus?",
+      "options": [
+        "The ventral rami of C5 and C6",
+        "The ventral rami of C8 and T1",
+        "The dorsal ramus of C7",
+        "The ventral ramus of C7"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The ventral ramus of C7",
+      "explanation": "The middle trunk is a direct continuation of the ventral ramus of the C7 spinal nerve.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana201-brachial-plexus-25",
+      "text": "Which neural structures unite to form the inferior (lower) trunk?",
+      "options": [
+        "The ventral rami of C8 and T1",
+        "The ventral ramus of C7 alone",
+        "The ventral rami of C6 and C7",
+        "The anterior division of the lower trunk"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The ventral rami of C8 and T1",
+      "explanation": "The inferior (lower) trunk is formed by the union of the ventral rami (roots) of C8 and T1.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana201-brachial-plexus-26",
+      "text": "Where are the roots of the brachial plexus anatomically derived from?",
+      "options": [
+        "The dorsal root ganglia of C5-T1",
+        "The anterior primary rami of C5-T1",
+        "The supraclavicular divisions in the axilla",
+        "Exclusively the motor nerve fibers of the spinal cord"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The anterior primary rami of C5-T1",
+      "explanation": "The roots of the brachial plexus are the anterior primary rami (ventral rami) of the C5 through T1 spinal nerves.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana201-brachial-plexus-27",
+      "text": "What is the origin of the dorsal scapular nerve?",
+      "options": [
+        "The lateral cord",
+        "The upper trunk",
+        "The root of C5",
+        "The posterior cord"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The root of C5",
+      "explanation": "The dorsal scapular nerve (nerve to rhomboids) arises directly from the root of C5.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana201-brachial-plexus-28",
+      "text": "Which of the following describes the thoracodorsal nerve?",
+      "options": [
+        "It innervates the trapezius muscle directly.",
+        "It arises from the anterior divisions of the middle trunk.",
+        "It is a branch of the medial cord supplying the pectoralis minor.",
+        "It is a branch of the posterior cord and supplies the latissimus dorsi."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. It is a branch of the posterior cord and supplies the latissimus dorsi.",
+      "explanation": "The thoracodorsal nerve (middle subscapular nerve) arises from the posterior cord (C6, C7, C8) and innervates the latissimus dorsi.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana201-brachial-plexus-29",
+      "text": "From where does the medial pectoral nerve originate?",
+      "options": [
+        "It is a branch of the medial cord supplying the pectoralis major and minor.",
+        "It originates from the lateral cord to supply only the pectoralis minor.",
+        "It carries fibers solely from the C5 and C6 nerve roots.",
+        "It provides sensory innervation to the medial aspect of the chest wall."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It is a branch of the medial cord supplying the pectoralis major and minor.",
+      "explanation": "The medial pectoral nerve is a branch of the medial cord and supplies both the pectoralis major and minor muscles.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana201-brachial-plexus-30",
+      "text": "Which statement correctly describes the lateral pectoral nerve?",
+      "options": [
+        "It is a terminal branch of the medial cord.",
+        "It is a branch of the lateral cord supplying the pectoralis major and minor.",
+        "It supplies motor innervation to the serratus anterior muscle.",
+        "It carries primarily sympathetic fibers to the axillary artery."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It is a branch of the lateral cord supplying the pectoralis major and minor.",
+      "explanation": "The lateral pectoral nerve arises from the lateral cord (C5, 6, 7) and innervates the pectoralis major and minor.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana201-brachial-plexus-31",
+      "text": "Which muscle group is supplied by the musculocutaneous nerve?",
+      "options": [
+        "The triceps brachii and anconeus.",
+        "The intrinsic hand muscles and flexor carpi ulnaris.",
+        "The coracobrachialis, brachialis, and biceps brachii.",
+        "The extensor compartment muscles of the forearm."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The coracobrachialis, brachialis, and biceps brachii.",
+      "explanation": "The musculocutaneous nerve branches from the lateral cord and supplies the coracobrachialis, brachialis, and biceps brachii muscles.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana201-brachial-plexus-32",
+      "text": "What is the origin and motor supply of the ulnar nerve?",
+      "options": [
+        "It originates exclusively from the lateral cord.",
+        "It supplies the supinator and brachioradialis muscles.",
+        "It is responsible solely for the sensory innervation of the lateral forearm.",
+        "It arises from the medial cord and supplies part of the intrinsic hand muscles and ulnar flexors."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. It arises from the medial cord and supplies part of the intrinsic hand muscles and ulnar flexors.",
+      "explanation": "The ulnar nerve originates from the medial cord (C7, C8, T1) and innervates ulnar flexors of the wrist/fingers and intrinsic muscles of the hand.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana201-brachial-plexus-33",
+      "text": "How is the median nerve formed within the brachial plexus?",
+      "options": [
+        "By the union of a lateral root from the lateral cord and a medial root from the medial cord.",
+        "By the direct terminal continuation of the posterior cord.",
+        "By branches arising entirely from the ventral rami of C8 and T1.",
+        "By divisions branching directly off the upper and middle trunks."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. By the union of a lateral root from the lateral cord and a medial root from the medial cord.",
+      "explanation": "The median nerve is uniquely formed by the convergence of the lateral root of the median nerve (from the lateral cord) and the medial root of the median nerve (from the medial cord).",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana201-brachial-plexus-34",
+      "text": "Anatomically, what is significant about Erb’s Point?",
+      "options": [
+        "It is the junction where four separate nerves converge on the middle trunk.",
+        "It is a site on the upper trunk where six nerves meet.",
+        "It is the anatomical landmark where the three cords divide into their terminal branches.",
+        "It is located on the posterior cord exactly at the origin of the radial nerve."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It is a site on the upper trunk where six nerves meet.",
+      "explanation": "Erb's point is located on the upper trunk where six nerves meet (C5 root, C6 root, Suprascapular nerve, Nerve to subclavius, dorsal division, and ventral division).",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana201-brachial-plexus-35",
+      "text": "Which specific muscles are paralyzed in Erb’s palsy?",
+      "options": [
+        "Flexor carpi ulnaris, flexor digitorum profundus, and intrinsic hand muscles.",
+        "Pectoralis major, pectoralis minor, and serratus anterior.",
+        "Biceps, deltoid, brachialis, brachioradialis, supraspinatus, infraspinatus, and supinator.",
+        "Triceps brachii, anconeus, and the extensor carpi radialis longus."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Biceps, deltoid, brachialis, brachioradialis, supraspinatus, infraspinatus, and supinator.",
+      "explanation": "Erb's palsy paralyzes muscles supplied by C5 and C6, including the biceps, deltoid, brachialis, brachioradialis, supraspinatus, infraspinatus, and supinator.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana201-brachial-plexus-36",
+      "text": "In Klumpke’s paralysis, which muscle groups suffer primary motor loss?",
+      "options": [
+        "Biceps brachii and coracobrachialis.",
+        "Deltoid and teres minor.",
+        "Latissimus dorsi and subscapularis.",
+        "Intrinsic muscles of the hand and ulnar flexors of the wrist and fingers."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Intrinsic muscles of the hand and ulnar flexors of the wrist and fingers.",
+      "explanation": "Because Klumpke's affects the lower trunk (C8, T1), it paralyzes the intrinsic hand muscles and ulnar flexors.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana201-brachial-plexus-37",
+      "text": "Where is the characteristic loss of sensation observed in Erb’s paralysis?",
+      "options": [
+        "Over the lower part of the deltoid.",
+        "Along the medial border of the forearm.",
+        "In the dorsal web space between the thumb and index finger.",
+        "Over the palmar aspect of the 4th and 5th digits."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Over the lower part of the deltoid.",
+      "explanation": "Erb's paralysis causes sensory loss over the lower part of the deltoid muscle.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana201-brachial-plexus-38",
+      "text": "What is the typical pattern of sensory loss in Klumpke’s paralysis?",
+      "options": [
+        "Loss of sensation over the lateral aspect of the arm.",
+        "Loss of sensation along the ulnar border of the forearm and hand.",
+        "Loss of sensation in the autonomous zone of the axillary nerve.",
+        "Loss of sensation over the anterior chest wall."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Loss of sensation along the ulnar border of the forearm and hand.",
+      "explanation": "Injury to the lower trunk results in loss of sensation along the ulnar border of the forearm and hand (C8, T1 dermatomes).",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana201-brachial-plexus-39",
+      "text": "What is a common mechanical cause for an injury to the nerve to the serratus anterior?",
+      "options": [
+        "Sudden traction on the arm leading to lower trunk avulsion.",
+        "Forceful separation of the neck and shoulder during childbirth.",
+        "Sudden pressure on the shoulder from above or carrying a heavy load on the shoulders.",
+        "Penetrating trauma directly to the medial cord in the axilla."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Sudden pressure on the shoulder from above or carrying a heavy load on the shoulders.",
+      "explanation": "The nerve of Bell (long thoracic nerve) can be injured by sudden pressure on the shoulder from above, such as carrying a heavy load.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana201-brachial-plexus-40",
+      "text": "In the context of obstetric brachial plexus injuries, what role does shoulder dystocia play?",
+      "options": [
+        "It exclusively causes direct laceration of the axillary artery without neural damage.",
+        "It primarily results in Horner's syndrome without accompanying limb paralysis.",
+        "It strictly causes compression of the radial nerve against the humerus.",
+        "It acts as a major mechanical risk factor where the baby's shoulder is restricted on the mother's pelvis, leading to stretching injuries."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. It acts as a major mechanical risk factor where the baby's shoulder is restricted on the mother's pelvis, leading to stretching injuries.",
+      "explanation": "Shoulder dystocia is a key risk factor for obstetric non-traumatic brachial plexus injuries due to excessive stretching of the neck or pulling of the limb.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana201-brachial-plexus-41",
+      "text": "How does the \"claw hand\" deformity anatomically present in a patient with Klumpke’s paralysis?",
+      "options": [
+        "Hyperextension at the metacarpophalangeal joints and flexion at the interphalangeal joints.",
+        "Flexion at the metacarpophalangeal joints and hyperextension at the interphalangeal joints.",
+        "A fixed supination of the forearm accompanied by a severe wrist drop.",
+        "Adduction and medial rotation of the arm locked at the shoulder joint."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Hyperextension at the metacarpophalangeal joints and flexion at the interphalangeal joints.",
+      "explanation": "The claw hand deformity is characterized by hyperextension at the metacarpophalangeal (MCP) joints and flexion at the interphalangeal (IP) joints due to the loss of intrinsic hand muscles.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana201-brachial-plexus-42",
+      "text": "The axillary sheath is a connective tissue structure in the axilla. What does it enclose?",
+      "options": [
+        "Spinal nerve roots, dorsal root ganglia, and the subclavian artery.",
+        "Cords and branches of the brachial plexus, and the axillary artery.",
+        "The upper trunks of the brachial plexus and the internal jugular vein.",
+        "The sympathetic paravertebral trunk and ascending somatic sensory fibers."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Cords and branches of the brachial plexus, and the axillary artery.",
+      "explanation": "The axillary sheath is a connective tissue sheath that encloses the neurovascular bundle containing the cords and branches of the brachial plexus alongside the axillary artery.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana201-brachial-plexus-43",
+      "text": "Which statement accurately describes the upper subscapular nerve?",
+      "options": [
+        "It originates from the upper trunk and supplies the supraspinatus.",
+        "It originates from the lateral cord and supplies the subclavius.",
+        "It originates from the posterior cord and supplies the upper part of the subscapularis.",
+        "It originates from the medial cord and supplies the latissimus dorsi."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It originates from the posterior cord and supplies the upper part of the subscapularis.",
+      "explanation": "The upper subscapular nerve (C5, C6) arises from the posterior cord and provides motor innervation to the upper part of the subscapularis muscle.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana201-brachial-plexus-44",
+      "text": "Which description accurately identifies the lower subscapular nerve?",
+      "options": [
+        "It originates from the lower trunk to supply the pectoralis minor.",
+        "It originates from the lateral cord to solely supply the subscapularis.",
+        "It originates from the medial cord to supply the teres minor.",
+        "It originates from the posterior cord to supply the lower subscapularis and teres major."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. It originates from the posterior cord to supply the lower subscapularis and teres major.",
+      "explanation": "The lower subscapular nerve (C5, C6) branches off the posterior cord to supply the lower part of the subscapularis and the teres major muscles.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana201-brachial-plexus-45",
+      "text": "What is the anatomical origin of the medial cutaneous nerve of the arm?",
+      "options": [
+        "It is a branch of the medial cord carrying C8 and T1 fibers.",
+        "It is a branch of the lateral cord carrying C5 through C7 fibers.",
+        "It is the terminal branch of the musculocutaneous nerve.",
+        "It arises directly from the anterior division of the lower trunk."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It is a branch of the medial cord carrying C8 and T1 fibers.",
+      "explanation": "The medial cutaneous nerve of the arm arises directly from the medial cord, carrying sensory fibers from C8 and T1.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana201-brachial-plexus-46",
+      "text": "Where does the medial cutaneous nerve of the forearm originate?",
+      "options": [
+        "Directly from the lower trunk.",
+        "From the medial cord (C8, T1).",
+        "As a sensory branch of the ulnar nerve.",
+        "Directly from the posterior cord."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. From the medial cord (C8, T1).",
+      "explanation": "The medial cutaneous nerve of the forearm originates from the medial cord (C8, T1).",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana201-brachial-plexus-47",
+      "text": "What is a common mechanical cause of an upper brachial plexus birth injury?",
+      "options": [
+        "Pulling the baby by the legs during a breech presentation, which always damages the lower trunk.",
+        "Cesarean section, which completely eliminates the risk of brachial plexus injury.",
+        "Undue separation of the head and shoulder, causing excessive stretching of the neck.",
+        "Hyperextension of the fetal spine, causing bilateral root avulsions."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Undue separation of the head and shoulder, causing excessive stretching of the neck.",
+      "explanation": "Excessive stretching of the neck—often caused by undue separation of the head and shoulder during a difficult delivery—leads to upper brachial plexus injury.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana201-brachial-plexus-48",
+      "text": "Which mechanism is most likely to cause a lower brachial plexus injury (Klumpke's palsy) during childbirth?",
+      "options": [
+        "Excessive lateral flexion of the neck away from the shoulder.",
+        "Direct compression of the fetal neck by the umbilical cord.",
+        "Prolonged fetal hypoxia affecting the anterior horn cells.",
+        "Excessive, forceful pulling of the upper extremity."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Excessive, forceful pulling of the upper extremity.",
+      "explanation": "Lower trunk injuries during childbirth typically occur when the upper extremity is forcefully pulled, stretching the C8 and T1 nerve roots.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana201-brachial-plexus-49",
+      "text": "Which muscle of the upper extremity and shoulder girdle is notably NOT innervated by the brachial plexus?",
+      "options": [
+        "Trapezius",
+        "Levator scapulae",
+        "Deltoid",
+        "Latissimus dorsi"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Trapezius",
+      "explanation": "The brachial plexus innervates the skin and muscles of the entire upper limb except for the trapezius muscle, which is innervated by the spinal accessory nerve.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana201-brachial-plexus-50",
+      "text": "How many trunks compose the supraclavicular portion of the brachial plexus?",
+      "options": [
+        "2 (Superior and Inferior)",
+        "5 (Corresponding to each nerve root)",
+        "3 (Superior, Middle, and Inferior)",
+        "6 (Formed by the anterior and posterior divisions)"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. 3 (Superior, Middle, and Inferior)",
+      "explanation": "There are exactly three trunks in the brachial plexus: the superior (upper), middle, and inferior (lower) trunks.",
+      "section": "Brachial Plexus Anatomy & Clinical Correlations",
+      "questionNumber": 50
+    }
+  ]
+}
