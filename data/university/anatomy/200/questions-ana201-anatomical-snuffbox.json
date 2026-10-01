@@ -1,0 +1,460 @@
+{
+  "title": "Anatomical Snuffbox",
+  "course": "ANA 201",
+  "totalQuestions": 30,
+  "sections": [
+    "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations (Q1-Q30)"
+  ],
+  "questions": [
+    {
+      "id": "ana201-snuffbox-1",
+      "text": "The lateral (radial) border of the anatomical snuff box is defined by the tendons of which two muscles?",
+      "options": [
+        "Extensor pollicis longus and extensor pollicis brevis",
+        "Extensor pollicis longus and abductor pollicis longus",
+        "Abductor pollicis longus and extensor pollicis brevis",
+        "Extensor carpi radialis longus and extensor carpi radialis brevis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Abductor pollicis longus and extensor pollicis brevis",
+      "explanation": "The lateral (radial) boundary of the anatomical snuff box is formed by the closely parallel tendons of the abductor pollicis longus and the extensor pollicis brevis muscles as they cross the styloid process of the radius.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana201-snuffbox-2",
+      "text": "Which carpal bone is primarily palpable within the floor of the anatomical snuff box and is notoriously susceptible to avascular necrosis following a fracture?",
+      "options": [
+        "Trapezium",
+        "Lunate",
+        "Capitate",
+        "Scaphoid"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Scaphoid",
+      "explanation": "The scaphoid bone forms the major part of the floor of the anatomical snuff box. Because its blood supply enters distally and runs proximally, a fracture across its waist can interrupt blood flow to the proximal pole, leading to avascular necrosis.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana201-snuffbox-3",
+      "text": "Which major vascular structure courses deep within the anatomical snuff box, crossing its floor before passing between the two heads of the first dorsal interosseous muscle?",
+      "options": [
+        "Ulnar artery",
+        "Radial artery",
+        "Cephalic vein",
+        "Superficial palmar arch"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Radial artery",
+      "explanation": "The radial artery is the primary deep content of the anatomical snuff box. It crosses the scaphoid and trapezium (the floor) before diving deeply between the heads of the first dorsal interosseous muscle to enter the palm and form the deep palmar arch.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana201-snuffbox-4",
+      "text": "During a physical examination, the clinician applies pressure directly into the hollow of the anatomical snuff box. Exquisite tenderness in this specific location is the classic clinical sign of which injury?",
+      "options": [
+        "Fracture of the scaphoid bone",
+        "Rupture of the extensor pollicis longus tendon",
+        "De Quervain's tenosynovitis",
+        "Dislocation of the lunate bone"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Fracture of the scaphoid bone",
+      "explanation": "Because the scaphoid bone forms the floor of the anatomical snuff box, localized tenderness upon deep palpation in this area following a fall on an outstretched hand is highly indicative of a scaphoid fracture, even if initial X-rays appear normal.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana201-snuffbox-5",
+      "text": "The medial (ulnar) boundary of the anatomical snuff box is formed by the tendon of a single muscle that hooks around the dorsal tubercle of the radius (Lister's tubercle). Which muscle is this?",
+      "options": [
+        "Abductor pollicis longus",
+        "Extensor pollicis brevis",
+        "Extensor indicis",
+        "Extensor pollicis longus"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Extensor pollicis longus",
+      "explanation": "The tendon of the extensor pollicis longus defines the medial (ulnar) border of the snuff box. It takes a sharp angle around Lister's tubercle on the radius, using it as a pulley to change its line of pull toward the thumb.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana201-snuffbox-6",
+      "text": "The superficial branch of the radial nerve passes through the roof of the anatomical snuff box. What is the primary function of this specific nerve branch in this region?",
+      "options": [
+        "Cutaneous sensation to the dorsal aspect of the radial side of the hand and thumb",
+        "Motor innervation to the abductor pollicis longus",
+        "Cutaneous sensation to the palmar aspect of the thumb and index finger",
+        "Motor innervation to the first dorsal interosseous muscle"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Cutaneous sensation to the dorsal aspect of the radial side of the hand and thumb",
+      "explanation": "The superficial branch of the radial nerve is a purely sensory nerve. As it courses through the roof of the snuff box, it provides cutaneous (sensory) innervation to the skin over the dorsolateral aspect of the hand, including the thumb, index, and middle fingers.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana201-snuffbox-7",
+      "text": "Which superficial vein, often utilized for peripheral intravenous access, originates from the radial side of the dorsal venous network of the hand and crosses the roof of the anatomical snuff box?",
+      "options": [
+        "Basilic vein",
+        "Median cubital vein",
+        "Cephalic vein",
+        "Accessory cephalic vein"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Cephalic vein",
+      "explanation": "The cephalic vein arises from the lateral (radial) end of the dorsal venous network on the back of the hand. It passes superficially over the anatomical snuff box (in its roof) before ascending the lateral aspect of the forearm.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana201-snuffbox-8",
+      "text": "The proximal boundary of the anatomical snuff box is formed by a distinct bony prominence. Which landmark serves as this proximal limit?",
+      "options": [
+        "Styloid process of the ulna",
+        "Styloid process of the radius",
+        "Dorsal tubercle of the radius (Lister's tubercle)",
+        "Base of the first metacarpal"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Styloid process of the radius",
+      "explanation": "The anatomical snuff box is bounded proximally by the styloid process of the radius. The tendons forming the medial and lateral borders converge proximally near this styloid process.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana201-snuffbox-9",
+      "text": "In addition to the scaphoid, which other carpal bone constitutes the floor of the anatomical snuff box, articulating directly with the first metacarpal bone?",
+      "options": [
+        "Trapezoid",
+        "Trapezium",
+        "Triquetrum",
+        "Capitate"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Trapezium",
+      "explanation": "The floor of the anatomical snuff box is formed by the scaphoid proximally and the trapezium distally. The trapezium articulates with the base of the first metacarpal to form the carpometacarpal joint of the thumb.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana201-snuffbox-10",
+      "text": "When taking a pulse in the anatomical snuff box, the clinician is compressing the radial artery against which underlying bony structure?",
+      "options": [
+        "The head of the ulna",
+        "The base of the second metacarpal",
+        "The scaphoid bone",
+        "The pisiform bone"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The scaphoid bone",
+      "explanation": "The radial artery runs directly over the floor of the snuff box. By palpating deeply in this depression, the artery can be compressed against the underlying scaphoid (and sometimes trapezium) bone to detect a pulse.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana201-snuffbox-11",
+      "text": "The tendons forming the lateral border of the anatomical snuff box (abductor pollicis longus and extensor pollicis brevis) share a common fibrous sheath and constitute which extensor compartment of the wrist?",
+      "options": [
+        "First extensor compartment",
+        "Second extensor compartment",
+        "Third extensor compartment",
+        "Fourth extensor compartment"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. First extensor compartment",
+      "explanation": "The tendons of the abductor pollicis longus and extensor pollicis brevis travel together in the first dorsal extensor compartment over the radial styloid. Inflammation of this compartment is known as De Quervain's tenosynovitis.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana201-snuffbox-12",
+      "text": "Which specific maneuver makes the boundaries of the anatomical snuff box most prominent and easily identifiable for clinical examination?",
+      "options": [
+        "Full flexion of the fingers into a fist",
+        "Radial deviation of the wrist with thumb adduction",
+        "Active extension and abduction of the thumb",
+        "Pronation of the forearm with wrist flexion"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Active extension and abduction of the thumb",
+      "explanation": "The anatomical snuff box is a dynamic structure. It becomes a highly visible, hollowed depression when the thumb is actively extended and abducted, which draws the bounding tendons (EPL, EPB, APL) taut.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana201-snuffbox-13",
+      "text": "The radial artery gives off several branches near the wrist. While within the anatomical snuff box, before it pierces the first dorsal interosseous muscle, which branch does it typically give rise to?",
+      "options": [
+        "Superficial palmar branch",
+        "Princeps pollicis artery",
+        "Radialis indicis artery",
+        "Dorsal carpal branch"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Dorsal carpal branch",
+      "explanation": "As the radial artery passes through the anatomical snuff box, it typically gives off the dorsal carpal branch, which joins the dorsal carpal arch to supply the carpal bones and dorsal hand. The princeps pollicis and radialis indicis arise deeper, in the palm.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana201-snuffbox-14",
+      "text": "During venipuncture of the cephalic vein overlying the anatomical snuff box, a patient reports a sudden, sharp, \"electric shock\" sensation radiating down the back of their thumb. Which structure has likely been inadvertently irritated by the needle?",
+      "options": [
+        "Deep branch of the radial nerve",
+        "Superficial branch of the radial nerve",
+        "Lateral cutaneous nerve of the forearm",
+        "Palmar cutaneous branch of the median nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Superficial branch of the radial nerve",
+      "explanation": "The superficial branch of the radial nerve lies in the roof of the snuff box, in close proximity to the cephalic vein. It is vulnerable to injury during venipuncture or IV placement in this area, resulting in sensory symptoms over the dorsum of the thumb.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana201-snuffbox-15",
+      "text": "De Quervain's tenosynovitis is a painful inflammatory condition affecting the tendons that form one specific border of the anatomical snuff box. Which border is affected?",
+      "options": [
+        "The medial border",
+        "The proximal border",
+        "The lateral border",
+        "The deep floor"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The lateral border",
+      "explanation": "De Quervain's tenosynovitis involves inflammation of the synovial sheath surrounding the abductor pollicis longus and extensor pollicis brevis tendons, which together form the lateral (radial) border of the anatomical snuff box.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana201-snuffbox-16",
+      "text": "The tendon of the extensor pollicis longus forms the medial border of the snuff box. Which extensor compartment of the wrist does this single tendon pass through?",
+      "options": [
+        "First extensor compartment",
+        "Second extensor compartment",
+        "Third extensor compartment",
+        "Fourth extensor compartment"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Third extensor compartment",
+      "explanation": "The tendon of the extensor pollicis longus travels alone through the third dorsal extensor compartment. It hooks around Lister's tubercle before angling laterally to form the medial border of the snuff box.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana201-snuffbox-17",
+      "text": "Which of the following structures is NOT considered part of the \"roof\" of the anatomical snuff box?",
+      "options": [
+        "Skin",
+        "Superficial fascia",
+        "Extensor retinaculum",
+        "Cephalic vein"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Extensor retinaculum",
+      "explanation": "The roof of the snuff box is formed merely by skin and superficial fascia, which contain the cephalic vein and the superficial branch of the radial nerve. The extensor retinaculum is a deeper fascial band that holds the boundary tendons in place proximally but does not cover the depression itself.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana201-snuffbox-18",
+      "text": "The scaphoid bone receives its blood supply in a retrograde fashion. Which specific vessel, traversing the snuff box, provides the primary arterial branches that enter the distal pole of the scaphoid?",
+      "options": [
+        "Anterior interosseous artery",
+        "Ulnar artery",
+        "Deep palmar arch",
+        "Radial artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Radial artery",
+      "explanation": "The radial artery courses directly over the scaphoid in the snuff box. It gives off small branches that enter the distal pole of the scaphoid and travel proximally within the bone, creating the risk of avascular necrosis if the bone fractures across its waist.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana201-snuffbox-19",
+      "text": "The distal limit of the anatomical snuff box is generally defined by the point where its medial and lateral tendinous borders converge. On which bone do these tendons ultimately insert, marking the distal extent of the region?",
+      "options": [
+        "Base of the first metacarpal and phalanges of the thumb",
+        "Trapezium and scaphoid",
+        "Base of the second metacarpal",
+        "Radial styloid process"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Base of the first metacarpal and phalanges of the thumb",
+      "explanation": "The snuff box tapers distally as the tendons forming its borders run to their insertions on the thumb. The APL inserts on the base of the first metacarpal, the EPB on the proximal phalanx, and the EPL on the distal phalanx.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana201-snuffbox-20",
+      "text": "Which of the following bones is palpable at the very distal end of the anatomical snuff box floor, just before the first carpometacarpal joint?",
+      "options": [
+        "Trapezoid",
+        "Lunate",
+        "Base of the first metacarpal",
+        "Capitate"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Base of the first metacarpal",
+      "explanation": "While the scaphoid and trapezium form the primary floor, the base of the first metacarpal bone is palpable at the distal apex of the snuff box, where it articulates with the trapezium.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana201-snuffbox-21",
+      "text": "A patient presents with a deep laceration across the anatomical snuff box. Upon examination, the patient cannot extend the interphalangeal (IP) joint of their thumb against resistance. Which tendon has been severed?",
+      "options": [
+        "Abductor pollicis longus",
+        "Extensor pollicis brevis",
+        "Extensor pollicis longus",
+        "Flexor pollicis longus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Extensor pollicis longus",
+      "explanation": "The extensor pollicis longus (the medial border of the snuff box) inserts onto the base of the distal phalanx of the thumb and is the sole muscle responsible for extending the interphalangeal joint.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana201-snuffbox-22",
+      "text": "The superficial branch of the radial nerve and the cephalic vein are intimately related in the roof of the snuff box. Generally, what is the anatomical relationship between these two structures in this specific region?",
+      "options": [
+        "The nerve lies deep to the deep fascia, while the vein is superficial.",
+        "The vein typically crosses superficial to the nerve.",
+        "They run parallel, with the nerve always lying strictly medial to the vein.",
+        "The nerve is entirely absent in the snuff box in the majority of individuals."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The vein typically crosses superficial to the nerve.",
+      "explanation": "Both structures are in the superficial fascia (roof). The cephalic vein typically crosses superficial to the superficial branch of the radial nerve, making the nerve vulnerable if a needle penetrates too deeply or at a steep angle during venipuncture.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana201-snuffbox-23",
+      "text": "The term \"anatomical snuff box\" is derived from the historical practice of placing powdered tobacco in this depression. What is the formal anatomical name for this region?",
+      "options": [
+        "Fossa ovalis",
+        "Cubital fossa",
+        "Radial fossa",
+        "Carpal tunnel"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Radial fossa",
+      "explanation": "The formal anatomical term for the snuff box is the radial fossa (foveola radialis), reflecting its position as a depression on the radial aspect of the wrist.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana201-snuffbox-24",
+      "text": "Which of the following clinical conditions is LEAST likely to present with primary pathology or significant physical findings directly within the anatomical snuff box?",
+      "options": [
+        "Scaphoid fracture",
+        "De Quervain's tenosynovitis",
+        "Carpal tunnel syndrome",
+        "Radial artery aneurysm"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Carpal tunnel syndrome",
+      "explanation": "Carpal tunnel syndrome involves compression of the median nerve on the volar (palmar) aspect of the wrist. It does not produce findings in the dorsal, radially located anatomical snuff box.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana201-snuffbox-25",
+      "text": "The tendons of the anatomical snuff box are held tightly against the distal radius by the extensor retinaculum. The tendon of the extensor pollicis brevis travels in the first compartment with the APL. Where does the EPB tendon insert?",
+      "options": [
+        "Base of the distal phalanx of the thumb",
+        "Base of the proximal phalanx of the thumb",
+        "Base of the first metacarpal",
+        "Trapezium"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Base of the proximal phalanx of the thumb",
+      "explanation": "The extensor pollicis brevis (part of the lateral border) inserts onto the base of the proximal phalanx of the thumb, extending the metacarpophalangeal joint.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana201-snuffbox-26",
+      "text": "If a patient has a severe fracture of the radial styloid process (e.g., a Chauffeur's fracture), which border of the anatomical snuff box is directly disrupted?",
+      "options": [
+        "The distal apex",
+        "The medial boundary",
+        "The proximal boundary",
+        "The roof"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The proximal boundary",
+      "explanation": "The styloid process of the radius forms the proximal border (or base of the triangle) of the anatomical snuff box. A fracture here disrupts this anatomical limit.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana201-snuffbox-27",
+      "text": "The radial artery, after traversing the floor of the anatomical snuff box, leaves the region by passing between the two heads of a specific muscle. Which muscle is this?",
+      "options": [
+        "Adductor pollicis",
+        "First dorsal interosseous",
+        "Abductor pollicis brevis",
+        "Opponens pollicis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. First dorsal interosseous",
+      "explanation": "After crossing the snuff box, the radial artery plunges deeply into the hand by passing between the two fleshy heads of the first dorsal interosseous muscle to reach the palm and form the deep palmar arch.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana201-snuffbox-28",
+      "text": "Which of the following correctly pairs a boundary or content of the anatomical snuff box with its respective nerve supply?",
+      "options": [
+        "Extensor pollicis longus – Median nerve",
+        "Abductor pollicis longus – Ulnar nerve",
+        "Skin of the roof – Superficial branch of the radial nerve",
+        "Scaphoid bone – Anterior interosseous nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Skin of the roof – Superficial branch of the radial nerve",
+      "explanation": "The superficial branch of the radial nerve supplies cutaneous innervation to the skin overlying the roof of the anatomical snuff box. The muscles bordering the snuff box are all innervated by the posterior interosseous nerve (a deep branch of the radial nerve).",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana201-snuffbox-29",
+      "text": "A 22-year-old falls on an outstretched hand and presents with wrist pain. X-rays are negative, but there is significant tenderness in the anatomical snuff box. The physician applies a thumb spica splint and schedules a follow-up in two weeks. Why is this conservative management standard practice?",
+      "options": [
+        "To prevent De Quervain's tenosynovitis from developing.",
+        "Initial X-rays often miss undisplaced scaphoid fractures, which carry a high risk of avascular necrosis.",
+        "Snuff box tenderness is a pathognomonic sign of a radial artery tear.",
+        "To allow the cephalic vein to heal from trauma."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Initial X-rays often miss undisplaced scaphoid fractures, which carry a high risk of avascular necrosis.",
+      "explanation": "Undisplaced scaphoid fractures often do not appear on initial X-rays. Because of the tenuous retrograde blood supply from the radial artery in the snuff box, missed fractures can easily lead to non-union or avascular necrosis, so suspected fractures are treated presumptively with immobilization.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana201-snuffbox-30",
+      "text": "The tendons bordering the anatomical snuff box act primarily on the thumb. Based on their anatomical position, which action at the radiocarpal (wrist) joint do these muscles collectively assist with when contracting together?",
+      "options": [
+        "Ulnar deviation (adduction)",
+        "Wrist flexion",
+        "Radial deviation (abduction)",
+        "Pronation"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Radial deviation (abduction)",
+      "explanation": "Because the APL, EPB, and EPL all cross the lateral (radial) aspect of the radiocarpal joint, their collective contraction assists the flexor and extensor carpi radialis muscles in radial deviation (abduction) of the wrist.",
+      "section": "Anatomical Snuffbox: Boundaries, Contents & Clinical Correlations",
+      "questionNumber": 30
+    }
+  ]
+}
