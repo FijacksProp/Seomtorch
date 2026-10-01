@@ -2635,11 +2635,12 @@ function render() {
 function updateScreenWatermark() {
   const watermarkLayer = document.getElementById("screen-watermark-layer");
   if (!watermarkLayer) return;
-  const userIdentifier = currentUser?.username || profile?.username || currentUser?.email || "Seomtorch Candidate";
+  const userIdentifier = currentUser?.username || profile?.username || "Student";
+  const emailIdentifier = currentUser?.email || profile?.email || "";
   const dateStr = new Date().toLocaleDateString();
-  const stampText = `Seomtorch · ${userIdentifier} · ${dateStr}`;
+  const stampText = `Seomtorch · ${userIdentifier}${emailIdentifier ? " · " + emailIdentifier : ""} · ${dateStr}`;
   let html = "";
-  for (let i = 0; i < 24; i++) {
+  for (let i = 0; i < 40; i++) {
     html += `<span class="watermark-stamp">${escapeHtml(stampText)}</span>`;
   }
   watermarkLayer.innerHTML = html;
@@ -2675,6 +2676,53 @@ function initScreenProtection() {
     }
   });
 
+  // Mobile Screenshot Gesture Trapping (e.g. 3-Finger Swipe Down on Android / MIUI / ColorOS / OneUI)
+  let touchStartY = 0;
+  window.addEventListener("touchstart", (e) => {
+    if (e.touches && e.touches.length >= 3) {
+      // 3 or more fingers on screen: definitive multi-finger screenshot gesture
+      e.preventDefault();
+      e.stopPropagation();
+      showShield();
+      triggerPrintScreenBlock("Multi-finger screenshot gesture blocked.");
+      return false;
+    }
+    if (e.touches && e.touches.length === 2) {
+      touchStartY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+    }
+  }, { capture: true, passive: false });
+
+  window.addEventListener("touchmove", (e) => {
+    if (e.touches && e.touches.length >= 3) {
+      e.preventDefault();
+      e.stopPropagation();
+      showShield();
+      return false;
+    }
+    if (e.touches && e.touches.length === 2) {
+      const currentY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+      // If two fingers are swiping downward together rapidly
+      if (currentY - touchStartY > 30) {
+        showShield();
+      }
+    }
+  }, { capture: true, passive: false });
+
+  window.addEventListener("touchend", (e) => {
+    if (e.touches && e.touches.length >= 2) {
+      showShield();
+    }
+  }, { capture: true, passive: false });
+
+  // Screen recording API blocker
+  if (navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) {
+    navigator.mediaDevices.getDisplayMedia = function () {
+      showShield();
+      triggerPrintScreenBlock("Screen recording is strictly prohibited on Seomtorch.");
+      return Promise.reject(new DOMException("Screen recording is disabled for exam integrity", "NotAllowedError"));
+    };
+  }
+
   // Clicking the shield returns focus immediately
   if (shield) {
     shield.addEventListener("click", () => {
@@ -2684,7 +2732,7 @@ function initScreenProtection() {
   }
 
   // Intercept PrintScreen and flash the security shield
-  function triggerPrintScreenBlock() {
+  function triggerPrintScreenBlock(customMsg) {
     showShield();
     if (shieldTimer) clearTimeout(shieldTimer);
     shieldTimer = setTimeout(() => {
@@ -2695,7 +2743,7 @@ function initScreenProtection() {
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText("Screenshots and screen capture are strictly prohibited on Seomtorch.").catch(() => {});
     }
-    showToast("Screenshots are restricted for exam and content security.");
+    showToast(customMsg || "Screenshots are restricted for exam and content security.");
   }
 
   window.addEventListener("keyup", (e) => {
@@ -2710,6 +2758,12 @@ function initScreenProtection() {
       e.preventDefault();
       triggerPrintScreenBlock();
       return false;
+    }
+
+    // Hardware screenshot key detection (e.g. Volume Down + Power button on mobile)
+    if (e.key === "AudioVolumeDown" || e.key === "AudioVolumeUp" || e.keyCode === 24 || e.keyCode === 25) {
+      showShield();
+      triggerPrintScreenBlock("Hardware screenshot attempt blocked.");
     }
 
     const isCtrlOrCmd = e.ctrlKey || e.metaKey;
