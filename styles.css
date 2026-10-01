@@ -3736,18 +3736,18 @@ img {
   }
 }
 
-/* Privacy Shield (Blurs & Shields when Snipping Tool or screenshot software runs) */
+/* Security Screen (Session Pause & Exam Integrity) */
 .screen-privacy-shield {
   display: none;
   position: fixed;
   inset: 0;
   z-index: 9999999;
-  background: rgba(10, 25, 38, 0.96);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  background: rgba(13, 20, 17, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 20px;
   text-align: center;
   color: #fff;
   cursor: pointer;
@@ -3762,63 +3762,93 @@ body.shield-active .app-shell,
 body.shield-active .topbar,
 body.shield-active .sidebar,
 body.shield-active #main {
-  filter: blur(30px) grayscale(90%);
+  filter: blur(20px) grayscale(70%);
   opacity: 0.05 !important;
   pointer-events: none !important;
   user-select: none !important;
 }
 
 .shield-dialog {
-  max-width: 440px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 20px;
-  padding: 36px 28px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 340px;
+  background: #111a15;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 28px 22px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  text-align: center;
+  cursor: default;
 }
 
-.shield-icon {
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  background: rgba(201, 168, 76, 0.15);
-  border: 1px solid rgba(201, 168, 76, 0.4);
-  color: var(--uni-gold, #c9a84c);
+.shield-tag {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #34d399;
+  margin-bottom: 12px;
+}
+
+.shield-symbol {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e5e7eb;
   display: grid;
   place-items: center;
-  margin-bottom: 6px;
+  margin-bottom: 14px;
 }
 
 .shield-dialog h2 {
-  font-family: var(--serif);
-  font-size: 22px;
+  font-family: var(--sans);
+  font-size: 18px;
   font-weight: 600;
-  margin: 0;
-  color: #fff;
+  color: #f9fafb;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.01em;
 }
 
 .shield-dialog p {
-  font-size: 13.5px;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.75);
-  margin: 0;
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.5;
+  color: #9ca3af;
+  margin: 0 0 18px 0;
 }
 
-.shield-instruction {
-  display: inline-block;
-  margin-top: 14px;
-  font-size: 12px;
+.shield-resume-btn {
+  width: 100%;
+  max-width: 220px;
+  padding: 10px 18px;
+  font-family: var(--sans);
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--uni-gold, #c9a84c);
-  background: rgba(201, 168, 76, 0.1);
-  border: 1px solid rgba(201, 168, 76, 0.25);
-  padding: 6px 16px;
-  border-radius: 20px;
+  color: #ffffff;
+  background: #064d3b;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.shield-resume-btn:hover {
+  background: #0a5f4a;
+}
+
+.shield-resume-btn:active {
+  transform: scale(0.98);
+}
+
+.shield-hint {
+  font-size: 11px;
+  color: #6b7280;
+  margin-top: 10px;
 }
 
 /* Mobile Long-Press Callout Blocker */

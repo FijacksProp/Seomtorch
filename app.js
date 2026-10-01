@@ -2683,31 +2683,28 @@ function initScreenProtection() {
   setInterval(updateScreenWatermark, 60 * 60 * 1000);
 
   // Mobile Screenshot Gesture Trapping (e.g. 3-Finger Swipe Down on Android / MIUI / ColorOS / OneUI)
+  // Two fingers are allowed for pinch-to-zoom and natural navigation
   window.addEventListener("touchstart", (e) => {
-    if (e.touches && e.touches.length >= 2) {
+    if (e.touches && e.touches.length >= 3) {
+      e.preventDefault();
+      e.stopPropagation();
       showShield();
-      if (e.touches.length >= 3) {
-        e.preventDefault();
-        e.stopPropagation();
-        triggerPrintScreenBlock("Multi-finger screenshot gesture detected.");
-        return false;
-      }
+      triggerPrintScreenBlock("Three-finger screenshot gesture detected.");
+      return false;
     }
   }, { capture: true, passive: false });
 
   window.addEventListener("touchmove", (e) => {
-    if (e.touches && e.touches.length >= 2) {
+    if (e.touches && e.touches.length >= 3) {
+      e.preventDefault();
+      e.stopPropagation();
       showShield();
-      if (e.touches.length >= 3) {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-      }
+      return false;
     }
   }, { capture: true, passive: false });
 
   window.addEventListener("touchend", (e) => {
-    if (e.touches && e.touches.length >= 2) {
+    if (e.touches && e.touches.length >= 3) {
       showShield();
     }
   }, { capture: true, passive: false });
@@ -2721,11 +2718,17 @@ function initScreenProtection() {
     };
   }
 
-  // Clicking the shield returns focus immediately
+  // Clicking or tapping the shield returns focus immediately
   if (shield) {
     shield.addEventListener("click", () => {
       hideShield();
       window.focus();
+    });
+    shield.addEventListener("touchend", (e) => {
+      if (!e.touches || e.touches.length === 0) {
+        hideShield();
+        window.focus();
+      }
     });
   }
 

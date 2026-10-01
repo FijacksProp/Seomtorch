@@ -59,13 +59,15 @@
   <div id="app" class="app-shell" aria-live="polite"></div>
   <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
   <div id="screen-privacy-shield" class="screen-privacy-shield" aria-hidden="true">
-    <div class="shield-dialog">
-      <div class="shield-icon">
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    <div class="shield-dialog" role="dialog" aria-modal="true" aria-labelledby="shield-title">
+      <div class="shield-tag">Seomtorch Security</div>
+      <div class="shield-symbol" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       </div>
-      <h2>Protected Study Space</h2>
-      <p>Screen capture, recording, and background window preview are restricted to safeguard exam and course materials.</p>
-      <span class="shield-instruction">Click anywhere to resume</span>
+      <h2 id="shield-title">Session Paused</h2>
+      <p>Screen capture is disabled while viewing study and test materials.</p>
+      <button type="button" class="shield-resume-btn">Resume Session</button>
+      <span class="shield-hint">Tap anywhere to return</span>
     </div>
   </div>
   <div id="screen-watermark-layer" class="screen-watermark-layer" aria-hidden="true"></div>
