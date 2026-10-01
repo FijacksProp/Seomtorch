@@ -3832,7 +3832,7 @@ body.shield-active #main {
   inset: 0;
   z-index: 999998;
   pointer-events: none;
-  opacity: 0.1;
+  opacity: 0.05;
   overflow: hidden;
   user-select: none;
   display: flex;
@@ -3857,7 +3857,7 @@ body.shield-active #main {
 
 @media (max-width: 680px) {
   .screen-watermark-layer {
-    opacity: 0.1;
+    opacity: 0.05;
   }
   .watermark-stamp {
     font-size: 9px;

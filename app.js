@@ -2635,10 +2635,11 @@ function render() {
 function updateScreenWatermark() {
   const watermarkLayer = document.getElementById("screen-watermark-layer");
   if (!watermarkLayer) return;
-  const userIdentifier = currentUser?.username || profile?.username || "Student";
-  const emailIdentifier = currentUser?.email || profile?.email || "";
-  const dateStr = new Date().toLocaleDateString();
-  const stampText = `Seomtorch · ${userIdentifier}${emailIdentifier ? " · " + emailIdentifier : ""} · ${dateStr}`;
+  const now = new Date();
+  const day = String(now.getDate()).padStart(2, "0");
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const dateFormatted = `${day} ${months[now.getMonth()]} ${now.getFullYear()}`;
+  const stampText = `SEOTORCH | FP | ${dateFormatted}`;
   let html = "";
   for (let i = 0; i < 40; i++) {
     html += `<span class="watermark-stamp">${escapeHtml(stampText)}</span>`;
@@ -2666,6 +2667,7 @@ function initScreenProtection() {
 
   window.addEventListener("focus", () => {
     hideShield();
+    updateScreenWatermark();
   });
 
   document.addEventListener("visibilitychange", () => {
@@ -2673,8 +2675,12 @@ function initScreenProtection() {
       showShield();
     } else {
       hideShield();
+      updateScreenWatermark();
     }
   });
+
+  // Auto-refresh watermark date daily (every hour for midnight rollover)
+  setInterval(updateScreenWatermark, 60 * 60 * 1000);
 
   // Mobile Screenshot Gesture Trapping (e.g. 3-Finger Swipe Down on Android / MIUI / ColorOS / OneUI)
   window.addEventListener("touchstart", (e) => {
