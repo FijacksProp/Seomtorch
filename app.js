@@ -2677,33 +2677,25 @@ function initScreenProtection() {
   });
 
   // Mobile Screenshot Gesture Trapping (e.g. 3-Finger Swipe Down on Android / MIUI / ColorOS / OneUI)
-  let touchStartY = 0;
   window.addEventListener("touchstart", (e) => {
-    if (e.touches && e.touches.length >= 3) {
-      // 3 or more fingers on screen: definitive multi-finger screenshot gesture
-      e.preventDefault();
-      e.stopPropagation();
+    if (e.touches && e.touches.length >= 2) {
       showShield();
-      triggerPrintScreenBlock("Multi-finger screenshot gesture blocked.");
-      return false;
-    }
-    if (e.touches && e.touches.length === 2) {
-      touchStartY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+      if (e.touches.length >= 3) {
+        e.preventDefault();
+        e.stopPropagation();
+        triggerPrintScreenBlock("Multi-finger screenshot gesture detected.");
+        return false;
+      }
     }
   }, { capture: true, passive: false });
 
   window.addEventListener("touchmove", (e) => {
-    if (e.touches && e.touches.length >= 3) {
-      e.preventDefault();
-      e.stopPropagation();
+    if (e.touches && e.touches.length >= 2) {
       showShield();
-      return false;
-    }
-    if (e.touches && e.touches.length === 2) {
-      const currentY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-      // If two fingers are swiping downward together rapidly
-      if (currentY - touchStartY > 30) {
-        showShield();
+      if (e.touches.length >= 3) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
       }
     }
   }, { capture: true, passive: false });

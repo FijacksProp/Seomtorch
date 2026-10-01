@@ -3826,13 +3826,13 @@ body.shield-active #main {
   -webkit-touch-callout: none !important;
 }
 
-/* Dynamic Academic Security Watermark (Anti-Leaking & Anti-Camera) */
+/* Dynamic Academic Security Watermark (Ultra-Faint Background) */
 .screen-watermark-layer {
   position: fixed;
   inset: 0;
   z-index: 999998;
   pointer-events: none;
-  opacity: 0.075;
+  opacity: 0.014;
   overflow: hidden;
   user-select: none;
   display: flex;
@@ -3844,25 +3844,25 @@ body.shield-active #main {
 
 .watermark-stamp {
   font-family: var(--sans);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   color: var(--ink);
   transform: rotate(-24deg);
   white-space: nowrap;
   user-select: none;
-  margin: 18px 12px;
-  text-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+  margin: 24px 16px;
+  text-shadow: none;
 }
 
 @media (max-width: 680px) {
   .screen-watermark-layer {
-    opacity: 0.095;
+    opacity: 0.014;
   }
   .watermark-stamp {
-    font-size: 10px;
-    margin: 12px 6px;
-    letter-spacing: 0.05em;
+    font-size: 9px;
+    margin: 18px 10px;
+    letter-spacing: 0.04em;
   }
 }
 
