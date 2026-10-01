@@ -16,8 +16,7 @@
         { "id": "ul-anatomical-snuffbox", "title": "Anatomical Snuffbox", "status": "available", "questionsCount": 30, "dataFile": "data/university/anatomy/200/questions-ana201-anatomical-snuffbox.json" },
         { "id": "ul-axilla", "title": "Axilla", "status": "coming-soon" },
         { "id": "ul-blood-supply", "title": "Blood Supply of the Upper Limb", "status": "coming-soon" },
-        { "id": "ul-cubital-fossa", "title": "Cubital Fossa", "status": "coming-soon" },
-        { "id": "ul-carpal-tunnel", "title": "Carpal Tunnel", "status": "coming-soon" }
+        { "id": "ul-cubital-fossa", "title": "Cubital Fossa", "status": "coming-soon" }
       ]
     },
     {
