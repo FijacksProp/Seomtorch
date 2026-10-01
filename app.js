@@ -2617,6 +2617,7 @@ async function startUniPractice(courseCode, topicTitle, dataFile) {
 // ─── End University Module ──────────────────────────────────────────────────
 
 function render() {
+  updateScreenWatermark();
   if (!authToken || !currentUser || !profile) return renderAuth();
   if (currentUser.must_change_password) return renderPasswordChange(true);
   if (route === "daily-sprint") return renderDailySprint();
@@ -2629,6 +2630,149 @@ function render() {
   if (route === "profile") return renderProfile();
   if (route === "achievements") return renderAchievements();
   if (route === "change-password") return renderPasswordChange(false);
+}
+
+function updateScreenWatermark() {
+  const watermarkLayer = document.getElementById("screen-watermark-layer");
+  if (!watermarkLayer) return;
+  const userIdentifier = currentUser?.username || profile?.username || currentUser?.email || "Seomtorch Candidate";
+  const dateStr = new Date().toLocaleDateString();
+  const stampText = `Seomtorch · ${userIdentifier} · ${dateStr}`;
+  let html = "";
+  for (let i = 0; i < 24; i++) {
+    html += `<span class="watermark-stamp">${escapeHtml(stampText)}</span>`;
+  }
+  watermarkLayer.innerHTML = html;
+}
+
+function initScreenProtection() {
+  const shield = document.getElementById("screen-privacy-shield");
+  let shieldTimer = null;
+
+  function showShield() {
+    document.body.classList.add("shield-active");
+  }
+
+  function hideShield() {
+    document.body.classList.remove("shield-active");
+  }
+
+  // Defeat Snipping Tool (Win+Shift+S), external screen recorders & screenshot utilities:
+  // When window loses focus or document becomes hidden, immediately frost and obscure the screen
+  window.addEventListener("blur", () => {
+    showShield();
+  });
+
+  window.addEventListener("focus", () => {
+    hideShield();
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") {
+      showShield();
+    } else {
+      hideShield();
+    }
+  });
+
+  // Clicking the shield returns focus immediately
+  if (shield) {
+    shield.addEventListener("click", () => {
+      hideShield();
+      window.focus();
+    });
+  }
+
+  // Intercept PrintScreen and flash the security shield
+  function triggerPrintScreenBlock() {
+    showShield();
+    if (shieldTimer) clearTimeout(shieldTimer);
+    shieldTimer = setTimeout(() => {
+      hideShield();
+    }, 2000);
+
+    // Overwrite system clipboard
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText("Screenshots and screen capture are strictly prohibited on Seomtorch.").catch(() => {});
+    }
+    showToast("Screenshots are restricted for exam and content security.");
+  }
+
+  window.addEventListener("keyup", (e) => {
+    if (e.key === "PrintScreen" || e.keyCode === 44) {
+      e.preventDefault();
+      triggerPrintScreenBlock();
+    }
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "PrintScreen" || e.keyCode === 44) {
+      e.preventDefault();
+      triggerPrintScreenBlock();
+      return false;
+    }
+
+    const isCtrlOrCmd = e.ctrlKey || e.metaKey;
+
+    // Block Print dialog (Ctrl+P / Cmd+P)
+    if (isCtrlOrCmd && (e.key === "p" || e.key === "P" || e.keyCode === 80)) {
+      e.preventDefault();
+      showToast("Printing is prohibited on Seomtorch.");
+      return false;
+    }
+
+    // Block Webpage Save (Ctrl+S / Cmd+S)
+    if (isCtrlOrCmd && (e.key === "s" || e.key === "S" || e.keyCode === 83)) {
+      e.preventDefault();
+      return false;
+    }
+
+    // Block Source view (Ctrl+U / Cmd+U)
+    if (isCtrlOrCmd && (e.key === "u" || e.key === "U" || e.keyCode === 85)) {
+      e.preventDefault();
+      return false;
+    }
+
+    // Block DevTools shortcuts
+    if (e.key === "F12" || e.keyCode === 123) {
+      e.preventDefault();
+      return false;
+    }
+    if (isCtrlOrCmd && e.shiftKey && (e.key === "I" || e.key === "i" || e.key === "J" || e.key === "j" || e.key === "C" || e.key === "c")) {
+      e.preventDefault();
+      return false;
+    }
+  });
+
+  // Block context menu (right click) except inside inputs / textareas
+  document.addEventListener("contextmenu", (e) => {
+    if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") {
+      return true;
+    }
+    e.preventDefault();
+    return false;
+  });
+
+  // Prevent drag & drop
+  document.addEventListener("dragstart", (e) => {
+    if (e.target.tagName !== "INPUT" && e.target.tagName !== "TEXTAREA") {
+      e.preventDefault();
+    }
+  });
+
+  // Block copying of questions or test content
+  document.addEventListener("copy", (e) => {
+    const isInput = e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA";
+    if (!isInput) {
+      e.preventDefault();
+      if (e.clipboardData) {
+        e.clipboardData.setData("text/plain", "Screenshots and content copying are restricted on Seomtorch.");
+      }
+      showToast("Content copying is disabled for test security.");
+    }
+  });
+
+  updateScreenWatermark();
 }
 
 async function init() {
@@ -2677,6 +2821,7 @@ async function init() {
     app.innerHTML = `<main class="onboard-form" style="min-height:100dvh"><div><p class="eyebrow">Unable to start</p><h1>Seomtorch needs a local web server.</h1><p class="lede">Open this project through localhost or a secure website so its question bank and offline storage can load correctly.</p><p><code>npx serve .</code></p></div></main>`;
   } finally {
     dismissAppLoader();
+    initScreenProtection();
   }
 }
 
