@@ -613,9 +613,7 @@ function shell(content) {
   return `<div class="layout ${mode === 'university' ? 'layout-uni' : ''}">
     <aside class="sidebar">
       <button class="brand" data-route="home" aria-label="Seomtorch home">
-        <span class="brand-symbol" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="#6EE7B7"><path d="M12 23c4.97 0 9-4.03 9-9 0-4.5-3.5-7.5-5-9.5-1.5 2-3 3-4.5 3-2 0-3.5-1.5-3.5-3.5 0-.5.1-1 .2-1.5C5.2 4.7 3 8.6 3 14c0 4.97 4.03 9 9 9z"/></svg>
-        </span>
+        <span class="brand-symbol" aria-hidden="true"><img src="assets/seomtorch_logo.png" alt=""></span>
         <span class="brand-name">Seomtorch</span>
       </button>
 
@@ -652,7 +650,7 @@ function shell(content) {
     <div class="content-wrap">
       <header class="topbar">
         <span class="mobile-brand">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="#2D6A4F"><path d="M12 23c4.97 0 9-4.03 9-9 0-4.5-3.5-7.5-5-9.5-1.5 2-3 3-4.5 3-2 0-3.5-1.5-3.5-3.5 0-.5.1-1 .2-1.5C5.2 4.7 3 8.6 3 14c0 4.97 4.03 9 9 9z"/></svg>
+          <img src="assets/seomtorch_logo.png" alt="">
           <b>Seomtorch</b>
         </span>
         <span class="sync-indicator ${pendingSyncCount > 0 ? 'pending' : navigator.onLine ? 'synced' : 'offline'}" title="${pendingSyncCount > 0 ? `${pendingSyncCount} items pending sync` : navigator.onLine ? 'Synced' : 'Offline'}">
@@ -915,17 +913,6 @@ function renderHome() {
           <span>${recent ? "Continue studying" : "Choose a subject"}</span>
           <span aria-hidden="true">→</span>
         </button>
-      </div>
-      <div class="hero-botanical-art" aria-hidden="true">
-        <svg viewBox="0 0 320 260" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M290 240 C260 170 200 120 130 80 C95 60 50 50 10 40" opacity="0.32"/>
-          <path d="M130 80 C110 50 80 45 60 55 C75 75 105 85 130 80 Z" opacity="0.28"/>
-          <path d="M165 105 C150 75 170 50 195 55 C195 80 180 100 165 105 Z" opacity="0.28"/>
-          <path d="M190 120 C160 125 145 145 150 170 C175 165 190 145 190 120 Z" opacity="0.28"/>
-          <path d="M225 155 C210 135 225 110 250 115 C255 140 240 155 225 155 Z" opacity="0.28"/>
-          <path d="M235 170 C205 180 195 205 205 230 C225 220 240 195 235 170 Z" opacity="0.28"/>
-          <path d="M265 230 C255 195 275 170 300 180 C295 205 280 225 265 230 Z" opacity="0.28"/>
-        </svg>
       </div>
     </article>
 
