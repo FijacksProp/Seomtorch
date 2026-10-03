@@ -1,5 +1,7 @@
 # Seomtorch
 
+<a href="https://maidensail.com/startup/seomtorch" rel="dofollow"><img src="https://maidensail.com/badge/seomtorch.svg" alt="Featured on Maidensail" height="44"></a>
+
 An offline-first examination preparation companion for English Language, General Paper, Mathematics and Physics.
 
 ## Run locally
@@ -20,13 +22,13 @@ Open the localhost address printed by the server. A local server is required bec
 
 ## Deploy the student app to Vercel
 
-Import the GitHub repository into Vercel and leave the framework preset as **Other**. No build command or output directory is required. The included `vercel.json` configures safe caching for the service worker and question bank, long-lived caching for versioned visual assets, and baseline security headers.
+Import the GitHub repository into Vercel and leave the framework preset as **Other**. No build command or output directory is required. The included `vercel.json` configures safe caching for the student app in production and temporary caching for offline development.
 
 The frontend expects the Render service at `https://seomtorch.onrender.com`. If Render assigns another address, update `config.js` and bump the service-worker cache version in `sw.js`.
 
 ## Deploy the backend to Render
 
-Create a Python Web Service manually in Render and connect it to Supabase PostgreSQL. Set the service root directory to `backend`, the build command to `bash build.sh`, and the start command to `bash start.sh`. The startup script runs migrations and initial administrator setup before opening the web port; question-bank initialization runs in the background. See `backend/README.md` and `backend/SUPABASE.md` for the environment variables and exact settings.
+Create a Python Web Service manually in Render and connect it to Supabase PostgreSQL. Set the service root directory to `backend`, the build command to `bash build.sh`, and the start command to `bash start.sh`.
 
 ## Architecture
 
@@ -48,6 +50,6 @@ Create a Python Web Service manually in Render and connect it to Supabase Postgr
 - Branded, reduced-motion-aware application pre-loader
 - JSON progress export and import
 
-To scale the bank, add valid question objects to the JSON file or split it into packs and list those packs in a small manifest. Question IDs must remain stable so historical attempts continue to match the correct question.
+To scale the bank, add valid question objects to the JSON file or split it into packs and list those packs in a small manifest. Question IDs must remain stable so historical attempts continue to resolve correctly.
 
-The supplied 2019 text files can be rebuilt with `npm run questions:build`. The importer normalizes embedded answer choices, assigns topics, generates concise explanations, removes exact duplicates, and writes a validation summary to `data/import-report.json`.
+The supplied 2019 text files can be rebuilt with `npm run questions:build`. The importer normalizes embedded answer choices, assigns topics, generates concise explanations, removes exact duplicate question texts and stores all derived metadata in the compiled JSON bank.
