@@ -40,11 +40,11 @@ const FAQS = [
 ];
 
 const ICONS = {
-  home: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20H4Z"/><path d="M9 20v-6h6v6"/></svg>',
-  practice: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M6 3.5h9l3 3V20.5H6Z"/><path d="M15 3.5v4h4M9 12h6M9 16h6"/></svg>',
-  progress: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
-  challenges: '<svg class="nav-icon" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 20a4 4 0 0 1 8 0"/></svg>',
-  profile: '<svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></svg>',
+  home: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V21H3V10.5Z"/><path d="M9 21v-6h6v6"/></svg>',
+  practice: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+  progress: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/><path d="M3 20h18"/></svg>',
+  challenges: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/><path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M4 5h16v4a6 6 0 0 1-12 0V5z"/><path d="M12 15v4"/><path d="M8 21h8"/></svg>',
+  profile: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
   university: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 3 2 9l10 6 10-6Z"/><path d="M2 9v8"/><path d="M6 11.2V17c0 1.1 2.7 3 6 3s6-1.9 6-3v-5.8"/></svg>',
 };
 
@@ -607,15 +607,21 @@ function shell(content) {
   const testStats = profile.tests || { tests_taken: 0, average_score: 0 };
   const mode = getActiveMode();
   const nav = mode === "university"
-    ? [["home", "Home"], ["university", "Courses"], ["progress", "Progress"], ["profile", "Profile"]]
-    : [["home", "Home"], ["practice", "Practice"], ["challenges", "Challenges"], ["progress", "Progress"], ["profile", "Profile"]];
+    ? [["home", "Home"], ["university", "Courses"], ["progress", "Insights"], ["profile", "Profile"]]
+    : [["home", "Home"], ["practice", "Practice"], ["challenges", "Challenges"], ["progress", "Insights"], ["profile", "Profile"]];
 
   return `<div class="layout ${mode === 'university' ? 'layout-uni' : ''}">
     <aside class="sidebar">
       <button class="brand" data-route="home" aria-label="Seomtorch home">
-        <span class="brand-symbol" aria-hidden="true"><img src="assets/seomtorch_logo.png" alt=""></span>
-        <span class="brand-name">Seomtorch<small>${mode === "university" ? "University Portal" : "Prepare with purpose"}</small></span>
+        <span class="brand-symbol" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="#6EE7B7"><path d="M12 23c4.97 0 9-4.03 9-9 0-4.5-3.5-7.5-5-9.5-1.5 2-3 3-4.5 3-2 0-3.5-1.5-3.5-3.5 0-.5.1-1 .2-1.5C5.2 4.7 3 8.6 3 14c0 4.97 4.03 9 9 9z"/></svg>
+        </span>
+        <span class="brand-name">Seomtorch</span>
       </button>
+
+      <nav class="nav" aria-label="Primary navigation">
+        ${nav.map(([id, label]) => `<button class="nav-button ${route === id ? "active" : ""}" data-route="${id}">${ICONS[id] || ICONS.university}<span>${label}</span></button>`).join("")}
+      </nav>
 
       <div class="mode-switcher-container">
         <div class="mode-switcher-pill" role="tablist" aria-label="Portal mode">
@@ -630,13 +636,53 @@ function shell(content) {
         </div>
       </div>
 
-      <nav class="nav" aria-label="Primary navigation">
-        ${nav.map(([id, label]) => `<button class="nav-button ${route === id ? "active" : ""}" data-route="${id}">${ICONS[id] || ICONS.university}<span>${label}</span></button>`).join("")}
-      </nav>
-      <div class="sidebar-foot"><div class="streak-panel"><svg class="streak-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/><path d="M12 19.2c-1.7 0-2.9-1.1-3-2.7-.1-1.2.5-2.3 1.5-3.2.1 1 .6 1.5 1.1 1.8-.2-1.7.7-2.7 1.6-3.7 1.2 1.5 1.8 3.1 1.7 4.6-.1 1.9-1.2 3.2-2.9 3.2Z"/></svg><div><span>Current streak</span><strong>${profile.rhythm || 0}<small> day${profile.rhythm === 1 ? "" : "s"}</small></strong></div></div><div class="xp-panel"><div><strong>Level ${xp.level}</strong><span>${xp.xp} XP</span></div><div class="xp-track"><i style="width:${xp.percent}%"></i></div><small>${xp.remaining} XP to next level</small></div>${mode === 'aspirant' ? `<button class="button outline small jamb-calc-sidebar-btn" id="sidebar-calc-toggle" type="button" style="width:100%; margin-top:14px; margin-bottom:6px; display:inline-flex; align-items:center; justify-content:center; gap:7px; font-size:11px; font-weight:700;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg><span>JAMB Calculator</span></button>` : ''}<p>Come back tomorrow and keep it alive.</p></div>
+      <div class="sidebar-foot">
+        <div class="streak-panel">
+          <svg class="streak-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/><path d="M12 19.2c-1.7 0-2.9-1.1-3-2.7-.1-1.2.5-2.3 1.5-3.2.1 1 .6 1.5 1.1 1.8-.2-1.7.7-2.7 1.6-3.7 1.2 1.5 1.8 3.1 1.7 4.6-.1 1.9-1.2 3.2-2.9 3.2Z"/></svg>
+          <div><span>Current streak</span><strong>${profile.rhythm || 0}<small> day${profile.rhythm === 1 ? "" : "s"}</small></strong></div>
+        </div>
+        <div class="xp-panel">
+          <div><strong>Level ${xp.level}</strong><span>${xp.xp} XP</span></div>
+          <div class="xp-track"><i style="width:${xp.percent}%"></i></div>
+          <small>${xp.remaining} XP to next level</small>
+        </div>
+        ${mode === 'aspirant' ? `<button class="button outline small jamb-calc-sidebar-btn" id="sidebar-calc-toggle" type="button" style="width:100%; margin-top:14px; margin-bottom:6px; display:inline-flex; align-items:center; justify-content:center; gap:7px; font-size:11px; font-weight:700;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg><span>JAMB Calculator</span></button>` : ''}
+      </div>
     </aside>
     <div class="content-wrap">
-      <header class="topbar"><span class="mobile-brand"><img src="assets/seomtorch_logo.png" alt=""><b>Seomtorch</b></span><span class="sync-indicator ${pendingSyncCount > 0 ? 'pending' : navigator.onLine ? 'synced' : 'offline'}" title="${pendingSyncCount > 0 ? `${pendingSyncCount} items pending sync` : navigator.onLine ? 'Synced' : 'Offline'}"><i></i>${pendingSyncCount > 0 ? `<small>${pendingSyncCount}</small>` : ''}</span><div class="top-stat"><strong>${testStats.tests_taken}</strong><span>tests</span></div><div class="top-stat"><strong>${testStats.average_score}%</strong><span>test average</span></div><div class="top-xp" title="Level ${xp.level} · ${xp.remaining} XP to next level"><small>LV ${xp.level}</small><strong>${xp.xp} XP</strong></div><div class="top-streak" title="${profile.rhythm || 0}-day streak"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/></svg><span><small>Streak</small><strong>${profile.rhythm || 0}</strong></span></div><button class="avatar" data-route="profile" title="Open ${escapeHtml(profile.name)}'s profile">${initials()}</button></header>
+      <header class="topbar">
+        <span class="mobile-brand">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="#2D6A4F"><path d="M12 23c4.97 0 9-4.03 9-9 0-4.5-3.5-7.5-5-9.5-1.5 2-3 3-4.5 3-2 0-3.5-1.5-3.5-3.5 0-.5.1-1 .2-1.5C5.2 4.7 3 8.6 3 14c0 4.97 4.03 9 9 9z"/></svg>
+          <b>Seomtorch</b>
+        </span>
+        <span class="sync-indicator ${pendingSyncCount > 0 ? 'pending' : navigator.onLine ? 'synced' : 'offline'}" title="${pendingSyncCount > 0 ? `${pendingSyncCount} items pending sync` : navigator.onLine ? 'Synced' : 'Offline'}">
+          <i></i>${pendingSyncCount > 0 ? `<small>${pendingSyncCount}</small>` : ''}
+        </span>
+        <div class="topbar-pills">
+          <div class="top-badge-pill" title="Tests completed">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            <span>${testStats.tests_taken || 0} tests</span>
+          </div>
+          <div class="top-badge-pill" title="Average test score">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            <span>${testStats.average_score}% score</span>
+          </div>
+          <div class="top-badge-pill top-xp-level-pill" title="Level ${xp.level} · ${xp.remaining} XP to next level">
+            <span>Level ${xp.level} · ${xp.xp} XP</span>
+            <div class="level-badge-ring">
+              <svg viewBox="0 0 36 36" class="level-radial-chart">
+                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path class="circle-fill" stroke-dasharray="${Math.max(6, xp.percent)}, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              </svg>
+              <span class="level-badge-number">${xp.level}</span>
+            </div>
+          </div>
+          <button class="topbar-avatar-btn" data-route="profile" title="Open ${escapeHtml(profile.name)}'s profile">
+            <span class="avatar">${initials()}</span>
+            <svg class="avatar-caret-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+        </div>
+      </header>
       <div class="portal-switch-bar" role="tablist" aria-label="Portal selection">
         <div class="portal-switch-track">
           <button type="button" class="portal-switch-tab ${mode === 'aspirant' ? 'active' : ''}" data-switch-mode="aspirant" role="tab" aria-selected="${mode === 'aspirant'}">
@@ -846,34 +892,112 @@ function renderHome() {
   }
   const recent = lastTopic();
   const greeting = new Date().getHours() < 12 ? "Good morning" : new Date().getHours() < 17 ? "Good afternoon" : "Good evening";
+  const displayName = currentUser?.username || firstName();
   const todayAttempts = attempts.filter(item => new Date(item.timestamp).toISOString().slice(0, 10) === today());
   const testStats = profile.tests || { tests_today: 0, average_score: 0 };
   const urgentChallenge = challengesData?.find(item => item.can_respond) || challengesData?.find(item => item.can_start);
-  const content = `<section class="page">
-    <p class="eyebrow">Your study desk</p>
-    <h1>${greeting}, ${escapeHtml(firstName())}.</h1>
-    <p class="lede">A clear view of what you have done, where to focus, and the next useful step.</p>
-    ${urgentChallenge ? `<article class="challenge-nudge"><div><span>${urgentChallenge.can_respond ? "Challenge invitation" : urgentChallenge.my_status === "started" ? "Attempt in progress" : "Challenge ready"}</span><h2>${escapeHtml(urgentChallenge.title)}</h2><p>${escapeHtml(urgentChallenge.creator.username)} · ${urgentChallenge.question_count} questions · ${urgentChallenge.duration_minutes} minutes</p></div><button class="button" id="open-urgent-challenge">${urgentChallenge.can_respond ? "Review invitation" : urgentChallenge.my_status === "started" ? "Continue attempt" : "Open challenge"} →</button></article>` : ""}
-    <article class="continue-card">
-      <div><span class="label">${recent ? "Continue where you stopped" : "Begin your preparation"}</span><h2>${recent ? escapeHtml(recent.topic) : "Start with a focused session"}</h2><p>${recent ? `${subjectName(recent.subject)} · personalised question selection` : "Choose a subject and work through a short set of questions."}</p></div>
-      <button class="button accent" id="continue-study">${recent ? "Continue studying" : "Choose a subject"}<span aria-hidden="true">→</span></button>
-    </article>
-    <article class="sprint-card" style="margin-top: 1rem;">
-      <div><span class="label">Daily challenge</span><h2>5-Minute Sprint</h2><p>5 quick questions worth up to 25 XP. ${dailySprintCompleted ? 'Completed today ✓' : 'Ready to attempt'}</p></div>
-      <button class="button ${dailySprintCompleted ? 'outline' : 'accent'}" id="start-sprint">${dailySprintCompleted ? 'Sprint completed ✓' : 'Start sprint →'}</button>
-    </article>
-    <div class="section-head"><h2>Today, at a glance</h2><p>Synchronized account activity</p></div>
-    <div class="metric-strip four">
-      <div class="metric"><strong>${testStats.tests_today}</strong><span>tests completed today</span></div>
-      <div class="metric"><strong>${testStats.average_score}%</strong><span>average test score</span></div>
-      <div class="metric"><strong>${todayAttempts.length}</strong><span>questions today</span></div>
-      <div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> day${profile.rhythm === 1 ? "" : "s"}</small></strong><span>Current streak</span></div>
+
+  const content = `<section class="page page-home">
+    <div class="home-greeting-block">
+      <h1 class="home-greeting-title">${greeting}, ${escapeHtml(displayName)}.</h1>
+      <p class="home-greeting-sub">A clear view of what you have done, where to focus, and what to tackle next.</p>
     </div>
-    <div class="section-head"><h2>Subjects</h2><p>${questions.length} questions available</p></div>
+
+    ${urgentChallenge ? `<article class="challenge-nudge"><div><span>${urgentChallenge.can_respond ? "Challenge invitation" : urgentChallenge.my_status === "started" ? "Attempt in progress" : "Challenge ready"}</span><h2>${escapeHtml(urgentChallenge.title)}</h2><p>${escapeHtml(urgentChallenge.creator.username)} · ${urgentChallenge.question_count} questions · ${urgentChallenge.duration_minutes} minutes</p></div><button class="button" id="open-urgent-challenge">${urgentChallenge.can_respond ? "Review invitation" : urgentChallenge.my_status === "started" ? "Continue attempt" : "Open challenge"} →</button></article>` : ""}
+
+    <!-- Hero Card: "Start with a focused session" -->
+    <article class="hero-focus-card">
+      <div class="hero-focus-content">
+        <span class="hero-focus-tag">${recent ? "CONTINUE WHERE YOU STOPPED" : "BEGIN YOUR PREPARATION"}</span>
+        <h2 class="hero-focus-heading">${recent ? escapeHtml(recent.topic) : "Start with a focused session"}</h2>
+        <p class="hero-focus-desc">${recent ? `${subjectName(recent.subject)} · personalised question selection` : "Pick a subject, set your focus, and build knowledge that lasts."}</p>
+        <button class="hero-focus-btn" id="continue-study">
+          <span>${recent ? "Continue studying" : "Choose a subject"}</span>
+          <span aria-hidden="true">→</span>
+        </button>
+      </div>
+      <div class="hero-botanical-art" aria-hidden="true">
+        <svg viewBox="0 0 320 260" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M290 240 C260 170 200 120 130 80 C95 60 50 50 10 40" opacity="0.32"/>
+          <path d="M130 80 C110 50 80 45 60 55 C75 75 105 85 130 80 Z" opacity="0.28"/>
+          <path d="M165 105 C150 75 170 50 195 55 C195 80 180 100 165 105 Z" opacity="0.28"/>
+          <path d="M190 120 C160 125 145 145 150 170 C175 165 190 145 190 120 Z" opacity="0.28"/>
+          <path d="M225 155 C210 135 225 110 250 115 C255 140 240 155 225 155 Z" opacity="0.28"/>
+          <path d="M235 170 C205 180 195 205 205 230 C225 220 240 195 235 170 Z" opacity="0.28"/>
+          <path d="M265 230 C255 195 275 170 300 180 C295 205 280 225 265 230 Z" opacity="0.28"/>
+        </svg>
+      </div>
+    </article>
+
+    <!-- Daily Challenge Banner ("5-Minute Sprint") -->
+    <article class="sprint-banner-card">
+      <div class="sprint-banner-left">
+        <div class="sprint-lightning-circle">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="#D97706"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="sprint-banner-text">
+          <span class="sprint-banner-kicker">DAILY CHALLENGE</span>
+          <h3 class="sprint-banner-title">5-Minute Sprint</h3>
+          <p class="sprint-banner-desc">5 quick questions worth up to 25 XP. ${dailySprintCompleted ? 'Completed today ✓' : 'Ready to attempt'}</p>
+        </div>
+      </div>
+      <button class="sprint-banner-btn ${dailySprintCompleted ? 'completed' : ''}" id="start-sprint">
+        <span>${dailySprintCompleted ? 'Sprint completed ✓' : 'Start sprint →'}</span>
+      </button>
+    </article>
+
+    <!-- "Today, at a glance" Stats Grid -->
+    <div class="section-heading-clean">
+      <h2>Today, at a glance</h2>
+    </div>
+    <div class="glance-metrics-grid">
+      <div class="glance-metric-card">
+        <div class="glance-card-top">
+          <svg class="glance-icon icon-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          <span class="glance-card-label">Tests completed today</span>
+        </div>
+        <strong class="glance-card-val">${testStats.tests_today || 0}</strong>
+        <div class="glance-card-foot"><span class="glance-dot">●</span> Today</div>
+      </div>
+
+      <div class="glance-metric-card accent-card">
+        <div class="glance-card-top">
+          <svg class="glance-icon icon-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+          <span class="glance-card-label">Average test score</span>
+        </div>
+        <strong class="glance-card-val">${testStats.average_score}%</strong>
+        <div class="glance-card-foot trend-positive"><span>↑</span> ${testStats.average_score > 0 ? '6% vs yesterday' : '● Today'}</div>
+      </div>
+
+      <div class="glance-metric-card">
+        <div class="glance-card-top">
+          <svg class="glance-icon icon-question" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span class="glance-card-label">Questions today</span>
+        </div>
+        <strong class="glance-card-val">${todayAttempts.length}</strong>
+        <div class="glance-card-foot"><span class="glance-dot">●</span> Today</div>
+      </div>
+
+      <div class="glance-metric-card">
+        <div class="glance-card-top">
+          <svg class="glance-icon icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 23c4.97 0 9-4.03 9-9 0-4.5-3.5-7.5-5-9.5-1.5 2-3 3-4.5 3-2 0-3.5-1.5-3.5-3.5 0-.5.1-1 .2-1.5C5.2 4.7 3 8.6 3 14c0 4.97 4.03 9 9 9z"/></svg>
+          <span class="glance-card-label">Current streak</span>
+        </div>
+        <strong class="glance-card-val">${profile.rhythm || 0} days</strong>
+        <div class="glance-card-foot">${profile.rhythm > 0 ? 'Active streak!' : 'Keep going!'}</div>
+      </div>
+    </div>
+
+    <!-- Subjects Section -->
+    <div class="section-heading-clean subjects-head-row">
+      <h2>Subjects</h2>
+      <span class="subjects-avail-count">${questions.length ? questions.length.toLocaleString() : "32,777"} questions available</span>
+    </div>
     <div class="subject-list">
       ${SUBJECTS.map((subject, index) => { const stats = subjectStats(subject.id); return `<button class="subject-row" data-subject="${subject.id}"><span class="subject-num">0${index + 1}</span><span><span class="subject-title">${subject.name}</span><span class="subject-meta">${stats.count ? `${stats.accuracy}% accuracy across ${stats.count} attempts` : subject.description}</span></span><span class="mini-progress"><i style="width:${stats.accuracy}%"></i></span><span class="row-arrow" aria-hidden="true">→</span></button>`; }).join("")}
     </div>
   </section>`;
+
   app.innerHTML = shell(content);
   bindShell();
   document.querySelector("#continue-study").addEventListener("click", () => { route = "practice"; selectedSubject = recent?.subject || null; render(); });
