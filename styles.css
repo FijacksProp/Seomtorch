@@ -2521,9 +2521,9 @@ select:focus, textarea:focus, input:focus {
    ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
-  --uni-navy: #0f2d56;
-  --uni-navy-deep: #081d38;
-  --uni-navy-light: #1a4277;
+  --uni-navy: #0C2518;
+  --uni-navy-deep: #091E13;
+  --uni-navy-light: #153E2A;
   --uni-gold: #c9a84c;
   --uni-gold-soft: #fbf5e6;
   --uni-gold-border: rgba(201, 168, 76, 0.35);
@@ -2542,12 +2542,12 @@ select:focus, textarea:focus, input:focus {
 }
 
 .uni-header {
-  background: linear-gradient(135deg, var(--uni-navy-deep) 0%, var(--uni-navy) 100%);
+  background: linear-gradient(135deg, #0C2518 0%, #153E2A 100%);
   color: #f8fafc;
   padding: 36px 32px 30px;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   margin-bottom: 28px;
-  box-shadow: 0 10px 30px rgba(15, 45, 86, 0.12);
+  box-shadow: 0 10px 30px rgba(12, 37, 24, 0.15);
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
@@ -2675,7 +2675,7 @@ select:focus, textarea:focus, input:focus {
 .uni-dept-icon svg {
   width: 26px;
   height: 26px;
-  stroke: var(--uni-navy, #0f2d56);
+  stroke: var(--uni-navy, #0C2518);
 }
 
 .uni-dept-info h3 {
@@ -2739,7 +2739,7 @@ select:focus, textarea:focus, input:focus {
 .uni-dept-icon-lg svg {
   width: 34px;
   height: 34px;
-  stroke: var(--uni-navy, #0f2d56);
+  stroke: var(--uni-navy, #0C2518);
 }
 
 .uni-dept-desc {
@@ -3936,13 +3936,13 @@ select:focus, textarea:focus, input:focus {
 .uni-workspace-masthead {
   padding: clamp(24px, 4.5vw, 40px);
   border-radius: var(--radius-lg);
-  background: linear-gradient(145deg, #091a24 0%, #0d2838 100%);
+  background: linear-gradient(135deg, #0C2518 0%, #153E2A 100%);
   color: #ffffff;
   position: relative;
   overflow: hidden;
   margin-bottom: 28px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 16px 40px -12px rgba(9, 26, 36, 0.35);
+  box-shadow: 0 16px 40px -12px rgba(12, 37, 24, 0.35);
 }
 
 .uni-workspace-masthead::after {
@@ -3952,7 +3952,7 @@ select:focus, textarea:focus, input:focus {
   bottom: -30px;
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(134, 239, 172, 0.14) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -3968,7 +3968,7 @@ select:focus, textarea:focus, input:focus {
 .uni-crest-icon {
   width: 15px;
   height: 15px;
-  color: #7dd3fc;
+  color: #86efac;
   flex-shrink: 0;
 }
 
@@ -3989,9 +3989,9 @@ select:focus, textarea:focus, input:focus {
   font-weight: 800;
   padding: 3px 9px;
   border-radius: 999px;
-  background: rgba(14, 165, 233, 0.18);
-  border: 1px solid rgba(14, 165, 233, 0.35);
-  color: #7dd3fc;
+  background: rgba(134, 239, 172, 0.14);
+  border: 1px solid rgba(134, 239, 172, 0.32);
+  color: #86efac;
   letter-spacing: .04em;
 }
 
@@ -4084,8 +4084,8 @@ select:focus, textarea:focus, input:focus {
   font-size: 10.5px;
   font-weight: 800;
   text-transform: uppercase;
-  color: #0369a1;
-  background: #e0f2fe;
+  color: #065f46;
+  background: #d1fae5;
   padding: 3px 9px;
   border-radius: 6px;
   letter-spacing: .06em;
