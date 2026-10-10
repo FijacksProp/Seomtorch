@@ -2719,79 +2719,111 @@ async function renderUniCourse() {
 
   let mixedCardHtml = "";
   if (availableTopics > 0) {
-    mixedCardHtml = `<div class="uni-mixed-practice-card">
-      <div class="uni-mixed-card-header">
+    mixedCardHtml = `<div class="uni-mixed-practice-card collapsed" id="uni-mixed-card">
+      <div class="uni-mixed-card-header" id="uni-mixed-toggle-btn" role="button" tabindex="0" aria-expanded="false" aria-controls="uni-mixed-body">
         <div class="uni-mixed-icon-badge" aria-hidden="true">
           <img src="assets/seomtorch_logo.png" alt="Seomtorch" class="uni-mixed-logo-img">
         </div>
         <div class="uni-mixed-title-group">
-          <div class="uni-mixed-badge">Multi-Topic Timed Exam</div>
+          <div class="uni-mixed-header-topline">
+            <span class="uni-mixed-badge">Multi-Topic Timed Exam</span>
+            <span class="uni-mixed-topics-pill">${availableTopics} Topics Available</span>
+          </div>
           <h3 class="uni-mixed-heading">Mixed Timed Practice</h3>
-          <p class="uni-mixed-desc">Test yourself across all ${availableTopics} available topics in ${escapeHtml(data.code)}. Questions are sampled evenly from each topic and shuffled under timed conditions.</p>
+          <p class="uni-mixed-desc-collapsed">Tap to configure a timed session pooling all ${availableTopics} course topics.</p>
+        </div>
+        <div class="uni-mixed-expand-indicator">
+          <span class="uni-mixed-expand-label" id="uni-mixed-expand-label">Configure Target</span>
+          <svg class="uni-mixed-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
         </div>
       </div>
 
-      <div class="uni-target-config-grid">
-        <div class="uni-target-card">
-          <div class="uni-target-label">
-            <span class="uni-target-name">Question Target</span>
-            <span class="uni-target-hint">5 – 100 questions</span>
-          </div>
-          <div class="uni-stepper-wrap">
-            <button type="button" class="uni-stepper-btn" id="uni-q-dec" aria-label="Decrease question count">−</button>
-            <div class="uni-stepper-val">
-              <input type="number" id="uni-target-q" min="5" max="100" step="5" value="25" inputmode="numeric" aria-label="Number of questions">
-              <span class="uni-stepper-unit">questions</span>
+      <div class="uni-mixed-card-body" id="uni-mixed-body">
+        <p class="uni-mixed-desc">Test yourself across all ${availableTopics} available topics in ${escapeHtml(data.code)}. Questions are sampled evenly from each topic and shuffled under timed conditions.</p>
+
+        <div class="uni-target-config-grid">
+          <div class="uni-target-card">
+            <div class="uni-target-label">
+              <span class="uni-target-name">Question Target</span>
+              <span class="uni-target-hint">5 – 100 questions</span>
             </div>
-            <button type="button" class="uni-stepper-btn" id="uni-q-inc" aria-label="Increase question count">+</button>
+            <div class="uni-stepper-wrap">
+              <button type="button" class="uni-stepper-btn" id="uni-q-dec" aria-label="Decrease question count">−</button>
+              <div class="uni-stepper-val">
+                <input type="number" id="uni-target-q" min="5" max="100" step="5" value="25" inputmode="numeric" aria-label="Number of questions">
+                <span class="uni-stepper-unit">questions</span>
+              </div>
+              <button type="button" class="uni-stepper-btn" id="uni-q-inc" aria-label="Increase question count">+</button>
+            </div>
+            <div class="uni-target-pills" id="uni-q-pills">
+              <button type="button" class="uni-target-pill" data-val="10">10</button>
+              <button type="button" class="uni-target-pill" data-val="20">20</button>
+              <button type="button" class="uni-target-pill active" data-val="25">25</button>
+              <button type="button" class="uni-target-pill" data-val="30">30</button>
+              <button type="button" class="uni-target-pill" data-val="50">50</button>
+            </div>
           </div>
-          <div class="uni-target-pills" id="uni-q-pills">
-            <button type="button" class="uni-target-pill" data-val="10">10</button>
-            <button type="button" class="uni-target-pill" data-val="20">20</button>
-            <button type="button" class="uni-target-pill active" data-val="25">25</button>
-            <button type="button" class="uni-target-pill" data-val="30">30</button>
-            <button type="button" class="uni-target-pill" data-val="50">50</button>
+
+          <div class="uni-target-card">
+            <div class="uni-target-label">
+              <span class="uni-target-name">Time Limit</span>
+              <span class="uni-target-hint">1 – 180 minutes</span>
+            </div>
+            <div class="uni-stepper-wrap">
+              <button type="button" class="uni-stepper-btn" id="uni-m-dec" aria-label="Decrease time limit">−</button>
+              <div class="uni-stepper-val">
+                <input type="number" id="uni-target-m" min="1" max="180" step="1" value="15" inputmode="numeric" aria-label="Time limit in minutes">
+                <span class="uni-stepper-unit">minutes</span>
+              </div>
+              <button type="button" class="uni-stepper-btn" id="uni-m-inc" aria-label="Increase time limit">+</button>
+            </div>
+            <div class="uni-target-pills" id="uni-m-pills">
+              <button type="button" class="uni-target-pill" data-val="5">5m</button>
+              <button type="button" class="uni-target-pill" data-val="10">10m</button>
+              <button type="button" class="uni-target-pill active" data-val="15">15m</button>
+              <button type="button" class="uni-target-pill" data-val="20">20m</button>
+              <button type="button" class="uni-target-pill" data-val="30">30m</button>
+            </div>
           </div>
         </div>
 
-        <div class="uni-target-card">
-          <div class="uni-target-label">
-            <span class="uni-target-name">Time Limit</span>
-            <span class="uni-target-hint">1 – 180 minutes</span>
+        <div class="uni-mixed-footer">
+          <div class="uni-mixed-meta">
+            <span class="uni-mixed-meta-dot"></span>
+            <span id="uni-mixed-pace-text">Pace: ~36s per question · Auto-submits on timer expiry</span>
           </div>
-          <div class="uni-stepper-wrap">
-            <button type="button" class="uni-stepper-btn" id="uni-m-dec" aria-label="Decrease time limit">−</button>
-            <div class="uni-stepper-val">
-              <input type="number" id="uni-target-m" min="1" max="180" step="1" value="15" inputmode="numeric" aria-label="Time limit in minutes">
-              <span class="uni-stepper-unit">minutes</span>
-            </div>
-            <button type="button" class="uni-stepper-btn" id="uni-m-inc" aria-label="Increase time limit">+</button>
-          </div>
-          <div class="uni-target-pills" id="uni-m-pills">
-            <button type="button" class="uni-target-pill" data-val="5">5m</button>
-            <button type="button" class="uni-target-pill" data-val="10">10m</button>
-            <button type="button" class="uni-target-pill active" data-val="15">15m</button>
-            <button type="button" class="uni-target-pill" data-val="20">20m</button>
-            <button type="button" class="uni-target-pill" data-val="30">30m</button>
-          </div>
+          <button class="button accent uni-mixed-start-btn" id="uni-start-mixed-practice">
+            <span>Begin Practice</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
         </div>
-      </div>
-
-      <div class="uni-mixed-footer">
-        <div class="uni-mixed-meta">
-          <span class="uni-mixed-meta-dot"></span>
-          <span id="uni-mixed-pace-text">Pace: ~36s per question · Auto-submits on timer expiry</span>
-        </div>
-        <button class="button accent uni-mixed-start-btn" id="uni-start-mixed-practice">
-          <span>Begin Practice</span>
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
       </div>
     </div>`;
   }
 
   app.innerHTML = uniShell(`<div class="uni-course-hero"><div class="uni-course-code-lg">${escapeHtml(data.code)}</div><p class="uni-course-desc">${escapeHtml(data.description)}</p>${statsHtml}</div>${mixedCardHtml}${topicsHtml}`, breadcrumbs);
   bindShell(); bindUniCrumbs(breadcrumbs);
+
+  const mixedCard = document.querySelector("#uni-mixed-card");
+  const mixedToggleBtn = document.querySelector("#uni-mixed-toggle-btn");
+  const expandLabel = document.querySelector("#uni-mixed-expand-label");
+
+  const toggleMixedCard = () => {
+    if (!mixedCard) return;
+    const isCollapsed = mixedCard.classList.toggle("collapsed");
+    mixedToggleBtn?.setAttribute("aria-expanded", String(!isCollapsed));
+    if (expandLabel) {
+      expandLabel.textContent = isCollapsed ? "Configure Target" : "Hide Settings";
+    }
+  };
+
+  mixedToggleBtn?.addEventListener("click", toggleMixedCard);
+  mixedToggleBtn?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggleMixedCard();
+    }
+  });
 
   const inputQ = document.querySelector("#uni-target-q");
   const inputM = document.querySelector("#uni-target-m");
