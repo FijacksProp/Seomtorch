@@ -2721,70 +2721,69 @@ async function renderUniCourse() {
   if (availableTopics > 0) {
     mixedCardHtml = `<div class="uni-mixed-practice-card">
       <div class="uni-mixed-card-header">
-        <div class="uni-mixed-icon-badge">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
-          </svg>
+        <div class="uni-mixed-icon-badge" aria-hidden="true">
+          <img src="assets/seomtorch_logo.png" alt="Seomtorch" class="uni-mixed-logo-img">
         </div>
         <div class="uni-mixed-title-group">
-          <div class="uni-mixed-badge">Comprehensive Course Simulation</div>
+          <div class="uni-mixed-badge">Multi-Topic Timed Exam</div>
           <h3 class="uni-mixed-heading">Mixed Timed Practice</h3>
-          <p class="uni-mixed-desc">Simulate a multi-topic exam across all ${availableTopics} available topics in ${escapeHtml(data.code)}. Questions are drawn almost equally from each topic and shuffled under exam conditions with automatic submission.</p>
+          <p class="uni-mixed-desc">Test yourself across all ${availableTopics} available topics in ${escapeHtml(data.code)}. Questions are sampled evenly from each topic and shuffled under timed conditions.</p>
         </div>
       </div>
 
-      <div class="uni-mixed-presets">
-        <button type="button" class="uni-preset-btn active" data-preset-q="25" data-preset-m="15">
-          <div class="uni-preset-top">
-            <span class="uni-preset-name">Standard</span>
-            <span class="uni-preset-badge">Recommended</span>
+      <div class="uni-target-config-grid">
+        <div class="uni-target-card">
+          <div class="uni-target-label">
+            <span class="uni-target-name">Question Target</span>
+            <span class="uni-target-hint">5 – 100 questions</span>
           </div>
-          <div class="uni-preset-nums"><strong>25</strong> questions · <strong>15</strong> mins</div>
-          <span class="uni-preset-sub">~36s per question · balanced review</span>
-        </button>
-
-        <button type="button" class="uni-preset-btn" data-preset-q="50" data-preset-m="30">
-          <div class="uni-preset-top">
-            <span class="uni-preset-name">Full Exam</span>
+          <div class="uni-stepper-wrap">
+            <button type="button" class="uni-stepper-btn" id="uni-q-dec" aria-label="Decrease question count">−</button>
+            <div class="uni-stepper-val">
+              <input type="number" id="uni-target-q" min="5" max="100" step="5" value="25" inputmode="numeric" aria-label="Number of questions">
+              <span class="uni-stepper-unit">questions</span>
+            </div>
+            <button type="button" class="uni-stepper-btn" id="uni-q-inc" aria-label="Increase question count">+</button>
           </div>
-          <div class="uni-preset-nums"><strong>50</strong> questions · <strong>30</strong> mins</div>
-          <span class="uni-preset-sub">~36s per question · in-depth mastery</span>
-        </button>
-
-        <button type="button" class="uni-preset-btn" data-preset-custom="true">
-          <div class="uni-preset-top">
-            <span class="uni-preset-name">Custom</span>
-          </div>
-          <div class="uni-preset-nums">Custom target</div>
-          <span class="uni-preset-sub">Set question count & timer</span>
-        </button>
-      </div>
-
-      <div class="uni-custom-inputs" id="uni-custom-inputs" style="display:none;">
-        <div class="uni-custom-field">
-          <label for="uni-custom-q-count">Questions</label>
-          <div class="uni-custom-input-wrap">
-            <input type="number" id="uni-custom-q-count" min="5" max="100" value="25" step="5">
-            <span>questions</span>
+          <div class="uni-target-pills" id="uni-q-pills">
+            <button type="button" class="uni-target-pill" data-val="10">10</button>
+            <button type="button" class="uni-target-pill" data-val="20">20</button>
+            <button type="button" class="uni-target-pill active" data-val="25">25</button>
+            <button type="button" class="uni-target-pill" data-val="30">30</button>
+            <button type="button" class="uni-target-pill" data-val="50">50</button>
           </div>
         </div>
-        <div class="uni-custom-field">
-          <label for="uni-custom-m-count">Time Limit</label>
-          <div class="uni-custom-input-wrap">
-            <input type="number" id="uni-custom-m-count" min="1" max="180" value="15" step="1">
-            <span>minutes</span>
+
+        <div class="uni-target-card">
+          <div class="uni-target-label">
+            <span class="uni-target-name">Time Limit</span>
+            <span class="uni-target-hint">1 – 180 minutes</span>
+          </div>
+          <div class="uni-stepper-wrap">
+            <button type="button" class="uni-stepper-btn" id="uni-m-dec" aria-label="Decrease time limit">−</button>
+            <div class="uni-stepper-val">
+              <input type="number" id="uni-target-m" min="1" max="180" step="1" value="15" inputmode="numeric" aria-label="Time limit in minutes">
+              <span class="uni-stepper-unit">minutes</span>
+            </div>
+            <button type="button" class="uni-stepper-btn" id="uni-m-inc" aria-label="Increase time limit">+</button>
+          </div>
+          <div class="uni-target-pills" id="uni-m-pills">
+            <button type="button" class="uni-target-pill" data-val="5">5m</button>
+            <button type="button" class="uni-target-pill" data-val="10">10m</button>
+            <button type="button" class="uni-target-pill active" data-val="15">15m</button>
+            <button type="button" class="uni-target-pill" data-val="20">20m</button>
+            <button type="button" class="uni-target-pill" data-val="30">30m</button>
           </div>
         </div>
       </div>
 
       <div class="uni-mixed-footer">
         <div class="uni-mixed-meta">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          <span>Hard-stop timer · Questions drawn evenly from ${availableTopics} topics</span>
+          <span class="uni-mixed-meta-dot"></span>
+          <span id="uni-mixed-pace-text">Pace: ~36s per question · Auto-submits on timer expiry</span>
         </div>
         <button class="button accent uni-mixed-start-btn" id="uni-start-mixed-practice">
-          <span>Start Mixed Practice</span>
+          <span>Begin Practice</span>
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
       </div>
@@ -2794,38 +2793,102 @@ async function renderUniCourse() {
   app.innerHTML = uniShell(`<div class="uni-course-hero"><div class="uni-course-code-lg">${escapeHtml(data.code)}</div><p class="uni-course-desc">${escapeHtml(data.description)}</p>${statsHtml}</div>${mixedCardHtml}${topicsHtml}`, breadcrumbs);
   bindShell(); bindUniCrumbs(breadcrumbs);
 
-  let selectedQ = 25;
-  let selectedM = 15;
-  let isCustom = false;
+  const inputQ = document.querySelector("#uni-target-q");
+  const inputM = document.querySelector("#uni-target-m");
+  const paceText = document.querySelector("#uni-mixed-pace-text");
+  const qPills = document.querySelectorAll("#uni-q-pills .uni-target-pill");
+  const mPills = document.querySelectorAll("#uni-m-pills .uni-target-pill");
 
-  const presetBtns = document.querySelectorAll(".uni-preset-btn");
-  const customInputs = document.querySelector("#uni-custom-inputs");
-  const customQ = document.querySelector("#uni-custom-q-count");
-  const customM = document.querySelector("#uni-custom-m-count");
+  const updatePace = () => {
+    const qVal = Math.max(5, Math.min(100, parseInt(inputQ?.value, 10) || 25));
+    const mVal = Math.max(1, Math.min(180, parseInt(inputM?.value, 10) || 15));
+    const secPerQ = Math.round((mVal * 60) / qVal);
+    if (paceText) {
+      paceText.textContent = `Pace: ~${secPerQ}s per question · Auto-submits on timer expiry`;
+    }
+  };
 
-  presetBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      presetBtns.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      if (btn.dataset.presetCustom) {
-        isCustom = true;
-        if (customInputs) customInputs.style.display = "flex";
-      } else {
-        isCustom = false;
-        if (customInputs) customInputs.style.display = "none";
-        selectedQ = Number(btn.dataset.presetQ);
-        selectedM = Number(btn.dataset.presetM);
-      }
+  const syncQPills = (val) => {
+    qPills.forEach(p => p.classList.toggle("active", Number(p.dataset.val) === val));
+  };
+
+  const syncMPills = (val) => {
+    mPills.forEach(p => p.classList.toggle("active", Number(p.dataset.val) === val));
+  };
+
+  document.querySelector("#uni-q-dec")?.addEventListener("click", () => {
+    if (!inputQ) return;
+    const current = parseInt(inputQ.value, 10) || 25;
+    const next = Math.max(5, current - 5);
+    inputQ.value = next;
+    syncQPills(next);
+    updatePace();
+  });
+
+  document.querySelector("#uni-q-inc")?.addEventListener("click", () => {
+    if (!inputQ) return;
+    const current = parseInt(inputQ.value, 10) || 25;
+    const next = Math.min(100, current + 5);
+    inputQ.value = next;
+    syncQPills(next);
+    updatePace();
+  });
+
+  qPills.forEach(p => {
+    p.addEventListener("click", () => {
+      if (!inputQ) return;
+      const val = Number(p.dataset.val);
+      inputQ.value = val;
+      syncQPills(val);
+      updatePace();
     });
   });
 
+  inputQ?.addEventListener("input", () => {
+    const val = parseInt(inputQ.value, 10);
+    syncQPills(val);
+    updatePace();
+  });
+
+  document.querySelector("#uni-m-dec")?.addEventListener("click", () => {
+    if (!inputM) return;
+    const current = parseInt(inputM.value, 10) || 15;
+    const step = current <= 10 ? 1 : 5;
+    const next = Math.max(1, current - step);
+    inputM.value = next;
+    syncMPills(next);
+    updatePace();
+  });
+
+  document.querySelector("#uni-m-inc")?.addEventListener("click", () => {
+    if (!inputM) return;
+    const current = parseInt(inputM.value, 10) || 15;
+    const step = current < 10 ? 1 : 5;
+    const next = Math.min(180, current + step);
+    inputM.value = next;
+    syncMPills(next);
+    updatePace();
+  });
+
+  mPills.forEach(p => {
+    p.addEventListener("click", () => {
+      if (!inputM) return;
+      const val = Number(p.dataset.val);
+      inputM.value = val;
+      syncMPills(val);
+      updatePace();
+    });
+  });
+
+  inputM?.addEventListener("input", () => {
+    const val = parseInt(inputM.value, 10);
+    syncMPills(val);
+    updatePace();
+  });
+
   document.querySelector("#uni-start-mixed-practice")?.addEventListener("click", () => {
-    let qCount = selectedQ;
-    let mCount = selectedM;
-    if (isCustom) {
-      qCount = Math.max(5, Math.min(100, parseInt(customQ?.value, 10) || 25));
-      mCount = Math.max(1, Math.min(180, parseInt(customM?.value, 10) || 15));
-    }
+    const qCount = Math.max(5, Math.min(100, parseInt(inputQ?.value, 10) || 25));
+    const mCount = Math.max(1, Math.min(180, parseInt(inputM?.value, 10) || 15));
     startUniMixedPractice(data, qCount, mCount);
   });
 

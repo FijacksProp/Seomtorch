@@ -2964,15 +2964,25 @@ select:focus, textarea:focus, input:focus {
 }
 
 .uni-mixed-icon-badge {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 14px;
-  background: linear-gradient(135deg, #0C2518 0%, #153E2A 100%);
-  color: #86EFAC;
-  display: grid;
-  place-items: center;
+  background: #ffffff;
+  border: 1.5px solid rgba(12, 37, 24, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(12, 37, 24, 0.2);
+  box-shadow: 0 4px 14px rgba(12, 37, 24, 0.08);
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.uni-mixed-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .uni-mixed-title-group {
@@ -3010,155 +3020,172 @@ select:focus, textarea:focus, input:focus {
   max-width: 680px;
 }
 
-/* Preset Options Grid */
-.uni-mixed-presets {
+/* Target Configuration Grid */
+.uni-target-config-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
   margin-bottom: 20px;
   width: 100%;
   box-sizing: border-box;
 }
 
-.uni-preset-btn {
+.uni-target-card {
   background: var(--paper);
   border: 1.5px solid var(--line);
   border-radius: var(--radius);
   padding: 16px 18px;
-  text-align: left;
-  cursor: pointer;
-  transition: all 0.18s ease;
-  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  color: inherit;
+  gap: 12px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
   box-sizing: border-box;
 }
 
-.uni-preset-btn:hover {
-  border-color: #2D6A4F;
-  background: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
-}
-
-.uni-preset-btn.active {
+.uni-target-card:focus-within {
   border-color: #0C2518;
-  background: #ffffff;
-  box-shadow: 0 0 0 1.5px #0C2518, 0 6px 18px rgba(12, 37, 24, 0.1);
+  box-shadow: 0 0 0 1px #0C2518, 0 4px 14px rgba(12, 37, 24, 0.06);
 }
 
-.uni-preset-top {
+.uni-target-label {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   gap: 8px;
 }
 
-.uni-preset-name {
+.uni-target-name {
   font-size: 13px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .06em;
-  color: var(--ink-secondary);
-}
-
-.uni-preset-btn.active .uni-preset-name {
   color: #0C2518;
 }
 
-.uni-preset-badge {
-  font-size: 9.5px;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: #065f46;
-  background: #d1fae5;
-  padding: 2px 7px;
-  border-radius: 999px;
-  letter-spacing: .04em;
-}
-
-.uni-preset-nums {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.3;
-}
-
-.uni-preset-nums strong {
-  font-size: 18px;
-  color: #0C2518;
-}
-
-.uni-preset-sub {
-  font-size: 11.5px;
+.uni-target-hint {
+  font-size: 11px;
   color: var(--muted);
-  line-height: 1.4;
+  font-weight: 600;
 }
 
-/* Custom Inputs Box */
-.uni-custom-inputs {
-  display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-  background: var(--paper);
-  border: 1px dashed var(--line-dark);
-  border-radius: var(--radius);
-  padding: 16px 20px;
-  margin-bottom: 20px;
-  box-sizing: border-box;
-  width: 100%;
-}
-
-.uni-custom-field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex: 1;
-  min-width: 140px;
-}
-
-.uni-custom-field label {
-  font-size: 11.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  color: var(--muted);
-}
-
-.uni-custom-input-wrap {
+.uni-stepper-wrap {
   display: flex;
   align-items: center;
   background: #ffffff;
   border: 1.5px solid var(--line-dark);
-  border-radius: 10px;
-  padding: 0 12px;
-  transition: border-color 0.15s ease;
+  border-radius: 12px;
+  padding: 4px;
+  gap: 6px;
   box-sizing: border-box;
 }
 
-.uni-custom-input-wrap:focus-within {
-  border-color: #0C2518;
-  box-shadow: 0 0 0 3px rgba(12, 37, 24, 0.1);
-}
-
-.uni-custom-input-wrap input {
+.uni-stepper-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
   border: none;
-  outline: none;
-  font-size: 16px;
+  background: var(--paper);
+  color: #0C2518;
+  font-size: 20px;
   font-weight: 700;
-  color: var(--ink);
-  padding: 8px 0;
-  width: 60px;
-  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: all 0.15s ease;
+  user-select: none;
+  flex-shrink: 0;
+  line-height: 1;
 }
 
-.uni-custom-input-wrap span {
+.uni-stepper-btn:hover {
+  background: #0C2518;
+  color: #ffffff;
+}
+
+.uni-stepper-btn:active {
+  transform: scale(0.93);
+}
+
+.uni-stepper-val {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.uni-stepper-val input {
+  width: 58px;
+  border: none;
+  background: transparent;
+  text-align: right;
+  font-size: 22px;
+  font-weight: 800;
+  color: #0C2518;
+  font-family: var(--sans);
+  padding: 0;
+  outline: none;
+}
+
+.uni-stepper-val input::-webkit-inner-spin-button,
+.uni-stepper-val input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.uni-stepper-val input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.uni-stepper-unit {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--muted);
-  margin-left: 6px;
+  text-transform: lowercase;
+}
+
+.uni-target-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.uni-target-pill {
+  flex: 1;
+  min-width: 38px;
+  padding: 6px 4px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--ink-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s ease;
+}
+
+.uni-target-pill:hover {
+  border-color: #2D6A4F;
+  color: #0C2518;
+}
+
+.uni-target-pill.active {
+  background: #0C2518;
+  border-color: #0C2518;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(12, 37, 24, 0.18);
+}
+
+.uni-mixed-meta-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  display: inline-block;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  flex-shrink: 0;
 }
 
 /* Card Footer */
@@ -3560,19 +3587,14 @@ select:focus, textarea:focus, input:focus {
     padding: 20px 16px;
     margin-bottom: 24px;
   }
-  .uni-mixed-presets {
+  .uni-target-config-grid {
     grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  .uni-custom-inputs {
-    flex-direction: column;
     gap: 12px;
-    padding: 14px 14px;
   }
   .uni-mixed-footer {
     flex-direction: column;
     align-items: stretch;
-    gap: 12px;
+    gap: 14px;
   }
   .uni-mixed-start-btn {
     width: 100%;
