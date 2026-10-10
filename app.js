@@ -2721,20 +2721,21 @@ async function renderUniCourse() {
   if (availableTopics > 0) {
     mixedCardHtml = `<div class="uni-mixed-practice-card collapsed" id="uni-mixed-card">
       <div class="uni-mixed-card-header" id="uni-mixed-toggle-btn" role="button" tabindex="0" aria-expanded="false" aria-controls="uni-mixed-body">
-        <div class="uni-mixed-icon-badge" aria-hidden="true">
-          <img src="assets/seomtorch_logo.png" alt="Seomtorch" class="uni-mixed-logo-img">
-        </div>
-        <div class="uni-mixed-title-group">
-          <div class="uni-mixed-header-topline">
-            <span class="uni-mixed-badge">Multi-Topic Timed Exam</span>
-            <span class="uni-mixed-topics-pill">${availableTopics} Topics Available</span>
+        <div class="uni-mixed-header-left">
+          <div class="uni-mixed-icon-badge" aria-hidden="true">
+            <img src="assets/seomtorch_logo.png" alt="Seomtorch" class="uni-mixed-logo-img">
           </div>
-          <h3 class="uni-mixed-heading">Mixed Timed Practice</h3>
-          <p class="uni-mixed-desc-collapsed">Tap to configure a timed session pooling all ${availableTopics} course topics.</p>
+          <div class="uni-mixed-title-group">
+            <h3 class="uni-mixed-heading">Mixed Timed Practice</h3>
+            <div class="uni-mixed-subline">
+              <span class="uni-mixed-badge">Multi-Topic</span>
+              <span class="uni-mixed-topics-pill">${availableTopics} Topics · Timed</span>
+            </div>
+          </div>
         </div>
         <div class="uni-mixed-expand-indicator">
-          <span class="uni-mixed-expand-label" id="uni-mixed-expand-label">Configure Target</span>
-          <svg class="uni-mixed-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          <span class="uni-mixed-expand-label" id="uni-mixed-expand-label">Set Target</span>
+          <svg class="uni-mixed-chevron" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
         </div>
       </div>
 
@@ -2813,7 +2814,7 @@ async function renderUniCourse() {
     const isCollapsed = mixedCard.classList.toggle("collapsed");
     mixedToggleBtn?.setAttribute("aria-expanded", String(!isCollapsed));
     if (expandLabel) {
-      expandLabel.textContent = isCollapsed ? "Configure Target" : "Hide Settings";
+      expandLabel.textContent = isCollapsed ? "Set Target" : "Hide";
     }
   };
 

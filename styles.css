@@ -2960,8 +2960,9 @@ select:focus, textarea:focus, input:focus {
 .uni-mixed-card-header {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 16px 20px;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
   cursor: pointer;
   user-select: none;
   transition: background-color 0.15s ease;
@@ -2975,12 +2976,21 @@ select:focus, textarea:focus, input:focus {
 
 .uni-mixed-practice-card:not(.collapsed) .uni-mixed-card-header {
   border-bottom: 1px solid var(--line);
-  padding-bottom: 18px;
+  background-color: rgba(12, 37, 24, 0.015);
+}
+
+.uni-mixed-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
 }
 
 .uni-mixed-icon-badge {
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
   border-radius: 12px;
   background: #ffffff;
   border: 1.5px solid rgba(12, 37, 24, 0.14);
@@ -3001,78 +3011,77 @@ select:focus, textarea:focus, input:focus {
 }
 
 .uni-mixed-title-group {
-  flex: 1;
   min-width: 0;
-}
-
-.uni-mixed-header-topline {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 4px;
-  flex-wrap: wrap;
-}
-
-.uni-mixed-badge {
-  display: inline-block;
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  color: #065f46;
-  background: #d1fae5;
-  padding: 2.5px 8px;
-  border-radius: 5px;
-}
-
-.uni-mixed-topics-pill {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--muted);
+  flex: 1;
 }
 
 .uni-mixed-heading {
   margin: 0;
-  font-size: clamp(17px, 2.5vw, 20px);
+  font-size: 16px;
   font-family: var(--serif);
   color: var(--ink);
   font-weight: 700;
   line-height: 1.25;
-}
-
-.uni-mixed-desc-collapsed {
-  margin: 2px 0 0;
-  font-size: 12.5px;
-  color: var(--muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.uni-mixed-expand-indicator {
+.uni-mixed-subline {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 14px;
+  margin: 3px 0 0;
+  flex-wrap: wrap;
+}
+
+.uni-mixed-badge {
+  display: inline-block;
+  font-size: 9.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: #065f46;
+  background: #d1fae5;
+  padding: 1.5px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.uni-mixed-topics-pill {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.uni-mixed-expand-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
   border-radius: 999px;
-  background: var(--paper);
-  border: 1px solid var(--line);
+  background: #ffffff;
+  border: 1.5px solid var(--line-dark);
   color: #0C2518;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 700;
   flex-shrink: 0;
   transition: all 0.18s ease;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .uni-mixed-card-header:hover .uni-mixed-expand-indicator {
-  border-color: #2D6A4F;
-  background: #ffffff;
+  border-color: #0C2518;
   box-shadow: var(--shadow-sm);
+  background: var(--paper);
 }
 
 .uni-mixed-chevron {
   transition: transform 0.25s ease;
   stroke: #0C2518;
+  flex-shrink: 0;
 }
 
 .uni-mixed-practice-card:not(.collapsed) .uni-mixed-chevron {
@@ -3081,16 +3090,12 @@ select:focus, textarea:focus, input:focus {
 
 /* Card Body (revealed when expanded) */
 .uni-mixed-card-body {
-  padding: 20px 24px 24px;
+  padding: 20px 20px 22px;
   display: block;
   animation: fadeIn 0.2s ease-in-out;
 }
 
 .uni-mixed-practice-card.collapsed .uni-mixed-card-body {
-  display: none;
-}
-
-.uni-mixed-practice-card:not(.collapsed) .uni-mixed-desc-collapsed {
   display: none;
 }
 
@@ -3666,17 +3671,58 @@ select:focus, textarea:focus, input:focus {
     display: none;
   }
   .uni-mixed-practice-card {
-    padding: 20px 16px;
-    margin-bottom: 24px;
+    padding: 0 !important;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+  }
+  .uni-mixed-card-header {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+  .uni-mixed-header-left {
+    gap: 10px;
+  }
+  .uni-mixed-icon-badge {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 10px;
+    padding: 5px;
+  }
+  .uni-mixed-heading {
+    font-size: 14.5px;
+  }
+  .uni-mixed-subline {
+    margin-top: 2px;
+    gap: 4px;
+  }
+  .uni-mixed-badge {
+    font-size: 9px;
+    padding: 1.5px 5px;
+  }
+  .uni-mixed-topics-pill {
+    font-size: 10.5px;
+  }
+  .uni-mixed-expand-indicator {
+    padding: 5px 9px;
+    font-size: 11px;
+    gap: 3px;
+  }
+  .uni-mixed-card-body {
+    padding: 16px 14px 18px;
   }
   .uni-target-config-grid {
     grid-template-columns: 1fr;
     gap: 12px;
   }
+  .uni-target-card {
+    padding: 14px 14px;
+    gap: 10px;
+  }
   .uni-mixed-footer {
     flex-direction: column;
     align-items: stretch;
-    gap: 14px;
+    gap: 12px;
   }
   .uni-mixed-start-btn {
     width: 100%;
