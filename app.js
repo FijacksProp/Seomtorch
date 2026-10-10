@@ -1236,7 +1236,7 @@ function currentSection() {
 }
 
 function renderSessionStart() {
-  const mode = activeSession.subject === "all" ? "All subjects" : activeSession.subject === "saved" ? "Saved for review" : subjectName(activeSession.subject);
+  const mode = activeSession.isMixed ? `${activeSession.courseCode || activeSession.subject} · Mixed Timed Practice` : activeSession.subject === "all" ? "All subjects" : activeSession.subject === "saved" ? "Saved for review" : subjectName(activeSession.subject);
   const isNormal = activeSession.mode === "normal";
   const content = `<section class="page page-narrow"><div class="session-ready"><p class="eyebrow">Ready when you are</p><h1>Your session is prepared.</h1><p class="lede">${isNormal ? "This guided session is untimed. You will see feedback after each answer." : "The countdown has not started. Once you begin, you may skip between questions and return using the numbered navigator."}</p><div class="ready-summary"><article><span>Focus</span><strong>${escapeHtml(mode)}</strong></article><article><span>Questions</span><strong>${activeSession.queue.length}</strong></article><article><span>Study time</span><strong>${isNormal ? "Untimed" : `${activeSession.durationMinutes} minutes`}</strong></article></div>${activeSession.sections.length > 1 ? `<div class="ready-sections">${activeSession.sections.map((section, index) => `<div><span>${String(index + 1).padStart(2, "0")}</span><strong>${escapeHtml(section.name)}</strong><small>${section.count} questions</small></div>`).join("")}</div>` : ""}<div class="button-row"><button class="button" id="begin-session">Begin session →</button><button class="button outline" id="cancel-session">Change selections</button></div></div></section>`;
   app.innerHTML = shell(content); bindShell();
@@ -1469,10 +1469,83 @@ function renderResult() {
   const answered = activeSession.answers.filter(item => item.confirmed).length;
   const unanswered = activeSession.queue.length - answered;
   const note = activeSession.timedOut ? "Time is up. Review the result, then try a shorter session or return when you can give it a full window." : score >= 80 ? "A strong session. Keep the standard steady." : score >= 50 ? "Good work. Review the corrections before moving on." : "This topic needs another careful pass. That is useful information.";
-  const review = activeSession.answers.map((answer, index) => { const question = activeSession.queue[index]; if (!answer.confirmed) return ""; return `<article class="result-review-item ${answer.correct ? "correct" : "incorrect"}"><div><span>Question ${index + 1}</span><strong>${answer.correct ? "Correct" : "Review"}</strong></div><p>${renderMath(escapeHtml(question.text))}</p><small>Your answer: ${escapeHtml(question.options[answer.selected] || "—")}</small>${answer.correct ? "" : `<small>Correct answer: ${escapeHtml(question.options[question.correct] || "—")}</small>`}${renderExplanation(question)}</article>`; }).join("");
+
+  let topicBreakdownHtml = "";
+  if (activeSession.isMixed) {
+    const topicStats = new Map();
+    activeSession.queue.forEach((q, idx) => {
+      const topicName = q.topic || "Course Topic";
+      if (!topicStats.has(topicName)) {
+        topicStats.set(topicName, { total: 0, correct: 0 });
+      }
+      const st = topicStats.get(topicName);
+      st.total++;
+      if (activeSession.answers[idx]?.correct) {
+        st.correct++;
+      }
+    });
+
+    const rows = Array.from(topicStats.entries()).map(([tName, st]) => {
+      const pct = st.total ? Math.round(st.correct / st.total * 100) : 0;
+      const tone = pct >= 80 ? "good" : pct >= 50 ? "fair" : "low";
+      return `<div class="uni-result-topic-row">
+        <div class="uni-result-topic-info">
+          <strong>${escapeHtml(tName)}</strong>
+          <span>${st.correct} of ${st.total} correct</span>
+        </div>
+        <div class="uni-result-topic-meter">
+          <div class="uni-result-topic-bar"><span style="width:${pct}%" class="${tone}"></span></div>
+          <span class="uni-result-topic-pct ${tone}">${pct}%</span>
+        </div>
+      </div>`;
+    }).join("");
+
+    topicBreakdownHtml = `<div class="uni-result-breakdown">
+      <div class="section-head compact">
+        <div>
+          <p class="eyebrow">Performance by Topic</p>
+          <h2>Topic Mastery Breakdown</h2>
+        </div>
+        <p>Review which areas need focused study</p>
+      </div>
+      <div class="uni-result-topic-list">${rows}</div>
+    </div>`;
+  }
+
+  const review = activeSession.answers.map((answer, index) => {
+    const question = activeSession.queue[index];
+    if (!answer.confirmed) return "";
+    const topicTag = (activeSession.isMixed && question.topic) ? `<span class="result-topic-tag">${escapeHtml(question.topic)}</span>` : "";
+    return `<article class="result-review-item ${answer.correct ? "correct" : "incorrect"}">
+      <div><span>Question ${index + 1}${topicTag}</span><strong>${answer.correct ? "Correct" : "Review"}</strong></div>
+      <p>${renderMath(escapeHtml(question.text))}</p>
+      <small>Your answer: ${escapeHtml(question.options[answer.selected] || "—")}</small>
+      ${answer.correct ? "" : `<small>Correct answer: ${escapeHtml(question.options[question.correct] || "—")}</small>`}
+      ${renderExplanation(question)}
+    </article>`;
+  }).join("");
+
   const returnLabel = activeSession.isUniversity ? "Back to Course" : "Choose another topic";
   const retryLabel = activeSession.isUniversity ? "Practise again" : "Practise this again";
-  const content = `<section class="page page-narrow"><div class="session-result"><p class="eyebrow">${activeSession.timedOut ? "Time expired" : "Session complete"}</p><div class="result-score">${score}%</div><h2>${activeSession.correct} of ${activeSession.queue.length} correct</h2><p class="lede" style="margin-inline:auto">${note}</p><div class="result-meta"><span>${answered} answered</span><span>${unanswered} unanswered</span><span>${activeSession.mode === "normal" ? "Untimed practice" : `${activeSession.durationMinutes} minute timer`}</span></div><div class="button-row" style="justify-content:center;margin-top:28px"><button class="button outline" id="return-practice">${returnLabel}</button>${activeSession.mode === "sprint" ? "" : `<button class="button" id="retry-session">${retryLabel}</button>`}</div></div>${review ? `<div class="result-review"><div class="section-head"><h2>Solutions</h2><p>Review every recorded answer</p></div>${review}</div>` : ""}</section>`;
+  const content = `<section class="page page-narrow">
+    <div class="session-result">
+      <p class="eyebrow">${activeSession.timedOut ? "Time expired" : "Session complete"}</p>
+      <div class="result-score">${score}%</div>
+      <h2>${activeSession.correct} of ${activeSession.queue.length} correct</h2>
+      <p class="lede" style="margin-inline:auto">${note}</p>
+      <div class="result-meta">
+        <span>${answered} answered</span>
+        <span>${unanswered} unanswered</span>
+        <span>${activeSession.mode === "normal" ? "Untimed practice" : `${activeSession.durationMinutes} minute timer`}</span>
+      </div>
+      <div class="button-row" style="justify-content:center;margin-top:28px">
+        <button class="button outline" id="return-practice">${returnLabel}</button>
+        ${activeSession.mode === "sprint" ? "" : `<button class="button" id="retry-session">${retryLabel}</button>`}
+      </div>
+    </div>
+    ${topicBreakdownHtml}
+    ${review ? `<div class="result-review"><div class="section-head"><h2>Solutions</h2><p>Review every recorded answer</p></div>${review}</div>` : ""}
+  </section>`;
   app.innerHTML = shell(content); bindShell();
   bindQuestionMedia();
   const sessionCopy = { ...activeSession };
@@ -1484,7 +1557,11 @@ function renderResult() {
   });
   document.querySelector("#retry-session")?.addEventListener("click", () => {
     if (sessionCopy.isUniversity) {
-      startUniPractice(sessionCopy.subject, sessionCopy.topic, sessionCopy.dataFile);
+      if (sessionCopy.isMixed && sessionCopy.courseData) {
+        startUniMixedPractice(sessionCopy.courseData, sessionCopy.requestedCount, sessionCopy.durationMinutes);
+      } else {
+        startUniPractice(sessionCopy.subject, sessionCopy.topic, sessionCopy.dataFile);
+      }
     } else {
       startSession(sessionCopy.subject, sessionCopy.topic, sessionCopy.requestedCount, sessionCopy.durationMinutes, sessionCopy.mode);
     }
@@ -2640,8 +2717,117 @@ async function renderUniCourse() {
 
   const statsHtml = `<div class="uni-course-stats"><div class="uni-stat"><strong>${totalTopics}</strong><span>Topics</span></div><div class="uni-stat"><strong>${availableTopics}</strong><span>Available</span></div><div class="uni-stat"><strong>${totalTopics - availableTopics}</strong><span>Coming soon</span></div></div>`;
 
-  app.innerHTML = uniShell(`<div class="uni-course-hero"><div class="uni-course-code-lg">${escapeHtml(data.code)}</div><p class="uni-course-desc">${escapeHtml(data.description)}</p>${statsHtml}</div>${topicsHtml}`, breadcrumbs);
+  let mixedCardHtml = "";
+  if (availableTopics > 0) {
+    mixedCardHtml = `<div class="uni-mixed-practice-card">
+      <div class="uni-mixed-card-header">
+        <div class="uni-mixed-icon-badge">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <div class="uni-mixed-title-group">
+          <div class="uni-mixed-badge">Comprehensive Course Simulation</div>
+          <h3 class="uni-mixed-heading">Mixed Timed Practice</h3>
+          <p class="uni-mixed-desc">Simulate a multi-topic exam across all ${availableTopics} available topics in ${escapeHtml(data.code)}. Questions are drawn almost equally from each topic and shuffled under exam conditions with automatic submission.</p>
+        </div>
+      </div>
+
+      <div class="uni-mixed-presets">
+        <button type="button" class="uni-preset-btn active" data-preset-q="25" data-preset-m="15">
+          <div class="uni-preset-top">
+            <span class="uni-preset-name">Standard</span>
+            <span class="uni-preset-badge">Recommended</span>
+          </div>
+          <div class="uni-preset-nums"><strong>25</strong> questions · <strong>15</strong> mins</div>
+          <span class="uni-preset-sub">~36s per question · balanced review</span>
+        </button>
+
+        <button type="button" class="uni-preset-btn" data-preset-q="50" data-preset-m="30">
+          <div class="uni-preset-top">
+            <span class="uni-preset-name">Full Exam</span>
+          </div>
+          <div class="uni-preset-nums"><strong>50</strong> questions · <strong>30</strong> mins</div>
+          <span class="uni-preset-sub">~36s per question · in-depth mastery</span>
+        </button>
+
+        <button type="button" class="uni-preset-btn" data-preset-custom="true">
+          <div class="uni-preset-top">
+            <span class="uni-preset-name">Custom</span>
+          </div>
+          <div class="uni-preset-nums">Custom target</div>
+          <span class="uni-preset-sub">Set question count & timer</span>
+        </button>
+      </div>
+
+      <div class="uni-custom-inputs" id="uni-custom-inputs" style="display:none;">
+        <div class="uni-custom-field">
+          <label for="uni-custom-q-count">Questions</label>
+          <div class="uni-custom-input-wrap">
+            <input type="number" id="uni-custom-q-count" min="5" max="100" value="25" step="5">
+            <span>questions</span>
+          </div>
+        </div>
+        <div class="uni-custom-field">
+          <label for="uni-custom-m-count">Time Limit</label>
+          <div class="uni-custom-input-wrap">
+            <input type="number" id="uni-custom-m-count" min="1" max="180" value="15" step="1">
+            <span>minutes</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="uni-mixed-footer">
+        <div class="uni-mixed-meta">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <span>Hard-stop timer · Questions drawn evenly from ${availableTopics} topics</span>
+        </div>
+        <button class="button accent uni-mixed-start-btn" id="uni-start-mixed-practice">
+          <span>Start Mixed Practice</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>`;
+  }
+
+  app.innerHTML = uniShell(`<div class="uni-course-hero"><div class="uni-course-code-lg">${escapeHtml(data.code)}</div><p class="uni-course-desc">${escapeHtml(data.description)}</p>${statsHtml}</div>${mixedCardHtml}${topicsHtml}`, breadcrumbs);
   bindShell(); bindUniCrumbs(breadcrumbs);
+
+  let selectedQ = 25;
+  let selectedM = 15;
+  let isCustom = false;
+
+  const presetBtns = document.querySelectorAll(".uni-preset-btn");
+  const customInputs = document.querySelector("#uni-custom-inputs");
+  const customQ = document.querySelector("#uni-custom-q-count");
+  const customM = document.querySelector("#uni-custom-m-count");
+
+  presetBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      presetBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      if (btn.dataset.presetCustom) {
+        isCustom = true;
+        if (customInputs) customInputs.style.display = "flex";
+      } else {
+        isCustom = false;
+        if (customInputs) customInputs.style.display = "none";
+        selectedQ = Number(btn.dataset.presetQ);
+        selectedM = Number(btn.dataset.presetM);
+      }
+    });
+  });
+
+  document.querySelector("#uni-start-mixed-practice")?.addEventListener("click", () => {
+    let qCount = selectedQ;
+    let mCount = selectedM;
+    if (isCustom) {
+      qCount = Math.max(5, Math.min(100, parseInt(customQ?.value, 10) || 25));
+      mCount = Math.max(1, Math.min(180, parseInt(customM?.value, 10) || 15));
+    }
+    startUniMixedPractice(data, qCount, mCount);
+  });
 
   document.querySelectorAll(".uni-topic-item.available").forEach(item => {
     const launch = () => {
@@ -2658,6 +2844,172 @@ async function renderUniCourse() {
       }
     });
   });
+}
+
+function sampleStratifiedCourseQuestions(topicSets, targetCount) {
+  if (!topicSets || !topicSets.length || targetCount <= 0) return [];
+
+  const pools = topicSets.map(s => ({
+    topic: s.topic,
+    pool: [...s.questions]
+  }));
+
+  const numTopics = pools.length;
+  const quotas = new Array(numTopics).fill(Math.floor(targetCount / numTopics));
+  let remainder = targetCount % numTopics;
+
+  const indices = pools.map((_, i) => i);
+  for (let i = indices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indices[i], indices[j]] = [indices[j], indices[i]];
+  }
+  for (let i = 0; i < remainder; i++) {
+    quotas[indices[i]]++;
+  }
+
+  let deficit = 0;
+  for (let i = 0; i < numTopics; i++) {
+    if (quotas[i] > pools[i].pool.length) {
+      deficit += quotas[i] - pools[i].pool.length;
+      quotas[i] = pools[i].pool.length;
+    }
+  }
+
+  while (deficit > 0) {
+    const availableIndices = pools
+      .map((p, i) => (quotas[i] < p.pool.length ? i : -1))
+      .filter(i => i >= 0);
+    if (!availableIndices.length) break;
+    const luckyIdx = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+    quotas[luckyIdx]++;
+    deficit--;
+  }
+
+  const selected = [];
+  for (let i = 0; i < numTopics; i++) {
+    const qCount = quotas[i];
+    if (qCount <= 0) continue;
+    const pool = pools[i].pool;
+    for (let j = pool.length - 1; j > 0; j--) {
+      const k = Math.floor(Math.random() * (j + 1));
+      [pool[j], pool[k]] = [pool[k], pool[j]];
+    }
+    selected.push(...pool.slice(0, qCount));
+  }
+
+  for (let i = selected.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [selected[i], selected[j]] = [selected[j], selected[i]];
+  }
+
+  return selected;
+}
+
+async function startUniMixedPractice(courseData, requestedCount, durationMinutes) {
+  showLoadingOverlay("Preparing Mixed Practice", "Loading course questions...");
+  try {
+    const availableTopics = (courseData.sections || [])
+      .flatMap(s => s.topics || [])
+      .filter(t => t.status !== "coming-soon" && t.dataFile);
+
+    if (!availableTopics.length) {
+      showToast("No practice topics available for this course yet.");
+      return;
+    }
+
+    const topicQuestionSets = await Promise.all(
+      availableTopics.map(async t => {
+        try {
+          const fileData = await fetchUniJson(t.dataFile);
+          const qs = (fileData && fileData.questions) || [];
+          return {
+            topic: t.title,
+            topicId: t.id,
+            questions: qs.map(q => ({
+              ...q,
+              topic: t.title,
+              topicId: t.id,
+              subject: courseData.code,
+              courseCode: courseData.code,
+              isUniversity: true
+            }))
+          };
+        } catch (e) {
+          return { topic: t.title, topicId: t.id, questions: [] };
+        }
+      })
+    );
+
+    const validSets = topicQuestionSets.filter(s => s.questions.length > 0);
+    const totalAvailable = validSets.reduce((sum, s) => sum + s.questions.length, 0);
+
+    if (totalAvailable === 0) {
+      showToast("Questions not available yet for this course.");
+      return;
+    }
+
+    const targetK = Math.min(requestedCount, totalAvailable);
+    const sampledQuestions = sampleStratifiedCourseQuestions(validSets, targetK);
+
+    if (!sampledQuestions.length) {
+      showToast("Unable to sample questions.");
+      return;
+    }
+
+    const detail = `<dl class="session-confirm-summary">
+      <div><dt>Course</dt><dd>${escapeHtml(courseData.code)} (${escapeHtml(courseData.title || "")})</dd></div>
+      <div><dt>Format</dt><dd>Mixed Timed Practice (Hard-stop)</dd></div>
+      <div><dt>Questions</dt><dd>${sampledQuestions.length} Questions across ${validSets.length} topics</dd></div>
+      <div><dt>Time Limit</dt><dd>${durationMinutes} Minutes (~${Math.round((durationMinutes * 60) / sampledQuestions.length)}s per question)</dd></div>
+    </dl>`;
+
+    showConfirmDialog({
+      title: `Start ${escapeHtml(courseData.code)} Mixed Practice?`,
+      message: `You are about to begin a mixed timed session. Questions are drawn almost equally from all ${validSets.length} available topics and shuffled. Answers will automatically submit when the timer ends.`,
+      detail,
+      confirmLabel: "Begin Practice",
+      cancelLabel: "Back to Course",
+      onConfirm: () => {
+        activeSession = {
+          subject: courseData.code,
+          topic: `Mixed Practice (${sampledQuestions.length} Qs)`,
+          courseTitle: courseData.title,
+          courseCode: courseData.code,
+          isUniversity: true,
+          isMixed: true,
+          courseData,
+          requestedCount: sampledQuestions.length,
+          durationMinutes,
+          deadline: null,
+          started: false,
+          finished: false,
+          queue: sampledQuestions,
+          sections: [{
+            subject: courseData.code,
+            name: `${courseData.code} · Mixed Timed Practice`,
+            count: sampledQuestions.length,
+            start: 0
+          }],
+          answers: sampledQuestions.map(() => ({ selected: null, confirmed: false, correct: false })),
+          remoteId: null,
+          index: 0,
+          correct: 0,
+          questionStartedAt: null,
+          reportedComplete: false,
+          timedOut: false,
+          timeUpAcknowledged: false,
+          mode: "timed"
+        };
+        saveActiveSession();
+        route = "session";
+        render();
+      }
+    });
+  } catch (err) {
+    showToast("Error preparing mixed practice session.");
+  } finally {
+    hideLoadingOverlay();
+  }
 }
 
 async function startUniPractice(courseCode, topicTitle, dataFile) {
