@@ -1,0 +1,1510 @@
+{
+  "title": "Bones of the Lower Limb",
+  "course": "ANA 201",
+  "totalQuestions": 100,
+  "sections": [
+    "Bones of the Lower Limb (Q1-Q100)"
+  ],
+  "questions": [
+    {
+      "id": "ana201-ll-bones-1",
+      "text": "The mature hip bone is formed by the fusion of three primary bones. During development, these bones are separated by a Y-shaped triradiate cartilage. Where is this cartilage centrally located?",
+      "options": [
+        "At the pubic symphysis",
+        "Within the obturator foramen",
+        "Centered in the acetabulum",
+        "Along the iliac crest"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Centered in the acetabulum",
+      "explanation": "In children, the ilium, ischium, and pubis are incompletely ossified and separated by a Y-shaped triradiate cartilage that is centered precisely within the acetabulum.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana201-ll-bones-2",
+      "text": "The ilium has a prominent, long, curved superior border called the iliac crest. Which specific anatomical feature marks the posterior termination of this crest?",
+      "options": [
+        "The posterior inferior iliac spine",
+        "The posterior superior iliac spine",
+        "The greater sciatic notch",
+        "The iliac tuberosity"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The posterior superior iliac spine",
+      "explanation": "The iliac crest extends posteriorly from the anterior superior iliac spine (ASIS) and terminates at the posterior superior iliac spine (PSIS).",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana201-ll-bones-3",
+      "text": "The lateral surface of the ala of the ilium provides attachment for the large gluteal muscles. How are these attachment sites demarcated on the bone?",
+      "options": [
+        "By the iliac fossa",
+        "By the pecten pubis",
+        "By three rough, curved gluteal lines",
+        "By the intertrochanteric crest"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. By three rough, curved gluteal lines",
+      "explanation": "The external (lateral) surface of the ilium features the posterior, anterior, and inferior gluteal lines, which are rough ridges indicating the proximal attachments of the gluteal muscles.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana201-ll-bones-4",
+      "text": "The ischium contributes to the postero-inferior aspect of the acetabulum. Its ramus joins with another bony structure to form the inferomedial boundary of the obturator foramen. Which structure is this?",
+      "options": [
+        "The superior ramus of the pubis",
+        "The inferior ramus of the pubis",
+        "The body of the ilium",
+        "The ischial spine"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The inferior ramus of the pubis",
+      "explanation": "The ramus of the ischium joins the inferior ramus of the pubis to form the ischiopubic ramus, which creates the inferomedial border of the obturator foramen.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana201-ll-bones-5",
+      "text": "The greater and lesser sciatic notches are separated by a distinct bony landmark that provides ligamentous attachment. What is this structure called?",
+      "options": [
+        "Ischial tuberosity",
+        "Posterior inferior iliac spine",
+        "Ischial spine",
+        "Iliopubic eminence"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Ischial spine",
+      "explanation": "The large, triangular ischial spine projects from the posterior border of the ischium, sharply separating the greater sciatic notch above from the lesser sciatic notch below.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana201-ll-bones-6",
+      "text": "The pubis forms the anteromedial portion of the hip bone. Which of its features provides attachment for the main part of the inguinal ligament?",
+      "options": [
+        "The pubic crest",
+        "The pecten pubis",
+        "The pubic tubercle",
+        "The symphysial surface"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The pubic tubercle",
+      "explanation": "The pubic tubercles are small projections at the lateral ends of the pubic crest that serve as important landmarks and provide the medial attachment point for the inguinal ligament.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana201-ll-bones-7",
+      "text": "The obturator foramen is largely closed by the obturator membrane. Which of the following statements best describes the functional advantage of this anatomical arrangement?",
+      "options": [
+        "It provides a massive opening for the femoral vessels to pass into the thigh.",
+        "It acts as the primary articular surface for the sacroiliac joint.",
+        "It minimizes bony mass while providing extensive surface area for muscle attachment.",
+        "It forms the bony roof of the acetabulum to stabilize the femoral head."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It minimizes bony mass while providing extensive surface area for muscle attachment.",
+      "explanation": "The presence of the large foramen reduces the weight of the pelvic girdle, while its closure by the strong membrane still allows for the extensive, fleshy attachment of muscles on both sides.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana201-ll-bones-8",
+      "text": "The acetabulum is a cup-shaped cavity that articulates with the femoral head. Which part of its margin is incomplete, creating a deficit resembling a cup with a missing lip?",
+      "options": [
+        "The superior margin at the iliac body",
+        "The posterior margin near the ischial spine",
+        "The inferior margin at the acetabular notch",
+        "The anterior margin near the pubic crest"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The inferior margin at the acetabular notch",
+      "explanation": "The acetabular margin is incomplete inferiorly at the acetabular notch, which leads into the rough depression known as the acetabular fossa.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana201-ll-bones-9",
+      "text": "The proximal femur features the greater and lesser trochanters. Which specific structure connects these two trochanters on the posterior surface of the bone?",
+      "options": [
+        "The intertrochanteric line",
+        "The pectineal line",
+        "The linea aspera",
+        "The intertrochanteric crest"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The intertrochanteric crest",
+      "explanation": "The intertrochanteric crest is a prominent ridge on the posterior surface connecting the greater and lesser trochanters, whereas the intertrochanteric line is located on the anterior surface.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana201-ll-bones-10",
+      "text": "The femoral neck connects the head to the shaft. In a normal adult, at what approximate angle is the neck set relative to the shaft to allow for an increased range of movement?",
+      "options": [
+        "90 degrees",
+        "115 degrees",
+        "135 degrees",
+        "160 degrees"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. 135 degrees",
+      "explanation": "The neck of the femur is typically set at an angle of approximately 135 degrees to the shaft, projecting superiorly and medially.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana201-ll-bones-11",
+      "text": "An avulsion fracture of the lesser trochanter of the femur is most likely caused by the forceful contraction of which muscle?",
+      "options": [
+        "Gluteus medius",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Quadratus femoris"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Iliopsoas",
+      "explanation": "The lesser trochanter is the specific site of attachment for the iliopsoas muscle. Forceful contraction of this muscle can cause an avulsion fracture at this site.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana201-ll-bones-12",
+      "text": "Neck of femur fractures are common in the elderly. Why are intracapsular fractures of the femoral neck particularly concerning compared to extracapsular fractures?",
+      "options": [
+        "They typically result in severe, life-threatening hemorrhage.",
+        "They often damage the medial femoral circumflex artery, risking avascular necrosis.",
+        "They prevent the attachment of the iliofemoral ligament.",
+        "They always require amputation due to uncontrollable infection."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. They often damage the medial femoral circumflex artery, risking avascular necrosis.",
+      "explanation": "Intracapsular fractures occur within the joint capsule and can disrupt the blood supply to the femoral head (primarily the medial femoral circumflex artery), carrying a high risk of avascular necrosis.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana201-ll-bones-13",
+      "text": "The posterior surface of the femoral shaft features a prominent roughened ridge called the linea aspera. What happens to this ridge as it progresses distally toward the knee?",
+      "options": [
+        "It merges into a single, sharp crest ending at the intercondylar fossa.",
+        "It continues directly into the medial malleolus.",
+        "It splits to form the medial and lateral supracondylar lines, enclosing the popliteal surface.",
+        "It spirals anteriorly to become the patellar surface."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It splits to form the medial and lateral supracondylar lines, enclosing the popliteal surface.",
+      "explanation": "Distally, the linea aspera widens and splits into the medial and lateral supracondylar lines, which form the boundaries of the flat popliteal surface on the posterior distal femur.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana201-ll-bones-14",
+      "text": "The distal femur articulates with the tibia. Which specific structure on the femur provides the attachment site for the anterior cruciate ligament (ACL)?",
+      "options": [
+        "The medial epicondyle",
+        "The medial aspect of the lateral condyle within the intercondylar fossa",
+        "The lateral aspect of the medial condyle within the intercondylar fossa",
+        "The adductor tubercle"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The medial aspect of the lateral condyle within the intercondylar fossa",
+      "explanation": "Within the deep intercondylar fossa, the ACL attaches to a facet on the medial aspect of the lateral condyle.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana201-ll-bones-15",
+      "text": "The patella is the largest sesamoid bone in the body. Which of its features articulates with the lateral condyle of the femur?",
+      "options": [
+        "The apex",
+        "The base",
+        "The lateral facet on its posterior surface",
+        "The anterior rough surface"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The lateral facet on its posterior surface",
+      "explanation": "The posterior surface of the patella is articular and is divided into a medial facet and a lateral facet, which articulate with the respective condyles of the femur.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana201-ll-bones-16",
+      "text": "A flat (less prominent) lateral femoral condyle increases the risk of a specific injury mechanism at the knee. What is this injury?",
+      "options": [
+        "Rupture of the posterior cruciate ligament",
+        "Avulsion of the tibial tuberosity",
+        "Patellar dislocation",
+        "Spiral fracture of the femoral shaft"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Patellar dislocation",
+      "explanation": "The lateral condyle of the femur is normally more prominent anteriorly, which acts as a buttress to prevent the natural lateral movement of the patella. If it is flat, the risk of lateral patellar dislocation increases.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana201-ll-bones-17",
+      "text": "The proximal tibia features a widened area known as the tibial plateau, which articulates with the femur. What structures are located between the medial and lateral condyles on this plateau?",
+      "options": [
+        "The medial and lateral epicondyles",
+        "The fibular notch",
+        "The intercondylar eminence and its tubercles",
+        "The soleal line"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The intercondylar eminence and its tubercles",
+      "explanation": "The intercondylar eminence projects upward between the articular surfaces of the tibial condyles. It consists of the medial and lateral intercondylar tubercles and serves as an attachment site for ligaments and menisci.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana201-ll-bones-18",
+      "text": "The anterior border of the tibia is palpable subcutaneously as the shin. What bony prominence marks the proximal end of this border?",
+      "options": [
+        "The medial malleolus",
+        "The tibial tuberosity",
+        "The adductor tubercle",
+        "The lateral condyle"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The tibial tuberosity",
+      "explanation": "The tibial tuberosity is a prominent elevation on the proximal, anterior aspect of the tibia, marking the superior end of the anterior border and providing attachment for the patellar ligament.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana201-ll-bones-19",
+      "text": "The posterior surface of the tibial shaft is marked by an oblique ridge of bone. What is the name of this ridge and what is its primary function?",
+      "options": [
+        "The interosseous border; attaches the interosseous membrane",
+        "The linea aspera; provides attachment for the hamstrings",
+        "The soleal line; serves as the origin for part of the soleus muscle",
+        "The pectineal line; attaches the pectineus muscle"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The soleal line; serves as the origin for part of the soleus muscle",
+      "explanation": "The soleal line is a rough diagonal ridge on the posterior surface of the proximal tibia that provides an origin for the soleus muscle.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana201-ll-bones-20",
+      "text": "Fractures of the medial malleolus often occur alongside fractures of the lateral malleolus. By what mechanism is the medial malleolus typically fractured in this context?",
+      "options": [
+        "Direct axial loading from a fall on the heel",
+        "Violent hyperextension of the knee joint",
+        "The ankle being twisted inwards (over-inversion), forcing the talus against the bone",
+        "Powerful contraction of the tibialis anterior muscle"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The ankle being twisted inwards (over-inversion), forcing the talus against the bone",
+      "explanation": "Over-inversion of the foot forces the talus against the medial malleolus, often causing a spiral fracture, which is frequently associated with lateral malleolar fractures.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana201-ll-bones-21",
+      "text": "The fibula is a slender bone in the lateral leg. What is its primary biomechanical role?",
+      "options": [
+        "To bear the majority of the body's weight during standing",
+        "To articulate with the femur to form the lateral aspect of the knee joint",
+        "To act primarily as an attachment site for muscles rather than bearing weight",
+        "To form the medial malleolus of the ankle"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. To act primarily as an attachment site for muscles rather than bearing weight",
+      "explanation": "The fibula does not bear significant weight. Its main function is to serve as a robust attachment site for muscles of the leg and to provide lateral stability to the ankle joint.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana201-ll-bones-22",
+      "text": "The distal end of the fibula expands to form the lateral malleolus. How does this structure compare anatomically to the medial malleolus of the tibia?",
+      "options": [
+        "It is situated significantly superior to the medial malleolus.",
+        "It is more prominent and extends further distally than the medial malleolus.",
+        "It articulates directly with the calcaneus, unlike the medial malleolus.",
+        "It is thicker and more weight-bearing than the medial malleolus."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It is more prominent and extends further distally than the medial malleolus.",
+      "explanation": "The lateral malleolus of the fibula is more prominent and projects further inferiorly (distally) than the medial malleolus of the tibia.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana201-ll-bones-23",
+      "text": "The talus is unique among the tarsal bones. Which of the following characteristics accurately describes it?",
+      "options": [
+        "It provides extensive origins for the intrinsic muscles of the foot.",
+        "It receives the Achilles tendon on its posterior surface.",
+        "It transmits the weight of the entire body to the foot but has no muscles originating from or inserting onto it.",
+        "It is wedge-shaped and forms the transverse arch of the foot."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It transmits the weight of the entire body to the foot but has no muscles originating from or inserting onto it.",
+      "explanation": "The talus is the crucial link transmitting weight from the tibia to the foot, but it is unique in that no muscles attach to it, making its blood supply vulnerable (dependent on fascial structures).",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana201-ll-bones-24",
+      "text": "The calcaneus is the largest tarsal bone. Which joint does it form by articulating with the bone located immediately anterior to it?",
+      "options": [
+        "The subtalar joint",
+        "The talonavicular joint",
+        "The calcaneocuboid joint",
+        "The tarsometatarsal joint"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The calcaneocuboid joint",
+      "explanation": "The calcaneus articulates anteriorly with the cuboid bone to form the calcaneocuboid joint. (It articulates superiorly with the talus at the subtalar joint).",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana201-ll-bones-25",
+      "text": "The cuneiform bones articulate anteriorly with the metatarsals. How many cuneiform bones are present in a typical human foot, and what is their general shape?",
+      "options": [
+        "Two; cuboidal",
+        "Three; wedge-shaped",
+        "Four; irregular",
+        "Five; cylindrical"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Three; wedge-shaped",
+      "explanation": "There are three cuneiform bones (medial, intermediate, and lateral), and they are wedge-shaped, which helps configure the transverse arch of the foot.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana201-ll-bones-26",
+      "text": "Stress fractures of the foot are common in athletes. Which specific bones are most frequently affected by these incomplete fractures due to repeated stress?",
+      "options": [
+        "The talus and the calcaneus",
+        "The proximal phalanges of the great toe",
+        "The necks of the second and third metatarsals",
+        "The medial and intermediate cuneiforms"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The necks of the second and third metatarsals",
+      "explanation": "Stress fractures in the foot occur most frequently at the necks of the second and third metatarsals, as well as the proximal fifth metatarsal.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana201-ll-bones-27",
+      "text": "Violent inversion of the foot can cause a specific avulsion fracture at the base of the fifth metatarsal. Which muscle's tendon is responsible for avulsing this bony fragment?",
+      "options": [
+        "Tibialis anterior",
+        "Extensor digitorum brevis",
+        "Fibularis (peroneus) brevis",
+        "Flexor hallucis longus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Fibularis (peroneus) brevis",
+      "explanation": "The tendon of the fibularis (peroneus) brevis inserts onto the base of the fifth metatarsal. Excessive, forceful inversion can cause this tendon to tear off (avulse) its bony attachment.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana201-ll-bones-28",
+      "text": "The proximal femur features a prominent ridge on its anterior surface connecting the trochanters. What is the name of this structure?",
+      "options": [
+        "The trochanteric crest",
+        "The intertrochanteric line",
+        "The linea aspera",
+        "The pectineal line"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The intertrochanteric line",
+      "explanation": "The intertrochanteric line is the bony ridge running inferomedially on the anterior surface between the greater and lesser trochanters. It provides attachment for the iliofemoral ligament.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana201-ll-bones-29",
+      "text": "At puberty, the three primary bones of the hip are separated by the triradiate cartilage. By what age is the fusion of these three bones typically complete?",
+      "options": [
+        "Between 9 and 12 years",
+        "Between 12 and 15 years",
+        "Between 15 and 17 years",
+        "Between 20 and 25 years"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Between 20 and 25 years",
+      "explanation": "While fusion begins between 15 and 17 years of age, the complete fusion of the ilium, ischium, and pubis into a single mature hip bone is typically complete between 20 and 25 years of age.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana201-ll-bones-30",
+      "text": "The ilium possesses a smooth depression on its medial aspect that provides proximal attachment for a muscle. What is this depression called?",
+      "options": [
+        "The acetabular fossa",
+        "The iliac fossa",
+        "The auricular surface",
+        "The greater sciatic notch"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The iliac fossa",
+      "explanation": "The medial aspect of the ala of the ilium features a large, smooth depression called the iliac fossa, which serves as the proximal attachment site for the iliacus muscle.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana201-ll-bones-31",
+      "text": "The ischium has a rough bony projection that bears the body's weight when sitting. What is this structure?",
+      "options": [
+        "The ischial spine",
+        "The ischiopubic ramus",
+        "The ischial tuberosity",
+        "The lesser sciatic notch"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The ischial tuberosity",
+      "explanation": "The large, rough ischial tuberosity is located at the inferior aspect of the ischium. It supports the body's weight in the seated position and provides attachment for the hamstring muscles.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana201-ll-bones-32",
+      "text": "The pubis contributes to the anterior portion of the acetabulum. Which of its features articulates with the contralateral pubic bone?",
+      "options": [
+        "The pubic crest",
+        "The pecten pubis",
+        "The symphysial surface",
+        "The pubic tubercle"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The symphysial surface",
+      "explanation": "The medially placed body of the pubis has a symphysial surface that articulates with the corresponding surface of the opposite pubis to form the pubic symphysis.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana201-ll-bones-33",
+      "text": "The hip joint socket is formed by the acetabulum. Which of the primary hip bones contribute to the formation of this socket?",
+      "options": [
+        "Ilium and ischium only",
+        "Ilium and pubis only",
+        "Ischium and pubis only",
+        "Ilium, ischium, and pubis"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Ilium, ischium, and pubis",
+      "explanation": "All three primary bones of the hip—the ilium, the ischium, and the pubis—fuse within the acetabulum and contribute to the formation of the hip socket.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana201-ll-bones-34",
+      "text": "The femoral head features a small depression on its surface. What is the anatomical significance of this depression?",
+      "options": [
+        "It provides attachment for the iliofemoral ligament.",
+        "It is the site of attachment for the ligamentum teres.",
+        "It articulates directly with the acetabular notch.",
+        "It serves as a conduit for the sciatic nerve."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It is the site of attachment for the ligamentum teres.",
+      "explanation": "The fovea is a small depression on the otherwise smooth articular surface of the femoral head. It serves as the attachment site for the ligamentum teres (ligament of the head of the femur).",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana201-ll-bones-35",
+      "text": "The proximal femur has a rounded tubercle located on the superior half of the intertrochanteric crest. Which muscle attaches to this specific tubercle?",
+      "options": [
+        "Gluteus medius",
+        "Piriformis",
+        "Quadratus femoris",
+        "Iliopsoas"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Quadratus femoris",
+      "explanation": "The quadrate tubercle is located on the posterior intertrochanteric crest and serves as the specific attachment point for the quadratus femoris muscle.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana201-ll-bones-36",
+      "text": "Fractures of the femoral shaft are typically high-energy injuries. If such a fracture results in bone fragments overriding one another, what clinical sign is typically observed?",
+      "options": [
+        "Lengthening of the affected leg",
+        "Internal rotation of the distal limb",
+        "Shortening of the affected leg",
+        "Immediate paralysis of the quadriceps"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Shortening of the affected leg",
+      "explanation": "In a femoral shaft fracture (such as a spiral fracture), the strong muscles surrounding the bone pull the distal fragment upwards, causing the bone fragments to override and resulting in clinical shortening of the leg.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana201-ll-bones-37",
+      "text": "The distal femur contains the intercondylar fossa posteriorly. Which structure attaches to the lateral aspect of the medial condyle within this fossa?",
+      "options": [
+        "The anterior cruciate ligament (ACL)",
+        "The posterior cruciate ligament (PCL)",
+        "The medial collateral ligament (MCL)",
+        "The patellar ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The posterior cruciate ligament (PCL)",
+      "explanation": "Within the intercondylar fossa, the posterior cruciate ligament (PCL) attaches to the lateral aspect of the medial femoral condyle.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana201-ll-bones-38",
+      "text": "The patella increases the mechanical efficiency of the quadriceps muscle. How does it achieve this?",
+      "options": [
+        "By acting as a rigid strut to limit knee flexion",
+        "By directly attaching the quadriceps to the fibula",
+        "By enhancing the leverage that the quadriceps tendon exerts on the femur",
+        "By providing a synovial bursa that reduces tendon friction to zero"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. By enhancing the leverage that the quadriceps tendon exerts on the femur",
+      "explanation": "The patella acts as a fulcrum, displacing the quadriceps tendon anteriorly. This increases the angle of insertion onto the tibia, thereby enhancing the leverage and mechanical advantage of the muscle during knee extension.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana201-ll-bones-39",
+      "text": "Fractures of the patella often result from direct trauma or sudden, forceful quadriceps contraction. If the patella fractures into two separate fragments, how do they typically displace?",
+      "options": [
+        "The fragments remain firmly held together by the medial and lateral retinacula.",
+        "Both fragments are pulled superiorly into the thigh.",
+        "The proximal fragment is pulled superiorly by the quadriceps tendon, and the distal fragment is pulled inferiorly by the patellar ligament.",
+        "The distal fragment is pulled superiorly, overriding the proximal fragment."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The proximal fragment is pulled superiorly by the quadriceps tendon, and the distal fragment is pulled inferiorly by the patellar ligament.",
+      "explanation": "Because the patella is embedded within the extensor mechanism, a transverse fracture usually results in separation: the quadriceps tendon pulls the top piece up, and the patellar ligament anchors the bottom piece down.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana201-ll-bones-40",
+      "text": "The proximal tibia has a flat surface for articulation with the femur, called the tibial plateau. What structures deepen this articular surface to accommodate the femoral condyles?",
+      "options": [
+        "The intercondylar tubercles",
+        "The menisci",
+        "The collateral ligaments",
+        "The patellar retinacula"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The menisci",
+      "explanation": "The flat articular surfaces of the medial and lateral tibial condyles are deepened by the fibrocartilaginous menisci, which improve the congruency and stability of the knee joint.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana201-ll-bones-41",
+      "text": "Fractures of the proximal tibia (tibial plateau fractures) are often classified using a specific system to determine operative management. What is this classification system called?",
+      "options": [
+        "Salter-Harris classification",
+        "Schatzker classification",
+        "Weber classification",
+        "Garden classification"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Schatzker classification",
+      "explanation": "Tibial plateau fractures, which involve the articular surface of the proximal tibia, are classified using the Schatzker classification system to guide treatment decisions.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana201-ll-bones-42",
+      "text": "The fibula articulates with the tibia at two distinct joints. Where does the proximal tibiofibular joint occur?",
+      "options": [
+        "Between the fibular head and the medial condyle of the tibia",
+        "Between the fibular head and the lateral condyle of the tibia",
+        "Between the lateral malleolus and the fibular notch",
+        "Between the fibular shaft and the tibial tuberosity"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Between the fibular head and the lateral condyle of the tibia",
+      "explanation": "The proximal tibiofibular joint is formed by the articulation of the facet on the enlarged head of the fibula with the posterolateral aspect of the lateral condyle of the tibia.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana201-ll-bones-43",
+      "text": "The lateral malleolus is a prominent feature of the distal fibula. What type of fracture typically occurs here when the foot is twisted outwards (eversion)?",
+      "options": [
+        "A spiral fracture",
+        "An avulsion fracture of the tip",
+        "A transverse fracture",
+        "A comminuted crush fracture"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A transverse fracture",
+      "explanation": "While forced inversion causes a spiral fracture of the medial malleolus, forced eversion of the foot pushes the talus laterally against the lateral malleolus, typically causing a transverse fracture of the fibula.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana201-ll-bones-44",
+      "text": "The tarsal bones form the proximal framework of the foot. Which bone is situated furthest lateral in the distal row of tarsals?",
+      "options": [
+        "The navicular",
+        "The lateral cuneiform",
+        "The cuboid",
+        "The calcaneus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The cuboid",
+      "explanation": "In the distal row of tarsal bones, the cuboid is positioned furthest laterally, lying anterior to the calcaneus and posterior to the bases of the fourth and fifth metatarsals.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana201-ll-bones-45",
+      "text": "The talus bone is highly susceptible to avascular necrosis following certain injuries. Which type of talar fracture is most strongly associated with this complication?",
+      "options": [
+        "Fractures of the talar head",
+        "Fractures of the lateral process",
+        "Fractures of the talar neck",
+        "Compression fractures of the posterior tubercle"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Fractures of the talar neck",
+      "explanation": "Talar neck fractures, often resulting from severe forced dorsiflexion, can disrupt the retrograde blood supply to the body of the talus, leading to a high risk of avascular necrosis.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana201-ll-bones-46",
+      "text": "A patient falls from a significant height, landing forcefully on their heels. Radiographs reveal a comminuted fracture. Which bone is most likely fractured, appearing shorter and wider on the X-ray?",
+      "options": [
+        "The talus",
+        "The calcaneus",
+        "The navicular",
+        "The first metatarsal"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The calcaneus",
+      "explanation": "The calcaneus is frequently fractured by axial loading (such as falling from a height onto the heels). The impact crushes the bone, making it appear shorter and wider on imaging.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana201-ll-bones-47",
+      "text": "The metatarsal bones connect the tarsals to the phalanges. How are the metatarsals numbered anatomically?",
+      "options": [
+        "From lateral (V) to medial (I)",
+        "From medial (I) to lateral (V)",
+        "Based on their relative length, from longest (I) to shortest (V)",
+        "Based on their order of ossification"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. From medial (I) to lateral (V)",
+      "explanation": "The metatarsals are numbered I through V starting from the medial side (the great toe is digit I) to the lateral side (the little toe is digit V).",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana201-ll-bones-48",
+      "text": "The phalanges of the foot are similar in structure to the metatarsals. How many phalanges does the great toe (hallux) possess?",
+      "options": [
+        "One",
+        "Two",
+        "Three",
+        "Four"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Two",
+      "explanation": "Unlike the other four toes, which each possess three phalanges (proximal, intermediate, and distal), the great toe has only two phalanges: a proximal and a distal phalanx.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana201-ll-bones-49",
+      "text": "The iliac crest serves as an important site of aponeurotic attachment for abdominal muscles. About 5-6 cm posterior to the ASIS, there is a distinct prominence on the external lip. What is this called?",
+      "options": [
+        "The iliopubic eminence",
+        "The tubercle of the iliac crest",
+        "The posterior superior iliac spine",
+        "The greater sciatic notch"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The tubercle of the iliac crest",
+      "explanation": "The tubercle of the iliac crest (iliac tubercle) is a thickening on the external lip of the iliac crest, located approximately 5-6 cm posterior to the anterior superior iliac spine (ASIS).",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana201-ll-bones-50",
+      "text": "The auricular surface of the ilium is a rough, ear-shaped area located posteriorly on its medial aspect. What is the function of this surface?",
+      "options": [
+        "It provides attachment for the sacrotuberous ligament.",
+        "It articulates with the reciprocal surface of the sacrum to form the sacroiliac joint.",
+        "It forms the smooth, gliding surface for the piriformis muscle.",
+        "It marks the fusion line between the ilium and the ischium."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It articulates with the reciprocal surface of the sacrum to form the sacroiliac joint.",
+      "explanation": "The auricular surface of the ilium is an articular surface that mates with a similarly shaped surface on the sacrum, forming the synovial portion of the sacroiliac joint.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 50
+    },
+    {
+      "id": "ana201-ll-bones-51",
+      "text": "The pecten pubis is a sharp, raised edge on the superior ramus of the pubis. What important anatomical boundary does it help form?",
+      "options": [
+        "The pelvic brim",
+        "The obturator canal",
+        "The lesser sciatic notch",
+        "The pubic arch"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The pelvic brim",
+      "explanation": "The pecten pubis (pectineal line of the pubis) is a sharp ridge on the superior pubic ramus that continues the arcuate line of the ilium, collectively forming part of the pelvic brim.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 51
+    },
+    {
+      "id": "ana201-ll-bones-52",
+      "text": "In the acetabulum, there is a smooth, C-shaped articular surface that directly receives the head of the femur. What is this specific surface called?",
+      "options": [
+        "The acetabular fossa",
+        "The triradiate cartilage",
+        "The lunate surface",
+        "The acetabular notch"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The lunate surface",
+      "explanation": "The smooth, crescent-shaped articular area inside the acetabulum, which is covered with hyaline cartilage and articulates with the femoral head, is called the lunate surface.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 52
+    },
+    {
+      "id": "ana201-ll-bones-53",
+      "text": "The proximal femur features the greater trochanter on its lateral aspect. Which muscle originates from the lateral surface of this bony prominence?",
+      "options": [
+        "Gluteus maximus",
+        "Vastus lateralis",
+        "Biceps femoris",
+        "Pectineus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Vastus lateralis",
+      "explanation": "While several gluteal muscles insert onto the greater trochanter, the vastus lateralis muscle takes part of its origin from the lateral aspect of the greater trochanter and the lateral lip of the linea aspera.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 53
+    },
+    {
+      "id": "ana201-ll-bones-54",
+      "text": "Fractures of the proximal femur are broadly classified based on their relationship to the hip joint capsule. Which type of fracture leaves the blood supply to the femoral head largely intact?",
+      "options": [
+        "Intracapsular fractures",
+        "Subcapital fractures",
+        "Transcervical fractures",
+        "Extracapsular fractures"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Extracapsular fractures",
+      "explanation": "Extracapsular fractures (such as intertrochanteric fractures) occur outside the joint capsule, leaving the medial femoral circumflex artery undamaged, making avascular necrosis a rare complication.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 54
+    },
+    {
+      "id": "ana201-ll-bones-55",
+      "text": "The shaft of the femur has a slight curvature to increase stability during weight-bearing. In which direction does the shaft descend?",
+      "options": [
+        "Strictly vertically",
+        "In a slight medial direction",
+        "In a slight lateral direction",
+        "With a marked anterior convexity"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. In a slight medial direction",
+      "explanation": "The shaft of the femur descends in a slight medial direction. This angulation brings the knees closer to the body's center of gravity, improving balance and bipedal stability.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 55
+    },
+    {
+      "id": "ana201-ll-bones-56",
+      "text": "The medial and lateral supracondylar lines of the femur define a flat, triangular area on the posterior surface of the distal bone. What is this area called?",
+      "options": [
+        "The intercondylar fossa",
+        "The popliteal surface",
+        "The patellar surface",
+        "The gluteal tuberosity"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The popliteal surface",
+      "explanation": "As the linea aspera diverges distally into the medial and lateral supracondylar lines, it creates a flat triangular area on the posterior femur known as the popliteal surface, which forms the floor of the upper popliteal fossa.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 56
+    },
+    {
+      "id": "ana201-ll-bones-57",
+      "text": "The medial supracondylar line of the femur terminates distally at a specific bony prominence. What is this prominence, and what muscle attaches there?",
+      "options": [
+        "The medial epicondyle; attaches the medial collateral ligament",
+        "The adductor tubercle; attaches the adductor magnus",
+        "The lesser trochanter; attaches the iliopsoas",
+        "The quadrate tubercle; attaches the quadratus femoris"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The adductor tubercle; attaches the adductor magnus",
+      "explanation": "The medial supracondylar line ends inferiorly at a distinct bony projection called the adductor tubercle, which serves as the insertion point for the hamstring part of the adductor magnus muscle.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 57
+    },
+    {
+      "id": "ana201-ll-bones-58",
+      "text": "The anterior surface of the distal femur articulates with the patella. How does this articular surface differ from the posterior articular surfaces of the condyles?",
+      "options": [
+        "It is separated into two distinct, non-continuous facets.",
+        "It is formed by a single, continuous, shallow depression connecting the condyles.",
+        "It lacks hyaline cartilage cover.",
+        "It projects significantly further distally than the posterior surfaces."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It is formed by a single, continuous, shallow depression connecting the condyles.",
+      "explanation": "While the posterior articular surfaces of the condyles are separated by the deep intercondylar fossa, the anterior articular surface (the patellar surface) is continuous, forming a shallow groove for the patella.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 58
+    },
+    {
+      "id": "ana201-ll-bones-59",
+      "text": "The patella has a triangular shape with an apex and a base. Which specific part of the patella points inferiorly and connects to the tibial tuberosity?",
+      "options": [
+        "The lateral facet",
+        "The medial facet",
+        "The base",
+        "The apex"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The apex",
+      "explanation": "The apex of the triangular patella is situated inferiorly and serves as the attachment point for the patellar ligament, which anchors it to the tibial tuberosity.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 59
+    },
+    {
+      "id": "ana201-ll-bones-60",
+      "text": "The medial and lateral intercondylar tubercles project upward from the tibial plateau. What is the collective name for these bony projections and the area immediately surrounding them?",
+      "options": [
+        "The tibial tuberosity",
+        "The intercondylar eminence",
+        "The soleal line",
+        "The fibular notch"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The intercondylar eminence",
+      "explanation": "The medial and lateral intercondylar tubercles together form the intercondylar eminence, a raised area between the articular surfaces of the tibial condyles.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 60
+    },
+    {
+      "id": "ana201-ll-bones-61",
+      "text": "The shaft of the tibia is prism-shaped, presenting three borders. Which border is sharp, subcutaneous, and colloquially referred to as the \"shin\"?",
+      "options": [
+        "The posterior border",
+        "The medial border",
+        "The interosseous border",
+        "The anterior border"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The anterior border",
+      "explanation": "The anterior border of the tibia is sharp and lies directly under the skin (subcutaneous) for its entire length, forming the prominent \"shin.\"",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 61
+    },
+    {
+      "id": "ana201-ll-bones-62",
+      "text": "The lateral border of the tibia provides a critical connection to the adjacent fibula. What is the specific name of this border, and what structure attaches to it?",
+      "options": [
+        "The soleal line; attaches the soleus muscle",
+        "The interosseous border; attaches the interosseous membrane",
+        "The anterior border; attaches the deep fascia of the leg",
+        "The medial border; attaches the medial collateral ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The interosseous border; attaches the interosseous membrane",
+      "explanation": "The sharp lateral border of the tibia faces the fibula and is called the interosseous border because it provides attachment for the dense interosseous membrane that binds the two bones together.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 62
+    },
+    {
+      "id": "ana201-ll-bones-63",
+      "text": "A nutrient artery enters the posterior surface of the tibia to supply the bone marrow. Where is this nutrient foramen typically located relative to the major landmarks of the posterior tibia?",
+      "options": [
+        "Immediately distal to the medial malleolus",
+        "Within the intercondylar eminence",
+        "Proximal to the soleal line",
+        "Just proximal to the fibular notch"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Proximal to the soleal line",
+      "explanation": "The nutrient foramen of the tibia is typically located on the posterior surface of the proximal shaft, usually situated just proximal to or along the course of the soleal line.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 63
+    },
+    {
+      "id": "ana201-ll-bones-64",
+      "text": "In high-energy fractures of the tibial shaft, another bone is frequently fractured simultaneously due to the strong ligamentous and membranous connections between them. Which bone is this?",
+      "options": [
+        "The femur",
+        "The patella",
+        "The fibula",
+        "The talus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The fibula",
+      "explanation": "Because the tibia and fibula are tightly bound together by the interosseous membrane and proximal/distal tibiofibular joints, severe forces that fracture the robust tibia will almost always fracture the weaker fibula as well.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 64
+    },
+    {
+      "id": "ana201-ll-bones-65",
+      "text": "The fibula is a long, thin bone located laterally in the leg. What structure can be found coursing directly over the posterior and lateral surface of the fibular neck?",
+      "options": [
+        "The popliteal artery",
+        "The tibial nerve",
+        "The common fibular (peroneal) nerve",
+        "The small saphenous vein"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The common fibular (peroneal) nerve",
+      "explanation": "The common fibular nerve wraps tightly around the neck of the fibula superficially, making it highly vulnerable to injury (e.g., from a direct blow, tight cast, or fibular neck fracture).",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 65
+    },
+    {
+      "id": "ana201-ll-bones-66",
+      "text": "The fibular shaft presents three surfaces (anterior, lateral, and posterior) that correspond to the muscular compartments of the leg. What separates these compartments?",
+      "options": [
+        "The interosseous membrane only",
+        "The crural fascia and intermuscular septa attaching to the bone",
+        "The path of the major blood vessels",
+        "The subcutaneous fat layer"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The crural fascia and intermuscular septa attaching to the bone",
+      "explanation": "The deep fascia of the leg (crural fascia) sends intermuscular septa inward to attach to the fibula, dividing the leg into anterior, lateral, and posterior compartments.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 66
+    },
+    {
+      "id": "ana201-ll-bones-67",
+      "text": "The distal tibiofibular joint is a critical syndesmosis that holds the ankle mortise together. What specific feature on the tibia articulates with the distal fibula to form this joint?",
+      "options": [
+        "The medial malleolus",
+        "The tibial tuberosity",
+        "The lateral condyle",
+        "The fibular notch"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The fibular notch",
+      "explanation": "The distal, lateral aspect of the tibia features a distinct concave depression called the fibular notch, into which the distal fibula fits securely to form the distal tibiofibular joint.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 67
+    },
+    {
+      "id": "ana201-ll-bones-68",
+      "text": "The tarsal bones form the hindfoot and midfoot. Which two bones specifically comprise the hindfoot?",
+      "options": [
+        "The talus and the navicular",
+        "The calcaneus and the cuboid",
+        "The talus and the calcaneus",
+        "The navicular and the cuneiforms"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The talus and the calcaneus",
+      "explanation": "The hindfoot consists of the two largest and most proximal tarsal bones: the talus (which articulates with the leg) and the calcaneus (which forms the heel).",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 68
+    },
+    {
+      "id": "ana201-ll-bones-69",
+      "text": "The talus is wider anteriorly than posteriorly. How does this wedge shape contribute to the biomechanical stability of the ankle joint?",
+      "options": [
+        "It prevents excessive plantarflexion by locking against the calcaneus.",
+        "It wedges tightly into the ankle mortise during dorsiflexion, increasing stability.",
+        "It allows for greater rotational freedom during walking.",
+        "It shifts the center of gravity medially to relieve stress on the fibula."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It wedges tightly into the ankle mortise during dorsiflexion, increasing stability.",
+      "explanation": "The superior articular surface of the talus (the trochlea) is wider anteriorly. During dorsiflexion, this wider anterior portion is forced into the narrower space between the malleoli, wedging the joint tightly and increasing stability.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 69
+    },
+    {
+      "id": "ana201-ll-bones-70",
+      "text": "The calcaneus transmits the weight of the body to the ground. What specific feature on its posterior aspect serves as the insertion point for the thickest tendon in the body?",
+      "options": [
+        "The sustentaculum tali",
+        "The peroneal trochlea",
+        "The calcaneal tuberosity",
+        "The anterior articular facet"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The calcaneal tuberosity",
+      "explanation": "The large, roughened posterior projection of the calcaneus is the calcaneal tuberosity. The massive Achilles tendon (calcaneal tendon) attaches to the middle third of its posterior surface.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 70
+    },
+    {
+      "id": "ana201-ll-bones-71",
+      "text": "The midfoot is composed of five tarsal bones. Which bone is boat-shaped and situated between the talar head proximally and the three cuneiform bones distally?",
+      "options": [
+        "The cuboid",
+        "The navicular",
+        "The lateral cuneiform",
+        "The intermediate cuneiform"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The navicular",
+      "explanation": "The navicular is a boat-shaped bone located on the medial side of the midfoot, articulating proximally with the head of the talus and distally with all three cuneiform bones.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 71
+    },
+    {
+      "id": "ana201-ll-bones-72",
+      "text": "The cuneiform bones and the cuboid form a structural arch across the midfoot. What is the primary function of this wedge-shaped arrangement?",
+      "options": [
+        "To provide a rigid lever for the Achilles tendon",
+        "To form the transverse arch of the foot, distributing weight and protecting plantar neurovascular structures",
+        "To prevent the talus from dislocating anteriorly",
+        "To allow for extensive lateral rotation of the forefoot"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. To form the transverse arch of the foot, distributing weight and protecting plantar neurovascular structures",
+      "explanation": "The wedge shape of the cuneiforms and their articulation with the cuboid naturally form the transverse arch of the foot, which acts like a Roman arch to support weight and shield the soft tissues underneath.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 72
+    },
+    {
+      "id": "ana201-ll-bones-73",
+      "text": "The inferior (plantar) surface of the cuboid bone features a distinct groove. Which tendon utilizes this groove to cross the sole of the foot?",
+      "options": [
+        "The tendon of the tibialis posterior",
+        "The tendon of the flexor hallucis longus",
+        "The tendon of the fibularis (peroneus) longus",
+        "The tendon of the tibialis anterior"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The tendon of the fibularis (peroneus) longus",
+      "explanation": "The tendon of the fibularis longus muscle passes behind the lateral malleolus, wraps under the foot, and runs through the deep groove on the plantar surface of the cuboid to insert on the medial cuneiform and first metatarsal.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 73
+    },
+    {
+      "id": "ana201-ll-bones-74",
+      "text": "The medial cuneiform is the largest of the three cuneiform bones. Several important muscles attach to it to help maintain the medial longitudinal arch. Which muscle inserts onto its plantar surface?",
+      "options": [
+        "Extensor digitorum brevis",
+        "Fibularis (peroneus) brevis",
+        "Tibialis anterior",
+        "Flexor digitorum longus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Tibialis anterior",
+      "explanation": "The tendon of the tibialis anterior muscle inserts onto the medial and inferior surfaces of the medial cuneiform and the base of the adjacent first metatarsal, strongly supporting the medial arch.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 74
+    },
+    {
+      "id": "ana201-ll-bones-75",
+      "text": "A patient who dropped a heavy weight on their midfoot presents with a suspected metatarsal fracture. Which part of the metatarsal bone is most vulnerable in this mechanism of direct crush injury?",
+      "options": [
+        "The articular head",
+        "The surgical neck",
+        "The shaft",
+        "The tuberosity at the base"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The shaft",
+      "explanation": "A direct blow to the dorsum of the foot, such as dropping a heavy object, most commonly results in a transverse or comminuted fracture through the shaft (diaphysis) of one or more metatarsals.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 75
+    },
+    {
+      "id": "ana201-ll-bones-76",
+      "text": "The base of the fifth metatarsal has a prominent tuberosity projecting laterally. Aside from the fibularis brevis tendon, what other structure is frequently involved in avulsion fractures at this site?",
+      "options": [
+        "The lateral band of the plantar aponeurosis",
+        "The spring ligament",
+        "The Achilles tendon",
+        "The deltoid ligament"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The lateral band of the plantar aponeurosis",
+      "explanation": "While the fibularis brevis pulls on the tuberosity, the lateral band of the tough plantar aponeurosis is also attached here and can contribute to avulsing the bone fragment during severe inversion injuries.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 76
+    },
+    {
+      "id": "ana201-ll-bones-77",
+      "text": "The metatarsophalangeal (MTP) joints are formed by the articulation of the metatarsal heads with the bases of the proximal phalanges. What structural feature is unique to the plantar aspect of the first MTP joint?",
+      "options": [
+        "The presence of a massive synovial bursa",
+        "The articulation with two distinct sesamoid bones",
+        "The complete absence of a joint capsule",
+        "The fusion of the metatarsal head to the phalanx"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The articulation with two distinct sesamoid bones",
+      "explanation": "The plantar surface of the first metatarsal head has two grooved facets that articulate with two separate sesamoid bones (medial and lateral) embedded within the tendons of the flexor hallucis brevis.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 77
+    },
+    {
+      "id": "ana201-ll-bones-78",
+      "text": "The mature hip bone lacks visible suture lines, but anatomists still refer to its three embryological components. Which component comprises the largest portion of the bone and forms the superior half of the acetabulum?",
+      "options": [
+        "The ischium",
+        "The pubis",
+        "The ilium",
+        "The sacrum"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The ilium",
+      "explanation": "The ilium is the largest of the three primary pelvic bones. It forms the large, wing-like superior expansion of the pelvis and contributes the entire superior half of the acetabular socket.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 78
+    },
+    {
+      "id": "ana201-ll-bones-79",
+      "text": "The anterior superior iliac spine (ASIS) is an easily palpable clinical landmark. It provides the origin for a muscle that crosses both the hip and the knee joints. Which muscle is this?",
+      "options": [
+        "The rectus femoris",
+        "The sartorius",
+        "The tensor fasciae latae",
+        "The iliacus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The sartorius",
+      "explanation": "The sartorius muscle, the longest muscle in the body, originates directly from the anterior superior iliac spine (ASIS) before spiraling down the thigh. (The rectus femoris originates from the AIIS).",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 79
+    },
+    {
+      "id": "ana201-ll-bones-80",
+      "text": "The posterior inferior iliac spine (PIIS) marks the beginning of a major anatomical feature on the posterior edge of the ilium. What is this feature?",
+      "options": [
+        "The auricular surface",
+        "The greater sciatic notch",
+        "The lesser sciatic notch",
+        "The ischial spine"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The greater sciatic notch",
+      "explanation": "The posterior margin of the ilium drops sharply below the posterior inferior iliac spine (PIIS) to form the deep indentation known as the greater sciatic notch.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 80
+    },
+    {
+      "id": "ana201-ll-bones-81",
+      "text": "The medial aspect of the ilium has a rough, ear-shaped area called the auricular surface. Immediately superior to this surface is a rougher area called the iliac tuberosity. What is its function?",
+      "options": [
+        "It provides attachment for the massive interosseous sacroiliac ligaments.",
+        "It serves as the origin for the gluteus medius muscle.",
+        "It acts as a pulley for the obturator internus tendon.",
+        "It forms the bony roof of the greater sciatic foramen."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It provides attachment for the massive interosseous sacroiliac ligaments.",
+      "explanation": "The extremely rough iliac tuberosity, located just above the auricular surface, provides the attachment site for the very strong interosseous sacroiliac ligaments that stabilize the sacroiliac joint.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 81
+    },
+    {
+      "id": "ana201-ll-bones-82",
+      "text": "The body of the ischium forms the posterior part of the acetabulum. As it descends, it terminates in the ischial tuberosity. What is the primary functional role of the ischial spine, which projects above the tuberosity?",
+      "options": [
+        "It bears weight during sitting.",
+        "It provides attachment for the sacrospinous ligament.",
+        "It forms the lateral border of the obturator foramen.",
+        "It articulates with the coccyx."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It provides attachment for the sacrospinous ligament.",
+      "explanation": "The sharp ischial spine provides the crucial attachment point for the sacrospinous ligament, which helps convert the greater sciatic notch into the greater sciatic foramen.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 82
+    },
+    {
+      "id": "ana201-ll-bones-83",
+      "text": "The lesser sciatic notch is a small, rounded indentation situated below the ischial spine. It functions as a pulley (trochlea) for the tendon of a specific muscle exiting the pelvis. Which muscle?",
+      "options": [
+        "Piriformis",
+        "Obturator internus",
+        "Quadratus femoris",
+        "Superior gemellus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Obturator internus",
+      "explanation": "The tendon of the obturator internus muscle exits the lesser pelvis through the lesser sciatic foramen, making a right-angle turn around the lesser sciatic notch, which acts as a bony pulley.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 83
+    },
+    {
+      "id": "ana201-ll-bones-84",
+      "text": "The pubis is divided into a body, a superior ramus, and an inferior ramus. The superior ramus meets the ilium and ischium at the acetabulum. Where does the inferior ramus go?",
+      "options": [
+        "It projects anteriorly to form the pubic crest.",
+        "It projects inferiorly to articulate directly with the femur.",
+        "It projects posterolaterally to join the ramus of the ischium.",
+        "It curves superiorly to form the anterior border of the greater sciatic notch."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It projects posterolaterally to join the ramus of the ischium.",
+      "explanation": "The inferior ramus of the pubis projects posterolaterally and downwards to fuse with the ramus of the ischium, creating the continuous bar of bone known as the ischiopubic ramus.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 84
+    },
+    {
+      "id": "ana201-ll-bones-85",
+      "text": "The pubic symphysis is a secondary cartilaginous joint between the two pubic bones. What specific structure intervenes between the symphysial surfaces of the pubic bodies?",
+      "options": [
+        "A synovial fluid-filled cavity",
+        "A thick pad of hyaline cartilage",
+        "An interpubic fibrocartilaginous disc",
+        "The strong pubic arcuate ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. An interpubic fibrocartilaginous disc",
+      "explanation": "The symphysial surfaces of the pubic bones are covered by a thin layer of hyaline cartilage, but they are firmly united by a thick, intervening interpubic disc of fibrocartilage.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 85
+    },
+    {
+      "id": "ana201-ll-bones-86",
+      "text": "The acetabulum is oriented in a specific way to optimally cover the femoral head during weight-bearing. In a standing anatomical position, which direction does the acetabular opening face?",
+      "options": [
+        "Directly laterally",
+        "Anteriorly, laterally, and inferiorly",
+        "Posteriorly, laterally, and inferiorly",
+        "Directly inferiorly"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Anteriorly, laterally, and inferiorly",
+      "explanation": "The cup of the acetabulum is not directed straight laterally; it faces anteriorly, laterally, and inferiorly. This orientation requires the femoral neck to angle anteriorly (anteversion) to fit properly.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 86
+    },
+    {
+      "id": "ana201-ll-bones-87",
+      "text": "The non-articular area located centrally and inferiorly within the acetabulum is called the acetabular fossa. What tissue normally occupies this rough depression in a living person?",
+      "options": [
+        "Hyaline articular cartilage",
+        "The strong iliofemoral ligament",
+        "A pad of fat covered by synovial membrane",
+        "The tendon of the rectus femoris"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A pad of fat covered by synovial membrane",
+      "explanation": "The acetabular fossa is devoid of cartilage. It contains a protective pad of fat (the Haversian fat pad) covered by synovial membrane, allowing for deformation during joint loading.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 87
+    },
+    {
+      "id": "ana201-ll-bones-88",
+      "text": "The head of the femur is approximately two-thirds of a sphere. Except for the fovea, it is entirely covered by what type of tissue?",
+      "options": [
+        "Periosteum",
+        "Fibrocartilage",
+        "Synovial membrane",
+        "Articular hyaline cartilage"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Articular hyaline cartilage",
+      "explanation": "To provide a smooth, low-friction surface for articulation within the acetabulum, the entire head of the femur (excluding the fovea) is covered in a layer of smooth articular hyaline cartilage.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 88
+    },
+    {
+      "id": "ana201-ll-bones-89",
+      "text": "The angle of inclination between the femoral neck and shaft is typically about 135 degrees. However, this angle can be pathologically decreased (e.g., to 90 degrees), a condition known as coxa vara. What is a primary biomechanical consequence of coxa vara?",
+      "options": [
+        "A significant increase in the length of the leg",
+        "A decreased risk of femoral neck fractures",
+        "Increased shearing stress across the femoral neck",
+        "Increased tension on the iliofemoral ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Increased shearing stress across the femoral neck",
+      "explanation": "While coxa vara improves the mechanical advantage of the hip abductors, the decreased angle significantly increases the bending moment and shearing stress across the femoral neck, making it more prone to fracture.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 89
+    },
+    {
+      "id": "ana201-ll-bones-90",
+      "text": "The greater trochanter provides leverage for muscles that abduct and medially rotate the thigh. Which prominent muscle inserts onto the lateral surface of the greater trochanter?",
+      "options": [
+        "Gluteus minimus",
+        "Gluteus medius",
+        "Piriformis",
+        "Obturator externus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Gluteus medius",
+      "explanation": "The gluteus medius is the powerful primary abductor of the hip, and its large tendon inserts directly onto the lateral surface of the greater trochanter. (Gluteus minimus inserts on the anterior surface).",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 90
+    },
+    {
+      "id": "ana201-ll-bones-91",
+      "text": "On the medial surface of the greater trochanter, there is a deep depression that serves as an insertion point for the obturator externus muscle. What is this depression called?",
+      "options": [
+        "The quadrate tubercle",
+        "The trochanteric fossa",
+        "The intertrochanteric line",
+        "The fovea capitis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The trochanteric fossa",
+      "explanation": "The trochanteric fossa is a deep pit located on the medial, posterior aspect of the greater trochanter, providing the specific insertion site for the tendon of the obturator externus.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 91
+    },
+    {
+      "id": "ana201-ll-bones-92",
+      "text": "The lesser trochanter projects posteromedially from the proximal femur. Why is this bony prominence relatively smooth and rounded compared to the rougher greater trochanter?",
+      "options": [
+        "Because no muscles attach to it",
+        "Because it is covered by articular cartilage",
+        "Because it receives the attachment of a single, large tendon",
+        "Because it rubs against the ischium during hip flexion"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Because it receives the attachment of a single, large tendon",
+      "explanation": "The lesser trochanter is smooth and bluntly rounded because it serves as the insertion point for only one structure: the massive, conjoined tendon of the powerful iliopsoas muscle.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 92
+    },
+    {
+      "id": "ana201-ll-bones-93",
+      "text": "The shaft of the femur is generally cylindrical but is flattened posteriorly at its proximal and distal ends. Which aspect of the shaft possesses a distinct anterior bowing (convexity)?",
+      "options": [
+        "The entire length of the shaft",
+        "Only the proximal third",
+        "Only the distal third",
+        "The femur has a posterior bowing, not anterior"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The entire length of the shaft",
+      "explanation": "The entire shaft of the femur exhibits a slight anterior bowing (convexity forward). This structural arching allows the bone to better withstand the bending stresses imposed by the body's weight.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 93
+    },
+    {
+      "id": "ana201-ll-bones-94",
+      "text": "The lateral supracondylar line of the femur is more prominent than the medial supracondylar line. Which muscle takes a partial origin from this lateral line?",
+      "options": [
+        "The short head of the biceps femoris",
+        "The plantaris",
+        "The popliteus",
+        "The medial head of the gastrocnemius"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The short head of the biceps femoris",
+      "explanation": "The short head of the biceps femoris muscle arises from the lateral lip of the linea aspera and extends down onto the upper portion of the lateral supracondylar line.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 94
+    },
+    {
+      "id": "ana201-ll-bones-95",
+      "text": "The distal articular surface of the femur is designed to glide over the tibia. During the final degrees of knee extension, the femur slightly medially rotates on the tibia to \"lock\" the joint. Which condylar feature facilitates this?",
+      "options": [
+        "The lateral condyle is shorter and flatter than the medial condyle.",
+        "The medial condyle is longer and curves further anteriorly than the lateral condyle.",
+        "The intercondylar fossa becomes shallower anteriorly.",
+        "The patellar surface ends abruptly on the medial side."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The medial condyle is longer and curves further anteriorly than the lateral condyle.",
+      "explanation": "The articular surface of the medial condyle is longer front-to-back and curves laterally at its anterior end. This forces the femur to internally rotate during terminal extension, \"locking\" the knee in the screw-home mechanism.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 95
+    },
+    {
+      "id": "ana201-ll-bones-96",
+      "text": "The patella is a sesamoid bone embedded within the quadriceps tendon. Its anterior surface is convex and rough. What is the purpose of this roughness?",
+      "options": [
+        "It provides a grating surface to wear away inflamed bursae.",
+        "It increases the surface area for the attachment of the vastus intermedius.",
+        "It allows for the firm adherence of the superficial fibers of the quadriceps tendon continuing into the patellar ligament.",
+        "It articulates with the subcutaneous prepatellar bursa."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It allows for the firm adherence of the superficial fibers of the quadriceps tendon continuing into the patellar ligament.",
+      "explanation": "The rough anterior surface of the patella is intimately blended with the longitudinal fibers of the quadriceps tendon passing completely over it to become the patellar ligament, requiring a strong, rough surface for adherence.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 96
+    },
+    {
+      "id": "ana201-ll-bones-97",
+      "text": "The medial and lateral tibial condyles form the flat tibial plateau. Which condyle is generally larger and more robust, reflecting the weight-bearing mechanics of the knee?",
+      "options": [
+        "The lateral condyle",
+        "The medial condyle",
+        "They are exactly equal in size and shape.",
+        "The lateral condyle is larger only in females."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The medial condyle",
+      "explanation": "The medial condyle of the tibia is somewhat larger, flatter, and more robust than the lateral condyle, as the mechanical axis of the leg passes slightly medial to the center of the knee, placing more load on the medial compartment.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 97
+    },
+    {
+      "id": "ana201-ll-bones-98",
+      "text": "The lateral condyle of the tibia has a prominent facet on its posterolateral undersurface. What is the function of this specific articular facet?",
+      "options": [
+        "It receives the insertion of the iliotibial tract.",
+        "It articulates with the head of the fibula.",
+        "It provides attachment for the lateral meniscus.",
+        "It articulates with the lateral condyle of the femur during deep flexion."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It articulates with the head of the fibula.",
+      "explanation": "The circular articular facet on the posterolateral aspect of the overhanging lateral tibial condyle articulates with the head of the fibula to form the synovial proximal tibiofibular joint.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 98
+    },
+    {
+      "id": "ana201-ll-bones-99",
+      "text": "Anteriorly, just lateral to the tibial tuberosity, there is a prominent bony tubercle (Gerdy's tubercle) on the lateral condyle of the tibia. Which tough fascial structure attaches here?",
+      "options": [
+        "The patellar retinaculum",
+        "The fibular collateral ligament",
+        "The iliotibial tract",
+        "The biceps femoris tendon"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The iliotibial tract",
+      "explanation": "Gerdy's tubercle is a smooth facet on the anterior aspect of the lateral tibial condyle that serves as the strong distal insertion point for the dense fascia of the iliotibial tract.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 99
+    },
+    {
+      "id": "ana201-ll-bones-100",
+      "text": "The medial malleolus of the tibia projects inferiorly to form the medial stability of the ankle mortise. Its lateral articular surface is flat and vertical. What does it articulate with?",
+      "options": [
+        "The medial surface of the talar body",
+        "The superior surface of the calcaneus",
+        "The medial surface of the navicular",
+        "The sustentaculum tali"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The medial surface of the talar body",
+      "explanation": "The lateral surface of the medial malleolus is covered with articular cartilage and articulates smoothly with the corresponding comma-shaped medial articular surface on the body of the talus.",
+      "section": "Bones of the Lower Limb",
+      "questionNumber": 100
+    }
+  ]
+}
