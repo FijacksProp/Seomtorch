@@ -1,0 +1,1510 @@
+{
+  "title": "Blood Supply of the Upper Limb",
+  "course": "ANA 201",
+  "totalQuestions": 100,
+  "sections": [
+    "Blood Supply of the Upper Limb (Q1-Q100)"
+  ],
+  "questions": [
+    {
+      "id": "ana201-blood-supply-1",
+      "text": "The axillary artery is divided into three parts by the pectoralis minor muscle. What defines the specific anatomical transition from the subclavian artery to the axillary artery?",
+      "options": [
+        "The lateral border of the first rib",
+        "The inferior border of the teres major",
+        "The medial border of the anterior scalene",
+        "The lateral border of the clavicle"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The lateral border of the first rib",
+      "explanation": "The vessel changes its name from the subclavian artery to the axillary artery as it crosses the lateral border of the first rib to enter the axilla region.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana201-blood-supply-2",
+      "text": "The axillary vein is a massive venous conduit responsible for draining the upper limb. It is formed by the confluence of which specific vascular structures?",
+      "options": [
+        "The cephalic vein and the median cubital vein",
+        "The basilic vein and the paired brachial veins",
+        "The subclavian vein and the internal jugular vein",
+        "The superficial palmar arch and the radial vein"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The basilic vein and the paired brachial veins",
+      "explanation": "The axillary vein is formed at the inferior border of the teres major muscle by the union of the basilic vein (which has pierced the deep fascia) and the paired deep brachial veins (venae comitantes).",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana201-blood-supply-3",
+      "text": "The superficial lymphatic vessels of the upper limb closely follow the major superficial veins. Where do the vessels accompanying the basilic vein primarily terminate?",
+      "options": [
+        "The apical axillary nodes",
+        "The central axillary nodes",
+        "The cubital lymph nodes",
+        "The deltopectoral nodes"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The cubital lymph nodes",
+      "explanation": "Lymphatic vessels tracking the basilic vein ascend the medial aspect of the forearm and primarily drain into the cubital lymph nodes, located just proximal to the medial epicondyle, before ascending to the lateral axillary nodes.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana201-blood-supply-4",
+      "text": "In the hand, the deep palmar arch provides critical collateral circulation. Which vessel serves as the primary direct continuation forming this arch?",
+      "options": [
+        "The superficial palmar branch of the radial artery",
+        "The anterior interosseous artery",
+        "The deep palmar branch of the ulnar artery",
+        "The radial artery after passing between the heads of the adductor pollicis"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The radial artery after passing between the heads of the adductor pollicis",
+      "explanation": "The deep palmar arch is primarily formed by the radial artery as it passes from the anatomical snuffbox, between the heads of the adductor pollicis, and into the deep plane of the palm.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana201-blood-supply-5",
+      "text": "The thyrocervical trunk provides essential vascular supply to the neck and shoulder. Which of the following arteries is a direct branch of this trunk?",
+      "options": [
+        "Superior thoracic artery",
+        "Suprascapular artery",
+        "Circumflex scapular artery",
+        "Supreme intercostal artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Suprascapular artery",
+      "explanation": "The thyrocervical trunk (a branch of the first part of the subclavian artery) typically gives rise to the suprascapular artery, the transverse cervical artery, and the inferior thyroid artery.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana201-blood-supply-6",
+      "text": "The cephalic vein traverses multiple anatomical regions before draining into the deep venous system. Which specific fascial structure does it pierce to terminate?",
+      "options": [
+        "The bicipital aponeurosis",
+        "The flexor retinaculum",
+        "The clavipectoral fascia",
+        "The axillary sheath"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The clavipectoral fascia",
+      "explanation": "Near the shoulder, the cephalic vein travels in the deltopectoral groove and pierces the clavipectoral fascia within the clavipectoral triangle to empty directly into the axillary vein.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana201-blood-supply-7",
+      "text": "The subscapular artery is the largest branch of the axillary artery. It divides into two major vessels that supply the posterior shoulder and back. What are these two branches?",
+      "options": [
+        "The superior thoracic and lateral thoracic arteries",
+        "The anterior and posterior circumflex humeral arteries",
+        "The dorsal scapular and suprascapular arteries",
+        "The circumflex scapular and thoracodorsal arteries"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The circumflex scapular and thoracodorsal arteries",
+      "explanation": "The subscapular artery branches into the circumflex scapular artery (which participates in the scapular anastomosis) and the thoracodorsal artery (which supplies the latissimus dorsi muscle).",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana201-blood-supply-8",
+      "text": "The internal thoracic artery descends posterior to the costal cartilages. How does it anatomically terminate at the sixth intercostal space?",
+      "options": [
+        "By dividing into the musculophrenic and superior epigastric arteries",
+        "By anastomosing with the inferior epigastric and subcostal arteries",
+        "By piercing the diaphragm to become the inferior phrenic artery",
+        "By joining the posterior intercostal arteries in the mid-axillary line"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. By dividing into the musculophrenic and superior epigastric arteries",
+      "explanation": "The internal thoracic artery (a branch of the first part of the subclavian) terminates at the level of the sixth intercostal space by dividing into its two terminal branches: the musculophrenic and superior epigastric arteries.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana201-blood-supply-9",
+      "text": "The profunda brachii artery provides the primary blood supply to the posterior compartment of the arm. Which neural structure accompanies it through the triangular interval?",
+      "options": [
+        "The axillary nerve",
+        "The ulnar nerve",
+        "The radial nerve",
+        "The median nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The radial nerve",
+      "explanation": "The profunda brachii (deep brachial) artery travels posterior to the humerus through the triangular interval (triceps hiatus) accompanied strictly by the radial nerve.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana201-blood-supply-10",
+      "text": "The peri-articular anastomosis around the elbow joint prevents ischemia during prolonged flexion. Which artery anastomoses directly with the anterior ulnar recurrent artery?",
+      "options": [
+        "The radial collateral artery",
+        "The middle collateral artery",
+        "The superior ulnar collateral artery",
+        "The inferior ulnar collateral artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The inferior ulnar collateral artery",
+      "explanation": "The inferior ulnar collateral artery (a branch of the brachial artery) descends anterior to the medial epicondyle to anastomose directly with the ascending anterior ulnar recurrent artery.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana201-blood-supply-11",
+      "text": "The central group of axillary lymph nodes acts as an intermediary collecting hub deep to the pectoralis minor. Where do the efferent lymphatic vessels from these nodes drain next?",
+      "options": [
+        "The apical axillary nodes",
+        "The subclavian lymphatic trunk",
+        "The pectoral axillary nodes",
+        "The parasternal lymph nodes"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The apical axillary nodes",
+      "explanation": "The central axillary nodes collect lymph from the pectoral, subscapular, and humeral nodes. Their efferent vessels then pass superiorly to drain into the apical axillary nodes located at the apex of the axilla.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana201-blood-supply-12",
+      "text": "The superficial palmar arch is primarily formed by the ulnar artery. Which digital vessels branch directly from the convexity of this arch?",
+      "options": [
+        "The proper palmar digital arteries",
+        "The common palmar digital arteries",
+        "The palmar metacarpal arteries",
+        "The dorsal digital arteries"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The common palmar digital arteries",
+      "explanation": "The superficial palmar arch gives rise to the common palmar digital arteries. These run toward the web spaces, where they subsequently bifurcate into the proper palmar digital arteries for the sides of the fingers.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana201-blood-supply-13",
+      "text": "The costocervical trunk arises from the second part of the subclavian artery. Which intercostal spaces receive their arterial supply from its supreme intercostal branch?",
+      "options": [
+        "The third and fourth intercostal spaces",
+        "The fifth and sixth intercostal spaces",
+        "The second and third intercostal spaces",
+        "The first and second intercostal spaces"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The first and second intercostal spaces",
+      "explanation": "The costocervical trunk divides into the deep cervical artery and the supreme (highest) intercostal artery. The supreme intercostal artery provides blood specifically to the first and second intercostal spaces.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana201-blood-supply-14",
+      "text": "The median cubital vein is a highly utilized site for venipuncture. What is its precise anatomical routing in the cubital fossa?",
+      "options": [
+        "It shunts blood diagonally from the lateral cephalic vein to the medial basilic vein.",
+        "It connects the deep radial veins to the superficial cephalic vein.",
+        "It runs vertically parallel to the brachial artery, deep to the deep fascia.",
+        "It drains blood from the superficial palmar venous arch to the axillary vein."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It shunts blood diagonally from the lateral cephalic vein to the medial basilic vein.",
+      "explanation": "The median cubital vein is a superficial anastomotic vessel that courses diagonally across the roof of the cubital fossa, routing venous blood from the laterally positioned cephalic vein to the medially positioned basilic vein.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana201-blood-supply-15",
+      "text": "The lateral thoracic artery courses inferomedially along the chest wall to supply the serratus anterior. Which specific part of the axillary artery does it branch from?",
+      "options": [
+        "The first part, proximal to the pectoralis minor",
+        "The second part, posterior to the pectoralis minor",
+        "The third part, distal to the pectoralis minor",
+        "The distal segment, just above the teres major"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The second part, posterior to the pectoralis minor",
+      "explanation": "The axillary artery is divided by the pectoralis minor. The second part (posterior to the muscle) yields two branches: the thoracoacromial artery and the lateral thoracic artery.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana201-blood-supply-16",
+      "text": "Which specific group of axillary lymph nodes receives the majority of the lymphatic drainage directly from the upper limb itself?",
+      "options": [
+        "The subscapular nodes",
+        "The pectoral nodes",
+        "The humeral (lateral) nodes",
+        "The central nodes"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The humeral (lateral) nodes",
+      "explanation": "The humeral (lateral) group of nodes is located posterior to the axillary vein and receives nearly all lymphatic drainage (both superficial and deep) traveling directly up from the upper extremity.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana201-blood-supply-17",
+      "text": "The common interosseous artery is a short trunk in the proximal forearm that quickly divides. From which parent artery does it directly arise?",
+      "options": [
+        "The ulnar artery",
+        "The radial artery",
+        "The brachial artery",
+        "The anterior interosseous artery"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The ulnar artery",
+      "explanation": "Shortly after the brachial artery bifurcates in the cubital fossa, the ulnar artery gives off the common interosseous artery, which then splits into the anterior and posterior interosseous arteries.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana201-blood-supply-18",
+      "text": "The suprascapular artery participates in the rich collateral network of the scapula. Which vessel does it primarily anastomose with in the infraspinous fossa?",
+      "options": [
+        "The transverse cervical artery",
+        "The posterior circumflex humeral artery",
+        "The circumflex scapular artery",
+        "The lateral thoracic artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The circumflex scapular artery",
+      "explanation": "The suprascapular artery (from the thyrocervical trunk) anastomoses extensively with the circumflex scapular artery (from the subscapular artery) to form the functional scapular anastomosis, bypassing potential subclavian occlusions.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana201-blood-supply-19",
+      "text": "The radial pulse is commonly palpated at the wrist. What is the precise anatomical relationship of the radial artery at this location?",
+      "options": [
+        "It lies medial to the flexor carpi ulnaris tendon.",
+        "It lies lateral to the flexor carpi radialis tendon.",
+        "It passes superficial to the extensor retinaculum.",
+        "It lies deep to the palmaris longus tendon."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It lies lateral to the flexor carpi radialis tendon.",
+      "explanation": "In the distal forearm, the radial artery lies superficially on the anterior aspect of the radius, situated between the brachioradialis tendon (laterally) and the flexor carpi radialis tendon (medially).",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana201-blood-supply-20",
+      "text": "Efferent lymphatic vessels from the apical axillary nodes form a major lymphatic conduit exiting the axilla. What is this structure called?",
+      "options": [
+        "The right lymphatic duct",
+        "The thoracic duct",
+        "The jugular lymphatic trunk",
+        "The subclavian lymphatic trunk"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The subclavian lymphatic trunk",
+      "explanation": "Lymph leaves the apical nodes via vessels that converge as they pass through the cervico-axillary canal, forming the subclavian lymphatic trunk which returns lymph to the central venous system.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana201-blood-supply-21",
+      "text": "The thoracoacromial artery pierces the clavipectoral fascia to supply the anterior shoulder. Which of the following is NOT one of its four named branches?",
+      "options": [
+        "The subscapular branch",
+        "The pectoral branch",
+        "The deltoid branch",
+        "The acromial branch"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The subscapular branch",
+      "explanation": "The thoracoacromial artery divides into four branches: Clavicular, Pectoral, Acromial, and Deltoid (CPAD). The subscapular artery is a separate, distinct branch from the third part of the axillary artery.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana201-blood-supply-22",
+      "text": "The surgical neck of the humerus is encircled by two vessels that form an anastomotic ring. From which part of the axillary artery do these vessels arise?",
+      "options": [
+        "The first part",
+        "The second part",
+        "The third part",
+        "The continuation as the brachial artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The third part",
+      "explanation": "The anterior and posterior circumflex humeral arteries both branch from the third part of the axillary artery (distal to the pectoralis minor) and encircle the surgical neck.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana201-blood-supply-23",
+      "text": "The basilic vein transitions from the superficial to the deep venous system. At what anatomical level does it pierce the deep brachial fascia?",
+      "options": [
+        "At the level of the cubital fossa",
+        "At the inferior border of the teres major",
+        "Through the clavipectoral triangle",
+        "Approximately midway up the medial aspect of the arm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Approximately midway up the medial aspect of the arm",
+      "explanation": "The basilic vein ascends superficially on the medial side of the upper limb until roughly the middle of the arm, where it pierces the brachial fascia to travel deeply alongside the brachial artery.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana201-blood-supply-24",
+      "text": "The anterior interosseous artery descends deep in the forearm. Which nerve reliably accompanies it on the anterior surface of the interosseous membrane?",
+      "options": [
+        "The superficial branch of the radial nerve",
+        "The anterior interosseous nerve",
+        "The deep branch of the ulnar nerve",
+        "The recurrent branch of the median nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The anterior interosseous nerve",
+      "explanation": "The anterior interosseous artery (from the common interosseous artery) runs distally directly on the interosseous membrane, accompanied exactly by the anterior interosseous nerve (a branch of the median nerve).",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana201-blood-supply-25",
+      "text": "The superficial venous system of the hand includes the prominent dorsal venous network. Which vein originates from the lateral (radial) side of this network?",
+      "options": [
+        "The basilic vein",
+        "The median antebrachial vein",
+        "The cephalic vein",
+        "The median cubital vein"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The cephalic vein",
+      "explanation": "The cephalic vein arises from the radial (lateral) aspect of the dorsal venous network, while the basilic vein arises from the ulnar (medial) aspect.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana201-blood-supply-26",
+      "text": "Deep lymphatic vessels of the upper limb follow the deep arteries and veins. Which specific axillary lymph nodes do they primarily drain into?",
+      "options": [
+        "The humeral (lateral) nodes",
+        "The pectoral (anterior) nodes",
+        "The subscapular (posterior) nodes",
+        "The apical (subclavicular) nodes"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The humeral (lateral) nodes",
+      "explanation": "Deep lymphatic vessels accompanying the radial, ulnar, and brachial vessels drain directly into the humeral (lateral) group of the axillary lymph nodes, matching the deep drainage pattern.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana201-blood-supply-27",
+      "text": "The ulnar artery provides major perfusion to the medial forearm and hand. Through which anatomical structure does it enter the palm?",
+      "options": [
+        "The carpal tunnel, deep to the flexor retinaculum",
+        "The anatomical snuffbox, posterior to the scaphoid",
+        "The interosseous membrane, alongside the median nerve",
+        "The ulnar tunnel (Guyon's canal), superficial to the flexor retinaculum"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The ulnar tunnel (Guyon's canal), superficial to the flexor retinaculum",
+      "explanation": "The ulnar artery and ulnar nerve enter the hand by passing superficial to the main body of the flexor retinaculum, traveling through the fibro-osseous ulnar tunnel (Guyon's canal).",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana201-blood-supply-28",
+      "text": "The dorsal scapular artery often supplies the rhomboid muscles. When it does not arise directly from the third part of the subclavian artery, from which vessel does it typically branch?",
+      "options": [
+        "The subscapular artery",
+        "The transverse cervical artery",
+        "The lateral thoracic artery",
+        "The suprascapular artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The transverse cervical artery",
+      "explanation": "The dorsal scapular artery is highly variable. When it doesn't originate from the third part of the subclavian artery, it frequently arises as the deep branch of the transverse cervical artery (from the thyrocervical trunk).",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana201-blood-supply-29",
+      "text": "The axillary sheath is an extension of the prevertebral fascia. Which vascular structures does it completely enclose?",
+      "options": [
+        "The axillary artery and the axillary vein",
+        "The cephalic vein and the thoracoacromial artery",
+        "The basilic vein and the brachial artery",
+        "The lateral thoracic artery and the subclavian vein"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The axillary artery and the axillary vein",
+      "explanation": "The axillary sheath forms a tubular investment derived from the prevertebral layer of deep cervical fascia, wrapping around the major neurovascular bundle: the axillary artery, axillary vein, and the cords of the brachial plexus.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana201-blood-supply-30",
+      "text": "The deep palmar arch anastomoses with the superficial palmar arch. Which vessels branch directly from the deep palmar arch to supply the metacarpal region?",
+      "options": [
+        "The common palmar digital arteries",
+        "The proper palmar digital arteries",
+        "The dorsal metacarpal arteries",
+        "The palmar metacarpal arteries"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The palmar metacarpal arteries",
+      "explanation": "The deep palmar arch gives off the palmar metacarpal arteries, which run distally to join the common palmar digital arteries from the superficial arch.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana201-blood-supply-31",
+      "text": "The posterior interosseous artery supplies the extensor compartment of the forearm. How does it contribute to the peri-articular anastomosis of the elbow?",
+      "options": [
+        "By anastomosing directly with the radial recurrent artery",
+        "By forming the superior ulnar collateral artery",
+        "By giving off the interosseous recurrent artery",
+        "By connecting to the inferior ulnar collateral artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. By giving off the interosseous recurrent artery",
+      "explanation": "The posterior interosseous artery gives off the interosseous recurrent artery, which ascends posterior to the radioulnar joint to anastomose with the middle collateral branch of the profunda brachii.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana201-blood-supply-32",
+      "text": "The median nerve travels closely with the brachial artery in the arm. As they enter the cubital fossa, what is their anatomical relationship?",
+      "options": [
+        "The median nerve lies superficial to the bicipital aponeurosis.",
+        "The median nerve lies immediately medial to the brachial artery.",
+        "The median nerve lies immediately lateral to the brachial artery.",
+        "The median nerve spirals posterior to the brachial artery."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The median nerve lies immediately medial to the brachial artery.",
+      "explanation": "In the center of the cubital fossa, the contents from medial to lateral are the median nerve, the brachial artery, the biceps tendon, and the radial nerve. Thus, the nerve is immediately medial to the artery.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana201-blood-supply-33",
+      "text": "Superficial lymphatic vessels accompanying the cephalic vein typically bypass the basal axillary nodes. Where do they frequently terminate instead?",
+      "options": [
+        "The central axillary nodes",
+        "The apical axillary nodes or deltopectoral nodes",
+        "The superficial cervical lymph nodes",
+        "The parasternal lymph nodes"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The apical axillary nodes or deltopectoral nodes",
+      "explanation": "Lymphatics following the cephalic vein up the lateral arm bypass the pectoral, subscapular, humeral, and central groups, draining directly into the apical axillary nodes or the superficial deltopectoral nodes.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana201-blood-supply-34",
+      "text": "The brachial artery typically bifurcates at the apex of the cubital fossa. What are its two terminal branches?",
+      "options": [
+        "The radial and ulnar arteries",
+        "The anterior and posterior interosseous arteries",
+        "The profunda brachii and superior ulnar collateral arteries",
+        "The deep palmar and superficial palmar arches"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The radial and ulnar arteries",
+      "explanation": "The brachial artery typically terminates near the neck of the radius in the cubital fossa by bifurcating into the radial artery and the ulnar artery.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana201-blood-supply-35",
+      "text": "The left subclavian artery differs from the right subclavian artery based on its precise anatomical origin. Where does the left subclavian artery originate?",
+      "options": [
+        "The bifurcation of the brachiocephalic trunk",
+        "The ascending aorta, proximal to the coronary arteries",
+        "The arch of the aorta in the superior mediastinum",
+        "The descending thoracic aorta"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The arch of the aorta in the superior mediastinum",
+      "explanation": "While the right subclavian artery branches from the brachiocephalic trunk, the left subclavian artery is a direct branch arising from the arch of the aorta.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana201-blood-supply-36",
+      "text": "The pectoral (anterior) axillary nodes are clinically significant in breast cancer staging. What is their primary drainage territory?",
+      "options": [
+        "The deep musculature of the posterior neck",
+        "The lateral half of the upper limb",
+        "The skin of the lateral abdominal wall",
+        "The anterior thoracic wall and the majority of the breast"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The anterior thoracic wall and the majority of the breast",
+      "explanation": "The pectoral (anterior) lymph nodes lie along the lateral thoracic vessels and receive the vast majority of lymphatic drainage from the breast and anterior chest wall.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana201-blood-supply-37",
+      "text": "The posterior circumflex humeral artery travels with the axillary nerve. Which anatomical space does it traverse to reach the deltoid muscle?",
+      "options": [
+        "The triangular interval",
+        "The quadrangular space",
+        "The triangular space",
+        "The clavipectoral triangle"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The quadrangular space",
+      "explanation": "The posterior circumflex humeral artery passes backward through the quadrangular space, bounded by the teres minor, teres major, long head of the triceps, and the surgical neck of the humerus.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana201-blood-supply-38",
+      "text": "The superior ulnar collateral artery contributes to the elbow anastomosis. With which vessel does it directly anastomose posterior to the medial epicondyle?",
+      "options": [
+        "The anterior ulnar recurrent artery",
+        "The radial recurrent artery",
+        "The interosseous recurrent artery",
+        "The posterior ulnar recurrent artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The posterior ulnar recurrent artery",
+      "explanation": "The superior ulnar collateral artery descends with the ulnar nerve behind the medial epicondyle to anastomose with the ascending posterior ulnar recurrent artery.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana201-blood-supply-39",
+      "text": "The scaphoid bone is vulnerable to avascular necrosis following a fracture. Which artery provides its primary, retrograde blood supply?",
+      "options": [
+        "The radial artery",
+        "The ulnar artery",
+        "The anterior interosseous artery",
+        "The deep palmar arch"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The radial artery",
+      "explanation": "Small branches of the radial artery enter the distal pole of the scaphoid and travel proximally. A fracture across the waist of the bone disrupts this retrograde flow, starving the proximal pole of blood.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana201-blood-supply-40",
+      "text": "The subclavian lymphatic trunks return lymph to the venous system. How does the right subclavian trunk typically terminate?",
+      "options": [
+        "By draining directly into the thoracic duct",
+        "By emptying into the superior vena cava",
+        "By forming the right lymphatic duct or entering the right venous angle",
+        "By merging with the jugular lymphatic trunk to form the cisterna chyli"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. By forming the right lymphatic duct or entering the right venous angle",
+      "explanation": "The right subclavian lymphatic trunk drains into the right venous angle (the junction of the right internal jugular and right subclavian veins), often after joining with the right jugular and bronchomediastinal trunks to form the right lymphatic duct.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana201-blood-supply-41",
+      "text": "The lateral thoracic artery runs along the inferior border of the pectoralis minor. Which muscle does it primarily supply on the lateral chest wall?",
+      "options": [
+        "The subclavius",
+        "The latissimus dorsi",
+        "The teres major",
+        "The serratus anterior"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The serratus anterior",
+      "explanation": "The lateral thoracic artery descends along the lateral border of the pectoralis minor and provides significant blood supply to the serratus anterior, pectoral muscles, and lateral breast.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana201-blood-supply-42",
+      "text": "The deep veins of the upper limb, known as venae comitantes, utilize a specific mechanism to enhance venous return. What is this mechanism?",
+      "options": [
+        "Negative intrathoracic pressure pulling blood through the axillary sheath",
+        "The pulsatile expansion of the adjacent artery compressing the veins",
+        "Continuous peristaltic contractions of the venous smooth muscle",
+        "Gravity-assisted drainage via the superficial venous network"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The pulsatile expansion of the adjacent artery compressing the veins",
+      "explanation": "The paired deep veins closely flank their corresponding artery. The pulsatile expansion of the artery mechanically compresses the veins, which, combined with venous valves, actively drives blood proximally toward the heart.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana201-blood-supply-43",
+      "text": "The subscapular lymph nodes filter lymph from the posterior thoracic wall. Where are these nodes anatomically situated?",
+      "options": [
+        "Along the lateral thoracic artery, deep to the pectoralis major",
+        "At the apex of the axilla, posterior to the clavicle",
+        "Along the posterior axillary fold, adjacent to the subscapular vessels",
+        "In the deltopectoral groove, surrounding the cephalic vein"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Along the posterior axillary fold, adjacent to the subscapular vessels",
+      "explanation": "The subscapular (posterior) lymph nodes are situated along the posterior axillary fold and the subscapular blood vessels, receiving drainage from the back and scapular region.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana201-blood-supply-44",
+      "text": "The radial recurrent artery is an important collateral vessel at the elbow. From which artery does it originate?",
+      "options": [
+        "The radial artery",
+        "The brachial artery",
+        "The profunda brachii artery",
+        "The common interosseous artery"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The radial artery",
+      "explanation": "The radial recurrent artery branches from the proximal radial artery just below the elbow and ascends anterior to the lateral epicondyle to join the anastomosis.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana201-blood-supply-45",
+      "text": "The axillary vein consistently maintains a specific anatomical relationship with the axillary artery throughout the axilla. What is this relationship?",
+      "options": [
+        "It lies strictly superior to the artery.",
+        "It lies posterior to the artery.",
+        "It lies lateral to the artery.",
+        "It lies medial to the artery."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. It lies medial to the artery.",
+      "explanation": "Throughout its course within the axillary sheath, the axillary vein lies on the medial side of the axillary artery, closer to the chest wall.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana201-blood-supply-46",
+      "text": "The thoracodorsal artery is a continuation of the subscapular artery. Which major back muscle does it supply?",
+      "options": [
+        "The trapezius",
+        "The rhomboid major",
+        "The latissimus dorsi",
+        "The levator scapulae"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The latissimus dorsi",
+      "explanation": "The thoracodorsal artery continues inferiorly from the subscapular artery to provide the primary vascular supply to the large latissimus dorsi muscle.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana201-blood-supply-47",
+      "text": "The palmar carpal arch spans the anterior aspect of the wrist. Which vessels anastomose to form this arch?",
+      "options": [
+        "The palmar carpal branches of the radial and ulnar arteries",
+        "The deep palmar branch and the superficial palmar arch",
+        "The anterior and posterior interosseous arteries",
+        "The Princeps pollicis and Radialis indicis arteries"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The palmar carpal branches of the radial and ulnar arteries",
+      "explanation": "The palmar carpal arch is a small arterial network located across the anterior carpal bones, formed by the anastomosis of the palmar carpal branches from both the radial and ulnar arteries.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana201-blood-supply-48",
+      "text": "The circumflex scapular artery passes through the triangular space. Which anatomical region does it enter to join the scapular anastomosis?",
+      "options": [
+        "The quadrangular space",
+        "The infraspinous fossa",
+        "The supraspinous fossa",
+        "The subscapular fossa"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The infraspinous fossa",
+      "explanation": "After passing through the triangular space, the circumflex scapular artery enters the infraspinous fossa on the posterior aspect of the scapula to anastomose with the suprascapular artery.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana201-blood-supply-49",
+      "text": "The median antebrachial vein ascends the anterior aspect of the forearm. How does it typically terminate?",
+      "options": [
+        "By draining directly into the axillary vein",
+        "By joining the deep venae comitantes of the brachial artery",
+        "By draining into the median cubital, basilic, or cephalic vein",
+        "By emptying into the superficial palmar venous arch"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. By draining into the median cubital, basilic, or cephalic vein",
+      "explanation": "The median antebrachial vein is highly variable. It ascends the anterior forearm and terminates by joining the median cubital vein, the basilic vein, or the cephalic vein near the elbow.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana201-blood-supply-50",
+      "text": "A patient has a displaced supracondylar fracture of the humerus. Which artery is at the highest risk of laceration or compression in this specific injury?",
+      "options": [
+        "The profunda brachii artery",
+        "The brachial artery",
+        "The radial artery",
+        "The posterior interosseous artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The brachial artery",
+      "explanation": "The brachial artery courses centrally across the anterior aspect of the elbow joint. A supracondylar fracture, especially with posterolateral displacement of the distal fragment, places the artery (and median nerve) at high risk of injury.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 50
+    },
+    {
+      "id": "ana201-blood-supply-51",
+      "text": "The cubital lymph nodes are the first regional nodes to filter lymph from the medial hand and forearm. Where are they located?",
+      "options": [
+        "In the anatomical snuffbox",
+        "In the deltopectoral groove",
+        "At the apex of the axilla",
+        "In the superficial fascia, slightly proximal to the medial epicondyle"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. In the superficial fascia, slightly proximal to the medial epicondyle",
+      "explanation": "The cubital lymph nodes are located in the superficial fascia near the medial epicondyle of the humerus, shadowing the basilic vein as it ascends the arm.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 51
+    },
+    {
+      "id": "ana201-blood-supply-52",
+      "text": "The internal thoracic artery gives rise to several branches before it terminates. Which nerve crosses anterior to its proximal portion?",
+      "options": [
+        "The phrenic nerve",
+        "The vagus nerve",
+        "The long thoracic nerve",
+        "The thoracodorsal nerve"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The phrenic nerve",
+      "explanation": "The phrenic nerve descends into the superior mediastinum and typically crosses anterior to the proximal portion of the internal thoracic artery just below the subclavian artery.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 52
+    },
+    {
+      "id": "ana201-blood-supply-53",
+      "text": "The profunda brachii artery divides into two terminal branches above the lateral epicondyle. What is the branch that descends posterior to the lateral epicondyle?",
+      "options": [
+        "The radial collateral artery",
+        "The radial recurrent artery",
+        "The middle collateral artery",
+        "The interosseous recurrent artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The middle collateral artery",
+      "explanation": "The profunda brachii divides into the radial collateral artery (anterior to the epicondyle) and the middle collateral artery (descending posterior to the lateral epicondyle to join the interosseous recurrent artery).",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 53
+    },
+    {
+      "id": "ana201-blood-supply-54",
+      "text": "The superficial venous system of the hand empties primarily into the dorsal venous network. Which veins connect the palmar digital veins to this dorsal network?",
+      "options": [
+        "The intercapitular veins",
+        "The perforating veins",
+        "The venae comitantes",
+        "The palmar metacarpal veins"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The intercapitular veins",
+      "explanation": "Venous blood from the palmar aspects of the fingers flows dorsally through the intercapitular veins, passing between the metacarpal heads to reach the dorsal venous network.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 54
+    },
+    {
+      "id": "ana201-blood-supply-55",
+      "text": "The acromial network helps maintain perfusion to the superior shoulder. Which branch of the thyrocervical trunk contributes to this network?",
+      "options": [
+        "The transverse cervical artery",
+        "The suprascapular artery",
+        "The inferior thyroid artery",
+        "The dorsal scapular artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The suprascapular artery",
+      "explanation": "The acromial anastomotic network is formed by branches from the thoracoacromial artery, the posterior circumflex humeral artery, and the suprascapular artery (a branch of the thyrocervical trunk).",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 55
+    },
+    {
+      "id": "ana201-blood-supply-56",
+      "text": "The axillary artery is conventionally divided into three parts. How many branches typically arise from the third part of the axillary artery?",
+      "options": [
+        "One branch",
+        "Four branches",
+        "Two branches",
+        "Three branches"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Three branches",
+      "explanation": "The third part of the axillary artery (distal to the pectoralis minor) typically yields three branches: the subscapular artery, the anterior circumflex humeral artery, and the posterior circumflex humeral artery.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 56
+    },
+    {
+      "id": "ana201-blood-supply-57",
+      "text": "The superficial branch of the radial nerve is a purely sensory nerve in the forearm. Which artery does it run closely alongside in the middle third of the forearm?",
+      "options": [
+        "The radial artery",
+        "The ulnar artery",
+        "The anterior interosseous artery",
+        "The posterior interosseous artery"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The radial artery",
+      "explanation": "Under the cover of the brachioradialis muscle in the middle third of the forearm, the superficial branch of the radial nerve runs immediately lateral to the radial artery.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 57
+    },
+    {
+      "id": "ana201-blood-supply-58",
+      "text": "The anterior circumflex humeral artery anastomoses with the posterior circumflex humeral artery. What is its relationship to the long head of the biceps brachii tendon?",
+      "options": [
+        "It passes posterior to the tendon.",
+        "It pierces the tendon directly.",
+        "It passes deep to the tendon in the intertubercular sulcus.",
+        "It runs parallel and superficial to the tendon."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It passes deep to the tendon in the intertubercular sulcus.",
+      "explanation": "The anterior circumflex humeral artery runs horizontally around the surgical neck of the humerus, passing deep to the short head of the biceps and the long head of the biceps tendon within the intertubercular sulcus.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 58
+    },
+    {
+      "id": "ana201-blood-supply-59",
+      "text": "Lymphedema of the upper limb is a common complication of certain oncological treatments. What surgical procedure is most likely to cause this?",
+      "options": [
+        "Excision of a ganglion cyst in Guyon's canal",
+        "Repair of a ruptured biceps brachii tendon",
+        "Ligation of the superficial palmar arch",
+        "Axillary lymph node dissection"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Axillary lymph node dissection",
+      "explanation": "Axillary lymph node dissection (often performed for breast cancer staging and treatment) physically removes the primary filtration and transit pathways for upper limb lymph, frequently resulting in fluid accumulation (lymphedema).",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 59
+    },
+    {
+      "id": "ana201-blood-supply-60",
+      "text": "The deep palmar arch is situated deep in the hand. Which muscles does it rest directly upon?",
+      "options": [
+        "The lumbricals",
+        "The interosseous muscles and the bases of the metacarpals",
+        "The thenar eminence muscles",
+        "The flexor digitorum profundus tendons"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The interosseous muscles and the bases of the metacarpals",
+      "explanation": "The deep palmar arch lies in the deepest plane of the palm, resting directly on the bases of the metacarpal bones and the interosseous muscles, deep to the flexor tendons.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 60
+    },
+    {
+      "id": "ana201-blood-supply-61",
+      "text": "The primary nutrient artery of the humerus provides critical vascular supply to the bone marrow. From which artery does it typically originate?",
+      "options": [
+        "The brachial artery",
+        "The anterior circumflex humeral artery",
+        "The profunda brachii artery",
+        "The subscapular artery"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The brachial artery",
+      "explanation": "The main nutrient artery to the humerus usually branches directly from the brachial artery in the middle of the arm, entering the nutrient foramen on the anteromedial surface of the bone.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 61
+    },
+    {
+      "id": "ana201-blood-supply-62",
+      "text": "The dorsal carpal arch supplies the posterior aspect of the wrist. Which of the following is NOT a typical contributor to this arch?",
+      "options": [
+        "The dorsal carpal branch of the radial artery",
+        "The dorsal carpal branch of the ulnar artery",
+        "The anterior interosseous artery",
+        "The Princeps pollicis artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The Princeps pollicis artery",
+      "explanation": "The dorsal carpal arch is formed by the dorsal carpal branches of the radial and ulnar arteries, along with contributions from the anterior and posterior interosseous arteries. The Princeps pollicis artery arises deeper in the palm to supply the thumb.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 62
+    },
+    {
+      "id": "ana201-blood-supply-63",
+      "text": "Red, warm streaks ascending the medial aspect of the forearm from an infected finger indicate inflammation of which specific anatomical structures?",
+      "options": [
+        "The deep venae comitantes",
+        "The superficial lymphatic vessels",
+        "The cutaneous branches of the ulnar nerve",
+        "The palmar aponeurosis fibers"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The superficial lymphatic vessels",
+      "explanation": "The presentation of red, tender streaks along the skin tracking toward regional lymph nodes (lymphangitis) represents an infection spreading through the superficial lymphatic vessels.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 63
+    },
+    {
+      "id": "ana201-blood-supply-64",
+      "text": "The basilic vein merges with the paired brachial veins. What single, large vein is formed by this confluence at the lower border of the teres major?",
+      "options": [
+        "The subclavian vein",
+        "The cephalic vein",
+        "The axillary vein",
+        "The brachiocephalic vein"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The axillary vein",
+      "explanation": "The axillary vein is officially formed at the inferior border of the teres major muscle where the deep brachial veins merge with the basilic vein.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 64
+    },
+    {
+      "id": "ana201-blood-supply-65",
+      "text": "In the arm, the brachial artery lies in the medial bicipital groove. Which muscle lies immediately posterior to the artery in the distal half of the arm?",
+      "options": [
+        "The coracobrachialis",
+        "The long head of the triceps",
+        "The short head of the biceps",
+        "The brachialis"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The brachialis",
+      "explanation": "As the brachial artery descends into the distal half of the arm toward the cubital fossa, it rests directly on the anterior surface of the brachialis muscle.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 65
+    },
+    {
+      "id": "ana201-blood-supply-66",
+      "text": "The common palmar digital arteries bifurcate into the proper palmar digital arteries. Near what anatomical landmarks does this bifurcation occur?",
+      "options": [
+        "The proximal interphalangeal joints",
+        "The carpometacarpal joints",
+        "The web spaces between the digits",
+        "The flexor retinaculum"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The web spaces between the digits",
+      "explanation": "The common palmar digital arteries run distally toward the web spaces (clefts) between the fingers, where they split into the proper palmar digital arteries that supply the adjacent sides of the digits.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 66
+    },
+    {
+      "id": "ana201-blood-supply-67",
+      "text": "The ulnar artery courses through the forearm deep to the flexor carpi ulnaris. In the distal half of the forearm, which nerve lies immediately medial to it?",
+      "options": [
+        "The ulnar nerve",
+        "The median nerve",
+        "The anterior interosseous nerve",
+        "The superficial branch of the radial nerve"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The ulnar nerve",
+      "explanation": "In the distal half of the forearm, the ulnar nerve joins the ulnar artery, running immediately medial to the artery as they both travel toward the wrist.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 67
+    },
+    {
+      "id": "ana201-blood-supply-68",
+      "text": "The transverse cervical artery supplies the trapezius muscle. Which trunk does it originate from?",
+      "options": [
+        "The costocervical trunk",
+        "The thyrocervical trunk",
+        "The brachiocephalic trunk",
+        "The common interosseous trunk"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The thyrocervical trunk",
+      "explanation": "The transverse (superficial) cervical artery is one of the three primary branches of the thyrocervical trunk (along with the suprascapular and inferior thyroid arteries).",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 68
+    },
+    {
+      "id": "ana201-blood-supply-69",
+      "text": "The anatomical snuffbox is a distinct surface landmark on the lateral wrist. Which artery crosses the floor of this depression?",
+      "options": [
+        "The ulnar artery",
+        "The anterior interosseous artery",
+        "The superficial palmar branch",
+        "The radial artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The radial artery",
+      "explanation": "The radial artery leaves the anterior forearm, passing posteriorly across the floor of the anatomical snuffbox (overlying the scaphoid and trapezium) before entering the palm.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 69
+    },
+    {
+      "id": "ana201-blood-supply-70",
+      "text": "Complete occlusion of the brachial artery without adequate collateral flow can lead to necrosis of forearm flexors. What is this resultant fibrotic deformity called?",
+      "options": [
+        "Dupuytren's contracture",
+        "Volkmann's ischemic contracture",
+        "Carpal tunnel syndrome",
+        "Guyon's canal syndrome"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Volkmann's ischemic contracture",
+      "explanation": "Severe ischemia resulting from loss of brachial artery flow causes necrosis of the flexor muscles, which are then replaced by scar tissue, resulting in a permanent flexion contracture known as Volkmann's ischemic contracture.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 70
+    },
+    {
+      "id": "ana201-blood-supply-71",
+      "text": "Perforating veins are essential for proper venous hemodynamics in the upper limb. What is their primary function?",
+      "options": [
+        "To connect the cephalic vein directly to the basilic vein",
+        "To drain lymph fluid back into the venous system",
+        "To shunt blood from the superficial veins into the deep venae comitantes",
+        "To return blood from the deep palmar arch to the superficial palmar arch"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. To shunt blood from the superficial veins into the deep venae comitantes",
+      "explanation": "Perforating veins pierce the deep investing fascia to provide direct connections that allow venous blood to flow from the superficial venous system into the deep venous system.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 71
+    },
+    {
+      "id": "ana201-blood-supply-72",
+      "text": "Subclavian steal syndrome involves retrograde blood flow due to a proximal arterial stenosis. Which artery experiences this reversed flow?",
+      "options": [
+        "The vertebral artery",
+        "The internal thoracic artery",
+        "The suprascapular artery",
+        "The deep cervical artery"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The vertebral artery",
+      "explanation": "A stenosis of the proximal subclavian artery causes a pressure drop distally. To compensate during arm exertion, blood flows backward (retrograde) down the vertebral artery, stealing flow from the brain.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 72
+    },
+    {
+      "id": "ana201-blood-supply-73",
+      "text": "The supreme (highest) intercostal artery branches from the costocervical trunk. How many intercostal spaces does it typically supply?",
+      "options": [
+        "The first intercostal space only",
+        "The first and second intercostal spaces",
+        "The first, second, and third intercostal spaces",
+        "The anterior portions of the upper four intercostal spaces"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The first and second intercostal spaces",
+      "explanation": "The supreme intercostal artery descends anterior to the necks of the first two ribs and provides the posterior intercostal arteries for the first and second intercostal spaces.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 73
+    },
+    {
+      "id": "ana201-blood-supply-74",
+      "text": "The cephalic vein ascends the lateral aspect of the arm. Before piercing the clavipectoral fascia, it travels in a groove between which two muscles?",
+      "options": [
+        "The biceps brachii and brachialis",
+        "The triceps brachii and deltoid",
+        "The pectoralis minor and serratus anterior",
+        "The deltoid and pectoralis major"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The deltoid and pectoralis major",
+      "explanation": "The cephalic vein occupies the deltopectoral groove, a distinctive anatomical depression located between the adjacent borders of the deltoid and pectoralis major muscles.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 74
+    },
+    {
+      "id": "ana201-blood-supply-75",
+      "text": "The superficial palmar arch is the primary source of blood for the digits. Which of the following is NOT typically supplied directly by this arch?",
+      "options": [
+        "The thumb (first digit)",
+        "The medial side of the index finger",
+        "The lateral side of the little finger",
+        "The medial side of the ring finger"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The thumb (first digit)",
+      "explanation": "The superficial palmar arch primarily supplies the medial 3.5 digits. The thumb and the lateral side of the index finger are typically supplied by the Princeps pollicis and Radialis indicis arteries, which branch from the radial artery/deep arch.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 75
+    },
+    {
+      "id": "ana201-blood-supply-76",
+      "text": "The superficial and deep palmar venous arches accompany the arterial arches. Where does the deep palmar venous arch primarily drain?",
+      "options": [
+        "Into the cephalic vein",
+        "Into the basilic vein",
+        "Into the deep radial and ulnar venae comitantes",
+        "Into the intercapitular veins"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Into the deep radial and ulnar venae comitantes",
+      "explanation": "The deep palmar venous arch drains directly into the deep venous system of the forearm, specifically the paired radial and ulnar venae comitantes that accompany the radial and ulnar arteries.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 76
+    },
+    {
+      "id": "ana201-blood-supply-77",
+      "text": "The subscapular artery supplies the posterior shoulder. Before continuing as the thoracodorsal artery, what major branch does it give off?",
+      "options": [
+        "The suprascapular artery",
+        "The circumflex scapular artery",
+        "The posterior circumflex humeral artery",
+        "The dorsal scapular artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The circumflex scapular artery",
+      "explanation": "The subscapular artery is short; it quickly bifurcates into the circumflex scapular artery (which passes into the triangular space) and the thoracodorsal artery (which supplies the latissimus dorsi).",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 77
+    },
+    {
+      "id": "ana201-blood-supply-78",
+      "text": "The axillary vein begins at the lower border of the teres major. Where does it end, becoming the subclavian vein?",
+      "options": [
+        "At the lateral border of the first rib",
+        "At the medial border of the anterior scalene muscle",
+        "At the sternoclavicular joint",
+        "At the inferior border of the clavicle"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. At the lateral border of the first rib",
+      "explanation": "Just as the subclavian artery becomes the axillary artery at the lateral border of the first rib, the axillary vein changes its name to the subclavian vein at this exact same anatomical boundary.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 78
+    },
+    {
+      "id": "ana201-blood-supply-79",
+      "text": "The internal thoracic artery provides a major collateral pathway to the lower body. Which artery does its superior epigastric branch anastomose with?",
+      "options": [
+        "The musculophrenic artery",
+        "The external iliac artery",
+        "The deep circumflex iliac artery",
+        "The inferior epigastric artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The inferior epigastric artery",
+      "explanation": "The superior epigastric artery descends into the rectus sheath and forms a critical anastomosis with the inferior epigastric artery (a branch of the external iliac), providing collateral flow between the subclavian and iliac systems.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 79
+    },
+    {
+      "id": "ana201-blood-supply-80",
+      "text": "Deep lymphatic vessels of the upper limb drain lymph from joint capsules and muscles. Which nodes do these deep vessels typically reach first?",
+      "options": [
+        "The subscapular nodes",
+        "The central nodes",
+        "The humeral (lateral) nodes",
+        "The pectoral nodes"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The humeral (lateral) nodes",
+      "explanation": "Because they follow the deep veins (venae comitantes) up the limb, the deep lymphatic vessels drain into the humeral (lateral) axillary nodes, which are positioned alongside the axillary vein.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 80
+    },
+    {
+      "id": "ana201-blood-supply-81",
+      "text": "The right lymphatic duct drains a specific quadrant of the body. Where does it empty its lymphatic fluid into the venous system?",
+      "options": [
+        "The right venous angle (junction of right internal jugular and subclavian veins)",
+        "The superior vena cava directly",
+        "The right atrium of the heart",
+        "The right brachiocephalic vein, distal to the venous angle"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The right venous angle (junction of right internal jugular and subclavian veins)",
+      "explanation": "The right lymphatic duct (formed by the union of the right jugular, subclavian, and bronchomediastinal trunks) drains directly into the venous circulation at the right venous angle.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 81
+    },
+    {
+      "id": "ana201-blood-supply-82",
+      "text": "The Princeps pollicis artery provides the primary blood supply to the thumb. Which vessel does it branch from?",
+      "options": [
+        "The superficial palmar arch",
+        "The radial artery, as it turns into the deep palm",
+        "The deep palmar branch of the ulnar artery",
+        "The anterior interosseous artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The radial artery, as it turns into the deep palm",
+      "explanation": "After the radial artery passes between the two heads of the first dorsal interosseous muscle to enter the deep palm, it typically gives off the Princeps pollicis artery to supply the thumb.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 82
+    },
+    {
+      "id": "ana201-blood-supply-83",
+      "text": "The anterior interosseous artery supplies the deep flexor compartment. It pierces the interosseous membrane distally to anastomose with which artery?",
+      "options": [
+        "The radial recurrent artery",
+        "The ulnar recurrent artery",
+        "The posterior interosseous artery",
+        "The deep palmar arch"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The posterior interosseous artery",
+      "explanation": "The anterior interosseous artery runs distally, and near the pronator quadratus, it pierces the interosseous membrane to pass posteriorly and anastomose with the posterior interosseous artery.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 83
+    },
+    {
+      "id": "ana201-blood-supply-84",
+      "text": "The brachial artery passes through the arm and terminates in the cubital fossa. What structure forms the roof of the cubital fossa, covering the artery?",
+      "options": [
+        "The brachialis muscle",
+        "The pronator teres muscle",
+        "The supinator muscle",
+        "The skin, superficial fascia, deep fascia, and bicipital aponeurosis"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The skin, superficial fascia, deep fascia, and bicipital aponeurosis",
+      "explanation": "The roof of the cubital fossa is formed by the overlying skin, superficial fascia (containing the median cubital vein), deep fascia, and the protective bicipital aponeurosis extending from the biceps tendon.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 84
+    },
+    {
+      "id": "ana201-blood-supply-85",
+      "text": "The superior thoracic artery is a small vessel supplying the upper anterior chest wall. Which part of the axillary artery does it arise from?",
+      "options": [
+        "The third part",
+        "The second part",
+        "The first part",
+        "It arises from the thoracoacromial trunk"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The first part",
+      "explanation": "The superior thoracic artery is the sole branch of the first part of the axillary artery, which is located medial/proximal to the pectoralis minor muscle.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 85
+    },
+    {
+      "id": "ana201-blood-supply-86",
+      "text": "The ulnar artery passes through the ulnar tunnel (Guyon's canal). What structures form the medial and lateral boundaries of this fibro-osseous tunnel?",
+      "options": [
+        "The scaphoid and the trapezium",
+        "The lunate and the capitate",
+        "The radius and the ulna styloid processes",
+        "The pisiform and the hook of the hamate"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The pisiform and the hook of the hamate",
+      "explanation": "Guyon's canal is bounded medially by the pisiform bone and laterally by the hook of the hamate, with the palmar carpal ligament forming its roof.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 86
+    },
+    {
+      "id": "ana201-blood-supply-87",
+      "text": "Venous valves ensure unidirectional flow toward the heart. Why are they more numerous in the deep veins of the upper limb compared to the superficial veins?",
+      "options": [
+        "Deep veins rely on the muscle pump and arterial pulsations to move blood against gravity.",
+        "Superficial veins experience higher hydrostatic pressure.",
+        "Deep veins lack a smooth muscle tunica media entirely.",
+        "Superficial veins drain directly into the thoracic duct."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Deep veins rely on the muscle pump and arterial pulsations to move blood against gravity.",
+      "explanation": "Deep veins (venae comitantes) are heavily valved because they rely on the mechanical squeezing action of adjacent muscular contractions and arterial pulsations to push blood proximally against gravity.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 87
+    },
+    {
+      "id": "ana201-blood-supply-88",
+      "text": "The deep cervical artery arises from the costocervical trunk and ascends the neck. With which external carotid branch does it frequently anastomose?",
+      "options": [
+        "The superior thyroid artery",
+        "The occipital artery",
+        "The facial artery",
+        "The ascending pharyngeal artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The occipital artery",
+      "explanation": "The deep cervical artery ascends the posterior neck and forms a crucial collateral pathway by anastomosing with a descending branch of the occipital artery.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 88
+    },
+    {
+      "id": "ana201-blood-supply-89",
+      "text": "The suprascapular artery passes over the superior transverse scapular ligament. Which nerve passes inferior to this same ligament, through the suprascapular notch?",
+      "options": [
+        "The dorsal scapular nerve",
+        "The axillary nerve",
+        "The thoracodorsal nerve",
+        "The suprascapular nerve"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The suprascapular nerve",
+      "explanation": "At the suprascapular notch, the suprascapular artery typically passes over the superior transverse scapular ligament, while the suprascapular nerve passes under it (through the notch).",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 89
+    },
+    {
+      "id": "ana201-blood-supply-90",
+      "text": "The axillary sheath surrounds the major neurovascular structures of the axilla. From which fascial layer of the neck is it derived?",
+      "options": [
+        "The prevertebral fascia",
+        "The pretracheal fascia",
+        "The investing layer of deep cervical fascia",
+        "The clavipectoral fascia"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The prevertebral fascia",
+      "explanation": "The axillary sheath is a direct, tubular downward extension of the prevertebral layer of deep cervical fascia, carrying the brachial plexus and axillary vessels into the axilla.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 90
+    },
+    {
+      "id": "ana201-blood-supply-91",
+      "text": "The dorsal scapular artery typically arises from the third part of the subclavian artery. Which muscles of the shoulder girdle does it primarily supply?",
+      "options": [
+        "The supraspinatus and infraspinatus",
+        "The levator scapulae and rhomboids",
+        "The deltoid and teres minor",
+        "The serratus anterior and subscapularis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The levator scapulae and rhomboids",
+      "explanation": "The dorsal scapular artery descends along the medial border of the scapula, providing the primary arterial supply to the levator scapulae and both the rhomboid major and minor muscles.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 91
+    },
+    {
+      "id": "ana201-blood-supply-92",
+      "text": "The lateral thoracic artery supplies the lateral chest wall. Which of the following muscles is a major recipient of its blood supply?",
+      "options": [
+        "The subclavius",
+        "The latissimus dorsi",
+        "The serratus anterior",
+        "The rhomboid major"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The serratus anterior",
+      "explanation": "The lateral thoracic artery descends along the lateral border of the pectoralis minor and supplies the adjacent serratus anterior muscle, as well as the pectoral muscles and lateral breast.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 92
+    },
+    {
+      "id": "ana201-blood-supply-93",
+      "text": "The superficial lymphatic vessels of the upper limb eventually drain into the axillary nodes. The vessels accompanying the basilic vein drain first into which nodes?",
+      "options": [
+        "The deltopectoral nodes",
+        "The cubital nodes",
+        "The central axillary nodes",
+        "The apical axillary nodes"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The cubital nodes",
+      "explanation": "Before reaching the lateral axillary nodes, the lymphatic vessels that shadow the basilic vein along the medial forearm drain first into the cubital lymph nodes located near the medial epicondyle.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 93
+    },
+    {
+      "id": "ana201-blood-supply-94",
+      "text": "The radial artery descends the forearm and provides several branches. Which branch participates in the peri-articular anastomosis of the elbow?",
+      "options": [
+        "The dorsal carpal branch",
+        "The superficial palmar branch",
+        "The radial recurrent artery",
+        "The common interosseous artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The radial recurrent artery",
+      "explanation": "The radial recurrent artery branches off the proximal radial artery and ascends anterior to the lateral epicondyle to anastomose with the radial collateral artery.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 94
+    },
+    {
+      "id": "ana201-blood-supply-95",
+      "text": "The brachial veins are deep veins that accompany the brachial artery. How are they anatomically structured?",
+      "options": [
+        "As a single, large vein lying anterior to the artery",
+        "As a superficial plexus within the subcutaneous fat",
+        "As a dense network inside the medullary cavity of the humerus",
+        "As paired venae comitantes running on either side of the artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. As paired venae comitantes running on either side of the artery",
+      "explanation": "The deep venous system of the arm consists of venae comitantes—typically a pair of veins that flank the brachial artery, utilizing its pulsations to assist in driving venous return.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 95
+    },
+    {
+      "id": "ana201-blood-supply-96",
+      "text": "The central axillary lymph nodes are large nodes embedded in the axillary fat. Deep to which specific muscle are they located?",
+      "options": [
+        "Pectoralis minor",
+        "Pectoralis major",
+        "Serratus anterior",
+        "Subscapularis"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Pectoralis minor",
+      "explanation": "The central axillary nodes are centrally located within the axillary fat pad, positioned deep to the pectoralis minor muscle, near the second part of the axillary artery.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 96
+    },
+    {
+      "id": "ana201-blood-supply-97",
+      "text": "The posterior circumflex humeral artery anastomoses with the anterior circumflex humeral artery. Together, what bone structure do they encircle?",
+      "options": [
+        "The anatomical neck of the humerus",
+        "The shaft of the humerus",
+        "The surgical neck of the humerus",
+        "The lateral epicondyle of the humerus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The surgical neck of the humerus",
+      "explanation": "The anterior and posterior circumflex humeral arteries wrap around the surgical neck of the humerus to supply the shoulder joint and surrounding musculature, making them vulnerable in surgical neck fractures.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 97
+    },
+    {
+      "id": "ana201-blood-supply-98",
+      "text": "The superficial palmar arch is located in the hand. Which fascial structure lies immediately superficial to it, protecting the arch?",
+      "options": [
+        "The flexor retinaculum",
+        "The deep transverse metacarpal ligament",
+        "The extensor retinaculum",
+        "The palmar aponeurosis"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The palmar aponeurosis",
+      "explanation": "The superficial palmar arch is located in the central palm, immediately deep to the thick, protective palmar aponeurosis and superficial to the long flexor tendons.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 98
+    },
+    {
+      "id": "ana201-blood-supply-99",
+      "text": "The thoracoacromial artery arises from the second part of the axillary artery. What is its relationship to the pectoralis minor muscle?",
+      "options": [
+        "It arises posterior to the muscle.",
+        "It arises distal to the muscle.",
+        "It arises proximal to the muscle.",
+        "It pierces the muscle belly directly."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It arises posterior to the muscle.",
+      "explanation": "The second part of the axillary artery is defined as the segment lying posterior (deep) to the pectoralis minor muscle. Therefore, the thoracoacromial artery arises posterior to the muscle.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 99
+    },
+    {
+      "id": "ana201-blood-supply-100",
+      "text": "The lymphatic drainage of the breast is highly relevant to oncology. While the majority goes to the axillary nodes, some lymph drains medially. To which nodes?",
+      "options": [
+        "The deep cervical nodes",
+        "The parasternal nodes",
+        "The bronchomediastinal nodes",
+        "The superficial inguinal nodes"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The parasternal nodes",
+      "explanation": "While over 75% of breast lymph drains laterally to the axillary nodes (primarily the pectoral nodes), a significant portion drains medially into the parasternal lymph nodes located along the internal thoracic artery.",
+      "section": "Blood Supply of the Upper Limb",
+      "questionNumber": 100
+    }
+  ]
+}
