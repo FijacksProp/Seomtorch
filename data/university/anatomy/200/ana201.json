@@ -23,7 +23,7 @@
       "title": "Lower Limb",
       "topics": [
         { "id": "ll-bones", "title": "Bones of the Lower Limb", "status": "available", "dataFile": "data/university/anatomy/200/questions-ana201-bones-lower-limb.json" },
-        { "id": "ll-muscles", "title": "Muscles of the Lower Limb", "status": "coming-soon" },
+        { "id": "ll-muscles", "title": "Muscles of the Lower Limb", "status": "available", "dataFile": "data/university/anatomy/200/questions-ana201-muscles-lower-limb.json" },
         { "id": "ll-joints", "title": "Joints of the Lower Limb", "status": "available", "dataFile": "data/university/anatomy/200/questions-ana201-joints-lower-limb.json" },
         { "id": "ll-popliteal-fossa", "title": "Popliteal Fossa", "status": "coming-soon" },
         { "id": "ll-femoral-triangle", "title": "Femoral Triangle", "status": "coming-soon" },

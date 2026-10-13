@@ -1,0 +1,1510 @@
+{
+  "title": "Muscles of the Lower Limb",
+  "course": "ANA 201",
+  "totalQuestions": 100,
+  "sections": [
+    "Muscles of the Lower Limb (Q1-Q100)"
+  ],
+  "questions": [
+    {
+      "id": "ana201-ll-muscles-1",
+      "text": "Which of the following muscle pairs is most directly responsible for enabling a person to rise from a seated position by powerfully extending the hip joint?",
+      "options": [
+        "The gluteus maximus and the hamstrings",
+        "The gluteus medius and the gluteus minimus",
+        "The rectus femoris and the vastus lateralis",
+        "The iliopsoas and the pectineus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The gluteus maximus and the hamstrings",
+      "explanation": "The gluteus maximus is the primary and most powerful extensor of the hip, especially from a flexed position. The hamstring group acts as a synergist in hip extension.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana201-ll-muscles-2",
+      "text": "The deep posterior compartment of the leg contains muscles that function primarily to plantarflex and invert the foot. Which of the following muscles is NOT located within this specific anatomical compartment?",
+      "options": [
+        "Flexor hallucis longus",
+        "Tibialis posterior",
+        "Flexor digitorum longus",
+        "Peroneus (fibularis) brevis"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Peroneus (fibularis) brevis",
+      "explanation": "The peroneus (fibularis) brevis is located in the lateral compartment of the leg and functions to evert the foot, not in the deep posterior compartment.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana201-ll-muscles-3",
+      "text": "During the swing phase of normal gait, the foot must be held in dorsiflexion to clear the ground. A lesion to which specific nerve would result in \"foot drop,\" eliminating this ability?",
+      "options": [
+        "Deep fibular (peroneal) nerve",
+        "Superficial fibular (peroneal) nerve",
+        "Tibial nerve",
+        "Sural nerve"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Deep fibular (peroneal) nerve",
+      "explanation": "The deep fibular nerve innervates the muscles of the anterior compartment of the leg (e.g., tibialis anterior), which are the primary dorsiflexors. Damage causes foot drop.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana201-ll-muscles-4",
+      "text": "The quadriceps femoris group constitutes the main bulk of the anterior thigh. Which of its four muscular components is uniquely capable of acting across two joints?",
+      "options": [
+        "Vastus intermedius",
+        "Vastus lateralis",
+        "Rectus femoris",
+        "Vastus medialis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Rectus femoris",
+      "explanation": "While all four vastus muscles cross only the knee (causing extension), the rectus femoris originates from the AIIS of the pelvis, meaning it crosses both the hip (causing flexion) and the knee.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana201-ll-muscles-5",
+      "text": "The adductor magnus is a massive muscle composed of two distinct functional parts. Which nerve innervates the portion of this muscle that assists the hamstrings in hip extension?",
+      "options": [
+        "Obturator nerve",
+        "Femoral nerve",
+        "Sciatic nerve (tibial division)",
+        "Inferior gluteal nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Sciatic nerve (tibial division)",
+      "explanation": "The adductor magnus has an \"adductor part\" innervated by the obturator nerve and a \"hamstring part\" innervated by the tibial division of the sciatic nerve.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana201-ll-muscles-6",
+      "text": "Which intrinsic muscle of the foot is located in the most superficial (first) layer of the plantar aspect and is directly responsible for flexing the lateral four toes?",
+      "options": [
+        "Quadratus plantae",
+        "Flexor digitorum brevis",
+        "Lumbricals",
+        "Plantar interossei"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Flexor digitorum brevis",
+      "explanation": "The flexor digitorum brevis lies in the first plantar layer and flexes the proximal interphalangeal joints of digits 2-5.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana201-ll-muscles-7",
+      "text": "The tensor fasciae latae acts synergistically with the gluteus medius and minimus. What combined action at the hip joint do these muscles primarily facilitate?",
+      "options": [
+        "Extension and external rotation",
+        "Adduction and lateral rotation",
+        "Flexion and medial rotation",
+        "Abduction and medial rotation"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Abduction and medial rotation",
+      "explanation": "The tensor fasciae latae, along with the gluteus medius and minimus, primarily abducts the thigh and assists in medial (internal) rotation.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana201-ll-muscles-8",
+      "text": "The short head of the biceps femoris muscle is unique among the posterior thigh muscles because of its innervation. Which nerve supplies this specific muscle belly?",
+      "options": [
+        "The tibial division of the sciatic nerve",
+        "The femoral nerve",
+        "The common fibular (peroneal) division of the sciatic nerve",
+        "The obturator nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The common fibular (peroneal) division of the sciatic nerve",
+      "explanation": "While the other hamstring muscles (and the long head of the biceps) are innervated by the tibial division, the short head of the biceps femoris is innervated by the common fibular division of the sciatic nerve.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana201-ll-muscles-9",
+      "text": "The popliteus muscle plays a crucial biomechanical role at the beginning of knee flexion. What specific action does it perform on the tibia to \"unlock\" the extended knee?",
+      "options": [
+        "Anterior translation",
+        "Medial rotation",
+        "Lateral rotation",
+        "Posterior translation"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Medial rotation",
+      "explanation": "To initiate flexion from a fully extended (\"locked\") position, the popliteus contracts to medially rotate the tibia relative to the femur, unlocking the joint.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana201-ll-muscles-10",
+      "text": "Which of the following muscles of the anterior thigh compartment is the longest muscle in the human body, acting to flex, abduct, and laterally rotate the hip while also flexing the knee?",
+      "options": [
+        "Gracilis",
+        "Sartorius",
+        "Rectus femoris",
+        "Tensor fasciae latae"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Sartorius",
+      "explanation": "The sartorius, originating from the ASIS and inserting on the medial tibia, crosses the thigh obliquely. It flexes, abducts, and laterally rotates the hip, and flexes the knee.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana201-ll-muscles-11",
+      "text": "The iliotibial (IT) band is a thick, lateral fascial structure that provides crucial knee stabilization during activities like running. Which two muscles insert directly into the proximal IT band?",
+      "options": [
+        "Gluteus maximus and tensor fasciae latae",
+        "Gluteus medius and gluteus minimus",
+        "Vastus lateralis and biceps femoris",
+        "Rectus femoris and sartorius"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Gluteus maximus and tensor fasciae latae",
+      "explanation": "Both the gluteus maximus (superficial fibers) and the tensor fasciae latae insert into the iliotibial tract, allowing them to brace the knee laterally when the opposite foot is lifted.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana201-ll-muscles-12",
+      "text": "The triceps surae is composed of the gastrocnemius and the soleus. While both act to plantarflex the ankle, how do they differ functionally regarding the knee joint?",
+      "options": [
+        "Both muscles assist in knee extension.",
+        "The soleus flexes the knee, while the gastrocnemius has no action at the knee.",
+        "The gastrocnemius crosses the knee and assists in flexion, while the soleus does not cross the knee.",
+        "Both muscles act as powerful flexors of the knee."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The gastrocnemius crosses the knee and assists in flexion, while the soleus does not cross the knee.",
+      "explanation": "The gastrocnemius originates from the femoral condyles and crosses the knee, acting as a weak flexor. The soleus originates below the knee (tibia/fibula) and acts only on the ankle.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana201-ll-muscles-13",
+      "text": "The deep fascia of the thigh, which tightly encloses the musculature and prevents outward expansion during contraction (thus aiding venous return), is known anatomically as the:",
+      "options": [
+        "Crural fascia",
+        "Plantar aponeurosis",
+        "Fascia lata",
+        "Popliteal fascia"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Fascia lata",
+      "explanation": "The fascia lata is the dense, tough deep fascia that invests the entire thigh, continuous with the inguinal ligament superiorly and the crural fascia inferiorly.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana201-ll-muscles-14",
+      "text": "Which muscle, located in the medial compartment of the thigh, is often considered transitional because it is typically innervated by both the femoral and obturator nerves?",
+      "options": [
+        "Adductor longus",
+        "Gracilis",
+        "Adductor magnus",
+        "Pectineus"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Pectineus",
+      "explanation": "The pectineus muscle is situated between the anterior (femoral nerve) and medial (obturator nerve) compartments. It is primarily supplied by the femoral nerve but frequently receives a branch from the obturator.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana201-ll-muscles-15",
+      "text": "The intrinsic muscles of the foot are arranged in four layers on the plantar aspect. Which of the following muscles is located in the deepest (fourth) layer?",
+      "options": [
+        "Quadratus plantae",
+        "Flexor hallucis brevis",
+        "Dorsal interossei",
+        "Abductor hallucis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Dorsal interossei",
+      "explanation": "The fourth (deepest) layer of the plantar foot contains the dorsal and plantar interossei muscles. The abductor hallucis is in the first layer; the quadratus plantae is in the second; the flexor hallucis brevis is in the third.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana201-ll-muscles-16",
+      "text": "During a physical examination, a patient demonstrates a positive Trendelenburg sign (the pelvis drops on the unsupported side when standing on one leg). This indicates weakness or paralysis of which specific muscles?",
+      "options": [
+        "The gluteus maximus and hamstrings",
+        "The iliopsoas and rectus femoris",
+        "The gluteus medius and gluteus minimus",
+        "The adductor longus and brevis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The gluteus medius and gluteus minimus",
+      "explanation": "The gluteus medius and minimus (innervated by the superior gluteal nerve) abduct the hip. When standing on one leg, they contract to keep the pelvis level. If they are weak, the opposite side of the pelvis drops.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana201-ll-muscles-17",
+      "text": "The tendons of the muscles in the lateral compartment of the leg pass posterior to the lateral malleolus. What is the primary combined action of these muscles on the foot?",
+      "options": [
+        "Dorsiflexion and inversion",
+        "Plantarflexion and eversion",
+        "Dorsiflexion and eversion",
+        "Plantarflexion and inversion"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Plantarflexion and eversion",
+      "explanation": "The fibularis (peroneus) longus and brevis reside in the lateral compartment. Because their tendons pass behind the lateral malleolus, their contraction pulls the foot down (plantarflexion) and out (eversion).",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana201-ll-muscles-18",
+      "text": "Which muscle of the anterior leg compartment is responsible for extending the great toe, while simultaneously assisting in dorsiflexion of the ankle?",
+      "options": [
+        "Extensor digitorum longus",
+        "Tibialis anterior",
+        "Fibularis tertius",
+        "Extensor hallucis longus"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Extensor hallucis longus",
+      "explanation": "The extensor hallucis longus specifically targets the great toe (hallux) for extension and, because it crosses the anterior ankle joint, it also aids in dorsiflexion.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana201-ll-muscles-19",
+      "text": "The deep posterior compartment of the leg contains three long muscles. Which of these muscles has its tendon cross beneath the others in the foot to insert on the bases of the distal phalanges of digits 2-5?",
+      "options": [
+        "Tibialis posterior",
+        "Popliteus",
+        "Flexor digitorum longus",
+        "Flexor hallucis longus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Flexor digitorum longus",
+      "explanation": "The flexor digitorum longus descends the medial leg, passes behind the medial malleolus, and its tendon splits to insert on the distal phalanges of the lateral four toes.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana201-ll-muscles-20",
+      "text": "The obturator nerve provides motor innervation primarily to the medial compartment of the thigh. Which of the following muscles is NOT supplied by this nerve?",
+      "options": [
+        "Adductor longus",
+        "Gracilis",
+        "Adductor brevis",
+        "Sartorius"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Sartorius",
+      "explanation": "The sartorius muscle is located in the anterior compartment of the thigh and is innervated by the femoral nerve, not the obturator nerve.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana201-ll-muscles-21",
+      "text": "The piriformis muscle is a key anatomical landmark in the gluteal region. Which specific action does it perform, and what major nerve typically exits the pelvis immediately inferior to it?",
+      "options": [
+        "Medial rotation of the hip; Femoral nerve",
+        "Lateral rotation of the hip; Sciatic nerve",
+        "Extension of the hip; Superior gluteal nerve",
+        "Adduction of the hip; Obturator nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Lateral rotation of the hip; Sciatic nerve",
+      "explanation": "The piriformis is a lateral rotator of the hip. It is a critical landmark because the massive sciatic nerve usually emerges from the greater sciatic foramen just below its inferior border.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana201-ll-muscles-22",
+      "text": "Which small intrinsic muscle of the foot is situated on the dorsal aspect, rather than the plantar aspect, and acts to extend the proximal phalanges of the toes?",
+      "options": [
+        "Quadratus plantae",
+        "Flexor digitorum brevis",
+        "Extensor digitorum brevis",
+        "Lumbricals"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Extensor digitorum brevis",
+      "explanation": "The extensor digitorum brevis (and extensor hallucis brevis) are the only intrinsic muscles located on the dorsum of the foot, assisting the long extensors.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana201-ll-muscles-23",
+      "text": "The gracilis is the most superficial muscle of the medial thigh compartment. What makes its anatomical mechanics unique compared to the other adductor muscles?",
+      "options": [
+        "It is the only adductor that is innervated by the sciatic nerve.",
+        "It is the only adductor that does not attach to the pubis.",
+        "It is the only muscle in the adductor group that crosses the knee joint.",
+        "It acts primarily as an extensor of the hip rather than an adductor."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It is the only muscle in the adductor group that crosses the knee joint.",
+      "explanation": "While the other adductors (longus, brevis, magnus) insert on the femur, the gracilis descends to insert on the medial tibia, thus crossing and acting upon both the hip and knee joints.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana201-ll-muscles-24",
+      "text": "Inversion of the foot relies on the synergistic action of two muscles that cross the ankle joint medially. Which pair of muscles is primarily responsible for this movement?",
+      "options": [
+        "Fibularis longus and fibularis brevis",
+        "Tibialis anterior and tibialis posterior",
+        "Gastrocnemius and soleus",
+        "Extensor digitorum longus and flexor digitorum longus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Tibialis anterior and tibialis posterior",
+      "explanation": "The tibialis anterior (from the anterior compartment) and the tibialis posterior (from the deep posterior compartment) both insert medially on the foot. Their combined action strongly inverts the foot.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana201-ll-muscles-25",
+      "text": "The lumbrical muscles of the foot originate from the tendons of the flexor digitorum longus. What is their specific action on the toes?",
+      "options": [
+        "Extension of the metatarsophalangeal (MTP) joints and flexion of the interphalangeal (IP) joints",
+        "Abduction of the MTP joints",
+        "Flexion of the metatarsophalangeal (MTP) joints and extension of the interphalangeal (IP) joints",
+        "Adduction of all five toes toward the midline"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Flexion of the metatarsophalangeal (MTP) joints and extension of the interphalangeal (IP) joints",
+      "explanation": "Similar to their counterparts in the hand, the foot lumbricals flex the MTP joints while simultaneously extending the IP joints via their attachment to the extensor expansions.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana201-ll-muscles-26",
+      "text": "The iliopsoas is the most powerful flexor of the hip. Where does its combined tendon definitively insert on the femur?",
+      "options": [
+        "Greater trochanter",
+        "Lesser trochanter",
+        "Linea aspera",
+        "Intertrochanteric crest"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Lesser trochanter",
+      "explanation": "The iliacus and psoas major muscles merge to form the iliopsoas tendon, which passes deep to the inguinal ligament to insert onto the lesser trochanter of the femur.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana201-ll-muscles-27",
+      "text": "Which muscle of the anterior leg compartment is typically absent in a small percentage of the population and acts as a weak dorsiflexor and evertor of the foot?",
+      "options": [
+        "Extensor hallucis longus",
+        "Tibialis anterior",
+        "Fibularis (peroneus) tertius",
+        "Extensor digitorum longus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Fibularis (peroneus) tertius",
+      "explanation": "The fibularis tertius is an inconsistent muscle (often considered a separated part of the extensor digitorum longus) that inserts on the 5th metatarsal to assist in dorsiflexion and eversion.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana201-ll-muscles-28",
+      "text": "The semimembranosus and semitendinosus muscles form the medial border of the upper popliteal fossa. Which of these muscles is characterized by a long, cord-like tendon that forms part of the pes anserinus?",
+      "options": [
+        "The semimembranosus",
+        "The semitendinosus",
+        "Both have identical, broad aponeurotic tendons.",
+        "Neither; the pes anserinus is formed entirely by the biceps femoris."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The semitendinosus",
+      "explanation": "The semitendinosus is named for its exceptionally long, cord-like tendon, which inserts onto the medial tibia alongside the sartorius and gracilis tendons to form the pes anserinus. The semimembranosus has a broad, membranous tendon.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana201-ll-muscles-29",
+      "text": "A runner presents with sharp pain on the lateral aspect of the knee during the stance phase of running. The pain is caused by friction of a thickened fascial band snapping over the lateral femoral epicondyle. Which fascial structure is involved?",
+      "options": [
+        "Crural fascia",
+        "Popliteal fascia",
+        "Iliotibial tract (band)",
+        "Plantar fascia"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Iliotibial tract (band)",
+      "explanation": "The iliotibial tract is a thickened lateral band of the fascia lata. Iliotibial band syndrome occurs when this tight band repeatedly rubs against the lateral femoral epicondyle during knee flexion/extension.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana201-ll-muscles-30",
+      "text": "The superficial fibular (peroneal) nerve provides motor innervation to the lateral compartment of the leg. What sensory deficit would result from an isolated lesion to this nerve?",
+      "options": [
+        "Loss of sensation on the plantar surface of the heel",
+        "Loss of sensation between the first and second toes only",
+        "Loss of sensation over the medial malleolus",
+        "Loss of sensation over the majority of the dorsum of the foot"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Loss of sensation over the majority of the dorsum of the foot",
+      "explanation": "The superficial fibular nerve provides motor supply to the fibularis muscles and cutaneous sensory innervation to the skin over the anterolateral leg and the majority of the dorsum of the foot.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana201-ll-muscles-31",
+      "text": "Which muscle of the deep posterior leg compartment is crucial for maintaining the medial longitudinal arch of the foot during the stance phase of walking?",
+      "options": [
+        "Flexor digitorum longus",
+        "Tibialis posterior",
+        "Popliteus",
+        "Plantaris"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Tibialis posterior",
+      "explanation": "The tibialis posterior tendon passes behind the medial malleolus and inserts broadly beneath the midfoot, acting as a dynamic \"sling\" that actively supports the medial longitudinal arch.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana201-ll-muscles-32",
+      "text": "The superior gluteal nerve innervates three specific muscles. Which of the following correctly lists these muscles?",
+      "options": [
+        "Gluteus maximus, piriformis, and quadratus femoris",
+        "Gluteus medius, gluteus minimus, and tensor fasciae latae",
+        "Obturator internus, superior gemellus, and inferior gemellus",
+        "Pectineus, gracilis, and adductor longus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Gluteus medius, gluteus minimus, and tensor fasciae latae",
+      "explanation": "The superior gluteal nerve supplies the muscles responsible for hip abduction and medial rotation: the gluteus medius, the gluteus minimus, and the tensor fasciae latae.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana201-ll-muscles-33",
+      "text": "During a surgical approach to the anterior thigh, a physician must be careful of the femoral nerve. Which of the following muscles is NOT supplied by the femoral nerve?",
+      "options": [
+        "Vastus lateralis",
+        "Rectus femoris",
+        "Sartorius",
+        "Tensor fasciae latae"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Tensor fasciae latae",
+      "explanation": "The tensor fasciae latae is located laterally and is innervated by the superior gluteal nerve. The femoral nerve supplies the anterior compartment muscles (quadriceps and sartorius).",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana201-ll-muscles-34",
+      "text": "The deep fascia of the leg is called the crural fascia. It sends septa inward to attach to the bones, forming compartments. Which two bones does it firmly bind together?",
+      "options": [
+        "The femur and the tibia",
+        "The tibia and the fibula",
+        "The talus and the calcaneus",
+        "The patella and the tibia"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The tibia and the fibula",
+      "explanation": "The crural fascia surrounds the leg and sends intermuscular septa inward to attach firmly to the anterior and posterior aspects of the fibula and the anterior border of the tibia.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana201-ll-muscles-35",
+      "text": "The quadratus plantae (flexor accessory) muscle is located in the second layer of the foot. What is its unique biomechanical function?",
+      "options": [
+        "It independently extends the lateral four toes.",
+        "It acts as the primary abductor of the great toe.",
+        "It corrects the oblique angle of pull of the flexor digitorum longus tendon.",
+        "It forms the transverse arch of the midfoot."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It corrects the oblique angle of pull of the flexor digitorum longus tendon.",
+      "explanation": "The flexor digitorum longus tendon enters the foot at an oblique angle. The quadratus plantae inserts into this tendon, pulling it straight back so the toes flex parallel to the long axis of the foot.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana201-ll-muscles-36",
+      "text": "The sciatic nerve typically bifurcates into the tibial and common fibular (peroneal) nerves. Where does this bifurcation most commonly occur anatomically?",
+      "options": [
+        "Inside the greater sciatic foramen",
+        "At the level of the greater trochanter",
+        "In the lower third of the posterior thigh, just proximal to the popliteal fossa",
+        "Immediately inferior to the piriformis muscle"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. In the lower third of the posterior thigh, just proximal to the popliteal fossa",
+      "explanation": "While variation exists, the sciatic nerve typically runs down the posterior thigh as a single bundle and bifurcates into its two terminal branches just superior to the popliteal fossa.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana201-ll-muscles-37",
+      "text": "Which group of intrinsic foot muscles is responsible for adducting the third, fourth, and fifth toes toward the midline (second toe)?",
+      "options": [
+        "Dorsal interossei",
+        "Lumbricals",
+        "Plantar interossei",
+        "Flexor digitorum brevis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Plantar interossei",
+      "explanation": "The three plantar interossei are unipennate muscles that adduce (PAD: Plantar ADduct) the lateral three toes toward the anatomical axis of the foot, which runs through the second toe.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana201-ll-muscles-38",
+      "text": "Which of the following muscles forms the inferomedial boundary of the popliteal fossa?",
+      "options": [
+        "Semitendinosus",
+        "Medial head of the gastrocnemius",
+        "Biceps femoris",
+        "Lateral head of the gastrocnemius"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Medial head of the gastrocnemius",
+      "explanation": "The popliteal fossa is a diamond-shaped space. Its inferior boundaries are formed by the medial and lateral heads of the gastrocnemius muscle. The medial head forms the inferomedial border.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana201-ll-muscles-39",
+      "text": "A patient sustains a deep laceration to the anterior compartment of the leg, severing the deep fibular nerve. Which of the following movements would be completely lost?",
+      "options": [
+        "Plantarflexion of the ankle",
+        "Eversion of the foot",
+        "Dorsiflexion of the ankle",
+        "Inversion of the foot"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Dorsiflexion of the ankle",
+      "explanation": "The deep fibular nerve supplies the anterior compartment muscles (tibialis anterior, extensor digitorum longus, extensor hallucis longus), which are the sole dorsiflexors of the ankle. Complete severing results in foot drop.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana201-ll-muscles-40",
+      "text": "The soleus muscle lies deep to the gastrocnemius. Which of the following accurately describes the anatomical origin of the soleus?",
+      "options": [
+        "The medial and lateral condyles of the femur",
+        "The posterior surface of the head and shaft of the fibula, and the soleal line of the tibia",
+        "The interosseous membrane only",
+        "The lateral epicondyle of the femur"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The posterior surface of the head and shaft of the fibula, and the soleal line of the tibia",
+      "explanation": "Unlike the gastrocnemius, which originates above the knee, the soleus originates below the knee from a horse-shoe shaped attachment along the posterior fibula, the tendinous arch, and the soleal line of the tibia.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana201-ll-muscles-41",
+      "text": "The adductor canal (Hunter's canal) is an aponeurotic tunnel in the middle third of the thigh. Which muscle forms the anterolateral boundary of this canal?",
+      "options": [
+        "Sartorius",
+        "Adductor longus",
+        "Vastus medialis",
+        "Rectus femoris"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Vastus medialis",
+      "explanation": "The adductor canal is bounded anterolaterally by the vastus medialis, posteriorly by the adductor longus/magnus, and covered medially (the roof) by the sartorius.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana201-ll-muscles-42",
+      "text": "The superficial venous system of the lower limb is crucial clinically. The small (short) saphenous vein begins on the lateral side of the foot. Where does it typically terminate?",
+      "options": [
+        "It empties into the femoral vein at the saphenous opening.",
+        "It drains into the great saphenous vein near the medial malleolus.",
+        "It pierces the popliteal fascia to empty into the popliteal vein.",
+        "It runs up the anterior leg to join the anterior tibial vein."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It pierces the popliteal fascia to empty into the popliteal vein.",
+      "explanation": "The small saphenous vein ascends the posterior aspect of the calf and pierces the deep fascia covering the popliteal fossa to drain directly into the deep popliteal vein.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana201-ll-muscles-43",
+      "text": "The flexor hallucis longus (FHL) tendon must pass from the lateral side of the leg (fibula origin) to the medial side of the foot (great toe). Where does it cross deep to the flexor digitorum longus tendon?",
+      "options": [
+        "In the popliteal fossa",
+        "Beneath the flexor retinaculum at the ankle",
+        "In the sole of the foot (the plantar surface)",
+        "It does not cross; they run completely parallel."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. In the sole of the foot (the plantar surface)",
+      "explanation": "The FHL tendon originates laterally on the fibula and the FDL originates medially on the tibia. They cross in the sole of the foot, where the FHL tendon passes deep to (superior to) the FDL tendon.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana201-ll-muscles-44",
+      "text": "The obturator internus muscle exits the pelvis through the lesser sciatic foramen. Which two small muscles immediately flank its tendon above and below as it inserts onto the greater trochanter?",
+      "options": [
+        "Gluteus medius and gluteus minimus",
+        "Superior gemellus and inferior gemellus",
+        "Piriformis and quadratus femoris",
+        "Pectineus and gracilis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Superior gemellus and inferior gemellus",
+      "explanation": "As the tendon of the obturator internus turns around the lesser sciatic notch, it is joined by the superior gemellus (above) and the inferior gemellus (below), which assist in lateral rotation.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana201-ll-muscles-45",
+      "text": "The plantaris muscle has a small belly and an exceptionally long, thin tendon. Where does this muscle originate?",
+      "options": [
+        "The medial condyle of the tibia",
+        "The posterior surface of the calcaneus",
+        "The lateral supracondylar line of the femur",
+        "The interosseous membrane"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The lateral supracondylar line of the femur",
+      "explanation": "The plantaris is a vestigial-like muscle that originates above the lateral head of the gastrocnemius on the lateral supracondylar line of the femur and inserts on the calcaneus.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana201-ll-muscles-46",
+      "text": "Which intrinsic muscle of the foot features two heads (oblique and transverse) that help form the figure \"7\" configuration in the third plantar layer, acting to adduct the great toe?",
+      "options": [
+        "Abductor hallucis",
+        "Flexor hallucis brevis",
+        "Adductor hallucis",
+        "Quadratus plantae"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Adductor hallucis",
+      "explanation": "The adductor hallucis has an oblique head and a transverse head that converge to insert on the lateral base of the proximal phalanx of the great toe, functioning to adduct it.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana201-ll-muscles-47",
+      "text": "Compartment syndrome is a surgical emergency caused by increased pressure within a closed fascial space. In the leg, which compartment is most frequently affected due to its tight, unyielding fascial borders?",
+      "options": [
+        "The anterior compartment",
+        "The lateral compartment",
+        "The superficial posterior compartment",
+        "The deep posterior compartment"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The anterior compartment",
+      "explanation": "The anterior compartment is tightly bound by the tibia, fibula, interosseous membrane, and very dense, unyielding crural fascia, making it highly susceptible to acute compartment syndrome.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana201-ll-muscles-48",
+      "text": "The fibularis (peroneus) longus and brevis muscles evert the foot. Which nerve provides their motor innervation?",
+      "options": [
+        "Deep fibular nerve",
+        "Sural nerve",
+        "Superficial fibular nerve",
+        "Tibial nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Superficial fibular nerve",
+      "explanation": "The superficial fibular nerve supplies the muscles of the lateral compartment (fibularis longus and brevis), which are responsible for foot eversion.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana201-ll-muscles-49",
+      "text": "The medial plantar nerve is a terminal branch of the tibial nerve. It provides motor supply to several intrinsic foot muscles. Which group is analogous to the median nerve distribution in the hand?",
+      "options": [
+        "Adductor hallucis, dorsal interossei, and quadratus plantae",
+        "Abductor hallucis, flexor digitorum brevis, flexor hallucis brevis, and the first lumbrical",
+        "All four lumbricals and all interossei",
+        "Flexor digiti minimi brevis and abductor digiti minimi"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Abductor hallucis, flexor digitorum brevis, flexor hallucis brevis, and the first lumbrical",
+      "explanation": "The medial plantar nerve supplies the skin of the medial 3.5 toes and four specific muscles: Abductor hallucis, Flexor digitorum brevis, Flexor hallucis brevis, and the 1st lumbrical. (This mirrors the median nerve in the hand).",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana201-ll-muscles-50",
+      "text": "The great saphenous vein ascends the medial aspect of the leg and thigh. Where does it terminate by emptying into the femoral vein?",
+      "options": [
+        "At the adductor hiatus",
+        "In the popliteal fossa",
+        "Through the saphenous opening in the fascia lata",
+        "Deep to the inguinal ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Through the saphenous opening in the fascia lata",
+      "explanation": "The great saphenous vein passes through a gap in the fascia lata called the saphenous opening (fossa ovalis) located in the femoral triangle, where it drains into the femoral vein.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 50
+    },
+    {
+      "id": "ana201-ll-muscles-51",
+      "text": "The hamstring muscles originate from the ischial tuberosity, with one exception. Which part of the hamstring complex does NOT originate from the ischial tuberosity?",
+      "options": [
+        "The semitendinosus",
+        "The semimembranosus",
+        "The long head of the biceps femoris",
+        "The short head of the biceps femoris"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The short head of the biceps femoris",
+      "explanation": "The short head of the biceps femoris originates from the linea aspera and lateral supracondylar line of the femur, not the ischial tuberosity.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 51
+    },
+    {
+      "id": "ana201-ll-muscles-52",
+      "text": "The femoral triangle is a crucial anatomical region in the upper thigh. Which muscle forms the lateral boundary of this triangle?",
+      "options": [
+        "Adductor longus",
+        "Pectineus",
+        "Sartorius",
+        "Rectus femoris"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Sartorius",
+      "explanation": "The femoral triangle is bounded superiorly by the inguinal ligament, medially by the medial border of the adductor longus, and laterally by the medial border of the sartorius muscle.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 52
+    },
+    {
+      "id": "ana201-ll-muscles-53",
+      "text": "During a deep dissection of the gluteal region, the sciatic nerve is observed emerging from the greater sciatic foramen. Which muscle lies immediately superficial to the nerve as it descends the posterior thigh?",
+      "options": [
+        "Gluteus medius",
+        "Long head of the biceps femoris",
+        "Adductor magnus",
+        "Semimembranosus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Long head of the biceps femoris",
+      "explanation": "After emerging from under the gluteus maximus, the sciatic nerve descends the posterior thigh resting on the adductor magnus, and it is crossed superficially by the long head of the biceps femoris.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 53
+    },
+    {
+      "id": "ana201-ll-muscles-54",
+      "text": "The extensor retinaculum at the ankle is divided into superior and inferior bands. The inferior extensor retinaculum is Y-shaped. Which specific bone does its \"stem\" attach to laterally?",
+      "options": [
+        "Lateral malleolus of the fibula",
+        "Head of the talus",
+        "Upper surface of the calcaneus",
+        "Cuboid bone"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Upper surface of the calcaneus",
+      "explanation": "The Y-shaped inferior extensor retinaculum has a strong lateral stem that attaches to the upper, anterior surface of the calcaneus, binding down the extensor tendons.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 54
+    },
+    {
+      "id": "ana201-ll-muscles-55",
+      "text": "The primary actions of the gluteus medius and minimus are abduction and medial rotation of the hip. In which functional scenario are these muscles most critically active?",
+      "options": [
+        "Pushing off during a sprint",
+        "Maintaining a level pelvis when the opposite foot is lifted off the ground",
+        "Medially rotating the leg to kick a soccer ball",
+        "Preventing the torso from falling forward during descent"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Maintaining a level pelvis when the opposite foot is lifted off the ground",
+      "explanation": "During the stance phase of walking, the gluteus medius and minimus of the supporting leg contract powerfully to prevent the pelvis from dropping on the unsupported (swinging) side.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 55
+    },
+    {
+      "id": "ana201-ll-muscles-56",
+      "text": "The sural nerve is a cutaneous nerve formed by contributions from both the tibial and common fibular nerves. Which area of the lower limb does it primarily supply with sensation?",
+      "options": [
+        "The medial aspect of the calf and medial malleolus",
+        "The anterior aspect of the lower leg",
+        "The posterolateral aspect of the lower leg and lateral border of the foot",
+        "The plantar surface of the heel"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The posterolateral aspect of the lower leg and lateral border of the foot",
+      "explanation": "The sural nerve travels down the posterolateral calf alongside the small saphenous vein, supplying sensation to the lateral and posterior lower leg and the lateral margin of the foot.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 56
+    },
+    {
+      "id": "ana201-ll-muscles-57",
+      "text": "The deep fascia of the foot is vastly thickened centrally to form the plantar aponeurosis. What is the primary biomechanical function of this strong fascial structure?",
+      "options": [
+        "To provide a cushion against ground impact",
+        "To act as a dynamic tie-rod that supports the longitudinal arches of the foot",
+        "To pull the toes into extension during the push-off phase of gait",
+        "To completely encapsulate and compress the plantar arteries"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. To act as a dynamic tie-rod that supports the longitudinal arches of the foot",
+      "explanation": "The plantar aponeurosis extends from the calcaneus to the phalanges, acting as a crucial passive tie-rod that maintains the tension of the longitudinal arches, especially during weight-bearing.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 57
+    },
+    {
+      "id": "ana201-ll-muscles-58",
+      "text": "Which of the following muscles is a powerful adductor of the thigh that also possesses a distinct \"hamstring part\" capable of hip extension?",
+      "options": [
+        "Pectineus",
+        "Adductor longus",
+        "Adductor brevis",
+        "Adductor magnus"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Adductor magnus",
+      "explanation": "The adductor magnus is the largest medial thigh muscle. It has an adductor part (obturator nerve) and a hamstring part originating from the ischial tuberosity (sciatic nerve) that extends the hip.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 58
+    },
+    {
+      "id": "ana201-ll-muscles-59",
+      "text": "The muscles of the anterior compartment of the leg are enveloped by a tight fascial sheath. Which artery provides the primary blood supply to these muscles?",
+      "options": [
+        "Anterior tibial artery",
+        "Posterior tibial artery",
+        "Fibular (peroneal) artery",
+        "Dorsalis pedis artery"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Anterior tibial artery",
+      "explanation": "The anterior tibial artery passes through the interosseous membrane to enter the anterior compartment, providing the sole arterial supply to the dorsiflexor muscles.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 59
+    },
+    {
+      "id": "ana201-ll-muscles-60",
+      "text": "The flexor digitorum brevis muscle lies immediately deep to the plantar aponeurosis. Where do its tendons insert?",
+      "options": [
+        "On the bases of the distal phalanges of the lateral four toes",
+        "On the bases of the middle phalanges of the lateral four toes",
+        "On the bases of the proximal phalanges of all five toes",
+        "Into the extensor expansions of the lateral four toes"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. On the bases of the middle phalanges of the lateral four toes",
+      "explanation": "The tendons of the flexor digitorum brevis split to allow the long flexor tendons to pass through, and then they insert onto both sides of the middle phalanges of digits 2-5.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 60
+    },
+    {
+      "id": "ana201-ll-muscles-61",
+      "text": "Which of the following statements regarding the vastus medialis muscle is correct anatomically and functionally?",
+      "options": [
+        "It originates primarily from the anterior inferior iliac spine.",
+        "Its lowest fibers (vastus medialis obliquus) are aligned horizontally to prevent lateral tracking of the patella.",
+        "It is innervated by the obturator nerve.",
+        "It actively flexes the knee joint during the swing phase of gait."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Its lowest fibers (vastus medialis obliquus) are aligned horizontally to prevent lateral tracking of the patella.",
+      "explanation": "The lowest fibers of the vastus medialis (the VMO) pull medially and almost horizontally. This vector is critical for countering the lateral pull of the vastus lateralis, keeping the patella centered in the trochlear groove.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 61
+    },
+    {
+      "id": "ana201-ll-muscles-62",
+      "text": "The deep fibular nerve accompanies a major artery as it descends through the anterior compartment of the leg. Which artery does it run alongside?",
+      "options": [
+        "Anterior tibial artery",
+        "Fibular artery",
+        "Popliteal artery",
+        "Dorsalis pedis artery"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Anterior tibial artery",
+      "explanation": "After piercing the extensor digitorum longus, the deep fibular nerve runs vertically down the interosseous membrane alongside the anterior tibial artery.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 62
+    },
+    {
+      "id": "ana201-ll-muscles-63",
+      "text": "The extensor digitorum longus (EDM) tendons form complex extensor expansions over the dorsal aspect of the toes. Which intrinsic muscles insert into these lateral bands to assist in toe mechanics?",
+      "options": [
+        "Only the lumbricals",
+        "Only the dorsal interossei",
+        "Both the lumbricals and the interossei (dorsal and plantar)",
+        "The quadratus plantae"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Both the lumbricals and the interossei (dorsal and plantar)",
+      "explanation": "The lumbricals and both sets of interossei (plantar and dorsal) insert into the extensor expansions, allowing them to flex the MTP joints and extend the IP joints.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 63
+    },
+    {
+      "id": "ana201-ll-muscles-64",
+      "text": "The obturator externus is a deeply placed muscle in the medial thigh. Despite its location near the adductor group, what is its primary action on the hip joint?",
+      "options": [
+        "Powerful adduction",
+        "Flexion and medial rotation",
+        "Lateral rotation",
+        "Extension and abduction"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Lateral rotation",
+      "explanation": "The obturator externus originates on the external surface of the obturator membrane and passes horizontally behind the hip joint to insert on the trochanteric fossa, making it a lateral rotator of the femur.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 64
+    },
+    {
+      "id": "ana201-ll-muscles-65",
+      "text": "A patient with a compromised tibial nerve in the popliteal fossa would present with profound weakness in which of the following combined movements?",
+      "options": [
+        "Dorsiflexion of the ankle and extension of the toes",
+        "Plantarflexion of the ankle and flexion of the toes",
+        "Eversion of the foot and flexion of the knee",
+        "Abduction of the hip and extension of the knee"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Plantarflexion of the ankle and flexion of the toes",
+      "explanation": "The tibial nerve supplies all the muscles of the superficial and deep posterior compartments of the leg, which are entirely responsible for plantarflexion and toe flexion.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 65
+    },
+    {
+      "id": "ana201-ll-muscles-66",
+      "text": "The iliotibial (IT) tract is the thickened lateral portion of the fascia lata. Where does it definitively insert distally?",
+      "options": [
+        "The head of the fibula",
+        "The lateral epicondyle of the femur",
+        "Gerdy's tubercle on the lateral condyle of the tibia",
+        "The lateral border of the patella"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Gerdy's tubercle on the lateral condyle of the tibia",
+      "explanation": "The IT tract acts as an aponeurotic tendon for the tensor fasciae latae and gluteus maximus, passing over the lateral femoral epicondyle to insert on Gerdy's tubercle on the anterolateral tibia.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 66
+    },
+    {
+      "id": "ana201-ll-muscles-67",
+      "text": "The dorsal interossei of the foot are arranged differently than the plantar interossei. How many dorsal interossei are there, and what is their primary function?",
+      "options": [
+        "Three; adduction of the toes",
+        "Four; abduction of the toes",
+        "Three; flexion of the MTP joints only",
+        "Four; extension of the MTP joints"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Four; abduction of the toes",
+      "explanation": "There are four bipennate dorsal interossei muscles. Their primary function is to abduct (spread) the toes away from the midline of the second digit (DAB: Dorsal ABduct).",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 67
+    },
+    {
+      "id": "ana201-ll-muscles-68",
+      "text": "The saphenous nerve is the longest sensory branch of the femoral nerve. What specific area of skin does it supply?",
+      "options": [
+        "The anterior aspect of the thigh",
+        "The lateral aspect of the leg and dorsum of the foot",
+        "The medial aspect of the leg and the medial margin of the foot",
+        "The entire plantar surface of the foot"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The medial aspect of the leg and the medial margin of the foot",
+      "explanation": "The saphenous nerve descends through the adductor canal, emerges superficially at the knee, and travels with the great saphenous vein to supply sensation to the medial leg and foot.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 68
+    },
+    {
+      "id": "ana201-ll-muscles-69",
+      "text": "The quadriceps tendon inserts into the base of the patella. The force of the quadriceps is then transmitted to the tibia via the patellar ligament. Which specific bony landmark does the patellar ligament attach to?",
+      "options": [
+        "Medial tibial condyle",
+        "Tibial tuberosity",
+        "Gerdy's tubercle",
+        "Anterior border of the tibia"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Tibial tuberosity",
+      "explanation": "The patellar ligament is the strong, distal continuation of the quadriceps tendon that anchors the patella securely to the tibial tuberosity on the anterior, proximal tibia.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 69
+    },
+    {
+      "id": "ana201-ll-muscles-70",
+      "text": "The superficial fibular (peroneal) nerve courses through the lateral compartment of the leg. Where does it typically pierce the deep fascia to become a superficial sensory nerve?",
+      "options": [
+        "In the upper third of the leg, just below the fibular head",
+        "In the middle third of the leg",
+        "In the lower third of the leg, above the lateral malleolus",
+        "It remains deep until it reaches the dorsum of the foot."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. In the lower third of the leg, above the lateral malleolus",
+      "explanation": "After supplying the fibularis muscles, the superficial fibular nerve pierces the crural fascia in the distal third of the anterolateral leg to descend subcutaneously to the dorsum of the foot.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 70
+    },
+    {
+      "id": "ana201-ll-muscles-71",
+      "text": "Which muscle of the posterior thigh compartment possesses a broad, flat, aponeurotic tendon of origin that gives the muscle its name?",
+      "options": [
+        "Biceps femoris",
+        "Semitendinosus",
+        "Semimembranosus",
+        "Gracilis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Semimembranosus",
+      "explanation": "The semimembranosus muscle is named for its superior attachment, which is a broad, flat, membranous aponeurosis originating from the ischial tuberosity.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 71
+    },
+    {
+      "id": "ana201-ll-muscles-72",
+      "text": "The flexor retinaculum of the ankle bridges the gap between the medial malleolus and the calcaneus. The structures passing deep to it follow a specific order from anterior to posterior. Which tendon lies most anteriorly (closest to the medial malleolus)?",
+      "options": [
+        "Flexor hallucis longus",
+        "Flexor digitorum longus",
+        "Tibialis posterior",
+        "Plantaris"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Tibialis posterior",
+      "explanation": "The mnemonic \"Tom, Dick, And Very Nervous Harry\" describes the order from anterior to posterior: Tibialis posterior, flexor Digitorum longus, Artery (posterior tibial), Vein, Nerve (tibial), flexor Hallucis longus.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 72
+    },
+    {
+      "id": "ana201-ll-muscles-73",
+      "text": "The femoral triangle contains the femoral vessels and nerve. The floor of the femoral triangle is formed by two muscles. Which muscles are these?",
+      "options": [
+        "Pectineus and adductor longus",
+        "Iliopsoas and pectineus",
+        "Sartorius and rectus femoris",
+        "Vastus medialis and adductor brevis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Iliopsoas and pectineus",
+      "explanation": "The trough-like floor of the femoral triangle is formed by the iliopsoas laterally and the pectineus medially.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 73
+    },
+    {
+      "id": "ana201-ll-muscles-74",
+      "text": "The lateral cutaneous nerve of the thigh (lateral femoral cutaneous nerve) is prone to compression as it passes beneath the inguinal ligament, causing a condition known as meralgia paresthetica. Which region of skin will experience numbness and tingling?",
+      "options": [
+        "The anterior aspect of the lower leg",
+        "The medial aspect of the thigh",
+        "The anterolateral aspect of the thigh",
+        "The posterior gluteal region"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The anterolateral aspect of the thigh",
+      "explanation": "The lateral cutaneous nerve of the thigh is a purely sensory nerve that supplies the skin over the anterolateral and lateral aspects of the thigh down to the knee.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 74
+    },
+    {
+      "id": "ana201-ll-muscles-75",
+      "text": "The deep plantar arch of the foot is an important arterial anastomosis. Which vessel is the primary contributor that dives deep between the bases of the first and second metatarsals to form this arch?",
+      "options": [
+        "Lateral plantar artery",
+        "Medial plantar artery",
+        "Dorsalis pedis artery (via its deep plantar branch)",
+        "Anterior tibial artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Dorsalis pedis artery (via its deep plantar branch)",
+      "explanation": "The deep plantar arch is formed primarily by the deep plantar branch of the dorsalis pedis artery anastomosing with the terminal branch of the lateral plantar artery.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 75
+    },
+    {
+      "id": "ana201-ll-muscles-76",
+      "text": "Which intrinsic muscle of the foot is situated in the first (most superficial) plantar layer and functions to abduct the little toe?",
+      "options": [
+        "Abductor digiti minimi",
+        "Flexor digiti minimi brevis",
+        "Fourth dorsal interosseous",
+        "Opponens digiti minimi"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Abductor digiti minimi",
+      "explanation": "The abductor digiti minimi lies on the lateral margin of the superficial plantar foot, originating from the calcaneus and inserting on the proximal phalanx of the 5th digit to abduct it.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 76
+    },
+    {
+      "id": "ana201-ll-muscles-77",
+      "text": "The popliteal artery is the deepest structure in the popliteal fossa. Where does it definitively divide into its terminal branches, the anterior and posterior tibial arteries?",
+      "options": [
+        "At the level of the adductor hiatus",
+        "In the center of the popliteal fossa, behind the knee joint",
+        "At the inferior border of the popliteus muscle",
+        "Deep to the soleal arch"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. At the inferior border of the popliteus muscle",
+      "explanation": "The popliteal artery descends through the fossa and ends at the inferior border of the popliteus muscle, where it bifurcates into the anterior and posterior tibial arteries.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 77
+    },
+    {
+      "id": "ana201-ll-muscles-78",
+      "text": "The gluteus maximus is supplied by the inferior gluteal nerve. However, its vascular supply is redundant. Which two arteries provide the primary blood supply to this massive muscle?",
+      "options": [
+        "Internal and external pudendal arteries",
+        "Superior and inferior gluteal arteries",
+        "Profunda femoris and obturator arteries",
+        "Medial and lateral circumflex femoral arteries"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Superior and inferior gluteal arteries",
+      "explanation": "The gluteus maximus is a highly vascularized muscle supplied by both the superior gluteal artery (upper half) and the inferior gluteal artery (lower half).",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 78
+    },
+    {
+      "id": "ana201-ll-muscles-79",
+      "text": "The medial collateral ligament (MCL) of the knee is a broad, flat band. Which surrounding anatomical structure is its deep surface firmly attached to, increasing the risk of simultaneous injury?",
+      "options": [
+        "The lateral meniscus",
+        "The medial meniscus",
+        "The anterior cruciate ligament",
+        "The popliteus tendon"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The medial meniscus",
+      "explanation": "The deep fibers of the MCL are firmly attached to the periphery of the medial meniscus. Therefore, severe valgus stress that tears the MCL frequently tears the medial meniscus as well.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 79
+    },
+    {
+      "id": "ana201-ll-muscles-80",
+      "text": "The femoral sheath is a funnel-shaped fascial tube enclosing the proximal parts of the femoral vessels. Which specific structure occupies the medial-most compartment (the femoral canal) of this sheath?",
+      "options": [
+        "The femoral nerve",
+        "The femoral artery",
+        "Deep lymphatic vessels and the lymph node of Cloquet",
+        "The great saphenous vein"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Deep lymphatic vessels and the lymph node of Cloquet",
+      "explanation": "The femoral sheath has three compartments. The lateral contains the artery, the intermediate contains the vein, and the medial (femoral canal) contains loose fat, lymphatic vessels, and often a deep inguinal lymph node. The nerve is outside the sheath.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 80
+    },
+    {
+      "id": "ana201-ll-muscles-81",
+      "text": "The anterior cruciate ligament (ACL) prevents the femur from sliding posteriorly on the tibia. Where does the ACL originate on the tibia?",
+      "options": [
+        "The posterior intercondylar area",
+        "The anterior intercondylar area, just behind the medial meniscus attachment",
+        "The medial epicondyle",
+        "The tibial tuberosity"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The anterior intercondylar area, just behind the medial meniscus attachment",
+      "explanation": "The ACL arises from the anterior intercondylar area of the tibia, just posterior to the attachment of the medial meniscus, and extends superiorly, posteriorly, and laterally to the femur.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 81
+    },
+    {
+      "id": "ana201-ll-muscles-82",
+      "text": "The muscles of the posterior leg are divided into superficial and deep groups by a layer of deep fascia. The tibial nerve and posterior tibial vessels run in a specific plane. Where are they located?",
+      "options": [
+        "Superficial to the gastrocnemius",
+        "Between the gastrocnemius and the soleus",
+        "Between the soleus and the deep flexor muscles (tibialis posterior, FDL, FHL)",
+        "Deep to the tibialis posterior, resting directly on the interosseous membrane"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Between the soleus and the deep flexor muscles (tibialis posterior, FDL, FHL)",
+      "explanation": "The neurovascular bundle (tibial nerve and posterior tibial vessels) descends the leg in the fascial plane located immediately deep to the soleus muscle and superficial to the deep flexor group.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 82
+    },
+    {
+      "id": "ana201-ll-muscles-83",
+      "text": "The adductor brevis muscle is situated in the medial thigh. Its anatomical position is clinically relevant because it dictates the splitting of a major nerve. Which nerve splits into anterior and posterior divisions that pass on either side of the adductor brevis?",
+      "options": [
+        "Femoral nerve",
+        "Sciatic nerve",
+        "Obturator nerve",
+        "Genitofemoral nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Obturator nerve",
+      "explanation": "As the obturator nerve enters the thigh, it splits into an anterior branch (running superficial to adductor brevis) and a posterior branch (running deep to adductor brevis).",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 83
+    },
+    {
+      "id": "ana201-ll-muscles-84",
+      "text": "The plantaris muscle is sometimes mistaken for a nerve during dissection due to its appearance. What is its primary, albeit weak, biomechanical action?",
+      "options": [
+        "Dorsiflexion of the ankle",
+        "Knee extension",
+        "Plantarflexion of the ankle and weak knee flexion",
+        "Eversion of the foot"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Plantarflexion of the ankle and weak knee flexion",
+      "explanation": "The plantaris originates on the femur and inserts on the calcaneus. Due to its extremely small muscle belly and long tendon, it acts as a very weak synergist to the gastrocnemius in knee flexion and plantarflexion.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 84
+    },
+    {
+      "id": "ana201-ll-muscles-85",
+      "text": "The flexor digitorum longus (FDL) tendon crosses the sole of the foot to insert on the lateral four toes. Which muscle inserts directly into the tendon of the FDL to align its line of pull?",
+      "options": [
+        "Lumbricals",
+        "Quadratus plantae",
+        "Flexor digitorum brevis",
+        "Plantar interossei"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Quadratus plantae",
+      "explanation": "The quadratus plantae originates on the calcaneus and inserts directly into the posterolateral margin of the FDL tendon, straightening the diagonal pull of the FDL so the toes flex directly downwards.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 85
+    },
+    {
+      "id": "ana201-ll-muscles-86",
+      "text": "A patient presents with a profound inability to evert the foot, though plantarflexion and dorsiflexion are mostly preserved. Which specific nerve is most likely damaged?",
+      "options": [
+        "Deep fibular nerve",
+        "Tibial nerve",
+        "Superficial fibular nerve",
+        "Sural nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Superficial fibular nerve",
+      "explanation": "Eversion is the primary function of the muscles in the lateral compartment of the leg (fibularis longus and brevis). These muscles are exclusively innervated by the superficial fibular nerve.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 86
+    },
+    {
+      "id": "ana201-ll-muscles-87",
+      "text": "The medial longitudinal arch is the highest and most important arch of the foot. Which ligament provides the most critical static, passive support to the highest point of this arch (the head of the talus)?",
+      "options": [
+        "Long plantar ligament",
+        "Plantar calcaneonavicular (spring) ligament",
+        "Short plantar ligament",
+        "Plantar aponeurosis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Plantar calcaneonavicular (spring) ligament",
+      "explanation": "The plantar calcaneonavicular (spring) ligament spans from the sustentaculum tali of the calcaneus to the navicular, forming a crucial elastic \"hammock\" that directly supports the head of the talus, maintaining the medial arch.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 87
+    },
+    {
+      "id": "ana201-ll-muscles-88",
+      "text": "The extensor hallucis brevis is essentially the medial-most slip of which muscle on the dorsum of the foot?",
+      "options": [
+        "Extensor digitorum brevis",
+        "Extensor hallucis longus",
+        "Tibialis anterior",
+        "First dorsal interosseous"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Extensor digitorum brevis",
+      "explanation": "The extensor digitorum brevis muscle belly on the dorsum of the foot sends its most medial tendon to the proximal phalanx of the great toe; this distinct medial slip is often termed the extensor hallucis brevis.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 88
+    },
+    {
+      "id": "ana201-ll-muscles-89",
+      "text": "The deep palmar arch of the hand is analogous to the deep plantar arch of the foot. The superficial palmar arch is primarily formed by the ulnar artery. In the foot, which artery is the primary contributor to the superficial plantar arch (when present)?",
+      "options": [
+        "Dorsalis pedis artery",
+        "Medial plantar artery",
+        "Lateral plantar artery",
+        "Fibular artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Medial plantar artery",
+      "explanation": "While the lateral plantar artery primarily forms the robust deep plantar arch, the superficial plantar arch (which is often incomplete) is formed primarily by branches of the medial plantar artery.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 89
+    },
+    {
+      "id": "ana201-ll-muscles-90",
+      "text": "The hip joint capsule is reinforced anteriorly by the strongest ligament in the human body, preventing hyperextension during standing. What is the name of this Y-shaped ligament?",
+      "options": [
+        "Ischiofemoral ligament",
+        "Pubofemoral ligament",
+        "Iliofemoral ligament",
+        "Ligamentum teres"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Iliofemoral ligament",
+      "explanation": "The iliofemoral ligament (Y ligament of Bigelow) attaches to the AIIS and the intertrochanteric line, corkscrewing around the anterior joint to strongly resist hyperextension of the hip.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 90
+    },
+    {
+      "id": "ana201-ll-muscles-91",
+      "text": "The tensor fasciae latae is innervated by the superior gluteal nerve. Despite this, it is anatomically located to assist with movements characteristic of the anterior thigh. What combined action does it perform?",
+      "options": [
+        "Hip extension and lateral rotation",
+        "Hip flexion, abduction, and medial rotation",
+        "Knee flexion and hip adduction",
+        "Hip adduction and lateral rotation"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Hip flexion, abduction, and medial rotation",
+      "explanation": "Due to its anterior position on the iliac crest and lateral insertion on the IT band, the tensor fasciae latae flexes, abducts, and medially rotates the hip joint.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 91
+    },
+    {
+      "id": "ana201-ll-muscles-92",
+      "text": "Which group of intrinsic foot muscles is responsible for abducting the toes (spreading them apart)?",
+      "options": [
+        "Lumbricals",
+        "Plantar interossei",
+        "Dorsal interossei",
+        "Quadratus plantae"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Dorsal interossei",
+      "explanation": "The dorsal interossei are bipennate muscles that abduct the toes away from the midline of the second digit (DAB: Dorsal ABduct).",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 92
+    },
+    {
+      "id": "ana201-ll-muscles-93",
+      "text": "The small saphenous vein ascends the posterior leg. Which cutaneous nerve travels adjacent to it in the superficial fascia of the calf?",
+      "options": [
+        "Saphenous nerve",
+        "Sural nerve",
+        "Superficial fibular nerve",
+        "Deep fibular nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Sural nerve",
+      "explanation": "The sural nerve (providing sensation to the posterolateral leg and lateral foot) courses closely alongside the small saphenous vein on the posterior aspect of the calf.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 93
+    },
+    {
+      "id": "ana201-ll-muscles-94",
+      "text": "The adductor longus, brevis, and magnus are the primary adductors of the thigh. Which specific bony landmark on the posterior femur serves as the primary linear insertion site for these muscles?",
+      "options": [
+        "Intertrochanteric crest",
+        "Greater trochanter",
+        "Linea aspera",
+        "Medial epicondyle"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Linea aspera",
+      "explanation": "The linea aspera is the prominent vertical ridge on the posterior aspect of the femoral shaft that serves as the extensive linear insertion site for the vast majority of the adductor muscle complex.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 94
+    },
+    {
+      "id": "ana201-ll-muscles-95",
+      "text": "The pes anserinus (goose's foot) is a conjoined tendon inserting on the medial aspect of the proximal tibia. It is formed by the tendons of three muscles from three different compartments. Which nerve supplies the muscle from the medial compartment?",
+      "options": [
+        "Femoral nerve",
+        "Tibial nerve",
+        "Obturator nerve",
+        "Common fibular nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Obturator nerve",
+      "explanation": "The pes anserinus includes the sartorius (anterior compartment/femoral n.), semitendinosus (posterior compartment/tibial n.), and gracilis. The gracilis is in the medial compartment and is supplied by the obturator nerve.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 95
+    },
+    {
+      "id": "ana201-ll-muscles-96",
+      "text": "The vastus intermedius is the deepest of the quadriceps muscles. Its fibers glide over the anterior femur during knee movement. Which structure lies between the lower part of this muscle and the femur to facilitate this gliding?",
+      "options": [
+        "The prepatellar bursa",
+        "The suprapatellar bursa",
+        "The deep infrapatellar bursa",
+        "The pes anserine bursa"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The suprapatellar bursa",
+      "explanation": "The suprapatellar bursa is a large extension of the knee joint cavity that extends upward between the femur and the deep surface of the quadriceps (vastus intermedius), allowing frictionless movement.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 96
+    },
+    {
+      "id": "ana201-ll-muscles-97",
+      "text": "The flexor hallucis longus (FHL) provides the powerful push-off force during walking. Which bony structure does its tendon groove deeply as it passes from the leg into the foot?",
+      "options": [
+        "The posterior surface of the talus, between the medial and lateral tubercles",
+        "The medial malleolus of the tibia",
+        "The lateral surface of the calcaneus",
+        "The plantar surface of the cuboid"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The posterior surface of the talus, between the medial and lateral tubercles",
+      "explanation": "The FHL tendon passes precisely between the medial and lateral tubercles on the posterior aspect of the talus before grooving the sustentaculum tali of the calcaneus to enter the sole.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 97
+    },
+    {
+      "id": "ana201-ll-muscles-98",
+      "text": "A patient suffers a traumatic injury severing the obturator nerve as it exits the obturator canal. While hip adduction is severely weakened, it is not completely lost. Which muscle is responsible for the remaining adduction capability?",
+      "options": [
+        "Gracilis",
+        "Pectineus",
+        "Adductor longus",
+        "Tensor fasciae latae"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Pectineus",
+      "explanation": "The pectineus is an adductor of the hip, but it is primarily innervated by the femoral nerve. Therefore, if the obturator nerve is severed, the pectineus (along with the hamstring part of the adductor magnus) can still provide some adduction.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 98
+    },
+    {
+      "id": "ana201-ll-muscles-99",
+      "text": "Which muscle of the deep gluteal region originates from the lateral border of the ischial tuberosity, inserts onto the quadrate tubercle of the intertrochanteric crest of the femur, and acts as a powerful lateral rotator of the thigh?",
+      "options": [
+        "Piriformis",
+        "Obturator externus",
+        "Quadratus femoris",
+        "Superior gemellus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Quadratus femoris",
+      "explanation": "The quadratus femoris is a flat, quadrilateral muscle that arises from the ischial tuberosity and inserts onto the quadrate tubercle on the posterior intertrochanteric crest of the femur. It acts as a strong lateral rotator and adductor of the thigh.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 99
+    },
+    {
+      "id": "ana201-ll-muscles-100",
+      "text": "The tibialis anterior muscle is the most medial and powerful dorsiflexor of the ankle joint. Onto which specific skeletal structures of the foot does its distal tendon insert?",
+      "options": [
+        "The tuberosity of the 5th metatarsal",
+        "The medial cuneiform and the base of the first metatarsal",
+        "The sustentaculum tali of the calcaneus",
+        "The navicular tuberosity and intermediate cuneiform"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The medial cuneiform and the base of the first metatarsal",
+      "explanation": "The tendon of the tibialis anterior passes beneath the superior and inferior extensor retinacula to insert into the medial and inferior surfaces of the medial cuneiform bone and the base of the first metatarsal.",
+      "section": "Muscles of the Lower Limb",
+      "questionNumber": 100
+    }
+  ]
+}
