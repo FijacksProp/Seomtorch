@@ -1,0 +1,1510 @@
+{
+  "title": "Joints of the Lower Limb",
+  "course": "ANA 201",
+  "totalQuestions": 100,
+  "sections": [
+    "Joints of the Lower Limb (Q1-Q100)"
+  ],
+  "questions": [
+    {
+      "id": "ana201-ll-joints-1",
+      "text": "A patient presents with a deep laceration in the center of the popliteal fossa. Which of the following structures is located deepest and is most immediately vulnerable to this posterior injury?",
+      "options": [
+        "Small saphenous vein",
+        "Tibial nerve",
+        "Popliteal artery",
+        "Common fibular nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Popliteal artery",
+      "explanation": "Within the popliteal fossa, the structures from superficial to deep are the nerve(s), vein, and artery. The popliteal artery is the deepest structure, resting against the knee joint capsule and femur.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana201-ll-joints-2",
+      "text": "A rugby player suffers a severe tackle to the lateral side of the knee while the foot is planted. This valgus force results in the \"unhappy triad\" injury. Which structure is damaged due to its direct attachment to the medial collateral ligament?",
+      "options": [
+        "Anterior cruciate ligament",
+        "Posterior cruciate ligament",
+        "Lateral meniscus",
+        "Medial meniscus"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Medial meniscus",
+      "explanation": "The \"unhappy triad\" involves the tearing of the ACL, MCL, and the medial meniscus. The medial meniscus is frequently torn along with the MCL because the deep fibers of the MCL are firmly attached to the periphery of the medial meniscus.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana201-ll-joints-3",
+      "text": "The hip joint capsule is reinforced by three strong ligaments. Which of these ligaments is situated posteriorly, has a spiral orientation, and specifically resists hyperextension while holding the femoral head in the acetabulum?",
+      "options": [
+        "Iliofemoral ligament",
+        "Ischiofemoral ligament",
+        "Pubofemoral ligament",
+        "Ligament of the head of femur"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Ischiofemoral ligament",
+      "explanation": "The ischiofemoral ligament spans from the ischium to the greater trochanter, reinforcing the capsule posteriorly. Its spiral orientation tightens during extension, preventing hyperextension and securing the femoral head.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana201-ll-joints-4",
+      "text": "During a physical examination, a clinician assesses the stability of a patient's knee. While holding the knee flexed, pushing the tibia posteriorly elicits significant movement. This \"posterior drawer\" sign indicates damage to which ligament?",
+      "options": [
+        "Anterior cruciate ligament",
+        "Medial collateral ligament",
+        "Posterior cruciate ligament",
+        "Lateral collateral ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Posterior cruciate ligament",
+      "explanation": "The posterior cruciate ligament (PCL) prevents the posterior displacement of the tibia relative to the femur. A positive posterior drawer test (excessive backward movement of the tibia) indicates a PCL tear.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana201-ll-joints-5",
+      "text": "The ankle (talocrural) joint is described functionally as a hinge joint. Which specific aspect of the talus articulates within the mortise to provide greater stability during dorsiflexion?",
+      "options": [
+        "The medial malleolar facet",
+        "The narrow posterior aspect",
+        "The broad anterior aspect",
+        "The lateral malleolar facet"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The broad anterior aspect",
+      "explanation": "The superior articular surface of the talus (the trochlea) is wider anteriorly. During dorsiflexion, this broad anterior portion is wedged tightly into the mortise, increasing joint stability compared to plantarflexion.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana201-ll-joints-6",
+      "text": "The arterial supply to the femoral head is critical for preventing avascular necrosis following a fracture. Which vessel provides the majority of this arterial supply and is at highest risk in a femoral neck fracture?",
+      "options": [
+        "Medial circumflex femoral artery",
+        "Artery of the ligament of the head of femur",
+        "Inferior gluteal artery",
+        "Lateral circumflex femoral artery"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Medial circumflex femoral artery",
+      "explanation": "The medial circumflex femoral artery is the primary source of blood to the femoral head and neck. It forms an anastomotic ring at the base of the neck, and damage here frequently leads to avascular necrosis.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana201-ll-joints-7",
+      "text": "The popliteal fossa is a diamond-shaped space at the back of the knee. Which of the following muscles forms the superolateral boundary of this fossa?",
+      "options": [
+        "Semimembranosus",
+        "Biceps femoris",
+        "Lateral head of gastrocnemius",
+        "Semitendinosus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Biceps femoris",
+      "explanation": "The boundaries of the popliteal fossa are: superomedial (semimembranosus/semitendinosus), superolateral (biceps femoris), inferomedial (medial head of gastrocnemius), and inferolateral (lateral head of gastrocnemius/plantaris).",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana201-ll-joints-8",
+      "text": "The subtalar joint is crucial for adjusting the foot on uneven ground. Which two specific bony surfaces articulate to form the true anatomical subtalar joint?",
+      "options": [
+        "Anterior talar articular surface and navicular",
+        "Superior surface of talus and inferior tibia",
+        "Inferior surface of the body of the talus and superior surface of the calcaneus",
+        "Calcaneus and cuboid"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Inferior surface of the body of the talus and superior surface of the calcaneus",
+      "explanation": "The anatomical subtalar joint is the articulation between the posterior talar articular surface (on the inferior body of the talus) and the posterior calcaneal articular facet (on the superior calcaneus).",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana201-ll-joints-9",
+      "text": "An inversion injury (sprained ankle) is the most common joint injury. Which specific ligament within the lateral collateral complex is most frequently and irreversibly damaged during forced inversion?",
+      "options": [
+        "Posterior talofibular ligament",
+        "Calcaneofibular ligament",
+        "Anterior talofibular ligament",
+        "Anterior inferior tibiofibular ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Anterior talofibular ligament",
+      "explanation": "The lateral ligament resists inversion and is weaker than the medial ligament. The anterior talofibular ligament is the most vulnerable and is usually the first (and often only) ligament torn in a typical inversion sprain.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana201-ll-joints-10",
+      "text": "The proximal tibiofibular joint is a plane-type synovial joint. Which of the following muscles provides structural reinforcement to this joint capsule as it inserts onto the fibular head?",
+      "options": [
+        "Popliteus",
+        "Soleus",
+        "Lateral head of gastrocnemius",
+        "Biceps femoris"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Biceps femoris",
+      "explanation": "The proximal tibiofibular joint capsule receives additional support from the tendon of the biceps femoris, which splits around the fibular collateral ligament to insert on the head of the fibula.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana201-ll-joints-11",
+      "text": "Which intracapsular ligament of the knee originates from the anterior intercondylar area of the tibia and attaches to the medial aspect of the lateral femoral condyle within the intercondylar fossa?",
+      "options": [
+        "Anterior cruciate ligament",
+        "Posterior cruciate ligament",
+        "Medial collateral ligament",
+        "Transverse ligament"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Anterior cruciate ligament",
+      "explanation": "The anterior cruciate ligament (ACL) ascends posteriorly and laterally from its anterior tibial attachment to insert on the lateral condyle of the femur within the intercondylar notch.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana201-ll-joints-12",
+      "text": "A patient suffers a \"Pott’s fracture\" due to forced eversion of the foot. According to the stages of this injury mechanism, what is typically the first bony or ligamentous structure to fail?",
+      "options": [
+        "The fibular shaft",
+        "The medial malleolus (avulsion)",
+        "The lateral malleolus (shearing)",
+        "The posterior margin of the tibia"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The medial malleolus (avulsion)",
+      "explanation": "In a classic Pott's fracture-dislocation caused by severe eversion, the strong medial (deltoid) ligament usually does not tear; instead, it pulls off (avulses) the medial malleolus first.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana201-ll-joints-13",
+      "text": "The hip joint is designed for stability. Which of the following anatomical features is the primary bony contributor to preventing dislocation of the femoral head?",
+      "options": [
+        "The deep acetabulum that encompasses nearly all of the femoral head",
+        "The attachment of the ligamentum teres",
+        "The orientation of the greater trochanter",
+        "The angle of inclination of the femoral neck"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The deep acetabulum that encompasses nearly all of the femoral head",
+      "explanation": "The deep, cup-like depression of the acetabulum encompasses almost the entire hemispherical head of the femur, providing significant intrinsic bony stability compared to shallower joints like the shoulder.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana201-ll-joints-14",
+      "text": "Which nerve courses superficially along the lateral margin of the popliteal fossa, closely following the tendon of the biceps femoris?",
+      "options": [
+        "Tibial nerve",
+        "Sural nerve",
+        "Common fibular (peroneal) nerve",
+        "Saphenous nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Common fibular (peroneal) nerve",
+      "explanation": "After the sciatic nerve bifurcates, the common fibular nerve travels laterally, hugging the medial border of the biceps femoris tendon as it forms the superolateral boundary of the popliteal fossa.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana201-ll-joints-15",
+      "text": "The distal tibiofibular joint is essential for the integrity of the ankle mortise. Which term correctly classifies the structural type of this specific articulation?",
+      "options": [
+        "Synovial plane joint",
+        "Synchondrosis",
+        "Fibrous syndesmosis",
+        "Synovial hinge joint"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Fibrous syndesmosis",
+      "explanation": "The distal tibiofibular joint is a fibrous syndesmosis. The bones are tightly bound by the interosseous membrane and ligaments, without a synovial cavity, providing stability rather than mobility.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana201-ll-joints-16",
+      "text": "A Baker's cyst typically presents as a swelling in the popliteal fossa. This cyst is an inflammation and fluid accumulation within which specific bursa?",
+      "options": [
+        "Prepatellar bursa",
+        "Suprapatellar bursa",
+        "Deep infrapatellar bursa",
+        "Semimembranosus bursa"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Semimembranosus bursa",
+      "explanation": "A Baker's (popliteal) cyst is a fluid-filled distension of the semimembranosus bursa, located between the semimembranosus muscle and the medial head of the gastrocnemius, often communicating with the knee joint.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana201-ll-joints-17",
+      "text": "The \"Unhappy Triad\" of knee injuries often occurs simultaneously from a lateral blow. Why is the medial meniscus frequently torn along with the medial collateral ligament (MCL)?",
+      "options": [
+        "They share a common synovial sheath.",
+        "The deep fibers of the MCL are structurally attached to the medial meniscus.",
+        "The medial meniscus is the primary restraint to valgus force.",
+        "The ACL pulls the meniscus out of position when it ruptures."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The deep fibers of the MCL are structurally attached to the medial meniscus.",
+      "explanation": "The deep portion of the medial collateral ligament is firmly attached to the periphery of the medial meniscus. Therefore, when the MCL is severely stretched or torn by a valgus force, it frequently pulls and tears the meniscus.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana201-ll-joints-18",
+      "text": "Which of the following ligaments reinforces the anterior aspect of the hip joint capsule and is characterized by a strong, inverted Y-shape that prevents hyperextension?",
+      "options": [
+        "Pubofemoral ligament",
+        "Ischiofemoral ligament",
+        "Iliofemoral ligament",
+        "Transverse acetabular ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Iliofemoral ligament",
+      "explanation": "The iliofemoral ligament originates from the AIIS and bifurcates to attach to the intertrochanteric line. It is the strongest ligament in the body and prevents hyperextension of the hip.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana201-ll-joints-19",
+      "text": "The medial and lateral menisci deepen the articular surface of the tibia. Which anatomical characteristic distinguishes the lateral meniscus from the medial meniscus?",
+      "options": [
+        "It is securely attached to the lateral collateral ligament.",
+        "It is larger and more C-shaped.",
+        "It lacks peripheral attachments to the capsule, rendering it more mobile.",
+        "It is primarily composed of hyaline cartilage."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It lacks peripheral attachments to the capsule, rendering it more mobile.",
+      "explanation": "Unlike the medial meniscus, the lateral meniscus is smaller, nearly circular, and is *not* attached to the lateral collateral ligament (separated by the popliteus tendon). This lack of fixation makes it more mobile and less prone to tearing.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana201-ll-joints-20",
+      "text": "A patient with developmental dysplasia of the hip (DDH) presents with a shallow acetabulum. Which structure, normally present to deepen the acetabular cavity, fails to provide adequate coverage in this condition?",
+      "options": [
+        "The transverse acetabular ligament",
+        "The acetabular labrum",
+        "The fovea capitis",
+        "The ligament of the head of femur"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The acetabular labrum",
+      "explanation": "The acetabular labrum is a fibrocartilaginous collar that normally deepens the socket. In DDH, the shallow bony acetabulum, even with the labrum, fails to adequately contain the femoral head.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana201-ll-joints-21",
+      "text": "The knee joint permits flexion, extension, and a small degree of rotation. Which muscles are responsible for medial rotation of the tibia when the knee is flexed?",
+      "options": [
+        "Biceps femoris only",
+        "Semimembranosus, semitendinosus, gracilis, sartorius, and popliteus",
+        "Quadriceps femoris",
+        "Gastrocnemius and soleus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Semimembranosus, semitendinosus, gracilis, sartorius, and popliteus",
+      "explanation": "Medial rotation of the flexed knee is performed by the medial hamstrings (semimembranosus, semitendinosus), the pes anserine muscles (sartorius, gracilis), and the popliteus. The biceps femoris performs lateral rotation.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana201-ll-joints-22",
+      "text": "Which of the following veins typically pieces the popliteal fascia to empty its contents directly into the popliteal vein within the popliteal fossa?",
+      "options": [
+        "Great saphenous vein",
+        "Femoral vein",
+        "Small saphenous vein",
+        "Posterior tibial vein"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Small saphenous vein",
+      "explanation": "The small (short) saphenous vein ascends the posterior calf and pierces the deep fascia covering the popliteal fossa to drain into the deep popliteal vein.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana201-ll-joints-23",
+      "text": "The ankle \"ring\" concept implies that a fracture on one side of the joint is often accompanied by ligamentous or bony injury on the opposite side. The upper part of this functional ring is formed by the mortise. What forms the lower part of the ring?",
+      "options": [
+        "The subtalar joint",
+        "The transverse tarsal joint",
+        "The plantar aponeurosis",
+        "The talocalcaneonavicular joint"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The subtalar joint",
+      "explanation": "The ankle ring in the coronal plane is formed superiorly by the tibiofibular mortise, laterally/medially by the collateral ligaments, and inferiorly by the subtalar joint (the articulation between the talus and calcaneus).",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana201-ll-joints-24",
+      "text": "Which bursa is located anterior to the knee, specifically situated between the apex of the patella and the overlying skin, and is susceptible to inflammation known as \"housemaid's knee\"?",
+      "options": [
+        "Suprapatellar bursa",
+        "Deep infrapatellar bursa",
+        "Prepatellar bursa",
+        "Semimembranosus bursa"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Prepatellar bursa",
+      "explanation": "The prepatellar bursa lies superficially between the skin and the anterior surface/apex of the patella. Chronic friction from kneeling causes prepatellar bursitis (\"housemaid's knee\").",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana201-ll-joints-25",
+      "text": "The subtalar joint is primarily responsible for which pair of movements in the foot?",
+      "options": [
+        "Dorsiflexion and plantarflexion",
+        "Inversion and eversion",
+        "Abduction and adduction",
+        "Flexion and extension of the toes"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Inversion and eversion",
+      "explanation": "The subtalar joint acts on an oblique axis, functioning as the chief site for eversion (turning the sole outward) and inversion (turning the sole inward) of the foot to adjust to uneven terrain.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana201-ll-joints-26",
+      "text": "During a physical examination of the knee, pain elicited upon forced lateral rotation of the leg (valgus stress) most likely indicates damage to which structure?",
+      "options": [
+        "Anterior cruciate ligament",
+        "Lateral collateral ligament",
+        "Medial collateral ligament",
+        "Posterior cruciate ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Medial collateral ligament",
+      "explanation": "The medial collateral ligament (MCL) resists valgus stress (force applied to the lateral knee, pushing it medially). Pain upon applying this force or laterally rotating the tibia indicates MCL damage.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana201-ll-joints-27",
+      "text": "The artery to the head of the femur travels within the ligamentum teres. From which parent vessel does this small, often inadequate, artery originate?",
+      "options": [
+        "Medial circumflex femoral artery",
+        "Obturator artery",
+        "Inferior gluteal artery",
+        "Lateral circumflex femoral artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Obturator artery",
+      "explanation": "The small artery within the ligament of the head of the femur is a branch of the obturator artery. It provides a minor contribution to the femoral head, insufficient to prevent necrosis if the circumflex vessels are torn.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana201-ll-joints-28",
+      "text": "The lateral ligament of the ankle resists over-inversion. It is composed of three separate bands. Which of these bands spans between the lateral malleolus and the calcaneus?",
+      "options": [
+        "Anterior talofibular ligament",
+        "Posterior talofibular ligament",
+        "Calcaneofibular ligament",
+        "Lateral talocalcaneal ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Calcaneofibular ligament",
+      "explanation": "The lateral ligament complex consists of the anterior and posterior talofibular ligaments (attaching to the talus) and the calcaneofibular ligament (descending from the fibula to the calcaneus).",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana201-ll-joints-29",
+      "text": "Aneurysms of the popliteal artery can compress adjacent structures within the tight popliteal fossa. Compression of which nerve typically leads to weakened plantar flexion and paraesthesia on the sole of the foot?",
+      "options": [
+        "Common fibular nerve",
+        "Saphenous nerve",
+        "Sural nerve",
+        "Tibial nerve"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Tibial nerve",
+      "explanation": "The tibial nerve runs superficially down the center of the popliteal fossa, posterior to the artery. Its compression affects the posterior calf muscles (plantarflexors) and sensation to the sole (via plantar nerves).",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana201-ll-joints-30",
+      "text": "The interosseous talocalcaneal ligament provides the majority of the ligamentous stability for the subtalar joint. Within which specific anatomical space does this strong ligament reside?",
+      "options": [
+        "The tarsal tunnel",
+        "The sinus tarsi",
+        "The mortise",
+        "The sustentaculum tali"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The sinus tarsi",
+      "explanation": "The strong interosseous talocalcaneal ligament sits within the sinus tarsi, a small cylindrical cavity located between the articular surfaces of the talus and calcaneus.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana201-ll-joints-31",
+      "text": "The medial collateral ligament (MCL) of the knee is a broad, flat band. Where are its proximal and distal attachment points located?",
+      "options": [
+        "Lateral epicondyle to the head of the fibula",
+        "Medial epicondyle of the femur to the medial condyle of the tibia",
+        "Adductor tubercle to the medial meniscus",
+        "Medial epicondyle to the tibial tuberosity"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Medial epicondyle of the femur to the medial condyle of the tibia",
+      "explanation": "The MCL originates from the medial epicondyle of the femur and inserts distally onto the medial surface of the medial condyle and upper shaft of the tibia.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana201-ll-joints-32",
+      "text": "A patient suffers a traumatic extension, abduction, and lateral rotation injury to the hip, resulting in an anterior dislocation. Where is the femoral head typically displaced in relation to the acetabulum?",
+      "options": [
+        "Posteriorly and superiorly into the gluteal region",
+        "Anteriorly and inferiorly",
+        "Medially into the obturator foramen",
+        "Superiorly beneath the anterior inferior iliac spine"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Anteriorly and inferiorly",
+      "explanation": "Anterior hip dislocations are rare and usually force the femoral head anteriorly and inferiorly (often into the obturator or pubic region) through the anterior capsule.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana201-ll-joints-33",
+      "text": "The distal tibiofibular joint lacks a joint capsule. Which ligament acts as a direct continuation of the posterior inferior tibiofibular ligament to support this fibrous joint?",
+      "options": [
+        "Inferior transverse tibiofibular ligament",
+        "Interosseous membrane",
+        "Anterior inferior tibiofibular ligament",
+        "Posterior talofibular ligament"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Inferior transverse tibiofibular ligament",
+      "explanation": "The inferior transverse tibiofibular ligament is a strong, thick band of fibers that continues inferiorly from the posterior inferior tibiofibular ligament, forming part of the socket for the talus.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana201-ll-joints-34",
+      "text": "The popliteal artery provides blood to the knee via the genicular anastomosis. Which of the following is NOT one of the five direct genicular branches originating from the popliteal artery?",
+      "options": [
+        "Superior lateral genicular artery",
+        "Middle genicular artery",
+        "Descending genicular artery",
+        "Inferior medial genicular artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Descending genicular artery",
+      "explanation": "The popliteal artery gives off five branches: superior lateral/medial, inferior lateral/medial, and middle genicular arteries. The descending genicular artery is a branch of the *femoral* artery.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana201-ll-joints-35",
+      "text": "The patellofemoral articulation allows the quadriceps tendon to insert effectively. How does the patella biomechanically enhance the power of the knee extensors?",
+      "options": [
+        "By acting as a shock absorber",
+        "By providing a fulcrum that increases the angle of insertion",
+        "By directly innervating the vastus medialis",
+        "By preventing lateral tracking of the tibia"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. By providing a fulcrum that increases the angle of insertion",
+      "explanation": "The patella displaces the quadriceps tendon anteriorly, acting as a fulcrum. This increases the angle of pull on the tibia, significantly enhancing the mechanical advantage and power of knee extension.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana201-ll-joints-36",
+      "text": "The deltoid ligament of the ankle is massive and strong. It fans out from the medial malleolus to attach to three different tarsal bones. Which bone is NOT an attachment site for the deltoid ligament?",
+      "options": [
+        "Talus",
+        "Calcaneus",
+        "Navicular",
+        "Cuboid"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Cuboid",
+      "explanation": "The deltoid (medial) ligament attaches to the talus (anterior and posterior tibiotalar parts), the calcaneus (tibiocalcaneal part), and the navicular (tibionavicular part). It does not reach the cuboid.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana201-ll-joints-37",
+      "text": "Which feature of the hip joint anatomy is functionally responsible for 'pulling' the head of the femur tightly into the acetabulum posteriorly, where the capsular ligaments are weakest?",
+      "options": [
+        "The transverse acetabular ligament",
+        "The strong and numerous medial rotator muscles",
+        "The tension of the iliofemoral ligament",
+        "The negative pressure within the joint cavity"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The strong and numerous medial rotator muscles",
+      "explanation": "The hip joint demonstrates reciprocal strength: anteriorly the ligaments are strong but flexor muscles are relatively weak; posteriorly, the ligaments are weaker, but the short lateral (external) rotators are strong and numerous, actively pulling the head into the socket.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana201-ll-joints-38",
+      "text": "The \"dashboard injury\" typically occurs when a flexed knee strikes the dashboard during a car crash, forcing the tibia posteriorly. Which ligament is primarily ruptured in this specific mechanism?",
+      "options": [
+        "Anterior cruciate ligament",
+        "Posterior cruciate ligament",
+        "Patellar ligament",
+        "Lateral collateral ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Posterior cruciate ligament",
+      "explanation": "A posterior force directed on the proximal tibia while the knee is flexed (like hitting a dashboard) forcefully translates the tibia backward relative to the femur, rupturing the posterior cruciate ligament (PCL).",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana201-ll-joints-39",
+      "text": "Which bursa is situated superficially between the skin and the tibial tuberosity (or patellar ligament), and can become inflamed from chronic friction on the shins (e.g., \"clergyman's knee\")?",
+      "options": [
+        "Prepatellar bursa",
+        "Suprapatellar bursa",
+        "Deep infrapatellar bursa",
+        "Superficial infrapatellar bursa"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Superficial infrapatellar bursa",
+      "explanation": "The superficial infrapatellar bursa lies directly between the skin and the patellar ligament/tibial tuberosity. Inflammation here is classically termed \"clergyman's knee.\"",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana201-ll-joints-40",
+      "text": "The proximal tibiofibular joint receives its arterial supply from the inferior genicular arteries and which other recurrent vessel?",
+      "options": [
+        "Anterior tibial recurrent artery",
+        "Posterior tibial recurrent artery",
+        "Descending branch of lateral circumflex femoral artery",
+        "Fibular recurrent artery"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Anterior tibial recurrent artery",
+      "explanation": "The anterior tibial recurrent artery branches from the anterior tibial artery just after it passes the interosseous membrane, ascending to supply the proximal tibiofibular joint and the knee anastomosis.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana201-ll-joints-41",
+      "text": "A posterior dislocation of the hip (90% of cases) causes the femoral head to tear through the posterior capsule. How will the patient's affected limb typically present clinically?",
+      "options": [
+        "Lengthened and laterally rotated",
+        "Shortened and medially rotated",
+        "Shortened and laterally rotated",
+        "Lengthened and medially rotated"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Shortened and medially rotated",
+      "explanation": "In a posterior hip dislocation, the strong anterior muscles (iliopsoas) and the loss of the posterior bony fulcrum pull the femur upwards and rotate it inwards, resulting in a shortened, medially rotated limb.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana201-ll-joints-42",
+      "text": "Which nerve provides the primary sensory innervation to the medial aspect of the knee joint, adhering to Hilton's law?",
+      "options": [
+        "Sciatic nerve",
+        "Obturator nerve",
+        "Femoral nerve",
+        "Common fibular nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Femoral nerve",
+      "explanation": "Hilton's Law states that nerves supplying the muscles crossing a joint also supply the joint. The femoral nerve supplies the anterior thigh muscles (quadriceps) and sends articular branches to the knee joint.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana201-ll-joints-43",
+      "text": "The lateral collateral ligament (LCL) of the knee is a cord-like structure. Where does it attach distally?",
+      "options": [
+        "The lateral condyle of the tibia",
+        "The intercondylar eminence",
+        "A depression on the lateral surface of the fibular head",
+        "Gerdy's tubercle"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A depression on the lateral surface of the fibular head",
+      "explanation": "The LCL extends from the lateral epicondyle of the femur down to a specific depression on the lateral surface of the head of the fibula, separated from the lateral meniscus by the popliteus tendon.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana201-ll-joints-44",
+      "text": "Which movement at the ankle joint is characterized by the anterior, broader part of the talar trochlea engaging fully within the tibiofibular mortise?",
+      "options": [
+        "Plantarflexion",
+        "Eversion",
+        "Dorsiflexion",
+        "Inversion"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Dorsiflexion",
+      "explanation": "During dorsiflexion, the wider anterior aspect of the talus is wedged between the medial and lateral malleoli, tightly spreading the tibia and fibula slightly and creating the most stable position of the ankle joint.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana201-ll-joints-45",
+      "text": "The pubofemoral ligament reinforces the hip capsule anteriorly and inferiorly. What excessive movement does this triangular ligament primarily prevent?",
+      "options": [
+        "Flexion and medial rotation",
+        "Abduction and extension",
+        "Adduction and flexion",
+        "Internal rotation only"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Abduction and extension",
+      "explanation": "The pubofemoral ligament arises from the pubic part of the acetabular rim and superior pubic ramus. Its fibers tighten during abduction and extension, preventing excessive movement in those directions.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana201-ll-joints-46",
+      "text": "A complete rupture of the anterior cruciate ligament (ACL) is diagnosed using the anterior drawer test. What specific abnormal movement defines a positive test?",
+      "options": [
+        "The femur translates anteriorly relative to a fixed tibia.",
+        "The tibia can be pulled excessively forward relative to the femur.",
+        "The knee joint opens excessively on the medial side.",
+        "The tibia can be pushed excessively backward relative to the femur."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The tibia can be pulled excessively forward relative to the femur.",
+      "explanation": "The ACL's primary function is to stop the tibia from sliding forward under the femur. If torn, pulling the tibia anteriorly while the knee is flexed results in excessive forward translation (a positive anterior drawer sign).",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana201-ll-joints-47",
+      "text": "The transverse acetabular ligament is a continuation of the acetabular labrum. What specific gap in the acetabular rim does this ligament bridge?",
+      "options": [
+        "The obturator foramen",
+        "The acetabular notch",
+        "The greater sciatic notch",
+        "The fovea capitis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The acetabular notch",
+      "explanation": "The acetabular notch is the deficiency in the inferior margin of the acetabulum. The transverse acetabular ligament bridges this gap, creating a foramen through which vessels and nerves enter the joint.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana201-ll-joints-48",
+      "text": "Which artery provides a critical collateral pathway to the knee, descending superomedially as a direct branch of the femoral artery just before it enters the adductor hiatus?",
+      "options": [
+        "Descending genicular artery",
+        "Superior medial genicular artery",
+        "Descending branch of the lateral femoral circumflex artery",
+        "Middle genicular artery"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Descending genicular artery",
+      "explanation": "The descending genicular artery arises from the femoral artery in the adductor canal, providing a vital source of collateral blood to the superomedial aspect of the knee's peri-articular anastomosis.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana201-ll-joints-49",
+      "text": "The subtalar joint allows the foot to adjust to lateral slopes. Which two nerves supply the dorsal aspect of this specific joint?",
+      "options": [
+        "Medial and lateral plantar nerves",
+        "Tibial and sural nerves",
+        "Deep fibular nerve",
+        "Saphenous nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Deep fibular nerve",
+      "explanation": "The dorsal aspect of the subtalar joint is innervated by the deep fibular (peroneal) nerve, while the plantar aspect is supplied by the medial or lateral plantar nerves.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana201-ll-joints-50",
+      "text": "Which muscle inserts into the tibial tuberosity via the patellar ligament, acting as the sole extensor of the knee joint?",
+      "options": [
+        "Sartorius",
+        "Biceps femoris",
+        "Quadriceps femoris",
+        "Popliteus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Quadriceps femoris",
+      "explanation": "The four heads of the quadriceps femoris converge to form the quadriceps tendon, which houses the patella and continues as the patellar ligament to insert on the tibial tuberosity, causing knee extension.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 50
+    },
+    {
+      "id": "ana201-ll-joints-51",
+      "text": "A congenital hip dislocation (DDH) is characterized by a shallow acetabulum. Besides a positive Ortolani or Barlow maneuver in infants, what is a common clinical sign of unilateral DDH in an older child?",
+      "options": [
+        "Lengthening of the affected limb",
+        "Inability to flex the hip",
+        "Asymmetrical gluteal or thigh skin folds",
+        "Excessive external rotation of the resting foot"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Asymmetrical gluteal or thigh skin folds",
+      "explanation": "In unilateral DDH, the upward displacement of the femoral head results in apparent limb shortening and \"bunching up\" of soft tissue, leading to asymmetrical gluteal and thigh skin creases compared to the normal side.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 51
+    },
+    {
+      "id": "ana201-ll-joints-52",
+      "text": "The medial meniscus is frequently described as C-shaped. Why is it more susceptible to tearing than the lateral meniscus during rotational stress on a weight-bearing knee?",
+      "options": [
+        "It is composed of weaker hyaline cartilage.",
+        "It is firmly attached to the joint capsule and the medial collateral ligament, reducing its mobility.",
+        "It lacks any attachment to the intercondylar area.",
+        "It bears the entirety of the body's weight during standing."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It is firmly attached to the joint capsule and the medial collateral ligament, reducing its mobility.",
+      "explanation": "The medial meniscus is tightly tethered to the deep surface of the medial collateral ligament and the joint capsule. This fixation prevents it from moving out of the way during abnormal rotational forces, making it prone to tearing.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 52
+    },
+    {
+      "id": "ana201-ll-joints-53",
+      "text": "Which of the following muscles acts to actively \"pull\" the lateral meniscus backward during knee flexion, preventing it from being crushed between the femoral and tibial condyles?",
+      "options": [
+        "Popliteus",
+        "Semimembranosus",
+        "Biceps femoris",
+        "Lateral head of gastrocnemius"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Popliteus",
+      "explanation": "The popliteus muscle sends an aponeurotic expansion to the posterior horn of the lateral meniscus. As the popliteus contracts to unlock and flex the knee, it pulls the lateral meniscus posteriorly.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 53
+    },
+    {
+      "id": "ana201-ll-joints-54",
+      "text": "The popliteal artery provides the main blood supply to the leg. In cases of prolonged severe knee flexion, this artery can become kinked. Which anastomotic network ensures continued blood flow to the lower leg?",
+      "options": [
+        "The trochanteric anastomosis",
+        "The cruciate anastomosis",
+        "The genicular anastomosis",
+        "The plantar arterial arch"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The genicular anastomosis",
+      "explanation": "The genicular anastomosis is a complex network of vessels surrounding the knee joint. It provides collateral circulation bypassing the popliteal artery when it is transiently occluded during extreme knee flexion.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 54
+    },
+    {
+      "id": "ana201-ll-joints-55",
+      "text": "Which of the following joint types accurately describes the proximal tibiofibular joint?",
+      "options": [
+        "Synovial pivot joint",
+        "Fibrous syndesmosis",
+        "Synovial plane joint",
+        "Secondary cartilaginous joint"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Synovial plane joint",
+      "explanation": "The proximal tibiofibular joint is an articulation between the flat facets on the fibular head and the lateral tibial condyle. It is a synovial plane joint, allowing slight gliding movements during ankle dorsiflexion/plantarflexion.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 55
+    },
+    {
+      "id": "ana201-ll-joints-56",
+      "text": "The subtalar joint consists of an articulation between the posterior calcaneal articular facet and the posterior talar articular surface. What type of functional joint does this represent?",
+      "options": [
+        "Ball and socket joint",
+        "Hinge joint",
+        "Plane synovial joint",
+        "Saddle joint"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Plane synovial joint",
+      "explanation": "Functionally, the subtalar joint acts as a plane synovial joint. Although the surfaces are slightly curved, movement is primarily a complex gliding or rotational slip that produces inversion and eversion.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 56
+    },
+    {
+      "id": "ana201-ll-joints-57",
+      "text": "The ankle joint capsule is relatively thin and weak anteriorly and posteriorly to allow for hinge movement. What structures provide the primary medial and lateral stability to the joint?",
+      "options": [
+        "The tendons of the deep posterior compartment",
+        "The strong collateral ligaments (medial deltoid and lateral ligament complex)",
+        "The retinacula",
+        "The shape of the talar head"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The strong collateral ligaments (medial deltoid and lateral ligament complex)",
+      "explanation": "While the mortise provides bony stability, the strong medial (deltoid) and lateral collateral ligaments are the primary soft-tissue restraints preventing side-to-side (eversion/inversion) instability at the hinge-like ankle joint.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 57
+    },
+    {
+      "id": "ana201-ll-joints-58",
+      "text": "Which specific intracapsular structure of the hip joint encloses a branch of the obturator artery but provides minimal mechanical stability to the joint?",
+      "options": [
+        "The zona orbicularis",
+        "The transverse acetabular ligament",
+        "The ligament of the head of femur",
+        "The acetabular labrum"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The ligament of the head of femur",
+      "explanation": "The ligament of the head of femur (ligamentum teres) is a weak, flattened band that runs from the acetabular fossa to the fovea. Its primary role is to carry the small artery to the femoral head, not to provide mechanical stability.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 58
+    },
+    {
+      "id": "ana201-ll-joints-59",
+      "text": "A patient sustains a displaced fracture of the femoral neck. Based on the anatomical vascular supply, why is the risk of avascular necrosis (AVN) of the femoral head so high in this specific injury?",
+      "options": [
+        "The fracture tears the artery of the ligamentum teres, the sole supply to the head.",
+        "The fracture disrupts the ascending retinacular vessels branching from the medial circumflex femoral artery.",
+        "The femoral head lacks any intraosseous blood supply.",
+        "The fracture compresses the superior gluteal artery against the ilium."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The fracture disrupts the ascending retinacular vessels branching from the medial circumflex femoral artery.",
+      "explanation": "The primary blood supply to the femoral head comes from the retinacular arteries (branches of the medial circumflex femoral artery) that travel up the femoral neck beneath the synovium. A transcervical fracture typically shears these delicate vessels.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 59
+    },
+    {
+      "id": "ana201-ll-joints-60",
+      "text": "The medial and lateral circumflex femoral arteries are the primary supply to the hip joint. From which major artery do these vessels typically originate?",
+      "options": [
+        "Internal iliac artery",
+        "Profunda femoris (deep femoral) artery",
+        "External iliac artery",
+        "Obturator artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Profunda femoris (deep femoral) artery",
+      "explanation": "The medial and lateral circumflex femoral arteries most commonly arise near the origin of the profunda femoris artery (the deep branch of the femoral artery), forming an anastomotic ring around the proximal femur.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 60
+    },
+    {
+      "id": "ana201-ll-joints-61",
+      "text": "Which of the following statements correctly describes the anatomical boundaries of the popliteal fossa?",
+      "options": [
+        "The roof is formed by the popliteus muscle.",
+        "The inferolateral border is formed by the medial head of the gastrocnemius.",
+        "The superomedial border is formed by the semimembranosus and semitendinosus muscles.",
+        "The floor is formed solely by the oblique popliteal ligament."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The superomedial border is formed by the semimembranosus and semitendinosus muscles.",
+      "explanation": "The superomedial boundary of the diamond-shaped popliteal fossa is formed by the hamstring muscles that insert medially: the semimembranosus and the more superficial semitendinosus.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 61
+    },
+    {
+      "id": "ana201-ll-joints-62",
+      "text": "The talocrural (ankle) joint allows for dorsiflexion and plantarflexion. Which muscle compartment of the leg contains the primary muscles responsible for plantarflexion?",
+      "options": [
+        "Anterior compartment",
+        "Lateral compartment",
+        "Posterior compartment",
+        "Medial compartment"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Posterior compartment",
+      "explanation": "The powerful muscles of the posterior compartment of the leg (gastrocnemius, soleus, tibialis posterior, FHL, FDL) are the primary plantarflexors of the ankle joint.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 62
+    },
+    {
+      "id": "ana201-ll-joints-63",
+      "text": "A patient is diagnosed with an aneurysm of the popliteal artery. Because the popliteal fascia forming the roof of the fossa is tough and non-extensible, the expanding artery compresses adjacent structures. What is the most likely initial neurological symptom?",
+      "options": [
+        "Foot drop due to common fibular nerve compression",
+        "Loss of sensation over the anterior thigh",
+        "Weakened plantarflexion and paraesthesia on the sole of the foot due to tibial nerve compression",
+        "Paralysis of the quadriceps femoris"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Weakened plantarflexion and paraesthesia on the sole of the foot due to tibial nerve compression",
+      "explanation": "The tibial nerve runs superficially down the center of the popliteal fossa, directly posterior to the popliteal vein and artery. An expanding aneurysm compresses this nerve against the tight fascial roof, affecting plantarflexion and plantar sensation.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 63
+    },
+    {
+      "id": "ana201-ll-joints-64",
+      "text": "The medial (deltoid) ligament of the ankle is highly resistant to tearing. During a severe eversion force, what injury is more likely to occur than a complete rupture of the deltoid ligament?",
+      "options": [
+        "Dislocation of the subtalar joint",
+        "Avulsion fracture of the medial malleolus",
+        "Rupture of the interosseous membrane",
+        "Tearing of the anterior talofibular ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Avulsion fracture of the medial malleolus",
+      "explanation": "The deltoid ligament is so incredibly strong that excessive eversion stress will often pull the medial malleolus entirely off the tibia (an avulsion fracture) rather than tearing the ligament itself.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 64
+    },
+    {
+      "id": "ana201-ll-joints-65",
+      "text": "The posterior cruciate ligament (PCL) is a critical stabilizer of the knee. Which of the following describes its correct anatomical attachments?",
+      "options": [
+        "Anterior intercondylar tibia to medial aspect of lateral femoral condyle",
+        "Posterior intercondylar tibia to lateral aspect of medial femoral condyle",
+        "Lateral meniscus to medial femoral condyle",
+        "Tibial tuberosity to the intercondylar notch"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Posterior intercondylar tibia to lateral aspect of medial femoral condyle",
+      "explanation": "The PCL arises from the posterior intercondylar area of the tibia and passes anteriorly and medially to attach to the lateral surface of the medial femoral condyle.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 65
+    },
+    {
+      "id": "ana201-ll-joints-66",
+      "text": "Which muscle is responsible for locking the knee in full extension during standing, and how does it accomplish this?",
+      "options": [
+        "Biceps femoris; by laterally rotating the tibia",
+        "Popliteus; by medially rotating the tibia",
+        "Quadriceps femoris; by relying on the shape of the medial femoral condyle to force medial rotation of the femur.",
+        "Gastrocnemius; by pulling the femoral condyles posteriorly."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Quadriceps femoris; by relying on the shape of the medial femoral condyle to force medial rotation of the femur.",
+      "explanation": "During the final stages of extension (driven by the quadriceps), the longer articular surface of the medial femoral condyle causes the femur to medially rotate on the fixed tibia, tightening the ligaments and \"locking\" the knee.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 66
+    },
+    {
+      "id": "ana201-ll-joints-67",
+      "text": "The superior and inferior gluteal arteries provide a minor contribution to the hip joint blood supply. Through which specific anatomical pathway do these arteries reach the joint?",
+      "options": [
+        "Through the ligament of the head of femur",
+        "By descending along the sciatic nerve",
+        "By piercing the iliofemoral ligament anteriorly",
+        "By contributing to the trochanteric anastomosis and penetrating the posterior capsule"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. By contributing to the trochanteric anastomosis and penetrating the posterior capsule",
+      "explanation": "The gluteal arteries anastomose with branches of the circumflex femoral arteries in the trochanteric anastomosis, supplying the greater trochanter and sending small branches through the posterior joint capsule.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 67
+    },
+    {
+      "id": "ana201-ll-joints-68",
+      "text": "The distal tibiofibular joint is stabilized by several strong ligaments. Which structure acts as a thick, fibrous sheet binding the shafts of the tibia and fibula together along their length, distributing forces between them?",
+      "options": [
+        "Interosseous membrane",
+        "Anterior inferior tibiofibular ligament",
+        "Posterior superior tibiofibular ligament",
+        "Crural fascia"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Interosseous membrane",
+      "explanation": "The interosseous membrane is a dense fibrous sheet spanning the gap between the interosseous borders of the tibia and fibula. It strongly binds the bones and provides a vast surface area for muscle attachment.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 68
+    },
+    {
+      "id": "ana201-ll-joints-69",
+      "text": "A runner complains of pain at the highest point of their medial foot arch. Which joint, functionally considered part of the subtalar complex in some clinical contexts, forms the highest part of the medial longitudinal arch?",
+      "options": [
+        "Talocalcaneonavicular joint",
+        "Calcaneocuboid joint",
+        "Tarsometatarsal joint",
+        "Metatarsophalangeal joint"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Talocalcaneonavicular joint",
+      "explanation": "The talocalcaneonavicular joint (specifically the articulation between the head of the talus and the navicular bone, supported by the spring ligament) forms the highest, most critical keystone of the medial longitudinal arch.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 69
+    },
+    {
+      "id": "ana201-ll-joints-70",
+      "text": "The superficial fibular (peroneal) nerve supplies the muscles of the lateral compartment of the leg. What joint movement is primarily compromised if this nerve is severed?",
+      "options": [
+        "Dorsiflexion",
+        "Inversion",
+        "Eversion",
+        "Plantarflexion"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Eversion",
+      "explanation": "The lateral compartment muscles (fibularis longus and brevis) are the primary evertors of the foot. Loss of the superficial fibular nerve results in an inability to actively evert the foot.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 70
+    },
+    {
+      "id": "ana201-ll-joints-71",
+      "text": "The hip joint capsule attaches distally to the intertrochanteric line anteriorly. Where does the capsule attach distally on the posterior aspect of the femur?",
+      "options": [
+        "The intertrochanteric crest",
+        "The lesser trochanter",
+        "The femoral neck, proximal to the intertrochanteric crest",
+        "The gluteal tuberosity"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The femoral neck, proximal to the intertrochanteric crest",
+      "explanation": "While the capsule attaches to the intertrochanteric line anteriorly, posteriorly it attaches to the neck of the femur, approximately 1 cm proximal (medial) to the prominent intertrochanteric crest.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 71
+    },
+    {
+      "id": "ana201-ll-joints-72",
+      "text": "A patient is unable to dorsiflex their foot and presents with a \"slapping\" gait. Which nerve, responsible for innervating the anterior compartment of the leg, is most likely compromised?",
+      "options": [
+        "Tibial nerve",
+        "Superficial fibular nerve",
+        "Sural nerve",
+        "Deep fibular nerve"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Deep fibular nerve",
+      "explanation": "The deep fibular nerve innervates the anterior compartment (tibialis anterior, long extensors), which are the exclusive dorsiflexors of the ankle. Damage causes foot drop.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 72
+    },
+    {
+      "id": "ana201-ll-joints-73",
+      "text": "Which structure within the popliteal fossa is located most superficially and laterally, closely following the tendon of the biceps femoris?",
+      "options": [
+        "Popliteal artery",
+        "Popliteal vein",
+        "Common fibular (peroneal) nerve",
+        "Tibial nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Common fibular (peroneal) nerve",
+      "explanation": "The common fibular nerve branches from the sciatic nerve and travels down the lateral margin of the popliteal fossa, immediately medial to the biceps femoris tendon, before winding around the fibular neck.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 73
+    },
+    {
+      "id": "ana201-ll-joints-74",
+      "text": "The subtalar joint relies heavily on ligamentous support due to its relatively flat articular surfaces. Which ligament, located within the sinus tarsi, is considered the strongest and most important stabilizer of this joint?",
+      "options": [
+        "Medial talocalcaneal ligament",
+        "Posterior talocalcaneal ligament",
+        "Interosseous talocalcaneal ligament",
+        "Lateral talocalcaneal ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Interosseous talocalcaneal ligament",
+      "explanation": "The interosseous talocalcaneal ligament is a thick, incredibly strong band of tissue sitting centrally within the sinus tarsi. It firmly binds the talus and calcaneus together, providing the majority of the joint's stability.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 74
+    },
+    {
+      "id": "ana201-ll-joints-75",
+      "text": "The knee joint cavity is extensive and communicates with several bursae. Which large bursa, extending superiorly deep to the quadriceps tendon, communicates directly with the synovial cavity of the knee joint?",
+      "options": [
+        "Suprapatellar bursa",
+        "Prepatellar bursa",
+        "Superficial infrapatellar bursa",
+        "Subcutaneous prepatellar bursa"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Suprapatellar bursa",
+      "explanation": "The suprapatellar bursa is essentially an upward extension of the knee's synovial cavity, situated between the femur and the quadriceps tendon to allow frictionless movement during flexion.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 75
+    },
+    {
+      "id": "ana201-ll-joints-76",
+      "text": "A patient is diagnosed with developmental dysplasia of the hip (DDH). The primary anatomical defect is a shallow acetabulum. Which non-surgical treatment is typically used in infants to hold the femoral head in the fossa and promote normal joint development?",
+      "options": [
+        "A tight spica cast in full extension",
+        "A Pavlik harness",
+        "Immediate surgical labral repair",
+        "Bilateral traction"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A Pavlik harness",
+      "explanation": "The Pavlik harness is the standard conservative treatment for infants with DDH. It maintains the hips in flexion and abduction, keeping the femoral head centered in the acetabulum to stimulate proper bony remodeling.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 76
+    },
+    {
+      "id": "ana201-ll-joints-77",
+      "text": "The medial and lateral circumflex femoral arteries anastomose at the base of the femoral neck. Why is the medial circumflex artery functionally more critical for the survival of the femoral head?",
+      "options": [
+        "It is significantly larger in caliber.",
+        "It provides the only blood supply to the ligamentum teres.",
+        "The lateral circumflex artery must penetrate the thick iliofemoral ligament, limiting its contribution.",
+        "The lateral circumflex artery only supplies the greater trochanter."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The lateral circumflex artery must penetrate the thick iliofemoral ligament, limiting its contribution.",
+      "explanation": "While both contribute to the ring, the lateral circumflex artery has a harder time reaching the joint capsule because it must pierce the massive, dense iliofemoral ligament, making the medial circumflex the dominant supplier.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 77
+    },
+    {
+      "id": "ana201-ll-joints-78",
+      "text": "Which group of muscles acts as the primary dynamic stabilizers (active stabilizers) of the knee joint, counteracting anterior displacement of the tibia?",
+      "options": [
+        "Quadriceps femoris",
+        "Hamstrings",
+        "Gastrocnemius",
+        "Popliteus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Hamstrings",
+      "explanation": "The hamstrings pull the tibia posteriorly. By doing so, they act as dynamic stabilizers that assist the anterior cruciate ligament (ACL) in preventing the tibia from sliding too far forward.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 78
+    },
+    {
+      "id": "ana201-ll-joints-79",
+      "text": "During ankle dorsiflexion, which muscles are primarily responsible for executing the movement?",
+      "options": [
+        "Gastrocnemius and soleus",
+        "Fibularis longus and brevis",
+        "Tibialis posterior and flexor digitorum longus",
+        "Tibialis anterior, extensor digitorum longus, and extensor hallucis longus"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Tibialis anterior, extensor digitorum longus, and extensor hallucis longus",
+      "explanation": "Dorsiflexion is lifting the foot upwards. This is performed entirely by the muscles in the anterior compartment of the leg: the tibialis anterior, extensor hallucis longus, and extensor digitorum longus.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 79
+    },
+    {
+      "id": "ana201-ll-joints-80",
+      "text": "The knee joint is a complex hinge. Which bony structure serves as a fulcrum, increasing the mechanical advantage and efficiency of the quadriceps femoris muscle during knee extension?",
+      "options": [
+        "Tibial tuberosity",
+        "Lateral femoral condyle",
+        "Patella",
+        "Fibular head"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Patella",
+      "explanation": "The patella sits within the quadriceps tendon. By lifting the tendon away from the axis of rotation of the knee, it acts as a mechanical fulcrum, significantly increasing the torque the quadriceps can generate.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 80
+    },
+    {
+      "id": "ana201-ll-joints-81",
+      "text": "Which of the following ligaments of the knee is described as a rounded, cord-like structure that is completely separated from the joint capsule and lateral meniscus by the tendon of the popliteus?",
+      "options": [
+        "Anterior cruciate ligament",
+        "Medial collateral ligament",
+        "Lateral collateral ligament",
+        "Oblique popliteal ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Lateral collateral ligament",
+      "explanation": "The lateral collateral ligament (LCL) is a distinct, cord-like ligament extending from the lateral epicondyle to the fibular head. Crucially, the popliteus tendon passes deep to it, separating it from the lateral meniscus.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 81
+    },
+    {
+      "id": "ana201-ll-joints-82",
+      "text": "A patient suffers a traumatic posterior dislocation of the hip joint. Which nerve is most at risk of injury due to its close anatomical relationship with the posterior aspect of the joint?",
+      "options": [
+        "Femoral nerve",
+        "Obturator nerve",
+        "Sciatic nerve",
+        "Superior gluteal nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Sciatic nerve",
+      "explanation": "The sciatic nerve exits the greater sciatic foramen and runs directly posterior to the hip joint. A posterior dislocation forces the femoral head backward, frequently stretching or crushing the sciatic nerve.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 82
+    },
+    {
+      "id": "ana201-ll-joints-83",
+      "text": "The medial (deltoid) ligament of the ankle consists of four continuous bands. Which of the following is NOT one of the specific named bands of the deltoid ligament?",
+      "options": [
+        "Anterior tibiotalar part",
+        "Tibiocalcaneal part",
+        "Posterior tibiotalar part",
+        "Tibiocuboid part"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Tibiocuboid part",
+      "explanation": "The four parts of the deltoid ligament are named for their tibial origins and tarsal insertions: anterior tibiotalar, posterior tibiotalar, tibiocalcaneal, and tibionavicular. It does not attach to the cuboid.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 83
+    },
+    {
+      "id": "ana201-ll-joints-84",
+      "text": "The subtalar joint is innervated by several nerves. Which nerve supplies the plantar aspect of this joint, adhering to Hilton's Law by also supplying the surrounding plantar muscles?",
+      "options": [
+        "Deep fibular nerve",
+        "Sural nerve",
+        "Medial or lateral plantar nerve",
+        "Saphenous nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Medial or lateral plantar nerve",
+      "explanation": "The plantar aspect of the subtalar joint is supplied by articular branches from the medial or lateral plantar nerves (terminal branches of the tibial nerve), which also innervate the plantar muscles acting on the foot.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 84
+    },
+    {
+      "id": "ana201-ll-joints-85",
+      "text": "Which structure forms the roof of the popliteal fossa, continuous with the fascia lata of the thigh, and prevents the outward expansion of the fossa's contents?",
+      "options": [
+        "The oblique popliteal ligament",
+        "The popliteal fascia",
+        "The semimembranosus tendon expansion",
+        "The posterior capsule of the knee joint"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The popliteal fascia",
+      "explanation": "The popliteal fascia forms the strong, non-extensible roof of the popliteal fossa. It is continuous with the fascia lata above and the crural fascia below, protecting the neurovascular structures.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 85
+    },
+    {
+      "id": "ana201-ll-joints-86",
+      "text": "The distal tibiofibular joint is a fibrous syndesmosis. Which ligament spans horizontally across the posterior aspect of this joint, forming a strong posterior wall for the ankle mortise?",
+      "options": [
+        "Posterior inferior tibiofibular ligament",
+        "Interosseous membrane",
+        "Posterior talofibular ligament",
+        "Calcaneofibular ligament"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Posterior inferior tibiofibular ligament",
+      "explanation": "The posterior inferior tibiofibular ligament (and its lower continuation, the inferior transverse tibiofibular ligament) strongly binds the distal tibia and fibula posteriorly, forming the back wall of the mortise socket.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 86
+    },
+    {
+      "id": "ana201-ll-joints-87",
+      "text": "Which intracapsular structure of the knee attaches to the posterior intercondylar area of the tibia and prevents the tibia from displacing posteriorly under the femur?",
+      "options": [
+        "Anterior cruciate ligament",
+        "Medial meniscus",
+        "Posterior cruciate ligament",
+        "Transverse ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Posterior cruciate ligament",
+      "explanation": "The posterior cruciate ligament (PCL) is named for its tibial attachment (posterior intercondylar area). Its primary mechanical role is to resist posterior translation of the tibia relative to the femur.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 87
+    },
+    {
+      "id": "ana201-ll-joints-88",
+      "text": "A football player is tackled from the lateral side, sustaining a severe valgus force to the knee. An MRI confirms a rupture of the medial collateral ligament (MCL). Why is the clinician highly suspicious of a concurrent medial meniscus tear?",
+      "options": [
+        "Both structures share the exact same blood supply.",
+        "The ACL inevitably ruptures first, taking the meniscus with it.",
+        "The deep fibers of the MCL blend directly into the medial meniscus.",
+        "The medial meniscus provides all the valgus stability for the knee."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The deep fibers of the MCL blend directly into the medial meniscus.",
+      "explanation": "The inner surface of the MCL is firmly attached to the outer margin of the medial meniscus. When the MCL is stretched to the point of rupture by a valgus force, it physically tears the attached meniscus.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 88
+    },
+    {
+      "id": "ana201-ll-joints-89",
+      "text": "The ankle joint (talocrural joint) is most stable in which position, and why?",
+      "options": [
+        "Plantarflexion; the collateral ligaments are maximally taut.",
+        "Dorsiflexion; the broader anterior part of the talar trochlea is wedged into the mortise.",
+        "Eversion; the talus locks against the medial malleolus.",
+        "Inversion; the lateral ligaments prevent further movement."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Dorsiflexion; the broader anterior part of the talar trochlea is wedged into the mortise.",
+      "explanation": "The superior articular surface of the talus is wider anteriorly. When the foot is dorsiflexed, this wide anterior wedge is forced tightly between the malleoli, providing maximum bony stability to the joint.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 89
+    },
+    {
+      "id": "ana201-ll-joints-90",
+      "text": "The hip joint is classified as a ball-and-socket synovial joint. What specific fibrocartilaginous structure surrounds the rim of the acetabulum, deepening the socket to enhance stability?",
+      "options": [
+        "The transverse acetabular ligament",
+        "The acetabular labrum",
+        "The zona orbicularis",
+        "The articular cartilage of the lunate surface"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The acetabular labrum",
+      "explanation": "The acetabular labrum is a lip of fibrocartilage that attaches to the bony rim of the acetabulum. It deepens the socket by roughly 10%, tightly gripping the femoral head and increasing joint stability.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 90
+    },
+    {
+      "id": "ana201-ll-joints-91",
+      "text": "Which artery, acting as a crucial collateral bypass for the popliteal artery, descends superolaterally toward the knee as a branch of the lateral circumflex femoral artery?",
+      "options": [
+        "Superior lateral genicular artery",
+        "Descending branch of the lateral femoral circumflex artery",
+        "Anterior tibial recurrent artery",
+        "Inferior lateral genicular artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Descending branch of the lateral femoral circumflex artery",
+      "explanation": "The descending branch of the lateral circumflex femoral artery travels down the lateral thigh to join the genicular anastomosis, providing a collateral route if the superficial femoral or popliteal arteries are occluded.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 91
+    },
+    {
+      "id": "ana201-ll-joints-92",
+      "text": "The popliteal fossa is a major transitional zone. Which of the following correctly orders its primary contents from most superficial to deepest?",
+      "options": [
+        "Popliteal artery, Popliteal vein, Tibial nerve",
+        "Tibial nerve, Popliteal artery, Popliteal vein",
+        "Tibial nerve, Popliteal vein, Popliteal artery",
+        "Popliteal vein, Tibial nerve, Popliteal artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Tibial nerve, Popliteal vein, Popliteal artery",
+      "explanation": "If you dissect through the roof (popliteal fascia) and look straight down into the fossa, the first major structure you encounter is the Tibial nerve, then the Popliteal vein, and finally the deepest structure against the bone is the Popliteal artery.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 92
+    },
+    {
+      "id": "ana201-ll-joints-93",
+      "text": "Which of the following ligaments of the hip joint spans between the superior pubic ramus and the intertrochanteric line, specifically functioning to prevent excessive abduction and extension?",
+      "options": [
+        "Iliofemoral ligament",
+        "Ischiofemoral ligament",
+        "Pubofemoral ligament",
+        "Ligamentum teres"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Pubofemoral ligament",
+      "explanation": "The pubofemoral ligament reinforces the anterior and inferior aspects of the hip capsule. Its location and fiber orientation make it the primary restraint against excessive abduction (spreading the legs) and extension.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 93
+    },
+    {
+      "id": "ana201-ll-joints-94",
+      "text": "The proximal tibiofibular joint occasionally communicates directly with the synovial cavity of the knee joint. This communication typically occurs through which specific bursa?",
+      "options": [
+        "Prepatellar bursa",
+        "Semimembranosus bursa",
+        "Popliteus bursa (subpopliteal recess)",
+        "Suprapatellar bursa"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Popliteus bursa (subpopliteal recess)",
+      "explanation": "In about 20% of people, the synovial cavity of the proximal tibiofibular joint communicates with the knee joint cavity via the subpopliteal recess (the bursa deep to the popliteus tendon).",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 94
+    },
+    {
+      "id": "ana201-ll-joints-95",
+      "text": "A patient with osteoarthritis of the knee develops a large swelling in the popliteal fossa. The swelling is confirmed to be a Baker's cyst. Which specific anatomical space is distended by synovial fluid in this condition?",
+      "options": [
+        "The popliteal vein",
+        "The suprapatellar bursa",
+        "The semimembranosus bursa",
+        "The deep infrapatellar bursa"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The semimembranosus bursa",
+      "explanation": "A Baker's cyst is an abnormal fluid accumulation in the semimembranosus bursa (located between the medial head of the gastrocnemius and the semimembranosus tendon), which often communicates with the knee joint.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 95
+    },
+    {
+      "id": "ana201-ll-joints-96",
+      "text": "The ankle joint receives its arterial supply from branches of the anterior tibial, posterior tibial, and fibular arteries. Which specific branches form the anastomotic network directly around the malleoli?",
+      "options": [
+        "Plantar arteries",
+        "Genicular arteries",
+        "Malleolar branches",
+        "Dorsalis pedis branches"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Malleolar branches",
+      "explanation": "The anterior tibial, posterior tibial, and fibular arteries all give off specific medial and lateral malleolar branches that form an anastomotic network supplying the capsule and ligaments of the ankle joint.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 96
+    },
+    {
+      "id": "ana201-ll-joints-97",
+      "text": "The medial and lateral menisci act as shock absorbers in the knee. They are primarily composed of which type of tissue?",
+      "options": [
+        "Hyaline cartilage",
+        "Fibrocartilage",
+        "Elastic cartilage",
+        "Dense regular connective tissue"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Fibrocartilage",
+      "explanation": "The menisci are wedge-shaped rings composed of tough, resilient fibrocartilage, allowing them to withstand and distribute the immense compressive forces transmitted through the knee joint.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 97
+    },
+    {
+      "id": "ana201-ll-joints-98",
+      "text": "Which of the following statements regarding the stability of the subtalar joint is anatomically correct?",
+      "options": [
+        "It relies entirely on the bony congruency of the talus and calcaneus.",
+        "The medial and lateral talocalcaneal ligaments provide the vast majority of its strength.",
+        "The interosseous talocalcaneal ligament within the sinus tarsi is its strongest stabilizer.",
+        "The joint capsule is thick and tight, preventing any subluxation."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The interosseous talocalcaneal ligament within the sinus tarsi is its strongest stabilizer.",
+      "explanation": "The articulating surfaces of the subtalar joint are relatively flat. It relies heavily on ligaments, the strongest and most crucial of which is the massive interosseous talocalcaneal ligament located deep within the sinus tarsi.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 98
+    },
+    {
+      "id": "ana201-ll-joints-99",
+      "text": "The popliteus muscle unlocks the knee to initiate flexion. What is its specific action on the femur when the tibia is fixed (e.g., during the initial phase of squatting from a standing position)?",
+      "options": [
+        "It laterally rotates the femur on the tibia.",
+        "It medially rotates the femur on the tibia.",
+        "It translates the femur anteriorly.",
+        "It actively flexes the patellofemoral joint."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It laterally rotates the femur on the tibia.",
+      "explanation": "When the foot is planted (tibia fixed), the popliteus contracts to *laterally* rotate the femur on the tibia. (Conversely, if the femur is fixed and the leg is swinging, it *medially* rotates the tibia). Both actions \"unlock\" the extended knee.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 99
+    },
+    {
+      "id": "ana201-ll-joints-100",
+      "text": "A severe \"sprained ankle\" most commonly involves tearing of the lateral ligament complex due to forced inversion. If the inversion force is extreme, which bony prominence may suffer an avulsion fracture caused by the pull of the lateral ligaments?",
+      "options": [
+        "Medial malleolus",
+        "Sustentaculum tali",
+        "Lateral malleolus",
+        "Base of the 5th metatarsal"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Lateral malleolus",
+      "explanation": "While severe eversion avulses the medial malleolus, severe forced inversion places immense tension on the lateral ligaments, which can tear or, alternatively, avulse (pull off) the tip of the lateral malleolus of the fibula to which they attach.",
+      "section": "Joints of the Lower Limb",
+      "questionNumber": 100
+    }
+  ]
+}
