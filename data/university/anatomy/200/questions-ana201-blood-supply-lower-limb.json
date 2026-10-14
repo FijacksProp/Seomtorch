@@ -1,0 +1,1510 @@
+{
+  "title": "Blood Supply of the Lower Limb",
+  "course": "ANA 201",
+  "totalQuestions": 100,
+  "sections": [
+    "Blood Supply of the Lower Limb (Q1-Q100)"
+  ],
+  "questions": [
+    {
+      "id": "ana201-ll-blood-supply-1",
+      "text": "The great saphenous vein is a major superficial vessel of the lower limb. How is this vein anatomically formed at its most distal point?",
+      "options": [
+        "By the union of the dorsal vein of the great toe and the dorsal venous arch of the foot",
+        "By the continuation of the lateral marginal vein of the foot",
+        "By the confluence of the plantar venous network and the medial marginal vein",
+        "By the direct continuation of the anterior tibial vein across the ankle"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. By the union of the dorsal vein of the great toe and the dorsal venous arch of the foot",
+      "explanation": "The great saphenous vein originates on the medial aspect of the foot through the union of the dorsal vein of the great toe and the dorsal venous arch.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana201-ll-blood-supply-2",
+      "text": "A patient presents with sudden calf swelling and a positive Homan's sign. The physician suspects a clot in the deep venous system. Which of the following is the most severe, potentially life-threatening complication of this condition?",
+      "options": [
+        "Intermittent claudication",
+        "Critical limb ischemia",
+        "Pulmonary embolism",
+        "Adventitial cyst formation"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Pulmonary embolism",
+      "explanation": "Deep Vein Thrombosis (DVT) can lead to a pulmonary embolism (PE) if the clot breaks loose and travels to the lungs, making it a critical complication.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana201-ll-blood-supply-3",
+      "text": "During physical activity, blood in the deep veins of the leg is propelled toward the heart against gravity. Which mechanism is primarily responsible for this upward propulsion?",
+      "options": [
+        "Negative intra-abdominal pressure",
+        "The musculovenous pump",
+        "Unidirectional arterial pulsations",
+        "Gravity-assisted venous return"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The musculovenous pump",
+      "explanation": "The musculovenous pump involves the contraction of surrounding muscles within tight fascial compartments, which squeezes the deep veins and forces blood upward through one-way valves.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana201-ll-blood-supply-4",
+      "text": "The external iliac artery is the primary source of arterial blood for the lower limb. At which specific anatomical landmark does it transition into the femoral artery?",
+      "options": [
+        "Adductor hiatus",
+        "Greater sciatic foramen",
+        "Superior border of the popliteus",
+        "Inguinal ligament"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Inguinal ligament",
+      "explanation": "The external iliac artery officially changes its name to the femoral artery as it passes under the inguinal ligament to enter the femoral triangle.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana201-ll-blood-supply-5",
+      "text": "Deep veins in the lower limb often present as paired, interconnecting vessels that flank an artery. What is the clinical and anatomical term for this specific venous arrangement?",
+      "options": [
+        "Perforating veins",
+        "Anastomotic venous networks",
+        "Venae comitantes",
+        "Superficial venous arches"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Venae comitantes",
+      "explanation": "Venae comitantes are paired accompanying veins that wrap around an artery, utilizing the artery's pulsations within a shared sheath to assist venous return.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana201-ll-blood-supply-6",
+      "text": "To prevent the backflow of blood, the great saphenous vein is equipped with numerous valves. Approximately how many valves does this vein typically contain along its course?",
+      "options": [
+        "10 to 12 valves",
+        "3 to 5 valves",
+        "15 to 20 valves",
+        "20 to 25 valves"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. 10 to 12 valves",
+      "explanation": "The great saphenous vein possesses 10-12 valves, which are more numerous in the leg than in the thigh, helping to break the blood column into shorter segments.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana201-ll-blood-supply-7",
+      "text": "Perforating veins play a critical role in lower limb hemodynamics. What is their primary anatomical function?",
+      "options": [
+        "To bypass occluded superficial veins",
+        "To supply oxygenated blood to the deep fascia",
+        "To connect the anterior and posterior tibial venous systems",
+        "To allow blood to flow only from the superficial veins to the deep veins"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. To allow blood to flow only from the superficial veins to the deep veins",
+      "explanation": "Perforating veins penetrate the deep fascia and contain valves that ensure unidirectional blood flow from the superficial venous system into the deep venous system.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana201-ll-blood-supply-8",
+      "text": "Which superficial vein ascends posterior to the lateral malleolus and runs along the lateral border of the calcaneal tendon?",
+      "options": [
+        "Great saphenous vein",
+        "Small saphenous vein",
+        "Lateral plantar vein",
+        "Fibular vein"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Small saphenous vein",
+      "explanation": "The small saphenous vein originates from the lateral side of the foot and ascends posterior to the lateral malleolus before moving up the posterior calf.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana201-ll-blood-supply-9",
+      "text": "The profunda femoris artery gives rise to three main sets of branches. Which of these branches wraps around the posteromedial aspect of the femur to supply its head and neck?",
+      "options": [
+        "Lateral femoral circumflex artery",
+        "Medial femoral circumflex artery",
+        "Superior gluteal artery",
+        "First perforating artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Medial femoral circumflex artery",
+      "explanation": "The medial femoral circumflex artery travels posteromedially and is the primary source of arterial blood to the head and neck of the femur.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana201-ll-blood-supply-10",
+      "text": "The femoral artery traverses the anterior thigh and eventually enters the posterior compartment. Through which specific structure does it pass to become the popliteal artery?",
+      "options": [
+        "Obturator canal",
+        "Femoral ring",
+        "Lesser sciatic foramen",
+        "Adductor hiatus"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Adductor hiatus",
+      "explanation": "The adductor hiatus is an opening in the adductor magnus muscle through which the femoral artery passes to reach the popliteal fossa, where it becomes the popliteal artery.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana201-ll-blood-supply-11",
+      "text": "A fracture of the femoral neck is clinically significant due to the high risk of damaging the retinacular arteries. What is the primary complication resulting from this vascular damage?",
+      "options": [
+        "Avascular necrosis of the femoral head",
+        "Severe compartment syndrome of the thigh",
+        "Complete paralysis of the quadriceps femoris",
+        "Ischemic ulceration of the medial knee"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Avascular necrosis of the femoral head",
+      "explanation": "Because the medial circumflex femoral artery is the primary supply to the femoral head, a femoral neck fracture can tear these vessels, leading to bone death (avascular necrosis).",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana201-ll-blood-supply-12",
+      "text": "Which artery descends through the obturator canal to supply the pectineus, obturator externus, adductor muscles, and gracilis?",
+      "options": [
+        "Deep femoral artery",
+        "Internal pudendal artery",
+        "Obturator artery",
+        "Inferior gluteal artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Obturator artery",
+      "explanation": "The obturator artery arises from the internal iliac artery, passes through the obturator canal, and gives off an anterior branch that supplies these specific medial thigh muscles.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana201-ll-blood-supply-13",
+      "text": "The superior gluteal artery exits the pelvis to enter the gluteal region. What is its precise anatomical relationship to the piriformis muscle as it exits the greater sciatic foramen?",
+      "options": [
+        "It pierces the piriformis muscle directly.",
+        "It passes inferior to the piriformis muscle.",
+        "It passes medial to the piriformis muscle.",
+        "It passes superior to the piriformis muscle."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. It passes superior to the piriformis muscle.",
+      "explanation": "The superior gluteal artery enters the gluteal region through the greater sciatic foramen strictly superior to the piriformis muscle.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana201-ll-blood-supply-14",
+      "text": "The dorsalis pedis artery is the primary arterial supply to the dorsum of the foot. It is a direct distal continuation of which major leg artery?",
+      "options": [
+        "Fibular artery",
+        "Anterior tibial artery",
+        "Posterior tibial artery",
+        "Popliteal artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Anterior tibial artery",
+      "explanation": "As the anterior tibial artery crosses the ankle joint into the foot, it continues under a new name: the dorsalis pedis artery.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana201-ll-blood-supply-15",
+      "text": "Which artery passes anteriorly through a gap in the superior part of the interosseous membrane to supply the anterior compartment of the leg?",
+      "options": [
+        "Fibular artery",
+        "Posterior tibial artery",
+        "Anterior tibial artery",
+        "Descending genicular artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Anterior tibial artery",
+      "explanation": "The anterior tibial artery originates from the popliteal artery and immediately passes through the interosseous membrane to descend between the tibialis anterior and extensor digitorum longus.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana201-ll-blood-supply-16",
+      "text": "Which major deep vein of the thigh joins the terminal portion of the femoral vein, draining blood from the thigh muscles via perforating veins?",
+      "options": [
+        "Deep vein of the thigh (profunda femoris vein)",
+        "Small saphenous vein",
+        "External iliac vein",
+        "Popliteal vein"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Deep vein of the thigh (profunda femoris vein)",
+      "explanation": "The deep vein of the thigh (profunda femoris vein) collects blood from the muscular perforating veins and empties directly into the terminal portion of the femoral vein.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana201-ll-blood-supply-17",
+      "text": "The deep plantar arch of the foot is primarily formed by the lateral plantar artery. Which artery provides the deep plantar branch that completes this arch medially?",
+      "options": [
+        "Anterior tibial artery",
+        "Medial plantar artery",
+        "Dorsalis pedis artery",
+        "Fibular artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Dorsalis pedis artery",
+      "explanation": "The dorsalis pedis artery gives off a deep plantar artery that pierces the first dorsal interosseous muscle to join and complete the deep plantar arch.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana201-ll-blood-supply-18",
+      "text": "When a clinician palpates the dorsalis pedis pulse, they typically locate it on the dorsum of the foot. The artery runs just lateral to the tendon of which muscle?",
+      "options": [
+        "Extensor hallucis longus",
+        "Tibialis anterior",
+        "Extensor digitorum brevis",
+        "Fibularis tertius"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Extensor hallucis longus",
+      "explanation": "The dorsalis pedis pulse is found just lateral to the prominent tendon of the extensor hallucis longus on the dorsal aspect of the foot.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana201-ll-blood-supply-19",
+      "text": "The medial plantar artery splits into superficial and deep branches. Which specific musculature is primarily supplied by its deep branch?",
+      "options": [
+        "Muscles of the lateral compartment of the leg",
+        "Muscles of the fifth toe",
+        "Muscles of the central plantar aponeurosis",
+        "Muscles of the great toe"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Muscles of the great toe",
+      "explanation": "The medial plantar artery's deep branch is primarily responsible for supplying the muscles associated with the great toe.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana201-ll-blood-supply-20",
+      "text": "To evaluate the posterior tibial pulse, a clinician must palpate the artery in the ankle region. Where is this pulse most reliably found?",
+      "options": [
+        "Anterior to the lateral malleolus",
+        "Inferoposterior to the medial malleolus",
+        "Deep within the tarsal sinus",
+        "Posterior to the lateral malleolus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Inferoposterior to the medial malleolus",
+      "explanation": "The posterior tibial artery passes through the tarsal tunnel, making its pulse palpable in the groove inferoposterior to the medial malleolus.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana201-ll-blood-supply-21",
+      "text": "An aneurysm of the popliteal artery can compress adjacent structures within the popliteal fossa. Which nerve is most susceptible to this compression, potentially leading to weakened plantarflexion?",
+      "options": [
+        "Common fibular nerve",
+        "Tibial nerve",
+        "Saphenous nerve",
+        "Sural nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Tibial nerve",
+      "explanation": "The tibial nerve runs centrally through the popliteal fossa alongside the popliteal vessels. An expanding aneurysm here can compress it, affecting plantarflexion and foot sensation.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana201-ll-blood-supply-22",
+      "text": "The superficial lymphatic vessels accompanying the great saphenous vein drain into a specific group of nodes in the groin. What is this group called?",
+      "options": [
+        "Vertical group of superficial inguinal lymph nodes",
+        "Deep inguinal lymph nodes",
+        "Popliteal lymph nodes",
+        "External iliac lymph nodes"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Vertical group of superficial inguinal lymph nodes",
+      "explanation": "Lymphatics shadowing the great saphenous vein empty primarily into the vertical (inferior) group of the superficial inguinal lymph nodes.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana201-ll-blood-supply-23",
+      "text": "Intermittent claudication is a classic symptom of Peripheral Arterial Disease (PAD). Which clinical test is commonly used to assess the severity of this arterial occlusion?",
+      "options": [
+        "Homan's sign test",
+        "Sentinel lymph node biopsy",
+        "Venous duplex ultrasound",
+        "Ankle-Brachial Index (ABI)"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Ankle-Brachial Index (ABI)",
+      "explanation": "The Ankle-Brachial Index (ABI) is a diagnostic test that compares the blood pressure in the ankle with that in the arm to evaluate the severity of PAD.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana201-ll-blood-supply-24",
+      "text": "Which lymph node cluster acts as the primary drainage site for the lymphatic vessels that accompany the small saphenous vein?",
+      "options": [
+        "Superficial inguinal lymph nodes",
+        "Deep inguinal lymph nodes",
+        "Popliteal lymph nodes",
+        "Common iliac lymph nodes"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Popliteal lymph nodes",
+      "explanation": "The lymphatic vessels tracking with the small saphenous vein drain directly into the popliteal lymph nodes located within the popliteal fossa.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana201-ll-blood-supply-25",
+      "text": "The deep inguinal lymph nodes receive lymph from the popliteal nodes and deep structures of the limb. Where are they anatomically situated?",
+      "options": [
+        "Under the deep fascia on the medial aspect of the femoral vein",
+        "Superficial to the fascia lata near the saphenous opening",
+        "Along the course of the external iliac artery",
+        "Encircling the adductor hiatus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Under the deep fascia on the medial aspect of the femoral vein",
+      "explanation": "The deep inguinal lymph nodes are positioned deeply, just under the deep fascia and specifically along the medial aspect of the femoral vein.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana201-ll-blood-supply-26",
+      "text": "The genicular anastomosis provides critical collateral circulation around the knee. Which specific branch of the popliteal artery contributes to this network on the superomedial aspect?",
+      "options": [
+        "Descending genicular artery",
+        "Superior medial genicular artery",
+        "Middle genicular artery",
+        "Inferior medial genicular artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Superior medial genicular artery",
+      "explanation": "The superior medial genicular artery is a direct branch of the popliteal artery that wraps around the femur superior to the medial condyle.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana201-ll-blood-supply-27",
+      "text": "A patient presents with massive swelling of the lower limb due to a parasitic infection (filariasis). What is the specific medical term for this condition caused by lymphatic blockage?",
+      "options": [
+        "Deep vein thrombosis",
+        "Critical limb ischemia",
+        "Lymphedema",
+        "Compartment syndrome"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Lymphedema",
+      "explanation": "Lymphedema is the accumulation of interstitial fluid resulting from the blockage, damage, or removal of lymphatic vessels and nodes.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana201-ll-blood-supply-28",
+      "text": "Which artery arises directly from the femoral artery and descends superomedially to participate in the genicular anastomosis?",
+      "options": [
+        "Superior lateral genicular artery",
+        "Medial circumflex femoral artery",
+        "Anterior tibial recurrent artery",
+        "Descending genicular artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Descending genicular artery",
+      "explanation": "The descending genicular artery branches off the femoral artery just before it passes through the adductor hiatus, contributing to the knee's collateral circulation.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana201-ll-blood-supply-29",
+      "text": "The inferior gluteal artery leaves the pelvis to enter the gluteal region through the greater sciatic foramen. Where does it emerge relative to the piriformis muscle?",
+      "options": [
+        "Inferior to the piriformis",
+        "Superior to the piriformis",
+        "Medial to the piriformis",
+        "Anterior to the piriformis"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Inferior to the piriformis",
+      "explanation": "The inferior gluteal artery passes out of the pelvis through the greater sciatic foramen specifically below (inferior to) the piriformis muscle, supplying the gluteus maximus and posterior thigh.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana201-ll-blood-supply-30",
+      "text": "The circumflex fibular branch joins the anastomoses around the knee. From which parent vessel does it typically originate?",
+      "options": [
+        "Popliteal artery",
+        "Anterior tibial artery",
+        "Posterior tibial artery",
+        "Dorsalis pedis artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Posterior tibial artery",
+      "explanation": "The circumflex fibular branch typically arises from the posterior tibial artery and winds laterally around the fibular neck.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana201-ll-blood-supply-31",
+      "text": "The lateral circumflex femoral artery gives off a specific branch that descends to join the genicular anastomosis. What is the name of this branch?",
+      "options": [
+        "Transverse branch",
+        "Descending branch of the lateral circumflex femoral artery",
+        "First perforating artery",
+        "Superior lateral genicular artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Descending branch of the lateral circumflex femoral artery",
+      "explanation": "The lateral circumflex femoral artery has a descending branch that travels down the lateral thigh to anastomose with the superior lateral genicular artery at the knee.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana201-ll-blood-supply-32",
+      "text": "Which artery branches from the anterior tibial artery and travels superiorly to contribute to the inferolateral aspect of the genicular anastomosis?",
+      "options": [
+        "Anterior tibial recurrent artery",
+        "Inferior lateral genicular artery",
+        "Fibular artery",
+        "Arcuate artery"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Anterior tibial recurrent artery",
+      "explanation": "The anterior tibial recurrent artery ascends from the anterior tibial artery to join the peri-articular anastomosis around the knee joint.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana201-ll-blood-supply-33",
+      "text": "Which group of arteries perforates the aponeurotic portion of the adductor magnus attachment to supply the central portions of the hamstring muscles?",
+      "options": [
+        "Descending genicular branches",
+        "Inferior gluteal branches",
+        "Perforating branches of the profunda femoris",
+        "Medial circumflex femoral branches"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Perforating branches of the profunda femoris",
+      "explanation": "The profunda femoris artery gives rise to three or four perforating arteries that piece the adductor magnus to enter the posterior compartment, serving as the primary blood supply for the hamstrings.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana201-ll-blood-supply-34",
+      "text": "In a coronary artery bypass grafting (CABG) procedure, which lower limb vessel is frequently harvested due to its superficial location and uniform diameter?",
+      "options": [
+        "Small saphenous vein",
+        "Femoral artery",
+        "Anterior tibial vein",
+        "Great saphenous vein"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Great saphenous vein",
+      "explanation": "The great saphenous vein is highly accessible in the subcutaneous tissue and maintains a remarkably uniform diameter throughout its long course, making it the premier choice for autologous vascular grafts.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana201-ll-blood-supply-35",
+      "text": "The superficial circumflex iliac, superficial epigastric, and external pudendal veins typically empty directly into which vessel near its termination?",
+      "options": [
+        "Femoral vein",
+        "Popliteal vein",
+        "Great saphenous vein",
+        "Small saphenous vein"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Great saphenous vein",
+      "explanation": "Just before piercing the saphenous opening to enter the femoral vein, the great saphenous vein receives several named tributaries from the groin region.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana201-ll-blood-supply-36",
+      "text": "Which superficial vein begins on the lateral side of the foot from the union of the dorsal vein of the little toe with the dorsal venous arch?",
+      "options": [
+        "Lateral marginal vein",
+        "Great saphenous vein",
+        "Accessory saphenous vein",
+        "Small saphenous vein"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Small saphenous vein",
+      "explanation": "The small saphenous vein is formed laterally by the union of the dorsal venous arch and the dorsal vein of the 5th toe, ascending posterior to the lateral malleolus.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana201-ll-blood-supply-37",
+      "text": "The great saphenous vein passes posterior to which prominent bony landmark of the knee region?",
+      "options": [
+        "Lateral condyle of the femur",
+        "Tibial tuberosity",
+        "Medial condyle of the femur",
+        "Head of the fibula"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Medial condyle of the femur",
+      "explanation": "As the great saphenous vein ascends the medial side of the leg and thigh, it specifically passes roughly a hand's breadth posterior to the medial border of the patella, running directly posterior to the medial condyle of the femur.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana201-ll-blood-supply-38",
+      "text": "Deep veins of the leg (anterior tibial, posterior tibial, and fibular veins) converge posterior to the knee to directly flow into which vessel?",
+      "options": [
+        "Great saphenous vein",
+        "Femoral vein",
+        "Profunda femoris vein",
+        "Popliteal vein"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Popliteal vein",
+      "explanation": "All three major paired deep veins of the leg drain proximally into the popliteal vein, which acts as the major deep venous conduit through the popliteal fossa.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana201-ll-blood-supply-39",
+      "text": "The small saphenous vein ascends in the leg by passing between the heads of which muscle before penetrating the deep fascia?",
+      "options": [
+        "Soleus",
+        "Plantaris",
+        "Gastrocnemius",
+        "Popliteus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Gastrocnemius",
+      "explanation": "The small saphenous vein travels superficially up the midline of the posterior calf and then passes subfascially directly between the two bellies of the gastrocnemius muscle.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana201-ll-blood-supply-40",
+      "text": "In cases of melanoma on the lower limb, checking for metastasis involves a biopsy of the sentinel node. In which node group is the sentinel node for the lower limb most commonly found?",
+      "options": [
+        "Popliteal lymph nodes",
+        "Inguinal lymph nodes",
+        "Common iliac lymph nodes",
+        "Deep femoral nodes"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Inguinal lymph nodes",
+      "explanation": "Since almost all superficial lymphatics of the lower limb converge on the inguinal lymph nodes (superficial and deep), a sentinel lymph node biopsy to detect melanoma spread typically targets this groin region.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana201-ll-blood-supply-41",
+      "text": "The genicular anastomosis is essential for providing collateral circulation to the leg. This bypass mechanism is particularly important when which artery is transiently kinked or occluded during full knee flexion?",
+      "options": [
+        "Profunda femoris artery",
+        "Popliteal artery",
+        "Anterior tibial artery",
+        "Posterior tibial artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Popliteal artery",
+      "explanation": "Full flexion of the knee can physically kink and compress the popliteal artery. The rich genicular anastomosis surrounding the joint ensures continuous blood flow to the leg despite this temporary main-vessel occlusion.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana201-ll-blood-supply-42",
+      "text": "The lateral plantar artery arches medially across the foot to form the deep plantar arch. This arch gives rise to multiple branches, including which specific vessels that divide near the bases of the proximal phalanges?",
+      "options": [
+        "Dorsal metatarsal arteries",
+        "Medial calcaneal arteries",
+        "Arcuate arteries",
+        "Plantar metatarsal arteries"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Plantar metatarsal arteries",
+      "explanation": "The deep plantar arch crosses the sole of the foot and gives rise to four plantar metatarsal arteries. These arteries travel distally and bifurcate into plantar digital arteries to supply the toes.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana201-ll-blood-supply-43",
+      "text": "The internal pudendal artery enters the gluteal region through the greater sciatic foramen, descends posterior to the ischial spine, and enters the perineum through which structure?",
+      "options": [
+        "Lesser sciatic foramen",
+        "Obturator canal",
+        "Adductor hiatus",
+        "Inguinal canal"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Lesser sciatic foramen",
+      "explanation": "The internal pudendal artery takes a unique course, leaving the pelvis via the greater sciatic foramen, hooking around the ischial spine, and immediately re-entering the perineum through the lesser sciatic foramen.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana201-ll-blood-supply-44",
+      "text": "The superficial branch of the medial plantar artery supplies the skin on the medial side of the sole. Its more lateral digital branches typically anastomose with which vessels?",
+      "options": [
+        "Deep plantar arch",
+        "Medial plantar metatarsal arteries",
+        "Dorsal metatarsal arteries",
+        "Arcuate artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Medial plantar metatarsal arteries",
+      "explanation": "The lateral digital branches of the superficial medial plantar artery anastomose with the medial plantar metatarsal arteries (which originate from the deep plantar arch) to complete the foot's vascular network.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana201-ll-blood-supply-45",
+      "text": "Deep lymphatic vessels from the leg accompany deep veins and enter the popliteal lymph nodes. Most lymph from these nodes then ascends to directly drain into which node group?",
+      "options": [
+        "Superficial inguinal lymph nodes",
+        "External iliac lymph nodes",
+        "Deep inguinal lymph nodes",
+        "Lumbar lymphatic trunks"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Deep inguinal lymph nodes",
+      "explanation": "Lymph from the popliteal nodes travels up the thigh via deep lymphatic vessels to drain primarily into the deep inguinal lymph nodes located near the femoral vein.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana201-ll-blood-supply-46",
+      "text": "After exiting the femoral triangle, the femoral artery continues down the anterior aspect of the thigh through a specific tunnel. What is the name of this passage?",
+      "options": [
+        "Obturator canal",
+        "Inguinal canal",
+        "Femoral canal",
+        "Adductor canal"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Adductor canal",
+      "explanation": "The femoral artery leaves the femoral triangle and enters the adductor canal (Hunter's canal), a fascial tunnel in the middle third of the thigh that guides the vessel to the adductor hiatus.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana201-ll-blood-supply-47",
+      "text": "Tributaries from the medial and posterior aspects of the thigh frequently unite to form which vein, which often becomes the main communication between the great and small saphenous veins?",
+      "options": [
+        "Lateral cutaneous vein",
+        "Superficial epigastric vein",
+        "Accessory saphenous vein",
+        "Perforating vein of the thigh"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Accessory saphenous vein",
+      "explanation": "The accessory saphenous vein is a common tributary that collects blood from the posteromedial thigh. When prominent, it serves as a major anastomotic channel linking the small and great saphenous systems.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana201-ll-blood-supply-48",
+      "text": "Which vascular condition is defined by incompetent valves that lead to blood pooling, creating dilated and tortuous superficial vessels?",
+      "options": [
+        "Deep vein thrombosis",
+        "Varicose veins",
+        "Arteriovenous fistula",
+        "Aneurysm"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Varicose veins",
+      "explanation": "Varicose veins occur when the venous valves (especially in the great saphenous vein and perforators) become incompetent, allowing blood to flow backward, pool, and distend the superficial veins.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana201-ll-blood-supply-49",
+      "text": "The inferior gluteal artery primarily supplies the gluteus maximus, obturator internus, quadratus femoris, and the superior parts of which muscle group?",
+      "options": [
+        "Quadriceps femoris",
+        "Adductors",
+        "Deep lateral rotators of the hip",
+        "Hamstrings"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Hamstrings",
+      "explanation": "Beyond supplying the major gluteal muscles, the inferior gluteal artery descends to provide blood to the superior origins of the hamstring muscles at the ischial tuberosity.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana201-ll-blood-supply-50",
+      "text": "During coronary angiography, a catheter is often navigated through the cardiovascular system starting from a superficial access point in the lower limb. Which artery is classically catheterized for this procedure?",
+      "options": [
+        "Popliteal artery",
+        "External iliac artery",
+        "Dorsalis pedis artery",
+        "Femoral artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Femoral artery",
+      "explanation": "The femoral artery is superficial and easily palpable within the femoral triangle, making it a standard, accessible puncture site for inserting catheters destined for the aorta and coronary arteries.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 50
+    },
+    {
+      "id": "ana201-ll-blood-supply-51",
+      "text": "When locating the popliteal pulse, the clinician must press deeply into the popliteal fossa. What specific maneuver helps relax the tough popliteal fascia to make this pulse easier to feel?",
+      "options": [
+        "Slightly flexing the knee",
+        "Fully extending the hip",
+        "Plantarflexing the ankle",
+        "Medially rotating the tibia"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Slightly flexing the knee",
+      "explanation": "Slightly flexing the knee joint reduces tension on the popliteal fascia, allowing the clinician's fingers to press deeper into the fossa to detect the artery.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 51
+    },
+    {
+      "id": "ana201-ll-blood-supply-52",
+      "text": "The dorsalis pedis artery supplies the tarsal bones and the dorsal aspect of the metatarsals. Where does it anatomically begin?",
+      "options": [
+        "At the adductor hiatus",
+        "At the bifurcation of the popliteal artery",
+        "Deep to the abductor hallucis muscle",
+        "As the anterior tibial artery enters the foot"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. As the anterior tibial artery enters the foot",
+      "explanation": "The anterior tibial artery changes its name to the dorsalis pedis artery exactly as it crosses the ankle joint and enters the dorsum of the foot.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 52
+    },
+    {
+      "id": "ana201-ll-blood-supply-53",
+      "text": "To locate the posterior tibial pulse, a clinician must palpate the medial aspect of the ankle. What is its exact relationship to the medial malleolus?",
+      "options": [
+        "Directly anterior to it",
+        "Strictly superior to it",
+        "Lateral to it",
+        "Inferoposterior to it"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Inferoposterior to it",
+      "explanation": "The posterior tibial artery courses through the tarsal tunnel, and its pulse is palpable in the groove inferoposterior to the medial malleolus.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 53
+    },
+    {
+      "id": "ana201-ll-blood-supply-54",
+      "text": "Which clinical finding is considered a classic indicator of deep vein thrombosis (DVT) when assessing a patient's calf?",
+      "options": [
+        "Absence of the dorsalis pedis pulse",
+        "Positive Homan's sign",
+        "Pale, cool skin",
+        "Immediate relief of pain upon walking"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Positive Homan's sign",
+      "explanation": "A positive Homan's sign (calf pain upon forced dorsiflexion of the foot) is a classic, though not definitive, clinical sign of deep vein thrombosis in the calf.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 54
+    },
+    {
+      "id": "ana201-ll-blood-supply-55",
+      "text": "A patient with severe peripheral arterial disease (PAD) experiences pain in their calf muscles while walking, which subsides with rest. What is the clinical term for this specific symptom?",
+      "options": [
+        "Critical limb ischemia",
+        "Venous claudication",
+        "Compartment syndrome",
+        "Intermittent claudication"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Intermittent claudication",
+      "explanation": "Intermittent claudication is the reproducible ischemic muscle pain that occurs during exercise and resolves with rest, typically caused by atherosclerosis in the lower limb arteries.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 55
+    },
+    {
+      "id": "ana201-ll-blood-supply-56",
+      "text": "The anterior tibial artery descends the leg accompanied by a specific nerve. Which nerve shares this anterior compartment pathway?",
+      "options": [
+        "Superficial fibular nerve",
+        "Tibial nerve",
+        "Deep fibular nerve",
+        "Sural nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Deep fibular nerve",
+      "explanation": "The anterior tibial artery descends along the interosseous membrane between the tibialis anterior and extensor digitorum longus, accompanied by the deep fibular nerve.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 56
+    },
+    {
+      "id": "ana201-ll-blood-supply-57",
+      "text": "Which of the following structures is an essential component of the lymphatic drainage system that filters lymph directly from the deep tissues of the foot and leg before it reaches the groin?",
+      "options": [
+        "Deep inguinal nodes",
+        "Internal iliac nodes",
+        "Popliteal lymph nodes",
+        "Lumbar trunks"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Popliteal lymph nodes",
+      "explanation": "The popliteal lymph nodes receive deep lymphatic vessels from the foot and leg, acting as the first major filtration station before the lymph ascends to the deep inguinal nodes.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 57
+    },
+    {
+      "id": "ana201-ll-blood-supply-58",
+      "text": "The lateral plantar artery is much larger than its medial counterpart. Together with a branch of the dorsalis pedis, it forms which major arterial structure in the foot?",
+      "options": [
+        "Plantar venous network",
+        "Superficial plantar arch",
+        "Deep plantar arch",
+        "Dorsal venous arch"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Deep plantar arch",
+      "explanation": "The lateral plantar artery crosses the sole of the foot to form the deep plantar arch, which is completed by the deep plantar branch of the dorsalis pedis artery.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 58
+    },
+    {
+      "id": "ana201-ll-blood-supply-59",
+      "text": "In addition to the lateral and medial circumflex femoral arteries, the cruciate anastomosis of the thigh receives a significant contribution from which perforating vessel?",
+      "options": [
+        "Second perforating artery",
+        "Third perforating artery",
+        "Terminal branch of the popliteal",
+        "First perforating artery of the deep femoral"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. First perforating artery of the deep femoral",
+      "explanation": "The cruciate anastomosis, which bypasses blockages between the internal iliac and femoral arteries, includes the inferior gluteal, medial/lateral circumflex femoral, and the first perforating artery.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 59
+    },
+    {
+      "id": "ana201-ll-blood-supply-60",
+      "text": "A surgical patient develops severe swelling and pain in the anterior leg following trauma. The diagnosis is compartment syndrome. What is the most definitive, immediate surgical treatment to prevent tissue necrosis?",
+      "options": [
+        "Embolectomy",
+        "Fasciotomy",
+        "Amputation",
+        "Venous bypass"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Fasciotomy",
+      "explanation": "Compartment syndrome is treated with a fasciotomy, which involves cutting open the deep fascia to relieve the pressure and restore blood flow to the ischemic muscles.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 60
+    },
+    {
+      "id": "ana201-ll-blood-supply-61",
+      "text": "Which large nerve is situated immediately medial to the inferior gluteal artery as it descends through the gluteal region?",
+      "options": [
+        "Superior gluteal nerve",
+        "Pudendal nerve",
+        "Posterior femoral cutaneous nerve",
+        "Sciatic nerve"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Sciatic nerve",
+      "explanation": "The inferior gluteal artery leaves the pelvis inferior to the piriformis and descends on the medial side of the massive sciatic nerve.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 61
+    },
+    {
+      "id": "ana201-ll-blood-supply-62",
+      "text": "The superficial lymphatic vessels accompanying the small saphenous vein drain into the popliteal nodes. From there, the lymph follows deep vessels that eventually terminate in which nodes?",
+      "options": [
+        "Superficial inguinal lymph nodes",
+        "Deep inguinal lymph nodes",
+        "External iliac nodes",
+        "Superficial epigastric nodes"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Deep inguinal lymph nodes",
+      "explanation": "Efferent vessels from the popliteal lymph nodes ascend deep within the thigh to terminate in the deep inguinal lymph nodes.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 62
+    },
+    {
+      "id": "ana201-ll-blood-supply-63",
+      "text": "Which arteries arise from the deep plantar arch and divide near the base of the proximal phalanges to supply the adjacent digits?",
+      "options": [
+        "Dorsal digital arteries",
+        "Arcuate arteries",
+        "Plantar metatarsal arteries",
+        "Lateral tarsal arteries"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Plantar metatarsal arteries",
+      "explanation": "The deep plantar arch gives off four plantar metatarsal arteries that run distally and divide to form the plantar digital arteries for the toes.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 63
+    },
+    {
+      "id": "ana201-ll-blood-supply-64",
+      "text": "Which of the following describes the functional mechanism of venous valves in the lower limbs?",
+      "options": [
+        "They actively contract to pump blood upward.",
+        "They shunt blood from deep veins into superficial veins during exercise.",
+        "Their cuplike sinuses fill from above, occluding the lumen and preventing reflux.",
+        "They open during diastole to allow blood to pool in the soleal sinuses."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Their cuplike sinuses fill from above, occluding the lumen and preventing reflux.",
+      "explanation": "Venous valves are endothelial cusps. When blood tries to flow backward due to gravity, the cuplike sinuses fill, forcing the cusps together to block the lumen and ensure unidirectional flow.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 64
+    },
+    {
+      "id": "ana201-ll-blood-supply-65",
+      "text": "The fibular (peroneal) artery descends in the posterior compartment of the leg. It provides blood to the lateral compartment muscles by giving off which specific branches?",
+      "options": [
+        "Genicular branches",
+        "Recurrent branches",
+        "Perforating branches",
+        "Malleolar branches"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Perforating branches",
+      "explanation": "The fibular artery gives off perforating branches that pierce the posterior intermuscular septum to supply the muscles of the lateral compartment.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 65
+    },
+    {
+      "id": "ana201-ll-blood-supply-66",
+      "text": "Which major lymphatic structures receive lymph directly from both the superficial and deep inguinal lymph nodes before it ascends to the lumbar trunks?",
+      "options": [
+        "Popliteal lymph nodes",
+        "External iliac lymph nodes",
+        "Internal iliac lymph nodes",
+        "Superficial circumflex iliac nodes"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. External iliac lymph nodes",
+      "explanation": "Lymph from both the superficial and deep inguinal nodes drains superiorly into the external iliac lymph nodes, located along the external iliac vein in the pelvis.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 66
+    },
+    {
+      "id": "ana201-ll-blood-supply-67",
+      "text": "The femoral artery gives off the profunda femoris artery. Where does this bifurcation typically occur?",
+      "options": [
+        "Inside the adductor canal",
+        "At the adductor hiatus",
+        "In the popliteal fossa",
+        "Within the femoral triangle"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Within the femoral triangle",
+      "explanation": "The profunda femoris (deep artery of the thigh) arises from the posterolateral aspect of the femoral artery shortly after it enters the femoral triangle.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 67
+    },
+    {
+      "id": "ana201-ll-blood-supply-68",
+      "text": "What is the primary vascular supply to the anterior compartment of the leg?",
+      "options": [
+        "Posterior tibial artery",
+        "Fibular artery",
+        "Anterior tibial artery",
+        "Popliteal artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Anterior tibial artery",
+      "explanation": "The anterior tibial artery passes through the interosseous membrane to provide the sole arterial supply to the muscles of the anterior compartment of the leg.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 68
+    },
+    {
+      "id": "ana201-ll-blood-supply-69",
+      "text": "The medial plantar nerve accompanies the medial plantar artery. Which arterial branch accompanies the deep branch of the lateral plantar nerve to form the deep plantar arch?",
+      "options": [
+        "Dorsalis pedis artery",
+        "Medial plantar artery",
+        "Lateral plantar artery",
+        "Deep plantar artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Lateral plantar artery",
+      "explanation": "The lateral plantar artery arches medially across the foot alongside the deep branch of the lateral plantar nerve, forming the deep plantar arch.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 69
+    },
+    {
+      "id": "ana201-ll-blood-supply-70",
+      "text": "Which superficial vein of the lower limb is a direct continuation of the lateral marginal vein of the foot?",
+      "options": [
+        "Great saphenous vein",
+        "Anterior tibial vein",
+        "Small saphenous vein",
+        "Popliteal vein"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Small saphenous vein",
+      "explanation": "The small saphenous vein begins on the lateral side of the foot as a direct upward continuation of the lateral marginal vein.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 70
+    },
+    {
+      "id": "ana201-ll-blood-supply-71",
+      "text": "The deep veins of the lower limb are characterized by possessing more valves than the superficial veins. Why is this structural difference physiologically necessary?",
+      "options": [
+        "They carry warmer blood that requires more segmentation.",
+        "They are not subjected to the musculovenous pump.",
+        "They frequently transport lymph fluid as well.",
+        "They must support a larger, heavier column of blood against gravity while relying on intermittent muscle contractions."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. They must support a larger, heavier column of blood against gravity while relying on intermittent muscle contractions.",
+      "explanation": "Deep veins rely on the musculovenous pump. They have more valves to effectively hold the blood column against gravity between muscle contractions, preventing retrograde flow.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 71
+    },
+    {
+      "id": "ana201-ll-blood-supply-72",
+      "text": "Which specific branch of the popliteal artery supplies the inferolateral aspect of the knee joint capsule?",
+      "options": [
+        "Superior lateral genicular artery",
+        "Inferior medial genicular artery",
+        "Middle genicular artery",
+        "Inferior lateral genicular artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Inferior lateral genicular artery",
+      "explanation": "The inferior lateral genicular artery is one of the five genicular branches of the popliteal artery, specifically targeted at the inferolateral quadrant of the knee joint.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 72
+    },
+    {
+      "id": "ana201-ll-blood-supply-73",
+      "text": "Which superficial vein runs obliquely across the anterior aspect of the medial malleolus?",
+      "options": [
+        "Small saphenous vein",
+        "Fibular vein",
+        "Accessory saphenous vein",
+        "Great saphenous vein"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Great saphenous vein",
+      "explanation": "The great saphenous vein begins on the dorsum of the foot and characteristically ascends immediately anterior to the medial malleolus.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 73
+    },
+    {
+      "id": "ana201-ll-blood-supply-74",
+      "text": "The internal pudendal artery leaves the pelvis to supply perineal structures. Does it supply the gluteal region during its brief transit through it?",
+      "options": [
+        "Yes, it supplies the gluteus maximus.",
+        "Yes, it provides the main supply to the piriformis.",
+        "No, it does not supply the gluteal region.",
+        "Yes, it supplies the superior gemellus."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. No, it does not supply the gluteal region.",
+      "explanation": "Although the internal pudendal artery enters the gluteal region through the greater sciatic foramen, it immediately exits through the lesser sciatic foramen to supply the perineum, without supplying the gluteal muscles.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 74
+    },
+    {
+      "id": "ana201-ll-blood-supply-75",
+      "text": "What is the primary function of the valves located within the perforating veins of the lower limb?",
+      "options": [
+        "To direct blood from the deep veins into the superficial veins",
+        "To regulate arterial blood pressure",
+        "To prevent blood from flowing from the deep veins back into the superficial veins",
+        "To shunt lymph into the venous system"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. To prevent blood from flowing from the deep veins back into the superficial veins",
+      "explanation": "Valves in the perforating veins ensure that blood moves only inward (superficial to deep) and prevents the high pressures generated during muscle contraction from blowing blood back into the superficial veins.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 75
+    },
+    {
+      "id": "ana201-ll-blood-supply-76",
+      "text": "Which of the following nerves travels alongside the small saphenous vein as it ascends the posterior aspect of the leg?",
+      "options": [
+        "Saphenous nerve",
+        "Deep fibular nerve",
+        "Sural nerve",
+        "Tibial nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Sural nerve",
+      "explanation": "The sural nerve is a cutaneous nerve that closely accompanies the small saphenous vein along the posterolateral aspect of the calf.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 76
+    },
+    {
+      "id": "ana201-ll-blood-supply-77",
+      "text": "The popliteal vein is a major deep vein. It is formed at the lower border of the popliteus muscle by the union of which vessels?",
+      "options": [
+        "Great and small saphenous veins",
+        "Femoral and deep femoral veins",
+        "Medial and lateral plantar veins",
+        "Anterior and posterior tibial veins"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Anterior and posterior tibial veins",
+      "explanation": "The paired anterior and posterior tibial veins (venae comitantes) ascend from the leg and unite at the lower border of the popliteus to form the single popliteal vein.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 77
+    },
+    {
+      "id": "ana201-ll-blood-supply-78",
+      "text": "Which structure forms the lateral margin of the saphenous opening, over which the great saphenous vein hooks before entering the femoral vein?",
+      "options": [
+        "Inguinal ligament",
+        "Falciform margin",
+        "Pectineal ligament",
+        "Cribriform fascia"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Falciform margin",
+      "explanation": "The saphenous opening in the fascia lata has a sharp, crescentic lateral edge known as the falciform margin, over which the great saphenous vein passes to reach the deep femoral vein.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 78
+    },
+    {
+      "id": "ana201-ll-blood-supply-79",
+      "text": "Which set of arteries supplies the major central portions of the hamstring muscles in the posterior thigh?",
+      "options": [
+        "Gluteal arteries",
+        "Genicular arteries",
+        "Obturator arteries",
+        "Perforating branches of the profunda femoris"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Perforating branches of the profunda femoris",
+      "explanation": "The perforating branches of the deep artery of the thigh (profunda femoris) pierce the adductor magnus and provide the primary blood supply to the hamstring muscles.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 79
+    },
+    {
+      "id": "ana201-ll-blood-supply-80",
+      "text": "Which artery provides the deep plantar artery that physically connects to the lateral plantar artery, completing the deep plantar arch?",
+      "options": [
+        "Anterior tibial artery",
+        "Fibular artery",
+        "Medial plantar artery",
+        "Dorsalis pedis artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Dorsalis pedis artery",
+      "explanation": "The dorsalis pedis artery gives off the deep plantar artery, which dives between the first two metatarsals to join the lateral plantar artery and form the deep plantar arch.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 80
+    },
+    {
+      "id": "ana201-ll-blood-supply-81",
+      "text": "A 65-year-old patient presents with pain in the calf that reliably occurs after walking two blocks and disappears with rest. This condition, intermittent claudication, is typically caused by atherosclerosis in which vessels?",
+      "options": [
+        "Great and small saphenous veins",
+        "Femoral and popliteal arteries",
+        "Internal iliac and obturator arteries",
+        "Plantar and dorsal venous arches"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Femoral and popliteal arteries",
+      "explanation": "Intermittent claudication of the calf is most commonly caused by atherosclerotic narrowing of the superficial femoral and popliteal arteries, which restrict blood flow during exercise.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 81
+    },
+    {
+      "id": "ana201-ll-blood-supply-82",
+      "text": "The lateral circumflex femoral artery typically divides into ascending, transverse, and descending branches. The descending branch travels distally to anastomose with which artery at the knee?",
+      "options": [
+        "Anterior tibial recurrent artery",
+        "Inferior medial genicular artery",
+        "Superior lateral genicular artery",
+        "Middle genicular artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Superior lateral genicular artery",
+      "explanation": "The descending branch of the lateral circumflex femoral artery courses down the lateral aspect of the thigh to join the superior lateral genicular artery in the knee's peri-articular anastomosis.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 82
+    },
+    {
+      "id": "ana201-ll-blood-supply-83",
+      "text": "The popliteal lymph nodes filter lymph from the deep leg and foot. In addition to these deep vessels, they also receive superficial lymphatics that follow which structure?",
+      "options": [
+        "Great saphenous vein",
+        "Anterior tibial artery",
+        "Small saphenous vein",
+        "Sural nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Small saphenous vein",
+      "explanation": "While most superficial lymphatics follow the great saphenous vein to the groin, the superficial lymphatic vessels on the lateral foot and posterior calf follow the small saphenous vein directly into the popliteal nodes.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 83
+    },
+    {
+      "id": "ana201-ll-blood-supply-84",
+      "text": "In a healthy standing individual, why does blood not pool excessively in the feet despite gravity?",
+      "options": [
+        "Competent venous valves prevent retrograde flow and break the hydrostatic column.",
+        "Arterial pressure alone pushes the blood upward.",
+        "The deep fascia constantly contracts to squeeze the veins.",
+        "The saphenofemoral junction actively suctions blood upward."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Competent venous valves prevent retrograde flow and break the hydrostatic column.",
+      "explanation": "In quiet standing, gravity pulls blood down, but competent valves in the veins catch the blood, preventing retrograde flow and breaking the long hydrostatic column of blood into smaller, lower-pressure segments.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 84
+    },
+    {
+      "id": "ana201-ll-blood-supply-85",
+      "text": "Which specific artery passes through the tarsal tunnel alongside the tibial nerve to enter the sole of the foot?",
+      "options": [
+        "Anterior tibial artery",
+        "Fibular artery",
+        "Dorsalis pedis artery",
+        "Posterior tibial artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Posterior tibial artery",
+      "explanation": "The posterior tibial artery descends the posterior leg and passes behind the medial malleolus through the tarsal tunnel before dividing into the medial and lateral plantar arteries.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 85
+    },
+    {
+      "id": "ana201-ll-blood-supply-86",
+      "text": "The saphenous nerve is the longest sensory branch of the femoral nerve. Which superficial vein does it accompany as it descends through the leg?",
+      "options": [
+        "Small saphenous vein",
+        "Great saphenous vein",
+        "Anterior tibial vein",
+        "Popliteal vein"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Great saphenous vein",
+      "explanation": "The saphenous nerve emerges to the surface near the knee and accompanies the great saphenous vein down the medial side of the leg and foot.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 86
+    },
+    {
+      "id": "ana201-ll-blood-supply-87",
+      "text": "Which lymphatic vessels must be evaluated (often via sentinel node biopsy) if a patient is diagnosed with squamous cell carcinoma on the medial aspect of the calf?",
+      "options": [
+        "Popliteal lymph nodes",
+        "Deep inguinal lymph nodes",
+        "Internal iliac lymph nodes",
+        "Superficial inguinal lymph nodes"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Superficial inguinal lymph nodes",
+      "explanation": "Lymph from the medial calf travels in superficial vessels accompanying the great saphenous vein, which drain directly into the superficial inguinal lymph nodes.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 87
+    },
+    {
+      "id": "ana201-ll-blood-supply-88",
+      "text": "Which artery is the smaller of the two terminal branches of the posterior tibial artery and primarily supplies the skin and muscles on the medial side of the sole?",
+      "options": [
+        "Lateral plantar artery",
+        "Deep plantar artery",
+        "Medial plantar artery",
+        "Dorsalis pedis artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Medial plantar artery",
+      "explanation": "The medial plantar artery is the smaller terminal branch of the posterior tibial artery; it supplies the medial sole and the muscles of the great toe.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 88
+    },
+    {
+      "id": "ana201-ll-blood-supply-89",
+      "text": "During a severe traumatic injury to the lower leg, swelling within a fascial compartment can compress arteries and nerves. What is the clinical term for this surgical emergency?",
+      "options": [
+        "Intermittent claudication",
+        "Deep vein thrombosis",
+        "Lymphedema",
+        "Compartment syndrome"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Compartment syndrome",
+      "explanation": "Compartment syndrome occurs when increased pressure within a non-yielding fascial compartment (due to bleeding or swelling) occludes blood supply, leading to rapid muscle and nerve ischemia.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 89
+    },
+    {
+      "id": "ana201-ll-blood-supply-90",
+      "text": "Which of the following describes the relationship of the femoral vein to the femoral artery as they pass deep to the inguinal ligament?",
+      "options": [
+        "The vein is lateral to the artery.",
+        "The vein is medial to the artery.",
+        "The vein is anterior to the artery.",
+        "The vein is posterior to the artery."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The vein is medial to the artery.",
+      "explanation": "Within the femoral sheath at the level of the inguinal ligament, the femoral vein is positioned immediately medial to the femoral artery (remember NAVEL: Nerve, Artery, Vein, Empty space, Lymphatics, from lateral to medial).",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 90
+    },
+    {
+      "id": "ana201-ll-blood-supply-91",
+      "text": "The anterior tibial artery continues as the dorsalis pedis artery. The dorsalis pedis artery then divides into the deep plantar artery and which other significant branch?",
+      "options": [
+        "Lateral tarsal artery",
+        "Plantar metatarsal artery",
+        "Arcuate artery",
+        "Posterior tibial artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Arcuate artery",
+      "explanation": "On the dorsum of the foot, the dorsalis pedis artery divides into the deep plantar artery (which completes the plantar arch) and the arcuate artery (which arches laterally over the metatarsal bases).",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 91
+    },
+    {
+      "id": "ana201-ll-blood-supply-92",
+      "text": "The deep veins of the lower limb are heavily valved and rely on muscle contraction for venous return. What specific arrangement of these veins maximizes the efficiency of this system?",
+      "options": [
+        "They lack a tunica media entirely.",
+        "They are completely separated from the arteries by thick fascia.",
+        "They form large, single-lumen venous sinuses in the thigh.",
+        "They occur as paired venae comitantes within a shared vascular sheath with a pulsating artery."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. They occur as paired venae comitantes within a shared vascular sheath with a pulsating artery.",
+      "explanation": "The paired venae comitantes surround the artery within a tight sheath. The expansion of the artery during systole helps physically squeeze the veins, driving blood upward.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 92
+    },
+    {
+      "id": "ana201-ll-blood-supply-93",
+      "text": "Which artery arises from the internal iliac artery, exits the pelvis through the greater sciatic foramen, and supplies the gluteus medius, minimus, and tensor fasciae latae?",
+      "options": [
+        "Inferior gluteal artery",
+        "Obturator artery",
+        "Superior gluteal artery",
+        "Internal pudendal artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Superior gluteal artery",
+      "explanation": "The superior gluteal artery exits the pelvis above the piriformis and divides into superficial and deep branches, supplying the upper gluteal muscles and tensor fasciae latae.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 93
+    },
+    {
+      "id": "ana201-ll-blood-supply-94",
+      "text": "The popliteal artery bifurcates at the lower border of the popliteus muscle. If the anterior tibial artery is one branch, what is the initial trunk that forms the other branch before it splits further?",
+      "options": [
+        "Fibular trunk",
+        "Dorsalis pedis trunk",
+        "Genicular trunk",
+        "Tibioperoneal trunk"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Tibioperoneal trunk",
+      "explanation": "The popliteal artery typically divides into the anterior tibial artery and the tibioperoneal (tibiofibular) trunk. The tibioperoneal trunk then quickly divides into the posterior tibial and fibular arteries.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 94
+    },
+    {
+      "id": "ana201-ll-blood-supply-95",
+      "text": "A patient with critical limb ischemia is at high risk of developing gangrene. If conservative treatments fail, what is the ultimate surgical intervention required for a non-salvageable, gangrenous limb?",
+      "options": [
+        "Amputation",
+        "Fasciotomy",
+        "Embolectomy",
+        "Sentinel node biopsy"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Amputation",
+      "explanation": "When critical limb ischemia progresses to irreversible tissue death (gangrene) and revascularization is impossible, amputation of the necrotic tissue is required to prevent fatal systemic infection.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 95
+    },
+    {
+      "id": "ana201-ll-blood-supply-96",
+      "text": "The medial and lateral circumflex femoral arteries anastomose to form a ring around the base of the femoral neck. From which larger artery do these circumflex arteries usually originate?",
+      "options": [
+        "External iliac artery",
+        "Deep artery of the thigh (profunda femoris)",
+        "Obturator artery",
+        "Popliteal artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Deep artery of the thigh (profunda femoris)",
+      "explanation": "The medial and lateral circumflex femoral arteries are typically the largest branches originating from the proximal portion of the profunda femoris artery.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 96
+    },
+    {
+      "id": "ana201-ll-blood-supply-97",
+      "text": "Which of the following vessels is NOT considered part of the deep venous system of the lower limb?",
+      "options": [
+        "Anterior tibial vein",
+        "Great saphenous vein",
+        "Popliteal vein",
+        "Femoral vein"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Great saphenous vein",
+      "explanation": "The great saphenous vein runs within the subcutaneous tissue above the deep fascia, classifying it exclusively as a superficial vein.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 97
+    },
+    {
+      "id": "ana201-ll-blood-supply-98",
+      "text": "The obturator artery supplies the medial compartment of the thigh. From which major pelvic artery does it originate?",
+      "options": [
+        "External iliac artery",
+        "Superior gluteal artery",
+        "Common iliac artery",
+        "Internal iliac artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Internal iliac artery",
+      "explanation": "The obturator artery is a branch of the internal iliac artery that exits the pelvic cavity through the obturator canal.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 98
+    },
+    {
+      "id": "ana201-ll-blood-supply-99",
+      "text": "Plantar digital arteries supply the toes, including the nail beds. From which arteries do these digital vessels directly originate near the bases of the proximal phalanges?",
+      "options": [
+        "Dorsal metatarsal arteries",
+        "Arcuate arteries",
+        "Lateral tarsal arteries",
+        "Plantar metatarsal arteries"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Plantar metatarsal arteries",
+      "explanation": "The plantar metatarsal arteries (arising from the deep plantar arch) travel distally and bifurcate near the proximal phalanges to become the plantar digital arteries supplying adjacent toes.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 99
+    },
+    {
+      "id": "ana201-ll-blood-supply-100",
+      "text": "Occasionally, a superficial plantar arch is present in the foot. When this occurs, it is formed by an anastomosis between the lateral plantar artery and the superficial branch of which other artery?",
+      "options": [
+        "Medial plantar artery",
+        "Dorsalis pedis artery",
+        "Fibular artery",
+        "Anterior tibial artery"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Medial plantar artery",
+      "explanation": "While the deep arch is constant, a superficial plantar arch sometimes forms when the superficial branch of the medial plantar artery anastomoses with the lateral plantar artery.",
+      "section": "Blood Supply of the Lower Limb",
+      "questionNumber": 100
+    }
+  ]
+}
