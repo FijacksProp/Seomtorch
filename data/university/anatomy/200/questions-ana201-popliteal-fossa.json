@@ -1,0 +1,760 @@
+{
+  "title": "Popliteal Fossa",
+  "course": "ANA 201",
+  "totalQuestions": 50,
+  "sections": [
+    "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses (Q1-Q50)"
+  ],
+  "questions": [
+    {
+      "id": "ana201-popliteal-fossa-1",
+      "text": "The popliteal fossa is a diamond-shaped depression on the posterior knee. Which of the following muscles forms its superomedial boundary?",
+      "options": [
+        "Semimembranosus and semitendinosus",
+        "Biceps femoris",
+        "Medial head of the gastrocnemius",
+        "Plantaris"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Semimembranosus and semitendinosus",
+      "explanation": "The superomedial border of the popliteal fossa is formed by the hamstring muscles that insert on the medial side of the leg: the semitendinosus and the semimembranosus.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana201-popliteal-fossa-2",
+      "text": "The floor of the popliteal fossa is formed by several anatomical structures from superior to inferior. Which of the following correctly describes a component of this floor?",
+      "options": [
+        "The tendon of the biceps femoris",
+        "The popliteal surface of the femur",
+        "The superficial popliteal fascia",
+        "The medial and lateral menisci"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The popliteal surface of the femur",
+      "explanation": "The floor (anterior wall) of the fossa is formed from above downward by the popliteal surface of the femur, the capsule of the knee joint with the oblique popliteal ligament, and the popliteal fascia covering the popliteus muscle.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana201-popliteal-fossa-3",
+      "text": "Which of the following nerves is located within the superficial fascia covering the roof of the popliteal fossa but does NOT pierce the popliteal fascia itself?",
+      "options": [
+        "Sural communicating nerve",
+        "Terminal part of the posterior cutaneous nerve of the thigh",
+        "Posterior division of the medial cutaneous nerve of the thigh",
+        "Lateral sural cutaneous nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Posterior division of the medial cutaneous nerve of the thigh",
+      "explanation": "The roof of the popliteal fossa contains the small saphenous vein and three cutaneous nerves. All of these structures pierce the deep fascial roof except for the posterior division of the medial cutaneous nerve of the thigh.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana201-popliteal-fossa-4",
+      "text": "In the lower part of the popliteal fossa, the relationship of the major neurovascular structures changes. From lateral to medial, what is the correct arrangement in this inferior region?",
+      "options": [
+        "Nerve, Vein, Artery",
+        "Vein, Nerve, Artery",
+        "Artery, Nerve, Vein",
+        "Artery, Vein, Nerve"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Artery, Vein, Nerve",
+      "explanation": "The spatial relationship of the structures shifts throughout the fossa. In the lower part of the popliteal fossa, the arrangement from lateral to medial side is Artery, Vein, and Nerve (AVN).",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana201-popliteal-fossa-5",
+      "text": "The popliteal artery terminates at the lower border of the popliteus muscle. At this specific location, it divides into which of the following vessels?",
+      "options": [
+        "Descending genicular and anterior tibial arteries",
+        "Fibular and posterior tibial arteries",
+        "Anterior and posterior tibial arteries",
+        "Superior and inferior lateral genicular arteries"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Anterior and posterior tibial arteries",
+      "explanation": "The popliteal artery serves as the main vascular conduit for the region and officially terminates at the lower border of the popliteus muscle by bifurcating into the anterior and posterior tibial arteries.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana201-popliteal-fossa-6",
+      "text": "The middle genicular artery is one of the five articular branches of the popliteal artery. To supply the internal structures of the knee joint, which structure must it pierce?",
+      "options": [
+        "Oblique popliteal ligament",
+        "Arcuate popliteal ligament",
+        "Popliteal fascia",
+        "Tendon of the popliteus muscle"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Oblique popliteal ligament",
+      "explanation": "The middle genicular artery travels anteriorly and pierces the oblique popliteal ligament to supply the cruciate ligaments and the synovial membrane inside the knee joint cavity.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana201-popliteal-fossa-7",
+      "text": "The genicular anastomosis provides crucial collateral circulation around the knee. Which of the following arteries anastomoses with the superior lateral genicular artery?",
+      "options": [
+        "Saphenous artery",
+        "Anterior tibial recurrent artery",
+        "Descending genicular artery",
+        "Descending branch of the lateral circumflex femoral artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Descending branch of the lateral circumflex femoral artery",
+      "explanation": "The superior lateral genicular artery forms an anastomosis with the descending branch of the lateral circumflex femoral artery and the inferior lateral genicular artery.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana201-popliteal-fossa-8",
+      "text": "Which of the following veins directly joins the popliteal vein by passing through the fascial roof of the popliteal fossa?",
+      "options": [
+        "Great saphenous vein",
+        "Small saphenous vein",
+        "Anterior tibial vein",
+        "Profunda femoris vein"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Small saphenous vein",
+      "explanation": "The small (short) saphenous vein ascends in the superficial fascia, pierces the strong popliteal fascia forming the roof of the fossa, and drains directly into the popliteal vein.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana201-popliteal-fossa-9",
+      "text": "The tibial nerve descends through the popliteal fossa and gives off multiple muscular branches. Which of these muscular branches exhibits a unique course by crossing superficial to the popliteal artery and winding around the lower border of its target muscle?",
+      "options": [
+        "Nerve to the popliteus",
+        "Nerve to the medial head of the gastrocnemius",
+        "Nerve to the plantaris",
+        "Nerve to the soleus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Nerve to the popliteus",
+      "explanation": "The nerve to the popliteus muscle crosses the popliteal artery superficially, runs downward and laterally, and then winds around the lower border of the popliteus to supply it from its deep surface.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana201-popliteal-fossa-10",
+      "text": "In addition to supplying its named muscle, the nerve to the popliteus provides innervation to several other structures. Which of the following is innervated by this specific nerve branch?",
+      "options": [
+        "The lateral meniscus",
+        "The plantaris muscle",
+        "The superior tibiofibular joint",
+        "The short head of the biceps femoris"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The superior tibiofibular joint",
+      "explanation": "Beyond the popliteus muscle, the nerve to the popliteus supplies the tibialis posterior muscle, the superior and inferior tibiofibular joints, the tibia, and the interosseous membrane.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana201-popliteal-fossa-11",
+      "text": "The common peroneal (fibular) nerve travels along the lateral aspect of the popliteal fossa. Which specific muscle tendon does it closely follow as it slopes downward and laterally?",
+      "options": [
+        "Semimembranosus",
+        "Biceps femoris",
+        "Lateral head of the gastrocnemius",
+        "Plantaris"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Biceps femoris",
+      "explanation": "The common peroneal nerve emerges beneath the long head of the biceps femoris and courses distally along the medial side of the biceps femoris tendon toward the lateral angle of the fossa.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana201-popliteal-fossa-12",
+      "text": "Within the popliteal fossa, the common peroneal nerve gives rise to several branches before winding around the neck of the fibula. Which of the following is one of its cutaneous branches?",
+      "options": [
+        "Sural nerve",
+        "Posterior cutaneous nerve of the thigh",
+        "Medial sural cutaneous nerve",
+        "Sural communicating nerve"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Sural communicating nerve",
+      "explanation": "In the popliteal fossa, the common peroneal nerve yields two cutaneous branches: the lateral cutaneous nerve of the calf (lateral sural nerve) and the sural communicating nerve.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana201-popliteal-fossa-13",
+      "text": "The popliteal lymph nodes are embedded within the popliteal pad of fat. From which of the following regions do these nodes primarily receive lymphatic drainage?",
+      "options": [
+        "The lateral side of the heel and foot",
+        "The medial side of the calf",
+        "The anterior compartment of the thigh",
+        "The medial aspect of the knee joint"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The lateral side of the heel and foot",
+      "explanation": "The popliteal lymph nodes receive lymphatic drainage from the back and lateral side of the calf of the leg, as well as the lateral side of the heel and foot.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana201-popliteal-fossa-14",
+      "text": "A genicular branch of the obturator nerve descends into the popliteal fossa to supply the knee capsule. Upon which structure does this nerve initially run before piercing the oblique popliteal ligament?",
+      "options": [
+        "The tibial nerve",
+        "The popliteal vein",
+        "The posterior surface of the popliteal artery",
+        "The popliteal surface of the femur"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The posterior surface of the popliteal artery",
+      "explanation": "The genicular branch of the obturator nerve is the continuation of its posterior division. It runs directly on the posterior surface of the popliteal artery before piercing the oblique popliteal ligament.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana201-popliteal-fossa-15",
+      "text": "When a physician attempts to palpate the popliteal pulse, it is often considered the most difficult peripheral pulse to feel. What specific patient positioning helps facilitate this examination?",
+      "options": [
+        "Flexing the knee to relax the popliteal fascia",
+        "Fully extending the knee to stretch the popliteal artery",
+        "Medially rotating the hip while maintaining knee extension",
+        "Dorsiflexing the ankle against resistance"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Flexing the knee to relax the popliteal fascia",
+      "explanation": "The strong popliteal fascia restricts palpation when tense. Flexing the knee relaxes this fascial roof, allowing the clinician to press deeply into the fossa to feel the artery against the femur.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana201-popliteal-fossa-16",
+      "text": "A Baker's cyst is a localized swelling in the popliteal fossa. This condition most commonly arises due to the inflammation of a bursa located underneath the tendon of which muscle?",
+      "options": [
+        "Biceps femoris",
+        "Semimembranosus",
+        "Plantaris",
+        "Popliteus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Semimembranosus",
+      "explanation": "A Baker's cyst frequently results from the inflammation of the synovial bursa situated underneath the tendon of the semimembranosus muscle, often communicating with the knee joint cavity.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana201-popliteal-fossa-17",
+      "text": "The popliteal artery gives off muscular branches in the upper part of the popliteal fossa. Which specific artery do these upper muscular branches often anastomose with?",
+      "options": [
+        "Descending genicular artery",
+        "First perforating artery",
+        "Fourth perforating artery",
+        "Circumflex fibular artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Fourth perforating artery",
+      "explanation": "The upper muscular branches of the popliteal artery supply the adductor magnus and hamstring muscles. One or two of these branches ascend to anastomose with the fourth perforating artery of the thigh.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana201-popliteal-fossa-18",
+      "text": "During surgical exploration of the popliteal fossa, the surgeon must be mindful of the \"dangerous side\" of the tibial nerve. Which statement accurately describes the branching pattern of the tibial nerve in this region?",
+      "options": [
+        "All muscular branches arise from the medial side.",
+        "The cutaneous branches all emerge from the medial side.",
+        "All branches emerge anteriorly to wrap around the popliteal vein.",
+        "All muscular branches arise from the lateral side except the nerve to the medial head of the gastrocnemius."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. All muscular branches arise from the lateral side except the nerve to the medial head of the gastrocnemius.",
+      "explanation": "The lateral side of the tibial nerve is considered the \"dangerous side\" because all its muscular branches originate there, with the single exception of the nerve to the medial head of the gastrocnemius, which arises medially (the \"safe side\").",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana201-popliteal-fossa-19",
+      "text": "The popliteal vein crosses the popliteal artery as it ascends through the fossa. Which direction does the vein travel relative to the artery during this superficial crossing?",
+      "options": [
+        "From the medial to the lateral side",
+        "From the lateral to the medial side",
+        "Strictly parallel along the posterior surface",
+        "From anterior to posterior"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. From the medial to the lateral side",
+      "explanation": "The popliteal vein ascends superficial to the popliteal artery, crossing it obliquely from the medial side to the lateral side within the popliteal fossa.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana201-popliteal-fossa-20",
+      "text": "The inferior lateral genicular artery participates in the rich collateral circulation around the knee. With which of the following vessels does it form a direct anastomosis?",
+      "options": [
+        "The saphenous artery",
+        "The circumflex fibular branch of the posterior tibial artery",
+        "The descending branch of the lateral circumflex femoral artery",
+        "The descending genicular artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The circumflex fibular branch of the posterior tibial artery",
+      "explanation": "The inferior lateral genicular artery anastomoses with the superior lateral genicular artery, the recurrent branches of the anterior tibial artery, and the circumflex fibular branch of the posterior tibial artery.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana201-popliteal-fossa-21",
+      "text": "Which cutaneous nerve leaves the popliteal fossa by piercing the fascial roof near its inferior angle after arising near the middle of the fossa?",
+      "options": [
+        "Posterior cutaneous nerve of the thigh",
+        "Sural communicating nerve",
+        "Sural nerve",
+        "Lateral cutaneous nerve of the calf"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Sural nerve",
+      "explanation": "The sural nerve is a cutaneous branch of the tibial nerve that arises in the middle of the popliteal fossa, runs downward under the deep fascia, and pierces the roof near the inferior angle.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana201-popliteal-fossa-22",
+      "text": "The common peroneal nerve eventually crosses superficially to two distinct muscular structures as it leaves the popliteal fossa to reach the head of the fibula. What are these two muscles?",
+      "options": [
+        "Semimembranosus and semitendinosus",
+        "Popliteus and soleus",
+        "Medial head of the gastrocnemius and plantaris",
+        "Plantaris and lateral head of the gastrocnemius"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Plantaris and lateral head of the gastrocnemius",
+      "explanation": "Following the biceps femoris tendon, the common peroneal nerve crosses superficial to the plantaris muscle and the lateral head of the gastrocnemius to reach the back of the fibular head.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana201-popliteal-fossa-23",
+      "text": "In the middle part of the popliteal fossa, the arrangement of the major neurovascular structures from superficial to deep is specifically documented. Which sequence represents this accurate anatomical layering?",
+      "options": [
+        "Nerve, Vein, Artery",
+        "Artery, Nerve, Vein",
+        "Vein, Artery, Nerve",
+        "Nerve, Artery, Vein"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Nerve, Vein, Artery",
+      "explanation": "In the middle of the fossa, looking from superficial to deep, the structures are layered sequentially: Tibial Nerve, Popliteal Vein, and then the deepest structure, the Popliteal Artery (NVA).",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana201-popliteal-fossa-24",
+      "text": "The popliteal artery enters the popliteal fossa through an osseo-aponeurotic opening. Where is this specific opening, the adductor hiatus, anatomically located?",
+      "options": [
+        "At the upper border of the popliteus muscle",
+        "Between the two heads of the gastrocnemius muscle",
+        "At the junction of the middle and lower one-third of the thigh",
+        "Within the fascial roof of the popliteal fossa"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. At the junction of the middle and lower one-third of the thigh",
+      "explanation": "The adductor hiatus is an opening in the adductor magnus muscle situated at the junction of the middle one-third and lower one-third of the thigh, marking the transition of the femoral artery to the popliteal artery.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana201-popliteal-fossa-25",
+      "text": "The sural communicating nerve is a branch of the common peroneal nerve. At what specific level does this nerve typically arise before crossing the lateral head of the gastrocnemius?",
+      "options": [
+        "Opposite the adductor hiatus",
+        "Opposite the head of the fibula",
+        "At the inferior angle of the popliteal fossa",
+        "Deep to the popliteal fascia near the femoral condyles"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Opposite the head of the fibula",
+      "explanation": "The sural communicating nerve branches off from the common peroneal nerve opposite the head of the fibula and crosses superficially over the lateral head of the gastrocnemius to join the sural nerve.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana201-popliteal-fossa-26",
+      "text": "The popliteal lymph nodes are arranged in three general locations within the fat pad of the fossa. Which of the following correctly identifies one of these node clusters?",
+      "options": [
+        "Embedded within the substance of the popliteus muscle",
+        "Encircling the common peroneal nerve at the fibular neck",
+        "Superficial to the fascial roof near the sural nerve",
+        "At the junction of the small saphenous vein and popliteal vein"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. At the junction of the small saphenous vein and popliteal vein",
+      "explanation": "Popliteal lymph nodes are found at three sites: one node at the junction of the small saphenous and popliteal veins, a few deep to the popliteal artery, and the remainder along the sides of the artery.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana201-popliteal-fossa-27",
+      "text": "The inferior medial genicular artery winds around the tibial condyle to join the genicular anastomosis. Underneath which specific structure must it pass during its course?",
+      "options": [
+        "Medial collateral ligament",
+        "Patellar ligament",
+        "Oblique popliteal ligament",
+        "Tendon of the popliteus muscle"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Medial collateral ligament",
+      "explanation": "Both the inferior medial and inferior lateral genicular arteries wind around the corresponding tibial condyles and pass deep to their corresponding collateral ligaments of the knee joint.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana201-popliteal-fossa-28",
+      "text": "The popliteal artery gives off vasomotor fibers (T10-L2) that regulate its caliber. From which nerve do these specific vascular branches originate within the popliteal fossa?",
+      "options": [
+        "Common peroneal nerve",
+        "Tibial nerve",
+        "Genicular branch of the obturator nerve",
+        "Posterior cutaneous nerve of the thigh"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Tibial nerve",
+      "explanation": "The tibial nerve gives off distinct vascular branches inside the popliteal fossa that supply vasomotor sympathetic fibers to the popliteal vessels.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana201-popliteal-fossa-29",
+      "text": "A clinical evaluation reveals a pulsatile midline swelling in the back of the knee. Given the anatomical contents of the popliteal fossa, this presentation is most indicative of which condition?",
+      "options": [
+        "A ruptured Baker's cyst",
+        "Deep vein thrombosis of the small saphenous vein",
+        "Popliteal aneurysm",
+        "Enlargement of the popliteal lymph nodes"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Popliteal aneurysm",
+      "explanation": "The popliteal artery is highly prone to aneurysm. Clinically, a popliteal aneurysm presents precisely as a pulsatile midline swelling within the popliteal fossa.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana201-popliteal-fossa-30",
+      "text": "Which specific branch of the popliteal artery anastomoses directly with both the superior medial genicular artery and the saphenous artery?",
+      "options": [
+        "Middle genicular artery",
+        "Superior lateral genicular artery",
+        "Inferior lateral genicular artery",
+        "Inferior medial genicular artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Inferior medial genicular artery",
+      "explanation": "The inferior medial genicular artery anastomoses with the superior medial genicular artery and the saphenous artery (a branch of the descending genicular artery from the femoral artery).",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana201-popliteal-fossa-31",
+      "text": "The popliteal fossa forms a transition zone between the thigh and the leg. Which of the following muscles forms the inferomedial boundary of this diamond-shaped hollow?",
+      "options": [
+        "Medial head of the gastrocnemius",
+        "Semitendinosus",
+        "Plantaris",
+        "Lateral head of the gastrocnemius"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Medial head of the gastrocnemius",
+      "explanation": "The inferior boundaries of the popliteal fossa are formed by the two heads of the gastrocnemius. The medial head establishes the inferomedial border.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana201-popliteal-fossa-32",
+      "text": "Which specific nerve pierces the deep fascial roof of the popliteal fossa near its middle and provides cutaneous innervation extending down the back of the leg?",
+      "options": [
+        "Sural nerve",
+        "Lateral sural cutaneous nerve",
+        "Posterior cutaneous nerve of the thigh",
+        "Medial cutaneous nerve of the thigh"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Posterior cutaneous nerve of the thigh",
+      "explanation": "The posterior cutaneous nerve of the thigh pierces the fascial roof near the middle of the popliteal fossa to provide cutaneous innervation down to the middle of the posterior leg.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana201-popliteal-fossa-33",
+      "text": "The tibial nerve descends vertically through the popliteal fossa. In the upper part of the fossa, what is its precise relationship to the popliteal artery?",
+      "options": [
+        "It lies medial and deep to the artery.",
+        "It lies lateral and superficial to the artery.",
+        "It lies strictly anterior to the artery against the femur.",
+        "It lies medial and superficial to the artery."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It lies lateral and superficial to the artery.",
+      "explanation": "The tibial nerve begins lateral to the popliteal artery in the upper fossa, crossing it superficially to lie medial to it in the lower fossa. Therefore, in the upper part, it is lateral and superficial to the artery.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana201-popliteal-fossa-34",
+      "text": "The superior medial and superior lateral genicular arteries are essential components of the knee's collateral circulation. What describes their anatomical routing immediately after branching from the popliteal artery?",
+      "options": [
+        "They descend vertically to pierce the gastrocnemius heads.",
+        "They cross superficial to the popliteal vein and tibial nerve.",
+        "They pierce the oblique popliteal ligament to enter the joint capsule.",
+        "They wind around the femur immediately above the corresponding femoral condyles."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. They wind around the femur immediately above the corresponding femoral condyles.",
+      "explanation": "Both the superior medial and superior lateral genicular arteries arise from the popliteal artery and immediately wind around their respective sides of the femur, just above the condyles.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana201-popliteal-fossa-35",
+      "text": "The nerve to the popliteus muscle originates from the tibial nerve. Before winding around the lower border of the popliteus, how does it physically cross the popliteal artery?",
+      "options": [
+        "Superficially",
+        "Deeply",
+        "Along its medial margin only",
+        "Through an opening in the tunica adventitia"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Superficially",
+      "explanation": "The nerve to the popliteus crosses superficial to the popliteal artery before running downward and laterally to hook around the lower border of the popliteus muscle.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana201-popliteal-fossa-36",
+      "text": "The popliteal vein is a major deep vessel of the lower limb. At what exact anatomical landmark does it transition into the femoral vein?",
+      "options": [
+        "The lower border of the popliteus muscle",
+        "The apex of the popliteal fossa",
+        "The adductor hiatus",
+        "The junction of the middle and upper third of the thigh"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The adductor hiatus",
+      "explanation": "The popliteal vein ascends through the popliteal fossa and exits superiorly through the adductor hiatus, at which point it continues anatomically as the femoral vein.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana201-popliteal-fossa-37",
+      "text": "Which of the following is NOT one of the anatomical structures innervated by the nerve to the popliteus?",
+      "options": [
+        "The interosseous membrane",
+        "The lateral head of the gastrocnemius",
+        "The tibialis posterior muscle",
+        "The inferior tibiofibular joint"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The lateral head of the gastrocnemius",
+      "explanation": "The lateral head of the gastrocnemius receives a direct muscular branch from the main tibial nerve. The nerve to the popliteus supplies the popliteus, tibialis posterior, superior/inferior tibiofibular joints, tibia, and interosseous membrane.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana201-popliteal-fossa-38",
+      "text": "The common peroneal nerve is the smaller terminal branch of the sciatic nerve. Beneath which specific muscle does it first appear within the popliteal fossa?",
+      "options": [
+        "Semitendinosus",
+        "Plantaris",
+        "Medial head of the gastrocnemius",
+        "Long head of the biceps femoris"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Long head of the biceps femoris",
+      "explanation": "The common peroneal nerve appears in the superolateral aspect of the popliteal fossa, emerging from beneath the long head of the biceps femoris muscle before tracking its tendon.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana201-popliteal-fossa-39",
+      "text": "The popliteal vein is formed by the union of the veins accompanying the anterior and posterior tibial arteries. Where does this specific union occur?",
+      "options": [
+        "At the lower border of the popliteus muscle",
+        "At the adductor hiatus",
+        "Behind the medial femoral condyle",
+        "In the center of the popliteal fossa, superficial to the tibial nerve"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. At the lower border of the popliteus muscle",
+      "explanation": "The venae comitantes that accompany the anterior and posterior tibial arteries unite at the inferior border of the popliteus muscle to form the popliteal vein.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana201-popliteal-fossa-40",
+      "text": "Which nerve provides articular branches that supply the superior tibiofibular joint, originating from the common peroneal nerve?",
+      "options": [
+        "Middle genicular nerve",
+        "Sural communicating nerve",
+        "Recurrent genicular nerve",
+        "Lateral cutaneous nerve of the calf"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Recurrent genicular nerve",
+      "explanation": "The genicular branches of the common peroneal nerve include the superior lateral, inferior lateral, and the recurrent genicular nerves. The recurrent genicular nerve specifically supplies the superior tibiofibular joint.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana201-popliteal-fossa-41",
+      "text": "The oblique popliteal ligament is a key component of the floor of the popliteal fossa. Which of the following blood vessels pierces this ligament?",
+      "options": [
+        "Superior medial genicular artery",
+        "Middle genicular artery",
+        "Inferior lateral genicular artery",
+        "Sural artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Middle genicular artery",
+      "explanation": "The middle genicular artery travels anteriorly from the popliteal artery and pierces the oblique popliteal ligament to enter the knee joint capsule, supplying the cruciate ligaments and synovium.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana201-popliteal-fossa-42",
+      "text": "During knee flexion, the popliteal artery can be mechanically compressed or kinked. Which specific circulatory mechanism guarantees that the knee joint and lower leg still receive adequate blood supply?",
+      "options": [
+        "Blood flow reverses through the popliteal vein",
+        "The small saphenous vein acts as an arterial conduit",
+        "The profound femoris artery dilates rapidly",
+        "The genicular anastomosis provides an alternate pathway"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The genicular anastomosis provides an alternate pathway",
+      "explanation": "The genicular anastomosis is an arterial network surrounding the knee that maintains continuous collateral blood flow to the joint and leg when the primary popliteal artery is kinked during knee flexion.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana201-popliteal-fossa-43",
+      "text": "The roof of the popliteal fossa contains several cutaneous nerves. Which one of the following nerves represents a branch of the common peroneal nerve that pierces the deep fascia to supply the upper lateral leg?",
+      "options": [
+        "Lateral sural cutaneous nerve",
+        "Medial sural cutaneous nerve",
+        "Sural communicating nerve",
+        "Posterior cutaneous nerve of the thigh"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Lateral sural cutaneous nerve",
+      "explanation": "The lateral cutaneous nerve of the calf (lateral sural nerve) branches off the common peroneal nerve lower down in the fossa and pierces the deep fascia to supply the skin on the upper lateral leg.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana201-popliteal-fossa-44",
+      "text": "As the popliteal artery crosses the floor of the popliteal fossa, what is its directional path from its entry at the adductor hiatus to its termination?",
+      "options": [
+        "From lateral to medial",
+        "Straight down the midline",
+        "From medial to lateral",
+        "From anterior to posterior"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. From medial to lateral",
+      "explanation": "The adductor hiatus is located on the medial aspect of the distal femur. The popliteal artery enters here and courses obliquely across the floor from the medial side to the lateral side to reach the lower border of the popliteus.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana201-popliteal-fossa-45",
+      "text": "The lower muscular branches of the popliteal artery are responsible for supplying a specific group of muscles in the posterior leg. Which muscles are primarily supplied by these branches?",
+      "options": [
+        "Biceps femoris and semitendinosus",
+        "The two heads of the gastrocnemius, soleus, and plantaris",
+        "Tibialis posterior and popliteus",
+        "Adductor magnus and gracilis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The two heads of the gastrocnemius, soleus, and plantaris",
+      "explanation": "The lower muscular branches of the popliteal artery supply the triceps surae muscles (the two heads of the gastrocnemius and the soleus) as well as the plantaris muscle.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana201-popliteal-fossa-46",
+      "text": "The popliteal fossa acts as a major transitional zone. Which of the following accurately describes the position of the popliteal surface of the femur within this space?",
+      "options": [
+        "It forms the superior roof of the fossa.",
+        "It acts as the lateral boundary alongside the biceps femoris.",
+        "It serves as the medial boundary of the lower fossa.",
+        "It constitutes the most superior component of the floor."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. It constitutes the most superior component of the floor.",
+      "explanation": "The floor (anterior wall) of the popliteal fossa is formed from superior to inferior by the popliteal surface of the femur, followed by the knee joint capsule, oblique popliteal ligament, and popliteus fascia.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana201-popliteal-fossa-47",
+      "text": "A patient requires a surgical procedure on the tibial nerve within the popliteal fossa. The surgeon recalls that the medial side of this nerve is considered the \"safe side.\" Why is the lateral side termed the \"dangerous side\"?",
+      "options": [
+        "Almost all of its muscular branches arise from the lateral side.",
+        "The popliteal vein forcefully pulsates on the lateral side.",
+        "The small saphenous vein crosses it laterally.",
+        "It is completely adhered to the popliteal artery laterally."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Almost all of its muscular branches arise from the lateral side.",
+      "explanation": "With the exception of the branch to the medial head of the gastrocnemius, all muscular branches of the tibial nerve arise from its lateral aspect, making surgical approach from the lateral side dangerous due to the risk of severing motor fibers.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana201-popliteal-fossa-48",
+      "text": "Which specific branch of the femoral artery descends to anastomose with the superior medial genicular artery and the inferior medial genicular artery?",
+      "options": [
+        "Profunda femoris artery",
+        "Lateral circumflex femoral artery",
+        "Descending genicular artery",
+        "Fourth perforating artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Descending genicular artery",
+      "explanation": "The superior medial genicular artery and inferior medial genicular artery both anastomose with the descending genicular artery, which is a direct branch of the femoral artery.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana201-popliteal-fossa-49",
+      "text": "The popliteal lymph nodes filter lymph from specific peripheral territories. Which of the following is NOT a primary drainage area for these nodes?",
+      "options": [
+        "The lateral side of the heel",
+        "The medial side of the thigh",
+        "The back of the calf",
+        "The lateral side of the foot"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The medial side of the thigh",
+      "explanation": "The popliteal lymph nodes drain the back and lateral side of the calf, as well as the lateral side of the heel and foot. The medial thigh drains into the inguinal lymph nodes.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana201-popliteal-fossa-50",
+      "text": "The common peroneal nerve is uniquely susceptible to external compression because of its anatomical course immediately after leaving the popliteal fossa. Against which bony structure can it be easily palpated?",
+      "options": [
+        "The lateral epicondyle of the femur",
+        "The medial condyle of the tibia",
+        "The tibial tuberosity",
+        "The neck of the fibula"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The neck of the fibula",
+      "explanation": "After winding around the posterolateral aspect of the popliteal fossa, the common peroneal nerve wraps directly against the neck of the fibula, where it is superficial, palpable, and highly vulnerable to compressive injury.",
+      "section": "Popliteal Fossa: Boundaries, Floor, Roof, Contents & Anastomoses",
+      "questionNumber": 50
+    }
+  ]
+}
