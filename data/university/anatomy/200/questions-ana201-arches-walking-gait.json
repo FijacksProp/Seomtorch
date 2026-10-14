@@ -1,0 +1,760 @@
+{
+  "title": "Arches of the Foot & Walking Gait",
+  "course": "ANA 201",
+  "totalQuestions": 50,
+  "sections": [
+    "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy (Q1-Q50)"
+  ],
+  "questions": [
+    {
+      "id": "ana201-arches-gait-1",
+      "text": "Which of the following best describes the stance phase of the gait cycle?",
+      "options": [
+        "The period when the foot is completely off the ground",
+        "The period when the foot is in contact with the ground",
+        "The period when both feet are off the ground",
+        "The period between heel-off and toe-off only"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The period when the foot is in contact with the ground",
+      "explanation": "The stance phase occurs while the foot is in contact with the ground and occupies about 60% of normal walking.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana201-arches-gait-2",
+      "text": "Which of the following is NOT one of the principal arches of the foot?",
+      "options": [
+        "Medial longitudinal arch",
+        "Lateral longitudinal arch",
+        "Transverse arch",
+        "Anterior cruciate arch"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Anterior cruciate arch",
+      "explanation": "The principal arches are the medial longitudinal, lateral longitudinal and transverse arches.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana201-arches-gait-3",
+      "text": "During normal walking, which muscle controls the lowering of the forefoot immediately after heel contact?",
+      "options": [
+        "Tibialis anterior",
+        "Gastrocnemius",
+        "Tibialis posterior",
+        "Flexor hallucis longus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Tibialis anterior",
+      "explanation": "Tibialis anterior contracts eccentrically after initial contact to control the lowering of the forefoot.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana201-arches-gait-4",
+      "text": "Which bone is the keystone of the medial longitudinal arch?",
+      "options": [
+        "Calcaneus",
+        "Talus",
+        "Cuboid",
+        "First metatarsal"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Talus",
+      "explanation": "The head of the talus is the keystone of the medial longitudinal arch.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana201-arches-gait-5",
+      "text": "Injury to the common fibular nerve may produce foot drop. Which gait abnormality may compensate for this?",
+      "options": [
+        "Trendelenburg gait",
+        "High-stepping gait",
+        "Antalgic gait",
+        "Waddling gait"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. High-stepping gait",
+      "explanation": "A high-stepping gait helps clear the toes when ankle dorsiflexion is weak.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana201-arches-gait-6",
+      "text": "Which ligament is particularly important in supporting the head of the talus and maintaining the medial longitudinal arch?",
+      "options": [
+        "Long plantar ligament",
+        "Short plantar ligament",
+        "Plantar calcaneonavicular ligament",
+        "Anterior talofibular ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Plantar calcaneonavicular ligament",
+      "explanation": "The plantar calcaneonavicular ligament supports the talar head and is also called the spring ligament.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana201-arches-gait-7",
+      "text": "Which muscle group provides a major propulsive force during terminal stance?",
+      "options": [
+        "Hip flexors",
+        "Knee extensors",
+        "Ankle plantar flexors",
+        "Ankle dorsiflexors"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Ankle plantar flexors",
+      "explanation": "The gastrocnemius and soleus contribute to propulsion during late stance and push-off.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana201-arches-gait-8",
+      "text": "Which muscle provides important dynamic support to the medial longitudinal arch?",
+      "options": [
+        "Tibialis posterior",
+        "Fibularis brevis",
+        "Extensor digitorum brevis",
+        "Popliteus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Tibialis posterior",
+      "explanation": "Tibialis posterior is a major dynamic support of the medial longitudinal arch.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana201-arches-gait-9",
+      "text": "During the swing phase, which ankle movement helps prevent the toes from dragging?",
+      "options": [
+        "Plantar flexion",
+        "Dorsiflexion",
+        "Hyperextension",
+        "Eversion only"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Dorsiflexion",
+      "explanation": "Dorsiflexion keeps the toes clear of the ground during swing.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana201-arches-gait-10",
+      "text": "Which structure is a major passive support of the longitudinal arches?",
+      "options": [
+        "Plantar aponeurosis",
+        "Iliotibial tract",
+        "Patellar retinaculum",
+        "Anterior longitudinal ligament"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Plantar aponeurosis",
+      "explanation": "The plantar aponeurosis resists separation of the ends of the arches.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana201-arches-gait-11",
+      "text": "A Trendelenburg gait most commonly indicates weakness of which muscle group?",
+      "options": [
+        "Hip adductors",
+        "Hip flexors",
+        "Hip abductors",
+        "Knee flexors"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Hip abductors",
+      "explanation": "Weak hip abductors allow the pelvis to drop on the unsupported side during single-limb support.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana201-arches-gait-12",
+      "text": "Which bones form the principal framework of the lateral longitudinal arch?",
+      "options": [
+        "Talus, navicular and three cuneiforms",
+        "Calcaneus, cuboid and fourth and fifth metatarsals",
+        "Talus, navicular and first metatarsal",
+        "Calcaneus, talus and first metatarsal"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Calcaneus, cuboid and fourth and fifth metatarsals",
+      "explanation": "The lateral longitudinal arch is formed mainly by the calcaneus, cuboid and lateral metatarsals.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana201-arches-gait-13",
+      "text": "Which nerve supplies gluteus medius and gluteus minimus?",
+      "options": [
+        "Inferior gluteal nerve",
+        "Superior gluteal nerve",
+        "Femoral nerve",
+        "Obturator nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Superior gluteal nerve",
+      "explanation": "The superior gluteal nerve supplies gluteus medius and minimus, as well as tensor fasciae latae.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana201-arches-gait-14",
+      "text": "The plantar calcaneonavicular ligament is commonly known as the:",
+      "options": [
+        "Spring ligament",
+        "Deltoid ligament",
+        "Cruciate ligament",
+        "Interosseous talocalcaneal ligament"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Spring ligament",
+      "explanation": "The spring ligament supports the head of the talus.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana201-arches-gait-15",
+      "text": "When both feet are simultaneously in contact with the ground during walking, the period is called:",
+      "options": [
+        "Single-limb support",
+        "Double support",
+        "Midswing",
+        "Terminal stance"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Double support",
+      "explanation": "Double support occurs when both feet contact the ground at the same time.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana201-arches-gait-16",
+      "text": "Which muscle is particularly associated with supporting the transverse arch of the foot?",
+      "options": [
+        "Fibularis longus",
+        "Sartorius",
+        "Vastus medialis",
+        "Gracilis"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Fibularis longus",
+      "explanation": "Fibularis longus crosses the sole and helps support the transverse arch.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana201-arches-gait-17",
+      "text": "Which muscle helps stabilise the pelvis during single-limb support?",
+      "options": [
+        "Gluteus medius",
+        "Gluteus maximus",
+        "Biceps femoris",
+        "Rectus femoris"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Gluteus medius",
+      "explanation": "Gluteus medius helps prevent excessive pelvic drop on the unsupported side.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana201-arches-gait-18",
+      "text": "A markedly lowered medial longitudinal arch is called:",
+      "options": [
+        "Pes cavus",
+        "Pes planus",
+        "Hallux valgus",
+        "Talipes equinovarus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Pes planus",
+      "explanation": "Pes planus means a low or flattened medial longitudinal arch.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana201-arches-gait-19",
+      "text": "Which gait pattern may occur when a person reduces the time spent bearing weight on a painful limb?",
+      "options": [
+        "High-stepping gait",
+        "Antalgic gait",
+        "Trendelenburg gait",
+        "Scissors gait"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Antalgic gait",
+      "explanation": "An antalgic gait reduces stance time on the painful side.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana201-arches-gait-20",
+      "text": "The tendon of fibularis longus inserts into the:",
+      "options": [
+        "Base of the fifth metatarsal only",
+        "Base of the first metatarsal and medial cuneiform",
+        "Navicular tuberosity only",
+        "Calcaneal tuberosity"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Base of the first metatarsal and medial cuneiform",
+      "explanation": "Fibularis longus crosses the sole to insert on the first metatarsal base and medial cuneiform.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana201-arches-gait-21",
+      "text": "Which phase of gait involves acceptance of body weight after initial contact?",
+      "options": [
+        "Initial swing",
+        "Loading response",
+        "Terminal swing",
+        "Midswing"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Loading response",
+      "explanation": "During loading response, the limb accepts body weight and absorbs shock.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana201-arches-gait-22",
+      "text": "Which ligament is a major passive support of the lateral longitudinal arch?",
+      "options": [
+        "Spring ligament",
+        "Long plantar ligament",
+        "Deltoid ligament",
+        "Iliofemoral ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Long plantar ligament",
+      "explanation": "The long plantar ligament supports the lateral longitudinal arch and the calcaneocuboid region.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana201-arches-gait-23",
+      "text": "Which muscle group is important for preventing the knee from buckling during loading response?",
+      "options": [
+        "Quadriceps femoris",
+        "Ankle dorsiflexors",
+        "Hip adductors",
+        "Toe flexors"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Quadriceps femoris",
+      "explanation": "The quadriceps control knee flexion as body weight is accepted.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana201-arches-gait-24",
+      "text": "The transverse arch is formed primarily by the:",
+      "options": [
+        "Calcaneus and talus alone",
+        "Navicular and talus alone",
+        "Cuneiforms, cuboid and bases of the metatarsals",
+        "Phalanges alone"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Cuneiforms, cuboid and bases of the metatarsals",
+      "explanation": "The transverse arch involves the cuneiforms, cuboid and metatarsal bases.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana201-arches-gait-25",
+      "text": "Which muscle is most important in controlling forward progression of the tibia over the foot during midstance?",
+      "options": [
+        "Tibialis anterior",
+        "Soleus",
+        "Extensor hallucis longus",
+        "Fibularis tertius"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Soleus",
+      "explanation": "The soleus and other plantar flexors control forward tibial progression during stance.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana201-arches-gait-26",
+      "text": "Which of the following best describes the function of the foot arches?",
+      "options": [
+        "Eliminate all ankle movement",
+        "Distribute body weight and absorb shock",
+        "Prevent toe movement",
+        "Prevent adaptation to uneven surfaces"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Distribute body weight and absorb shock",
+      "explanation": "The arches distribute weight, absorb shock and provide both flexibility and stability.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana201-arches-gait-27",
+      "text": "Which nerve supplies the principal ankle plantar flexors?",
+      "options": [
+        "Deep fibular nerve",
+        "Superficial fibular nerve",
+        "Tibial nerve",
+        "Femoral nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Tibial nerve",
+      "explanation": "The tibial nerve supplies gastrocnemius, soleus and other major plantar flexors.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana201-arches-gait-28",
+      "text": "Toe extension tightens the plantar aponeurosis and raises the longitudinal arch. This is called the:",
+      "options": [
+        "Stretch reflex",
+        "Screw-home mechanism",
+        "Windlass mechanism",
+        "Withdrawal reflex"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Windlass mechanism",
+      "explanation": "The windlass mechanism tensions the plantar aponeurosis during toe extension.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana201-arches-gait-29",
+      "text": "The swing phase occupies approximately what percentage of normal walking?",
+      "options": [
+        "10%",
+        "20%",
+        "40%",
+        "70%"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. 40%",
+      "explanation": "The swing phase occupies about 40% of the gait cycle.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana201-arches-gait-30",
+      "text": "Which muscle is supplied by the medial plantar nerve and contributes to dynamic support of the medial arch?",
+      "options": [
+        "Abductor hallucis",
+        "Fibularis longus",
+        "Tibialis posterior",
+        "Gastrocnemius"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Abductor hallucis",
+      "explanation": "Abductor hallucis is supplied by the medial plantar nerve and supports the medial side of the foot.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana201-arches-gait-31",
+      "text": "Which muscle helps control the trunk and hip during early stance?",
+      "options": [
+        "Gluteus maximus",
+        "Tibialis anterior",
+        "Extensor digitorum longus",
+        "Fibularis brevis"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Gluteus maximus",
+      "explanation": "Gluteus maximus helps provide hip extension stability during early stance.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana201-arches-gait-32",
+      "text": "Which bone is generally considered the keystone of the lateral longitudinal arch?",
+      "options": [
+        "Navicular",
+        "Cuboid",
+        "Talus",
+        "Medial cuneiform"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Cuboid",
+      "explanation": "The cuboid is commonly described as the keystone of the lateral longitudinal arch.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana201-arches-gait-33",
+      "text": "Which muscle assists hip flexion during early swing?",
+      "options": [
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Adductor magnus",
+        "Semimembranosus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Iliopsoas",
+      "explanation": "Iliopsoas is an important hip flexor during limb advancement.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana201-arches-gait-34",
+      "text": "Which statement about the medial and lateral longitudinal arches is correct?",
+      "options": [
+        "The medial arch is lower and less mobile",
+        "Neither arch helps distribute weight",
+        "The lateral arch is relatively low and provides a stable platform",
+        "The transverse arch is formed only by the phalanges"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The lateral arch is relatively low and provides a stable platform",
+      "explanation": "The lateral longitudinal arch is relatively low and rigid, providing a stable weight-bearing platform.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana201-arches-gait-35",
+      "text": "During terminal swing, the hamstrings mainly:",
+      "options": [
+        "Initiate ankle dorsiflexion",
+        "Decelerate forward movement of the thigh and leg",
+        "Produce the main ankle push-off",
+        "Prevent foot eversion"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Decelerate forward movement of the thigh and leg",
+      "explanation": "The hamstrings eccentrically decelerate the limb before initial contact.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana201-arches-gait-36",
+      "text": "Which of the following is a major bony component of the medial longitudinal arch?",
+      "options": [
+        "Talus",
+        "Cuboid only",
+        "Fifth metatarsal only",
+        "Patella"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Talus",
+      "explanation": "The talus is a key component and the keystone of the medial longitudinal arch.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana201-arches-gait-37",
+      "text": "Which joint movement contributes directly to propulsion during push-off?",
+      "options": [
+        "Hip abduction",
+        "Knee flexion alone",
+        "Ankle plantar flexion",
+        "Movement at the distal tibiofibular joint"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Ankle plantar flexion",
+      "explanation": "Ankle plantar flexion contributes to forward propulsion in late stance.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana201-arches-gait-38",
+      "text": "Weakness of which muscle may cause a backward trunk lean to compensate for reduced hip extension stability?",
+      "options": [
+        "Gluteus maximus",
+        "Gluteus medius",
+        "Tibialis anterior",
+        "Extensor hallucis longus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Gluteus maximus",
+      "explanation": "Gluteus maximus weakness may produce a gluteus maximus lurch.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana201-arches-gait-39",
+      "text": "Which of the following best describes the windlass mechanism?",
+      "options": [
+        "Toe extension tensions the plantar aponeurosis and elevates the arch",
+        "Ankle inversion relaxes all foot ligaments",
+        "Knee extension raises the transverse arch directly",
+        "Toe flexion removes tension from the plantar aponeurosis"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Toe extension tensions the plantar aponeurosis and elevates the arch",
+      "explanation": "Extension of the metatarsophalangeal joints winds the plantar aponeurosis around the metatarsal heads.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana201-arches-gait-40",
+      "text": "Which statement about the medial longitudinal arch is correct?",
+      "options": [
+        "It is higher and more flexible than the lateral arch",
+        "It is lower and more rigid than the lateral arch",
+        "It contains no tarsal bones",
+        "It is supported only by bone"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It is higher and more flexible than the lateral arch",
+      "explanation": "The medial longitudinal arch is higher and more elastic than the lateral arch.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana201-arches-gait-41",
+      "text": "Which gait abnormality is associated with weakness of ankle dorsiflexors?",
+      "options": [
+        "Foot drop with possible high-stepping gait",
+        "Trendelenburg gait only",
+        "Waddling gait only",
+        "Antalgic gait in every case"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Foot drop with possible high-stepping gait",
+      "explanation": "Dorsiflexor weakness may cause foot drop and compensatory high stepping.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana201-arches-gait-42",
+      "text": "Which structure connects the calcaneus to the navicular and supports the talar head?",
+      "options": [
+        "Spring ligament",
+        "Patellar ligament",
+        "Anterior talofibular ligament",
+        "Iliofemoral ligament"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Spring ligament",
+      "explanation": "The spring ligament extends from the calcaneus to the navicular and supports the head of the talus.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana201-arches-gait-43",
+      "text": "Which of the following is the correct sequence of gait phases?",
+      "options": [
+        "Initial contact → loading response → midstance → terminal stance → pre-swing → initial swing → midswing → terminal swing",
+        "Initial swing → loading response → terminal stance → midstance → terminal swing",
+        "Loading response → initial contact → midswing → terminal stance → pre-swing",
+        "Initial contact → terminal swing → midstance → loading response → initial swing"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Initial contact → loading response → midstance → terminal stance → pre-swing → initial swing → midswing → terminal swing",
+      "explanation": "This is the recognised sequence of the eight gait-cycle phases.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana201-arches-gait-44",
+      "text": "Which combination correctly identifies important supports of the medial longitudinal arch?",
+      "options": [
+        "Spring ligament, plantar aponeurosis and tibialis posterior",
+        "Patellar ligament, iliotibial tract and sartorius",
+        "Anterior talofibular ligament, biceps femoris and popliteus",
+        "Deltoid ligament, quadriceps femoris and gracilis"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Spring ligament, plantar aponeurosis and tibialis posterior",
+      "explanation": "The spring ligament and plantar aponeurosis provide passive support, while tibialis posterior provides dynamic support.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana201-arches-gait-45",
+      "text": "What is a major role of the arms during normal walking?",
+      "options": [
+        "They remain completely stationary",
+        "They help balance and counterbalance trunk and lower-limb movements",
+        "They generate the primary propulsive force",
+        "They prevent all pelvic movement"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. They help balance and counterbalance trunk and lower-limb movements",
+      "explanation": "Arm swing helps balance and counterbalances trunk and pelvic rotation.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana201-arches-gait-46",
+      "text": "Which of the following best describes pre-swing?",
+      "options": [
+        "The limb accepts initial body weight",
+        "The body moves over the supporting foot only",
+        "Weight transfers to the opposite limb as the toes prepare to leave the ground",
+        "The limb advances forward without ground contact"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Weight transfers to the opposite limb as the toes prepare to leave the ground",
+      "explanation": "Pre-swing is the final part of stance, when weight is transferred and the limb prepares for toe-off.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana201-arches-gait-47",
+      "text": "Which ligament helps maintain the lateral longitudinal arch by supporting the calcaneocuboid region?",
+      "options": [
+        "Long plantar ligament",
+        "Spring ligament",
+        "Deltoid ligament",
+        "Iliofemoral ligament"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Long plantar ligament",
+      "explanation": "The long plantar ligament is a key passive support of the lateral longitudinal arch.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana201-arches-gait-48",
+      "text": "Which muscle controls plantar flexion of the foot immediately after initial contact?",
+      "options": [
+        "Tibialis anterior",
+        "Soleus",
+        "Gluteus medius",
+        "Iliopsoas"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Tibialis anterior",
+      "explanation": "Tibialis anterior contracts eccentrically to control the foot as the forefoot lowers.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana201-arches-gait-49",
+      "text": "Weakness of tibialis posterior can compromise which structure most directly?",
+      "options": [
+        "Medial longitudinal arch",
+        "Patellar ligament",
+        "Knee menisci",
+        "Iliotibial tract"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Medial longitudinal arch",
+      "explanation": "Tibialis posterior is a major dynamic support of the medial longitudinal arch.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana201-arches-gait-50",
+      "text": "Which gait phase occurs immediately before initial contact of the same limb?",
+      "options": [
+        "Loading response",
+        "Terminal swing",
+        "Midstance",
+        "Pre-swing"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Terminal swing",
+      "explanation": "Terminal swing is the final swing phase before the foot makes initial contact.",
+      "section": "Arches of the Foot & Walking Gait: Biomechanics & Functional Anatomy",
+      "questionNumber": 50
+    }
+  ]
+}
