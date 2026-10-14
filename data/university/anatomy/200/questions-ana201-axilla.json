@@ -1,0 +1,760 @@
+{
+  "title": "Axilla",
+  "course": "ANA 201",
+  "totalQuestions": 50,
+  "sections": [
+    "Axilla: Boundaries, Contents, Vessels & Lymphatics (Q1-Q50)"
+  ],
+  "questions": [
+    {
+      "id": "ana201-axilla-1",
+      "text": "A surgeon operating near the apex of the axilla must carefully navigate the cervicoaxillary canal. Which of the following bony structures forms the posterior boundary of this important passageway?",
+      "options": [
+        "The upper border of the scapula",
+        "The clavicle",
+        "The outer border of the first rib",
+        "The coracoid process"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The upper border of the scapula",
+      "explanation": "The cervicoaxillary canal, representing the apex of the axilla, is bounded anteriorly by the clavicle, medially by the outer border of the first rib, and posteriorly by the upper border of the scapula.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana201-axilla-2",
+      "text": "The axillary artery is conventionally divided into three parts based on its relationship to the pectoralis minor muscle. Which specific branch arises from the second part of the axillary artery?",
+      "options": [
+        "Superior thoracic artery",
+        "Lateral thoracic artery",
+        "Subscapular artery",
+        "Posterior circumflex humeral artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Lateral thoracic artery",
+      "explanation": "The second part of the axillary artery, located directly behind the pectoralis minor muscle, gives rise to two branches: the thoracoacromial artery and the lateral thoracic artery.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana201-axilla-3",
+      "text": "During a physical examination, the physician palpates the anterior axillary fold to assess for lymphadenopathy. Which anatomical structure is primarily responsible for forming this distinct fold?",
+      "options": [
+        "The tendon of the latissimus dorsi muscle",
+        "The lateral edge of the pectoralis minor",
+        "The lower border of the pectoralis major muscle",
+        "The clavicular head of the pectoralis major"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The lower border of the pectoralis major muscle",
+      "explanation": "The base of the axilla is bounded anteriorly by the anterior axillary fold, which is formed primarily by the lower border of the pectoralis major muscle.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana201-axilla-4",
+      "text": "A patient presents with an infection in the lateral quadrants of the breast. To which specific group of axillary lymph nodes will this lymphatic fluid primarily drain first?",
+      "options": [
+        "Apical group",
+        "Subscapular (posterior) group",
+        "Brachial (lateral) group",
+        "Pectoral (anterior) group"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Pectoral (anterior) group",
+      "explanation": "The pectoral (anterior) group of axillary lymph nodes drains the superficial lymphatic vessels from the anterolateral abdominal wall (above the umbilicus) and the lateral quadrants of the breast.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana201-axilla-5",
+      "text": "The posterior wall of the axilla is formed by a group of muscles. Which of the following muscles contributes to this boundary while also forming part of the posterior axillary fold?",
+      "options": [
+        "Latissimus dorsi",
+        "Pectoralis minor",
+        "Subscapularis",
+        "Serratus anterior"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Latissimus dorsi",
+      "explanation": "The posterior wall of the axilla is formed by the subscapularis, latissimus dorsi, and teres major muscles. The tendon of the latissimus dorsi (along with teres major) forms the posterior axillary fold.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana201-axilla-6",
+      "text": "The axillary sheath is a connective tissue enclosure surrounding vital neurovascular structures. From which fascial layer in the neck is this sheath a direct downward continuation?",
+      "options": [
+        "Investing layer of deep cervical fascia",
+        "Prevertebral fascia",
+        "Pretracheal fascia",
+        "Clavipectoral fascia"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Prevertebral fascia",
+      "explanation": "The axillary sheath is a connective tissue sleeve that encloses the axillary artery and the cords of the brachial plexus. It is continuous superiorly with the prevertebral fascia of the neck.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana201-axilla-7",
+      "text": "The medial wall of the axilla is a complex structure involving bone and muscle. Which specific anatomical components make up this boundary?",
+      "options": [
+        "The clavicle, the first rib, and the subclavius muscle",
+        "The humerus and the short head of the biceps brachii",
+        "The upper 4 ribs, their intercostal spaces, and the serratus anterior",
+        "The lateral border of the scapula and the teres major"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The upper 4 ribs, their intercostal spaces, and the serratus anterior",
+      "explanation": "The medial wall of the axilla is formed by the serratus anterior muscle overlying the thoracic wall, which includes the upper 4 ribs and their corresponding intercostal spaces.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana201-axilla-8",
+      "text": "Which specific branch of the axillary artery is the largest and arises from the third part of the vessel?",
+      "options": [
+        "Superior thoracic artery",
+        "Lateral thoracic artery",
+        "Thoracoacromial artery",
+        "Subscapular artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Subscapular artery",
+      "explanation": "The subscapular artery is the largest branch of the axillary artery. It originates from the third part of the artery (below the pectoralis minor) and runs along the lower border of the subscapularis muscle.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana201-axilla-9",
+      "text": "The cervicoaxillary canal serves as the primary conduit between the neck and the axilla. Which structure constitutes the medial boundary of this canal?",
+      "options": [
+        "The outer border of the first rib",
+        "The clavicle",
+        "The upper border of the scapula",
+        "The lateral border of the pectoralis minor"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The outer border of the first rib",
+      "explanation": "The apex of the axilla (cervicoaxillary canal) is bounded medially by the outer border of the first rib, anteriorly by the clavicle, and posteriorly by the superior border of the scapula.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana201-axilla-10",
+      "text": "In the anatomical arrangement of the axilla, which specific part of the axillary artery is located completely posterior to the pectoralis minor muscle?",
+      "options": [
+        "The first part",
+        "The second part",
+        "The third part",
+        "The terminal part before becoming the brachial artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The second part",
+      "explanation": "The pectoralis minor muscle crosses anterior to the axillary artery, dividing it into three parts. The second part is defined precisely by its location behind (posterior to) the pectoralis minor.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana201-axilla-11",
+      "text": "While dissecting the axilla, you identify the lateral wall. Which muscles are located within the bicipital groove of the humerus, forming this specific boundary?",
+      "options": [
+        "Subscapularis and teres major",
+        "Pectoralis major and minor",
+        "Coracobrachialis and biceps brachii",
+        "Serratus anterior and latissimus dorsi"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Coracobrachialis and biceps brachii",
+      "explanation": "The narrow lateral wall of the axilla is formed by the intertubercular (bicipital) groove of the humerus, which contains the coracobrachialis muscle and the tendon of the long head of the biceps brachii.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana201-axilla-12",
+      "text": "The axillary lymph nodes are arranged in five distinct groups. Which group acts as the final common pathway, receiving efferent vessels from all other axillary node groups before forming the subclavian lymph trunk?",
+      "options": [
+        "Central group",
+        "Pectoral (anterior) group",
+        "Brachial (lateral) group",
+        "Apical group"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Apical group",
+      "explanation": "The apical group of lymph nodes is situated at the apex of the axilla. It receives efferent lymphatics from all other axillary node groups, and its own efferents unite to form the subclavian lymph trunk.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana201-axilla-13",
+      "text": "The posterior circumflex humeral artery is a significant vessel supplying the shoulder. From which part of the axillary artery does it branch, and which specific anatomical space does it traverse?",
+      "options": [
+        "Quadrangular space",
+        "Clavipectoral triangle",
+        "Triangular interval",
+        "Triangular space"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Quadrangular space",
+      "explanation": "The posterior circumflex humeral artery arises from the third part of the axillary artery (below the pectoralis minor) and winds around the surgical neck of the humerus by passing through the quadrangular space.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana201-axilla-14",
+      "text": "Which of the following describes the correct transition point where the axillary artery ends and the brachial artery begins?",
+      "options": [
+        "The lateral border of the first rib",
+        "The lower border of the teres major",
+        "The lower border of the pectoralis minor",
+        "The surgical neck of the humerus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The lower border of the teres major",
+      "explanation": "The axillary artery continues as the brachial artery exactly at the lower (inferior) border of the teres major muscle. It begins at the lateral border of the first rib.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana201-axilla-15",
+      "text": "The central group of axillary lymph nodes is clinically significant. Where are these nodes primarily situated within the axilla?",
+      "options": [
+        "At the very apex, within the cervicoaxillary canal",
+        "Along the lateral thoracic vessels",
+        "Embedded within the fat at the base of the axilla",
+        "Along the subscapular vessels on the posterior wall"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Embedded within the fat at the base of the axilla",
+      "explanation": "The central group of axillary lymph nodes lies within the axillary fat pad at the base (floor) of the axilla. They receive lymph from the pectoral, subscapular, and lateral groups.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana201-axilla-16",
+      "text": "The first part of the axillary artery maintains specific anatomical relationships. Which major vascular structure lies immediately medial to the first part of the artery?",
+      "options": [
+        "Cephalic vein",
+        "Lateral cord of the brachial plexus",
+        "Medial cord of the brachial plexus",
+        "Axillary vein"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Axillary vein",
+      "explanation": "In its first part, the axillary artery is related medially to the axillary vein. The medial and posterior cords of the brachial plexus lie lateral or posterior to the artery at this stage.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana201-axilla-17",
+      "text": "A patient is diagnosed with breast cancer situated in the superior aspect of the gland. While the majority of the breast drains to the pectoral nodes, lymph from this specific upper region drains directly to which node group?",
+      "options": [
+        "Apical group",
+        "Central group",
+        "Subscapular group",
+        "Parasternal group"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Apical group",
+      "explanation": "While approximately 75% of breast lymph drains to the pectoral nodes, the lymphatics from the upper part of the mammary gland bypass the lower groups and drain directly into the apical group of axillary lymph nodes.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana201-axilla-18",
+      "text": "Which of the following structures constitutes the anterior boundary of the cervicoaxillary canal (the apex of the axilla)?",
+      "options": [
+        "The outer border of the first rib",
+        "The clavicle",
+        "The upper border of the scapula",
+        "The pectoralis minor muscle"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The clavicle",
+      "explanation": "The apex of the axilla (cervicoaxillary canal) is bounded anteriorly by the clavicle, posteriorly by the upper border of the scapula, and medially by the outer border of the first rib.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana201-axilla-19",
+      "text": "The third part of the axillary artery gives rise to three distinct branches. Which of the following is NOT a branch of the third part?",
+      "options": [
+        "Subscapular artery",
+        "Posterior circumflex humeral artery",
+        "Thoracoacromial artery",
+        "Anterior circumflex humeral artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Thoracoacromial artery",
+      "explanation": "The branches of the third part are the subscapular, anterior circumflex humeral, and posterior circumflex humeral arteries. The thoracoacromial artery is a branch of the second part.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana201-axilla-20",
+      "text": "Which muscle contributes to the anterior wall of the axilla and acts as a vital surgical landmark by dividing the axillary artery into its three descriptive parts?",
+      "options": [
+        "Pectoralis major",
+        "Subclavius",
+        "Coracobrachialis",
+        "Pectoralis minor"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Pectoralis minor",
+      "explanation": "The pectoralis minor muscle forms part of the anterior wall of the axilla and is the key anatomical landmark that crosses anterior to the axillary artery, dividing it into first, second, and third parts.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana201-axilla-21",
+      "text": "The base (or floor) of the axilla is formed by skin and fascia stretching between the anterior and posterior walls. Which muscle's tendon primarily forms the posterior axillary fold?",
+      "options": [
+        "Latissimus dorsi",
+        "Pectoralis major",
+        "Coracobrachialis",
+        "Serratus anterior"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Latissimus dorsi",
+      "explanation": "The posterior axillary fold, which helps bound the base of the axilla, is formed primarily by the tendon of the latissimus dorsi muscle (along with the teres major).",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana201-axilla-22",
+      "text": "Which of the following groups of axillary lymph nodes is located on the posterior wall of the axilla, along the lower border of the subscapularis muscle?",
+      "options": [
+        "Pectoral (anterior) group",
+        "Subscapular (posterior) group",
+        "Central group",
+        "Brachial (lateral) group"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Subscapular (posterior) group",
+      "explanation": "The subscapular (posterior) group of lymph nodes is situated on the posterior wall of the axilla, lying along the subscapular vessels at the lower margin of the subscapularis muscle.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana201-axilla-23",
+      "text": "The axillary artery is surrounded by the cords of the brachial plexus. In the second part of the axillary artery (behind the pectoralis minor), what is the relationship of the posterior cord to the artery?",
+      "options": [
+        "It lies anterior to the artery.",
+        "It lies lateral to the artery.",
+        "It lies posterior to the artery.",
+        "It lies medial to the artery."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It lies posterior to the artery.",
+      "explanation": "Behind the pectoralis minor, the cords of the brachial plexus are arranged around the second part of the axillary artery according to their names. Thus, the posterior cord lies posterior to the artery.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana201-axilla-24",
+      "text": "Which nerve runs along the medial wall of the axilla, resting on the superficial surface of the serratus anterior muscle?",
+      "options": [
+        "Medial pectoral nerve",
+        "Thoracodorsal nerve",
+        "Axillary nerve",
+        "Long thoracic nerve"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Long thoracic nerve",
+      "explanation": "The long thoracic nerve (nerve to serratus anterior) descends vertically on the external surface of the serratus anterior muscle, which forms the medial wall of the axilla.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana201-axilla-25",
+      "text": "The axillary vein lies in close proximity to the axillary artery throughout its course. What is the consistent anatomical relationship of the axillary vein to the first part of the axillary artery?",
+      "options": [
+        "It lies medial to the artery.",
+        "It lies posterior to the artery.",
+        "It lies lateral to the artery.",
+        "It lies anterior to the artery."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It lies medial to the artery.",
+      "explanation": "Throughout the axilla, including alongside the first part of the artery, the large axillary vein consistently lies on the medial side of the axillary artery.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana201-axilla-26",
+      "text": "Which branch of the first part of the axillary artery is typically small and supplies the upper intercostal spaces and the superior portion of the serratus anterior?",
+      "options": [
+        "Lateral thoracic artery",
+        "Superior thoracic artery",
+        "Thoracodorsal artery",
+        "Subscapular artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Superior thoracic artery",
+      "explanation": "The superior thoracic artery is the single, small branch originating from the first part of the axillary artery. It runs anteriorly to supply the upper thoracic wall and overlying muscles.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana201-axilla-27",
+      "text": "Lymphatic drainage from the upper limb (excluding the shoulder region) primarily enters which specific group of axillary lymph nodes first?",
+      "options": [
+        "Apical group",
+        "Pectoral (anterior) group",
+        "Brachial (lateral) group",
+        "Central group"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Brachial (lateral) group",
+      "explanation": "The brachial (lateral) group of lymph nodes is located along the lateral wall of the axilla (along the axillary vessels) and receives almost all the afferent lymphatic drainage directly from the upper limb.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana201-axilla-28",
+      "text": "The anterior wall of the axilla is composed of three muscles. Which of the following muscles is NOT a component of this anterior boundary?",
+      "options": [
+        "Pectoralis major",
+        "Subclavius",
+        "Pectoralis minor",
+        "Teres major"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Teres major",
+      "explanation": "The anterior wall is formed by the pectoralis major, pectoralis minor, and subclavius muscles. The teres major is a component of the posterior wall of the axilla.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana201-axilla-29",
+      "text": "The subscapular (posterior) lymph nodes receive afferent lymphatic vessels primarily from which anatomical region?",
+      "options": [
+        "The superficial tissues of the back, down to the iliac crests",
+        "The lateral quadrants of the breast",
+        "The upper limb distal to the elbow",
+        "The anterior abdominal wall above the umbilicus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The superficial tissues of the back, down to the iliac crests",
+      "explanation": "The subscapular group drains the superficial lymphatic vessels from the posterior thoracic wall and the back, extending as far inferiorly as the superior border of the iliac crests.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana201-axilla-30",
+      "text": "The anterior circumflex humeral artery is a branch of the third part of the axillary artery. How does it typically route itself around the humerus?",
+      "options": [
+        "It descends within the intertubercular groove.",
+        "It winds around the front of the surgical neck of the humerus.",
+        "It passes through the quadrangular space with the axillary nerve.",
+        "It pierces the coracobrachialis muscle to reach the joint."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It winds around the front of the surgical neck of the humerus.",
+      "explanation": "The anterior circumflex humeral artery is a small branch that passes horizontally and anteriorly around the surgical neck of the humerus, deep to the coracobrachialis and biceps brachii.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana201-axilla-31",
+      "text": "Which of the following vessels originates directly from the arterial segment located deep to the pectoralis minor muscle?",
+      "options": [
+        "Anterior circumflex humeral artery",
+        "Superior thoracic artery",
+        "Thoracoacromial artery",
+        "Subscapular artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Thoracoacromial artery",
+      "explanation": "The thoracoacromial artery (along with the lateral thoracic artery) arises from the second part of the axillary artery, which is situated directly posterior (deep) to the pectoralis minor muscle.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana201-axilla-32",
+      "text": "In the upper region of the axilla, the first part of the axillary artery is related posteriorly to which specific structure?",
+      "options": [
+        "Cephalic vein and lateral cord",
+        "Pectoralis major and clavipectoral fascia",
+        "Axillary vein and medial cord",
+        "Serratus anterior, long thoracic nerve, and medial cord"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Serratus anterior, long thoracic nerve, and medial cord",
+      "explanation": "The first part of the axillary artery rests posteriorly against the serratus anterior muscle, the long thoracic nerve, and the medial cord of the brachial plexus.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana201-axilla-33",
+      "text": "Lymphatic vessels from the medial portion of the mammary gland exhibit a unique drainage pattern. Where do these specific vessels primarily route their lymph?",
+      "options": [
+        "Into the parasternal (internal thoracic) lymph nodes",
+        "Inferiorly into the subdiaphragmatic lymphatics",
+        "Directly into the apical group of axillary nodes",
+        "Across the sternum to the contralateral axilla"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Into the parasternal (internal thoracic) lymph nodes",
+      "explanation": "Lymphatics from the medial part of the breast bypass the axilla entirely and drain directly into the parasternal (internal thoracic) lymph nodes, forming a chain along the internal thoracic vessels.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana201-axilla-34",
+      "text": "The third part of the axillary artery extends from the inferior border of the pectoralis minor. Which neural structure crosses this arterial segment anteriorly?",
+      "options": [
+        "Radial nerve",
+        "Medial root of the median nerve",
+        "Musculocutaneous nerve",
+        "Ulnar nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Medial root of the median nerve",
+      "explanation": "As the median nerve is formed by its medial and lateral roots, the medial root crosses anterior to the third part of the axillary artery to join the lateral root.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana201-axilla-35",
+      "text": "Efferent lymphatic vessels emerging from the apical group of axillary nodes converge to form a larger lymphatic channel. What is the name of this resulting structure?",
+      "options": [
+        "Thoracic duct",
+        "Right lymphatic duct",
+        "Subclavian lymph trunk",
+        "Bronchomediastinal trunk"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Subclavian lymph trunk",
+      "explanation": "The apical nodes act as the terminal collection point for the axilla. Their efferent vessels unite to form the subclavian lymph trunk, which typically opens into the subclavian vein or the thoracic duct.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana201-axilla-36",
+      "text": "Several structures run medially to the third part of the axillary artery. Which of the following nerves is situated in this medial position?",
+      "options": [
+        "Axillary nerve",
+        "Musculocutaneous nerve",
+        "Radial nerve",
+        "Ulnar nerve"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Ulnar nerve",
+      "explanation": "The ulnar nerve (a branch of the medial cord) descends medially to the third part of the axillary artery, alongside the axillary vein and the medial cutaneous nerve of the arm.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana201-axilla-37",
+      "text": "The subscapular artery is a major branch in the axilla. According to standard branching patterns, into which two vessels does it subsequently divide?",
+      "options": [
+        "Circumflex scapular and thoracodorsal arteries",
+        "Thoracoacromial and dorsal scapular arteries",
+        "Anterior and posterior circumflex humeral arteries",
+        "Superior and lateral thoracic arteries"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Circumflex scapular and thoracodorsal arteries",
+      "explanation": "The subscapular artery is a short trunk that quickly divides into the circumflex scapular artery (which participates in the scapular anastomosis) and the thoracodorsal artery (which supplies the latissimus dorsi).",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana201-axilla-38",
+      "text": "The inferomedial quadrant of the breast has a distinct lymphatic drainage pathway that differs from the majority of the gland. Where do lymphatics from this specific area anastomose?",
+      "options": [
+        "Directly into the subclavian lymph trunk",
+        "With vessels of the rectus sheath and linea alba",
+        "With the apical group of axillary nodes",
+        "With the central group of axillary nodes"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. With vessels of the rectus sheath and linea alba",
+      "explanation": "Lymphatics draining the inferomedial quadrant of the breast penetrate deeply to anastomose with lymphatic vessels of the rectus sheath, linea alba, and the subdiaphragmatic networks.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana201-axilla-39",
+      "text": "The second part of the axillary artery lies deep to the pectoralis minor. Which cord of the brachial plexus is located immediately lateral to this arterial segment?",
+      "options": [
+        "Anterior cord",
+        "Medial cord",
+        "Lateral cord",
+        "Posterior cord"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Lateral cord",
+      "explanation": "The cords of the brachial plexus are named according to their relationship with the second part of the axillary artery. Therefore, the lateral cord is located lateral to the vessel.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana201-axilla-40",
+      "text": "The lateral wall of the axilla is very narrow due to the convergence of the anterior and posterior walls. Which bony structure specifically forms this narrow lateral boundary?",
+      "options": [
+        "Coracoid process of the scapula",
+        "Acromion of the scapula",
+        "Lateral border of the first rib",
+        "Intertubercular groove of the humerus"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Intertubercular groove of the humerus",
+      "explanation": "The lateral wall of the axilla is formed by the narrow intertubercular (bicipital) groove of the humerus, which houses the coracobrachialis and the biceps brachii tendon.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana201-axilla-41",
+      "text": "The first part of the axillary artery is covered by several structures anteriorly. Which of the following veins is part of this anterior anatomical relationship?",
+      "options": [
+        "Cephalic vein",
+        "Brachial vein",
+        "Basilic vein",
+        "Lateral thoracic vein"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Cephalic vein",
+      "explanation": "The first part of the axillary artery is related anteriorly to the pectoralis major, clavipectoral fascia, and the cephalic vein, which pierces the fascia in this region to join the axillary vein.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana201-axilla-42",
+      "text": "The posterior wall of the axilla is muscular and expansive. Which of the following muscles is a definitive component of this posterior boundary?",
+      "options": [
+        "Serratus anterior",
+        "Teres major",
+        "Pectoralis minor",
+        "Coracobrachialis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Teres major",
+      "explanation": "The posterior wall of the axilla is constructed by the subscapularis, the latissimus dorsi, and the teres major muscles.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana201-axilla-43",
+      "text": "The axillary artery serves as the primary vascular conduit for the upper limb. At which precise anatomical landmark does the subclavian artery become the axillary artery?",
+      "options": [
+        "The medial border of the pectoralis minor",
+        "The superior border of the scapula",
+        "The lateral border of the first rib",
+        "The inferior border of the clavicle"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The lateral border of the first rib",
+      "explanation": "The transition point where the subclavian artery officially changes its name to the axillary artery is at the outer (lateral) border of the first rib as it enters the axilla.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana201-axilla-44",
+      "text": "The scapular (posterior) group of axillary lymph nodes is situated along the posterior wall of the axilla. Which specific blood vessels do these nodes closely follow?",
+      "options": [
+        "Thoracoacromial vessels",
+        "Posterior circumflex humeral vessels",
+        "Lateral thoracic vessels",
+        "Subscapular vessels"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Subscapular vessels",
+      "explanation": "The subscapular group of nodes runs along the posterior wall of the axilla in close association with the subscapular blood vessels at the lower border of the subscapularis muscle.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana201-axilla-45",
+      "text": "The lateral thoracic artery supplies structures on the medial wall of the axilla. Along which specific muscular border does this vessel typically descend?",
+      "options": [
+        "The lower border of the pectoralis minor",
+        "The medial border of the coracobrachialis",
+        "The lateral border of the latissimus dorsi",
+        "The upper border of the subscapularis"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The lower border of the pectoralis minor",
+      "explanation": "The lateral thoracic artery originates from the second part of the axillary artery and runs alongside the lower (inferior) border of the pectoralis minor to supply the lateral chest wall and breast.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana201-axilla-46",
+      "text": "The third part of the axillary artery rests against several structures posteriorly. Which of the following pairs of nerves lies immediately posterior to this segment of the artery?",
+      "options": [
+        "Long thoracic and thoracodorsal nerves",
+        "Median and ulnar nerves",
+        "Axillary and radial nerves",
+        "Musculocutaneous and axillary nerves"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Axillary and radial nerves",
+      "explanation": "The third part of the axillary artery is related posteriorly to the subscapularis, latissimus dorsi, and teres major muscles, as well as the axillary and radial nerves (terminal branches of the posterior cord).",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana201-axilla-47",
+      "text": "Lymphatic metastasis from a primary breast tumor can occasionally present in the contralateral breast. Which lymphatic vessels facilitate this cross-midline spread?",
+      "options": [
+        "Deep lymphatics draining into the subdiaphragmatic nodes",
+        "Apical efferent vessels crossing through the cervicoaxillary canal",
+        "Vessels from the medial part of the gland passing across the front of the sternum",
+        "Vessels originating from the lateral quadrants that bypass the axilla"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Vessels from the medial part of the gland passing across the front of the sternum",
+      "explanation": "Some lymphatics originating from the medial aspect of the breast traverse the anterior surface of the sternum to anastomose with the lymphatic network of the opposite breast.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana201-axilla-48",
+      "text": "The cords of the brachial plexus are named for their relationship to the second part of the axillary artery. Where is the medial cord positioned relative to this segment?",
+      "options": [
+        "Posterior to the artery",
+        "Anterior to the artery",
+        "Lateral to the artery",
+        "Medial to the artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Medial to the artery",
+      "explanation": "True to its name, the medial cord of the brachial plexus lies directly medial to the second part of the axillary artery, situated behind the pectoralis minor.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana201-axilla-49",
+      "text": "The axillary inlet (apex) allows passage of structures into the arm. Which of the following correctly identifies its anterior, posterior, and medial boundaries respectively?",
+      "options": [
+        "Clavicle, upper border of scapula, outer border of first rib",
+        "Upper border of scapula, first rib, clavicle",
+        "First rib, clavicle, upper border of scapula",
+        "Clavicle, outer border of first rib, upper border of scapula"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Clavicle, upper border of scapula, outer border of first rib",
+      "explanation": "The apex of the axilla (cervicoaxillary canal) is bounded anteriorly by the clavicle, posteriorly by the upper border of the scapula, and medially by the outer border of the first rib.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana201-axilla-50",
+      "text": "The first part of the axillary artery is closely associated with the proximal portions of the brachial plexus. Which cords of the plexus are located lateral to this initial arterial segment?",
+      "options": [
+        "Medial and posterior cords",
+        "Lateral and posterior cords",
+        "Lateral and medial cords",
+        "Only the lateral cord"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Lateral and posterior cords",
+      "explanation": "In its first part (above the pectoralis minor), the axillary artery is related laterally to both the lateral and posterior cords of the brachial plexus. The medial cord lies posterior to it at this level.",
+      "section": "Axilla: Boundaries, Contents, Vessels & Lymphatics",
+      "questionNumber": 50
+    }
+  ]
+}
