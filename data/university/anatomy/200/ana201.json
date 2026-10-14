@@ -26,7 +26,7 @@
         { "id": "ll-muscles", "title": "Muscles of the Lower Limb", "status": "available", "dataFile": "data/university/anatomy/200/questions-ana201-muscles-lower-limb.json" },
         { "id": "ll-joints", "title": "Joints of the Lower Limb", "status": "available", "dataFile": "data/university/anatomy/200/questions-ana201-joints-lower-limb.json" },
         { "id": "ll-popliteal-fossa", "title": "Popliteal Fossa", "status": "available", "dataFile": "data/university/anatomy/200/questions-ana201-popliteal-fossa.json" },
-        { "id": "ll-femoral-triangle", "title": "Femoral Triangle", "status": "coming-soon" },
+        { "id": "ll-femoral-triangle", "title": "Femoral Triangle", "status": "available", "dataFile": "data/university/anatomy/200/questions-ana201-femoral-triangle.json" },
         { "id": "ll-arches-of-foot", "title": "Arches of the Foot", "status": "coming-soon" },
         { "id": "ll-adductor-canal", "title": "Adductor Canal", "status": "coming-soon" },
         { "id": "ll-walking-gait", "title": "Walking Gait", "status": "coming-soon" },

@@ -1,0 +1,1060 @@
+{
+  "title": "Femoral Triangle",
+  "course": "ANA 201",
+  "totalQuestions": 70,
+  "sections": [
+    "Femoral Triangle: Boundaries, Contents, Sheath & Hernias (Q1-Q70)"
+  ],
+  "questions": [
+    {
+      "id": "ana201-femoral-triangle-1",
+      "text": "A 55-year-old female presents with a tender bulge inferolateral to the pubic tubercle. Which imaging modality is most appropriately used to confirm the clinical suspicion of a femoral hernia?",
+      "options": [
+        "Plain radiography (X-ray)",
+        "Magnetic Resonance Imaging (MRI)",
+        "Ultrasound or Computed Tomography (CT)",
+        "Radionuclide bone scan"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Ultrasound or Computed Tomography (CT)",
+      "explanation": "While femoral hernias are often diagnosed clinically, ultrasound or CT imaging are the standard modalities used to confirm the diagnosis and visualize the herniated contents within the femoral canal.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana201-femoral-triangle-2",
+      "text": "During anatomical dissection, the boundaries of the femoral triangle are defined. Which specific muscular border establishes the lateral boundary of this region?",
+      "options": [
+        "The medial border of the sartorius muscle",
+        "The lateral border of the rectus femoris muscle",
+        "The medial border of the gracilis muscle",
+        "The lateral border of the vastus medialis muscle"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The medial border of the sartorius muscle",
+      "explanation": "The lateral boundary of the femoral triangle is formed precisely by the medial border of the sartorius muscle as it crosses the anterior thigh.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana201-femoral-triangle-3",
+      "text": "The femoral triangle requires precise anatomical landmarks for proper identification. Which structure forms its medial boundary?",
+      "options": [
+        "The medial border of the pectineus muscle",
+        "The lateral border of the semimembranosus muscle",
+        "The medial border of the sartorius muscle",
+        "The medial border of the adductor longus muscle"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The medial border of the adductor longus muscle",
+      "explanation": "The medial boundary of the femoral triangle is formed by the lateral border of the adductor longus muscle.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana201-femoral-triangle-4",
+      "text": "Which tough, fibrous structure forms the superior base of the femoral triangle?",
+      "options": [
+        "The iliolumbar ligament",
+        "The inguinal ligament",
+        "The sacrotuberous ligament",
+        "The pectineal ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The inguinal ligament",
+      "explanation": "The superior border, or base, of the femoral triangle is formed by the inguinal ligament (also known as Poupart's ligament).",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana201-femoral-triangle-5",
+      "text": "The floor of the femoral triangle is formed by a sequence of muscles. Moving from lateral to medial, which muscle constitutes the most lateral component of this floor?",
+      "options": [
+        "Pectineus",
+        "Adductor longus",
+        "Iliopsoas",
+        "Adductor magnus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Iliopsoas",
+      "explanation": "The floor of the femoral triangle, from lateral to medial, is formed by the iliopsoas, pectineus, and adductor longus muscles. Therefore, the iliopsoas is the most lateral.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana201-femoral-triangle-6",
+      "text": "A deep laceration to the medial aspect of the femoral triangle's floor would primarily expose which of the following muscles?",
+      "options": [
+        "Adductor longus",
+        "Tensor fasciae latae",
+        "Vastus intermedius",
+        "Sartorius"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Adductor longus",
+      "explanation": "Because the floor of the femoral triangle is formed by the iliopsoas laterally, pectineus intermediately, and adductor longus medially, a medial laceration to the floor would expose the adductor longus.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana201-femoral-triangle-7",
+      "text": "Within the femoral triangle, neurovascular structures are highly organized. Which of the following occupies the most lateral position?",
+      "options": [
+        "Femoral artery",
+        "Femoral canal",
+        "Femoral vein",
+        "Femoral nerve"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Femoral nerve",
+      "explanation": "Using the mnemonic NAVEL from lateral to medial (Nerve, Artery, Vein, Empty space, Lymphatics), the femoral nerve is the most lateral major structure in the triangle.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana201-femoral-triangle-8",
+      "text": "The femoral sheath is subdivided by vertical fascial septa. How many distinct internal compartments does this sheath normally contain?",
+      "options": [
+        "Two",
+        "Three",
+        "Four",
+        "Five"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Three",
+      "explanation": "Extra-peritoneal connective tissue septa divide the internal space of the femoral sheath into three compartments: lateral (arterial), intermediate (venous), and medial (canal).",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana201-femoral-triangle-9",
+      "text": "Within the sub-compartments of the femoral sheath, what is the anatomical position of the femoral canal?",
+      "options": [
+        "It constitutes the lateral compartment.",
+        "It constitutes the intermediate compartment.",
+        "It constitutes the medial compartment.",
+        "It lies entirely posterior to the sheath."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It constitutes the medial compartment.",
+      "explanation": "The femoral canal is the smallest and most medial compartment of the femoral sheath, containing loose connective tissue and lymphatics.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana201-femoral-triangle-10",
+      "text": "The superior opening of the femoral canal is the femoral ring. Which ligamentous structure strictly forms the posterior boundary of this ring?",
+      "options": [
+        "Pectineal ligament",
+        "Inguinal ligament",
+        "Lacunar ligament",
+        "Sacrospinous ligament"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Pectineal ligament",
+      "explanation": "The posterior boundary of the femoral ring is formed by the pectineal ligament, which lies directly on the superior pubic ramus.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana201-femoral-triangle-11",
+      "text": "When evaluating the margins of the femoral ring, which anatomical structure forms its lateral boundary?",
+      "options": [
+        "Femoral artery",
+        "Femoral nerve",
+        "Iliopectineal arch",
+        "Femoral vein"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Femoral vein",
+      "explanation": "The femoral vein runs within the intermediate compartment of the sheath, making it the direct lateral boundary of the medially situated femoral ring.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana201-femoral-triangle-12",
+      "text": "Which fibrous structure creates the sharp, rigid medial border of the femoral ring?",
+      "options": [
+        "Pectineal ligament",
+        "Lacunar ligament",
+        "Inguinal ligament",
+        "Conjoint tendon"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Lacunar ligament",
+      "explanation": "The lacunar ligament forms the rigid, concave medial boundary of the femoral ring. Its sharp edge is often responsible for the strangulation of herniated bowel loops.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana201-femoral-triangle-13",
+      "text": "A surgeon repairing a femoral hernia must identify the structures compressing the hernia sac. What structure forms the anterior boundary of the femoral ring?",
+      "options": [
+        "Superior pubic ramus",
+        "Pectineal ligament",
+        "Inguinal ligament",
+        "Transversalis fascia"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Inguinal ligament",
+      "explanation": "The anterior boundary of the femoral ring is formed by the overlying inguinal ligament.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana201-femoral-triangle-14",
+      "text": "Physical examination of groin masses relies on anatomical landmarks. How is a femoral hernia clinically distinguished from an inguinal hernia by location?",
+      "options": [
+        "A femoral hernia appears inferolateral to the pubic tubercle.",
+        "A femoral hernia emerges directly through the superficial inguinal ring.",
+        "A femoral hernia presents superomedial to the pubic tubercle.",
+        "A femoral hernia is always located above the inguinal ligament."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. A femoral hernia appears inferolateral to the pubic tubercle.",
+      "explanation": "A classic clinical sign is that a femoral hernia presents as a mass below (inferior) and lateral to the pubic tubercle, whereas an inguinal hernia typically presents above and medial to it.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana201-femoral-triangle-15",
+      "text": "Femoral hernias carry a high risk of strangulation. What anatomical feature of the femoral ring is primarily responsible for this high risk?",
+      "options": [
+        "The highly distensible nature of the transversalis fascia",
+        "The continuous pulsation of the adjacent femoral artery",
+        "The thick, muscular border of the pectineus muscle",
+        "The sharp, rigid margin of the lacunar ligament"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The sharp, rigid margin of the lacunar ligament",
+      "explanation": "The boundaries of the femoral ring are highly unyielding, particularly the sharp, concave margin of the lacunar ligament medially, which easily traps and strangulates herniated contents.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana201-femoral-triangle-16",
+      "text": "To quickly assess peripheral perfusion, emergency personnel palpate the femoral pulse. Where is the optimal site for palpating this pulse within the femoral triangle?",
+      "options": [
+        "Posterior to the medial malleolus",
+        "Just inferior to where the femoral artery crosses the inguinal ligament",
+        "In the mid-thigh, deep to the adductor longus",
+        "At the apex of the femoral triangle"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Just inferior to where the femoral artery crosses the inguinal ligament",
+      "explanation": "The femoral pulse is most easily palpated superficially just inferior to the midpoint of the inguinal ligament, where the femoral artery enters the femoral triangle.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana201-femoral-triangle-17",
+      "text": "The superficial positioning of the vessels in the femoral triangle makes it an ideal site for which common clinical procedure?",
+      "options": [
+        "Central nervous system fluid sampling",
+        "Routine intramuscular vaccination",
+        "Femoral artery catheterization for coronary angiography",
+        "Drainage of abdominal ascites"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Femoral artery catheterization for coronary angiography",
+      "explanation": "The femoral artery is easily accessed in the femoral triangle, making it a primary site for inserting catheters during procedures like coronary angiography.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana201-femoral-triangle-18",
+      "text": "The femoral sheath is an extension of the fascial lining of the abdomen. Which specific fascia extends downwards to form its anterior wall?",
+      "options": [
+        "Transversalis fascia",
+        "Iliac fascia",
+        "Scarpa's fascia",
+        "Camper's fascia"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Transversalis fascia",
+      "explanation": "The anterior wall of the funnel-shaped femoral sheath is formed by an inferior prolongation of the transversalis fascia from the abdomen.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana201-femoral-triangle-19",
+      "text": "The posterior wall of the femoral sheath is formed by the inferior prolongation of which abdominal connective tissue layer?",
+      "options": [
+        "Transversalis fascia",
+        "Colles' fascia",
+        "Rectus sheath",
+        "Iliac fascia"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Iliac fascia",
+      "explanation": "While the anterior wall is formed by transversalis fascia, the posterior wall of the femoral sheath is formed by a continuation of the iliac fascia (iliopsoas fascia).",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana201-femoral-triangle-20",
+      "text": "Which of the following statements correctly describes the relationship of the femoral nerve to the femoral sheath?",
+      "options": [
+        "It lies within the intermediate compartment of the sheath.",
+        "It passes through the muscular compartment and is not enclosed by the sheath.",
+        "It pierces the anterior wall of the sheath to enter the femoral canal.",
+        "It is enveloped by the most medial compartment of the sheath."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It passes through the muscular compartment and is not enclosed by the sheath.",
+      "explanation": "The femoral nerve lies lateral to the femoral sheath. It descends into the thigh through the muscular compartment (along with the iliopsoas) and is therefore not enclosed by the vascular fascial sheath.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana201-femoral-triangle-21",
+      "text": "The femoral canal provides a critical biomechanical advantage within the restricted space of the femoral sheath. What is this primary function?",
+      "options": [
+        "It allows the femoral artery to dilate during parasympathetic stimulation.",
+        "It provides a protective tunnel for the femoral nerve.",
+        "It allows for the expansion of the femoral vein during periods of increased venous return.",
+        "It anchors the deep inguinal lymph nodes directly to the femur."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It allows for the expansion of the femoral vein during periods of increased venous return.",
+      "explanation": "The loose connective tissue within the femoral canal acts as a \"dead space\" that allows the adjacent femoral vein to expand laterally when venous return increases, such as during exercise.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana201-femoral-triangle-22",
+      "text": "The femoral canal is a relatively short anatomical passageway extending from the femoral ring. What is its approximate length?",
+      "options": [
+        "1.5 cm",
+        "3.0 cm",
+        "4.5 cm",
+        "6.0 cm"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. 1.5 cm",
+      "explanation": "The femoral canal is a small, weak area extending roughly 1.5 cm from the femoral ring down to the level of the saphenous opening.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana201-femoral-triangle-23",
+      "text": "An enlarging femoral hernia initially contained within the femoral canal can pass inferiorly into the subcutaneous tissue of the thigh by protruding through which structure?",
+      "options": [
+        "The deep inguinal ring",
+        "The adductor hiatus",
+        "The obturator canal",
+        "The saphenous opening"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The saphenous opening",
+      "explanation": "As a femoral hernia enlarges and moves inferiorly through the femoral canal, it can bulge forward through the saphenous opening into the superficial subcutaneous tissue of the thigh.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana201-femoral-triangle-24",
+      "text": "When recalling the contents of the femoral triangle from lateral to medial, the \"E\" in the mnemonic NAVEL stands for \"Empty space\". What anatomical structure does this refer to?",
+      "options": [
+        "The space deep to the iliopsoas",
+        "The femoral canal",
+        "The gap between the pectineus and adductor longus",
+        "The bursa beneath the sartorius"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The femoral canal",
+      "explanation": "The \"Empty space\" in the NAVEL mnemonic refers to the femoral canal, the most medial compartment of the femoral sheath that contains only loose tissue and lymphatics.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana201-femoral-triangle-25",
+      "text": "A femoral hernia involves the protrusion of abdominal viscera. Which structures most commonly herniate into this canal?",
+      "options": [
+        "Portions of the urinary bladder and ureter",
+        "The appendix and cecum",
+        "A loop of small intestine or omentum",
+        "The ovaries and fallopian tubes"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A loop of small intestine or omentum",
+      "explanation": "Due to their mobility in the lower abdominal cavity, loops of the small intestine and the greater omentum are the contents most frequently found within a femoral hernia sac.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana201-femoral-triangle-26",
+      "text": "Epidemiologically, femoral hernias occur more frequently in female patients than in male patients. What is the primary anatomical reason for this discrepancy?",
+      "options": [
+        "Females possess a wider pelvis and consequently a larger femoral canal.",
+        "The inguinal ligament is more elastic in females.",
+        "The femoral artery is significantly smaller in females, leaving more empty space.",
+        "The transversalis fascia is inherently thinner in the female abdominal wall."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Females possess a wider pelvis and consequently a larger femoral canal.",
+      "explanation": "The female pelvis is structurally wider to accommodate childbirth. This widens the sub-inguinal space, resulting in a larger femoral ring and canal, predisposing females to femoral herniation.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana201-femoral-triangle-27",
+      "text": "Several physiological states can predispose an individual to a femoral hernia by increasing intra-abdominal pressure. Which of the following is NOT typically considered a direct risk factor for this condition?",
+      "options": [
+        "Pregnancy",
+        "Obesity",
+        "Chronic coughing",
+        "Severe hypotension"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Severe hypotension",
+      "explanation": "Factors that increase intra-abdominal pressure (like chronic coughing, straining, obesity, and pregnancy) force abdominal contents against weak points like the femoral ring. Hypotension does not increase intra-abdominal pressure.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana201-femoral-triangle-28",
+      "text": "Strangulation of a femoral hernia is a surgical emergency because the tight boundaries of the femoral ring compress the herniated contents. What is the ultimate consequence of this prolonged compression?",
+      "options": [
+        "Overgrowth of lymphatic tissue in the canal",
+        "Interference with blood supply leading to tissue necrosis",
+        "Rapid enlargement of the deep inguinal lymph nodes",
+        "Permanent paralysis of the femoral nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Interference with blood supply leading to tissue necrosis",
+      "explanation": "The rigid boundaries of the femoral ring compress the blood vessels supplying the herniated intestine. This ischemia quickly progresses to tissue death (necrosis) if not surgically reduced.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana201-femoral-triangle-29",
+      "text": "Before cellular death occurs in a strangulated femoral hernia, the compressed bowel loop first experiences a severe reduction in blood flow. What is the medical term for this inadequate blood supply?",
+      "options": [
+        "Hyperemia",
+        "Hemostasis",
+        "Ischemia",
+        "Aneurysm"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Ischemia",
+      "explanation": "Ischemia is the localized lack of blood supply (and oxygen) to a tissue, which occurs when the hernial sac contents are compressed by the rigid femoral ring.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana201-femoral-triangle-30",
+      "text": "The femoral triangle is a subfascial space that is clinically and surgically important. In which topographical region of the lower limb is it located?",
+      "options": [
+        "The upper third of the anterior thigh",
+        "The middle third of the medial thigh",
+        "The lower third of the posterior thigh",
+        "The gluteal region"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The upper third of the anterior thigh",
+      "explanation": "Topographically, the femoral triangle is situated exclusively in the superior (upper) third of the anterior thigh, immediately below the inguinal ligament.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana201-femoral-triangle-31",
+      "text": "In the context of the femoral triangle, what structure does the \"V\" in the NAVEL mnemonic represent?",
+      "options": [
+        "Vastus medialis muscle",
+        "Vagus nerve",
+        "Vestibular space",
+        "Femoral vein"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Femoral vein",
+      "explanation": "In the lateral-to-medial mnemonic NAVEL, \"V\" stands for the Femoral Vein, which lies medial to the femoral artery.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana201-femoral-triangle-32",
+      "text": "Following the medial-to-lateral organization of the femoral triangle, what does the \"A\" in the NAVEL mnemonic stand for?",
+      "options": [
+        "Adductor longus",
+        "Femoral artery",
+        "Aponeurosis of the external oblique",
+        "Anterior superior iliac spine"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Femoral artery",
+      "explanation": "In the lateral-to-medial mnemonic NAVEL, \"A\" stands for the Femoral Artery.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana201-femoral-triangle-33",
+      "text": "The most medial component of the structures passing beneath the inguinal ligament is represented by the \"L\" in the NAVEL mnemonic. What does this indicate?",
+      "options": [
+        "Lacunar ligament",
+        "Lateral cutaneous nerve of the thigh",
+        "Lymphatics",
+        "Lumbo-inguinal nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Lymphatics",
+      "explanation": "The \"L\" represents the Lymphatics (including the deep inguinal lymph nodes), which are located within the most medial space of the sheath—the femoral canal.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana201-femoral-triangle-34",
+      "text": "The floor of the femoral triangle is formed by three muscles. Which muscle is positioned intermediately, between the most lateral and most medial components of the floor?",
+      "options": [
+        "Pectineus",
+        "Iliopsoas",
+        "Adductor longus",
+        "Sartorius"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Pectineus",
+      "explanation": "From lateral to medial, the floor is formed by the iliopsoas, pectineus, and adductor longus muscles. Therefore, the pectineus occupies the intermediate position.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana201-femoral-triangle-35",
+      "text": "The apex of the femoral triangle points inferiorly down the thigh. Which anatomical event characterizes this apex?",
+      "options": [
+        "The separation of the femoral artery and vein",
+        "The origin of the deep femoral artery",
+        "The insertion of the pectineus onto the femur",
+        "The intersection where the sartorius crosses over the adductor longus"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The intersection where the sartorius crosses over the adductor longus",
+      "explanation": "The apex of the femoral triangle is formed inferiorly by the point where the medial border of the sartorius muscle crosses the lateral border of the adductor longus muscle.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana201-femoral-triangle-36",
+      "text": "The roof of the femoral triangle covers the neurovascular contents. Which of the following components forms the deepest layer of this roof?",
+      "options": [
+        "Epidermis",
+        "Fascia lata",
+        "Subcutaneous tissue",
+        "Scarpa's fascia"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Fascia lata",
+      "explanation": "The roof of the femoral triangle consists of skin, subcutaneous tissue, and the fascia lata. The fascia lata is the deepest of these layers, sealing the subfascial space below.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana201-femoral-triangle-37",
+      "text": "If an individual possesses a long femoral sheath that extends further distally into the thigh, the medial wall of this sheath must be pierced to allow which vessel to join the deep circulation?",
+      "options": [
+        "Popliteal vein",
+        "Profunda femoris vein",
+        "Great saphenous vein",
+        "Small saphenous vein"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Great saphenous vein",
+      "explanation": "The great saphenous vein travels superficially and must pierce the medial wall of the femoral sheath (at the saphenous opening) to drain into the deeply situated femoral vein.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana201-femoral-triangle-38",
+      "text": "The femoral nerve is the most lateral major structure in the femoral triangle. What is its primary motor function in the lower limb?",
+      "options": [
+        "Innervation of the anterior thigh muscles, such as the quadriceps",
+        "Innervation of the posterior thigh muscles, such as the hamstrings",
+        "Innervation of the adductor muscles of the medial thigh",
+        "Innervation of the plantar flexors of the leg"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Innervation of the anterior thigh muscles, such as the quadriceps",
+      "explanation": "The femoral nerve provides motor innervation to the anterior compartment of the thigh (including the quadriceps femoris) and supplies sensory innervation to the anterior thigh and medial leg.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana201-femoral-triangle-39",
+      "text": "The femoral artery enters the femoral triangle by passing deep to the inguinal ligament. Which major blood vessel is the direct proximal continuation of the femoral artery?",
+      "options": [
+        "Abdominal aorta",
+        "Internal iliac artery",
+        "Profunda femoris artery",
+        "External iliac artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. External iliac artery",
+      "explanation": "As the external iliac artery passes beneath the inguinal ligament to enter the thigh, its name changes to the femoral artery.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana201-femoral-triangle-40",
+      "text": "The femoral vein ascends through the intermediate compartment of the femoral sheath. What is its primary physiological role?",
+      "options": [
+        "To distribute oxygenated blood to the pelvic viscera",
+        "To drain deoxygenated blood from the lower limb back toward the heart",
+        "To provide primary vascular supply to the anterior abdominal wall",
+        "To filter lymph before it enters the thoracic duct"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. To drain deoxygenated blood from the lower limb back toward the heart",
+      "explanation": "The femoral vein is the major deep vein of the thigh, functioning to collect and drain deoxygenated blood from the lower limb and return it upward to the external iliac vein.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana201-femoral-triangle-41",
+      "text": "Why is the femoral nerve positioned outside the protective fascial funnel of the femoral sheath?",
+      "options": [
+        "It enters the thigh via the obturator canal instead of the retro-inguinal space.",
+        "It lies strictly within the subcutaneous tissue above the fascia lata.",
+        "It descends through the muscular compartment alongside the iliopsoas muscle.",
+        "It branches off the sciatic nerve far below the inguinal ligament."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It descends through the muscular compartment alongside the iliopsoas muscle.",
+      "explanation": "The retro-inguinal space is divided into a vascular compartment and a muscular compartment. The femoral sheath only encloses the vascular compartment. The femoral nerve descends in the muscular compartment with the iliopsoas, keeping it outside the sheath.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana201-femoral-triangle-42",
+      "text": "The pectineal ligament forms the rigid posterior boundary of the femoral ring. On which bony structure is this ligament located?",
+      "options": [
+        "The superior pubic ramus",
+        "The anterior inferior iliac spine",
+        "The ischial spine",
+        "The symphysis pubis"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The superior pubic ramus",
+      "explanation": "The pectineal ligament (Cooper's ligament) is a thick, strong band of connective tissue running along the pectineal line on the superior pubic ramus, forming the posterior margin of the femoral ring.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana201-femoral-triangle-43",
+      "text": "The inguinal ligament forms the superior border of the femoral triangle. Between which two bony landmarks does this ligament stretch?",
+      "options": [
+        "Pubic symphysis and ischial tuberosity",
+        "Anterior inferior iliac spine and pubic tubercle",
+        "Posterior superior iliac spine and pubic symphysis",
+        "Anterior superior iliac spine and pubic tubercle"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Anterior superior iliac spine and pubic tubercle",
+      "explanation": "The inguinal ligament (Poupart's ligament) spans from the anterior superior iliac spine (ASIS) laterally to the pubic tubercle medially.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana201-femoral-triangle-44",
+      "text": "The lacunar ligament forms the medial boundary of the femoral ring. From which larger ligamentous structure does the lacunar ligament reflect and extend?",
+      "options": [
+        "Pectineal ligament",
+        "Inguinal ligament",
+        "Sacrospinous ligament",
+        "Iliofemoral ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Inguinal ligament",
+      "explanation": "The lacunar ligament is a crescent-shaped extension of fibers that flare backward and medially from the medial end of the inguinal ligament to attach to the pectineal line.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana201-femoral-triangle-45",
+      "text": "A patient with a strangulated femoral hernia often presents with severe pain and tenderness in the upper thigh. This specific presentation is primarily due to:",
+      "options": [
+        "Rapid accumulation of subcutaneous fluid",
+        "Direct laceration of the femoral nerve",
+        "Ischemic compression of herniated bowel loops",
+        "Spasm of the surrounding adductor muscles"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Ischemic compression of herniated bowel loops",
+      "explanation": "The sharp, unyielding boundaries of the femoral ring mechanically compress the blood vessels serving the herniated bowel. This severe ischemia produces intense pain and tenderness.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana201-femoral-triangle-46",
+      "text": "The femoral triangle is described clinically as a specific type of anatomical space. Which term accurately defines it?",
+      "options": [
+        "A subfascial space",
+        "A visceral cavity",
+        "A synovial recess",
+        "An epidural space"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. A subfascial space",
+      "explanation": "The femoral triangle is located beneath the deep fascia of the thigh (fascia lata), classifying it as a subfascial space.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana201-femoral-triangle-47",
+      "text": "As its name implies, the femoral triangle has a distinct geometric appearance on the anterior thigh. Which of the following best describes this shape?",
+      "options": [
+        "A quadrilateral polygon",
+        "A perfect circle",
+        "A rhomboid space",
+        "A triangular depression"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. A triangular depression",
+      "explanation": "Topographically, the femoral triangle appears as an inverted triangular depression in the upper thigh, bounded by the inguinal ligament, sartorius, and adductor longus.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana201-femoral-triangle-48",
+      "text": "The topographical location of the femoral triangle restricts it to a specific region of the lower extremity. Where is it strictly localized?",
+      "options": [
+        "The lower third of the anterior thigh",
+        "The upper third of the anterior thigh",
+        "The middle third of the posterior thigh",
+        "The gluteal region"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The upper third of the anterior thigh",
+      "explanation": "The femoral triangle is located exclusively in the upper (proximal) third of the anterior thigh, immediately descending from the groin crease.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana201-femoral-triangle-49",
+      "text": "The femoral sheath is a specialized connective tissue structure. How is its three-dimensional shape best described anatomically?",
+      "options": [
+        "A flat aponeurotic sheet",
+        "A rigid cylindrical tube",
+        "A funnel-shaped fascial sleeve",
+        "A spherical capsule"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A funnel-shaped fascial sleeve",
+      "explanation": "The femoral sheath acts as a funnel-shaped sleeve extending downwards from the abdominal cavity to smoothly guide the femoral vessels into the thigh.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana201-femoral-triangle-50",
+      "text": "The internal vertical septa that divide the femoral sheath into three compartments are derived from which type of tissue?",
+      "options": [
+        "Extraperitoneal connective tissue extending from the abdomen",
+        "Dense regular connective tissue from the inguinal ligament",
+        "Striated muscle fibers from the transversus abdominis",
+        "Adipose tissue from the subcutaneous layer"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Extraperitoneal connective tissue extending from the abdomen",
+      "explanation": "The internal partitions (septa) of the femoral sheath are formed by the downward extension of extraperitoneal connective tissue from the abdomen.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 50
+    },
+    {
+      "id": "ana201-femoral-triangle-51",
+      "text": "In the absence of a hernia, the femoral canal is not entirely empty. Which of the following structures normally occupies this space?",
+      "options": [
+        "The profunda femoris vein",
+        "The lateral circumflex femoral artery",
+        "The femoral branch of the genitofemoral nerve",
+        "Lymphatic vessels and a deep inguinal lymph node"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Lymphatic vessels and a deep inguinal lymph node",
+      "explanation": "The femoral canal serves as a conduit for lymphatic drainage, containing lymphatic vessels and typically a deep inguinal lymph node.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 51
+    },
+    {
+      "id": "ana201-femoral-triangle-52",
+      "text": "A prominent lymph node is often located within the femoral canal. What is the clinical eponym for this deep inguinal lymph node?",
+      "options": [
+        "Virchow's node",
+        "Node of Cloquet",
+        "Sister Mary Joseph node",
+        "Rotter's node"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Node of Cloquet",
+      "explanation": "The deep inguinal lymph node commonly found nestled within the narrow confines of the femoral canal is historically referred to as the Node of Cloquet (or Rosenmüller node).",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 52
+    },
+    {
+      "id": "ana201-femoral-triangle-53",
+      "text": "Strangulation of a femoral hernia occurs rapidly due to the inability of the femoral ring to stretch. Which boundary of the ring is considered the most rigid and unrelenting?",
+      "options": [
+        "The anterior inguinal ligament",
+        "The lateral femoral vein",
+        "The medial lacunar ligament",
+        "The deep fascia of the thigh"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The medial lacunar ligament",
+      "explanation": "The lacunar ligament, forming the medial boundary of the ring, has a sharp, crescentic, fibrous edge that is entirely unyielding, making it the primary culprit in strangulating hernias.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 53
+    },
+    {
+      "id": "ana201-femoral-triangle-54",
+      "text": "A 60-year-old woman is diagnosed with an incarcerated femoral hernia. What is the definitive treatment for this condition?",
+      "options": [
+        "Surgical repair (herniorrhaphy)",
+        "Long-term bed rest with elevation of the pelvis",
+        "Application of a tight external truss",
+        "Administration of intravenous muscle relaxants"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Surgical repair (herniorrhaphy)",
+      "explanation": "Due to the high risk of strangulation and necrosis, definitive treatment for a femoral hernia is surgical repair (herniorrhaphy) to reduce the bowel and close the defect.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 54
+    },
+    {
+      "id": "ana201-femoral-triangle-55",
+      "text": "During the surgical repair of a femoral hernia, the surgeon must close or reinforce the defect in the femoral canal to prevent recurrence. What material is commonly used to reinforce this space?",
+      "options": [
+        "Autologous bone graft",
+        "Silicone tubing",
+        "Biodegradable collagen sponge",
+        "Synthetic surgical mesh"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Synthetic surgical mesh",
+      "explanation": "Herniorrhaphy for femoral hernias frequently involves the placement of synthetic surgical mesh to securely plug the femoral ring and reinforce the weakened canal.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 55
+    },
+    {
+      "id": "ana201-femoral-triangle-56",
+      "text": "While a femoral hernia is often diagnosed clinically, imaging may be required for confirmation, especially in obese patients. Which modalities are considered standard and most effective?",
+      "options": [
+        "Fluoroscopy and X-ray",
+        "Ultrasound or Computed Tomography (CT)",
+        "Positron Emission Tomography (PET)",
+        "Dual-energy X-ray absorptiometry (DEXA)"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Ultrasound or Computed Tomography (CT)",
+      "explanation": "Ultrasound and CT scans provide excellent visualization of soft tissues and can easily identify herniated bowel protruding through the femoral ring.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 56
+    },
+    {
+      "id": "ana201-femoral-triangle-57",
+      "text": "Because of the superficial location of the large vessels within the femoral triangle, this area is a common site for which type of acute pathology?",
+      "options": [
+        "Spontaneous muscle rupture",
+        "Primary bone malignancies",
+        "Trauma resulting in lacerations and massive hemorrhage",
+        "Chronic joint dislocations"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Trauma resulting in lacerations and massive hemorrhage",
+      "explanation": "The superficial depth of the femoral artery and vein in the upper thigh makes them highly vulnerable to traumatic injuries and lacerations, which can lead to rapid, life-threatening hemorrhage.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 57
+    },
+    {
+      "id": "ana201-femoral-triangle-58",
+      "text": "The femoral artery in the femoral triangle is susceptible to a localized, balloon-like dilation of its wall. What is the medical term for this vascular pathology?",
+      "options": [
+        "Aneurysm",
+        "Atheroma",
+        "Embolism",
+        "Phlebitis"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Aneurysm",
+      "explanation": "An aneurysm is an abnormal focal dilation of an artery. Femoral artery aneurysms can occur in the femoral triangle and present as pulsatile masses.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 58
+    },
+    {
+      "id": "ana201-femoral-triangle-59",
+      "text": "The femoral triangle is a frequent site for arterial access. A catheter inserted into the femoral artery here can be threaded retrograde to the heart for which diagnostic procedure?",
+      "options": [
+        "Pulmonary function testing",
+        "Electroencephalography",
+        "Endoscopic retrograde cholangiopancreatography",
+        "Coronary angiography"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Coronary angiography",
+      "explanation": "Femoral artery catheterization allows access to the aorta and subsequently the coronary arteries, making it a standard approach for coronary angiography.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 59
+    },
+    {
+      "id": "ana201-femoral-triangle-60",
+      "text": "The femoral sheath allows the femoral vessels to adapt to the dynamic movements of the hip joint. What specific mechanical advantage does the sheath provide?",
+      "options": [
+        "It severely restricts blood flow during hip extension to prevent pooling.",
+        "It allows the vessels to glide smoothly deep to the inguinal ligament without friction.",
+        "It rigidly fixes the vessels to the pubic bone to prevent avulsion.",
+        "It actively contracts to assist venous return during hip flexion."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It allows the vessels to glide smoothly deep to the inguinal ligament without friction.",
+      "explanation": "The loose, funnel-shaped design of the fascial sheath allows the delicate femoral artery and vein to glide unhindered beneath the rigid inguinal ligament as the hip joint moves.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 60
+    },
+    {
+      "id": "ana201-femoral-triangle-61",
+      "text": "The sartorius muscle runs obliquely across the anterior thigh. Which specific part of this muscle forms the lateral boundary of the femoral triangle?",
+      "options": [
+        "The lateral border",
+        "The anterior aponeurosis",
+        "The medial border",
+        "The tendinous insertion"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The medial border",
+      "explanation": "The lateral boundary of the femoral triangle is defined by the medial border of the sartorius muscle.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 61
+    },
+    {
+      "id": "ana201-femoral-triangle-62",
+      "text": "The adductor longus muscle is a prominent medial thigh muscle. Which specific margin of this muscle forms the medial boundary of the femoral triangle?",
+      "options": [
+        "The lateral border",
+        "The medial border",
+        "The superior border",
+        "The inferior border"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The lateral border",
+      "explanation": "The medial boundary of the femoral triangle is defined by the lateral border of the adductor longus muscle.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 62
+    },
+    {
+      "id": "ana201-femoral-triangle-63",
+      "text": "The iliopsoas muscle forms the lateral portion of the femoral triangle's floor. What is the primary mechanical action of this muscle complex?",
+      "options": [
+        "Extension of the knee",
+        "Adduction of the hip",
+        "Plantarflexion of the ankle",
+        "Flexion of the hip"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Flexion of the hip",
+      "explanation": "The iliopsoas is the most powerful flexor of the hip joint, pulling the thigh anteriorly and superiorly.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 63
+    },
+    {
+      "id": "ana201-femoral-triangle-64",
+      "text": "The pectineus muscle lies medial to the iliopsoas in the floor of the femoral triangle. In addition to contributing to the floor, what is its primary action?",
+      "options": [
+        "Abduction of the thigh",
+        "Adduction and flexion of the thigh",
+        "Extension of the hip",
+        "Lateral rotation of the knee"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Adduction and flexion of the thigh",
+      "explanation": "Functionally, the pectineus adducts and flexes the thigh at the hip joint.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 64
+    },
+    {
+      "id": "ana201-femoral-triangle-65",
+      "text": "The roof of the femoral triangle contains various superficial structures embedded within the adipose layer. What is this fatty layer of the roof called?",
+      "options": [
+        "Deep investing fascia",
+        "Transversalis fascia",
+        "Subcutaneous tissue",
+        "Epimysium"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Subcutaneous tissue",
+      "explanation": "The subcutaneous tissue (superficial fascia) lies just beneath the skin and contains fat, superficial veins, and nerves, making up the intermediate layer of the roof.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 65
+    },
+    {
+      "id": "ana201-femoral-triangle-66",
+      "text": "The most superficial layer covering the femoral triangle, forming the outermost part of its roof, is the:",
+      "options": [
+        "Skin (Epidermis and Dermis)",
+        "Scarpa's fascia",
+        "Fascia lata",
+        "Peritoneum"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Skin (Epidermis and Dermis)",
+      "explanation": "The skin is the most superficial anatomical layer forming the roof over the femoral triangle.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 66
+    },
+    {
+      "id": "ana201-femoral-triangle-67",
+      "text": "The femoral sheath is often described clinically as a functional extension of the abdominal wall. It brings which continuous fascial layer down into the thigh?",
+      "options": [
+        "The rectus sheath",
+        "The perineal membrane",
+        "The dartos fascia",
+        "The combined transversalis and iliac fasciae"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The combined transversalis and iliac fasciae",
+      "explanation": "The femoral sheath is directly formed by the inferior prolongation of the transversalis fascia (anteriorly) and the iliac fascia (posteriorly) from the abdominal cavity.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 67
+    },
+    {
+      "id": "ana201-femoral-triangle-68",
+      "text": "Conditions that chronically increase intra-abdominal pressure predispose individuals to femoral hernias. Which pair of conditions represents common chronic risk factors?",
+      "options": [
+        "Anorexia and osteoporosis",
+        "Pregnancy and obesity",
+        "Hypothyroidism and anemia",
+        "Dehydration and muscle atrophy"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Pregnancy and obesity",
+      "explanation": "Both pregnancy and obesity significantly and chronically increase intra-abdominal pressure, forcing contents down against the weak femoral ring.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 68
+    },
+    {
+      "id": "ana201-femoral-triangle-69",
+      "text": "A 65-year-old heavy smoker presents with a femoral hernia. What repetitive action associated with his smoking history most likely contributed to the increased intra-abdominal pressure causing the hernia?",
+      "options": [
+        "Chronic coughing",
+        "Frequent deep inspirations",
+        "Breath-holding spells",
+        "Chronic sneezing"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Chronic coughing",
+      "explanation": "Chronic coughing is a major mechanism for repeatedly spiking intra-abdominal pressure, which can force abdominal contents through weak spots like the femoral canal.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 69
+    },
+    {
+      "id": "ana201-femoral-triangle-70",
+      "text": "If a loop of small intestine becomes incarcerated within the femoral canal, the patient may present with nausea, vomiting, and a distended abdomen. These are classic clinical signs of which hernia complication?",
+      "options": [
+        "Aortic aneurysm rupture",
+        "Appendicitis",
+        "Bowel obstruction",
+        "Deep vein thrombosis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Bowel obstruction",
+      "explanation": "When herniated bowel is trapped (incarcerated) within the narrow femoral canal, the passage of intestinal contents is physically blocked, resulting in bowel obstruction.",
+      "section": "Femoral Triangle: Boundaries, Contents, Sheath & Hernias",
+      "questionNumber": 70
+    }
+  ]
+}
