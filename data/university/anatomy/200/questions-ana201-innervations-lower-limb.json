@@ -1,0 +1,1510 @@
+{
+  "title": "Innervations of the Lower Limb",
+  "course": "ANA 201",
+  "totalQuestions": 100,
+  "sections": [
+    "Innervations of the Lower Limb (Q1-Q100)"
+  ],
+  "questions": [
+    {
+      "id": "ana201-ll-innervations-1",
+      "text": "The lumbar plexus is a critical network of nerve fibers supplying the lower limb. Anatomically, where is this plexus primarily located?",
+      "options": [
+        "Within the substance of the psoas major muscle",
+        "Anterior to the quadratus lumborum muscle",
+        "Posterior to the transverse processes of the lumbar vertebrae",
+        "Superficial to the iliacus muscle"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Within the substance of the psoas major muscle",
+      "explanation": "The lumbar plexus is located in the lumbar region, specifically within the substance of the psoas major muscle and anterior to the transverse processes of the lumbar vertebrae.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana201-ll-innervations-2",
+      "text": "The lumbar plexus is formed by specific spinal nerve contributions. Which anterior rami comprise the primary roots of this plexus?",
+      "options": [
+        "T12 to L3",
+        "L1 to L4",
+        "L2 to L5",
+        "L1 to S1"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. L1 to L4",
+      "explanation": "The lumbar plexus is formed primarily by the anterior rami (divisions) of the lumbar spinal nerves L1, L2, L3, and L4, with minor contributions from T12.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana201-ll-innervations-3",
+      "text": "The iliohypogastric nerve is the first major branch of the lumbar plexus. Which specific spinal nerve roots predominantly form this nerve?",
+      "options": [
+        "L2",
+        "T11 and T12",
+        "L1 with contributions from T12",
+        "L1 and L2"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. L1 with contributions from T12",
+      "explanation": "The iliohypogastric nerve is rooted in L1, frequently receiving minor contributions from the T12 spinal nerve before descending across the posterior abdominal wall.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana201-ll-innervations-4",
+      "text": "The iliohypogastric nerve innervates musculature of the anterior abdominal wall. After perforating the transversus abdominis, it provides motor innervation to which muscles?",
+      "options": [
+        "Rectus abdominis and pyramidalis",
+        "External oblique and rectus abdominis",
+        "Psoas major and quadratus lumborum",
+        "Internal oblique and transversus abdominis"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Internal oblique and transversus abdominis",
+      "explanation": "The iliohypogastric nerve supplies motor fibers to the internal oblique and transversus abdominis muscles as it courses through the abdominal wall.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana201-ll-innervations-5",
+      "text": "The ilioinguinal nerve follows a similar anatomical course to the iliohypogastric nerve. Which spinal root(s) solely give rise to the ilioinguinal nerve?",
+      "options": [
+        "L1",
+        "L2",
+        "T12 and L1",
+        "L1 and L2"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. L1",
+      "explanation": "The ilioinguinal nerve is derived solely from the anterior ramus of the L1 spinal nerve root.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana201-ll-innervations-6",
+      "text": "The ilioinguinal nerve passes through the superficial inguinal ring. In females, what specific cutaneous region does this nerve supply?",
+      "options": [
+        "The lateral thigh and gluteal fold",
+        "The skin over the mons pubis and labia majora",
+        "The perineal body and anal sphincter",
+        "The medial aspect of the thigh extending to the knee"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The skin over the mons pubis and labia majora",
+      "explanation": "In females, the sensory branches of the ilioinguinal nerve provide cutaneous innervation to the skin overlying the mons pubis and the labia majora.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana201-ll-innervations-7",
+      "text": "The genitofemoral nerve originates from L1 and L2. After emerging from the psoas major muscle, it quickly divides. What are its two terminal branches?",
+      "options": [
+        "Anterior and posterior branches",
+        "Medial and lateral branches",
+        "Genital and femoral branches",
+        "Superficial and deep branches"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Genital and femoral branches",
+      "explanation": "The genitofemoral nerve descends and promptly divides into its two named terminal segments: the genital branch and the femoral branch.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana201-ll-innervations-8",
+      "text": "The genital branch of the genitofemoral nerve has distinct motor functions in males. Which specific muscle does it innervate?",
+      "options": [
+        "Dartos muscle",
+        "Bulbospongiosus muscle",
+        "Ischiocavernosus muscle",
+        "Cremasteric muscle"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Cremasteric muscle",
+      "explanation": "In males, the motor fibers of the genital branch of the genitofemoral nerve supply the cremasteric muscle within the spermatic cord.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana201-ll-innervations-9",
+      "text": "The lateral cutaneous nerve of the thigh enters the lower limb at the lateral aspect of the inguinal ligament. What are its spinal roots?",
+      "options": [
+        "L2 and L3",
+        "L1 and L2",
+        "L3 and L4",
+        "L4 and L5"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. L2 and L3",
+      "explanation": "The lateral cutaneous nerve of the thigh is formed by the posterior divisions of the L2 and L3 anterior rami from the lumbar plexus.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana201-ll-innervations-10",
+      "text": "The lateral cutaneous nerve of the thigh has a purely sensory function. How far distally does its area of cutaneous innervation extend?",
+      "options": [
+        "Down to the lateral malleolus",
+        "Down to the level of the knee",
+        "Down to the mid-calf",
+        "Down to the dorsum of the foot"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Down to the level of the knee",
+      "explanation": "This nerve provides cutaneous innervation strictly to the anterior and lateral aspects of the thigh, extending distally only down to the level of the knee.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana201-ll-innervations-11",
+      "text": "The sacral plexus supplies the skin and muscles of the pelvis and lower limb. Where is it anatomically positioned within the pelvic cavity?",
+      "options": [
+        "On the anterior surface of the obturator internus",
+        "Superior to the pelvic brim",
+        "On the surface of the posterior pelvic wall, anterior to the piriformis",
+        "Medial to the internal iliac vessels"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. On the surface of the posterior pelvic wall, anterior to the piriformis",
+      "explanation": "The sacral plexus lies on the posterior pelvic wall, positioned directly anterior to the piriformis muscle before its branches exit the pelvis.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana201-ll-innervations-12",
+      "text": "The sacral plexus is formed by a convergence of multiple spinal roots. Which anterior rami combine to form the core of this plexus?",
+      "options": [
+        "L3 to S2",
+        "L4 to S3",
+        "L5 to S4",
+        "S1 to S4, along with L4 and L5"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. S1 to S4, along with L4 and L5",
+      "explanation": "The sacral plexus is primarily formed by the anterior rami of S1, S2, S3, and S4, joined by the lumbosacral trunk consisting of fibers from L4 and L5.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana201-ll-innervations-13",
+      "text": "The lumbosacral trunk acts as a vital bridge between the lumbar and sacral plexuses. Which spinal roots combine to form this structure?",
+      "options": [
+        "L4 and L5",
+        "L3 and L4",
+        "L5 and S1",
+        "L2, L3, and L4"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. L4 and L5",
+      "explanation": "The 4th and 5th lumbar roots combine to form the lumbosacral trunk, which descends into the pelvis to merge with the sacral roots.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana201-ll-innervations-14",
+      "text": "The superior gluteal nerve exits the pelvis to innervate key abductors of the thigh. Which spinal roots contribute to this nerve?",
+      "options": [
+        "L5, S1, S2",
+        "L4, L5, S1",
+        "L2, L3, L4",
+        "S1, S2, S3"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. L4, L5, S1",
+      "explanation": "The superior gluteal nerve is formed by the posterior divisions of the L4, L5, and S1 ventral rami.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana201-ll-innervations-15",
+      "text": "The superior gluteal nerve plays a critical role in stabilizing the pelvis during gait. Which muscles does it directly innervate?",
+      "options": [
+        "Gluteus maximus and piriformis",
+        "Obturator internus and gemelli",
+        "Gluteus minimus, gluteus medius, and tensor fascia lata",
+        "Quadratus femoris and inferior gemellus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Gluteus minimus, gluteus medius, and tensor fascia lata",
+      "explanation": "The superior gluteal nerve provides exclusive motor innervation to the gluteus medius, gluteus minimus, and the tensor fascia lata. It has no sensory function.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana201-ll-innervations-16",
+      "text": "The inferior gluteal nerve provides motor control to the primary extensor of the hip. What are its spinal roots?",
+      "options": [
+        "L4, L5, S1",
+        "S2, S3, S4",
+        "L3, L4, L5",
+        "L5, S1, S2"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. L5, S1, S2",
+      "explanation": "The inferior gluteal nerve derives its fibers from the posterior divisions of the L5, S1, and S2 nerve roots.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana201-ll-innervations-17",
+      "text": "The inferior gluteal nerve enters the gluteal region inferior to the piriformis muscle. Which specific muscle does it innervate?",
+      "options": [
+        "Gluteus maximus",
+        "Gluteus medius",
+        "Biceps femoris",
+        "Semitendinosus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Gluteus maximus",
+      "explanation": "The inferior gluteal nerve is the sole motor supply to the massive gluteus maximus muscle, exiting the greater sciatic foramen below the piriformis to reach it.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana201-ll-innervations-18",
+      "text": "The posterior cutaneous nerve of the thigh provides extensive sensory coverage to the posterior limb. What are the spinal roots of this nerve?",
+      "options": [
+        "L4, L5, S1",
+        "S1, S2, S3",
+        "S2, S3, S4",
+        "L5, S1, S2"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. S1, S2, S3",
+      "explanation": "This purely sensory nerve is formed by branches from the S1, S2, and S3 roots of the sacral plexus.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana201-ll-innervations-19",
+      "text": "The pudendal nerve is the primary nerve of the perineum. Which roots from the sacral plexus form this nerve?",
+      "options": [
+        "L4, L5, S1",
+        "L5, S1, S2",
+        "S2, S3, S4",
+        "S3, S4, S5"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. S2, S3, S4",
+      "explanation": "The pudendal nerve originates from the S2, S3, and S4 anterior rami, carrying both motor and sensory fibers to the perineal structures.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana201-ll-innervations-20",
+      "text": "The pudendal nerve leaves the pelvis via the greater sciatic foramen and re-enters via the lesser sciatic foramen. Which of the following best describes its sensory function?",
+      "options": [
+        "Innervates the posterior thigh",
+        "Innervates the medial thigh and knee",
+        "Innervates the anterior scrotum or labia majora only",
+        "Innervates the penis or clitoris and most of the skin of the perineum"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Innervates the penis or clitoris and most of the skin of the perineum",
+      "explanation": "After navigating the ischiorectal fossa, the pudendal nerve provides primary sensory innervation to the penis/clitoris and the vast majority of the perineal skin.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana201-ll-innervations-21",
+      "text": "Dermatomes represent skin areas supplied by a specific spinal nerve. The L1 dermatome primarily covers which region of the lower limb?",
+      "options": [
+        "Inguinal region and superior aspect of the medial thigh",
+        "Lateral aspect of the thigh",
+        "Dorsum of the foot",
+        "Medial malleolus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Inguinal region and superior aspect of the medial thigh",
+      "explanation": "The L1 dermatome corresponds anatomically to the inguinal region and the most superior aspect of the medial thigh.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana201-ll-innervations-22",
+      "text": "When assessing for spinal cord pathology, understanding the L2 dermatome is crucial. Which area does it supply?",
+      "options": [
+        "Perianal region",
+        "Middle and lateral anterior thigh",
+        "Horizontal gluteal crease",
+        "Lateral aspect of the calcaneus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Middle and lateral anterior thigh",
+      "explanation": "The L2 dermatome band crosses the middle and lateral aspects of the anterior thigh.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana201-ll-innervations-23",
+      "text": "The L3 dermatome follows an oblique path across the lower limb. Which specific landmark is key for assessing the L3 dermatome?",
+      "options": [
+        "Dorsum of the foot at the third metatarsophalangeal joint",
+        "Lateral border of the foot",
+        "Medial condyle of the femur running inferomedial across the thigh",
+        "Midpoint of the popliteal fossa"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Medial condyle of the femur running inferomedial across the thigh",
+      "explanation": "The L3 dermatome sweeps inferomedially across the anterior thigh, prominently crossing over the medial condyle of the femur at the knee.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana201-ll-innervations-24",
+      "text": "A patient presents with sensory loss over the medial bony prominence of the ankle. Which dermatome is likely affected?",
+      "options": [
+        "L3",
+        "S1",
+        "S2",
+        "L4"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. L4",
+      "explanation": "The L4 dermatome extends down the medial aspect of the leg and supplies the skin directly overlying the medial malleolus.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana201-ll-innervations-25",
+      "text": "The L5 dermatome is clinically tested to evaluate for lower lumbar radiculopathy. Which area is standard for assessing this dermatome?",
+      "options": [
+        "Dorsum of the foot at the third metatarsophalangeal joint",
+        "Medial malleolus",
+        "Posterior aspect of the calf",
+        "Inferior gluteal fold"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Dorsum of the foot at the third metatarsophalangeal joint",
+      "explanation": "The L5 dermatome covers the anterolateral leg and the central dorsum of the foot, specifically tested around the third metatarsophalangeal joint.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana201-ll-innervations-26",
+      "text": "Sensory testing of the S1 dermatome is typically performed on which specific anatomical landmark?",
+      "options": [
+        "Medial aspect of the knee",
+        "Lateral aspect of the calcaneus",
+        "Anterior superior iliac spine",
+        "Medial side of the great toe"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Lateral aspect of the calcaneus",
+      "explanation": "The S1 dermatome runs down the posterior aspect of the leg and supplies the lateral aspect of the heel (calcaneus) and lateral margin of the foot.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana201-ll-innervations-27",
+      "text": "A patient reports numbness precisely at the midpoint of the popliteal fossa. This finding suggests involvement of which dermatome?",
+      "options": [
+        "L4",
+        "L5",
+        "S2",
+        "S3"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. S2",
+      "explanation": "The S2 dermatome runs vertically down the posterior midline of the thigh and leg, specifically covering the central midpoint of the popliteal fossa.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana201-ll-innervations-28",
+      "text": "The S3 dermatome covers a specific area on the posterior aspect of the body. Which region does it supply?",
+      "options": [
+        "Posterior calf",
+        "Sole of the foot",
+        "Lateral gluteal region",
+        "Horizontal gluteal crease"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Horizontal gluteal crease",
+      "explanation": "The S3 dermatome forms a distinct band supplying the skin across the horizontal gluteal crease at the lower border of the buttocks.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana201-ll-innervations-29",
+      "text": "Cutaneous innervation to the gluteal region is divided into quadrants. The upper medial quadrant is supplied by the posterior rami of which spinal roots?",
+      "options": [
+        "L1-L3 and S1-S3",
+        "T12 and L1",
+        "L4 and L5",
+        "S4 and S5"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. L1-L3 and S1-S3",
+      "explanation": "The skin of the upper medial quadrant of the gluteal region is supplied by the posterior (dorsal) rami of the upper lumbar (L1-L3) and upper sacral (S1-S3) spinal roots.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana201-ll-innervations-30",
+      "text": "The upper lateral quadrant of the gluteal region receives its cutaneous nerve supply from which two peripheral nerves?",
+      "options": [
+        "Lateral cutaneous nerve of thigh and femoral branch of genitofemoral nerve",
+        "Subcostal nerve and iliohypogastric nerve",
+        "Superior and inferior gluteal nerves",
+        "Posterior cutaneous nerve of thigh and pudendal nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Subcostal nerve and iliohypogastric nerve",
+      "explanation": "The subcostal nerve (anterior ramus of T12) and the iliohypogastric nerve (a branch of the lumbar plexus) supply the skin of the upper lateral gluteal quadrant.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana201-ll-innervations-31",
+      "text": "The lower medial quadrant of the gluteal region is innervated by a branch of the sacral plexus. Which nerve is responsible for this area?",
+      "options": [
+        "Ilioinguinal nerve",
+        "Pudendal nerve",
+        "Posterior cutaneous nerve of thigh",
+        "Sural nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Posterior cutaneous nerve of thigh",
+      "explanation": "The posterior cutaneous nerve of the thigh ascends slightly after exiting the greater sciatic foramen to supply the skin of the lower medial gluteal quadrant.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana201-ll-innervations-32",
+      "text": "The skin over the lower lateral quadrant of the gluteal region is supplied by a branch of the lumbar plexus. Which nerve provides this innervation?",
+      "options": [
+        "Iliohypogastric nerve",
+        "Genitofemoral nerve",
+        "Obturator nerve",
+        "Lateral cutaneous nerve of thigh"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Lateral cutaneous nerve of thigh",
+      "explanation": "In addition to the lateral thigh, the lateral cutaneous nerve of the thigh supplies the skin of the lower lateral gluteal quadrant.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana201-ll-innervations-33",
+      "text": "The anterior thigh's cutaneous innervation is predominantly supplied by anterior, medial, and intermediate branches. From which major nerve do these arise?",
+      "options": [
+        "Femoral nerve",
+        "Sciatic nerve",
+        "Obturator nerve",
+        "Ilioinguinal nerve"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Femoral nerve",
+      "explanation": "The femoral nerve gives rise to multiple anterior cutaneous branches (medial and intermediate) that supply the vast majority of the skin over the anterior thigh.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana201-ll-innervations-34",
+      "text": "The saphenous nerve is the longest cutaneous branch in the body. From which major peripheral nerve does it originate?",
+      "options": [
+        "Tibial nerve",
+        "Femoral nerve",
+        "Common fibular nerve",
+        "Obturator nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Femoral nerve",
+      "explanation": "The saphenous nerve is the terminal sensory continuation of the posterior division of the femoral nerve.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana201-ll-innervations-35",
+      "text": "A patient suffers a superficial laceration to the medial aspect of the leg and foot. Which specific nerve provides sensory coverage to this territory?",
+      "options": [
+        "Superficial fibular nerve",
+        "Sural nerve",
+        "Saphenous nerve",
+        "Deep fibular nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Saphenous nerve",
+      "explanation": "The saphenous nerve descends from the thigh to supply the skin exclusively over the anteromedial aspect of the leg and the medial margin of the foot.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana201-ll-innervations-36",
+      "text": "The cutaneous innervation of the anterolateral aspect of the leg and the majority of the dorsum of the foot is supplied by which nerve?",
+      "options": [
+        "Saphenous nerve",
+        "Deep fibular nerve",
+        "Sural nerve",
+        "Superficial fibular nerve"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Superficial fibular nerve",
+      "explanation": "After innervating the lateral compartment muscles, the superficial fibular nerve becomes purely cutaneous, supplying the anterolateral leg and most of the dorsum of the foot.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana201-ll-innervations-37",
+      "text": "The sural nerve courses down the posterolateral aspect of the leg. It is formed by communicating branches from which two major nerves?",
+      "options": [
+        "Tibial and common fibular nerves",
+        "Femoral and obturator nerves",
+        "Sciatic and pudendal nerves",
+        "Deep and superficial fibular nerves"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Tibial and common fibular nerves",
+      "explanation": "The sural nerve is a cutaneous nerve formed by the union of the medial sural cutaneous nerve (from the tibial nerve) and the sural communicating branch (from the common fibular nerve).",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana201-ll-innervations-38",
+      "text": "A patient experiences paraesthesia along the lateral margin of the hindfoot and midfoot. Which nerve is most likely compromised?",
+      "options": [
+        "Saphenous nerve",
+        "Sural nerve",
+        "Medial plantar nerve",
+        "Deep fibular nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Sural nerve",
+      "explanation": "The sural nerve descends behind the lateral malleolus to supply the skin of the posterolateral leg and the lateral margin of the foot.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana201-ll-innervations-39",
+      "text": "The deep fibular nerve terminates by providing sensory innervation to a very specific and isolated cutaneous region. Where is this territory located?",
+      "options": [
+        "The lateral border of the fifth toe",
+        "The medial aspect of the heel",
+        "The space between the 1st and 2nd toes on the dorsum of the foot",
+        "The entire plantar surface of the foot"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The space between the 1st and 2nd toes on the dorsum of the foot",
+      "explanation": "The sensory terminal branch of the deep fibular nerve uniquely supplies the skin of the first webbed space (between the great toe and second toe) on the dorsum of the foot.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana201-ll-innervations-40",
+      "text": "The medial two-thirds of the sole of the foot receive their cutaneous innervation from a terminal branch of the tibial nerve. Which nerve is this?",
+      "options": [
+        "Sural nerve",
+        "Saphenous nerve",
+        "Lateral plantar nerve",
+        "Medial plantar nerve"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Medial plantar nerve",
+      "explanation": "The medial plantar nerve acts similarly to the median nerve in the hand, supplying sensation to the medial two-thirds of the plantar surface of the foot.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana201-ll-innervations-41",
+      "text": "The lateral third of the sole of the foot is supplied by a specific terminal branch of the tibial nerve. Which nerve provides this coverage?",
+      "options": [
+        "Lateral plantar nerve",
+        "Deep fibular nerve",
+        "Medial calcaneal nerve",
+        "Superficial fibular nerve"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Lateral plantar nerve",
+      "explanation": "The lateral plantar nerve supplies the lateral one-third of the sole of the foot, functionally analogous to the ulnar nerve in the hand.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana201-ll-innervations-42",
+      "text": "The skin over the medial aspect of the heel is uniquely innervated by a direct branch of the tibial nerve. Which branch serves this area?",
+      "options": [
+        "Medial plantar nerve",
+        "Medial calcaneal nerve",
+        "Sural communicating nerve",
+        "Saphenous nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Medial calcaneal nerve",
+      "explanation": "Before the tibial nerve divides into the medial and lateral plantar nerves within the tarsal tunnel, it gives off the medial calcaneal nerve to supply the skin of the medial heel.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana201-ll-innervations-43",
+      "text": "The femoral nerve is the largest branch of the lumbar plexus. From which specific anterior rami does it derive its nerve roots?",
+      "options": [
+        "L1, L2, L3",
+        "L3, L4, L5",
+        "L2, L3, L4",
+        "L4, L5, S1"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. L2, L3, L4",
+      "explanation": "The femoral nerve is formed by the posterior divisions of the anterior rami of spinal nerves L2, L3, and L4.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana201-ll-innervations-44",
+      "text": "The femoral nerve enters the thigh by passing underneath the inguinal ligament. What is its precise anatomical relationship to the femoral sheath within the femoral triangle?",
+      "options": [
+        "It is enclosed within the intermediate compartment of the sheath.",
+        "It is enclosed within the medial compartment of the sheath.",
+        "It lies anterior to the femoral artery within the lateral compartment.",
+        "It is located lateral to the femoral vessels and is not enclosed by the femoral sheath."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. It is located lateral to the femoral vessels and is not enclosed by the femoral sheath.",
+      "explanation": "While the femoral artery and vein are encased in the femoral sheath, the femoral nerve runs laterally to them and remains completely outside of this fascial sheath.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana201-ll-innervations-45",
+      "text": "The femoral nerve supplies several hip flexors. Which of the following muscles acts to adduct, flex, and assist in medial rotation of the thigh, and receives innervation from the femoral nerve?",
+      "options": [
+        "Pectineus",
+        "Psoas major",
+        "Iliacus",
+        "Adductor magnus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Pectineus",
+      "explanation": "The pectineus muscle, though located in the medial compartment, is primarily innervated by the femoral nerve (with occasional branches from the obturator nerve) and assists in adduction and flexion.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana201-ll-innervations-46",
+      "text": "The sartorius muscle is unique for its ability to flex, abduct, and laterally rotate the thigh. Which nerve is responsible for its motor innervation?",
+      "options": [
+        "Obturator nerve",
+        "Femoral nerve",
+        "Superior gluteal nerve",
+        "Sciatic nerve"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Femoral nerve",
+      "explanation": "The sartorius, the longest muscle in the body, resides in the anterior compartment and is innervated by the femoral nerve.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana201-ll-innervations-47",
+      "text": "The saphenous nerve travels through a specific fascial tunnel in the thigh before emerging to supply the leg. What is the name of this passage?",
+      "options": [
+        "Femoral canal",
+        "Obturator canal",
+        "Adductor canal",
+        "Inguinal canal"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Adductor canal",
+      "explanation": "The saphenous nerve accompanies the femoral artery and vein through the adductor canal (Hunter's canal), but it exits anteriorly before the vessels pass through the adductor hiatus.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana201-ll-innervations-48",
+      "text": "The obturator nerve is responsible for innervating the medial compartment of the thigh. Which anterior divisions of the lumbar plexus form this nerve?",
+      "options": [
+        "L1, L2, L3",
+        "L3, L4, L5",
+        "L4, L5, S1",
+        "L2, L3, L4"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. L2, L3, L4",
+      "explanation": "The obturator nerve is formed by the anterior divisions of the anterior rami of spinal nerves L2, L3, and L4.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana201-ll-innervations-49",
+      "text": "The obturator nerve descends through the psoas major and must navigate the pelvic cavity to reach the thigh. Through which specific structure does it exit the pelvis?",
+      "options": [
+        "Obturator canal",
+        "Greater sciatic foramen",
+        "Lesser sciatic foramen",
+        "Saphenous opening"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Obturator canal",
+      "explanation": "The obturator nerve leaves the pelvis by passing through the obturator canal, a small opening within the obturator membrane that spans the obturator foramen.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana201-ll-innervations-50",
+      "text": "The obturator nerve divides into anterior and posterior branches to supply the hip adductors. Which of the following muscles is NOT supplied by the obturator nerve?",
+      "options": [
+        "Adductor longus",
+        "Quadriceps femoris",
+        "Adductor brevis",
+        "Gracilis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Quadriceps femoris",
+      "explanation": "The quadriceps femoris resides in the anterior compartment and is innervated by the femoral nerve, while the obturator nerve specifically targets the medial adductor group.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 50
+    },
+    {
+      "id": "ana201-ll-innervations-51",
+      "text": "While the obturator nerve supplies the adductor group, one specific part of an adductor muscle is instead innervated by the tibial nerve. Which muscle features this dual innervation?",
+      "options": [
+        "Pectineus",
+        "Gracilis",
+        "Adductor magnus",
+        "Obturator externus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Adductor magnus",
+      "explanation": "The adductor magnus is a hybrid muscle. Its adductor part is innervated by the obturator nerve, but its hamstring part is innervated by the tibial division of the sciatic nerve.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 51
+    },
+    {
+      "id": "ana201-ll-innervations-52",
+      "text": "In addition to motor functions, the obturator nerve provides sensory coverage via its cutaneous branch. Which region of the skin does it supply?",
+      "options": [
+        "The lateral aspect of the thigh",
+        "The anterior aspect of the knee",
+        "The posterior calf",
+        "The middle part of the medial thigh"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The middle part of the medial thigh",
+      "explanation": "The anterior branch of the obturator nerve provides a cutaneous branch that supplies sensation exclusively to the skin over the middle aspect of the medial thigh.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 52
+    },
+    {
+      "id": "ana201-ll-innervations-53",
+      "text": "An obturator nerve block is a clinical procedure used for pain management following lower limb surgery. Where is the anaesthetic typically injected for this block?",
+      "options": [
+        "Inferior to the pubic tubercle and lateral to the tendon of the adductor longus",
+        "Superior to the inguinal ligament, midway between the ASIS and pubic tubercle",
+        "Deep within the popliteal fossa, medial to the sciatic nerve",
+        "Posterior to the greater trochanter of the femur"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Inferior to the pubic tubercle and lateral to the tendon of the adductor longus",
+      "explanation": "To block the obturator nerve, anaesthetic is injected just inferior to the pubic tubercle and lateral to the prominent tendon of the adductor longus muscle, often under ultrasound guidance.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 53
+    },
+    {
+      "id": "ana201-ll-innervations-54",
+      "text": "If a patient sustains iatrogenic damage to the obturator nerve during pelvic surgery, which combination of symptoms would most likely manifest?",
+      "options": [
+        "Weakness in hip extension and numbness over the posterior thigh",
+        "Weakness in adduction of the thigh and numbness on the medial aspect of the thigh",
+        "Inability to extend the knee and loss of sensation over the anterior thigh",
+        "Foot drop and loss of sensation between the first and second toes"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Weakness in adduction of the thigh and numbness on the medial aspect of the thigh",
+      "explanation": "Obturator nerve damage paralyzes the medial compartment muscles (weakening hip adduction) and causes sensory loss in its cutaneous territory (the middle medial thigh).",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 54
+    },
+    {
+      "id": "ana201-ll-innervations-55",
+      "text": "The sciatic nerve is the largest nerve in the human body. As the major continuation of the sacral plexus, which nerve roots contribute to its formation?",
+      "options": [
+        "L2, L3, L4, L5",
+        "L3, L4, L5, S1",
+        "L4, L5, S1, S2, S3",
+        "S1, S2, S3, S4"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. L4, L5, S1, S2, S3",
+      "explanation": "The massive sciatic nerve is formed by the convergence of the anterior rami of L4, L5, S1, S2, and S3.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 55
+    },
+    {
+      "id": "ana201-ll-innervations-56",
+      "text": "The sciatic nerve emerges from the pelvis to enter the gluteal region. Through which specific opening does it pass?",
+      "options": [
+        "Obturator foramen",
+        "Lesser sciatic foramen",
+        "Adductor hiatus",
+        "Greater sciatic foramen inferior to the piriformis"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Greater sciatic foramen inferior to the piriformis",
+      "explanation": "The sciatic nerve exits the pelvis via the greater sciatic foramen, passing strictly inferior to the piriformis muscle as the most lateral structure in that space.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 56
+    },
+    {
+      "id": "ana201-ll-innervations-57",
+      "text": "As the sciatic nerve runs inferolaterally under the gluteus maximus, it maintains important relationships with surrounding structures. Which structures lie immediately medial to it as it emerges?",
+      "options": [
+        "Inferior gluteal nerve and vessels, internal pudendal vessels, and pudendal nerve",
+        "Superior gluteal nerve and vessels",
+        "Obturator internus and gemelli muscles",
+        "Quadratus femoris and lateral circumflex femoral artery"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Inferior gluteal nerve and vessels, internal pudendal vessels, and pudendal nerve",
+      "explanation": "Directly medial to the descending sciatic nerve are the inferior gluteal neurovascular bundle and the pudendal neurovascular bundle, which briefly pass through the greater sciatic foramen.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 57
+    },
+    {
+      "id": "ana201-ll-innervations-58",
+      "text": "The sciatic nerve is essentially two distinct nerves bound together in a common connective tissue sheath. Which two nerves make up the sciatic nerve?",
+      "options": [
+        "Femoral and obturator nerves",
+        "Tibial and common fibular nerves",
+        "Deep and superficial fibular nerves",
+        "Medial and lateral plantar nerves"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Tibial and common fibular nerves",
+      "explanation": "The sciatic nerve is composed of the tibial nerve (medially) and the common fibular nerve (laterally), wrapped together in a single epineural sheath until they separate near the knee.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 58
+    },
+    {
+      "id": "ana201-ll-innervations-59",
+      "text": "Despite its massive size, the sciatic nerve does not provide motor innervation to the gluteal region. Which muscle group does it primarily innervate directly before bifurcating?",
+      "options": [
+        "Anterior thigh muscles",
+        "Medial thigh muscles",
+        "Posterior thigh muscles",
+        "Lateral leg muscles"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Posterior thigh muscles",
+      "explanation": "The sciatic nerve directly supplies the hamstring muscles in the posterior compartment of the thigh (and the hamstring part of adductor magnus) before splitting into its terminal branches.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 59
+    },
+    {
+      "id": "ana201-ll-innervations-60",
+      "text": "The tibial nerve is the larger, medial terminal branch of the sciatic nerve. At what anatomical landmark does the sciatic nerve typically bifurcate to give rise to the tibial nerve?",
+      "options": [
+        "The greater sciatic foramen",
+        "The inferior border of the gluteus maximus",
+        "The adductor hiatus",
+        "The apex of the popliteal fossa"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The apex of the popliteal fossa",
+      "explanation": "The sciatic nerve typically runs down the posterior thigh as a single trunk until it reaches the superior apex of the popliteal fossa, where it bifurcates into the tibial and common fibular nerves.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 60
+    },
+    {
+      "id": "ana201-ll-innervations-61",
+      "text": "As the tibial nerve travels through the popliteal fossa and continues down the leg, where is it positioned relative to the tibia?",
+      "options": [
+        "Posterior to the tibia",
+        "Anterior to the tibia",
+        "Lateral to the fibula",
+        "Within the interosseous membrane"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Posterior to the tibia",
+      "explanation": "True to its role in innervating the posterior compartment of the leg, the tibial nerve descends centrally and posterior to the tibia.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 61
+    },
+    {
+      "id": "ana201-ll-innervations-62",
+      "text": "The tibial nerve enters the foot by passing posterior and inferior to the medial malleolus. What is the name of the fibro-osseous tunnel it traverses here?",
+      "options": [
+        "Cubital tunnel",
+        "Tarsal tunnel",
+        "Carpal tunnel",
+        "Adductor canal"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Tarsal tunnel",
+      "explanation": "The tarsal tunnel is the space behind the medial malleolus, roofed by the flexor retinaculum, through which the tibial nerve and posterior tibial vessels pass into the sole.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 62
+    },
+    {
+      "id": "ana201-ll-innervations-63",
+      "text": "Tarsal tunnel syndrome results from the compression of the tibial nerve beneath the flexor retinaculum. Which symptom is the hallmark of this entrapment neuropathy?",
+      "options": [
+        "Foot drop and inability to dorsiflex",
+        "Loss of sensation over the lateral margin of the foot",
+        "Altered sensation on the sole of the foot",
+        "Paralysis of the anterior leg compartment muscles"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Altered sensation on the sole of the foot",
+      "explanation": "Because the tibial nerve branches into the medial and lateral plantar nerves within or just after the tarsal tunnel, compression causes pain, tingling, and altered sensation strictly on the sole of the foot.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 63
+    },
+    {
+      "id": "ana201-ll-innervations-64",
+      "text": "The common fibular nerve is the lateral terminal branch of the sciatic nerve. From which specific divisions of the anterior rami is it derived?",
+      "options": [
+        "Anterior (preaxial) divisions",
+        "Medial divisions",
+        "Lateral divisions",
+        "Posterior (postaxial) divisions"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Posterior (postaxial) divisions",
+      "explanation": "The common fibular nerve is derived from the posterior (postaxial) divisions of the anterior rami of L4, L5, S1, and S2, whereas the tibial nerve comes from the anterior (preaxial) divisions.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 64
+    },
+    {
+      "id": "ana201-ll-innervations-65",
+      "text": "The common fibular nerve tracks the medial border of a specific muscle before wrapping around the fibular neck. Which muscle serves as this guide?",
+      "options": [
+        "Biceps femoris",
+        "Semitendinosus",
+        "Lateral head of the gastrocnemius",
+        "Popliteus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Biceps femoris",
+      "explanation": "In the popliteal fossa, the common fibular nerve angles laterally, following the medial margin of the biceps femoris muscle down to the head of the fibula.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 65
+    },
+    {
+      "id": "ana201-ll-innervations-66",
+      "text": "To enter the lateral compartment of the leg, the common fibular nerve wraps around the neck of the fibula. What happens to the nerve at this exact location?",
+      "options": [
+        "It pierces the interosseous membrane.",
+        "It terminates by dividing into the superficial and deep fibular nerves.",
+        "It gives off the sural communicating nerve.",
+        "It joins with the saphenous nerve."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It terminates by dividing into the superficial and deep fibular nerves.",
+      "explanation": "As it winds around the vulnerable neck of the fibula, the common fibular nerve bifurcates into its two terminal branches: the deep and superficial fibular nerves.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 66
+    },
+    {
+      "id": "ana201-ll-innervations-67",
+      "text": "The common fibular nerve provides direct motor innervation to only one muscle before it bifurcates. Which muscle is this?",
+      "options": [
+        "Long head of the biceps femoris",
+        "Plantaris",
+        "Short head of the biceps femoris",
+        "Fibularis longus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Short head of the biceps femoris",
+      "explanation": "While still part of the sciatic trunk or just after branching, the common fibular division exclusively supplies the short head of the biceps femoris in the posterior thigh.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 67
+    },
+    {
+      "id": "ana201-ll-innervations-68",
+      "text": "A fracture of the fibular neck often severely damages the common fibular nerve. What is the classic clinical presentation of this nerve palsy?",
+      "options": [
+        "Paralysis of the calf muscles leading to a calcaneus gait",
+        "Inability to actively plantarflex the ankle",
+        "Loss of sensation over the medial aspect of the foot",
+        "Inability to dorsiflex and evert the foot, resulting in footdrop"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Inability to dorsiflex and evert the foot, resulting in footdrop",
+      "explanation": "Damage to the common fibular nerve paralyzes both the anterior (dorsiflexors) and lateral (evertors) compartments of the leg, causing the foot to hang down in plantarflexion (footdrop).",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 68
+    },
+    {
+      "id": "ana201-ll-innervations-69",
+      "text": "As the common fibular nerve passes over the lateral head of the gastrocnemius, it gives rise to two cutaneous branches. One is the lateral sural cutaneous nerve. What is the other?",
+      "options": [
+        "Sural communicating nerve",
+        "Saphenous nerve",
+        "Medial calcaneal nerve",
+        "Deep fibular cutaneous branch"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Sural communicating nerve",
+      "explanation": "The common fibular nerve gives off the sural communicating nerve, which crosses the calf to join the medial sural cutaneous nerve (from the tibial nerve), forming the main sural nerve.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 69
+    },
+    {
+      "id": "ana201-ll-innervations-70",
+      "text": "The superficial fibular nerve arises at the neck of the fibula and descends between the fibularis muscles. Which specific muscles does it provide motor innervation to?",
+      "options": [
+        "Tibialis anterior and extensor digitorum longus",
+        "Fibularis longus and fibularis brevis",
+        "Gastrocnemius and soleus",
+        "Flexor hallucis longus and flexor digitorum longus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Fibularis longus and fibularis brevis",
+      "explanation": "The superficial fibular nerve supplies the muscles of the lateral compartment of the leg, which consist solely of the fibularis longus and fibularis brevis.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 70
+    },
+    {
+      "id": "ana201-ll-innervations-71",
+      "text": "After supplying the lateral compartment muscles, the superficial fibular nerve pierces the deep crural fascia. What is its terminal function?",
+      "options": [
+        "It innervates the intrinsic muscles of the plantar foot.",
+        "It provides sensory innervation to the medial heel.",
+        "It divides into dorsal cutaneous nerves to innervate the majority of the dorsum of the foot.",
+        "It forms an anastomosis with the tibial nerve to supply the webbed spaces."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It divides into dorsal cutaneous nerves to innervate the majority of the dorsum of the foot.",
+      "explanation": "In the lower third of the leg, the superficial fibular nerve emerges cutaneously and divides into medial and intermediate dorsal cutaneous nerves to supply the skin on the dorsum of the foot.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 71
+    },
+    {
+      "id": "ana201-ll-innervations-72",
+      "text": "Superficial fibular nerve entrapment can occur where the nerve exits the deep fascia, often exacerbated by ankle sprains. What is the primary surgical management for chronic, severe cases?",
+      "options": [
+        "Fasciotomy of the anterior compartment",
+        "Tarsal tunnel release",
+        "Ligation of the anterior tibial artery",
+        "Surgical decompression by cutting the overlying deep fascia"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Surgical decompression by cutting the overlying deep fascia",
+      "explanation": "When the nerve is compressed by the tight fascia where it emerges into the subcutaneous tissue, a surgical decompression involves incising that fascia to relieve the pressure and resolve the pain.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 72
+    },
+    {
+      "id": "ana201-ll-innervations-73",
+      "text": "The deep fibular nerve is a terminal branch of the common fibular nerve. In which specific anatomical compartment does it originate before piercing the intermuscular septum?",
+      "options": [
+        "Lateral compartment of the leg",
+        "Anterior compartment of the leg",
+        "Deep posterior compartment of the leg",
+        "Popliteal fossa"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Lateral compartment of the leg",
+      "explanation": "The deep fibular nerve actually originates in the lateral compartment between the fibularis longus and the fibular neck before diving medially through the anterior intermuscular septum into the anterior compartment.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 73
+    },
+    {
+      "id": "ana201-ll-innervations-74",
+      "text": "After entering the anterior compartment of the leg, the deep fibular nerve descends alongside a major blood vessel. Which artery accompanies this nerve?",
+      "options": [
+        "Posterior tibial artery",
+        "Anterior tibial artery",
+        "Fibular artery",
+        "Popliteal artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Anterior tibial artery",
+      "explanation": "The deep fibular nerve is the primary nerve of the anterior compartment and travels distally in close association with the anterior tibial artery.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 74
+    },
+    {
+      "id": "ana201-ll-innervations-75",
+      "text": "The deep fibular nerve provides motor innervation to the muscles of the anterior leg. Which of the following lists correctly identifies these muscles?",
+      "options": [
+        "Fibularis longus, fibularis brevis, and plantaris",
+        "Gastrocnemius, soleus, and tibialis posterior",
+        "Tibialis anterior, extensor hallucis longus, extensor digitorum longus, and fibularis tertius",
+        "Flexor hallucis longus, flexor digitorum longus, and popliteus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Tibialis anterior, extensor hallucis longus, extensor digitorum longus, and fibularis tertius",
+      "explanation": "The deep fibular nerve exclusively innervates the four muscles of the anterior compartment of the leg, which are collectively responsible for ankle dorsiflexion and toe extension.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 75
+    },
+    {
+      "id": "ana201-ll-innervations-76",
+      "text": "\"Ski boot syndrome\" involves compression of a specific nerve beneath the extensor retinaculum due to tight-fitting footwear. Which nerve is compressed, leading to pain in the dorsum of the foot?",
+      "options": [
+        "Saphenous nerve",
+        "Sural nerve",
+        "Superficial fibular nerve",
+        "Deep fibular nerve"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Deep fibular nerve",
+      "explanation": "The deep fibular nerve passes under the tight extensor retinaculum at the ankle. Compression here (like from a stiff ski boot) causes pain and paraesthesia in its terminal sensory territory (the first webbed space).",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 76
+    },
+    {
+      "id": "ana201-ll-innervations-77",
+      "text": "Lumbosacral plexopathy is a rare syndrome caused by damage to the nerve bundles of the plexus. If symptoms cannot be localized to a single peripheral nerve, which underlying systemic condition is a major known cause?",
+      "options": [
+        "Uncontrolled diabetes mellitus causing diabetic amyotrophy",
+        "Hypertension",
+        "Chronic venous insufficiency",
+        "Peripheral arterial disease"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Uncontrolled diabetes mellitus causing diabetic amyotrophy",
+      "explanation": "Diabetic amyotrophy (lumbosacral radioplexus neurophagy) is a severe complication of diabetes where chronically high blood sugar levels damage the expansive nerve bundles of the lumbosacral plexus.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 77
+    },
+    {
+      "id": "ana201-ll-innervations-78",
+      "text": "Diabetic amyotrophy is a specific type of lumbosacral plexopathy. By what other precise medical term is this condition known?",
+      "options": [
+        "Parsonage-Turner syndrome",
+        "Lumbosacral radioplexus neurophagy",
+        "Charcot-Marie-Tooth disease",
+        "Guillain-Barré syndrome"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Lumbosacral radioplexus neurophagy",
+      "explanation": "Diabetic amyotrophy is also clinically referred to as lumbosacral radioplexus neurophagy, reflecting the widespread neural damage across the plexus roots.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 78
+    },
+    {
+      "id": "ana201-ll-innervations-79",
+      "text": "The sacral plexus gives off several smaller direct muscular branches before forming its major terminal nerves. Which of the following is one of these smaller branches?",
+      "options": [
+        "Nerve to the vastus lateralis",
+        "Nerve to the pectineus",
+        "Nerve to the piriformis",
+        "Nerve to the adductor magnus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Nerve to the piriformis",
+      "explanation": "The nerve to the piriformis is a direct, small muscular branch arising posteriorly from the sacral plexus (S1, S2) to supply the muscle upon which the plexus lies.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 79
+    },
+    {
+      "id": "ana201-ll-innervations-80",
+      "text": "Most branches of the sacral plexus innervate somatic structures. However, one specific set of nerves provides parasympathetic innervation to the abdominal viscera. What are these nerves called?",
+      "options": [
+        "Lumbar splanchnic nerves",
+        "Genitofemoral nerves",
+        "Ilioinguinal nerves",
+        "Pelvic splanchnic nerves"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Pelvic splanchnic nerves",
+      "explanation": "The pelvic splanchnic nerves arise from the sacral roots (S2, S3, S4) but carry parasympathetic autonomic fibers, rather than somatic fibers, to innervate the hindgut and pelvic organs.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 80
+    },
+    {
+      "id": "ana201-ll-innervations-81",
+      "text": "The iliohypogastric nerve provides sensory innervation to specific regions of the lower trunk and pelvis. Which of the following areas does it supply?",
+      "options": [
+        "Skin of the posterolateral gluteal and pubic regions",
+        "Skin over the medial aspect of the knee",
+        "Skin of the anterior scrotum",
+        "Skin of the lateral leg"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Skin of the posterolateral gluteal and pubic regions",
+      "explanation": "The sensory branches of the iliohypogastric nerve supply the skin over the superolateral gluteal quadrant and the skin just above the pubis.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 81
+    },
+    {
+      "id": "ana201-ll-innervations-82",
+      "text": "The genitofemoral nerve splits into a genital branch and a femoral branch. What is the specific sensory territory of the femoral branch?",
+      "options": [
+        "The skin over the lateral border of the foot",
+        "The skin on the upper anterior thigh",
+        "The skin of the perianal region",
+        "The skin of the medial calf"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The skin on the upper anterior thigh",
+      "explanation": "While the genital branch handles cremasteric motor function and scrotal sensation, the femoral branch emerges below the inguinal ligament to provide sensation to a small patch of skin on the upper anterior thigh.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 82
+    },
+    {
+      "id": "ana201-ll-innervations-83",
+      "text": "The lateral cutaneous nerve of the thigh provides extensive sensory coverage. Which statement accurately describes its inferior anatomical limit?",
+      "options": [
+        "It extends down to the lateral malleolus.",
+        "It extends down to the mid-calf level.",
+        "It innervates the lateral thigh strictly down to the level of the knee.",
+        "It stops at the level of the greater trochanter."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It innervates the lateral thigh strictly down to the level of the knee.",
+      "explanation": "The territory of the lateral cutaneous nerve of the thigh is expansive but halts precisely at the knee joint; it does not extend into the lower leg.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 83
+    },
+    {
+      "id": "ana201-ll-innervations-84",
+      "text": "The obturator nerve provides motor innervation to the medial compartment of the thigh. Which muscle responsible for laterally rotating the thigh is also innervated by this nerve?",
+      "options": [
+        "Piriformis",
+        "Quadratus femoris",
+        "Superior gemellus",
+        "Obturator externus"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Obturator externus",
+      "explanation": "The obturator externus is located deeply in the upper medial thigh and functions as a lateral rotator of the hip; it receives its motor supply from the posterior branch of the obturator nerve.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 84
+    },
+    {
+      "id": "ana201-ll-innervations-85",
+      "text": "The posterior cutaneous nerve of the thigh descends deep to a massive muscle before running down the back of the leg. Which muscle covers its proximal course?",
+      "options": [
+        "Gluteus maximus",
+        "Gluteus medius",
+        "Biceps femoris",
+        "Adductor magnus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Gluteus maximus",
+      "explanation": "The posterior cutaneous nerve of the thigh exits the greater sciatic foramen and immediately runs inferiorly beneath the protective cover of the thick gluteus maximus muscle.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 85
+    },
+    {
+      "id": "ana201-ll-innervations-86",
+      "text": "The pudendal nerve is critical for perineal function. Which of the following muscles receives somatic motor innervation from the pudendal nerve?",
+      "options": [
+        "Coccygeus",
+        "External anal sphincter",
+        "Obturator internus",
+        "Piriformis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. External anal sphincter",
+      "explanation": "The pudendal nerve provides somatic motor control to the voluntary sphincters of the perineum, including the external urethral sphincter and the external anal sphincter.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 86
+    },
+    {
+      "id": "ana201-ll-innervations-87",
+      "text": "The superior gluteal nerve is accompanied by the superior gluteal artery and vein. Above which specific muscle does this neurovascular bundle exit the greater sciatic foramen?",
+      "options": [
+        "Obturator internus",
+        "Superior gemellus",
+        "Piriformis",
+        "Gluteus minimus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Piriformis",
+      "explanation": "The piriformis muscle splits the greater sciatic foramen. The superior gluteal nerve is the only nerve to exit superior to the piriformis; all other major nerves exit inferiorly.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 87
+    },
+    {
+      "id": "ana201-ll-innervations-88",
+      "text": "The inferior gluteal nerve is the sole motor supply to the gluteus maximus. Which nerve roots predominantly make up this specific nerve?",
+      "options": [
+        "L4, L5, S1",
+        "S2, S3, S4",
+        "L1, L2, L3",
+        "L5, S1, S2"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. L5, S1, S2",
+      "explanation": "Formed by the posterior divisions of the L5, S1, and S2 anterior rami, the inferior gluteal nerve is dedicated entirely to powering the gluteus maximus.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 88
+    },
+    {
+      "id": "ana201-ll-innervations-89",
+      "text": "Tarsal tunnel syndrome can cause significant morbidity due to tibial nerve compression. If conservative measures fail, what is the definitive surgical treatment?",
+      "options": [
+        "Tarsal tunnel release via cutting the flexor retinaculum",
+        "Fasciotomy of the posterior leg compartment",
+        "Resection of the medial malleolus",
+        "Nerve grafting of the medial plantar nerve"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Tarsal tunnel release via cutting the flexor retinaculum",
+      "explanation": "A surgical tarsal tunnel release involves incising the overlying flexor retinaculum, physically expanding the space and decompressing the trapped tibial nerve.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 89
+    },
+    {
+      "id": "ana201-ll-innervations-90",
+      "text": "The superficial fibular nerve transitions from a mixed nerve to a purely cutaneous nerve in the lower leg. How does it reach the superficial tissues?",
+      "options": [
+        "By passing through the tarsal tunnel",
+        "By piercing the deep crural fascia in the lower third of the leg",
+        "By exiting through the adductor hiatus",
+        "By wrapping around the medial malleolus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. By piercing the deep crural fascia in the lower third of the leg",
+      "explanation": "After descending in the lateral compartment, the superficial fibular nerve punches through the tough deep fascia of the leg in its lower third to become superficial and supply the skin.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 90
+    },
+    {
+      "id": "ana201-ll-innervations-91",
+      "text": "The deep fibular nerve terminates by dividing into medial and lateral branches on the dorsum of the foot. The lateral branch provides motor innervation to which intrinsic foot muscle?",
+      "options": [
+        "Abductor hallucis",
+        "Flexor digitorum brevis",
+        "Extensor digitorum brevis",
+        "Quadratus plantae"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Extensor digitorum brevis",
+      "explanation": "The lateral terminal branch of the deep fibular nerve dives deep to supply motor fibers to the extensor digitorum brevis and extensor hallucis brevis on the dorsum of the foot.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 91
+    },
+    {
+      "id": "ana201-ll-innervations-92",
+      "text": "During its descent in the anterior compartment, the deep fibular nerve changes its position relative to the anterior tibial artery. Which describes its final position relative to the artery distally?",
+      "options": [
+        "It remains strictly lateral to the artery.",
+        "It spirals behind the artery to lie posteriorly.",
+        "It remains strictly anterior to the artery.",
+        "It is initially lateral, then anterior, and finally medial to the artery."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. It is initially lateral, then anterior, and finally medial to the artery.",
+      "explanation": "The deep fibular nerve crosses the anterior tibial artery as it descends, starting laterally, crossing anteriorly, and finishing medially at the ankle.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 92
+    },
+    {
+      "id": "ana201-ll-innervations-93",
+      "text": "Dermatomal mapping is essential for neurological examinations. Which spinal root provides the dermatome for the perianal region?",
+      "options": [
+        "S4/5",
+        "S2",
+        "L1",
+        "S1"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. S4/5",
+      "explanation": "The S4 and S5 dermatomes represent the lowest point of the spinal cord's somatic cutaneous distribution, localizing in concentric rings around the perianal region.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 93
+    },
+    {
+      "id": "ana201-ll-innervations-94",
+      "text": "The femoral nerve divides into its characteristic anterior and posterior divisions after entering the thigh. At what approximate anatomical location does this division occur?",
+      "options": [
+        "Superior to the iliac crest",
+        "Exactly 4cm below the inguinal ligament",
+        "At the apex of the femoral triangle",
+        "As it passes through the adductor canal"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Exactly 4cm below the inguinal ligament",
+      "explanation": "The trunk of the femoral nerve is very short; it divides into a spray of anterior and posterior branches approximately 4cm inferior to the inguinal ligament within the femoral triangle.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 94
+    },
+    {
+      "id": "ana201-ll-innervations-95",
+      "text": "The skin over the anterior scrotum in males receives its sensory innervation from a specific branch of the lumbar plexus. Which nerve provides this supply?",
+      "options": [
+        "Obturator nerve",
+        "Pudendal nerve",
+        "Genital branch of the genitofemoral nerve",
+        "Femoral branch of the genitofemoral nerve"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Genital branch of the genitofemoral nerve",
+      "explanation": "The genital branch of the genitofemoral nerve travels within the spermatic cord to provide sensation to the skin of the anterior scrotum.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 95
+    },
+    {
+      "id": "ana201-ll-innervations-96",
+      "text": "The gracilis is a long, strap-like muscle on the medial aspect of the thigh. Which nerve is responsible for its motor innervation?",
+      "options": [
+        "Femoral nerve",
+        "Tibial nerve",
+        "Sciatic nerve",
+        "Obturator nerve"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Obturator nerve",
+      "explanation": "As a member of the medial (adductor) compartment of the thigh, the gracilis receives its motor supply from the anterior branch of the obturator nerve.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 96
+    },
+    {
+      "id": "ana201-ll-innervations-97",
+      "text": "The tensor fasciae latae is a muscle of the gluteal region that assists in stabilizing the hip and knee. Which nerve provides its motor supply?",
+      "options": [
+        "Superior gluteal nerve",
+        "Inferior gluteal nerve",
+        "Femoral nerve",
+        "Lateral cutaneous nerve of the thigh"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Superior gluteal nerve",
+      "explanation": "The superior gluteal nerve supplies the gluteus medius, gluteus minimus, and the tensor fasciae latae.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 97
+    },
+    {
+      "id": "ana201-ll-innervations-98",
+      "text": "The gluteus minimus lies deep to the gluteus medius and shares its innervation. Which nerve supplies both of these muscles?",
+      "options": [
+        "Sciatic nerve",
+        "Superior gluteal nerve",
+        "Inferior gluteal nerve",
+        "Nerve to quadratus femoris"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Superior gluteal nerve",
+      "explanation": "The superior gluteal nerve emerges above the piriformis and courses between the gluteus medius and minimus, providing motor supply to both.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 98
+    },
+    {
+      "id": "ana201-ll-innervations-99",
+      "text": "The sciatic nerve innervates the hamstring muscles before bifurcating. However, one specific part of the hamstring complex is innervated by the common fibular division rather than the tibial division. Which muscle is this?",
+      "options": [
+        "Semitendinosus",
+        "Long head of the biceps femoris",
+        "Short head of the biceps femoris",
+        "Ischial head of adductor magnus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Short head of the biceps femoris",
+      "explanation": "The short head of the biceps femoris is the only muscle in the posterior thigh innervated by the common fibular (peroneal) division of the sciatic nerve; the rest are supplied by the tibial division.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 99
+    },
+    {
+      "id": "ana201-ll-innervations-100",
+      "text": "The sciatic nerve is a massive structure that requires its own dedicated blood supply. Which artery provides a named branch specifically to the sciatic nerve?",
+      "options": [
+        "Superior gluteal artery",
+        "Internal pudendal artery",
+        "Obturator artery",
+        "Inferior gluteal artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Inferior gluteal artery",
+      "explanation": "The inferior gluteal artery travels alongside the sciatic nerve and gives off a specific branch, the artery to the sciatic nerve (arteria comitans nervi ischiadici), to provide its vascular supply.",
+      "section": "Innervations of the Lower Limb",
+      "questionNumber": 100
+    }
+  ]
+}

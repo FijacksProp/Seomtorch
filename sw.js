@@ -1,4 +1,4 @@
-const CACHE = "seomtorch-v90";
+const CACHE = "seomtorch-v91";
 const APP_ASSETS = [
   "./",
   "index.html",
@@ -28,6 +28,7 @@ const APP_ASSETS = [
   "data/university/anatomy/200/questions-ana201-popliteal-fossa.json",
   "data/university/anatomy/200/questions-ana201-femoral-triangle.json",
   "data/university/anatomy/200/questions-ana201-arches-walking-gait.json",
+  "data/university/anatomy/200/questions-ana201-innervations-lower-limb.json",
   "data/university/anatomy/200/questions-ana201-blood-supply-lower-limb.json",
   "data/university/anatomy/200/ana202.json",
   "data/university/anatomy/200/ana203.json",
