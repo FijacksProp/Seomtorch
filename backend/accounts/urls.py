@@ -2,12 +2,14 @@ from django.urls import path
 from .views import (
     AspirantProfileView,
     ChangePasswordView,
+    ContactMatchView,
     LoginView,
     LogoutView,
     MeView,
     RegisterView,
     SwitchModeView,
     UniversityProfileView,
+    UpdatePhoneView,
 )
 
 urlpatterns = [
@@ -19,4 +21,6 @@ urlpatterns = [
     path("switch-mode/", SwitchModeView.as_view(), name="switch-mode"),
     path("aspirant-profile/", AspirantProfileView.as_view(), name="aspirant-profile"),
     path("university-profile/", UniversityProfileView.as_view(), name="university-profile"),
+    path("update-phone/", UpdatePhoneView.as_view(), name="update-phone"),
+    path("contacts/match/", ContactMatchView.as_view(), name="contacts-match"),
 ]

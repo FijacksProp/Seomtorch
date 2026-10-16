@@ -46,6 +46,7 @@ const ICONS = {
   challenges: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/><path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M4 5h16v4a6 6 0 0 1-12 0V5z"/><path d="M12 15v4"/><path d="M8 21h8"/></svg>',
   profile: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
   university: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 3 2 9l10 6 10-6Z"/><path d="M2 9v8"/><path d="M6 11.2V17c0 1.1 2.7 3 6 3s6-1.9 6-3v-5.8"/></svg>',
+  buddies: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
 };
 
 const DB_NAME = "seomtorch";
@@ -117,7 +118,19 @@ let uniLevel = null;
 let uniCourseId = null;
 let uniContentCache = {};
 let uniDepartments = null;
+let buddiesMatches = { onApp: getSavedBuddies(), invites: [] };
+let buddiesLoading = false;
+let buddiesSearchOpen = false;
 
+function getSavedBuddies() {
+  try { return JSON.parse(localStorage.getItem("seomtorch-saved-buddies") || "[]"); }
+  catch { return []; }
+}
+
+function saveBuddies(list) {
+  try { localStorage.setItem("seomtorch-saved-buddies", JSON.stringify(list)); }
+  catch {}
+}
 window.addEventListener("beforeinstallprompt", event => {
   event.preventDefault();
   deferredInstallPrompt = event;
@@ -607,8 +620,8 @@ function shell(content) {
   const testStats = profile.tests || { tests_taken: 0, average_score: 0 };
   const mode = getActiveMode();
   const nav = mode === "university"
-    ? [["home", "Home"], ["university", "Courses"], ["progress", "Insights"], ["profile", "Profile"]]
-    : [["home", "Home"], ["practice", "Practice"], ["challenges", "Challenges"], ["progress", "Insights"], ["profile", "Profile"]];
+    ? [["home", "Home"], ["university", "Courses"], ["buddies", "Buddies"], ["progress", "Insights"], ["profile", "Profile"]]
+    : [["home", "Home"], ["practice", "Practice"], ["challenges", "Challenges"], ["buddies", "Buddies"], ["progress", "Insights"], ["profile", "Profile"]];
 
   return `<div class="layout ${mode === 'university' ? 'layout-uni' : ''}">
     <aside class="sidebar">
@@ -1632,7 +1645,7 @@ function renderProfile(filter = "") {
   const xp = xpState();
   const testStats = profile.tests || { tests_taken: 0, average_score: 0 };
   const joined = currentUser?.date_joined ? new Date(currentUser.date_joined).toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) : "—";
-  const content = `<section class="page profile-page"><div class="profile-hero"><div class="profile-monogram">${initials()}</div><div><p class="eyebrow">Student profile</p><h1>${escapeHtml(currentUser?.username || profile.name)}</h1><p>${escapeHtml(currentUser?.email || profile.email)} · Member since ${joined}</p></div><button class="button outline" id="refresh-account">Refresh account</button></div><div class="profile-grid"><section class="profile-card identity-card"><span class="card-label">Student ID</span><strong>${escapeHtml(currentUser?.public_id || "—")}</strong><p>Share this ID with people you know when they invite you to a challenge.</p></section><section class="profile-card level-card"><span class="card-label">Level ${xp.level}</span><strong>${xp.xp} <small>XP</small></strong><div class="xp-track light"><i style="width:${xp.percent}%"></i></div><p>${xp.remaining} XP until level ${xp.level + 1}</p></section></div><div class="metric-strip four profile-metrics"><div class="metric"><strong>${attempts.length}</strong><span>answers recorded</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> days</small></strong><span>current streak</span></div><div class="metric"><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>best streak</span></div></div><div class="section-head"><h2>Academic Portals & Registrations</h2><p>Your enrollment across student portals</p></div><div class="uni-quick-grid" style="margin-bottom:28px;"><div class="uni-portal-status-card"><div><div class="uni-dept-svg-mark anatomy"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><strong>Aspirants Portal</strong><p>${hasAspirantProfile() ? `Registered for ${(currentUser?.aspirant_profile?.exam_type || "JAMB").toUpperCase()} ${currentUser?.aspirant_profile?.target_year || ""}` : "Not registered yet. Required for JAMB & SSCE practice."}</p></div><button class="button ${hasAspirantProfile() ? 'outline' : 'accent'} small" id="profile-manage-aspirant">${hasAspirantProfile() ? "Update Exam Details" : "Register for Aspirants Portal →"}</button></div><div class="uni-portal-status-card"><div><div class="uni-dept-svg-mark physiology"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M4 18h16M4 10h16M12 3L2 8h20z"/><path d="M6 10v8M10 10v8M14 10v8M18 10v8"/></svg></div><strong>University Portal</strong><p>${hasUniversityProfile() ? `Enrolled at ${escapeHtml(currentUser?.university_profile?.university_name || "")} · ${escapeHtml(currentUser?.university_profile?.department || "")} (${currentUser?.university_profile?.level || 200}L)` : "Not registered yet. Required for undergraduate course banks."}</p></div><button class="button ${hasUniversityProfile() ? 'outline' : 'accent'} small" id="profile-manage-university">${hasUniversityProfile() ? "Update University Details" : "Register for University Portal →"}</button></div></div>${renderAchievementSummary()}<div class="section-head"><h2>Subject record</h2><p>Synchronized account history</p></div><div class="profile-subjects">${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<article><span>${subject.name}</span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong><small>${stat.count} answer${stat.count === 1 ? "" : "s"}</small></article>`; }).join("")}</div><section class="settings-panel"><p class="eyebrow">Account data</p><h2>Portable, private and recoverable.</h2><p class="lede">The server keeps the authoritative account record. This device stores an offline copy and queues answers whenever the connection drops.</p><div class="button-row"><button class="button" id="export-data">Export backup</button><label class="button outline" for="import-data">Import backup</label><input class="file-input" id="import-data" type="file" accept="application/json"><button class="button outline" id="clear-cache">Refresh device cache</button><button class="button danger" id="sign-out">Sign out</button></div></section><section class="settings-panel guide-section"><p class="eyebrow">Guide and support</p><h2>Answers, without the noise.</h2><p class="lede">Quick guidance about practice, progress and account data.</p><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="faq-search" value="${escapeHtml(filter)}" placeholder="Search help topics" aria-label="Search help topics"></div><div id="faq-results">${groups.length ? groups.map(group => `<section class="faq-group"><h3>${group}</h3>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("") : '<div class="empty">No help entries match that search.</div>'}</div></section></section>`;
+  const content = `<section class="page profile-page"><div class="profile-hero"><div class="profile-monogram">${initials()}</div><div><p class="eyebrow">Student profile</p><h1>${escapeHtml(currentUser?.username || profile.name)}</h1><p>${escapeHtml(currentUser?.email || profile.email)} · Member since ${joined}</p></div><button class="button outline" id="refresh-account">Refresh account</button></div><div class="profile-grid"><section class="profile-card identity-card"><span class="card-label">Student ID</span><strong>${escapeHtml(currentUser?.public_id || "—")}</strong><p>${currentUser?.phone_number ? `Phone: <strong>${escapeHtml(currentUser.phone_number)}</strong> · ` : ""}Share your ID for challenges or connect in <a href="#" data-route="buddies" style="text-decoration:underline; font-weight:600;">Buddies</a>.</p></section><section class="profile-card level-card"><span class="card-label">Level ${xp.level}</span><strong>${xp.xp} <small>XP</small></strong><div class="xp-track light"><i style="width:${xp.percent}%"></i></div><p>${xp.remaining} XP until level ${xp.level + 1}</p></section></div><div class="metric-strip four profile-metrics"><div class="metric"><strong>${attempts.length}</strong><span>answers recorded</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> days</small></strong><span>current streak</span></div><div class="metric"><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>best streak</span></div></div><div class="section-head"><h2>Academic Portals & Registrations</h2><p>Your enrollment across student portals</p></div><div class="uni-quick-grid" style="margin-bottom:28px;"><div class="uni-portal-status-card"><div><div class="uni-dept-svg-mark anatomy"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><strong>Aspirants Portal</strong><p>${hasAspirantProfile() ? `Registered for ${(currentUser?.aspirant_profile?.exam_type || "JAMB").toUpperCase()} ${currentUser?.aspirant_profile?.target_year || ""}` : "Not registered yet. Required for JAMB & SSCE practice."}</p></div><button class="button ${hasAspirantProfile() ? 'outline' : 'accent'} small" id="profile-manage-aspirant">${hasAspirantProfile() ? "Update Exam Details" : "Register for Aspirants Portal →"}</button></div><div class="uni-portal-status-card"><div><div class="uni-dept-svg-mark physiology"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M4 18h16M4 10h16M12 3L2 8h20z"/><path d="M6 10v8M10 10v8M14 10v8M18 10v8"/></svg></div><strong>University Portal</strong><p>${hasUniversityProfile() ? `Enrolled at ${escapeHtml(currentUser?.university_profile?.university_name || "")} · ${escapeHtml(currentUser?.university_profile?.department || "")} (${currentUser?.university_profile?.level || 200}L)` : "Not registered yet. Required for undergraduate course banks."}</p></div><button class="button ${hasUniversityProfile() ? 'outline' : 'accent'} small" id="profile-manage-university">${hasUniversityProfile() ? "Update University Details" : "Register for University Portal →"}</button></div></div>${renderAchievementSummary()}<div class="section-head"><h2>Subject record</h2><p>Synchronized account history</p></div><div class="profile-subjects">${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<article><span>${subject.name}</span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong><small>${stat.count} answer${stat.count === 1 ? "" : "s"}</small></article>`; }).join("")}</div><section class="settings-panel"><p class="eyebrow">Account data</p><h2>Portable, private and recoverable.</h2><p class="lede">The server keeps the authoritative account record. This device stores an offline copy and queues answers whenever the connection drops.</p><div class="button-row"><button class="button" id="export-data">Export backup</button><label class="button outline" for="import-data">Import backup</label><input class="file-input" id="import-data" type="file" accept="application/json"><button class="button outline" id="clear-cache">Refresh device cache</button><button class="button danger" id="sign-out">Sign out</button></div></section><section class="settings-panel guide-section"><p class="eyebrow">Guide and support</p><h2>Answers, without the noise.</h2><p class="lede">Quick guidance about practice, progress and account data.</p><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="faq-search" value="${escapeHtml(filter)}" placeholder="Search help topics" aria-label="Search help topics"></div><div id="faq-results">${groups.length ? groups.map(group => `<section class="faq-group"><h3>${group}</h3>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("") : '<div class="empty">No help entries match that search.</div>'}</div></section></section>`;
   app.innerHTML = shell(content);
   const profileMetrics = document.querySelectorAll(".profile-metrics .metric");
   if (profileMetrics[0]) profileMetrics[0].innerHTML = `<strong>${testStats.tests_taken}</strong><span>tests taken</span>`;
@@ -1669,7 +1682,7 @@ function challengeCard(item) {
 function renderChallengeComposer() {
   const starts = new Date(Date.now() + 30 * 60000);
   const ends = new Date(Date.now() + 24 * 60 * 60000);
-  return `<section class="challenge-composer"><div class="composer-intro"><p class="eyebrow">Create a private challenge</p><h2>Set the paper. Invite your people.</h2><p>Everyone receives the same frozen question set. Each accepted friend gets one timed attempt inside your chosen window.</p></div><form id="challenge-form"><div class="challenge-form-grid"><div class="field"><label for="challenge-title">Challenge title</label><input id="challenge-title" name="title" maxlength="100" value="Weekend study circle" required></div><div class="field"><label for="challenge-subject">Focus</label><select id="challenge-subject" name="subject"><option value="all">All subjects</option>${SUBJECTS.map(subject => `<option value="${subject.id}">${subject.name}</option>`).join("")}</select></div><div class="field"><label for="challenge-count">Questions</label><input id="challenge-count" name="question_count" type="number" min="10" max="100" value="20" required></div><div class="field"><label for="challenge-duration">Timer in minutes</label><input id="challenge-duration" name="duration_minutes" type="number" min="1" max="180" value="20" required></div><div class="field"><label for="challenge-start">Opens</label><input id="challenge-start" name="starts_at" type="datetime-local" value="${localDateTimeValue(starts)}" required></div><div class="field"><label for="challenge-end">Completion deadline</label><input id="challenge-end" name="ends_at" type="datetime-local" value="${localDateTimeValue(ends)}" required></div></div><div class="field"><label for="challenge-message">Invitation note <span>optional</span></label><textarea id="challenge-message" name="message" maxlength="280" placeholder="A short note for the group"></textarea></div><div class="invite-builder"><label for="friend-id">Invite with Student ID</label><div><input id="friend-id" maxlength="6" autocomplete="off" placeholder="e.g. A7B2Q9"><button class="button outline" type="button" id="add-friend">Add friend</button></div><small>Invite up to nine registered friends you know.</small><div class="invitee-list">${challengeInvitees.length ? challengeInvitees.map(item => `<span>${escapeHtml(item.username)} <small>${item.public_id}</small><button type="button" data-remove-invitee="${item.public_id}" aria-label="Remove ${escapeHtml(item.username)}">×</button></span>`).join("") : '<p>No friends added yet.</p>'}</div></div><div id="challenge-error" class="auth-error" role="alert"></div><div class="button-row"><button class="button" type="submit">Review challenge →</button><button class="button outline" type="button" id="close-composer">Cancel</button></div></form></section>`;
+  return `<section class="challenge-composer"><div class="composer-intro"><p class="eyebrow">Create a private challenge</p><h2>Set the paper. Invite your people.</h2><p>Everyone receives the same frozen question set. Each accepted friend gets one timed attempt inside your chosen window.</p></div><form id="challenge-form"><div class="challenge-form-grid"><div class="field"><label for="challenge-title">Challenge title</label><input id="challenge-title" name="title" maxlength="100" value="Weekend study circle" required></div><div class="field"><label for="challenge-subject">Focus</label><select id="challenge-subject" name="subject"><option value="all">All subjects</option>${SUBJECTS.map(subject => `<option value="${subject.id}">${subject.name}</option>`).join("")}</select></div><div class="field"><label for="challenge-count">Questions</label><input id="challenge-count" name="question_count" type="number" min="10" max="100" value="20" required></div><div class="field"><label for="challenge-duration">Timer in minutes</label><input id="challenge-duration" name="duration_minutes" type="number" min="1" max="180" value="20" required></div><div class="field"><label for="challenge-start">Opens</label><input id="challenge-start" name="starts_at" type="datetime-local" value="${localDateTimeValue(starts)}" required></div><div class="field"><label for="challenge-end">Completion deadline</label><input id="challenge-end" name="ends_at" type="datetime-local" value="${localDateTimeValue(ends)}" required></div></div><div class="field"><label for="challenge-message">Invitation note <span>optional</span></label><textarea id="challenge-message" name="message" maxlength="280" placeholder="A short note for the group"></textarea></div><div class="invite-builder"><label for="friend-id">Invite with Student ID or Buddies</label><div><input id="friend-id" maxlength="6" autocomplete="off" placeholder="e.g. A7B2Q9"><button class="button outline" type="button" id="add-friend">Add</button><button class="button outline" type="button" id="open-buddies-picker">From Buddies</button></div><small>Invite up to nine registered friends you know.</small><div class="invitee-list">${challengeInvitees.length ? challengeInvitees.map(item => `<span>${escapeHtml(item.username)} <small>${item.public_id}</small><button type="button" data-remove-invitee="${item.public_id}" aria-label="Remove ${escapeHtml(item.username)}">×</button></span>`).join("") : '<p>No friends added yet.</p>'}</div></div><div id="challenge-error" class="auth-error" role="alert"></div><div class="button-row"><button class="button" type="submit">Review challenge →</button><button class="button outline" type="button" id="close-composer">Cancel</button></div></form></section>`;
 }
 
 function renderChallengeDetail(item) {
@@ -1704,6 +1717,7 @@ function bindChallenges() {
   document.querySelector("#close-composer")?.addEventListener("click", () => { challengeComposerOpen = false; challengeInvitees = []; renderChallenges(); });
   document.querySelectorAll("[data-challenge-id]").forEach(button => button.addEventListener("click", () => { selectedChallengeId = button.dataset.challengeId; renderChallenges(); }));
   document.querySelector("#add-friend")?.addEventListener("click", addChallengeFriend);
+  document.querySelector("#open-buddies-picker")?.addEventListener("click", showBuddiesPickerModal);
   bindInviteeRemoval();
   document.querySelector("#challenge-form")?.addEventListener("submit", reviewChallengeForm);
 }
@@ -2295,9 +2309,538 @@ async function openChallengeShareModal(item) {
   });
 }
 
+// ── Study Buddies & Contacts ────────────────────────────────────────────────
+
+function buddyInitials(name) {
+  return (name || "").trim().split(/\s+/).slice(0, 2).map(w => w[0]).join("").toUpperCase() || "ST";
+}
+
+function whatsappInviteUrl(phone, text) {
+  let clean = (phone || "").replace(/[^0-9]/g, "");
+  if (clean.startsWith("0")) clean = "234" + clean.slice(1);
+  const msg = text || `Hey! Join me on Seomtorch to practice past questions, track progress, and take timed challenges together. My Student ID is ${currentUser?.public_id || ""}: https://seomtorch.vercel.app`;
+  return clean ? `https://wa.me/${clean}?text=${encodeURIComponent(msg)}` : `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
+}
+
+function smsInviteUrl(phone, text) {
+  let clean = (phone || "").replace(/[^\+0-9]/g, "");
+  const msg = text || `Join me on Seomtorch to study and take private challenges together! My Student ID is ${currentUser?.public_id || ""}: https://seomtorch.vercel.app`;
+  return `sms:${clean}?body=${encodeURIComponent(msg)}`;
+}
+
+async function handleScanContacts(onComplete) {
+  if (!("contacts" in navigator && "ContactsManager" in window)) {
+    showToast("Contact picker is not available on this browser. Use manual search or share your invite link.");
+    return;
+  }
+  try {
+    buddiesLoading = true;
+    if (route === "buddies") renderBuddies();
+    const props = ["name", "tel", "email"];
+    const contacts = await navigator.contacts.select(props, { multiple: true });
+    if (!contacts || !contacts.length) {
+      buddiesLoading = false;
+      if (route === "buddies") renderBuddies();
+      return;
+    }
+    await processContactsList(contacts);
+    buddiesLoading = false;
+    showToast(`Processed ${contacts.length} contact${contacts.length === 1 ? "" : "s"}`);
+    if (onComplete) onComplete();
+    else if (route === "buddies") renderBuddies();
+  } catch (err) {
+    buddiesLoading = false;
+    if (route === "buddies") renderBuddies();
+    if (err.name !== "AbortError") {
+      showToast("Could not access contacts: " + (err.message || "Unknown error"));
+    }
+  }
+}
+
+async function processContactsList(contacts) {
+  const phones = [];
+  const emails = [];
+  const contactMap = new Map();
+
+  for (const c of contacts) {
+    const name = c.name?.[0] || "";
+    const cPhones = c.tel || [];
+    const cEmails = c.email || [];
+    for (const p of cPhones) {
+      if (typeof p === "string" && p.trim()) {
+        const clean = p.trim();
+        phones.push(clean);
+        contactMap.set("tel:" + clean, { name, tel: clean, email: cEmails[0] || "" });
+      }
+    }
+    for (const e of cEmails) {
+      if (typeof e === "string" && e.trim()) {
+        const clean = e.trim().toLowerCase();
+        emails.push(clean);
+        contactMap.set("email:" + clean, { name, tel: cPhones[0] || "", email: clean });
+      }
+    }
+  }
+
+  try {
+    const res = await api.matchContacts(authToken, phones, emails);
+    const matchedUsers = res.matches || [];
+    const matchedKeys = new Set();
+
+    // Find and merge with saved buddies
+    const currentSaved = getSavedBuddies();
+    const savedIds = new Set(currentSaved.map(item => item.public_id));
+    for (const m of matchedUsers) {
+      if (!savedIds.has(m.public_id)) {
+        currentSaved.push(m);
+        savedIds.add(m.public_id);
+      }
+    }
+    saveBuddies(currentSaved);
+
+    // Identify non-registered contacts to invite
+    const invites = [];
+    const seenInviteKeys = new Set();
+    for (const [key, contact] of contactMap.entries()) {
+      if (!seenInviteKeys.has(key)) {
+        seenInviteKeys.add(key);
+        invites.push(contact);
+      }
+    }
+
+    buddiesMatches = {
+      onApp: currentSaved,
+      invites: invites.slice(0, 50)
+    };
+  } catch (err) {
+    showToast("Contact matching failed: " + (err.message || "Server error"));
+  }
+}
+
+function renderBuddies() {
+  const hasContactPicker = "contacts" in navigator && "ContactsManager" in window;
+  const onApp = buddiesMatches?.onApp || [];
+  const invites = buddiesMatches?.invites || [];
+  const hasPhone = Boolean(currentUser?.phone_number);
+
+  const phoneBanner = !hasPhone ? `
+    <div class="buddies-phone-banner">
+      <div class="buddies-banner-icon">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="buddies-banner-content">
+        <strong>Link your phone number so your classmates can find you</strong>
+        <p>When friends check their contacts on Seomtorch, they will see you as a study buddy.</p>
+        <form id="form-link-phone" class="buddies-phone-form">
+          <input type="tel" id="input-link-phone" placeholder="e.g. +2348012345678 or 080..." required>
+          <button class="button small" type="submit">Link Phone</button>
+        </form>
+        <div id="phone-link-error" class="auth-error" style="margin-top:6px;"></div>
+      </div>
+    </div>
+  ` : `
+    <div class="buddies-phone-linked-pill">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      <span>Linked Phone: <strong>${escapeHtml(currentUser.phone_number)}</strong></span>
+      <button type="button" id="btn-edit-phone" class="button outline small" style="margin-left:auto; padding:4px 10px; font-size:11px;">Change</button>
+    </div>
+  `;
+
+  const searchBox = `
+    <div class="buddies-search-box ${buddiesSearchOpen ? "" : "collapsed"}" id="buddies-search-box">
+      <div class="section-head" style="margin-bottom:12px;">
+        <h2>Search by ID, Phone, or Email</h2>
+        <p>Find registered friends or generate instant invite links</p>
+      </div>
+      <form id="form-manual-buddy-lookup" class="buddies-search-form">
+        <input type="text" id="input-manual-lookup" placeholder="e.g. A7B2Q9, 08012345678, or friend@email.com" required>
+        <button class="button" type="submit">Search / Check</button>
+      </form>
+      <div id="manual-lookup-result" class="manual-lookup-result"></div>
+    </div>
+  `;
+
+  const onAppSection = onApp.length ? `
+    <div class="section-head">
+      <h2>Friends on Seomtorch (${onApp.length})</h2>
+      <p>Tap Challenge to set a shared timed paper</p>
+    </div>
+    <div class="buddies-grid">
+      ${onApp.map(buddy => `
+        <article class="buddy-card">
+          <span class="buddy-monogram">${buddyInitials(buddy.username)}</span>
+          <div class="buddy-details">
+            <h3>${escapeHtml(buddy.username)}</h3>
+            <p>Student ID: <strong>${escapeHtml(buddy.public_id)}</strong></p>
+          </div>
+          <div class="buddy-card-actions">
+            <button class="button small" data-challenge-buddy="${buddy.public_id}" data-buddy-name="${escapeHtml(buddy.username)}">Challenge →</button>
+            <button class="button outline small" data-copy-buddy-id="${buddy.public_id}" title="Copy Student ID">Copy ID</button>
+            <button class="remove-buddy-btn" data-remove-buddy="${buddy.public_id}" aria-label="Remove buddy" title="Remove from list">×</button>
+          </div>
+        </article>
+      `).join("")}
+    </div>
+  ` : "";
+
+  const invitesSection = invites.length ? `
+    <div class="section-head">
+      <h2>Contacts to Invite (${invites.length})</h2>
+      <p>Invite your classmates to join your study circle</p>
+    </div>
+    <div class="buddies-grid invites">
+      ${invites.map(c => `
+        <article class="buddy-card invite-card">
+          <span class="buddy-monogram invite">${buddyInitials(c.name)}</span>
+          <div class="buddy-details">
+            <h3>${escapeHtml(c.name || c.tel || c.email)}</h3>
+            <p>${escapeHtml(c.tel || c.email || "Contact")}</p>
+          </div>
+          <div class="buddy-card-actions">
+            ${c.tel ? `<a href="${whatsappInviteUrl(c.tel)}" target="_blank" rel="noopener noreferrer" class="button small whatsapp-invite-btn">WhatsApp</a>` : ""}
+            ${c.tel ? `<a href="${smsInviteUrl(c.tel)}" class="button outline small">SMS</a>` : ""}
+            ${c.email && !c.tel ? `<a href="mailto:${encodeURIComponent(c.email)}?subject=Study with me on Seomtorch&body=${encodeURIComponent('Join me on Seomtorch! My Student ID is ' + (currentUser?.public_id || '') + ': https://seomtorch.vercel.app')}" class="button outline small">Email</a>` : ""}
+          </div>
+        </article>
+      `).join("")}
+    </div>
+  ` : "";
+
+  const emptyGuide = (!onApp.length && !invites.length) ? `
+    <section class="buddies-guide-card">
+      <div class="guide-intro">
+        <span class="guide-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </span>
+        <h2>How Study Circles & Buddies Work</h2>
+        <p>Studying with friends keeps you consistent and sharpens your exam readiness.</p>
+      </div>
+      <div class="buddies-steps-grid">
+        <div class="step-card">
+          <span class="step-num">01</span>
+          <h4>Select Contacts</h4>
+          <p>Tap Select Contacts to see which classmates are already on Seomtorch.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-num">02</span>
+          <h4>Invite Friends</h4>
+          <p>Send 1-tap WhatsApp or SMS invites with your Student ID (<strong>${currentUser?.public_id || "—"}</strong>).</p>
+        </div>
+        <div class="step-card">
+          <span class="step-num">03</span>
+          <h4>Challenge Each Other</h4>
+          <p>Sit the same frozen question set under timed conditions and compare results privately.</p>
+        </div>
+      </div>
+      <div class="buddies-guide-actions">
+        ${hasContactPicker ? `<button class="button" id="btn-scan-guide"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Select Contacts Now</span></button>` : ""}
+        <button class="button ${hasContactPicker ? 'outline' : ''}" id="btn-share-invite-guide">Share Invite via WhatsApp</button>
+      </div>
+    </section>
+  ` : "";
+
+  const content = `
+    <section class="page buddies-page">
+      <div class="buddies-head">
+        <div>
+          <p class="eyebrow">Study together</p>
+          <h1>Study Buddies.</h1>
+          <p class="lede">Connect with classmates, scan contacts to find friends on Seomtorch, and invite partners to private study circles.</p>
+        </div>
+        <div class="buddies-head-actions">
+          ${hasContactPicker ? `
+            <button class="button" id="btn-scan-contacts">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>${buddiesLoading ? "Checking contacts…" : "Select Contacts"}</span>
+            </button>
+          ` : ""}
+          <button class="button ${hasContactPicker ? 'outline' : ''}" id="btn-share-invite-link">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span>Share Invite</span>
+          </button>
+          <button class="button outline" id="btn-toggle-search">
+            ${buddiesSearchOpen ? "Close Search" : "Search ID / Phone"}
+          </button>
+        </div>
+      </div>
+
+      ${phoneBanner}
+      ${searchBox}
+      ${onAppSection}
+      ${invitesSection}
+      ${emptyGuide}
+    </section>
+  `;
+
+  app.innerHTML = shell(content);
+  bindShell();
+  bindBuddies();
+}
+
+function bindBuddies() {
+  document.querySelector("#btn-scan-contacts")?.addEventListener("click", () => handleScanContacts());
+  document.querySelector("#btn-scan-guide")?.addEventListener("click", () => handleScanContacts());
+
+  const shareHandler = async () => {
+    const inviteUrl = "https://seomtorch.vercel.app";
+    const shareText = `Hey! Join me on Seomtorch to prepare for exams and take timed study challenges together. My Student ID is ${currentUser?.public_id || ""}:`;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "Study with me on Seomtorch", text: shareText, url: inviteUrl });
+        showToast("Invite link shared!");
+      } catch (err) {
+        if (err.name !== "AbortError") window.open(whatsappInviteUrl(), "_blank");
+      }
+    } else {
+      window.open(whatsappInviteUrl(), "_blank");
+    }
+  };
+
+  document.querySelector("#btn-share-invite-link")?.addEventListener("click", shareHandler);
+  document.querySelector("#btn-share-invite-guide")?.addEventListener("click", shareHandler);
+
+  document.querySelector("#btn-toggle-search")?.addEventListener("click", () => {
+    buddiesSearchOpen = !buddiesSearchOpen;
+    renderBuddies();
+  });
+
+  document.querySelector("#btn-edit-phone")?.addEventListener("click", () => {
+    if (currentUser) {
+      currentUser.phone_number = "";
+      renderBuddies();
+    }
+  });
+
+  document.querySelector("#form-link-phone")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const input = document.querySelector("#input-link-phone");
+    const error = document.querySelector("#phone-link-error");
+    const phone = input.value.trim();
+    if (!phone) return;
+    try {
+      const res = await api.updatePhone(authToken, phone);
+      if (res?.user) {
+        currentUser = res.user;
+        localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
+        showToast("Phone number linked successfully!");
+        renderBuddies();
+      }
+    } catch (err) {
+      if (error) error.textContent = err.message || "Failed to link phone number";
+    }
+  });
+
+  document.querySelector("#form-manual-buddy-lookup")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const input = document.querySelector("#input-manual-lookup");
+    const resultContainer = document.querySelector("#manual-lookup-result");
+    const query = input.value.trim();
+    if (!query) return;
+
+    resultContainer.innerHTML = '<div class="challenge-loading"><i></i><i></i><i></i><p>Searching...</p></div>';
+
+    // 1. If 6 chars and alphanumeric, try Student ID lookup first
+    if (/^[A-Za-z0-9]{6}$/.test(query)) {
+      try {
+        const student = await api.lookupStudent(authToken, query.toUpperCase());
+        const saved = getSavedBuddies();
+        if (!saved.some(b => b.public_id === student.public_id)) {
+          saved.push(student);
+          saveBuddies(saved);
+          buddiesMatches.onApp = saved;
+        }
+        resultContainer.innerHTML = `
+          <div class="lookup-found-card">
+            <span class="buddy-monogram">${buddyInitials(student.username)}</span>
+            <div>
+              <strong>${escapeHtml(student.username)}</strong>
+              <p>Student ID: <strong>${escapeHtml(student.public_id)}</strong></p>
+            </div>
+            <button class="button small" data-challenge-buddy="${student.public_id}" style="margin-left:auto;">Challenge →</button>
+          </div>
+        `;
+        resultContainer.querySelector("[data-challenge-buddy]")?.addEventListener("click", () => {
+          challengeInvitees = [student];
+          challengeComposerOpen = true;
+          route = "challenges";
+          render();
+        });
+        return;
+      } catch (err) {
+        // Not a student ID, proceed to phone/email match
+      }
+    }
+
+    // 2. Try matchContacts with phone or email
+    const isEmail = query.includes("@");
+    const phones = isEmail ? [] : [query];
+    const emails = isEmail ? [query.toLowerCase()] : [];
+
+    try {
+      const matchRes = await api.matchContacts(authToken, phones, emails);
+      if (matchRes.matches && matchRes.matches.length) {
+        const student = matchRes.matches[0];
+        const saved = getSavedBuddies();
+        if (!saved.some(b => b.public_id === student.public_id)) {
+          saved.push(student);
+          saveBuddies(saved);
+          buddiesMatches.onApp = saved;
+        }
+        resultContainer.innerHTML = `
+          <div class="lookup-found-card">
+            <span class="buddy-monogram">${buddyInitials(student.username)}</span>
+            <div>
+              <strong>${escapeHtml(student.username)}</strong>
+              <p>Student ID: <strong>${escapeHtml(student.public_id)}</strong></p>
+            </div>
+            <button class="button small" data-challenge-buddy="${student.public_id}" style="margin-left:auto;">Challenge →</button>
+          </div>
+        `;
+        resultContainer.querySelector("[data-challenge-buddy]")?.addEventListener("click", () => {
+          challengeInvitees = [student];
+          challengeComposerOpen = true;
+          route = "challenges";
+          render();
+        });
+      } else {
+        resultContainer.innerHTML = `
+          <div class="lookup-not-found-card">
+            <p>No registered user found with that ${isEmail ? "email" : "phone / ID"}.</p>
+            <div style="display:flex; gap:8px; margin-top:8px;">
+              ${!isEmail ? `<a href="${whatsappInviteUrl(query)}" target="_blank" rel="noopener noreferrer" class="button small whatsapp-invite-btn">Invite via WhatsApp</a>` : ""}
+              ${!isEmail ? `<a href="${smsInviteUrl(query)}" class="button outline small">Invite via SMS</a>` : ""}
+              ${isEmail ? `<a href="mailto:${encodeURIComponent(query)}?subject=Study with me on Seomtorch&body=${encodeURIComponent('Join me on Seomtorch! My Student ID is ' + (currentUser?.public_id || '') + ': https://seomtorch.vercel.app')}" class="button outline small">Invite via Email</a>` : ""}
+            </div>
+          </div>
+        `;
+      }
+    } catch (err) {
+      resultContainer.innerHTML = `<p class="auth-error">${escapeHtml(err.message || "Search failed")}</p>`;
+    }
+  });
+
+  document.querySelectorAll("[data-challenge-buddy]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const publicId = btn.dataset.challengeBuddy;
+      const buddy = (buddiesMatches?.onApp || []).find(b => b.public_id === publicId) || { public_id: publicId, username: btn.dataset.buddyName || "Friend" };
+      if (!challengeInvitees.some(i => i.public_id === publicId)) {
+        challengeInvitees.push(buddy);
+      }
+      challengeComposerOpen = true;
+      route = "challenges";
+      selectedChallengeId = null;
+      render();
+      showToast(`Added ${buddy.username} to challenge`);
+    });
+  });
+
+  document.querySelectorAll("[data-copy-buddy-id]").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const publicId = btn.dataset.copyBuddyId;
+      try {
+        await navigator.clipboard.writeText(publicId);
+        showToast(`Copied Student ID: ${publicId}`);
+      } catch {
+        showToast(`Student ID: ${publicId}`);
+      }
+    });
+  });
+
+  document.querySelectorAll("[data-remove-buddy]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const publicId = btn.dataset.removeBuddy;
+      const updated = (buddiesMatches?.onApp || []).filter(b => b.public_id !== publicId);
+      buddiesMatches.onApp = updated;
+      saveBuddies(updated);
+      renderBuddies();
+      showToast("Removed from buddies");
+    });
+  });
+}
+
+function showBuddiesPickerModal() {
+  document.querySelector("#buddies-picker-modal")?.remove();
+  const saved = getSavedBuddies();
+  const hasContactPicker = "contacts" in navigator && "ContactsManager" in window;
+
+  const modal = document.createElement("div");
+  modal.id = "buddies-picker-modal";
+  modal.className = "dialog-backdrop";
+  modal.innerHTML = `
+    <section class="confirm-dialog" style="max-width:440px;" role="dialog" aria-modal="true" aria-labelledby="picker-title">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h2 id="picker-title" style="margin:0; font-size:20px;">Add from Buddies</h2>
+        <button type="button" class="remove-buddy-btn" id="close-buddies-picker" style="font-size:22px;">×</button>
+      </div>
+      <p style="color:var(--muted); font-size:13px; margin:0 0 16px;">Choose a saved study buddy to add to your challenge.</p>
+      
+      ${saved.length ? `
+        <div class="buddies-modal-list">
+          ${saved.map(b => {
+            const alreadyAdded = challengeInvitees.some(i => i.public_id === b.public_id);
+            return `
+              <div class="buddies-modal-row ${alreadyAdded ? 'added' : ''}">
+                <span class="buddy-monogram small">${buddyInitials(b.username)}</span>
+                <div style="flex:1;">
+                  <strong>${escapeHtml(b.username)}</strong>
+                  <small style="display:block; color:var(--muted); font-size:11px;">${b.public_id}</small>
+                </div>
+                <button type="button" class="button small ${alreadyAdded ? 'outline' : ''}" data-modal-add-buddy="${b.public_id}" ${alreadyAdded ? 'disabled' : ''}>
+                  ${alreadyAdded ? 'Added' : 'Add +'}
+                </button>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      ` : `
+        <p style="text-align:center; padding:20px 0; color:var(--muted); font-size:13px;">No saved buddies yet.</p>
+      `}
+
+      <div style="display:flex; gap:10px; margin-top:16px;">
+        ${hasContactPicker ? `<button type="button" class="button outline small" id="picker-scan-btn" style="flex:1;">Select Phone Contacts</button>` : ""}
+        <button type="button" class="button outline small" id="picker-done-btn" style="margin-left:auto;">Done</button>
+      </div>
+    </section>
+  `;
+
+  document.body.appendChild(modal);
+
+  const close = () => modal.remove();
+  modal.querySelector("#close-buddies-picker")?.addEventListener("click", close);
+  modal.querySelector("#picker-done-btn")?.addEventListener("click", close);
+  modal.addEventListener("click", e => { if (e.target === modal) close(); });
+
+  modal.querySelectorAll("[data-modal-add-buddy]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const publicId = btn.dataset.modalAddBuddy;
+      const b = saved.find(item => item.public_id === publicId);
+      if (b && !challengeInvitees.some(i => i.public_id === publicId)) {
+        if (challengeInvitees.length >= 9) {
+          showToast("A challenge can include up to nine invited friends.");
+          return;
+        }
+        challengeInvitees.push(b);
+        btn.textContent = "Added";
+        btn.classList.add("outline");
+        btn.disabled = true;
+        renderInviteeList();
+        showToast(`Added ${b.username}`);
+      }
+    });
+  });
+
+  modal.querySelector("#picker-scan-btn")?.addEventListener("click", async () => {
+    close();
+    await handleScanContacts(() => {
+      showBuddiesPickerModal();
+    });
+  });
+}
+
 function badgeInitials(item) {
   return item.name.split(/\s+/).map(word => word[0]).slice(0, 2).join("");
 }
+
 
 function renderAchievementSummary() {
   if (!achievementsData) return `<section class="achievement-summary loading"><div><p class="eyebrow">Achievements</p><h2>Your record is loading.</h2></div><div class="achievement-loading"><i></i><i></i><i></i></div></section>`;
@@ -3182,6 +3725,7 @@ function render() {
   if (route === "home") return renderHome();
   if (route === "practice") return renderPractice();
   if (route === "challenges") return renderChallenges();
+  if (route === "buddies") return renderBuddies();
   if (route === "session") return renderSession();
   if (route === "progress") return renderProgress();
   if (route === "university") return renderUniversity();

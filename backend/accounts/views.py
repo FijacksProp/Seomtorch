@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from learning.models import ActivityEvent, UserStats
-from .models import AspirantProfile, UniversityProfile
+from .models import AspirantProfile, UniversityProfile, User
 from .serializers import (
     AspirantProfileSerializer,
     ChangePasswordSerializer,
@@ -135,3 +135,64 @@ class UniversityProfileView(APIView):
             {"user": UserSerializer(request.user).data},
             status=status.HTTP_201_CREATED if created else status.HTTP_200_OK,
         )
+
+
+class UpdatePhoneView(APIView):
+    def post(self, request):
+        import re
+        phone = (request.data.get("phone_number") or "").strip()
+        if phone:
+            # Basic validation: must start with + or digit, 7-20 chars, digits/spaces/dashes/plus only
+            cleaned = re.sub(r"[\s\-]", "", phone)
+            if not re.match(r"^\+?\d{7,15}$", cleaned):
+                return Response({"detail": "Enter a valid phone number (e.g. +2348012345678)."}, status=status.HTTP_400_BAD_REQUEST)
+            phone = cleaned
+        request.user.phone_number = phone
+        request.user.save(update_fields=("phone_number",))
+        return Response({"user": UserSerializer(request.user).data})
+
+
+class ContactMatchView(APIView):
+    def post(self, request):
+        import re
+        phones = request.data.get("phones", [])
+        emails = request.data.get("emails", [])
+        if not isinstance(phones, list) or not isinstance(emails, list):
+            return Response({"detail": "phones and emails must be lists."}, status=status.HTTP_400_BAD_REQUEST)
+        if len(phones) + len(emails) > 500:
+            return Response({"detail": "Too many contacts submitted. Maximum 500."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Normalize phones: strip spaces/dashes, ensure we match
+        cleaned_phones = []
+        for p in phones:
+            if isinstance(p, str):
+                cleaned = re.sub(r"[\s\-]", "", p.strip())
+                if cleaned:
+                    cleaned_phones.append(cleaned)
+                    # Also add Nigerian +234 variant if starts with 0
+                    if cleaned.startswith("0") and len(cleaned) == 11:
+                        cleaned_phones.append("+234" + cleaned[1:])
+                    elif cleaned.startswith("234") and not cleaned.startswith("+"):
+                        cleaned_phones.append("+" + cleaned)
+        
+        # Normalize emails
+        cleaned_emails = [e.strip().lower() for e in emails if isinstance(e, str) and e.strip()]
+        
+        # Query matching users (exclude the requesting user)
+        from django.db.models import Q
+        query = Q()
+        if cleaned_phones:
+            query |= Q(phone_number__in=cleaned_phones)
+        if cleaned_emails:
+            query |= Q(email__in=cleaned_emails)
+        
+        if not query:
+            return Response({"matches": []})
+        
+        matches = User.objects.filter(query, is_active=True).exclude(id=request.user.id)
+        result = [
+            {"public_id": u.public_id, "username": u.username}
+            for u in matches
+        ]
+        return Response({"matches": result})
+

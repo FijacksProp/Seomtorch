@@ -54,7 +54,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            "public_id", "email", "username", "date_joined",
+            "public_id", "email", "username", "phone_number", "date_joined",
             "must_change_password", "user_type", "active_mode",
             "has_aspirant_profile", "has_university_profile",
             "aspirant_profile", "university_profile", "stats",

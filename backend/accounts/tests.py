@@ -71,3 +71,50 @@ class AuthenticationTests(APITestCase):
         response = self.client.get("/api/subjects/")
         self.assertEqual(response.status_code, 403)
         self.assertIn("temporary password", response.data["detail"])
+
+
+class ContactTests(APITestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(
+            email="me@example.com", username="meuser", password="Securepass934!"
+        )
+        self.token = Token.objects.create(user=self.user)
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {self.token.key}")
+
+    def test_update_phone_number(self):
+        res = self.client.post("/api/auth/update-phone/", {"phone_number": "+234 801 234 5678"}, format="json")
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.data["user"]["phone_number"], "+2348012345678")
+        self.user.refresh_from_db()
+        self.assertEqual(self.user.phone_number, "+2348012345678")
+
+    def test_update_phone_number_invalid(self):
+        res = self.client.post("/api/auth/update-phone/", {"phone_number": "not-a-phone"}, format="json")
+        self.assertEqual(res.status_code, 400)
+
+    def test_contact_match(self):
+        other1 = get_user_model().objects.create_user(
+            email="friend1@example.com", username="friend1", password="Securepass934!",
+            phone_number="+2348011111111"
+        )
+        other2 = get_user_model().objects.create_user(
+            email="friend2@example.com", username="friend2", password="Securepass934!",
+            phone_number="+2348022222222"
+        )
+        res = self.client.post(
+            "/api/auth/contacts/match/",
+            {"phones": ["08011111111", "09999999999"], "emails": ["friend2@example.com", "nobody@example.com"]},
+            format="json"
+        )
+        self.assertEqual(res.status_code, 200)
+        matches = {m["public_id"]: m["username"] for m in res.data["matches"]}
+        self.assertIn(other1.public_id, matches)
+        self.assertIn(other2.public_id, matches)
+        self.assertNotIn(self.user.public_id, matches)
+
+    def test_contact_match_validation(self):
+        res = self.client.post("/api/auth/contacts/match/", {"phones": "invalid"}, format="json")
+        self.assertEqual(res.status_code, 400)
+        res2 = self.client.post("/api/auth/contacts/match/", {"phones": ["1"] * 501, "emails": []}, format="json")
+        self.assertEqual(res2.status_code, 400)
+

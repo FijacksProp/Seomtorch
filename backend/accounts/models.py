@@ -44,6 +44,10 @@ class User(AbstractUser):
     public_id = models.CharField(max_length=6, unique=True, default=generate_public_id, editable=False, db_index=True)
     must_change_password = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
+    phone_number = models.CharField(
+        max_length=20, blank=True, default="",
+        help_text="Optional phone number for contact discovery.",
+    )
 
     # ── Segmentation ──────────────────────────────────────
     user_type = models.CharField(

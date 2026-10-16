@@ -52,4 +52,7 @@ export const api = {
   switchMode: (token, mode) => request("/auth/switch-mode/", { token, method: "POST", body: { mode } }),
   saveAspirantProfile: (token, body) => request("/auth/aspirant-profile/", { token, method: "POST", body }),
   saveUniversityProfile: (token, body) => request("/auth/university-profile/", { token, method: "POST", body }),
+  // Contacts & friends
+  updatePhone: (token, phone_number) => request("/auth/update-phone/", { token, method: "POST", body: { phone_number } }),
+  matchContacts: (token, phones, emails) => request("/auth/contacts/match/", { token, method: "POST", body: { phones, emails } }),
 };
