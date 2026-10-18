@@ -1,0 +1,1510 @@
+{
+  "title": "Week Two",
+  "course": "ANA 203",
+  "totalQuestions": 100,
+  "sections": [
+    "Week Two (Q1-Q100)"
+  ],
+  "questions": [
+    {
+      "id": "ana203-ge-week-two-1",
+      "text": "During the second week of development, the inner cell mass of the blastocyst differentiates into two distinct cellular layers. Which specific layer is composed of cuboidal cells?",
+      "options": [
+        "Syncytiotrophoblast",
+        "Epiblast",
+        "Hypoblast",
+        "Cytotrophoblast"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Hypoblast",
+      "explanation": "On day 8, the embryoblast (inner cell mass) differentiates into two layers: the epiblast, consisting of high columnar cells, and the hypoblast, consisting of small cuboidal cells.",
+      "section": "Week Two",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana203-ge-week-two-2",
+      "text": "The second week of development is often referred to as the \"week of two's.\" Which of the following is NOT one of the primary structures that forms as a pair during this specific timeframe?",
+      "options": [
+        "Two extraembryonic mesoderm layers",
+        "Two distinct embryonic cavities",
+        "Two distinct neural folds",
+        "Two layers of the trophoblast"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Two distinct neural folds",
+      "explanation": "The neural folds begin forming during the third week (neurulation), not the second week. The \"two's\" of week two refer to the bilaminar disc (epiblast/hypoblast), two trophoblast layers (cyto/syncytio), two cavities (amnion/yolk sac), and two mesoderm layers (somatic/splanchnic).",
+      "section": "Week Two",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana203-ge-week-two-3",
+      "text": "Attachment of the blastocyst to the endometrial surface initiates implantation. Which specific molecular expression by the blastocyst is essential for this initial attachment?",
+      "options": [
+        "Laminin",
+        "Fibronectin",
+        "Integrins",
+        "Metalloproteinases"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Integrins",
+      "explanation": "Attachment requires the expression of integrins by the blastocyst, which interact with laminin and fibronectin expressed by the receptive endometrium.",
+      "section": "Week Two",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana203-ge-week-two-4",
+      "text": "Around day 9, a new structure forms from the hypoblast that lines the inner surface of the cytotrophoblast. What is this structure called?",
+      "options": [
+        "Connecting stalk",
+        "Amniotic membrane",
+        "Exocoelomic (Heuser's) membrane",
+        "Chorionic plate"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Exocoelomic (Heuser's) membrane",
+      "explanation": "The exocoelomic membrane, also known as Heuser's membrane, develops from the hypoblast and lines the inner surface of the cytotrophoblast, enclosing the exocoelomic cavity.",
+      "section": "Week Two",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana203-ge-week-two-5",
+      "text": "The syncytiotrophoblast plays a crucial role in early pregnancy by producing several essential substances. Which of its products is directly responsible for maintaining the corpus luteum?",
+      "options": [
+        "Prostaglandin E2",
+        "Proteolytic enzymes",
+        "Human chorionic gonadotropin (hCG)",
+        "Luteinizing hormone"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Human chorionic gonadotropin (hCG)",
+      "explanation": "The syncytiotrophoblast produces hCG, which signals the corpus luteum to persist and continue secreting progesterone to maintain the endometrial lining.",
+      "section": "Week Two",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana203-ge-week-two-6",
+      "text": "During the lacunar stage of trophoblast development (Day 9), vacuoles appear and fuse. In which specific cellular layer do these lacunae primarily form?",
+      "options": [
+        "Epiblast",
+        "Syncytiotrophoblast",
+        "Cytotrophoblast",
+        "Extraembryonic mesoderm"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Syncytiotrophoblast",
+      "explanation": "On day 9, vacuoles appear specifically within the syncytiotrophoblast (syncytium) and fuse to form large, interconnected spaces called trophoblastic lacunae.",
+      "section": "Week Two",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana203-ge-week-two-7",
+      "text": "The establishment of the primitive uteroplacental circulation occurs around days 11 and 12. How is this circulation anatomically achieved?",
+      "options": [
+        "The connecting stalk blood vessels fuse with the endometrial spiral arteries.",
+        "Syncytial lacunae become filled with maternal blood from eroded endometrial sinusoids.",
+        "The primary yolk sac actively pumps fluid into the surrounding mesoderm.",
+        "Cytotrophoblast columns grow directly into the maternal uterine veins."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Syncytial lacunae become filled with maternal blood from eroded endometrial sinusoids.",
+      "explanation": "As the syncytiotrophoblast erodes the endothelial lining of maternal capillaries (sinusoids), maternal blood flows into the trophoblastic lacunae, establishing the primitive uteroplacental circulation.",
+      "section": "Week Two",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana203-ge-week-two-8",
+      "text": "What is the primary cellular origin of the extraembryonic mesoderm that forms during days 11 and 12?",
+      "options": [
+        "Cells derived from the primitive streak",
+        "Cells migrating from the epiblast layer",
+        "Cells derived from the primitive yolk sac (exocoelomic cavity)",
+        "Cells proliferating directly from the syncytiotrophoblast"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Cells derived from the primitive yolk sac (exocoelomic cavity)",
+      "explanation": "The extraembryonic mesoderm, a new population of cells appearing between the inner surface of the cytotrophoblast and the outer surface of the exocoelomic cavity, is derived from cells of the primitive yolk sac.",
+      "section": "Week Two",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana203-ge-week-two-9",
+      "text": "The extraembryonic mesoderm eventually splits into two distinct layers due to the formation of a large cavity. What is the name of the layer that specifically lines the cytotrophoblast and the amnion?",
+      "options": [
+        "Extraembryonic somatic mesoderm",
+        "Extraembryonic visceral mesoderm",
+        "Extraembryonic splanchnic mesoderm",
+        "Intraembryonic somatic mesoderm"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Extraembryonic somatic mesoderm",
+      "explanation": "The extraembryonic somatic mesoderm lines the inner aspect of the cytotrophoblast and covers the outside of the amnion, while the visceral (splanchnic) layer covers the yolk sac.",
+      "section": "Week Two",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana203-ge-week-two-10",
+      "text": "Which specific anatomical structure is formed when large cavities within the extraembryonic mesoderm coalesce into a single, expansive space?",
+      "options": [
+        "Secondary yolk sac",
+        "Chorionic cavity (extraembryonic coelom)",
+        "Amniotic cavity",
+        "Exocoelomic cyst"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Chorionic cavity (extraembryonic coelom)",
+      "explanation": "The extraembryonic coelom, which eventually becomes known as the chorionic cavity, forms as multiple minute spaces within the extraembryonic mesoderm coalesce.",
+      "section": "Week Two",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana203-ge-week-two-11",
+      "text": "By day 13, the primary chorionic villi begin to appear. What constitutes the basic structural framework of a primary chorionic villus?",
+      "options": [
+        "A core of extraembryonic mesoderm covered by syncytium",
+        "A core of maternal blood vessels surrounded by cytotrophoblast",
+        "Cellular columns of cytotrophoblast covered by syncytiotrophoblast",
+        "A solid mass of syncytiotrophoblast invading the myometrium"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Cellular columns of cytotrophoblast covered by syncytiotrophoblast",
+      "explanation": "Primary chorionic villi are initially formed by columns of actively proliferating cytotrophoblastic cells that are covered by an outer layer of syncytiotrophoblast.",
+      "section": "Week Two",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana203-ge-week-two-12",
+      "text": "During the second week, a decidual reaction occurs within the maternal tissues to support the implanting embryo. Which characteristic defines this reaction?",
+      "options": [
+        "The endometrium becomes avascular and fibrotic.",
+        "Endometrial cells accumulate abundant glycogen and lipids.",
+        "The uterine glands cease secretion to prevent washing the embryo away.",
+        "The myometrium undergoes rapid, spontaneous contractions."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Endometrial cells accumulate abundant glycogen and lipids.",
+      "explanation": "The decidual reaction involves the endometrium becoming oedematous, highly vascularized, and the endometrial cells themselves swelling as they accumulate rich stores of glycogen and lipids.",
+      "section": "Week Two",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana203-ge-week-two-13",
+      "text": "The secondary (definitive) yolk sac forms around day 13. From which specific cellular layer is this new structure derived?",
+      "options": [
+        "Epiblast",
+        "Extraembryonic somatic mesoderm",
+        "Cytotrophoblast",
+        "Hypoblast"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Hypoblast",
+      "explanation": "On day 13, cells derived from the hypoblast migrate along the inside of the exocoelomic membrane to form a new, smaller cavity known as the secondary or definitive yolk sac.",
+      "section": "Week Two",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana203-ge-week-two-14",
+      "text": "During the formation of the secondary yolk sac, large portions of the original primitive yolk sac are pinched off. What are these isolated remnants called when found within the chorionic cavity?",
+      "options": [
+        "Amniotic cysts",
+        "Trophoblastic lacunae",
+        "Exocoelomic cysts",
+        "Primary chorionic villi"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Exocoelomic cysts",
+      "explanation": "Exocoelomic cysts are remnants of the primitive yolk sac (exocoelomic cavity) that are pinched off during the formation of the secondary yolk sac and can often be found floating in the chorionic cavity.",
+      "section": "Week Two",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana203-ge-week-two-15",
+      "text": "Which structure serves as the vital physical bridge suspending the bilaminar embryonic disc, amniotic cavity, and yolk sac within the larger chorionic cavity?",
+      "options": [
+        "The prechordal plate",
+        "The secondary yolk sac",
+        "The connecting stalk",
+        "The chorionic plate"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The connecting stalk",
+      "explanation": "The connecting stalk, formed by a band of extraembryonic mesoderm, is the only structure that attaches the embryo to the surrounding trophoblastic shell, later developing into the umbilical cord.",
+      "section": "Week Two",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana203-ge-week-two-16",
+      "text": "The conceptus must evade the maternal immune system to survive as an allograft. Which specific mechanism helps block the maternal recognition of the implanting embryo?",
+      "options": [
+        "Secretion of high levels of maternal IgG",
+        "Complete absence of any major histocompatibility complex (MHC) molecules",
+        "Expression of an unusual MHC class 1B molecule by the embryo",
+        "Rapid phagocytosis of maternal T-cells by the cytotrophoblast"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Expression of an unusual MHC class 1B molecule by the embryo",
+      "explanation": "The embryo avoids rejection partly by expressing an unusual MHC class 1B molecule, which helps block maternal immune recognition of the conceptus as a foreign allograft.",
+      "section": "Week Two",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana203-ge-week-two-17",
+      "text": "Implantation normally occurs along the anterior or posterior wall of the uterine body. Which of the following describes a highly dangerous abnormal implantation site located close to the internal cervical os?",
+      "options": [
+        "Ectopic tubal pregnancy",
+        "Primary ovarian pregnancy",
+        "Placenta praevia",
+        "Rectouterine pouch implantation"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Placenta praevia",
+      "explanation": "Placenta praevia occurs when the blastocyst implants dangerously low in the uterus, close to or covering the internal os of the cervix, leading to severe bleeding before or during delivery.",
+      "section": "Week Two",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana203-ge-week-two-18",
+      "text": "A patient is diagnosed with a hydatidiform mole (molar pregnancy). Cytologically, what characterizes this specific type of gestational trophoblastic disease?",
+      "options": [
+        "A fully developed embryo surrounded by an excessively large amnion",
+        "A grape-like mass of trophoblastic tissue forming when a sperm fertilizes an oocyte lacking chromosomes",
+        "An embryo implanting successfully within the fallopian tube",
+        "A normal placenta that prematurely detaches from the uterine wall"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A grape-like mass of trophoblastic tissue forming when a sperm fertilizes an oocyte lacking chromosomes",
+      "explanation": "A hydatidiform mole forms when a sperm fertilizes an \"empty\" oocyte (lacking chromosomes). The result is an overgrowth of trophoblastic tissue forming a grape-like mass, with an absence of a germ disc (embryo).",
+      "section": "Week Two",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana203-ge-week-two-19",
+      "text": "The amniotic cavity first appears on day 8. Which two structures anatomically bound this newly formed space?",
+      "options": [
+        "Hypoblast and cytotrophoblast",
+        "Epiblast and amnion",
+        "Syncytiotrophoblast and extraembryonic mesoderm",
+        "Exocoelomic membrane and primary yolk sac"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Epiblast and amnion",
+      "explanation": "The amniotic cavity begins as a small fluid-filled space that forms directly above the epiblast layer and is roofed over by amniogenic cells that form the amnion.",
+      "section": "Week Two",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana203-ge-week-two-20",
+      "text": "Which layer of the developing two-week embryo is responsible for producing the proteolytic enzymes that actively erode the maternal endometrium?",
+      "options": [
+        "Syncytiotrophoblast",
+        "Hypoblast",
+        "Epiblast",
+        "Extraembryonic splanchnic mesoderm"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Syncytiotrophoblast",
+      "explanation": "The syncytiotrophoblast (syncytium) is the highly invasive outer layer that secretes proteases and metalloproteinases to break down endometrial tissue and maternal blood vessels during implantation.",
+      "section": "Week Two",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana203-ge-week-two-21",
+      "text": "During the second week, the blastocyst typically implants with a specific orientation. Which pole of the blastocyst usually makes first contact with the endometrium?",
+      "options": [
+        "The abembryonic pole",
+        "The lateral equatorial pole",
+        "The embryonic pole",
+        "The caudal pole"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The embryonic pole",
+      "explanation": "The blastocyst typically attaches to the endometrial epithelium with the embryonic pole (the side where the inner cell mass is located) leading the way into the tissue.",
+      "section": "Week Two",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana203-ge-week-two-22",
+      "text": "Around day 11 to 12, the bilaminar embryonic disc exhibits a relatively slow growth rate. Approximately how large is this disc during this period?",
+      "options": [
+        "1.0 to 2.0 mm long",
+        "0.1 to 0.2 mm long",
+        "5.0 to 6.0 mm long",
+        "10.0 to 12.0 mm long"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 0.1 to 0.2 mm long",
+      "explanation": "Compared to the rapidly expanding trophoblast, the bilaminar disc grows relatively slowly, measuring only about 0.1 to 0.2 mm in length during days 11 and 12.",
+      "section": "Week Two",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana203-ge-week-two-23",
+      "text": "The extraembryonic mesoderm lining the inside of the cytotrophoblast is given a specific alternative name once the chorionic cavity is fully formed. What is this specific layer called?",
+      "options": [
+        "Exocoelomic membrane",
+        "Splachnopleuric mesoderm",
+        "Chorionic plate",
+        "Decidua basalis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Chorionic plate",
+      "explanation": "The layer of extraembryonic somatic mesoderm that directly lines the inner surface of the cytotrophoblast is also specifically referred to as the chorionic plate.",
+      "section": "Week Two",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana203-ge-week-two-24",
+      "text": "Which serious clinical condition can arise as a malignant progression from a persistent hydatidiform mole?",
+      "options": [
+        "Placenta praevia",
+        "Neuroblastoma",
+        "Choriocarcinoma",
+        "Sacrococcygeal teratoma"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Choriocarcinoma",
+      "explanation": "A hydatidiform mole is a benign form of gestational trophoblastic disease, but it has the potential to become highly invasive and malignant, developing into a choriocarcinoma.",
+      "section": "Week Two",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana203-ge-week-two-25",
+      "text": "The primitive uteroplacental circulation relies on maternal blood entering the trophoblastic lacunae. Where does this maternal blood originate from immediately before entering the lacunae?",
+      "options": [
+        "Dilated maternal sinusoids",
+        "Uterine spiral arteries directly bypassing capillaries",
+        "The amniotic cavity",
+        "The primary yolk sac"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Dilated maternal sinusoids",
+      "explanation": "The syncytiotrophoblast erodes the endothelial lining of congested and dilated maternal capillaries, which are known as maternal sinusoids, allowing blood to flow into the lacunae.",
+      "section": "Week Two",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana203-ge-week-two-26",
+      "text": "During normal development, the defect in the endometrial epithelium caused by the penetrating blastocyst must be sealed. How is this surface defect initially closed around day 9?",
+      "options": [
+        "By rapid mitosis of the cytotrophoblast",
+        "By a fibrin coagulum",
+        "By an overgrowth of the syncytiotrophoblast",
+        "By the expansion of the amniotic membrane"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. By a fibrin coagulum",
+      "explanation": "As the blastocyst burrows deeper, the penetration defect in the surface epithelium is temporarily sealed by a fibrous plug known as a fibrin coagulum.",
+      "section": "Week Two",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana203-ge-week-two-27",
+      "text": "Which of the following is considered an abnormal, extra-uterine site for implantation that commonly results in a pregnancy terminating by the second month?",
+      "options": [
+        "Posterior uterine wall",
+        "Anterior uterine wall",
+        "Near the internal os",
+        "The fallopian tube"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The fallopian tube",
+      "explanation": "An ectopic pregnancy occurring in the uterine (fallopian) tube is the most common abnormal extra-uterine site and typically ends in rupture or abortion by the second month due to lack of space and adequate vascular support.",
+      "section": "Week Two",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana203-ge-week-two-28",
+      "text": "The extraembryonic visceral mesoderm provides structural covering for which specific developing cavity?",
+      "options": [
+        "The amniotic cavity",
+        "The primary yolk sac",
+        "The chorionic cavity",
+        "The lacunar network"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The primary yolk sac",
+      "explanation": "The extraembryonic visceral (or splanchnic) mesoderm specifically lines the outside of the primary yolk sac (exocoelomic cavity).",
+      "section": "Week Two",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana203-ge-week-two-29",
+      "text": "The prechordal plate is a localized thickening that indicates the future site of the mouth. In which cell layer of the bilaminar disc does this specific thickening first appear?",
+      "options": [
+        "The epiblast",
+        "The extraembryonic mesoderm",
+        "The hypoblast",
+        "The cytotrophoblast"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The hypoblast",
+      "explanation": "The prechordal plate forms as a localized area of thickened columnar cells within the otherwise cuboidal hypoblast layer, indicating the future cranial end of the embryo.",
+      "section": "Week Two",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana203-ge-week-two-30",
+      "text": "Which maternally derived substance enhances the initial burrowing of the blastocyst into the uterine wall during implantation?",
+      "options": [
+        "Human chorionic gonadotropin",
+        "Laminin",
+        "Fibrin coagulum",
+        "Oocyte maturation inhibitor"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Laminin",
+      "explanation": "The endometrium expresses extracellular matrix proteins such as laminin and fibronectin, which bind to integrins on the blastocyst to enhance its attachment and subsequent burrowing.",
+      "section": "Week Two",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana203-ge-week-two-31",
+      "text": "By the end of the second week, the chorion has been established. What three distinct layers collectively comprise the chorion?",
+      "options": [
+        "Epiblast, hypoblast, and amnion",
+        "Syncytiotrophoblast, cytotrophoblast, and extraembryonic somatic mesoderm",
+        "Primary yolk sac, secondary yolk sac, and exocoelomic membrane",
+        "Endometrium, myometrium, and perimetrium"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Syncytiotrophoblast, cytotrophoblast, and extraembryonic somatic mesoderm",
+      "explanation": "The chorion, which forms the wall of the chorionic cavity, is composed of the syncytiotrophoblast, the cytotrophoblast, and the underlying extraembryonic somatic mesoderm (chorionic plate).",
+      "section": "Week Two",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana203-ge-week-two-32",
+      "text": "A patient with systemic lupus erythematosus (SLE) has a higher risk of recurrent miscarriages. Based on the immunology of pregnancy, why might this auto-immune disease lead to the loss of a conceptus?",
+      "options": [
+        "The conceptus fails to produce hCG.",
+        "The maternal immune system recognizes and rejects the conceptus as an allograft.",
+        "The blastocyst fails to express integrins.",
+        "The decidual reaction completely fails to occur."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The maternal immune system recognizes and rejects the conceptus as an allograft.",
+      "explanation": "Normally, the embryo evades maternal immune rejection. However, in mothers with severe auto-immune diseases like SLE, the hyperactive immune system may overcome these protective mechanisms and reject the conceptus via an immune reaction.",
+      "section": "Week Two",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana203-ge-week-two-33",
+      "text": "What is the primary morphological difference between the cells of the epiblast and the cells of the hypoblast when they first differentiate on day 8?",
+      "options": [
+        "Epiblast cells are squamous, while hypoblast cells are columnar.",
+        "Epiblast cells are multinucleated, while hypoblast cells are mononucleated.",
+        "Epiblast cells are high columnar, while hypoblast cells are small and cuboidal.",
+        "Epiblast cells are vacuolated, while hypoblast cells are solid."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Epiblast cells are high columnar, while hypoblast cells are small and cuboidal.",
+      "explanation": "The inner cell mass differentiates into the epiblast layer, consisting of tall columnar cells, and the underlying hypoblast layer, consisting of small cuboidal cells.",
+      "section": "Week Two",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana203-ge-week-two-34",
+      "text": "During the second week, the connecting stalk is formed entirely from which specific type of tissue?",
+      "options": [
+        "Epiblast-derived ectoderm",
+        "Syncytiotrophoblast",
+        "Hypoblast-derived endoderm",
+        "Extraembryonic mesoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Extraembryonic mesoderm",
+      "explanation": "The connecting stalk is a thick band of extraembryonic mesoderm that traverses the chorionic cavity to attach the embryo to the chorionic plate.",
+      "section": "Week Two",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana203-ge-week-two-35",
+      "text": "The primary yolk sac is bounded by the hypoblast superiorly. What membrane forms the remainder of its boundary?",
+      "options": [
+        "The amniotic membrane",
+        "The exocoelomic membrane",
+        "The chorionic plate",
+        "The decidua basalis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The exocoelomic membrane",
+      "explanation": "The exocoelomic (Heuser's) membrane extends from the edges of the hypoblast to line the inner surface of the cytotrophoblast, completely bounding the primitive yolk sac.",
+      "section": "Week Two",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana203-ge-week-two-36",
+      "text": "In the context of abnormal implantation, what is a \"primary ovarian pregnancy\"?",
+      "options": [
+        "An implantation that occurs deep within the myometrium",
+        "An implantation that occurs on the surface of the ovary itself",
+        "An implantation that occurs in the pouch of Douglas",
+        "An implantation that occurs within the cervical canal"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. An implantation that occurs on the surface of the ovary itself",
+      "explanation": "A primary ovarian pregnancy is an extremely rare form of ectopic pregnancy where the blastocyst implants directly on the surface of the ovary instead of traveling down the uterine tube.",
+      "section": "Week Two",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana203-ge-week-two-37",
+      "text": "Which feature explicitly defines the \"lacunar stage\" of trophoblast development on day 9?",
+      "options": [
+        "The appearance of primary chorionic villi",
+        "The complete closure of the endometrial surface defect",
+        "The formation of the extraembryonic coelom",
+        "The appearance and fusion of vacuoles within the syncytium"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The appearance and fusion of vacuoles within the syncytium",
+      "explanation": "The lacunar stage is characterized by the development of isolated vacuoles within the syncytiotrophoblast that subsequently fuse to form larger trophoblastic lacunae.",
+      "section": "Week Two",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana203-ge-week-two-38",
+      "text": "Maternal sinusoids play a crucial role in early embryonic nutrition. What are these sinusoids fundamentally composed of?",
+      "options": [
+        "Enlarged, congested maternal endometrial capillaries",
+        "Dilated spaces within the cytotrophoblast",
+        "Ruptured embryonic blood vessels",
+        "Glandular crypts filled with glycogen"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Enlarged, congested maternal endometrial capillaries",
+      "explanation": "Maternal sinusoids are congested and dilated maternal capillaries within the endometrium that are eroded by the syncytiotrophoblast to establish the primitive uteroplacental circulation.",
+      "section": "Week Two",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana203-ge-week-two-39",
+      "text": "The embryonic disc lies directly between two major fluid-filled cavities during the second week. What are these two cavities?",
+      "options": [
+        "The chorionic cavity and the exocoelomic cyst",
+        "The amniotic cavity and the secondary yolk sac",
+        "The uterine cavity and the blastocyst cavity",
+        "The trophoblastic lacunae and the maternal sinusoids"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The amniotic cavity and the secondary yolk sac",
+      "explanation": "The bilaminar embryonic disc is sandwiched between the amniotic cavity (above the epiblast) and the secondary yolk sac (below the hypoblast).",
+      "section": "Week Two",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana203-ge-week-two-40",
+      "text": "Which specific layer of the extraembryonic mesoderm lies immediately external to the secondary yolk sac?",
+      "options": [
+        "Somatic mesoderm",
+        "Visceral (splanchnic) mesoderm",
+        "Chorionic plate",
+        "Syncytiotrophoblast"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Visceral (splanchnic) mesoderm",
+      "explanation": "The extraembryonic visceral (or splanchnic) mesoderm intimately covers the external surface of the yolk sac.",
+      "section": "Week Two",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana203-ge-week-two-41",
+      "text": "A positive pregnancy test relies on detecting hCG in maternal serum or urine. By which point in development is sufficient hCG typically produced to be clinically detectable?",
+      "options": [
+        "By the end of week 1",
+        "By the end of week 2",
+        "By the end of week 4",
+        "Only after the formation of the primitive streak"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. By the end of week 2",
+      "explanation": "The syncytiotrophoblast produces sufficient quantities of hCG by the end of the second week of development to be reliably detected by standard pregnancy tests.",
+      "section": "Week Two",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana203-ge-week-two-42",
+      "text": "Decidual cells within the endometrium produce substances that help protect the conceptus. Which specific immunosuppressive cytokine do they secrete?",
+      "options": [
+        "Interleukin-2",
+        "Interferon-gamma",
+        "Prostaglandin E2",
+        "Tumor Necrosis Factor"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Prostaglandin E2",
+      "explanation": "Decidual cells produce immunosuppressive cytokines, notably prostaglandin E2, which helps to dampen the localized maternal immune response against the implanting embryo.",
+      "section": "Week Two",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana203-ge-week-two-43",
+      "text": "The exocoelomic cavity undergoes a transformation around day 13. What new, smaller cavity replaces it?",
+      "options": [
+        "The definitive (secondary) yolk sac",
+        "The amniotic cavity",
+        "The chorionic cavity",
+        "The primitive gut tube"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The definitive (secondary) yolk sac",
+      "explanation": "On day 13, new cells from the hypoblast migrate to form a smaller cavity known as the secondary (or definitive) yolk sac, which largely replaces the primitive exocoelomic cavity.",
+      "section": "Week Two",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana203-ge-week-two-44",
+      "text": "Which component of the trophoblast remains highly cellular and consists of distinct, mononucleated cells?",
+      "options": [
+        "The syncytiotrophoblast",
+        "The cytotrophoblast",
+        "The extraembryonic somatic mesoderm",
+        "The exocoelomic membrane"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The cytotrophoblast",
+      "explanation": "The trophoblast divides into two layers: the highly invasive, multinucleated syncytiotrophoblast, and the inner cytotrophoblast, which is composed of distinct, individual, mononucleated cells.",
+      "section": "Week Two",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana203-ge-week-two-45",
+      "text": "What happens to the fibrin coagulum that temporarily seals the penetration defect on the endometrial surface?",
+      "options": [
+        "It calcifies to form a permanent protective shell.",
+        "It is entirely replaced by the expanding amniotic cavity.",
+        "It is typically covered over and healed by the regenerating surface epithelium by day 13.",
+        "It develops into the connecting stalk."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It is typically covered over and healed by the regenerating surface epithelium by day 13.",
+      "explanation": "The fibrin coagulum is a temporary seal. By day 13, the endometrial surface epithelium has generally regenerated to completely cover the defect and the coagulum.",
+      "section": "Week Two",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana203-ge-week-two-46",
+      "text": "During the second week, the blastocyst cavity changes its name after the formation of the exocoelomic membrane. What is its new designation?",
+      "options": [
+        "Chorionic cavity",
+        "Amniotic cavity",
+        "Primitive yolk sac",
+        "Extraembryonic coelom"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Primitive yolk sac",
+      "explanation": "Once the hypoblast-derived exocoelomic membrane lines the inner surface of the cytotrophoblast, the former blastocyst cavity is renamed the primitive yolk sac (or exocoelomic cavity).",
+      "section": "Week Two",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana203-ge-week-two-47",
+      "text": "The appearance of primary chorionic villi is a hallmark of day 13. What specific cellular activity causes these columns to form?",
+      "options": [
+        "Rapid apoptosis of the syncytium",
+        "Fluid accumulation in the chorionic cavity",
+        "Proliferation and outward extension of cytotrophoblast cells into the syncytium",
+        "Migration of maternal endothelial cells"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Proliferation and outward extension of cytotrophoblast cells into the syncytium",
+      "explanation": "Primary chorionic villi form when cells of the underlying cytotrophoblast actively proliferate and extend outwards, creating cellular columns that penetrate into the overlying syncytiotrophoblast.",
+      "section": "Week Two",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana203-ge-week-two-48",
+      "text": "Which of the following locations is an abnormal site for implantation known as the pouch of Douglas?",
+      "options": [
+        "Ectopic tubal ampulla",
+        "Rectouterine pouch",
+        "Internal cervical os",
+        "Ovarian surface"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Rectouterine pouch",
+      "explanation": "Implantation in the rectouterine pouch, the space between the rectum and the uterus, is a very rare abdominal ectopic pregnancy located in the pouch of Douglas.",
+      "section": "Week Two",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana203-ge-week-two-49",
+      "text": "The amnion is formed by a specific type of cell that roofs the amniotic cavity. What are these cells called?",
+      "options": [
+        "Amnioblasts",
+        "Hypoblasts",
+        "Syncytial cells",
+        "Decidual cells"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Amnioblasts",
+      "explanation": "The amniotic cavity is bounded inferiorly by the epiblast and superiorly by a dome of specialized cells derived from the epiblast known as amnioblasts.",
+      "section": "Week Two",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana203-ge-week-two-50",
+      "text": "If a blastocyst implants in the lower segment of the uterus, near the internal os, it can cause severe complications later in pregnancy. What is the primary clinical risk associated with this condition (Placenta praevia)?",
+      "options": [
+        "Failure of the neural tube to close",
+        "Severe, life-threatening bleeding before or during delivery",
+        "Development of a sacrococcygeal teratoma",
+        "Immediate rejection of the allograft"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Severe, life-threatening bleeding before or during delivery",
+      "explanation": "Placenta praevia positions the placenta directly over or near the cervical opening, making it highly susceptible to tearing and severe, potentially fatal hemorrhage as the cervix dilates before and during childbirth.",
+      "section": "Week Two",
+      "questionNumber": 50
+    },
+    {
+      "id": "ana203-ge-week-two-51",
+      "text": "On Day 8, the inner cell mass (embryoblast) differentiates into the epiblast and hypoblast. Which cavity subsequently develops directly adjacent to the epiblast layer?",
+      "options": [
+        "The blastocyst cavity",
+        "The primitive yolk sac",
+        "The amniotic cavity",
+        "The chorionic cavity"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The amniotic cavity",
+      "explanation": "The amniotic cavity forms as a small space that appears directly dorsal to (above) the tall columnar cells of the epiblast layer.",
+      "section": "Week Two",
+      "questionNumber": 51
+    },
+    {
+      "id": "ana203-ge-week-two-52",
+      "text": "What specific term describes the early structural layout of the embryo consisting solely of the epiblast and hypoblast layers?",
+      "options": [
+        "Morula",
+        "Trilaminar germ disc",
+        "Bilaminar embryonic disc",
+        "Primitive streak"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Bilaminar embryonic disc",
+      "explanation": "During the second week, the embryo consists of just two flat layers of cells (epiblast and hypoblast), and is therefore referred to as the bilaminar embryonic disc.",
+      "section": "Week Two",
+      "questionNumber": 52
+    },
+    {
+      "id": "ana203-ge-week-two-53",
+      "text": "During normal implantation, the blastocyst embeds completely into the endometrium. By which day is this embedding process generally considered to be fully completed?",
+      "options": [
+        "Day 6",
+        "Days 11 and 12",
+        "Day 14",
+        "Day 21"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Days 11 and 12",
+      "explanation": "By days 11 and 12, the blastocyst has burrowed entirely into the endometrial stroma, and the surface defect is mostly sealed, marking the completion of embedding.",
+      "section": "Week Two",
+      "questionNumber": 53
+    },
+    {
+      "id": "ana203-ge-week-two-54",
+      "text": "The extraembryonic mesoderm initially forms as a solid layer. How does the extraembryonic coelom (chorionic cavity) originate within this layer?",
+      "options": [
+        "It forms by the invagination of the amniotic cavity.",
+        "It starts as minute spaces that eventually coalesce into a single large cavity.",
+        "It is formed by a massive hemorrhage from maternal sinusoids.",
+        "It results from the rapid shrinkage of the primary yolk sac."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It starts as minute spaces that eventually coalesce into a single large cavity.",
+      "explanation": "The extraembryonic coelom begins as small, isolated spaces within the extraembryonic mesoderm that eventually merge (coalesce) to form the expansive chorionic cavity.",
+      "section": "Week Two",
+      "questionNumber": 54
+    },
+    {
+      "id": "ana203-ge-week-two-55",
+      "text": "Which specific layer of the extraembryonic mesoderm is physically continuous with the connecting stalk?",
+      "options": [
+        "The splanchnopleuric mesoderm",
+        "The extraembryonic visceral mesoderm",
+        "The extraembryonic somatic mesoderm",
+        "The exocoelomic membrane"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The extraembryonic somatic mesoderm",
+      "explanation": "The extraembryonic somatic mesoderm (which forms the chorionic plate) is continuous with the connecting stalk, anchoring the embryo to the outer chorionic shell.",
+      "section": "Week Two",
+      "questionNumber": 55
+    },
+    {
+      "id": "ana203-ge-week-two-56",
+      "text": "The defining characteristic of a hydatidiform mole is the absence of a viable embryo. What is the fundamental chromosomal abnormality that typically leads to this condition?",
+      "options": [
+        "Trisomy 21 (Down syndrome)",
+        "Fertilization of an oocyte that lacks its own maternal chromosomes",
+        "Polyspermy of a normal oocyte",
+        "A microdeletion on chromosome 15"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Fertilization of an oocyte that lacks its own maternal chromosomes",
+      "explanation": "A complete hydatidiform mole usually develops when one or two sperm fertilize an \"empty\" egg (an oocyte that has lost its nucleus), resulting in a conceptus with exclusively paternal chromosomes.",
+      "section": "Week Two",
+      "questionNumber": 56
+    },
+    {
+      "id": "ana203-ge-week-two-57",
+      "text": "Which of the following spaces completely surrounds the amnion and the yolk sac, except where they are attached to the chorion by the connecting stalk?",
+      "options": [
+        "The amniotic cavity",
+        "The uterine cavity",
+        "The primary yolk sac",
+        "The chorionic cavity"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The chorionic cavity",
+      "explanation": "The extraembryonic coelom (chorionic cavity) expands to surround the entire bilaminar disc, amnion, and yolk sac, leaving them suspended only by the connecting stalk.",
+      "section": "Week Two",
+      "questionNumber": 57
+    },
+    {
+      "id": "ana203-ge-week-two-58",
+      "text": "Maternal sinusoids are eroded by the syncytiotrophoblast to establish primitive circulation. What defines these specific maternal vascular structures?",
+      "options": [
+        "They are thick-walled muscular arteries.",
+        "They are congested, dilated endometrial capillaries.",
+        "They are large lymphatic vessels.",
+        "They are completely avascular cystic spaces."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. They are congested, dilated endometrial capillaries.",
+      "explanation": "As part of the decidual reaction, maternal endometrial capillaries become engorged and dilated, at which point they are referred to as maternal sinusoids.",
+      "section": "Week Two",
+      "questionNumber": 58
+    },
+    {
+      "id": "ana203-ge-week-two-59",
+      "text": "Which of the following lists the correct sequence of extraembryonic cavities formed during the first two weeks of development?",
+      "options": [
+        "Blastocyst cavity -> Exocoelomic cavity -> Secondary yolk sac",
+        "Amniotic cavity -> Chorionic cavity -> Blastocyst cavity",
+        "Secondary yolk sac -> Primary yolk sac -> Exocoelomic cavity",
+        "Trophoblastic lacunae -> Amniotic cavity -> Blastocyst cavity"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Blastocyst cavity -> Exocoelomic cavity -> Secondary yolk sac",
+      "explanation": "The initial blastocyst cavity is lined by hypoblast cells to become the exocoelomic cavity (primary yolk sac), which is then pinched off to form the smaller secondary (definitive) yolk sac.",
+      "section": "Week Two",
+      "questionNumber": 59
+    },
+    {
+      "id": "ana203-ge-week-two-60",
+      "text": "The prechordal plate is an important organizational landmark that appears late in the second week. What future anatomical structure does it denote?",
+      "options": [
+        "The future site of the cloaca",
+        "The future site of the umbilical cord",
+        "The future site of the mouth (buccopharyngeal membrane)",
+        "The future site of the neural tube"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The future site of the mouth (buccopharyngeal membrane)",
+      "explanation": "The localized thickening of hypoblast cells known as the prechordal plate indicates the cranial end of the embryo and specifically marks the future site of the mouth.",
+      "section": "Week Two",
+      "questionNumber": 60
+    },
+    {
+      "id": "ana203-ge-week-two-61",
+      "text": "Which of the following best describes the structural relationship of the epiblast and hypoblast within the bilaminar disc?",
+      "options": [
+        "The epiblast is ventral to the hypoblast.",
+        "The epiblast surrounds the hypoblast completely.",
+        "The epiblast is dorsal to the hypoblast.",
+        "They are arranged side-by-side laterally."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The epiblast is dorsal to the hypoblast.",
+      "explanation": "In the standard anatomical orientation of the embryonic disc, the tall columnar cells of the epiblast lie dorsally (forming the floor of the amniotic cavity), while the cuboidal hypoblast lies ventrally (forming the roof of the yolk sac).",
+      "section": "Week Two",
+      "questionNumber": 61
+    },
+    {
+      "id": "ana203-ge-week-two-62",
+      "text": "Implantation bleeding can sometimes occur around day 13 and may be confused with normal menstruation. What is the anatomical cause of this specific bleeding?",
+      "options": [
+        "Complete detachment of the chorion from the uterine wall",
+        "Rupture of a primary ovarian follicle",
+        "Increased blood flow into the lacunar spaces leaking past the healing surface defect",
+        "Shedding of the stratum functionalis due to dropping progesterone levels"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Increased blood flow into the lacunar spaces leaking past the healing surface defect",
+      "explanation": "As maternal blood heavily fills the trophoblastic lacunae, some bleeding may occasionally leak from the implantation site into the uterine cavity around day 13, which coincides roughly with the expected date of menses.",
+      "section": "Week Two",
+      "questionNumber": 62
+    },
+    {
+      "id": "ana203-ge-week-two-63",
+      "text": "Which mechanism allows the blastocyst to burrow deeply into the endometrial stroma?",
+      "options": [
+        "Active phagocytosis of endometrial cells by the inner cell mass",
+        "Physical pushing by the expanding amniotic fluid",
+        "Secretion of proteolytic enzymes by the syncytiotrophoblast",
+        "Muscular contractions of the cytotrophoblast"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Secretion of proteolytic enzymes by the syncytiotrophoblast",
+      "explanation": "The syncytiotrophoblast secretes powerful proteolytic enzymes that actively break down the extracellular matrix and cellular structure of the maternal endometrium, allowing the blastocyst to invade deeply.",
+      "section": "Week Two",
+      "questionNumber": 63
+    },
+    {
+      "id": "ana203-ge-week-two-64",
+      "text": "Which embryological tissue is exclusively responsible for the production of Human Chorionic Gonadotropin (hCG)?",
+      "options": [
+        "The epiblast",
+        "The extraembryonic somatic mesoderm",
+        "The cytotrophoblast",
+        "The syncytiotrophoblast"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The syncytiotrophoblast",
+      "explanation": "The multinucleated syncytiotrophoblast is the active endocrine layer of the early conceptus, producing the hCG necessary to maintain the corpus luteum of pregnancy.",
+      "section": "Week Two",
+      "questionNumber": 64
+    },
+    {
+      "id": "ana203-ge-week-two-65",
+      "text": "During the formation of primary chorionic villi, cytotrophoblast cells proliferate and penetrate into the syncytiotrophoblast. What drives this specific directional growth?",
+      "options": [
+        "An effort to reach the maternal sinusoids for nutrient exchange",
+        "Pressure building within the amniotic cavity",
+        "A need to separate the embryo from the connecting stalk",
+        "Chemotaxis toward the secondary yolk sac"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. An effort to reach the maternal sinusoids for nutrient exchange",
+      "explanation": "The primary villi form as columns growing outward through the syncytium to increase the surface area available for nutrient and gas exchange with the maternal blood bathing the surrounding lacunae.",
+      "section": "Week Two",
+      "questionNumber": 65
+    },
+    {
+      "id": "ana203-ge-week-two-66",
+      "text": "Which of the following is an accurate description of the cytotrophoblast layer?",
+      "options": [
+        "It is a thick, multinucleated mass without distinct cell boundaries.",
+        "It is an inner layer of distinct, mononucleated cells that show high mitotic activity.",
+        "It forms the innermost lining of the primary yolk sac.",
+        "It is composed of tall, columnar epiblast cells."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It is an inner layer of distinct, mononucleated cells that show high mitotic activity.",
+      "explanation": "The cytotrophoblast is the inner layer of the trophoblast shell, defined by distinct cellular boundaries and frequent mitotic figures, acting as the proliferative source for the outer syncytium.",
+      "section": "Week Two",
+      "questionNumber": 66
+    },
+    {
+      "id": "ana203-ge-week-two-67",
+      "text": "The \"decidual reaction\" refers to changes in the maternal endometrium. Which of the following is NOT a characteristic of decidual cells?",
+      "options": [
+        "They become swollen and polyhedral.",
+        "They accumulate large amounts of glycogen.",
+        "They accumulate large amounts of lipids.",
+        "They undergo rapid apoptosis to make room for the blastocyst."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. They undergo rapid apoptosis to make room for the blastocyst.",
+      "explanation": "Decidual cells do not undergo rapid apoptosis; rather, they enlarge and become packed with nutrients (glycogen and lipids) to support the early embryo before the placenta is fully established.",
+      "section": "Week Two",
+      "questionNumber": 67
+    },
+    {
+      "id": "ana203-ge-week-two-68",
+      "text": "Which structure forms the direct physical roof of the secondary yolk sac?",
+      "options": [
+        "The epiblast",
+        "The hypoblast",
+        "The extraembryonic visceral mesoderm",
+        "The amnioblasts"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The hypoblast",
+      "explanation": "The secondary yolk sac is bounded inferiorly and laterally by cells migrating from the hypoblast, and its direct roof is formed by the hypoblast layer of the bilaminar disc itself.",
+      "section": "Week Two",
+      "questionNumber": 68
+    },
+    {
+      "id": "ana203-ge-week-two-69",
+      "text": "What is the ultimate developmental fate of the connecting stalk?",
+      "options": [
+        "It degenerates completely by the third week.",
+        "It forms the neural tube.",
+        "It becomes the umbilical cord.",
+        "It expands to form the placenta."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It becomes the umbilical cord.",
+      "explanation": "The connecting stalk, formed of extraembryonic mesoderm, acts as the initial tether for the embryo and eventually incorporates blood vessels to become the definitive umbilical cord.",
+      "section": "Week Two",
+      "questionNumber": 69
+    },
+    {
+      "id": "ana203-ge-week-two-70",
+      "text": "The embryo is considered an allograft, yet it is rarely rejected by the mother. Which maternal adaptation contributes to this immunological tolerance?",
+      "options": [
+        "Production of immunosuppressive cytokines, like prostaglandin E2, by decidual cells",
+        "Complete destruction of maternal T-cells in the uterus",
+        "Formation of a highly acidic environment in the uterine cavity",
+        "Secretion of maternal antibodies that mask the embryo"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Production of immunosuppressive cytokines, like prostaglandin E2, by decidual cells",
+      "explanation": "The decidual cells of the endometrium produce localized immunosuppressive cytokines, such as prostaglandin E2, which help prevent the maternal immune system from attacking the conceptus.",
+      "section": "Week Two",
+      "questionNumber": 70
+    },
+    {
+      "id": "ana203-ge-week-two-71",
+      "text": "Which layer of extraembryonic mesoderm is intimately applied to the outer surface of the amnion?",
+      "options": [
+        "Somatic mesoderm",
+        "Visceral mesoderm",
+        "Splanchnic mesoderm",
+        "Chorionic plate"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Somatic mesoderm",
+      "explanation": "The extraembryonic somatic mesoderm lines the inner surface of the cytotrophoblast and also closely covers the outer surface of the amnion.",
+      "section": "Week Two",
+      "questionNumber": 71
+    },
+    {
+      "id": "ana203-ge-week-two-72",
+      "text": "Exocoelomic cysts are frequently observed within the chorionic cavity. What is the direct physical process that creates these cysts?",
+      "options": [
+        "Rupture of maternal sinusoids",
+        "Pinching off of large portions of the primary yolk sac during the formation of the secondary yolk sac",
+        "Secretions from the syncytiotrophoblast pooling in the mesoderm",
+        "Degeneration of primary chorionic villi"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Pinching off of large portions of the primary yolk sac during the formation of the secondary yolk sac",
+      "explanation": "As cells migrate to form the much smaller secondary yolk sac, large sections of the original primary yolk sac (exocoelomic cavity) are pinched off, leaving isolated exocoelomic cysts floating in the extraembryonic coelom.",
+      "section": "Week Two",
+      "questionNumber": 72
+    },
+    {
+      "id": "ana203-ge-week-two-73",
+      "text": "Which cavity is specifically lined by the exocoelomic (Heuser's) membrane?",
+      "options": [
+        "The amniotic cavity",
+        "The blastocyst cavity (before modification)",
+        "The primary yolk sac",
+        "The chorionic cavity"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The primary yolk sac",
+      "explanation": "The exocoelomic membrane, derived from the hypoblast, lines the inner surface of the cytotrophoblast to enclose the primitive yolk sac (exocoelomic cavity).",
+      "section": "Week Two",
+      "questionNumber": 73
+    },
+    {
+      "id": "ana203-ge-week-two-74",
+      "text": "Tubal pregnancies are the most common type of ectopic pregnancy. Why do they almost invariably end in spontaneous abortion or rupture by the second month?",
+      "options": [
+        "The fallopian tube lacks a functional blood supply.",
+        "The embryo is exposed to high levels of stomach acid.",
+        "The narrow lumen and lack of robust decidual tissue cannot accommodate or support the growing conceptus.",
+        "The syncytiotrophoblast fails to develop in the tubal environment."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The narrow lumen and lack of robust decidual tissue cannot accommodate or support the growing conceptus.",
+      "explanation": "The thin wall and narrow space of the fallopian tube cannot support the massive physical expansion and complex vascular demands of a growing placenta and embryo, leading to inevitable rupture or failure.",
+      "section": "Week Two",
+      "questionNumber": 74
+    },
+    {
+      "id": "ana203-ge-week-two-75",
+      "text": "What characterizes the growth of the trophoblast compared to the bilaminar disc during the second week?",
+      "options": [
+        "The bilaminar disc grows much faster than the trophoblast.",
+        "They grow at exactly the same rate.",
+        "The trophoblast develops rapidly, forming extensive structures, while the bilaminar disc grows relatively slowly.",
+        "The trophoblast ceases growth completely while the disc expands."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The trophoblast develops rapidly, forming extensive structures, while the bilaminar disc grows relatively slowly.",
+      "explanation": "During the second week, the trophoblast undergoes explosive, rapid development (forming lacunae, villi, and invading deep into tissue), whereas the bilaminar disc grows quite slowly, reaching only 0.1 to 0.2 mm.",
+      "section": "Week Two",
+      "questionNumber": 75
+    },
+    {
+      "id": "ana203-ge-week-two-76",
+      "text": "Which structural configuration correctly defines the boundaries of the amniotic cavity during the second week?",
+      "options": [
+        "Roofed by epiblast, floored by hypoblast",
+        "Roofed by amnioblasts, floored by epiblast",
+        "Roofed by cytotrophoblast, floored by syncytium",
+        "Roofed by extraembryonic mesoderm, floored by hypoblast"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Roofed by amnioblasts, floored by epiblast",
+      "explanation": "The amniotic cavity forms above the epiblast layer; its floor is the epiblast itself, and its roof is formed by specialized cells called amnioblasts.",
+      "section": "Week Two",
+      "questionNumber": 76
+    },
+    {
+      "id": "ana203-ge-week-two-77",
+      "text": "The chorionic cavity separates two layers of extraembryonic mesoderm. Which two layers are these?",
+      "options": [
+        "Epiblast and hypoblast",
+        "Cytotrophoblast and syncytiotrophoblast",
+        "Somatic mesoderm and splanchnic (visceral) mesoderm",
+        "Amnion and exocoelomic membrane"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Somatic mesoderm and splanchnic (visceral) mesoderm",
+      "explanation": "The large extraembryonic coelom (chorionic cavity) splits the extraembryonic mesoderm into an outer somatic layer (lining the trophoblast and amnion) and an inner splanchnic/visceral layer (lining the yolk sac).",
+      "section": "Week Two",
+      "questionNumber": 77
+    },
+    {
+      "id": "ana203-ge-week-two-78",
+      "text": "What is the primary diagnostic marker targeted by modern over-the-counter pregnancy tests?",
+      "options": [
+        "Prostaglandin E2 in the blood",
+        "High levels of Luteinizing Hormone (LH)",
+        "Human chorionic gonadotropin (hCG) in maternal urine or serum",
+        "Integrins shed by the blastocyst"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Human chorionic gonadotropin (hCG) in maternal urine or serum",
+      "explanation": "Pregnancy tests detect hCG, which is produced by the syncytiotrophoblast and enters the maternal bloodstream and urine in detectable quantities by the end of the second week.",
+      "section": "Week Two",
+      "questionNumber": 78
+    },
+    {
+      "id": "ana203-ge-week-two-79",
+      "text": "During the formation of the primitive uteroplacental circulation, maternal blood flows into the trophoblastic lacunae. What keeps this blood from clotting immediately?",
+      "options": [
+        "Secretion of heparin by the epiblast",
+        "The continuous flow and specialized properties of the syncytiotrophoblast lining",
+        "Dilution by amniotic fluid",
+        "The complete absence of platelets in maternal sinusoids"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The continuous flow and specialized properties of the syncytiotrophoblast lining",
+      "explanation": "The syncytiotrophoblast lines the lacunae and acts similarly to vascular endothelium, possessing anticoagulant properties that allow the maternal blood to flow continuously without clotting.",
+      "section": "Week Two",
+      "questionNumber": 79
+    },
+    {
+      "id": "ana203-ge-week-two-80",
+      "text": "Which of the following is considered an absolute prerequisite for successful implantation on Day 6?",
+      "options": [
+        "The presence of a primitive streak",
+        "The formation of the connecting stalk",
+        "The complete differentiation of the extraembryonic mesoderm",
+        "The successful hatching of the blastocyst from the zona pellucida"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The successful hatching of the blastocyst from the zona pellucida",
+      "explanation": "Before the blastocyst can physically interact with and attach to the endometrial epithelium, it must first \"hatch\" or shed the restrictive glycoprotein shell known as the zona pellucida.",
+      "section": "Week Two",
+      "questionNumber": 80
+    },
+    {
+      "id": "ana203-ge-week-two-81",
+      "text": "A hydatidiform mole is often described macroscopically as having a specific appearance. What is this classic description?",
+      "options": [
+        "A solid, calcified mass",
+        "A fluid-filled sac containing a perfectly preserved, miniature embryo",
+        "A grape-like mass of cystic vesicles",
+        "A flat, highly vascularized disc"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A grape-like mass of cystic vesicles",
+      "explanation": "Due to the swelling of the chorionic villi in the absence of an embryonic circulation to drain them, a hydatidiform mole classically presents as a disorganized, grape-like mass of fluid-filled vesicles.",
+      "section": "Week Two",
+      "questionNumber": 81
+    },
+    {
+      "id": "ana203-ge-week-two-82",
+      "text": "Which cells specifically undergo the \"decidual reaction\"?",
+      "options": [
+        "Syncytiotrophoblast cells",
+        "Stromal cells of the maternal endometrium",
+        "Cytotrophoblast cells",
+        "Cells of the inner cell mass"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Stromal cells of the maternal endometrium",
+      "explanation": "The decidual reaction occurs in the maternal tissue; specifically, the connective tissue (stromal) cells of the endometrium swell with glycogen and lipids to support the implanting conceptus.",
+      "section": "Week Two",
+      "questionNumber": 82
+    },
+    {
+      "id": "ana203-ge-week-two-83",
+      "text": "As the chorionic cavity expands, the amniotic cavity and secondary yolk sac remain suspended within it. Which statement correctly describes their relative positions?",
+      "options": [
+        "The yolk sac is located dorsally, and the amnion is located ventrally.",
+        "The amnion is located dorsally (above the epiblast), and the yolk sac is located ventrally (below the hypoblast).",
+        "They are arranged side-by-side laterally.",
+        "The yolk sac completely envelops the amniotic cavity."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The amnion is located dorsally (above the epiblast), and the yolk sac is located ventrally (below the hypoblast).",
+      "explanation": "In the standard orientation, the amniotic cavity lies dorsally over the epiblast, while the secondary yolk sac lies ventrally beneath the hypoblast.",
+      "section": "Week Two",
+      "questionNumber": 83
+    },
+    {
+      "id": "ana203-ge-week-two-84",
+      "text": "Primary chorionic villi represent the first stage of placental development. By definition, what do these primary villi lack that will appear in later stages?",
+      "options": [
+        "A covering of syncytiotrophoblast",
+        "A core of actively dividing cells",
+        "A core of mesoderm and fetal blood vessels",
+        "Contact with the maternal endometrium"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A core of mesoderm and fetal blood vessels",
+      "explanation": "Primary villi consist only of a cytotrophoblast core covered by syncytium. They do not yet possess the extraembryonic mesodermal core (secondary villi) or fetal blood vessels (tertiary villi) seen in later development.",
+      "section": "Week Two",
+      "questionNumber": 84
+    },
+    {
+      "id": "ana203-ge-week-two-85",
+      "text": "Which of the following correctly pairs a developing structure with its direct cellular origin during the second week?",
+      "options": [
+        "Syncytiotrophoblast -> derived from Epiblast",
+        "Exocoelomic membrane -> derived from Hypoblast",
+        "Connecting stalk -> derived from Cytotrophoblast",
+        "Amnioblasts -> derived from Endometrium"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Exocoelomic membrane -> derived from Hypoblast",
+      "explanation": "The exocoelomic (Heuser's) membrane is formed by cells that migrate directly from the edges of the hypoblast layer.",
+      "section": "Week Two",
+      "questionNumber": 85
+    },
+    {
+      "id": "ana203-ge-week-two-86",
+      "text": "The trophoblastic lacunae form primarily at which pole of the implanting blastocyst?",
+      "options": [
+        "The abembryonic pole",
+        "The lateral pole",
+        "The embryonic pole",
+        "They form evenly across the entire surface simultaneously."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The embryonic pole",
+      "explanation": "The blastocyst implants embryonic pole first, and this is the area where the syncytiotrophoblast is thickest and where the trophoblastic lacunae first appear and develop most extensively.",
+      "section": "Week Two",
+      "questionNumber": 86
+    },
+    {
+      "id": "ana203-ge-week-two-87",
+      "text": "What is the primary function of the proteolytic enzymes secreted by the syncytiotrophoblast?",
+      "options": [
+        "To digest the zona pellucida prior to implantation",
+        "To break down maternal endometrial tissue to allow for deep invasion",
+        "To initiate the cleavage divisions of the zygote",
+        "To dissolve the fibrin coagulum"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. To break down maternal endometrial tissue to allow for deep invasion",
+      "explanation": "The syncytiotrophoblast uses proteases and metalloproteinases to actively digest the extracellular matrix and cells of the endometrium, creating a path for the blastocyst to burrow into the uterine wall.",
+      "section": "Week Two",
+      "questionNumber": 87
+    },
+    {
+      "id": "ana203-ge-week-two-88",
+      "text": "Which embryological cavity is the earliest to form, existing prior to implantation, and is subsequently lined to form the primary yolk sac?",
+      "options": [
+        "The amniotic cavity",
+        "The blastocyst cavity (blastocoel)",
+        "The chorionic cavity",
+        "The extraembryonic coelom"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The blastocyst cavity (blastocoel)",
+      "explanation": "The blastocyst cavity (blastocoel) is the large central fluid-filled space present when the blastocyst arrives in the uterus. It is later lined by the exocoelomic membrane to become the primary yolk sac.",
+      "section": "Week Two",
+      "questionNumber": 88
+    },
+    {
+      "id": "ana203-ge-week-two-89",
+      "text": "In a normal pregnancy, which structure eventually obliterates the chorionic cavity as the fetus grows?",
+      "options": [
+        "The expanding secondary yolk sac",
+        "The expanding amniotic cavity",
+        "The enlarging connecting stalk",
+        "The thickening decidua basalis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The expanding amniotic cavity",
+      "explanation": "As pregnancy progresses, the amniotic cavity expands rapidly to accommodate the growing fetus, eventually pressing against the chorion and completely obliterating the chorionic cavity.",
+      "section": "Week Two",
+      "questionNumber": 89
+    },
+    {
+      "id": "ana203-ge-week-two-90",
+      "text": "The extraembryonic mesoderm forms between the trophoblast and the primitive yolk sac. Current embryological evidence suggests this mesoderm is primarily derived from which structure?",
+      "options": [
+        "The epiblast",
+        "The primitive streak",
+        "The primitive yolk sac (exocoelomic membrane)",
+        "The maternal stroma"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The primitive yolk sac (exocoelomic membrane)",
+      "explanation": "Current evidence indicates that the extraembryonic mesoderm, which forms a loose network of tissue during the second week, is derived from cells of the primitive yolk sac.",
+      "section": "Week Two",
+      "questionNumber": 90
+    },
+    {
+      "id": "ana203-ge-week-two-91",
+      "text": "Placenta praevia is characterized by implantation near the internal cervical os. Why is this condition primarily dangerous?",
+      "options": [
+        "The cervix produces antibodies that destroy the trophoblast.",
+        "The placenta blocks the birth canal and can tear, causing severe maternal hemorrhage.",
+        "It leads to the inevitable formation of a choriocarcinoma.",
+        "The lower uterus lacks sufficient oxygen to support any embryonic growth."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The placenta blocks the birth canal and can tear, causing severe maternal hemorrhage.",
+      "explanation": "Implantation near the internal os means the placenta covers the exit to the birth canal. As the lower uterus stretches or the cervix begins to dilate, the placenta can tear, causing massive, life-threatening bleeding.",
+      "section": "Week Two",
+      "questionNumber": 91
+    },
+    {
+      "id": "ana203-ge-week-two-92",
+      "text": "Which of the following describes the nature of the syncytiotrophoblast layer?",
+      "options": [
+        "A layer of distinct, individual cells undergoing rapid mitosis",
+        "A single layer of ciliated columnar epithelial cells",
+        "A thick, multinucleated mass of protoplasm with no distinct cell boundaries",
+        "A loose network of reticular fibers and fibroblasts"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A thick, multinucleated mass of protoplasm with no distinct cell boundaries",
+      "explanation": "The term \"syncytium\" means a mass of cytoplasm containing many nuclei but not separated into individual cells by cell membranes. The syncytiotrophoblast is a classic example of this structure.",
+      "section": "Week Two",
+      "questionNumber": 92
+    },
+    {
+      "id": "ana203-ge-week-two-93",
+      "text": "If an embryo were to express standard, classical MHC class I molecules matching the father's genetics, what would likely occur during the second week?",
+      "options": [
+        "The embryo would grow at double the normal rate.",
+        "The maternal immune system would recognize it as foreign and mount a rejection response.",
+        "The decidual reaction would be permanently enhanced.",
+        "The syncytiotrophoblast would immediately differentiate back into cytotrophoblast."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The maternal immune system would recognize it as foreign and mount a rejection response.",
+      "explanation": "The embryo contains paternal DNA and is genetically distinct from the mother (an allograft). If it expressed standard MHC molecules, maternal T-cells would recognize the foreign antigens and reject (destroy) the conceptus.",
+      "section": "Week Two",
+      "questionNumber": 93
+    },
+    {
+      "id": "ana203-ge-week-two-94",
+      "text": "The connecting stalk anchors the bilaminar disc to the chorion. Which anatomical structure will this stalk eventually become?",
+      "options": [
+        "The spinal cord",
+        "The descending aorta",
+        "The umbilical cord",
+        "The primitive gut tube"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The umbilical cord",
+      "explanation": "The connecting stalk contains the extraembryonic mesoderm that will eventually house the umbilical vessels and form the definitive umbilical cord, connecting the fetus to the placenta.",
+      "section": "Week Two",
+      "questionNumber": 94
+    },
+    {
+      "id": "ana203-ge-week-two-95",
+      "text": "During days 11 and 12, the syncytiotrophoblast is characterized by a sponge-like appearance at the embryonic pole. What forms these prominent spaces?",
+      "options": [
+        "Accumulations of amniotic fluid leaking outward",
+        "Trophoblastic lacunae that have fused together",
+        "Giant decidual cells undergoing apoptosis",
+        "Developing fetal red blood cells"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Trophoblastic lacunae that have fused together",
+      "explanation": "The sponge-like appearance of the thick syncytiotrophoblast at the embryonic pole is due to the formation and fusion of numerous trophoblastic lacunae, which will soon fill with maternal blood.",
+      "section": "Week Two",
+      "questionNumber": 95
+    },
+    {
+      "id": "ana203-ge-week-two-96",
+      "text": "The primary yolk sac serves important early functions before being replaced. Which of the following is considered a primary function of the yolk sac in humans during early development?",
+      "options": [
+        "Storing large quantities of nutritional yolk",
+        "Serving as the primary organ for gas exchange",
+        "Acting as an early site for blood cell formation (hematopoiesis)",
+        "Providing the structural framework for the nervous system"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Acting as an early site for blood cell formation (hematopoiesis)",
+      "explanation": "Unlike in birds, the human yolk sac contains no actual yolk. However, it serves critical early roles, including being one of the first sites for blood cell formation (hematopoiesis) and the origin of primordial germ cells.",
+      "section": "Week Two",
+      "questionNumber": 96
+    },
+    {
+      "id": "ana203-ge-week-two-97",
+      "text": "Which specific embryological event defines the transition from a primitive (primary) yolk sac to a definitive (secondary) yolk sac?",
+      "options": [
+        "The filling of the sac with maternal blood",
+        "The complete encasement of the sac by syncytiotrophoblast",
+        "A new wave of cells from the hypoblast migrating to line a smaller, newly pinched-off cavity",
+        "The fusion of the yolk sac with the amniotic cavity"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A new wave of cells from the hypoblast migrating to line a smaller, newly pinched-off cavity",
+      "explanation": "On day 13, a second wave of cells migrates from the hypoblast along the inside of the exocoelomic membrane. This creates a new, smaller cavity—the secondary yolk sac—pinching off much of the original primary yolk sac.",
+      "section": "Week Two",
+      "questionNumber": 97
+    },
+    {
+      "id": "ana203-ge-week-two-98",
+      "text": "Which two layers specifically constitute the \"Chorionic Plate\"?",
+      "options": [
+        "Syncytiotrophoblast and Cytotrophoblast only",
+        "Cytotrophoblast and Extraembryonic somatic mesoderm",
+        "Extraembryonic somatic mesoderm and Extraembryonic visceral mesoderm",
+        "Epiblast and Amnion"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Cytotrophoblast and Extraembryonic somatic mesoderm",
+      "explanation": "The chorionic plate is technically defined as the combination of the extraembryonic somatic mesoderm and the adjacent cytotrophoblast layer that it lines.",
+      "section": "Week Two",
+      "questionNumber": 98
+    },
+    {
+      "id": "ana203-ge-week-two-99",
+      "text": "The prechordal plate forms at the cranial end of the bilaminar disc. What specific shape do the hypoblast cells take on in this localized area to form the plate?",
+      "options": [
+        "They flatten into squamous cells.",
+        "They become tall and columnar.",
+        "They fuse into a multinucleated mass.",
+        "They undergo keratinization."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. They become tall and columnar.",
+      "explanation": "While the rest of the hypoblast consists of small cuboidal cells, the cells in the localized area of the prechordal plate become thickened and columnar.",
+      "section": "Week Two",
+      "questionNumber": 99
+    },
+    {
+      "id": "ana203-ge-week-two-100",
+      "text": "Molar pregnancies (hydatidiform moles) can secrete extremely high levels of a specific hormone, which can cause severe maternal symptoms like hyperemesis (excessive vomiting). Which hormone is this?",
+      "options": [
+        "Follicle-stimulating hormone",
+        "Prolactin",
+        "Human chorionic gonadotropin (hCG)",
+        "Oxytocin"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Human chorionic gonadotropin (hCG)",
+      "explanation": "Because a molar pregnancy consists of an overgrowth of trophoblastic tissue (which produces hCG), the condition is characterized by excessively high levels of hCG, leading to exaggerated pregnancy symptoms",
+      "section": "Week Two",
+      "questionNumber": 100
+    }
+  ]
+}

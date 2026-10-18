@@ -14,7 +14,7 @@
         { "id": "ge-oogenesis", "title": "Oogenesis", "status": "available", "dataFile": "data/university/anatomy/200/questions-ana203-oogenesis.json" },
         { "id": "ge-ovarian-menstrual-cycle", "title": "Ovarian and Menstrual Cycle", "status": "available", "dataFile": "data/university/anatomy/200/questions-ana203-ovarian-menstrual-cycle.json" },
         { "id": "ge-week-one", "title": "Week One of Development", "status": "coming-soon" },
-        { "id": "ge-week-two", "title": "Week Two", "status": "coming-soon" },
+        { "id": "ge-week-two", "title": "Week Two", "status": "available", "dataFile": "data/university/anatomy/200/questions-ana203-week-two.json" },
         { "id": "ge-week-three", "title": "Week Three", "status": "coming-soon" },
         { "id": "ge-week-three-to-eight", "title": "Week Three to Eight", "status": "coming-soon" }
       ]
