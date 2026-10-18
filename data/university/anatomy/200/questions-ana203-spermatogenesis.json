@@ -1,0 +1,760 @@
+{
+  "title": "Spermatogenesis",
+  "course": "ANA 203",
+  "totalQuestions": 50,
+  "sections": [
+    "Spermatogenesis (Q1-Q50)"
+  ],
+  "questions": [
+    {
+      "id": "ana203-ge-spermatogenesis-1",
+      "text": "In the process of spermatogenesis, what is the primary role of the blood-testis barrier formed by tight junctions between adjacent Sertoli cells?",
+      "options": [
+        "To prevent the entry of luteinizing hormone (LH) into the basal compartment",
+        "To stop the shedding of residual bodies into the lumen",
+        "To create an immunologically privileged site in the apical compartment",
+        "To facilitate the direct transfer of testosterone to developing spermatids"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. To create an immunologically privileged site in the apical compartment",
+      "explanation": "The blood-testis barrier isolates the more advanced stages of spermatogenesis (in the apical compartment) from the immune system, preventing an autoimmune response against the genetically unique haploid cells.",
+      "section": "Spermatogenesis",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-2",
+      "text": "Which specific hormone is directly responsible for stimulating Leydig cells to produce testosterone, thereby supporting spermatogenesis?",
+      "options": [
+        "Luteinizing hormone (LH)",
+        "Androgen-binding protein (ABP)",
+        "Follicle-stimulating hormone (FSH)",
+        "Gonadotropin-releasing hormone (GnRH)"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Luteinizing hormone (LH)",
+      "explanation": "LH from the anterior pituitary specifically targets Leydig (interstitial) cells, stimulating them to secrete testosterone, which is essential for the spermatogenic process.",
+      "section": "Spermatogenesis",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-3",
+      "text": "During the long prophase of meiosis I in spermatocytogenesis, what critical genetic event takes place?",
+      "options": [
+        "Segregation of sister chromatids to opposite poles",
+        "Genetic recombination via crossing over",
+        "Replication of the diploid chromosomal DNA",
+        "Shedding of excess cytoplasm as residual bodies"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Genetic recombination via crossing over",
+      "explanation": "The extended prophase I (lasting about 22 days) is crucial because it allows for the pairing of homologous chromosomes and crossing over, resulting in genetic recombination.",
+      "section": "Spermatogenesis",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-4",
+      "text": "What is the primary function of Follicle-stimulating hormone (FSH) concerning the Sertoli cells during spermatogenesis?",
+      "options": [
+        "It induces the conversion of Type B spermatogonia to primary spermatocytes.",
+        "It directly stimulates the Leydig cells to release testosterone.",
+        "It triggers the final release of spermatozoa into the tubular lumen.",
+        "It stimulates the synthesis of intracellular androgen-binding protein (ABP)."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. It stimulates the synthesis of intracellular androgen-binding protein (ABP).",
+      "explanation": "FSH binds to receptors on Sertoli cells, stimulating them to produce testicular fluid and synthesize androgen-binding protein (ABP), which concentrates testosterone near the developing germ cells.",
+      "section": "Spermatogenesis",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-5",
+      "text": "At which specific stage of cell division are primary spermatocytes considered to be resting for approximately 22 days?",
+      "options": [
+        "Metaphase of meiosis II",
+        "Prophase of meiosis I",
+        "Anaphase of mitosis",
+        "Telophase of meiosis I"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Prophase of meiosis I",
+      "explanation": "Primary spermatocytes enter a prolonged resting phase specifically during prophase of meiosis I, which lasts about 22 days to allow for complex genetic processes like crossing over.",
+      "section": "Spermatogenesis",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-6",
+      "text": "During the transformation of a spermatid into a spermatozoon, which cellular organelle gives rise to the acrosomal cap?",
+      "options": [
+        "Endoplasmic reticulum",
+        "Mitochondria",
+        "Golgi apparatus",
+        "Centriole"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Golgi apparatus",
+      "explanation": "In the initial phases of spermiogenesis, the Golgi apparatus forms the acrosomal vesicle, which expands over the nucleus to become the acrosomal cap containing proteolytic enzymes.",
+      "section": "Spermatogenesis",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-7",
+      "text": "A semen analysis reveals a patient has a sperm count of less than 10 million sperms per milliliter of semen. What is the clinical term for this condition?",
+      "options": [
+        "Oligozoospermia",
+        "Azoospermia",
+        "Aspermia",
+        "Teratozoospermia"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Oligozoospermia",
+      "explanation": "Oligozoospermia is defined as a low sperm count (less than 10 million/ml), which can significantly reduce fertility and may be caused by factors like varicocele or hormonal imbalance.",
+      "section": "Spermatogenesis",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-8",
+      "text": "Which of the following cell types is defined as a diploid (2n) cell that undergoes mitosis to eventually give rise to primary spermatocytes?",
+      "options": [
+        "Secondary spermatocytes",
+        "Spermatids",
+        "Leydig cells",
+        "Type B spermatogonia"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Type B spermatogonia",
+      "explanation": "Type B spermatogonia are the diploid cells resulting from the mitotic division of Type A cells; they eventually differentiate to become the primary spermatocytes that enter meiosis.",
+      "section": "Spermatogenesis",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-9",
+      "text": "How is the phenomenon where successive generations of developing germ cells remain connected to each other explained anatomically?",
+      "options": [
+        "They are joined by tight junctions between Sertoli cells.",
+        "They are fused by a shared acrosomal cap.",
+        "They remain connected by cytoplasmic bridges due to incomplete cytokinesis.",
+        "They are bound together within a single residual body."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. They remain connected by cytoplasmic bridges due to incomplete cytokinesis.",
+      "explanation": "During the mitotic and meiotic divisions of spermatogenesis, cytokinesis is incomplete, leaving the daughter cells physically connected by cytoplasmic bridges to function synchronously as a clone.",
+      "section": "Spermatogenesis",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-10",
+      "text": "In the seminiferous tubule, where are the most mature germ cells (spermatozoa) located relative to the tubule structure?",
+      "options": [
+        "Embedded strictly within the basal compartment",
+        "Near the luminal side of the seminiferous tubule",
+        "Directly attached to the basement membrane",
+        "Interspersed among the interstitial Leydig cells"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Near the luminal side of the seminiferous tubule",
+      "explanation": "As spermatogenesis progresses, the developing cells move progressively from the basement membrane (basal compartment) toward the lumen (apical compartment), with the most mature spermatozoa released into the lumen.",
+      "section": "Spermatogenesis",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-11",
+      "text": "What is the definitive chromosomal and DNA content of a secondary spermatocyte immediately following the completion of meiosis I?",
+      "options": [
+        "46 double-structured chromosomes; 4N DNA",
+        "23 single-structured chromosomes; 1N DNA",
+        "46 single-structured chromosomes; 2N DNA",
+        "23 double-structured chromosomes; 2N DNA"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. 23 double-structured chromosomes; 2N DNA",
+      "explanation": "Meiosis I is a reductional division. The resulting secondary spermatocyte has half the number of chromosomes (23), but because the sister chromatids have not yet separated, the chromosomes are double-structured, containing 2N DNA.",
+      "section": "Spermatogenesis",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-12",
+      "text": "Which cell type provides the physical support, protection, and nutritional environment essential for the developing germ cells within the seminiferous tubules?",
+      "options": [
+        "Sertoli cells",
+        "Primordial germ cells",
+        "Leydig cells",
+        "Myoid cells"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Sertoli cells",
+      "explanation": "Sertoli (sustentacular) cells are the supporting cells within the seminiferous tubules that nourish, protect, and regulate the environment for the developing spermatogenic cells.",
+      "section": "Spermatogenesis",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-13",
+      "text": "During human prenatal development, where do the primordial germ cells initially appear in the third week of intra-uterine life?",
+      "options": [
+        "Within the developing sex cords of the testis",
+        "In the mesonephric ridge",
+        "In the wall of the yolk sac",
+        "Along the primitive streak"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. In the wall of the yolk sac",
+      "explanation": "The primitive sex cells first appear around the third week of gestation in the endodermal wall of the yolk sac before migrating to the developing gonads by week 5.",
+      "section": "Spermatogenesis",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-14",
+      "text": "Which clinical term describes a condition where an individual produces seminal fluid but it contains absolutely zero spermatozoa?",
+      "options": [
+        "Oligoasthenospermia",
+        "Azoospermia",
+        "Teratozoospermia",
+        "Aspermia"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Azoospermia",
+      "explanation": "Azoospermia is the medical condition in which a man's semen contains no sperm at all, whereas aspermia refers to the complete lack of semen (ejaculate).",
+      "section": "Spermatogenesis",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-15",
+      "text": "During spermiogenesis, the mitochondria of the spermatid undergo a major reorganization. Where do they ultimately localize in the mature spermatozoon?",
+      "options": [
+        "They are shed entirely within the residual body.",
+        "They pack tightly within the acrosomal cap.",
+        "They migrate into the nucleus to provide direct energy for DNA maintenance.",
+        "They arrange in spirals around the axoneme in the middle piece."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. They arrange in spirals around the axoneme in the middle piece.",
+      "explanation": "To provide localized energy (ATP) for flagellar movement, the mitochondria migrate and wrap in a helical pattern around the axoneme specifically within the middle piece of the sperm.",
+      "section": "Spermatogenesis",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-16",
+      "text": "What happens to the vast majority of the unnecessary cytoplasm present in the rounded spermatid as it transforms into an elongated spermatozoon?",
+      "options": [
+        "It condenses to form the core of the flagellum.",
+        "It is absorbed directly into the highly condensed nucleus.",
+        "It is shed as a residual body and phagocytosed by Sertoli cells.",
+        "It forms the protective membrane known as the blood-testis barrier."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It is shed as a residual body and phagocytosed by Sertoli cells.",
+      "explanation": "During spermiogenesis, the excess cytoplasm is pinched off as a structure called a residual body, which is subsequently engulfed and digested by the supporting Sertoli cells.",
+      "section": "Spermatogenesis",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-17",
+      "text": "A mature human spermatozoon features a highly specialized tail designed for motility. What is the approximate length of this tail structure?",
+      "options": [
+        "15 µm",
+        "100 µm",
+        "7 µm",
+        "40 µm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. 40 µm",
+      "explanation": "The tail is the longest part of the spermatozoon, acting as a long tapering process that measures approximately 40 µm in length.",
+      "section": "Spermatogenesis",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-18",
+      "text": "Which specific structure within the mature spermatozoon houses the centrioles?",
+      "options": [
+        "The acrosome",
+        "The neck",
+        "The terminal piece of the tail",
+        "The middle piece"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The neck",
+      "explanation": "The neck of the spermatozoon is a very short constriction (about 0.3 µm) located just caudal to the head that contains the centrioles, one of which will form the basal body for the axoneme.",
+      "section": "Spermatogenesis",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-19",
+      "text": "Which class of cells maintains the continuous population of germ cells by undergoing mitotic divisions that produce both more stem cells and cells destined to become primary spermatocytes?",
+      "options": [
+        "Type A spermatogonia",
+        "Secondary spermatocytes",
+        "Leydig cells",
+        "Spermatids"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Type A spermatogonia",
+      "explanation": "Type A spermatogonia serve as the stem cell population. They divide mitotically; some replenish the stem cell pool, while others differentiate into Type B spermatogonia, committing to the spermatogenic pathway.",
+      "section": "Spermatogenesis",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-20",
+      "text": "A laboratory analysis of a semen sample shows that 50% of the spermatozoa have morphologic defects such as two heads or dwarfism. What is the clinical diagnosis for this specific condition?",
+      "options": [
+        "Asthenozoospermia",
+        "Oligozoospermia",
+        "Normozoospermia",
+        "Teratozoospermia"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Teratozoospermia",
+      "explanation": "Teratozoospermia is defined by the presence of a high percentage (typically >40%) of morphologically abnormal sperms (e.g., duplicated heads or tails) in the semen.",
+      "section": "Spermatogenesis",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-21",
+      "text": "What characterizes the nuclear content of a mature human spermatozoon?",
+      "options": [
+        "It contains 46 double-structured chromosomes.",
+        "It contains loosely packed euchromatin to allow for rapid transcription.",
+        "It is haploid and highly condensed, utilizing protamines instead of typical histones.",
+        "It is diploid and located within the middle piece."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It is haploid and highly condensed, utilizing protamines instead of typical histones.",
+      "explanation": "The sperm nucleus is located in the head, is haploid (23 chromosomes), and its DNA is extremely compacted, largely due to the replacement of standard histones with smaller, highly basic proteins called protamines.",
+      "section": "Spermatogenesis",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-22",
+      "text": "Which sequence correctly outlines the broad phases of male gamete production from start to finish?",
+      "options": [
+        "Meiosis I → Mitosis → Meiosis II → Spermiogenesis",
+        "Spermatocytogenesis → Meiosis I → Meiosis II → Spermiogenesis",
+        "Spermiogenesis → Spermatocytogenesis → Meiosis",
+        "Meiosis II → Spermiogenesis → Mitosis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Spermatocytogenesis → Meiosis I → Meiosis II → Spermiogenesis",
+      "explanation": "The process begins with spermatocytogenesis (mitotic proliferation and differentiation into primary spermatocytes), followed by the two meiotic divisions, and finally spermiogenesis (the physical metamorphosis of spermatids into spermatozoa).",
+      "section": "Spermatogenesis",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-23",
+      "text": "Immediately following their release from the Sertoli cells into the lumen of the seminiferous tubules, what is the functional state of the spermatozoa regarding their motility?",
+      "options": [
+        "They are only slightly motile and must mature further in the epididymis.",
+        "They are completely immotile and remain so until they reach the female tract.",
+        "They possess full, vigorous motility capable of immediate fertilization.",
+        "They exhibit hyperactivated motility driven by sudden exposure to fructose."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. They are only slightly motile and must mature further in the epididymis.",
+      "explanation": "Spermatozoa released into the seminiferous tubule lumen are morphologically complete but functionally immature and only slightly motile; they acquire full functional motility during their transit through the epididymis.",
+      "section": "Spermatogenesis",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-24",
+      "text": "Which morphological category of spermatogonia is characterized cytologically by having a pale cytoplasm and an eccentric nucleolus?",
+      "options": [
+        "Type B spermatogonia",
+        "Type A dark spermatogonia",
+        "Intermediate spermatogonia",
+        "Type A pale spermatogonia"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Type A pale spermatogonia",
+      "explanation": "Type A pale spermatogonia are distinguished from Type A dark spermatogonia by their lighter-staining (pale) cytoplasm, though both share the feature of an eccentric nucleolus.",
+      "section": "Spermatogenesis",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-25",
+      "text": "The continuous production of spermatozoa requires a delicate hormonal feedback loop. What specific substance, produced by the Sertoli cells, acts to inhibit the secretion of FSH from the anterior pituitary?",
+      "options": [
+        "Testosterone",
+        "Androgen-binding protein (ABP)",
+        "Inhibin",
+        "Gonadotropin-releasing hormone (GnRH)"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Inhibin",
+      "explanation": "While testosterone (from Leydig cells) provides negative feedback on LH and GnRH, Sertoli cells produce inhibin, which specifically acts on the anterior pituitary to inhibit the release of FSH.",
+      "section": "Spermatogenesis",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-26",
+      "text": "During which specific cell division do homologous chromosome pairs align on the equator of the cell before separating to opposite poles?",
+      "options": [
+        "Mitosis of Type A spermatogonia",
+        "Meiosis II (Metaphase II)",
+        "The final division of spermiogenesis",
+        "Meiosis I (Metaphase I)"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Meiosis I (Metaphase I)",
+      "explanation": "The pairing and subsequent separation of intact homologous chromosomes (rather than individual sister chromatids) is the defining characteristic of the first meiotic division (Meiosis I).",
+      "section": "Spermatogenesis",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-27",
+      "text": "What is the total duration required for a spermatogonium to develop completely into a mature spermatozoon in a human male?",
+      "options": [
+        "Approximately 22 days",
+        "Approximately 64 to 74 days",
+        "Approximately 20 days",
+        "Approximately 120 days"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Approximately 64 to 74 days",
+      "explanation": "The entire developmental cycle of spermatogenesis, from a primitive spermatogonium through meiosis and the metamorphic changes of spermiogenesis, takes roughly 64 to 74 days.",
+      "section": "Spermatogenesis",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-28",
+      "text": "The blood-testis barrier effectively divides the seminiferous epithelium into two distinct functional compartments. Which of the following cells is located exclusively within the basal compartment?",
+      "options": [
+        "Secondary spermatocytes",
+        "Early spermatids",
+        "Type A spermatogonia",
+        "Spermatozoa"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Type A spermatogonia",
+      "explanation": "The tight junctions between Sertoli cells separate the epithelium. Spermatogonia (Type A and B) reside in the basal compartment, while primary spermatocytes pass through the barrier to complete their development in the immunologically privileged apical compartment.",
+      "section": "Spermatogenesis",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-29",
+      "text": "Asthenozoospermia is a condition that contributes to male infertility. Which specific parameter of the semen analysis is abnormal in this diagnosis?",
+      "options": [
+        "Less than 40% of the sperm exhibit normal forward motility.",
+        "The morphological shape of the sperm heads is severely distorted.",
+        "The total count of sperm is less than 10 million per milliliter.",
+        "The total volume of the ejaculate is too low."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Less than 40% of the sperm exhibit normal forward motility.",
+      "explanation": "Asthenozoospermia refers specifically to reduced sperm motility (sluggish or non-motile sperm), where less than the normal threshold (usually 40%) of the sperm are moving effectively.",
+      "section": "Spermatogenesis",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-30",
+      "text": "Which hormone, released from the hypothalamus, acts as the primary trigger initiating the cascade of hormonal events required for spermatogenesis at puberty?",
+      "options": [
+        "Luteinizing hormone (LH)",
+        "Follicle-stimulating hormone (FSH)",
+        "Testosterone",
+        "Gonadotropin-releasing hormone (GnRH)"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Gonadotropin-releasing hormone (GnRH)",
+      "explanation": "The hypothalamus releases GnRH in a pulsatile manner, which stimulates the anterior pituitary gland to secrete both LH and FSH, thereby driving the entire gonadal axis.",
+      "section": "Spermatogenesis",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-31",
+      "text": "What defines the genetic and chromosomal makeup of a spermatid immediately after the completion of meiosis II?",
+      "options": [
+        "Haploid, 23 single-structured chromosomes",
+        "Haploid, 23 double-structured chromosomes",
+        "Diploid, 46 single-structured chromosomes",
+        "Diploid, 46 double-structured chromosomes"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Haploid, 23 single-structured chromosomes",
+      "explanation": "Meiosis II separates the sister chromatids. Therefore, the resulting spermatids are haploid (containing 23 chromosomes) and each chromosome consists of a single chromatid (1N DNA).",
+      "section": "Spermatogenesis",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-32",
+      "text": "The acrosome contains several powerful enzymes that assist the sperm during fertilization. Which enzyme specifically acts as a proteinase?",
+      "options": [
+        "A lipid-digesting lipase",
+        "A carbohydrate-cleaving amylase",
+        "Acrosin",
+        "A nucleic acid-destroying nuclease"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Acrosin",
+      "explanation": "Acrosin is a crucial proteolytic enzyme (proteinase) housed within the acrosome that helps the sperm digest the proteinaceous zona pellucida surrounding the ovum.",
+      "section": "Spermatogenesis",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-33",
+      "text": "How do the germ cells structurally change shortly before puberty to initiate the potential for spermatogenesis?",
+      "options": [
+        "They migrate from the yolk sac into the epididymis.",
+        "The solid sex cords acquire a lumen and become seminiferous tubules.",
+        "They immediately undergo meiosis I to form secondary spermatocytes.",
+        "They shed their cytoplasm to form the blood-testis barrier."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The solid sex cords acquire a lumen and become seminiferous tubules.",
+      "explanation": "During fetal life and childhood, the testis contains solid structures called sex cords. Approaching puberty, these cords hollow out to form a central lumen, becoming the functional seminiferous tubules where spermatogenesis will occur.",
+      "section": "Spermatogenesis",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-34",
+      "text": "Which component of the mature spermatozoon features a central axoneme comprising a 9+2 arrangement of microtubules?",
+      "options": [
+        "The head",
+        "The acrosome",
+        "The neck",
+        "The tail (including the middle piece)"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The tail (including the middle piece)",
+      "explanation": "The core of the entire tail (from the middle piece down to the end piece) is the axoneme, which provides the structural and motor framework (microtubules, dynein arms) necessary for flagellar beating.",
+      "section": "Spermatogenesis",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-35",
+      "text": "In the context of male fertility, what defines \"normozoospermia\"?",
+      "options": [
+        "A complete absence of abnormal sperm morphologies",
+        "A semen volume of at least 10 ml per ejaculate",
+        "A sperm count of >20 million sperms/ml or >50 million sperms/ejaculate",
+        "100% of the sperm moving at a velocity greater than 50 µm/s"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A sperm count of >20 million sperms/ml or >50 million sperms/ejaculate",
+      "explanation": "Normozoospermia indicates a healthy, normal sperm count, generally defined as having greater than or equal to 20 million spermatozoa per milliliter of semen, or over 50 million in the total ejaculate.",
+      "section": "Spermatogenesis",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-36",
+      "text": "What is the specific anatomical location of the Leydig cells within the testis?",
+      "options": [
+        "In the apical compartment of the seminiferous tubules",
+        "Lining the lumen of the epididymis",
+        "Inside the blood-testis barrier, attached to Sertoli cells",
+        "Within the interstitial tissue located between the seminiferous tubules"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Within the interstitial tissue located between the seminiferous tubules",
+      "explanation": "Leydig cells (interstitial cells) are found in the connective tissue spaces (interstitium) between the seminiferous tubules, where they produce testosterone in response to LH.",
+      "section": "Spermatogenesis",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-37",
+      "text": "If a secondary spermatocyte contains a Y chromosome, what will be the sex chromosome complement of the two spermatids it produces after meiosis II?",
+      "options": [
+        "One will have an X, the other will have a Y.",
+        "Both will contain a Y chromosome.",
+        "Both will contain an X chromosome.",
+        "They will contain neither, as sex chromosomes are shed in the residual body."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Both will contain a Y chromosome.",
+      "explanation": "A secondary spermatocyte is already haploid and committed to one sex chromosome. When it divides via meiosis II (which simply separates sister chromatids), both resulting spermatids will carry identical copies of that same Y chromosome.",
+      "section": "Spermatogenesis",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-38",
+      "text": "Which specific structure within the axoneme of the sperm tail acts as the motor protein, utilizing ATP to cause the microtubules to slide against one another?",
+      "options": [
+        "Dynein arms",
+        "Inner sheath",
+        "Nexin links",
+        "Radial spokes"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Dynein arms",
+      "explanation": "Dynein arms are attached to the outer doublet microtubules of the axoneme. They are ATPases that generate the mechanical force required for the microtubules to slide, producing the whip-like motion of the tail.",
+      "section": "Spermatogenesis",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-39",
+      "text": "A patient is diagnosed with a severe deficiency in anterior pituitary function, specifically lacking the ability to produce Luteinizing Hormone (LH). Which primary cellular consequence will occur in the testis?",
+      "options": [
+        "The Sertoli cells will fail to produce androgen-binding protein.",
+        "The spermatogonia will immediately undergo apoptosis.",
+        "The Leydig cells will fail to synthesize and release testosterone.",
+        "The blood-testis barrier will permanently break down."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The Leydig cells will fail to synthesize and release testosterone.",
+      "explanation": "LH specifically targets the Leydig (interstitial) cells in the testis. Without LH, these cells will not be stimulated to produce testosterone, which will secondarily halt spermatogenesis.",
+      "section": "Spermatogenesis",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-40",
+      "text": "Which of the following descriptions accurately characterizes Type B spermatogonia?",
+      "options": [
+        "They have an eccentric nucleolus and dark cytoplasm.",
+        "They have a central nucleolus and differentiate directly into primary spermatocytes.",
+        "They are haploid cells resulting from the first meiotic division.",
+        "They form the permanent stem cell pool that never enters meiosis."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. They have a central nucleolus and differentiate directly into primary spermatocytes.",
+      "explanation": "Type B spermatogonia are the final stage of the mitotic phase. They are characterized morphologically by a centrally located nucleolus and they undergo a final mitotic division to become primary spermatocytes.",
+      "section": "Spermatogenesis",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-41",
+      "text": "During the morphological transformation of spermiogenesis, what happens to the centrioles of the developing spermatid?",
+      "options": [
+        "They localize in the newly forming neck region.",
+        "They dissolve completely to reduce the overall weight of the sperm.",
+        "They migrate to the extreme apical tip of the head to form the acrosome.",
+        "They fuse with the mitochondria in the middle piece."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. They localize in the newly forming neck region.",
+      "explanation": "As the spermatid elongates, the centrioles migrate to the pole of the nucleus opposite the acrosome, localizing in the neck region. One centriole will serve as the basal body organizing the flagellar axoneme.",
+      "section": "Spermatogenesis",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-42",
+      "text": "The acrosome of a mature spermatozoon contains hyaluronidase. What is the specific biological role of this enzyme?",
+      "options": [
+        "It hydrolyzes the sulphate moiety of glycoproteins.",
+        "It digests the hyaluronic acid matrix surrounding the ovum.",
+        "It acts as a proteinase to breach the cell membrane of the egg.",
+        "It provides the initial energy burst required for capacitation."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It digests the hyaluronic acid matrix surrounding the ovum.",
+      "explanation": "Hyaluronidase breaks down hyaluronic acid, which is a major component of the extracellular matrix (cumulus oophorus) that surrounds the ovum, allowing the sperm to navigate through this protective layer.",
+      "section": "Spermatogenesis",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-43",
+      "text": "The human spermatozoon is described as an elongated, tadpole-like cell. What is its approximate total length from head to tail?",
+      "options": [
+        "15 µm",
+        "120 µm",
+        "60 µm",
+        "300 µm"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. 60 µm",
+      "explanation": "A mature human spermatozoon is microscopic but highly elongated, measuring approximately 60 µm in total length.",
+      "section": "Spermatogenesis",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-44",
+      "text": "Once mature spermatozoa enter the duct of the epididymis, approximately how long does it take for them to travel through this 4-6 meter long tortuous tube?",
+      "options": [
+        "24 hours",
+        "5 days",
+        "20 days",
+        "64 days"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. 20 days",
+      "explanation": "The transit time for sperm to travel the entire length of the highly coiled duct of the epididymis is approximately 20 days, during which they undergo further biochemical maturation and acquire full motility.",
+      "section": "Spermatogenesis",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-45",
+      "text": "What is the primary function of the androgen-binding protein (ABP) secreted by the Sertoli cells?",
+      "options": [
+        "It binds to testosterone to keep local concentrations high within the seminiferous tubules.",
+        "It transports testosterone through the bloodstream to the brain.",
+        "It destroys excess testosterone to prevent down-regulation of receptors.",
+        "It binds to LH receptors to amplify the pituitary signal."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It binds to testosterone to keep local concentrations high within the seminiferous tubules.",
+      "explanation": "ABP binds to the testosterone produced by nearby Leydig cells, concentrating it within the luminal environment of the seminiferous tubules, which is an absolute requirement for successful spermatogenesis.",
+      "section": "Spermatogenesis",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-46",
+      "text": "During spermatocytogenesis, one primary spermatocyte undergoes meiosis I. What is the direct cellular outcome of this single division?",
+      "options": [
+        "Four haploid spermatids",
+        "Two haploid secondary spermatocytes",
+        "Two diploid Type B spermatogonia",
+        "One secondary spermatocyte and one polar body"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Two haploid secondary spermatocytes",
+      "explanation": "The first meiotic division (meiosis I) splits the homologous chromosomes of one diploid primary spermatocyte to create two haploid secondary spermatocytes.",
+      "section": "Spermatogenesis",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-47",
+      "text": "Which term accurately describes the specific phase of sperm development where rounded spermatids undergo a physical metamorphosis into elongated spermatozoa?",
+      "options": [
+        "Spermiation",
+        "Spermatocytogenesis",
+        "Capacitation",
+        "Spermiogenesis"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Spermiogenesis",
+      "explanation": "Spermiogenesis is the final stage of sperm development, consisting strictly of morphological changes (acrosome formation, nuclear condensation, tail formation) without any further cell division.",
+      "section": "Spermatogenesis",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-48",
+      "text": "In a healthy adult male, roughly how many sperm cells are produced on a daily basis?",
+      "options": [
+        "300 million",
+        "10 million",
+        "50 million",
+        "1 billion"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. 300 million",
+      "explanation": "Spermatogenesis is a highly prolific, continuous process in the adult male, resulting in the production of approximately 300 million spermatozoa every single day.",
+      "section": "Spermatogenesis",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-49",
+      "text": "At the conclusion of spermiogenesis, the mature spermatozoa are released from their intimate association with the Sertoli cells into the tubular lumen. This specific release event is known as:",
+      "options": [
+        "Spermiation",
+        "Capacitation",
+        "Ejaculation",
+        "The acrosome reaction"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Spermiation",
+      "explanation": "The shedding of the cytoplasmic bridges and the physical detachment and release of the spermatozoa from the supportive pockets of the Sertoli cells into the lumen is termed spermiation.",
+      "section": "Spermatogenesis",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana203-ge-spermatogenesis-50",
+      "text": "Which of the following features is structurally characteristic of the middle piece of a mammalian spermatozoon?",
+      "options": [
+        "It contains a helical arrangement of mitochondria.",
+        "It is the longest section of the flagellum.",
+        "It lacks an axoneme, consisting only of fibrous sheaths.",
+        "It contains the highly condensed, haploid nucleus."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It contains a helical arrangement of mitochondria.",
+      "explanation": "The middle piece, located just distal to the neck, is defined by a dense, spiral sheath of mitochondria wrapped tightly around the central axoneme, providing the energy for motility.",
+      "section": "Spermatogenesis",
+      "questionNumber": 50
+    }
+  ]
+}
