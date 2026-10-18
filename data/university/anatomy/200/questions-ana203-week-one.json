@@ -1,0 +1,1510 @@
+{
+  "title": "Week One of Development",
+  "course": "ANA 203",
+  "totalQuestions": 100,
+  "sections": [
+    "Week One of Development (Q1-Q100)"
+  ],
+  "questions": [
+    {
+      "id": "ana203-ge-week-one-1",
+      "text": "The physiological process of fertilization culminates in the fusion of male and female gametes to establish a diploid zygote. In which specific anatomical segment of the female reproductive tract does this event normally occur?",
+      "options": [
+        "The narrow isthmus of the uterine tube",
+        "The infundibulum near the fimbriae",
+        "The ampullary region of the uterine tube",
+        "The posterior wall of the uterine cavity"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The ampullary region of the uterine tube",
+      "explanation": "Fertilization, the union of a spermatozoal nucleus with an egg nucleus to form a primary embryo nucleus, occurs in the ampullary region of the uterine tube, which is the widest part of the tube located close to the ovary.",
+      "section": "Week One of Development",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana203-ge-week-one-2",
+      "text": "To successfully penetrate the secondary oocyte, a spermatozoon must navigate extracellular barriers. Which specific molecular interaction directly triggers the acrosome to burst and release its digestive enzymes?",
+      "options": [
+        "Binding to a complementary ZP3 glycoprotein on the zona pellucida",
+        "Contact with the hyaluronic acid matrix of the corona radiata",
+        "Adhesion to integrin receptors on the egg plasma membrane",
+        "Fusion with the cortical granules in the perivitelline space"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Binding to a complementary ZP3 glycoprotein on the zona pellucida",
+      "explanation": "A complementary molecule on the sperm head binds to a ZP3 glycoprotein within the zona pellucida. This binding triggers the acrosome to burst, releasing enzymes that facilitate penetration through the zona pellucida.",
+      "section": "Week One of Development",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana203-ge-week-one-3",
+      "text": "Following successful penetration by a single spermatozoon, the secondary oocyte initiates a mechanism to prevent additional sperm from entering. What is the immediate functional consequence of the cortical reaction?",
+      "options": [
+        "The complete dissolution of the surrounding corona radiata cells",
+        "The cross-linking of glycoproteins in the zona pellucida, making it hard and impermeable",
+        "The premature consumption of acrosomes on the surface of the egg cell",
+        "The immediate resumption and completion of the first meiotic division"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The cross-linking of glycoproteins in the zona pellucida, making it hard and impermeable",
+      "explanation": "The cortical reaction involves the exocytosis of cortical granules, causing glycoproteins in the zona pellucida to cross-link. This matrix becomes hard and impermeable to other sperm, thereby preventing polyspermy.",
+      "section": "Week One of Development",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana203-ge-week-one-4",
+      "text": "Early embryonic development is characterized by a series of rapid cell divisions immediately following fertilization. What is the precise embryological definition of cleavage?",
+      "options": [
+        "The differentiation of the embryoblast into the epiblast and hypoblast",
+        "The enzymatic degradation of the zona pellucida to allow implantation",
+        "The migration of the pronuclei toward the center of the oocyte",
+        "The mitotic process that transforms a relatively large unicellular zygote into a multicellular morula"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The mitotic process that transforms a relatively large unicellular zygote into a multicellular morula",
+      "explanation": "Cleavage is defined as the process that transforms a relatively large unicellular zygote into a multicellular embryo, known as a morula, and it closely follows fertilization via mitosis.",
+      "section": "Week One of Development",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana203-ge-week-one-5",
+      "text": "The initial cleavage divisions are critical for establishing the early cell populations of the embryo. At approximately what time point after fertilization does the first mitotic division of the zygote begin?",
+      "options": [
+        "12 hours",
+        "30 hours",
+        "48 hours",
+        "72 hours"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 30 hours",
+      "explanation": "The first mitotic division of the zygote, which yields two blastomeres, begins approximately 30 hours after fertilization occurs.",
+      "section": "Week One of Development",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana203-ge-week-one-6",
+      "text": "As cleavage progresses, the loosely arranged blastomeres undergo a structural reorganization known as compaction. At which specific cellular stage does this compaction process typically occur?",
+      "options": [
+        "At the 2 or 4-cell stage",
+        "At the 32-cell stage",
+        "At the 8 or 9-cell stage",
+        "At the 16 to 20-cell stage"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. At the 8 or 9-cell stage",
+      "explanation": "Compaction occurs at the 8 or 9-cell stage (after the 3rd cleavage), during which the blastomeres form a highly compact ball of cells.",
+      "section": "Week One of Development",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana203-ge-week-one-7",
+      "text": "During compaction, the outer cells of the developing embryo must maximize their physical association to seal the inner microenvironment. Which cellular structures are primarily responsible for enhancing this cell-cell interaction among the outer blastomeres?",
+      "options": [
+        "Tight junctions",
+        "Desmosomes",
+        "Gap junctions",
+        "Hemidesmosomes"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Tight junctions",
+      "explanation": "During compaction, the blastomeres become closely associated with each other by forming tight junctions, which effectively enhances cell-cell interaction and seals the inner cells.",
+      "section": "Week One of Development",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana203-ge-week-one-8",
+      "text": "While the outer cells seal the embryo during compaction, the segregated inner cells must coordinate their developmental signals. How do the cells of the inner cell mass primarily communicate with one another?",
+      "options": [
+        "Through continuous paracrine diffusion across the zona pellucida",
+        "Via direct cytoplasmic bridges left over from incomplete cytokinesis",
+        "Through physical pressure exerted by the expanding blastocoele",
+        "Via gap junctions"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Via gap junctions",
+      "explanation": "Compaction segregates the inner cells to form the inner cell mass. These inner cells actively communicate with one another via gap junctions.",
+      "section": "Week One of Development",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana203-ge-week-one-9",
+      "text": "The term \"morula\" is used to describe the embryo when it reaches a specific morphological stage resembling a mulberry. How many cells typically comprise the embryo when it is formally designated a morula?",
+      "options": [
+        "4 to 8 cells",
+        "64 to 128 cells",
+        "12 to 16 cells",
+        "2 to 4 cells"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. 12 to 16 cells",
+      "explanation": "A morula is formed when the developing embryo has divided to contain between 12 and 16 cells, taking on the appearance of a mulberry.",
+      "section": "Week One of Development",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana203-ge-week-one-10",
+      "text": "The transition to the morula stage is a key temporal marker in the first week of development. On approximately which day post-fertilization is the morula definitively formed?",
+      "options": [
+        "Day 1",
+        "Day 5",
+        "Day 7",
+        "Day 3"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Day 3",
+      "explanation": "The embryo reaches the 12-16 cell morula stage at approximately 3 days post-fertilization.",
+      "section": "Week One of Development",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana203-ge-week-one-11",
+      "text": "Within the morula, the cells segregate into distinct functional populations. What is the alternative embryological term for the centrally located inner cell mass?",
+      "options": [
+        "Embryoblast",
+        "Trophoblast",
+        "Blastocele",
+        "Corona radiata"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Embryoblast",
+      "explanation": "Some cells of the morula segregate into a central group known as the inner cell mass, which is alternatively referred to as the embryoblast.",
+      "section": "Week One of Development",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana203-ge-week-one-12",
+      "text": "Twinning can occur through several distinct developmental mechanisms. Which specific event during early cleavage leads to the formation of monozygotic twins?",
+      "options": [
+        "The simultaneous fertilization of two separate oocytes by two different spermatozoa",
+        "The independent development of the two blastomeres that arise from the first mitotic division of a single zygote",
+        "The spontaneous splitting of the embryonic disc during the third week of development",
+        "The fusion of two distinct morulae prior to implantation"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The independent development of the two blastomeres that arise from the first mitotic division of a single zygote",
+      "explanation": "Monozygotic twins form if the two blastomeres that arise from the very first mitotic division of a single zygote separate and develop independently of each other.",
+      "section": "Week One of Development",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana203-ge-week-one-13",
+      "text": "Chromosomal anomalies can arise extremely early in development. If anaphase lag occurs during early cleavage, what is the resulting clinical condition wherein the embryo possesses two or more distinct cell lines with different chromosome numbers?",
+      "options": [
+        "Mosaicism",
+        "Chimerism",
+        "Polyspermy",
+        "Parthenogenesis"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Mosaicism",
+      "explanation": "Mosaicism arises early in cleavage due to non-dysjunction or anaphase lag, producing an individual with two or more cell lines containing different numbers of chromosomes, such as in mosaic Down syndrome.",
+      "section": "Week One of Development",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana203-ge-week-one-14",
+      "text": "In highly unusual cases, an individual may develop from the fusion of two completely distinct zygotes rather than forming fraternal twins. What is the embryological term for this phenomenon?",
+      "options": [
+        "Mosaicism",
+        "Syngamy",
+        "Chimerism",
+        "Twinning"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Chimerism",
+      "explanation": "Chimerism develops early in embryogenesis when two distinct zygotes fuse to form a single individual. Consequently, the individual consists of two genetically different cell populations.",
+      "section": "Week One of Development",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana203-ge-week-one-15",
+      "text": "The journey of the early embryo relies on continuous transport through the female reproductive tract. At what point does the embryo typically complete its transit and enter the uterine cavity?",
+      "options": [
+        "At the 2-cell stage on Day 1",
+        "Concurrently with the degradation of the corona radiata",
+        "Following the complete hatching of the blastocyst on Day 5",
+        "At the end of the 3rd day after fertilization"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. At the end of the 3rd day after fertilization",
+      "explanation": "The entry of the embryo into the uterine cavity normally occurs at the end of the 3rd day after fertilization, while it is still in the morula stage.",
+      "section": "Week One of Development",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana203-ge-week-one-16",
+      "text": "The transition from a solid morula to a hollow blastocyst is a critical developmental milestone. What is the primary physical mechanism that drives the formation of the blastocyst cavity?",
+      "options": [
+        "The rapid apoptosis of the central embryoblast cells",
+        "The passage of fluid from the uterine cavity into the morula",
+        "The active secretion of liquor folliculi by the trophoblast",
+        "The enzymatic digestion of the zona pellucida"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The passage of fluid from the uterine cavity into the morula",
+      "explanation": "Blastogenesis occurs when the morula enters the uterine cavity, allowing fluid to pass from the uterine cavity into the morula. This accumulation creates a single fluid-filled cavity, the blastocoele.",
+      "section": "Week One of Development",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana203-ge-week-one-17",
+      "text": "The outer cell mass of the blastocyst physically surrounds the inner cell mass and the fluid-filled cavity. What is the ultimate developmental fate of this outer cell layer?",
+      "options": [
+        "It forms the entirety of the fetal nervous system.",
+        "It differentiates into the primary endoderm of the yolk sac.",
+        "It contributes to the formation of the placenta.",
+        "It degenerates completely upon contact with the endometrium."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It contributes to the formation of the placenta.",
+      "explanation": "The outer cell mass, or trophoblast, is a layer of cells that surrounds the blastocyst and ultimately contributes to the formation of the placenta.",
+      "section": "Week One of Development",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana203-ge-week-one-18",
+      "text": "Before the blastocyst can physically attach to the endometrial lining, it must shed its protective glycoprotein coat. When does the degeneration of the zona pellucida commence?",
+      "options": [
+        "Once the blastocyst is fully formed and begins to expand",
+        "Immediately following the completion of the first mitotic cleavage",
+        "Only after the syncytiotrophoblast has deeply eroded the maternal sinusoids",
+        "Simultaneously with the initial fusion of the pronuclei"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Once the blastocyst is fully formed and begins to expand",
+      "explanation": "Once the blastocyst is formed, the zona pellucida begins to degenerate. This shedding allows the blastocyst to come into direct contact with the endometrium to initiate implantation.",
+      "section": "Week One of Development",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana203-ge-week-one-19",
+      "text": "The initiation of implantation requires precise synchronization between the embryo and the maternal endometrium. On approximately which day post-fertilization does implantation typically commence?",
+      "options": [
+        "Day 3",
+        "Day 9",
+        "Day 14",
+        "Day 6"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Day 6",
+      "explanation": "The commencement of implantation begins once the zona pellucida is shed, which typically occurs around the 6th day of development.",
+      "section": "Week One of Development",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana203-ge-week-one-20",
+      "text": "To ensure a viable pregnancy, the blastocyst must implant in a highly vascularized and structurally sound region of the uterus. Which locations represent the normal sites for implantation?",
+      "options": [
+        "The narrow isthmus of the uterine tube",
+        "The posterior or anterior wall of the endometrium",
+        "The internal os of the cervix",
+        "The ampullary region of the fallopian tube"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The posterior or anterior wall of the endometrium",
+      "explanation": "Under normal physiological conditions, the blastocyst typically implants on either the posterior or the anterior wall of the endometrium.",
+      "section": "Week One of Development",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana203-ge-week-one-21",
+      "text": "The penetration of the blastocyst into the maternal endometrium is an actively invasive process. Which specific cellular layer produces the enzymes responsible for this erosive action?",
+      "options": [
+        "The inner cell mass",
+        "The cytotrophoblast",
+        "The corona radiata",
+        "The syncytiotrophoblast"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The syncytiotrophoblast",
+      "explanation": "Implantation involves the erosive action of enzymes that are specifically produced by the syncytiotrophoblast of the implanting blastocyst.",
+      "section": "Week One of Development",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana203-ge-week-one-22",
+      "text": "Implantation is a progressive event spanning multiple days. By what point in development is the implantation process considered fully completed, with the embryo completely embedded?",
+      "options": [
+        "By the end of Day 6",
+        "During week 2",
+        "Immediately upon shedding the zona pellucida",
+        "By the end of the first month"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. During week 2",
+      "explanation": "The process of implantation commences around day 6 and continues into week 2, when it is successfully completed, leaving the embryo completely embedded in the endometrium.",
+      "section": "Week One of Development",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana203-ge-week-one-23",
+      "text": "Ectopic implantations present severe clinical risks. In the most common type of ectopic pregnancy (tubal pregnancy), at approximately what gestational age does the risk of severe bleeding from a ruptured uterine tube peak?",
+      "options": [
+        "4 weeks",
+        "12 weeks",
+        "8 weeks",
+        "16 weeks"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. 8 weeks",
+      "explanation": "Ectopic implantation in the uterine tube often leads to the rupture of the tube at about 8 weeks of tubal pregnancy, resulting in severe bleeding from damaged vessels.",
+      "section": "Week One of Development",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana203-ge-week-one-24",
+      "text": "While the uterine tube is the most frequent site of ectopic pregnancy, embryos can occasionally implant in other aberrant locations. What is the clinical term for an implantation occurring directly on the surface of the ovary?",
+      "options": [
+        "Primary ovarian pregnancy",
+        "Tubal abortion",
+        "Placenta praevia",
+        "Recto-uterine ectopic"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Primary ovarian pregnancy",
+      "explanation": "Ectopic implantation can occur on the surface of the ovary, a condition that is relatively rare and specifically termed a primary ovarian pregnancy.",
+      "section": "Week One of Development",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana203-ge-week-one-25",
+      "text": "If an embryo fails to be swept into the uterine tube, it may fall into the peritoneal cavity and implant. Which specific anatomical space within the peritoneal cavity is a recognized site for such an ectopic implantation?",
+      "options": [
+        "The Morrison's pouch",
+        "The recto-uterine pouch of Douglas",
+        "The lesser sac",
+        "The vesico-uterine pouch"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The recto-uterine pouch of Douglas",
+      "explanation": "The peritoneal cavity is a potential site for ectopic pregnancy, with the recto-uterine pouch of Douglas specifically identified as a location where an embryo may implant.",
+      "section": "Week One of Development",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana203-ge-week-one-26",
+      "text": "Placenta praevia is a dangerous obstetric condition associated with abnormal implantation positioning. Where exactly does the blastocyst implant to cause this condition?",
+      "options": [
+        "Close to the internal os of the cervix",
+        "High on the anterior fundal wall",
+        "Within the ampulla of the fallopian tube",
+        "Deep within the myometrial muscle layer"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Close to the internal os of the cervix",
+      "explanation": "In placenta praevia, the placenta is sited abnormally close to the internal os of the cervix, physically blocking the opening.",
+      "section": "Week One of Development",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana203-ge-week-one-27",
+      "text": "A patient diagnosed with placenta praevia is approaching term. Why is a Cesarean section (CS) generally required for delivery in this condition?",
+      "options": [
+        "The fetus is usually presenting in a transverse lie.",
+        "The uterus loses its ability to contract effectively.",
+        "Vaginal birth would cause rupture of the placenta and fatal bleeding.",
+        "The umbilical cord is typically too short for vaginal delivery."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Vaginal birth would cause rupture of the placenta and fatal bleeding.",
+      "explanation": "Because the placenta blocks the internal os in placenta praevia, a vaginal birth would cause the placenta to rupture, leading to fatal maternal and fetal bleeding. A CS is thus required.",
+      "section": "Week One of Development",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana203-ge-week-one-28",
+      "text": "Before a spermatozoon can successfully fertilize an oocyte, it must undergo a period of conditioning that enhances its motility and destabilizes its membrane. Where does this process, called capacitation, occur?",
+      "options": [
+        "In the seminiferous tubules of the testes",
+        "In the epididymis during storage",
+        "Within the seminal vesicles upon ejaculation",
+        "In the female's reproductive tract over several hours"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. In the female's reproductive tract over several hours",
+      "explanation": "Freshly ejaculated sperm are poorly able to fertilize. They must undergo capacitation within the female's reproductive tract over several hours, preparing them for the acrosome reaction.",
+      "section": "Week One of Development",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana203-ge-week-one-29",
+      "text": "To reach the zona pellucida, the spermatozoa must first navigate an outer cellular barrier surrounding the oocyte. What helps the sperm break through the granulosa cells of the corona radiata?",
+      "options": [
+        "Motility and the initial release of enzymes prior to the full acrosome reaction",
+        "The complete dissolution of the sperm tail",
+        "Phagocytosis by the oocyte plasma membrane",
+        "The immediate fusion of the pronuclei"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Motility and the initial release of enzymes prior to the full acrosome reaction",
+      "explanation": "Hundreds of sperm attracted to the corona radiata begin to physically break through this cellular barrier of granulosa cells to approach the underlying zona pellucida.",
+      "section": "Week One of Development",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana203-ge-week-one-30",
+      "text": "Once a single spermatozoon has successfully entered the oocyte, the peripheral portion of the ooplasm undergoes a structural modification to block other sperm. What is this newly formed restrictive barrier called?",
+      "options": [
+        "The acrosomal membrane",
+        "The corona radiata",
+        "The zona pellucida matrix",
+        "The peri-vitelline membrane"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The peri-vitelline membrane",
+      "explanation": "Upon sperm entry, the peripheral portion of the yolk (ooplasm) changes into a protective layer termed the peri-vitelline membrane, which prevents the passage of any additional spermatozoa.",
+      "section": "Week One of Development",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana203-ge-week-one-31",
+      "text": "The entry of the spermatozoon triggers a profound physiological response within the secondary oocyte. Which nuclear event is immediately finalized as a direct reaction to this membrane fusion?",
+      "options": [
+        "The initiation of prophase I",
+        "The completion of the second meiotic division",
+        "The extrusion of the first polar body",
+        "The immediate replication of maternal DNA"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The completion of the second meiotic division",
+      "explanation": "The oocyte undergoes its second meiotic division as a direct reaction to the fusion of the cell membranes of the secondary oocyte and the sperm, producing a mature haploid ovum.",
+      "section": "Week One of Development",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana203-ge-week-one-32",
+      "text": "A fundamental principle of human genetics regarding organelle inheritance is established during fertilization. Why are all mitochondria in humans exclusively of maternal origin?",
+      "options": [
+        "The oocyte actively destroys any paternal mitochondria that enter.",
+        "Sperm mitochondria lack functional DNA.",
+        "The sperm's tail and mitochondria degenerate after entering the oocyte.",
+        "The sperm does not possess mitochondria at the time of ejaculation."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The sperm's tail and mitochondria degenerate after entering the oocyte.",
+      "explanation": "After entering the oocyte's cytoplasm, the sperm's tail and mitochondria degenerate alongside the formation of the male pronucleus. Consequently, all surviving mitochondria in the embryo are of maternal origin.",
+      "section": "Week One of Development",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana203-ge-week-one-33",
+      "text": "Before the newly formed zygote can divide, its genetic material must be prepared. What critical action do the newly formed male and female pronuclei undertake as they migrate toward the center of the oocyte?",
+      "options": [
+        "They undergo crossing over to increase genetic diversity.",
+        "They expel excess chromosomes to maintain haploidy.",
+        "They rapidly replicate their DNA to prepare for the first mitotic division.",
+        "They synthesize the enzymes needed to dissolve the zona pellucida."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. They rapidly replicate their DNA to prepare for the first mitotic division.",
+      "explanation": "The pronuclei migrate toward the center of the oocyte, rapidly replicating their DNA as they do so. This replication prepares the zygote for its first mitotic division.",
+      "section": "Week One of Development",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana203-ge-week-one-34",
+      "text": "In standard embryological timelines, fertilization marks the absolute beginning of human development. Which specific designation is given to the day of fertilization?",
+      "options": [
+        "Day 0",
+        "Day 1",
+        "Day 3",
+        "Day 14"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Day 0",
+      "explanation": "According to the standard timeline of development, the day of ovulation and subsequent fertilization (forming the zygote) is designated as Day 0.",
+      "section": "Week One of Development",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana203-ge-week-one-35",
+      "text": "Cleavage is a rapid process, with cell numbers doubling at each step. On which day of development is the embryo typically observed at the 4-cell stage?",
+      "options": [
+        "Day 1",
+        "Day 2",
+        "Day 3",
+        "Day 4"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Day 2",
+      "explanation": "The developmental timeline indicates that the first cleavage to the 2-cell stage occurs on Day 1, and the subsequent division to the 4-cell stage occurs on Day 2.",
+      "section": "Week One of Development",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana203-ge-week-one-36",
+      "text": "The transformation from a solid ball of cells to a hollow structure defines blastogenesis. On which day does the embryo typically reach the \"early blastocyst\" stage?",
+      "options": [
+        "Day 3",
+        "Day 6",
+        "Day 8",
+        "Day 4"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Day 4",
+      "explanation": "The timeline illustrates the progression from an 8-cell uncompacted morula to a compacted morula between days 3 and 4, and reaching the early blastocyst stage by Day 4.",
+      "section": "Week One of Development",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana203-ge-week-one-37",
+      "text": "A defining characteristic of cleavage divisions is the lack of cell growth between mitoses. What happens to the cytoplasm-nucleus ratio of the individual blastomeres as cleavage proceeds?",
+      "options": [
+        "It becomes increasingly reduced.",
+        "It increases exponentially.",
+        "It remains perfectly constant.",
+        "It fluctuates depending on the stage of the cell cycle."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It becomes increasingly reduced.",
+      "explanation": "Because the total cytoplasmic volume remains confined within the zona pellucida, the cytoplasm-nucleus ratio of the individual blastomeres becomes increasingly reduced with every successive cleavage division.",
+      "section": "Week One of Development",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana203-ge-week-one-38",
+      "text": "The term \"morula\" is derived from Latin due to the embryo's distinct gross appearance at the 12-16 cell stage. Which specific fruit does the morula resemble?",
+      "options": [
+        "A raspberry",
+        "A grape",
+        "A strawberry",
+        "A mulberry"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. A mulberry",
+      "explanation": "At the 12-16 cell stage, the compacted ball of blastomeres structurally resembles a mulberry, which is why it is termed a morula.",
+      "section": "Week One of Development",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana203-ge-week-one-39",
+      "text": "Within the blastocyst, the inner cell mass is not positioned centrally but is localized to one side of the cavity. What is the embryological term for this specific side of the blastocyst?",
+      "options": [
+        "The abembryonic pole",
+        "The syncytial pole",
+        "The embryonic pole",
+        "The vegetative pole"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The embryonic pole",
+      "explanation": "The inner cell mass, or embryoblast, is specifically located at one end of the blastocyst cavity, a region designated as the embryonic pole.",
+      "section": "Week One of Development",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana203-ge-week-one-40",
+      "text": "The zona pellucida is a crucial acellular layer that surrounds the oocyte and early embryo. What is the primary biochemical composition of the zona pellucida?",
+      "options": [
+        "A dense network of collagen fibers",
+        "A layer of glycoproteins",
+        "A phospholipid bilayer",
+        "A matrix of hyaluronic acid and fibronectin"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A layer of glycoproteins",
+      "explanation": "The zona pellucida is structurally defined as an extra-cellular matrix composed of a layer of glycoproteins external to the trophoblast.",
+      "section": "Week One of Development",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana203-ge-week-one-41",
+      "text": "While the zona pellucida undergoes cross-linking, another event permanently prevents multiple fertilizations. What prevents the entry of other sperm after the first one fuses with the egg plasma membrane?",
+      "options": [
+        "The rapid depolarization of the corona radiata",
+        "Changes in egg proteins that prevent entry",
+        "The immediate secretion of progesterone",
+        "The contraction of the perivitelline space"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Changes in egg proteins that prevent entry",
+      "explanation": "Immediately upon sperm fusion, localized changes in egg proteins occur that prevent the entry of any other sperm, complementing the slower cortical reaction.",
+      "section": "Week One of Development",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana203-ge-week-one-42",
+      "text": "Fertilization restores the chromosomal complement necessary for human life. What is the chromosomal status of the newly formed zygote immediately following syngamy?",
+      "options": [
+        "Haploid",
+        "Triploid",
+        "Diploid",
+        "Polyploid"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Diploid",
+      "explanation": "Fertilization is the fusion of haploid gametes (egg and sperm, each containing one set of chromosomes) to form a single diploid zygote with two complete sets of chromosomes.",
+      "section": "Week One of Development",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana203-ge-week-one-43",
+      "text": "The cortical granules play an indispensable role in the slow block to polyspermy. By which cellular mechanism do these granules release their enzymatic contents into the zona pellucida?",
+      "options": [
+        "Exocytosis",
+        "Simple diffusion",
+        "Endocytosis",
+        "Active transport via carrier proteins"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Exocytosis",
+      "explanation": "Cortical granules inside the secondary oocyte fuse with the plasma membrane and expel their internal enzymes to the zona pellucida strictly via the process of exocytosis.",
+      "section": "Week One of Development",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana203-ge-week-one-44",
+      "text": "The corona radiata acts as the outermost cellular shield of the ovulated oocyte. What specific cell type comprises this radiating layer?",
+      "options": [
+        "Endometrial stromal cells",
+        "Syncytiotrophoblast cells",
+        "Primary oocytes",
+        "Follicle cells (granulosa cells)"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Follicle cells (granulosa cells)",
+      "explanation": "The corona radiata is composed of a layer of follicle cells (granulosa cells) that remain attached to the outside of the secondary oocyte following ovulation.",
+      "section": "Week One of Development",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana203-ge-week-one-45",
+      "text": "Upon penetrating the oocyte cytoplasm, the spermatozoon undergoes significant deconstruction. Which specific component of the sperm disintegrates alongside the outer coating?",
+      "options": [
+        "The acrosome",
+        "The nucleus",
+        "The tail",
+        "The pronucleus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The tail",
+      "explanation": "After the sperm enters the cytoplasm of the oocyte, its tail and outer coating disintegrate, leaving the nuclear material to form the male pronucleus.",
+      "section": "Week One of Development",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana203-ge-week-one-46",
+      "text": "While maternal mitochondria are exclusively inherited, the sperm does contribute more than just nuclear DNA to the zygote. Which other macromolecule from the sperm is delivered and likely influences embryo development?",
+      "options": [
+        "Large quantities of glycogen",
+        "A considerable amount of RNA",
+        "Pre-formed ribosomes",
+        "Cortical granules"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A considerable amount of RNA",
+      "explanation": "A considerable amount of RNA from the sperm is delivered to the resulting embryo during fertilization, which likely influences subsequent embryo development and the phenotype of the offspring.",
+      "section": "Week One of Development",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana203-ge-week-one-47",
+      "text": "Despite undergoing multiple mitotic divisions, the total size of the embryo does not increase during the cleavage stages. What physical barrier enforces this size restriction until the blastocyst stage?",
+      "options": [
+        "The corona radiata",
+        "The perivitelline membrane",
+        "The endometrial lining",
+        "The zona pellucida"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The zona pellucida",
+      "explanation": "The thick glycoprotein shell of the zona pellucida remains intact throughout cleavage and compaction, physically constraining the embryo so its overall volume remains constant while individual blastomeres become smaller.",
+      "section": "Week One of Development",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana203-ge-week-one-48",
+      "text": "The trophoblast is the outer epithelial layer of the blastocyst. To which maternal tissue does the trophoblast eventually directly adhere and invade during the first two weeks?",
+      "options": [
+        "The endometrium",
+        "The myometrium",
+        "The perimetrium",
+        "The cervical mucosa"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The endometrium",
+      "explanation": "Following the degeneration of the zona pellucida, the blastocyst, via its outer trophoblast layer, comes into direct contact with and implants into the maternal endometrium.",
+      "section": "Week One of Development",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana203-ge-week-one-49",
+      "text": "Ectopic pregnancies outside the reproductive tract are rare but life-threatening. What anatomical term refers to the peritoneal space located specifically between the rectum and the uterus, a known site for such implantations?",
+      "options": [
+        "The vesicouterine pouch",
+        "The paracolic gutter",
+        "The subhepatic space",
+        "The recto-uterine pouch of Douglas"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The recto-uterine pouch of Douglas",
+      "explanation": "The recto-uterine pouch of Douglas is a specific location within the peritoneal cavity where an ectopic pregnancy can implant if the embryo fails to enter or remain in the uterine tube.",
+      "section": "Week One of Development",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana203-ge-week-one-50",
+      "text": "Placenta praevia creates a mechanical obstruction that complicates delivery. Which specific anatomical bottleneck is blocked by the abnormally sited placenta?",
+      "options": [
+        "The internal os of the cervix",
+        "The ampulla of the fallopian tube",
+        "The external urethral meatus",
+        "The vaginal introitus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The internal os of the cervix",
+      "explanation": "In placenta praevia, the placenta implants close to and physically blocks the internal os of the cervix, preventing a safe vaginal delivery.",
+      "section": "Week One of Development",
+      "questionNumber": 50
+    },
+    {
+      "id": "ana203-ge-week-one-51",
+      "text": "The second meiotic division is held in arrest until fertilization. What is the cellular product of this division that receives the vast majority of the cytoplasm?",
+      "options": [
+        "The first polar body",
+        "The male pronucleus",
+        "The haploid mature ovum",
+        "The primary oocyte"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The haploid mature ovum",
+      "explanation": "When the oocyte completes its second meiotic division following sperm entry, it produces a large haploid mature ovum and a small, non-functional second polar body.",
+      "section": "Week One of Development",
+      "questionNumber": 51
+    },
+    {
+      "id": "ana203-ge-week-one-52",
+      "text": "In the journey toward the oocyte, many sperm cells undergo the acrosome reaction before reaching the zona pellucida. What is the physiological benefit of some sperm consuming their acrosomes prematurely on the egg's surface?",
+      "options": [
+        "It immediately triggers the cortical reaction.",
+        "It facilitates the penetration by other subsequent sperm cells.",
+        "It cross-links the corona radiata cells.",
+        "It prevents the embryo from implanting in the fallopian tube."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It facilitates the penetration by other subsequent sperm cells.",
+      "explanation": "Some sperm cells consume their acrosome prematurely on the surface of the egg cell. The release of these enzymes helps to clear the path, facilitating the eventual penetration by other, subsequent sperm cells.",
+      "section": "Week One of Development",
+      "questionNumber": 52
+    },
+    {
+      "id": "ana203-ge-week-one-53",
+      "text": "Compaction is a crucial event occurring at the 8 or 9-cell stage. What is the primary functional result of this structural reorganization?",
+      "options": [
+        "It segregates the inner cells that will form the inner cell mass.",
+        "It initiates the immediate hatching of the blastocyst.",
+        "It causes the dissolution of the zona pellucida.",
+        "It prevents any further mitotic divisions."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It segregates the inner cells that will form the inner cell mass.",
+      "explanation": "Compaction brings the blastomeres into tight association, which functionally brings about the segregation of the inner cells that are destined to form the inner cell mass (embryoblast).",
+      "section": "Week One of Development",
+      "questionNumber": 53
+    },
+    {
+      "id": "ana203-ge-week-one-54",
+      "text": "The progression from a loose collection of cells to a tightly bound morula occurs rapidly. Between which days does the embryo transition from an 8-cell uncompacted morula to an 8-cell compacted morula?",
+      "options": [
+        "Day 1 and 2",
+        "Day 3 and 4",
+        "Day 5 and 6",
+        "Day 7 and 8"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Day 3 and 4",
+      "explanation": "The developmental timeline places the 8-cell uncompacted morula and its transition into the 8-cell compacted morula squarely between Day 3 and Day 4 post-fertilization.",
+      "section": "Week One of Development",
+      "questionNumber": 54
+    },
+    {
+      "id": "ana203-ge-week-one-55",
+      "text": "Before implantation can begin, the blastocyst must undergo \"hatching.\" On which day of development is the late-stage blastocyst typically observed hatching?",
+      "options": [
+        "Day 2",
+        "Day 8",
+        "Day 10",
+        "Day 5"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Day 5",
+      "explanation": "The timeline illustrates that the late-stage blastocyst undergoes hatching (shedding the zona pellucida) on Day 5, preparing it for implantation on Day 6.",
+      "section": "Week One of Development",
+      "questionNumber": 55
+    },
+    {
+      "id": "ana203-ge-week-one-56",
+      "text": "The very first event of cleavage establishes the multicellular nature of the embryo. What is the direct cellular product of the first mitotic division of the zygote?",
+      "options": [
+        "A 4-cell embryo",
+        "A solid morula",
+        "Two blastomeres",
+        "An embryoblast and a trophoblast"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Two blastomeres",
+      "explanation": "The first mitotic division of the unicellular zygote strictly yields two distinct cells, which are embryologically termed blastomeres.",
+      "section": "Week One of Development",
+      "questionNumber": 56
+    },
+    {
+      "id": "ana203-ge-week-one-57",
+      "text": "The trophoblast is the defining peripheral layer of the blastocyst. What is its exact spatial relationship to the other components of the blastocyst?",
+      "options": [
+        "It is nestled entirely within the blastocoele.",
+        "It is a layer of cells that surrounds both the inner cell mass and the blastocyst cavity.",
+        "It forms a solid core surrounded by the zona pellucida.",
+        "It is located exclusively at the abembryonic pole."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It is a layer of cells that surrounds both the inner cell mass and the blastocyst cavity.",
+      "explanation": "The outer cell mass, or trophoblast, is defined as a continuous layer of cells that structurally surrounds both the inner cell mass and the fluid-filled blastocyst cavity.",
+      "section": "Week One of Development",
+      "questionNumber": 57
+    },
+    {
+      "id": "ana203-ge-week-one-58",
+      "text": "Blastogenesis relies on a shift in the embryo's environment. From where does the fluid originate that passes into the morula to form the blastocyst cavity?",
+      "options": [
+        "It is synthesized de novo by the inner cell mass.",
+        "It is secreted by the degenerating corona radiata.",
+        "It passes from the uterine cavity into the morula.",
+        "It is extruded from the shrinking blastomeres."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It passes from the uterine cavity into the morula.",
+      "explanation": "Once the morula enters the uterine cavity at the end of day 3, it absorbs fluid directly from the surrounding uterine cavity. This fluid accumulates to form the blastocyst cavity.",
+      "section": "Week One of Development",
+      "questionNumber": 58
+    },
+    {
+      "id": "ana203-ge-week-one-59",
+      "text": "Mosaicism arises from errors in chromosomal segregation during early cleavage. Which of the following is a classic clinical example of a condition that can result from this specific embryological error?",
+      "options": [
+        "Mosaic Down syndrome",
+        "Placenta praevia",
+        "Tubal pregnancy",
+        "Complete mole"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Mosaic Down syndrome",
+      "explanation": "Non-dysjunction or anaphase lag during early cleavage results in mosaicism. An individual with multiple cell lines containing different chromosome numbers is a mosaic, with mosaic Down syndrome explicitly cited as an example.",
+      "section": "Week One of Development",
+      "questionNumber": 59
+    },
+    {
+      "id": "ana203-ge-week-one-60",
+      "text": "Chimerism is an incredibly rare genetic condition where an individual possesses two genetically distinct cell populations from two separate zygotes. Which observable physical trait was provided as an example of a phenotypic manifestation of chimerism?",
+      "options": [
+        "Ambiguous genitalia",
+        "Polydactyly",
+        "Severe developmental delay",
+        "Having one brown eye and one hazel eye"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Having one brown eye and one hazel eye",
+      "explanation": "Because a chimera consists of two distinct genetic cell populations, they can exhibit mixed phenotypic traits. A chimera with different colored eyes (e.g., brown and hazel eyes) is a specific illustrative example.",
+      "section": "Week One of Development",
+      "questionNumber": 60
+    },
+    {
+      "id": "ana203-ge-week-one-61",
+      "text": "The zona pellucida performs several critical functions during the first week. Which of the following is an essential role it plays prior to its degeneration?",
+      "options": [
+        "It synthesizes human chorionic gonadotropin.",
+        "It actively pumps uterine fluid into the blastocoele.",
+        "It provides the enzymes necessary for implantation.",
+        "It prevents the embryo from prematurely implanting in the uterine tube."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. It prevents the embryo from prematurely implanting in the uterine tube.",
+      "explanation": "The zona pellucida acts as a physical barrier that must be shed (hatching) before the blastocyst can come into direct contact with the endometrium. This prevents premature ectopic implantation in the uterine tube during transit.",
+      "section": "Week One of Development",
+      "questionNumber": 61
+    },
+    {
+      "id": "ana203-ge-week-one-62",
+      "text": "Fertilization occurs in a specific region of the uterine tube optimized for gamete encounter. What anatomical feature characterizes the ampullary region?",
+      "options": [
+        "It is the narrowest point of the tube, filtering sperm.",
+        "It is the widest part of the tube and is close to the ovary.",
+        "It is the segment embedded within the uterine wall.",
+        "It is lined with stratified squamous epithelium."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It is the widest part of the tube and is close to the ovary.",
+      "explanation": "The ampullary region of the uterine tube is explicitly described as the widest part of the tube, located in close proximity to the ovary, making it the ideal site for fertilization.",
+      "section": "Week One of Development",
+      "questionNumber": 62
+    },
+    {
+      "id": "ana203-ge-week-one-63",
+      "text": "When the spermatozoon is on the verge of piercing the oocyte, the yolk reacts physically. What is the term for the conical elevation drawn out from the ooplasm?",
+      "options": [
+        "The cortical granule",
+        "The acrosomal process",
+        "The cone of attraction (reception cone)",
+        "The peri-vitelline space"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The cone of attraction (reception cone)",
+      "explanation": "Just before the spermatozoon pierces the egg, the yolk (ooplasm) is drawn outward into a localized conical elevation termed the cone of attraction or reception cone.",
+      "section": "Week One of Development",
+      "questionNumber": 63
+    },
+    {
+      "id": "ana203-ge-week-one-64",
+      "text": "The hardness and impermeability of the zona pellucida following the cortical reaction are due to a specific structural change in its constituent molecules. What is this change?",
+      "options": [
+        "The cross-linking of glycoproteins with each other",
+        "The rapid calcification of the extracellular matrix",
+        "The insertion of cholesterol into the membrane",
+        "The total degradation of ZP3 receptors"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The cross-linking of glycoproteins with each other",
+      "explanation": "The enzymes released by the cortical granules cause the glycoproteins within the zona pellucida to cross-link with each other, creating a hard, impermeable matrix.",
+      "section": "Week One of Development",
+      "questionNumber": 64
+    },
+    {
+      "id": "ana203-ge-week-one-65",
+      "text": "Following fertilization, the genetic material of both parents must be prepared for mitosis. What is the specific term used to describe the nucleus of the oocyte after it completes its second meiotic division but before it fuses with the male genetic material?",
+      "options": [
+        "The definitive oocyte",
+        "The polar body",
+        "The female pronucleus",
+        "The zygotic nucleus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The female pronucleus",
+      "explanation": "Upon completing its second meiotic division, the nucleus of the mature ovum is specifically referred to as a female pronucleus, distinguishing it from the nuclei formed after the first cleavage.",
+      "section": "Week One of Development",
+      "questionNumber": 65
+    },
+    {
+      "id": "ana203-ge-week-one-66",
+      "text": "Similarly, the genetic material delivered by the spermatozoon must be prepared for the first cleavage. Following the degeneration of the sperm's tail and mitochondria, what structure does the remaining nuclear material form?",
+      "options": [
+        "A new acrosome",
+        "A cortical granule",
+        "A diploid zygote",
+        "The male pronucleus"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The male pronucleus",
+      "explanation": "As the sperm's tail and mitochondria degenerate within the ooplasm, its nuclear material condenses to form the male pronucleus, readying itself for replication and fusion.",
+      "section": "Week One of Development",
+      "questionNumber": 66
+    },
+    {
+      "id": "ana203-ge-week-one-67",
+      "text": "The male and female pronuclei do not immediately fuse upon forming at the periphery of the oocyte. What directional movement must they undertake prior to the first mitotic division?",
+      "options": [
+        "They migrate toward the center of the oocyte.",
+        "They move to opposite poles of the cell.",
+        "They migrate toward the perivitelline space.",
+        "They exit the oocyte and enter the perivitelline space."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. They migrate toward the center of the oocyte.",
+      "explanation": "Once formed, the male and female pronuclei migrate from the periphery toward the center of the oocyte, rapidly replicating their DNA as they prepare for the first cleavage division.",
+      "section": "Week One of Development",
+      "questionNumber": 67
+    },
+    {
+      "id": "ana203-ge-week-one-68",
+      "text": "Tubal pregnancies pose a catastrophic risk to the mother if left undetected. What is the primary physiological consequence that makes rupture of the uterine tube at 8 weeks so dangerous?",
+      "options": [
+        "The sudden onset of profound maternal hypoglycemia",
+        "Severe internal bleeding from damaged maternal vessels",
+        "The development of severe pre-eclampsia",
+        "Massive systemic bacterial infection"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Severe internal bleeding from damaged maternal vessels",
+      "explanation": "If a tubal pregnancy ruptures (typically around 8 weeks), the primary and most immediate danger is severe bleeding resulting from the damage to the engorged maternal blood vessels supporting the ectopic tissue.",
+      "section": "Week One of Development",
+      "questionNumber": 68
+    },
+    {
+      "id": "ana203-ge-week-one-69",
+      "text": "The developmental timeline from fertilization to implantation is highly ordered. At what specific developmental stage is the embryo when it finally enters the uterine cavity?",
+      "options": [
+        "The morula stage",
+        "The 2-cell stage",
+        "The unfertilized oocyte stage",
+        "The late blastocyst stage"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The morula stage",
+      "explanation": "The entry of the embryo into the uterine cavity occurs at the end of the 3rd day, at which point the embryo is structurally a morula. It only becomes a blastocyst after entering the uterus and absorbing fluid.",
+      "section": "Week One of Development",
+      "questionNumber": 69
+    },
+    {
+      "id": "ana203-ge-week-one-70",
+      "text": "Implantation is not a passive settling of the embryo but an active, destructive invasion. Which specific cell layer of the blastocyst is uniquely responsible for producing the erosive enzymes required for this invasion?",
+      "options": [
+        "The inner cell mass",
+        "The cytotrophoblast",
+        "The syncytiotrophoblast",
+        "The primary endoderm"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The syncytiotrophoblast",
+      "explanation": "The erosive action required for the blastocyst to embed into the endometrium is carried out by enzymes produced specifically by the syncytiotrophoblast layer.",
+      "section": "Week One of Development",
+      "questionNumber": 70
+    },
+    {
+      "id": "ana203-ge-week-one-71",
+      "text": "Cleavage relies exclusively on a specific type of cellular division to increase cell numbers without increasing overall embryo mass. Which process drives cleavage?",
+      "options": [
+        "Meiosis I",
+        "Meiosis II",
+        "Budding",
+        "Mitosis"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Mitosis",
+      "explanation": "Cleavage is explicitly described as occurring by mitosis, allowing the unicellular zygote to rapidly divide into many smaller blastomeres.",
+      "section": "Week One of Development",
+      "questionNumber": 71
+    },
+    {
+      "id": "ana203-ge-week-one-72",
+      "text": "The zona pellucida is a critical regulatory structure. What must occur regarding the zona pellucida before the commencement of implantation can begin on the 6th day?",
+      "options": [
+        "It must undergo massive hypertrophy.",
+        "It must be shed or degenerate completely.",
+        "It must fuse with the corona radiata.",
+        "It must become heavily vascularized."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It must be shed or degenerate completely.",
+      "explanation": "The commencement of implantation begins strictly once the protective zona pellucida has begun to degenerate and is shed, allowing the trophoblast to contact the endometrium.",
+      "section": "Week One of Development",
+      "questionNumber": 72
+    },
+    {
+      "id": "ana203-ge-week-one-73",
+      "text": "The orientation of the blastocyst as it attaches to the endometrium is highly specific. Which part of the blastocyst typically leads the invasion into the maternal tissue?",
+      "options": [
+        "The abembryonic pole",
+        "The embryonic pole",
+        "The lateral margin",
+        "The primitive streak"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The embryonic pole",
+      "explanation": "The inner cell mass (embryoblast) is located at the embryonic pole. During normal implantation, the blastocyst typically attaches to the endometrium with this embryonic pole leading the way.",
+      "section": "Week One of Development",
+      "questionNumber": 73
+    },
+    {
+      "id": "ana203-ge-week-one-74",
+      "text": "Ectopic pregnancies can theoretically occur anywhere along the embryo's transit path or if it escapes the reproductive tract. What is the clinical term for an ectopic implantation that occurs directly on the ovary?",
+      "options": [
+        "Cervical ectopic",
+        "Tubal abortion",
+        "Placenta praevia",
+        "Primary ovarian pregnancy"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Primary ovarian pregnancy",
+      "explanation": "An ectopic pregnancy occurring on the surface of the ovary is relatively rare and is explicitly termed a primary ovarian pregnancy.",
+      "section": "Week One of Development",
+      "questionNumber": 74
+    },
+    {
+      "id": "ana203-ge-week-one-75",
+      "text": "Upon the degeneration of the zona pellucida, the blastocyst is finally exposed. Which structural component of the blastocyst comes into direct physical contact with the endometrium to initiate implantation?",
+      "options": [
+        "The trophoblast",
+        "The embryoblast",
+        "The blastocoele fluid",
+        "The polar bodies"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The trophoblast",
+      "explanation": "Once the zona pellucida degenerates, the outermost cellular layer of the blastocyst, the trophoblast, comes into direct contact with the endometrium to begin implantation.",
+      "section": "Week One of Development",
+      "questionNumber": 75
+    },
+    {
+      "id": "ana203-ge-week-one-76",
+      "text": "The formation of the blastocyst relies on fluid accumulation. What is the anatomical term for the single fluid-filled cavity created during blastogenesis?",
+      "options": [
+        "The archenteron",
+        "The amniotic cavity",
+        "The blastocoele",
+        "The exocoelomic cavity"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The blastocoele",
+      "explanation": "The fluid that passes from the uterine cavity into the morula accumulates to form a single large fluid-filled cavity known as the blastocyst cavity, or blastocoele.",
+      "section": "Week One of Development",
+      "questionNumber": 76
+    },
+    {
+      "id": "ana203-ge-week-one-77",
+      "text": "The morula is not simply a uniform ball of cells; it exhibits early cellular segregation. Into what two distinct populations do the cells of the morula separate?",
+      "options": [
+        "Epiblast and hypoblast",
+        "Syncytiotrophoblast and cytotrophoblast",
+        "Ectoderm and endoderm",
+        "An inner cell mass and an outer cell mass"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. An inner cell mass and an outer cell mass",
+      "explanation": "Some cells of the morula segregate into a central group called the inner cell mass (embryoblast), which is surrounded by a peripheral layer of cells that form the outer cell mass (trophoblast).",
+      "section": "Week One of Development",
+      "questionNumber": 77
+    },
+    {
+      "id": "ana203-ge-week-one-78",
+      "text": "Monozygotic twins are genetically identical. What early embryological divergence results in the formation of monozygotic twins?",
+      "options": [
+        "The independent development of the two blastomeres resulting from the first mitotic division",
+        "The fertilization of two distinct oocytes",
+        "The occurrence of anaphase lag during the 8-cell stage",
+        "The fusion of two separate morulae"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The independent development of the two blastomeres resulting from the first mitotic division",
+      "explanation": "Monozygotic twins form specifically if the two blastomeres that arise from the 1st mitotic division of the zygote separate and develop completely independent of each other.",
+      "section": "Week One of Development",
+      "questionNumber": 78
+    },
+    {
+      "id": "ana203-ge-week-one-79",
+      "text": "The first week of development encompasses several major transformative milestones. Which statement best summarizes the status of the embryo at the exact end of week 1?",
+      "options": [
+        "It is a solid morula freely floating in the fallopian tube.",
+        "It has passed through cleavage and blastogenesis, and has commenced implantation.",
+        "It has fully completed implantation and established the primitive streak.",
+        "It has formed the neural tube and somites."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It has passed through cleavage and blastogenesis, and has commenced implantation.",
+      "explanation": "The summary of the first week dictates that by its end, the embryo has passed through cleavage and blastogenesis, and has already commenced the process of implantation into the endometrium.",
+      "section": "Week One of Development",
+      "questionNumber": 79
+    },
+    {
+      "id": "ana203-ge-week-one-80",
+      "text": "Placenta praevia presents a severe mechanical problem during childbirth due to the placenta blocking the internal os. What medical intervention is typically mandated to safely deliver the infant in this scenario?",
+      "options": [
+        "Administration of high-dose oxytocin",
+        "Use of forceps for vaginal extraction",
+        "A Cesarean section (CS)",
+        "Manual rotation of the fetus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A Cesarean section (CS)",
+      "explanation": "Because the placenta blocks the internal os and would rupture during vaginal birth causing fatal bleeding, a Cesarean section (CS) is required for safe delivery.",
+      "section": "Week One of Development",
+      "questionNumber": 80
+    },
+    {
+      "id": "ana203-ge-week-one-81",
+      "text": "At its most fundamental biological level, what is the defining genetic essence of the fertilization process?",
+      "options": [
+        "The fusion of the hereditary material of two gametes to form a diploid set of chromosomes",
+        "The rapid initiation of continuous cell division",
+        "The complete destruction of paternal mitochondrial DNA",
+        "The activation of the cortical reaction"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The fusion of the hereditary material of two gametes to form a diploid set of chromosomes",
+      "explanation": "The absolute essence of fertilization is the fusion of the hereditary material of two different haploid sex cells (gametes) to form a single zygote with a complete diploid set of chromosomes typical of the species.",
+      "section": "Week One of Development",
+      "questionNumber": 81
+    },
+    {
+      "id": "ana203-ge-week-one-82",
+      "text": "The ovulated oocyte is not bare; it is surrounded by a cellular corona radiata. What is the initial interaction between the fertilizing sperm and this layer?",
+      "options": [
+        "The sperm immediately releases cortical granules.",
+        "The sperm bypasses it through a preexisting pore.",
+        "Hundreds of sperm are attracted to it and begin to physically break through the barrier of granulosa cells.",
+        "The sperm fuses directly with the corona radiata cells to share DNA."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Hundreds of sperm are attracted to it and begin to physically break through the barrier of granulosa cells.",
+      "explanation": "Hundreds of sperm are attracted to the corona radiata and begin the process of breaking through this cellular barrier of granulosa cells to approach the underlying zona pellucida.",
+      "section": "Week One of Development",
+      "questionNumber": 82
+    },
+    {
+      "id": "ana203-ge-week-one-83",
+      "text": "The acrosome reaction is a prerequisite for zona pellucida penetration. What is the functional mechanism of this reaction?",
+      "options": [
+        "The release of a massive calcium wave into the oocyte",
+        "The enzymatic digestion of the sperm's own tail",
+        "The secretion of digestive enzymes that break down the glycoprotein membrane of the zona pellucida",
+        "The cross-linking of the zona pellucida to prevent polyspermy"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The secretion of digestive enzymes that break down the glycoprotein membrane of the zona pellucida",
+      "explanation": "The acrosome reaction involves the bursting of the acrosome, which releases digestive enzymes that actively break down the glycoprotein matrix of the zona pellucida, exposing the oocyte's plasma membrane.",
+      "section": "Week One of Development",
+      "questionNumber": 83
+    },
+    {
+      "id": "ana203-ge-week-one-84",
+      "text": "The cortical reaction is the slow block to polyspermy. At what precise moment does this reaction occur during the sequence of fertilization?",
+      "options": [
+        "Before the sperm reaches the corona radiata",
+        "While the sperm is traversing the zona pellucida",
+        "Only after the pronuclei have fully fused",
+        "Once the sperm cells find their way past the zona pellucida and fuse with the plasma membrane"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Once the sperm cells find their way past the zona pellucida and fuse with the plasma membrane",
+      "explanation": "The cortical reaction occurs specifically after the sperm cells have penetrated the zona pellucida and fused with the plasma membrane of the secondary oocyte.",
+      "section": "Week One of Development",
+      "questionNumber": 84
+    },
+    {
+      "id": "ana203-ge-week-one-85",
+      "text": "The zona pellucida contains specific receptor molecules critical for fertilization. What is the designated name of the glycoprotein to which the sperm head must bind to trigger the acrosome reaction?",
+      "options": [
+        "Integrin alpha-5",
+        "Fibronectin",
+        "ZP3 glycoprotein",
+        "Hyaluronic acid"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. ZP3 glycoprotein",
+      "explanation": "A complementary molecule on the surface of the sperm head must bind specifically to a ZP3 glycoprotein within the zona pellucida. This highly specific binding is the trigger for the acrosome reaction.",
+      "section": "Week One of Development",
+      "questionNumber": 85
+    },
+    {
+      "id": "ana203-ge-week-one-86",
+      "text": "Following the formation of the male and female pronuclei, the zygote prepares for its first division. What essential genetic process must occur within the pronuclei as they migrate toward the center?",
+      "options": [
+        "Meiotic recombination",
+        "Rapid replication of their DNA",
+        "Transcription of massive amounts of RNA",
+        "Degradation of maternal epigenetic markers"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Rapid replication of their DNA",
+      "explanation": "As the pronuclei migrate toward the center of the oocyte, they rapidly replicate their DNA. This ensures that the resulting blastomeres each receive a full diploid complement of DNA after the first mitotic division.",
+      "section": "Week One of Development",
+      "questionNumber": 86
+    },
+    {
+      "id": "ana203-ge-week-one-87",
+      "text": "The timeline of early cleavage is relatively uniform in healthy human development. At which day post-fertilization does the embryo typically reach the 2-cell stage?",
+      "options": [
+        "Day 0",
+        "Day 3",
+        "Day 4",
+        "Day 1"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Day 1",
+      "explanation": "According to the developmental timeline chart, the first cleavage completes and the embryo reaches the 2-cell stage on Day 1.",
+      "section": "Week One of Development",
+      "questionNumber": 87
+    },
+    {
+      "id": "ana203-ge-week-one-88",
+      "text": "Compaction dramatically alters the morphology of the morula. By which day is the embryo definitively classified as an 8-cell compacted morula?",
+      "options": [
+        "Day 3 to 4",
+        "Day 1",
+        "Day 6",
+        "Day 8"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Day 3 to 4",
+      "explanation": "The timeline illustrates the progression from a 4-cell stage to an 8-cell uncompacted morula, and then to an 8-cell compacted morula between Day 3 and Day 4.",
+      "section": "Week One of Development",
+      "questionNumber": 88
+    },
+    {
+      "id": "ana203-ge-week-one-89",
+      "text": "Ectopic pregnancies are a significant cause of maternal morbidity. Which anatomical site is the overwhelmingly most common location for an ectopic implantation to occur?",
+      "options": [
+        "The cervix",
+        "The uterine tube (tubal pregnancy)",
+        "The pouch of Douglas",
+        "The surface of the ovary"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The uterine tube (tubal pregnancy)",
+      "explanation": "Ectopic implantation usually occurs in the uterine tube, which is referred to as a tubal pregnancy. It is the most common site for implantation outside the normal uterine cavity.",
+      "section": "Week One of Development",
+      "questionNumber": 89
+    },
+    {
+      "id": "ana203-ge-week-one-90",
+      "text": "When a blastocyst implants in the cervix rather than the uterine body, it is termed a cervical ectopic pregnancy. What is the fundamental difference between a cervical ectopic pregnancy and placenta praevia?",
+      "options": [
+        "Placenta praevia occurs in the fallopian tube.",
+        "Cervical ectopics do not cause bleeding.",
+        "Placenta praevia involves normal uterine implantation that is situated too close to the internal os, while cervical ectopics implant entirely within the cervical canal.",
+        "They are clinically synonymous terms."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. They are clinically synonymous terms.",
+      "explanation": "The text distinguishes them simply by listing \"Cervix\" as an ectopic site, and separately describing \"Placenta praevia\" as a condition where \"the placenta is sited close to the internal os of the cervix\". Therefore, placenta praevia is near the os, while a cervical ectopic is in the cervix itself.",
+      "section": "Week One of Development",
+      "questionNumber": 90
+    },
+    {
+      "id": "ana203-ge-week-one-91",
+      "text": "Mosaicism results in an individual possessing multiple cell lines with varying chromosome numbers. What is the specific cellular mechanism cited as the cause of this condition during early cleavage?",
+      "options": [
+        "Polyspermy",
+        "The fusion of two separate morulae",
+        "Non-dysjunction or anaphase lag of chromosomes",
+        "The complete failure of the second meiotic division"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Non-dysjunction or anaphase lag of chromosomes",
+      "explanation": "Mosaicism arises early in cleavage strictly due to non-dysjunction or anaphase lag of chromosomes during mitosis, leading to disparate chromosome numbers in subsequent cell lineages.",
+      "section": "Week One of Development",
+      "questionNumber": 91
+    },
+    {
+      "id": "ana203-ge-week-one-92",
+      "text": "In contrast to mosaicism, chimerism results in an individual with two genetically distinct cell populations. What is the absolute origin of these two different cell populations in a chimera?",
+      "options": [
+        "They arise from two distinct zygotes that fuse into a single individual.",
+        "They arise from a single zygote that undergoes severe chromosomal non-dysjunction.",
+        "They arise from the fertilization of a single oocyte by two sperms.",
+        "They arise from the splitting of the inner cell mass."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. They arise from two distinct zygotes that fuse into a single individual.",
+      "explanation": "A chimera develops when two entirely distinct zygotes (which normally would have become fraternal twins) fuse to form a single individual, resulting in two genetically different cell populations.",
+      "section": "Week One of Development",
+      "questionNumber": 92
+    },
+    {
+      "id": "ana203-ge-week-one-93",
+      "text": "Blastogenesis is the defining process that transforms the solid morula into a hollow structure. How is the process of blastogenesis explicitly defined?",
+      "options": [
+        "The active shedding of the zona pellucida",
+        "The segregation of the embryoblast and trophoblast",
+        "The initial mitotic division of the zygote",
+        "The process that converts the morula to a fluid-filled blastocyst"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The process that converts the morula to a fluid-filled blastocyst",
+      "explanation": "Blastogenesis is defined explicitly as the process that converts the solid morula into a fluid-filled blastocyst.",
+      "section": "Week One of Development",
+      "questionNumber": 93
+    },
+    {
+      "id": "ana203-ge-week-one-94",
+      "text": "For a pregnancy to proceed normally to term, the blastocyst must select an appropriate site for implantation within the uterus. Which specific surfaces of the endometrium are considered normal implantation sites?",
+      "options": [
+        "The lateral margins near the fallopian ostia",
+        "The internal os of the cervix",
+        "The posterior or anterior wall of the endometrium",
+        "The extreme fundus of the uterus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The posterior or anterior wall of the endometrium",
+      "explanation": "Normal implantation occurs on the heavily vascularized posterior or anterior wall of the endometrium.",
+      "section": "Week One of Development",
+      "questionNumber": 94
+    },
+    {
+      "id": "ana203-ge-week-one-95",
+      "text": "A tubal pregnancy typically ends in rupture. What specific consequence of this rupture makes it a life-threatening medical emergency?",
+      "options": [
+        "Severe bleeding from damaged vessels",
+        "Immediate systemic sepsis",
+        "Severe, irreversible damage to the adjacent ovary",
+        "Tetanic contractions of the myometrium"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Severe bleeding from damaged vessels",
+      "explanation": "Rupture of the uterine tube, which may occur at about 8 weeks of a tubal pregnancy, results in severe bleeding from the damaged maternal vessels, posing a fatal risk.",
+      "section": "Week One of Development",
+      "questionNumber": 95
+    },
+    {
+      "id": "ana203-ge-week-one-96",
+      "text": "The interaction between the sperm and the zona pellucida is highly specific. Biochemical analysis of the ZP3 molecule, which triggers the acrosome reaction, reveals it to be which type of macromolecule?",
+      "options": [
+        "A simple lipid",
+        "A glycoprotein",
+        "A complex carbohydrate polymer",
+        "A nucleic acid sequence"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A glycoprotein",
+      "explanation": "The ZP3 molecule in the zona pellucida, to which the sperm head binds to trigger the acrosome reaction, is explicitly identified as a glycoprotein.",
+      "section": "Week One of Development",
+      "questionNumber": 96
+    },
+    {
+      "id": "ana203-ge-week-one-97",
+      "text": "The timing of the very first cell division is relatively slow compared to subsequent rapid cleavages. Approximately how much time elapses between fertilization and the beginning of the first mitotic division?",
+      "options": [
+        "12 hours",
+        "30 hours",
+        "48 hours",
+        "72 hours"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 30 hours",
+      "explanation": "The first mitotic division of the zygote, which yields the first two blastomeres, begins approximately 30 hours after fertilization.",
+      "section": "Week One of Development",
+      "questionNumber": 97
+    },
+    {
+      "id": "ana203-ge-week-one-98",
+      "text": "Throughout the first week of development, the embryo increases its cell number dramatically. By what specific biological mechanism does cleavage proceed?",
+      "options": [
+        "Mitosis",
+        "Meiosis I",
+        "Meiosis II",
+        "Amitosis"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Mitosis",
+      "explanation": "Cleavage, the process that transforms the unicellular zygote into a multicellular morula, occurs exclusively by mitosis.",
+      "section": "Week One of Development",
+      "questionNumber": 98
+    },
+    {
+      "id": "ana203-ge-week-one-99",
+      "text": "During compaction, the outer blastomeres must form a tight, impermeable seal. Which cellular structures provide this critical sealing function among the cells destined to become the trophoblast?",
+      "options": [
+        "Gap junctions",
+        "Desmosomes",
+        "Adherens junctions",
+        "Tight junctions"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Tight junctions",
+      "explanation": "During compaction, the outer blastomeres become closely associated by forming tight junctions, which enhances cell-cell interaction and seals the internal environment.",
+      "section": "Week One of Development",
+      "questionNumber": 99
+    },
+    {
+      "id": "ana203-ge-week-one-100",
+      "text": "The primary objective of fertilization is to ensure the genetic viability of the offspring. How does the process of syngamy achieve the necessary chromosomal complement for human development?",
+      "options": [
+        "By combining four haploid pronuclei into a tetraploid mass",
+        "By discarding half of the maternal chromosomes",
+        "By fusing one haploid sperm with one haploid egg to form a diploid zygote",
+        "By relying entirely on the maternal mitochondrial DNA"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. By fusing one haploid sperm with one haploid egg to form a diploid zygote",
+      "explanation": "The essence of fertilization is to ensure that the offspring has one complete diploid set of chromosomes, achieved when exactly one haploid sperm fuses with one haploid egg.",
+      "section": "Week One of Development",
+      "questionNumber": 100
+    }
+  ]
+}
