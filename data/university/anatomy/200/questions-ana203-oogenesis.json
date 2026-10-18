@@ -1,0 +1,760 @@
+{
+  "title": "Oogenesis",
+  "course": "ANA 203",
+  "totalQuestions": 50,
+  "sections": [
+    "Oogenesis (Q1-Q50)"
+  ],
+  "questions": [
+    {
+      "id": "ana203-ge-oogenesis-1",
+      "text": "Advanced maternal age is a known clinical risk factor in gametogenesis. Which of the following conditions is primarily associated with numerical chromosomal aberrations like trisomy?",
+      "options": [
+        "Down's syndrome",
+        "Achondroplasia",
+        "Sickle cell anemia",
+        "Cystic fibrosis"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Down's syndrome",
+      "explanation": "According to clinical correlates, chromosomal anomalies such as Down's syndrome (trisomy) increase with maternal age due to non-disjunction events during the prolonged meiotic arrest. Achondroplasia is linked to a specific gene mutation rather than a numerical chromosomal aberration.",
+      "section": "Oogenesis",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana203-ge-oogenesis-2",
+      "text": "Which specific structural feature is the defining morphological characteristic that differentiates a secondary follicle from a primary follicle?",
+      "options": [
+        "A single layer of squamous follicular cells",
+        "A multi-layered, stratified cuboidal epithelium",
+        "The appearance of the first polar body in the perivitelline space",
+        "The coalescence of fluid-filled spaces to form an antrum"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The coalescence of fluid-filled spaces to form an antrum",
+      "explanation": "The secondary follicle is formally identified when the primary follicle develops an antrum, which is a cavity filled with follicular fluid.",
+      "section": "Oogenesis",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana203-ge-oogenesis-3",
+      "text": "The cumulus oophorus is a distinct structural feature observed during follicular development. What does this structure represent?",
+      "options": [
+        "The connective tissue capsule formed by the theca externa",
+        "The intact mass of follicular cells immediately surrounding the eccentric primary oocyte",
+        "The fluid-filled coalesced spaces within the secondary follicle",
+        "The single layer of squamous cells identifying a primordial follicle"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The intact mass of follicular cells immediately surrounding the eccentric primary oocyte",
+      "explanation": "As the fluid-filled antrum progressively enlarges, it displaces the primary oocyte to an eccentric position, where it remains surrounded by a specialized mound of intact follicular cells known as the cumulus oophorus.",
+      "section": "Oogenesis",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana203-ge-oogenesis-4",
+      "text": "Which component of a mature follicle eventually merges directly with the surrounding ovarian stroma?",
+      "options": [
+        "The cumulus oophorus",
+        "The theca interna",
+        "The theca externa",
+        "The zona pellucida"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The theca externa",
+      "explanation": "The theca externa forms the outermost fibrous capsule of the developing follicle and gradually merges with the surrounding connective tissue of the ovarian stroma.",
+      "section": "Oogenesis",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana203-ge-oogenesis-5",
+      "text": "What is the primary function of the Oocyte Maturation Inhibitor (OMI) during the postnatal maturation of oocytes?",
+      "options": [
+        "To maintain primary oocytes in the dictyotene stage until puberty",
+        "To prevent the premature release of the secondary oocyte into the peritoneal cavity",
+        "To suppress the secretion of luteinizing hormone prior to the mid-cycle surge",
+        "To inhibit the completion of meiosis II in the absence of fertilization"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. To maintain primary oocytes in the dictyotene stage until puberty",
+      "explanation": "OMI, which is secreted by the surrounding follicular cells, acts to keep the primary oocytes arrested in the dictyotene (resting) phase of prophase I throughout childhood until puberty initiates further maturation.",
+      "section": "Oogenesis",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana203-ge-oogenesis-6",
+      "text": "What is the approximate number of primary oocytes estimated to be present in each ovary at the time of birth?",
+      "options": [
+        "400",
+        "400,000",
+        "7 million",
+        "1 million"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. 1 million",
+      "explanation": "At the time of birth, the extensive atresia of fetal life has reduced the initial peak of 7 million germ cells down to approximately 1 million primary oocytes per ovary.",
+      "section": "Oogenesis",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana203-ge-oogenesis-7",
+      "text": "What specific physiological event is absolutely required for the secondary oocyte to break its meiotic arrest and complete meiosis II?",
+      "options": [
+        "The mid-cycle surge of Luteinizing Hormone (LH)",
+        "The initial formation of the fluid-filled antrum",
+        "Successful fertilization by a spermatozoon",
+        "The secretion of progesterone by the corpus luteum"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Successful fertilization by a spermatozoon",
+      "explanation": "An ovulated secondary oocyte is arrested in metaphase II. It will only resume and complete the second meiotic division to become a mature ovum if it is successfully penetrated and fertilized by a sperm.",
+      "section": "Oogenesis",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana203-ge-oogenesis-8",
+      "text": "What distinct structural layer immediately surrounds the primary oocyte in a developing secondary follicle, separating it from the granulosa cells?",
+      "options": [
+        "Theca externa",
+        "Zona pellucida",
+        "Theca interna",
+        "Corona radiata"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Zona pellucida",
+      "explanation": "The zona pellucida is a layer of glycoprotein produced jointly by the oocyte and follicular cells that intimately surrounds the oocyte throughout its follicular development.",
+      "section": "Oogenesis",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana203-ge-oogenesis-9",
+      "text": "Which of the following conditions is cited as an example of a genetic anomaly arising from a specific gene mutation rather than a numerical chromosomal aberration?",
+      "options": [
+        "Achondroplasia",
+        "Down's syndrome",
+        "Turner's syndrome",
+        "Klinefelter's syndrome"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Achondroplasia",
+      "explanation": "While conditions like Down's syndrome, Turner's syndrome, and Klinefelter's syndrome are numerical chromosomal aberrations (trisomies and monosomies), achondroplasia occurs due to a specific structural gene mutation.",
+      "section": "Oogenesis",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana203-ge-oogenesis-10",
+      "text": "The zona pellucida is a crucial acellular layer that surrounds the primary oocyte. Which cells are responsible for its production?",
+      "options": [
+        "The secretory cells of the theca interna",
+        "The fibroblast-like cells of the theca externa",
+        "The ciliated epithelial cells of the fallopian tube",
+        "The developing oocyte and the adjacent follicular cells"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The developing oocyte and the adjacent follicular cells",
+      "explanation": "The protective glycoprotein coat known as the zona pellucida is actively synthesized and secreted by both the primary oocyte and the surrounding follicular (granulosa) cells.",
+      "section": "Oogenesis",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana203-ge-oogenesis-11",
+      "text": "What role do the fibroblast-like cells of the theca externa primarily serve in the developing follicle?",
+      "options": [
+        "Synthesizing estrogen to prepare the endometrium",
+        "Secreting the zona pellucida glycoproteins",
+        "Forming an outer connective tissue boundary that merges with the ovarian stroma",
+        "Producing the luteinizing hormone required for ovulation"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Forming an outer connective tissue boundary that merges with the ovarian stroma",
+      "explanation": "The theca externa is the outermost layer of the theca folliculi, composed of connective tissue and fibroblast-like cells that provide structural support and seamlessly merge with the rest of the ovarian stroma.",
+      "section": "Oogenesis",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana203-ge-oogenesis-12",
+      "text": "Clomiphene citrate is a pharmacological agent utilized in reproductive medicine. Based on its clinical correlation with oogenesis, what is its primary physiological effect?",
+      "options": [
+        "It permanently halts the meiotic progression of primary oocytes.",
+        "It enhances ovulation, potentially allowing multiple follicles to mature simultaneously.",
+        "It induces the formation of the zona pellucida in primordial follicles.",
+        "It selectively triggers the atresia of secondary follicles to preserve ovarian reserve."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It enhances ovulation, potentially allowing multiple follicles to mature simultaneously.",
+      "explanation": "Under normal conditions, only one Graafian follicle matures per cycle. However, ovulation-enhancing drugs like clomiphene citrate can stimulate the simultaneous maturation of several follicles, increasing the likelihood of multiple pregnancies.",
+      "section": "Oogenesis",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana203-ge-oogenesis-13",
+      "text": "During the transition from a primordial to a primary follicle, how does the morphology of the surrounding follicular cells change?",
+      "options": [
+        "They transform from flat (squamous) to cuboidal and become stratified.",
+        "They degenerate and are completely replaced by theca interna cells.",
+        "They secrete fluid to immediately form a large, central antrum.",
+        "They fuse to form a single, multi-nucleated syncytium around the oocyte."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. They transform from flat (squamous) to cuboidal and become stratified.",
+      "explanation": "Under the influence of FSH, the single layer of flattened epithelial cells surrounding the primordial follicle thickens to become cuboidal and then proliferates to form a stratified layer, marking the transition to a primary follicle.",
+      "section": "Oogenesis",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana203-ge-oogenesis-14",
+      "text": "Which of the following is a true statement regarding the meiotic divisions observed in human oogenesis?",
+      "options": [
+        "They produce four functionally identical gametes per oogonium.",
+        "They bypass prophase I entirely to conserve cellular energy.",
+        "They are completely independent of gonadotropin regulation.",
+        "They are highly asymmetrical, resulting in the formation of polar bodies."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. They are highly asymmetrical, resulting in the formation of polar bodies.",
+      "explanation": "Unlike spermatogenesis, which yields four equal sperm cells, oocyte meiotic divisions are highly unequal, concentrating almost all cytoplasm in one cell (the oocyte/ovum) while discarding excess genetic material in small, non-functional polar bodies.",
+      "section": "Oogenesis",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana203-ge-oogenesis-15",
+      "text": "What is the approximate diameter of a fully mature Graafian (tertiary) follicle just prior to ovulation?",
+      "options": [
+        "2 mm",
+        "10 mm",
+        "20 mm",
+        "40 mm"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. 20 mm",
+      "explanation": "At full maturity, the fluid-filled antrum of the Graafian follicle has expanded significantly, causing the entire follicle to measure approximately 20 mm across.",
+      "section": "Oogenesis",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana203-ge-oogenesis-16",
+      "text": "The dictyotene stage is a prolonged resting phase critical to human oogenesis. This specific phase is a sub-stage of which meiotic event?",
+      "options": [
+        "Metaphase II",
+        "Prophase I",
+        "Telophase I",
+        "Anaphase II"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Prophase I",
+      "explanation": "Primary oocytes enter prophase I of meiosis during fetal development but arrest their progression before reaching metaphase I, entering a specialized resting state known as the dictyotene stage.",
+      "section": "Oogenesis",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana203-ge-oogenesis-17",
+      "text": "As the primary follicle enlarges, the surrounding ovarian stroma organizes into the theca folliculi. What is the primary functional role of the theca interna?",
+      "options": [
+        "It secretes steroid hormones such as estrogens and progesterone.",
+        "It synthesizes the glycoproteins required for the zona pellucida.",
+        "It produces Oocyte Maturation Inhibitor to halt meiosis.",
+        "It provides a tough, fibrous connective tissue capsule for structural support."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It secretes steroid hormones such as estrogens and progesterone.",
+      "explanation": "The theca interna is composed of vascularized, highly specialized secretory cells that produce key steroid hormones, specifically estrogens and progesterone, to support the reproductive cycle.",
+      "section": "Oogenesis",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana203-ge-oogenesis-18",
+      "text": "If a secondary oocyte fails to encounter a spermatozoon following ovulation, what is its expected viable lifespan before it undergoes degeneration?",
+      "options": [
+        "Approximately 2 hours",
+        "Approximately 12 hours",
+        "Approximately 48 hours",
+        "Approximately 24 hours"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Approximately 24 hours",
+      "explanation": "An unfertilized secondary oocyte remains viable in the female reproductive tract for roughly 24 hours post-ovulation before it inevitably degenerates.",
+      "section": "Oogenesis",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana203-ge-oogenesis-19",
+      "text": "Oogenesis differs from spermatogenesis regarding the timing of meiotic initiation. When does meiosis first begin in a female?",
+      "options": [
+        "Immediately following the first menstrual cycle",
+        "At the onset of puberty, triggered by rising FSH levels",
+        "Before birth, during fetal development",
+        "Only after successful penetration by a spermatozoon"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Before birth, during fetal development",
+      "explanation": "A major distinction between the two processes is that female germ cells begin their first meiotic division (meiosis I) while still in utero, well before birth.",
+      "section": "Oogenesis",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana203-ge-oogenesis-20",
+      "text": "At which stage of embryonic development do primordial germ cells typically arrive at the developing gonads?",
+      "options": [
+        "During the 3rd week of gestation",
+        "By the 5th week of intra-uterine life",
+        "Immediately following neural tube closure",
+        "At the onset of the 4th month of development"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. By the 5th week of intra-uterine life",
+      "explanation": "Primordial germ cells first appear in the wall of the yolk sac around the 3rd week, but they actively migrate and reach the developing gonadal ridges by the 5th week.",
+      "section": "Oogenesis",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana203-ge-oogenesis-21",
+      "text": "Following the completion of meiosis I just prior to ovulation, what happens to the resulting first polar body?",
+      "options": [
+        "It is extruded and retains very sparse cytoplasm compared to the secondary oocyte.",
+        "It receives the bulk of the cytoplasm and rapidly differentiates into the mature ovum.",
+        "It actively secretes Oocyte Maturation Inhibitor to prevent further division.",
+        "It develops into the corpus luteum to support potential implantation."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It is extruded and retains very sparse cytoplasm compared to the secondary oocyte.",
+      "explanation": "The completion of meiosis I is highly asymmetrical; the secondary oocyte retains virtually all the cytoplasm, leaving the first polar body with a tiny fraction of cytoplasm as a mechanism to discard half the chromosomes.",
+      "section": "Oogenesis",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana203-ge-oogenesis-22",
+      "text": "When a secondary oocyte is ovulated, it carries an inherent ploidy and chromosomal structure. Which statement accurately describes its genetic payload at this precise moment?",
+      "options": [
+        "It is diploid with 46 single-stranded chromosomes.",
+        "It is haploid with 23 single-stranded chromosomes.",
+        "It is diploid with 46 double-stranded chromosomes.",
+        "It is haploid with 23 double-stranded chromosomes."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. It is haploid with 23 double-stranded chromosomes.",
+      "explanation": "Meiosis I separates homologous chromosomes but not sister chromatids. Therefore, the resulting secondary oocyte is haploid (23 chromosomes), but each chromosome remains double-stranded.",
+      "section": "Oogenesis",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana203-ge-oogenesis-23",
+      "text": "When comparing male and female gametogenesis, which statement accurately highlights a fundamental difference in their meiotic divisions?",
+      "options": [
+        "Spermatogenesis involves a prolonged dictyotene resting phase, whereas oogenesis does not.",
+        "Meiosis in females generates four functional gametes per germ cell, unlike in males.",
+        "Female meiotic divisions are highly asymmetrical, resulting in polar bodies, whereas male divisions are symmetrical.",
+        "Both processes begin continuously at puberty and cease simultaneously during senescence."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Female meiotic divisions are highly asymmetrical, resulting in polar bodies, whereas male divisions are symmetrical.",
+      "explanation": "Spermatogenesis produces four equally viable, functional sperm cells from one spermatocyte. Oogenesis produces only one large, functional ovum and up to two non-functional polar bodies due to asymmetrical cell division.",
+      "section": "Oogenesis",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana203-ge-oogenesis-24",
+      "text": "The theca interna is an essential layer of the developing ovarian follicle. What characterizes its cellular composition and primary physiological function?",
+      "options": [
+        "It consists of densely packed fibroblasts providing rigid structural protection.",
+        "It contains secretory cells responsible for producing estrogens and progesterone.",
+        "It is composed of ciliated cells that help propel the oocyte toward the fallopian tube.",
+        "It forms the acellular glycoprotein barrier known as the zona pellucida."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It contains secretory cells responsible for producing estrogens and progesterone.",
+      "explanation": "Located just outside the granulosa cells, the theca interna is highly vascularized and rich in secretory cells that actively synthesize essential steroid reproductive hormones.",
+      "section": "Oogenesis",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana203-ge-oogenesis-25",
+      "text": "The completion of meiosis II by a fertilized secondary oocyte yields two distinct cellular products. What are these products?",
+      "options": [
+        "A mature ovum and a second polar body",
+        "Two mature ova of equal cytoplasmic volume",
+        "A primary oocyte and a definitive yolk sac",
+        "A diploid zygote and a first polar body"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. A mature ovum and a second polar body",
+      "explanation": "Upon fertilization, the secondary oocyte completes its second meiotic division, resulting in one large mature ovum (which immediately merges with the sperm nucleus) and one tiny, non-functional second polar body.",
+      "section": "Oogenesis",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana203-ge-oogenesis-26",
+      "text": "At what precise point during the ovarian cycle does the primary oocyte complete its first meiotic division?",
+      "options": [
+        "Immediately following the arrival of primordial germ cells in the gonads",
+        "During the transition from a primordial to a primary follicle",
+        "At the exact moment of fertilization by a spermatozoon",
+        "Just before ovulation, typically around the 14th day of a 28-day cycle"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Just before ovulation, typically around the 14th day of a 28-day cycle",
+      "explanation": "The primary oocyte remains arrested in prophase I until the hormonal shifts of the mid-cycle (specifically the LH surge) prompt it to complete meiosis I, transforming it into a secondary oocyte just hours prior to ovulation.",
+      "section": "Oogenesis",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana203-ge-oogenesis-27",
+      "text": "Which components structurally define a primordial follicle within the developing ovary?",
+      "options": [
+        "A secondary oocyte enveloped by a stratified layer of cuboidal granulosa cells",
+        "An oogonium surrounded by a newly formed zona pellucida",
+        "A primary oocyte surrounded by a single layer of squamous follicular cells",
+        "A primary oocyte enclosed by both theca interna and theca externa layers"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A primary oocyte surrounded by a single layer of squamous follicular cells",
+      "explanation": "A primordial follicle is the simplest follicular structure, consisting solely of a primary oocyte encapsulated by a single, distinct layer of flattened (squamous) epithelial follicular cells.",
+      "section": "Oogenesis",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana203-ge-oogenesis-28",
+      "text": "Which specific hormonal signal is directly responsible for triggering the ejection of the secondary oocyte from the ruptured Graafian follicle?",
+      "options": [
+        "A sharp decline in circulating estrogen",
+        "An acute surge of Luteinizing Hormone (LH)",
+        "A sustained elevation of Follicle-Stimulating Hormone (FSH)",
+        "The localized release of Oocyte Maturation Inhibitor (OMI)"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. An acute surge of Luteinizing Hormone (LH)",
+      "explanation": "Ovulation is governed by a massive, transient spike in Luteinizing Hormone (the LH surge), which occurs approximately 12-24 hours prior and acts as the physiological trigger for follicular rupture.",
+      "section": "Oogenesis",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana203-ge-oogenesis-29",
+      "text": "The LH surge occurs prior to ovulation to trigger the ejection of the oocyte. Approximately how long before ovulation does this hormonal surge typically happen?",
+      "options": [
+        "12 to 24 hours",
+        "1 to 2 hours",
+        "3 to 5 days",
+        "37 hours"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. 12 to 24 hours",
+      "explanation": "The critical surge in Luteinizing Hormone that finalizes follicular maturation and precipitates the physical release of the secondary oocyte generally precedes ovulation by 12 to 24 hours.",
+      "section": "Oogenesis",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana203-ge-oogenesis-30",
+      "text": "During the prenatal phase of oogenesis, the follicular cells that intimately surround the developing oogonia are originally derived from which embryonic tissue?",
+      "options": [
+        "The neural crest",
+        "The paraxial mesoderm",
+        "The coelomic epithelium",
+        "The endoderm of the yolk sac"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The coelomic epithelium",
+      "explanation": "The supporting flat epithelial cells that organize around the germ cells to form early follicles originate from the surface epithelium of the developing ovary, which is derived from the coelomic epithelium.",
+      "section": "Oogenesis",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana203-ge-oogenesis-31",
+      "text": "At what specific embryonic stage do the primordial germ cells first become visible within the wall of the yolk sac?",
+      "options": [
+        "During the 1st week",
+        "During the 5th week",
+        "By the 3rd week",
+        "By the 7th month"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. By the 3rd week",
+      "explanation": "While they will eventually migrate to the gonads, primordial germ cells are initially identifiable migrating into the endodermal wall of the yolk sac around the 3rd week of embryonic development.",
+      "section": "Oogenesis",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana203-ge-oogenesis-32",
+      "text": "In the context of female gametogenesis, which of the following terms is synonymous with the \"dictyotene\" stage?",
+      "options": [
+        "The preovulatory phase",
+        "The resting phase of prophase I",
+        "The active metaphase II arrest",
+        "The post-fertilization cleavage state"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The resting phase of prophase I",
+      "explanation": "The dictyotene stage is a specialized, prolonged resting phase that occurs specifically during prophase I of meiosis, where primary oocytes are suspended from fetal life until puberty.",
+      "section": "Oogenesis",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana203-ge-oogenesis-33",
+      "text": "What cellular process is predominantly responsible for the massive reduction in the number of germ cells between the 5th month of gestation and the onset of puberty?",
+      "options": [
+        "Widespread atresia and cellular degeneration",
+        "Extrusion of germ cells into the peritoneal cavity",
+        "Rapid completion of meiosis II and subsequent apoptosis",
+        "Conversion of primary oocytes back into primordial stem cells"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Widespread atresia and cellular degeneration",
+      "explanation": "The germ cell population peaks at about 7 million in the 5th month of gestation. Most of these cells undergo programmed cell death, a degenerative process known as atresia, leaving only about 400,000 by puberty.",
+      "section": "Oogenesis",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana203-ge-oogenesis-34",
+      "text": "Unlike spermatogenesis, oogenesis in females is characterized by an inherent limitation regarding the germ cell pool. What defines this limitation?",
+      "options": [
+        "Oogonia are continuously replenished from the coelomic epithelium until menopause.",
+        "New primary oocytes are synthesized rhythmically during each menstrual cycle.",
+        "The stem cell population undergoes accelerated mitosis following the onset of puberty.",
+        "Females are born with a finite, non-renewable supply of all the eggs they will ever produce."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Females are born with a finite, non-renewable supply of all the eggs they will ever produce.",
+      "explanation": "A key distinction between male and female reproduction is that females exhaust their mitotic proliferation of oogonia prior to birth. Thus, they are born with a completely finite reserve of oocytes, which eventually depletes at menopause.",
+      "section": "Oogenesis",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana203-ge-oogenesis-35",
+      "text": "What represents the embryonic origin of the primordial germ cells that eventually differentiate into oogonia?",
+      "options": [
+        "The epiblast, prior to migrating to the wall of the yolk sac",
+        "The paraxial mesoderm adjacent to the developing neural tube",
+        "The coelomic epithelium lining the developing gonadal ridge",
+        "The hypoblast layer during the formation of the bilaminar disc"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The epiblast, prior to migrating to the wall of the yolk sac",
+      "explanation": "Primordial germ cells originate in the epiblast during early embryogenesis. They subsequently migrate out to the yolk sac wall before finally traveling back into the embryo to colonize the developing gonads.",
+      "section": "Oogenesis",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana203-ge-oogenesis-36",
+      "text": "During the preovulatory phase, what specific structural rearrangement makes the primary oocyte eccentric in position within the follicle?",
+      "options": [
+        "The sudden influx of LH isolating the oocyte",
+        "The progressive enlargement of the fluid-filled antrum",
+        "The shedding of the outermost theca externa layers",
+        "The rapid contraction of the surrounding stromal tissue"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The progressive enlargement of the fluid-filled antrum",
+      "explanation": "As the follicle transitions into the secondary stage, the newly formed antrum rapidly accumulates follicular fluid. This expansion physically pushes the oocyte, along with its cumulus oophorus, to an off-center (eccentric) position against the follicular wall.",
+      "section": "Oogenesis",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana203-ge-oogenesis-37",
+      "text": "By the 7th month of prenatal development, what is the predominant cellular state of the germ cells residing in the fetal ovaries?",
+      "options": [
+        "The majority have replicated their DNA and entered the prophase of meiosis I.",
+        "They exist primarily as actively dividing oogonia undergoing rapid mitosis.",
+        "They are arrested in the metaphase of meiosis II awaiting pubertal hormones.",
+        "They are fully mature ova suspended within tertiary Graafian follicles."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The majority have replicated their DNA and entered the prophase of meiosis I.",
+      "explanation": "By the 7th month, the rapid mitotic division phase has ended. Most surviving germ cells have differentiated into primary oocytes, replicated their genetic material, and actively commenced prophase I before arresting.",
+      "section": "Oogenesis",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana203-ge-oogenesis-38",
+      "text": "Approximately how many follicles begin the maturation process during a single, normal ovarian cycle under the influence of gonadotropins?",
+      "options": [
+        "1",
+        "100 to 200",
+        "400",
+        "5 to 15"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. 5 to 15",
+      "explanation": "In a typical cycle, a small cohort of about 5 to 15 follicles is recruited and begins to mature under the influence of FSH and LH, though usually only one ultimately reaches full maturity and ovulates.",
+      "section": "Oogenesis",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana203-ge-oogenesis-39",
+      "text": "The production of Oocyte Maturation Inhibitor (OMI) is crucial for halting meiosis during childhood. Which specific cell type secretes this regulatory substance?",
+      "options": [
+        "Theca interna cells",
+        "Ovarian stromal fibroblasts",
+        "Follicular (granulosa) cells",
+        "Primordial germ cells"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Follicular (granulosa) cells",
+      "explanation": "The follicular (epithelial) cells that directly surround the primary oocyte within the primordial follicle secrete OMI, which acts on the oocyte to suspend meiotic division until hormonal shifts occur at puberty.",
+      "section": "Oogenesis",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana203-ge-oogenesis-40",
+      "text": "Approximately how many primary oocytes successfully survive the extensive atresia of childhood to be present at the onset of puberty?",
+      "options": [
+        "400",
+        "400,000",
+        "1,000,000",
+        "7,000,000"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 400,000",
+      "explanation": "While roughly 1 million primary oocytes exist at birth, continued atresia throughout childhood depletes this number so that only about 400,000 remain viable within the ovaries by the time a female reaches puberty.",
+      "section": "Oogenesis",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana203-ge-oogenesis-41",
+      "text": "What is the chromosomal configuration of the secondary oocyte immediately after the completion of meiosis I?",
+      "options": [
+        "23 double-stranded chromosomes",
+        "46 single-stranded chromosomes",
+        "23 single-stranded chromosomes",
+        "46 double-stranded chromosomes"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. 23 double-stranded chromosomes",
+      "explanation": "Meiosis I is a reduction division that halves the chromosome number from 46 to 23. However, the sister chromatids have not yet separated, so each of those 23 chromosomes remains double-stranded.",
+      "section": "Oogenesis",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana203-ge-oogenesis-42",
+      "text": "During the reproductive lifespan of a typical female, spanning from puberty to menopause, approximately how many oocytes will undergo complete maturation and ovulation?",
+      "options": [
+        "1 million",
+        "7 million",
+        "400,000",
+        "400"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. 400",
+      "explanation": "Although 400,000 oocytes are present at puberty, the vast majority will undergo atresia. Only one follicle typically ovulates per menstrual cycle, equating to roughly 400 ovulations over the average female reproductive lifespan.",
+      "section": "Oogenesis",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana203-ge-oogenesis-43",
+      "text": "The production of Oocyte Maturation Inhibitor (OMI) is crucial for halting meiosis during childhood. Which specific cell type secretes this regulatory substance?",
+      "options": [
+        "Theca interna cells",
+        "Ovarian stromal fibroblasts",
+        "Follicular (granulosa) cells",
+        "Primordial germ cells"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Follicular (granulosa) cells",
+      "explanation": "The follicular (epithelial) cells that directly surround the primary oocyte within the primordial follicle secrete OMI, which acts on the oocyte to suspend meiotic division until hormonal shifts occur at puberty.",
+      "section": "Oogenesis",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana203-ge-oogenesis-44",
+      "text": "Turner's syndrome is listed as a chromosomal anomaly that can occur due to errors in gametogenesis. What is the fundamental genetic nature of this specific syndrome?",
+      "options": [
+        "A structural gene mutation causing abnormal cartilage formation",
+        "A trisomy involving the sex chromosomes",
+        "A monosomy resulting from the loss of a sex chromosome",
+        "A polyploid state due to polyspermy"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A monosomy resulting from the loss of a sex chromosome",
+      "explanation": "Turner's syndrome is a classic example of a monosomy (specifically 45,X0), where an entire sex chromosome is missing, often due to non-disjunction errors during maternal or paternal gametogenesis.",
+      "section": "Oogenesis",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana203-ge-oogenesis-45",
+      "text": "What represents the embryonic origin of the primordial germ cells that eventually differentiate into oogonia?",
+      "options": [
+        "The epiblast, prior to migrating to the wall of the yolk sac",
+        "The paraxial mesoderm adjacent to the developing neural tube",
+        "The coelomic epithelium lining the developing gonadal ridge",
+        "The hypoblast layer during the formation of the bilaminar disc"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The epiblast, prior to migrating to the wall of the yolk sac",
+      "explanation": "Primordial germ cells originate in the epiblast during early embryogenesis. They subsequently migrate out to the yolk sac wall before finally traveling back into the embryo to colonize the developing gonads.",
+      "section": "Oogenesis",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana203-ge-oogenesis-46",
+      "text": "Klinefelter's syndrome is identified as a potential abnormality associated with gametogenesis. How is this syndrome chromosomally classified in the provided material?",
+      "options": [
+        "A structural gene deletion",
+        "A monosomy",
+        "A lethal polyploidy",
+        "A trisomy"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. A trisomy",
+      "explanation": "The provided lecture specifies Klinefelter's syndrome as a trisomy (specifically 47,XXY), which occurs due to an extra sex chromosome acquired through meiotic non-disjunction.",
+      "section": "Oogenesis",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana203-ge-oogenesis-47",
+      "text": "During the prenatal phase of oogenesis, the follicular cells that intimately surround the developing oogonia are originally derived from which embryonic tissue?",
+      "options": [
+        "The neural crest",
+        "The paraxial mesoderm",
+        "The coelomic epithelium",
+        "The endoderm of the yolk sac"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The coelomic epithelium",
+      "explanation": "The supporting flat epithelial cells that organize around the germ cells to form early follicles originate from the surface epithelium of the developing ovary, which is derived from the coelomic epithelium.",
+      "section": "Oogenesis",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana203-ge-oogenesis-48",
+      "text": "At the moment the secondary oocyte is ejected from the ruptured Graafian follicle into the peritoneal cavity, in which stage of cellular division is it arrested?",
+      "options": [
+        "Prophase of meiosis I",
+        "Metaphase of meiosis II",
+        "Anaphase of meiosis I",
+        "Prophase of meiosis II"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Metaphase of meiosis II",
+      "explanation": "Following the completion of meiosis I just before ovulation, the secondary oocyte immediately enters meiosis II but stops at the metaphase stage as it is expelled from the ovary.",
+      "section": "Oogenesis",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana203-ge-oogenesis-49",
+      "text": "During the 4th month in utero, what is the primary activity of the oogonia located within the developing ovaries?",
+      "options": [
+        "They undergo a series of mitotic divisions to form additional oogonia.",
+        "They secrete large volumes of Oocyte Maturation Inhibitor.",
+        "They complete the first meiotic division to form secondary oocytes.",
+        "They synthesize the glycoprotein layer of the zona pellucida."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. They undergo a series of mitotic divisions to form additional oogonia.",
+      "explanation": "During the 4th month of fetal development, the oogonia are highly proliferative, undergoing successive mitotic divisions to exponentially increase the germ cell population before entering meiotic arrest.",
+      "section": "Oogenesis",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana203-ge-oogenesis-50",
+      "text": "What is the defining characteristic of oogenesis regarding its process continuity throughout a female's lifespan?",
+      "options": [
+        "It is a rapid, uninterrupted process that completes within a single 28-day cycle.",
+        "It remains completely dormant from fetal life until the moment of fertilization.",
+        "It is an episodic, non-continuous process punctuated by long periods of meiotic arrest.",
+        "It features continuous stem cell renewal from menarche to menopause."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It is an episodic, non-continuous process punctuated by long periods of meiotic arrest.",
+      "explanation": "A major hallmark of oogenesis is its discontinuous nature. It halts in prophase I from fetal life until puberty, and then halts again in metaphase II, only reaching absolute completion if fertilization occurs.",
+      "section": "Oogenesis",
+      "questionNumber": 50
+    }
+  ]
+}
