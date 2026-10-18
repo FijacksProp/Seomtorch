@@ -1,0 +1,760 @@
+{
+  "title": "Male and Female Gamete",
+  "course": "ANA 203",
+  "totalQuestions": 50,
+  "sections": [
+    "Male and Female Gamete (Q1-Q50)"
+  ],
+  "questions": [
+    {
+      "id": "ana203-ge-gametes-1",
+      "text": "What is the approximate rate of motility for a highly differentiated human spermatozoon navigating the female reproductive tract?",
+      "options": [
+        "10 mm/minute",
+        "1 mm/second",
+        "3 mm/minute",
+        "5 cm/hour"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. 3 mm/minute",
+      "explanation": "A mature human spermatozoon is highly motile and travels at a speed of approximately 3 mm per minute, driven by the flagellar movement of its tail.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana203-ge-gametes-2",
+      "text": "What are the approximate dimensions of the widest part of a mature spermatozoon head?",
+      "options": [
+        "4 µm long and 3 µm wide",
+        "2 µm long and 1 µm wide",
+        "7 µm long and 5 µm wide",
+        "10 µm long and 2 µm wide"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. 4 µm long and 3 µm wide",
+      "explanation": "The anterior ovoid or piriform end of the sperm forms the head, which is roughly 4 µm long and 3 µm wide at its maximum breadth.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana203-ge-gametes-3",
+      "text": "During spermiogenesis, the acrosomal cap is directly derived from which cellular organelle?",
+      "options": [
+        "Endoplasmic reticulum",
+        "Mitochondrion",
+        "Centriole",
+        "Golgi apparatus"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Golgi apparatus",
+      "explanation": "The acrosome is a specialized lysosome-like vesicle that forms from the Golgi apparatus during the morphological differentiation of the spermatid into a spermatozoon.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana203-ge-gametes-4",
+      "text": "Which specific enzyme within the acrosome is responsible for the hydrolysis of hyaluronic acid in the extracellular matrix surrounding the ovum?",
+      "options": [
+        "Acrosin",
+        "Hyaluronidase",
+        "Arylsulphatase",
+        "Neuraminidase"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Hyaluronidase",
+      "explanation": "The acrosome contains a variety of hydrolytic enzymes. Hyaluronidase specifically targets and breaks down the hyaluronic acid polymer found in the extracellular matrix surrounding the oocyte.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana203-ge-gametes-5",
+      "text": "Which acrosomal enzyme functions as a glycohydrolase to facilitate the hydrolysis of glycosides during fertilization?",
+      "options": [
+        "Acrosin",
+        "Neuraminidase",
+        "Acid phosphatase",
+        "Hyaluronidase"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Neuraminidase",
+      "explanation": "Neuraminidase, also known as sialidase, acts as a glycohydrolase in the acrosome, targeting glycosidic linkages to help digest the barriers surrounding the ovum.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana203-ge-gametes-6",
+      "text": "What proportion of the sperm nucleus is typically covered by the acrosomal cap?",
+      "options": [
+        "The anterior half",
+        "The entire nucleus",
+        "The anterior two-thirds",
+        "Only the extreme apical tip"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The anterior two-thirds",
+      "explanation": "The acrosomal cap fits securely over the anterior two-thirds of the sperm nucleus, acting like a helmet packed with enzymes required for penetration.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana203-ge-gametes-7",
+      "text": "The highly condensed nature of the spermatozoon nucleus is largely due to the DNA being bound to which specific proteins?",
+      "options": [
+        "Protamines",
+        "Actin filaments",
+        "Histones",
+        "Tubulins"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Protamines",
+      "explanation": "During spermiogenesis, standard histones are replaced by protamines. This allows the haploid genetic complement to be packed into a highly condensed and compact state in the sperm head.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana203-ge-gametes-8",
+      "text": "According to the fluid mosaic model of the sperm cell membrane, the specific receptors for binding to the egg are primarily located in which region?",
+      "options": [
+        "The tip of the acrosome",
+        "The midpiece membrane",
+        "The post-acrosomal region",
+        "The distal tail membrane"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The post-acrosomal region",
+      "explanation": "The sperm cell membrane possesses many specialized domains. The egg receptors that facilitate binding during fertilization are concentrated in the post-acrosomal region of the head.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana203-ge-gametes-9",
+      "text": "Which structural components are characteristically found within the neck of a mature spermatozoon?",
+      "options": [
+        "A spiral arrangement of fused mitochondria",
+        "A dense array of hydrolytic enzymes",
+        "The haploid genetic complement",
+        "Centrioles proximally and a basal body distally"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Centrioles proximally and a basal body distally",
+      "explanation": "The neck of the sperm is a small constriction just caudal to the head, containing centrioles proximally and a basal body distally that organizes the flagellar axoneme.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana203-ge-gametes-10",
+      "text": "The middle piece of a spermatozoon features a central axoneme surrounded by which specialized energy-producing structure?",
+      "options": [
+        "A dense fibrous sheath",
+        "A spiral sheath of mitochondria",
+        "An array of Golgi vesicles",
+        "A tightly coiled endoplasmic reticulum"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A spiral sheath of mitochondria",
+      "explanation": "The midpiece contains many mitochondria fused together into a spiral (helical) pattern surrounding the axoneme. These mitochondria generate the ATP essential for flagellar movement.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana203-ge-gametes-11",
+      "text": "The central axoneme of the sperm flagellum is composed of a specific arrangement of microtubules. What is this structural configuration?",
+      "options": [
+        "Nine outer doublets and a central pair of microtubules",
+        "Nine outer singlets and two central singlets",
+        "Nine central singlets and two outer doublets",
+        "Nine outer triplets with no central microtubules"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Nine outer doublets and a central pair of microtubules",
+      "explanation": "The flagellar axoneme maintains the classic \"9+2\" arrangement, consisting of nine outer doublet microtubules surrounding a single central pair of microtubules.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana203-ge-gametes-12",
+      "text": "The sliding of microtubules that generates the motive force for sperm flagellar movement is primarily mediated by which protein complex?",
+      "options": [
+        "Nexin",
+        "Kinesin",
+        "Radial spokes",
+        "Dynein arms"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Dynein arms",
+      "explanation": "Dynein arms are motor proteins attached to the outer doublets of the axoneme. The ATP-dependent sliding of these microtubules against one another creates the whip-like motion of the flagellum.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana203-ge-gametes-13",
+      "text": "What is the approximate length of the tail (flagellum) of a mature human spermatozoon?",
+      "options": [
+        "15 µm",
+        "60 µm",
+        "40 µm",
+        "100 µm"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. 40 µm",
+      "explanation": "The tail is a long tapering process that measures approximately 40 µm in length, representing the longest portion of the entire spermatozoon.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana203-ge-gametes-14",
+      "text": "Following ejaculation into the female reproductive tract, what is the average viable lifespan of a spermatozoon?",
+      "options": [
+        "48 hours",
+        "12 hours",
+        "72 hours",
+        "5 days"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. 48 hours",
+      "explanation": "While a small number may survive slightly longer depending on the cervical environment, the average viable lifespan of human sperm in the female reproductive tract is generally 48 hours.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana203-ge-gametes-15",
+      "text": "Approximately how many days are required for a spermatogonium to complete its development into a mature spermatozoon?",
+      "options": [
+        "30 days",
+        "64 days",
+        "45 days",
+        "120 days"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 64 days",
+      "explanation": "The entire process of spermatogenesis, taking a primitive spermatogonium through meiosis and spermiogenesis to yield a mature spermatozoon, spans roughly 64 days.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana203-ge-gametes-16",
+      "text": "Spermatozoa depend heavily on fructose as an energy substrate. Which male accessory gland is the primary source of this fructose?",
+      "options": [
+        "Prostate gland",
+        "Bulbourethral gland",
+        "Epididymis",
+        "Seminal vesicle"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Seminal vesicle",
+      "explanation": "The seminal vesicles secrete a fluid rich in fructose, which serves as the primary energy source powering the flagellar motility of the sperm.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana203-ge-gametes-17",
+      "text": "The mature human ovum is significantly larger than the spermatozoon. What is its approximate diameter?",
+      "options": [
+        "200 µm",
+        "50 µm",
+        "500 µm",
+        "1000 µm"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. 200 µm",
+      "explanation": "A mature human ovum is large enough to be visible to the naked eye, roughly the size of a pinhead, with a diameter of approximately 200 µm.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana203-ge-gametes-18",
+      "text": "If fertilization does not occur, what is the typical viable lifespan of a human ovum post-ovulation?",
+      "options": [
+        "12 hours",
+        "48 hours",
+        "24 hours",
+        "72 hours"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. 24 hours",
+      "explanation": "The ovum remains viable for fertilization for roughly 24 hours after it is released from the ovary. If unfertilized by this time, it rapidly degenerates.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana203-ge-gametes-19",
+      "text": "The human ovum contains nutritive yolk with lecithin that is evenly distributed throughout the cytoplasm. What is the embryological term for this pattern of yolk distribution?",
+      "options": [
+        "Telolecithal",
+        "Isolecithal",
+        "Centrolecithal",
+        "Alecithal"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Isolecithal",
+      "explanation": "Human ova are isolecithal, indicating a relatively small amount of yolk (lecithin) that is distributed evenly throughout the ooplasm.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana203-ge-gametes-20",
+      "text": "Within the ovum's cytoplasm, the nutritive yolk is specifically referred to as deutoplasm. This deutoplasm is known to be particularly rich in which lipid substance?",
+      "options": [
+        "Lecithin",
+        "Sphingomyelin",
+        "Triglyceride",
+        "Cholesterol"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Lecithin",
+      "explanation": "The deutoplasm constitutes the nutritive yolk of the ovum, and its primary lipid component is lecithin, which provides early structural and energy substrates.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana203-ge-gametes-21",
+      "text": "In early embryological terminology, the large, haploid nucleus of the mature ovum is classically referred to as the:",
+      "options": [
+        "Ooplasm",
+        "Germinal spot",
+        "Vitellus",
+        "Germinal vesicle"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Germinal vesicle",
+      "explanation": "The nucleus of the ovum is highly vesicular and is historically and embryologically termed the germinal vesicle.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana203-ge-gametes-22",
+      "text": "Correspondingly, the prominent nucleolus found within the nucleus of the human ovum is termed the:",
+      "options": [
+        "Formative yolk",
+        "Germinal spot",
+        "Corona radiata",
+        "Centriole"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Germinal spot",
+      "explanation": "The prominent, dense nucleolus residing within the germinal vesicle (nucleus) of the ovum is known as the germinal spot.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana203-ge-gametes-23",
+      "text": "Cortical granules are located just beneath the plasma membrane of the ovum. What critical biological function do their enzymatic contents perform during fertilization?",
+      "options": [
+        "They induce the zona and cortical reactions to prevent polyspermy.",
+        "They trigger the completion of meiosis I.",
+        "They digest the zona pellucida to aid sperm entry.",
+        "They provide the initial nutrients for the cleaving zygote."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. They induce the zona and cortical reactions to prevent polyspermy.",
+      "explanation": "Upon sperm entry, cortical granules undergo exocytosis. Their enzymes cross-link the zona pellucida, forming a hardened barrier that prevents additional sperm from entering (the polyspermy block).",
+      "section": "Male and Female Gamete",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana203-ge-gametes-24",
+      "text": "The zona pellucida is a thick, transparent extracellular matrix surrounding the mammalian oocyte. It is primarily composed of:",
+      "options": [
+        "Hyaluronic acid",
+        "Keratin filaments",
+        "Glycoproteins",
+        "Cellulose"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Glycoproteins",
+      "explanation": "The zona pellucida consists of a specialized meshwork of glycoproteins (ZP1, ZP2, ZP3) that regulate sperm binding and induce the acrosome reaction.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana203-ge-gametes-25",
+      "text": "Capacitation is an essential physiological conditioning process that spermatozoa must undergo before they can fertilize an ovum. Where does this process naturally occur?",
+      "options": [
+        "In the seminiferous tubules",
+        "In the epididymis",
+        "In the vas deferens",
+        "In the female reproductive tract"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. In the female reproductive tract",
+      "explanation": "Sperm only achieve full fertilizing capacity after spending time in the female reproductive tract, where proteins and cholesterol are stripped from their plasma membranes in a process called capacitation.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana203-ge-gametes-26",
+      "text": "Which statement best differentiates capacitation from the acrosome reaction?",
+      "options": [
+        "Capacitation releases hydrolytic enzymes, while the acrosome reaction alters flagellar motility.",
+        "Capacitation causes the fusion of sperm and egg membranes, while the acrosome reaction prevents polyspermy.",
+        "Capacitation prepares the sperm in the female tract, while the acrosome reaction involves enzyme release to penetrate the zona pellucida.",
+        "Capacitation occurs in the epididymis, while the acrosome reaction occurs in the uterus."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Capacitation prepares the sperm in the female tract, while the acrosome reaction involves enzyme release to penetrate the zona pellucida.",
+      "explanation": "Capacitation is a biochemical preparation in the female tract allowing the sperm to become hypermotile and capable of undergoing the acrosome reaction. The acrosome reaction is the subsequent release of enzymes that digest the ovum's outer layers.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana203-ge-gametes-27",
+      "text": "At the time of ovulation, the secondary oocyte is released from the ovary. In which specific stage of cell division is it temporarily arrested?",
+      "options": [
+        "Prophase I",
+        "Metaphase II",
+        "Metaphase I",
+        "Telophase II"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Metaphase II",
+      "explanation": "The oocyte is ovulated as a secondary oocyte, and its division pauses at Metaphase II. It only completes this second meiotic division if successful fertilization occurs.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana203-ge-gametes-28",
+      "text": "A human female is born with a finite number of germ cells. At birth, these female gametes are arrested in which stage of development?",
+      "options": [
+        "Oogonia",
+        "Secondary oocytes",
+        "Mature ova",
+        "Primary oocytes"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Primary oocytes",
+      "explanation": "During fetal development, oogonia enter meiosis but arrest at Prophase I. Therefore, at birth, all female gametes exist exclusively as primary oocytes.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana203-ge-gametes-29",
+      "text": "The release of the second polar body from the oocyte signifies a major developmental milestone. When exactly does this event occur?",
+      "options": [
+        "After the completion of meiosis II, triggered by fertilization",
+        "Immediately prior to ovulation from the Graafian follicle",
+        "During the transition from prophase I to metaphase I",
+        "At the moment of blastocyst implantation"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. After the completion of meiosis II, triggered by fertilization",
+      "explanation": "When a sperm fuses with the oocyte membrane, it triggers the completion of meiosis II. This final division separates the sister chromatids, allocating half to the mature ovum and discarding the rest in the second polar body.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana203-ge-gametes-30",
+      "text": "Which of the following is NOT a direct physiological consequence of successful fertilization?",
+      "options": [
+        "Restoration of the diploid number of chromosomes",
+        "Arrest of the oocyte in metaphase II",
+        "Initiation of embryonic cleavage",
+        "Determination of chromosomal sex"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Arrest of the oocyte in metaphase II",
+      "explanation": "Fertilization breaks the metaphase II arrest, allowing the oocyte to complete meiosis. It restores the diploid state, establishes chromosomal sex, and initiates cellular cleavage.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana203-ge-gametes-31",
+      "text": "Acrosin is a specialized enzyme localized within the sperm's acrosome. What is its specific biochemical classification?",
+      "options": [
+        "A lipid-digesting lipase",
+        "A carbohydrate-cleaving amylase",
+        "A protein-degrading proteinase",
+        "A nucleic acid-destroying nuclease"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A protein-degrading proteinase",
+      "explanation": "Acrosin functions as a potent proteinase, breaking down the peptide bonds in the glycoprotein matrix of the zona pellucida to create a pathway for the sperm.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana203-ge-gametes-32",
+      "text": "The acrosome contains arylsulphatase, an enzyme that assists in penetrating the ovum's protective layers. What specific molecular bond does this enzyme target?",
+      "options": [
+        "Peptide bonds in core proteins",
+        "Glycosidic bonds in complex sugars",
+        "Sulphate moieties of glycoproteins",
+        "Ester linkages in membrane phospholipids"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Sulphate moieties of glycoproteins",
+      "explanation": "Arylsulphatase catalyzes the hydrolysis of sulphate groups attached to the complex glycoproteins of the egg investments, facilitating sperm penetration.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana203-ge-gametes-33",
+      "text": "The neck of a spermatozoon forms a vital connection between the head and the midpiece. What is the approximate length of this structural constriction?",
+      "options": [
+        "7.0 µm",
+        "3.0 µm",
+        "40 µm",
+        "0.3 µm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. 0.3 µm",
+      "explanation": "The neck is extremely short, measuring only about 0.3 µm in length, but it plays a crucial role in housing the centrioles and basal body.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana203-ge-gametes-34",
+      "text": "The cytoplasm of a mature ovum contains various specialized components required for early embryogenesis. What is the alternative anatomical term for this cytoplasm?",
+      "options": [
+        "Germinal vesicle",
+        "Vitellus",
+        "Deutoplasm",
+        "Zona pellucida"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Vitellus",
+      "explanation": "The cytoplasm of the ovum is classically termed the vitellus (or ooplasm), which contains both the functional organelles and the stored nutrient reserves.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana203-ge-gametes-35",
+      "text": "The ovum's cytoplasm is functionally divided into formative and nutritive yolk. Which characteristic specifically defines the \"formative yolk\"?",
+      "options": [
+        "It represents the normal cytoplasm containing functional organelles.",
+        "It constitutes the dense corona radiata.",
+        "It is rich in lecithin and stored lipids.",
+        "It is the fluid-filled space beneath the plasma membrane."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It represents the normal cytoplasm containing functional organelles.",
+      "explanation": "Formative yolk is simply the active, normal cytoplasm comprising the cellular organelles essential for the basic physiological functions of the cell, distinct from the stored deutoplasm (nutritive yolk).",
+      "section": "Male and Female Gamete",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana203-ge-gametes-36",
+      "text": "The middle piece of the spermatozoon houses the mitochondrial sheath necessary for motility. What is its approximate length?",
+      "options": [
+        "0.3 µm",
+        "40 µm",
+        "4 µm",
+        "7 µm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. 7 µm",
+      "explanation": "The midpiece spans roughly 7 µm in length, providing adequate space for the spiraling mitochondria that generate ATP for the flagellum.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana203-ge-gametes-37",
+      "text": "In a mature spermatozoon, what lies immediately between the external cell membrane and the underlying nucleus/acrosome complex?",
+      "options": [
+        "A dense network of mitochondria",
+        "No intervening cytoplasm",
+        "A thick layer of formative yolk",
+        "A layer of cortical granules"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. No intervening cytoplasm",
+      "explanation": "Due to the extreme differentiation and compaction during spermiogenesis, virtually all cytoplasm is shed or displaced. Thus, no cytoplasm intervenes between the cell membrane and the nucleus or acrosome in the sperm head.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana203-ge-gametes-38",
+      "text": "Considering the head, neck, midpiece, and tail, what is the approximate total length of a mature human spermatozoon?",
+      "options": [
+        "20 µm",
+        "200 µm",
+        "60 µm",
+        "120 µm"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. 60 µm",
+      "explanation": "The highly elongated, tadpole-like mature human spermatozoon has a total length of approximately 60 µm (with the tail making up the vast majority at 40 µm).",
+      "section": "Male and Female Gamete",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana203-ge-gametes-39",
+      "text": "During the intricate process of conception, what is considered the very first definitive sign that fertilization is occurring?",
+      "options": [
+        "The fusion of the sperm and oocyte membranes",
+        "The onset of the first cleavage division",
+        "The completion of the cortical reaction",
+        "The extrusion of the second polar body"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The fusion of the sperm and oocyte membranes",
+      "explanation": "The initial, hallmark event of fertilization is the physical fusion of the sperm's cell membrane with the oocyte's cell membrane, triggering subsequent intracellular events.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana203-ge-gametes-40",
+      "text": "The acrosome reaction releases a cocktail of enzymes. What is the primary functional objective of releasing these specific enzymes?",
+      "options": [
+        "To stimulate the ovum to complete meiosis I",
+        "To alter the cervical mucus for easier transit",
+        "To provide ATP for the sperm's flagellum",
+        "To digest the extracellular matrix and zona pellucida"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. To digest the extracellular matrix and zona pellucida",
+      "explanation": "The hydrolytic enzymes (like acrosin and hyaluronidase) from the acrosome digest the protective cellular matrix and zona pellucida, allowing the sperm to physically reach the oocyte membrane.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana203-ge-gametes-41",
+      "text": "Both the mature spermatozoon and the mature ovum are highly differentiated haploid cells. How many chromosomes does each normally contain?",
+      "options": [
+        "23",
+        "46",
+        "22",
+        "47"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. 23",
+      "explanation": "Gametogenesis involves meiotic division, which halves the genetic material to create haploid gametes containing exactly 23 chromosomes each.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana203-ge-gametes-42",
+      "text": "The mature ovum is surrounded by several supportive and protective layers. Which structure lies immediately external to the zona pellucida?",
+      "options": [
+        "The plasma membrane",
+        "The vitelline membrane",
+        "The corona radiata",
+        "The cortical granules"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The corona radiata",
+      "explanation": "The corona radiata is a dense layer of follicular cells that completely surrounds the glycoprotein shell known as the zona pellucida.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana203-ge-gametes-43",
+      "text": "The cortical reaction is a vital mechanism in preserving the genetic integrity of the zygote. What triggers the release of cortical granules?",
+      "options": [
+        "The surge of luteinizing hormone (LH)",
+        "The degradation of the corona radiata",
+        "The completion of the second meiotic division",
+        "The fusion of the sperm and egg cell membranes"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The fusion of the sperm and egg cell membranes",
+      "explanation": "Membrane fusion causes an intracellular calcium wave in the oocyte, prompting the exocytosis of cortical granules into the perivitelline space to initiate the block to polyspermy.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana203-ge-gametes-44",
+      "text": "Unlike the highly motile spermatozoon, the mature human ovum is completely immotile. How is it successfully transported through the fallopian tube toward the uterine cavity?",
+      "options": [
+        "Via amoeboid movement of the oocyte membrane",
+        "By the ciliary movement and muscular contractions of the fallopian tube",
+        "Through chemotactic attraction generated by the endometrium",
+        "By utilizing residual flagellar remnants from its precursor cells"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. By the ciliary movement and muscular contractions of the fallopian tube",
+      "explanation": "The ovum relies entirely on external forces for transport; specifically, the sweeping motion of the ciliated epithelial cells and the peristaltic contractions of the smooth muscle in the uterine tube.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana203-ge-gametes-45",
+      "text": "The neck of the spermatozoon contains centrioles that are crucial for post-fertilization development. How are these structures arranged within the neck?",
+      "options": [
+        "Centrioles are located proximally, and the basal body is distal.",
+        "The basal body is proximal, and the centrioles are distal.",
+        "They are arranged in a spiral sheath around the axoneme.",
+        "They are positioned randomly within the sparse cytoplasm."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Centrioles are located proximally, and the basal body is distal.",
+      "explanation": "Structurally, the neck contains the proximal centriole (which enters the egg to organize the first cleavage spindle) and distally transitions into the basal body that anchors the tail's axoneme.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana203-ge-gametes-46",
+      "text": "If multiple sperm were to fertilize a single ovum, a lethal polyploid condition would result. Which specific mechanism effectively prevents this occurrence?",
+      "options": [
+        "Capacitation",
+        "The cortical reaction",
+        "The acrosome reaction",
+        "The extrusion of the first polar body"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The cortical reaction",
+      "explanation": "The cortical reaction alters the structure of the zona pellucida and oocyte membrane, fundamentally preventing any additional sperm from binding to or entering the egg.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana203-ge-gametes-47",
+      "text": "Within the axoneme of the sperm tail, specific proteins maintain structural integrity while allowing flexibility. What is the role of the nexin links?",
+      "options": [
+        "They generate the ATP required for flagellar beating.",
+        "They form the outer boundary of the plasma membrane.",
+        "They anchor the central pair of microtubules to the basal body.",
+        "They connect adjacent outer microtubule doublets."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. They connect adjacent outer microtubule doublets.",
+      "explanation": "Nexin links are elastic protein bands that tether the nine outer microtubule doublets to one another, translating the sliding motion caused by dynein into the bending motion of the flagellum.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana203-ge-gametes-48",
+      "text": "Upon successful entry into the ovum's cytoplasm, the highly condensed nucleus of the spermatozoon undergoes a transformation. What structure does it become?",
+      "options": [
+        "The second polar body",
+        "The zygotic centrosome",
+        "The male pronucleus",
+        "The cortical granule"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The male pronucleus",
+      "explanation": "Once inside the ovum, the sperm nucleus decondenses as protamines are swapped back for histones, swelling to form the male pronucleus prior to syngamy.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana203-ge-gametes-49",
+      "text": "In the classic 9+2 microtubule arrangement of the sperm flagellum, which structural components project inward from the outer doublets toward the central pair?",
+      "options": [
+        "Dynein arms",
+        "Nexin links",
+        "Radial spokes",
+        "Coarse outer fibers"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Radial spokes",
+      "explanation": "Radial spokes project inward from each of the nine outer doublets, interacting with the central pair of microtubules to regulate flagellar beating.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana203-ge-gametes-50",
+      "text": "The tail of the spermatozoon is a remarkably thin and specialized structure designed for propulsion. What is its approximate width?",
+      "options": [
+        "0.5 µm",
+        "4.0 µm",
+        "0.1 µm",
+        "2.0 µm"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. 0.5 µm",
+      "explanation": "While extremely long (about 40 µm), the tail of the spermatozoon is very narrow, measuring approximately 0.5 µm in width.",
+      "section": "Male and Female Gamete",
+      "questionNumber": 50
+    }
+  ]
+}
