@@ -1,0 +1,1510 @@
+{
+  "title": "Ovarian and Menstrual Cycle",
+  "course": "ANA 203",
+  "totalQuestions": 100,
+  "sections": [
+    "Ovarian and Menstrual Cycle (Q1-Q100)"
+  ],
+  "questions": [
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-1",
+      "text": "In the early stages of fetal development, primordial germ cells must migrate from the yolk sac to populate the developing gonads. Once they arrive in the ovarian cortex, what specific cellular process do they immediately undergo to increase their numbers?",
+      "options": [
+        "First meiotic division",
+        "Second meiotic division",
+        "Rapid mitotic proliferation",
+        "Direct differentiation into primary oocytes"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Rapid mitotic proliferation",
+      "explanation": "Upon reaching the ovarian cortex, primordial germ cells (oogonia) undergo rapid mitotic multiplication to significantly increase their population before any meiotic divisions begin.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-2",
+      "text": "The transition from an oogonium to a primary oocyte is a critical step in prenatal development. By which fetal age do some oogonia enlarge to become primary oocytes and commence the first stage of meiotic division?",
+      "options": [
+        "First and second months",
+        "Fourth and fifth months",
+        "Seventh and eighth months",
+        "Shortly before birth"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Fourth and fifth months",
+      "explanation": "By the fourth and fifth months of human fetal development, some oogonia enlarge, differentiate into primary oocytes, and enter the prophase of their first meiotic division.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-3",
+      "text": "During the seventh month of fetal development, the primary oocytes become encapsulated. What specific type of cell surrounds a single primary oocyte to form a primordial follicle?",
+      "options": [
+        "A single layer of flattened follicular cells",
+        "A stratified layer of cuboidal granulosa cells",
+        "A single layer of columnar epithelial cells",
+        "A multilayered theca interna"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. A single layer of flattened follicular cells",
+      "explanation": "A primordial follicle is characterized by a primary oocyte surrounded by a single layer of flattened (squamous) follicular cells, which occurs around the seventh month of fetal development.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-4",
+      "text": "The encapsulation of the primary oocyte to form a primordial follicle has a profound physiological effect on its meiotic progression. What is this effect?",
+      "options": [
+        "It accelerates the completion of the first meiotic division.",
+        "It triggers the immediate onset of the second meiotic division.",
+        "It arrests the first meiotic division at the diplotene stage of prophase.",
+        "It causes the immediate extrusion of the first polar body."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It arrests the first meiotic division at the diplotene stage of prophase.",
+      "explanation": "The encapsulation by flattened follicular cells arrests the primary oocyte in the diplotene stage of prophase of the first meiotic division, a state that persists until after puberty.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-5",
+      "text": "At the time of birth, the female ovaries contain a finite reserve of germ cells. Approximately how many primordial follicles are present in the ovaries at birth?",
+      "options": [
+        "100,000",
+        "500,000",
+        "1,000,000",
+        "2,000,000"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 500,000",
+      "explanation": "At birth, a female infant possesses approximately 500,000 primordial follicles, which represents the entire pool of potential ova for her reproductive lifespan.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-6",
+      "text": "The hypothalamic-pituitary-gonadal axis tightly regulates the ovarian cycle. Which hormone, synthesized by the hypothalamus, acts as a simple decapeptide to initiate this cascade?",
+      "options": [
+        "Follicle-Stimulating Hormone (FSH)",
+        "Luteinizing Hormone (LH)",
+        "Gonadotrophin-Releasing Hormone (GnRH)",
+        "Progesterone"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Gonadotrophin-Releasing Hormone (GnRH)",
+      "explanation": "Gonadotrophin-Releasing Hormone (GnRH) is a decapeptide secreted by the hypothalamus that travels via the hypophysial portal system to stimulate the anterior pituitary.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-7",
+      "text": "Gonadotrophin-Releasing Hormone (GnRH) exerts its primary effect on which specific anatomical structure to stimulate the release of gonadotrophins?",
+      "options": [
+        "Posterior pituitary gland",
+        "Anterior pituitary gland",
+        "Theca interna cells of the ovary",
+        "Granulosa cells of the ovary"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Anterior pituitary gland",
+      "explanation": "GnRH is transported via the hypophysial portal blood vessels directly to the anterior pituitary gland, where it stimulates the production and release of FSH and LH.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-8",
+      "text": "The secretion of GnRH by the hypothalamus is subject to a complex feedback mechanism. Which hormones primarily exert this feedback control?",
+      "options": [
+        "FSH and LH",
+        "Oestrogen and progesterone",
+        "Inhibin and relaxin",
+        "Human chorionic gonadotropin (hCG)"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Oestrogen and progesterone",
+      "explanation": "The secretion of GnRH is mainly controlled by the circulating levels of ovarian steroids, specifically oestrogen and progesterone, through both negative and positive feedback loops.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-9",
+      "text": "Follicle-Stimulating Hormone (FSH) and Luteinizing Hormone (LH) are classified biochemically as which type of molecule?",
+      "options": [
+        "Steroids",
+        "Simple peptides",
+        "Glycoproteins",
+        "Catecholamines"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Glycoproteins",
+      "explanation": "Both FSH and LH, produced by the anterior pituitary gland, are biochemically classified as glycoprotein hormones.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-10",
+      "text": "During the first half of the ovarian cycle, Follicle-Stimulating Hormone (FSH) is predominantly responsible for which physiological event?",
+      "options": [
+        "The luteinization of granulosa cells",
+        "The rapid growth and maturation of ovarian follicles",
+        "The immediate triggering of ovulation",
+        "The maintenance of the corpus luteum"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The rapid growth and maturation of ovarian follicles",
+      "explanation": "In the first half of the cycle (follicular phase), FSH is released to act on the ovaries, rescuing 15 to 20 primordial follicles from atresia and stimulating their growth and maturation.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-11",
+      "text": "Ovulation is a dramatic event triggered by a highly specific hormonal shift. Approximately 24 to 36 hours before ovulation, which phenomenon occurs?",
+      "options": [
+        "A sudden, sharp drop in circulating oestrogen",
+        "A massive surge in Luteinizing Hormone (LH) release",
+        "A sustained plateau of elevated progesterone",
+        "Complete suppression of FSH secretion"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A massive surge in Luteinizing Hormone (LH) release",
+      "explanation": "The LH surge, a sudden and massive increase in LH released by the anterior pituitary, occurs 24-36 hours prior to ovulation and is the definitive trigger for follicular rupture.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-12",
+      "text": "Following ovulation, the ruptured follicle undergoes a significant structural and functional transformation. What is the primary role of LH in this specific process?",
+      "options": [
+        "It causes the immediate atresia of the ruptured follicle.",
+        "It transforms the ruptured follicle into the corpus luteum.",
+        "It stimulates the newly formed corpus luteum to secrete only oestrogen.",
+        "It prevents the vascularization of the granulosa cells."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It transforms the ruptured follicle into the corpus luteum.",
+      "explanation": "The LH surge not only triggers ovulation but also promotes the luteinization of the remaining granulosa and theca cells, transforming the ruptured follicle into the corpus luteum.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-13",
+      "text": "Oestrogens play a crucial role in driving the proliferative phase of the menstrual cycle. Which specific cells within the maturing ovarian follicle are primarily responsible for oestrogen production?",
+      "options": [
+        "Oocytes",
+        "Theca cells",
+        "Fibroblasts of the theca externa",
+        "Endothelial cells of the stromal vasculature"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Theca cells",
+      "explanation": "Oestrogens are primarily produced by the theca cells (specifically theca interna) of maturing ovarian follicles, often in concert with granulosa cells.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-14",
+      "text": "In the context of the regular 28-day ovarian cycle, at what point do circulating oestrogen levels typically reach their absolute peak?",
+      "options": [
+        "At the onset of menstruation (Day 1)",
+        "Approximately two days before ovulation",
+        "Exactly at the moment of follicular rupture",
+        "During the mid-luteal phase (Day 21)"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Approximately two days before ovulation",
+      "explanation": "Oestrogen levels rise steadily during the follicular phase and reach their peak concentration approximately two days prior to ovulation, subsequently triggering the LH surge via positive feedback.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-15",
+      "text": "During the proliferative phase of the menstrual cycle, oestrogen exerts profound effects on the uterine lining. Which of the following is a direct morphological result of this oestrogenic action?",
+      "options": [
+        "The endometrial stroma progressively thickens and glands elongate.",
+        "The endometrial glands become highly tortuous and saccular.",
+        "The spiral arteries undergo intense, sustained vasoconstriction.",
+        "The stratum basale is completely shed and expelled."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The endometrial stroma progressively thickens and glands elongate.",
+      "explanation": "Oestrogen acts on the endometrium to initiate repair and proliferation; the stroma thickens, glands elongate but remain relatively straight, and spiral arteries begin to grow toward the surface.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-16",
+      "text": "Progesterone is the dominant hormone of the luteal phase, preparing the uterus for potential implantation. Which structure is the primary source of progesterone during the non-pregnant ovarian cycle?",
+      "options": [
+        "The maturing Graafian follicle",
+        "The corpus luteum",
+        "The adrenal cortex",
+        "The stratum spongiosum of the endometrium"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The corpus luteum",
+      "explanation": "Progesterone is predominantly produced by the theca-lutein and granulosa-lutein cells that constitute the corpus luteum following ovulation.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-17",
+      "text": "Working in synergy with oestrogens during the secretory phase, progesterone stimulates the endometrial glands to perform which specific function?",
+      "options": [
+        "To undergo rapid mitotic division to form new crypts",
+        "To secrete rich mucoid materials containing abundant glycogen",
+        "To break down and release proteolytic enzymes for shedding",
+        "To convert from a simple columnar to a stratified squamous epithelium"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. To secrete rich mucoid materials containing abundant glycogen",
+      "explanation": "Progesterone causes the newly elongated endometrial glands to widen, become tortuous, and actively secrete a glycogen-rich mucoid material to nourish a potentially implanting blastocyst.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-18",
+      "text": "Inhibin is a hormone that plays a crucial regulatory role in the ovarian cycle. Which cells are responsible for the production of this non-steroid hormone?",
+      "options": [
+        "Theca interna cells",
+        "Luteal cells of the corpus albicans",
+        "Granulosa cells of the ovarian follicles",
+        "Syncytiotrophoblast cells"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Granulosa cells of the ovarian follicles",
+      "explanation": "Inhibin is produced by the granulosa cells of the developing ovarian follicles.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-19",
+      "text": "What is the primary physiological target and action of the hormone inhibin during the ovarian cycle?",
+      "options": [
+        "It acts on the endometrium to initiate the secretory phase.",
+        "It acts on the anterior pituitary to inhibit the secretion of gonadotrophins.",
+        "It acts on the hypothalamus to stimulate GnRH release.",
+        "It acts directly on the corpus luteum to prolong its lifespan."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It acts on the anterior pituitary to inhibit the secretion of gonadotrophins.",
+      "explanation": "Inhibin acts via negative feedback directly on the anterior pituitary gland to suppress the secretion of gonadotrophins, particularly FSH, which contributes to the eventual regression of the corpus luteum.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-20",
+      "text": "If fertilization and implantation do not occur, the corpus luteum undergoes regression. What is the immediate endocrine consequence of this regression that directly precipitates menstruation?",
+      "options": [
+        "A sudden surge in Luteinizing Hormone (LH)",
+        "A dramatic fall in blood levels of oestrogen and progesterone",
+        "A rapid increase in the production of human chorionic gonadotropin (hCG)",
+        "An elevation in hypothalamic GnRH secretion"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A dramatic fall in blood levels of oestrogen and progesterone",
+      "explanation": "The demise of the corpus luteum ceases its production of ovarian steroids, leading to a precipitous drop in circulating oestrogen and progesterone, which triggers the shedding of the endometrial lining.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-21",
+      "text": "Early in the follicular phase, a cohort of 15 to 20 primordial follicles is recruited to begin maturation. What specific hormonal action rescues these follicles from becoming atretic?",
+      "options": [
+        "Stimulation by Progesterone",
+        "Stimulation by Follicle-Stimulating Hormone (FSH)",
+        "Inhibition by Luteinizing Hormone (LH)",
+        "Stimulation by placental oestrogens"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Stimulation by Follicle-Stimulating Hormone (FSH)",
+      "explanation": "At the beginning of each cycle, rising levels of FSH rescue a small cohort of 15-20 primordial follicles from programmed cell death (atresia), prompting them to grow.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-22",
+      "text": "Despite the initial recruitment of multiple follicles, typically only one achieves full maturity to ovulate. What is the fate of the remaining recruited follicles that fail to reach this stage?",
+      "options": [
+        "They revert back to primordial follicles for the next cycle.",
+        "They migrate to the contralateral ovary.",
+        "They become atretic and are replaced by connective tissue, forming corpus atreticum.",
+        "They immediately transform into accessory corpora lutea."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. They become atretic and are replaced by connective tissue, forming corpus atreticum.",
+      "explanation": "The follicles that do not achieve dominance undergo a degenerative process called atresia. They are resorbed and replaced by connective tissue, forming a structure known as corpus atreticum.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-23",
+      "text": "The transition from a primordial follicle to a primary follicle involves distinct morphological changes in the surrounding epithelial cells. Which description accurately characterizes this change?",
+      "options": [
+        "The cells change from cuboidal to columnar and secrete mucus.",
+        "The cells change from flat (squamous) to cuboidal and proliferate to form a stratified layer.",
+        "The cells undergo apoptosis to create a fluid-filled cavity.",
+        "The cells fuse to form a multinucleated syncytium around the oocyte."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The cells change from flat (squamous) to cuboidal and proliferate to form a stratified layer.",
+      "explanation": "A primordial follicle becomes a primary follicle when its single layer of flat squamous cells changes to a cuboidal shape and then proliferates to form a stratified epithelium of granulosa cells.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-24",
+      "text": "As the primary follicle develops, a distinct, thick, homogeneous layer forms between the primary oocyte and the surrounding granulosa cells. What is this layer called?",
+      "options": [
+        "Theca interna",
+        "Theca externa",
+        "Zona pellucida",
+        "Stratum granulosum"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Zona pellucida",
+      "explanation": "The zona pellucida is a thick layer of glycoproteins and acid proteoglycans that develops between the oocyte and the surrounding follicular (granulosa) cells during the primary follicle stage.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-25",
+      "text": "The stromal cells surrounding the growing primary follicle organize into a specialized capsule known as the theca folliculi. This capsule further differentiates into two layers. What characterizes the theca interna?",
+      "options": [
+        "It is an outer fibrous capsule composed mainly of collagen.",
+        "It is an inner layer composed of secretory cells.",
+        "It is an avascular layer that merges with the ovarian epithelium.",
+        "It is composed exclusively of fluid-filled lacunae."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It is an inner layer composed of secretory cells.",
+      "explanation": "The theca folliculi organizes into an inner theca interna, which is highly vascularized and composed of glandular, secretory cells, and an outer theca externa, which is a fibrous connective tissue layer.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-26",
+      "text": "The defining characteristic that marks the transition from a primary follicle to a secondary (antral) follicle is the appearance of which structure?",
+      "options": [
+        "The zona pellucida",
+        "The theca externa",
+        "Fluid-filled spaces that coalesce to form the antrum",
+        "The corona radiata"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Fluid-filled spaces that coalesce to form the antrum",
+      "explanation": "A primary follicle is reclassified as a secondary (vesicular or antral) follicle when fluid-filled spaces develop between the granulosa cells and coalesce to form a single large cavity called the antrum.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-27",
+      "text": "As the antrum of the secondary follicle enlarges, it displaces the primary oocyte to an eccentric position. However, the oocyte remains surrounded by a mound of intact granulosa cells. What is this specific group of cells termed?",
+      "options": [
+        "Stratum basale",
+        "Cumulus oophorus",
+        "Theca lutein cells",
+        "Corpus albicans"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Cumulus oophorus",
+      "explanation": "The cumulus oophorus is the localized mound of granulosa cells that remains intimately associated with the primary oocyte, anchoring it to the follicular wall as the fluid-filled antrum expands.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-28",
+      "text": "At its peak of maturation just prior to ovulation, the fully developed secondary follicle is often referred to by a specific eponym. What is this term, and what is its approximate diameter?",
+      "options": [
+        "Primordial follicle; 5 mm",
+        "Graafian follicle; 25 mm or more",
+        "Corpus atreticum; 10 mm",
+        "Theca folliculi; 2 mm"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Graafian follicle; 25 mm or more",
+      "explanation": "A fully mature secondary follicle is commonly called a Graafian follicle (or tertiary/mature follicle) and can reach a diameter of 25 mm or more, forming a visible bulge on the ovarian surface.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-29",
+      "text": "The preovulatory phase is initiated by the LH surge. During this critical window, what significant nuclear event occurs within the primary oocyte?",
+      "options": [
+        "It replicates its DNA for a second time.",
+        "It completely finishes both meiotic divisions.",
+        "It completes meiosis I, forming a secondary oocyte and the first polar body.",
+        "It enters a new resting phase known as dictyotene."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It completes meiosis I, forming a secondary oocyte and the first polar body.",
+      "explanation": "The LH surge induces the primary oocyte to resume and complete its first meiotic division, resulting in two haploid daughter cells of unequal size: the large secondary oocyte and the tiny first polar body.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-30",
+      "text": "Following the completion of meiosis I, the newly formed secondary oocyte immediately enters meiosis II. However, it does not complete this division before ovulation. At which specific stage does it arrest?",
+      "options": [
+        "Prophase II",
+        "Metaphase II",
+        "Anaphase II",
+        "Telophase II"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Metaphase II",
+      "explanation": "The secondary oocyte enters meiosis II but arrests at metaphase II approximately 3 hours before ovulation. It will remain in this state until fertilization occurs.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-31",
+      "text": "What is the primary anatomical location of the first polar body immediately following its formation?",
+      "options": [
+        "Deep within the cytoplasm of the secondary oocyte",
+        "Floating freely within the follicular antrum",
+        "Between the zona pellucida and the cell membrane of the secondary oocyte",
+        "Embedded within the cells of the theca interna"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Between the zona pellucida and the cell membrane of the secondary oocyte",
+      "explanation": "The first polar body is extruded into the perivitelline space, which is the narrow gap located between the plasma membrane of the secondary oocyte and the surrounding zona pellucida.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-32",
+      "text": "In the hours leading up to ovulation, the high concentration of LH triggers an increase in specific enzymatic activity that weakens the follicular wall. Which enzyme is primarily responsible for digesting the collagen fibers surrounding the follicle?",
+      "options": [
+        "Hyaluronidase",
+        "Collagenase",
+        "Plasminogen",
+        "Acid phosphatase"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Collagenase",
+      "explanation": "The LH surge increases collagenase activity, leading to the digestion of the collagen fibers that provide structural integrity to the follicular wall, preparing it for rupture.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-33",
+      "text": "Alongside enzymatic digestion, the physical extrusion of the oocyte during ovulation is facilitated by local muscular contractions of the ovarian wall. Which substance, elevated in response to the LH surge, stimulates these contractions?",
+      "options": [
+        "Progesterone",
+        "Prostaglandins",
+        "Inhibin",
+        "Relaxin"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Prostaglandins",
+      "explanation": "The LH surge causes an increase in local prostaglandin levels, which induce rhythmic muscular contractions in the ovarian wall that help physically squeeze and extrude the oocyte from the ruptured follicle.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-34",
+      "text": "Just prior to ovulation, a localized, avascular bulge appears on the surface of the ovary over the most convex point of the mature follicle. What is the specific anatomical term for this spot?",
+      "options": [
+        "Cumulus oophorus",
+        "Corpus luteum",
+        "Stigma",
+        "Macula lutea"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Stigma",
+      "explanation": "As the follicle prepares to rupture, the overlying stroma and theca cells thin out, and an avascular, nipple-like protrusion called the stigma appears on the ovarian surface.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-35",
+      "text": "Upon ovulation, the secondary oocyte is expelled along with its zona pellucida and a surrounding layer of specialized granulosa cells. What is the name given to these arranged cells post-ovulation?",
+      "options": [
+        "Theca externa",
+        "Stratum compactum",
+        "Corona radiata",
+        "Corpus albicans"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Corona radiata",
+      "explanation": "After ovulation, the cells of the cumulus oophorus that remain attached to and arranged radially around the zona pellucida of the ovulated oocyte are collectively termed the corona radiata.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-36",
+      "text": "Immediately following its release from the ovary, the oocyte must be transported into the uterine tube. Which mechanisms are primarily responsible for capturing and moving the oocyte?",
+      "options": [
+        "High-pressure fluid jets from the ruptured follicle",
+        "The sweeping movement of the fimbriae and the motion of cilia on the tubal epithelium",
+        "Chemotactic attraction by the endometrium",
+        "Amoeboid movement of the corona radiata cells"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The sweeping movement of the fimbriae and the motion of cilia on the tubal epithelium",
+      "explanation": "The fimbriae of the uterine tube sweep over the ovary to catch the oocyte, and the beating cilia on the epithelial lining of the tube propel the oocyte slowly toward the uterus.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-37",
+      "text": "If the secondary oocyte is not successfully fertilized by a spermatozoon, what is its expected viable lifespan within the female reproductive tract?",
+      "options": [
+        "1 to 2 hours",
+        "12 to 24 hours",
+        "3 to 4 days",
+        "Up to 7 days"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 12 to 24 hours",
+      "explanation": "An unfertilized ovum has a very short viable lifespan; it typically dies and begins to degenerate within 12 to 24 hours after being ovulated.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-38",
+      "text": "Following ovulation, the remnants of the ruptured follicle (granulosa and theca interna cells) undergo a transformation driven by LH. What is the resulting glandular structure called?",
+      "options": [
+        "Corpus atreticum",
+        "Corpus albicans",
+        "Corpus luteum",
+        "Graafian follicle"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Corpus luteum",
+      "explanation": "The collapsed walls of the ruptured follicle undergo luteinization under the influence of LH, developing yellowish pigment and transforming into the corpus luteum, a temporary endocrine gland.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-39",
+      "text": "During the formation of the corpus luteum, the granulosa cells acquire a polyhedral shape and their cytoplasm fills with a specific yellow pigment. What is the name of this pigment?",
+      "options": [
+        "Melanin",
+        "Bilirubin",
+        "Lutein",
+        "Lipofuscin"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Lutein",
+      "explanation": "The cells of the corpus luteum accumulate a yellowish lipid-rich pigment called lutein, which gives the structure its characteristic yellow appearance (corpus luteum means \"yellow body\").",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-40",
+      "text": "To function effectively as an endocrine gland, the newly formed corpus luteum requires a robust blood supply. Where do the invading blood vessels primarily originate from?",
+      "options": [
+        "The tunica albuginea",
+        "The theca interna",
+        "The adjacent fallopian tube",
+        "The peritoneal cavity"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The theca interna",
+      "explanation": "During luteinization, blood vessels originating from the theca interna actively invade the mass of luteal cells, providing the rich vascularization necessary for rapid hormone transport.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-41",
+      "text": "In the absence of fertilization, the corpus luteum has a strictly limited functional lifespan. What is the maximum duration it typically persists before degenerating?",
+      "options": [
+        "7 days",
+        "14 days",
+        "21 days",
+        "28 days"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 14 days",
+      "explanation": "If pregnancy does not occur, the \"corpus luteum of menstruation\" reaches its maximum development and functional capacity approximately 9 to 14 days post-ovulation before it begins to involute.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-42",
+      "text": "When the corpus luteum of menstruation degenerates, it shrinks and forms a mass of white, fibrotic scar tissue within the ovary. What is the specific anatomical term for this scar?",
+      "options": [
+        "Corpus albicans",
+        "Corpus atreticum",
+        "Macula densa",
+        "Stigma"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Corpus albicans",
+      "explanation": "The degenerated, fibrotic remnant of the corpus luteum is completely devoid of pigment and is therefore called the corpus albicans (meaning \"white body\").",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-43",
+      "text": "If successful fertilization and implantation occur, the corpus luteum is rescued from degeneration. Which specific hormone is responsible for maintaining the corpus luteum during early pregnancy?",
+      "options": [
+        "High levels of maternal Luteinizing Hormone (LH)",
+        "Human chorionic gonadotrophin (hCG) secreted by the embryonic syncytiotrophoblast",
+        "Prolactin secreted by the maternal anterior pituitary",
+        "Oxytocin secreted by the posterior pituitary"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Human chorionic gonadotrophin (hCG) secreted by the embryonic syncytiotrophoblast",
+      "explanation": "The developing embryo (specifically the syncytiotrophoblast) secretes hCG, an LH-like hormone that signals the corpus luteum to persist and continue producing progesterone, becoming the \"corpus luteum of pregnancy.\"",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-44",
+      "text": "The corpus luteum of pregnancy grows significantly to support the gestation. By the third month of development, approximately what proportion of the total ovarian volume might it occupy?",
+      "options": [
+        "1/10 to 1/8",
+        "1/4 to 1/3",
+        "1/3 to 1/2",
+        "It shrinks entirely by the second month."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. 1/3 to 1/2",
+      "explanation": "The corpus luteum of pregnancy becomes very large, potentially occupying 1/3 to 1/2 of the entire volume of the ovary by the end of the first trimester, before the placenta fully takes over hormone production.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-45",
+      "text": "The menstrual cycle specifically describes the cyclical changes occurring in the endometrium. Histologically, the endometrium is divided into three distinct layers. Which layer lies deepest and remains intact during menstruation?",
+      "options": [
+        "Stratum compactum",
+        "Stratum spongiosum",
+        "Stratum basale",
+        "Stratum corneum"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Stratum basale",
+      "explanation": "The stratum basale (basal layer) is the deepest layer, adjacent to the myometrium. It undergoes little change during the cycle, is not shed during menstruation, and serves as the regenerative base for the next cycle.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-46",
+      "text": "During the secretory phase, the superficial and intermediate layers of the endometrium become highly developed and oedematous. What are these two layers collectively called, reflecting their fate during menstruation?",
+      "options": [
+        "Stratum basale",
+        "Stratum germinativum",
+        "Stratum functionalis",
+        "Stratum lucidum"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Stratum functionalis",
+      "explanation": "The superficial stratum compactum and the intermediate stratum spongiosum undergo dramatic cyclical changes and are both shed during menstruation. Together, they constitute the functional layer, or stratum functionalis.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-47",
+      "text": "The vascular supply to the endometrium is highly specialized. While straight arteries supply the basal layer, which specific type of arteries supply the stratum functionalis and are highly responsive to hormonal changes?",
+      "options": [
+        "Arcuate arteries",
+        "Radial arteries",
+        "Spiral arteries",
+        "Helicine arteries"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Spiral arteries",
+      "explanation": "The spiral arteries are long, coiled vessels that extend into the compact and spongy layers. They are exquisitely sensitive to progesterone and oestrogen levels, and their constriction initiates the ischemic phase preceding menstruation.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-48",
+      "text": "The post-menstrual (early proliferative) phase is characterized by regeneration. What is the typical appearance of the uterine glands during this specific phase?",
+      "options": [
+        "They are wide, tortuous, and saccular.",
+        "They are straight and beginning to grow in length.",
+        "They are completely absent, replaced by dense stroma.",
+        "They are actively secreting thick, glycogen-rich mucus."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. They are straight and beginning to grow in length.",
+      "explanation": "Immediately following menstruation, the endometrium is thin. During the early repair phase, the remaining basal portions of the uterine glands simply grow straight upwards to re-epithelialize the surface.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-49",
+      "text": "The proliferative phase of the menstrual cycle is driven primarily by which hormone, and it parallels which phase of the corresponding ovarian cycle?",
+      "options": [
+        "Driven by progesterone; parallels the luteal phase",
+        "Driven by oestrogen; parallels the growth of ovarian follicles",
+        "Driven by LH; parallels ovulation",
+        "Driven by hCG; parallels corpus luteum regression"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Driven by oestrogen; parallels the growth of ovarian follicles",
+      "explanation": "The proliferative phase is stimulated by rising levels of oestrogen produced by the developing ovarian follicles, therefore it occurs concurrently with the follicular phase of the ovarian cycle.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-50",
+      "text": "As the secretory phase progresses under the influence of progesterone, the endometrial glands undergo marked morphological changes. Which description accurately reflects the glands during the peak of the secretory phase?",
+      "options": [
+        "They become straight, narrow, and inactive.",
+        "They shrink and undergo apoptosis.",
+        "They become wide, tortuous, and saccular, filled with secretions.",
+        "They transform into solid cords of epithelial cells."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. They become wide, tortuous, and saccular, filled with secretions.",
+      "explanation": "Progesterone induces the glands to become highly coiled, widened (saccular), and actively secrete glycogen-rich material into their lumens to prepare for potential embryo implantation.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 50
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-51",
+      "text": "The sudden withdrawal of which hormone directly causes the intense constriction of the spiral arteries, leading to endometrial ischemia and subsequent menstruation?",
+      "options": [
+        "Follicle-Stimulating Hormone (FSH)",
+        "Oestrogen",
+        "Progesterone",
+        "Prolactin"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Progesterone",
+      "explanation": "The regression of the corpus luteum causes a sharp decline in progesterone. The spiral arteries depend on progesterone; its absence causes them to go into sustained spasm, choking off blood supply to the functionalis layer.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 51
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-52",
+      "text": "When the menstrual phase begins, exactly which parts of the endometrium are shed and expelled from the uterus?",
+      "options": [
+        "Only the stratum compactum",
+        "The stratum compactum and stratum spongiosum",
+        "The stratum spongiosum and stratum basale",
+        "The entire endometrium down to the myometrium"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The stratum compactum and stratum spongiosum",
+      "explanation": "Menstruation involves the shedding of the entire stratum functionalis, which comprises both the superficial stratum compactum and the underlying stratum spongiosum, leaving only the stratum basale intact.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 52
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-53",
+      "text": "During normal conception, where does the human blastocyst typically implant within the uterine cavity?",
+      "options": [
+        "In the cervical canal",
+        "Deep within the myometrial muscle layer",
+        "In the endometrium along the anterior or posterior wall of the body of the uterus",
+        "At the extreme fundus, blocking the fallopian tube openings"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. In the endometrium along the anterior or posterior wall of the body of the uterus",
+      "explanation": "Normal implantation occurs in the functional layer of the endometrium, most commonly on the anterior or posterior wall of the main body of the uterus.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 53
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-54",
+      "text": "Combined oral contraceptive pills (OCPs) are a common method of birth control. Based on the physiology of the ovarian cycle, what is the primary mechanism by which these pills prevent pregnancy?",
+      "options": [
+        "They cause a continuous, unyielding LH surge.",
+        "They physically block the fallopian tubes with thickened mucus.",
+        "The continuous presence of exogenous progesterone prevents the LH surge, thereby inhibiting ovulation.",
+        "They actively destroy primordial follicles within the ovary."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The continuous presence of exogenous progesterone prevents the LH surge, thereby inhibiting ovulation.",
+      "explanation": "OCPs contain synthetic progestins (and often oestrogens) that provide constant negative feedback to the pituitary. This prevents the mid-cycle LH surge, effectively halting follicular maturation and preventing ovulation.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 54
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-55",
+      "text": "The \"rhythm method\" of contraception relies on calculating the fertile window. Based on standard gamete viability, fertilization can realistically only occur if intercourse takes place within which specific timeframe relative to ovulation?",
+      "options": [
+        "Between 7 days before and 7 days after ovulation",
+        "Between 4 days before ovulation and 2 days after ovulation",
+        "Strictly on the exact day of ovulation",
+        "Only during the 3 days following ovulation"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Between 4 days before ovulation and 2 days after ovulation",
+      "explanation": "Sperm can survive in the female tract for roughly 4 days, while an ovulated ovum is viable for at most 2 days. Therefore, the fertile window is generally considered to be 4 days prior to and 2 days following ovulation.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 55
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-56",
+      "text": "Some women experience a mild, localized pain in the lower abdomen precisely at the time of ovulation. What is the clinical term often used to describe this phenomenon?",
+      "options": [
+        "Dysmenorrhea",
+        "Mittelschmerz (middle pain)",
+        "Endometriosis",
+        "Pelvic inflammatory disease"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Mittelschmerz (middle pain)",
+      "explanation": "Mittelschmerz, derived from German for \"middle pain,\" refers to the slight, often unilateral abdominal pain some women feel mid-cycle, corresponding to the rupture of the Graafian follicle and release of follicular fluid.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 56
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-57",
+      "text": "Anovulation (failure to ovulate) is a common cause of female infertility. If this condition is due to an insufficient release of pituitary hormones, what medical intervention is most logical?",
+      "options": [
+        "Surgical removal of the corpus albicans",
+        "Administration of high-dose continuous progesterone",
+        "Administration of an agent to stimulate gonadotrophin release (e.g., clomiphene citrate)",
+        "Ligation of the spiral arteries"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Administration of an agent to stimulate gonadotrophin release (e.g., clomiphene citrate)",
+      "explanation": "If anovulation is due to low FSH/LH, administering drugs that stimulate the pituitary to release gonadotrophins (often by blocking oestrogen negative feedback) can successfully induce follicular development and ovulation.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 57
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-58",
+      "text": "If a woman is pregnant but requires surgical removal of her ovaries (oophorectomy) during the second month of gestation, what is the most likely outcome for the pregnancy, and why?",
+      "options": [
+        "The pregnancy will continue normally because the placenta is already fully functional.",
+        "Spontaneous abortion will occur because the primary source of progesterone (the corpus luteum) has been removed.",
+        "The pregnancy will continue, but the fetus will suffer severe growth restriction.",
+        "The uterus will immediately enter a state of tetanic contraction."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Spontaneous abortion will occur because the primary source of progesterone (the corpus luteum) has been removed.",
+      "explanation": "Before the fourth month, the corpus luteum of pregnancy is the absolute required source of progesterone to maintain the endometrial lining. Removing it before the placenta is capable of producing sufficient progesterone will result in abortion.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 58
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-59",
+      "text": "During the mid-luteal phase of a normal 28-day cycle, which histological feature is most characteristic of the endometrial stroma?",
+      "options": [
+        "It is extremely dense, thin, and highly cellular.",
+        "It is entirely avascular and necrotic.",
+        "It becomes loose, soft, and distinctly oedematous.",
+        "It is replaced completely by stratified squamous epithelium."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It becomes loose, soft, and distinctly oedematous.",
+      "explanation": "Under the influence of peak progesterone during the secretory (luteal) phase, the endometrial stroma becomes highly vascularized, soft, and oedematous (water-logged) to provide a receptive bed for implantation.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 59
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-60",
+      "text": "Which of the following correctly pairs the phase of the menstrual cycle with its corresponding phase in the ovarian cycle?",
+      "options": [
+        "Menstrual phase corresponds to the Luteal phase.",
+        "Proliferative phase corresponds to the Follicular phase.",
+        "Secretory phase corresponds to the Follicular phase.",
+        "Proliferative phase corresponds to the Luteal phase."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Proliferative phase corresponds to the Follicular phase.",
+      "explanation": "The proliferative building of the endometrium is driven by oestrogen, which is produced by the growing follicles during the follicular phase of the ovary. Therefore, the proliferative and follicular phases occur simultaneously.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 60
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-61",
+      "text": "During the normal shedding of the endometrium (menstruation), how does the physical process of tissue desquamation typically occur?",
+      "options": [
+        "The entire functional layer detaches instantly as a single, solid cast.",
+        "Shedding is gradual, occurring bit by bit over several days.",
+        "Only the epithelial lining of the glands is shed, leaving the stroma intact.",
+        "Shedding begins at the basal layer and works its way superficially."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Shedding is gradual, occurring bit by bit over several days.",
+      "explanation": "Menstruation is not a sudden, massive sloughing of tissue. It is a gradual, piece-by-piece breakdown and shedding of the necrotic functional layer over a period of roughly 3 to 5 days.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 61
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-62",
+      "text": "What is the primary function of the stratum basale during the menstrual cycle?",
+      "options": [
+        "To synthesize and secrete large volumes of glycogen-rich mucus",
+        "To serve as the primary site of blastocyst implantation",
+        "To act as the regenerative layer for rebuilding the glands and arteries after menstruation",
+        "To produce progesterone in the absence of a corpus luteum"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. To act as the regenerative layer for rebuilding the glands and arteries after menstruation",
+      "explanation": "The stratum basale contains the blind ends of the uterine glands and its own independent blood supply (basal arteries). It survives menstruation and provides the stem cells necessary to regenerate the functional layer.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 62
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-63",
+      "text": "In a standard 28-day cycle, on roughly which day does ovulation typically occur, separating the follicular and luteal phases?",
+      "options": [
+        "Day 7",
+        "Day 14",
+        "Day 21",
+        "Day 28"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Day 14",
+      "explanation": "In an idealized 28-day cycle, the follicular phase lasts about 14 days, culminating in ovulation around Day 14, followed by a relatively constant 14-day luteal phase.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 63
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-64",
+      "text": "During the very late secretory phase, just prior to menstruation, the apical portions of the endometrial glandular epithelial cells undergo a specific change. What happens to them?",
+      "options": [
+        "They undergo rapid, uncontrolled mitosis.",
+        "They are shed off as part of their robust apocrine-like secretion process.",
+        "They keratinize to protect against ischemic damage.",
+        "They fuse to form giant multinucleated cells."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. They are shed off as part of their robust apocrine-like secretion process.",
+      "explanation": "As the glands maximize their secretory activity, the apical (top) parts of the glandular cells are often shed into the lumen along with the secretory product, leaving the cells looking cuboidal with a regular edge.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 64
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-65",
+      "text": "Which structural component of the ovary is composed of connective tissue and physically separates the granulosa cells of a developing follicle from the surrounding vascularized ovarian stroma?",
+      "options": [
+        "The zona pellucida",
+        "The cumulus oophorus",
+        "The basement membrane (theca folliculi boundary)",
+        "The corona radiata"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The basement membrane (theca folliculi boundary)",
+      "explanation": "The granulosa cells rest on a distinct basement membrane that physically separates the avascular granulosa layer from the highly vascularized theca interna and surrounding ovarian stroma.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 65
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-66",
+      "text": "The production of oestrogen by the growing follicle requires cooperation between two cell types. FSH stimulates the theca cells to produce androgens (like testosterone). What do the granulosa cells do with these androgens?",
+      "options": [
+        "They store them indefinitely in the follicular antrum.",
+        "They convert them into progesterone via 5-alpha reductase.",
+        "They convert them into oestrogen via the enzyme aromatase.",
+        "They secrete them directly into the peritoneal cavity to trigger fimbrial sweeping."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. They convert them into oestrogen via the enzyme aromatase.",
+      "explanation": "Theca cells produce androgens under LH stimulation. These androgens diffuse across the basement membrane into the granulosa cells, which, under FSH stimulation, use aromatase to convert them into oestrogens.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 66
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-67",
+      "text": "As ovulation approaches, the character of the cervical mucus changes significantly. What change occurs, and what is its physiological purpose?",
+      "options": [
+        "It becomes thick and highly acidic to kill invading bacteria.",
+        "It undergoes significant thinning to allow for the easier passage of spermatozoa.",
+        "It forms a solid plug to prevent the oocyte from falling out.",
+        "It becomes completely dehydrated and powdery."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It undergoes significant thinning to allow for the easier passage of spermatozoa.",
+      "explanation": "High levels of oestrogen just prior to ovulation cause the cervical mucus to become thin, watery, and stringy (spinnbarkeit), creating ideal channels for sperm to swim through the cervix.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 67
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-68",
+      "text": "Immediately following ovulation, the secondary oocyte is in the uterine tube. At this precise moment, what surrounds the zona pellucida?",
+      "options": [
+        "Nothing; it is completely bare.",
+        "The entire, intact Graafian follicle",
+        "The theca interna and externa layers",
+        "The corona radiata"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The corona radiata",
+      "explanation": "The ovulated secondary oocyte takes a layer of cumulus oophorus cells with it. Once free-floating, these radially arranged cells immediately surrounding the zona pellucida are called the corona radiata.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 68
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-69",
+      "text": "What is the primary visual characteristic used by embryologists to identify a secondary (antral) follicle in a histological section of an ovary?",
+      "options": [
+        "A completely bare oocyte lacking a zona pellucida",
+        "A single layer of flat squamous cells",
+        "The presence of a fluid-filled cavity called an antrum",
+        "The presence of a large, highly folded yellow scar"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The presence of a fluid-filled cavity called an antrum",
+      "explanation": "The defining morphological feature that distinguishes a secondary follicle from a primary follicle is the presence of the antrum, formed by the coalescence of fluid-filled spaces among the granulosa cells.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 69
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-70",
+      "text": "If a woman has a regular 32-day menstrual cycle, on approximately which day is she most likely to ovulate?",
+      "options": [
+        "Day 14",
+        "Day 16",
+        "Day 18",
+        "Day 20"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Day 18",
+      "explanation": "While the follicular phase can vary in length, the luteal phase (from ovulation to menstruation) is relatively constant at 14 days. Therefore, in a 32-day cycle, ovulation occurs around Day 18 (32 - 14 = 18).",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 70
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-71",
+      "text": "During the proliferative phase, the endometrium responds to oestrogen. Which of the following best describes the state of the spiral arteries during this specific phase?",
+      "options": [
+        "They are rapidly degenerating and bleeding.",
+        "They are tightly coiled and undergoing severe spasms.",
+        "They are actively growing in length towards the epithelial surface.",
+        "They are completely absent, replaced by large venous lakes."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. They are actively growing in length towards the epithelial surface.",
+      "explanation": "In the proliferative phase, as the stroma thickens, the spiral arteries are actively lengthening and growing upward through the newly forming tissue to re-establish the vascular network.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 71
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-72",
+      "text": "The luteal phase is characterized by the dominance of progesterone. Besides its effects on the endometrium, what is a key systemic physiological effect of progesterone that can be measured clinically?",
+      "options": [
+        "A significant drop in blood pressure",
+        "A mild but measurable rise in basal body temperature",
+        "Complete suppression of all respiratory drive",
+        "A massive increase in bone density within hours"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A mild but measurable rise in basal body temperature",
+      "explanation": "Progesterone is thermogenic. Following ovulation, the increased production of progesterone by the corpus luteum causes a slight but reliable increase in basal body temperature (about 0.5°F to 1.0°F).",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 72
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-73",
+      "text": "Which of the following cellular structures is specifically responsible for preventing the primary oocyte from completing meiosis I during the long dictyotene resting phase of childhood?",
+      "options": [
+        "The zona pellucida",
+        "The theca externa",
+        "Oocyte Maturation Inhibitor (OMI) produced by follicular cells",
+        "High levels of maternal hCG"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Oocyte Maturation Inhibitor (OMI) produced by follicular cells",
+      "explanation": "The follicular cells surrounding the primary oocyte secrete Oocyte Maturation Inhibitor (OMI), a small peptide that actively maintains the meiotic arrest at the diplotene stage until puberty.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 73
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-74",
+      "text": "As the Graafian follicle matures, it produces large amounts of fluid. What is the composition and clinical name of this fluid that fills the antrum?",
+      "options": [
+        "Amniotic fluid",
+        "Liquor folliculi",
+        "Cerebrospinal fluid",
+        "Ascitic fluid"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Liquor folliculi",
+      "explanation": "The fluid that accumulates in the antrum of the secondary and tertiary (Graafian) follicles is a protein-rich exudate containing high concentrations of hormones (oestrogen), termed liquor folliculi.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 74
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-75",
+      "text": "The theca interna is highly vascularized, whereas the granulosa cell layer in a growing follicle is entirely avascular. How do the granulosa cells receive nutrients and oxygen?",
+      "options": [
+        "Via direct capillary networks that pierce the basement membrane",
+        "By phagocytosing the primary oocyte",
+        "By diffusion across the basement membrane from the vessels in the theca interna",
+        "They do not require oxygen until after ovulation."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. By diffusion across the basement membrane from the vessels in the theca interna",
+      "explanation": "Because the granulosa layer lacks its own blood vessels prior to ovulation, all nutrients, oxygen, and hormones must diffuse from the rich capillary beds of the theca interna across the basement membrane.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 75
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-76",
+      "text": "When does the secondary oocyte finally complete its second meiotic division?",
+      "options": [
+        "At the exact moment of the LH surge",
+        "During its transit through the fimbriae",
+        "Only if and when it is successfully penetrated by a spermatozoon",
+        "Exactly 24 hours after it implants in the uterus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Only if and when it is successfully penetrated by a spermatozoon",
+      "explanation": "The secondary oocyte remains arrested in metaphase II. The mechanical and chemical events of fertilization (sperm penetration) provide the necessary stimulus for the oocyte to finally complete meiosis II.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 76
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-77",
+      "text": "What is the genetic and cellular consequence when the secondary oocyte completes meiosis II upon fertilization?",
+      "options": [
+        "It forms two identical, functional ova.",
+        "It forms a diploid zygote and a second polar body.",
+        "It forms a mature haploid ovum and extrudes the second polar body.",
+        "It immediately begins rapid mitotic cleavage before fusion."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It forms a mature haploid ovum and extrudes the second polar body.",
+      "explanation": "Completion of meiosis II results in the unequal division of cytoplasm, creating one large, mature haploid ovum (whose nucleus will become the female pronucleus) and one small, non-functional second polar body.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 77
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-78",
+      "text": "The corpus luteum requires continuous hormonal support to survive past 14 days. In early pregnancy, how does human chorionic gonadotropin (hCG) function to provide this support?",
+      "options": [
+        "It binds to FSH receptors to stimulate new follicle growth.",
+        "It acts as an analogue of LH, binding to LH receptors on luteal cells to maintain their secretory activity.",
+        "It acts as an analogue of oestrogen to stimulate the endometrium directly.",
+        "It suppresses the maternal immune system to prevent rejection of the ovary."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It acts as an analogue of LH, binding to LH receptors on luteal cells to maintain their secretory activity.",
+      "explanation": "hCG is structurally and functionally very similar to pituitary LH. It binds to LH receptors on the corpus luteum, preventing its degeneration and ensuring continuous progesterone production.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 78
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-79",
+      "text": "During the ischemic phase that immediately precedes menstruation, what is the primary cause of the extensive tissue necrosis in the stratum functionalis?",
+      "options": [
+        "Over-proliferation of glands leading to cellular crowding and death",
+        "Direct toxic damage from high levels of oestrogen",
+        "Spasmodic constriction of the spiral arteries cutting off oxygen and nutrients",
+        "Autoimmune attack by maternal macrophages"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Spasmodic constriction of the spiral arteries cutting off oxygen and nutrients",
+      "explanation": "The withdrawal of progesterone causes the spiral arteries to undergo intense, prolonged spasms. This ischemia starves the functional layer of oxygen and nutrients, leading to rapid necrosis and subsequent sloughing.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 79
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-80",
+      "text": "Which of the following best describes the role of the fimbriae during the ovarian cycle?",
+      "options": [
+        "They secrete enzymes to dissolve the ovarian capsule.",
+        "They rhythmically sweep over the ovary near the time of ovulation to capture the extruded oocyte.",
+        "They produce the LH surge via localized endocrine signaling.",
+        "They form a tight seal over the cervix to prevent sperm entry."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. They rhythmically sweep over the ovary near the time of ovulation to capture the extruded oocyte.",
+      "explanation": "The fimbriae are finger-like projections at the end of the fallopian tube. Near ovulation, they become engorged and actively sweep the surface of the ovary to catch the oocyte and guide it into the ostium.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 80
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-81",
+      "text": "By the fifth month of fetal development, the ovaries contain their maximum number of germ cells. Approximately how many germ cells are estimated to be present at this peak?",
+      "options": [
+        "400,000",
+        "2 million",
+        "7 million",
+        "100 million"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. 7 million",
+      "explanation": "The population of germ cells peaks at roughly 7 million around the 5th month in utero. After this point, massive atresia begins, drastically reducing the number by birth.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 81
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-82",
+      "text": "Which statement accurately describes the continuous developmental timeline of oogenesis compared to spermatogenesis?",
+      "options": [
+        "Oogenesis is a rapid, continuous process taking roughly 64 days from start to finish.",
+        "Both processes remain completely dormant until the onset of puberty.",
+        "Oogenesis is highly discontinuous, featuring prolonged arrests spanning from fetal life to potentially decades later.",
+        "Oogenesis begins at puberty and ends only at death."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Oogenesis is highly discontinuous, featuring prolonged arrests spanning from fetal life to potentially decades later.",
+      "explanation": "A hallmark of oogenesis is its extreme discontinuity. It halts in prophase I during fetal life, remains dormant for years, resumes at ovulation, and halts again in metaphase II, only finishing if fertilized.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 82
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-83",
+      "text": "Atretic follicles are those that have undergone degeneration. What is the ultimate fate of the space previously occupied by a large atretic follicle in the ovary?",
+      "options": [
+        "It remains as a permanent fluid-filled cyst.",
+        "It is replaced by fibrous connective tissue, leaving a minor scar.",
+        "It transforms into a hyperactive endocrine gland.",
+        "It fills with blood to form a corpus hemorrhagicum."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It is replaced by fibrous connective tissue, leaving a minor scar.",
+      "explanation": "When follicles undergo atresia, the oocyte and granulosa cells die and are resorbed. The remaining cavity is invaded by fibroblasts and replaced by connective tissue, forming a small scar (corpus atreticum).",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 83
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-84",
+      "text": "During the late secretory phase, the endometrium reaches its maximum thickness. What is the typical physical thickness of a fully developed secretory endometrium?",
+      "options": [
+        "1 - 2 mm",
+        "5 - 7 mm",
+        "10 - 15 mm",
+        "20 - 25 mm"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 5 - 7 mm",
+      "explanation": "Under the combined influence of oestrogen and high levels of progesterone, the fully succulent, oedematous endometrium during the secretory phase typically reaches a maximum thickness of about 5 to 7 mm.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 84
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-85",
+      "text": "Which of the following is NOT a morphological characteristic of the endometrial glands during the secretory phase?",
+      "options": [
+        "They are highly tortuous (coiled).",
+        "They appear \"saw-toothed\" in histological section.",
+        "They are actively secreting a glycogen-rich fluid.",
+        "They are short, straight, and lined by simple cuboidal epithelium."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. They are short, straight, and lined by simple cuboidal epithelium.",
+      "explanation": "Short, straight glands lined by cuboidal cells are characteristic of the early proliferative (post-menstrual) phase. During the secretory phase, glands are highly coiled, widened, and actively secreting.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 85
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-86",
+      "text": "The corpus luteum produces hormones that exert negative feedback on the hypothalamus and pituitary. Which specific hormone combination is primarily responsible for suppressing new follicular development during the luteal phase?",
+      "options": [
+        "High FSH and low LH",
+        "High oestrogen and high progesterone",
+        "Low inhibin and high GnRH",
+        "High oxytocin and low prolactin"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. High oestrogen and high progesterone",
+      "explanation": "The high levels of progesterone (working synergistically with oestrogen) produced by the corpus luteum strongly inhibit the release of GnRH, FSH, and LH, preventing any new follicles from maturing while the current cycle concludes.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 86
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-87",
+      "text": "In a histological preparation of an ovary, you observe a large follicle with a vast fluid-filled cavity. The oocyte is pushed to one side, surrounded by a distinct mound of cells. The most appropriate classification for this structure is a:",
+      "options": [
+        "Primordial follicle",
+        "Primary follicle",
+        "Pre-antral follicle",
+        "Graafian (tertiary) follicle"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Graafian (tertiary) follicle",
+      "explanation": "A very large, single fluid-filled cavity (antrum) with the oocyte displaced eccentrically within the cumulus oophorus is the classic histological appearance of a fully mature Graafian (tertiary) follicle.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 87
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-88",
+      "text": "What happens to the first polar body after it is extruded into the perivitelline space?",
+      "options": [
+        "It rapidly enlarges to become a second functional ovum.",
+        "It fuses back with the secondary oocyte to restore diploidy.",
+        "It often undergoes a second meiotic division but ultimately degenerates.",
+        "It secretes hormones to maintain the corpus luteum."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It often undergoes a second meiotic division but ultimately degenerates.",
+      "explanation": "The first polar body is non-functional due to its lack of cytoplasm. While it may occasionally undergo a second division (resulting in a total of three polar bodies), it inevitably fragments and degenerates.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 88
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-89",
+      "text": "A patient is prescribed clomiphene citrate for infertility. This drug works by blocking oestrogen receptors in the hypothalamus, deceiving it into sensing low oestrogen levels. What is the expected physiological result on the ovarian cycle?",
+      "options": [
+        "Immediate regression of all developing follicles",
+        "Increased GnRH release leading to increased FSH and the potential maturation of multiple follicles",
+        "Premature menstruation due to spiral artery spasm",
+        "Permanent suppression of the LH surge"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Increased GnRH release leading to increased FSH and the potential maturation of multiple follicles",
+      "explanation": "By blocking the negative feedback of oestrogen, clomiphene causes the hypothalamus to increase GnRH, which increases pituitary FSH secretion. This strong FSH drive can rescue multiple follicles from atresia, leading to superovulation.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 89
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-90",
+      "text": "During the ischemic phase, the spiral arteries constrict. However, blood eventually escapes into the endometrial stroma just before shedding begins. Why does this occur?",
+      "options": [
+        "The spiral arteries rupture due to sudden, massive hypertension.",
+        "The spiral arteries undergo brief periods of relaxation, allowing blood to rush into the damaged, necrotic vessels, which then leak.",
+        "The straight arteries of the basal layer extend upward and hemorrhage.",
+        "The myometrium contracts violently, crushing the superficial vessels."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The spiral arteries undergo brief periods of relaxation, allowing blood to rush into the damaged, necrotic vessels, which then leak.",
+      "explanation": "After prolonged constriction, the spiral arteries briefly open up (relax). Blood rushes into the ischemic, damaged capillary beds, which easily rupture, leading to diapedesis of red blood cells into the stroma and subsequent sloughing.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 90
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-91",
+      "text": "Which component of the blastocyst is directly responsible for synthesizing and secreting human chorionic gonadotropin (hCG) to rescue the corpus luteum?",
+      "options": [
+        "The inner cell mass",
+        "The cytotrophoblast",
+        "The syncytiotrophoblast",
+        "The amniotic epithelium"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The syncytiotrophoblast",
+      "explanation": "Shortly after implantation, the highly invasive, multinucleated outer layer of the trophoblast—the syncytiotrophoblast—begins secreting significant amounts of hCG into the maternal circulation.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 91
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-92",
+      "text": "If the corpus luteum of pregnancy is successfully maintained, until approximately what point in gestation does it serve as the primary, indispensable source of progesterone?",
+      "options": [
+        "Until the end of the first week",
+        "Until the end of the fourth month",
+        "Until the end of the eighth month",
+        "It remains the sole source until parturition."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Until the end of the fourth month",
+      "explanation": "The corpus luteum of pregnancy is critical for maintaining the endometrium during the first trimester. By the end of the fourth month (roughly 16 weeks), the placenta is large and developed enough to synthesize sufficient progesterone on its own.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 92
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-93",
+      "text": "The basal layer (stratum basale) of the endometrium receives its blood supply from which specific vessels, allowing it to survive the ischemic phase?",
+      "options": [
+        "Spiral arteries",
+        "Arcuate arteries",
+        "Straight (basal) arteries",
+        "Uterine arteries directly"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Straight (basal) arteries",
+      "explanation": "The straight (or basal) arteries are short branches that supply only the stratum basale. Unlike the spiral arteries, they do not possess receptors that make them sensitive to progesterone withdrawal, so they remain patent during menstruation.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 93
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-94",
+      "text": "In the context of the menstrual cycle, the term \"diapedesis\" refers to which specific event occurring in the endometrium?",
+      "options": [
+        "The active secretion of glycogen by the uterine glands",
+        "The escape of red blood cells from damaged superficial vessels into the surrounding stroma",
+        "The migration of the blastocyst through the epithelial lining",
+        "The rapid mitosis of stromal cells during the proliferative phase"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The escape of red blood cells from damaged superficial vessels into the surrounding stroma",
+      "explanation": "As the ischemic phase transitions into the menstrual phase, damaged vessels leak, and there is an extensive diapedesis (extravasation or escape) of red blood cells into the spongy layer of the endometrium just prior to shedding.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 94
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-95",
+      "text": "During the formation of a primary follicle, the surrounding epithelial cells change shape and begin to proliferate. From what embryological source are these original flat epithelial cells derived?",
+      "options": [
+        "The neural crest",
+        "The paraxial mesoderm",
+        "The surface (coelomic) epithelium of the ovary",
+        "The endoderm of the yolk sac"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The surface (coelomic) epithelium of the ovary",
+      "explanation": "The flat follicular cells that organize around the migrating primordial germ cells to form primordial follicles are derived from the surface epithelium covering the developing fetal ovary (which originates from the coelomic epithelium).",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 95
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-96",
+      "text": "The structure of a mature Graafian follicle includes a connective tissue layer called the theca externa. What is the primary characteristic of this specific layer?",
+      "options": [
+        "It is composed of highly active steroid-secreting cells.",
+        "It is a dense, fibrous capsule containing fibroblast-like cells that merges with the ovarian stroma.",
+        "It forms the immediate, acellular barrier around the oocyte.",
+        "It is the layer that directly produces the liquor folliculi."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It is a dense, fibrous capsule containing fibroblast-like cells that merges with the ovarian stroma.",
+      "explanation": "The theca externa is the outermost layer of the follicular capsule. It is primarily structural, consisting of fibrous connective tissue and smooth muscle-like cells that blend seamlessly into the surrounding ovarian stroma.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 96
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-97",
+      "text": "During the proliferative phase, the epithelial cells lining the uterine glands exhibit a specific morphological change as they prepare for the secretory phase. What is this change?",
+      "options": [
+        "They accumulate lipid droplets at their apical surface.",
+        "They accumulate glycogen in their basal portion, which pushes the nucleus closer to the lumen.",
+        "They develop dense fields of stereocilia.",
+        "They undergo keratinization to protect against the impending blastocyst invasion."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. They accumulate glycogen in their basal portion, which pushes the nucleus closer to the lumen.",
+      "explanation": "As the proliferative phase ends and transitions into the secretory phase, the tall columnar cells of the glands begin to accumulate large amounts of glycogen at their bases, physically displacing the nucleus upward toward the glandular lumen.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 97
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-98",
+      "text": "Which layer of the endometrium is described as having a \"compact stromal appearance\" and is located most superficially, adjacent to the uterine cavity?",
+      "options": [
+        "Stratum basale",
+        "Stratum spongiosum",
+        "Stratum compactum",
+        "Myometrium"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Stratum compactum",
+      "explanation": "The stratum compactum is the thin, most superficial layer of the endometrium. It gets its name from the densely packed nature of the stromal cells surrounding the narrow necks of the uterine glands in this region.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 98
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-99",
+      "text": "The intermediate layer of the endometrium, the stratum spongiosum, derives its \"spongy\" appearance primarily from which anatomical feature during the secretory phase?",
+      "options": [
+        "Large, empty air pockets within the tissue",
+        "The presence of highly dilated, tortuous, and secretion-filled uterine glands",
+        "A dense network of interlocking collagen fibers",
+        "Severe, generalized atrophy of the stromal cells"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The presence of highly dilated, tortuous, and secretion-filled uterine glands",
+      "explanation": "During the secretory phase, the uterine glands become highly coiled, dilated, and saccular. When viewed in histological section, these large, winding glandular spaces give the middle layer of the endometrium a porous, \"spongy\" look.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 99
+    },
+    {
+      "id": "ana203-ge-ovarian-menstrual-cycle-100",
+      "text": "A 28-year-old woman with a consistent 28-day menstrual cycle is charting her basal body temperature. She notices a sustained temperature increase starting on Day 15. This thermal shift is a direct systemic indicator of which recent physiological event?",
+      "options": [
+        "The onset of menses",
+        "The peak of the oestrogen surge",
+        "The rupture of the follicle and formation of the corpus luteum",
+        "The implantation of a blastocyst"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The rupture of the follicle and formation of the corpus luteum",
+      "explanation": "The slight but sustained rise in basal body temperature is caused by the thermogenic effect of progesterone. Because progesterone is secreted by the newly formed corpus luteum, the temperature shift is a reliable retrospective indicator that ovulation has occurred.",
+      "section": "Ovarian and Menstrual Cycle",
+      "questionNumber": 100
+    }
+  ]
+}
