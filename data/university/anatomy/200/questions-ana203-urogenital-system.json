@@ -1,0 +1,1510 @@
+{
+  "title": "Urogenital System",
+  "course": "ANA 203",
+  "totalQuestions": 100,
+  "sections": [
+    "Urogenital System (Q1-Q100)"
+  ],
+  "questions": [
+    {
+      "id": "ana203-se-urogenital-system-1",
+      "text": "The urinary and reproductive systems are closely linked both anatomically and embryologically. From which specific embryonic tissue do both of these systems fundamentally originate?",
+      "options": [
+        "The paraxial mesoderm",
+        "The splanchnic layer of lateral plate mesoderm",
+        "The intermediate mesoderm",
+        "The endodermal lining of the cloaca"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The intermediate mesoderm",
+      "explanation": "Both the urinary and reproductive systems develop from the intermediate mesoderm, specifically forming a longitudinal elevation known as the urogenital ridge on either side of the dorsal aorta.",
+      "section": "Urogenital System",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana203-se-urogenital-system-2",
+      "text": "The development of the kidneys occurs through three overlapping sequential systems. Which of the following correctly lists these systems in the order of their appearance during embryonic development?",
+      "options": [
+        "Mesonephros, Metanephros, Pronephros",
+        "Pronephros, Mesonephros, Metanephros",
+        "Metanephros, Pronephros, Mesonephros",
+        "Pronephros, Metanephros, Mesonephros"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Pronephros, Mesonephros, Metanephros",
+      "explanation": "The kidney develops in three sequential stages from cranial to caudal: the pronephros appears first, followed by the mesonephros, and finally the metanephros, which forms the definitive permanent kidney.",
+      "section": "Urogenital System",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana203-se-urogenital-system-3",
+      "text": "The pronephros is the earliest and most primitive kidney system to appear. In which specific anatomical region of the embryo does its development begin?",
+      "options": [
+        "The sacral region",
+        "The lower thoracic region",
+        "The upper lumbar region",
+        "The cervical region"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The cervical region",
+      "explanation": "The development of the pronephros begins early in the 4th week in the cervical region of the embryo. It is rudimentary and non-functional in humans.",
+      "section": "Urogenital System",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana203-se-urogenital-system-4",
+      "text": "During its brief existence, the pronephros forms segmented divisions at its cranial end. What are these 6-10 pairs of segmented divisions called?",
+      "options": [
+        "Mesonephric tubules",
+        "Nephrotomes",
+        "Renal vesicles",
+        "Metanephric blastemas"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Nephrotomes",
+      "explanation": "In the pronephros, the intermediate mesoderm segments into 6-10 pairs of distinct clusters called nephrotomes before the system completely regresses by the end of week 4.",
+      "section": "Urogenital System",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana203-se-urogenital-system-5",
+      "text": "The mesonephros serves as a transitional excretory organ. Which specific structure from the preceding pronephric system induces the nearby intermediate mesoderm to form the mesonephros?",
+      "options": [
+        "The cloacal membrane",
+        "The pronephric duct",
+        "The allantois",
+        "The nephrogenic cord"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The pronephric duct",
+      "explanation": "The presence and caudal growth of the pronephric duct induces the adjacent intermediate mesoderm in the thoracolumbar region to differentiate into mesonephric tubules, forming the mesonephros.",
+      "section": "Urogenital System",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana203-se-urogenital-system-6",
+      "text": "The definitive, permanent kidneys are formed by the metanephros. In which anatomical region does the metanephros initially develop before assuming its final position?",
+      "options": [
+        "The cervical region",
+        "The upper lumbar region",
+        "The pelvic region",
+        "The thoracic region"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The pelvic region",
+      "explanation": "The definitive kidney (metanephros) initially develops in the pelvic region. As the embryo grows and the abdomen elongates, the kidneys \"ascend\" to their final position in the upper lumbar region.",
+      "section": "Urogenital System",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana203-se-urogenital-system-7",
+      "text": "The metanephric system is composed of two distinct functional and embryological components: the collecting system and the excretory system. Which structure specifically gives rise to the collecting system?",
+      "options": [
+        "The metanephric blastema",
+        "The mesonephric tubules",
+        "The ureteric bud",
+        "The paramesonephric duct"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The ureteric bud",
+      "explanation": "The ureteric bud, an outgrowth from the caudal end of the mesonephric duct, dilates and branches to form the entire collecting system: the ureter, renal pelvis, major/minor calyces, and collecting tubules.",
+      "section": "Urogenital System",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana203-se-urogenital-system-8",
+      "text": "Conversely, the excretory system of the kidney (the nephrons) derives from a different mesodermal source than the collecting system. From which specific structure does the excretory system originate?",
+      "options": [
+        "The metanephric blastema (metanephric mass of mesoderm)",
+        "The ureteric bud",
+        "The pronephric duct",
+        "The urogenital sinus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The metanephric blastema (metanephric mass of mesoderm)",
+      "explanation": "The excretory system, comprising the Bowman's capsule, proximal convoluted tubule, loop of Henle, and distal convoluted tubule, develops from the metanephric blastema (the metanephric mass of intermediate mesoderm).",
+      "section": "Urogenital System",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana203-se-urogenital-system-9",
+      "text": "The interaction between two specific tissues is absolutely critical for the formation of the definitive kidney. Which two structures undergo reciprocal epithelial-mesenchymal interactions to drive metanephros development?",
+      "options": [
+        "The pronephric duct and the cloaca",
+        "The ureteric bud and the metanephric blastema",
+        "The mesonephric tubules and the gonadal ridge",
+        "The allantois and the urogenital sinus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The ureteric bud and the metanephric blastema",
+      "explanation": "The development of the permanent kidney depends on continuous, reciprocal induction (epithelial-mesenchymal interactions) between the epithelial ureteric bud and the mesenchymal metanephric blastema.",
+      "section": "Urogenital System",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana203-se-urogenital-system-10",
+      "text": "The cloaca plays a central role in the development of the lower urinary and digestive tracts. How is the cloaca partitioned to separate the urinary system from the digestive system?",
+      "options": [
+        "By the descent of the urorectal septum",
+        "By the expansion of the allantois",
+        "By the fusion of the paramesonephric ducts",
+        "By the obliteration of the urachus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. By the descent of the urorectal septum",
+      "explanation": "The urorectal septum grows caudally to divide the cloaca into an anterior portion (the urogenital sinus) and a posterior portion (the anorectal canal).",
+      "section": "Urogenital System",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana203-se-urogenital-system-11",
+      "text": "The urogenital sinus is formed from the anterior division of the cloaca and is subdivided into three parts. Which part of the urogenital sinus gives rise to the majority of the urinary bladder?",
+      "options": [
+        "The phallic part",
+        "The pelvic part",
+        "The upper part (vesical part)",
+        "The caudal part"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The upper part (vesical part)",
+      "explanation": "The upper, largest part of the urogenital sinus is the vesical part, which dilates to form the majority of the urinary bladder.",
+      "section": "Urogenital System",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana203-se-urogenital-system-12",
+      "text": "The trigone is a smooth triangular region at the base of the urinary bladder. From which embryonic structures is the trigone derived?",
+      "options": [
+        "The absorbed caudal parts of the mesonephric ducts",
+        "The upper part of the urogenital sinus",
+        "The urachus",
+        "The paramesonephric ducts"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The absorbed caudal parts of the mesonephric ducts",
+      "explanation": "While most of the bladder is endodermal (from the urogenital sinus), the trigone is formed by the incorporation (absorption) of the caudal ends of the mesodermal mesonephric ducts into the bladder wall.",
+      "section": "Urogenital System",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana203-se-urogenital-system-13",
+      "text": "The pelvic part of the urogenital sinus gives rise to different structures depending on the genetic sex of the embryo. What does the pelvic part form in males?",
+      "options": [
+        "The entire urethra",
+        "The prostatic and membranous parts of the urethra",
+        "The spongy (penile) urethra",
+        "The ureters"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The prostatic and membranous parts of the urethra",
+      "explanation": "In males, the pelvic part of the urogenital sinus forms the prostatic urethra and the membranous urethra. The spongy urethra is formed from the phallic part and the urethral folds.",
+      "section": "Urogenital System",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana203-se-urogenital-system-14",
+      "text": "In females, the pelvic part of the urogenital sinus has a different developmental fate than in males. What does it form in the female urinary system?",
+      "options": [
+        "Only the upper half of the urethra",
+        "The entire female urethra",
+        "The lower part of the vagina only",
+        "The trigone of the bladder"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The entire female urethra",
+      "explanation": "Because the female urethra is short, the pelvic part of the urogenital sinus gives rise to the entire female urethra.",
+      "section": "Urogenital System",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana203-se-urogenital-system-15",
+      "text": "The phallic (caudal) part of the urogenital sinus contributes to the external genitalia. What urinary structure does it form in the male?",
+      "options": [
+        "The prostatic urethra",
+        "The membranous urethra",
+        "The spongy (penile) urethra",
+        "The ejaculatory duct"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The spongy (penile) urethra",
+      "explanation": "In males, the phallic part of the urogenital sinus, as it grows along with the genital tubercle (phallus), forms the spongy (penile) urethra.",
+      "section": "Urogenital System",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana203-se-urogenital-system-16",
+      "text": "The gonads pass through an initial \"indifferent stage\" where male and female embryos are morphologically indistinguishable. Which specific cellular event induces the formation of these indifferent gonads?",
+      "options": [
+        "The arrival and incorporation of primordial germ cells into the genital ridges",
+        "The secretion of Anti-Müllerian Hormone (AMH)",
+        "The degeneration of the mesonephric ducts",
+        "The fusion of the paramesonephric ducts"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The arrival and incorporation of primordial germ cells into the genital ridges",
+      "explanation": "The formation of the indifferent gonads is induced specifically upon the arrival of primordial germ cells, which migrate from the yolk sac and stimulate the coelomic epithelium of the genital ridges to thicken.",
+      "section": "Urogenital System",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana203-se-urogenital-system-17",
+      "text": "Primordial germ cells are the precursors to sperm and ova. Where do these cells originate before migrating to the developing gonads?",
+      "options": [
+        "The neural crest",
+        "The somatic lateral plate mesoderm",
+        "The walls of the yolk sac",
+        "The metanephric blastema"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The walls of the yolk sac",
+      "explanation": "Primordial germ cells originate in the epiblast, migrate to the walls of the yolk sac, and then migrate along the dorsal mesentery of the hindgut to reach and colonize the genital ridges.",
+      "section": "Urogenital System",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana203-se-urogenital-system-18",
+      "text": "During the 6th week, the surface epithelium of the genital ridge proliferates. What structural features does this proliferation create within the indifferent gonad?",
+      "options": [
+        "The rete testis",
+        "The tunica albuginea",
+        "The primitive sex cords",
+        "The efferent ductules"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The primitive sex cords",
+      "explanation": "As the surface epithelium of the genital ridge proliferates, it penetrates into the underlying mesenchyme to form finger-like projections known as the primitive sex cords.",
+      "section": "Urogenital System",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana203-se-urogenital-system-19",
+      "text": "The sexual differentiation of the gonads is genetically determined. What specific chromosomal factor directly dictates whether the primitive sex cords will differentiate into a testis?",
+      "options": [
+        "The presence of two X chromosomes",
+        "The absence of the SRY gene",
+        "The presence of a Y chromosome",
+        "The secretion of estrogen"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The presence of a Y chromosome",
+      "explanation": "The presence of a Y chromosome (specifically the SRY gene on it) dictates the subsequent sexual differentiation of the indifferent gonads into testes.",
+      "section": "Urogenital System",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana203-se-urogenital-system-20",
+      "text": "In male development, the primitive sex cords continue to proliferate and penetrate deep into the medulla of the gonad. What do these cords ultimately form in the mature testis?",
+      "options": [
+        "The ductus deferens",
+        "A network of seminiferous tubules",
+        "The epididymis",
+        "The seminal vesicles"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A network of seminiferous tubules",
+      "explanation": "Under the influence of the Y chromosome, the primitive sex cords proliferate and form the seminiferous cords, which later canalize at puberty to become the seminiferous tubules.",
+      "section": "Urogenital System",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana203-se-urogenital-system-21",
+      "text": "The seminiferous cords must connect to the excurrent duct system to transport sperm. To achieve this, the cords differentiate into thin-walled ducts near the hilum of the testis. What is this network of ducts called?",
+      "options": [
+        "The rete testis",
+        "The efferent ductules",
+        "The duct of the epididymis",
+        "The mesonephric duct"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The rete testis",
+      "explanation": "The deep portions of the testis cords branch and anastomose to form a network of thin-walled ducts known as the rete testis, which links the seminiferous tubules to the efferent ductules.",
+      "section": "Urogenital System",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana203-se-urogenital-system-22",
+      "text": "During male gonadal development, a thick, dense layer of fibrous connective tissue forms, completely separating the testis cords from the surface epithelium. What is this protective layer called?",
+      "options": [
+        "The tunica vaginalis",
+        "The gubernaculum",
+        "The tunica albuginea",
+        "The dartos fascia"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The tunica albuginea",
+      "explanation": "The tunica albuginea is a dense fibrous capsule that develops under the surface epithelium, defining the structural boundary of the testis and separating the seminiferous cords from the surface.",
+      "section": "Urogenital System",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana203-se-urogenital-system-23",
+      "text": "In female development, the absence of a Y chromosome leads to a different fate for the primitive sex cords. What happens to these initial cords in an XX embryo?",
+      "options": [
+        "They form the rete ovarii which persists throughout life.",
+        "They differentiate into the fallopian tubes.",
+        "They degenerate and form irregular cell clusters in the medulla.",
+        "They rapidly canalize to form the uterine cavity."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. They degenerate and form irregular cell clusters in the medulla.",
+      "explanation": "In the absence of a Y chromosome, the primary (medullary) primitive sex cords degenerate and form irregular cell clusters that eventually disappear, replaced by a vascular stroma.",
+      "section": "Urogenital System",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana203-se-urogenital-system-24",
+      "text": "Since the initial primitive sex cords degenerate in females, a second generation of cords must form. What stimulates the surface epithelium to form these secondary \"cortical sex cords\"?",
+      "options": [
+        "The presence of Anti-Müllerian Hormone",
+        "The secretion of testosterone by the adrenal glands",
+        "The underlying meiotic oocytes",
+        "The expansion of the urogenital sinus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The underlying meiotic oocytes",
+      "explanation": "The primordial germ cells differentiate into oogonia and enter meiosis. These meiotic oocytes stimulate the surface epithelium to proliferate again, forming a second generation of cords called the cortical sex cords.",
+      "section": "Urogenital System",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana203-se-urogenital-system-25",
+      "text": "The cortical sex cords eventually break up into isolated clusters. What do these clusters form when a single oocyte becomes surrounded by a layer of follicle (granulosa) cells?",
+      "options": [
+        "A corpus luteum",
+        "A primordial follicle",
+        "A Graafian follicle",
+        "A theca interna"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A primordial follicle",
+      "explanation": "The cortical cords split into clusters of follicle cells that surround individual oocytes, forming the primordial follicles that populate the cortex of the ovary.",
+      "section": "Urogenital System",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana203-se-urogenital-system-26",
+      "text": "During the indifferent stage of genital duct development (week 6), embryos of both sexes possess two pairs of ducts. What are these two duct systems called?",
+      "options": [
+        "The pronephric and metanephric ducts",
+        "The ureteric bud and the allantois",
+        "The mesonephric (Wolffian) and paramesonephric (Müllerian) ducts",
+        "The efferent ductules and the epididymis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The mesonephric (Wolffian) and paramesonephric (Müllerian) ducts",
+      "explanation": "At the 6th week, all embryos have both the mesonephric (Wolffian) ducts and the paramesonephric (Müllerian) ducts, regardless of their genetic sex.",
+      "section": "Urogenital System",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana203-se-urogenital-system-27",
+      "text": "The differentiation of the male genital ducts relies on specific hormonal signals from the fetal testes. Which specialized cells in the testes secrete Anti-Müllerian Hormone (AMH)?",
+      "options": [
+        "Leydig cells",
+        "Sertoli cells",
+        "Primordial germ cells",
+        "Spermatogonia"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Sertoli cells",
+      "explanation": "Sertoli cells (sustentacular cells) in the fetal testes secrete Anti-Müllerian Hormone (AMH), which actively causes the paramesonephric (Müllerian) ducts to degenerate in males.",
+      "section": "Urogenital System",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana203-se-urogenital-system-28",
+      "text": "While AMH suppresses the female ducts, another hormone is required to stimulate the development of the male duct system. Which cells produce this hormone, and what is it?",
+      "options": [
+        "Sertoli cells; Estrogen",
+        "Leydig cells; Testosterone",
+        "Leydig cells; AMH",
+        "Primordial germ cells; Progesterone"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Leydig cells; Testosterone",
+      "explanation": "Leydig cells (interstitial cells) secrete testosterone, which stimulates the mesonephric ducts and tubules to differentiate into the male genital duct system.",
+      "section": "Urogenital System",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana203-se-urogenital-system-29",
+      "text": "In male development, the mesonephric duct forms several essential reproductive structures. Which of the following is NOT derived from the mesonephric duct?",
+      "options": [
+        "The epididymis",
+        "The ductus deferens",
+        "The efferent ductules",
+        "The seminal vesicles"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The efferent ductules",
+      "explanation": "The efferent ductules are derived from the cranial mesonephric *tubules* (which connect to the rete testis), whereas the epididymis, ductus deferens, seminal vesicles, and ejaculatory duct are derived from the mesonephric *duct*.",
+      "section": "Urogenital System",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana203-se-urogenital-system-30",
+      "text": "In females, the absence of AMH allows the paramesonephric ducts to persist and develop. The cranial unfused portions of the paramesonephric ducts form which anatomical structures?",
+      "options": [
+        "The uterus",
+        "The fallopian tubes and fimbriae",
+        "The upper vagina",
+        "The broad ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The fallopian tubes and fimbriae",
+      "explanation": "The cranial, unfused halves of the paramesonephric ducts develop into the fallopian tubes, opening via the fimbriae into the peritoneal cavity.",
+      "section": "Urogenital System",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana203-se-urogenital-system-31",
+      "text": "The caudal portions of the bilateral paramesonephric ducts fuse in the midline. What structures do these fused caudal portions form?",
+      "options": [
+        "The lower two-thirds of the vagina",
+        "The labia minora",
+        "The uterus, cervix, and upper vagina",
+        "The clitoris"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The uterus, cervix, and upper vagina",
+      "explanation": "The caudal halves of the paramesonephric ducts fuse together in the midline to form the uterine body, the cervix, and the upper portion of the vagina.",
+      "section": "Urogenital System",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana203-se-urogenital-system-32",
+      "text": "The vagina has a unique \"dual origin\" embryologically. While the upper vagina derives from the paramesonephric ducts, from what structure does the lower vagina derive?",
+      "options": [
+        "The mesonephric ducts",
+        "The sinovaginal bulbs of the urogenital sinus",
+        "The cloacal folds",
+        "The genital swellings"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The sinovaginal bulbs of the urogenital sinus",
+      "explanation": "As the fused paramesonephric ducts contact the urogenital sinus, they induce the formation of solid sinovaginal bulbs from the sinus. These bulbs form the vaginal plate, which canalizes to become the lower portion of the vagina.",
+      "section": "Urogenital System",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana203-se-urogenital-system-33",
+      "text": "The external genitalia also pass through an indifferent stage. Which structure forms initially at the cranial end where the cloacal folds unite?",
+      "options": [
+        "The urethral folds",
+        "The genital swellings",
+        "The anal folds",
+        "The genital tubercle"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The genital tubercle",
+      "explanation": "Cranial to the cloacal membrane, the cloacal folds unite to form a prominent midline elevation known as the genital tubercle.",
+      "section": "Urogenital System",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana203-se-urogenital-system-34",
+      "text": "In male development, the genital tubercle rapidly elongates under the influence of androgens. What does the genital tubercle become in the male?",
+      "options": [
+        "The scrotum",
+        "The phallus (penis)",
+        "The prostate gland",
+        "The bulbourethral glands"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The phallus (penis)",
+      "explanation": "Driven by fetal testicular androgens (specifically dihydrotestosterone), the genital tubercle elongates significantly to form the phallus, which develops into the penis.",
+      "section": "Urogenital System",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana203-se-urogenital-system-35",
+      "text": "As the phallus elongates, it pulls the urethral folds forward. What do the urethral folds ultimately form in the male?",
+      "options": [
+        "The scrotum",
+        "The prepuce",
+        "The lateral walls of the urethral groove (and eventually the ventral aspect of the penis enclosing the spongy urethra)",
+        "The glans penis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The lateral walls of the urethral groove (and eventually the ventral aspect of the penis enclosing the spongy urethra)",
+      "explanation": "The urethral folds are pulled forward by the elongating phallus, forming the lateral walls of the urethral groove. These folds eventually fuse in the midline to enclose the spongy urethra.",
+      "section": "Urogenital System",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana203-se-urogenital-system-36",
+      "text": "The genital swellings are a pair of elevations located lateral to the urethral folds. What do these swellings expand and fuse to form in the male?",
+      "options": [
+        "The labia majora",
+        "The scrotum",
+        "The prostate",
+        "The tunica vaginalis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The scrotum",
+      "explanation": "In the male, the genital (labioscrotal) swellings expand, migrate caudally, and fuse in the midline to form the scrotum, providing a sac for the descending testes.",
+      "section": "Urogenital System",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana203-se-urogenital-system-37",
+      "text": "In female development, the lack of intense androgen stimulation results in different fates for the indifferent external structures. What does the genital tubercle become in the female?",
+      "options": [
+        "The vestibule of the vagina",
+        "The labia minora",
+        "The clitoris",
+        "The hymen"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The clitoris",
+      "explanation": "In the female, the genital tubercle elongates only slightly and develops into the clitoris, which is the homologue of the male glans penis.",
+      "section": "Urogenital System",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana203-se-urogenital-system-38",
+      "text": "Unlike in males where they fuse to enclose the urethra, the urethral folds in females remain largely unfused. What structures do they form?",
+      "options": [
+        "The labia majora",
+        "The labia minora",
+        "The mons pubis",
+        "The broad ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The labia minora",
+      "explanation": "Because they do not fuse across the midline, the urethral folds in the female develop into the labia minora, flanking the vestibule.",
+      "section": "Urogenital System",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana203-se-urogenital-system-39",
+      "text": "The genital swellings in the female also remain unfused for the most part. What do they enlarge to become?",
+      "options": [
+        "The clitoris",
+        "The labia majora",
+        "The vaginal fornices",
+        "The Bartholin's glands"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The labia majora",
+      "explanation": "The genital (labioscrotal) swellings in the female enlarge but do not fuse (except posteriorly at the posterior commissure), forming the prominent labia majora.",
+      "section": "Urogenital System",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana203-se-urogenital-system-40",
+      "text": "The gonads initially develop high on the posterior abdominal wall and must descend to their final positions. What is the name of the mesenchymal ligament that guides this descent?",
+      "options": [
+        "The round ligament",
+        "The suspensory ligament of the ovary",
+        "The processus vaginalis",
+        "The gubernaculum"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The gubernaculum",
+      "explanation": "The gubernaculum is a ligamentous cord that attaches the caudal pole of the gonad to the developing labioscrotal swellings, serving to guide and anchor the gonads during their descent.",
+      "section": "Urogenital System",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana203-se-urogenital-system-41",
+      "text": "During male gonadal descent, the testes pass through the abdominal wall via a specific pathway. What forms the inguinal canal that the testes utilize?",
+      "options": [
+        "The breakdown of the mesonephric duct",
+        "An evagination of the peritoneum (processus vaginalis) pushing through the muscular and fascial layers of the abdominal wall",
+        "The rupture of the cloacal membrane",
+        "The expansion of the urachus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. An evagination of the peritoneum (processus vaginalis) pushing through the muscular and fascial layers of the abdominal wall",
+      "explanation": "The peritoneum forms an evagination called the processus vaginalis, which follows the gubernaculum through the abdominal wall. This outpocketing takes layers of the abdominal wall with it, creating the inguinal canal.",
+      "section": "Urogenital System",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana203-se-urogenital-system-42",
+      "text": "As the testis descends into the scrotum, it is accompanied by the processus vaginalis. What does the distal portion of the processus vaginalis become after its connection to the peritoneal cavity obliterates?",
+      "options": [
+        "The tunica albuginea",
+        "The dartos muscle",
+        "The tunica vaginalis",
+        "The epididymis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The tunica vaginalis",
+      "explanation": "The distal portion of the processus vaginalis remains as a closed serous sac enveloping the testis, known as the tunica vaginalis, providing a friction-free surface within the scrotum.",
+      "section": "Urogenital System",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana203-se-urogenital-system-43",
+      "text": "In females, the ovaries also descend but halt their journey in the pelvis. Why does the gubernaculum not pull the ovaries completely out of the abdomen into the labia majora?",
+      "options": [
+        "The ovaries are too large to fit through the inguinal canal.",
+        "The gubernaculum becomes attached to the developing paramesonephric ducts (uterus).",
+        "The absence of AMH causes the gubernaculum to rapidly degenerate.",
+        "The broad ligament physically blocks the deep inguinal ring."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The gubernaculum becomes attached to the developing paramesonephric ducts (uterus).",
+      "explanation": "The gubernaculum attaches to the paramesonephric ducts (which fuse to form the uterus). This attachment prevents further descent, anchoring the ovary to the uterus via the ovarian ligament.",
+      "section": "Urogenital System",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana203-se-urogenital-system-44",
+      "text": "Because the gubernaculum attaches to the uterus in females, it is divided into two distinct adult remnants. The cranial part forms the ovarian ligament. What does the caudal part, which passes through the inguinal canal, form?",
+      "options": [
+        "The suspensory ligament of the ovary",
+        "The round ligament of the uterus",
+        "The broad ligament",
+        "The cardinal ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The round ligament of the uterus",
+      "explanation": "The caudal half of the gubernaculum, extending from the uterus through the inguinal canal to the labia majora, persists in the adult female as the round ligament of the uterus.",
+      "section": "Urogenital System",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana203-se-urogenital-system-45",
+      "text": "The cranial suspensory ligament of the gonad has different fates in males and females. In females, it persists. What is its adult name?",
+      "options": [
+        "The mesosalpinx",
+        "The proper ligament of the ovary",
+        "The suspensory ligament of the ovary (infundibulopelvic ligament)",
+        "The uterosacral ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The suspensory ligament of the ovary (infundibulopelvic ligament)",
+      "explanation": "The cranial suspensory ligament remains intact in females, forming the suspensory ligament of the ovary, which carries the ovarian vessels. In males, it degenerates to allow testicular descent.",
+      "section": "Urogenital System",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana203-se-urogenital-system-46",
+      "text": "Congenital anomalies of the uterus are relatively common and often asymptomatic. If a female patient presents with a \"bicornuate uterus,\" what was the underlying embryological failure?",
+      "options": [
+        "Complete failure of the paramesonephric ducts to develop on one side",
+        "Failure of the sinovaginal bulbs to canalize",
+        "Incomplete fusion of the caudal ends of the paramesonephric ducts",
+        "Abnormal persistence of the mesonephric ducts"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Incomplete fusion of the caudal ends of the paramesonephric ducts",
+      "explanation": "A bicornuate uterus (two uterine horns entering a single cervix) results when the paired paramesonephric ducts fail to fuse completely in their cranial-most portion before forming the uterine body.",
+      "section": "Urogenital System",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana203-se-urogenital-system-47",
+      "text": "A \"unicornuate uterus\" is a rare congenital anomaly where only half of the uterus forms. What causes this condition?",
+      "options": [
+        "Failure of one paramesonephric duct to develop or elongate",
+        "Failure of the urorectal septum to descend",
+        "Excessive production of Anti-Müllerian Hormone in a female fetus",
+        "Resorption of the vaginal plate"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Failure of one paramesonephric duct to develop or elongate",
+      "explanation": "A unicornuate uterus occurs when only one paramesonephric duct develops normally, while the other fails to form or elongate, resulting in a single uterine horn.",
+      "section": "Urogenital System",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana203-se-urogenital-system-48",
+      "text": "Hypospadias is a common anomaly of the male external genitalia where the external urethral orifice opens on the ventral aspect of the penis. What is the embryological basis of this defect?",
+      "options": [
+        "Incomplete fusion of the genital swellings",
+        "Failure of the urethral folds to fuse completely in the midline",
+        "Splitting of the genital tubercle",
+        "Agenesis of the phallic part of the urogenital sinus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Failure of the urethral folds to fuse completely in the midline",
+      "explanation": "Hypospadias occurs when the urethral folds fail to fuse completely along the ventral surface of the penis, leaving the urethral groove open and displacing the meatus proximally.",
+      "section": "Urogenital System",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana203-se-urogenital-system-49",
+      "text": "Cryptorchidism is a condition affecting male infants. What is the defining characteristic of this condition?",
+      "options": [
+        "The presence of fluid within the tunica vaginalis",
+        "The failure of one or both testes to descend into the scrotum",
+        "The abnormal development of testicular tissue into an ovotestis",
+        "The herniation of intestinal loops into the scrotum"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The failure of one or both testes to descend into the scrotum",
+      "explanation": "Cryptorchidism translates to \"hidden testis\" and refers specifically to the failure of one or both testes to complete their descent from the abdomen into the scrotum.",
+      "section": "Urogenital System",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana203-se-urogenital-system-50",
+      "text": "If the narrow canal connecting the tunica vaginalis to the peritoneal cavity fails to obliterate completely, abdominal contents can be forced through the open processus vaginalis. What clinical condition does this cause?",
+      "options": [
+        "A direct inguinal hernia",
+        "An indirect (congenital) inguinal hernia",
+        "A hydrocele",
+        "Epispadias"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. An indirect (congenital) inguinal hernia",
+      "explanation": "A persistent, wide-open processus vaginalis provides a pre-formed pathway for loops of intestine to herniate through the deep inguinal ring and into the scrotum, causing a congenital (indirect) inguinal hernia.",
+      "section": "Urogenital System",
+      "questionNumber": 50
+    },
+    {
+      "id": "ana203-se-urogenital-system-51",
+      "text": "If the processus vaginalis closes at the deep inguinal ring but remains open and secretes fluid around the testis, a painless scrotal swelling occurs. What is this condition termed?",
+      "options": [
+        "Varicocele",
+        "Spermatocele",
+        "Hydrocele",
+        "Cryptorchidism"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Hydrocele",
+      "explanation": "A hydrocele is an accumulation of serous fluid within a persistent segment of the processus vaginalis (typically the tunica vaginalis), causing a transilluminating cystic swelling in the scrotum.",
+      "section": "Urogenital System",
+      "questionNumber": 51
+    },
+    {
+      "id": "ana203-se-urogenital-system-52",
+      "text": "Wilms' tumor (nephroblastoma) is one of the most common solid abdominal tumors in young children. From which specific embryonic tissue does this renal cancer typically arise?",
+      "options": [
+        "The ureteric bud",
+        "The metanephric blastema",
+        "The mesonephric duct",
+        "The urogenital sinus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The metanephric blastema",
+      "explanation": "Wilms' tumor is an embryonal malignancy of the kidney that arises from abnormal proliferation of the metanephric blastema, often containing diverse tissues mimicking early nephrogenesis.",
+      "section": "Urogenital System",
+      "questionNumber": 52
+    },
+    {
+      "id": "ana203-se-urogenital-system-53",
+      "text": "Renal agenesis occurs when a kidney completely fails to form. This condition is directly caused by the failure of which specific developmental interaction?",
+      "options": [
+        "The failure of the pronephros to induce the mesonephros",
+        "The failure of the urorectal septum to partition the cloaca",
+        "The failure of the ureteric bud to emerge and induce the metanephric blastema",
+        "The failure of the gonadal ridge to secrete testosterone"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The failure of the ureteric bud to emerge and induce the metanephric blastema",
+      "explanation": "Kidney formation requires mutual induction. If the ureteric bud fails to develop from the mesonephric duct or fails to reach the metanephric blastema, the kidney will simply not form (agenesis).",
+      "section": "Urogenital System",
+      "questionNumber": 53
+    },
+    {
+      "id": "ana203-se-urogenital-system-54",
+      "text": "A horseshoe kidney is a congenital anomaly where the lower poles of the two kidneys fuse. Why are horseshoe kidneys characteristically located lower in the abdomen than normal kidneys?",
+      "options": [
+        "They are too heavy to ascend.",
+        "Their ascent is mechanically blocked by the inferior mesenteric artery.",
+        "They remain attached to the bladder trigone.",
+        "The ureters are abnormally short."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Their ascent is mechanically blocked by the inferior mesenteric artery.",
+      "explanation": "As the fused horseshoe kidney attempts to ascend from the pelvis during development, it catches on the root of the inferior mesenteric artery, preventing it from reaching the normal upper lumbar position.",
+      "section": "Urogenital System",
+      "questionNumber": 54
+    },
+    {
+      "id": "ana203-se-urogenital-system-55",
+      "text": "The molecular regulation of kidney development involves complex epithelial-mesenchymal interactions. Which of the following genes/factors is NOT typically associated with renal development?",
+      "options": [
+        "SRY gene",
+        "Glial-derived neurotrophic factor (GDNF)",
+        "Tyrosine kinase receptor (RET)",
+        "PAX-2"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. SRY gene",
+      "explanation": "SRY is the sex-determining gene on the Y chromosome responsible for testis development. GDNF, RET, PAX-2, and Hepatocyte Growth Factor (HGF) are all critical molecular regulators of metanephric kidney development.",
+      "section": "Urogenital System",
+      "questionNumber": 55
+    },
+    {
+      "id": "ana203-se-urogenital-system-56",
+      "text": "The allantois is a diverticulum extending from the cloaca into the connecting stalk. What is the adult remnant of the intra-abdominal portion of the allantois (the urachus)?",
+      "options": [
+        "The medial umbilical ligament",
+        "The median umbilical ligament",
+        "The round ligament of the liver",
+        "The ligamentum venosum"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The median umbilical ligament",
+      "explanation": "The urachus, which connects the apex of the bladder to the umbilicus, normally obliterates after birth to become the solid fibrous cord known as the median umbilical ligament.",
+      "section": "Urogenital System",
+      "questionNumber": 56
+    },
+    {
+      "id": "ana203-se-urogenital-system-57",
+      "text": "If the entire urachus fails to obliterate, it leaves a patent tubular connection between the urinary bladder and the umbilicus. What is the clinical sign of this specific anomaly?",
+      "options": [
+        "Feces leaking from the umbilicus",
+        "A cystic swelling anterior to the bladder",
+        "Urine leaking from the umbilicus",
+        "Extreme pain during urination"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Urine leaking from the umbilicus",
+      "explanation": "A completely patent urachus (urachal fistula) maintains a direct connection between the bladder lumen and the umbilicus, allowing urine to leak continuously from the naval.",
+      "section": "Urogenital System",
+      "questionNumber": 57
+    },
+    {
+      "id": "ana203-se-urogenital-system-58",
+      "text": "Exstrophy of the bladder is a severe congenital anomaly where the posterior wall of the bladder is exposed externally. This defect is primarily caused by a failure in the development of which surrounding structure?",
+      "options": [
+        "The metanephric blastema",
+        "The lower anterior abdominal wall (mesoderm migration failure)",
+        "The paramesonephric ducts",
+        "The urorectal septum"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The lower anterior abdominal wall (mesoderm migration failure)",
+      "explanation": "Bladder exstrophy results from a failure of lateral body wall folds (mesoderm) to migrate and close the lower anterior abdominal wall properly, leaving the anterior wall of the bladder and abdomen absent.",
+      "section": "Urogenital System",
+      "questionNumber": 58
+    },
+    {
+      "id": "ana203-se-urogenital-system-59",
+      "text": "During the indifferent stage of gonadal development, the genital ridges form on the medial side of which existing embryonic structure?",
+      "options": [
+        "The notochord",
+        "The developing liver",
+        "The mesonephros",
+        "The gut tube"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The mesonephros",
+      "explanation": "The genital ridges, the precursors to the gonads, develop as longitudinal thickenings of the coelomic epithelium on the medial aspect of the large, bilaterally positioned mesonephros (intermediate kidney).",
+      "section": "Urogenital System",
+      "questionNumber": 59
+    },
+    {
+      "id": "ana203-se-urogenital-system-60",
+      "text": "The initial excretory system of the embryo is non-functional. By what point in development does the pronephros completely regress and disappear?",
+      "options": [
+        "End of week 4",
+        "End of week 8",
+        "End of the second trimester",
+        "Shortly after birth"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. End of week 4",
+      "explanation": "The pronephros is a transient, rudimentary structure that appears early in the 4th week and regresses completely by the end of that same week.",
+      "section": "Urogenital System",
+      "questionNumber": 60
+    },
+    {
+      "id": "ana203-se-urogenital-system-61",
+      "text": "Which functional role does the mesonephros play during early embryonic development before the metanephros is fully capable?",
+      "options": [
+        "It produces amniotic fluid.",
+        "It acts as a primitive excretory system, filtering blood.",
+        "It synthesizes red blood cells.",
+        "It produces early sex hormones."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It acts as a primitive excretory system, filtering blood.",
+      "explanation": "The mesonephros, unlike the pronephros, is functional for a period. Its tubules filter blood, acting as a temporary excretory system for the embryo until the permanent kidneys (metanephros) take over.",
+      "section": "Urogenital System",
+      "questionNumber": 61
+    },
+    {
+      "id": "ana203-se-urogenital-system-62",
+      "text": "The permanent kidney (metanephros) begins its development during week 5. By approximately what week does it become functional and begin producing urine?",
+      "options": [
+        "Week 6",
+        "Week 8",
+        "Week 12",
+        "Week 20"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Week 12",
+      "explanation": "The metanephros begins forming in the 5th week and becomes a functional excretory organ around the 12th week of development, contributing urine to the amniotic fluid.",
+      "section": "Urogenital System",
+      "questionNumber": 62
+    },
+    {
+      "id": "ana203-se-urogenital-system-63",
+      "text": "The interaction between the ureteric bud and the metanephric blastema is vital. What morphological change does the metanephric blastema undergo immediately upon induction by the ureteric bud?",
+      "options": [
+        "It forms a single, large cyst.",
+        "It fragments into the renal pyramids.",
+        "It condenses tightly around the tips of the branching ureteric bud to form tissue caps.",
+        "It undergoes immediate apoptosis to create the renal pelvis space."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It condenses tightly around the tips of the branching ureteric bud to form tissue caps.",
+      "explanation": "Upon contact with the ureteric bud, the metanephric mesoderm (blastema) condenses to form discrete tissue caps covering the growing, branching tips of the collecting ducts.",
+      "section": "Urogenital System",
+      "questionNumber": 63
+    },
+    {
+      "id": "ana203-se-urogenital-system-64",
+      "text": "As the tissue caps differentiate, they hollow out to form renal vesicles, which then elongate into S-shaped tubules. What do these S-shaped tubules ultimately become?",
+      "options": [
+        "The major and minor calyces",
+        "The straight collecting tubules",
+        "The entire excretory nephron (from Bowman's capsule to the DCT)",
+        "The vasa recta"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The entire excretory nephron (from Bowman's capsule to the DCT)",
+      "explanation": "The S-shaped tubules derived from the metanephric blastema differentiate and elongate to form the functional excretory units: Bowman's capsule, proximal convoluted tubule, loop of Henle, and distal convoluted tubule.",
+      "section": "Urogenital System",
+      "questionNumber": 64
+    },
+    {
+      "id": "ana203-se-urogenital-system-65",
+      "text": "Glomeruli are the capillary tufts where blood filtration occurs in the kidney. How are the glomeruli integrated into the developing excretory tubules?",
+      "options": [
+        "Capillaries grow into the proximal, cup-shaped end (Bowman's capsule) of the S-shaped tubule.",
+        "The ureteric bud branches differentiate directly into capillaries.",
+        "They form from the somatic mesoderm and attach to the outside of the kidney.",
+        "They develop independently in the renal pelvis and migrate to the cortex."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Capillaries grow into the proximal, cup-shaped end (Bowman's capsule) of the S-shaped tubule.",
+      "explanation": "Small tufts of capillaries (glomeruli) grow into the invaginated, cup-shaped proximal ends of the S-shaped excretory tubules, forming Bowman's capsules and completing the renal corpuscle.",
+      "section": "Urogenital System",
+      "questionNumber": 65
+    },
+    {
+      "id": "ana203-se-urogenital-system-66",
+      "text": "If the ureteric bud bifurcates completely before it reaches the metanephric blastema, what is the most likely resulting anatomical anomaly?",
+      "options": [
+        "Polycystic kidney disease",
+        "Renal agenesis",
+        "Duplication of the ureter (bifid ureter or double ureter)",
+        "Bladder exstrophy"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Duplication of the ureter (bifid ureter or double ureter)",
+      "explanation": "Premature division or bifurcation of the ureteric bud results in a divided collecting system, commonly presenting as a duplicated (bifid or double) ureter entering a single kidney.",
+      "section": "Urogenital System",
+      "questionNumber": 66
+    },
+    {
+      "id": "ana203-se-urogenital-system-67",
+      "text": "Polycystic kidney disease is a severe condition that can be congenital. While often genetic, what was historically believed to be the embryological mechanical failure causing cysts in the kidney?",
+      "options": [
+        "Failure of the pronephric duct to regress",
+        "Failure of the excretory tubules to establish a connection with the collecting tubules",
+        "Excessive branching of the ureteric bud",
+        "Hypertrophy of the mesonephric tubules"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Failure of the excretory tubules to establish a connection with the collecting tubules",
+      "explanation": "A long-standing embryological theory (though now known to be largely a genetic defect of cilia) proposed that cysts form when the nephrons (excretory tubules) fail to establish a continuous lumen with the collecting tubules, leading to fluid accumulation.",
+      "section": "Urogenital System",
+      "questionNumber": 67
+    },
+    {
+      "id": "ana203-se-urogenital-system-68",
+      "text": "The kidneys undergo an apparent \"ascent\" during development. What is the primary mechanical reason for this change in position from the pelvis to the abdomen?",
+      "options": [
+        "Active migration via amoeboid movement of the metanephric blastema",
+        "The rapid lengthening of the ureters pushing the kidneys upward",
+        "Disproportionate growth of the embryo's caudal regions (lumbar and sacral regions)",
+        "The physical pull of the ascending gonads"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Disproportionate growth of the embryo's caudal regions (lumbar and sacral regions)",
+      "explanation": "The \"ascent\" of the kidneys is largely a relative movement caused by the rapid, disproportionate growth and elongation of the embryo's caudal half (the lumbar and sacral regions) away from the pelvic organs.",
+      "section": "Urogenital System",
+      "questionNumber": 68
+    },
+    {
+      "id": "ana203-se-urogenital-system-69",
+      "text": "During their ascent, the kidneys receive their blood supply from sequentially higher levels of the aorta. What happens to the lower, transient renal arteries as new, higher ones form?",
+      "options": [
+        "They invariably persist as accessory renal arteries.",
+        "They normally degenerate and disappear.",
+        "They become the testicular or ovarian arteries.",
+        "They fuse to form the inferior mesenteric artery."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. They normally degenerate and disappear.",
+      "explanation": "Normally, as the kidney ascends and acquires new blood vessels from higher levels of the aorta, the transient lower vessels degenerate.",
+      "section": "Urogenital System",
+      "questionNumber": 69
+    },
+    {
+      "id": "ana203-se-urogenital-system-70",
+      "text": "Occasionally, the transient lower renal vessels fail to degenerate during renal ascent. What is the clinical term for this common vascular variation?",
+      "options": [
+        "Arteriovenous malformations",
+        "Accessory renal arteries",
+        "Renal vein entrapment",
+        "Coarctation of the aorta"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Accessory renal arteries",
+      "explanation": "If the inferior transient vessels fail to degenerate, they persist in the adult as accessory (or supernumerary) renal arteries, which are very common and usually asymptomatic unless they compress the ureter.",
+      "section": "Urogenital System",
+      "questionNumber": 70
+    },
+    {
+      "id": "ana203-se-urogenital-system-71",
+      "text": "The cloaca is the terminal end of the hindgut. It is a common cavity for which two developing systems before it is partitioned?",
+      "options": [
+        "The respiratory and digestive systems",
+        "The digestive and urinary/reproductive systems",
+        "The nervous and endocrine systems",
+        "The cardiovascular and lymphatic systems"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The digestive and urinary/reproductive systems",
+      "explanation": "The cloaca initially serves as a shared, common cavity for both the digestive system (hindgut) and the urogenital system (allantois/urogenital sinus) before being divided by the urorectal septum.",
+      "section": "Urogenital System",
+      "questionNumber": 71
+    },
+    {
+      "id": "ana203-se-urogenital-system-72",
+      "text": "What structure physically partitions the cloaca into the urogenital sinus and the anorectal canal?",
+      "options": [
+        "The transverse fold",
+        "The urorectal septum",
+        "The broad ligament",
+        "The falciform ligament"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The urorectal septum",
+      "explanation": "The urorectal septum is a wedge of mesoderm that grows caudally between the allantois and the hindgut, eventually fusing with the cloacal membrane to completely divide the cloaca.",
+      "section": "Urogenital System",
+      "questionNumber": 72
+    },
+    {
+      "id": "ana203-se-urogenital-system-73",
+      "text": "The area where the urorectal septum physically fuses with the cloacal membrane becomes an important anatomical landmark in the adult. What is this structure?",
+      "options": [
+        "The pubic symphysis",
+        "The coccyx",
+        "The perineal body",
+        "The urethral meatus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The perineal body",
+      "explanation": "The tip of the urorectal septum fuses with the cloacal membrane to form the perineal body, the central tendinous point of the perineum separating the urogenital and anal triangles.",
+      "section": "Urogenital System",
+      "questionNumber": 73
+    },
+    {
+      "id": "ana203-se-urogenital-system-74",
+      "text": "The male internal genitalia are primarily derived from the mesonephric ducts. Which of the following male structures is an exception, NOT forming from the mesonephric duct?",
+      "options": [
+        "The seminal vesicles",
+        "The epididymis",
+        "The prostate gland",
+        "The ductus deferens"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The prostate gland",
+      "explanation": "The epididymis, ductus deferens, and seminal vesicles are derived from the mesonephric duct. The prostate gland, however, develops from multiple endodermal outgrowths of the prostatic urethra (urogenital sinus).",
+      "section": "Urogenital System",
+      "questionNumber": 74
+    },
+    {
+      "id": "ana203-se-urogenital-system-75",
+      "text": "The paramesonephric (Müllerian) ducts develop in both sexes initially. How do they physically originate in the embryo?",
+      "options": [
+        "As lateral outgrowths from the mesonephric ducts",
+        "As longitudinal invaginations of the coelomic epithelium on the anterolateral surface of the urogenital ridge",
+        "From the metanephric blastema",
+        "From the endodermal lining of the yolk sac"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. As longitudinal invaginations of the coelomic epithelium on the anterolateral surface of the urogenital ridge",
+      "explanation": "The paramesonephric ducts form as longitudinal invaginations (grooves) of the coelomic epithelium on the lateral surface of the urogenital ridge, which then close to form tubes.",
+      "section": "Urogenital System",
+      "questionNumber": 75
+    },
+    {
+      "id": "ana203-se-urogenital-system-76",
+      "text": "In male fetuses, the paramesonephric ducts almost entirely degenerate due to AMH. However, a small cranial remnant may persist. What is this vestigial structure called?",
+      "options": [
+        "The appendix epididymis",
+        "The appendix testis",
+        "The paradidymis",
+        "The utricle"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The appendix testis",
+      "explanation": "The cranial-most tip of the paramesonephric duct in males often persists as a small, non-functional cystic structure on the superior pole of the testis known as the appendix testis.",
+      "section": "Urogenital System",
+      "questionNumber": 76
+    },
+    {
+      "id": "ana203-se-urogenital-system-77",
+      "text": "Similarly, in female fetuses, the mesonephric ducts largely degenerate. However, remnants of the cranial mesonephric tubules can persist near the ovary. What are these remnants called?",
+      "options": [
+        "The epoophoron",
+        "The paroophoron",
+        "Gartner's cyst",
+        "The round ligament"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The epoophoron",
+      "explanation": "Remnants of the cranial mesonephric tubules in females may persist in the mesovarium as the epoophoron. (Caudal tubule remnants form the paroophoron, and duct remnants form Gartner's cysts).",
+      "section": "Urogenital System",
+      "questionNumber": 77
+    },
+    {
+      "id": "ana203-se-urogenital-system-78",
+      "text": "The uterus and broad ligaments dramatically alter the anatomy of the female pelvis during development. As the paramesonephric ducts fuse in the midline, they pull a fold of peritoneum with them. What is this resulting transverse fold?",
+      "options": [
+        "The mesentery proper",
+        "The greater omentum",
+        "The broad ligament of the uterus",
+        "The falciform ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The broad ligament of the uterus",
+      "explanation": "As the paramesonephric ducts swing medially and fuse to form the uterus, they drag a fold of peritoneum from the posterior body wall, creating the broad, transverse broad ligament that divides the pelvic cavity.",
+      "section": "Urogenital System",
+      "questionNumber": 78
+    },
+    {
+      "id": "ana203-se-urogenital-system-79",
+      "text": "The formation of the broad ligament creates two distinct peritoneal pouches in the female pelvis. What is the pouch located anterior to the uterus, between the uterus and the bladder?",
+      "options": [
+        "The recto-uterine pouch (of Douglas)",
+        "The vesico-uterine pouch",
+        "The paravesical fossa",
+        "The ischioanal fossa"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The vesico-uterine pouch",
+      "explanation": "The broad ligament and uterus partition the pelvis into a posterior recto-uterine pouch (between rectum and uterus) and an anterior vesico-uterine pouch (between the bladder and uterus).",
+      "section": "Urogenital System",
+      "questionNumber": 79
+    },
+    {
+      "id": "ana203-se-urogenital-system-80",
+      "text": "The sinovaginal bulbs grow out from the urogenital sinus to form the vaginal plate. Initially, this plate is a solid mass of cells. By which month of gestation does the vagina typically become completely canalized (hollowed out)?",
+      "options": [
+        "Second month",
+        "Third month",
+        "Fifth month",
+        "Eighth month"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Fifth month",
+      "explanation": "The solid vaginal plate undergoes cellular breakdown centrally, and by the fifth month of gestation, the vagina becomes completely canalized, forming a patent lumen.",
+      "section": "Urogenital System",
+      "questionNumber": 80
+    },
+    {
+      "id": "ana203-se-urogenital-system-81",
+      "text": "The hymen is a thin membrane that partially covers the vaginal orifice. From which specific embryological structures is the hymen formed?",
+      "options": [
+        "Solely from the endoderm of the urogenital sinus",
+        "Solely from the mesoderm of the cloacal folds",
+        "A combination of sinus epithelium and a thin layer of vaginal cells",
+        "From the fused tips of the paramesonephric ducts"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A combination of sinus epithelium and a thin layer of vaginal cells",
+      "explanation": "The hymen represents the separation between the urogenital sinus and the canalized vagina, consisting of a thin tissue plate formed by sinus epithelium on one side and a thin layer of vaginal cells on the other.",
+      "section": "Urogenital System",
+      "questionNumber": 81
+    },
+    {
+      "id": "ana203-se-urogenital-system-82",
+      "text": "During the indifferent stage of external genitalia development, a pair of cloacal folds flanks the cloacal membrane. Caudally, these folds subdivide. What is the posterior subdivision of these folds called?",
+      "options": [
+        "The urethral folds",
+        "The anal folds",
+        "The genital swellings",
+        "The labioscrotal folds"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The anal folds",
+      "explanation": "The cloacal folds subdivide caudally into the urethral folds anteriorly (surrounding the urogenital membrane) and the anal folds posteriorly (surrounding the anal membrane).",
+      "section": "Urogenital System",
+      "questionNumber": 82
+    },
+    {
+      "id": "ana203-se-urogenital-system-83",
+      "text": "In male development, the elongating phallus pulls the urethral folds forward to form the urethral groove. What provides the epithelial lining of this urethral groove, which eventually forms the urethral plate?",
+      "options": [
+        "Surface ectoderm",
+        "Somatic mesoderm",
+        "Neural crest",
+        "Endoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Endoderm",
+      "explanation": "The epithelial lining of the urethral groove, which forms the urethral plate, is derived from the endoderm of the phallic part of the urogenital sinus extending into the phallus.",
+      "section": "Urogenital System",
+      "questionNumber": 83
+    },
+    {
+      "id": "ana203-se-urogenital-system-84",
+      "text": "The penile urethra is formed by the fusion of the urethral folds over the urethral plate. However, the most distal portion of the urethra within the glans penis forms differently. How does the external urethral meatus form?",
+      "options": [
+        "Through the continuous fusion of the urethral folds to the very tip",
+        "By an ectodermal ingrowth from the tip of the glans that later canalizes",
+        "By the outward expansion of the urogenital sinus",
+        "Through the migration of neural crest cells"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. By an ectodermal ingrowth from the tip of the glans that later canalizes",
+      "explanation": "The spongy urethra does not reach the tip of the phallus initially. During month 4, ectodermal cells from the tip of the glans penetrate inward to form a short cord, which then canalizes to connect with the spongy urethra, forming the external meatus.",
+      "section": "Urogenital System",
+      "questionNumber": 84
+    },
+    {
+      "id": "ana203-se-urogenital-system-85",
+      "text": "If the ectodermal cord at the tip of the glans penis fails to canalize or fails to connect with the spongy urethra, what is the resulting clinical condition?",
+      "options": [
+        "Hypospadias",
+        "Epispadias",
+        "Phimosis",
+        "A blind-ending external urethral meatus"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. A blind-ending external urethral meatus",
+      "explanation": "If the ectodermal ingrowth fails to canalize or connect to the rest of the urethra, it results in a blind-ending meatus, requiring surgical correction to establish a continuous patent urethra.",
+      "section": "Urogenital System",
+      "questionNumber": 85
+    },
+    {
+      "id": "ana203-se-urogenital-system-86",
+      "text": "Epispadias is a rare anomaly where the urethral meatus opens on the dorsal (upper) surface of the penis. This condition is strongly associated with which other severe congenital defect?",
+      "options": [
+        "Renal agenesis",
+        "Cryptorchidism",
+        "Exstrophy of the bladder",
+        "Ambiguous genitalia"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Exstrophy of the bladder",
+      "explanation": "Epispadias is highly correlated with exstrophy of the bladder; both conditions result from a failure of the primitive streak mesoderm to migrate properly around the cloacal membrane and lower abdominal wall.",
+      "section": "Urogenital System",
+      "questionNumber": 86
+    },
+    {
+      "id": "ana203-se-urogenital-system-87",
+      "text": "In normal female external genitalia development, the genital tubercle does not elongate significantly. However, in certain pathological conditions, a female fetus may develop ambiguous genitalia with severe clitoromegaly. What is the most common cause of this?",
+      "options": [
+        "Turner syndrome (45, X)",
+        "Androgen Insensitivity Syndrome",
+        "Congenital Adrenal Hyperplasia (CAH)",
+        "Swyer syndrome"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Congenital Adrenal Hyperplasia (CAH)",
+      "explanation": "Congenital Adrenal Hyperplasia (CAH) causes the fetal adrenal glands to overproduce androgens. In a 46,XX fetus, this excess androgen exposure virilizes the external genitalia, causing clitoral enlargement and potential labial fusion.",
+      "section": "Urogenital System",
+      "questionNumber": 87
+    },
+    {
+      "id": "ana203-se-urogenital-system-88",
+      "text": "Androgen Insensitivity Syndrome (AIS) presents in individuals with a 46,XY karyotype. Why do these individuals have a normal female external appearance despite possessing testes?",
+      "options": [
+        "Their testes fail to produce any testosterone.",
+        "Their tissues lack functional androgen receptors to respond to the testosterone produced.",
+        "They produce excessive amounts of estrogen that override the testosterone.",
+        "Their SRY gene is mutated and non-functional."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Their tissues lack functional androgen receptors to respond to the testosterone produced.",
+      "explanation": "In AIS, the testes develop normally and produce testosterone, but the body's tissues lack functioning androgen receptors. Without the ability to respond to androgens, the external genitalia develop along the default female pathway.",
+      "section": "Urogenital System",
+      "questionNumber": 88
+    },
+    {
+      "id": "ana203-se-urogenital-system-89",
+      "text": "Individuals with Androgen Insensitivity Syndrome (46,XY) have a female external phenotype, but they lack a uterus and fallopian tubes. Why are these internal structures absent?",
+      "options": [
+        "Because they lack two X chromosomes required for uterine development",
+        "Because the testes produce Anti-Müllerian Hormone (AMH) which actively suppresses the paramesonephric ducts",
+        "Because the lack of androgen receptors directly destroys the paramesonephric ducts",
+        "Because the sinovaginal bulbs fail to form"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Because the testes produce Anti-Müllerian Hormone (AMH) which actively suppresses the paramesonephric ducts",
+      "explanation": "The testes in AIS patients function normally to produce AMH. AMH successfully suppresses the paramesonephric (Müllerian) ducts, preventing the formation of the uterus and fallopian tubes, regardless of the lack of androgen signaling.",
+      "section": "Urogenital System",
+      "questionNumber": 89
+    },
+    {
+      "id": "ana203-se-urogenital-system-90",
+      "text": "Testicular descent is a complex process. Which phase of descent relies heavily on the enlargement of the processus vaginalis and the active, androgen-dependent shortening of the gubernaculum?",
+      "options": [
+        "The initial transabdominal descent to the deep inguinal ring",
+        "The movement through the inguinal canal into the scrotum",
+        "The formation of the indifferent gonad",
+        "The separation of the mesonephros from the abdominal wall"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The movement through the inguinal canal into the scrotum",
+      "explanation": "The transinguinal phase of descent (moving through the inguinal canal into the scrotum) is highly dependent on androgens and the physical guidance/shortening of the gubernaculum along with the processus vaginalis.",
+      "section": "Urogenital System",
+      "questionNumber": 90
+    },
+    {
+      "id": "ana203-se-urogenital-system-91",
+      "text": "Cryptorchidism (undescended testis) is common in premature infants but usually resolves spontaneously. If a testis remains undescended postnatally, why is surgical correction (orchiopexy) typically recommended?",
+      "options": [
+        "To prevent the development of ambiguous genitalia",
+        "Undescended testes produce excessive testosterone, causing precocious puberty.",
+        "Undescended testes fail to produce mature spermatozoa due to higher abdominal temperatures and carry a higher risk of testicular cancer.",
+        "To prevent the complete atrophy of the epididymis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Undescended testes fail to produce mature spermatozoa due to higher abdominal temperatures and carry a higher risk of testicular cancer.",
+      "explanation": "Testes retained in the abdomen or canal are subjected to higher core body temperatures, which impairs spermatogenesis (causing infertility) and significantly increases the lifetime risk of developing testicular germ cell tumors.",
+      "section": "Urogenital System",
+      "questionNumber": 91
+    },
+    {
+      "id": "ana203-se-urogenital-system-92",
+      "text": "The descent of the gonads involves distinct physical movements. By what point in gestation have the testes typically reached the deep inguinal ring, ready to begin their descent through the canal?",
+      "options": [
+        "Week 8",
+        "Week 12",
+        "Month 3 to Month 7",
+        "Month 9"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Month 3 to Month 7",
+      "explanation": "Following the initial transabdominal descent, the testes typically rest in the vicinity of the deep inguinal ring between the third and seventh months of gestation before beginning their final descent through the canal.",
+      "section": "Urogenital System",
+      "questionNumber": 92
+    },
+    {
+      "id": "ana203-se-urogenital-system-93",
+      "text": "True hermaphroditism is an extremely rare condition where an individual possesses both testicular and ovarian tissue. What is the most common karyotype found in individuals with this condition?",
+      "options": [
+        "46, XY",
+        "46, XX/46, XY mosaic",
+        "47, XXY",
+        "46, XX"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. 46, XX",
+      "explanation": "While mosaicism and 46,XY karyotypes can occur, the majority (~70%) of individuals diagnosed with true hermaphroditism possess a 46,XX karyotype, often due to translocation of tiny fragments of the SRY gene.",
+      "section": "Urogenital System",
+      "questionNumber": 93
+    },
+    {
+      "id": "ana203-se-urogenital-system-94",
+      "text": "Turner syndrome is a chromosomal disorder characterized by a 45,X karyotype. Which of the following statements accurately describes the gonadal status in a typical Turner syndrome patient?",
+      "options": [
+        "They possess normal, functional ovaries but lack a uterus.",
+        "They possess streak gonads due to accelerated atresia of oocytes, resulting in gonadal dysgenesis.",
+        "They possess intra-abdominal testes that fail to produce testosterone.",
+        "They develop an ovotestis."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. They possess streak gonads due to accelerated atresia of oocytes, resulting in gonadal dysgenesis.",
+      "explanation": "In Turner syndrome (45,X), primordial germ cells migrate normally, but the oocytes undergo accelerated atresia (degeneration) before birth, leaving behind fibrotic \"streak gonads\" completely lacking follicles.",
+      "section": "Urogenital System",
+      "questionNumber": 94
+    },
+    {
+      "id": "ana203-se-urogenital-system-95",
+      "text": "Klinefelter syndrome is the most common major disorder of sexual differentiation in males, typically presenting with a 47,XXY karyotype. Which of the following is a classic clinical feature of this syndrome?",
+      "options": [
+        "Ambiguous external genitalia at birth",
+        "Normal fertility but severe intellectual disability",
+        "Small testes, decreased testosterone production, and frequently gynecomastia",
+        "Severe hypospadias and cryptorchidism"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Small testes, decreased testosterone production, and frequently gynecomastia",
+      "explanation": "Individuals with Klinefelter syndrome (47,XXY) are phenotypically male but typically present at puberty with small, firm testes, primary hypogonadism (low testosterone, infertility), and often gynecomastia (breast development).",
+      "section": "Urogenital System",
+      "questionNumber": 95
+    },
+    {
+      "id": "ana203-se-urogenital-system-96",
+      "text": "Swyer syndrome results in XY female gonadal dysgenesis. Individuals have a 46,XY karyotype but appear phenotypically female. What is the underlying genetic cause of this condition?",
+      "options": [
+        "An extra X chromosome (47, XXY)",
+        "A complete absence of androgen receptors",
+        "Mutations or deletions specifically involving the SRY gene",
+        "An enzymatic defect in cortisol synthesis (CAH)"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Mutations or deletions specifically involving the SRY gene",
+      "explanation": "Swyer syndrome occurs when a 46,XY individual has a mutation or deletion of the SRY gene. Without functional SRY protein, the indifferent gonads fail to differentiate into testes and instead become streak gonads, leading to a female phenotype.",
+      "section": "Urogenital System",
+      "questionNumber": 96
+    },
+    {
+      "id": "ana203-se-urogenital-system-97",
+      "text": "5-alpha-reductase deficiency is an autosomal recessive condition affecting 46,XY individuals. What is the specific physiological failure in this disorder?",
+      "options": [
+        "The inability to produce Anti-Müllerian Hormone",
+        "The inability to synthesize any testosterone in the Leydig cells",
+        "The inability to convert testosterone to the more potent dihydrotestosterone (DHT)",
+        "The complete absence of androgen receptors"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The inability to convert testosterone to the more potent dihydrotestosterone (DHT)",
+      "explanation": "5-alpha-reductase is the enzyme required to convert testosterone into dihydrotestosterone (DHT). DHT is crucial for the masculinization of the external genitalia in utero; without it, genitalia appear ambiguous or female at birth.",
+      "section": "Urogenital System",
+      "questionNumber": 97
+    },
+    {
+      "id": "ana203-se-urogenital-system-98",
+      "text": "In 5-alpha-reductase deficiency, despite having ambiguous or female-appearing external genitalia at birth, what internal genital structures do these 46,XY individuals possess?",
+      "options": [
+        "A fully formed uterus and fallopian tubes",
+        "Normal male internal ducts (epididymis, vas deferens) because these rely on testosterone, not DHT",
+        "No internal genital ducts of either sex",
+        "Both male and female internal ducts"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Normal male internal ducts (epididymis, vas deferens) because these rely on testosterone, not DHT",
+      "explanation": "The differentiation of the mesonephric ducts into the epididymis and vas deferens is driven directly by testosterone, which is normal in these patients. Only the external genitalia (which require DHT) are undermasculinized.",
+      "section": "Urogenital System",
+      "questionNumber": 98
+    },
+    {
+      "id": "ana203-se-urogenital-system-99",
+      "text": "The prostate gland develops as multiple outgrowths from the prostatic urethra. Because the urethra at this level is derived from the pelvic part of the urogenital sinus, what is the germ layer origin of the prostatic glandular epithelium?",
+      "options": [
+        "Ectoderm",
+        "Mesoderm",
+        "Neural crest",
+        "Endoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Endoderm",
+      "explanation": "The urogenital sinus is a derivative of the cloaca (hindgut), meaning its lining—and any glandular outgrowths from it, such as the prostate and bulbourethral glands—are of endodermal origin.",
+      "section": "Urogenital System",
+      "questionNumber": 99
+    },
+    {
+      "id": "ana203-se-urogenital-system-100",
+      "text": "The seminal vesicles produce the majority of the fluid in human semen. From which embryonic structure do they arise?",
+      "options": [
+        "As outgrowths of the prostatic urethra",
+        "As lateral outgrowths from the caudal portion of the mesonephric ducts",
+        "From the fused paramesonephric ducts",
+        "From the metanephric blastema"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. As lateral outgrowths from the caudal portion of the mesonephric ducts",
+      "explanation": "The seminal vesicles arise as blind, lateral outbuddings from the caudal ends of the mesonephric (Wolffian) ducts, just before the ducts enter the developing prostate.",
+      "section": "Urogenital System",
+      "questionNumber": 100
+    }
+  ]
+}
