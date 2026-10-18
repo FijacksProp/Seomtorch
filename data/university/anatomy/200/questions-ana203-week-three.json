@@ -1,0 +1,1510 @@
+{
+  "title": "Week Three",
+  "course": "ANA 203",
+  "totalQuestions": 100,
+  "sections": [
+    "Week Three (Q1-Q100)"
+  ],
+  "questions": [
+    {
+      "id": "ana203-ge-week-three-1",
+      "text": "Gastrulation is the defining event of the third week of development. What is the fundamental morphologic outcome of this process?",
+      "options": [
+        "The establishment of the trilaminar embryonic disc",
+        "The complete closure of the neural tube",
+        "The formation of the secondary yolk sac",
+        "The differentiation of the cytotrophoblast"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The establishment of the trilaminar embryonic disc",
+      "explanation": "Gastrulation is the process by which the bilaminar embryonic disc undergoes reorganization to establish the three primary germ layers: the ectoderm, mesoderm, and endoderm, forming the trilaminar embryo.",
+      "section": "Week Three",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana203-ge-week-three-2",
+      "text": "The initiation of gastrulation is visibly marked by the appearance of a specific structure on the dorsum of the epiblast. When does this structure typically become visible?",
+      "options": [
+        "Day 8 post-ovulation",
+        "Day 15 post-ovulation",
+        "Day 21 post-ovulation",
+        "Day 28 post-ovulation"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Day 15 post-ovulation",
+      "explanation": "The primitive streak, which marks the beginning of gastrulation, becomes visible by the 15th day post-ovulation as a median longitudinal elevation on the caudal part of the embryo's dorsal aspect.",
+      "section": "Week Three",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana203-ge-week-three-3",
+      "text": "During the formation of the trilaminar embryo, a new layer of tissue is established between the existing epiblast and hypoblast. What is the cellular origin of this intraembryonic mesoderm?",
+      "options": [
+        "Proliferation of the underlying hypoblast",
+        "Migration of cells from the cytotrophoblast",
+        "Epiblast cells that ingress through the primitive groove",
+        "Expansion of the extraembryonic somatic mesoderm"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Epiblast cells that ingress through the primitive groove",
+      "explanation": "As cells of the epiblast migrate toward the primitive streak and ingress through the primitive groove, they spread laterally and cranially to form the intraembryonic mesoderm.",
+      "section": "Week Three",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana203-ge-week-three-4",
+      "text": "The primitive streak organizes the craniocaudal, dorsoventral, and right-left axes of the embryo. What is the typical developmental fate of the primitive streak?",
+      "options": [
+        "It persists to form the sacral vertebrae.",
+        "It develops into the definitive notochord.",
+        "It expands to form the neural crest.",
+        "It actively degenerates and disappears by the end of the fourth week."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. It actively degenerates and disappears by the end of the fourth week.",
+      "explanation": "After completing its role in gastrulation, the primitive streak typically diminishes in size, degenerates, and disappears by the end of the 4th week of development.",
+      "section": "Week Three",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana203-ge-week-three-5",
+      "text": "The process of gastrulation assigns definitive fates to the primary germ layers. Which of the following adult structures is a direct derivative of the embryonic ectoderm?",
+      "options": [
+        "Cornea and lens of the eye",
+        "Endothelial lining of blood vessels",
+        "Epithelial lining of the digestive tract",
+        "Skeletal muscle of the limbs"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Cornea and lens of the eye",
+      "explanation": "The embryonic ectoderm gives rise to structures that maintain contact with the outside world, including the epidermis, central and peripheral nervous systems, and sensory structures like the cornea and lens of the eye.",
+      "section": "Week Three",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana203-ge-week-three-6",
+      "text": "The mesoderm differentiates into highly specialized connective and supportive tissues. Which of the following glands or functional tissues is derived entirely from the mesoderm?",
+      "options": [
+        "Thyroid gland",
+        "Pituitary gland",
+        "Adrenal cortex",
+        "Thymus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Adrenal cortex",
+      "explanation": "The adrenal cortex is derived from the mesoderm, specifically from the coelomic epithelium, whereas the adrenal medulla originates from neural crest cells (ectoderm).",
+      "section": "Week Three",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana203-ge-week-three-7",
+      "text": "The embryonic endoderm forms the epithelial lining of various internal organ systems. Which of the following is an endodermal derivative?",
+      "options": [
+        "Dermis of the skin",
+        "Enamel of the teeth",
+        "Lymphatic vessels",
+        "Epithelial lining of the respiratory system"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Epithelial lining of the respiratory system",
+      "explanation": "The endoderm is responsible for forming the epithelial lining of the gastrointestinal and respiratory tracts, as well as the parenchyma of the liver, pancreas, thyroid, and parathyroid glands.",
+      "section": "Week Three",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana203-ge-week-three-8",
+      "text": "The cardiogenic plate is the earliest primordium of the developing heart. Where is this plate anatomically established during the third week?",
+      "options": [
+        "In the caudal midline, directly posterior to the primitive node",
+        "In the midline, just cranial to the prechordal plate",
+        "In the lateral margins of the intermediate mesoderm",
+        "Within the extraembryonic mesoderm of the connecting stalk"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. In the midline, just cranial to the prechordal plate",
+      "explanation": "The cardiogenic plate forms in the midline from mesodermal cells that migrate cranially, positioning themselves just cranial to the prechordal plate to form the heart primordium.",
+      "section": "Week Three",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana203-ge-week-three-9",
+      "text": "The definitive notochord serves as the primary axial skeleton for the early embryo. Which specific population of cells gives rise to the notochord?",
+      "options": [
+        "Hypoblast cells at the cranial margin",
+        "Epiblast cells that traverse the primitive pit to reach the prechordal plate",
+        "Mesenchymal cells from the lateral plate mesoderm",
+        "Endodermal cells forming the roof of the yolk sac"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Epiblast cells that traverse the primitive pit to reach the prechordal plate",
+      "explanation": "The definitive notochord is derived from specialized epiblast cells that ingress through the primitive pit and migrate cranially in the midline until they reach the prechordal plate.",
+      "section": "Week Three",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana203-ge-week-three-10",
+      "text": "While the majority of the embryonic notochord eventually degenerates as the vertebral column forms, a portion of it persists in the adult skeleton. Which structure represents this remnant?",
+      "options": [
+        "The spinous processes of the vertebrae",
+        "The annulus fibrosus",
+        "The anterior longitudinal ligament",
+        "The nucleus pulposus of the intervertebral disc"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The nucleus pulposus of the intervertebral disc",
+      "explanation": "The notochord becomes incorporated into the developing vertebral column, where its remnants persist exclusively as the gelatinous nucleus pulposus in the center of the intervertebral discs.",
+      "section": "Week Three",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana203-ge-week-three-11",
+      "text": "The notochord plays a critical inductive role in early embryonic development. Which major morphologic event is directly initiated by signals from the notochord?",
+      "options": [
+        "Formation of the secondary yolk sac",
+        "Angiogenesis in the connecting stalk",
+        "Thickening of the overlying ectoderm to form the neural plate",
+        "Splitting of the lateral plate mesoderm"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Thickening of the overlying ectoderm to form the neural plate",
+      "explanation": "The developing notochord acts as a primary signaling center, inducing the overlying embryonic ectoderm to thicken and differentiate into the neural plate, thereby initiating neurulation.",
+      "section": "Week Three",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana203-ge-week-three-12",
+      "text": "During the transformation of the notochordal process into the notochordal plate, a temporary communication is established between two embryonic cavities. What is the name of this canal?",
+      "options": [
+        "The neurenteric canal",
+        "The pericardio-peritoneal canal",
+        "The neural canal",
+        "The amniotic duct"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The neurenteric canal",
+      "explanation": "As the floor of the notochordal canal fuses with the underlying endoderm and breaks down, the neurenteric canal temporarily links the amniotic cavity with the secondary yolk sac.",
+      "section": "Week Three",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana203-ge-week-three-13",
+      "text": "The allantois is an extraembryonic membrane that appears during early development. At approximately what time does the allantoic diverticulum first form?",
+      "options": [
+        "Day 8",
+        "Day 12",
+        "Day 14",
+        "Day 16"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Day 16",
+      "explanation": "The allantois appears around day 16 as a small outpouching or diverticulum extending from the caudal wall of the umbilical vesicle (yolk sac).",
+      "section": "Week Three",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana203-ge-week-three-14",
+      "text": "The proximal portion of the allantois persists throughout much of fetal development to connect the developing bladder to the umbilical region. What is this stalk called?",
+      "options": [
+        "The primitive streak",
+        "The urachus",
+        "The notochordal canal",
+        "The connecting stalk"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The urachus",
+      "explanation": "The proximal part of the original allantoic diverticulum persists as a thick fibrous stalk known as the urachus, which extends from the apex of the bladder to the umbilicus.",
+      "section": "Week Three",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana203-ge-week-three-15",
+      "text": "After birth, the urachus obliterates and forms a solid fibrous cord in the adult abdominal wall. What is the anatomical name of this adult remnant?",
+      "options": [
+        "Median umbilical ligament",
+        "Ligamentum teres hepatis",
+        "Medial umbilical ligament",
+        "Falciform ligament"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Median umbilical ligament",
+      "explanation": "The urachus becomes fibrotic after birth and remains in the adult as the median umbilical ligament, extending from the bladder dome to the umbilicus.",
+      "section": "Week Three",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana203-ge-week-three-16",
+      "text": "Although the allantois remains structurally small in humans, its mesodermal wall is critical for establishing early embryonic circulation. What do the blood vessels within the allantoic stalk develop into?",
+      "options": [
+        "The dorsal aortae",
+        "The vitelline veins",
+        "The umbilical arteries and veins",
+        "The cardinal veins"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The umbilical arteries and veins",
+      "explanation": "The mesoderm covering the allantois is highly angiogenic, and the blood vessels that form within the allantoic stalk differentiate into the umbilical arteries and veins, essential for fetal-placental circulation.",
+      "section": "Week Three",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana203-ge-week-three-17",
+      "text": "Neurulation describes the formation of the neural tube. Which structure dictates the longitudinal alignment and position of the newly forming neural plate?",
+      "options": [
+        "The primitive streak",
+        "The cardiogenic area",
+        "The underlying notochord",
+        "The oropharyngeal membrane"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The underlying notochord",
+      "explanation": "The neural plate is initially aligned with the length of the underlying notochord, appearing dorsal to the notochord and adjacent mesoderm, reflecting the notochord's inductive influence.",
+      "section": "Week Three",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana203-ge-week-three-18",
+      "text": "The neural tube initially remains open at its cranial and caudal ends, communicating with the amniotic cavity via neuropores. When does the rostral (cranial) neuropore typically close?",
+      "options": [
+        "Day 25",
+        "Day 21",
+        "Day 28",
+        "Day 30"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Day 25",
+      "explanation": "The rostral (cranial) neuropore is the first to close, completing its closure at approximately day 25 of development.",
+      "section": "Week Three",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana203-ge-week-three-19",
+      "text": "Failure of the neuropores to close results in severe congenital anomalies. What condition results from the failure of the rostral neuropore to close?",
+      "options": [
+        "Spina bifida occulta",
+        "Sacrococcygeal teratoma",
+        "Sirenomelia",
+        "Anencephaly"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Anencephaly",
+      "explanation": "Failure of the rostral neuropore to close prevents the normal formation of the brain and cranial vault, resulting in anencephaly (a lethal condition often associated with polyhydramnios).",
+      "section": "Week Three",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana203-ge-week-three-20",
+      "text": "As the neural folds elevate and fuse, a specialized population of cells detaches from the lateral lips of the folds. Where do these neural crest cells initially reside before migrating?",
+      "options": [
+        "In the floor plate of the neural tube",
+        "At the junction between the general surface ectoderm and the neural folds",
+        "Within the paraxial mesoderm",
+        "On the ventral surface of the notochord"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. At the junction between the general surface ectoderm and the neural folds",
+      "explanation": "Neural crest cells occupy the junction between the general surface ectoderm and the elevating neural folds before they undergo an epithelial-to-mesenchymal transition and migrate away.",
+      "section": "Week Three",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana203-ge-week-three-21",
+      "text": "The intraembryonic mesoderm adjacent to the notochord differentiates into a thickened, longitudinal column of cells. What is this specific region of mesoderm called?",
+      "options": [
+        "Intermediate mesoderm",
+        "Splanchnic mesoderm",
+        "Somatic mesoderm",
+        "Paraxial mesoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Paraxial mesoderm",
+      "explanation": "The primitive node gives rise to the paraxial mesoderm, which forms thick longitudinal columns running parallel to the notochord on either side of the midline.",
+      "section": "Week Three",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana203-ge-week-three-22",
+      "text": "The paraxial mesoderm segments into distinct blocks of tissue called somites. Where do the very first pairs of somites anatomically appear?",
+      "options": [
+        "In the sacral region",
+        "In the lumbar region",
+        "In the occipital region",
+        "In the coccygeal region"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. In the occipital region",
+      "explanation": "Somite formation proceeds in a craniocaudal sequence. The very first pair of somites appears in the occipital region (just caudal to the head) during the third week.",
+      "section": "Week Three",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana203-ge-week-three-23",
+      "text": "The continuous addition of somites provides a reliable indicator of embryonic age. At approximately what rate do new somite pairs develop?",
+      "options": [
+        "1 pair per day",
+        "3 pairs per day",
+        "5 pairs per day",
+        "7 pairs per day"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 3 pairs per day",
+      "explanation": "Following the appearance of the first occipital pair, additional somites develop roughly at a rapid rate of 3 pairs per day until the fifth week.",
+      "section": "Week Three",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana203-ge-week-three-24",
+      "text": "As somites mature, their cells differentiate into specific tissue precursors. The dorsolateral wall of a somite gives rise to which specific structural components?",
+      "options": [
+        "The dermomyotome (forming dermis and skeletal muscle)",
+        "The splanchnopleure (forming the gut wall)",
+        "The sclerotome (forming axial cartilage and bone)",
+        "The nephrogenic cord (forming the kidneys)"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The dermomyotome (forming dermis and skeletal muscle)",
+      "explanation": "Each somite differentiates into two main parts: the ventromedial wall forms the sclerotome (bones/cartilage), while the dorsolateral wall forms the dermomyotome (muscle and dermis).",
+      "section": "Week Three",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana203-ge-week-three-25",
+      "text": "The intermediate mesoderm connects the paraxial mesoderm to the lateral plate mesoderm. What is the primary developmental fate of the intermediate mesoderm?",
+      "options": [
+        "To form the heart and great vessels",
+        "To form the excretory units of the kidneys",
+        "To form the appendicular skeleton",
+        "To form the lining of the peritoneal cavity"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. To form the excretory units of the kidneys",
+      "explanation": "The intermediate mesoderm forms the permanent nephric tubules in its caudal part, playing a major role in the formation of the kidneys and the overall urinary system.",
+      "section": "Week Three",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana203-ge-week-three-26",
+      "text": "In addition to the kidneys, the intermediate mesoderm contributes to the development of the reproductive system. Which critical reproductive structure originates from this layer?",
+      "options": [
+        "The mesonephric duct (primordium of male genital ducts)",
+        "The primordial germ cells",
+        "The vaginal epithelium",
+        "The dartos fascia"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The mesonephric duct (primordium of male genital ducts)",
+      "explanation": "The intermediate mesoderm gives rise to the mesonephric (Wolffian) duct, which serves as the primordium for the male genital duct system (epididymis, vas deferens, seminal vesicles).",
+      "section": "Week Three",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana203-ge-week-three-27",
+      "text": "Topographically, where is the intermediate mesoderm located within the developing embryo?",
+      "options": [
+        "Ventral to the endoderm",
+        "Dorsal to the neural tube",
+        "Medial to the notochord",
+        "Between the paraxial mesoderm and the lateral plate mesoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Between the paraxial mesoderm and the lateral plate mesoderm",
+      "explanation": "The intermediate mesoderm is a narrow bridge of tissue that physically connects the segmented paraxial mesoderm to the unsegmented lateral plate mesoderm.",
+      "section": "Week Three",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana203-ge-week-three-28",
+      "text": "Which physical characteristic distinguishes the intermediate mesoderm from the adjacent paraxial mesoderm during early development?",
+      "options": [
+        "It forms a hollow tube immediately upon differentiating.",
+        "It undergoes rapid calcification.",
+        "It does not show segmentation.",
+        "It lacks any intracellular cavities."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It does not show segmentation.",
+      "explanation": "Unlike the paraxial mesoderm, which cleaves into highly segmented blocks (somites), the intermediate mesoderm generally remains unsegmented, forming continuous longitudinal cords.",
+      "section": "Week Three",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana203-ge-week-three-29",
+      "text": "The lateral plate mesoderm splits into two distinct layers to accommodate a new cavity. What initiates this separation?",
+      "options": [
+        "The formation of the intraembryonic coelom",
+        "The swelling of the neural tube",
+        "The expansion of the amniotic cavity",
+        "The rupture of the exocoelomic cysts"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The formation of the intraembryonic coelom",
+      "explanation": "Isolated coelomic spaces appear in the lateral mesoderm and merge to form the intraembryonic coelom, completely dividing the lateral plate into somatic (parietal) and splanchnic (visceral) layers.",
+      "section": "Week Three",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana203-ge-week-three-30",
+      "text": "The embryonic body wall is composed of a specialized dual-layer structure. What makes up the somatopleure?",
+      "options": [
+        "Splanchnic mesoderm and embryonic endoderm",
+        "Paraxial mesoderm and neural crest",
+        "Intermediate mesoderm and somatic mesoderm",
+        "Somatic mesoderm and the overlying embryonic ectoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Somatic mesoderm and the overlying embryonic ectoderm",
+      "explanation": "The somatic (parietal) layer of the lateral mesoderm adheres to the overlying embryonic ectoderm. Together, these two adhered layers form the somatopleure, which becomes the embryonic body wall.",
+      "section": "Week Three",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana203-ge-week-three-31",
+      "text": "The developing embryonic gut tube requires a supportive, vascularized connective tissue layer. Which structure provides this support by forming the splanchnopleure?",
+      "options": [
+        "Somatic mesoderm and surface ectoderm",
+        "Intermediate mesoderm and notochord",
+        "Splanchnic mesoderm and the underlying embryonic endoderm",
+        "Paraxial mesoderm and hypoblast"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Splanchnic mesoderm and the underlying embryonic endoderm",
+      "explanation": "The splanchnic (visceral) layer of the lateral mesoderm joins the underlying embryonic endoderm to form the splanchnopleure, which will develop into the wall of the embryonic gut.",
+      "section": "Week Three",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana203-ge-week-three-32",
+      "text": "During the second month of development, the horseshoe-shaped intraembryonic coelom undergoes significant partitioning. What does this single continuous cavity eventually divide into?",
+      "options": [
+        "The amniotic, chorionic, and yolk sac cavities",
+        "The pericardial, pleural, and peritoneal cavities",
+        "The lateral, third, and fourth cerebral ventricles",
+        "The superior, middle, and inferior mediastinum"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The pericardial, pleural, and peritoneal cavities",
+      "explanation": "The intraembryonic coelom eventually partitions to form the three major serous body cavities of the adult: the pericardial cavity, the bilateral pleural cavities, and the peritoneal cavity.",
+      "section": "Week Three",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana203-ge-week-three-33",
+      "text": "Angiogenesis begins early in the third week to support the rapidly growing embryo. Where do the first blood islands aggregate?",
+      "options": [
+        "In the paraxial mesoderm",
+        "Within the neural groove",
+        "In the extraembryonic mesoderm of the wall of the yolk sac",
+        "Inside the amniotic cavity"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. In the extraembryonic mesoderm of the wall of the yolk sac",
+      "explanation": "The first blood-forming cells (angioblasts) aggregate to form blood islands initially in the mesoderm lining the wall of the yolk sac, before appearing in the chorion and connecting stalk.",
+      "section": "Week Three",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana203-ge-week-three-34",
+      "text": "The cardiogenic area rapidly develops during the third week. By approximately what day does the primitive heart form and begin to beat (function)?",
+      "options": [
+        "Day 21",
+        "Day 14",
+        "Day 28",
+        "Day 35"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Day 21",
+      "explanation": "Angiogenesis proceeds rapidly in the cardiogenic area, establishing a primitive heart tube that begins to pulsate and function by about the 21st day of development.",
+      "section": "Week Three",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana203-ge-week-three-35",
+      "text": "Cells within the blood islands serve a dual purpose in early vascular development. Which specific cells give rise to both the endothelial lining of vessels and the primitive blood cells?",
+      "options": [
+        "Amnioblasts",
+        "Hemangioblasts",
+        "Odontoblasts",
+        "Sclerotomal cells"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Hemangioblasts",
+      "explanation": "Progenitor cells in the blood islands, known as hemangioblasts, differentiate into both the angioblasts (which form the vascular endothelium) and the hematopoietic stem cells (which form blood cells).",
+      "section": "Week Three",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana203-ge-week-three-36",
+      "text": "While extraembryonic blood formation starts in the third week, hematopoiesis inside the embryo proper is delayed. When does the formation of blood cells begin within the embryo itself?",
+      "options": [
+        "3rd week",
+        "4th week",
+        "8th week",
+        "5th week"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. 5th week",
+      "explanation": "Extraembryonic hematopoiesis begins in the 3rd week in the yolk sac, but intraembryonic blood formation does not begin until the 5th week of development.",
+      "section": "Week Three",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana203-ge-week-three-37",
+      "text": "Chorionic villi progress through three distinct stages of maturation. What distinguishes a secondary chorionic villus from a primary villus?",
+      "options": [
+        "The presence of a mesenchymal (mesodermal) core",
+        "A covering of amniotic epithelium",
+        "The presence of a highly branched capillary network",
+        "The complete absence of cytotrophoblast cells"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The presence of a mesenchymal (mesodermal) core",
+      "explanation": "Primary villi consist only of cytotrophoblast covered by syncytiotrophoblast. Secondary villi are defined by the invasion of extraembryonic mesoderm into the center, creating a mesenchymal core.",
+      "section": "Week Three",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana203-ge-week-three-38",
+      "text": "The transition from a secondary to a tertiary chorionic villus is a critical step in placental development. What is the defining characteristic of a tertiary villus?",
+      "options": [
+        "Fusion with adjacent villi to form a solid shell",
+        "Degeneration of the syncytiotrophoblast layer",
+        "Calcification of the mesodermal core",
+        "The appearance of fetal blood vessels within the mesenchymal core"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The appearance of fetal blood vessels within the mesenchymal core",
+      "explanation": "Tertiary villi are formed later in the 3rd week when angioblasts within the mesodermal core differentiate into fetal blood vessels and capillaries, linking to the embryonic circulation.",
+      "section": "Week Three",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana203-ge-week-three-39",
+      "text": "Tertiary villi are functionally divided into stem villi and branch villi. What is the primary structural role of stem tertiary villi?",
+      "options": [
+        "To produce massive amounts of human chorionic gonadotropin",
+        "To attach the embryo and chorionic sac securely to the maternal endometrium",
+        "To penetrate the myometrium and establish nerve connections",
+        "To phagocytize maternal red blood cells"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. To attach the embryo and chorionic sac securely to the maternal endometrium",
+      "explanation": "Stem (anchoring) tertiary villi extend from the chorionic plate all the way through to the cytotrophoblastic shell, physically anchoring the developing placenta to the maternal endometrium.",
+      "section": "Week Three",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana203-ge-week-three-40",
+      "text": "While stem villi anchor the placenta, what is the primary physiological function of the branch tertiary villi?",
+      "options": [
+        "To synthesize amniotic fluid",
+        "To provide a rigid structural framework for the amniotic sac",
+        "To serve as the primary site for the active exchange of materials between maternal and fetal circulation",
+        "To secrete Oocyte Maturation Inhibitor"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. To serve as the primary site for the active exchange of materials between maternal and fetal circulation",
+      "explanation": "Branch tertiary villi sprout from the sides of stem villi into the intervillous spaces (lacunae), maximizing surface area for the vital exchange of gases, nutrients, and waste between mother and fetus.",
+      "section": "Week Three",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana203-ge-week-three-41",
+      "text": "A large mass is discovered in the sacral region of a newborn infant. Biopsy reveals a disorganized mixture of bone, hair, and muscle tissue. Which embryological error is the most likely cause?",
+      "options": [
+        "Incomplete closure of the caudal neuropore",
+        "Failure of the proctodeum to canalize",
+        "Persistence of remnants of the primitive streak",
+        "Abnormal migration of neural crest cells"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Persistence of remnants of the primitive streak",
+      "explanation": "Sacrococcygeal teratomas are massive tumors containing diverse tissue types (from all three germ layers). They arise when remnants of the highly proliferative primitive streak fail to degenerate completely.",
+      "section": "Week Three",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana203-ge-week-three-42",
+      "text": "Sirenomelia, or caudal dysgenesis, presents with fused lower limbs and associated pelvic anomalies. What is the fundamental embryological defect underlying this condition?",
+      "options": [
+        "A deficit of mesoderm in the caudal-most part of the embryo",
+        "Premature closure of the rostral neuropore",
+        "Excessive proliferation of the notochordal process",
+        "Autoimmune destruction of the lateral plate mesoderm"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. A deficit of mesoderm in the caudal-most part of the embryo",
+      "explanation": "Sirenomelia occurs when insufficient mesoderm is formed in the caudalmost region of the embryo during gastrulation, disrupting the formation of the lower limbs and urogenital structures.",
+      "section": "Week Three",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana203-ge-week-three-43",
+      "text": "Because Sirenomelia results from a caudal mesoderm deficit, it frequently presents with a specific constellation of associated anomalies. Which of the following is commonly seen in these patients?",
+      "options": [
+        "Anencephaly",
+        "Cleft palate",
+        "Transposition of the great arteries",
+        "Renal agenesis and imperforate anus"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Renal agenesis and imperforate anus",
+      "explanation": "The deficit in caudal mesoderm affects both the somatic mesoderm (lower limbs) and the intermediate/splanchnic mesoderm, commonly resulting in renal agenesis, anomalous genitalia, and imperforate anus.",
+      "section": "Week Three",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana203-ge-week-three-44",
+      "text": "A newborn is diagnosed with holoprosencephaly. The infant has a small forebrain, merged lateral ventricles, and hypotelorism. Which of the following is a known teratogenic risk factor for destroying the rostral midline cells causing this condition?",
+      "options": [
+        "Folic acid supplementation",
+        "Maternal alcohol consumption during early pregnancy",
+        "High doses of Vitamin C",
+        "Maternal exposure to loud noises"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Maternal alcohol consumption during early pregnancy",
+      "explanation": "Holoprosencephaly is a severe forebrain defect. It can be induced by teratogens like high levels of alcohol, which destroy the midline cells in the rostral part of the trilaminar germ disc during early gastrulation.",
+      "section": "Week Three",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana203-ge-week-three-45",
+      "text": "During a routine physical, an individual is found to have their heart on the right side and their liver on the left, with otherwise normal physiology. What is this condition termed?",
+      "options": [
+        "Sacrococcygeal teratoma",
+        "Situs inversus",
+        "Holoprosencephaly",
+        "Ectopia cordis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Situs inversus",
+      "explanation": "Situs inversus is a complete mirror-image reversal of normal organ positioning. It occurs in about 1/7000 individuals due to an error in left-right axis determination during gastrulation.",
+      "section": "Week Three",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana203-ge-week-three-46",
+      "text": "Heterotaxy (laterality sequence) involves abnormal sidedness of only some organs. In patients presenting with left-sided bilaterality (left isomerism), which splenic anomaly is characteristically observed?",
+      "options": [
+        "A single, massively enlarged spleen",
+        "Complete absence of splenic tissue (asplenia)",
+        "An ectopic spleen located in the thorax",
+        "The presence of multiple small spleens (polysplenia)"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The presence of multiple small spleens (polysplenia)",
+      "explanation": "In heterotaxy with left-sided bilaterality, the body incorrectly patterns both sides as \"left.\" Since the spleen is a left-sided organ, this typically results in polysplenia.",
+      "section": "Week Three",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana203-ge-week-three-47",
+      "text": "Conversely, in patients presenting with heterotaxy featuring right-sided bilaterality (right isomerism), what is the expected condition of the spleen?",
+      "options": [
+        "Asplenia or a severely hypoplastic spleen",
+        "Polysplenia",
+        "A normal spleen located on the right side",
+        "A spleen fused with the liver"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Asplenia or a severely hypoplastic spleen",
+      "explanation": "In right-sided bilaterality, both sides are patterned as \"right.\" Because the spleen normally develops on the left, these individuals typically exhibit asplenia (absence of a spleen) or a severely hypoplastic spleen.",
+      "section": "Week Three",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana203-ge-week-three-48",
+      "text": "Vestigial remnants of notochordal tissue can occasionally undergo malignant transformation. What is the clinical term for the slow-growing bone tumor that typically arises at the base of the cranium (clivus)?",
+      "options": [
+        "Osteosarcoma",
+        "Multiple myeloma",
+        "Chordoma",
+        "Chondrosarcoma"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Chordoma",
+      "explanation": "Chordomas are rare, slow-growing malignant tumors arising from the remnants of the notochord. About one-third of them occur at the cranial base, while others occur in the sacrococcygeal region.",
+      "section": "Week Three",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana203-ge-week-three-49",
+      "text": "A complete hydatidiform mole forms a grape-like mass without a viable embryo. Genetically, what is the most common mechanism for the formation of a monospermic complete mole?",
+      "options": [
+        "Fertilization of an empty oocyte by a single sperm that then duplicates its DNA",
+        "Fertilization of a normal oocyte by two separate sperms",
+        "Fertilization of a diploid oocyte by a single haploid sperm",
+        "Parthenogenetic activation of an unfertilized oocyte"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Fertilization of an empty oocyte by a single sperm that then duplicates its DNA",
+      "explanation": "A classic complete hydatidiform mole is monospermic, occurring when a single sperm fertilizes an oocyte lacking a functional maternal pronucleus (\"empty\"), and the sperm's DNA then duplicates (46,XX, entirely paternal).",
+      "section": "Week Three",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana203-ge-week-three-50",
+      "text": "Partial hydatidiform moles exhibit some evidence of embryonic development alongside molar changes. What is the typical genetic origin of a partial mole?",
+      "options": [
+        "Mitotic non-disjunction in a normal zygote",
+        "Fertilization of a normal haploid oocyte by two sperms (dispermy)",
+        "Fertilization of an empty oocyte by two sperms",
+        "Deletion of the maternal X chromosome"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Fertilization of a normal haploid oocyte by two sperms (dispermy)",
+      "explanation": "Partial moles are usually triploid (69,XXX, 69,XXY, or 69,XYY) and result from the fertilization of a normal, healthy oocyte by two separate sperms (dispermy).",
+      "section": "Week Three",
+      "questionNumber": 50
+    },
+    {
+      "id": "ana203-ge-week-three-51",
+      "text": "Hydatidiform moles are characterized by varying degrees of trophoblastic proliferation. Which clinical marker is characteristically produced in massive excess by these molar tissues?",
+      "options": [
+        "Alpha-fetoprotein (AFP)",
+        "Prolactin",
+        "Human chorionic gonadotropin (hCG)",
+        "Luteinizing hormone (LH)"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Human chorionic gonadotropin (hCG)",
+      "explanation": "Because a mole consists of highly proliferative trophoblastic tissue (which normally secretes hCG), it produces excessively high, abnormal levels of human chorionic gonadotropin.",
+      "section": "Week Three",
+      "questionNumber": 51
+    },
+    {
+      "id": "ana203-ge-week-three-52",
+      "text": "While hydatidiform moles are initially benign, a small percentage (3% to 5%) can undergo malignant transformation into highly aggressive lesions that metastasize to the lungs, liver, and brain. What are these malignant tumors called?",
+      "options": [
+        "Teratomas",
+        "Dysgerminomas",
+        "Adenocarcinomas",
+        "Choriocarcinomas"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Choriocarcinomas",
+      "explanation": "Choriocarcinomas are highly malignant, rapidly metastasizing tumors that arise from the trophoblastic epithelium, often following a molar pregnancy, abortion, or normal delivery.",
+      "section": "Week Three",
+      "questionNumber": 52
+    },
+    {
+      "id": "ana203-ge-week-three-53",
+      "text": "Neural tube defects result from the failure of the neuropores to close normally. If the caudal neuropore fails to close around day 27, which specific clinical condition results?",
+      "options": [
+        "Encephalocele",
+        "Spina bifida",
+        "Hydrocephalus",
+        "Craniosynostosis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Spina bifida",
+      "explanation": "Failure of the caudal neuropore to close completely leaves the lower spinal cord exposed or improperly formed, a condition broadly classified as spina bifida.",
+      "section": "Week Three",
+      "questionNumber": 53
+    },
+    {
+      "id": "ana203-ge-week-three-54",
+      "text": "Anencephaly is a severe neural tube defect resulting from failure of rostral neuropore closure. This condition is frequently accompanied by which specific amniotic fluid abnormality?",
+      "options": [
+        "Oligohydramnios",
+        "Chorioamnionitis",
+        "Polyhydramnios",
+        "Amniotic band syndrome"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Polyhydramnios",
+      "explanation": "Fetuses with anencephaly lack the swallowing reflex controlled by higher brain centers. Consequently, they cannot swallow amniotic fluid, leading to an excessive accumulation known as polyhydramnios.",
+      "section": "Week Three",
+      "questionNumber": 54
+    },
+    {
+      "id": "ana203-ge-week-three-55",
+      "text": "Neural crest cells are remarkable for their extensive migration and diverse differentiation. Which endocrine structure is derived directly from migrating neural crest cells?",
+      "options": [
+        "The anterior pituitary gland",
+        "The thyroid follicular cells",
+        "The islets of Langerhans",
+        "The chromaffin cells of the adrenal medulla"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The chromaffin cells of the adrenal medulla",
+      "explanation": "Neural crest cells migrate into the developing adrenal gland to form the adrenal medulla, differentiating into the chromaffin cells that synthesize and secrete catecholamines (epinephrine).",
+      "section": "Week Three",
+      "questionNumber": 55
+    },
+    {
+      "id": "ana203-ge-week-three-56",
+      "text": "The pigmentation of human skin relies on specialized cells called melanoblasts. From which embryological source do melanoblasts originate?",
+      "options": [
+        "Neural crest cells",
+        "Epidermal surface ectoderm",
+        "Dermatome of the paraxial mesoderm",
+        "Extraembryonic somatic mesoderm"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Neural crest cells",
+      "explanation": "Melanoblasts (the precursors to melanocytes) are highly migratory cells derived entirely from the neural crest before they settle into the epidermis.",
+      "section": "Week Three",
+      "questionNumber": 56
+    },
+    {
+      "id": "ana203-ge-week-three-57",
+      "text": "The primitive streak has an expanded cranial end that acts as a major signaling center. What is the specific term for this expanded cranial end?",
+      "options": [
+        "The prechordal plate",
+        "The oropharyngeal membrane",
+        "The cardiogenic area",
+        "The primitive node"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The primitive node",
+      "explanation": "The primitive streak elongates caudally to cranially. Its expanded, slightly elevated cranial end is known as the primitive node (or Hensen's node), which surrounds the primitive pit.",
+      "section": "Week Three",
+      "questionNumber": 57
+    },
+    {
+      "id": "ana203-ge-week-three-58",
+      "text": "The prechordal plate is an important structural landmark in the early trilaminar embryo. Where is the prechordal plate located relative to the developing notochord and the cardiogenic area?",
+      "options": [
+        "Caudal to the cloacal membrane",
+        "Deep within the intermediate mesoderm",
+        "Cranial to the notochord but caudal to the cardiogenic area",
+        "Dorsal to the amniotic cavity"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Cranial to the notochord but caudal to the cardiogenic area",
+      "explanation": "The prechordal plate (which marks the future mouth) is located in the midline, directly cranial to the advancing tip of the notochord, and just caudal to the cardiogenic plate.",
+      "section": "Week Three",
+      "questionNumber": 58
+    },
+    {
+      "id": "ana203-ge-week-three-59",
+      "text": "During gastrulation, how is the definitive intraembryonic endoderm established?",
+      "options": [
+        "Epiblast cells invaginate and completely displace the original hypoblast cells.",
+        "The hypoblast undergoes rapid mitosis to form a thicker layer.",
+        "The extraembryonic visceral mesoderm folds inward.",
+        "Cytotrophoblast cells break through the basement membrane."
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Epiblast cells invaginate and completely displace the original hypoblast cells.",
+      "explanation": "The first wave of epiblast cells to ingress through the primitive streak drops down and physically displaces the underlying hypoblast cells, forming the new intraembryonic endoderm layer.",
+      "section": "Week Three",
+      "questionNumber": 59
+    },
+    {
+      "id": "ana203-ge-week-three-60",
+      "text": "The primitive streak is highly proliferative and serves multiple developmental roles. Which critical cell population uniquely arises from the epiblast via the primitive streak and later migrates to the developing gonads?",
+      "options": [
+        "Spermatogonia only",
+        "Primordial germ cells",
+        "Theca lutein cells",
+        "Leydig cells"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Primordial germ cells",
+      "explanation": "The primitive streak is the source of the primordial germ cells, which migrate into the wall of the yolk sac and later return to the embryo to invade the developing gonads.",
+      "section": "Week Three",
+      "questionNumber": 60
+    },
+    {
+      "id": "ana203-ge-week-three-61",
+      "text": "The definitive notochord forms through a series of distinct morphological stages. Which sequence correctly orders these developmental stages?",
+      "options": [
+        "Notochordal process -> Notochordal canalization -> Notochordal plate -> Definitive notochord",
+        "Notochordal plate -> Definitive notochord -> Notochordal canal -> Notochordal process",
+        "Notochordal canal -> Notochordal process -> Definitive notochord -> Notochordal plate",
+        "Definitive notochord -> Notochordal plate -> Notochordal process -> Notochordal canalization"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Notochordal process -> Notochordal canalization -> Notochordal plate -> Definitive notochord",
+      "explanation": "The sequence begins with the hollow notochordal process, which canalizes, flattens to form the notochordal plate (intercalating with endoderm), and finally folds solidly into the definitive notochord.",
+      "section": "Week Three",
+      "questionNumber": 61
+    },
+    {
+      "id": "ana203-ge-week-three-62",
+      "text": "During the intermediate stage of its development, the floor of the notochordal process fuses with the underlying tissue and breaks down. With which specific layer does the notochordal plate temporarily intercalate?",
+      "options": [
+        "Embryonic ectoderm",
+        "Extraembryonic mesoderm",
+        "Somatic mesoderm",
+        "Embryonic endoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Embryonic endoderm",
+      "explanation": "When the floor of the notochordal canal degrades, the remaining roof forms a flattened notochordal plate that temporarily intercalates (merges into) the layer of the embryonic endoderm.",
+      "section": "Week Three",
+      "questionNumber": 62
+    },
+    {
+      "id": "ana203-ge-week-three-63",
+      "text": "The notochord establishes the longitudinal axis of the embryo. Structurally, it provides the foundation for the development of which major skeletal component?",
+      "options": [
+        "The appendicular skeleton",
+        "The axial skeleton",
+        "The viscerocranium",
+        "The pelvic girdle"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The axial skeleton",
+      "explanation": "The notochord serves as the primary skeleton of the trilaminar embryo and provides the structural and inductive basis around which the axial skeleton (vertebral column) forms.",
+      "section": "Week Three",
+      "questionNumber": 63
+    },
+    {
+      "id": "ana203-ge-week-three-64",
+      "text": "When the notochordal canal breaks down, a temporary opening connects the amniotic cavity with the secondary yolk sac. What is the clinical or anatomical name for this opening?",
+      "options": [
+        "The primitive pit",
+        "The intraembryonic coelom",
+        "The neurenteric canal",
+        "The cloacal membrane"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The neurenteric canal",
+      "explanation": "The neurenteric canal is the transient passage formed at the primitive pit that temporarily connects the fluid of the amniotic cavity above with the fluid of the yolk sac below.",
+      "section": "Week Three",
+      "questionNumber": 64
+    },
+    {
+      "id": "ana203-ge-week-three-65",
+      "text": "Following the closure of the neural tube, it separates and sinks below the surface. What is the fate of the free edges of the non-neural ectoderm that meet and fuse over the neural tube?",
+      "options": [
+        "They differentiate into the neural crest.",
+        "They differentiate into the epidermis of the skin.",
+        "They form the dorsal root ganglia.",
+        "They develop into the dermomyotome."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. They differentiate into the epidermis of the skin.",
+      "explanation": "Once the neural tube detaches, the remaining surface ectoderm edges fuse in the midline and form a continuous layer that will eventually differentiate into the epidermis.",
+      "section": "Week Three",
+      "questionNumber": 65
+    },
+    {
+      "id": "ana203-ge-week-three-66",
+      "text": "Neural crest cells exhibit a remarkable change in cellular behavior, allowing them to migrate widely. What is this specific transformation called?",
+      "options": [
+        "Apoptosis",
+        "Meiosis",
+        "Epithelial-to-mesenchymal transition",
+        "Endochondral ossification"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Epithelial-to-mesenchymal transition",
+      "explanation": "Neural crest cells lose their compact epithelial arrangement and undergo an epithelial-to-mesenchymal transition, transforming into freely migratory cells known as ectomesenchyme.",
+      "section": "Week Three",
+      "questionNumber": 66
+    },
+    {
+      "id": "ana203-ge-week-three-67",
+      "text": "The central nervous system is enveloped by three meningeal layers. Which two layers, collectively termed the leptomeninges, are derived from neural crest cells?",
+      "options": [
+        "Arachnoid mater and Pia mater",
+        "Dura mater and Arachnoid mater",
+        "Dura mater and Pia mater",
+        "Ependyma and Dura mater"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Arachnoid mater and Pia mater",
+      "explanation": "Neural crest cells migrate to surround the neural tube and differentiate into the delicate inner meningeal layers: the arachnoid mater and pia mater (the leptomeninges).",
+      "section": "Week Three",
+      "questionNumber": 67
+    },
+    {
+      "id": "ana203-ge-week-three-68",
+      "text": "Peripheral nerves require myelination for efficient signal conduction. Which cells, derived from the neural crest, provide the myelin sheath for the peripheral nervous system?",
+      "options": [
+        "Oligodendrocytes",
+        "Astrocytes",
+        "Microglia",
+        "Schwann cells"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Schwann cells",
+      "explanation": "Schwann cells, which myelinate the axons of the peripheral nervous system, are direct derivatives of the migratory neural crest cell population.",
+      "section": "Week Three",
+      "questionNumber": 68
+    },
+    {
+      "id": "ana203-ge-week-three-69",
+      "text": "While the neural tube forms the bulk of the central nervous system, the surface ectoderm forms other specialized epithelial structures. Which glandular epithelia are derived from the surface ectoderm?",
+      "options": [
+        "Thyroid and parathyroid glands",
+        "Pancreas and liver",
+        "Epithelium of the pineal and pituitary glands",
+        "Adrenal cortex and gonads"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Epithelium of the pineal and pituitary glands",
+      "explanation": "The surface (non-neural) ectoderm gives rise to specialized invaginations that form the epithelium of the pineal and pituitary glands, as well as the enamel of the teeth.",
+      "section": "Week Three",
+      "questionNumber": 69
+    },
+    {
+      "id": "ana203-ge-week-three-70",
+      "text": "The mesoderm is responsible for forming the majority of the body's connective tissues. Which endocrine organ's outer layer is a derivative of the mesoderm?",
+      "options": [
+        "Adrenal cortex",
+        "Adrenal medulla",
+        "Parathyroid gland",
+        "Anterior pituitary"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Adrenal cortex",
+      "explanation": "The adrenal cortex is derived from mesodermal cells (coelomic epithelium), unlike the adrenal medulla, which is neuroectodermal (neural crest) in origin.",
+      "section": "Week Three",
+      "questionNumber": 70
+    },
+    {
+      "id": "ana203-ge-week-three-71",
+      "text": "The endoderm provides the epithelial lining for the primitive gut tube and its derivatives. Which of the following organs is formed from an endodermal outgrowth?",
+      "options": [
+        "Spleen",
+        "Kidney",
+        "Heart",
+        "Thymus"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Thymus",
+      "explanation": "The thymus, along with the thyroid, parathyroids, liver, and pancreas, originates as an endodermal epithelial outgrowth from the primitive pharynx/gut tube.",
+      "section": "Week Three",
+      "questionNumber": 71
+    },
+    {
+      "id": "ana203-ge-week-three-72",
+      "text": "Teeth are composite structures formed from different embryonic sources. Which specialized cells, responsible for producing dentine, are derived from the neural crest?",
+      "options": [
+        "Ameloblasts",
+        "Odontoblasts",
+        "Osteoblasts",
+        "Chondrocytes"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Odontoblasts",
+      "explanation": "Odontoblasts, the cells that secrete dentine in the developing tooth, are derived from the neural crest (ectomesenchyme), while the overlying enamel is formed by ectoderm.",
+      "section": "Week Three",
+      "questionNumber": 72
+    },
+    {
+      "id": "ana203-ge-week-three-73",
+      "text": "Somite formation is a continuous process spanning the 3rd to 5th weeks of development. Approximately how many pairs of somites are present by the end of the 5th week?",
+      "options": [
+        "15 to 20 pairs",
+        "42 to 44 pairs",
+        "60 to 65 pairs",
+        "10 to 12 pairs"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 42 to 44 pairs",
+      "explanation": "Somite formation ceases around the end of the 5th week, at which point the embryo possesses approximately 42 to 44 pairs of somites.",
+      "section": "Week Three",
+      "questionNumber": 73
+    },
+    {
+      "id": "ana203-ge-week-three-74",
+      "text": "Before fully condensing into distinct cuboidal blocks, paraxial mesoderm cells organize into preliminary, tightly compacted bilaminar cylinders. What are these precursor structures called?",
+      "options": [
+        "Sclerotomes",
+        "Dermomyotomes",
+        "Nephrotomes",
+        "Somitomeres"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Somitomeres",
+      "explanation": "The earliest segmented structures in the paraxial mesoderm are somitomeres, which subsequently condense and organize into the definitive block-like somites.",
+      "section": "Week Three",
+      "questionNumber": 74
+    },
+    {
+      "id": "ana203-ge-week-three-75",
+      "text": "Upon formation, each distinct somite contains a temporary central cavity. What is the embryological term for this cavity?",
+      "options": [
+        "Myocoele",
+        "Blastocoel",
+        "Archenteron",
+        "Coelom"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Myocoele",
+      "explanation": "As the epithelial cells of the newly formed somite arrange themselves in a ring, they enclose a small, temporary central cavity called the myocoele.",
+      "section": "Week Three",
+      "questionNumber": 75
+    },
+    {
+      "id": "ana203-ge-week-three-76",
+      "text": "The somite differentiates based on internal signaling. Which specific region of the somite wall loses its compact epithelial arrangement to become the sclerotome?",
+      "options": [
+        "The dorsolateral wall",
+        "The cranial pole",
+        "The ventromedial wall",
+        "The caudal pole"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The ventromedial wall",
+      "explanation": "The cells of the ventromedial wall of the somite undergo an epithelial-to-mesenchymal transition and migrate medially to surround the notochord, forming the sclerotome.",
+      "section": "Week Three",
+      "questionNumber": 76
+    },
+    {
+      "id": "ana203-ge-week-three-77",
+      "text": "The allantois forms early in development and makes a critical physical connection to support vascularization. Into which existing extraembryonic structure does the allantois directly project?",
+      "options": [
+        "The connecting stalk",
+        "The chorionic cavity",
+        "The amniotic cavity",
+        "The extraembryonic coelom"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The connecting stalk",
+      "explanation": "As the allantois pouches out from the caudal wall of the yolk sac, it projects directly into the dense mesenchyme of the connecting stalk.",
+      "section": "Week Three",
+      "questionNumber": 77
+    },
+    {
+      "id": "ana203-ge-week-three-78",
+      "text": "Remnants of the extraembryonic portion of the allantois can persist and form cysts. Where are these asymptomatic allantoic cysts most commonly detected by ultrasonography?",
+      "options": [
+        "In the wall of the urinary bladder",
+        "Within the falciform ligament",
+        "In the proximal part of the umbilical cord",
+        "Attached to the fetal liver"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. In the proximal part of the umbilical cord",
+      "explanation": "Allantoic cysts are typically found between the fetal umbilical vessels in the proximal part of the umbilical cord, near its attachment to the anterior abdominal wall.",
+      "section": "Week Three",
+      "questionNumber": 78
+    },
+    {
+      "id": "ana203-ge-week-three-79",
+      "text": "The intraembryonic coelom provides the space for the major body cavities. How does the primordium of this coelom initially appear?",
+      "options": [
+        "As a massive rupture of the yolk sac wall",
+        "As an invagination of the primitive streak",
+        "As a swelling of the neural canal",
+        "As isolated coelomic spaces in the lateral plate and cardiogenic mesoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. As isolated coelomic spaces in the lateral plate and cardiogenic mesoderm",
+      "explanation": "The intraembryonic coelom first manifests as small, isolated clefts or spaces within the lateral plate mesoderm and the horseshoe-shaped cardiogenic mesoderm.",
+      "section": "Week Three",
+      "questionNumber": 79
+    },
+    {
+      "id": "ana203-ge-week-three-80",
+      "text": "Before partitioning into pleural, pericardial, and peritoneal cavities, the coalesced spaces of the intraembryonic coelom form a single continuous cavity. What is the overall shape of this cavity?",
+      "options": [
+        "A perfect sphere",
+        "A horseshoe shape",
+        "A straight tubular shape",
+        "A spiral shape"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A horseshoe shape",
+      "explanation": "The isolated spaces in the lateral plate and cardiogenic mesoderm merge to form a single, continuous, horseshoe-shaped cavity spanning across the cranial end and down both sides of the embryo.",
+      "section": "Week Three",
+      "questionNumber": 80
+    },
+    {
+      "id": "ana203-ge-week-three-81",
+      "text": "Angiogenesis in the early embryo is critical for survival. What is the fundamental cellular source of the initial angioblasts that aggregate to form blood islands?",
+      "options": [
+        "Endodermal lining of the yolk sac",
+        "Ectodermal cells of the neural crest",
+        "Mesodermal cells of the conceptus",
+        "Trophoblast cells of the chorion"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Mesodermal cells of the conceptus",
+      "explanation": "Mesodermal cells respond to localized signaling by differentiating into angioblasts, which then cluster together to form the first blood islands.",
+      "section": "Week Three",
+      "questionNumber": 81
+    },
+    {
+      "id": "ana203-ge-week-three-82",
+      "text": "While extraembryonic hematopoiesis begins around day 17, the production of blood cells within the embryo proper is delayed. At what time does intraembryonic blood formation commence?",
+      "options": [
+        "In the 5th week",
+        "At the end of the 2nd week",
+        "By day 21",
+        "In the 8th week"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. In the 5th week",
+      "explanation": "Extraembryonic blood islands appear in the 3rd week, but the active formation of blood cells strictly within the intraembryonic tissues begins later, in the 5th week of development.",
+      "section": "Week Three",
+      "questionNumber": 82
+    },
+    {
+      "id": "ana203-ge-week-three-83",
+      "text": "Blood-forming cells (angioblasts) invade nearly all mesenchymal tissues of the growing embryo to establish capillary networks. Which specific embryonic tissue is notably NOT invaded by angioblasts?",
+      "options": [
+        "Hepatic mesenchyme",
+        "Sclerotome",
+        "Somatopleure",
+        "Brain tissue"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Brain tissue",
+      "explanation": "Angioblasts aggressively invade and vascularize almost all embryonic mesenchyme to supply oxygen; however, they do not invade the developing brain tissue directly from the surrounding mesenchyme.",
+      "section": "Week Three",
+      "questionNumber": 83
+    },
+    {
+      "id": "ana203-ge-week-three-84",
+      "text": "If an embryo dies early in development, the chorionic villi may fail to complete their vascularization (tertiary stage). What happens to these degenerating, avascular villi?",
+      "options": [
+        "They calcify into lithopedions.",
+        "They swell and form cystic hydatidiform moles.",
+        "They develop into accessory placentas.",
+        "They trigger immediate maternal immune rejection."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. They swell and form cystic hydatidiform moles.",
+      "explanation": "When an embryo dies and fetal circulation fails to establish in the villi, the villi swell with fluid (due to absent venous return) and form the grape-like cystic clusters characteristic of a hydatidiform mole.",
+      "section": "Week Three",
+      "questionNumber": 84
+    },
+    {
+      "id": "ana203-ge-week-three-85",
+      "text": "Various teratogens and maternal conditions can disrupt the intricate signaling of gastrulation. Which specific maternal metabolic condition is strongly associated with a higher risk of Sirenomelia (caudal dysgenesis)?",
+      "options": [
+        "Maternal diabetes",
+        "Maternal hypothyroidism",
+        "Gestational hypertension",
+        "Maternal phenylketonuria"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Maternal diabetes",
+      "explanation": "Sirenomelia (fusion of lower limbs due to caudal mesoderm deficit) is a severe anomaly that is highly associated with and exacerbated by poor glycemic control in maternal diabetes.",
+      "section": "Week Three",
+      "questionNumber": 85
+    },
+    {
+      "id": "ana203-ge-week-three-86",
+      "text": "The neural crest gives rise to a vast array of specialized cells in the head and neck. Which of the following dental structures relies on neural crest derivatives for its formation?",
+      "options": [
+        "Enamel",
+        "Periodontal ligament",
+        "Cementum",
+        "Dentine"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Dentine",
+      "explanation": "Dentine is secreted by odontoblasts. These highly specialized cells of the developing tooth are direct derivatives of the migratory neural crest cells.",
+      "section": "Week Three",
+      "questionNumber": 86
+    },
+    {
+      "id": "ana203-ge-week-three-87",
+      "text": "Cranial nerves possess sensory ganglia similar to the dorsal root ganglia of the spinal cord. The ganglia of which specific cranial nerves are derived from neural crest cells?",
+      "options": [
+        "I, II, III, and IV",
+        "V, VII, IX, and X",
+        "VI, VIII, XI, and XII",
+        "III, V, VIII, and XI"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. V, VII, IX, and X",
+      "explanation": "The neural crest provides the cellular precursors for the sensory ganglia of cranial nerves V (Trigeminal), VII (Facial), IX (Glossopharyngeal), and X (Vagus).",
+      "section": "Week Three",
+      "questionNumber": 87
+    },
+    {
+      "id": "ana203-ge-week-three-88",
+      "text": "The lateral plate mesoderm splits to line the body cavities. Which specific derivative of the lateral plate mesoderm forms the smooth muscle of the gastrointestinal tract?",
+      "options": [
+        "Somatic mesoderm",
+        "Extraembryonic mesoderm",
+        "Splanchnic mesoderm",
+        "Intermediate mesoderm"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Splanchnic mesoderm",
+      "explanation": "The splanchnic (visceral) layer of the lateral mesoderm surrounds the endodermal gut tube and differentiates into the smooth muscle, connective tissue, and visceral serosa of the gut.",
+      "section": "Week Three",
+      "questionNumber": 88
+    },
+    {
+      "id": "ana203-ge-week-three-89",
+      "text": "Somitomeres are the earliest visible segments of paraxial mesoderm. Where does the very first pair of somitomeres appear during the third week?",
+      "options": [
+        "In the tail bud",
+        "Adjacent to the prechordal plate in the future head region",
+        "At the level of the primitive node",
+        "In the future lumbar region"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Adjacent to the prechordal plate in the future head region",
+      "explanation": "The first pair of somitomeres forms cranially, lying immediately adjacent to the prechordal plate in the region that will become the head.",
+      "section": "Week Three",
+      "questionNumber": 89
+    },
+    {
+      "id": "ana203-ge-week-three-90",
+      "text": "Because somites appear at a highly regular, predictable rate, they serve a valuable purpose for embryologists. What clinical or scientific utility do somites provide?",
+      "options": [
+        "They dictate fetal sex.",
+        "They map the exact location of the developing heart.",
+        "They can be used to accurately estimate the age of the embryo.",
+        "They indicate the presence of a chromosomal microdeletion."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. They can be used to accurately estimate the age of the embryo.",
+      "explanation": "Because somites develop at a constant rate of roughly 3 pairs per day during the 4th and 5th weeks, counting the number of somite pairs is a standard method for precisely estimating embryonic age.",
+      "section": "Week Three",
+      "questionNumber": 90
+    },
+    {
+      "id": "ana203-ge-week-three-91",
+      "text": "The neural tube's closure isolates the central nervous system from the amniotic fluid. On approximately which day does the rostral neuropore finalize this closure?",
+      "options": [
+        "Day 18",
+        "Day 21",
+        "Day 28",
+        "Day 25"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Day 25",
+      "explanation": "The rostral (cranial) neuropore is the first of the two openings to close, completing its fusion around day 25 of development.",
+      "section": "Week Three",
+      "questionNumber": 91
+    },
+    {
+      "id": "ana203-ge-week-three-92",
+      "text": "During gastrulation, two specific areas of the bilaminar disc remain free of intervening mesoderm, with ectoderm and endoderm remaining tightly adhered. What are these two regions called?",
+      "options": [
+        "The buccopharyngeal (oropharyngeal) and cloacal membranes",
+        "The primitive node and the notochordal plate",
+        "The cardiogenic plate and the septum transversum",
+        "The prechordal plate and the primitive pit"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The buccopharyngeal (oropharyngeal) and cloacal membranes",
+      "explanation": "The buccopharyngeal (future mouth) and cloacal (future anus) membranes are defined during gastrulation as distinct, circular areas where mesoderm is excluded, and ectoderm and endoderm remain tightly fused.",
+      "section": "Week Three",
+      "questionNumber": 92
+    },
+    {
+      "id": "ana203-ge-week-three-93",
+      "text": "The mesoderm provides the foundational connective tissues for the integumentary system. Which specific layer of the skin is derived from the mesoderm?",
+      "options": [
+        "Dermis",
+        "Epidermis",
+        "Stratum corneum",
+        "Hair follicles"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Dermis",
+      "explanation": "While the superficial epidermis and its appendages (hair, sweat glands) are derived from the surface ectoderm, the deeper connective tissue layer, the dermis, is derived from the mesoderm (specifically the dermatome of the somites).",
+      "section": "Week Three",
+      "questionNumber": 93
+    },
+    {
+      "id": "ana203-ge-week-three-94",
+      "text": "The endoderm gives rise to the critical epithelial linings of several major organ systems. Which of the following is an endocrine gland whose parenchyma is entirely endodermal in origin?",
+      "options": [
+        "Adrenal cortex",
+        "Pineal gland",
+        "Pituitary gland",
+        "Thyroid gland"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Thyroid gland",
+      "explanation": "The thyroid gland, along with the parathyroids, liver, and pancreas, originates as an epithelial outgrowth from the endodermal lining of the primitive gut tube.",
+      "section": "Week Three",
+      "questionNumber": 94
+    },
+    {
+      "id": "ana203-ge-week-three-95",
+      "text": "The neural tube is the direct embryological primordium for the central nervous system. Which two major anatomical structures develop directly from the neural tube?",
+      "options": [
+        "The autonomic ganglia and adrenal medulla",
+        "The cerebral aqueduct and the choroid plexus",
+        "The brain and the spinal cord",
+        "The cranial nerve ganglia and the enteric plexus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The brain and the spinal cord",
+      "explanation": "The neuroectoderm of the neural tube expands cranially to form the vesicles of the brain, while its narrower caudal portion elongates to become the spinal cord.",
+      "section": "Week Three",
+      "questionNumber": 95
+    },
+    {
+      "id": "ana203-ge-week-three-96",
+      "text": "The transition from a bilaminar to a trilaminar disc is visually heralded by a specific event. What explicitly marks the beginning of the gastrulation process?",
+      "options": [
+        "The fusion of the neural folds",
+        "The appearance of the primitive streak on the epiblast",
+        "The formation of the extraembryonic coelom",
+        "The rupture of the buccopharyngeal membrane"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The appearance of the primitive streak on the epiblast",
+      "explanation": "Gastrulation officially begins early in the third week with the visible appearance of the primitive streak on the dorsal surface of the epiblast layer.",
+      "section": "Week Three",
+      "questionNumber": 96
+    },
+    {
+      "id": "ana203-ge-week-three-97",
+      "text": "While the rostral neuropore closes on day 25, the caudal end of the neural tube remains open slightly longer. On which day does the caudal neuropore typically close?",
+      "options": [
+        "Day 24",
+        "Day 27",
+        "Day 30",
+        "Day 35"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Day 27",
+      "explanation": "The caudal neuropore, completing the closure of the entire neural tube and sequestering the central nervous system, typically closes on day 27 of development.",
+      "section": "Week Three",
+      "questionNumber": 97
+    },
+    {
+      "id": "ana203-ge-week-three-98",
+      "text": "The primitive streak features an expanded cranial region known as the primitive node. What specific anatomical feature sits precisely at the center of this node?",
+      "options": [
+        "The primitive pit",
+        "The neurenteric canal",
+        "The prechordal plate",
+        "The cloacal membrane"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The primitive pit",
+      "explanation": "The primitive node is a slightly elevated area at the cranial end of the primitive streak, and it contains a central depression known as the primitive pit, through which notochordal precursor cells ingress.",
+      "section": "Week Three",
+      "questionNumber": 98
+    },
+    {
+      "id": "ana203-ge-week-three-99",
+      "text": "Gestational trophoblastic diseases present with varying karyotypes. In a classic, complete hydatidiform mole, what is the source of the nuclear DNA?",
+      "options": [
+        "Entirely maternal",
+        "Equal contribution from mother and father",
+        "Entirely paternal",
+        "Triploid (one maternal, two paternal)"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Entirely paternal",
+      "explanation": "A complete mole occurs when a sperm fertilizes an empty oocyte and then duplicates. Therefore, 100% of the nuclear DNA in a complete mole is of paternal origin.",
+      "section": "Week Three",
+      "questionNumber": 99
+    },
+    {
+      "id": "ana203-ge-week-three-100",
+      "text": "The allantois is a small diverticulum originating from the yolk sac. While it eventually regresses, it contributes functionally to the formation of which adult anatomical structure?",
+      "options": [
+        "The descending colon",
+        "The liver",
+        "The spleen",
+        "The urinary bladder"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The urinary bladder",
+      "explanation": "The proximal portion of the allantois (the urachus) maintains a connection to the developing cloaca/urogenital sinus, thereby contributing to the apex and formation of the human urinary bladder.",
+      "section": "Week Three",
+      "questionNumber": 100
+    }
+  ]
+}
