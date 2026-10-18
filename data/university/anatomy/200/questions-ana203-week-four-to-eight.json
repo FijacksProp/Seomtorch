@@ -1,0 +1,1510 @@
+{
+  "title": "Week Four to Eight",
+  "course": "ANA 203",
+  "totalQuestions": 100,
+  "sections": [
+    "Week Four to Eight (Q1-Q100)"
+  ],
+  "questions": [
+    {
+      "id": "ana203-ge-week-four-to-eight-1",
+      "text": "Which specific molecular event is primarily responsible for the induction of the neural plate during the third week of development?",
+      "options": [
+        "The inactivation of Bone Morphogenetic Protein (BMP) by chordin, noggin, and follistatin",
+        "The upregulation of Sonic hedgehog (Shh) by the surface ectoderm",
+        "The direct suppression of WNT-3A by the paraxial mesoderm",
+        "The complete inhibition of retinoic acid synthesis in the primitive node"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The inactivation of Bone Morphogenetic Protein (BMP) by chordin, noggin, and follistatin",
+      "explanation": "Neural plate formation is induced by the inactivation of BMP, which is mediated by chordin, noggin, and follistatin produced by the notochord and primitive node.",
+      "section": "Week Four to Eight",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-2",
+      "text": "The neural crest cells undergo an epithelial-to-mesenchymal transition and migrate to form various structures. Where do these cells initially reside before their migration?",
+      "options": [
+        "Within the central canal of the neural tube",
+        "At the junction separating the neural plate from the general surface ectoderm",
+        "Deep within the paraxial mesoderm surrounding the notochord",
+        "On the ventral surface of the developing foregut endoderm"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. At the junction separating the neural plate from the general surface ectoderm",
+      "explanation": "Neural crest cells occupy the junction (raised margins or folds) between the general surface ectoderm and the neural plate before migrating extensively to form the peripheral nervous system and other tissues.",
+      "section": "Week Four to Eight",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-3",
+      "text": "The neural tube undergoes significant regional differentiation. The cranial two-thirds of the neural tube specifically gives rise to which of the following structures?",
+      "options": [
+        "The spinal cord and dorsal root ganglia",
+        "The sympathetic chain and pre-aortic ganglia",
+        "The brain vesicles (forebrain, midbrain, and hindbrain)",
+        "The peripheral nervous system and Schwann cells"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The brain vesicles (forebrain, midbrain, and hindbrain)",
+      "explanation": "The cranial part of the neural tube dilates to form the primary brain vesicles, while the caudal one-third forms the spinal cord.",
+      "section": "Week Four to Eight",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-4",
+      "text": "Which portion of the developing central nervous system is derived specifically from the caudal one-third of the neural tube?",
+      "options": [
+        "The telencephalon",
+        "The diencephalon",
+        "The mesencephalon",
+        "The spinal cord"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The spinal cord",
+      "explanation": "While the cranial two-thirds of the neural tube dilates to form the brain vesicles, the narrower caudal one-third elongates to become the spinal cord.",
+      "section": "Week Four to Eight",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-5",
+      "text": "The paraxial mesoderm segments into somites, which develop in a specific pattern. How many pairs of sacral somites are normally formed during embryonic development?",
+      "options": [
+        "4 pairs",
+        "8 pairs",
+        "12 pairs",
+        "5 pairs"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. 5 pairs",
+      "explanation": "The developing embryo forms 5 pairs of sacral somites, along with 4 occipital, 8 cervical, 12 thoracic, 5 lumbar, and 8-10 coccygeal pairs.",
+      "section": "Week Four to Eight",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-6",
+      "text": "The primary brain vesicles undergo further subdivision. The forebrain (prosencephalon) divides into which of the following secondary structures?",
+      "options": [
+        "The metencephalon and myelencephalon",
+        "The mesencephalon and rhombencephalon",
+        "The cerebral hemispheres (telencephalon) and diencephalon",
+        "The medulla oblongata and the pons"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The cerebral hemispheres (telencephalon) and diencephalon",
+      "explanation": "The forebrain divides into the telencephalon, which forms the cerebral hemispheres, and the diencephalon.",
+      "section": "Week Four to Eight",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-7",
+      "text": "Severe neural tube defects occur when the neuropores fail to close. Which developmental anomaly directly results from the failure of the rostral (anterior) neuropore to close?",
+      "options": [
+        "Spina bifida occulta",
+        "Anencephaly (associated with cranioschisis)",
+        "Meningocoele",
+        "Rachischisis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Anencephaly (associated with cranioschisis)",
+      "explanation": "Failure of the rostral neuropore to close by day 25 results in anencephaly, preventing normal brain and cranial vault formation.",
+      "section": "Week Four to Eight",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-8",
+      "text": "The closure of the neural tube does not occur simultaneously along its entire length. Where does the fusion of the neural folds initially begin?",
+      "options": [
+        "In the cervical region, approximately at the level of the 5th somite",
+        "At the extreme cranial pole near the optic placodes",
+        "In the sacrococcygeal region",
+        "At the mid-thoracic level, near the 12th somite"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. In the cervical region, approximately at the level of the 5th somite",
+      "explanation": "The neural folds first touch and fuse in the cervical region, specifically around the level of the 5th somite, before zipping cranially and caudally.",
+      "section": "Week Four to Eight",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-9",
+      "text": "By approximately Day 24 of development, specific morphological features become prominent on the external surface of the embryo. Which structures are distinctly recognizable at this stage?",
+      "options": [
+        "The first (mandibular) and second (hyoid) branchial arches",
+        "The upper and lower limb buds simultaneously",
+        "The distinct separation of the digits on the hand plates",
+        "The fully formed external auditory meatus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The first (mandibular) and second (hyoid) branchial arches",
+      "explanation": "On day 24, the first (mandibular) and second (hyoid) branchial arches become morphologically distinct and recognizable on the embryo.",
+      "section": "Week Four to Eight",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-10",
+      "text": "The embryonic ectoderm is responsible for forming structures that maintain contact with the outside world. Which of the following sensory structures is derived from ectodermal otic placodes?",
+      "options": [
+        "The retina of the eye",
+        "The olfactory epithelium",
+        "The internal ear",
+        "The lens of the eye"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The internal ear",
+      "explanation": "The otic placodes, which are surface ectodermal thickenings, invaginate to form the internal ear structures.",
+      "section": "Week Four to Eight",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-11",
+      "text": "Spina bifida occulta is the mildest form of a neural tube defect. Which physical manifestation is classically associated with the overlying skin in this specific condition?",
+      "options": [
+        "A large fluid-filled cyst containing cerebrospinal fluid",
+        "A prominent tuft of hair",
+        "A complete absence of the epidermis",
+        "A severe outward herniation of the spinal cord"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A prominent tuft of hair",
+      "explanation": "Spina bifida occulta involves a minor vertebral defect that is often marked externally only by a dimple or a tuft of hair over the affected area, with no herniation of neural tissue.",
+      "section": "Week Four to Eight",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-12",
+      "text": "The paraxial mesoderm organizes into segmented blocks. How many pairs of cervical somites are characteristic of human embryonic development?",
+      "options": [
+        "4 pairs",
+        "5 pairs",
+        "12 pairs",
+        "8 pairs"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. 8 pairs",
+      "explanation": "The somite count includes 8 pairs of cervical somites, corresponding largely to the cervical spinal segments.",
+      "section": "Week Four to Eight",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-13",
+      "text": "At approximately Day 26 of development, the embryo assumes a distinct C-shaped curvature. Which significant event coincides with this morphological change?",
+      "options": [
+        "The initial appearance of the primitive streak",
+        "The closure of the caudal neuropore",
+        "The complete degeneration of the connecting stalk",
+        "The appearance of the arm buds as small ventral swellings"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The appearance of the arm buds as small ventral swellings",
+      "explanation": "Around day 26, the embryo has 3 pairs of branchial arches, a closed rostral neuropore, a distinct C-shape, and the arm buds become recognizable as small swellings.",
+      "section": "Week Four to Eight",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-14",
+      "text": "During the fourth week of development, cranial and caudal folding significantly alter the embryo's shape. What is the primary mechanical cause of this head and tail folding?",
+      "options": [
+        "The rapid expansion of the amniotic cavity",
+        "The rapid increase in cranio-caudal length due to the growth of the neural tube and somites",
+        "The obliteration of the chorionic cavity",
+        "The regression of the intraembryonic coelom"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The rapid increase in cranio-caudal length due to the growth of the neural tube and somites",
+      "explanation": "Head and tail folds are primarily driven by the rapid longitudinal growth of the central nervous system (neural tube) and the paired somites.",
+      "section": "Week Four to Eight",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-15",
+      "text": "The rostral neuropore must close to ensure proper brain development. By which specific day of development does this critical closure typically occur?",
+      "options": [
+        "Day 25",
+        "Day 18",
+        "Day 28",
+        "Day 21"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Day 25",
+      "explanation": "The cranial (rostral) neuropore closes on approximately the 25th day of development, during the 18-20 somite stage.",
+      "section": "Week Four to Eight",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-16",
+      "text": "The embryonic endoderm provides the epithelial lining for several internal organs. Which of the following structures is lined by endoderm-derived epithelium?",
+      "options": [
+        "The cornea",
+        "The lower half of the anal canal",
+        "The tympanic cavity and Eustachian tube",
+        "The external acoustic meatus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The tympanic cavity and Eustachian tube",
+      "explanation": "The endoderm derives the epithelial lining of the digestive and respiratory tracts, as well as the tympanic cavity and the Eustachian (pharyngotympanic) tube.",
+      "section": "Week Four to Eight",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-17",
+      "text": "Which of the following neural tube defects is characterized by the severe herniation of both the meninges and the brain tissue through a cranial defect?",
+      "options": [
+        "Spina bifida cystica",
+        "Cranial meningocoele",
+        "Meningoencephalocoele",
+        "Rachischisis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Meningoencephalocoele",
+      "explanation": "A meningoencephalocoele involves the herniation of both the meninges and the actual brain tissue (encephalon) through a defect in the skull.",
+      "section": "Week Four to Eight",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-18",
+      "text": "The caudal neuropore is the final portion of the neural tube to seal. On which day does the closure of the caudal neuropore occur?",
+      "options": [
+        "Day 27",
+        "Day 22",
+        "Day 25",
+        "Day 30"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Day 27",
+      "explanation": "The caudal (posterior) neuropore closes approximately on the 27th day of development, roughly at the 25-somite stage.",
+      "section": "Week Four to Eight",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-19",
+      "text": "The ectoderm differentiates into surface ectoderm and neuroectoderm. Which specific region of the oral and anal cavities is lined by epithelium derived from the surface ectoderm?",
+      "options": [
+        "The entire gastrointestinal tract",
+        "The posterior part of the oral cavity and the upper half of the anal canal",
+        "The pharynx and the esophagus",
+        "The anterior part of the oral cavity and the lower half of the anal canal"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The anterior part of the oral cavity and the lower half of the anal canal",
+      "explanation": "The surface ectoderm forms the epithelial lining of the anterior portion of the oral cavity (mouth) and the lower one-half of the anal canal (proctodeum).",
+      "section": "Week Four to Eight",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-20",
+      "text": "By Day 28, the end of the fourth week, several new structures are visible on the embryo. Which of the following uniquely appears at this stage?",
+      "options": [
+        "The first branchial arch",
+        "The fourth pair of branchial arches and the leg buds",
+        "The primitive umbilical ring",
+        "The cervical sinus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The fourth pair of branchial arches and the leg buds",
+      "explanation": "At the end of week 4 (day 28), the fourth pair of branchial arches and the lower limb (leg) buds become visibly recognizable.",
+      "section": "Week Four to Eight",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-21",
+      "text": "The endoderm forms the epithelial lining of the respiratory tree. Which specific respiratory structures are lined by endoderm-derived cells?",
+      "options": [
+        "The nasal cavity and paranasal sinuses",
+        "The pharynx, trachea, bronchi, and alveoli",
+        "The visceral pleura only",
+        "The olfactory epithelium"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The pharynx, trachea, bronchi, and alveoli",
+      "explanation": "The epithelium of the respiratory passages, including the pharynx, trachea, bronchi, and alveoli, is derived entirely from the endoderm.",
+      "section": "Week Four to Eight",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-22",
+      "text": "The stomodeum is the primitive mouth of the developing embryo. How is the stomodeum initially formed?",
+      "options": [
+        "As an ectodermal depression between the forebrain bulge and the cardiac bulge",
+        "As an endodermal outpocketing of the foregut",
+        "By the fusion of the third and fourth branchial arches",
+        "Through the canalization of the notochord"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. As an ectodermal depression between the forebrain bulge and the cardiac bulge",
+      "explanation": "The stomodeum forms as an ectodermal depression situated ventrally between the prominent forebrain bulge and the cardiac bulge.",
+      "section": "Week Four to Eight",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-23",
+      "text": "The parenchymal cells of several major glands are endodermal in origin. Which of the following glands falls into this category?",
+      "options": [
+        "The adrenal cortex",
+        "The parotid gland",
+        "The parenchyma of the parathyroid glands",
+        "The pineal gland"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The parenchyma of the parathyroid glands",
+      "explanation": "The endoderm gives rise to the parenchyma of the liver, pancreas, thymus, thyroid, and parathyroid glands.",
+      "section": "Week Four to Eight",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-24",
+      "text": "In the eye, the pupillary muscles of the iris are unique because they do not arise from mesoderm. From which embryonic germ layer do they originate?",
+      "options": [
+        "Ectoderm",
+        "Endoderm",
+        "Intermediate mesoderm",
+        "Splanchnic mesoderm"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Ectoderm",
+      "explanation": "The pupillary muscles of the iris are highly unique as they are the only muscles in the body derived from the ectoderm (specifically neuroectoderm) rather than mesoderm.",
+      "section": "Week Four to Eight",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-25",
+      "text": "The smooth muscle coats that surround the gastrointestinal tract are essential for peristalsis. Which germ layer provides the cellular precursors for these smooth muscles?",
+      "options": [
+        "Ectoderm",
+        "Endoderm",
+        "Somatic mesoderm",
+        "Splanchnic (visceral) lateral plate mesoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Splanchnic (visceral) lateral plate mesoderm",
+      "explanation": "The smooth muscle coats and connective tissue stroma of the gut are derived from the splanchnic (visceral) layer of the lateral plate mesoderm.",
+      "section": "Week Four to Eight",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-26",
+      "text": "During embryonic folding, the lateral folds transform the flat embryonic disc into a cylindrical structure. What is the primary driving force behind lateral folding?",
+      "options": [
+        "The rapid elongation of the neural tube",
+        "The rapid expansion of the amniotic cavity",
+        "The enlargement of the yolk sac",
+        "The contraction of the connecting stalk"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The rapid expansion of the amniotic cavity",
+      "explanation": "While head and tail folds are driven by neural tube growth, lateral folding is primarily caused by the rapid expansion of the amniotic cavity, which pushes the lateral edges of the disc ventrally.",
+      "section": "Week Four to Eight",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-27",
+      "text": "Connective tissues associated with internal organs must develop in tandem with the organs themselves. From which germ layer is this connective tissue derived?",
+      "options": [
+        "Endoderm",
+        "Surface ectoderm",
+        "Neural crest",
+        "Mesoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Mesoderm",
+      "explanation": "The connective tissue and vessels associated with the internal organs are derived from the mesoderm, specifically the splanchnic layer for visceral organs.",
+      "section": "Week Four to Eight",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-28",
+      "text": "The adrenal gland has a dual embryonic origin. While the medulla is derived from neural crest cells, from which germ layer does the adrenal cortex originate?",
+      "options": [
+        "Mesoderm",
+        "Ectoderm",
+        "Endoderm",
+        "Extraembryonic endoderm"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Mesoderm",
+      "explanation": "The adrenal cortex develops from the mesoderm (specifically the coelomic epithelium), distinguishing it from the ectodermally derived adrenal medulla.",
+      "section": "Week Four to Eight",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-29",
+      "text": "Odontoblasts are specialized cells responsible for the formation of tooth dentine. From which specific embryonic cell population do odontoblasts arise?",
+      "options": [
+        "Surface ectoderm",
+        "Endoderm",
+        "Sclerotome",
+        "Neural crest (ectomesenchyme)"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Neural crest (ectomesenchyme)",
+      "explanation": "Odontoblasts are a direct derivative of the migratory neural crest cells, which form much of the connective tissue and specialized structures of the head and neck.",
+      "section": "Week Four to Eight",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-30",
+      "text": "During week 5, the upper limbs begin to show regional differentiation. Which specific structures develop on the distal paddle-shaped hand plates?",
+      "options": [
+        "The elbow joints",
+        "The digital ridges known as finger rays",
+        "The carpal bones",
+        "The completely separated phalanges"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The digital ridges known as finger rays",
+      "explanation": "During week 5, the paddle-shaped hand plates develop distinct digital ridges called finger rays, which outline the future fingers before apoptosis separates them.",
+      "section": "Week Four to Eight",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-31",
+      "text": "Embryonic folding profoundly changes the three-dimensional layout of the embryo. Which of the following best describes the resulting shape of the embryo after this process?",
+      "options": [
+        "A flat, trilaminar disc",
+        "A perfect sphere",
+        "A tubular or cylindrical appearance",
+        "A horseshoe shape"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A tubular or cylindrical appearance",
+      "explanation": "The combined effects of cranial, caudal, and lateral folding transform the flat embryonic disc into a highly organized, cylindrical (or tubular) embryo.",
+      "section": "Week Four to Eight",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-32",
+      "text": "The external auditory meatus (ear canal) develops from a specific embryological cleft. Where do the small swellings that form the ear auricle initially appear?",
+      "options": [
+        "Around the stomodeum",
+        "Around the groove between the first and second branchial arches",
+        "On the maxillary process",
+        "Dorsal to the otic placode"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Around the groove between the first and second branchial arches",
+      "explanation": "During week 6, small swellings (auricular hillocks) appear around the branchial groove located between the first and second branchial arches, which itself becomes the external auditory meatus.",
+      "section": "Week Four to Eight",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-33",
+      "text": "The hindgut is formed during tail folding. Which membrane temporarily closes the caudal end of the hindgut before it ruptures to form the anal opening?",
+      "options": [
+        "The buccopharyngeal membrane",
+        "The exocoelomic membrane",
+        "The amniotic membrane",
+        "The cloacal membrane"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The cloacal membrane",
+      "explanation": "The hindgut is formed by the tail fold and is closed at its extreme caudal end by the cloacal membrane.",
+      "section": "Week Four to Eight",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-34",
+      "text": "During the fifth week, a structure called the cervical sinus forms. What morphological event directly causes the formation of this depression?",
+      "options": [
+        "The neural tube fails to close in the cervical region.",
+        "The first branchial arch degenerates completely.",
+        "The rapid expansion of the pericardial cavity.",
+        "The second (hyoid) branchial arch overgrows the third and fourth arches."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The second (hyoid) branchial arch overgrows the third and fourth arches.",
+      "explanation": "The cervical sinus is an ectodermal depression formed when the rapidly growing second branchial arch overgrows the smaller third and fourth arches.",
+      "section": "Week Four to Eight",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-35",
+      "text": "The neural crest cells are highly migratory and give rise to the adrenal medulla. Which other critical endocrine cells are derived from the neural crest?",
+      "options": [
+        "Thyroid follicular cells",
+        "Pancreatic islet cells",
+        "Adrenocortical cells",
+        "Melanocytes and Schwann cells"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Melanocytes and Schwann cells",
+      "explanation": "In addition to the adrenal medulla, neural crest cells differentiate into melanocytes, Schwann cells, and various sensory and autonomic ganglia.",
+      "section": "Week Four to Eight",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-36",
+      "text": "The midgut remains temporarily connected to the yolk sac as embryonic folding progresses. What is the specific name of the narrow tube that maintains this connection?",
+      "options": [
+        "The urachus",
+        "The connecting stalk",
+        "The vitelline duct (yolk stalk)",
+        "The allantois"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The vitelline duct (yolk stalk)",
+      "explanation": "The midgut is formed by the lateral folds and remains connected to the definitive yolk sac via the narrowing vitelline duct (or vitello-intestinal duct).",
+      "section": "Week Four to Eight",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-37",
+      "text": "During the sixth week of development, a distinct change in the embryo's posture occurs. What is the primary cause of the head bending further over the heart prominence?",
+      "options": [
+        "The regression of the notochord",
+        "The rapid elongation of the developing legs",
+        "The cervical flexure, resulting from the bending of the brain in the cervical region",
+        "The contraction of the newly formed somites"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The cervical flexure, resulting from the bending of the brain in the cervical region",
+      "explanation": "The embryo's head bends significantly over the heart prominence during week 6 due to the cervical flexure, which is caused by the rapid growth and bending of the brain.",
+      "section": "Week Four to Eight",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-38",
+      "text": "The stroma (connective tissue framework) of the respiratory organs is essential for maintaining airway structure. From which specific mesodermal layer does this stroma derive?",
+      "options": [
+        "Paraxial mesoderm",
+        "Intermediate mesoderm",
+        "Somatic lateral plate mesoderm",
+        "Splanchnic lateral plate mesoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Splanchnic lateral plate mesoderm",
+      "explanation": "While the endoderm forms the respiratory epithelium, the surrounding stroma, cartilage, and smooth muscle of the respiratory organs derive from the splanchnic (visceral) layer of the lateral mesoderm.",
+      "section": "Week Four to Eight",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-39",
+      "text": "As a direct result of cranial (head) folding, the relative positions of the heart and pericardium change significantly. Where are they located after folding is complete?",
+      "options": [
+        "Cranial to the septum transversum",
+        "Dorsal to the neural tube",
+        "Ventral and caudal to the septum transversum and forebrain",
+        "Within the extraembryonic coelom"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Ventral and caudal to the septum transversum and forebrain",
+      "explanation": "Before folding, the septum transversum and cardiogenic area are the most cranial structures. Head folding swings them ventrally and caudally, placing the heart ventral to the foregut.",
+      "section": "Week Four to Eight",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-40",
+      "text": "The metanephric tissue caps are essential for the formation of the definitive kidneys. From which mesodermal subdivision do they originate?",
+      "options": [
+        "Paraxial mesoderm",
+        "Somatic mesoderm",
+        "Splanchnic mesoderm",
+        "Intermediate mesoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Intermediate mesoderm",
+      "explanation": "The intermediate mesoderm gives rise to the urogenital system, including the metanephric tissue caps that will form the excretory units of the permanent kidneys.",
+      "section": "Week Four to Eight",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-41",
+      "text": "The definitive yolk sac is structurally distinct from the primary yolk sac. How is the definitive yolk sac defined after embryonic folding?",
+      "options": [
+        "It is the portion of the original yolk sac that is fully incorporated into the midgut.",
+        "It is the portion of the yolk sac that remains outside the embryo, within the umbilical cord.",
+        "It is the sac that completely surrounds the amniotic cavity.",
+        "It is the temporary cavity that forms the exocoelomic cysts."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It is the portion of the yolk sac that remains outside the embryo, within the umbilical cord.",
+      "explanation": "As folding constricts the yolk sac, the portion incorporated inside the embryo forms the gut tube, while the portion remaining outside the embryo in the umbilical cord becomes the definitive yolk sac.",
+      "section": "Week Four to Eight",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-42",
+      "text": "The renal corpuscles and tubules (nephrons) are the functional filtration units of the kidney. Which germ layer provides the cellular precursors for these structures?",
+      "options": [
+        "Surface ectoderm",
+        "Endoderm",
+        "Splanchnic mesoderm",
+        "Intermediate mesoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Intermediate mesoderm",
+      "explanation": "The entire excretory portion of the kidney, including the renal corpuscles and tubules, develops from the intermediate mesoderm.",
+      "section": "Week Four to Eight",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-43",
+      "text": "The connecting stalk initially forms at the extreme caudal end of the embryonic disc. How does embryonic folding alter its position?",
+      "options": [
+        "It remains at the caudal tip, forming the tail.",
+        "It swings ventrally and becomes positioned more cranially, merging into the umbilical ring.",
+        "It moves dorsally to fuse with the neural tube.",
+        "It detaches completely and degenerates."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It swings ventrally and becomes positioned more cranially, merging into the umbilical ring.",
+      "explanation": "Tail folding causes the connecting stalk, initially located at the most caudal edge, to swing ventrally and move relatively cranially to form part of the ventral umbilical ring.",
+      "section": "Week Four to Eight",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-44",
+      "text": "The intra-embryonic coelom is a horseshoe-shaped cavity that eventually partitions into three major body cavities. Which of the following sets of cavities is derived entirely from this coelom?",
+      "options": [
+        "The amniotic, chorionic, and yolk sac cavities",
+        "The lateral, third, and fourth cerebral ventricles",
+        "The synovial cavities of the major joints",
+        "The pleural, pericardial, and peritoneal cavities"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The pleural, pericardial, and peritoneal cavities",
+      "explanation": "During the second month, the intra-embryonic coelom is subdivided to form the definitive pericardial cavity, the pleural cavities, and the peritoneal cavity.",
+      "section": "Week Four to Eight",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-45",
+      "text": "The endoderm serves as the source for the epithelial linings of specific tracts. Which of the following represents an endodermal derivative?",
+      "options": [
+        "The lens of the eye",
+        "The enamel of the teeth",
+        "The epithelial lining of the urinary bladder and most of the urethra",
+        "The epidermis of the skin"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The epithelial lining of the urinary bladder and most of the urethra",
+      "explanation": "The endoderm forms the epithelial lining of most of the urinary bladder, the urethra, and the associated respiratory and digestive tracts.",
+      "section": "Week Four to Eight",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-46",
+      "text": "Angioblasts are specialized mesodermal cells critical for cardiovascular development. What is the specific primary function of angioblasts?",
+      "options": [
+        "To secrete the collagen matrix of the heart valves",
+        "To form the endothelial lining of blood vessels",
+        "To differentiate into mature erythrocytes",
+        "To generate the pacemaker cells of the SA node"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. To form the endothelial lining of blood vessels",
+      "explanation": "Angioblasts are the progenitor cells within the blood islands that specifically flatten and organize to form the endothelial lining of the primitive blood vessels.",
+      "section": "Week Four to Eight",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-47",
+      "text": "Hemocytoblasts work in tandem with angioblasts during early vascular development. What is the specific developmental fate of hemocytoblasts?",
+      "options": [
+        "They form the smooth muscle of the aorta.",
+        "They ossify to form the sternum.",
+        "They develop into the neural crest.",
+        "They differentiate into the primitive blood cells."
+      ],
+      "correct": 3,
+      "correctAnswer": "D. They differentiate into the primitive blood cells.",
+      "explanation": "While angioblasts form the vessel walls, the central cells in the blood islands—the hemocytoblasts—differentiate into the first primitive blood cells.",
+      "section": "Week Four to Eight",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-48",
+      "text": "The reproductive system depends heavily on the intermediate mesoderm. Which supporting structures of the gonads are derived from this layer?",
+      "options": [
+        "The primordial germ cells",
+        "The ovarian and testicular stroma",
+        "The labia majora and scrotum",
+        "The smooth muscle of the uterus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The ovarian and testicular stroma",
+      "explanation": "The intermediate mesoderm forms not only the nephric structures but also the connective tissue stroma of the ovaries and testes, as well as the male reproductive ducts.",
+      "section": "Week Four to Eight",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-49",
+      "text": "The development of the sensory placodes is a key feature of the embryonic period. From which specific germ layer do the sensory epithelia of the ear and nose originate?",
+      "options": [
+        "Endoderm",
+        "Neural crest",
+        "Paraxial mesoderm",
+        "Surface ectoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Surface ectoderm",
+      "explanation": "The sensory epithelia of the olfactory (nose) and otic (ear) regions develop from placodes, which are localized thickenings of the surface ectoderm.",
+      "section": "Week Four to Eight",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-50",
+      "text": "The thymus gland is a critical organ for immune system maturation. Which germ layer provides the parenchyma (epithelial reticular cells) of the thymus?",
+      "options": [
+        "Splanchnic mesoderm",
+        "Neural crest",
+        "Ectoderm",
+        "Endoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Endoderm",
+      "explanation": "The endoderm of the embryonic pharynx gives rise to the epithelial parenchyma of several glands, including the thymus, thyroid, and parathyroids.",
+      "section": "Week Four to Eight",
+      "questionNumber": 50
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-51",
+      "text": "The establishment of the circulatory system occurs in stages. Where do blood vessels and blood cells first begin to form during week 3?",
+      "options": [
+        "In the wall of the yolk sac and other extraembryonic sites",
+        "Directly within the cardiogenic plate",
+        "In the splanchnic mesoderm of the developing gut",
+        "Inside the lumen of the neural tube"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. In the wall of the yolk sac and other extraembryonic sites",
+      "explanation": "Angiogenesis and hemogenesis initially begin at extraembryonic sites, primarily in the wall of the yolk sac, chorion, and connecting stalk, before occurring in the embryo proper.",
+      "section": "Week Four to Eight",
+      "questionNumber": 51
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-52",
+      "text": "In the embryo proper, blood vessels begin to form slightly later than in the extraembryonic tissues. What is the typical delay before intraembryonic angiogenesis commences?",
+      "options": [
+        "About 12 hours later",
+        "About 2 weeks later",
+        "About 2 days later",
+        "About 1 month later"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. About 2 days later",
+      "explanation": "Blood vessel formation begins in the extraembryonic sites and is followed approximately 2 days later by blood vessel formation within the embryo itself.",
+      "section": "Week Four to Eight",
+      "questionNumber": 52
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-53",
+      "text": "During week 5, intraembryonic hematopoiesis (blood cell formation) begins in earnest. Which embryonic organ serves as the very first site for this internal blood cell production?",
+      "options": [
+        "The spleen",
+        "The bone marrow",
+        "The lymph nodes",
+        "The liver"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The liver",
+      "explanation": "Once hematopoiesis shifts into the embryo proper in week 5, it occurs first in the liver, before eventually transitioning to the spleen, bone marrow, and lymph nodes.",
+      "section": "Week Four to Eight",
+      "questionNumber": 53
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-54",
+      "text": "During week 6, the embryo's external appearance becomes more defined. In which specific region do the somites become clearly visible during the middle of this week?",
+      "options": [
+        "The cervical region",
+        "The cranial region",
+        "The thoracic region",
+        "The lumbosacral region"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The lumbosacral region",
+      "explanation": "By the middle of week 6, the somites become visibly prominent specifically in the lumbosacral region of the embryo.",
+      "section": "Week Four to Eight",
+      "questionNumber": 54
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-55",
+      "text": "Meningomyelocoele is a severe form of spina bifida cystica. Which structures herniate through the vertebral defect in this specific condition?",
+      "options": [
+        "Only the cerebrospinal fluid and dura mater",
+        "The entire spinal column and dorsal aorta",
+        "The overlying epidermis and dermis",
+        "Both the meninges and the spinal cord"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Both the meninges and the spinal cord",
+      "explanation": "Unlike a simple meningocoele (which only contains meninges), a meningomyelocoele involves the herniation of both the meninges and the neural tissue (spinal cord) into the cystic sac.",
+      "section": "Week Four to Eight",
+      "questionNumber": 55
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-56",
+      "text": "The liver parenchyma develops from a specific germ layer. Which layer gives rise to the hepatocytes?",
+      "options": [
+        "Ectoderm",
+        "Neural crest",
+        "Endoderm",
+        "Somatic mesoderm"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Endoderm",
+      "explanation": "The glandular cells (parenchyma) of the liver and pancreas are derived from the endodermal lining of the developing gut tube.",
+      "section": "Week Four to Eight",
+      "questionNumber": 56
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-57",
+      "text": "Which of the following is a classic manifestation of fetal alcohol syndrome, caused by teratogen exposure during early organogenesis?",
+      "options": [
+        "Severe limb hypertrophy",
+        "Complete agenesis of the lungs",
+        "Growth restriction, facial abnormalities, and CNS dysfunction",
+        "Polycythemia and enlarged spleen"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Growth restriction, facial abnormalities, and CNS dysfunction",
+      "explanation": "Maternal alcohol abuse can lead to fetal alcohol syndrome, which is characterized by intrauterine growth restriction, specific facial abnormalities, and central nervous system dysfunction.",
+      "section": "Week Four to Eight",
+      "questionNumber": 57
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-58",
+      "text": "Trisomy 18 is a severe chromosomal abnormality that profoundly affects organogenesis. What is the clinical eponym for Trisomy 18?",
+      "options": [
+        "Down syndrome",
+        "Patau syndrome",
+        "Angelman syndrome",
+        "Edwards syndrome"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Edwards syndrome",
+      "explanation": "Trisomy 18 is clinically known as Edwards syndrome, whereas Trisomy 13 is Patau syndrome, and Trisomy 21 is Down syndrome.",
+      "section": "Week Four to Eight",
+      "questionNumber": 58
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-59",
+      "text": "Trisomy 13 is another chromosomal defect leading to multiple congenital anomalies. What is the clinical name for Trisomy 13?",
+      "options": [
+        "Patau syndrome",
+        "Edwards syndrome",
+        "Turner syndrome",
+        "Klinefelter syndrome"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Patau syndrome",
+      "explanation": "Trisomy 13 is known as Patau syndrome.",
+      "section": "Week Four to Eight",
+      "questionNumber": 59
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-60",
+      "text": "Trisomy 21 is the most common viable autosomal trisomy. What is the standard clinical designation for this syndrome?",
+      "options": [
+        "Edwards syndrome",
+        "Patau syndrome",
+        "Down syndrome",
+        "DiGeorge syndrome"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Down syndrome",
+      "explanation": "Trisomy 21 is universally known as Down syndrome.",
+      "section": "Week Four to Eight",
+      "questionNumber": 60
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-61",
+      "text": "Maternal cigarette smoking during pregnancy exposes the embryo to hypoxia and toxins. What is the most consistent adverse fetal outcome associated with heavy smoking?",
+      "options": [
+        "Anencephaly",
+        "Sirenomelia",
+        "Sacrococcygeal teratoma",
+        "Low birth weight (less than 2500 g)"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Low birth weight (less than 2500 g)",
+      "explanation": "Cigarette smoking restricts fetal growth, leading primarily to low birth weight (typically defined as <2500 g) and other related complications.",
+      "section": "Week Four to Eight",
+      "questionNumber": 61
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-62",
+      "text": "The third and fourth weeks of development are particularly sensitive periods. What is the primary risk if a mother abuses illicit drugs during this specific window?",
+      "options": [
+        "The immediate development of gestational diabetes",
+        "A high risk of inducing major congenital malformations in the organ systems",
+        "The guaranteed formation of identical twins",
+        "The complete cessation of placental hCG production"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A high risk of inducing major congenital malformations in the organ systems",
+      "explanation": "The 3rd and 4th weeks mark the beginning of organogenesis, making the embryo exquisitely sensitive to teratogens, which can induce major congenital malformations.",
+      "section": "Week Four to Eight",
+      "questionNumber": 62
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-63",
+      "text": "The formation of the primitive umbilical ring is a consequence of embryonic folding. Which three vital structures are contained within this ventral defect?",
+      "options": [
+        "The neural tube, notochord, and dorsal aorta",
+        "The connecting stalk, allantois, and vitello-intestinal (vitelline) duct",
+        "The midgut, hindgut, and cloaca",
+        "The amnion, chorion, and decidua basalis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The connecting stalk, allantois, and vitello-intestinal (vitelline) duct",
+      "explanation": "The primitive umbilical ring is a ventral defect in the abdominal wall that forms during folding; it contains the connecting stalk, the allantois, and the vitello-intestinal duct connecting to the yolk sac.",
+      "section": "Week Four to Eight",
+      "questionNumber": 63
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-64",
+      "text": "During the process of lateral folding, the amniotic cavity changes its relationship to the embryo. What is the ultimate position of the amniotic cavity after folding is complete?",
+      "options": [
+        "It is confined strictly to the dorsal aspect of the embryo.",
+        "It is obliterated completely by the expanding chorion.",
+        "It surrounds all aspects of the embryo, enclosing it in a fluid sac.",
+        "It moves ventrally to form the lining of the gut tube."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. It surrounds all aspects of the embryo, enclosing it in a fluid sac.",
+      "explanation": "Before folding, the amniotic cavity lies strictly dorsal to the disc. After lateral and craniocaudal folding, it is pulled ventrally to completely surround the embryo.",
+      "section": "Week Four to Eight",
+      "questionNumber": 64
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-65",
+      "text": "Somites develop at a highly predictable rate. Approximately how many pairs of somites are produced per day starting from day 20?",
+      "options": [
+        "1 pair per day",
+        "3 pairs per day",
+        "5 pairs per day",
+        "7 pairs per day"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 3 pairs per day",
+      "explanation": "Somites form in a craniocaudal sequence at a rapid, consistent rate of roughly 3 pairs per day.",
+      "section": "Week Four to Eight",
+      "questionNumber": 65
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-66",
+      "text": "By the end of the fifth week, somite formation ceases. What is the maximum total number of somite pairs typically formed in a human embryo?",
+      "options": [
+        "30-32 pairs",
+        "50-55 pairs",
+        "42-44 pairs",
+        "20-25 pairs"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. 42-44 pairs",
+      "explanation": "The embryo ultimately forms 42 to 44 pairs of somites (4 occipital, 8 cervical, 12 thoracic, 5 lumbar, 5 sacral, 8-10 coccygeal) before the first and last few degenerate.",
+      "section": "Week Four to Eight",
+      "questionNumber": 66
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-67",
+      "text": "The ventromedial wall of the somite undergoes an epithelial-to-mesenchymal transition. What is the resulting cellular mass called, and what does it form?",
+      "options": [
+        "The sclerotome, which forms the axial bones and cartilage (vertebrae, ribs)",
+        "The dermatome, which forms the epidermis",
+        "The myotome, which forms the smooth muscle of the gut",
+        "The nephrotome, which forms the kidney"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The sclerotome, which forms the axial bones and cartilage (vertebrae, ribs)",
+      "explanation": "The ventromedial portion of the somite forms the sclerotome, whose cells migrate to surround the notochord and spinal cord to form the vertebrae, ribs, and much of the skull.",
+      "section": "Week Four to Eight",
+      "questionNumber": 67
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-68",
+      "text": "The dorsolateral portion of the somite remains intact longer than the sclerotome. What two specific tissues are derived from this dermomyotome layer?",
+      "options": [
+        "The neural crest and spinal ganglia",
+        "The dermis and the skeletal muscles of the limbs and body wall",
+        "The smooth muscle and cardiac muscle",
+        "The visceral serosa and parietal serosa"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The dermis and the skeletal muscles of the limbs and body wall",
+      "explanation": "The dermomyotome splits to form the dermatome (which forms the dermis and subcutaneous tissue) and the myotome (which forms the skeletal muscles).",
+      "section": "Week Four to Eight",
+      "questionNumber": 68
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-69",
+      "text": "The intermediate mesoderm forms the nephrogenic cord. In males, it also contributes significantly to the reproductive tract. Which specific male structures arise from this layer?",
+      "options": [
+        "The prostate gland and bulbourethral glands",
+        "The epididymis, vas deferens, and ejaculatory ducts",
+        "The seminiferous tubules",
+        "The penis and scrotum"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The epididymis, vas deferens, and ejaculatory ducts",
+      "explanation": "The intermediate mesoderm gives rise to the male reproductive tracts, specifically the epididymis, vas deferens, and ejaculatory ducts.",
+      "section": "Week Four to Eight",
+      "questionNumber": 69
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-70",
+      "text": "The lateral plate mesoderm splits into somatic and splanchnic layers. Which specific layer forms the visceral serosa (e.g., visceral pleura, epicardium)?",
+      "options": [
+        "The paraxial mesoderm",
+        "The extraembryonic somatic mesoderm",
+        "The lateral splanchnic (visceral) mesoderm",
+        "The lateral somatic (parietal) mesoderm"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The lateral splanchnic (visceral) mesoderm",
+      "explanation": "The splanchnic (visceral) layer of the lateral mesoderm closely associates with the endodermal organs and forms their connective tissue, smooth muscle, and visceral serous coverings.",
+      "section": "Week Four to Eight",
+      "questionNumber": 70
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-71",
+      "text": "Conversely, the lateral somatic (parietal) mesoderm associates with the surface ectoderm. What is the primary derivative of this mesodermal layer?",
+      "options": [
+        "The parietal layers of the serous membranes (e.g., parietal pleura, parietal peritoneum)",
+        "The central nervous system",
+        "The epithelial lining of the gut",
+        "The skeletal muscles of the back"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The parietal layers of the serous membranes (e.g., parietal pleura, parietal peritoneum)",
+      "explanation": "The somatic (parietal) mesoderm, along with the overlying ectoderm, forms the body wall (somatopleure) and gives rise to the parietal layers of the serous membranes.",
+      "section": "Week Four to Eight",
+      "questionNumber": 71
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-72",
+      "text": "At approximately Day 28, sensory placodes become visible on the side of the head. What do the lens placodes represent?",
+      "options": [
+        "The future olfactory epithelium",
+        "The future retinas",
+        "The future lenses of the eyes",
+        "The future otic vesicles"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The future lenses of the eyes",
+      "explanation": "The lens placodes are bilateral ectodermal thickenings that appear around day 28 and represent the primordia of the future lenses of the eyes.",
+      "section": "Week Four to Eight",
+      "questionNumber": 72
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-73",
+      "text": "As the embryo folds, the yolk sac is constricted. What happens to the portion of the yolk sac that remains completely outside the embryo proper?",
+      "options": [
+        "It rapidly expands to form the chorionic cavity.",
+        "It is incorporated into the umbilical cord as the definitive yolk sac.",
+        "It detaches and forms exocoelomic cysts.",
+        "It differentiates into the primitive streak."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It is incorporated into the umbilical cord as the definitive yolk sac.",
+      "explanation": "The part of the yolk sac that is not incorporated into the gut tube during folding remains outside the embryo, within the umbilical cord, and is termed the definitive yolk sac.",
+      "section": "Week Four to Eight",
+      "questionNumber": 73
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-74",
+      "text": "Before folding, the primitive heart tube and septum transversum are located at the extreme cranial end of the embryonic disc. What repositioning occurs as a direct result of cranial folding?",
+      "options": [
+        "They move dorsally to lie above the neural tube.",
+        "They are pushed caudally and ventrally to lie beneath the foregut.",
+        "They migrate laterally into the arm buds.",
+        "They are completely expelled into the extraembryonic coelom."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. They are pushed caudally and ventrally to lie beneath the foregut.",
+      "explanation": "Head (cranial) folding swings the cardiogenic area and the septum transversum ventrally and caudally, positioning the heart in the future thoracic region beneath the newly formed foregut.",
+      "section": "Week Four to Eight",
+      "questionNumber": 74
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-75",
+      "text": "The pineal body (gland) is a small endocrine structure in the brain. From which primary germ layer is the pineal body derived?",
+      "options": [
+        "Endoderm",
+        "Mesoderm",
+        "Ectoderm",
+        "Intermediate mesoderm"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Ectoderm",
+      "explanation": "The pineal body, along with the anterior and posterior pituitary, is derived from the ectoderm (neuroectoderm).",
+      "section": "Week Four to Eight",
+      "questionNumber": 75
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-76",
+      "text": "Rachischisis (myeloschisis) represents the most severe form of spina bifida. What is the fundamental embryological failure in this condition?",
+      "options": [
+        "The failure of the somites to form sclerotomes",
+        "The overproduction of cerebrospinal fluid",
+        "The complete failure of the neural folds to elevate and fuse, leaving an open, flattened neural plate",
+        "The premature closure of the caudal neuropore"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The complete failure of the neural folds to elevate and fuse, leaving an open, flattened neural plate",
+      "explanation": "Rachischisis (or myeloschisis) is a severe, open neural tube defect where the neural folds fail entirely to fuse in the spinal region, leaving a flattened mass of nervous tissue exposed.",
+      "section": "Week Four to Eight",
+      "questionNumber": 76
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-77",
+      "text": "The respiratory system originates as an outgrowth from the primitive gut. Which germ layer forms the epithelial lining of the trachea and alveoli?",
+      "options": [
+        "Splanchnic mesoderm",
+        "Ectoderm",
+        "Somatic mesoderm",
+        "Endoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Endoderm",
+      "explanation": "The endoderm gives rise to the continuous epithelial lining of the respiratory passages, spanning from the pharynx down to the alveoli.",
+      "section": "Week Four to Eight",
+      "questionNumber": 77
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-78",
+      "text": "Which component of the somite breaks its compact epithelial arrangement first, migrating medially to surround the neural tube and notochord?",
+      "options": [
+        "The dermatome",
+        "The myotome",
+        "The splanchnic mesoderm",
+        "The sclerotome"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The sclerotome",
+      "explanation": "Cells from the ventromedial wall of the somite lose their epithelial character and migrate medially as mesenchyme to form the sclerotome, the precursor to the axial skeleton.",
+      "section": "Week Four to Eight",
+      "questionNumber": 78
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-79",
+      "text": "During the formation of the somites, a transient fluid-filled space exists within each block. What is this temporary cavity called?",
+      "options": [
+        "The blastocoel",
+        "The extraembryonic coelom",
+        "The myocoele",
+        "The neurenteric canal"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The myocoele",
+      "explanation": "Each newly formed somite possesses a transient central cavity known as the myocoele, which eventually disappears as the cells differentiate.",
+      "section": "Week Four to Eight",
+      "questionNumber": 79
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-80",
+      "text": "The peripheral nervous system (PNS) derives entirely from which highly migratory embryonic cell population?",
+      "options": [
+        "The intermediate mesoderm",
+        "The unsegmented paraxial mesoderm",
+        "The endodermal lining of the gut",
+        "The neural crest cells"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The neural crest cells",
+      "explanation": "The neural crest cells migrate from the margins of the neural folds to form the sensory and autonomic ganglia, Schwann cells, and the entirety of the peripheral nervous system.",
+      "section": "Week Four to Eight",
+      "questionNumber": 80
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-81",
+      "text": "The first pair of somites appears in the future occipital region. At what precise embryological time does this event typically occur?",
+      "options": [
+        "Day 14",
+        "Day 18",
+        "Day 20",
+        "Day 28"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Day 20",
+      "explanation": "The first pair of somites appears in the occipital region at approximately day 20 of embryonic development.",
+      "section": "Week Four to Eight",
+      "questionNumber": 81
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-82",
+      "text": "While the majority of somites contribute to the adult skeleton, a few pairs inevitably disappear during early development. Which specific somites degenerate?",
+      "options": [
+        "The first 4 cervical pairs",
+        "All 5 sacral pairs",
+        "The last 3 thoracic pairs",
+        "The 1st occipital pair and the last 5-7 coccygeal pairs"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The 1st occipital pair and the last 5-7 coccygeal pairs",
+      "explanation": "Out of the 42-44 pairs formed, the first occipital pair and the final 5 to 7 coccygeal pairs eventually degenerate and disappear.",
+      "section": "Week Four to Eight",
+      "questionNumber": 82
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-83",
+      "text": "The spleen is an important hematopoietic and lymphoid organ. From which embryonic germ layer does the spleen originate?",
+      "options": [
+        "Endoderm",
+        "Neural crest",
+        "Ectoderm",
+        "Mesoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Mesoderm",
+      "explanation": "The spleen develops from mesenchymal cells within the dorsal mesogastrium, making it a derivative of the mesoderm.",
+      "section": "Week Four to Eight",
+      "questionNumber": 83
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-84",
+      "text": "The cardiovascular system, including the heart and all blood vessels, arises entirely from which germ layer?",
+      "options": [
+        "Endoderm",
+        "Extraembryonic ectoderm",
+        "Intermediate mesoderm",
+        "Mesoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Mesoderm",
+      "explanation": "The entire cardiovascular system (heart, blood vessels, and blood cells) is a derivative of the mesoderm, specifically from angioblasts and splanchnic mesoderm.",
+      "section": "Week Four to Eight",
+      "questionNumber": 84
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-85",
+      "text": "Which distinct event characterizes the transition of the embryo into Week 5?",
+      "options": [
+        "The appearance of the first somite",
+        "The rapid acceleration of head growth due to prominent brain development",
+        "The initial rupture of the cloacal membrane",
+        "The completion of bone ossification"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The rapid acceleration of head growth due to prominent brain development",
+      "explanation": "Week 5 is characterized by a massive acceleration in head growth due to the rapid development of the underlying brain vesicles, causing the face to contact the heart prominence.",
+      "section": "Week Four to Eight",
+      "questionNumber": 85
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-86",
+      "text": "The formation of the gut tube occurs as a direct result of embryonic folding. The foregut is formed within the head fold and is closed cranially by which specific structure?",
+      "options": [
+        "The primitive node",
+        "The oropharyngeal (buccopharyngeal) membrane",
+        "The cloacal membrane",
+        "The septum transversum"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The oropharyngeal (buccopharyngeal) membrane",
+      "explanation": "The head fold incorporates a portion of the endodermal yolk sac to form the foregut, which is blindly closed at its extreme cranial end by the buccopharyngeal membrane.",
+      "section": "Week Four to Eight",
+      "questionNumber": 86
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-87",
+      "text": "The midgut remains in direct communication with the yolk sac. By which tubular structure is this connection maintained during folding?",
+      "options": [
+        "The connecting stalk",
+        "The allantois",
+        "The vitelline duct",
+        "The neural canal"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The vitelline duct",
+      "explanation": "The lateral folds form the midgut, which remains connected to the definitive yolk sac via the narrowing vitelline (or vitello-intestinal) duct.",
+      "section": "Week Four to Eight",
+      "questionNumber": 87
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-88",
+      "text": "The hindgut is formed within the tail fold. Its terminal, dilated portion is called the cloaca. To which ventral structure does the cloaca connect?",
+      "options": [
+        "The vitelline duct",
+        "The stomodeum",
+        "The unumbilical vein",
+        "The allantois"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The allantois",
+      "explanation": "The hindgut is formed during tail folding. Its dilated caudal part is the cloaca, which connects ventrally to the allantois extending into the connecting stalk.",
+      "section": "Week Four to Eight",
+      "questionNumber": 88
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-89",
+      "text": "Melanocytes, the pigment-producing cells of the skin, must migrate into the epidermis during development. What is their embryological source?",
+      "options": [
+        "The dermatome of the somites",
+        "The underlying endoderm",
+        "The neural crest",
+        "The surface ectoderm itself"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The neural crest",
+      "explanation": "Melanocytes are not derived from the surface ectoderm or the mesodermal dermatome; they are highly migratory cells originating from the neural crest.",
+      "section": "Week Four to Eight",
+      "questionNumber": 89
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-90",
+      "text": "The thyroid gland parenchyma is derived from the endoderm. Which specific aspect of the embryonic anatomy gives rise to this tissue?",
+      "options": [
+        "An invagination of the stomodeum",
+        "An outgrowth from the primitive pharynx (foregut)",
+        "The splanchnic mesoderm surrounding the trachea",
+        "The second branchial arch"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. An outgrowth from the primitive pharynx (foregut)",
+      "explanation": "The parenchyma of the thyroid gland, like the tonsils, parathyroids, and thymus, develops as an epithelial outgrowth from the endodermal lining of the pharynx.",
+      "section": "Week Four to Eight",
+      "questionNumber": 90
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-91",
+      "text": "The enamel of the teeth is the hardest substance in the human body. Which embryonic layer provides the specialized ameloblasts that secrete enamel?",
+      "options": [
+        "Mesoderm",
+        "Neural crest",
+        "Ectoderm",
+        "Endoderm"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Ectoderm",
+      "explanation": "While dentine is formed by neural crest-derived odontoblasts, the overlying enamel is formed by ameloblasts, which are derived from the surface ectoderm.",
+      "section": "Week Four to Eight",
+      "questionNumber": 91
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-92",
+      "text": "The adrenal medulla secretes epinephrine and norepinephrine. Due to its functional similarity to sympathetic ganglia, it is derived from which embryonic source?",
+      "options": [
+        "Splanchnic mesoderm",
+        "Intermediate mesoderm",
+        "Somatic mesoderm",
+        "Neural crest"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Neural crest",
+      "explanation": "The adrenal medulla is essentially a highly modified sympathetic ganglion and is derived directly from migratory neural crest cells.",
+      "section": "Week Four to Eight",
+      "questionNumber": 92
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-93",
+      "text": "The mesoderm forms the dermis of the skin. From which specific subdivision of the somite does the dermal connective tissue originate?",
+      "options": [
+        "The sclerotome",
+        "The myotome",
+        "The splanchnic mesoderm",
+        "The dermatome"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The dermatome",
+      "explanation": "The dorsolateral dermomyotome splits, and its dermatome portion migrates to form the dermis and subcutaneous tissue of the skin.",
+      "section": "Week Four to Eight",
+      "questionNumber": 93
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-94",
+      "text": "The epithelial lining of the gastrointestinal tract is endodermal. However, the connective tissue, blood vessels, and smooth muscle of the gut wall come from a different source. Which source is this?",
+      "options": [
+        "Surface ectoderm",
+        "Somatic lateral plate mesoderm",
+        "Intermediate mesoderm",
+        "Splanchnic lateral plate mesoderm"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Splanchnic lateral plate mesoderm",
+      "explanation": "The splanchnic (visceral) layer of the lateral mesoderm surrounds the endodermal gut tube to form its connective tissue, visceral serosa, and smooth muscle coats.",
+      "section": "Week Four to Eight",
+      "questionNumber": 94
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-95",
+      "text": "The central canal of the spinal cord is a remnant of which embryonic structure?",
+      "options": [
+        "The primitive pit",
+        "The notochordal canal",
+        "The amniotic cavity",
+        "The lumen of the neural tube"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The lumen of the neural tube",
+      "explanation": "When the neural folds fuse to form the neural tube, the enclosed lumen persists and ultimately becomes the central canal of the spinal cord and the ventricles of the brain.",
+      "section": "Week Four to Eight",
+      "questionNumber": 95
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-96",
+      "text": "The otic placodes appear early in development and invaginate to form the otic vesicles. What do these vesicles ultimately become?",
+      "options": [
+        "The external ear auricle",
+        "The middle ear ossicles",
+        "The tympanic membrane",
+        "The internal ear structures"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The internal ear structures",
+      "explanation": "The otic placodes (ectodermal thickenings) invaginate to form the otic pits and vesicles, which develop into the sensory structures of the internal ear.",
+      "section": "Week Four to Eight",
+      "questionNumber": 96
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-97",
+      "text": "Maternal malnutrition, specifically vitamin deficiency, is a known teratogenic factor. Which specific congenital anomaly is most strongly associated with maternal folate (vitamin B9) deficiency during weeks 3 and 4?",
+      "options": [
+        "Fetal alcohol syndrome",
+        "Sirenomelia",
+        "Down syndrome",
+        "Spina bifida and other neural tube defects"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Spina bifida and other neural tube defects",
+      "explanation": "Maternal malnutrition, particularly a deficiency in folic acid, severely disrupts neurulation and is a leading environmental cause of spina bifida and other neural tube defects.",
+      "section": "Week Four to Eight",
+      "questionNumber": 97
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-98",
+      "text": "The extraembryonic mesoderm plays a role in placental formation. The tertiary chorionic villi are defined by the appearance of which specific structures within their mesodermal core?",
+      "options": [
+        "Cysts and calcifications",
+        "Lymphatic nodules",
+        "Smooth muscle fibers",
+        "Fetal blood vessels"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Fetal blood vessels",
+      "explanation": "A secondary villus becomes a tertiary chorionic villus at the end of the 3rd week when fetal blood vessels (capillaries) differentiate within its mesodermal core.",
+      "section": "Week Four to Eight",
+      "questionNumber": 98
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-99",
+      "text": "The chorion frondosum represents the highly branched, bushy portion of the chorion. Where is the chorion frondosum anatomically located in relation to the maternal tissues?",
+      "options": [
+        "Directly opposite the decidua capsularis",
+        "Free-floating in the amniotic fluid",
+        "Opposite the internal cervical os",
+        "Directly opposite the decidua basalis"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Directly opposite the decidua basalis",
+      "explanation": "The tertiary villi opposite the decidua basalis grow rapidly to form side branches called the chorion frondosum (the fetal part of the placenta), while those under the decidua capsularis degenerate to form the smooth chorion laeve.",
+      "section": "Week Four to Eight",
+      "questionNumber": 99
+    },
+    {
+      "id": "ana203-ge-week-four-to-eight-100",
+      "text": "The placenta functions as the vital organ of exchange between fetal and maternal blood. What is the typical approximate weight of a fully developed, term placenta?",
+      "options": [
+        "100 - 200 g",
+        "500 - 600 g",
+        "1000 - 1500 g",
+        "2500 - 3000 g"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 500 - 600 g",
+      "explanation": "A normal, fully developed placenta is disc-like, has a diameter of 15-25 cm, a thickness of about 3 cm, and typically weighs between 500 and 600 grams.",
+      "section": "Week Four to Eight",
+      "questionNumber": 100
+    }
+  ]
+}
