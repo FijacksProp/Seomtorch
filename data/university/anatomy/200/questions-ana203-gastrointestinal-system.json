@@ -1,0 +1,1510 @@
+{
+  "title": "Gastrointestinal System",
+  "course": "ANA 203",
+  "totalQuestions": 100,
+  "sections": [
+    "Gastrointestinal System (Q1-Q100)"
+  ],
+  "questions": [
+    {
+      "id": "ana203-se-gastrointestinal-system-1",
+      "text": "The primitive gut is formed during embryonic folding. Which of the following best describes the specific embryological origin of its epithelial lining?",
+      "options": [
+        "Dorsal part of the endodermal-lined yolk sac",
+        "Ventral portion of the splanchnic mesoderm",
+        "Invagination of the surface ectoderm",
+        "Cephalocaudal migration of neural crest cells"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Dorsal part of the endodermal-lined yolk sac",
+      "explanation": "The primitive gut tube is established by the incorporation of the dorsal part of the endodermal-lined yolk sac into the embryo during the processes of cephalocaudal and lateral folding.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 1
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-2",
+      "text": "During the solid stage of gastrointestinal development, the gut tube becomes completely occluded. What is the subsequent process that restores the lumen?",
+      "options": [
+        "Apoptosis of the splanchnic mesoderm",
+        "Recanalization of the endoderm",
+        "Diverticular expansion of the foregut",
+        "Herniation into the umbilical cord"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Recanalization of the endoderm",
+      "explanation": "The endodermal lining of the gut tube proliferates to the point of temporarily obliterating the lumen. Normal development requires subsequent recanalization to restore the hollow tube structure.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 2
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-3",
+      "text": "Which of the following structural layers of the digestive tract is derived from the splanchnic mesenchyme?",
+      "options": [
+        "The mucosal epithelium",
+        "The submucosal glands",
+        "The muscular walls",
+        "The enteric nervous system"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The muscular walls",
+      "explanation": "While the epithelium and glands of the gut are endodermal in origin, the connective tissue and muscular layers are derived from the surrounding splanchnic (visceral) mesoderm.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 3
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-4",
+      "text": "The foregut gives rise to multiple organs in the superior abdomen. Which of the following is NOT a direct derivative of the foregut?",
+      "options": [
+        "Liver",
+        "Gallbladder",
+        "Pancreas",
+        "Distal half of the duodenum"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Distal half of the duodenum",
+      "explanation": "The foregut gives rise to the duodenum only proximal to the opening of the bile duct. The distal half of the duodenum is derived from the cranial portion of the midgut.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 4
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-5",
+      "text": "The arterial supply of the primitive gut tube is divided by embryonic region. Which vessel primarily supplies the derivatives of the foregut?",
+      "options": [
+        "Superior mesenteric artery",
+        "Celiac trunk",
+        "Inferior mesenteric artery",
+        "Umbilical artery"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Celiac trunk",
+      "explanation": "The celiac trunk is the primary artery of the foregut, supplying derivatives such as the stomach, liver, pancreas, and proximal duodenum.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 5
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-6",
+      "text": "The esophagus develops from the foregut. What structure partitions the primitive foregut to separate the esophagus from the respiratory tract?",
+      "options": [
+        "Septum transversum",
+        "Oropharyngeal membrane",
+        "Tracheoesophageal septum",
+        "Dorsal mesentery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Tracheoesophageal septum",
+      "explanation": "The tracheoesophageal septum forms longitudinally to separate the ventral respiratory diverticulum (trachea and lung buds) from the dorsal portion of the foregut, which becomes the esophagus.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 6
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-7",
+      "text": "The muscularis externa of the esophagus exhibits a distinct transition in its developmental origin. The smooth muscle found in the inferior third of the esophagus derives from which source?",
+      "options": [
+        "Paraxial mesoderm",
+        "Pharyngeal arch mesenchyme",
+        "Somatic mesoderm",
+        "Splanchnic mesenchyme"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Splanchnic mesenchyme",
+      "explanation": "The striated muscle in the upper third of the esophagus develops from surrounding mesenchyme (often branchial arch origin), whereas the smooth muscle in the lower third originates from splanchnic mesenchyme.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 7
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-8",
+      "text": "A newborn presents with excessive drooling, choking, and cyanosis upon first feeding. An anatomical defect is suspected. What is the most likely embryological cause of esophageal atresia with a distal fistula?",
+      "options": [
+        "Posterior deviation of the tracheoesophageal septum",
+        "Failure of the stomach to rotate properly",
+        "Incomplete descent of the diaphragm",
+        "Failure of the midgut loop to return to the abdomen"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Posterior deviation of the tracheoesophageal septum",
+      "explanation": "Esophageal atresia with a tracheoesophageal fistula typically results from a posterior deviation of the tracheoesophageal septum, causing incomplete separation of the esophagus from the laryngotracheal tube.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 8
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-9",
+      "text": "Congenital hiatal hernia is characterized by the superior displacement of part of the stomach into the thorax. This condition is fundamentally caused by a failure of which developmental process?",
+      "options": [
+        "Recanalization of the esophageal lumen",
+        "Fusion of the pleuroperitoneal folds",
+        "Sufficient elongation of the esophagus",
+        "Rotation of the foregut around its longitudinal axis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Sufficient elongation of the esophagus",
+      "explanation": "The esophagus is initially short but must elongate rapidly as the heart and lungs grow and descend. Failure of the esophagus to lengthen sufficiently pulls part of the stomach superiorly through the esophageal hiatus.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 9
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-10",
+      "text": "The stomach first appears in the fourth week as a fusiform enlargement. Which event dictates the formation of the greater curvature?",
+      "options": [
+        "Retraction of the midgut loop",
+        "Cranial folding of the embryonic disc",
+        "Fusion of the dorsal and ventral pancreatic buds",
+        "Faster growth of the dorsal border compared to the ventral border"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Faster growth of the dorsal border compared to the ventral border",
+      "explanation": "During the development of the stomach, its dorsal border grows at a significantly faster rate than the ventral border, resulting in the prominent outward curve known as the greater curvature.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 10
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-11",
+      "text": "During stomach development, the organ undergoes a 90-degree clockwise rotation around its longitudinal axis. What is the anatomical consequence of this specific rotation?",
+      "options": [
+        "The greater curvature moves to the right side of the abdominal cavity",
+        "The original left side becomes the ventral surface",
+        "The lesser curvature shifts to the dorsal wall",
+        "The original ventral border becomes the posterior surface"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The original left side becomes the ventral surface",
+      "explanation": "As the stomach rotates 90 degrees clockwise (viewed cranially), the original left surface swings anteriorly to become the ventral surface, and the original right surface becomes the dorsal surface.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 11
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-12",
+      "text": "As the stomach undergoes its complex rotations, its cranial and caudal ends also shift position. Following these shifts, where does the caudal region (pylorus) ultimately lie?",
+      "options": [
+        "To the right and superiorly",
+        "To the left and inferiorly",
+        "In the exact median plane",
+        "Dorsal to the developing spleen"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. To the right and superiorly",
+      "explanation": "During rotation, the cranial end (fundus/cardia) moves to the left and slightly inferiorly, while the caudal end (pylorus) moves to the right and superiorly, giving the stomach its transverse orientation.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 12
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-13",
+      "text": "Hypertrophic pyloric stenosis presents with projectile vomiting in infants. What is the underlying morphological abnormality in this condition?",
+      "options": [
+        "A mucosal web occluding the pyloric orifice",
+        "Failure of the pyloric canal to recanalize",
+        "Marked thickening of the circular and longitudinal muscles of the pylorus",
+        "An aberrant right hepatic artery compressing the pylorus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Marked thickening of the circular and longitudinal muscles of the pylorus",
+      "explanation": "Congenital hypertrophic pyloric stenosis involves a marked muscular thickening (hypertrophy) of the circular and, to a lesser degree, longitudinal muscles at the pylorus, physically obstructing the outflow tract.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 13
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-14",
+      "text": "The duodenum develops from both the foregut and the midgut. Which of the following statements best describes its early morphological development?",
+      "options": [
+        "It forms a C-shaped loop that projects ventrally and subsequently rotates to the right",
+        "It undergoes a 180-degree counterclockwise rotation independent of the stomach",
+        "It herniates into the umbilical cord along with the primary intestinal loop",
+        "It retains a complete dorsal and ventral mesentery throughout adult life"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It forms a C-shaped loop that projects ventrally and subsequently rotates to the right",
+      "explanation": "The duodenum grows rapidly and forms a distinct C-shaped loop projecting ventrally. As the stomach rotates, this duodenal loop rotates to the right and gets pressed against the posterior abdominal wall.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 14
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-15",
+      "text": "By the end of the embryonic period, the duodenum achieves its definitive hollow state. If the process of defective vacuolization occurs during its solid stage, what is the most likely clinical outcome?",
+      "options": [
+        "Biliary atresia",
+        "Pancreatic divisum",
+        "Annular pancreas",
+        "Duodenal stenosis"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Duodenal stenosis",
+      "explanation": "Defective vacuolization leads to incomplete recanalization of the duodenal lumen. This partial occlusion manifests clinically as duodenal stenosis.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 15
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-16",
+      "text": "The liver and biliary apparatus originate as the hepatic diverticulum. From which specific segment of the primitive gut tube does this diverticulum arise?",
+      "options": [
+        "Proximal foregut",
+        "Caudal part of the foregut",
+        "Cranial part of the midgut",
+        "Proximal hindgut"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Caudal part of the foregut",
+      "explanation": "The hepatic diverticulum arises as a ventral outgrowth from the caudal (distal) part of the foregut, appearing early in the fourth week of development.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 16
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-17",
+      "text": "The hepatic diverticulum extends into a mass of splanchnic mesoderm located between the developing heart and midgut. What is the name of this mesodermal mass?",
+      "options": [
+        "Dorsal mesogastrium",
+        "Pleuroperitoneal membrane",
+        "Septum transversum",
+        "Ventral mesentery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Septum transversum",
+      "explanation": "The septum transversum is a thick block of splanchnic mesoderm that separates the thoracic cavity from the abdomen. The expanding hepatic diverticulum grows directly into it to form the liver stroma.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 17
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-18",
+      "text": "The hepatic diverticulum divides into a larger cranial part and a smaller caudal part. What structure is derived from the stalk of the smaller caudal part?",
+      "options": [
+        "Cystic duct",
+        "Common hepatic duct",
+        "Main pancreatic duct",
+        "Accessory hepatic duct"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Cystic duct",
+      "explanation": "The smaller caudal part of the hepatic diverticulum forms the gallbladder, and its narrow stalk differentiates into the cystic duct.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 18
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-19",
+      "text": "The pancreas develops from two endodermal buds. Where does the ventral pancreatic bud initially develop before its migration?",
+      "options": [
+        "Within the dorsal mesogastrium",
+        "On the cranial surface of the septum transversum",
+        "Adjacent to the developing spleen",
+        "Near the entry of the bile duct into the duodenum"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Near the entry of the bile duct into the duodenum",
+      "explanation": "The ventral pancreatic bud initially develops on the ventral aspect of the duodenum, situated immediately adjacent to the entry point of the developing bile duct.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 19
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-20",
+      "text": "The fusion of the pancreatic buds is a critical step in glandular development. What mechanical event drives the ventral pancreatic bud dorsally to fuse with the dorsal bud?",
+      "options": [
+        "Herniation of the midgut loop",
+        "Rotation of the duodenum to the right",
+        "Elongation of the common bile duct",
+        "Expansion of the omental bursa"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Rotation of the duodenum to the right",
+      "explanation": "As the duodenum rotates to the right and becomes C-shaped, it carries the ventral pancreatic bud and the bile duct dorsally, eventually bringing the ventral bud to lie just posterior to the dorsal bud.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 20
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-21",
+      "text": "Most of the definitive pancreas is formed by one of the embryonic buds. Which structure is derived primarily from the dorsal pancreatic bud?",
+      "options": [
+        "The uncinate process",
+        "The inferior part of the head",
+        "The superior part of the head, body, and tail",
+        "The main pancreatic duct of Wirsung"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The superior part of the head, body, and tail",
+      "explanation": "The larger dorsal pancreatic bud forms the majority of the pancreas, specifically the superior part of the head, the body, and the entire tail.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 21
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-22",
+      "text": "The primary intestinal loop (midgut) undergoes a physiologic herniation. At what point during gestation does this herniation typically begin?",
+      "options": [
+        "Beginning of the sixth week",
+        "End of the eighth week",
+        "Beginning of the tenth week",
+        "Twelfth week of development"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Beginning of the sixth week",
+      "explanation": "Physiologic umbilical herniation occurs at the beginning of the sixth week, as the rapidly elongating midgut loop is forced into the extraembryonic coelom within the umbilical cord.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 22
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-23",
+      "text": "The midgut loop maintains a temporary connection to the umbilical vesicle (yolk sac). What is the specific embryological term for this communicating structure?",
+      "options": [
+        "Urachus",
+        "Allantois",
+        "Connecting stalk",
+        "Omphaloenteric duct"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Omphaloenteric duct",
+      "explanation": "The omphaloenteric duct (also known as the vitelline duct or yolk stalk) connects the apex of the midgut loop to the yolk sac until roughly the 10th week of development.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 23
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-24",
+      "text": "The midgut loop consists of a cranial limb and a caudal limb. Which of the following adult structures develops exclusively from the caudal limb?",
+      "options": [
+        "Jejunum",
+        "Cecum",
+        "Proximal ileum",
+        "Distal duodenum"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Cecum",
+      "explanation": "The caudal (distal) limb of the midgut loop gives rise to the cecum, appendix, ascending colon, and the right portion of the transverse colon. The cranial limb forms the small intestine loops.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 24
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-25",
+      "text": "While herniated within the umbilical cord, the midgut loop undergoes its initial rotation. What is the degree and direction of this primary rotation (viewed ventrally)?",
+      "options": [
+        "90 degrees clockwise",
+        "180 degrees counterclockwise",
+        "90 degrees counterclockwise",
+        "270 degrees clockwise"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. 90 degrees counterclockwise",
+      "explanation": "The first stage of midgut rotation occurs within the umbilical cord, involving a 90-degree counterclockwise rotation that brings the cranial limb to the right and the caudal limb to the left.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 25
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-26",
+      "text": "The axis of rotation for the midgut loop is provided by a major blood vessel. Which artery serves as this central axis?",
+      "options": [
+        "Superior mesenteric artery",
+        "Celiac trunk",
+        "Inferior mesenteric artery",
+        "Vitelline vein"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Superior mesenteric artery",
+      "explanation": "The superior mesenteric artery runs precisely through the axis of the midgut loop, serving as the anatomical pivot point around which the entire 270-degree rotation occurs.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 26
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-27",
+      "text": "During the tenth week, the midgut loop returns to the abdominal cavity. Which portion of the intestine is the first to re-enter the abdomen?",
+      "options": [
+        "Ascending colon",
+        "Cecum",
+        "Transverse colon",
+        "Small intestine (cranial limb)"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Small intestine (cranial limb)",
+      "explanation": "During the reduction of the midgut hernia, the cranial limb (representing the jejunum and ileum) returns first, passing posterior to the superior mesenteric artery to occupy the central abdomen.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 27
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-28",
+      "text": "As the large intestine returns to the abdominal cavity, it completes the final phase of gut rotation. How many additional degrees does the gut rotate during this return phase?",
+      "options": [
+        "90 degrees",
+        "120 degrees",
+        "180 degrees",
+        "270 degrees"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. 180 degrees",
+      "explanation": "The midgut rotates 90 degrees initially in the cord, and an additional 180 degrees counterclockwise as it returns to the abdomen, resulting in a total rotation of 270 degrees.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 28
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-29",
+      "text": "Following the return of the intestines, fixation occurs, altering the peritoneal relations of several organs. Which of the following structures becomes secondarily retroperitoneal as its mesentery fuses with the posterior abdominal wall?",
+      "options": [
+        "Transverse colon",
+        "Ascending colon",
+        "Jejunum",
+        "Sigmoid colon"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Ascending colon",
+      "explanation": "The enlarged colon presses against the posterior abdominal wall. The mesentery of the ascending colon (and descending colon) fuses with the parietal peritoneum, rendering it secondarily retroperitoneal.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 29
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-30",
+      "text": "The appendix develops from the cecal swelling. How does the postnatal growth pattern of the cecum affect the final anatomical position of the appendix?",
+      "options": [
+        "Unequal growth of the cecal wall shifts the appendix to the medial side",
+        "Symmetrical expansion forces the appendix into the pelvic cavity",
+        "Rapid elongation of the teniae coli pulls the appendix superiorly",
+        "Fusion with the ascending colon mesentery anchors it laterally"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Unequal growth of the cecal wall shifts the appendix to the medial side",
+      "explanation": "The appendix initially forms at the apex of the cecum. After birth, unequal lateral expansion of the cecal wall pushes the attachment point of the appendix toward the medial surface.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 30
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-31",
+      "text": "An infant is born with a protrusion of abdominal viscera covered by a translucent sac composed of amnion. What is the most accurate diagnosis?",
+      "options": [
+        "Gastroschisis",
+        "Umbilical hernia",
+        "Ectopia cordis",
+        "Omphalocele"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Omphalocele",
+      "explanation": "A congenital omphalocele is a persistence of the physiologic midgut herniation. The extruded abdominal contents remain encapsulated within the proximal umbilical cord, covered directly by the amnion.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 31
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-32",
+      "text": "Gastroschisis represents a severe abdominal wall defect. Which of the following characteristics clinically differentiates gastroschisis from an omphalocele?",
+      "options": [
+        "It results from a persistence of the physiologic midgut herniation",
+        "The extruded viscera are not covered by an amniotic sac",
+        "The defect is invariably located directly at the umbilicus",
+        "It predominantly involves the herniation of the liver"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The extruded viscera are not covered by an amniotic sac",
+      "explanation": "Gastroschisis involves a full-thickness defect lateral to the median plane. The extruded viscera pass directly into the amniotic cavity and are not covered by an amniotic sac or umbilical cord epithelium.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 32
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-33",
+      "text": "A newborn is diagnosed with an umbilical hernia. What is the primary anatomical defect responsible for this specific condition?",
+      "options": [
+        "Failure of the midgut loop to return to the abdomen in the tenth week",
+        "A defect lateral to the median plane of the anterior abdominal wall",
+        "An imperfectly closed linea alba at the umbilicus following normal gut return",
+        "Complete agenesis of the rectus abdominis muscle"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. An imperfectly closed linea alba at the umbilicus following normal gut return",
+      "explanation": "An umbilical hernia occurs after the intestines successfully return to the abdominal cavity but subsequently herniate through a weakened, imperfectly closed umbilicus (specifically a defect in the linea alba).",
+      "section": "Gastrointestinal System",
+      "questionNumber": 33
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-34",
+      "text": "Anomalies of midgut rotation can lead to significant clinical complications. In the condition known as \"nonrotation,\" where does the entire large intestine typically settle?",
+      "options": [
+        "On the left side of the abdomen",
+        "On the right side of the abdomen",
+        "In the pelvic cavity",
+        "Anterior to the small intestine"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. On the left side of the abdomen",
+      "explanation": "In nonrotation, the gut only completes its initial 90-degree rotation. The caudal limb (large intestine) returns to the abdomen first and settles entirely on the left side, while the small intestine remains on the right.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 34
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-35",
+      "text": "Reversed rotation of the midgut is a rare anomaly that alters normal anatomical relationships. In this condition, the midgut rotates 90 degrees clockwise. What is the resulting position of the transverse colon?",
+      "options": [
+        "Anterior to the stomach",
+        "Inferior to the bladder",
+        "Suspended entirely by the ventral mesentery",
+        "Posterior to the superior mesenteric artery"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Posterior to the superior mesenteric artery",
+      "explanation": "Normal counterclockwise rotation places the transverse colon anterior to the SMA. In reversed (clockwise) rotation, the duodenum comes to lie anterior to the SMA, and the transverse colon ends up posterior to it.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 35
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-36",
+      "text": "Midgut volvulus is a life-threatening surgical emergency in infants. What is the primary pathomechanism that leads to infarction and gangrene in this condition?",
+      "options": [
+        "Compression of the bowel by the umbilical ring",
+        "Twisting of the improperly fixed intestine, obstructing the superior mesenteric artery",
+        "Failure of the anal membrane to rupture, causing massive distension",
+        "Intussusception of the ileum into the cecum"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Twisting of the improperly fixed intestine, obstructing the superior mesenteric artery",
+      "explanation": "Improper positioning and incomplete fixation of the intestines predispose the midgut to twist around its mesentery (volvulus). This physical twisting strangles the superior mesenteric artery, leading to rapid ischemic necrosis.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 36
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-37",
+      "text": "The hindgut gives rise to the distal portions of the gastrointestinal tract. Which of the following segments is a direct derivative of the hindgut?",
+      "options": [
+        "The ascending colon",
+        "The right half of the transverse colon",
+        "The descending colon",
+        "The entirety of the anal canal"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The descending colon",
+      "explanation": "The hindgut derivatives include the distal one-third to one-half of the transverse colon, the descending colon, the sigmoid colon, the rectum, and only the superior part of the anal canal.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 37
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-38",
+      "text": "The terminal end of the hindgut forms an endoderm-lined chamber known as the cloaca. With which embryonic layer does the cloaca come into direct contact at the cloacal membrane?",
+      "options": [
+        "Surface ectoderm",
+        "Splanchnic mesoderm",
+        "Neural crest mesenchyme",
+        "Extraembryonic mesoderm"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Surface ectoderm",
+      "explanation": "The cloaca is an endodermal chamber. It physically meets the surface ectoderm at a distinct boundary known as the cloacal membrane, with no intervening mesoderm present.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 38
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-39",
+      "text": "The partitioning of the cloaca is a critical event in hindgut development. Which structure grows caudally to divide this chamber?",
+      "options": [
+        "Septum transversum",
+        "Tracheoesophageal septum",
+        "Genital tubercle",
+        "Urorectal septum"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Urorectal septum",
+      "explanation": "The urorectal septum is a wedge of mesenchyme that develops between the allantois and the hindgut. It actively grows caudally toward the cloacal membrane, ultimately dividing the cloaca.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 39
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-40",
+      "text": "As the urorectal septum descends, it divides the cloaca into a dorsal and a ventral portion. What does the ventral portion become?",
+      "options": [
+        "The anorectal canal",
+        "The urogenital sinus",
+        "The allantois",
+        "The proctodeum"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The urogenital sinus",
+      "explanation": "The urorectal septum partitions the cloaca into a dorsal part, which becomes the rectum and upper anal canal, and a ventral part, which becomes the urogenital sinus (forming the bladder and urethra).",
+      "section": "Gastrointestinal System",
+      "questionNumber": 40
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-41",
+      "text": "The fusion of the urorectal septum with the cloacal membrane separates the urinary and digestive tracts. What adult anatomical structure is formed at this exact area of fusion?",
+      "options": [
+        "The pubic symphysis",
+        "The internal anal sphincter",
+        "The perineal body",
+        "The coccygeal ligament"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The perineal body",
+      "explanation": "The point where the tip of the descending urorectal septum fuses with the cloacal membrane represents the anatomical center of the perineum, persisting in the adult as the fibromuscular perineal body.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 41
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-42",
+      "text": "The anal canal has a dual embryological origin. The superior two-thirds are derived from the hindgut. From what structure does the inferior one-third develop?",
+      "options": [
+        "The proctodeum",
+        "The urogenital sinus",
+        "The allantois",
+        "The mesonephric duct"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The proctodeum",
+      "explanation": "While the superior portion of the anal canal is endodermal (hindgut), the inferior one-third develops from an invagination of the surface ectoderm known as the proctodeum (or anal pit).",
+      "section": "Gastrointestinal System",
+      "questionNumber": 42
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-43",
+      "text": "The pectinate line of the anal canal marks an important embryological transition zone. What epithelial change occurs across this line?",
+      "options": [
+        "From stratified squamous to simple cuboidal",
+        "From pseudostratified ciliated to simple squamous",
+        "From transitional to stratified squamous",
+        "From columnar to stratified squamous"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. From columnar to stratified squamous",
+      "explanation": "The pectinate line represents the junction between the hindgut (endoderm) and the proctodeum (ectoderm). Consequently, the epithelium changes from columnar superiorly to stratified squamous inferiorly.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 43
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-44",
+      "text": "Congenital anomalies of the hindgut are often classified based on their relationship to a specific muscular landmark. Which muscle serves as the divider between \"high\" and \"low\" anorectal anomalies?",
+      "options": [
+        "The external anal sphincter",
+        "The puborectalis sling (levator ani)",
+        "The deep transverse perineal muscle",
+        "The internal obturator muscle"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The puborectalis sling (levator ani)",
+      "explanation": "Clinically, hindgut anomalies are divided into high and low categories based on whether the abnormal rectum terminates superior to or inferior to the puborectal sling (puborectalis muscle).",
+      "section": "Gastrointestinal System",
+      "questionNumber": 44
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-45",
+      "text": "Anal agenesis may present with or without a fistula. If an infant is born with a blindly ending anal canal and no fistula, which developmental step most likely failed?",
+      "options": [
+        "Formation of the urorectal septum",
+        "Descent of the hindgut into the pelvis",
+        "Rupture of the anal membrane",
+        "Canalization of the sigmoid colon"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Rupture of the anal membrane",
+      "explanation": "In anal agenesis without a fistula, the anal canal forms but ends blindly. This typically implies that the anal membrane simply failed to rupture at the end of the eighth week to establish patency.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 45
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-46",
+      "text": "An infant presents with feces passing through the urethra. This indicates an anorectal malformation with a fistula. This defect is primarily due to an abnormality in the development of which structure?",
+      "options": [
+        "Urorectal septum",
+        "Proctodeum",
+        "Omphaloenteric duct",
+        "Vitelline vein"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Urorectal septum",
+      "explanation": "Fistulas connecting the hindgut to the urogenital tract (bladder, urethra, vagina) result from an incomplete or abnormal descent and fusion of the urorectal septum, failing to fully partition the cloaca.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 46
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-47",
+      "text": "The solid stage of esophageal development is followed by recanalization. If the esophagus undergoes incomplete recanalization, which condition will manifest?",
+      "options": [
+        "Esophageal atresia",
+        "Tracheoesophageal fistula",
+        "Achalasia",
+        "Esophageal stenosis"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Esophageal stenosis",
+      "explanation": "Incomplete recanalization leaves behind a web or a long narrowed segment with a threadlike lumen. This partial occlusion is clinically defined as esophageal stenosis.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 47
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-48",
+      "text": "The foregut derivatives are primarily supplied by the celiac trunk. Which foregut derivative is a notable EXCEPTION to this rule, receiving its blood supply from a different source?",
+      "options": [
+        "Distal esophagus",
+        "Pharynx",
+        "Proximal duodenum",
+        "Gallbladder"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Pharynx",
+      "explanation": "The pharynx, lower respiratory tract, and most of the esophagus are derived from the foregut but are not supplied by the celiac trunk; they are supplied by localized cervical and thoracic vessels.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 48
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-49",
+      "text": "During the formation of the stomach, its rotation alters the position of the mesenteries. Which structure is formed as a direct result of the fusion of isolated vacuoles in the dorsal mesogastrium?",
+      "options": [
+        "The lesser omentum",
+        "The falciform ligament",
+        "The omental bursa (lesser sac)",
+        "The transverse mesocolon"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The omental bursa (lesser sac)",
+      "explanation": "As the stomach rotates, the dorsal mesogastrium is pulled to the left. Small isolated clefts (vacuoles) appear within it, which subsequently fuse to form a large recess known as the omental bursa.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 49
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-50",
+      "text": "The development of the pancreas involves two distinct buds. Which portion of the mature pancreas is derived from the ventral pancreatic bud?",
+      "options": [
+        "The uncinate process and inferior part of the head",
+        "The body and the tail",
+        "The superior part of the head only",
+        "The entire endocrine portion (Islets of Langerhans)"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The uncinate process and inferior part of the head",
+      "explanation": "While the dorsal bud forms most of the pancreas, the ventral bud gives rise exclusively to the uncinate process and the inferior portion of the head of the pancreas.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 50
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-51",
+      "text": "The main pancreatic duct (of Wirsung) has a composite embryological origin. It is formed by the duct of the ventral bud and which specific portion of the dorsal pancreatic bud?",
+      "options": [
+        "The proximal part",
+        "The distal part",
+        "The uncinate branch",
+        "The accessory duct"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The distal part",
+      "explanation": "The main pancreatic duct is formed by the fusion of the distal portion of the dorsal pancreatic duct with the entire ventral pancreatic duct.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 51
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-52",
+      "text": "Accessory pancreatic tissue can be found in various ectopic locations. Which of the following is a common site for ectopic pancreatic tissue?",
+      "options": [
+        "The lumen of the gallbladder",
+        "The wall of the ascending colon",
+        "The mucosal lining of the esophagus",
+        "The wall of the stomach or a Meckel's diverticulum"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The wall of the stomach or a Meckel's diverticulum",
+      "explanation": "Accessory (ectopic) pancreatic tissue is frequently discovered embedded within the wall of the stomach, the duodenum, or in an ileal (Meckel's) diverticulum.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 52
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-53",
+      "text": "The midgut loop is supplied by the superior mesenteric artery. What forms the axis around which the midgut loop rotates during its herniation?",
+      "options": [
+        "The superior mesenteric artery itself",
+        "The omphaloenteric duct",
+        "The vitelline vein",
+        "The umbilical cord"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The superior mesenteric artery itself",
+      "explanation": "The superior mesenteric artery forms the central physical axis around which the midgut loop twists as it undergoes its 270-degree counterclockwise rotation.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 53
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-54",
+      "text": "The pancreatic ducts open into the duodenum at specific papillae. According to standard embryological development, the accessory pancreatic duct opens into which structure?",
+      "options": [
+        "The major duodenal papilla",
+        "The minor duodenal papilla",
+        "The common bile duct directly",
+        "The pyloric sphincter"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The minor duodenal papilla",
+      "explanation": "The main pancreatic duct opens into the major duodenal papilla (along with the bile duct), whereas the accessory pancreatic duct (representing the proximal dorsal duct) opens superiorly into the minor duodenal papilla.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 54
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-55",
+      "text": "The primitive gut tube is divided into three main sections. The boundary between the midgut and the hindgut is defined anatomically by the blood supply. Where does this transition occur in the adult colon?",
+      "options": [
+        "At the hepatic flexure",
+        "At the ileocecal junction",
+        "Between the descending and sigmoid colon",
+        "Along the distal portion of the transverse colon"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Along the distal portion of the transverse colon",
+      "explanation": "The midgut gives rise to the right 1/2 to 2/3 of the transverse colon, while the hindgut forms the left 1/3 to 1/2. The transition occurs along the distal transverse colon where the SMA vascular territory meets the IMA territory.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 55
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-56",
+      "text": "The liver grows rapidly during embryonic development. What specific tissues within the developing liver are derived from the mesenchyme of the septum transversum?",
+      "options": [
+        "Fibrous connective tissue, hematopoietic tissue, and Kupffer cells",
+        "Hepatocytes and biliary epithelial cells",
+        "The endothelial lining of the central veins",
+        "The smooth muscle of the hepatic artery"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Fibrous connective tissue, hematopoietic tissue, and Kupffer cells",
+      "explanation": "The endodermal hepatic diverticulum forms the functional hepatocytes, but the supporting fibrous tissue, the hematopoietic (blood-forming) cells, and the resident macrophages (Kupffer cells) derive from the septum transversum mesenchyme.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 56
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-57",
+      "text": "The gallbladder and cystic duct originate from the caudal part of the hepatic diverticulum. Which of the following describes a known congenital variation of this biliary apparatus?",
+      "options": [
+        "The cystic duct originates directly from the stomach",
+        "The cystic duct opens into an accessory hepatic duct rather than the common hepatic duct",
+        "The gallbladder is derived from the dorsal pancreatic bud",
+        "The bile duct empties into the transverse colon"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The cystic duct opens into an accessory hepatic duct rather than the common hepatic duct",
+      "explanation": "Biliary variations are common. A notable clinical variation involves the cystic duct draining into an aberrant or accessory right hepatic duct rather than the common hepatic duct.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 57
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-58",
+      "text": "The small intestine acquires a new line of mesenteric attachment following the return of the midgut to the abdomen. What is the anatomical path of this new attachment?",
+      "options": [
+        "From the pylorus to the hepatic flexure",
+        "Along the greater curvature of the stomach",
+        "From the duodenojejunal junction inferolaterally to the ileocecal junction",
+        "Vertically along the midline of the posterior abdominal wall"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. From the duodenojejunal junction inferolaterally to the ileocecal junction",
+      "explanation": "As the ascending colon becomes retroperitoneal, the fan-shaped mesentery of the mobile small intestine acquires a new diagonal attachment spanning from the duodenojejunal junction down to the ileocecal junction.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 58
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-59",
+      "text": "The cecum develops from the cecal swelling. During the 6th week, on which specific border of the midgut loop does this swelling first appear?",
+      "options": [
+        "The mesenteric border of the cranial limb",
+        "The antimesenteric border of the cranial limb",
+        "The mesenteric border of the caudal limb",
+        "The antimesenteric border of the caudal limb"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The antimesenteric border of the caudal limb",
+      "explanation": "The cecal diverticulum (swelling) appears as a distinct conical elevation on the antimesenteric border of the caudal limb of the primary intestinal loop.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 59
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-60",
+      "text": "The urorectal septum descends to partition the cloaca. If the septum completely fails to descend, which severe congenital anomaly is most likely to result?",
+      "options": [
+        "Persistent cloaca (common outlet for urinary, genital, and digestive tracts)",
+        "Esophageal atresia",
+        "Isolated imperforate anus",
+        "Gastroschisis"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Persistent cloaca (common outlet for urinary, genital, and digestive tracts)",
+      "explanation": "The urorectal septum normally separates the digestive tract from the urogenital tract. Failure of this partition results in a persistent cloaca, where the rectum, vagina/urethra, and bladder all empty into a single common channel.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 60
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-61",
+      "text": "In a normal neonate, the anal membrane ruptures to establish patency. At what specific gestational age does this normally occur?",
+      "options": [
+        "4th week",
+        "8th week",
+        "12th week",
+        "20th week"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 8th week",
+      "explanation": "The anal membrane temporarily seals the distal end of the anal canal but is programmed to rupture and degenerate normally at the end of the eighth week of development.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 61
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-62",
+      "text": "Duodenal atresia occurs when the duodenal lumen is completely occluded. What is the fundamental embryological cause of this complete occlusion?",
+      "options": [
+        "Hypertrophy of the surrounding muscularis layer",
+        "Entrapment by the superior mesenteric artery",
+        "Failure of the epithelial cells to recanalize during development",
+        "Premature fusion of the dorsal and ventral pancreatic buds"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Failure of the epithelial cells to recanalize during development",
+      "explanation": "Duodenal atresia is a direct result of the failure of the solid duodenal cord to recanalize. The lumen remains completely blocked by solid endodermal cells.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 62
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-63",
+      "text": "The lesser omentum is a derivative of the ventral mesentery. Which embryonic structure provides the mesoderm that forms this ventral mesentery?",
+      "options": [
+        "The visceral splanchnic mesoderm",
+        "The somatic paraxial mesoderm",
+        "The primitive streak",
+        "The septum transversum"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The septum transversum",
+      "explanation": "The ventral mesentery is formed entirely by the thinning mesoderm of the septum transversum. It gives rise to both the lesser omentum and the falciform ligament.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 63
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-64",
+      "text": "The midgut loop communicates with the umbilical vesicle (yolk sac) via the omphaloenteric duct. If a remnant of this duct persists in the adult, what is it clinically called?",
+      "options": [
+        "Meckel's (ileal) diverticulum",
+        "Zenker's diverticulum",
+        "Urachal cyst",
+        "Appendix epididymis"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Meckel's (ileal) diverticulum",
+      "explanation": "A Meckel's (ileal) diverticulum is the most common anomaly of the GI tract, representing a persistent proximal remnant of the omphaloenteric (vitelline) duct attached to the ileum.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 64
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-65",
+      "text": "Which of the following events is considered the primary trigger for the physiologic herniation of the midgut into the umbilical cord?",
+      "options": [
+        "The rapid elongation of the hindgut",
+        "The relatively massive growth of the liver and kidneys reducing available abdominal space",
+        "The failure of the anterior abdominal wall to close completely",
+        "The delayed regression of the omphaloenteric duct"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The relatively massive growth of the liver and kidneys reducing available abdominal space",
+      "explanation": "Early in development, the abdominal cavity is temporarily too small to accommodate the rapidly elongating intestinal loops, primarily due to the massive, disproportionate growth of the developing liver and kidneys.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 65
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-66",
+      "text": "During the reduction of the midgut hernia (return to the abdomen), which specific segment of the gastrointestinal tract is the first to re-enter?",
+      "options": [
+        "The descending colon",
+        "The cecum and appendix",
+        "The small intestine (cranial limb)",
+        "The transverse colon"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The small intestine (cranial limb)",
+      "explanation": "The cranial limb of the midgut loop, containing the rapidly coiled loops of the jejunum and proximal ileum, is the first segment to return to the abdominal cavity during the 10th week.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 66
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-67",
+      "text": "The position of the appendix is highly variable in adults. Which of the following anatomical positions is the most common (accounting for approximately 64% of cases)?",
+      "options": [
+        "Pelvic",
+        "Preileal",
+        "Subcecal",
+        "Retrocecal"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Retrocecal",
+      "explanation": "Due to the elongation of the ascending colon, the appendix is frequently drawn upward behind the cecum. A retrocecal position is observed in approximately 64% of individuals.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 67
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-68",
+      "text": "In \"nonrotation\" of the midgut, the normal 270-degree rotation is incomplete. How many degrees of rotation actually occur in a classic nonrotation scenario?",
+      "options": [
+        "90 degrees counterclockwise",
+        "180 degrees clockwise",
+        "270 degrees counterclockwise",
+        "0 degrees"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. 90 degrees counterclockwise",
+      "explanation": "Nonrotation implies that the gut undergoes its initial 90-degree counterclockwise rotation inside the umbilical cord but fails to execute the subsequent 180-degree rotation as it returns to the abdomen.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 68
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-69",
+      "text": "The cloacal membrane separates the cloaca from the amniotic cavity. What two embryonic germ layers comprise the cloacal membrane?",
+      "options": [
+        "Endoderm and mesoderm",
+        "Ectoderm and endoderm",
+        "Ectoderm and mesoderm",
+        "Mesoderm and neural crest"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Ectoderm and endoderm",
+      "explanation": "The cloacal membrane (like the oropharyngeal membrane) is a unique bilaminar structure composed exclusively of tightly fused surface ectoderm and gut endoderm, entirely devoid of intervening mesoderm.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 69
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-70",
+      "text": "The inferior one-third of the anal canal is derived from the proctodeum. What is the epithelial lining of this specific region?",
+      "options": [
+        "Simple columnar epithelium",
+        "Pseudostratified ciliated columnar epithelium",
+        "Stratified squamous epithelium",
+        "Transitional epithelium"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Stratified squamous epithelium",
+      "explanation": "Because the proctodeum is an invagination of the surface ectoderm, the epithelium of the inferior third of the anal canal is stratified squamous, eventually becoming keratinized at the anal verge.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 70
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-71",
+      "text": "The vascular supply to the gut tube is strictly partitioned. If a segment of the bowel is supplied by the inferior mesenteric artery, from which embryonic region is it derived?",
+      "options": [
+        "Cranial foregut",
+        "Caudal foregut",
+        "Midgut",
+        "Hindgut"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Hindgut",
+      "explanation": "The inferior mesenteric artery is the defining blood vessel of the hindgut. Any structure supplied by this artery is embryologically derived from the hindgut.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 71
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-72",
+      "text": "An infant presents with an imperforate anus. Surgical exploration reveals the rectum ends blindly above the puborectalis sling. How is this anomaly classified embryologically?",
+      "options": [
+        "High anorectal anomaly",
+        "Low anorectal anomaly",
+        "Cloacal exstrophy",
+        "Hindgut duplication"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. High anorectal anomaly",
+      "explanation": "Anorectal anomalies are classified relative to the levator ani (puborectalis sling). If the rectum terminates superior to this muscular sling, it is classified as a \"high\" anomaly, which is typically more complex to repair.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 72
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-73",
+      "text": "During the rotation of the stomach, the original right side of the stomach becomes the dorsal surface. Which nerve subsequently supplies the posterior wall of the adult stomach?",
+      "options": [
+        "Right phrenic nerve",
+        "Right vagus nerve",
+        "Left vagus nerve",
+        "Left sympathetic trunk"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Right vagus nerve",
+      "explanation": "Initially, the right vagus nerve supplies the right side of the stomach. As the stomach rotates 90 degrees clockwise, the right side rotates to the back, pulling the right vagus nerve onto the posterior surface of the stomach.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 73
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-74",
+      "text": "Which of the following best describes the morphologic transformation of the esophagus during its development from the 4th to the 8th week?",
+      "options": [
+        "It begins as a solid cord and gradually hollows out by the 6th week",
+        "It undergoes a 90-degree counterclockwise rotation",
+        "The epithelium proliferates to partially or completely obliterate the lumen before recanalizing",
+        "It loses its muscular layer, which is later replaced by migrating neural crest cells"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The epithelium proliferates to partially or completely obliterate the lumen before recanalizing",
+      "explanation": "Like much of the primitive gut tube, the rapid proliferation of endodermal epithelium temporarily occludes the lumen of the esophagus. It must then undergo recanalization (vacuolization) to restore its hollow state by the 8th week.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 74
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-75",
+      "text": "Congenital pyloric stenosis is characterized by marked muscular thickening at the stomach's distal sphincter. Which specific muscle layers are hypertrophied in this condition?",
+      "options": [
+        "The oblique and transverse muscles",
+        "The muscularis mucosae only",
+        "The striated skeletal muscle fibers",
+        "The circular and, to a lesser degree, longitudinal muscles"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The circular and, to a lesser degree, longitudinal muscles",
+      "explanation": "In hypertrophic pyloric stenosis, there is marked hypertrophy of the circular muscle layer and, to a lesser extent, the longitudinal muscle layer, which creates a rigid mass obstructing the pyloric canal.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 75
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-76",
+      "text": "During the formation of the stomach, the original ventral and dorsal borders change positions. What does the original ventral border of the stomach become?",
+      "options": [
+        "The greater curvature",
+        "The lesser curvature",
+        "The fundus",
+        "The pyloric antrum"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The lesser curvature",
+      "explanation": "The ventral border of the stomach grows more slowly than the dorsal border. As the stomach rotates, this original ventral border shifts to the right and becomes the lesser curvature.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 76
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-77",
+      "text": "The rotation of the midgut loop is described in stages. What is the total degree of normal counterclockwise rotation experienced by the midgut loop from start to finish?",
+      "options": [
+        "270 degrees",
+        "180 degrees",
+        "90 degrees",
+        "360 degrees"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. 270 degrees",
+      "explanation": "The midgut rotates a total of 270 degrees counterclockwise: an initial 90 degrees while inside the umbilical cord, followed by an additional 180 degrees as it returns into the abdominal cavity.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 77
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-78",
+      "text": "The fixation of the intestines anchors certain segments to the posterior abdominal wall. Which of the following midgut derivatives normally retains its mesentery and remains freely mobile?",
+      "options": [
+        "The ascending colon",
+        "The distal duodenum",
+        "The jejunum and ileum",
+        "The head of the pancreas"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The jejunum and ileum",
+      "explanation": "While the ascending colon and most of the duodenum lose their mesenteries and become retroperitoneal, the loops of the jejunum and ileum retain their mesentery, remaining suspended and mobile.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 78
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-79",
+      "text": "Following the fixation of the ascending colon, the mesentery of the small intestine acquires a new, permanent line of attachment. From where to where does this new attachment run?",
+      "options": [
+        "From the liver to the lesser curvature of the stomach",
+        "From the splenic flexure to the sigmoid colon",
+        "Horizontally across the pancreas to the spleen",
+        "From the duodenojejunal junction inferolaterally to the ileocecal junction"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. From the duodenojejunal junction inferolaterally to the ileocecal junction",
+      "explanation": "As the large bowel adheres to the posterior wall, the root of the small bowel mesentery secures a new diagonal attachment running from the duodenojejunal junction in the upper left quadrant down to the ileocecal junction in the lower right quadrant.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 79
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-80",
+      "text": "The urorectal septum divides the cloaca. As this septum grows caudally towards the cloacal membrane, what characteristic structures develop on its lateral walls?",
+      "options": [
+        "Sinovaginal bulbs",
+        "Forklike extensions that produce infoldings",
+        "Primitive sex cords",
+        "Mesonephric ducts"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Forklike extensions that produce infoldings",
+      "explanation": "As the urorectal septum descends toward the cloacal membrane, it develops forklike lateral extensions. These produce infoldings of the lateral walls of the cloaca that help pinch the cavity into two distinct tubes.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 80
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-81",
+      "text": "In the development of the anal canal, the epithelium changes composition at the pectinate line. What is the nature of the epithelium at the absolute terminal end (the anus) itself?",
+      "options": [
+        "Keratinized stratified squamous continuous with the surrounding skin",
+        "Non-keratinized stratified squamous epithelium",
+        "Simple columnar epithelium with goblet cells",
+        "Transitional epithelium"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Keratinized stratified squamous continuous with the surrounding skin",
+      "explanation": "At the very inferior limit of the anal canal (the anus), the ectoderm-derived epithelium becomes heavily keratinized stratified squamous epithelium, seamlessly continuous with the skin of the perineum.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 81
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-82",
+      "text": "Which of the following hindgut anomalies is characterized by a narrow anal canal and anus in the normal anatomical position?",
+      "options": [
+        "Anal agenesis",
+        "Rectovaginal fistula",
+        "Anal stenosis",
+        "Imperforate anus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Anal stenosis",
+      "explanation": "Anal stenosis represents a mild deviation in the partitioning of the cloaca, resulting in an anus that is located in the correct position but has an abnormally narrow lumen.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 82
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-83",
+      "text": "A newborn fails to pass meconium and imaging reveals an abnormally dilated colon. The condition is determined to be Hirschsprung disease (congenital megacolon). What is the underlying embryological defect?",
+      "options": [
+        "Failure of the hindgut to recanalize",
+        "Hypertrophy of the circular muscle layer",
+        "Premature rupture of the anal membrane",
+        "Absence of parasympathetic ganglia in the bowel wall"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Absence of parasympathetic ganglia in the bowel wall",
+      "explanation": "Hirschsprung disease is caused by the failure of neural crest cells to migrate into the wall of the distal colon, resulting in an aganglionic segment devoid of parasympathetic innervation, which cannot undergo peristalsis.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 83
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-84",
+      "text": "Omphalocele and gastroschisis are both abdominal wall defects. Which statement accurately describes the umbilical cord's relationship to the defect in gastroschisis?",
+      "options": [
+        "The defect occurs directly through the umbilical ring",
+        "The defect is lateral to the median plane and does not involve the umbilical cord",
+        "The umbilical cord vessels course through the extruded bowel",
+        "The umbilical cord forms a protective sac over the viscera"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The defect is lateral to the median plane and does not involve the umbilical cord",
+      "explanation": "Unlike an omphalocele which protrudes directly through the umbilical ring, gastroschisis is a linear defect located lateral to the umbilicus (usually to the right) and does not involve the umbilical cord structures at all.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 84
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-85",
+      "text": "The primitive gut forms by the incorporation of the yolk sac. Which embryonic folding processes are directly responsible for this incorporation?",
+      "options": [
+        "Cephalocaudal and lateral folding",
+        "Only lateral folding",
+        "Only cephalocaudal folding",
+        "Folding of the neural tube"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Cephalocaudal and lateral folding",
+      "explanation": "The folding of the flat embryonic disc in two planes—longitudinally (cephalocaudal) and transversely (lateral)—rolls the embryo into a cylinder, pinching off a portion of the yolk sac to create the internal primitive gut tube.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 85
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-86",
+      "text": "As the stomach rotates, the dorsal mesogastrium is pulled to the left, contributing to the formation of the omental bursa. What happens to the dorsal mesogastrium to allow this expansion?",
+      "options": [
+        "It undergoes complete apoptosis",
+        "It fuses immediately with the ventral mesentery",
+        "Isolated vacuoles form within it and subsequently fuse",
+        "It calcifies to form the greater omentum"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Isolated vacuoles form within it and subsequently fuse",
+      "explanation": "The formation of the omental bursa involves the appearance of small isolated clefts or vacuoles within the thick dorsal mesogastrium. As the stomach rotates, these vacuoles coalesce to form a single large cavity.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 86
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-87",
+      "text": "The ventral mesentery is derived from the septum transversum. Which two major adult anatomical structures are formed from the ventral mesentery?",
+      "options": [
+        "The greater omentum and transverse mesocolon",
+        "The mesentery proper and sigmoid mesocolon",
+        "The gastrosplenic ligament and splenorenal ligament",
+        "The lesser omentum and falciform ligament"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The lesser omentum and falciform ligament",
+      "explanation": "As the liver grows into the septum transversum, it splits the ventral mesentery into two parts: the lesser omentum (connecting the liver to the stomach/duodenum) and the falciform ligament (connecting the liver to the anterior abdominal wall).",
+      "section": "Gastrointestinal System",
+      "questionNumber": 87
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-88",
+      "text": "The development of the pancreas can be complicated by the formation of an annular pancreas. What is the fundamental embryological mechanism that causes this condition?",
+      "options": [
+        "Complete agenesis of the dorsal pancreatic bud",
+        "Bifid or bilobed ventral pancreatic bud migrating around both sides of the duodenum",
+        "Failure of the pancreatic ducts to fuse",
+        "Overproliferation of the islets of Langerhans"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Bifid or bilobed ventral pancreatic bud migrating around both sides of the duodenum",
+      "explanation": "An annular pancreas occurs when a bilobed ventral pancreatic bud splits, with one lobe migrating ventrally and the other dorsally. They fuse around the duodenum, creating a constricting ring of pancreatic tissue.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 88
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-89",
+      "text": "In early embryonic development, the liver grows rapidly. Between which weeks does the liver expand to fill a large part of the upper abdominal cavity?",
+      "options": [
+        "From the 5th to the 10th weeks",
+        "From the 2nd to the 4th weeks",
+        "From the 10th to the 15th weeks",
+        "From the 20th to the 25th weeks"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. From the 5th to the 10th weeks",
+      "explanation": "The liver experiences massive growth from the 5th to the 10th weeks of gestation. This rapid expansion contributes significantly to the lack of abdominal space that forces the midgut into the umbilical cord.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 89
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-90",
+      "text": "Minor variations in the biliary apparatus are common. If an accessory hepatic duct is present, where does it most frequently run from the right lobe of the liver?",
+      "options": [
+        "Into the main pancreatic duct",
+        "Directly into the second part of the duodenum",
+        "Into the anterior surface of the body of the gallbladder",
+        "Into the left hepatic duct"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Into the anterior surface of the body of the gallbladder",
+      "explanation": "Accessory hepatic ducts are relatively common narrow channels. When present, they typically run directly from the right lobe of the liver into the anterior surface of the gallbladder body.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 90
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-91",
+      "text": "The duodenum acts as a developmental bridge between the foregut and midgut. Which of the following statements correctly describes its final peritoneal status after rotation and fixation?",
+      "options": [
+        "It remains entirely intraperitoneal",
+        "It is suspended by a prominent ventral mesentery",
+        "It becomes completely extraperitoneal, embedded in the anterior abdominal wall",
+        "It is majorly retroperitoneal, except for the duodenal cap"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. It is majorly retroperitoneal, except for the duodenal cap",
+      "explanation": "As the colon presses the duodenum against the posterior abdominal wall, its dorsal mesentery fuses with the parietal peritoneum. Consequently, almost all of the duodenum becomes secondarily retroperitoneal, with the exception of the very first part (duodenal cap).",
+      "section": "Gastrointestinal System",
+      "questionNumber": 91
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-92",
+      "text": "During the sixth week, the cecal swelling appears on the midgut loop. What is the specific location of this swelling?",
+      "options": [
+        "The mesenteric border of the cranial limb",
+        "The antimesenteric border of the caudal limb",
+        "The apex of the omphaloenteric duct",
+        "The junction of the foregut and midgut"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The antimesenteric border of the caudal limb",
+      "explanation": "The cecal diverticulum, the primordium of the cecum and appendix, appears distinctly as a conical elevation on the antimesenteric border (the border opposite the mesentery) of the caudal limb of the midgut loop.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 92
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-93",
+      "text": "The cranial limb of the midgut loop undergoes rapid growth compared to the caudal limb. What is the primary anatomical result of this rapid elongation?",
+      "options": [
+        "It forms the tightly coiled loops of the jejunum and ileum",
+        "It develops into the entirety of the ascending colon",
+        "It creates the sharp angle of the splenic flexure",
+        "It pushes the liver into the superior thoracic cavity"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It forms the tightly coiled loops of the jejunum and ileum",
+      "explanation": "While the caudal limb experiences relatively little change initially, the cranial limb of the midgut grows explosively, folding into the numerous highly coiled loops that will become the jejunum and proximal ileum.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 93
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-94",
+      "text": "In the hindgut, the urorectal septum divides the cloaca into a dorsal and a ventral compartment. What does the dorsal compartment specifically become?",
+      "options": [
+        "The urinary bladder",
+        "The entire anal canal",
+        "The rectum and the cranial part of the anal canal",
+        "The descending colon"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The rectum and the cranial part of the anal canal",
+      "explanation": "The descending urorectal septum partitions the cloaca, creating a ventral urogenital sinus and a dorsal anorectal canal. This dorsal canal eventually forms the rectum and the superior (cranial) portion of the anal canal.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 94
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-95",
+      "text": "The pectinate line is a critical landmark in the adult anal canal. What does this line roughly indicate in terms of embryonic development?",
+      "options": [
+        "The junction between the midgut and hindgut",
+        "The site where the urorectal septum fused with the posterior abdominal wall",
+        "The transition from smooth muscle to skeletal muscle",
+        "The junction of the epithelium derived from the ectoderm of the proctodeum and the endoderm of the hindgut"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The junction of the epithelium derived from the ectoderm of the proctodeum and the endoderm of the hindgut",
+      "explanation": "The irregular pectinate line explicitly demarcates the developmental junction between the endodermally derived hindgut (superior 2/3) and the ectodermally derived proctodeum (inferior 1/3) in the anal canal.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 95
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-96",
+      "text": "A neonate is diagnosed with an anoperineal fistula. This anomaly indicates that the anal canal opens into an abnormal location. According to the text, where does this fistula typically open?",
+      "options": [
+        "Into the urinary bladder",
+        "Into the perineum",
+        "Into the vagina",
+        "Into the urethra"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Into the perineum",
+      "explanation": "In anal agenesis with an anoperineal fistula, the anal canal fails to form a normal terminus and instead opens via a small fistula directly onto the surface of the perineum.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 96
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-97",
+      "text": "The cloacal membrane is initially intact, sealing the distal gut. Which of the following accurately describes its fate during normal development?",
+      "options": [
+        "It is divided into an anal membrane and a urogenital membrane, both of which subsequently rupture",
+        "It persists as the hymen in females and the perineal raphe in males",
+        "It thickens to form the internal anal sphincter",
+        "It invaginates to form the entire rectum"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It is divided into an anal membrane and a urogenital membrane, both of which subsequently rupture",
+      "explanation": "The urorectal septum fuses with the cloacal membrane, dividing it into a ventral urogenital membrane and a dorsal anal membrane. The anal membrane usually ruptures at the end of the 8th week to open the digestive tract.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 97
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-98",
+      "text": "The blood supply of the gastrointestinal tract is organized by embryonic origin. The celiac trunk supplies the foregut, and the superior mesenteric artery supplies the midgut. Which artery supplies the hindgut derivatives?",
+      "options": [
+        "Internal iliac artery",
+        "Middle sacral artery",
+        "Inferior mesenteric artery",
+        "Pudendal artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Inferior mesenteric artery",
+      "explanation": "The inferior mesenteric artery is the defining arterial supply for all structures derived from the embryonic hindgut, spanning from the distal transverse colon to the superior anal canal.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 98
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-99",
+      "text": "The esophagus is initially very short. What embryological events primarily drive the rapid elongation of the esophagus by the 7th week?",
+      "options": [
+        "The downward growth of the stomach into the pelvis",
+        "The expansion of the amniotic cavity",
+        "The physical pulling force of the descending midgut loop",
+        "The growth and relocation of the heart and lungs"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The growth and relocation of the heart and lungs",
+      "explanation": "The rapid elongation of the esophagus is not primarily intrinsic; rather, it is passively stretched to its relative length as the developing heart and lungs rapidly grow and descend into the thoracic cavity.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 99
+    },
+    {
+      "id": "ana203-se-gastrointestinal-system-100",
+      "text": "Congenital megacolon (Hirschsprung disease) results in a massively dilated colon. The absence of which specific structures leads to this condition?",
+      "options": [
+        "Longitudinal muscle bands (teniae coli)",
+        "Parasympathetic ganglia in the bowel wall",
+        "Sympathetic chain ganglia",
+        "Enteric endodermal cells"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Parasympathetic ganglia in the bowel wall",
+      "explanation": "Congenital megacolon is also known as aganglionic megacolon. It occurs when neural crest cells fail to migrate to the distal colon, resulting in a complete absence of parasympathetic ganglia, which prevents normal peristalsis and causes proximal dilation.",
+      "section": "Gastrointestinal System",
+      "questionNumber": 100
+    }
+  ]
+}
