@@ -127,6 +127,7 @@ let uniNoteGlossaryOpen = false;
 let uniNotePlayingBlockId = null;
 let uniNoteSpeechRate = 1.0;
 let uniNoteRevealedMap = {};
+let uniNotePodcastOpenMap = {};
 let buddiesMatches = { onApp: getSavedBuddies(), invites: [] };
 let buddiesLoading = false;
 let buddiesSearchOpen = false;
@@ -1582,7 +1583,7 @@ function renderResult() {
       if (sessionCopy.isMixed && sessionCopy.courseData) {
         startUniMixedPractice(sessionCopy.courseData, sessionCopy.requestedCount, sessionCopy.durationMinutes);
       } else {
-        startUniPractice(sessionCopy.subject, sessionCopy.topic, sessionCopy.dataFile);
+        startUniPractice(sessionCopy.subject, sessionCopy.topic, sessionCopy.dataFile, sessionCopy.requestedCount, sessionCopy.durationMinutes);
       }
     } else {
       startSession(sessionCopy.subject, sessionCopy.topic, sessionCopy.requestedCount, sessionCopy.durationMinutes, sessionCopy.mode);
@@ -3262,9 +3263,31 @@ async function renderUniCourse() {
 
     const topicItems = section.topics.map(topic => {
       const isAvailable = topic.status !== "coming-soon";
-      const tagText = isAvailable ? "Available" : "Coming soon";
       const statusIcon = isAvailable ? `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>` : `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`;
-      return `<div class="uni-topic-item ${isAvailable ? "available" : "coming-soon"}" ${isAvailable ? `data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" role="button" tabindex="0"` : ""}><span class="uni-topic-status">${statusIcon}</span><div class="uni-topic-info"><h4>${escapeHtml(topic.title)}</h4><span class="uni-topic-tag">${tagText}</span></div>${isAvailable ? `<button class="button uni-btn sm" type="button" style="margin-left:auto; white-space:nowrap; padding:6px 14px; font-size:12px; pointer-events:none;">Practice →</button>` : ""}</div>`;
+      
+      if (!isAvailable) {
+        return `<div class="uni-topic-item coming-soon">
+          <span class="uni-topic-status">${statusIcon}</span>
+          <div class="uni-topic-info">
+            <h4>${escapeHtml(topic.title)}</h4>
+            <span class="uni-topic-tag">Coming soon</span>
+          </div>
+        </div>`;
+      }
+
+      return `<div class="uni-topic-item available" data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" role="button" tabindex="0">
+        <span class="uni-topic-status">${statusIcon}</span>
+        <div class="uni-topic-info">
+          <h4>${escapeHtml(topic.title)}</h4>
+        </div>
+        <button class="uni-topic-target-btn" type="button" data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" aria-label="Configure practice: ${escapeHtml(topic.title)}">
+          <span class="uni-topic-target-dot"></span>
+          <span class="uni-topic-target-label">Available</span>
+          <span class="uni-topic-target-divider">•</span>
+          <span class="uni-topic-target-hint">Pick Qs &amp; Time</span>
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>`;
     }).join("");
 
     return `<div class="uni-section">
@@ -3505,6 +3528,8 @@ async function renderUniCourse() {
       uniNoteFile = btn.dataset.uniNoteFile;
       uniNoteTitle = btn.dataset.uniNoteTitle;
       uniNoteActiveBlock = 1;
+      uniNoteRevealedMap = {};
+      uniNotePodcastOpenMap = {};
       uniRoute = "note";
       window.scrollTo({ top: 0, behavior: "smooth" });
       render();
@@ -3512,17 +3537,18 @@ async function renderUniCourse() {
   });
 
   document.querySelectorAll(".uni-topic-item.available").forEach(item => {
-    const launch = () => {
+    const launch = (e) => {
+      e?.stopPropagation?.();
       const dataFile = item.dataset.uniDataFile;
       const topicTitle = item.dataset.uniTopicTitle;
       if (!dataFile) return;
-      startUniPractice(data.code || "ANA 201", topicTitle, dataFile);
+      showTopicConfigModal(data.code || "ANA 201", topicTitle, dataFile);
     };
     item.addEventListener("click", launch);
     item.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        launch();
+        launch(e);
       }
     });
   });
@@ -3694,7 +3720,323 @@ async function startUniMixedPractice(courseData, requestedCount, durationMinutes
   }
 }
 
-async function startUniPractice(courseCode, topicTitle, dataFile) {
+async function showTopicConfigModal(courseCode, topicTitle, dataFile) {
+  showLoadingOverlay("Loading topic", "Preparing question bank...");
+  let data = null;
+  try {
+    data = await fetchUniJson(dataFile);
+  } catch (err) {
+    // handled below
+  } finally {
+    hideLoadingOverlay();
+  }
+
+  if (!data || !data.questions || !data.questions.length) {
+    showToast("Questions not available yet for this topic.");
+    return;
+  }
+
+  const totalQuestions = data.questions.length;
+  const defaultPillTargets = [10, 20, 25, 30, 50].filter(v => v < totalQuestions);
+  const qPillValues = [...defaultPillTargets, totalQuestions];
+  let defaultQ = Math.min(25, totalQuestions);
+  if (!qPillValues.includes(defaultQ) && qPillValues.length) {
+    defaultQ = qPillValues[0];
+  }
+
+  document.querySelector("#uni-topic-config-backdrop")?.remove();
+
+  const backdrop = document.createElement("div");
+  backdrop.id = "uni-topic-config-backdrop";
+  backdrop.className = "uni-topic-config-backdrop";
+
+  const qPillsHtml = qPillValues.map(v => {
+    const label = v === totalQuestions ? `${v} (All)` : `${v}`;
+    const isActive = v === defaultQ;
+    return `<button type="button" class="uni-target-pill ${isActive ? "active" : ""}" data-val="${v}">${label}</button>`;
+  }).join("");
+
+  backdrop.innerHTML = `
+    <div class="uni-topic-config-card" role="dialog" aria-modal="true" aria-labelledby="uni-modal-topic-title">
+      <div class="uni-topic-config-header">
+        <div class="uni-topic-config-badge-group">
+          <span class="uni-topic-modal-code">${escapeHtml(courseCode)}</span>
+          <span class="uni-topic-modal-badge">${totalQuestions} Questions in Bank</span>
+        </div>
+        <button class="uni-topic-config-close" id="uni-config-close" aria-label="Close dialog">✕</button>
+      </div>
+
+      <div class="uni-topic-config-title-wrap">
+        <h2 id="uni-modal-topic-title">${escapeHtml(topicTitle)}</h2>
+        <p class="uni-topic-config-desc">Select your target question count and practice mode. Untimed mode gives immediate anatomical feedback after each question, while timed mode simulates exam pressure.</p>
+      </div>
+
+      <div class="uni-target-config-grid">
+        <div class="uni-target-card">
+          <div class="uni-target-label">
+            <span class="uni-target-name">Question Target</span>
+            <span class="uni-target-hint">5 – ${totalQuestions} questions</span>
+          </div>
+          <div class="uni-stepper-wrap">
+            <button type="button" class="uni-stepper-btn" id="uni-modal-q-dec" aria-label="Decrease question count">−</button>
+            <div class="uni-stepper-val">
+              <input type="number" id="uni-modal-target-q" min="5" max="${totalQuestions}" step="5" value="${defaultQ}" inputmode="numeric" aria-label="Number of questions">
+              <span class="uni-stepper-unit">questions</span>
+            </div>
+            <button type="button" class="uni-stepper-btn" id="uni-modal-q-inc" aria-label="Increase question count">+</button>
+          </div>
+          <div class="uni-target-pills" id="uni-modal-q-pills">
+            ${qPillsHtml}
+          </div>
+        </div>
+
+        <div class="uni-target-card">
+          <div class="uni-target-label">
+            <span class="uni-target-name">Time Limit</span>
+            <span class="uni-target-hint">0 = Untimed · up to 180m</span>
+          </div>
+          <div class="uni-stepper-wrap">
+            <button type="button" class="uni-stepper-btn" id="uni-modal-m-dec" aria-label="Decrease time limit">−</button>
+            <div class="uni-stepper-val">
+              <input type="number" id="uni-modal-target-m" min="0" max="180" step="1" value="15" inputmode="numeric" aria-label="Time limit in minutes">
+              <span class="uni-stepper-unit" id="uni-modal-m-unit">minutes</span>
+            </div>
+            <button type="button" class="uni-stepper-btn" id="uni-modal-m-inc" aria-label="Increase time limit">+</button>
+          </div>
+          <div class="uni-target-pills" id="uni-modal-m-pills">
+            <button type="button" class="uni-target-pill" data-val="0">Untimed</button>
+            <button type="button" class="uni-target-pill" data-val="5">5m</button>
+            <button type="button" class="uni-target-pill" data-val="10">10m</button>
+            <button type="button" class="uni-target-pill active" data-val="15">15m</button>
+            <button type="button" class="uni-target-pill" data-val="20">20m</button>
+            <button type="button" class="uni-target-pill" data-val="30">30m</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="uni-config-pace-banner" id="uni-modal-pace-banner">
+        <div class="uni-config-pace-icon" id="uni-modal-pace-icon">⏱️</div>
+        <div class="uni-config-pace-text">
+          <strong id="uni-modal-pace-head">Timed Practice Mode</strong>
+          <span id="uni-modal-pace-sub">Pace: ~36s per question · Exam countdown timer · Auto-submits on timer expiry</span>
+        </div>
+      </div>
+
+      <div class="uni-topic-config-actions">
+        <button type="button" class="button outline" id="uni-config-cancel-btn">Cancel</button>
+        <button type="button" class="button accent uni-config-start-btn" id="uni-config-confirm-btn">
+          <span>Start Practice</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(backdrop);
+
+  const inputQ = backdrop.querySelector("#uni-modal-target-q");
+  const inputM = backdrop.querySelector("#uni-modal-target-m");
+  const unitM = backdrop.querySelector("#uni-modal-m-unit");
+  const paceBanner = backdrop.querySelector("#uni-modal-pace-banner");
+  const paceIcon = backdrop.querySelector("#uni-modal-pace-icon");
+  const paceHead = backdrop.querySelector("#uni-modal-pace-head");
+  const paceSub = backdrop.querySelector("#uni-modal-pace-sub");
+  const qPills = backdrop.querySelectorAll("#uni-modal-q-pills .uni-target-pill");
+  const mPills = backdrop.querySelectorAll("#uni-modal-m-pills .uni-target-pill");
+
+  const closeModal = () => {
+    backdrop.remove();
+  };
+
+  backdrop.querySelector("#uni-config-close")?.addEventListener("click", closeModal);
+  backdrop.querySelector("#uni-config-cancel-btn")?.addEventListener("click", closeModal);
+  backdrop.addEventListener("click", (e) => {
+    if (e.target === backdrop) closeModal();
+  });
+
+  const updateModalPace = () => {
+    const qVal = Math.max(5, Math.min(totalQuestions, parseInt(inputQ?.value, 10) || defaultQ));
+    const mVal = Math.max(0, Math.min(180, parseInt(inputM?.value, 10) || 0));
+
+    if (mVal === 0) {
+      if (unitM) unitM.textContent = "guided";
+      paceBanner?.classList.add("untimed");
+      if (paceIcon) paceIcon.textContent = "📖";
+      if (paceHead) paceHead.textContent = "Guided Untimed Practice";
+      if (paceSub) paceSub.textContent = `No time pressure · ${qVal} questions · Immediate rationale & answers after each question.`;
+    } else {
+      if (unitM) unitM.textContent = "minutes";
+      paceBanner?.classList.remove("untimed");
+      const secPerQ = Math.round((mVal * 60) / qVal);
+      if (paceIcon) paceIcon.textContent = "⏱️";
+      if (paceHead) paceHead.textContent = `Timed Practice · ${mVal} Minutes`;
+      if (paceSub) paceSub.textContent = `Pace: ~${secPerQ}s per question · Countdown timer · Auto-submits on timer expiry`;
+    }
+  };
+
+  const syncModalQPills = (val) => {
+    qPills.forEach(p => p.classList.toggle("active", Number(p.dataset.val) === val));
+  };
+
+  const syncModalMPills = (val) => {
+    mPills.forEach(p => p.classList.toggle("active", Number(p.dataset.val) === val));
+  };
+
+  backdrop.querySelector("#uni-modal-q-dec")?.addEventListener("click", () => {
+    if (!inputQ) return;
+    const current = parseInt(inputQ.value, 10) || defaultQ;
+    const next = Math.max(5, current - 5);
+    inputQ.value = next;
+    syncModalQPills(next);
+    updateModalPace();
+  });
+
+  backdrop.querySelector("#uni-modal-q-inc")?.addEventListener("click", () => {
+    if (!inputQ) return;
+    const current = parseInt(inputQ.value, 10) || defaultQ;
+    const next = Math.min(totalQuestions, current + 5);
+    inputQ.value = next;
+    syncModalQPills(next);
+    updateModalPace();
+  });
+
+  qPills.forEach(p => {
+    p.addEventListener("click", () => {
+      if (!inputQ) return;
+      const val = Number(p.dataset.val);
+      inputQ.value = val;
+      syncModalQPills(val);
+      updateModalPace();
+    });
+  });
+
+  inputQ?.addEventListener("input", () => {
+    const val = parseInt(inputQ.value, 10);
+    syncModalQPills(val);
+    updateModalPace();
+  });
+
+  backdrop.querySelector("#uni-modal-m-dec")?.addEventListener("click", () => {
+    if (!inputM) return;
+    const current = parseInt(inputM.value, 10) || 0;
+    const step = current <= 10 ? 1 : 5;
+    const next = Math.max(0, current - step);
+    inputM.value = next;
+    syncModalMPills(next);
+    updateModalPace();
+  });
+
+  backdrop.querySelector("#uni-modal-m-inc")?.addEventListener("click", () => {
+    if (!inputM) return;
+    const current = parseInt(inputM.value, 10) || 0;
+    const step = current < 10 ? 1 : 5;
+    const next = Math.min(180, current + step);
+    inputM.value = next;
+    syncModalMPills(next);
+    updateModalPace();
+  });
+
+  mPills.forEach(p => {
+    p.addEventListener("click", () => {
+      if (!inputM) return;
+      const val = Number(p.dataset.val);
+      inputM.value = val;
+      syncModalMPills(val);
+      updateModalPace();
+    });
+  });
+
+  inputM?.addEventListener("input", () => {
+    const val = parseInt(inputM.value, 10);
+    syncModalMPills(val);
+    updateModalPace();
+  });
+
+  updateModalPace();
+
+  backdrop.querySelector("#uni-config-confirm-btn")?.addEventListener("click", () => {
+    const qCount = Math.max(5, Math.min(totalQuestions, parseInt(inputQ?.value, 10) || defaultQ));
+    const mCount = Math.max(0, Math.min(180, parseInt(inputM?.value, 10) || 0));
+    closeModal();
+    startUniConfiguredPractice(courseCode, topicTitle, data, qCount, mCount, dataFile);
+  });
+}
+
+function startUniConfiguredPractice(courseCode, topicTitle, data, requestedCount, durationMinutes, dataFile = null) {
+  const allQuestions = Array.isArray(data?.questions) ? data.questions : [];
+  if (!allQuestions.length) {
+    showToast("No questions available for this topic.");
+    return;
+  }
+
+  const shuffled = [...allQuestions].sort(() => Math.random() - 0.5);
+  const queue = shuffled.slice(0, Math.min(requestedCount, allQuestions.length));
+  const isTimed = durationMinutes > 0;
+
+  const sections = [{
+    subject: courseCode,
+    name: `${courseCode} - ${topicTitle}`,
+    count: queue.length,
+    start: 0
+  }];
+
+  const detail = `<dl class="session-confirm-summary">
+    <div><dt>Course</dt><dd>${escapeHtml(courseCode)}</dd></div>
+    <div><dt>Focus</dt><dd>${escapeHtml(topicTitle)}</dd></div>
+    <div><dt>Questions</dt><dd>${queue.length} of ${allQuestions.length}</dd></div>
+    <div><dt>Format</dt><dd>${isTimed ? `${durationMinutes} Minutes (~${Math.round((durationMinutes * 60) / queue.length)}s per question)` : "Guided practice (Untimed)"}</dd></div>
+  </dl>`;
+
+  showConfirmDialog({
+    title: `Start ${escapeHtml(courseCode)} Practice?`,
+    message: isTimed
+      ? `You are about to begin a timed session on "${escapeHtml(topicTitle)}". Answers will automatically submit when the timer ends.`
+      : `Begin guided untimed practice on "${escapeHtml(topicTitle)}". You'll get immediate anatomical rationale and answers after each question.`,
+    detail,
+    confirmLabel: "Begin Practice",
+    cancelLabel: "Change Settings",
+    onConfirm: () => {
+      activeSession = {
+        subject: courseCode,
+        topic: topicTitle,
+        dataFile,
+        isUniversity: true,
+        isMixed: false,
+        requestedCount: queue.length,
+        durationMinutes: isTimed ? durationMinutes : 0,
+        deadline: null,
+        started: false,
+        finished: false,
+        queue,
+        sections,
+        answers: queue.map(() => ({ selected: null, confirmed: false, correct: false })),
+        remoteId: null,
+        index: 0,
+        correct: 0,
+        questionStartedAt: null,
+        reportedComplete: false,
+        timedOut: false,
+        timeUpAcknowledged: false,
+        mode: isTimed ? "timed" : "normal"
+      };
+      saveActiveSession();
+      route = "session";
+      render();
+    },
+    onCancel: () => {
+      if (dataFile) {
+        showTopicConfigModal(courseCode, topicTitle, dataFile);
+      }
+    }
+  });
+}
+
+async function startUniPractice(courseCode, topicTitle, dataFile, requestedCount = null, durationMinutes = null) {
+  if (requestedCount === null || durationMinutes === null) {
+    showTopicConfigModal(courseCode, topicTitle, dataFile);
+    return;
+  }
+
   showLoadingOverlay("Preparing practice", "Loading questions...");
   try {
     const data = await fetchUniJson(dataFile);
@@ -3702,55 +4044,7 @@ async function startUniPractice(courseCode, topicTitle, dataFile) {
       showToast("Questions not available yet for this topic.");
       return;
     }
-
-    const queue = data.questions;
-    const sections = [{
-      subject: courseCode,
-      name: `${courseCode} - ${topicTitle}`,
-      count: queue.length,
-      start: 0
-    }];
-
-    const detail = `<dl class="session-confirm-summary">
-      <div><dt>Course</dt><dd>${escapeHtml(courseCode)}</dd></div>
-      <div><dt>Focus</dt><dd>${escapeHtml(topicTitle)}</dd></div>
-      <div><dt>Format</dt><dd>Guided practice (Untimed)</dd></div>
-    </dl>`;
-
-    showConfirmDialog({
-      title: `Start ${escapeHtml(courseCode)} Practice?`,
-      message: `Begin guided untimed practice on "${escapeHtml(topicTitle)}". You'll get immediate anatomical rationale and answers after each question.`,
-      detail,
-      confirmLabel: "Begin Practice",
-      cancelLabel: "Back to Course",
-      onConfirm: () => {
-        activeSession = {
-          subject: courseCode,
-          topic: topicTitle,
-          dataFile,
-          isUniversity: true,
-          requestedCount: queue.length,
-          durationMinutes: 0,
-          deadline: null,
-          started: false,
-          finished: false,
-          queue,
-          sections,
-          answers: queue.map(() => ({ selected: null, confirmed: false, correct: false })),
-          remoteId: null,
-          index: 0,
-          correct: 0,
-          questionStartedAt: null,
-          reportedComplete: false,
-          timedOut: false,
-          timeUpAcknowledged: false,
-          mode: "normal"
-        };
-        saveActiveSession();
-        route = "session";
-        render();
-      }
-    });
+    startUniConfiguredPractice(courseCode, topicTitle, data, requestedCount, durationMinutes, dataFile);
   } catch (err) {
     showToast("Error loading question bank.");
   } finally {
@@ -4352,9 +4646,10 @@ async function renderUniNote() {
       </li>`;
     }).join("");
 
+    const isPodcastOpen = Boolean(uniNotePodcastOpenMap[b.id] || isPlaying);
     const podcastHtml = (b.podcast && b.podcast.length) ? `
-      <div class="uni-podcast-card">
-        <div class="uni-podcast-header">
+      <div class="uni-podcast-card ${isPodcastOpen ? "expanded" : "collapsed"}">
+        <div class="uni-podcast-header" data-podcast-toggle="${escapeHtml(b.id)}" role="button" tabindex="0" aria-expanded="${isPodcastOpen}">
           <div class="uni-podcast-title-wrap">
             <span class="uni-podcast-icon-badge">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -4364,25 +4659,46 @@ async function renderUniNote() {
             </span>
             <div>
               <h4 class="uni-podcast-title">Conversational Audio Guide &amp; Podcast</h4>
-              <span class="uni-podcast-subtitle">Listen or read conversational explanations</span>
+              <span class="uni-podcast-subtitle">${isPodcastOpen ? "Interactive dialogue & voice walkthrough" : "Tap to expand conversational audio guide"}</span>
             </div>
           </div>
           <div class="uni-podcast-controls">
-            <button class="uni-audio-speed-btn" data-audio-speed-toggle="true" title="Adjust playback speed">${uniNoteSpeechRate}x</button>
-            <button class="uni-audio-btn ${isPlaying ? "playing" : ""}" data-audio-block-id="${escapeHtml(b.id)}" data-audio-text="${escapeHtml(podcastJoined)}">
-              ${isPlaying ? `
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
-                <span>Stop</span>
-              ` : `
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Listen</span>
-              `}
+            ${isPodcastOpen ? `
+              <button class="uni-audio-speed-btn" data-audio-speed-toggle="true" title="Adjust playback speed" onclick="event.stopPropagation();">${uniNoteSpeechRate}x</button>
+              <button class="uni-audio-btn ${isPlaying ? "playing" : ""}" data-audio-block-id="${escapeHtml(b.id)}" data-audio-text="${escapeHtml(podcastJoined)}" onclick="event.stopPropagation();">
+                ${isPlaying ? `
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
+                  <span>Stop</span>
+                ` : `
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  <span>Listen</span>
+                `}
+              </button>
+            ` : ""}
+            <button class="uni-podcast-toggle-btn" type="button" aria-label="${isPodcastOpen ? "Collapse podcast" : "Expand podcast"}">
+              <span>${isPodcastOpen ? "Hide" : "Open"}</span>
+              <svg class="uni-podcast-chevron" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="${isPodcastOpen ? "M18 15l-6-6-6 6" : "M6 9l6 6 6-6"}"/>
+              </svg>
             </button>
           </div>
         </div>
-        <div class="uni-podcast-text">
-          ${b.podcast.map(pText => `<p>${escapeHtml(pText)}</p>`).join("")}
-        </div>
+        ${isPodcastOpen ? `
+          <div class="uni-podcast-text">
+            ${b.podcast.map(pText => `<p>${escapeHtml(pText)}</p>`).join("")}
+            <div class="uni-podcast-footer-listen">
+              <button class="uni-audio-btn ${isPlaying ? "playing" : ""}" data-audio-block-id="${escapeHtml(b.id)}" data-audio-text="${escapeHtml(podcastJoined)}">
+                ${isPlaying ? `
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
+                  <span>Stop Audio Guide</span>
+                ` : `
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  <span>Play Audio Guide (${uniNoteSpeechRate}x)</span>
+                `}
+              </button>
+            </div>
+          </div>
+        ` : ""}
       </div>
     ` : "";
 
@@ -4602,14 +4918,16 @@ async function renderUniNote() {
             <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
             <span>Glossary (${noteData.glossary ? noteData.glossary.length : 8})</span>
           </button>
-          <a href="#checklist" class="uni-note-tool-btn" style="text-decoration:none;">
+          <button type="button" class="uni-note-tool-btn" id="uni-toolbar-checklist-btn">
             <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             <span>Checklist</span>
-          </a>
+          </button>
         </div>
       </div>
     </header>
   `;
+
+  const isFinalStep = uniNoteViewMode === "step" ? (activeBlock.number >= totalBlocks) : true;
 
   const noteContainerHtml = `
     <div class="uni-note-container">
@@ -4619,8 +4937,8 @@ async function renderUniNote() {
         ${filterPillsHtml}
       </div>
       ${contentBodyHtml}
-      ${checklistHtml}
-      ${ctaCardHtml}
+      ${isFinalStep ? checklistHtml : ""}
+      ${isFinalStep ? ctaCardHtml : ""}
     </div>
   `;
 
@@ -4753,9 +5071,36 @@ async function renderUniNote() {
     });
   });
 
+  // Bind Podcast Accordion Toggle
+  document.querySelectorAll("[data-podcast-toggle]").forEach(header => {
+    const toggle = () => {
+      const blockId = header.dataset.podcastToggle;
+      uniNotePodcastOpenMap[blockId] = !uniNotePodcastOpenMap[blockId];
+      render();
+    };
+    header.addEventListener("click", toggle);
+    header.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggle();
+      }
+    });
+  });
+
+  // Bind Toolbar Checklist button
+  document.querySelector("#uni-toolbar-checklist-btn")?.addEventListener("click", () => {
+    if (uniNoteViewMode === "step" && uniNoteActiveBlock < totalBlocks) {
+      uniNoteActiveBlock = totalBlocks;
+      render();
+    }
+    setTimeout(() => {
+      document.querySelector("#checklist")?.scrollIntoView({ behavior: "smooth" });
+    }, 40);
+  });
+
   // Bind Practice CTA
   document.querySelector("#uni-note-start-practice")?.addEventListener("click", () => {
     stopUniNoteAudio();
-    startUniPractice(noteData.courseCode || "ANA 201", "Bones of the Upper Limb", "data/university/anatomy/200/questions-ana201-bones.json");
+    showTopicConfigModal(noteData.courseCode || "ANA 201", "Bones of the Upper Limb", "data/university/anatomy/200/questions-ana201-bones.json");
   });
 }
