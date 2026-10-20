@@ -1,0 +1,503 @@
+{
+  "id": "note-ana201-upper-limb",
+  "courseCode": "ANA 201",
+  "courseTitle": "Upper and Lower Limb",
+  "sectionTitle": "Upper Limb",
+  "noteTitle": "Bones of the Upper Limb",
+  "subtitle": "Comprehensive Illustrated Anatomy Notebook & High-Yield Clinical Guide",
+  "howToUse": "How to use this resource: For each block, first review the recommended diagram or image to get your bearings. Read the bulleted Notes to grasp the core facts, then read/listen to the Podcast for a simpler, conversational explanation. Finally, test yourself with the Quick Recall questions before moving on.",
+  "glossary": [
+    {
+      "term": "Articulate",
+      "definition": "two bones meet at a joint."
+    },
+    {
+      "term": "Medial",
+      "definition": "closer to the middle line of the body."
+    },
+    {
+      "term": "Lateral",
+      "definition": "farther from the middle line; in the anatomical position, the thumb side of the forearm."
+    },
+    {
+      "term": "Proximal",
+      "definition": "closer to the trunk or point where a limb attaches."
+    },
+    {
+      "term": "Distal",
+      "definition": "farther from the trunk or point where a limb attaches."
+    },
+    {
+      "term": "Anterior / posterior",
+      "definition": "front / back."
+    },
+    {
+      "term": "Fossa",
+      "definition": "a hollow or depression in a bone."
+    },
+    {
+      "term": "Process",
+      "definition": "a projection or part that sticks out from a bone."
+    }
+  ],
+  "totalBlocks": 17,
+  "blocks": [
+    {
+      "number": 1,
+      "id": "block-1",
+      "title": "The Big Picture",
+      "rawTitle": "BLOCK 1 — THE BIG PICTURE",
+      "category": "Overview",
+      "image": "assets/notes/ana201-upper-limb/block-01.webp",
+      "notes": [
+        "The upper limb has four groups: shoulder girdle, arm, forearm and hand.",
+        "Shoulder girdle: clavicle (collarbone) + scapula (shoulder blade).",
+        "Arm: humerus; runs from shoulder to elbow.",
+        "Forearm: ulna on the medial side and radius on the lateral side in anatomical position.",
+        "Hand: carpals (wrist), metacarpals (palm) and phalanges (digits).",
+        "Key numbers in one hand: 8 carpals, 5 metacarpals and 14 phalanges.",
+        "Thumb: has 2 phalanges. Each of the other four fingers has 3."
+      ],
+      "podcast": [
+        "Let us picture the upper limb from the shoulder down to the fingertips. It is divided into four main groups: the shoulder girdle, arm, forearm and hand. The shoulder girdle contains two bones: the clavicle, which is the collarbone you can feel near the base of your neck, and the scapula, which is the shoulder blade at the back.",
+        "The arm itself has one bone, the humerus. The forearm has two bones: the ulna and the radius. In the anatomical position, the palm faces forward. The ulna is on the little-finger side, while the radius is on the thumb side.",
+        "The hand has three groups of bones. Eight carpals form the wrist area; five metacarpals form the palm; and phalanges form the digits. Four fingers have three phalanges each, but the thumb has two. That gives fourteen phalanges in one hand. Memory check: shoulder girdle equals two bones; arm equals one; forearm equals two; hand equals carpals, metacarpals and phalanges."
+      ],
+      "quickRecall": [
+        "Name the four groups. Which forearm bone is on the thumb side?",
+        "How many phalanges are in one hand?"
+      ]
+    },
+    {
+      "number": 2,
+      "id": "block-2",
+      "title": "The Scapula: Location And Surfaces",
+      "rawTitle": "THE SCAPULA: LOCATION AND SURFACES",
+      "category": "Scapula",
+      "image": "assets/notes/ana201-upper-limb/block-02.webp",
+      "notes": [
+        "What it is: a triangular, flat bone called the shoulder blade.",
+        "Location: posterolateral aspect of the thorax, overlying ribs 2–7.",
+        "Posterior surface: has the spine of the scapula, which divides it into the supraspinous fossa (smaller) and infraspinous fossa (larger).",
+        "Costal/anterior surface: forms the large subscapular fossa.",
+        "Why the fossae matter: the broad surfaces provide attachment for fleshy muscles.",
+        "Body: thin and translucent above and below the spine; borders, especially the lateral border, are thicker."
+      ],
+      "podcast": [
+        "The scapula is the flat, triangular bone many people call the shoulder blade. It lies at the back and side of the chest, over the second to the seventh ribs.",
+        "Look at its back, or posterior surface. A raised ridge of bone called the spine of the scapula crosses the surface. It divides the back into two hollows, called fossae. The smaller one above the spine is the supraspinous fossa. The much larger one below it is the infraspinous fossa.",
+        "Now turn the bone around in your mind. The surface facing the ribs is the costal surface. It contains a large hollow called the subscapular fossa. Why should we care about these hollows? They provide broad surfaces where muscles can attach. The scapular body is thin in places, but its borders—especially the lateral border—are thicker. Picture a ridge dividing the back into a small upper hollow and a large lower hollow. That is the easiest way to remember the posterior scapula."
+      ],
+      "quickRecall": [
+        "What ribs does the scapula overlie?",
+        "Name the three fossae and state which two are separated by the scapular spine."
+      ]
+    },
+    {
+      "number": 3,
+      "id": "block-3",
+      "title": "The Scapula: Processes, Cavity And Borders",
+      "rawTitle": "BLOCK 3 — THE SCAPULA: PROCESSES, CAVITY AND BORDERS",
+      "category": "Scapula",
+      "image": "assets/notes/ana201-upper-limb/block-03.webp",
+      "notes": [
+        "Acromion: the spine continues laterally as the expanded acromion. It forms the palpable point of the shoulder and articulates with the clavicle.",
+        "Acromioclavicular (AC) joint: formed where the acromion meets the acromial end of the clavicle.",
+        "Glenoid cavity: shallow, oval socket on the superolateral scapula; receives the head of the humerus at the glenohumeral joint.",
+        "Coracoid process: beak-like projection above the glenoid cavity, directed anterolaterally.",
+        "Borders: medial (vertebral), lateral (axillary) and superior.",
+        "Angles: superior, lateral and inferior.",
+        "Suprascapular notch: near the junction of the medial two-thirds and lateral one-third of the superior border.",
+        "Neck and head: the lateral angle bears the broadened head; the narrowed region between head and body is the neck.",
+        "Movement: the scapula moves on the thoracic wall at the physiological scapulothoracic joint."
+      ],
+      "podcast": [
+        "Three landmarks are especially important. First, the spine of the scapula continues outward to form the acromion. You can feel this bony point at the top of your shoulder. The acromion meets the clavicle, forming the acromioclavicular joint, often shortened to AC joint.",
+        "Second, find the glenoid cavity. It is a shallow socket on the outer upper part of the scapula. The head of the humerus fits into it to form the glenohumeral, or shoulder, joint. The socket is much smaller than the humeral head, which helps explain why the shoulder allows a wide range of movement.",
+        "Third, the coracoid process looks like a small beak. It sits above the glenoid cavity and projects forwards and outwards.",
+        "The scapula has three borders: medial, lateral and superior. The medial border is also called the vertebral border because it runs roughly parallel to the thoracic vertebral column. The lateral border is called the axillary border because it runs towards the armpit. It also has three angles: superior, lateral and inferior. Near the superior border is the suprascapular notch. The lateral angle is the thickest part and bears the head of the scapula; the narrowed part between the head and body is the neck. Finally, the scapula is not fixed like a plate. It can move over the thoracic wall, giving the upper limb a mobile base."
+      ],
+      "quickRecall": [
+        "What forms the AC joint?",
+        "What fits into the glenoid cavity?",
+        "Name the three borders and three angles."
+      ]
+    },
+    {
+      "number": 4,
+      "id": "block-4",
+      "title": "Scapula: Clinical Relevance",
+      "rawTitle": "BLOCK 4 — SCAPULA: CLINICAL RELEVANCE",
+      "category": "Scapula",
+      "image": "assets/notes/ana201-upper-limb/block-04.webp",
+      "notes": [
+        "Scapular fracture: relatively uncommon.",
+        "Typical context: may indicate severe chest trauma, such as a high-speed road collision, crushing injury or sports injury.",
+        "Treatment point from the slides: fixation is not typically required because surrounding muscle tone helps hold the fragments in place while healing occurs."
+      ],
+      "podcast": [
+        "A fracture means a break in a bone. Scapular fractures are relatively uncommon because the scapula is protected by surrounding muscles and the chest wall.",
+        "When a scapula does fracture, clinicians take the injury seriously. It can be a sign of major trauma, such as a high-speed road traffic collision, a crushing injury or a sports injury. The lecture notes explain that fixation is not typically required in many cases because the surrounding muscles help hold the bone fragments in position while healing occurs. The decision for any real patient depends on the specific injury and clinical assessment."
+      ],
+      "quickRecall": [
+        "Why can a scapular fracture be a warning sign of serious trauma?"
+      ]
+    },
+    {
+      "number": 5,
+      "id": "block-5",
+      "title": "The Clavicle: Functions And Shape",
+      "rawTitle": "BLOCK 5 — THE CLAVICLE: FUNCTIONS AND SHAPE",
+      "category": "Clavicle",
+      "image": "assets/notes/ana201-upper-limb/block-05.webp",
+      "notes": [
+        "What it is: the collarbone; a long bone extending from the manubrium of the sternum to the acromion of the scapula.",
+        "Three functions: attaches the upper limb to the trunk; protects underlying neurovascular structures; transmits force from the upper limb to the axial skeleton.",
+        "Shape: S-shaped and palpable along its length.",
+        "Orientation: when viewed from the front, the medial part is convex and the lateral part is concave.",
+        "Parts: sternal (medial) end, shaft and acromial (lateral) end.",
+        "Sternoclavicular (SC) joint: the sternal end articulates with the manubrium.",
+        "Costoclavicular ligament: attaches to a rough oval depression on the inferior surface near the sternal end."
+      ],
+      "podcast": [
+        "The clavicle is the collarbone. You can usually feel it running from the middle of the chest towards the shoulder. It connects the sternum in the centre of the body to the acromion of the scapula.",
+        "It has three major jobs. First, it helps attach the upper limb to the trunk. Second, it helps protect important nerves and blood vessels passing towards the upper limb. Third, it transmits forces from the upper limb to the axial skeleton—the central framework of the body.",
+        "The clavicle has an S shape. Looking from the front, its medial part is convex, meaning it curves outward, while its lateral part is concave, meaning it curves inward. We describe three parts: the sternal end, the shaft and the acromial end. At the medial or sternal end, the clavicle meets the manubrium of the sternum. This is the sternoclavicular joint. A rough oval depression on the inferior surface near this end provides attachment for the costoclavicular ligament."
+      ],
+      "quickRecall": [
+        "State the three functions of the clavicle. Which bone does its sternal end meet?"
+      ]
+    },
+    {
+      "number": 6,
+      "id": "block-6",
+      "title": "Clavicle: Attachments And Fracture",
+      "rawTitle": "BLOCK 6 — CLAVICLE: ATTACHMENTS AND FRACTURE",
+      "category": "Clavicle",
+      "image": "assets/notes/ana201-upper-limb/block-06.webp",
+      "notes": [
+        "Muscle attachments on the shaft: deltoid, trapezius, subclavius, pectoralis major, sternocleidomastoid and sternohyoid.",
+        "Acromial end: articulates with the acromion at the AC joint.",
+        "Conoid tubercle: attachment for the conoid ligament, the medial part of the coracoclavicular ligament.",
+        "Trapezoid line: attachment for the trapezoid ligament, the lateral part of the coracoclavicular ligament.",
+        "Coracoclavicular ligament: strong ligament that helps suspend the weight of the upper limb from the clavicle.",
+        "Fracture distribution in the slides: middle third 80%; lateral third 15%; medial third 5%.",
+        "Common mechanism: fall onto the shoulder or an outstretched hand.",
+        "Displacement after fracture: lateral end tends to move inferiorly due to arm weight and medially due to pectoralis major; medial end is pulled superiorly by sternocleidomastoid.",
+        "Possible consequence of surgical injury: damage to supraclavicular nerves can cause a numb patch over the upper chest and shoulder."
+      ],
+      "podcast": [
+        "The clavicle is not just a strut between the chest and shoulder; several muscles attach to it. The lecture lists the deltoid, trapezius, subclavius, pectoralis major, sternocleidomastoid and sternohyoid.",
+        "At its lateral end, the clavicle meets the acromion to form the AC joint. Two named landmarks are important: the conoid tubercle attaches to the conoid ligament, and the trapezoid line attaches to the trapezoid ligament. Together, these ligaments form the coracoclavicular ligament, which helps suspend the upper limb from the clavicle.",
+        "The clavicle is commonly fractured, often after a fall onto the shoulder or onto an outstretched hand. In the lecture's figures, 80 percent occur in the middle third, 15 percent in the lateral third and 5 percent in the medial third. Remember the pattern: middle, lateral, medial—80, 15, 5.",
+        "After a fracture, the arm's weight tends to pull the lateral fragment down. Pectoralis major can pull it medially, while sternocleidomastoid pulls the medial fragment upward. During surgical repair, nearby supraclavicular nerves can be injured, potentially leaving an area of numbness over the upper chest and shoulder."
+      ],
+      "quickRecall": [
+        "Which third of the clavicle is most commonly fractured?",
+        "What attaches to the conoid tubercle and trapezoid line?"
+      ]
+    },
+    {
+      "number": 7,
+      "id": "block-7",
+      "title": "The Humerus: Proximal End",
+      "rawTitle": "BLOCK 7 — THE HUMERUS: PROXIMAL END",
+      "category": "Humerus",
+      "image": "assets/notes/ana201-upper-limb/block-07.webp",
+      "notes": [
+        "What it is: the long bone extending from shoulder to elbow.",
+        "Articulations: proximally with the glenoid cavity of the scapula; distally with the radius and ulna at the elbow.",
+        "Proximal landmarks: head, anatomical neck, surgical neck, greater tuberosity, lesser tuberosity and intertubercular sulcus.",
+        "Head: faces medially, upwards and backwards.",
+        "Greater tuberosity: lateral; attachment for supraspinatus, infraspinatus and teres minor on superior, middle and inferior facets respectively.",
+        "Lesser tuberosity: more medial; attachment for subscapularis.",
+        "Intertubercular sulcus: groove between the tuberosities; carries the tendon of the long head of biceps brachii.",
+        "Lips of the sulcus: attachment for pectoralis major, teres major and latissimus dorsi. Memory aid: 'a lady between two majors'—latissimus dorsi between teres major and pectoralis major.",
+        "Surgical neck: axillary nerve and circumflex humeral vessels lie against the bone here."
+      ],
+      "podcast": [
+        "The humerus is the single long bone of the arm. At the top, its head meets the glenoid cavity of the scapula. At the bottom, it meets the radius and ulna at the elbow.",
+        "The upper end has several landmarks. The head faces medially, upwards and backwards. Around it is the anatomical neck. Farther down is the surgical neck, which is clinically important because the axillary nerve and circumflex humeral vessels lie close to it.",
+        "There are two tuberosities. The greater tuberosity is on the lateral side and provides attachment for three rotator cuff muscles: supraspinatus, infraspinatus and teres minor. The smaller, more medial lesser tuberosity gives attachment to subscapularis. Together, these are the four rotator cuff muscles.",
+        "Between the tuberosities is the intertubercular sulcus, or groove. The tendon of the long head of biceps brachii passes through it. The lips of the groove receive three muscle attachments: pectoralis major, teres major and latissimus dorsi. A memory phrase from the slides is 'a lady between two majors': latissimus dorsi lies between teres major and pectoralis major."
+      ],
+      "quickRecall": [
+        "Name the four rotator cuff muscles. Which nerve is at risk near the surgical neck?"
+      ]
+    },
+    {
+      "number": 8,
+      "id": "block-8",
+      "title": "Humerus: Shaft And Distal End",
+      "rawTitle": "BLOCK 8 — HUMERUS: SHAFT AND DISTAL END",
+      "category": "Humerus",
+      "image": "assets/notes/ana201-upper-limb/block-08.webp",
+      "notes": [
+        "Shaft: circular proximally and flattened distally.",
+        "Deltoid tuberosity: roughened lateral surface where deltoid attaches.",
+        "Radial/spiral groove: shallow diagonal groove on the posterior surface; contains the radial nerve and profunda brachii artery.",
+        "Muscle attachments listed in the slides: anterior—coracobrachialis, deltoid, brachialis, brachioradialis; posterior—medial and lateral heads of triceps.",
+        "Supraepicondylar ridges: medial and lateral ridges; the lateral ridge gives common origin to forearm extensor muscles.",
+        "Epicondyles: medial and lateral; the medial is larger and extends farther distally. The ulnar nerve passes behind the medial epicondyle.",
+        "Trochlea: medial; articulates with the trochlear notch of the ulna.",
+        "Capitulum: lateral; articulates with the head of the radius.",
+        "Fossae: coronoid, radial and olecranon fossae accommodate forearm bones during elbow movement."
+      ],
+      "podcast": [
+        "Moving down the humerus, we reach the shaft. Its cross-section is circular nearer the shoulder and becomes flatter towards the elbow. On the outer side is a rough area called the deltoid tuberosity, where the deltoid attaches.",
+        "On the back of the shaft is the radial or spiral groove. The radial nerve and profunda brachii artery pass in this groove. This relationship is important because a fracture through the middle of the humerus can injure these structures.",
+        "At the lower end, feel for the two epicondyles on either side of the elbow. The medial epicondyle is larger and projects farther down. The ulnar nerve passes behind it; this is why striking the inner elbow can produce a tingling sensation down the forearm and hand.",
+        "There are two main articular surfaces. The trochlea is medial and meets the ulna. The capitulum is lateral and meets the radius. Three nearby depressions—the coronoid, radial and olecranon fossae—make room for the forearm bones as the elbow bends and straightens."
+      ],
+      "quickRecall": [
+        "Which structure passes through the radial groove?",
+        "Which humeral surface articulates with the radius?"
+      ]
+    },
+    {
+      "number": 9,
+      "id": "block-9",
+      "title": "Humerus: Clinical Relevance",
+      "rawTitle": "BLOCK 9 — HUMERUS: CLINICAL RELEVANCE",
+      "category": "Humerus",
+      "image": "assets/notes/ana201-upper-limb/block-09.webp",
+      "notes": [
+        "Mid-shaft fracture: may damage the radial nerve and profunda brachii artery.",
+        "Wrist drop: radial nerve injury paralyses wrist extensors, leaving wrist flexion unopposed.",
+        "Sensory changes: may affect the dorsal hand and proximal dorsal ends of the lateral 3½ fingers.",
+        "Supracondylar fracture: fracture of the distal humerus just above the elbow; often follows a fall on an outstretched hand and is more common in children.",
+        "Major risk: brachial artery injury can cause ischaemia and Volkmann's ischaemic contracture.",
+        "Other nerves at risk: anterior interosseous nerve, ulnar nerve and radial nerve.",
+        "Anterior interosseous nerve test: ask the patient to make an 'OK' sign, testing flexor pollicis longus function.",
+        "Gartland classification in slides: Type I minimally displaced; Type II displaced but posterior cortex intact; Type III completely off-ended.",
+        "Treatment summary in slides: Type I usually above-elbow cast; Types II and III typically surgical fixation with crossed bicortical K-wires."
+      ],
+      "podcast": [
+        "Clinical anatomy connects a bone landmark to what can happen when that bone is injured. A mid-shaft humeral fracture can affect the radial nerve because the nerve lies in the radial groove. The radial nerve supplies the wrist extensors. If those muscles are paralysed, the wrist droops into flexion—this is called wrist drop. Sensation may also be reduced over parts of the back of the hand.",
+        "A supracondylar fracture occurs at the lower end of the humerus, just above the elbow. It commonly follows a fall onto an outstretched hand and is more common in children. The brachial artery may be injured, reducing blood supply to the forearm and hand. Severe ischaemia can lead to Volkmann's ischaemic contracture, in which the flexor muscles become shortened and fibrotic.",
+        "The anterior interosseous, ulnar and radial nerves may also be affected. One bedside test mentioned in the slides is the OK sign, which helps assess flexor pollicis longus function.",
+        "The Gartland classification describes supracondylar fractures: Type I is minimally displaced; Type II is displaced but the posterior cortex remains intact; Type III is completely off-ended. The lecture describes casting for Type I and commonly surgical fixation for Types II and III. Actual management depends on clinical assessment."
+      ],
+      "quickRecall": [
+        "What causes wrist drop?",
+        "Which artery is at risk in a supracondylar fracture?"
+      ]
+    },
+    {
+      "number": 10,
+      "id": "block-10",
+      "title": "The Ulna: Proximal End",
+      "rawTitle": "BLOCK 10 — THE ULNA: PROXIMAL END",
+      "category": "Ulna",
+      "image": "assets/notes/ana201-upper-limb/block-10.webp",
+      "notes": [
+        "Position and role: medial forearm bone; acts as a stabilizer while the radius moves around it.",
+        "Proximal articulation: the ulna meets the trochlea of the humerus at the elbow.",
+        "Olecranon: large projection forming the tip of the elbow; triceps brachii attaches to its superior surface.",
+        "Coronoid process: projects anteriorly and forms part of the trochlear notch.",
+        "Trochlear notch: wrench-shaped notch formed by olecranon and coronoid process; articulates with the trochlea of the humerus.",
+        "Radial notch: on the lateral side of the trochlear notch; articulates with the head of the radius.",
+        "Ulnar tuberosity: rough area just distal to the coronoid process; attachment for brachialis."
+      ],
+      "podcast": [
+        "The ulna is the medial bone of the forearm. At its upper end, it meets the trochlea of the humerus to form part of the elbow joint.",
+        "The olecranon is the large projection you feel as the tip of your elbow. The triceps brachii attaches to its upper surface. The coronoid process projects forwards and helps form a deep, wrench-shaped space called the trochlear notch.",
+        "The trochlear notch fits around the trochlea of the humerus. On the outer side of this region is the radial notch, which meets the head of the radius. Just below the coronoid process is the rough ulnar tuberosity, where brachialis attaches.",
+        "Think of the proximal ulna as having a big elbow tip, a forward-projecting coronoid process, and a notch between them that receives the humeral trochlea."
+      ],
+      "quickRecall": [
+        "Which muscle attaches to the olecranon?",
+        "What fits into the trochlear notch?"
+      ]
+    },
+    {
+      "number": 11,
+      "id": "block-11",
+      "title": "Ulna: Shaft, Distal End And Fractures",
+      "rawTitle": "BLOCK 11 — ULNA: SHAFT, DISTAL END AND FRACTURES",
+      "category": "Ulna",
+      "image": "assets/notes/ana201-upper-limb/block-11.webp",
+      "notes": [
+        "Shaft: triangular in cross-section, with three surfaces and three borders; narrows distally.",
+        "Surfaces: anterior—pronator quadratus attaches distally; posterior—attachment for many muscles; medial—unremarkable in the slides.",
+        "Borders: posterior—palpable along the back of the forearm; interosseous—attachment for interosseous membrane; anterior—unremarkable in the slides.",
+        "Distal end: smaller than proximal end; has a rounded head and ulnar styloid process.",
+        "Distal articulation: head of ulna meets the ulnar notch of the radius at the distal radioulnar joint.",
+        "Ulna shaft fracture: may follow a direct blow; proximal fragment can be pulled posteriorly by muscle tone.",
+        "Olecranon fracture: may follow a fall onto a flexed elbow; triceps can pull a fragment proximally.",
+        "Monteggia fracture: proximal ulna shaft fracture with anterior dislocation of the radial head at the elbow.",
+        "Galeazzi fracture: distal radius fracture with dislocation of the ulnar head at the distal radioulnar joint."
+      ],
+      "podcast": [
+        "The ulna's shaft is triangular when viewed in cross-section. It has three surfaces and three borders, and the bone becomes narrower as it approaches the wrist. The interosseous border provides attachment for the interosseous membrane, which spans between the radius and ulna.",
+        "At the distal end, the ulna has a rounded head and a small projection called the ulnar styloid process. The head meets the ulnar notch of the radius at the distal radioulnar joint.",
+        "A direct blow can fracture the ulna shaft. A fracture of the olecranon may occur when someone falls onto a bent elbow; the triceps can pull the fractured piece upwards.",
+        "Two named injuries are easy to mix up. Monteggia is a fracture of the proximal ulna with the radial head dislocated anteriorly at the elbow. Galeazzi is a fracture of the distal radius with the ulnar head dislocated at the distal radioulnar joint. Say them slowly and attach each name to the bone that is fractured."
+      ],
+      "quickRecall": [
+        "Differentiate Monteggia and Galeazzi fractures."
+      ]
+    },
+    {
+      "number": 12,
+      "id": "block-12",
+      "title": "The Radius: Position And Proximal End",
+      "rawTitle": "BLOCK 12 — THE RADIUS: POSITION AND PROXIMAL END",
+      "category": "Radius",
+      "image": "assets/notes/ana201-upper-limb/block-12.webp",
+      "notes": [
+        "Position and role: lateral forearm bone; pivots around the ulna during movement at the radioulnar joints.",
+        "Four articulations listed in the slides: elbow joint, proximal radioulnar joint, wrist joint and distal radioulnar joint.",
+        "Head: disc-shaped with a concave articular surface; its medial part participates in the proximal radioulnar joint.",
+        "Neck: narrow region between the head and radial tuberosity.",
+        "Radial tuberosity: attachment for biceps brachii."
+      ],
+      "podcast": [
+        "The radius lies on the thumb side of the forearm when the palm faces forwards. Unlike the ulna, which plays a stabilizing role, the radius pivots around the ulna during pronation and supination.",
+        "The radius participates in four articulations listed in the lecture: the elbow joint, proximal radioulnar joint, wrist joint and distal radioulnar joint.",
+        "At the upper end is the disc-shaped head of the radius. Its upper surface is concave, and its medial side participates in the proximal radioulnar joint. Below the head is the narrow neck. Farther down is the radial tuberosity, which provides attachment for biceps brachii.",
+        "A simple way to picture it: the head is at the top, the neck narrows below it, and the radial tuberosity is the rough attachment area for biceps."
+      ],
+      "quickRecall": [
+        "Which side of the forearm is the radius on?",
+        "Which muscle attaches to the radial tuberosity?"
+      ]
+    },
+    {
+      "number": 13,
+      "id": "block-13",
+      "title": "Radius: Shaft, Distal End And Fractures",
+      "rawTitle": "BLOCK 13 — RADIUS: SHAFT, DISTAL END AND FRACTURES",
+      "category": "Radius",
+      "image": "assets/notes/ana201-upper-limb/block-13.webp",
+      "notes": [
+        "Shaft: triangular in cross-section; expands in diameter towards the distal end.",
+        "Pronator teres: attaches to a roughened area on the middle of the lateral surface.",
+        "Distal end: expands into a rectangular region; lateral side projects as the radial styloid process.",
+        "Ulnar notch: medial concavity at the distal radius; meets the head of the ulna.",
+        "Wrist joint: distal radius articulates with the scaphoid and lunate.",
+        "Colles' fracture: distal radius fracture after a fall on an outstretched hand; distal fragment displaced posteriorly, producing dinner-fork deformity.",
+        "Radial head fracture: often follows a fall on an outstretched hand, forcing the radial head against the capitulum.",
+        "Smith's fracture: distal radius fracture after falling onto the back of the hand; distal fragment displaced anteriorly, opposite to Colles'.",
+        "Remember: Monteggia = proximal ulna fracture + radial head dislocation; Galeazzi = distal radius fracture + ulnar head dislocation."
+      ],
+      "podcast": [
+        "The radial shaft is triangular and widens as it approaches the wrist. The pronator teres attaches to a roughened area on the middle of its lateral surface.",
+        "At the distal end, the radius becomes broader. Its lateral projection is the radial styloid process. On the medial side is the ulnar notch, which meets the head of the ulna. The distal surface of the radius meets two carpal bones—the scaphoid and lunate—to form the wrist joint.",
+        "Three fracture names appear in the slides. Colles' fracture usually follows a fall onto an outstretched hand. The distal fragment moves posteriorly, producing the classic dinner-fork deformity. Smith's fracture is the opposite pattern: the distal fragment moves anteriorly, often after a fall onto the back of the hand. A radial head fracture can also follow a fall onto an outstretched hand when the head is driven against the capitulum.",
+        "Do not confuse these with Monteggia and Galeazzi. Monteggia begins with a proximal ulna fracture and radial head dislocation. Galeazzi begins with a distal radius fracture and ulnar head dislocation."
+      ],
+      "quickRecall": [
+        "How does the displacement in Colles' fracture differ from Smith's fracture?"
+      ]
+    },
+    {
+      "number": 14,
+      "id": "block-14",
+      "title": "The Hand: Carpals And Carpal Tunnel",
+      "rawTitle": "BLOCK 14 — THE HAND: CARPALS AND CARPAL TUNNEL",
+      "category": "Hand & Wrist",
+      "image": "assets/notes/ana201-upper-limb/block-14.webp",
+      "notes": [
+        "Three groups: carpals (wrist), metacarpals (palm) and phalanges (digits).",
+        "Eight carpals, proximal row from lateral to medial: scaphoid, lunate, triquetrum, pisiform.",
+        "Eight carpals, distal row from lateral to medial: trapezium, trapezoid, capitate, hamate.",
+        "Pisiform: sesamoid bone formed within the tendon of flexor carpi ulnaris.",
+        "Hook of hamate: projection on the palmar surface of the hamate.",
+        "Wrist joint: scaphoid and lunate in the proximal row articulate with the radius.",
+        "Carpometacarpal joints: distal row of carpals articulates with metacarpals.",
+        "Carpal tunnel: carpal bones form an arch; the flexor retinaculum spans the arch to form the tunnel through which structures pass to and from the anterior (volar) hand."
+      ],
+      "podcast": [
+        "Let's look at the wrist. The eight carpal bones are arranged in two rows of four. Starting on the thumb side and moving towards the little-finger side, the proximal row is scaphoid, lunate, triquetrum and pisiform.",
+        "The distal row, again from thumb side towards little-finger side, is trapezium, trapezoid, capitate and hamate. The pisiform is a sesamoid bone within the tendon of flexor carpi ulnaris. The hamate has a hook-like projection on its palm-facing surface called the hook of hamate.",
+        "The scaphoid and lunate are important because they articulate with the radius to form the radiocarpal, or wrist, joint. The distal row of carpals meets the metacarpals at the carpometacarpal joints.",
+        "The carpal bones form an arch. A strong band called the flexor retinaculum stretches across that arch, creating the carpal tunnel. Structures pass through this tunnel to reach or leave the front of the hand. Remember the idea: a bony arch plus a band across it makes a tunnel."
+      ],
+      "quickRecall": [
+        "Name the proximal and distal rows of carpal bones. What structures form the carpal tunnel?"
+      ]
+    },
+    {
+      "number": 15,
+      "id": "block-15",
+      "title": "Scaphoid Fracture",
+      "rawTitle": "BLOCK 15 — SCAPHOID FRACTURE",
+      "category": "Hand & Wrist",
+      "image": "assets/notes/ana201-upper-limb/block-15.webp",
+      "notes": [
+        "Most commonly fractured carpal: the scaphoid.",
+        "Typical cause: fall on an outstretched hand (FOOSH).",
+        "Clinical feature: pain and tenderness in the anatomical snuffbox.",
+        "Blood supply concern: retrograde blood supply enters at the distal end; a fracture through the waist can interrupt blood supply to the proximal part.",
+        "Complication: avascular necrosis of the proximal scaphoid; a missed fracture may later contribute to wrist osteoarthritis."
+      ],
+      "podcast": [
+        "The scaphoid is the carpal bone most commonly fractured. A typical cause is FOOSH, which stands for 'fall on an outstretched hand'. One clue is pain and tenderness in the anatomical snuffbox, a hollow near the base of the thumb.",
+        "Why is a scaphoid fracture important? The lecture describes its blood supply as retrograde: blood enters at the distal end and travels towards the proximal part. If the bone breaks through its waist, the blood supply to the proximal part may be interrupted.",
+        "When bone tissue loses its blood supply, it can undergo avascular necrosis. If a scaphoid fracture is missed, the patient may develop wrist osteoarthritis later. So remember three things: FOOSH, anatomical snuffbox tenderness and risk of avascular necrosis."
+      ],
+      "quickRecall": [
+        "What is the classic tender area in a scaphoid fracture, and why is the proximal part at risk?"
+      ]
+    },
+    {
+      "number": 16,
+      "id": "block-16",
+      "title": "Metacarpals And Phalanges",
+      "rawTitle": "BLOCK 16 — METACARPALS AND PHALANGES",
+      "category": "Hand & Wrist",
+      "image": "assets/notes/ana201-upper-limb/block-16.webp",
+      "notes": [
+        "Metacarpals: five bones of the palm, numbered from the thumb side.",
+        "Metacarpal I–V: thumb, index, middle, ring and little finger respectively.",
+        "Each metacarpal: base proximally, shaft and head distally.",
+        "Interossei: attach along the concave medial and lateral surfaces of the metacarpals.",
+        "Phalanges: thumb has two; other digits have three each.",
+        "Parts of a phalanx: base proximally, shaft/body and head distally.",
+        "Relative sizes: proximal phalanges are largest, middle are intermediate, distal are smallest.",
+        "Distal phalanges: expanded, flattened ends lie beneath the nail beds."
+      ],
+      "podcast": [
+        "After the wrist come the metacarpals, which form the palm. There are five, numbered from the thumb side. Metacarpal one belongs to the thumb; two to the index finger; three to the middle finger; four to the ring finger; and five to the little finger.",
+        "Each metacarpal has a base near the wrist, a shaft in the palm and a head near the finger. The interossei muscles attach along the sides of the metacarpals.",
+        "The phalanges form the digits. The thumb has two, while each of the other fingers has three. Each phalanx has a base, shaft and head. The proximal phalanges are the largest, the middle ones are intermediate, and the distal ones are the smallest. The expanded ends of the distal phalanges support the nail beds."
+      ],
+      "quickRecall": [
+        "Which digit belongs to metacarpal V?",
+        "Name the three parts of a phalanx."
+      ]
+    },
+    {
+      "number": 17,
+      "id": "block-17",
+      "title": "Fractures Of The Hand Bones",
+      "rawTitle": "BLOCK 17 — FRACTURES OF THE HAND BONES",
+      "category": "Hand & Wrist",
+      "image": "assets/notes/ana201-upper-limb/block-17.webp",
+      "notes": [
+        "Boxer's fracture: fracture of the neck of the fifth metacarpal, commonly from punching a hard object with a clenched fist; the distal part may angulate and shorten the affected finger.",
+        "Bennett's fracture: fracture at the base of the first metacarpal after forced hyperabduction of the thumb; extends into the first carpometacarpal joint and can cause instability/subluxation; often needs surgery.",
+        "Distal phalanx fracture: crushing injury is common; fracture may be comminuted and a painful haematoma may develop.",
+        "Proximal and middle phalanx fractures: often due to crushing or hyperextension; careful realignment is needed because of the close relationship to flexor tendons."
+      ],
+      "podcast": [
+        "Two named metacarpal fractures are useful to know. A Boxer's fracture affects the neck of the fifth metacarpal, near the little finger. It often happens when a clenched fist strikes a hard object. The distal fragment may angle, making the finger look shorter.",
+        "Bennett's fracture affects the base of the first metacarpal, near the thumb. It can occur with forced hyperabduction of the thumb and extends into the first carpometacarpal joint. Because the joint can become unstable or subluxed, this injury often requires surgical repair.",
+        "Crushing injuries to the fingertips can fracture the distal phalanx. The fracture may break into several pieces—a comminuted fracture—and a painful haematoma, or collection of blood, can form. Fractures of the proximal and middle phalanges may follow crushing or hyperextension. Correct alignment matters because the flexor tendons lie close to these bones."
+      ],
+      "quickRecall": [
+        "Differentiate Boxer's and Bennett's fractures. What does comminuted mean?"
+      ]
+    }
+  ],
+  "checklist": [
+    "Can I name the four groups of upper limb bones?",
+    "Can I describe the scapular fossae, borders, angles and major processes?",
+    "Can I state the clavicle's functions and explain the common fracture pattern?",
+    "Can I identify the humeral landmarks and link the radial nerve to wrist drop?",
+    "Can I distinguish the ulna from the radius and explain Monteggia versus Galeazzi?",
+    "Can I name both rows of carpal bones in order?",
+    "Can I explain scaphoid fracture, Colles' fracture, Smith's fracture, Boxer's fracture and Bennett's fracture?"
+  ]
+}

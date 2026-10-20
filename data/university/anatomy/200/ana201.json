@@ -8,6 +8,8 @@
   "sections": [
     {
       "title": "Upper Limb",
+      "noteFile": "data/university/anatomy/200/notes-ana201-upper-limb.json",
+      "noteTitle": "Bones of the Upper Limb",
       "topics": [
         { "id": "ul-bones", "title": "Bones of the Upper Limb", "status": "available", "dataFile": "data/university/anatomy/200/questions-ana201-bones.json" },
         { "id": "ul-muscles", "title": "Muscles of the Upper Limb", "status": "available", "dataFile": "data/university/anatomy/200/questions-ana201-muscles.json" },

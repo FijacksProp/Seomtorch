@@ -112,12 +112,21 @@ let progressData = null;
 let badgeCelebrationQueue = [];
 let badgeCelebrationActive = false;
 let badgeCelebrationKnown = new Set();
-let uniRoute = "departments"; // departments | levels | courses | course
+let uniRoute = "departments"; // departments | levels | courses | course | note
 let uniDeptId = null;
 let uniLevel = null;
 let uniCourseId = null;
 let uniContentCache = {};
 let uniDepartments = null;
+let uniNoteFile = null;
+let uniNoteTitle = null;
+let uniNoteActiveBlock = 1;
+let uniNoteViewMode = "step"; // "step" | "all"
+let uniNoteCategoryFilter = "all";
+let uniNoteGlossaryOpen = false;
+let uniNotePlayingBlockId = null;
+let uniNoteSpeechRate = 1.0;
+let uniNoteRevealedMap = {};
 let buddiesMatches = { onApp: getSavedBuddies(), invites: [] };
 let buddiesLoading = false;
 let buddiesSearchOpen = false;
@@ -3125,6 +3134,7 @@ async function renderUniversity() {
   if (uniRoute === "levels" && uniDeptId) return renderUniLevels();
   if (uniRoute === "courses" && uniDeptId && uniLevel) return renderUniCourses();
   if (uniRoute === "course" && uniDeptId && uniLevel && uniCourseId) return renderUniCourse();
+  if (uniRoute === "note" && uniDeptId && uniLevel && uniCourseId && uniNoteFile) return renderUniNote();
   return renderUniDepartments();
 }
 
@@ -3239,13 +3249,34 @@ async function renderUniCourse() {
 
   const sections = data.sections || [];
   const topicsHtml = sections.map(section => {
+    const hasNote = Boolean(section.noteFile);
+    const noteBtnHtml = hasNote ? `
+      <button class="uni-notebook-btn" type="button" data-uni-note-file="${escapeHtml(section.noteFile)}" data-uni-note-title="${escapeHtml(section.noteTitle || section.title + ' Notebook')}" aria-label="Open ${escapeHtml(section.title)} Notebook">
+        <svg class="uni-notebook-btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-0-5.5H20"/>
+          <path d="M8 7h8M8 11h8M8 15h4"/>
+        </svg>
+        <span class="uni-notebook-btn-label">Notebook</span>
+        <span class="uni-notebook-btn-badge">Study Note</span>
+      </button>` : "";
+
     const topicItems = section.topics.map(topic => {
       const isAvailable = topic.status !== "coming-soon";
       const tagText = isAvailable ? "Available" : "Coming soon";
       const statusIcon = isAvailable ? `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>` : `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`;
       return `<div class="uni-topic-item ${isAvailable ? "available" : "coming-soon"}" ${isAvailable ? `data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" role="button" tabindex="0"` : ""}><span class="uni-topic-status">${statusIcon}</span><div class="uni-topic-info"><h4>${escapeHtml(topic.title)}</h4><span class="uni-topic-tag">${tagText}</span></div>${isAvailable ? `<button class="button uni-btn sm" type="button" style="margin-left:auto; white-space:nowrap; padding:6px 14px; font-size:12px; pointer-events:none;">Practice →</button>` : ""}</div>`;
     }).join("");
-    return `<div class="uni-section"><h3 class="uni-section-heading">${escapeHtml(section.title)}</h3><div class="uni-topic-list">${topicItems}</div></div>`;
+
+    return `<div class="uni-section">
+      <div class="uni-section-header">
+        <div class="uni-section-title-wrap">
+          <h3 class="uni-section-heading">${escapeHtml(section.title)}</h3>
+          <span class="uni-section-count-badge">${section.topics.length} topics</span>
+        </div>
+        ${noteBtnHtml}
+      </div>
+      <div class="uni-topic-list">${topicItems}</div>
+    </div>`;
   }).join("");
 
   const totalTopics = sections.reduce((sum, s) => sum + s.topics.length, 0);
@@ -3466,6 +3497,18 @@ async function renderUniCourse() {
     const qCount = Math.max(5, Math.min(100, parseInt(inputQ?.value, 10) || 25));
     const mCount = Math.max(1, Math.min(180, parseInt(inputM?.value, 10) || 15));
     startUniMixedPractice(data, qCount, mCount);
+  });
+
+  document.querySelectorAll(".uni-notebook-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      uniNoteFile = btn.dataset.uniNoteFile;
+      uniNoteTitle = btn.dataset.uniNoteTitle;
+      uniNoteActiveBlock = 1;
+      uniRoute = "note";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      render();
+    });
   });
 
   document.querySelectorAll(".uni-topic-item.available").forEach(item => {
@@ -4176,4 +4219,543 @@ function renderNormalSession() {
       }
     });
   }
+}
+
+
+/* ==========================================================================
+   University Notebook (Study Notes) Functions
+   ========================================================================== */
+
+function stopUniNoteAudio() {
+  if ("speechSynthesis" in window) {
+    try { window.speechSynthesis.cancel(); } catch {}
+  }
+  uniNotePlayingBlockId = null;
+}
+
+function toggleUniNoteAudio(blockId, textToSpeak) {
+  if (!("speechSynthesis" in window)) {
+    showToast("Audio guide is not supported on this browser.");
+    return;
+  }
+  if (uniNotePlayingBlockId === blockId) {
+    stopUniNoteAudio();
+    render();
+    return;
+  }
+  stopUniNoteAudio();
+  const utterance = new SpeechSynthesisUtterance(textToSpeak);
+  utterance.rate = Number(uniNoteSpeechRate) || 1.0;
+  utterance.pitch = 1.0;
+  utterance.onend = () => {
+    uniNotePlayingBlockId = null;
+    render();
+  };
+  utterance.onerror = () => {
+    uniNotePlayingBlockId = null;
+    render();
+  };
+  uniNotePlayingBlockId = blockId;
+  window.speechSynthesis.speak(utterance);
+  render();
+}
+
+function showDiagramLightbox(src, title) {
+  const existing = document.querySelector("#uni-diagram-lightbox");
+  if (existing) existing.remove();
+
+  const modal = document.createElement("div");
+  modal.id = "uni-diagram-lightbox";
+  modal.className = "uni-lightbox-modal";
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-modal", "true");
+  modal.setAttribute("aria-label", title || "Anatomical Diagram");
+  modal.innerHTML = `
+    <div class="uni-lightbox-content">
+      <button class="uni-lightbox-close" type="button" aria-label="Close diagram">✕</button>
+      <img src="${escapeHtml(src)}" alt="${escapeHtml(title)}" class="uni-lightbox-img">
+      <div class="uni-lightbox-title">${escapeHtml(title)}</div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  const close = () => modal.remove();
+  modal.querySelector(".uni-lightbox-close")?.addEventListener("click", close);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) close();
+  });
+  const handleKey = (e) => {
+    if (e.key === "Escape") {
+      close();
+      window.removeEventListener("keydown", handleKey);
+    }
+  };
+  window.addEventListener("keydown", handleKey);
+}
+
+async function renderUniNote() {
+  const dept = uniDepartments?.find(d => d.id === uniDeptId);
+  if (!dept) { uniRoute = "departments"; return renderUniDepartments(); }
+
+  const noteData = await fetchUniJson(uniNoteFile);
+  if (!noteData) {
+    const breadcrumbs = [
+      { label: "University", action: () => { uniRoute = "departments"; uniDeptId = null; uniLevel = null; uniCourseId = null; uniNoteFile = null; stopUniNoteAudio(); } },
+      { label: dept.name, action: () => { uniRoute = "levels"; uniLevel = null; uniCourseId = null; uniNoteFile = null; stopUniNoteAudio(); } },
+      { label: `${uniLevel} Level`, action: () => { uniRoute = "courses"; uniCourseId = null; uniNoteFile = null; stopUniNoteAudio(); } },
+      { label: uniCourseId ? uniCourseId.toUpperCase() : "Course", action: () => { uniRoute = "course"; uniNoteFile = null; stopUniNoteAudio(); } },
+      { label: "Notebook" }
+    ];
+    app.innerHTML = uniShell(`<div class="uni-empty"><h2>Unable to load notebook</h2><p>Please check your connection and try again.</p><button class="button uni-btn" id="uni-back-course">← Back to course</button></div>`, breadcrumbs);
+    bindShell(); bindUniCrumbs(breadcrumbs);
+    document.querySelector("#uni-back-course")?.addEventListener("click", () => { uniRoute = "course"; uniNoteFile = null; stopUniNoteAudio(); render(); });
+    return;
+  }
+
+  const breadcrumbs = [
+    { label: "University", action: () => { uniRoute = "departments"; uniDeptId = null; uniLevel = null; uniCourseId = null; uniNoteFile = null; stopUniNoteAudio(); } },
+    { label: dept.name, action: () => { uniRoute = "levels"; uniLevel = null; uniCourseId = null; uniNoteFile = null; stopUniNoteAudio(); } },
+    { label: `${uniLevel} Level`, action: () => { uniRoute = "courses"; uniCourseId = null; uniNoteFile = null; stopUniNoteAudio(); } },
+    { label: noteData.courseCode || (uniCourseId ? uniCourseId.toUpperCase() : "Course"), action: () => { uniRoute = "course"; uniNoteFile = null; stopUniNoteAudio(); } },
+    { label: noteData.noteTitle || "Notebook" }
+  ];
+
+  const allBlocks = noteData.blocks || [];
+  const totalBlocks = allBlocks.length;
+  const categories = ["all", ...new Set(allBlocks.map(b => b.category))];
+  const filteredBlocks = uniNoteCategoryFilter === "all" ? allBlocks : allBlocks.filter(b => b.category === uniNoteCategoryFilter);
+
+  // Ensure active block exists
+  let activeBlock = allBlocks.find(b => b.number === uniNoteActiveBlock);
+  if (!activeBlock && allBlocks.length > 0) {
+    activeBlock = allBlocks[0];
+    uniNoteActiveBlock = activeBlock.number;
+  }
+
+  // Saved checklist items
+  const checklistKey = `seomtorch_note_check_${noteData.id || "upper_limb"}`;
+  let savedChecks = {};
+  try { savedChecks = JSON.parse(localStorage.getItem(checklistKey) || "{}"); } catch {}
+  const checklistItems = noteData.checklist || [];
+  const checkedCount = checklistItems.filter((_, idx) => Boolean(savedChecks[idx])).length;
+
+  // Helper to render a block
+  const renderBlockCardHtml = (b) => {
+    const isPlaying = uniNotePlayingBlockId === b.id;
+    const podcastJoined = (b.podcast || []).join(" ");
+    const isRecallRevealed = Boolean(uniNoteRevealedMap[b.id]);
+
+    const notesListHtml = (b.notes || []).map(noteText => {
+      return `<li class="uni-notes-item">
+        <svg class="uni-notes-bullet" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
+        <span>${escapeHtml(noteText)}</span>
+      </li>`;
+    }).join("");
+
+    const podcastHtml = (b.podcast && b.podcast.length) ? `
+      <div class="uni-podcast-card">
+        <div class="uni-podcast-header">
+          <div class="uni-podcast-title-wrap">
+            <span class="uni-podcast-icon-badge">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+              </svg>
+            </span>
+            <div>
+              <h4 class="uni-podcast-title">Conversational Audio Guide &amp; Podcast</h4>
+              <span class="uni-podcast-subtitle">Listen or read conversational explanations</span>
+            </div>
+          </div>
+          <div class="uni-podcast-controls">
+            <button class="uni-audio-speed-btn" data-audio-speed-toggle="true" title="Adjust playback speed">${uniNoteSpeechRate}x</button>
+            <button class="uni-audio-btn ${isPlaying ? "playing" : ""}" data-audio-block-id="${escapeHtml(b.id)}" data-audio-text="${escapeHtml(podcastJoined)}">
+              ${isPlaying ? `
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
+                <span>Stop</span>
+              ` : `
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <span>Listen</span>
+              `}
+            </button>
+          </div>
+        </div>
+        <div class="uni-podcast-text">
+          ${b.podcast.map(pText => `<p>${escapeHtml(pText)}</p>`).join("")}
+        </div>
+      </div>
+    ` : "";
+
+    const recallQuestionsHtml = (b.quickRecall && b.quickRecall.length) ? `
+      <div class="uni-recall-card">
+        <div class="uni-recall-header">
+          <div class="uni-recall-title-group">
+            <span class="uni-recall-badge">Quick Recall</span>
+            <span style="font-size:12px; font-weight:600; color:var(--muted);">Self-Test Active Recall</span>
+          </div>
+          <button class="uni-recall-reveal-btn" data-recall-toggle="${escapeHtml(b.id)}">
+            ${isRecallRevealed ? "Hide Answer Guide" : "Reveal Answer Guide"}
+          </button>
+        </div>
+        <div class="uni-recall-q-list">
+          ${b.quickRecall.map(q => `<div class="uni-recall-q-item">❓ ${escapeHtml(q)}</div>`).join("")}
+        </div>
+        ${isRecallRevealed ? `
+          <div class="uni-recall-answer-box">
+            <strong>Key takeaway for this block:</strong>
+            <ul style="margin:6px 0 0 16px; padding:0;">
+              ${(b.notes || []).slice(0, 3).map(n => `<li>${escapeHtml(n)}</li>`).join("")}
+            </ul>
+          </div>
+        ` : ""}
+      </div>
+    ` : "";
+
+    return `
+      <article class="uni-block-card" id="${escapeHtml(b.id)}">
+        <header class="uni-block-header">
+          <div>
+            <div class="uni-block-badges">
+              <span class="uni-block-num-pill">BLOCK ${String(b.number).padStart(2, "0")}</span>
+              <span class="uni-block-cat-pill">${escapeHtml(b.category)}</span>
+            </div>
+            <h2 class="uni-block-title">${escapeHtml(b.title)}</h2>
+          </div>
+        </header>
+
+        ${b.image ? `
+          <div class="uni-diagram-frame" data-diagram-src="${escapeHtml(b.image)}" data-diagram-title="${escapeHtml(b.title)}">
+            <img src="${escapeHtml(b.image)}" alt="${escapeHtml(b.title)} anatomical diagram" class="uni-diagram-img" loading="lazy">
+            <span class="uni-diagram-caption">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+              Click diagram to expand full size
+            </span>
+          </div>
+        ` : ""}
+
+        <div class="uni-notes-section">
+          <h3 class="uni-section-subhead">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            Key Anatomical Facts &amp; Landmarks
+          </h3>
+          <ul class="uni-notes-list">
+            ${notesListHtml}
+          </ul>
+        </div>
+
+        ${podcastHtml}
+        ${recallQuestionsHtml}
+      </article>
+    `;
+  };
+
+  // Filter Bar HTML
+  const filterPillsHtml = categories.map(cat => {
+    const label = cat === "all" ? `All Blocks (${totalBlocks})` : cat;
+    const isActive = uniNoteCategoryFilter === cat;
+    return `<button class="uni-note-filter-pill ${isActive ? "active" : ""}" data-category-filter="${escapeHtml(cat)}">${escapeHtml(label)}</button>`;
+  }).join("");
+
+  // Glossary HTML
+  const glossaryHtml = (noteData.glossary && noteData.glossary.length && uniNoteGlossaryOpen) ? `
+    <section class="uni-glossary-card">
+      <div class="uni-glossary-header">
+        <div class="uni-glossary-title-group">
+          <h3 class="uni-glossary-title">Essential Anatomical Terms</h3>
+          <span class="uni-glossary-badge">${noteData.glossary.length} Defined Terms</span>
+        </div>
+        <button class="uni-note-tool-btn" id="uni-glossary-close-btn" style="padding:4px 10px;">Close ✕</button>
+      </div>
+      <div class="uni-glossary-grid">
+        ${noteData.glossary.map(termObj => `
+          <div class="uni-term-card">
+            <span class="uni-term-name">${escapeHtml(termObj.term)}</span>
+            <span class="uni-term-def">${escapeHtml(termObj.definition)}</span>
+          </div>
+        `).join("")}
+      </div>
+    </section>
+  ` : "";
+
+  // Content body depending on view mode
+  let contentBodyHtml = "";
+
+  if (uniNoteViewMode === "step") {
+    const progressPercent = Math.round((activeBlock.number / totalBlocks) * 100);
+    const selectOptionsHtml = allBlocks.map(b => `
+      <option value="${b.number}" ${b.number === activeBlock.number ? "selected" : ""}>
+        Block ${String(b.number).padStart(2, "0")}: ${escapeHtml(b.title)}
+      </option>
+    `).join("");
+
+    contentBodyHtml = `
+      <div class="uni-note-step-tracker">
+        <div class="uni-step-info">
+          <span class="uni-step-number-badge">Step ${activeBlock.number} of ${totalBlocks}</span>
+          <span class="uni-step-title-text">${escapeHtml(activeBlock.title)}</span>
+        </div>
+        <div class="uni-step-progress-outer" title="${progressPercent}% completed">
+          <div class="uni-step-progress-fill" style="width: ${progressPercent}%;"></div>
+        </div>
+        <select class="uni-step-select" id="uni-block-step-selector" aria-label="Jump to specific block">
+          ${selectOptionsHtml}
+        </select>
+      </div>
+
+      ${renderBlockCardHtml(activeBlock)}
+
+      <div class="uni-step-nav-footer">
+        <button class="uni-step-nav-btn prev" id="uni-step-prev" ${activeBlock.number <= 1 ? "disabled" : ""}>
+          ← Previous Block
+        </button>
+        <span style="font-size:12px; font-weight:600; color:var(--muted);">Block ${activeBlock.number} / ${totalBlocks}</span>
+        <button class="uni-step-nav-btn next" id="uni-step-next">
+          ${activeBlock.number >= totalBlocks ? "Review Checklist ✓" : "Next Block →"}
+        </button>
+      </div>
+    `;
+  } else {
+    // Continuous Full Document View
+    const blocksHtml = filteredBlocks.map(b => renderBlockCardHtml(b)).join("");
+    contentBodyHtml = `
+      <div class="uni-note-continuous-stack">
+        ${blocksHtml}
+      </div>
+    `;
+  }
+
+  // Checklist Card HTML
+  const checklistHtml = `
+    <section class="uni-checklist-card" id="checklist">
+      <div class="uni-checklist-header">
+        <h3 class="uni-checklist-title">Self-Assessment Mastery Checklist</h3>
+        <span class="uni-checklist-score-pill" id="uni-checklist-score-pill">${checkedCount} / ${checklistItems.length} Mastered</span>
+      </div>
+      <p style="margin:0; font-size:13.5px; color:var(--muted);">Check off each anatomical concept you are confident explaining before attempting the quiz:</p>
+      <div class="uni-checklist-items">
+        ${checklistItems.map((itemText, idx) => {
+          const isChecked = Boolean(savedChecks[idx]);
+          return `
+            <div class="uni-check-row ${isChecked ? "checked" : ""}" data-check-index="${idx}" role="checkbox" aria-checked="${isChecked}" tabindex="0">
+              <span class="uni-check-box">${isChecked ? "✓" : ""}</span>
+              <span class="uni-check-text">${escapeHtml(itemText)}</span>
+            </div>
+          `;
+        }).join("")}
+      </div>
+    </section>
+  `;
+
+  // Final Practice Call to Action Card
+  const ctaCardHtml = `
+    <section class="uni-note-cta-card">
+      <div class="uni-note-cta-text">
+        <h3>Ready to test your anatomical knowledge?</h3>
+        <p>Challenge yourself with the high-yield MCQs for Bones of the Upper Limb in ANA 201.</p>
+      </div>
+      <button class="uni-note-cta-btn" id="uni-note-start-practice">
+        <span>Start Practice Quiz</span>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </section>
+  `;
+
+  // Hero Card HTML
+  const heroHtml = `
+    <header class="uni-note-hero">
+      <span class="uni-note-hero-tagline">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-0-5.5H20"/><path d="M8 7h8M8 11h8M8 15h4"/></svg>
+        Illustrated Notebook · ${escapeHtml(noteData.courseCode || "ANA 201")}
+      </span>
+      <h1 class="uni-note-hero-title">${escapeHtml(noteData.noteTitle || "Bones of the Upper Limb")}</h1>
+      <p class="uni-note-hero-subtitle">${escapeHtml(noteData.subtitle || "")}</p>
+      
+      <div class="uni-note-hero-pills">
+        <span class="uni-note-meta-pill">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          17 High-Yield Diagrams
+        </span>
+        <span class="uni-note-meta-pill">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+          Audio Podcast Walkthrough
+        </span>
+        <span class="uni-note-meta-pill">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Quick Recall Self-Tests
+        </span>
+      </div>
+
+      <div class="uni-note-toolbar">
+        <div class="uni-note-mode-switch" role="group" aria-label="Reading mode">
+          <button type="button" class="uni-note-mode-btn ${uniNoteViewMode === "step" ? "active" : ""}" id="uni-mode-step">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Step-by-Step Focus
+          </button>
+          <button type="button" class="uni-note-mode-btn ${uniNoteViewMode === "all" ? "active" : ""}" id="uni-mode-all">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            Continuous Reading
+          </button>
+        </div>
+
+        <div class="uni-note-quick-triggers">
+          <button type="button" class="uni-note-tool-btn ${uniNoteGlossaryOpen ? "active" : ""}" id="uni-glossary-toggle">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            <span>Glossary (${noteData.glossary ? noteData.glossary.length : 8})</span>
+          </button>
+          <a href="#checklist" class="uni-note-tool-btn" style="text-decoration:none;">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span>Checklist</span>
+          </a>
+        </div>
+      </div>
+    </header>
+  `;
+
+  const noteContainerHtml = `
+    <div class="uni-note-container">
+      ${heroHtml}
+      ${glossaryHtml}
+      <div class="uni-note-filter-bar">
+        ${filterPillsHtml}
+      </div>
+      ${contentBodyHtml}
+      ${checklistHtml}
+      ${ctaCardHtml}
+    </div>
+  `;
+
+  app.innerHTML = uniShell(noteContainerHtml, breadcrumbs);
+  bindShell();
+  bindUniCrumbs(breadcrumbs);
+
+  // Bind Mode Toggle
+  document.querySelector("#uni-mode-step")?.addEventListener("click", () => {
+    uniNoteViewMode = "step";
+    render();
+  });
+  document.querySelector("#uni-mode-all")?.addEventListener("click", () => {
+    uniNoteViewMode = "all";
+    render();
+  });
+
+  // Bind Glossary Toggle
+  document.querySelector("#uni-glossary-toggle")?.addEventListener("click", () => {
+    uniNoteGlossaryOpen = !uniNoteGlossaryOpen;
+    render();
+  });
+  document.querySelector("#uni-glossary-close-btn")?.addEventListener("click", () => {
+    uniNoteGlossaryOpen = false;
+    render();
+  });
+
+  // Bind Category Filters
+  document.querySelectorAll("[data-category-filter]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const cat = btn.dataset.categoryFilter;
+      uniNoteCategoryFilter = cat;
+      if (uniNoteViewMode === "step" && cat !== "all") {
+        const firstInCat = allBlocks.find(b => b.category === cat);
+        if (firstInCat) uniNoteActiveBlock = firstInCat.number;
+      }
+      render();
+    });
+  });
+
+  // Bind Step Selector dropdown
+  document.querySelector("#uni-block-step-selector")?.addEventListener("change", (e) => {
+    uniNoteActiveBlock = Number(e.target.value) || 1;
+    stopUniNoteAudio();
+    render();
+  });
+
+  // Bind Step Prev / Next
+  document.querySelector("#uni-step-prev")?.addEventListener("click", () => {
+    if (uniNoteActiveBlock > 1) {
+      uniNoteActiveBlock -= 1;
+      stopUniNoteAudio();
+      window.scrollTo({ top: 200, behavior: "smooth" });
+      render();
+    }
+  });
+
+  document.querySelector("#uni-step-next")?.addEventListener("click", () => {
+    if (uniNoteActiveBlock < totalBlocks) {
+      uniNoteActiveBlock += 1;
+      stopUniNoteAudio();
+      window.scrollTo({ top: 200, behavior: "smooth" });
+      render();
+    } else {
+      document.querySelector("#checklist")?.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+
+  // Bind Audio Play / Stop buttons
+  document.querySelectorAll("[data-audio-block-id]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const blockId = btn.dataset.audioBlockId;
+      const textToSpeak = btn.dataset.audioText || "";
+      toggleUniNoteAudio(blockId, textToSpeak);
+    });
+  });
+
+  // Bind Audio Speed cycle (1x -> 1.25x -> 1.5x -> 1x)
+  document.querySelectorAll("[data-audio-speed-toggle]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (uniNoteSpeechRate === 1.0) uniNoteSpeechRate = 1.25;
+      else if (uniNoteSpeechRate === 1.25) uniNoteSpeechRate = 1.5;
+      else uniNoteSpeechRate = 1.0;
+      showToast(`Audio speed: ${uniNoteSpeechRate}x`);
+      render();
+    });
+  });
+
+  // Bind Quick Recall Reveal buttons
+  document.querySelectorAll("[data-recall-toggle]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const blockId = btn.dataset.recallToggle;
+      uniNoteRevealedMap[blockId] = !uniNoteRevealedMap[blockId];
+      render();
+    });
+  });
+
+  // Bind Diagram Lightbox Triggers
+  document.querySelectorAll("[data-diagram-src]").forEach(frame => {
+    frame.addEventListener("click", () => {
+      const src = frame.dataset.diagramSrc;
+      const title = frame.dataset.diagramTitle || "Anatomical Diagram";
+      if (src) showDiagramLightbox(src, title);
+    });
+  });
+
+  // Bind Checklist interactive rows
+  document.querySelectorAll(".uni-check-row").forEach(row => {
+    const handleCheck = () => {
+      const idx = row.dataset.checkIndex;
+      savedChecks[idx] = !savedChecks[idx];
+      try { localStorage.setItem(checklistKey, JSON.stringify(savedChecks)); } catch {}
+      const newCheckedCount = checklistItems.filter((_, i) => Boolean(savedChecks[i])).length;
+      row.classList.toggle("checked", Boolean(savedChecks[idx]));
+      row.setAttribute("aria-checked", String(Boolean(savedChecks[idx])));
+      const box = row.querySelector(".uni-check-box");
+      if (box) box.textContent = savedChecks[idx] ? "✓" : "";
+      const pill = document.querySelector("#uni-checklist-score-pill");
+      if (pill) pill.textContent = `${newCheckedCount} / ${checklistItems.length} Mastered`;
+      if (newCheckedCount === checklistItems.length) {
+        showToast("🎉 Excellent! All 7 checklist competencies mastered!");
+      }
+    };
+    row.addEventListener("click", handleCheck);
+    row.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        handleCheck();
+      }
+    });
+  });
+
+  // Bind Practice CTA
+  document.querySelector("#uni-note-start-practice")?.addEventListener("click", () => {
+    stopUniNoteAudio();
+    startUniPractice(noteData.courseCode || "ANA 201", "Bones of the Upper Limb", "data/university/anatomy/200/questions-ana201-bones.json");
+  });
 }
