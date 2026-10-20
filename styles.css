@@ -2946,17 +2946,6 @@ select:focus, textarea:focus, input:focus {
   box-sizing: border-box;
 }
 
-.uni-mixed-practice-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #0C2518 0%, #2D6A4F 50%, #86EFAC 100%);
-  z-index: 2;
-}
-
 .uni-mixed-card-header {
   display: flex;
   align-items: center;
@@ -3263,6 +3252,11 @@ select:focus, textarea:focus, input:focus {
   border-color: #0C2518;
   color: #ffffff;
   box-shadow: 0 2px 6px rgba(12, 37, 24, 0.18);
+}
+
+.uni-target-pill[data-val="0"] {
+  font-size: 16px;
+  line-height: 1;
 }
 
 .uni-mixed-meta-dot {
@@ -5753,7 +5747,6 @@ body.shield-active #main {
 .uni-term-card {
   background: var(--paper);
   border: 1px solid var(--line);
-  border-left: 3px solid var(--brand-accent);
   border-radius: var(--radius-sm);
   padding: 10px 14px;
   display: flex;
@@ -6173,8 +6166,7 @@ body.shield-active #main {
 /* Interactive Quick Recall Card */
 .uni-recall-card {
   background: #ffffff;
-  border: 1px solid rgba(217, 119, 6, 0.25);
-  border-left: 4px solid var(--ochre);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 18px 20px;
   display: flex;
@@ -6200,8 +6192,8 @@ body.shield-active #main {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--ochre);
-  background: var(--ochre-soft);
+  color: var(--forest);
+  background: var(--forest-soft);
   padding: 3px 8px;
   border-radius: 10px;
 }
@@ -6237,18 +6229,18 @@ body.shield-active #main {
 
 .uni-recall-reveal-btn:hover {
   background: var(--surface);
-  border-color: var(--ochre);
-  color: var(--ochre);
+  border-color: var(--forest);
+  color: var(--forest);
 }
 
 .uni-recall-answer-box {
-  background: var(--ochre-soft);
-  border: 1px solid rgba(217, 119, 6, 0.3);
+  background: var(--paper);
+  border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   padding: 12px 16px;
   font-size: 13.5px;
   line-height: 1.5;
-  color: #78350f;
+  color: var(--ink-secondary);
   animation: fadeIn 0.2s ease;
 }
 

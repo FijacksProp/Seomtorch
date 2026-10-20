@@ -1,4 +1,4 @@
-const CACHE = "seomtorch-v106";
+const CACHE = "seomtorch-v107";
 const APP_ASSETS = [
   "./",
   "index.html",

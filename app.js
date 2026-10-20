@@ -3793,7 +3793,7 @@ async function showTopicConfigModal(courseCode, topicTitle, dataFile) {
         <div class="uni-target-card">
           <div class="uni-target-label">
             <span class="uni-target-name">Time Limit</span>
-            <span class="uni-target-hint">0 = Untimed · up to 180m</span>
+            <span class="uni-target-hint">0 = Untimed (∞) · up to 180m</span>
           </div>
           <div class="uni-stepper-wrap">
             <button type="button" class="uni-stepper-btn" id="uni-modal-m-dec" aria-label="Decrease time limit">−</button>
@@ -3804,7 +3804,7 @@ async function showTopicConfigModal(courseCode, topicTitle, dataFile) {
             <button type="button" class="uni-stepper-btn" id="uni-modal-m-inc" aria-label="Increase time limit">+</button>
           </div>
           <div class="uni-target-pills" id="uni-modal-m-pills">
-            <button type="button" class="uni-target-pill" data-val="0">Untimed</button>
+            <button type="button" class="uni-target-pill" data-val="0" title="Untimed (No time limit)" aria-label="Untimed">∞</button>
             <button type="button" class="uni-target-pill" data-val="5">5m</button>
             <button type="button" class="uni-target-pill" data-val="10">10m</button>
             <button type="button" class="uni-target-pill active" data-val="15">15m</button>
@@ -3859,10 +3859,10 @@ async function showTopicConfigModal(courseCode, topicTitle, dataFile) {
     const mVal = Math.max(0, Math.min(180, parseInt(inputM?.value, 10) || 0));
 
     if (mVal === 0) {
-      if (unitM) unitM.textContent = "guided";
+      if (unitM) unitM.textContent = "guided (∞)";
       paceBanner?.classList.add("untimed");
       if (paceIcon) paceIcon.textContent = "📖";
-      if (paceHead) paceHead.textContent = "Guided Untimed Practice";
+      if (paceHead) paceHead.textContent = "Guided Untimed Practice (∞)";
       if (paceSub) paceSub.textContent = `No time pressure · ${qVal} questions · Immediate rationale & answers after each question.`;
     } else {
       if (unitM) unitM.textContent = "minutes";
