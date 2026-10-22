@@ -127,7 +127,7 @@ let uniNoteGlossaryOpen = false;
 let uniNotePlayingBlockId = null;
 let uniNoteSpeechRate = 1.0;
 let uniNoteRevealedMap = {};
-let uniNotePodcastOpenMap = {};
+let uniNoteTranscriptOpenMap = {};
 
 const AVATAR_PRESETS = [
   { id: "varsity-male", name: "Varsity (Male)", persona: "Varsity", file: "assets/avatars/varsity-male.webp" },
@@ -3575,7 +3575,7 @@ async function renderUniCourse() {
       uniNoteTitle = btn.dataset.uniNoteTitle;
       uniNoteActiveBlock = 1;
       uniNoteRevealedMap = {};
-      uniNotePodcastOpenMap = {};
+      uniNoteTranscriptOpenMap = {};
       uniRoute = "note";
       window.scrollTo({ top: 0, behavior: "smooth" });
       render();
@@ -4692,12 +4692,19 @@ async function renderUniNote() {
       </li>`;
     }).join("");
 
-    const isPodcastOpen = Boolean(uniNotePodcastOpenMap[b.id] || isPlaying);
+    const isTranscriptOpen = Boolean(uniNoteTranscriptOpenMap[b.id]);
+    let podcastSubtitle = "Interactive dialogue & voice walkthrough";
+    if (isPlaying) {
+      podcastSubtitle = `Audio guide playing (${uniNoteSpeechRate}x) • Tap Stop to pause`;
+    } else if (isTranscriptOpen) {
+      podcastSubtitle = "Transcript visible • Tap Play to listen";
+    }
+
     const podcastHtml = (b.podcast && b.podcast.length) ? `
-      <div class="uni-podcast-card ${isPodcastOpen ? "expanded" : "collapsed"}">
-        <div class="uni-podcast-header" data-podcast-toggle="${escapeHtml(b.id)}" role="button" tabindex="0" aria-expanded="${isPodcastOpen}">
+      <div class="uni-podcast-card ${isTranscriptOpen ? "has-transcript" : ""} ${isPlaying ? "is-playing" : ""}">
+        <div class="uni-podcast-header">
           <div class="uni-podcast-title-wrap">
-            <span class="uni-podcast-icon-badge">
+            <span class="uni-podcast-icon-badge ${isPlaying ? "pulse-badge" : ""}">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
                 <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
@@ -4705,35 +4712,43 @@ async function renderUniNote() {
             </span>
             <div>
               <h4 class="uni-podcast-title">Conversational Audio Guide &amp; Podcast</h4>
-              <span class="uni-podcast-subtitle">${isPodcastOpen ? "Interactive dialogue & voice walkthrough" : "Tap to expand conversational audio guide"}</span>
+              <span class="uni-podcast-subtitle">${escapeHtml(podcastSubtitle)}</span>
             </div>
           </div>
           <div class="uni-podcast-controls">
-            ${isPodcastOpen ? `
-              <button class="uni-audio-speed-btn" data-audio-speed-toggle="true" title="Adjust playback speed" onclick="event.stopPropagation();">${uniNoteSpeechRate}x</button>
-              <button class="uni-audio-btn ${isPlaying ? "playing" : ""}" data-audio-block-id="${escapeHtml(b.id)}" data-audio-text="${escapeHtml(podcastJoined)}" onclick="event.stopPropagation();">
-                ${isPlaying ? `
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
-                  <span>Stop</span>
-                ` : `
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                  <span>Listen</span>
-                `}
-              </button>
-            ` : ""}
-            <button class="uni-podcast-toggle-btn" type="button" aria-label="${isPodcastOpen ? "Collapse podcast" : "Expand podcast"}">
-              <span>${isPodcastOpen ? "Hide" : "Open"}</span>
-              <svg class="uni-podcast-chevron" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="${isPodcastOpen ? "M18 15l-6-6-6 6" : "M6 9l6 6 6-6"}"/>
+            <button class="uni-audio-speed-btn" data-audio-speed-toggle="true" type="button" title="Playback speed (tap to cycle: 1x, 1.25x, 1.5x)">${uniNoteSpeechRate}x</button>
+            <button class="uni-audio-btn ${isPlaying ? "playing" : ""}" type="button" data-audio-block-id="${escapeHtml(b.id)}" data-audio-text="${escapeHtml(podcastJoined)}" aria-label="${isPlaying ? "Stop audio guide" : "Play audio guide"}">
+              ${isPlaying ? `
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
+                <span>Stop</span>
+              ` : `
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <span>Play</span>
+              `}
+            </button>
+            <button class="uni-podcast-transcript-btn ${isTranscriptOpen ? "active" : ""}" type="button" data-transcript-toggle="${escapeHtml(b.id)}" aria-expanded="${isTranscriptOpen}" aria-label="${isTranscriptOpen ? "Hide transcript" : "Show transcript"}">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+              <span>${isTranscriptOpen ? "Hide Transcript" : "Transcript"}</span>
+              <svg class="uni-transcript-chevron ${isTranscriptOpen ? "rotated" : ""}" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="${isTranscriptOpen ? "M18 15l-6-6-6 6" : "M6 9l6 6 6-6"}"/>
               </svg>
             </button>
           </div>
         </div>
-        ${isPodcastOpen ? `
+        ${isTranscriptOpen ? `
           <div class="uni-podcast-text">
+            <div class="uni-transcript-banner">
+              <span class="uni-transcript-badge">Full Transcript</span>
+              <span class="uni-transcript-hint">Read along with the conversational audio walkthrough</span>
+            </div>
             ${b.podcast.map(pText => `<p>${escapeHtml(pText)}</p>`).join("")}
             <div class="uni-podcast-footer-listen">
-              <button class="uni-audio-btn ${isPlaying ? "playing" : ""}" data-audio-block-id="${escapeHtml(b.id)}" data-audio-text="${escapeHtml(podcastJoined)}">
+              <button class="uni-audio-btn ${isPlaying ? "playing" : ""}" type="button" data-audio-block-id="${escapeHtml(b.id)}" data-audio-text="${escapeHtml(podcastJoined)}">
                 ${isPlaying ? `
                   <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
                   <span>Stop Audio Guide</span>
@@ -5055,7 +5070,8 @@ async function renderUniNote() {
 
   // Bind Audio Play / Stop buttons
   document.querySelectorAll("[data-audio-block-id]").forEach(btn => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (e) => {
+      e?.stopPropagation?.();
       const blockId = btn.dataset.audioBlockId;
       const textToSpeak = btn.dataset.audioText || "";
       toggleUniNoteAudio(blockId, textToSpeak);
@@ -5064,7 +5080,8 @@ async function renderUniNote() {
 
   // Bind Audio Speed cycle (1x -> 1.25x -> 1.5x -> 1x)
   document.querySelectorAll("[data-audio-speed-toggle]").forEach(btn => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (e) => {
+      e?.stopPropagation?.();
       if (uniNoteSpeechRate === 1.0) uniNoteSpeechRate = 1.25;
       else if (uniNoteSpeechRate === 1.25) uniNoteSpeechRate = 1.5;
       else uniNoteSpeechRate = 1.0;
@@ -5117,18 +5134,19 @@ async function renderUniNote() {
     });
   });
 
-  // Bind Podcast Accordion Toggle
-  document.querySelectorAll("[data-podcast-toggle]").forEach(header => {
-    const toggle = () => {
-      const blockId = header.dataset.podcastToggle;
-      uniNotePodcastOpenMap[blockId] = !uniNotePodcastOpenMap[blockId];
+  // Bind Podcast Transcript Toggle
+  document.querySelectorAll("[data-transcript-toggle]").forEach(btn => {
+    const toggle = (e) => {
+      e?.stopPropagation?.();
+      const blockId = btn.dataset.transcriptToggle;
+      uniNoteTranscriptOpenMap[blockId] = !uniNoteTranscriptOpenMap[blockId];
       render();
     };
-    header.addEventListener("click", toggle);
-    header.addEventListener("keydown", (e) => {
+    btn.addEventListener("click", toggle);
+    btn.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        toggle();
+        toggle(e);
       }
     });
   });
