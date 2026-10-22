@@ -12,7 +12,8 @@
         {
           "id": "pio-transport-homeostasis",
           "title": "Transport Mechanism and Homeostasis",
-          "status": "coming-soon"
+          "status": "available",
+          "dataFile": "data/university/physiology/200/questions-pio201-transport-homeostasis.json"
         },
         {
           "id": "pio-wbc",

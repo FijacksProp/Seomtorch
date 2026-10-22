@@ -1,0 +1,1066 @@
+{
+  "title": "Transport Mechanism and Homeostasis",
+  "course": "PIO 201",
+  "totalQuestions": 70,
+  "sections": [
+    "Foundations of Homeostasis & Control Systems (Q1-Q15)",
+    "Body Fluid Compartments & Measurement (Q16-Q30)",
+    "Membrane Structure, Permeability & Simple Diffusion (Q31-Q42)",
+    "Osmosis, Osmolality & Tonicity (Q43-Q52)",
+    "Carrier-Mediated Transport & Ion Channels (Q53-Q60)",
+    "Primary & Secondary Active Transport (Q61-Q69)",
+    "Intercellular Junctions & Vesicular Transport (Q70)"
+  ],
+  "questions": [
+    {
+      "id": "pio201-th-1",
+      "text": "The pioneering concept of the constancy of the 'milieu intérieur' (internal environment) was introduced by Claude Bernard, but which American physiologist coined the term 'homeostasis' to define the coordinated physiological processes maintaining this steady state?",
+      "options": [
+        "Walter B. Cannon",
+        "Ernest Starling",
+        "William Harvey",
+        "Arthur Guyton"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Walter B. Cannon",
+      "explanation": "Walter B. Cannon (1926) coined the term 'homeostasis' (from Greek homoios = similar, stasis = standing still) to describe the dynamic self-regulating physiological mechanisms that maintain internal constancy, building upon Claude Bernard's 19th-century concept of the milieu intérieur.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 1
+    },
+    {
+      "id": "pio201-th-2",
+      "text": "In a classical biological negative feedback control system, which functional component compares the monitored variable against the established set-point and generates an error signal?",
+      "options": [
+        "Effector organ",
+        "Integrating / control center",
+        "Afferent sensory pathway",
+        "Sensory receptor"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Integrating / control center",
+      "explanation": "The integrating or control center (often located in the central nervous system or an endocrine gland) receives afferent input from sensory receptors, compares the actual value of the regulated variable against the set-point, and initiates corrective outputs via efferent pathways.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 2
+    },
+    {
+      "id": "pio201-th-3",
+      "text": "The operational effectiveness of a negative feedback control system is quantitatively described as its 'gain'. If a disturbance increases mean arterial pressure from 100 mmHg to 140 mmHg in a baroreceptor-denervated animal, but the same disturbance only raises it to 110 mmHg when intact baroreceptors actively correct the pressure by -30 mmHg with a remaining error of +10 mmHg, what is the gain of the baroreceptor system?",
+      "options": [
+        "-3.0",
+        "+0.33",
+        "-4.0",
+        "+3.0"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. -3.0",
+      "explanation": "Gain is defined mathematically as Gain = Correction / Error. Here, the corrective change is -30 mmHg and the remaining error is +10 mmHg. Thus, Gain = -30 / +10 = -3.0. In physiology, negative feedback gain is typically expressed as a negative number or as an absolute magnitude of 3.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 3
+    },
+    {
+      "id": "pio201-th-4",
+      "text": "During core hypothermia, which neuroanatomical structure functions as the primary central integrating thermostat to trigger cutaneous vasoconstriction, non-shivering thermogenesis, and shivering?",
+      "options": [
+        "Hippocampus",
+        "Posterior and preoptic anterior hypothalamus",
+        "Subthalamic nucleus",
+        "Area postrema of the medulla"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Posterior and preoptic anterior hypothalamus",
+      "explanation": "The preoptic anterior hypothalamus contains thermosensitive neurons that detect core blood temperature and integrate peripheral thermal inputs, while the posterior hypothalamus coordinates cold-defense efferent responses (shivering, cutaneous vasoconstriction, sympathetic activation).",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 4
+    },
+    {
+      "id": "pio201-th-5",
+      "text": "Following a carbohydrate-rich meal, elevated blood glucose stimulates pancreatic beta-cells to secrete insulin, promoting glucose uptake into skeletal muscle and adipose tissue until normoglycemia is restored. This regulation is an example of:",
+      "options": [
+        "Feedforward anticipation",
+        "Negative feedback loop",
+        "Positive feedback cascade",
+        "Rheostasis with set-point resetting"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Negative feedback loop",
+      "explanation": "This represents a quintessential negative feedback loop: the perturbation (hyperglycemia) stimulates a corrective response (insulin secretion and tissue glucose uptake) that counteracts the original disturbance to return the parameter back toward its baseline set-point.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 5
+    },
+    {
+      "id": "pio201-th-6",
+      "text": "Which of the following physiological events operates through an acute, self-amplifying positive feedback mechanism that is ultimately terminated by an external climatic event?",
+      "options": [
+        "The Ferguson reflex during parturition",
+        "The baroreceptor regulation of blood pressure upon standing",
+        "Renal compensation for metabolic acidosis",
+        "The regulation of plasma osmolarity by antidiuretic hormone"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The Ferguson reflex during parturition",
+      "explanation": "The Ferguson reflex is a classic physiological positive feedback loop: fetal head pressure on the cervix activates mechanical stretch receptors, sending neural signals to the hypothalamus to release oxytocin, which strengthens uterine contractions, driving the fetal head further into the cervix until delivery terminates the loop.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 6
+    },
+    {
+      "id": "pio201-th-7",
+      "text": "Why does the blood coagulation cascade represent a safe and physiologically adaptive application of positive feedback within the vascular system?",
+      "options": [
+        "It permanently converts all circulating fibrinogen into insoluble fibrin monomer",
+        "It is self-limiting and rapidly constrained by antithrombin III, protein C/S, and flowing blood dilution",
+        "It does not require any enzymatic amplification steps",
+        "It is completely independent of calcium and phospholipids"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It is self-limiting and rapidly constrained by antithrombin III, protein C/S, and flowing blood dilution",
+      "explanation": "Blood clotting utilizes positive feedback (e.g., thrombin accelerating its own generation via factors V, VIII, and XI) to rapidly seal vascular breaches. It is safe because localized anticoagulant mechanisms (antithrombin III, tissue factor pathway inhibitor, the thrombomodulin-protein C/S pathway) and laminar blood flow confine the clot strictly to the injury site.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 7
+    },
+    {
+      "id": "pio201-th-8",
+      "text": "The rapid depolarizing upstroke (Phase 0) of a neuronal action potential is driven by the 'Hodgkin cycle'. This cycle constitutes a positive feedback mechanism because:",
+      "options": [
+        "Depolarization inactivates sodium channels to reduce conductance",
+        "Depolarization opens voltage-gated Na+ channels, causing Na+ influx which further depolarizes the membrane",
+        "Potassium efflux enhances inward sodium movement",
+        "Calcium uptake stimulates the sodium-potassium ATPase"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Depolarization opens voltage-gated Na+ channels, causing Na+ influx which further depolarizes the membrane",
+      "explanation": "The Hodgkin cycle is an explosive positive feedback loop: initial threshold depolarization opens voltage-gated Na+ channels -> inward Na+ current increases -> membrane potential depolarizes further -> opening more voltage-gated Na+ channels until the membrane potential approaches the sodium equilibrium potential.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 8
+    },
+    {
+      "id": "pio201-th-9",
+      "text": "When severe acute hemorrhage leads to irreversible circulatory shock, which vicious cycle illustrates the catastrophic failure of homeostatic negative feedback?",
+      "options": [
+        "Increased baroreceptor firing restoring cardiac output",
+        "Decreased cardiac output causing coronary hypoperfusion, which further weakens myocardial contractility and depresses output",
+        "Elevated renin release restoring circulating volume and arterial pressure",
+        "Intense splenic contraction replenishing red cell mass"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Decreased cardiac output causing coronary hypoperfusion, which further weakens myocardial contractility and depresses output",
+      "explanation": "In irreversible shock, positive feedback becomes pathological: severely reduced arterial pressure compromises coronary perfusion -> induces progressive myocardial ischemia and acidosis -> reduces cardiac contractility -> lowers cardiac output further, culminating in complete cardiovascular collapse.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 9
+    },
+    {
+      "id": "pio201-th-10",
+      "text": "A trained sprinter exhibits an increased heart rate, elevated blood pressure, and hyperventilation several seconds before the starting gun is fired. This adaptive response is mediated by which control mechanism?",
+      "options": [
+        "Negative feedback response to blood lactic acidosis",
+        "Feedforward (anticipatory) regulation",
+        "Positive feedback hormonal cascade",
+        "Direct peripheral chemoreceptor stimulation"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Feedforward (anticipatory) regulation",
+      "explanation": "Feedforward control produces an anticipatory physiological change in anticipation of an impending disturbance before the regulated variable itself is actually altered, preventing delay and minimizing deviation from the homeostatic set-point.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 10
+    },
+    {
+      "id": "pio201-th-11",
+      "text": "Upon abruptly standing from a supine posture, gravity causes venous pooling in the lower extremities, reducing venous return and stroke volume. The compensatory reflex response involves:",
+      "options": [
+        "Decreased firing of carotid sinus baroreceptors leading to sympathetic activation and vagal withdrawal",
+        "Increased firing of aortic arch baroreceptors stimulating systemic vasodilation",
+        "Direct inhibition of the medullary vasomotor center by atrial natriuretic peptide",
+        "Enhanced parasympathetic efferent stimulation to the sinoatrial node"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Decreased firing of carotid sinus baroreceptors leading to sympathetic activation and vagal withdrawal",
+      "explanation": "Orthostatic venous pooling reduces arterial pressure, decreasing carotid sinus and aortic baroreceptor afferent firing. This disinhibits the medullary vasoconstrictor center and reduces vagal output, prompting reflex tachycardia, increased myocardial contractility, and arteriolar vasoconstriction to restore blood pressure.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 11
+    },
+    {
+      "id": "pio201-th-12",
+      "text": "The regulation of plasma ionized calcium by parathyroid hormone (PTH) involves calcium-sensing receptors (CaSR) located on parathyroid chief cells. How do these receptors govern PTH release?",
+      "options": [
+        "Hypocalcemia stimulates CaSR to directly trigger apoptosis of chief cells",
+        "High ionized calcium activates CaSR (Gq/Gi signaling), which inhibits PTH secretion; low calcium relieves this inhibition",
+        "Low ionized calcium blocks vitamin D hydroxylation in parathyroid mitochondria",
+        "High ionized calcium stimulates PTH transcription through cAMP accumulation"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. High ionized calcium activates CaSR (Gq/Gi signaling), which inhibits PTH secretion; low calcium relieves this inhibition",
+      "explanation": "CaSR on parathyroid chief cells is a G-protein-coupled receptor that is activated by high extracellular ionized Ca2+, initiating downstream signaling that suppresses PTH exocytosis. When extracellular Ca2+ drops, CaSR is inactivated, lifting the tonic inhibition and triggering brisk PTH secretion to restore calcemia.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 12
+    },
+    {
+      "id": "pio201-th-13",
+      "text": "In response to chronic tissue hypoxia (such as ascent to high altitude), peritubular interstitial cells in the renal cortex increase the synthesis and release of erythropoietin (EPO). This negative feedback loop primarily targets:",
+      "options": [
+        "Bone marrow colony-forming unit-erythroid (CFU-E) progenitor cells to stimulate red cell production",
+        "Splenic reticuloendothelial macrophages to accelerate erythrocyte destruction",
+        "Hepatic sinusoidal cells to stimulate albumin production",
+        "Renal proximal tubules to inhibit sodium reabsorption"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Bone marrow colony-forming unit-erythroid (CFU-E) progenitor cells to stimulate red cell production",
+      "explanation": "Renal interstitial cells detect tissue hypoxia via hypoxia-inducible factor 2-alpha (HIF-2a) stabilization, promoting EPO secretion. Circulating EPO binds to receptors on CFU-E and proerythroblasts in the bone marrow, inhibiting apoptosis and promoting erythrocyte differentiation to increase oxygen-carrying capacity.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 13
+    },
+    {
+      "id": "pio201-th-14",
+      "text": "During systemic bacterial infection, endogenous pyrogens (such as interleukin-1 and TNF-alpha) induce fever by inducing local prostaglandin E2 (PGE2) production in the hypothalamic vascular endothelium. Physiologically, fever differs from hyperthermia because in fever:",
+      "options": [
+        "The hypothalamic set-point is upwardly shifted, and homeostatic effector mechanisms actively defend the new higher temperature",
+        "Thermoregulatory mechanisms are paralyzed and core temperature drifts passively with ambient temperature",
+        "Cutaneous sweating and vasodilation are maximally stimulated despite a low body temperature",
+        "The internal temperature rises without any change in metabolic rate"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The hypothalamic set-point is upwardly shifted, and homeostatic effector mechanisms actively defend the new higher temperature",
+      "explanation": "In fever, the hypothalamic thermal set-point is elevated (regulated resetting). The body perceives normal temperature as cold, initiating chills, shivering, and vasoconstriction to actively defend the new, higher set-point. In contrast, hyperthermia occurs when heat production/gain exceeds dissipation capacity with an unaltered set-point.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 14
+    },
+    {
+      "id": "pio201-th-15",
+      "text": "During the late follicular phase of the human menstrual cycle, sustained secretion of high concentrations of 17-beta-estradiol by the mature Graafian follicle triggers the pre-ovulatory luteinizing hormone (LH) surge. This phenomenon is a classic example of:",
+      "options": [
+        "Negative feedback escape by adrenal androgens",
+        "A temporary switch from negative to positive feedback in the neuroendocrine axis",
+        "Direct hypothalamic feedforward autonomous rhythmicity",
+        "Downregulation of anterior pituitary GnRH receptors"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A temporary switch from negative to positive feedback in the neuroendocrine axis",
+      "explanation": "While moderate estrogen levels exert negative feedback on gonadotropin secretion throughout most of the cycle, sustained high estradiol levels (>200 pg/mL for >36 hours) induce a dramatic switch to positive feedback, sensitizing the pituitary to GnRH and stimulating the massive LH surge that triggers ovulation.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 15
+    },
+    {
+      "id": "pio201-th-16",
+      "text": "In a healthy 70-kg adult male with typical body composition, what is the approximate volume of Total Body Water (TBW) and its normal percentage of total body weight?",
+      "options": [
+        "28 L (40%)",
+        "42 L (60%)",
+        "56 L (80%)",
+        "14 L (20%)"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 42 L (60%)",
+      "explanation": "Total Body Water (TBW) accounts for approximately 60% of total body weight in a lean young adult male (70 kg x 0.60 = 42 liters). In females, TBW is slightly lower (~50%, ~35 L for 70 kg) due to a higher proportion of subcutaneous adipose tissue, which is essentially hydrophobic.",
+      "section": "Body Fluid Compartments & Measurement",
+      "questionNumber": 16
+    },
+    {
+      "id": "pio201-th-17",
+      "text": "According to the fundamental '60-40-20 rule' of physiological body fluid distribution in a 70-kg adult, how is total body water divided between the intracellular (ICF) and extracellular (ECF) fluid compartments?",
+      "options": [
+        "ICF = 28 L (40% of body weight); ECF = 14 L (20% of body weight)",
+        "ICF = 14 L (20% of body weight); ECF = 28 L (40% of body weight)",
+        "ICF = 35 L (50% of body weight); ECF = 7 L (10% of body weight)",
+        "ICF = 21 L (30% of body weight); ECF = 21 L (30% of body weight)"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. ICF = 28 L (40% of body weight); ECF = 14 L (20% of body weight)",
+      "explanation": "The 60-40-20 rule designates that TBW is 60% of body weight (~42 L), Intracellular Fluid (ICF) comprises two-thirds of TBW (40% of body weight, ~28 L), and Extracellular Fluid (ECF) comprises one-third of TBW (20% of body weight, ~14 L).",
+      "section": "Body Fluid Compartments & Measurement",
+      "questionNumber": 17
+    },
+    {
+      "id": "pio201-th-18",
+      "text": "The extracellular fluid (ECF) compartment is subdivided into interstitial fluid and blood plasma. What are their respective proportions of the ECF?",
+      "options": [
+        "Interstitial fluid comprises ~3/4 (approx. 10.5–11 L); Plasma comprises ~1/4 (approx. 3–3.5 L)",
+        "Interstitial fluid comprises ~1/2 (7 L); Plasma comprises ~1/2 (7 L)",
+        "Interstitial fluid comprises ~1/4 (3.5 L); Plasma comprises ~3/4 (10.5 L)",
+        "Interstitial fluid comprises ~9/10 (12.6 L); Plasma comprises ~1/10 (1.4 L)"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Interstitial fluid comprises ~3/4 (approx. 10.5–11 L); Plasma comprises ~1/4 (approx. 3–3.5 L)",
+      "explanation": "Within the 14 L ECF compartment, approximately three-quarters (75%, ~10.5–11 L or 15% of body weight) resides in the interstitial fluid bathing parenchymal cells, while one-quarter (25%, ~3–3.5 L or 5% of body weight) circulates as intravascular blood plasma.",
+      "section": "Body Fluid Compartments & Measurement",
+      "questionNumber": 18
+    },
+    {
+      "id": "pio201-th-19",
+      "text": "Which specialized sub-compartment of the extracellular fluid is defined by fluid separated from plasma not merely by capillary endothelium, but also by a continuous layer of epithelial cells?",
+      "options": [
+        "Interstitial fluid",
+        "Transcellular fluid",
+        "Intravascular fluid",
+        "Cytosolic matrix"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Transcellular fluid",
+      "explanation": "Transcellular fluid comprises specialized fluids (~1–2 liters total) formed by active epithelial transport mechanisms, including cerebrospinal fluid (CSF), synovial fluid, intraocular fluid (aqueous humor), and peritoneal, pleural, and pericardial fluids.",
+      "section": "Body Fluid Compartments & Measurement",
+      "questionNumber": 19
+    },
+    {
+      "id": "pio201-th-20",
+      "text": "In the indicator dilution technique (V = [Q - e] / C), which set of properties is essential for an exogenous substance to serve as an accurate tracer for a target fluid compartment?",
+      "options": [
+        "Must be rapidly metabolized, bind non-specifically to membrane lipids, and alter fluid shifts",
+        "Must be non-toxic, distribute evenly and exclusively in the target space, remain un-metabolized, and not alter water distribution",
+        "Must selectively cross the blood-brain barrier and bind irreversibly to chromatin",
+        "Must be highly lipophilic and undergo complete renal tubular secretion"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Must be non-toxic, distribute evenly and exclusively in the target space, remain un-metabolized, and not alter water distribution",
+      "explanation": "An ideal dilution indicator must be non-toxic, distribute exclusively and uniformly throughout the compartment to be measured, be physiologically inert (neither causing nor altering fluid shifts), and remain stable without unmeasured rapid metabolic degradation or excretion during equilibration.",
+      "section": "Body Fluid Compartments & Measurement",
+      "questionNumber": 20
+    },
+    {
+      "id": "pio201-th-21",
+      "text": "Which combination of tracer substances can cross all biological cell membranes freely and is therefore utilized clinically and experimentally to measure Total Body Water (TBW)?",
+      "options": [
+        "Inulin, mannitol, and sucrose",
+        "Deuterium oxide (D2O), tritium oxide (THO), and antipyrine",
+        "Evans blue dye (T-1824) and 125I-labeled serum albumin",
+        "Radiosulfate (35SO4 2-) and radioactive sodium (22Na)"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Deuterium oxide (D2O), tritium oxide (THO), and antipyrine",
+      "explanation": "Deuterium oxide (heavy water, D2O), tritium oxide (THO), and antipyrine (a lipophilic compound) diffuse across both vascular endothelia and cell membranes with equal ease, distributing uniformly throughout both ECF and ICF to accurately measure Total Body Water.",
+      "section": "Body Fluid Compartments & Measurement",
+      "questionNumber": 21
+    },
+    {
+      "id": "pio201-th-22",
+      "text": "Which uncharged polysaccharide easily crosses capillary fenestrations but cannot cross cellular plasma membranes, making it the international gold standard indicator for measuring Extracellular Fluid (ECF) volume?",
+      "options": [
+        "Inulin",
+        "Glycogen",
+        "Dextran-70",
+        "Heparin"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Inulin",
+      "explanation": "Inulin (a fructose polymer of ~5,000 Da) readily filters across capillary walls into the interstitial space but is strictly excluded from cells because mammalian cells lack membrane transport mechanisms or channels for it. Hence, it measures the ECF volume.",
+      "section": "Body Fluid Compartments & Measurement",
+      "questionNumber": 22
+    },
+    {
+      "id": "pio201-th-23",
+      "text": "To measure the intravascular plasma volume directly, which substance is injected because it binds avidly and tightly to endogenous circulating serum albumin?",
+      "options": [
+        "Mannitol",
+        "Evans blue dye (T-1824)",
+        "Tritium oxide",
+        "Antipyrine"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Evans blue dye (T-1824)",
+      "explanation": "Evans blue dye (T-1824) binds with high affinity to plasma albumin upon intravenous injection. Because albumin remains confined within the vascular bed under normal capillary permeability conditions, the dye dilution directly yields the plasma volume.",
+      "section": "Body Fluid Compartments & Measurement",
+      "questionNumber": 23
+    },
+    {
+      "id": "pio201-th-24",
+      "text": "Because there is no known tracer that distributes exclusively into the intracellular fluid (ICF) without entering the extracellular fluid (ECF), how is the ICF volume clinically determined?",
+      "options": [
+        "By measuring plasma volume and multiplying by the hematocrit",
+        "By indirect subtraction: ICF = Total Body Water - Extracellular Fluid Volume",
+        "By measuring transcellular fluid with radioactive sodium",
+        "By direct needle aspiration of red blood cell cytoplasm"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. By indirect subtraction: ICF = Total Body Water - Extracellular Fluid Volume",
+      "explanation": "Because any tracer that enters cells must first pass through and equilibrate with the extracellular fluid, ICF cannot be measured directly. It is calculated by subtracting measured ECF volume from measured Total Body Water (ICF = TBW - ECF). Similarly, Interstitial Fluid = ECF - Plasma Volume.",
+      "section": "Body Fluid Compartments & Measurement",
+      "questionNumber": 24
+    },
+    {
+      "id": "pio201-th-25",
+      "text": "What are the primary cation and primary anions that account for over 90% of the osmotically active particles in normal extracellular fluid (plasma and interstitial fluid)?",
+      "options": [
+        "Potassium (K+) cation; Phosphate and organic protein anions",
+        "Sodium (Na+) cation; Chloride (Cl-) and bicarbonate (HCO3-) anions",
+        "Calcium (Ca2+) cation; Sulfate and lactate anions",
+        "Magnesium (Mg2+) cation; Citrate and pyruvate anions"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Sodium (Na+) cation; Chloride (Cl-) and bicarbonate (HCO3-) anions",
+      "explanation": "Sodium (Na+, ~140–142 mEq/L) is the dominant extracellular cation, balanced electrically by chloride (Cl-, ~103 mEq/L) and bicarbonate (HCO3-, ~24–28 mEq/L). Together, they determine extracellular volume and osmolality.",
+      "section": "Body Fluid Compartments & Measurement",
+      "questionNumber": 25
+    },
+    {
+      "id": "pio201-th-26",
+      "text": "Inside the intracellular fluid (ICF), which mineral cation is maintained at a concentration of approximately 140–150 mEq/L, and which molecules provide the dominant balancing polyanionic charge?",
+      "options": [
+        "Sodium; Chloride and bicarbonate",
+        "Potassium; Organic phosphates (ATP, creatine phosphate) and proteins",
+        "Calcium; Bicarbonate and urea",
+        "Hydrogen ions; Carbonate and lactate"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Potassium; Organic phosphates (ATP, creatine phosphate) and proteins",
+      "explanation": "Intracellular fluid is dominated by potassium (K+, ~140–150 mEq/L) and magnesium (Mg2+, ~40 mEq/L), counterbalanced by non-diffusible polyvalent organic phosphates (ATP, ADP, AMP, phosphorylated glycolytic intermediates) and intracellular proteins.",
+      "section": "Body Fluid Compartments & Measurement",
+      "questionNumber": 26
+    },
+    {
+      "id": "pio201-th-27",
+      "text": "The Gibbs-Donnan equilibrium describes the unequal distribution of diffusible permeable ions across capillary walls and cell membranes caused by the presence of non-diffusible protein anions on one side. A primary consequence of this effect in plasma is:",
+      "options": [
+        "The concentration of diffusible cations (e.g. Na+) is ~5% higher in plasma than in interstitial fluid, while diffusible anions (Cl-) are ~5% lower in plasma",
+        "The concentration of all ions becomes completely identical across the capillary barrier",
+        "Chloride ions are actively pumped out of plasma into the lymphatics",
+        "Plasma becomes hypertonic by more than 100 mOsm/kg compared to interstitial fluid"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The concentration of diffusible cations (e.g. Na+) is ~5% higher in plasma than in interstitial fluid, while diffusible anions (Cl-) are ~5% lower in plasma",
+      "explanation": "Because negatively charged plasma proteins cannot cross capillary walls, they exert an electrostatic attraction that holds a slightly higher concentration of diffusible cations (Na+, K+) in plasma (~1.05 ratio) while repelling diffusible anions (Cl-, HCO3-), making their concentration ~5% higher in protein-poor interstitial fluid.",
+      "section": "Body Fluid Compartments & Measurement",
+      "questionNumber": 27
+    },
+    {
+      "id": "pio201-th-28",
+      "text": "Total serum calcium is normally ~2.4 mmol/L (9.6 mg/dL). Which fraction represents the physiologically active, tightly homeostatically regulated component responsible for neuromuscular transmission, excitation-contraction coupling, and blood clotting?",
+      "options": [
+        "Protein-bound calcium (~40%, mostly bound to albumin)",
+        "Free ionized calcium (Ca2+, ~50%, approx. 1.2 mmol/L)",
+        "Complexed calcium (~10%, bound to citrate and phosphate)",
+        "Intracellular skeletal apatite crystals"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Free ionized calcium (Ca2+, ~50%, approx. 1.2 mmol/L)",
+      "explanation": "Free ionized calcium (Ca2+) constitutes ~50% of total plasma calcium (approx. 1.15–1.30 mmol/L or 4.5–5.2 mg/dL) and is the only biologically active fraction monitored by parathyroid calcium-sensing receptors and responsible for cellular physiological functions.",
+      "section": "Body Fluid Compartments & Measurement",
+      "questionNumber": 28
+    },
+    {
+      "id": "pio201-th-29",
+      "text": "If a patient's plasma volume is determined by Evans blue dye dilution to be 3.0 liters and their venous hematocrit (Hct) is 0.40 (40%), what is their total blood volume (TBV)?",
+      "options": [
+        "4.2 liters",
+        "5.0 liters",
+        "7.5 liters",
+        "1.8 liters"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 5.0 liters",
+      "explanation": "Total Blood Volume = Plasma Volume / (1 - Hematocrit). Substituting the values: TBV = 3.0 L / (1 - 0.40) = 3.0 / 0.60 = 5.0 liters.",
+      "section": "Body Fluid Compartments & Measurement",
+      "questionNumber": 29
+    },
+    {
+      "id": "pio201-th-30",
+      "text": "Under basal sedentary conditions in a temperate climate, the body loses approximately 700 mL of water per day via 'insensible water loss'. What constitutes this route of water loss?",
+      "options": [
+        "Sensible active sweating from eccrine sweat glands",
+        "Continuous evaporation from the respiratory tract (300–400 mL) and passive trans-epidermal diffusion through the skin (300–400 mL)",
+        "Obligatory solute clearance in concentrated urine",
+        "Water secretion in digestive biliary secretions"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Continuous evaporation from the respiratory tract (300–400 mL) and passive trans-epidermal diffusion through the skin (300–400 mL)",
+      "explanation": "Insensible water loss occurs continuously without conscious awareness through moisture evaporation during expired breathing (~300–400 mL/day) and passive diffusion across the keratinized stratum corneum of the skin (~300–400 mL/day). It is entirely separate from active sweating.",
+      "section": "Body Fluid Compartments & Measurement",
+      "questionNumber": 30
+    },
+    {
+      "id": "pio201-th-31",
+      "text": "According to the Singer-Nicolson Fluid Mosaic Model, the biological cell membrane is structurally organized as:",
+      "options": [
+        "A rigid, continuous monolayer of globular carbohydrates coated by peripheral lipids",
+        "A fluid phospholipid bilayer with amphipathic integral proteins embedded across it and peripheral proteins loosely associated at its surfaces",
+        "A protein sandwich with a lipid monolayer enclosed between two continuous protein sheets",
+        "A crystalline lattice of cholesterol polymers anchored by collagen fibrils"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A fluid phospholipid bilayer with amphipathic integral proteins embedded across it and peripheral proteins loosely associated at its surfaces",
+      "explanation": "The Fluid Mosaic Model (1972) depicts the plasma membrane as a dynamic, two-dimensional liquid crystalline phospholipid bilayer whose hydrophobic interior provides a permeability barrier, within which integral transmembrane proteins float and peripheral proteins associate electrostatically.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 31
+    },
+    {
+      "id": "pio201-th-32",
+      "text": "What structural characteristic makes membrane phospholipids ideally suited to form stable bilayers spontaneously in an aqueous environment?",
+      "options": [
+        "They are completely non-polar and hydrophobic throughout their entire structure",
+        "They are amphipathic, possessing polar hydrophilic head groups and non-polar hydrophobic fatty acyl hydrocarbon tails",
+        "They form covalent disulfide cross-links with adjacent water molecules",
+        "They are composed solely of branched carbohydrates"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. They are amphipathic, possessing polar hydrophilic head groups and non-polar hydrophobic fatty acyl hydrocarbon tails",
+      "explanation": "Phospholipids are amphipathic molecules: their charged, polar phosphate-containing heads form hydrogen bonds with ambient water, while their uncharged, hydrophobic fatty acid tails sequester away from water into the bilayer core driven by favorable hydrophobic interactions.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 32
+    },
+    {
+      "id": "pio201-th-33",
+      "text": "How does cholesterol function as a 'bidirectional fluidity buffer' within mammalian plasma membranes?",
+      "options": [
+        "It permanently hydrolyzes fatty acid double bonds at elevated temperatures",
+        "It prevents hydrocarbon tails from packing closely at low temperatures (preventing freezing) and restrains fatty acid movement at high temperatures (preventing excess fluidity)",
+        "It actively pumps hydrogen ions across the lipid core",
+        "It converts all unsaturated fatty acids into saturated sphingolipids"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It prevents hydrocarbon tails from packing closely at low temperatures (preventing freezing) and restrains fatty acid movement at high temperatures (preventing excess fluidity)",
+      "explanation": "Cholesterol's steroid ring intercalates between phospholipid hydrocarbon chains: at body temperature (37°C), it limits phospholipid mobility and reduces membrane permeability to small solutes; at lower temperatures, it disrupts close fatty acid packing, inhibiting gel transition (crystallization).",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 33
+    },
+    {
+      "id": "pio201-th-34",
+      "text": "Biological cell membranes exhibit strict lipid asymmetry between their outer and inner leaflets. Which phospholipid is actively maintained on the inner (cytoplasmic) leaflet by ATP-dependent flippases?",
+      "options": [
+        "Phosphatidylcholine",
+        "Sphingomyelin",
+        "Phosphatidylserine",
+        "Glycolipids (gangliosides)"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Phosphatidylserine",
+      "explanation": "Phosphatidylserine (PS) and phosphatidylethanolamine (PE) are sequestered on the inner cytoplasmic leaflet by ATP-dependent aminophospholipid flippases. In contrast, phosphatidylcholine and sphingomyelin predominate on the extracellular leaflet.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 34
+    },
+    {
+      "id": "pio201-th-35",
+      "text": "When a cell enters programmed cell death (apoptosis), scramblase enzymes activate and flippases become inactivated. What is the critical physiological consequence of the resulting externalization of phosphatidylserine to the outer leaflet?",
+      "options": [
+        "It triggers immediate cellular swelling and osmotic burst",
+        "It serves as an 'eat-me' signal recognized by scavenger receptors on phagocytic macrophages",
+        "It initiates malignant transformation of the cell",
+        "It blocks all transmembrane ion channel conductance"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It serves as an 'eat-me' signal recognized by scavenger receptors on phagocytic macrophages",
+      "explanation": "Externalization of phosphatidylserine to the cell exterior is a signature hallmark of apoptosis. Macrophages express specific receptors (e.g., Tim-4, stabilin-2) that recognize exposed PS as an 'eat-me' signal, mediating non-inflammatory phagocytosis before cell lysis can occur.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 35
+    },
+    {
+      "id": "pio201-th-36",
+      "text": "Specialized, detergent-insoluble membrane microdomains enriched in cholesterol, sphingolipids, and GPI-anchored proteins that serve as organizing platforms for receptor signaling and endocytosis are termed:",
+      "options": [
+        "Lipid rafts",
+        "Desmosomal plaques",
+        "Zonula occludens",
+        "Nuclear pore complexes"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Lipid rafts",
+      "explanation": "Lipid rafts are specialized, dynamic, cholesterol- and sphingolipid-rich membrane microdomains that exist in a liquid-ordered state. They compartmentalize cellular processes by organizing signal transduction complexes (e.g., GPI-anchored proteins, Src-family kinases, receptor tyrosine kinases).",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 36
+    },
+    {
+      "id": "pio201-th-37",
+      "text": "Which structural motif is most commonly utilized by integral transmembrane proteins to span the ~3-nm hydrophobic core of the phospholipid bilayer?",
+      "options": [
+        "An alpha-helix comprised of approximately 20–25 hydrophobic amino acid residues",
+        "A series of hydrophilic beta-turns with exposed carboxylate side chains",
+        "A random coiled loop of basic lysine and arginine residues",
+        "A covalent triple helix of hydroxyproline and glycine"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. An alpha-helix comprised of approximately 20–25 hydrophobic amino acid residues",
+      "explanation": "An alpha-helix composed of ~20 to 25 non-polar (hydrophobic) amino acids (such as leucine, isoleucine, valine, phenylalanine) provides sufficient length (0.54 nm per turn x 5.5 turns = ~3.0 nm) to traverse the bilayer while internally satisfying its peptide backbone hydrogen bonds.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 37
+    },
+    {
+      "id": "pio201-th-38",
+      "text": "Across an artificial, pure phospholipid bilayer without transport proteins, which of the following substances has the highest permeability coefficient for simple diffusion?",
+      "options": [
+        "Sodium ion (Na+)",
+        "D-Glucose",
+        "Oxygen gas (O2)",
+        "Chloride ion (Cl-)"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Oxygen gas (O2)",
+      "explanation": "Small non-polar gas molecules (O2, CO2, N2) dissolve rapidly in the lipid core and have the highest permeability coefficients (~10^-1 to 10^-2 cm/s). Small uncharged polar molecules (water, urea) diffuse at moderate rates, while large uncharged polar molecules (glucose) and charged ions (Na+, Cl-) have virtually zero permeability.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 38
+    },
+    {
+      "id": "pio201-th-39",
+      "text": "According to Fick's first law of diffusion (J = -P * A * [C2 - C1]), which of the following interventions will cause the greatest increase in the net rate of simple diffusion of a lipophilic solute?",
+      "options": [
+        "Doubling membrane thickness",
+        "Doubling the trans-membrane concentration gradient and doubling the available surface area",
+        "Decreasing the oil-water partition coefficient of the solute",
+        "Decreasing ambient temperature from 37°C to 4°C"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Doubling the trans-membrane concentration gradient and doubling the available surface area",
+      "explanation": "In Fick's law, diffusion flux (J) is directly proportional to surface area (A), the partition coefficient (lipid solubility), and the concentration gradient (C1 - C2), and inversely proportional to membrane thickness. Doubling both the gradient and surface area increases net diffusion rate four-fold.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 39
+    },
+    {
+      "id": "pio201-th-40",
+      "text": "The oil-water partition coefficient (K) of a substance is a quantitative measure of its:",
+      "options": [
+        "Electrical charge relative to extracellular sodium",
+        "Relative solubility in a non-polar solvent (oil) versus an aqueous solvent (water)",
+        "Hydration radius in an electric field",
+        "Rate of metabolic clearance by hepatocytes"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Relative solubility in a non-polar solvent (oil) versus an aqueous solvent (water)",
+      "explanation": "The partition coefficient (K = [Solute in oil] / [Solute in water]) quantifies lipophilicity. The higher the K value, the more lipophilic the substance and the more readily it dissolves in and crosses the hydrophobic core of the plasma membrane.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 40
+    },
+    {
+      "id": "pio201-th-41",
+      "text": "Although water is polar, it crosses cell membranes with surprising speed. The Nobel Prize-winning discovery by Peter Agre revealed that this rapid transmembrane movement is predominantly facilitated by:",
+      "options": [
+        "Voltage-gated potassium leak channels",
+        "Aquaporin water channels (AQPs)",
+        "ATP-dependent water pumps",
+        "Sodium-glucose symporters (SGLT1)"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Aquaporin water channels (AQPs)",
+      "explanation": "Peter Agre discovered aquaporins (specifically AQP1 in erythrocytes and renal tubules), tetrameric membrane channels with hourglass-shaped water-selective pores that allow bidirectional passage of water molecules single file (~3 billion water molecules/second) while excluding protons.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 41
+    },
+    {
+      "id": "pio201-th-42",
+      "text": "Which specific aquaporin isoform is stored in intracellular endosomes and is inserted into the apical membrane of renal collecting duct principal cells under the direct influence of antidiuretic hormone (ADH / vasopressin)?",
+      "options": [
+        "Aquaporin-1 (AQP1)",
+        "Aquaporin-2 (AQP2)",
+        "Aquaporin-3 (AQP3)",
+        "Aquaporin-4 (AQP4)"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Aquaporin-2 (AQP2)",
+      "explanation": "Aquaporin-2 (AQP2) is the vasopressin-regulated water channel in the renal collecting duct. Binding of ADH to basolateral V2 receptors activates Gs-cAMP-PKA signaling, phosphorylating AQP2 and triggering exocytic insertion of AQP2 vesicles into the apical membrane to promote water reabsorption.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 42
+    },
+    {
+      "id": "pio201-th-43",
+      "text": "Van 't Hoff's law allows calculation of osmotic pressure (pi = sigma * C * R * T). What physical phenomenon does osmotic pressure fundamentally represent in biological fluids?",
+      "options": [
+        "The hydrostatic pressure required to completely stop the net osmotic movement of water across a semipermeable membrane",
+        "The gravitational pull on dissolved macromolecular proteins",
+        "The frictional resistance of blood flow against arteriolar walls",
+        "The electrical potential difference created by potassium efflux"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The hydrostatic pressure required to completely stop the net osmotic movement of water across a semipermeable membrane",
+      "explanation": "Osmotic pressure is defined as the precise hydrostatic pressure that must be applied to a concentrated solution to prevent the net inward osmotic flow of pure water across a semipermeable membrane separating the two compartments.",
+      "section": "Osmosis, Osmolality & Tonicity",
+      "questionNumber": 43
+    },
+    {
+      "id": "pio201-th-44",
+      "text": "Staverman's reflection coefficient (sigma) measures the relative permeability of a membrane to a specific solute. If sigma = 1 for a solute across a cellular membrane, this indicates that:",
+      "options": [
+        "The membrane is completely impermeable to the solute, and it exerts its full theoretical osmotic pressure",
+        "The solute is as permeable as water and cannot generate any effective osmotic pressure",
+        "The solute is actively pumped against its chemical gradient",
+        "The solute undergoes instantaneous enzymatic destruction upon contacting the membrane"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The membrane is completely impermeable to the solute, and it exerts its full theoretical osmotic pressure",
+      "explanation": "When sigma = 1, the solute is completely 'reflected' by the membrane (impermeable, such as albumin across capillary walls or mannitol across cell membranes), exerting its full theoretical osmotic pressure. When sigma = 0, the solute is as permeable as water and exerts zero effective osmotic pressure.",
+      "section": "Osmosis, Osmolality & Tonicity",
+      "questionNumber": 44
+    },
+    {
+      "id": "pio201-th-45",
+      "text": "The normal osmolality of human plasma is maintained within a remarkably narrow physiological range of approximately 285–295 mOsm/kg H2O. Which central osmoreceptors detect changes as small as 1% to regulate thirst and antidiuretic hormone (ADH) secretion?",
+      "options": [
+        "Choroid plexus ependymal cells",
+        "Osmoreceptive neurons in the organum vasculosum of the lamina terminalis (OVLT) and subfornical organ (SFO)",
+        "Aortic arch baroreceptors",
+        "Macula densa cells of the juxtaglomerular apparatus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Osmoreceptive neurons in the organum vasculosum of the lamina terminalis (OVLT) and subfornical organ (SFO)",
+      "explanation": "The circumventricular organs—specifically the organum vasculosum of the lamina terminalis (OVLT) and subfornical organ (SFO)—lack a blood-brain barrier. Their specialized osmosensitive neurons swell or shrink in response to minute (1–2%) shifts in systemic plasma osmolality, signaling the supraoptic and paraventricular nuclei to modulate ADH release.",
+      "section": "Osmosis, Osmolality & Tonicity",
+      "questionNumber": 45
+    },
+    {
+      "id": "pio201-th-46",
+      "text": "Calculated serum osmolality is estimated as: 2*[Na+] + [Glucose]/18 + [BUN]/2.8 (with glucose and BUN in mg/dL). If a patient's measured serum osmolality is 330 mOsm/kg while calculated osmolality is 290 mOsm/kg, the resulting 'osmolal gap' of 40 mOsm/kg suggests:",
+      "options": [
+        "Severe respiratory alkalosis with hyperventilation",
+        "The presence of unmeasured low-molecular-weight exogenous toxins (e.g. ethylene glycol, methanol, or ethanol)",
+        "Excessive endogenous albumin synthesis",
+        "Profound hypovolemic dehydration without solute changes"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The presence of unmeasured low-molecular-weight exogenous toxins (e.g. ethylene glycol, methanol, or ethanol)",
+      "explanation": "An osmolal gap > 10 mOsm/kg indicates the presence of unmeasured, osmotically active foreign solutes in the circulation. Common causes include toxic alcohol ingestions (methanol, ethylene glycol, isopropanol), ethanol intoxication, or high-dose mannitol infusion.",
+      "section": "Osmosis, Osmolality & Tonicity",
+      "questionNumber": 46
+    },
+    {
+      "id": "pio201-th-47",
+      "text": "If human red blood cells (normal intracellular osmolality ~290 mOsm/kg) are suspended in a 100 mOsm/kg NaCl hypotonic solution, what immediate physical change will occur?",
+      "options": [
+        "Water leaves the erythrocytes rapidly, leading to cellular dehydration and crenation",
+        "Water enters the erythrocytes by osmosis down its chemical gradient, causing cell swelling and eventual osmotic lysis (hemolysis)",
+        "Sodium is actively extruded until intracellular osmolality matches 100 mOsm/kg without any volume change",
+        "Potassium instantly precipitates as insoluble crystals"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Water enters the erythrocytes by osmosis down its chemical gradient, causing cell swelling and eventual osmotic lysis (hemolysis)",
+      "explanation": "Because intracellular non-penetrating solutes create a higher osmotic pressure inside the erythrocyte than in the hypotonic medium, water rushes into the cells via osmosis, causing them to swell until the membrane elastic limit is exceeded, resulting in hemolysis.",
+      "section": "Osmosis, Osmolality & Tonicity",
+      "questionNumber": 47
+    },
+    {
+      "id": "pio201-th-48",
+      "text": "Mannitol is administered intravenously in neurosurgical emergencies to reduce acute intracranial pressure in cerebral edema. By which physiological mechanism does mannitol achieve brain dehydration?",
+      "options": [
+        "It crosses the blood-brain barrier and enters astrocytes, forcing potassium out",
+        "It remains confined to the cerebral vascular lumen (sigma = 1 across the blood-brain barrier), creating an osmotic gradient that extracts water from parenchymal brain tissue into blood",
+        "It directly stimulates the brainstem respiratory center to blow off carbon dioxide",
+        "It binds to GABA-A receptors to decrease cerebrospinal fluid production"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It remains confined to the cerebral vascular lumen (sigma = 1 across the blood-brain barrier), creating an osmotic gradient that extracts water from parenchymal brain tissue into blood",
+      "explanation": "Mannitol does not cross an intact blood-brain barrier (reflection coefficient sigma ~1.0). Consequently, hypertonic mannitol raises intravascular plasma osmolality above that of brain interstitium, drawing free water out of brain parenchymal cells into the circulation and lowering intracranial pressure.",
+      "section": "Osmosis, Osmolality & Tonicity",
+      "questionNumber": 48
+    },
+    {
+      "id": "pio201-th-49",
+      "text": "In a classical Darrow-Yannet fluid balance analysis, what shifts in extracellular and intracellular fluid volumes and osmolarities occur following intravenous infusion of 2.0 liters of isotonic (0.9%) saline?",
+      "options": [
+        "ECF volume increases; ECF osmolarity remains unchanged; ICF volume and osmolarity remain completely unchanged",
+        "ECF and ICF volumes both increase equally; overall osmolarity decreases",
+        "ECF volume decreases; ICF volume increases due to sodium-potassium ATPase activation",
+        "ECF volume increases; ICF volume shrinks due to profound hyperosmotic drawing"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. ECF volume increases; ECF osmolarity remains unchanged; ICF volume and osmolarity remain completely unchanged",
+      "explanation": "Because 0.9% NaCl is isosmotic with body fluids and sodium is predominantly confined to the extracellular compartment, the infused fluid distributes entirely within the ECF. ECF volume increases without any change in ECF osmolarity. Because no osmotic gradient is generated across cell membranes, ICF volume and ICF osmolarity remain unaltered.",
+      "section": "Osmosis, Osmolality & Tonicity",
+      "questionNumber": 49
+    },
+    {
+      "id": "pio201-th-50",
+      "text": "A desert traveler deprived of water for 48 hours loses hypotonic sweat through the skin and respiratory tract (hyperosmotic volume contraction). According to Darrow-Yannet analysis, what happens to the fluid compartments?",
+      "options": [
+        "ECF volume decreases; ECF and ICF osmolarities both increase; ICF volume decreases due to osmotic water shift out of cells",
+        "ECF volume decreases; ICF volume increases; both osmolarities decrease",
+        "ECF volume increases; ICF volume remains completely normal",
+        "ICF volume remains normal because cells are protected from dehydration by aquaporin closure"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. ECF volume decreases; ECF and ICF osmolarities both increase; ICF volume decreases due to osmotic water shift out of cells",
+      "explanation": "Loss of hypotonic fluid raises ECF osmolarity and reduces ECF volume. The hyperosmolar ECF creates an osmotic driving force that extracts water out of cells into the ECF. Consequently, at equilibrium, both ECF and ICF volumes are contracted, and both compartments share a higher osmolarity.",
+      "section": "Osmosis, Osmolality & Tonicity",
+      "questionNumber": 50
+    },
+    {
+      "id": "pio201-th-51",
+      "text": "In the syndrome of inappropriate antidiuretic hormone secretion (SIADH), excess ADH causes renal water retention (hyposmotic volume expansion). What is the equilibrium state of the fluid compartments?",
+      "options": [
+        "ECF and ICF volumes both expand, while both ECF and ICF osmolarities decrease",
+        "ECF volume expands, but ICF volume contracts due to sodium shifts",
+        "ECF volume contracts due to compensatory atrial natriuretic peptide secretion",
+        "Only the plasma volume expands, leaving interstitial and intracellular volumes untouched"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. ECF and ICF volumes both expand, while both ECF and ICF osmolarities decrease",
+      "explanation": "Retained pure water dilutes the ECF, lowering its osmolarity. This creates an osmotic gradient that drives water from the hypotonic ECF into cells. At equilibrium, both ECF and ICF volumes are expanded, and both compartments exhibit reduced osmolarity.",
+      "section": "Osmosis, Osmolality & Tonicity",
+      "questionNumber": 51
+    },
+    {
+      "id": "pio201-th-52",
+      "text": "Why is a 5% dextrose in water (D5W) solution considered 'iso-osmotic in the infusion bag, but hypotonic in the body'?",
+      "options": [
+        "Dextrose rapidly crystallizes in the bloodstream and is excreted in stool",
+        "Once infused, dextrose is rapidly metabolized into CO2 and H2O or taken up by cells, leaving behind hypotonic free water",
+        "Dextrose actively inhibits aquaporin channels throughout the systemic capillary bed",
+        "Dextrose binds to plasma albumin and precipitates sodium ions"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Once infused, dextrose is rapidly metabolized into CO2 and H2O or taken up by cells, leaving behind hypotonic free water",
+      "explanation": "In vitro, 5% dextrose has an osmolarity of ~278 mOsm/L, roughly isosmotic with plasma. In vivo, insulin-mediated tissue uptake and rapid cellular metabolism convert glucose to CO2 and water, so the net physiological effect is identical to infusing pure hypotonic water.",
+      "section": "Osmosis, Osmolality & Tonicity",
+      "questionNumber": 52
+    },
+    {
+      "id": "pio201-th-53",
+      "text": "Carrier-mediated transport mechanisms (such as facilitated diffusion) exhibit saturation kinetics (Vmax), stereospecificity, and competitive inhibition. How does this compare with simple diffusion?",
+      "options": [
+        "Simple diffusion exhibits a strict Vmax plateau at high solute concentrations",
+        "Simple diffusion rate increases linearly with solute concentration without saturation, whereas carrier-mediated transport reaches a transport maximum (Tm or Vmax) when all carrier binding sites are occupied",
+        "Carrier-mediated transport does not depend on carrier protein conformation",
+        "Simple diffusion requires metabolic ATP hydrolysis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Simple diffusion rate increases linearly with solute concentration without saturation, whereas carrier-mediated transport reaches a transport maximum (Tm or Vmax) when all carrier binding sites are occupied",
+      "explanation": "Because carrier-mediated transport relies on a finite population of specific membrane proteins that undergo conformational change, the transport rate plateaus at Vmax once all binding sites are saturated. Simple diffusion has no fixed carriers, so its rate increases linearly with the concentration gradient.",
+      "section": "Carrier-Mediated Transport & Ion Channels",
+      "questionNumber": 53
+    },
+    {
+      "id": "pio201-th-54",
+      "text": "Which member of the facilitated glucose transporter (GLUT) family is unique in that its translocation to the plasma membrane is stimulated by insulin in skeletal muscle and adipose tissue?",
+      "options": [
+        "GLUT1",
+        "GLUT2",
+        "GLUT3",
+        "GLUT4"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. GLUT4",
+      "explanation": "GLUT4 is the insulin-sensitive glucose transporter. In the basal un-stimulated state, ~90% of GLUT4 resides in intracellular storage vesicles. Binding of insulin to its receptor stimulates IRS-PI3K-Akt signaling, triggering rapid exocytosis and fusion of GLUT4 vesicles with the plasma membrane.",
+      "section": "Carrier-Mediated Transport & Ion Channels",
+      "questionNumber": 54
+    },
+    {
+      "id": "pio201-th-55",
+      "text": "Which high-affinity glucose transporters operate constitutively at basal physiological conditions to supply uninterrupted glucose to erythrocytes, endothelial cells of the blood-brain barrier, and neurons?",
+      "options": [
+        "GLUT1 and GLUT3",
+        "GLUT2 and GLUT5",
+        "GLUT4 and SGLT1",
+        "SGLT2 and GLUT5"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. GLUT1 and GLUT3",
+      "explanation": "GLUT1 (abundant in erythrocytes and blood-brain barrier endothelial cells) and GLUT3 (primary neuronal glucose transporter) have low Km values (~1–2 mM), ensuring high-affinity, steady glucose uptake even during periods of hypoglycemia.",
+      "section": "Carrier-Mediated Transport & Ion Channels",
+      "questionNumber": 55
+    },
+    {
+      "id": "pio201-th-56",
+      "text": "GLUT2 is characterized by a high Km (~15–20 mM, low affinity) and high transport capacity. This unique kinetic profile makes it physiologically ideal for which of the following tissues?",
+      "options": [
+        "Blood-retinal barrier and cerebrospinal fluid secretion",
+        "Pancreatic beta-cells and hepatocytes, where glucose flux must directly mirror fluctuating postprandial blood glucose levels",
+        "Resting skeletal muscle fibers during prolonged fasting",
+        "Adipose tissue during acute insulin deficiency"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Pancreatic beta-cells and hepatocytes, where glucose flux must directly mirror fluctuating postprandial blood glucose levels",
+      "explanation": "Because of its high Km, GLUT2 transport rate is proportional to blood glucose across the entire physiological and postprandial range. In pancreatic beta-cells, this enables accurate glucose sensing for insulin secretion; in hepatocytes, it allows bidirectional glucose uptake during hyperglycemia and release during fasting.",
+      "section": "Carrier-Mediated Transport & Ion Channels",
+      "questionNumber": 56
+    },
+    {
+      "id": "pio201-th-57",
+      "text": "Which facilitative hexose transporter located on the apical brush border of intestinal enterocytes and on spermatozoa is highly specific for the absorption of D-fructose rather than glucose or galactose?",
+      "options": [
+        "SGLT1",
+        "GLUT2",
+        "GLUT5",
+        "GLUT4"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. GLUT5",
+      "explanation": "GLUT5 is a facilitative uniporter specific for D-fructose. It mediates passive downhill fructose transport across the apical membrane of enterocytes in the small intestine, and is also expressed in spermatozoa, which use fructose as a primary metabolic energy substrate.",
+      "section": "Carrier-Mediated Transport & Ion Channels",
+      "questionNumber": 57
+    },
+    {
+      "id": "pio201-th-58",
+      "text": "How do ion channels achieve transport flux rates (10^7 to 10^8 ions/second) that are thousands of times faster than carrier proteins (10^2 to 10^4 molecules/second)?",
+      "options": [
+        "Ion channels utilize continuous ATP hydrolysis at each passage",
+        "Ion channels form continuous water-filled transmembrane pores through which ions diffuse without requiring a large structural conformational cycle for every single ion transferred",
+        "Ion channels dissolve ions into the hydrophobic hydrocarbon core of the membrane",
+        "Ion channels operate solely through vesicular endocytosis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Ion channels form continuous water-filled transmembrane pores through which ions diffuse without requiring a large structural conformational cycle for every single ion transferred",
+      "explanation": "Carrier proteins must bind a substrate and undergo a cyclic, rate-limiting series of macroscopic conformational changes (ping-pong mechanism) for each molecule transported. Ion channels, once gated open, form an aqueous pore through which thousands of ions flow down electrochemical gradients per millisecond.",
+      "section": "Carrier-Mediated Transport & Ion Channels",
+      "questionNumber": 58
+    },
+    {
+      "id": "pio201-th-59",
+      "text": "The 1991 Nobel Prize in Physiology or Medicine was awarded to Erwin Neher and Bert Sakmann for developing which revolutionary electrophysiological technique that permits real-time electrical recording of ionic currents through individual channel proteins?",
+      "options": [
+        "The patch-clamp technique",
+        "The micro-dialysis technique",
+        "The Western blot technique",
+        "Fluorescence recovery after photobleaching (FRAP)"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. The patch-clamp technique",
+      "explanation": "Neher and Sakmann developed the patch-clamp technique, using polished glass micropipettes to form a giga-ohm seal with cell membranes, enabling direct observation of conformational state transitions (open vs closed) and ionic currents of single ion channels.",
+      "section": "Carrier-Mediated Transport & Ion Channels",
+      "questionNumber": 59
+    },
+    {
+      "id": "pio201-th-60",
+      "text": "How does the selectivity filter of bacterial and mammalian voltage-gated potassium (K+) channels select potassium ions over sodium (Na+) ions with greater than 10,000-fold specificity, even though Na+ has a smaller ionic radius?",
+      "options": [
+        "Sodium is trapped by positive arginine residues in the cytoplasmic gate",
+        "The selectivity filter contains precisely spaced backbone carbonyl oxygens that substitute perfectly for potassium's hydration shell, whereas smaller sodium ions cannot coordinate stably with all oxygens to shed their water shell",
+        "Potassium is non-polar, whereas sodium is strongly polarized",
+        "Potassium channels actively hydrolyze ATP to repel divalent ions"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The selectivity filter contains precisely spaced backbone carbonyl oxygens that substitute perfectly for potassium's hydration shell, whereas smaller sodium ions cannot coordinate stably with all oxygens to shed their water shell",
+      "explanation": "Roderick MacKinnon's crystal structure of K+ channels showed that five conserved amino acids (TVGYG) orient backbone carbonyl oxygens into the pore at precise distances (0.28 nm) that replicate the hydration shell of K+. The smaller Na+ ion cannot coordinate with all four carbonyl oxygens simultaneously, making the energetic cost of dehydration prohibitive.",
+      "section": "Carrier-Mediated Transport & Ion Channels",
+      "questionNumber": 60
+    },
+    {
+      "id": "pio201-th-61",
+      "text": "The classic P-type sodium-potassium ATPase (Na+-K+ pump) is fundamentally electrogenic because for each molecule of ATP hydrolyzed by its catalytic alpha subunit, it exports and imports which respective stoichiometric ratio of ions?",
+      "options": [
+        "Exports 3 Na+ ions and imports 2 K+ ions",
+        "Exports 2 Na+ ions and imports 3 K+ ions",
+        "Exports 1 Na+ ion and imports 1 K+ ion",
+        "Exports 3 Na+ ions and imports 3 K+ ions"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Exports 3 Na+ ions and imports 2 K+ ions",
+      "explanation": "The Na+-K+ ATPase pumps 3 Na+ ions out of the cell and 2 K+ ions into the cell for each molecule of ATP hydrolyzed. Because there is a net loss of one positive charge per cycle, the pump is electrogenic, generating a small negative potential (~ -4 to -5 mV) and maintaining the chemical gradients.",
+      "section": "Primary & Secondary Active Transport",
+      "questionNumber": 61
+    },
+    {
+      "id": "pio201-th-62",
+      "text": "Cardiac glycosides (such as digoxin and ouabain) are well-known pharmacological inhibitors of the Na+-K+ ATPase. At which site do these drugs bind to arrest pump activity?",
+      "options": [
+        "The intracellular ATP-binding nucleotide pocket on the beta-subunit",
+        "The extracellular surface of the phosphorylated alpha-subunit (E2-P conformation)",
+        "The cytoplasmic calmodulin-binding autoinhibitory domain",
+        "The transmembrane lipid-gated pore of the gamma subunit"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The extracellular surface of the phosphorylated alpha-subunit (E2-P conformation)",
+      "explanation": "Cardiac glycosides (ouabain, digoxin) bind specifically to the extracellular face of the catalytic alpha-subunit of the Na+-K+ ATPase, stabilizing the phosphorylated E2-P conformation and preventing the binding and inward transport of potassium.",
+      "section": "Primary & Secondary Active Transport",
+      "questionNumber": 62
+    },
+    {
+      "id": "pio201-th-63",
+      "text": "How does therapeutic inhibition of the myocardial Na+-K+ ATPase by digoxin produce a positive inotropic effect (increased force of cardiac muscle contraction)?",
+      "options": [
+        "By directly opening voltage-gated L-type calcium channels during phase 4",
+        "Increased intracellular Na+ decreases the trans-sarcolemmal Na+ gradient, reducing Ca2+ extrusion via the 3Na+-1Ca2+ exchanger (NCX) and allowing more Ca2+ accumulation in the sarcoplasmic reticulum for subsequent release",
+        "By accelerating SERCA activity to lower cytosolic calcium",
+        "By stimulating beta-1 adrenergic receptors and increasing cAMP"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Increased intracellular Na+ decreases the trans-sarcolemmal Na+ gradient, reducing Ca2+ extrusion via the 3Na+-1Ca2+ exchanger (NCX) and allowing more Ca2+ accumulation in the sarcoplasmic reticulum for subsequent release",
+      "explanation": "Inhibiting the Na+-K+ pump slightly raises intracellular [Na+]. This reduces the trans-sarcolemmal Na+ chemical gradient that drives secondary active calcium extrusion through the Na+-Ca2+ exchanger (NCX). As a result, intracellular Ca2+ increases, loading more Ca2+ into the sarcoplasmic reticulum via SERCA, yielding greater Ca2+ release on subsequent beats.",
+      "section": "Primary & Secondary Active Transport",
+      "questionNumber": 63
+    },
+    {
+      "id": "pio201-th-64",
+      "text": "The sarcoplasmic/endoplasmic reticulum calcium ATPase (SERCA) is critical for muscle relaxation. What is its primary physiological role and stoichiometry?",
+      "options": [
+        "It pumps 2 Ca2+ ions from the cytoplasm into the sarcoplasmic reticulum lumen per ATP hydrolyzed, lowering cytosolic Ca2+ to resting levels (~100 nM)",
+        "It exports 1 Ca2+ ion across the outer sarcolemma in exchange for 3 Na+ ions",
+        "It releases calcium into the myofibrillar space during electrical depolarization",
+        "It phosphorylates myosin light chains to initiate cross-bridge cycling"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It pumps 2 Ca2+ ions from the cytoplasm into the sarcoplasmic reticulum lumen per ATP hydrolyzed, lowering cytosolic Ca2+ to resting levels (~100 nM)",
+      "explanation": "SERCA is a P-type primary active transport pump that consumes one ATP to pump 2 Ca2+ ions from the cytosol back into the SR lumen against a concentration gradient of >10,000-fold, restoring resting cytosolic [Ca2+] to ~100 nM and permitting muscle relaxation.",
+      "section": "Primary & Secondary Active Transport",
+      "questionNumber": 64
+    },
+    {
+      "id": "pio201-th-65",
+      "text": "The gastric proton pump (H+-K+ ATPase) in parietal cells generates gastric acid (pH ~1.0) against a million-fold concentration gradient. Which class of clinical drugs directly inhibits this pump to treat peptic ulcer disease and GERD?",
+      "options": [
+        "H2-receptor antagonists (e.g. ranitidine)",
+        "Proton pump inhibitors (e.g. omeprazole, pantoprazole)",
+        "Anticholinergic agents (e.g. atropine)",
+        "Prostaglandin analogues (e.g. misoprostol)"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Proton pump inhibitors (e.g. omeprazole, pantoprazole)",
+      "explanation": "Proton pump inhibitors (PPIs like omeprazole, esomeprazole, pantoprazole) are prodrugs that accumulate in the acidic canaliculi of parietal cells, where they convert into active sulfenamides that form covalent disulfide bonds with cysteine residues on the H+-K+ ATPase, irreversibly inactivating acid secretion.",
+      "section": "Primary & Secondary Active Transport",
+      "questionNumber": 65
+    },
+    {
+      "id": "pio201-th-66",
+      "text": "Which of the following physiological responses exemplifies a negative feedback mechanism operating through an endocrine neurohumoral loop?",
+      "options": [
+        "The amplification of oxytocin release during cervical stretching in labour",
+        "The acceleration of the blood coagulation cascade following thrombin formation",
+        "The explosive depolarization of an axon following initial voltage-gated sodium influx",
+        "The suppression of TSH release by elevated blood thyroxine levels"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. The suppression of TSH release by elevated blood thyroxine levels",
+      "explanation": "Elevated thyroxine levels provide negative feedback to the pituitary gland, suppressing further TSH release to prevent hyperthyroidism and maintain a stable hormone baseline.",
+      "section": "Primary & Secondary Active Transport",
+      "questionNumber": 66
+    },
+    {
+      "id": "pio201-th-67",
+      "text": "What defines the critical physiological distinction between osmolarity and osmolality?",
+      "options": [
+        "Osmolarity relates to the volume of the solution, while osmolality relates to the mass of the solvent",
+        "Osmolality exclusively measures intracellular particles",
+        "Osmolarity is unaffected by temperature changes, whereas osmolality varies significantly",
+        "Osmolality counts only the effective osmoles present"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Osmolarity relates to the volume of the solution, while osmolality relates to the mass of the solvent",
+      "explanation": "Osmolarity is the number of osmoles per liter of solution (volume), whereas osmolality is the number of osmoles per kilogram of solvent (water mass). The difference is minimal in biological fluids but technically distinct.",
+      "section": "Primary & Secondary Active Transport",
+      "questionNumber": 67
+    },
+    {
+      "id": "pio201-th-68",
+      "text": "The tonicity of a fluid evaluates its effect on cell volume. Why is a solution containing penetrating solutes (like urea) considered to have a different effective osmolality than one containing non-penetrating solutes (like sodium)?",
+      "options": [
+        "Penetrating solutes do not dissolve completely in water",
+        "Non-penetrating solutes create a permanent concentration gradient that drives sustained osmosis",
+        "Penetrating solutes actively destroy the cell membrane",
+        "Non-penetrating solutes are rapidly metabolized for energy"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Non-penetrating solutes create a permanent concentration gradient that drives sustained osmosis",
+      "explanation": "Tonicity depends on \"effective\" osmoles. Non-penetrating solutes (like sodium) cannot cross the membrane, so they exert a sustained osmotic pressure that drives water movement. Penetrating solutes quickly equilibrate and do not cause lasting volume shifts.",
+      "section": "Primary & Secondary Active Transport",
+      "questionNumber": 68
+    },
+    {
+      "id": "pio201-th-69",
+      "text": "An experimental drug fully inhibits the activity of the sodium-potassium ATPase. What will be the most immediate consequence on secondary active transport mechanisms?",
+      "options": [
+        "Sodium-glucose cotransport will accelerate due to excess intracellular sodium",
+        "They will halt as the trans-membrane sodium concentration gradient dissipates",
+        "They will switch to utilizing the potassium gradient instead",
+        "They will bypass the carrier proteins and move via simple diffusion"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. They will halt as the trans-membrane sodium concentration gradient dissipates",
+      "explanation": "Secondary active transport relies entirely on the potential energy stored in the sodium concentration gradient. If the Na+-K+ pump is inhibited, this gradient dissipates, and all secondary active transport processes will subsequently fail.",
+      "section": "Primary & Secondary Active Transport",
+      "questionNumber": 69
+    },
+    {
+      "id": "pio201-th-70",
+      "text": "Which specific cell junction provides strong mechanical attachments between adjacent cells by anchoring to their internal intermediate filaments, acting like localized \"spot welds\"?",
+      "options": [
+        "Tight junction",
+        "Gap junction",
+        "Focal adhesion",
+        "Desmosome"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Desmosome",
+      "explanation": "Desmosomes (macula adherens) connect the intermediate filaments of two adjacent cells. They function like spot welds to provide immense mechanical strength, particularly in tissues subjected to high stress like the skin and myocardium.",
+      "section": "Intercellular Junctions & Vesicular Transport",
+      "questionNumber": 70
+    }
+  ]
+}
