@@ -708,49 +708,51 @@ function shell(content) {
       </div>
     </aside>
     <div class="content-wrap">
-      <header class="topbar">
-        <span class="mobile-brand">
-          <img src="assets/seomtorch_logo.png" alt="">
-          <b>Seomtorch</b>
-        </span>
-        <span class="sync-indicator ${pendingSyncCount > 0 ? 'pending' : navigator.onLine ? 'synced' : 'offline'}" title="${pendingSyncCount > 0 ? `${pendingSyncCount} items pending sync` : navigator.onLine ? 'Synced' : 'Offline'}">
-          <i></i>${pendingSyncCount > 0 ? `<small>${pendingSyncCount}</small>` : ''}
-        </span>
-        <div class="topbar-pills">
-          <div class="top-badge-pill" title="Tests completed">
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            <span>${testStats.tests_taken || 0} tests</span>
-          </div>
-          <div class="top-badge-pill" title="Average test score">
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-            <span>${testStats.average_score}% score</span>
-          </div>
-          <div class="top-badge-pill top-xp-level-pill" title="Level ${xp.level} · ${xp.remaining} XP to next level">
-            <span>Level ${xp.level} · ${xp.xp} XP</span>
-            <div class="level-badge-ring">
-              <svg viewBox="0 0 36 36" class="level-radial-chart">
-                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-                <path class="circle-fill" stroke-dasharray="${Math.max(6, xp.percent)}, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-              </svg>
-              <span class="level-badge-number">${xp.level}</span>
+      <div class="app-header-sticky">
+        <header class="topbar">
+          <span class="mobile-brand">
+            <img src="assets/seomtorch_logo.png" alt="">
+            <b>Seomtorch</b>
+          </span>
+          <span class="sync-indicator ${pendingSyncCount > 0 ? 'pending' : navigator.onLine ? 'synced' : 'offline'}" title="${pendingSyncCount > 0 ? `${pendingSyncCount} items pending sync` : navigator.onLine ? 'Synced' : 'Offline'}">
+            <i></i>${pendingSyncCount > 0 ? `<small>${pendingSyncCount}</small>` : ''}
+          </span>
+          <div class="topbar-pills">
+            <div class="top-badge-pill" title="Tests completed">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              <span>${testStats.tests_taken || 0} tests</span>
             </div>
+            <div class="top-badge-pill" title="Average test score">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              <span>${testStats.average_score}% score</span>
+            </div>
+            <div class="top-badge-pill top-xp-level-pill" title="Level ${xp.level} · ${xp.remaining} XP to next level">
+              <span>Level ${xp.level} · ${xp.xp} XP</span>
+              <div class="level-badge-ring">
+                <svg viewBox="0 0 36 36" class="level-radial-chart">
+                  <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                  <path class="circle-fill" stroke-dasharray="${Math.max(6, xp.percent)}, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                </svg>
+                <span class="level-badge-number">${xp.level}</span>
+              </div>
+            </div>
+            <button class="topbar-avatar-btn" data-route="profile" title="Open ${escapeHtml(profile.name)}'s profile">
+              <span class="avatar">${renderAvatarMarkup(profile.avatar, 36)}</span>
+              <svg class="avatar-caret-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
           </div>
-          <button class="topbar-avatar-btn" data-route="profile" title="Open ${escapeHtml(profile.name)}'s profile">
-            <span class="avatar">${renderAvatarMarkup(profile.avatar, 36)}</span>
-            <svg class="avatar-caret-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-          </button>
-        </div>
-      </header>
-      <div class="portal-switch-bar" role="tablist" aria-label="Portal selection">
-        <div class="portal-switch-track">
-          <button type="button" class="portal-switch-tab ${mode === 'aspirant' ? 'active' : ''}" data-switch-mode="aspirant" role="tab" aria-selected="${mode === 'aspirant'}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-            <span>Aspirants (JAMB / SSCE)</span>
-          </button>
-          <button type="button" class="portal-switch-tab ${mode === 'university' ? 'active' : ''}" data-switch-mode="university" role="tab" aria-selected="${mode === 'university'}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M4 18h16M4 10h16M12 3L2 8h20z"/><path d="M6 10v8M10 10v8M14 10v8M18 10v8"/></svg>
-            <span>University Degree</span>
-          </button>
+        </header>
+        <div class="portal-switch-bar" role="tablist" aria-label="Portal selection">
+          <div class="portal-switch-track">
+            <button type="button" class="portal-switch-tab ${mode === 'aspirant' ? 'active' : ''}" data-switch-mode="aspirant" role="tab" aria-selected="${mode === 'aspirant'}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              <span>Aspirants (JAMB / SSCE)</span>
+            </button>
+            <button type="button" class="portal-switch-tab ${mode === 'university' ? 'active' : ''}" data-switch-mode="university" role="tab" aria-selected="${mode === 'university'}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M4 18h16M4 10h16M12 3L2 8h20z"/><path d="M6 10v8M10 10v8M14 10v8M18 10v8"/></svg>
+              <span>University Degree</span>
+            </button>
+          </div>
         </div>
       </div>
       <main id="main">${content}</main>
