@@ -54,5 +54,6 @@ export const api = {
   saveUniversityProfile: (token, body) => request("/auth/university-profile/", { token, method: "POST", body }),
   // Contacts & friends
   updatePhone: (token, phone_number) => request("/auth/update-phone/", { token, method: "POST", body: { phone_number } }),
+  updateAvatar: (token, avatar) => request("/auth/update-avatar/", { token, method: "POST", body: { avatar } }),
   matchContacts: (token, phones, emails) => request("/auth/contacts/match/", { token, method: "POST", body: { phones, emails } }),
 };

@@ -10,6 +10,7 @@ from .views import (
     SwitchModeView,
     UniversityProfileView,
     UpdatePhoneView,
+    UpdateAvatarView,
 )
 
 urlpatterns = [
@@ -22,5 +23,6 @@ urlpatterns = [
     path("aspirant-profile/", AspirantProfileView.as_view(), name="aspirant-profile"),
     path("university-profile/", UniversityProfileView.as_view(), name="university-profile"),
     path("update-phone/", UpdatePhoneView.as_view(), name="update-phone"),
+    path("update-avatar/", UpdateAvatarView.as_view(), name="update-avatar"),
     path("contacts/match/", ContactMatchView.as_view(), name="contacts-match"),
 ]

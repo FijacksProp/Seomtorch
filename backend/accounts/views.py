@@ -152,6 +152,14 @@ class UpdatePhoneView(APIView):
         return Response({"user": UserSerializer(request.user).data})
 
 
+class UpdateAvatarView(APIView):
+    def post(self, request):
+        avatar = (request.data.get("avatar") or "").strip()
+        request.user.avatar = avatar
+        request.user.save(update_fields=("avatar",))
+        return Response({"user": UserSerializer(request.user).data})
+
+
 class ContactMatchView(APIView):
     def post(self, request):
         import re

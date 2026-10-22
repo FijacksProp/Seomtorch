@@ -128,6 +128,39 @@ let uniNotePlayingBlockId = null;
 let uniNoteSpeechRate = 1.0;
 let uniNoteRevealedMap = {};
 let uniNotePodcastOpenMap = {};
+
+const AVATAR_PRESETS = [
+  { id: "varsity-male", name: "Varsity (Male)", persona: "Varsity", file: "assets/avatars/varsity-male.webp" },
+  { id: "varsity-female", name: "Varsity (Female)", persona: "Varsity", file: "assets/avatars/varsity-female.webp" },
+  { id: "scholar-female", name: "Reading (Female)", persona: "Scholar", file: "assets/avatars/scholar-female.webp" },
+  { id: "scholar-male", name: "Reading (Male)", persona: "Scholar", file: "assets/avatars/scholar-male.webp" },
+  { id: "audio-male", name: "Focus (Male)", persona: "Focus", file: "assets/avatars/audio-male.webp" },
+  { id: "audio-female", name: "Focus (Female)", persona: "Focus", file: "assets/avatars/audio-female.webp" },
+  { id: "medic-female", name: "Pre-Med (Female)", persona: "Pre-Med", file: "assets/avatars/medic-female.webp" },
+  { id: "medic-male", name: "Pre-Med (Male)", persona: "Pre-Med", file: "assets/avatars/medic-male.webp" },
+  { id: "hijab-female", name: "Modest (Female)", persona: "Modest", file: "assets/avatars/hijab-female.webp" }
+];
+
+function getRandomAvatarId() {
+  return AVATAR_PRESETS[Math.floor(Math.random() * AVATAR_PRESETS.length)].id;
+}
+
+function getAvatarSrc(avatarId) {
+  if (!avatarId) return null;
+  const match = AVATAR_PRESETS.find(p => p.id === avatarId || p.file === avatarId);
+  if (match) return match.file;
+  if (avatarId.startsWith("assets/") || avatarId.startsWith("http") || avatarId.startsWith("data:")) return avatarId;
+  return `assets/avatars/${avatarId}.webp`;
+}
+
+function renderAvatarMarkup(avatarId, size = 36) {
+  const src = getAvatarSrc(avatarId);
+  if (src) {
+    return `<img src="${escapeHtml(src)}" alt="Student avatar" class="avatar-img-element" width="${size}" height="${size}" onerror="this.style.display='none'; if (this.nextElementSibling) this.nextElementSibling.style.display='grid';"><span class="avatar-fallback-initials" style="display:none;">${initials()}</span>`;
+  }
+  return `<span class="avatar-fallback-initials">${initials()}</span>`;
+}
+
 let buddiesMatches = { onApp: getSavedBuddies(), invites: [] };
 let buddiesLoading = false;
 let buddiesSearchOpen = false;
@@ -519,6 +552,10 @@ async function loadQuestions() {
 async function loadData() {
   const profiles = await getAll("profile");
   profile = profiles[0] || null;
+  if (profile && !profile.avatar) {
+    profile.avatar = getRandomAvatarId();
+    await put("profile", profile);
+  }
   attempts = await getAll("attempts");
   bookmarks = await getAll("bookmarks");
 }
@@ -699,7 +736,7 @@ function shell(content) {
             </div>
           </div>
           <button class="topbar-avatar-btn" data-route="profile" title="Open ${escapeHtml(profile.name)}'s profile">
-            <span class="avatar">${initials()}</span>
+            <span class="avatar">${renderAvatarMarkup(profile.avatar, 36)}</span>
             <svg class="avatar-caret-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
           </button>
         </div>
@@ -1655,12 +1692,21 @@ function renderProfile(filter = "") {
   const xp = xpState();
   const testStats = profile.tests || { tests_taken: 0, average_score: 0 };
   const joined = currentUser?.date_joined ? new Date(currentUser.date_joined).toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) : "—";
-  const content = `<section class="page profile-page"><div class="profile-hero"><div class="profile-monogram">${initials()}</div><div><p class="eyebrow">Student profile</p><h1>${escapeHtml(currentUser?.username || profile.name)}</h1><p>${escapeHtml(currentUser?.email || profile.email)} · Member since ${joined}</p></div><button class="button outline" id="refresh-account">Refresh account</button></div><div class="profile-grid"><section class="profile-card identity-card"><span class="card-label">Student ID</span><strong>${escapeHtml(currentUser?.public_id || "—")}</strong><p>${currentUser?.phone_number ? `Phone: <strong>${escapeHtml(currentUser.phone_number)}</strong> · ` : ""}Share your ID for challenges or connect in <a href="#" data-route="buddies" style="text-decoration:underline; font-weight:600;">Buddies</a>.</p></section><section class="profile-card level-card"><span class="card-label">Level ${xp.level}</span><strong>${xp.xp} <small>XP</small></strong><div class="xp-track light"><i style="width:${xp.percent}%"></i></div><p>${xp.remaining} XP until level ${xp.level + 1}</p></section></div><div class="metric-strip four profile-metrics"><div class="metric"><strong>${attempts.length}</strong><span>answers recorded</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> days</small></strong><span>current streak</span></div><div class="metric"><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>best streak</span></div></div><div class="section-head"><h2>Academic Portals & Registrations</h2><p>Your enrollment across student portals</p></div><div class="uni-quick-grid" style="margin-bottom:28px;"><div class="uni-portal-status-card"><div><div class="uni-dept-svg-mark anatomy"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><strong>Aspirants Portal</strong><p>${hasAspirantProfile() ? `Registered for ${(currentUser?.aspirant_profile?.exam_type || "JAMB").toUpperCase()} ${currentUser?.aspirant_profile?.target_year || ""}` : "Not registered yet. Required for JAMB & SSCE practice."}</p></div><button class="button ${hasAspirantProfile() ? 'outline' : 'accent'} small" id="profile-manage-aspirant">${hasAspirantProfile() ? "Update Exam Details" : "Register for Aspirants Portal →"}</button></div><div class="uni-portal-status-card"><div><div class="uni-dept-svg-mark physiology"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M4 18h16M4 10h16M12 3L2 8h20z"/><path d="M6 10v8M10 10v8M14 10v8M18 10v8"/></svg></div><strong>University Portal</strong><p>${hasUniversityProfile() ? `Enrolled at ${escapeHtml(currentUser?.university_profile?.university_name || "")} · ${escapeHtml(currentUser?.university_profile?.department || "")} (${currentUser?.university_profile?.level || 200}L)` : "Not registered yet. Required for undergraduate course banks."}</p></div><button class="button ${hasUniversityProfile() ? 'outline' : 'accent'} small" id="profile-manage-university">${hasUniversityProfile() ? "Update University Details" : "Register for University Portal →"}</button></div></div>${renderAchievementSummary()}<div class="section-head"><h2>Subject record</h2><p>Synchronized account history</p></div><div class="profile-subjects">${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<article><span>${subject.name}</span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong><small>${stat.count} answer${stat.count === 1 ? "" : "s"}</small></article>`; }).join("")}</div><section class="settings-panel"><p class="eyebrow">Account data</p><h2>Portable, private and recoverable.</h2><p class="lede">The server keeps the authoritative account record. This device stores an offline copy and queues answers whenever the connection drops.</p><div class="button-row"><button class="button" id="export-data">Export backup</button><label class="button outline" for="import-data">Import backup</label><input class="file-input" id="import-data" type="file" accept="application/json"><button class="button outline" id="clear-cache">Refresh device cache</button><button class="button danger" id="sign-out">Sign out</button></div></section><section class="settings-panel guide-section"><p class="eyebrow">Guide and support</p><h2>Answers, without the noise.</h2><p class="lede">Quick guidance about practice, progress and account data.</p><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="faq-search" value="${escapeHtml(filter)}" placeholder="Search help topics" aria-label="Search help topics"></div><div id="faq-results">${groups.length ? groups.map(group => `<section class="faq-group"><h3>${group}</h3>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("") : '<div class="empty">No help entries match that search.</div>'}</div></section></section>`;
+  const content = `<section class="page profile-page"><div class="profile-hero"><div class="profile-avatar-wrap" id="profile-avatar-trigger" role="button" tabindex="0" title="Click to customize your avatar">${renderAvatarMarkup(profile.avatar, 86)}<span class="profile-avatar-edit-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span></div><div><p class="eyebrow">Student profile</p><h1>${escapeHtml(currentUser?.username || profile.name)}</h1><p>${escapeHtml(currentUser?.email || profile.email)} · Member since ${joined}</p></div><button class="button outline" id="refresh-account">Refresh account</button></div><div class="profile-grid"><section class="profile-card identity-card"><span class="card-label">Student ID</span><strong>${escapeHtml(currentUser?.public_id || "—")}</strong><p>${currentUser?.phone_number ? `Phone: <strong>${escapeHtml(currentUser.phone_number)}</strong> · ` : ""}Share your ID for challenges or connect in <a href="#" data-route="buddies" style="text-decoration:underline; font-weight:600;">Buddies</a>.</p></section><section class="profile-card level-card"><span class="card-label">Level ${xp.level}</span><strong>${xp.xp} <small>XP</small></strong><div class="xp-track light"><i style="width:${xp.percent}%"></i></div><p>${xp.remaining} XP until level ${xp.level + 1}</p></section></div><div class="metric-strip four profile-metrics"><div class="metric"><strong>${attempts.length}</strong><span>answers recorded</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> days</small></strong><span>current streak</span></div><div class="metric"><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>best streak</span></div></div><div class="section-head"><h2>Academic Portals & Registrations</h2><p>Your enrollment across student portals</p></div><div class="uni-quick-grid" style="margin-bottom:28px;"><div class="uni-portal-status-card"><div><div class="uni-dept-svg-mark anatomy"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><strong>Aspirants Portal</strong><p>${hasAspirantProfile() ? `Registered for ${(currentUser?.aspirant_profile?.exam_type || "JAMB").toUpperCase()} ${currentUser?.aspirant_profile?.target_year || ""}` : "Not registered yet. Required for JAMB & SSCE practice."}</p></div><button class="button ${hasAspirantProfile() ? 'outline' : 'accent'} small" id="profile-manage-aspirant">${hasAspirantProfile() ? "Update Exam Details" : "Register for Aspirants Portal →"}</button></div><div class="uni-portal-status-card"><div><div class="uni-dept-svg-mark physiology"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M4 18h16M4 10h16M12 3L2 8h20z"/><path d="M6 10v8M10 10v8M14 10v8M18 10v8"/></svg></div><strong>University Portal</strong><p>${hasUniversityProfile() ? `Enrolled at ${escapeHtml(currentUser?.university_profile?.university_name || "")} · ${escapeHtml(currentUser?.university_profile?.department || "")} (${currentUser?.university_profile?.level || 200}L)` : "Not registered yet. Required for undergraduate course banks."}</p></div><button class="button ${hasUniversityProfile() ? 'outline' : 'accent'} small" id="profile-manage-university">${hasUniversityProfile() ? "Update University Details" : "Register for University Portal →"}</button></div></div>${renderAchievementSummary()}<div class="section-head"><h2>Subject record</h2><p>Synchronized account history</p></div><div class="profile-subjects">${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<article><span>${subject.name}</span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong><small>${stat.count} answer${stat.count === 1 ? "" : "s"}</small></article>`; }).join("")}</div><section class="settings-panel"><p class="eyebrow">Account data</p><h2>Portable, private and recoverable.</h2><p class="lede">The server keeps the authoritative account record. This device stores an offline copy and queues answers whenever the connection drops.</p><div class="button-row"><button class="button" id="export-data">Export backup</button><label class="button outline" for="import-data">Import backup</label><input class="file-input" id="import-data" type="file" accept="application/json"><button class="button outline" id="clear-cache">Refresh device cache</button><button class="button danger" id="sign-out">Sign out</button></div></section><section class="settings-panel guide-section"><p class="eyebrow">Guide and support</p><h2>Answers, without the noise.</h2><p class="lede">Quick guidance about practice, progress and account data.</p><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="faq-search" value="${escapeHtml(filter)}" placeholder="Search help topics" aria-label="Search help topics"></div><div id="faq-results">${groups.length ? groups.map(group => `<section class="faq-group"><h3>${group}</h3>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("") : '<div class="empty">No help entries match that search.</div>'}</div></section></section>`;
   app.innerHTML = shell(content);
   const profileMetrics = document.querySelectorAll(".profile-metrics .metric");
   if (profileMetrics[0]) profileMetrics[0].innerHTML = `<strong>${testStats.tests_taken}</strong><span>tests taken</span>`;
   if (profileMetrics[1]) profileMetrics[1].innerHTML = `<strong>${testStats.average_score}%</strong><span>average test score</span>`;
   bindShell(); bindProfile();
+  document.querySelector("#profile-avatar-trigger")?.addEventListener("click", () => {
+    openAvatarPickerModal(() => renderProfile(filter));
+  });
+  document.querySelector("#profile-avatar-trigger")?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      openAvatarPickerModal(() => renderProfile(filter));
+    }
+  });
   document.querySelector("#profile-manage-aspirant")?.addEventListener("click", () => {
     showAspirantRegistrationModal(() => renderProfile(filter));
   });
@@ -3067,7 +3113,7 @@ async function prepareLocalUser(user) {
     await clearStore("profile"); await clearStore("attempts"); await clearStore("bookmarks"); await put("meta", { key: "bookmarkQueue", actions: [] }); attempts = []; bookmarks = [];
   }
   const stats = user.stats || {};
-  profile = { id: "local-user", remoteId: user.public_id, name: user.username, email: user.email, xp: stats.xp ?? 0, rhythm: stats.current_streak ?? 0, bestRhythm: stats.best_streak ?? 0, lastStudyDate: stats.last_study_date || null, tests: stats.tests || profile?.tests || null, createdAt: profile?.createdAt || Date.now() };
+  profile = { id: "local-user", remoteId: user.public_id, name: user.username, email: user.email, avatar: user.avatar || profile?.avatar || getRandomAvatarId(), xp: stats.xp ?? 0, rhythm: stats.current_streak ?? 0, bestRhythm: stats.best_streak ?? 0, lastStudyDate: stats.last_study_date || null, tests: stats.tests || profile?.tests || null, createdAt: profile?.createdAt || Date.now() };
   await put("profile", profile);
 }
 
@@ -5104,3 +5150,125 @@ async function renderUniNote() {
     showTopicConfigModal(noteData.courseCode || "ANA 201", "Bones of the Upper Limb", "data/university/anatomy/200/questions-ana201-bones.json");
   });
 }
+
+
+function openAvatarPickerModal(onUpdated) {
+  document.querySelector("#avatar-picker-backdrop")?.remove();
+  let selectedPersona = "all";
+  let activeAvatarId = profile?.avatar || "varsity-male";
+
+  const backdrop = document.createElement("div");
+  backdrop.id = "avatar-picker-backdrop";
+  backdrop.className = "avatar-picker-backdrop";
+
+  const renderModalContent = () => {
+    const filtered = selectedPersona === "all"
+      ? AVATAR_PRESETS
+      : AVATAR_PRESETS.filter(a => a.persona.toLowerCase() === selectedPersona.toLowerCase());
+
+    const tabs = [
+      { id: "all", label: `All (${AVATAR_PRESETS.length})` },
+      { id: "Varsity", label: "Varsity" },
+      { id: "Scholar", label: "Reading" },
+      { id: "Focus", label: "Focus" },
+      { id: "Pre-Med", label: "Pre-Med" },
+      { id: "Modest", label: "Modest" }
+    ];
+
+    const tabsHtml = tabs.map(t => {
+      const isActive = selectedPersona.toLowerCase() === t.id.toLowerCase();
+      return `<button type="button" class="avatar-filter-btn ${isActive ? "active" : ""}" data-tab="${t.id}">${escapeHtml(t.label)}</button>`;
+    }).join("");
+
+    const cardsHtml = filtered.map(a => {
+      const isSelected = activeAvatarId === a.id;
+      return `
+        <div class="avatar-card ${isSelected ? "selected" : ""}" data-avatar-id="${a.id}" role="button" tabindex="0">
+          <div class="avatar-card-img-wrap">
+            <img src="${a.file}" alt="${escapeHtml(a.name)}" class="avatar-card-img" loading="lazy">
+          </div>
+          <span class="avatar-card-check">✓</span>
+          <span class="avatar-card-label">${escapeHtml(a.name)}</span>
+          <span class="avatar-card-persona">${escapeHtml(a.persona)}</span>
+        </div>
+      `;
+    }).join("");
+
+    backdrop.innerHTML = `
+      <div class="avatar-picker-modal" role="dialog" aria-modal="true" aria-labelledby="avatar-picker-title">
+        <div class="avatar-picker-header">
+          <div>
+            <span class="uni-topic-modal-code">Personalize</span>
+            <h2 id="avatar-picker-title" style="margin:4px 0 0; font-size:20px; font-weight:800; color:#0C2518;">Choose Your Avatar</h2>
+          </div>
+          <button class="uni-topic-config-close" id="avatar-picker-close" aria-label="Close dialog">✕</button>
+        </div>
+        <p style="margin:0; font-size:13px; color:var(--muted); line-height:1.5;">Select a character that reflects your study persona. Your avatar displays on your profile, topbar, and leaderboards.</p>
+
+        <div class="avatar-filter-tabs">
+          ${tabsHtml}
+        </div>
+
+        <div class="avatar-grid">
+          ${cardsHtml}
+        </div>
+
+        <div class="avatar-picker-footer">
+          <button type="button" class="button outline" id="avatar-revert-monogram">Initials Only</button>
+          <button type="button" class="button accent" id="avatar-picker-save">Done</button>
+        </div>
+      </div>
+    `;
+
+    backdrop.querySelector("#avatar-picker-close")?.addEventListener("click", () => backdrop.remove());
+    backdrop.querySelector("#avatar-picker-save")?.addEventListener("click", () => backdrop.remove());
+
+    backdrop.querySelectorAll("[data-tab]").forEach(tab => {
+      tab.addEventListener("click", () => {
+        selectedPersona = tab.dataset.tab;
+        renderModalContent();
+      });
+    });
+
+    backdrop.querySelectorAll("[data-avatar-id]").forEach(card => {
+      const pick = async () => {
+        const id = card.dataset.avatarId;
+        activeAvatarId = id;
+        profile.avatar = id;
+        await put("profile", profile);
+        if (authToken) {
+          api.updateAvatar(authToken, id).catch(() => {});
+        }
+        showToast("Avatar updated! ✨");
+        renderModalContent();
+        onUpdated?.();
+      };
+      card.addEventListener("click", pick);
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          pick();
+        }
+      });
+    });
+
+    backdrop.querySelector("#avatar-revert-monogram")?.addEventListener("click", async () => {
+      profile.avatar = "";
+      activeAvatarId = "";
+      await put("profile", profile);
+      if (authToken) {
+        api.updateAvatar(authToken, "").catch(() => {});
+      }
+      showToast("Reverted to monogram initials");
+      backdrop.remove();
+      onUpdated?.();
+    });
+  };
+
+  renderModalContent();
+  document.body.appendChild(backdrop);
+  backdrop.addEventListener("click", (e) => {
+    if (e.target === backdrop) backdrop.remove();
+  });
+}
+

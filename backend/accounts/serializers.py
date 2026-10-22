@@ -54,7 +54,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            "public_id", "email", "username", "phone_number", "date_joined",
+            "public_id", "email", "username", "phone_number", "avatar", "date_joined",
             "must_change_password", "user_type", "active_mode",
             "has_aspirant_profile", "has_university_profile",
             "aspirant_profile", "university_profile", "stats",
@@ -95,10 +95,11 @@ class RegisterSerializer(serializers.ModelSerializer):
     user_type = serializers.ChoiceField(
         choices=UserType.choices, default=UserType.ASPIRANT, required=False,
     )
+    avatar = serializers.CharField(required=False, default="")
 
     class Meta:
         model = User
-        fields = ("email", "username", "password", "user_type")
+        fields = ("email", "username", "password", "user_type", "avatar")
 
     def validate_email(self, value):
         value = value.lower().strip()
@@ -111,11 +112,23 @@ class RegisterSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
+        import random
+        avatar_presets = [
+            "varsity-male", "varsity-female",
+            "scholar-female", "scholar-male",
+            "audio-male", "audio-female",
+            "medic-female", "medic-male",
+            "hijab-female",
+        ]
         user_type = validated_data.pop("user_type", UserType.ASPIRANT)
+        avatar = (validated_data.pop("avatar", "") or "").strip()
+        if not avatar:
+            avatar = random.choice(avatar_presets)
         user = User.objects.create_user(**validated_data)
         user.user_type = user_type
         user.active_mode = user_type
-        user.save(update_fields=("user_type", "active_mode"))
+        user.avatar = avatar
+        user.save(update_fields=("user_type", "active_mode", "avatar"))
         return user
 
 

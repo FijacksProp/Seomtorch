@@ -1,4 +1,4 @@
-const CACHE = "seomtorch-v107";
+const CACHE = "seomtorch-v108";
 const APP_ASSETS = [
   "./",
   "index.html",
@@ -7,6 +7,15 @@ const APP_ASSETS = [
   "calculator.js",
   "api-client.js",
   "manifest.webmanifest",
+  "assets/avatars/varsity-male.webp",
+  "assets/avatars/varsity-female.webp",
+  "assets/avatars/scholar-female.webp",
+  "assets/avatars/scholar-male.webp",
+  "assets/avatars/audio-male.webp",
+  "assets/avatars/audio-female.webp",
+  "assets/avatars/medic-female.webp",
+  "assets/avatars/medic-male.webp",
+  "assets/avatars/hijab-female.webp",
   "assets/seomtorch_logo.png",
   "config.js",
   "data/manifest.json",
