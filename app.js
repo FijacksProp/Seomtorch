@@ -5177,7 +5177,7 @@ function openAvatarPickerModal(onUpdated) {
 
     const tabsHtml = tabs.map(t => {
       const isActive = selectedPersona.toLowerCase() === t.id.toLowerCase();
-      return `<button type="button" class="avatar-filter-btn ${isActive ? "active" : ""}" data-tab="${t.id}">${escapeHtml(t.label)}</button>`;
+      return `<button type="button" class="avatar-filter-btn ${isActive ? "active" : ""}" data-tab="${t.id}"><span>${escapeHtml(t.label)}</span></button>`;
     }).join("");
 
     const cardsHtml = filtered.map(a => {
