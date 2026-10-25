@@ -1,7 +1,5 @@
 # Seomtorch
 
-<a href="https://maidensail.com/startup/seomtorch" rel="dofollow"><img src="https://maidensail.com/badge/seomtorch.svg" alt="Featured on Maidensail" height="44"></a>
-
 An offline-first examination preparation companion for English Language, General Paper, Mathematics and Physics.
 
 ## Run locally
