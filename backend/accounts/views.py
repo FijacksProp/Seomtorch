@@ -154,9 +154,18 @@ class UpdatePhoneView(APIView):
 
 class UpdateAvatarView(APIView):
     def post(self, request):
-        avatar = (request.data.get("avatar") or "").strip()
-        request.user.avatar = avatar
-        request.user.save(update_fields=("avatar",))
+        update_fields = []
+        if "avatar" in request.data:
+            avatar = str(request.data.get("avatar") or "").strip()
+            request.user.avatar = avatar
+            update_fields.append("avatar")
+        if "gender" in request.data:
+            gender = str(request.data.get("gender") or "").strip().lower()
+            if gender in ["male", "female", ""]:
+                request.user.gender = gender
+                update_fields.append("gender")
+        if update_fields:
+            request.user.save(update_fields=update_fields)
         return Response({"user": UserSerializer(request.user).data})
 
 

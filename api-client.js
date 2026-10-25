@@ -54,6 +54,11 @@ export const api = {
   saveUniversityProfile: (token, body) => request("/auth/university-profile/", { token, method: "POST", body }),
   // Contacts & friends
   updatePhone: (token, phone_number) => request("/auth/update-phone/", { token, method: "POST", body: { phone_number } }),
-  updateAvatar: (token, avatar) => request("/auth/update-avatar/", { token, method: "POST", body: { avatar } }),
+  updateAvatar: (token, avatarOrData, gender) => {
+    const body = typeof avatarOrData === "object" && avatarOrData !== null
+      ? avatarOrData
+      : { avatar: avatarOrData, ...(gender !== undefined ? { gender } : {}) };
+    return request("/auth/update-avatar/", { token, method: "POST", body });
+  },
   matchContacts: (token, phones, emails) => request("/auth/contacts/match/", { token, method: "POST", body: { phones, emails } }),
 };

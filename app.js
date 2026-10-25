@@ -130,19 +130,22 @@ let uniNoteRevealedMap = {};
 let uniNoteTranscriptOpenMap = {};
 
 const AVATAR_PRESETS = [
-  { id: "varsity-male", name: "Varsity (Male)", persona: "Varsity", file: "assets/avatars/varsity-male.webp" },
-  { id: "varsity-female", name: "Varsity (Female)", persona: "Varsity", file: "assets/avatars/varsity-female.webp" },
-  { id: "scholar-female", name: "Reading (Female)", persona: "Scholar", file: "assets/avatars/scholar-female.webp" },
-  { id: "scholar-male", name: "Reading (Male)", persona: "Scholar", file: "assets/avatars/scholar-male.webp" },
-  { id: "audio-male", name: "Focus (Male)", persona: "Focus", file: "assets/avatars/audio-male.webp" },
-  { id: "audio-female", name: "Focus (Female)", persona: "Focus", file: "assets/avatars/audio-female.webp" },
-  { id: "medic-female", name: "Pre-Med (Female)", persona: "Pre-Med", file: "assets/avatars/medic-female.webp" },
-  { id: "medic-male", name: "Pre-Med (Male)", persona: "Pre-Med", file: "assets/avatars/medic-male.webp" },
-  { id: "hijab-female", name: "Modest (Female)", persona: "Modest", file: "assets/avatars/hijab-female.webp" }
+  { id: "varsity-male", name: "Varsity (Male)", persona: "Varsity", gender: "male", file: "assets/avatars/varsity-male.webp" },
+  { id: "varsity-female", name: "Varsity (Female)", persona: "Varsity", gender: "female", file: "assets/avatars/varsity-female.webp" },
+  { id: "scholar-female", name: "Reading (Female)", persona: "Scholar", gender: "female", file: "assets/avatars/scholar-female.webp" },
+  { id: "scholar-male", name: "Reading (Male)", persona: "Scholar", gender: "male", file: "assets/avatars/scholar-male.webp" },
+  { id: "audio-male", name: "Focus (Male)", persona: "Focus", gender: "male", file: "assets/avatars/audio-male.webp" },
+  { id: "audio-female", name: "Focus (Female)", persona: "Focus", gender: "female", file: "assets/avatars/audio-female.webp" },
+  { id: "medic-female", name: "Pre-Med (Female)", persona: "Pre-Med", gender: "female", file: "assets/avatars/medic-female.webp" },
+  { id: "medic-male", name: "Pre-Med (Male)", persona: "Pre-Med", gender: "male", file: "assets/avatars/medic-male.webp" },
+  { id: "hijab-female", name: "Modest (Female)", persona: "Modest", gender: "female", file: "assets/avatars/hijab-female.webp" }
 ];
 
-function getRandomAvatarId() {
-  return AVATAR_PRESETS[Math.floor(Math.random() * AVATAR_PRESETS.length)].id;
+function getRandomAvatarId(gender = null) {
+  const normalized = gender ? String(gender).toLowerCase().trim() : null;
+  const pool = normalized ? AVATAR_PRESETS.filter(a => a.gender === normalized) : AVATAR_PRESETS;
+  const list = pool.length > 0 ? pool : AVATAR_PRESETS;
+  return list[Math.floor(Math.random() * list.length)].id;
 }
 
 function getAvatarSrc(avatarId) {
@@ -3026,7 +3029,7 @@ async function refreshDeviceCache() {
 
 function renderAuth() {
   const register = authMode === "register";
-  app.innerHTML = `<main class="onboarding auth-screen"><section class="onboard-brand"><span class="brand"><span class="brand-symbol" aria-hidden="true"><img src="assets/seomtorch_logo.png" alt=""></span><span class="brand-name">Seomtorch<small>Prepare with purpose</small></span></span><div><blockquote>Your progress should follow you.</blockquote><p>Sign in to keep every answer, streak and milestone connected to your account.</p></div><small>Biology · Chemistry · Civic Education · Computer Studies · Economics · English Language · General Paper · Government · History · Literature in English · Marketing · Mathematics · Music · Physics · University Courses</small></section><section class="onboard-form"><div><div class="auth-tabs"><button class="${!register ? "active" : ""}" data-auth-mode="signin">Sign in</button><button class="${register ? "active" : ""}" data-auth-mode="register">Register</button></div><p class="eyebrow">${register ? "Create your account" : "Welcome back"}</p><h1>${register ? "Begin your preparation." : "Return to your study desk."}</h1><p class="lede">${register ? "Select your path and create a secure profile." : "Sign in with your email address and password."}</p><form id="auth-form" class="auth-form">${register ? '<div class="field"><label for="auth-username">Username</label><input id="auth-username" name="username" type="text" maxlength="150" autocomplete="username" required></div>' : ""}<div class="field"><label for="auth-email">Email address</label><input id="auth-email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="auth-password">Password</label><input id="auth-password" name="password" type="password" minlength="8" autocomplete="${register ? "new-password" : "current-password"}" required></div>${register ? `<div class="field"><label style="font-weight:700;margin-bottom:8px;display:block;">Choose your primary portal:</label><div class="reg-path-selector"><label class="reg-path-option"><input type="radio" name="user_type" value="aspirant" checked><div class="reg-path-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg><strong>Exam Aspirant</strong><small>JAMB, WAEC, NECO & Post-UTME</small></div></label><label class="reg-path-option"><input type="radio" name="user_type" value="university"><div class="reg-path-card uni-path"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M3 10h18M5 10v11M9 10v11M15 10v11M19 10v11M12 2L2 7h20L12 2z"/></svg><strong>University Student</strong><small>Undergraduate Degree (100L - 600L)</small></div></label></div></div><div id="reg-aspirant-fields"><div class="field"><label for="auth-exam-type">Target Examination</label><select id="auth-exam-type" name="exam_type"><option value="jamb">JAMB UTME</option><option value="waec">WAEC SSCE</option><option value="neco">NECO SSCE</option><option value="post_utme">POST-UTME</option></select></div><div class="field"><label for="auth-target-year">Target Year</label><input id="auth-target-year" name="target_year" type="number" min="2024" max="2035" value="2026"></div></div><div id="reg-uni-fields" style="display:none;"><div class="field"><label for="auth-uni-name">University / Institution *</label><input id="auth-uni-name" name="university_name" type="text" placeholder="e.g. University of Lagos (UNILAG)"></div><div class="field"><label for="auth-uni-dept">Department *</label><input id="auth-uni-dept" name="department" type="text" placeholder="e.g. Anatomy"></div><div class="field"><label for="auth-uni-level">Level</label><select id="auth-uni-level" name="level"><option value="100">100 Level</option><option value="200" selected>200 Level</option><option value="300">300 Level</option><option value="400">400 Level</option><option value="500">500 Level</option><option value="600">600 Level</option></select></div></div>` : ""}<div id="auth-error" class="auth-error" role="alert"></div><button class="button auth-submit" type="submit">${register ? "Create account" : "Sign in"} →</button></form></div></section></main>${!isStandalone() ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ''}`;
+  app.innerHTML = `<main class="onboarding auth-screen"><section class="onboard-brand"><span class="brand"><span class="brand-symbol" aria-hidden="true"><img src="assets/seomtorch_logo.png" alt=""></span><span class="brand-name">Seomtorch<small>Prepare with purpose</small></span></span><div><blockquote>Your progress should follow you.</blockquote><p>Sign in to keep every answer, streak and milestone connected to your account.</p></div><small>Biology · Chemistry · Civic Education · Computer Studies · Economics · English Language · General Paper · Government · History · Literature in English · Marketing · Mathematics · Music · Physics · University Courses</small></section><section class="onboard-form"><div><div class="auth-tabs"><button class="${!register ? "active" : ""}" data-auth-mode="signin">Sign in</button><button class="${register ? "active" : ""}" data-auth-mode="register">Register</button></div><p class="eyebrow">${register ? "Create your account" : "Welcome back"}</p><h1>${register ? "Begin your preparation." : "Return to your study desk."}</h1><p class="lede">${register ? "Select your path and create a secure profile." : "Sign in with your email address and password."}</p><form id="auth-form" class="auth-form">${register ? '<div class="field"><label for="auth-username">Username</label><input id="auth-username" name="username" type="text" maxlength="150" autocomplete="username" required></div>' : ""}<div class="field"><label for="auth-email">Email address</label><input id="auth-email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="auth-password">Password</label><input id="auth-password" name="password" type="password" minlength="8" autocomplete="${register ? "new-password" : "current-password"}" required></div>${register ? `<div class="field"><label style="font-weight:700;margin-bottom:8px;display:block;">Gender:</label><div class="reg-gender-selector"><label class="reg-gender-option"><input type="radio" name="gender" value="male" checked><div class="reg-gender-card"><span class="reg-gender-symbol">♂</span><div><strong>Male</strong><small>Allocates male avatar</small></div></div></label><label class="reg-gender-option"><input type="radio" name="gender" value="female"><div class="reg-gender-card female"><span class="reg-gender-symbol">♀</span><div><strong>Female</strong><small>Allocates female avatar</small></div></div></label></div></div><div class="field"><label style="font-weight:700;margin-bottom:8px;display:block;">Choose your primary portal:</label><div class="reg-path-selector"><label class="reg-path-option"><input type="radio" name="user_type" value="aspirant" checked><div class="reg-path-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg><strong>Exam Aspirant</strong><small>JAMB, WAEC, NECO & Post-UTME</small></div></label><label class="reg-path-option"><input type="radio" name="user_type" value="university"><div class="reg-path-card uni-path"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M3 10h18M5 10v11M9 10v11M15 10v11M19 10v11M12 2L2 7h20L12 2z"/></svg><strong>University Student</strong><small>Undergraduate Degree (100L - 600L)</small></div></label></div></div><div id="reg-aspirant-fields"><div class="field"><label for="auth-exam-type">Target Examination</label><select id="auth-exam-type" name="exam_type"><option value="jamb">JAMB UTME</option><option value="waec">WAEC SSCE</option><option value="neco">NECO SSCE</option><option value="post_utme">POST-UTME</option></select></div><div class="field"><label for="auth-target-year">Target Year</label><input id="auth-target-year" name="target_year" type="number" min="2024" max="2035" value="2026"></div></div><div id="reg-uni-fields" style="display:none;"><div class="field"><label for="auth-uni-name">University / Institution *</label><input id="auth-uni-name" name="university_name" type="text" placeholder="e.g. University of Lagos (UNILAG)"></div><div class="field"><label for="auth-uni-dept">Department *</label><input id="auth-uni-dept" name="department" type="text" placeholder="e.g. Anatomy"></div><div class="field"><label for="auth-uni-level">Level</label><select id="auth-uni-level" name="level"><option value="100">100 Level</option><option value="200" selected>200 Level</option><option value="300">300 Level</option><option value="400">400 Level</option><option value="500">500 Level</option><option value="600">600 Level</option></select></div></div>` : ""}<div id="auth-error" class="auth-error" role="alert"></div><button class="button auth-submit" type="submit">${register ? "Create account" : "Sign in"} →</button></form></div></section></main>${!isStandalone() ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ''}`;
   document.querySelectorAll("[data-auth-mode]").forEach(button => button.addEventListener("click", () => { authMode = button.dataset.authMode; renderAuth(); }));
   document.querySelectorAll("[data-install-app]").forEach(button => button.addEventListener("click", installApp));
   if (register) {
@@ -3050,11 +3053,13 @@ async function submitAuth(event) {
     let data;
     if (authMode === "register") {
       const userType = body.user_type || "aspirant";
+      const gender = (body.gender || "male").toLowerCase();
       data = await api.register({
         email: body.email,
         username: body.username,
         password: body.password,
-        user_type: userType
+        user_type: userType,
+        gender: gender
       });
       // Register initial profile according to their selected path
       if (userType === "university") {
@@ -3115,7 +3120,7 @@ async function prepareLocalUser(user) {
     await clearStore("profile"); await clearStore("attempts"); await clearStore("bookmarks"); await put("meta", { key: "bookmarkQueue", actions: [] }); attempts = []; bookmarks = [];
   }
   const stats = user.stats || {};
-  profile = { id: "local-user", remoteId: user.public_id, name: user.username, email: user.email, avatar: user.avatar || profile?.avatar || getRandomAvatarId(), xp: stats.xp ?? 0, rhythm: stats.current_streak ?? 0, bestRhythm: stats.best_streak ?? 0, lastStudyDate: stats.last_study_date || null, tests: stats.tests || profile?.tests || null, createdAt: profile?.createdAt || Date.now() };
+  profile = { id: "local-user", remoteId: user.public_id, name: user.username, email: user.email, gender: user.gender || profile?.gender || "", avatar: user.avatar || profile?.avatar || getRandomAvatarId(user.gender), xp: stats.xp ?? 0, rhythm: stats.current_streak ?? 0, bestRhythm: stats.best_streak ?? 0, lastStudyDate: stats.last_study_date || null, tests: stats.tests || profile?.tests || null, createdAt: profile?.createdAt || Date.now() };
   await put("profile", profile);
 }
 
@@ -5175,6 +5180,8 @@ async function renderUniNote() {
 function openAvatarPickerModal(onUpdated) {
   document.querySelector("#avatar-picker-backdrop")?.remove();
   let selectedPersona = "all";
+  let selectedGender = (profile?.gender || currentUser?.gender || "all").toLowerCase();
+  if (selectedGender !== "male" && selectedGender !== "female") selectedGender = "all";
   let activeAvatarId = profile?.avatar || "varsity-male";
 
   const backdrop = document.createElement("div");
@@ -5182,12 +5189,16 @@ function openAvatarPickerModal(onUpdated) {
   backdrop.className = "avatar-picker-backdrop";
 
   const renderModalContent = () => {
-    const filtered = selectedPersona === "all"
-      ? AVATAR_PRESETS
-      : AVATAR_PRESETS.filter(a => a.persona.toLowerCase() === selectedPersona.toLowerCase());
+    let filtered = AVATAR_PRESETS;
+    if (selectedGender !== "all") {
+      filtered = filtered.filter(a => a.gender === selectedGender);
+    }
+    if (selectedPersona !== "all") {
+      filtered = filtered.filter(a => a.persona.toLowerCase() === selectedPersona.toLowerCase());
+    }
 
     const tabs = [
-      { id: "all", label: `All (${AVATAR_PRESETS.length})` },
+      { id: "all", label: "All Personas" },
       { id: "Varsity", label: "Varsity" },
       { id: "Scholar", label: "Reading" },
       { id: "Focus", label: "Focus" },
@@ -5200,7 +5211,7 @@ function openAvatarPickerModal(onUpdated) {
       return `<button type="button" class="avatar-filter-btn ${isActive ? "active" : ""}" data-tab="${t.id}"><span>${escapeHtml(t.label)}</span></button>`;
     }).join("");
 
-    const cardsHtml = filtered.map(a => {
+    const cardsHtml = filtered.length ? filtered.map(a => {
       const isSelected = activeAvatarId === a.id;
       return `
         <div class="avatar-card ${isSelected ? "selected" : ""}" data-avatar-id="${a.id}" role="button" tabindex="0">
@@ -5209,10 +5220,10 @@ function openAvatarPickerModal(onUpdated) {
           </div>
           <span class="avatar-card-check">✓</span>
           <span class="avatar-card-label">${escapeHtml(a.name)}</span>
-          <span class="avatar-card-persona">${escapeHtml(a.persona)}</span>
+          <span class="avatar-card-persona">${escapeHtml(a.persona)} · ${a.gender === "female" ? "♀ Female" : "♂ Male"}</span>
         </div>
       `;
-    }).join("");
+    }).join("") : `<div class="empty" style="grid-column: 1 / -1; padding: 28px 16px; text-align: center; color: var(--muted); font-size: 13px;">No avatars match this filter combination. Try selecting "All Personas" or "All".</div>`;
 
     backdrop.innerHTML = `
       <div class="avatar-picker-modal" role="dialog" aria-modal="true" aria-labelledby="avatar-picker-title">
@@ -5225,8 +5236,16 @@ function openAvatarPickerModal(onUpdated) {
         </div>
         <p style="margin:0; font-size:13px; color:var(--muted); line-height:1.5;">Select a character that reflects your study persona. Your avatar displays on your profile, topbar, and leaderboards.</p>
 
-        <div class="avatar-filter-tabs">
-          ${tabsHtml}
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div class="avatar-gender-pills">
+            <button type="button" class="avatar-gender-pill ${selectedGender === "all" ? "active" : ""}" data-avatar-gender="all">All (${AVATAR_PRESETS.length})</button>
+            <button type="button" class="avatar-gender-pill ${selectedGender === "male" ? "active" : ""}" data-avatar-gender="male">♂ Male (${AVATAR_PRESETS.filter(a => a.gender === "male").length})</button>
+            <button type="button" class="avatar-gender-pill ${selectedGender === "female" ? "active" : ""}" data-avatar-gender="female">♀ Female (${AVATAR_PRESETS.filter(a => a.gender === "female").length})</button>
+          </div>
+
+          <div class="avatar-filter-tabs">
+            ${tabsHtml}
+          </div>
         </div>
 
         <div class="avatar-grid">
@@ -5243,6 +5262,13 @@ function openAvatarPickerModal(onUpdated) {
     backdrop.querySelector("#avatar-picker-close")?.addEventListener("click", () => backdrop.remove());
     backdrop.querySelector("#avatar-picker-save")?.addEventListener("click", () => backdrop.remove());
 
+    backdrop.querySelectorAll("[data-avatar-gender]").forEach(pill => {
+      pill.addEventListener("click", () => {
+        selectedGender = pill.dataset.avatarGender;
+        renderModalContent();
+      });
+    });
+
     backdrop.querySelectorAll("[data-tab]").forEach(tab => {
       tab.addEventListener("click", () => {
         selectedPersona = tab.dataset.tab;
@@ -5253,11 +5279,16 @@ function openAvatarPickerModal(onUpdated) {
     backdrop.querySelectorAll("[data-avatar-id]").forEach(card => {
       const pick = async () => {
         const id = card.dataset.avatarId;
+        const match = AVATAR_PRESETS.find(p => p.id === id);
         activeAvatarId = id;
         profile.avatar = id;
+        if (match?.gender) {
+          profile.gender = match.gender;
+          if (currentUser) currentUser.gender = match.gender;
+        }
         await put("profile", profile);
         if (authToken) {
-          api.updateAvatar(authToken, id).catch(() => {});
+          api.updateAvatar(authToken, id, profile.gender).catch(() => {});
         }
         showToast("Avatar updated! ✨");
         renderModalContent();

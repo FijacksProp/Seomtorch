@@ -72,6 +72,30 @@ class AuthenticationTests(APITestCase):
         self.assertEqual(response.status_code, 403)
         self.assertIn("temporary password", response.data["detail"])
 
+    def test_register_male_gender_allocates_male_avatar(self):
+        male_avatars = {"varsity-male", "scholar-male", "audio-male", "medic-male"}
+        response = self.client.post("/api/auth/register/", {
+            "email": "male.student@example.com",
+            "username": "malestudent",
+            "password": "Securepass934!",
+            "gender": "male"
+        }, format="json")
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.data["user"]["gender"], "male")
+        self.assertIn(response.data["user"]["avatar"], male_avatars)
+
+    def test_register_female_gender_allocates_female_avatar(self):
+        female_avatars = {"varsity-female", "scholar-female", "audio-female", "medic-female", "hijab-female"}
+        response = self.client.post("/api/auth/register/", {
+            "email": "female.student@example.com",
+            "username": "femalestudent",
+            "password": "Securepass934!",
+            "gender": "female"
+        }, format="json")
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.data["user"]["gender"], "female")
+        self.assertIn(response.data["user"]["avatar"], female_avatars)
+
 
 class ContactTests(APITestCase):
     def setUp(self):

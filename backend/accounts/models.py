@@ -39,6 +39,11 @@ class UserType(models.TextChoices):
     UNIVERSITY = "university", "University"
 
 
+class Gender(models.TextChoices):
+    MALE = "male", "Male"
+    FEMALE = "female", "Female"
+
+
 class User(AbstractUser):
     email = models.EmailField(unique=True)
     public_id = models.CharField(max_length=6, unique=True, default=generate_public_id, editable=False, db_index=True)
@@ -47,6 +52,13 @@ class User(AbstractUser):
     phone_number = models.CharField(
         max_length=20, blank=True, default="",
         help_text="Optional phone number for contact discovery.",
+    )
+    gender = models.CharField(
+        max_length=10,
+        choices=Gender.choices,
+        blank=True,
+        default="",
+        help_text="User gender (male or female).",
     )
     avatar = models.CharField(
         max_length=50, blank=True, default="",
