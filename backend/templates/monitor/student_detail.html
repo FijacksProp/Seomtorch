@@ -1,9 +1,429 @@
 {% extends 'monitor/base.html' %}
-{% block title %}{{ student.username }}{% endblock %}
+{% block title %}{{ student.username }} ({{ student.public_id }}){% endblock %}
 {% block content %}
-<a class="back-link" href="{% url 'monitor:students' %}">← Student directory</a>
-<div class="student-hero"><div class="hero-avatar">{{ student.username|slice:":1"|upper }}</div><div><p class="kicker">Student profile · {{ student.public_id }}</p><h1>{{ student.username }}</h1><p>{{ student.email }} · joined {{ student.date_joined|date:"j F Y" }}</p><form method="post" action="{% url 'monitor:reset-student-password' student.public_id %}" onsubmit="return confirm('Reset this student’s password and sign them out on every device?');">{% csrf_token %}<button class="button password-reset-button" type="submit">Generate temporary password</button></form></div></div>
-<section class="metric-grid"><article><span>Tests taken</span><strong>{{ tests.tests_taken }}</strong><small>{{ tests.in_progress }} currently in progress</small></article><article><span>Average test score</span><strong>{{ tests.average_score }}%</strong><small>Across completed papers</small></article><article><span>Best test score</span><strong>{{ tests.best_score }}%</strong><small>{{ tests.questions_in_tests }} questions inside tests</small></article><article class="accent"><span>Completion rate</span><strong>{{ tests.completion_rate }}%</strong><small>{{ tests.unfinished }} unfinished sessions</small></article></section>
-<div class="support-line"><span>{{ total }} questions answered</span><span>{{ correct }} correct</span><span>{{ accuracy }}% answer accuracy</span><span>{{ student.learning_stats.xp }} XP · Level {{ student.learning_stats.level }}</span><span>{{ student.learning_stats.live_current_streak }}-day streak</span></div>
-<div class="dashboard-grid"><section class="panel wide"><div class="panel-head"><div><p class="kicker">Completed papers</p><h2>Recent tests</h2></div></div><div class="test-record-list">{% for test in tests.recent_tests %}<div><time>{{ test.completed_at|date:"j M Y" }}</time><p><strong>{{ test.focus }}</strong><small>{{ test.mode_label }} · {{ test.answered }}/{{ test.total }} answered</small></p><b>{{ test.score }}%</b></div>{% empty %}<div class="empty">No completed tests yet.</div>{% endfor %}</div></section><section class="panel"><div class="panel-head"><div><p class="kicker">Practice composition</p><h2>Test formats</h2></div></div><div class="simple-list">{% for mode in tests.by_mode %}<div><span>{{ mode.label }}<small>{{ mode.count }} completed</small></span><b>{{ mode.average_score }}%</b></div>{% empty %}<div class="empty">No format data yet.</div>{% endfor %}</div></section><section class="panel wide"><div class="panel-head"><div><p class="kicker">Question-level evidence</p><h2>By subject</h2></div></div><div class="subject-report">{% for row in subject_rows %}<a href="{% url 'monitor:subject-detail' row.question__topic__subject__slug %}"><div><strong>{{ row.question__topic__subject__name }}</strong><small>{{ row.correct }} correct · {{ row.total }} answers</small></div><div class="bar"><i style="width:{{ row.accuracy }}%"></i></div><b>{{ row.accuracy }}%</b><span>→</span></a>{% empty %}<div class="empty">No answers submitted yet.</div>{% endfor %}</div></section><section class="panel"><div class="panel-head"><div><p class="kicker">Focus areas</p><h2>Topic detail</h2></div></div><div class="simple-list">{% for row in topic_rows %}<div><span>{{ row.question__topic__name }}<small>{{ row.question__topic__subject__name }} · {{ row.total }} answers</small></span><b>{{ row.accuracy }}%</b></div>{% empty %}<div class="empty">No topic data yet.</div>{% endfor %}</div></section><section class="panel wide"><div class="panel-head"><div><p class="kicker">Answer history</p><h2>Recent questions</h2></div></div><div class="attempt-list">{% for attempt in recent_attempts %}<div><i class="{% if attempt.is_correct %}correct{% else %}wrong{% endif %}"></i><p>{{ attempt.question.text|truncatechars:100 }}<small>{{ attempt.question.topic.subject.name }} · {{ attempt.question.topic.name }} · {{ attempt.answered_at|timesince }} ago</small></p><b>{% if attempt.is_correct %}+5 XP{% else %}Review{% endif %}</b></div>{% empty %}<div class="empty">No attempts yet.</div>{% endfor %}</div></section></div>
+
+<a class="back-link" href="{% url 'monitor:students' %}">← Back to Student Directory</a>
+
+<!-- Student Profile Header Card -->
+<div class="control-section" style="margin-bottom:24px;">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+    <div style="display:flex;align-items:center;gap:20px;">
+      <div class="hero-avatar" style="width:76px;height:76px;font-size:32px;">
+        {{ student.username|slice:":1"|upper }}
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+          <h1 style="margin:0;font-family:var(--font-serif);font-size:36px;font-weight:600;color:var(--color-ink);">
+            {{ student.username }}
+          </h1>
+          <span class="badge {% if student.active_mode == 'university' %}badge-uni{% else %}badge-aspirant{% endif %}">
+            {{ student.active_mode|title }} Mode
+          </span>
+          {% if access_summary.has_all_access %}
+            <span class="badge badge-all-access">⭐ All-Access</span>
+          {% elif access_summary.is_trial %}
+            <span class="badge badge-trial">✨ 3-Day Trial ({{ access_summary.trial_days_remaining }}d left)</span>
+          {% elif access_summary.unlocked_courses %}
+            <span class="badge badge-single">Course Access ({{ access_summary.unlocked_courses|join:", " }})</span>
+          {% else %}
+            <span class="badge badge-free">Free Tier</span>
+          {% endif %}
+        </div>
+        <p style="margin:0 0 6px;color:var(--color-muted);font-size:13px;">
+          <strong>{{ student.email }}</strong> · ID: <code>{{ student.public_id }}</code>
+          {% if student.phone_number %} · Phone: <strong>{{ student.phone_number }}</strong>{% endif %}
+          {% if student.gender %} · Gender: <strong>{{ student.get_gender_display }}</strong>{% endif %}
+          · Joined {{ student.date_joined|date:"j F Y" }}
+        </p>
+
+        <!-- Academic segmentation details -->
+        {% if student.active_mode == 'university' and student.university_profile %}
+          <div style="font-size:12px;color:var(--color-forest);font-weight:600;background:var(--color-forest-light);padding:4px 10px;border-radius:6px;display:inline-block;">
+            🏫 {{ student.university_profile.university_name }} · {{ student.university_profile.department }} ({{ student.university_profile.get_level_display }})
+          </div>
+        {% elif student.aspirant_profile %}
+          <div style="font-size:12px;color:#86198f;font-weight:600;background:#fdf4ff;padding:4px 10px;border-radius:6px;display:inline-block;">
+            🎯 Preparing for {{ student.aspirant_profile.get_exam_type_display }} {{ student.aspirant_profile.target_year }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Security & Password Reset -->
+    <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+      <form method="post" action="{% url 'monitor:reset-student-password' student.public_id %}" onsubmit="return confirm('Reset this student’s password and sign them out on every device?');">
+        {% csrf_token %}
+        <button class="btn-outline" style="border-color:#b45309;color:#92400e;" type="submit">
+          🔑 Generate Temporary Password
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Quick Access Grant Panel -->
+  <div style="margin-top:20px;padding-top:18px;border-top:1px solid rgba(0,0,0,0.06);background:#fcfefd;padding:16px;border-radius:var(--radius-md);border:1px solid var(--color-forest-border);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:10px;">
+      <div>
+        <strong style="font-size:13px;color:var(--color-forest);text-transform:uppercase;letter-spacing:0.04em;">
+          Direct Access Control for {{ student.username }}
+        </strong>
+        <p style="margin:2px 0 0;font-size:11.5px;color:var(--color-muted);">Grant or revoke course passes directly to this student.</p>
+      </div>
+
+      {% if access_summary.has_all_access or access_summary.is_trial or access_summary.unlocked_courses %}
+        <form method="post" action="{% url 'monitor:revoke-student-access' student.public_id %}" onsubmit="return confirm('Revoke all active access for this student?');" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn-danger" style="padding:6px 14px;">Revoke All Active Access</button>
+        </form>
+      {% endif %}
+    </div>
+
+    <form method="post" action="{% url 'monitor:grant-student-access' student.public_id %}" style="display:grid;grid-template-columns:minmax(140px,1.2fr) minmax(140px,1fr) minmax(130px,1fr) auto;gap:10px;align-items:end;">
+      {% csrf_token %}
+      <div class="form-group" style="margin:0;">
+        <label style="font-size:10px;">Select Plan</label>
+        <select name="access_type" id="student-plan-select" style="padding:7px 10px;font-size:12px;">
+          <option value="all_access">All-Access (All 3 Courses)</option>
+          <option value="single_course">Single Course</option>
+          <option value="trial">3-Day Free Trial</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin:0;" id="student-course-select-wrap">
+        <label style="font-size:10px;">Course Code</label>
+        <select name="course_code" style="padding:7px 10px;font-size:12px;">
+          <option value="all">All Courses</option>
+          <option value="ANA 201">ANA 201 (Upper &amp; Lower Limb)</option>
+          <option value="ANA 203">ANA 203 (Systemic Embryology)</option>
+          <option value="PIO 201">PIO 201 (Medical Physiology)</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin:0;">
+        <label style="font-size:10px;">Expires On</label>
+        <input type="date" name="expires_at" value="{{ plan_config.semester_end_date|date:'Y-m-d' }}" style="padding:6px 10px;font-size:12px;">
+      </div>
+
+      <button type="submit" class="btn-primary" style="padding:8px 16px;white-space:nowrap;font-size:12px;">
+        Grant Access
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Student Top Metrics Grid -->
+<section class="metric-grid-enhanced">
+  <article class="metric-card">
+    <span class="label">Tests Taken</span>
+    <strong>{{ tests.tests_taken }}</strong>
+    <small>{{ tests.in_progress }} currently in progress</small>
+  </article>
+
+  <article class="metric-card highlight">
+    <span class="label">Average Test Score</span>
+    <strong>{{ tests.average_score }}%</strong>
+    <small>Across completed practice tests</small>
+  </article>
+
+  <article class="metric-card accent">
+    <span class="label">Best Score</span>
+    <strong>{{ tests.best_score }}%</strong>
+    <small>{{ tests.questions_in_tests }} test questions answered</small>
+  </article>
+
+  <article class="metric-card">
+    <span class="label">Answer Accuracy</span>
+    <strong>{{ accuracy }}%</strong>
+    <small>{{ correct }} correct of {{ total }} answered</small>
+  </article>
+
+  <article class="metric-card">
+    <span class="label">Gamification</span>
+    <strong>{{ student.learning_stats.xp }} XP</strong>
+    <small>Level {{ student.learning_stats.level }} · {{ student.learning_stats.live_current_streak }}-day streak</small>
+  </article>
+
+  <article class="metric-card">
+    <span class="label">Completion Rate</span>
+    <strong>{{ tests.completion_rate }}%</strong>
+    <small>{{ tests.unfinished }} abandoned sessions</small>
+  </article>
+</section>
+
+<!-- Student Visual Charts Grid -->
+<div class="charts-grid">
+  <!-- Chart 1: Subject Accuracy (Bar Chart) -->
+  <div class="chart-card">
+    <div class="chart-header">
+      <div>
+        <p class="kicker">Subject Mastery</p>
+        <h3>Accuracy by Subject (%)</h3>
+      </div>
+      <small style="color:var(--color-muted);">Individual Accuracy</small>
+    </div>
+    <div class="chart-canvas-wrap">
+      <canvas id="studentSubjectChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Chart 2: Test Score Progression (Line Chart) -->
+  <div class="chart-card">
+    <div class="chart-header">
+      <div>
+        <p class="kicker">Learning Trajectory</p>
+        <h3>Score History (Recent Tests)</h3>
+      </div>
+      <small style="color:var(--color-muted);">Score Progression</small>
+    </div>
+    <div class="chart-canvas-wrap">
+      <canvas id="studentScoreChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Chart 3: Question Diagnostic (Doughnut Chart) -->
+  <div class="chart-card">
+    <div class="chart-header">
+      <div>
+        <p class="kicker">Answer Diagnostic</p>
+        <h3>Correct vs Incorrect Answers</h3>
+      </div>
+      <small style="color:var(--color-muted);">{{ accuracy }}% overall accuracy</small>
+    </div>
+    <div class="chart-canvas-wrap">
+      <canvas id="studentPieChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Card 4: Access History & Subscriptions -->
+  <div class="chart-card" style="overflow-y:auto;max-height:330px;">
+    <div class="chart-header">
+      <div>
+        <p class="kicker">Access Grants</p>
+        <h3>Subscription &amp; Pass History</h3>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      {% for grant in all_grants %}
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--color-paper);border-radius:8px;font-size:12px;">
+        <div>
+          <strong>{{ grant.get_access_type_display }}</strong>
+          {% if grant.course_code != 'all' %}({{ grant.course_code }}){% endif %}
+          <small style="display:block;color:var(--color-muted);">Expires {{ grant.expires_at|date:'j M Y' }}</small>
+        </div>
+        <div>
+          {% if grant.is_currently_valid %}
+            <span class="badge badge-active">Active</span>
+          {% else %}
+            <span class="badge badge-disabled">Expired</span>
+          {% endif %}
+        </div>
+      </div>
+      {% empty %}
+      <div class="empty">No access passes granted to this student.</div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- Detailed Records Section -->
+<div class="dashboard-grid">
+  <!-- Recent Completed Tests Table -->
+  <section class="panel wide">
+    <div class="panel-head">
+      <div>
+        <p class="kicker">Completed Papers</p>
+        <h2>Recent Tests Taken</h2>
+      </div>
+    </div>
+    <div class="test-record-list">
+      {% for test in tests.recent_tests %}
+      <div>
+        <time>{{ test.completed_at|date:"j M Y" }}</time>
+        <p>
+          <strong>{{ test.focus }}</strong>
+          <small>{{ test.mode_label }} · {{ test.answered }}/{{ test.total }} answered</small>
+        </p>
+        <b>{{ test.score }}%</b>
+      </div>
+      {% empty %}
+      <div class="empty">No completed tests yet.</div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Practice Composition -->
+  <section class="panel">
+    <div class="panel-head">
+      <div>
+        <p class="kicker">Format Breakdown</p>
+        <h2>Test Formats</h2>
+      </div>
+    </div>
+    <div class="simple-list">
+      {% for mode in tests.by_mode %}
+      <div>
+        <span>{{ mode.label }}<small>{{ mode.count }} completed</small></span>
+        <b>{{ mode.average_score }}%</b>
+      </div>
+      {% empty %}
+      <div class="empty">No format data yet.</div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Subject Level Breakdown -->
+  <section class="panel wide">
+    <div class="panel-head">
+      <div>
+        <p class="kicker">Subject Evidence</p>
+        <h2>Performance by Subject</h2>
+      </div>
+    </div>
+    <div class="subject-report">
+      {% for row in subject_rows %}
+      <a href="{% url 'monitor:subject-detail' row.question__topic__subject__slug %}">
+        <div>
+          <strong>{{ row.question__topic__subject__name }}</strong>
+          <small>{{ row.correct }} correct · {{ row.total }} answers submitted</small>
+        </div>
+        <div class="bar"><i style="width:{{ row.accuracy }}%"></i></div>
+        <b>{{ row.accuracy }}%</b>
+        <span>→</span>
+      </a>
+      {% empty %}
+      <div class="empty">No answers submitted yet.</div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Topics Detail -->
+  <section class="panel">
+    <div class="panel-head">
+      <div>
+        <p class="kicker">Focus Areas</p>
+        <h2>Topics Needing Focus</h2>
+      </div>
+    </div>
+    <div class="simple-list">
+      {% for row in topic_rows %}
+      <div>
+        <span>{{ row.question__topic__name }}<small>{{ row.question__topic__subject__name }} · {{ row.total }} answers</small></span>
+        <b>{{ row.accuracy }}%</b>
+      </div>
+      {% empty %}
+      <div class="empty">No topic data yet.</div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Recent Questions Attempted -->
+  <section class="panel wide">
+    <div class="panel-head">
+      <div>
+        <p class="kicker">Question Log</p>
+        <h2>Recent Questions Attempted</h2>
+      </div>
+    </div>
+    <div class="attempt-list">
+      {% for attempt in recent_attempts %}
+      <div>
+        <i class="{% if attempt.is_correct %}correct{% else %}wrong{% endif %}"></i>
+        <p>
+          {{ attempt.question.text|truncatechars:100 }}
+          <small>{{ attempt.question.topic.subject.name }} · {{ attempt.question.topic.name }} · {{ attempt.answered_at|timesince }} ago</small>
+        </p>
+        <b>{% if attempt.is_correct %}+5 XP{% else %}Review{% endif %}</b>
+      </div>
+      {% empty %}
+      <div class="empty">No attempts submitted yet.</div>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // 1. Subject Accuracy Bar Chart
+  const subCtx = document.getElementById("studentSubjectChart")?.getContext("2d");
+  if (subCtx) {
+    new Chart(subCtx, {
+      type: "bar",
+      data: {
+        labels: {{ chart_subject_labels|safe }},
+        datasets: [{
+          label: "Accuracy %",
+          data: {{ chart_subject_accuracy|safe }},
+          backgroundColor: "#064d3b",
+          borderRadius: 5
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { min: 0, max: 100, ticks: { callback: v => v + "%", font: { family: "DM Sans" } }, grid: { color: "rgba(0,0,0,0.05)" } },
+          x: { ticks: { font: { family: "DM Sans", size: 10.5 } }, grid: { display: false } }
+        }
+      }
+    });
+  }
+
+  // 2. Score Progression Line Chart
+  const scoreCtx = document.getElementById("studentScoreChart")?.getContext("2d");
+  if (scoreCtx) {
+    new Chart(scoreCtx, {
+      type: "line",
+      data: {
+        labels: {{ chart_test_labels|safe }},
+        datasets: [{
+          label: "Test Score %",
+          data: {{ chart_test_scores|safe }},
+          borderColor: "#d7922b",
+          backgroundColor: "rgba(215, 146, 43, 0.1)",
+          fill: true,
+          tension: 0.3,
+          pointRadius: 5,
+          pointBackgroundColor: "#d7922b"
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { min: 0, max: 100, ticks: { callback: v => v + "%", font: { family: "DM Sans" } }, grid: { color: "rgba(0,0,0,0.05)" } },
+          x: { ticks: { font: { family: "DM Sans" } }, grid: { display: false } }
+        }
+      }
+    });
+  }
+
+  // 3. Question Diagnostic Doughnut Chart
+  const pieCtx = document.getElementById("studentPieChart")?.getContext("2d");
+  if (pieCtx) {
+    new Chart(pieCtx, {
+      type: "doughnut",
+      data: {
+        labels: {{ chart_pie_labels|safe }},
+        datasets: [{
+          data: {{ chart_pie_data|safe }},
+          backgroundColor: ["#10b981", "#ef4444"],
+          borderWidth: 2,
+          borderColor: "#ffffff"
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: "right", labels: { font: { family: "DM Sans", size: 11 }, boxWidth: 12 } }
+        },
+        cutout: "70%"
+      }
+    });
+  }
+});
+</script>
+
 {% endblock %}

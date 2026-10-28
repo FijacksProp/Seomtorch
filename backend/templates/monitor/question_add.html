@@ -1,0 +1,195 @@
+{% extends 'monitor/base.html' %}
+{% block title %}Add Question{% endblock %}
+{% block content %}
+
+<a class="back-link" href="{% url 'monitor:questions' %}">← Back to Question Bank</a>
+
+<div class="control-section">
+  <div class="control-section-head">
+    <div>
+      <p class="kicker">Editorial Desk</p>
+      <h2>Add New Question</h2>
+    </div>
+    <small style="color:var(--color-muted);">Assign to subject, configure 4 options, and provide full worked solution</small>
+  </div>
+
+  <form method="post" id="question-form">
+    {% csrf_token %}
+
+    <div class="form-grid-3">
+      <div class="form-group">
+        <label>Academic Subject</label>
+        <select name="subject_id" id="subject-select" required>
+          {% for s in subjects %}
+            <option value="{{ s.id }}">{{ s.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Select Existing Topic</label>
+        <select name="topic_id" id="topic-select">
+          <option value="">-- Choose Topic or Type New Below --</option>
+          {% for s in subjects %}
+            {% for t in s.topics.all %}
+              <option value="{{ t.id }}" data-subject="{{ s.id }}">{{ s.name }} · {{ t.name }}</option>
+            {% endfor %}
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Or Type New Topic Name</label>
+        <input type="text" name="new_topic_name" id="new-topic-input" placeholder="e.g. Brachial Plexus">
+        <small class="hint">Leave empty if you picked a topic above.</small>
+      </div>
+    </div>
+
+    <!-- Question Text Area -->
+    <div class="form-group">
+      <label>Question Text</label>
+      <textarea name="text" id="q-text-input" rows="4" placeholder="Enter full question stem here... LaTeX math and standard formatting supported." required></textarea>
+    </div>
+
+    <!-- Live Preview Box -->
+    <div class="question-preview-box" id="preview-box">
+      <h4>Live Question Preview</h4>
+      <div class="preview-text" id="preview-text">Question text will preview here...</div>
+      <div class="preview-options">
+        <div class="preview-option-row" id="prev-row-0"><strong>A.</strong> <span id="prev-opt-0">Option A</span></div>
+        <div class="preview-option-row" id="prev-row-1"><strong>B.</strong> <span id="prev-opt-1">Option B</span></div>
+        <div class="preview-option-row" id="prev-row-2"><strong>C.</strong> <span id="prev-opt-2">Option C</span></div>
+        <div class="preview-option-row" id="prev-row-3"><strong>D.</strong> <span id="prev-opt-3">Option D</span></div>
+      </div>
+    </div>
+
+    <!-- 4 Options Inputs with Correct Option Radio Selection -->
+    <h3 style="margin:24px 0 12px;font-size:15px;color:var(--color-ink);">Options &amp; Correct Answer Selection</h3>
+    <div class="form-grid-2">
+      <div class="form-group" style="background:#ffffff;padding:12px;border:1px solid #e2e8f0;border-radius:10px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <label style="margin:0;color:var(--color-forest);">Option A</label>
+          <label style="margin:0;font-size:11px;cursor:pointer;display:flex;align-items:center;gap:4px;">
+            <input type="radio" name="correct_option" value="0" checked style="accent-color:var(--color-forest);">
+            <strong>Mark Correct (A)</strong>
+          </label>
+        </div>
+        <input type="text" name="option_a" id="opt-a-input" placeholder="Option A text" required>
+      </div>
+
+      <div class="form-group" style="background:#ffffff;padding:12px;border:1px solid #e2e8f0;border-radius:10px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <label style="margin:0;color:var(--color-forest);">Option B</label>
+          <label style="margin:0;font-size:11px;cursor:pointer;display:flex;align-items:center;gap:4px;">
+            <input type="radio" name="correct_option" value="1" style="accent-color:var(--color-forest);">
+            <strong>Mark Correct (B)</strong>
+          </label>
+        </div>
+        <input type="text" name="option_b" id="opt-b-input" placeholder="Option B text" required>
+      </div>
+
+      <div class="form-group" style="background:#ffffff;padding:12px;border:1px solid #e2e8f0;border-radius:10px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <label style="margin:0;color:var(--color-forest);">Option C</label>
+          <label style="margin:0;font-size:11px;cursor:pointer;display:flex;align-items:center;gap:4px;">
+            <input type="radio" name="correct_option" value="2" style="accent-color:var(--color-forest);">
+            <strong>Mark Correct (C)</strong>
+          </label>
+        </div>
+        <input type="text" name="option_c" id="opt-c-input" placeholder="Option C text" required>
+      </div>
+
+      <div class="form-group" style="background:#ffffff;padding:12px;border:1px solid #e2e8f0;border-radius:10px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <label style="margin:0;color:var(--color-forest);">Option D</label>
+          <label style="margin:0;font-size:11px;cursor:pointer;display:flex;align-items:center;gap:4px;">
+            <input type="radio" name="correct_option" value="3" style="accent-color:var(--color-forest);">
+            <strong>Mark Correct (D)</strong>
+          </label>
+        </div>
+        <input type="text" name="option_d" id="opt-d-input" placeholder="Option D text" required>
+      </div>
+    </div>
+
+    <!-- Detailed Worked Explanation Area -->
+    <div class="form-group" style="margin-top:14px;">
+      <label>Detailed Explanation &amp; Rationale</label>
+      <textarea name="explanation" rows="4" placeholder="Explain step-by-step why the marked option is correct and why other options are incorrect."></textarea>
+      <small class="hint">Questions with explanations provide high-yield learning value for students.</small>
+    </div>
+
+    <!-- Metadata Details -->
+    <div class="form-grid-3">
+      <div class="form-group">
+        <label>Difficulty</label>
+        <select name="difficulty">
+          <option value="standard" selected>Standard</option>
+          <option value="easy">Easy</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Exam / Question Source</label>
+        <input type="text" name="source" placeholder="e.g. JAMB 2024 or Clinical Review">
+      </div>
+
+      <div class="form-group">
+        <label>Question Year (Optional)</label>
+        <input type="number" name="question_year" placeholder="e.g. 2024" min="1990" max="2030">
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:20px;padding-top:18px;border-top:1px solid rgba(0,0,0,0.06);">
+      <button type="submit" name="save_and_add_another" value="1" class="btn-outline">
+        Save &amp; Add Another
+      </button>
+      <button type="submit" class="btn-primary" style="padding:10px 24px;">
+        Save Question to Bank
+      </button>
+    </div>
+  </form>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const qTextInput = document.getElementById("q-text-input");
+  const prevText = document.getElementById("preview-text");
+  const optA = document.getElementById("opt-a-input");
+  const optB = document.getElementById("opt-b-input");
+  const optC = document.getElementById("opt-c-input");
+  const optD = document.getElementById("opt-d-input");
+  const prevOpt0 = document.getElementById("prev-opt-0");
+  const prevOpt1 = document.getElementById("prev-opt-1");
+  const prevOpt2 = document.getElementById("prev-opt-2");
+  const prevOpt3 = document.getElementById("prev-opt-3");
+  const radioButtons = document.querySelectorAll('input[name="correct_option"]');
+
+  function updatePreview() {
+    prevText.textContent = qTextInput.value.trim() || "Question text will preview here...";
+    prevOpt0.textContent = optA.value.trim() || "Option A";
+    prevOpt1.textContent = optB.value.trim() || "Option B";
+    prevOpt2.textContent = optC.value.trim() || "Option C";
+    prevOpt3.textContent = optD.value.trim() || "Option D";
+
+    radioButtons.forEach(radio => {
+      const idx = radio.value;
+      const row = document.getElementById(`prev-row-${idx}`);
+      if (row) {
+        row.classList.toggle("correct", radio.checked);
+      }
+    });
+  }
+
+  qTextInput.addEventListener("input", updatePreview);
+  optA.addEventListener("input", updatePreview);
+  optB.addEventListener("input", updatePreview);
+  optC.addEventListener("input", updatePreview);
+  optD.addEventListener("input", updatePreview);
+  radioButtons.forEach(radio => radio.addEventListener("change", updatePreview));
+  updatePreview();
+});
+</script>
+
+{% endblock %}

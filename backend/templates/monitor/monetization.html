@@ -1,0 +1,439 @@
+{% extends 'monitor/base.html' %}
+{% block title %}Monetization &amp; Access Controls{% endblock %}
+{% block content %}
+
+<div class="page-heading">
+  <div>
+    <p class="kicker">Revenue &amp; Entitlements</p>
+    <h1>Monetization &amp; Access Control</h1>
+    <p>Manage subscription plans, launch discounts, class promo codes, and manually grant or revoke student access without visiting raw Django admin.</p>
+  </div>
+  <a href="{% url 'monitor:dashboard' %}" class="btn-outline">← Back to Overview</a>
+</div>
+
+<!-- Monetization Metric Cards -->
+<section class="metric-grid-enhanced">
+  <article class="metric-card accent">
+    <span class="label">Total Platform Revenue</span>
+    <strong>₦{{ total_revenue|floatformat:"0" }}</strong>
+    <small>From verified Paystack transactions</small>
+  </article>
+
+  <article class="metric-card highlight">
+    <span class="label">Active All-Access Passes</span>
+    <strong>{{ all_access_active }}</strong>
+    <small>Full access across all 3 medical courses</small>
+  </article>
+
+  <article class="metric-card">
+    <span class="label">Active 3-Day Trials</span>
+    <strong>{{ trial_active }}</strong>
+    <small>Students in 72-hour trial window</small>
+  </article>
+
+  <article class="metric-card">
+    <span class="label">Single Course Passes</span>
+    <strong>{{ single_active }}</strong>
+    <small>Specific course access unlocks</small>
+  </article>
+</section>
+
+<!-- Section 1: Pricing & Semester Settings -->
+<div class="control-section">
+  <div class="control-section-head">
+    <div>
+      <p class="kicker">Global Pricing</p>
+      <h2>Plan Pricing &amp; Semester Configuration</h2>
+    </div>
+    <span class="badge badge-active">Live Configuration</span>
+  </div>
+
+  <form method="post" action="{% url 'monitor:update-pricing' %}">
+    {% csrf_token %}
+    <div class="form-grid-3">
+      <div class="form-group">
+        <label>Single Course Price (₦)</label>
+        <input type="number" name="single_course_price" value="{{ plan_config.single_course_price }}" min="500" step="100" required>
+        <small class="hint">Standard price per single course per semester (default 1,500).</small>
+      </div>
+
+      <div class="form-group">
+        <label>All-Access Regular Price (₦)</label>
+        <input type="number" name="all_access_price" value="{{ plan_config.all_access_price }}" min="1000" step="100" required>
+        <small class="hint">Standard all-access price per semester (default 3,000).</small>
+      </div>
+
+      <div class="form-group">
+        <label>Launch Offer Price (₦)</label>
+        <input type="number" name="launch_offer_price" value="{{ plan_config.launch_offer_price }}" min="500" step="100" required>
+        <small class="hint">Discounted all-access price during launch (default 2,000).</small>
+      </div>
+    </div>
+
+    <div class="form-grid-3">
+      <div class="form-group">
+        <label>Launch Offer End Date</label>
+        <input type="date" name="launch_offer_end_date" value="{{ plan_config.launch_offer_end_date|date:'Y-m-d' }}">
+        <small class="hint">After this date, price automatically reverts to regular price.</small>
+      </div>
+
+      <div class="form-group">
+        <label>Max Launch Offer Buyers</label>
+        <input type="number" name="launch_offer_max_buyers" value="{{ plan_config.launch_offer_max_buyers }}" min="1">
+        <small class="hint">Current buyers: {{ plan_config.launch_offer_buyers_count }} / {{ plan_config.launch_offer_max_buyers }}</small>
+      </div>
+
+      <div class="form-group">
+        <label>Semester End Expiry Date</label>
+        <input type="date" name="semester_end_date" value="{{ plan_config.semester_end_date|date:'Y-m-d' }}" required>
+        <small class="hint">Target expiry date for all semester purchases.</small>
+      </div>
+    </div>
+
+    <div class="form-grid-3">
+      <div class="form-group">
+        <label>Trial Duration (Days)</label>
+        <input type="number" name="trial_duration_days" value="{{ plan_config.trial_duration_days }}" min="1" max="30" required>
+        <small class="hint">Automatic trial days granted at signup (default 3).</small>
+      </div>
+
+      <div class="form-group">
+        <label>Paystack Public Key</label>
+        <input type="text" name="paystack_public_key" value="{{ plan_config.paystack_public_key }}" placeholder="pk_live_... or pk_test_...">
+        <small class="hint">Public key used by frontend inline popup.</small>
+      </div>
+
+      <div class="form-group">
+        <label>Paystack Secret Key</label>
+        <input type="password" name="paystack_secret_key" value="{% if plan_config.paystack_secret_key %}••••••••••••••••{% endif %}" placeholder="sk_live_... or sk_test_...">
+        <small class="hint">Secret key for server verification &amp; webhooks.</small>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid rgba(0,0,0,0.06);">
+      <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;font-weight:700;">
+        <input type="checkbox" name="launch_offer_active" {% if plan_config.launch_offer_active %}checked{% endif %} style="width:18px;height:18px;accent-color:var(--color-forest);">
+        <span>Launch Offer Active (currently {% if plan_config.is_launch_offer_valid %}<strong style="color:#047857;">VALID</strong>{% else %}<strong style="color:#b91c1c;">EXPIRED</strong>{% endif %})</span>
+      </label>
+
+      <button type="submit" class="btn-primary">
+        <span>Save Pricing Configuration</span>
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- Section 2: Discount & Class Codes -->
+<div class="control-section">
+  <div class="control-section-head">
+    <div>
+      <p class="kicker">Class Promos</p>
+      <h2>Class / Discount Codes</h2>
+    </div>
+    <span class="badge badge-all-access">{{ discount_codes|length }} Total Codes</span>
+  </div>
+
+  <!-- Create New Discount Code Form -->
+  <form method="post" action="{% url 'monitor:create-discount' %}" style="background:var(--color-paper);padding:18px;border-radius:var(--radius-md);margin-bottom:20px;border:1px solid var(--color-card-border);">
+    {% csrf_token %}
+    <h4 style="margin:0 0 12px;font-size:13px;font-weight:800;color:var(--color-forest);text-transform:uppercase;letter-spacing:0.05em;">
+      + Create New Class / Promo Code
+    </h4>
+    <div class="form-grid-3">
+      <div class="form-group">
+        <label>Code (Uppercase)</label>
+        <input type="text" name="code" placeholder="e.g. MEDILAG24" required style="text-transform:uppercase;">
+      </div>
+      <div class="form-group">
+        <label>Label / Class Name</label>
+        <input type="text" name="label" placeholder="e.g. UNILAG 200L Medics" required>
+      </div>
+      <div class="form-group">
+        <label>Discounted Price (₦)</label>
+        <input type="number" name="discounted_price" placeholder="e.g. 2500" min="500" step="50" required>
+      </div>
+    </div>
+    <div class="form-grid-3">
+      <div class="form-group">
+        <label>Target Plan</label>
+        <select name="target_plan">
+          <option value="all_access">All-Access Pass (Recommended)</option>
+          <option value="single_course">Single Course</option>
+          <option value="any">Any Plan</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Max Uses (Optional)</label>
+        <input type="number" name="max_uses" placeholder="Leave empty for unlimited" min="1">
+      </div>
+      <div class="form-group">
+        <label>Expiry Date (Optional)</label>
+        <input type="date" name="expires_at">
+      </div>
+    </div>
+    <div style="text-align:right;margin-top:6px;">
+      <button type="submit" class="btn-primary" style="padding:8px 18px;">Create Code</button>
+    </div>
+  </form>
+
+  <!-- Discount Codes Table -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Label</th>
+          <th>Discounted Price</th>
+          <th>Target Plan</th>
+          <th>Usage</th>
+          <th>Expires</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for disc in discount_codes %}
+        <tr>
+          <td><code>{{ disc.code }}</code></td>
+          <td><strong>{{ disc.label }}</strong></td>
+          <td><b>₦{{ disc.discounted_price|floatformat:"0" }}</b></td>
+          <td>{{ disc.get_target_plan_display }}</td>
+          <td>{{ disc.times_used }} / {% if disc.max_uses %}{{ disc.max_uses }}{% else %}∞{% endif %}</td>
+          <td>{% if disc.expires_at %}{{ disc.expires_at|date:'j M Y' }}{% else %}Never{% endif %}</td>
+          <td>
+            {% if disc.is_active %}
+              <span class="badge badge-active">Active</span>
+            {% else %}
+              <span class="badge badge-disabled">Disabled</span>
+            {% endif %}
+          </td>
+          <td>
+            <div style="display:flex;gap:6px;">
+              <form method="post" action="{% url 'monitor:toggle-discount' disc.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn-outline" style="padding:4px 8px;font-size:10.5px;">
+                  {% if disc.is_active %}Disable{% else %}Enable{% endif %}
+                </button>
+              </form>
+              <form method="post" action="{% url 'monitor:delete-discount' disc.id %}" style="display:inline;" onsubmit="return confirm('Delete code {{ disc.code }}?');">
+                {% csrf_token %}
+                <button type="submit" class="btn-danger" style="padding:4px 8px;font-size:10.5px;">Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="8"><div class="empty">No discount or class codes created yet. Create one above!</div></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Section 3: Free Sample Topics Configuration -->
+<div class="control-section">
+  <div class="control-section-head">
+    <div>
+      <p class="kicker">Content Access</p>
+      <h2>Free Sample Topic per Course</h2>
+    </div>
+    <small style="color:var(--color-muted);">Free tier students can study this topic with full explanations</small>
+  </div>
+
+  <form method="post" action="{% url 'monitor:update-free-topics' %}">
+    {% csrf_token %}
+    <div class="form-grid-3">
+      <div class="form-group">
+        <label>ANA 201 Free Topic ID</label>
+        <input type="text" name="free_topic_ana_201" value="ul-bones" placeholder="e.g. ul-bones">
+        <small class="hint">Upper &amp; Lower Limb free topic identifier.</small>
+      </div>
+
+      <div class="form-group">
+        <label>ANA 203 Free Topic ID</label>
+        <input type="text" name="free_topic_ana_203" value="ge-gametes" placeholder="e.g. ge-gametes">
+        <small class="hint">Systemic Embryology free topic identifier.</small>
+      </div>
+
+      <div class="form-group">
+        <label>PIO 201 Free Topic ID</label>
+        <input type="text" name="free_topic_pio_201" value="pio-transport-homeostasis" placeholder="e.g. pio-transport-homeostasis">
+        <small class="hint">Physiology free topic identifier.</small>
+      </div>
+    </div>
+    <div style="text-align:right;margin-top:10px;">
+      <button type="submit" class="btn-primary" style="padding:8px 18px;">Update Free Topics</button>
+    </div>
+  </form>
+</div>
+
+<!-- Section 4: Quick Student Access Grant -->
+<div class="control-section">
+  <div class="control-section-head">
+    <div>
+      <p class="kicker">Direct Grants</p>
+      <h2>Student Access Management</h2>
+    </div>
+    <small style="color:var(--color-muted);">Instant manual unlocks for students</small>
+  </div>
+
+  <form method="post" action="{% url 'monitor:quick-grant-access' %}" style="background:var(--color-paper);padding:18px;border-radius:var(--radius-md);margin-bottom:20px;border:1px solid var(--color-card-border);">
+    {% csrf_token %}
+    <h4 style="margin:0 0 12px;font-size:13px;font-weight:800;color:var(--color-forest);text-transform:uppercase;">
+      + Manually Grant Course Access to Student
+    </h4>
+    <div class="form-grid-3">
+      <div class="form-group">
+        <label>Student (ID, Username, or Email)</label>
+        <input type="text" name="student_ident" placeholder="e.g. A3F8K1 or student@gmail.com" required>
+      </div>
+      <div class="form-group">
+        <label>Plan Type</label>
+        <select name="access_type">
+          <option value="all_access">All-Access Pass (All Courses)</option>
+          <option value="single_course">Single Course</option>
+          <option value="trial">3-Day Free Trial</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Course (for Single Course)</label>
+        <select name="course_code">
+          <option value="ANA 201">ANA 201 (Upper &amp; Lower Limb)</option>
+          <option value="ANA 203">ANA 203 (Systemic Embryology)</option>
+          <option value="PIO 201">PIO 201 (Medical Physiology)</option>
+          <option value="all">All Courses</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-grid-2">
+      <div class="form-group">
+        <label>Custom Expiry Date (Defaults to Semester End Date)</label>
+        <input type="date" name="expires_at" value="{{ plan_config.semester_end_date|date:'Y-m-d' }}">
+      </div>
+      <div style="display:flex;align-items:flex-end;">
+        <button type="submit" class="btn-primary" style="width:100%;padding:11px;">Grant Access Now</button>
+      </div>
+    </div>
+  </form>
+
+  <h3 style="margin:16px 0 10px;font-size:15px;color:var(--color-ink);">Active Student Access Grants (Recent)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Plan Type</th>
+          <th>Course</th>
+          <th>Granted By</th>
+          <th>Started</th>
+          <th>Expires</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for grant in active_grants %}
+        <tr>
+          <td>
+            <a href="{% url 'monitor:student-detail' grant.user.public_id %}" style="font-weight:700;color:var(--color-forest);text-decoration:none;">
+              {{ grant.user.username }}
+            </a>
+            <small style="display:block;color:var(--color-muted);">{{ grant.user.public_id }} · {{ grant.user.email }}</small>
+          </td>
+          <td>
+            <span class="badge {% if grant.access_type == 'all_access' %}badge-all-access{% elif grant.access_type == 'trial' %}badge-trial{% else %}badge-single{% endif %}">
+              {{ grant.get_access_type_display }}
+            </span>
+          </td>
+          <td><strong>{{ grant.course_code|upper }}</strong></td>
+          <td>{{ grant.get_granted_by_display }}</td>
+          <td>{{ grant.starts_at|date:'j M Y' }}</td>
+          <td><b>{{ grant.expires_at|date:'j M Y' }}</b></td>
+          <td><span class="badge badge-active">Active</span></td>
+          <td>
+            <form method="post" action="{% url 'monitor:quick-revoke-access' grant.id %}" onsubmit="return confirm('Revoke this access grant?');">
+              {% csrf_token %}
+              <button type="submit" class="btn-danger">Revoke</button>
+            </form>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="8"><div class="empty">No active student grants recorded yet.</div></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Section 5: Recent Payment Transactions Audit -->
+<div class="control-section">
+  <div class="control-section-head">
+    <div>
+      <p class="kicker">Paystack Audit</p>
+      <h2>Recent Payment Transactions</h2>
+    </div>
+    <small style="color:var(--color-muted);">Online and manual payment reconciliation</small>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Reference</th>
+          <th>Student</th>
+          <th>Amount</th>
+          <th>Plan</th>
+          <th>Discount Code</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tx in recent_transactions %}
+        <tr>
+          <td><code>{{ tx.reference }}</code></td>
+          <td>
+            <a href="{% url 'monitor:student-detail' tx.user.public_id %}" style="font-weight:700;color:var(--color-ink);text-decoration:none;">
+              {{ tx.user.username }}
+            </a>
+          </td>
+          <td><strong>₦{{ tx.amount|floatformat:"0" }}</strong></td>
+          <td>{{ tx.get_access_type_display }} ({{ tx.course_code }})</td>
+          <td>{% if tx.discount_code %}<span class="badge badge-trial">{{ tx.discount_code.code }}</span>{% else %}—{% endif %}</td>
+          <td>
+            {% if tx.status == 'success' %}
+              <span class="badge badge-active">SUCCESS</span>
+            {% elif tx.status == 'pending' %}
+              <span class="badge badge-pending">PENDING</span>
+            {% else %}
+              <span class="badge badge-disabled">FAILED</span>
+            {% endif %}
+          </td>
+          <td>{{ tx.created_at|date:'j M Y, H:i' }}</td>
+          <td>
+            {% if tx.status != 'success' %}
+              <form method="post" action="{% url 'monitor:verify-transaction' tx.reference %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-primary" style="padding:4px 10px;font-size:10.5px;">Confirm &amp; Unlock</button>
+              </form>
+            {% else %}
+              <span style="color:#047857;font-size:11px;font-weight:700;">✓ Verified</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="8"><div class="empty">No payment transactions recorded yet.</div></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

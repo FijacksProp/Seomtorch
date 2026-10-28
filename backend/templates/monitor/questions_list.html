@@ -1,0 +1,110 @@
+{% extends 'monitor/base.html' %}
+{% block title %}Question Bank{% endblock %}
+{% block content %}
+
+<div class="page-heading">
+  <div>
+    <p class="kicker">Content &amp; Editorial</p>
+    <h1>Question Bank</h1>
+    <p>Browse, search, review, and add questions directly to the verified Seomtorch question bank.</p>
+  </div>
+  <a href="{% url 'monitor:add-question' %}" class="btn-primary" style="padding:10px 20px;">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Add New Question
+  </a>
+</div>
+
+<!-- Question Bank Metrics -->
+<section class="metric-grid-enhanced" style="margin-bottom:20px;">
+  <article class="metric-card">
+    <span class="label">Total Live Questions</span>
+    <strong>{{ total_count }}</strong>
+    <small>Across active academic subjects</small>
+  </article>
+
+  <article class="metric-card highlight">
+    <span class="label">Reviewed Explanations</span>
+    <strong>{{ reviewed_count }}</strong>
+    <small>{{ coverage_pct }}% verified explanation coverage</small>
+  </article>
+
+  <article class="metric-card accent">
+    <span class="label">Pending Review</span>
+    <strong>{{ pending_count }}</strong>
+    <small>Questions awaiting detailed explanations</small>
+  </article>
+</section>
+
+<!-- Search & Filter Bar -->
+<form method="get" class="search-bar" style="max-width:100%;margin-bottom:20px;grid-template-columns:auto 1fr auto auto;">
+  <div style="display:grid;place-items:center;padding:0 12px;">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--color-muted)" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
+  </div>
+  <input name="q" value="{{ q_search }}" placeholder="Search by question text, external ID, or explanation content...">
+  <select name="subject" style="border:none;border-left:1px solid var(--color-card-border);background:transparent;padding:0 14px;font-family:var(--font-sans);font-size:12.5px;color:var(--color-ink);">
+    <option value="">All Subjects</option>
+    {% for s in subjects %}
+      <option value="{{ s.slug }}" {% if subject_filter == s.slug %}selected{% endif %}>{{ s.name }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Search</button>
+</form>
+
+<!-- Questions Table -->
+<section class="panel table-panel">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>External ID</th>
+          <th>Subject &amp; Topic</th>
+          <th>Question Excerpt</th>
+          <th>Correct Answer</th>
+          <th>Difficulty</th>
+          <th>Status</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for q in questions %}
+        <tr>
+          <td><code>{{ q.external_id }}</code></td>
+          <td>
+            <strong>{{ q.topic.subject.name }}</strong>
+            <small style="display:block;color:var(--color-muted);">{{ q.topic.name }}</small>
+          </td>
+          <td style="max-width:380px;white-space:normal;">
+            <span style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.45;">
+              {{ q.text }}
+            </span>
+          </td>
+          <td>
+            <span style="font-weight:700;color:#047857;background:#ecfdf5;padding:2px 8px;border-radius:6px;font-size:11px;">
+              {% if q.correct_index == 0 %}A{% elif q.correct_index == 1 %}B{% elif q.correct_index == 2 %}C{% else %}D{% endif %}
+            </span>
+          </td>
+          <td>
+            <span style="font-size:11px;text-transform:capitalize;color:var(--color-muted);">
+              {{ q.difficulty }}
+            </span>
+          </td>
+          <td>
+            {% if q.explanation_status == 'reviewed' %}
+              <span class="badge badge-active">Reviewed</span>
+            {% else %}
+              <span class="badge badge-pending">Pending</span>
+            {% endif %}
+          </td>
+          <td>{{ q.created_at|date:'j M Y' }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="7"><div class="empty">No questions found matching your search.</div></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{% endblock %}
