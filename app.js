@@ -3703,7 +3703,7 @@ async function renderUniCourse() {
     { label: data.code }
   ];
 
-  const hasCourse = hasCourseAccess(data.code);
+  // hasCourse already declared above
   const heroAccessBadge = hasCourse
     ? (userAccessData?.is_trial
         ? `<span style="background:#f0fdf4;color:#065f46;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px;">✨ 3-Day Trial Active (${userAccessData?.trial_days_remaining}d left)</span>`
