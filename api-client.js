@@ -61,4 +61,12 @@ export const api = {
     return request("/auth/update-avatar/", { token, method: "POST", body });
   },
   matchContacts: (token, phones, emails) => request("/auth/contacts/match/", { token, method: "POST", body: { phones, emails } }),
+  // Monetization & Subscriptions
+  subscriptionConfig: token => request("/subscriptions/config/", { token }),
+  validateDiscountCode: (code, plan) => request("/subscriptions/validate-code/", { method: "POST", body: { code, plan } }),
+  initPayment: (token, body) => request("/subscriptions/initialize/", { token, method: "POST", body }),
+  verifyPayment: (token, reference) => request("/subscriptions/verify/", { token, method: "POST", body: { reference } }),
+  startTrial: token => request("/subscriptions/start-trial/", { token, method: "POST" }),
+  myAccess: token => request("/subscriptions/my-access/", { token }),
+  logMonetizationEvent: (token, event_name, metadata) => request("/subscriptions/events/", { token, method: "POST", body: { event_name, metadata } }),
 };
