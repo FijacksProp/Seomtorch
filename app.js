@@ -131,6 +131,67 @@ let uniNoteSpeechRate = 1.0;
 let uniNoteRevealedMap = {};
 let uniNoteTranscriptOpenMap = {};
 
+/* ─── Monetization & Access Control State ──────────────────────────────── */
+let subscriptionConfig = null;
+let userAccessData = {
+  has_all_access: false,
+  unlocked_courses: [],
+  is_trial: false,
+  trial_days_remaining: 0,
+  trial_used: false,
+  expires_at: null,
+};
+let freeTopicsMap = {
+  "ANA 201": "ul-bones",
+  "ANA 203": "ge-gametes",
+  "PIO 201": "pio-transport-homeostasis",
+};
+
+async function loadSubscriptionState() {
+  try {
+    const data = await api.subscriptionConfig(authToken);
+    if (data) {
+      subscriptionConfig = data;
+      if (data.user_access) {
+        userAccessData = data.user_access;
+      }
+      if (data.free_topics) {
+        freeTopicsMap = { ...freeTopicsMap, ...data.free_topics };
+      }
+    }
+  } catch (err) {
+    // offline or backend not reachable
+  }
+}
+
+function hasCourseAccess(courseCode) {
+  if (!courseCode) return false;
+  const norm = String(courseCode).trim().toUpperCase();
+  const isUniCourse = ["ANA 201", "ANA 203", "PIO 201", "ANA201", "ANA203", "PIO201"].some(c => norm.includes(c));
+  if (!isUniCourse) return true; // Non-university content remains free
+  if (userAccessData?.has_all_access) return true;
+  if (userAccessData?.is_trial) return true;
+  if (userAccessData?.unlocked_courses?.some(c => norm.includes(c.toUpperCase()))) return true;
+  return false;
+}
+
+function hasAllAccess() {
+  return Boolean(userAccessData?.has_all_access || userAccessData?.is_trial);
+}
+
+function isTopicFree(courseCode, topicId, topicIdx = 0, sectionIdx = 0) {
+  const norm = String(courseCode || "").trim().toUpperCase();
+  const configured = freeTopicsMap[norm] || freeTopicsMap[norm.replace(/\s+/g, "")];
+  if (configured && topicId) {
+    const cId = String(configured).toLowerCase();
+    const tId = String(topicId).toLowerCase();
+    if (tId === cId || tId.includes(cId) || cId.includes(tId)) {
+      return true;
+    }
+  }
+  return sectionIdx === 0 && topicIdx === 0;
+}
+
 const AVATAR_PRESETS = [
   { id: "varsity-male", name: "Varsity (Male)", persona: "Varsity", gender: "male", file: "assets/avatars/varsity-male.webp" },
   { id: "varsity-female", name: "Varsity (Female)", persona: "Varsity", gender: "female", file: "assets/avatars/varsity-female.webp" },
@@ -599,6 +660,20 @@ function renderQuestionImage(question) {
   return `<figure class="question-figure" data-media-figure><button type="button" class="media-preview-trigger" data-image-preview="${escapeHtml(imageUrl)}" data-image-caption="Question diagram" aria-label="Open question diagram at full size"><span class="media-loading">Loading diagram…</span><img class="question-image" src="${escapeHtml(imageUrl)}" alt="${escapeHtml(alt)}" loading="lazy"></button><figcaption><span>Question diagram</span><small>Tap to enlarge</small></figcaption></figure>`;
 }
 function renderExplanation(question) {
+  const isUni = Boolean(question?.isUniversity || question?.courseCode);
+  if (isUni) {
+    const courseCode = question.courseCode || question.subject;
+    const isFree = isTopicFree(courseCode, question.topicId || question.topic);
+    if (!hasCourseAccess(courseCode) && !isFree) {
+      return `<div class="explanation-content">
+        <div class="explanation-locked-box" style="padding:14px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;margin-top:8px;">
+          <strong style="display:flex;align-items:center;gap:6px;color:#92400e;font-size:13px;">🔒 Detailed Explanation Locked</strong>
+          <p style="margin:4px 0 10px;font-size:12px;color:#78350f;">Full worked solutions and clinical rationales for this topic are included with Course Access.</p>
+          <button type="button" class="button small outline" style="border-color:#b45309;color:#92400e;" onclick="window.showUpgradeModal({trigger:'locked_explanation',courseCode:'${escapeHtml(courseCode || '')}'})">Unlock Explanations</button>
+        </div>
+      </div>`;
+    }
+  }
   const explanation = String(question?.explanation || "").trim();
   const imageUrl = questionExplanationImage(question);
   return `<div class="explanation-content">${explanation
@@ -1579,7 +1654,10 @@ function renderResult() {
   }
 
   let topicBreakdownHtml = "";
-  if (activeSession.isMixed) {
+  const isUniSession = Boolean(activeSession.isUniversity);
+  const userHasSessionAccess = hasCourseAccess(activeSession.subject);
+
+  if (activeSession.isMixed && userHasSessionAccess) {
     const topicStats = new Map();
     activeSession.queue.forEach((q, idx) => {
       const topicName = q.topic || "Course Topic";
@@ -1617,6 +1695,37 @@ function renderResult() {
         <p>Review which areas need focused study</p>
       </div>
       <div class="uni-result-topic-list">${rows}</div>
+    </div>`;
+  } else if (isUniSession && !userHasSessionAccess) {
+    topicBreakdownHtml = `<div class="uni-result-breakdown locked-teaser">
+      <div class="section-head compact" style="margin-bottom:12px">
+        <div>
+          <p class="eyebrow"><span class="teaser-lock-badge">PRO ANALYTICS</span></p>
+          <h2>Topic Mastery &amp; Weak-Area Diagnostic</h2>
+        </div>
+      </div>
+      <div class="uni-result-teaser-container">
+        <div class="uni-result-topic-list blurred" aria-hidden="true">
+          <div class="uni-result-topic-row">
+            <div class="uni-result-topic-info"><strong>High-Yield Anatomy / Physiology Diagnostic</strong><span>3 of 8 correct</span></div>
+            <div class="uni-result-topic-meter"><div class="uni-result-topic-bar"><span style="width:37%" class="low"></span></div><span class="uni-result-topic-pct low">37%</span></div>
+          </div>
+          <div class="uni-result-topic-row">
+            <div class="uni-result-topic-info"><strong>Clinical Scenarios &amp; Mechanisms</strong><span>7 of 10 correct</span></div>
+            <div class="uni-result-topic-meter"><div class="uni-result-topic-bar"><span style="width:70%" class="fair"></span></div><span class="uni-result-topic-pct fair">70%</span></div>
+          </div>
+          <div class="uni-result-topic-row">
+            <div class="uni-result-topic-info"><strong>Weak Topic Priority Focus</strong><span>2 of 7 correct</span></div>
+            <div class="uni-result-topic-meter"><div class="uni-result-topic-bar"><span style="width:28%" class="low"></span></div><span class="uni-result-topic-pct low">28%</span></div>
+          </div>
+        </div>
+        <div class="uni-result-teaser-overlay">
+          <span class="teaser-icon">🔒</span>
+          <h3>Unlock Your Weak Topics</h3>
+          <p>Review full performance diagnostics across all topics to target exactly what to revise before exams.</p>
+          <button type="button" class="button accent" id="teaser-upgrade-btn">Unlock Full Access</button>
+        </div>
+      </div>
     </div>`;
   }
 
@@ -1657,6 +1766,10 @@ function renderResult() {
   app.innerHTML = shell(content); bindShell();
   bindQuestionMedia();
   const sessionCopy = { ...activeSession };
+  document.querySelector("#teaser-upgrade-btn")?.addEventListener("click", () => {
+    api.logMonetizationEvent(authToken, "analytics_teaser_viewed", { course: activeSession?.subject }).catch(() => {});
+    showUpgradeModal({ trigger: "result_analytics_teaser", courseCode: activeSession?.subject });
+  });
   document.querySelector("#return-practice").addEventListener("click", () => {
     const wasUni = sessionCopy.isUniversity;
     activeSession = null;
@@ -1970,7 +2083,15 @@ async function loadChallenges() {
 }
 
 function bindChallenges() {
-  document.querySelector("#toggle-challenge-composer")?.addEventListener("click", () => { challengeComposerOpen = !challengeComposerOpen; renderChallenges(); });
+  document.querySelector("#toggle-challenge-composer")?.addEventListener("click", () => {
+    if (!hasAllAccess()) {
+      api.logMonetizationEvent(authToken, "upgrade_screen_viewed", { trigger: "create_challenge" }).catch(() => {});
+      showUpgradeModal({ trigger: "create_challenge" });
+      return;
+    }
+    challengeComposerOpen = !challengeComposerOpen;
+    renderChallenges();
+  });
   document.querySelector("#close-composer")?.addEventListener("click", () => { challengeComposerOpen = false; challengeInvitees = []; renderChallenges(); });
   document.querySelectorAll("[data-challenge-id]").forEach(button => button.addEventListener("click", () => { selectedChallengeId = button.dataset.challengeId; renderChallenges(); }));
   document.querySelector("#add-friend")?.addEventListener("click", addChallengeFriend);
@@ -3301,6 +3422,7 @@ async function submitAuth(event) {
     localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
     localStorage.setItem("seomtorch-active-mode", currentUser.active_mode || "aspirant");
     await prepareLocalUser(currentUser);
+    await loadSubscriptionState();
     await syncPendingAttempts();
     route = "home";
     render();
@@ -3323,7 +3445,7 @@ async function prepareLocalUser(user) {
 
 async function restoreAuth() {
   if (!authToken) return false;
-  try { currentUser = await api.me(authToken); localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser)); await prepareLocalUser(currentUser); return true; }
+  try { currentUser = await api.me(authToken); localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser)); await prepareLocalUser(currentUser); await loadSubscriptionState(); return true; }
   catch (error) {
     if (error instanceof ApiError && error.status === 401) { authToken = null; currentUser = null; localStorage.removeItem("seomtorch-auth-token"); localStorage.removeItem("seomtorch-auth-user"); return false; }
     if (currentUser) { await prepareLocalUser(currentUser); return true; }
@@ -3333,6 +3455,8 @@ async function restoreAuth() {
 
 async function signOut() {
   try { await syncBookmarkQueue(); await api.logout(authToken); } catch {}
+  userAccessData = { has_all_access: false, unlocked_courses: [], is_trial: false, trial_days_remaining: 0, trial_used: false, expires_at: null };
+  await loadSubscriptionState();
   await clearStore("profile"); await clearStore("attempts"); await clearStore("bookmarks"); await put("meta", { key: "bookmarkQueue", actions: [] }); await put("meta", { key: "completed_tests", list: [] });
   completedTests = [];
   authToken = null; currentUser = null; profile = null; attempts = []; bookmarks = []; challengesData = null; achievementsData = null; progressData = null; selectedChallengeId = null; badgeCelebrationKnown.clear(); badgeCelebrationQueue = []; localStorage.removeItem("seomtorch-auth-token"); localStorage.removeItem("seomtorch-auth-user"); renderAuth();
@@ -3500,20 +3624,24 @@ async function renderUniCourse() {
   }
 
   const sections = data.sections || [];
-  const topicsHtml = sections.map(section => {
+  const hasCourse = hasCourseAccess(data.code);
+  const topicsHtml = sections.map((section, sIdx) => {
     const hasNote = Boolean(section.noteFile);
+    const isNoteUnlocked = hasCourse || sIdx === 0;
     const noteBtnHtml = hasNote ? `
-      <button class="uni-notebook-btn" type="button" data-uni-note-file="${escapeHtml(section.noteFile)}" data-uni-note-title="${escapeHtml(section.noteTitle || section.title + ' Notebook')}" aria-label="Open ${escapeHtml(section.title)} Notebook">
+      <button class="uni-notebook-btn ${isNoteUnlocked ? "" : "locked-note"}" type="button" data-uni-note-file="${escapeHtml(section.noteFile)}" data-uni-note-title="${escapeHtml(section.noteTitle || section.title + ' Notebook')}" data-uni-course-code="${escapeHtml(data.code)}" data-note-locked="${isNoteUnlocked ? "0" : "1"}" aria-label="Open ${escapeHtml(section.title)} Notebook">
         <svg class="uni-notebook-btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-0-5.5H20"/>
           <path d="M8 7h8M8 11h8M8 15h4"/>
         </svg>
         <span class="uni-notebook-btn-label">Notebook</span>
-        <span class="uni-notebook-btn-badge">Study Note</span>
+        <span class="uni-notebook-btn-badge">${isNoteUnlocked ? (sIdx === 0 && !hasCourse ? "Free Showcase" : "Study Note") : "🔒 Locked"}</span>
       </button>` : "";
 
-    const topicItems = section.topics.map(topic => {
+    const topicItems = section.topics.map((topic, topicIdx) => {
       const isAvailable = topic.status !== "coming-soon";
+      const isFree = isTopicFree(data.code, topic.id, topicIdx, sIdx);
+      const isUnlocked = hasCourse || isFree;
       const statusIcon = isAvailable ? `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>` : `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`;
       
       if (!isAvailable) {
@@ -3526,10 +3654,22 @@ async function renderUniCourse() {
         </div>`;
       }
 
+      if (!isUnlocked) {
+        return `<div class="uni-topic-item locked" data-uni-topic-title="${escapeHtml(topic.title)}" data-uni-course-code="${escapeHtml(data.code)}" role="button" tabindex="0">
+          <span class="uni-topic-status locked"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+          <div class="uni-topic-info">
+            <h4>${escapeHtml(topic.title)}</h4>
+            <span class="uni-topic-tag" style="color:var(--ochre)">Locked · Full Course Access</span>
+          </div>
+          <span class="uni-topic-lock-pill">🔒 Unlock</span>
+        </div>`;
+      }
+
       return `<div class="uni-topic-item available" data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" role="button" tabindex="0">
         <span class="uni-topic-status">${statusIcon}</span>
         <div class="uni-topic-info">
           <h4>${escapeHtml(topic.title)}</h4>
+          ${isFree && !hasCourse ? `<span class="uni-topic-tag" style="color:var(--forest);font-weight:700;">Free Sample Topic</span>` : ""}
         </div>
         <button class="uni-topic-target-btn" type="button" data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" aria-label="Configure practice: ${escapeHtml(topic.title)}">
           <span class="uni-topic-target-dot"></span>
@@ -3563,7 +3703,13 @@ async function renderUniCourse() {
     { label: data.code }
   ];
 
-  const statsHtml = `<div class="uni-course-stats"><div class="uni-stat"><strong>${totalTopics}</strong><span>Topics</span></div><div class="uni-stat"><strong>${availableTopics}</strong><span>Available</span></div><div class="uni-stat"><strong>${totalTopics - availableTopics}</strong><span>Coming soon</span></div></div>`;
+  const hasCourse = hasCourseAccess(data.code);
+  const heroAccessBadge = hasCourse
+    ? (userAccessData?.is_trial
+        ? `<span style="background:#f0fdf4;color:#065f46;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px;">✨ 3-Day Trial Active (${userAccessData?.trial_days_remaining}d left)</span>`
+        : `<span style="background:#f0fdf4;color:#065f46;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px;">✓ Full Course Access Active</span>`)
+    : `<button type="button" class="button small accent" id="uni-hero-upgrade-btn" style="padding:6px 14px;font-size:12.5px;">🔒 Upgrade to Full Access</button>`;
+  const statsHtml = `<div class="uni-course-stats"><div class="uni-stat"><strong>${totalTopics}</strong><span>Topics</span></div><div class="uni-stat"><strong>${availableTopics}</strong><span>Available</span></div><div class="uni-stat"><strong>${totalTopics - availableTopics}</strong><span>Coming soon</span></div></div><div style="margin-top:12px;">${heroAccessBadge}</div>`;
 
   let mixedCardHtml = "";
   if (availableTopics > 0) {
@@ -3767,7 +3913,16 @@ async function renderUniCourse() {
     updatePace();
   });
 
+  document.querySelector("#uni-hero-upgrade-btn")?.addEventListener("click", () => {
+    showUpgradeModal({ trigger: "course_hero", courseCode: data.code });
+  });
+
   document.querySelector("#uni-start-mixed-practice")?.addEventListener("click", () => {
+    if (!hasCourseAccess(data.code)) {
+      api.logMonetizationEvent(authToken, "upgrade_screen_viewed", { trigger: "mixed_mock_practice", course: data.code }).catch(() => {});
+      showUpgradeModal({ trigger: "mixed_mock_practice", courseCode: data.code });
+      return;
+    }
     const qCount = Math.max(5, Math.min(100, parseInt(inputQ?.value, 10) || 25));
     const mCount = Math.max(1, Math.min(180, parseInt(inputM?.value, 10) || 15));
     startUniMixedPractice(data, qCount, mCount);
@@ -3776,6 +3931,10 @@ async function renderUniCourse() {
   document.querySelectorAll(".uni-notebook-btn").forEach(btn => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
+      if (btn.dataset.noteLocked === "1") {
+        showUpgradeModal({ trigger: "locked_note", courseCode: btn.dataset.uniCourseCode || data.code });
+        return;
+      }
       uniNoteFile = btn.dataset.uniNoteFile;
       uniNoteTitle = btn.dataset.uniNoteTitle;
       uniNoteActiveBlock = 1;
@@ -3784,6 +3943,23 @@ async function renderUniCourse() {
       uniRoute = "note";
       window.scrollTo({ top: 0, behavior: "smooth" });
       render();
+    });
+  });
+
+  document.querySelectorAll(".uni-topic-item.locked").forEach(item => {
+    const launchUpgrade = (e) => {
+      e?.stopPropagation?.();
+      const courseCode = item.dataset.uniCourseCode || data.code;
+      const topicTitle = item.dataset.uniTopicTitle;
+      api.logMonetizationEvent(authToken, "locked_topic_tapped", { course: courseCode, topic: topicTitle }).catch(() => {});
+      showUpgradeModal({ trigger: "locked_topic", courseCode, topicTitle });
+    };
+    item.addEventListener("click", launchUpgrade);
+    item.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        launchUpgrade(e);
+      }
     });
   });
 
@@ -4544,6 +4720,7 @@ async function init() {
       renderAuth();
     }
     dismissAppLoader();
+    await loadSubscriptionState();
     const authenticated = await restoreAuth();
     render();
     if (authenticated) {
@@ -4766,6 +4943,307 @@ function renderNormalSession() {
   }
 }
 
+
+
+/* ─── Upgrade Modal & Paystack Checkout ────────────────────────────────── */
+
+function showUpgradeModal(options = {}) {
+  document.querySelector("#upgrade-modal-backdrop")?.remove();
+
+  const trigger = options.trigger || "general";
+  const defaultCourse = options.courseCode ? options.courseCode.toUpperCase() : "ANA 201";
+
+  api.logMonetizationEvent(authToken, "upgrade_screen_viewed", {
+    trigger,
+    course: defaultCourse,
+    topic: options.topicTitle || null
+  }).catch(() => {});
+
+  let selectedPlan = "all_access"; // default to all_access
+  let selectedCourse = defaultCourse;
+  let appliedDiscount = null;
+
+  const config = subscriptionConfig || {};
+  const singlePrice = config.single_course_price || 1500;
+  const regularAllPrice = config.all_access_price || 3000;
+  const launchOffer = config.launch_offer || {};
+  const isLaunchActive = Boolean(launchOffer.active);
+  const currentAllPrice = config.current_all_access_price || (isLaunchActive ? (launchOffer.price || 2000) : 3000);
+  const trialEligible = !userAccessData?.trial_used && Boolean(authToken);
+
+  const backdrop = document.createElement("div");
+  backdrop.id = "upgrade-modal-backdrop";
+  backdrop.className = "upgrade-modal-backdrop";
+
+  const renderModalContent = () => {
+    const rawPrice = selectedPlan === "all_access" ? currentAllPrice : singlePrice;
+    const finalPrice = appliedDiscount ? appliedDiscount.discounted_price : rawPrice;
+
+    backdrop.innerHTML = `
+      <div class="upgrade-modal" role="dialog" aria-modal="true" aria-labelledby="upgrade-modal-title">
+        <div class="upgrade-header">
+          <div>
+            <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(45,106,79,0.1);color:var(--forest);font-size:11px;font-weight:800;letter-spacing:0.5px;padding:3px 10px;border-radius:10px;margin-bottom:6px;text-transform:uppercase;">
+              <span>⭐ Seomtorch Medical Pass</span>
+            </div>
+            <h2 id="upgrade-modal-title" style="margin:0;font-size:20px;font-weight:800;color:var(--ink);">Unlock Full Course Access</h2>
+            <p style="margin:4px 0 0;font-size:13px;color:var(--muted);">Instant automatic unlock across medical anatomy and physiology.</p>
+          </div>
+          <button type="button" class="uni-topic-config-close" id="upgrade-modal-close" aria-label="Close dialog">✕</button>
+        </div>
+
+        ${trialEligible ? `
+        <div class="upgrade-trial-callout">
+          <div>
+            <strong>🎁 Eligible for 3-Day Free Trial</strong>
+            <p>Get full 72-hour access to all 3 courses immediately. No card required.</p>
+          </div>
+          <button type="button" class="button small accent" id="upgrade-activate-trial">Activate Free Trial</button>
+        </div>` : ""}
+
+        <div class="upgrade-plans-grid">
+          <div class="upgrade-plan-card ${selectedPlan === "single_course" ? "selected" : ""}" id="plan-single-course" role="button" tabindex="0">
+            <div class="upgrade-plan-head">
+              <h3 class="upgrade-plan-title">Single Course</h3>
+              <div class="upgrade-plan-price">₦${singlePrice.toLocaleString()} <small>/ semester</small></div>
+            </div>
+            <p style="font-size:12px;color:var(--muted);margin:0;">Full access to 1 chosen course through semester exams.</p>
+            <div style="margin-top:4px;">
+              <label style="font-size:11px;font-weight:700;color:var(--ink-secondary);display:block;margin-bottom:4px;">Choose Course:</label>
+              <select id="upgrade-course-select" class="input" style="padding:6px 10px;font-size:12px;width:100%;font-weight:700;">
+                <option value="ANA 201" ${selectedCourse === "ANA 201" ? "selected" : ""}>ANA 201: Upper & Lower Limb</option>
+                <option value="ANA 203" ${selectedCourse === "ANA 203" ? "selected" : ""}>ANA 203: Systemic Embryology</option>
+                <option value="PIO 201" ${selectedCourse === "PIO 201" ? "selected" : ""}>PIO 201: Medical Physiology</option>
+              </select>
+            </div>
+            <ul class="upgrade-plan-features">
+              <li><span class="check">✓</span> All topics &amp; worked solutions</li>
+              <li><span class="check">✓</span> Topic drills &amp; audio notes</li>
+              <li><span class="check">✓</span> Pass until semester end date</li>
+            </ul>
+          </div>
+
+          <div class="upgrade-plan-card ${selectedPlan === "all_access" ? "selected" : ""}" id="plan-all-access" role="button" tabindex="0">
+            ${isLaunchActive ? `<div class="upgrade-plan-ribbon">Launch Offer · Save ₦${(regularAllPrice - currentAllPrice).toLocaleString()}</div>` : `<div class="upgrade-plan-ribbon">Most Popular</div>`}
+            <div class="upgrade-plan-head">
+              <h3 class="upgrade-plan-title">All-Access Pass</h3>
+              <div class="upgrade-plan-price">
+                ₦${currentAllPrice.toLocaleString()} <small>/ semester</small>
+                ${isLaunchActive ? `<div style="font-size:11px;color:var(--muted);text-decoration:line-through;font-weight:500;">₦${regularAllPrice.toLocaleString()}</div>` : ""}
+              </div>
+            </div>
+            <p style="font-size:12px;color:var(--muted);margin:0;">Unlock all 3 courses (ANA 201, ANA 203, PIO 201).</p>
+            <ul class="upgrade-plan-features">
+              <li><span class="check">✓</span> <strong>All 3 Courses</strong> fully unlocked</li>
+              <li><span class="check">✓</span> <strong>Timed Mock Exams</strong> across topics</li>
+              <li><span class="check">✓</span> <strong>Weak-Topic Diagnostic</strong> analytics</li>
+              <li><span class="check">✓</span> <strong>Create Challenges</strong> &amp; leaderboards</li>
+              <li><span class="check">✓</span> All conversational audio podcasts</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="upgrade-discount-box">
+          <label style="font-size:11.5px;font-weight:700;color:var(--ink-secondary);display:flex;justify-content:space-between;align-items:center;">
+            <span>Class Code / Discount Code</span>
+            <span style="font-size:10.5px;color:var(--muted);font-weight:500;">e.g. your class group code</span>
+          </label>
+          ${appliedDiscount ? `
+            <div class="upgrade-discount-badge">
+              <span>🎉 ${escapeHtml(appliedDiscount.label || appliedDiscount.code)}: ₦${appliedDiscount.discounted_price.toLocaleString()}</span>
+              <button type="button" id="remove-discount-btn" style="background:none;border:none;cursor:pointer;color:#065f46;font-size:14px;padding:0 4px;font-weight:800;" aria-label="Remove code">✕</button>
+            </div>
+          ` : `
+            <div class="upgrade-discount-input-row">
+              <input type="text" id="discount-code-input" class="input" placeholder="ENTER CODE (e.g. MEDILAG24)" autocomplete="off">
+              <button type="button" class="button outline small" id="apply-discount-btn" style="white-space:nowrap;">Apply</button>
+            </div>
+          `}
+          <div id="discount-error-text" style="color:var(--crimson);font-size:11.5px;display:none;"></div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <button type="button" class="button accent" id="upgrade-checkout-btn" style="width:100%;padding:14px;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;">
+            <span>Pay ₦${finalPrice.toLocaleString()} with Paystack</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+          <div class="upgrade-security-badge">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>Secured by Paystack · 256-bit encryption · Instant automatic unlock</span>
+          </div>
+        </div>
+      </div>
+    `;
+
+    bindModalEvents();
+  };
+
+  const bindModalEvents = () => {
+    backdrop.querySelector("#upgrade-modal-close")?.addEventListener("click", () => backdrop.remove());
+
+    backdrop.querySelector("#plan-single-course")?.addEventListener("click", (e) => {
+      if (e.target.tagName === "SELECT") return;
+      selectedPlan = "single_course";
+      appliedDiscount = null;
+      renderModalContent();
+    });
+
+    backdrop.querySelector("#plan-all-access")?.addEventListener("click", () => {
+      selectedPlan = "all_access";
+      appliedDiscount = null;
+      renderModalContent();
+    });
+
+    backdrop.querySelector("#upgrade-course-select")?.addEventListener("change", (e) => {
+      selectedCourse = e.target.value;
+    });
+
+    backdrop.querySelector("#upgrade-activate-trial")?.addEventListener("click", async () => {
+      if (!authToken) {
+        backdrop.remove();
+        showToast("Please sign in or create an account to start your free trial.");
+        route = "home";
+        authMode = "register";
+        renderAuth();
+        return;
+      }
+      showLoadingOverlay("Starting Free Trial", "Unlocking courses...");
+      try {
+        const res = await api.startTrial(authToken);
+        userAccessData = res.user_access;
+        hideLoadingOverlay();
+        backdrop.remove();
+        showToast("🎉 3-Day Free Trial Activated! All courses unlocked.");
+        render();
+      } catch (err) {
+        hideLoadingOverlay();
+        showToast(err.message || "Could not start trial.");
+      }
+    });
+
+    backdrop.querySelector("#apply-discount-btn")?.addEventListener("click", async () => {
+      const input = backdrop.querySelector("#discount-code-input");
+      const errBox = backdrop.querySelector("#discount-error-text");
+      const codeStr = (input?.value || "").trim();
+      if (!codeStr) return;
+      try {
+        if (errBox) errBox.style.display = "none";
+        const res = await api.validateDiscountCode(codeStr, selectedPlan);
+        if (res.valid) {
+          appliedDiscount = res;
+          renderModalContent();
+          showToast(`Discount applied: ${res.label}`);
+        }
+      } catch (err) {
+        if (errBox) {
+          errBox.textContent = err.message || "Invalid discount code.";
+          errBox.style.display = "block";
+        }
+      }
+    });
+
+    backdrop.querySelector("#remove-discount-btn")?.addEventListener("click", () => {
+      appliedDiscount = null;
+      renderModalContent();
+    });
+
+    backdrop.querySelector("#upgrade-checkout-btn")?.addEventListener("click", async () => {
+      const btn = backdrop.querySelector("#upgrade-checkout-btn");
+      if (!authToken) {
+        backdrop.remove();
+        showToast("Please sign in or register to secure your course subscription.");
+        route = "home";
+        authMode = "register";
+        renderAuth();
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Connecting to Paystack...";
+
+      try {
+        api.logMonetizationEvent(authToken, "upgrade_button_tapped", {
+          plan: selectedPlan,
+          course: selectedCourse,
+          discount_code: appliedDiscount?.code || null
+        }).catch(() => {});
+
+        const initRes = await api.initPayment(authToken, {
+          access_type: selectedPlan,
+          course_code: selectedPlan === "single_course" ? selectedCourse : "all",
+          discount_code: appliedDiscount?.code || ""
+        });
+
+        // Check if PaystackPop inline is available
+        const hasLiveKey = initRes.public_key && !initRes.public_key.startsWith("test_dummy");
+        if (window.PaystackPop && hasLiveKey) {
+          const handler = window.PaystackPop.setup({
+            key: initRes.public_key,
+            email: initRes.email || currentUser?.email,
+            amount: initRes.amount_kobo,
+            currency: "NGN",
+            ref: initRes.reference,
+            callback: async function(paystackCallback) {
+              showLoadingOverlay("Verifying Payment", "Activating your course access...");
+              try {
+                const verifyRes = await api.verifyPayment(authToken, paystackCallback.reference || initRes.reference);
+                userAccessData = verifyRes.user_access;
+                hideLoadingOverlay();
+                backdrop.remove();
+                showToast("🎉 Payment verified! Course access is now active.");
+                render();
+              } catch (vErr) {
+                hideLoadingOverlay();
+                showToast(vErr.message || "Payment verification error. Please contact support.");
+              }
+            },
+            onClose: function() {
+              btn.disabled = false;
+              renderModalContent();
+              showToast("Payment window closed.");
+            }
+          });
+          handler.openIframe();
+        } else {
+          // Dev test mode fallback (or before live Paystack keys are entered)
+          backdrop.remove();
+          showConfirmDialog({
+            title: "Confirm Paystack Payment (Test Mode)",
+            message: `Simulate payment of ₦${initRes.amount.toLocaleString()} for ${initRes.access_type === "all_access" ? "All-Access Pass" : initRes.course_code}?`,
+            confirmLabel: "Complete Payment",
+            cancelLabel: "Cancel",
+            onConfirm: async () => {
+              showLoadingOverlay("Activating Access", "Unlocking course materials...");
+              try {
+                const verifyRes = await api.verifyPayment(authToken, initRes.reference);
+                userAccessData = verifyRes.user_access;
+                hideLoadingOverlay();
+                showToast("🎉 Payment verified! Course access unlocked.");
+                render();
+              } catch (vErr) {
+                hideLoadingOverlay();
+                showToast(vErr.message || "Could not complete payment.");
+              }
+            }
+          });
+        }
+      } catch (err) {
+        btn.disabled = false;
+        renderModalContent();
+        showToast(err.message || "Could not initialize checkout. Please try again.");
+      }
+    });
+  };
+
+  backdrop.addEventListener("click", (e) => {
+    if (e.target === backdrop) backdrop.remove();
+  });
+
+  document.body.appendChild(backdrop);
+  renderModalContent();
+}
+
+window.showUpgradeModal = showUpgradeModal;
 
 /* ==========================================================================
    University Notebook (Study Notes) Functions

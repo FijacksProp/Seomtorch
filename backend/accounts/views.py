@@ -32,6 +32,33 @@ class RegisterView(APIView):
         UserStats.objects.get_or_create(user=user)
         token = Token.objects.create(user=user)
         ActivityEvent.objects.create(user=user, event_type=ActivityEvent.Type.REGISTERED)
+
+        # Automatically grant 3-Day Free Trial upon registration
+        try:
+            from datetime import timedelta
+            from django.utils import timezone
+            from monetization.models import CourseAccess, PlanConfig, MonetizationEvent
+            config = PlanConfig.get_solo()
+            trial_days = config.trial_duration_days or 3
+            now = timezone.now()
+            expires = now + timedelta(days=trial_days)
+            CourseAccess.objects.create(
+                user=user,
+                access_type=CourseAccess.AccessType.TRIAL,
+                course_code="all",
+                starts_at=now,
+                expires_at=expires,
+                is_active=True,
+                granted_by=CourseAccess.GrantedBy.TRIAL,
+                reference=f"trial_signup_{user.public_id}",
+            )
+            MonetizationEvent.objects.create(
+                user=user,
+                event_name="trial_started",
+                metadata={"trigger": "signup", "expires_at": expires.isoformat(), "trial_days": trial_days}
+            )
+        except Exception:
+            pass
         return Response(
             {"token": token.key, "user": UserSerializer(user).data},
             status=status.HTTP_201_CREATED,
