@@ -7309,6 +7309,315 @@ body.shield-active #main {
   line-height: 1.45;
 }
 
+/* ─── Notebook Free vs Locked Blocks ─────────────────────────────────── */
+
+.uni-free-showcase-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: linear-gradient(135deg, #fef9c3, #fef08a);
+  border: 1px solid #fde047;
+  color: #713f12;
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  margin-bottom: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(113, 63, 18, 0.08);
+}
+
+.uni-free-showcase-banner span strong {
+  color: #854d0e;
+}
+
+.uni-free-showcase-banner button {
+  background: #854d0e;
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.14s ease, background 0.14s ease;
+}
+
+.uni-free-showcase-banner button:hover {
+  background: #713f12;
+  transform: translateY(-1px);
+}
+
+.uni-block-lock-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 12px;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+/* Locked Block Card (Step-by-Step Focus Mode) */
+.locked-block-card {
+  position: relative;
+  overflow: hidden;
+  border: 1.5px solid rgba(217, 119, 6, 0.35);
+  background: #ffffff;
+}
+
+.uni-block-locked-body {
+  position: relative;
+  min-height: 420px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Blurred Skeleton Background */
+.uni-block-blurred-skeleton {
+  position: absolute;
+  inset: 0;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  filter: blur(6px);
+  opacity: 0.35;
+  user-select: none;
+  pointer-events: none;
+  background: #fafafa;
+}
+
+.skeleton-diagram-box {
+  width: 100%;
+  height: 180px;
+  background: #e2e8f0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.skeleton-shape.circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #cbd5e1;
+}
+
+.skeleton-shape.bar {
+  width: 140px;
+  height: 24px;
+  border-radius: 6px;
+  background: #cbd5e1;
+}
+
+.skeleton-text-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skeleton-line {
+  height: 14px;
+  border-radius: 4px;
+  background: #cbd5e1;
+}
+
+.skeleton-podcast-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+
+.skeleton-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #cbd5e1;
+}
+
+/* Foreground Lock Overlay (Step Mode) */
+.uni-block-locked-overlay {
+  position: relative;
+  z-index: 10;
+  max-width: 520px;
+  margin: 20px auto;
+  text-align: center;
+  padding: 32px 24px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(217, 119, 6, 0.25);
+  box-shadow: 0 12px 36px rgba(12, 37, 24, 0.12);
+}
+
+.locked-shield-icon {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: #fef3c7;
+  color: #b45309;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.18);
+}
+
+.locked-cta-title {
+  margin: 0 0 8px;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.locked-cta-desc {
+  margin: 0 0 18px;
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.locked-feature-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.locked-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #065f46;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.locked-cta-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.locked-cta-actions .button {
+  width: 100%;
+  max-width: 320px;
+  justify-content: center;
+}
+
+/* ─── Continuous Reading Locked Barrier ──────────────────────────────── */
+.uni-continuous-locked-barrier {
+  position: relative;
+  margin-top: 20px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1.5px dashed rgba(217, 119, 6, 0.4);
+  background: #fafaf9;
+}
+
+.uni-continuous-blurred-preview {
+  filter: blur(6px);
+  opacity: 0.35;
+  user-select: none;
+  pointer-events: none;
+  padding: 24px;
+  max-height: 520px;
+  overflow: hidden;
+}
+
+.uni-continuous-lock-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 36px 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.96) 65%, #ffffff 100%);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.uni-continuous-lock-overlay h3 {
+  margin: 0 0 8px;
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.uni-continuous-lock-overlay p {
+  margin: 0 0 18px;
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 500px;
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .uni-free-showcase-banner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .uni-free-showcase-banner button {
+    width: 100%;
+  }
+  .uni-block-locked-overlay {
+    padding: 24px 16px;
+    margin: 12px;
+  }
+  .locked-cta-title {
+    font-size: 19px;
+  }
+  .locked-cta-desc {
+    font-size: 12.5px;
+  }
+  .uni-continuous-lock-overlay {
+    padding: 28px 14px;
+  }
+  .uni-continuous-lock-overlay h3 {
+    font-size: 20px;
+  }
+  .uni-continuous-lock-overlay p {
+    font-size: 13px;
+  }
+  .locked-feature-tags {
+    gap: 6px;
+  }
+  .locked-tag {
+    font-size: 10.5px;
+    padding: 3px 8px;
+  }
+}
+
 /* Upgrade Modal */
 .upgrade-modal-backdrop {
   position: fixed;

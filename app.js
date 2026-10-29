@@ -5348,6 +5348,10 @@ async function renderUniNote() {
   const categories = ["all", ...new Set(allBlocks.map(b => b.category))];
   const filteredBlocks = uniNoteCategoryFilter === "all" ? allBlocks : allBlocks.filter(b => b.category === uniNoteCategoryFilter);
 
+  // Check monetization access level for this course notebook
+  const courseCode = noteData.courseCode || (uniCourseId ? uniCourseId.toUpperCase() : "ANA 201");
+  const isNoteFullyUnlocked = hasCourseAccess(courseCode);
+
   // Ensure active block exists
   let activeBlock = allBlocks.find(b => b.number === uniNoteActiveBlock);
   if (!activeBlock && allBlocks.length > 0) {
@@ -5361,6 +5365,94 @@ async function renderUniNote() {
   try { savedChecks = JSON.parse(localStorage.getItem(checklistKey) || "{}"); } catch {}
   const checklistItems = noteData.checklist || [];
   const checkedCount = checklistItems.filter((_, idx) => Boolean(savedChecks[idx])).length;
+
+  // Helper to render locked block card for free tier students
+  const renderLockedBlockCardHtml = (b) => {
+    return `
+      <article class="uni-block-card locked-block-card" id="${escapeHtml(b.id)}">
+        <header class="uni-block-header">
+          <div>
+            <div class="uni-block-badges">
+              <span class="uni-block-num-pill">BLOCK ${String(b.number).padStart(2, "0")}</span>
+              <span class="uni-block-cat-pill">${escapeHtml(b.category)}</span>
+              <span class="uni-block-lock-pill">🔒 Course Access Required</span>
+            </div>
+            <h2 class="uni-block-title">${escapeHtml(b.title)}</h2>
+          </div>
+        </header>
+
+        <div class="uni-block-locked-body">
+          <div class="uni-block-blurred-skeleton" aria-hidden="true">
+            <div class="skeleton-diagram-box">
+              <div class="skeleton-shape circle"></div>
+              <div class="skeleton-shape bar"></div>
+            </div>
+            <div class="skeleton-text-lines">
+              <div class="skeleton-line" style="width: 90%;"></div>
+              <div class="skeleton-line" style="width: 78%;"></div>
+              <div class="skeleton-line" style="width: 86%;"></div>
+              <div class="skeleton-line" style="width: 65%;"></div>
+            </div>
+            <div class="skeleton-podcast-box">
+              <div class="skeleton-icon"></div>
+              <div class="skeleton-line" style="width: 48%;"></div>
+            </div>
+          </div>
+
+          <div class="uni-block-locked-overlay">
+            <div class="locked-shield-icon">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <h3 class="locked-cta-title">Unlock Block ${b.number}: ${escapeHtml(b.title)}</h3>
+            <p class="locked-cta-desc">
+              Block 01 is open for free trial reading. Upgrade to <strong>${escapeHtml(courseCode)} Course Access</strong> or <strong>All-Access</strong> to unlock all ${totalBlocks} illustrated blocks, high-yield diagrams, audio podcasts, and self-test recall guides.
+            </p>
+            <div class="locked-feature-tags">
+              <span class="locked-tag">✓ All ${totalBlocks} Illustrated Blocks</span>
+              <span class="locked-tag">✓ Audio Podcasts on Every Block</span>
+              <span class="locked-tag">✓ Quick Recall Answer Guides</span>
+            </div>
+            <div class="locked-cta-actions">
+              <button type="button" class="button uni-btn locked-upgrade-trigger" data-course-code="${escapeHtml(courseCode)}" style="background:linear-gradient(135deg, #d97706, #b45309); color:#fff; font-weight:700; padding:12px 24px;">
+                <span>Unlock Course Access</span>
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+              <button type="button" class="button outline small" id="uni-return-free-block" style="border-color:#cedbd1; color:var(--ink);">
+                ← Back to Free Block 01
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+    `;
+  };
+
+  // Helper to render blurred preview card in continuous mode
+  const renderBlurredBlockPreviewHtml = (b) => {
+    if (!b) return "";
+    return `
+      <article class="uni-block-card blurred-preview-card" style="margin-bottom:16px;">
+        <header class="uni-block-header">
+          <div>
+            <div class="uni-block-badges">
+              <span class="uni-block-num-pill">BLOCK ${String(b.number).padStart(2, "0")}</span>
+              <span class="uni-block-cat-pill">${escapeHtml(b.category)}</span>
+            </div>
+            <h2 class="uni-block-title">${escapeHtml(b.title)}</h2>
+          </div>
+        </header>
+        <div class="skeleton-diagram-box" style="height:140px; margin:12px 0;"></div>
+        <div class="skeleton-text-lines" style="gap:8px;">
+          <div class="skeleton-line" style="width: 90%; height:12px;"></div>
+          <div class="skeleton-line" style="width: 80%; height:12px;"></div>
+          <div class="skeleton-line" style="width: 70%; height:12px;"></div>
+        </div>
+      </article>
+    `;
+  };
 
   // Helper to render a block
   const renderBlockCardHtml = (b) => {
@@ -5541,12 +5633,20 @@ async function renderUniNote() {
   let contentBodyHtml = "";
 
   if (uniNoteViewMode === "step") {
+    const isCurrentBlockUnlocked = isNoteFullyUnlocked || activeBlock.number === 1;
     const progressPercent = Math.round((activeBlock.number / totalBlocks) * 100);
-    const selectOptionsHtml = allBlocks.map(b => `
-      <option value="${b.number}" ${b.number === activeBlock.number ? "selected" : ""}>
-        Block ${String(b.number).padStart(2, "0")}: ${escapeHtml(b.title)}
-      </option>
-    `).join("");
+    const selectOptionsHtml = allBlocks.map(b => {
+      const isBlockUnlocked = isNoteFullyUnlocked || b.number === 1;
+      return `
+        <option value="${b.number}" ${b.number === activeBlock.number ? "selected" : ""}>
+          Block ${String(b.number).padStart(2, "0")}: ${escapeHtml(b.title)}${isBlockUnlocked ? "" : " 🔒 (Locked)"}
+        </option>
+      `;
+    }).join("");
+
+    const blockCardContent = isCurrentBlockUnlocked
+      ? renderBlockCardHtml(activeBlock)
+      : renderLockedBlockCardHtml(activeBlock);
 
     contentBodyHtml = `
       <div class="uni-note-step-tracker">
@@ -5562,7 +5662,14 @@ async function renderUniNote() {
         </select>
       </div>
 
-      ${renderBlockCardHtml(activeBlock)}
+      ${(!isNoteFullyUnlocked && activeBlock.number === 1) ? `
+        <div class="uni-free-showcase-banner">
+          <span>⭐ <strong>Free Showcase Block</strong> · Blocks 02–${totalBlocks} included with Course Access</span>
+          <button type="button" class="locked-upgrade-trigger" data-course-code="${escapeHtml(courseCode)}">Unlock All Blocks</button>
+        </div>
+      ` : ""}
+
+      ${blockCardContent}
 
       <div class="uni-step-nav-footer">
         <button class="uni-step-nav-btn prev" id="uni-step-prev" ${activeBlock.number <= 1 ? "disabled" : ""}>
@@ -5570,18 +5677,67 @@ async function renderUniNote() {
         </button>
         <span style="font-size:12px; font-weight:600; color:var(--muted);">Block ${activeBlock.number} / ${totalBlocks}</span>
         <button class="uni-step-nav-btn next" id="uni-step-next">
-          ${activeBlock.number >= totalBlocks ? "Review Checklist ✓" : "Next Block →"}
+          ${activeBlock.number >= totalBlocks ? "Review Checklist ✓" : (!isNoteFullyUnlocked && activeBlock.number === 1 ? "Next Block 🔒" : "Next Block →")}
         </button>
       </div>
     `;
   } else {
     // Continuous Full Document View
-    const blocksHtml = filteredBlocks.map(b => renderBlockCardHtml(b)).join("");
-    contentBodyHtml = `
-      <div class="uni-note-continuous-stack">
-        ${blocksHtml}
-      </div>
-    `;
+    if (isNoteFullyUnlocked) {
+      const blocksHtml = filteredBlocks.map(b => renderBlockCardHtml(b)).join("");
+      contentBodyHtml = `
+        <div class="uni-note-continuous-stack">
+          ${blocksHtml}
+        </div>
+      `;
+    } else {
+      // Free User in Continuous Reading Mode: Only Block 1 is visible, remaining blocks are blurred/locked
+      const hasBlockOneInFilter = filteredBlocks.some(b => b.number === 1);
+      const blockOne = allBlocks.find(b => b.number === 1);
+      const previewBlockTwo = allBlocks.find(b => b.number === 2);
+      const previewBlockThree = allBlocks.find(b => b.number === 3);
+
+      contentBodyHtml = `
+        <div class="uni-note-continuous-stack">
+          ${hasBlockOneInFilter && blockOne ? `
+            <div class="uni-free-showcase-banner">
+              <span>⭐ <strong>Free Showcase Block</strong> · Blocks 02–${totalBlocks} included with Course Access</span>
+              <button type="button" class="locked-upgrade-trigger" data-course-code="${escapeHtml(courseCode)}">Unlock All Blocks</button>
+            </div>
+            ${renderBlockCardHtml(blockOne)}
+          ` : ""}
+
+          <div class="uni-continuous-locked-barrier">
+            <div class="uni-continuous-blurred-preview" aria-hidden="true">
+              ${renderBlurredBlockPreviewHtml(previewBlockTwo)}
+              ${renderBlurredBlockPreviewHtml(previewBlockThree)}
+            </div>
+            <div class="uni-continuous-lock-overlay">
+              <div class="locked-shield-icon">
+                <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
+              <h3>Unlock Remaining ${totalBlocks - 1} Illustrated Blocks</h3>
+              <p>
+                Block 01 is open for free continuous reading. Upgrade to <strong>${escapeHtml(courseCode)} Course Access</strong> or <strong>All-Access</strong> to read all ${totalBlocks} continuous blocks with diagrams, full podcasts, and clinical pearls.
+              </p>
+              <div class="locked-feature-tags">
+                <span class="locked-tag">✓ Full Continuous Notebook Reading</span>
+                <span class="locked-tag">✓ All ${totalBlocks} High-Yield Diagrams</span>
+                <span class="locked-tag">✓ Conversational Audio Podcasts</span>
+                <span class="locked-tag">✓ Self-Assessment Checklist</span>
+              </div>
+              <button type="button" class="button uni-btn locked-upgrade-trigger" data-course-code="${escapeHtml(courseCode)}" style="background:linear-gradient(135deg, #d97706, #b45309); color:#fff; font-weight:700; padding:13px 28px; font-size:15px;">
+                <span>Unlock Complete Notebook</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
   }
 
   // Checklist Card HTML
@@ -5741,6 +5897,13 @@ async function renderUniNote() {
   });
 
   document.querySelector("#uni-step-next")?.addEventListener("click", () => {
+    if (!isNoteFullyUnlocked && activeBlock.number === 1) {
+      uniNoteActiveBlock = 2;
+      stopUniNoteAudio();
+      window.scrollTo({ top: 200, behavior: "smooth" });
+      render();
+      return;
+    }
     if (uniNoteActiveBlock < totalBlocks) {
       uniNoteActiveBlock += 1;
       stopUniNoteAudio();
@@ -5751,12 +5914,37 @@ async function renderUniNote() {
     }
   });
 
+  // Bind Return to Free Block button
+  document.querySelector("#uni-return-free-block")?.addEventListener("click", () => {
+    uniNoteActiveBlock = 1;
+    stopUniNoteAudio();
+    window.scrollTo({ top: 200, behavior: "smooth" });
+    render();
+  });
+
+  // Bind all Locked Upgrade Triggers
+  document.querySelectorAll(".locked-upgrade-trigger").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const cCode = btn.dataset.courseCode || courseCode;
+      api.logMonetizationEvent(authToken, "upgrade_screen_viewed", { trigger: "locked_notebook_block", course: cCode }).catch(() => {});
+      showUpgradeModal({ trigger: "locked_notebook_block", courseCode: cCode });
+    });
+  });
+
   // Bind Audio Play / Stop buttons
   document.querySelectorAll("[data-audio-block-id]").forEach(btn => {
     btn.addEventListener("click", (e) => {
       e?.stopPropagation?.();
       const blockId = btn.dataset.audioBlockId;
       const textToSpeak = btn.dataset.audioText || "";
+      if (!isNoteFullyUnlocked && blockId !== "block-1") {
+        showToast("🔒 Audio guide for this block is included with Course Access.");
+        api.logMonetizationEvent(authToken, "locked_podcast_tapped", { course: courseCode, block: blockId }).catch(() => {});
+        showUpgradeModal({ trigger: "locked_notebook_podcast", courseCode });
+        return;
+      }
       toggleUniNoteAudio(blockId, textToSpeak);
     });
   });
@@ -5777,6 +5965,12 @@ async function renderUniNote() {
   document.querySelectorAll("[data-recall-toggle]").forEach(btn => {
     btn.addEventListener("click", () => {
       const blockId = btn.dataset.recallToggle;
+      if (!isNoteFullyUnlocked && blockId !== "block-1") {
+        showToast("🔒 Recall guide for this block is included with Course Access.");
+        api.logMonetizationEvent(authToken, "locked_recall_tapped", { course: courseCode, block: blockId }).catch(() => {});
+        showUpgradeModal({ trigger: "locked_recall_guide", courseCode });
+        return;
+      }
       uniNoteRevealedMap[blockId] = !uniNoteRevealedMap[blockId];
       render();
     });
@@ -5822,6 +6016,11 @@ async function renderUniNote() {
     const toggle = (e) => {
       e?.stopPropagation?.();
       const blockId = btn.dataset.transcriptToggle;
+      if (!isNoteFullyUnlocked && blockId !== "block-1") {
+        showToast("🔒 Transcript for this block is included with Course Access.");
+        showUpgradeModal({ trigger: "locked_podcast_transcript", courseCode });
+        return;
+      }
       uniNoteTranscriptOpenMap[blockId] = !uniNoteTranscriptOpenMap[blockId];
       render();
     };
