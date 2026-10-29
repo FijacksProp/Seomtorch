@@ -1534,7 +1534,44 @@ function confirmFinishSession() {
   showConfirmDialog({ title: "Finish this session?", message: unanswered ? `${unanswered} question${unanswered === 1 ? " is" : "s are"} still unanswered. You can return to them using the numbered navigator.` : "Every question has a selected answer.", detail: `<div class="finish-summary"><span><strong>${answered}</strong> answered</span><span><strong>${unanswered}</strong> unanswered</span></div>`, confirmLabel: "Finish and view results", cancelLabel: "Continue session", onConfirm: () => activeSession.mode === "normal" ? finishNormalSession() : finalizeSelectedAnswers(false) });
 }
 
+function recordCompletedSessionToHistory(session) {
+  if (!session || session.recordedToLocalHistory) return;
+  const answered = session.answers ? session.answers.filter(item => item.confirmed || item.selected !== null).length : 0;
+  if (answered === 0) return;
+  session.recordedToLocalHistory = true;
+  const correct = typeof session.correct === "number" ? session.correct : (session.answers ? session.answers.filter(item => item.correct).length : 0);
+  const total = session.queue ? session.queue.length : answered;
+  const score = total ? Math.round((correct / total) * 100) : 0;
+  const completedRecord = {
+    id: session.remoteId || `test-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    focus: session.isUniversity
+      ? `${session.subject} · ${session.topic || "Practice"}`
+      : (session.topic ? `${subjectName(session.subject)} · ${session.topic}` : (subjectName(session.subject) || "General Practice")),
+    subject: session.subject || "general",
+    topic: session.topic || "",
+    score,
+    correct,
+    answered,
+    total,
+    completed_at: new Date().toISOString(),
+    duration_minutes: session.durationMinutes || 0,
+    mode: session.mode || "normal",
+    mode_label: session.mode === "timed" ? "Timed Practice" : (session.mode === "sprint" ? "Daily Sprint" : (session.mode === "challenge" ? "Friend Challenge" : "Guided Practice")),
+    isUniversity: Boolean(session.isUniversity)
+  };
+  completedTests = [completedRecord, ...completedTests.filter(t => t.id !== completedRecord.id)].slice(0, 100);
+  put("meta", { key: "completed_tests", list: completedTests }).catch(() => {});
+  if (profile) {
+    profile.tests = {
+      tests_taken: completedTests.length,
+      average_score: Math.round(completedTests.reduce((s, t) => s + (Number(t.score) || 0), 0) / completedTests.length)
+    };
+    put("profile", profile).catch(() => {});
+  }
+}
+
 function finishNormalSession() {
+  recordCompletedSessionToHistory(activeSession);
   activeSession.finished = true;
   clearActiveSession();
   render();
@@ -1595,7 +1632,17 @@ async function syncPendingAttempts() {
     for (const attempt of attempts.filter(item => !item.synced && !item.syncError)) await syncAttemptRecord(attempt);
     const remote = await api.attempts(authToken);
     const unresolved = attempts.filter(item => !item.synced);
-    const canonical = remote.attempts.map(item => ({ questionId: item.question_id, subject: item.subject, correct: item.is_correct, selected: item.selected_index, timestamp: new Date(item.answered_at).getTime(), durationMs: item.duration_ms, clientId: item.client_id, synced: true }));
+    const canonical = remote.attempts.map(item => ({
+      questionId: item.question_id,
+      subject: item.subject,
+      topic: item.topic || questionById(item.question_id)?.topic || "",
+      correct: item.is_correct,
+      selected: item.selected_index,
+      timestamp: new Date(item.answered_at).getTime(),
+      durationMs: item.duration_ms,
+      clientId: item.client_id,
+      synced: true
+    }));
     const known = new Set(canonical.map(item => item.clientId));
     await clearStore("attempts"); attempts = [];
     for (const item of [...canonical, ...unresolved.filter(item => !known.has(item.clientId))]) { const clean = { ...item }; delete clean.id; clean.id = await add("attempts", clean); attempts.push(clean); }
@@ -1688,32 +1735,7 @@ function renderResult() {
   const unanswered = activeSession.queue.length - answered;
   const note = activeSession.timedOut ? "Time is up. Review the result, then try a shorter session or return when you can give it a full window." : score >= 80 ? "A strong session. Keep the standard steady." : score >= 50 ? "Good work. Review the corrections before moving on." : "This topic needs another careful pass. That is useful information.";
 
-  if (!activeSession.recordedToLocalHistory) {
-    activeSession.recordedToLocalHistory = true;
-    const completedRecord = {
-      id: activeSession.remoteId || `test-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-      focus: activeSession.isUniversity
-        ? `${activeSession.subject} · ${activeSession.topic || "Practice"}`
-        : (activeSession.topic ? `${subjectName(activeSession.subject)} · ${activeSession.topic}` : (subjectName(activeSession.subject) || "General Practice")),
-      subject: activeSession.subject || "general",
-      topic: activeSession.topic || "",
-      score,
-      correct: activeSession.correct,
-      answered,
-      total: activeSession.queue.length,
-      completed_at: new Date().toISOString(),
-      duration_minutes: activeSession.durationMinutes || 0,
-      mode: activeSession.mode || "normal",
-      mode_label: activeSession.mode === "timed" ? "Timed Practice" : (activeSession.mode === "sprint" ? "Daily Sprint" : (activeSession.mode === "challenge" ? "Friend Challenge" : "Guided Practice")),
-      isUniversity: !!activeSession.isUniversity
-    };
-    completedTests = [completedRecord, ...completedTests.filter(t => t.id !== completedRecord.id)].slice(0, 100);
-    put("meta", { key: "completed_tests", list: completedTests }).catch(() => {});
-    if (profile) {
-      profile.tests = { tests_taken: completedTests.length, average_score: Math.round(completedTests.reduce((s, t) => s + (Number(t.score) || 0), 0) / completedTests.length) };
-      put("profile", profile).catch(() => {});
-    }
-  }
+  recordCompletedSessionToHistory(activeSession);
 
   let topicBreakdownHtml = "";
   const isUniSession = Boolean(activeSession.isUniversity);
@@ -1904,6 +1926,7 @@ function getSynthesizedProgressData() {
       mode_label: t.mode_label || "Practice"
     });
   });
+
   completedTests.forEach(t => {
     const key = String(t.id);
     if (!testMap.has(key)) {
@@ -1922,7 +1945,29 @@ function getSynthesizedProgressData() {
     }
   });
 
-  const allTests = Array.from(testMap.values()).sort((a, b) => new Date(b.completed_at) - new Date(a.completed_at));
+  let allTests = Array.from(testMap.values()).sort((a, b) => new Date(b.completed_at) - new Date(a.completed_at));
+
+  // If student has answered questions in practice but no formal test session was completed yet,
+  // synthesize a first practice summary so they immediately see live progress charts!
+  if (allTests.length === 0 && attempts.length > 0) {
+    const correctCount = attempts.filter(a => a.correct).length;
+    const scorePct = Math.round((correctCount / attempts.length) * 100);
+    const lastAttempt = attempts[attempts.length - 1];
+    const subjTitle = subjectName(lastAttempt?.subject || "General");
+    allTests.push({
+      id: "synthetic-initial-practice",
+      focus: `${subjTitle} · Guided Practice`,
+      score: scorePct,
+      correct: correctCount,
+      answered: attempts.length,
+      total: attempts.length,
+      completed_at: new Date(lastAttempt?.timestamp || Date.now()).toISOString(),
+      duration_minutes: 0,
+      mode: "normal",
+      mode_label: "Guided Practice"
+    });
+  }
+
   const scores = allTests.map(t => t.score);
   const testsTaken = allTests.length;
   const avgScore = testsTaken ? Math.round(scores.reduce((a, b) => a + b, 0) / testsTaken) : 0;
@@ -1954,9 +1999,11 @@ function getSynthesizedProgressData() {
     completed_at: t.completed_at
   }));
 
+  // Build Subjects & Topics comprehensively from attempts + remote
   const subjectMap = new Map();
   const topicMap = new Map();
 
+  // 1. Populate from remote progressData if present
   (progressData?.subjects || []).forEach(s => {
     subjectMap.set(s.name, { name: s.name, total: Number(s.total) || 0, correct: Number(s.correct) || 0 });
   });
@@ -1964,25 +2011,39 @@ function getSynthesizedProgressData() {
     topicMap.set(t.name, { name: t.name, subject: t.subject || "Course", total: Number(t.total) || 0, correct: Number(t.correct) || 0 });
   });
 
+  // 2. Aggregate local attempts (whether synced or unsynced, university or aspirant)
   attempts.forEach(att => {
     const rawSubj = att.subject || "general";
     const displayName = subjectName(rawSubj);
+    
+    // If backend hasn't provided this subject, or if backend count is 0, initialize
     if (!subjectMap.has(displayName)) {
       subjectMap.set(displayName, { name: displayName, total: 0, correct: 0 });
     }
     const sObj = subjectMap.get(displayName);
-    if (!att.synced) {
+    const backendSubjectTotal = (progressData?.subjects || []).find(s => s.name === displayName)?.total || 0;
+    // Count local attempt if it's unsynced OR if backend has 0 recorded for this subject
+    if (!att.synced || backendSubjectTotal === 0) {
       sObj.total++;
       if (att.correct) sObj.correct++;
     }
 
-    const tName = att.topic ? String(att.topic).trim() : "";
+    const questionObj = questionById(att.questionId);
+    let tName = att.topic ? String(att.topic).trim() : (questionObj?.topic ? String(questionObj.topic).trim() : "");
+    if (!tName && att.questionId) {
+      const parts = String(att.questionId).split("-");
+      if (parts.length >= 2) {
+        tName = parts[1].replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+      }
+    }
+
     if (tName) {
       if (!topicMap.has(tName)) {
         topicMap.set(tName, { name: tName, subject: rawSubj, total: 0, correct: 0 });
       }
       const tObj = topicMap.get(tName);
-      if (!att.synced) {
+      const backendTopicTotal = (progressData?.topics || []).find(t => t.name === tName)?.total || 0;
+      if (!att.synced || backendTopicTotal === 0) {
         tObj.total++;
         if (att.correct) tObj.correct++;
       }
@@ -2045,7 +2106,54 @@ function renderProgress() {
   const data = getSynthesizedProgressData();
   const tests = data.tests;
   const movement = tests.improvement === null ? "Building" : `${tests.improvement >= 0 ? "+" : ""}${tests.improvement}`;
-  const content = `<section class="page progress-page"><p class="eyebrow">Progress</p><h1>Your test record.</h1><p class="lede">Completed papers lead the analysis. Individual answers remain available as supporting evidence.</p><div class="metric-strip four test-metrics"><div class="metric"><strong>${tests.tests_taken}</strong><span>tests taken</span></div><div class="metric"><strong>${tests.average_score}%</strong><span>average test score</span></div><div class="metric"><strong>${tests.best_score}%</strong><span>best test score</span></div><div class="metric ${tests.improvement !== null && tests.improvement >= 0 ? "xp-metric" : ""}"><strong>${movement}${tests.improvement === null ? "" : "<small> pts</small>"}</strong><span>recent movement</span></div></div><div class="test-analysis-grid"><section class="report-panel test-trend"><div class="section-head compact"><div><p class="eyebrow">Last ${tests.trend.length} tests</p><h2>Score movement</h2></div><p>${tests.completion_rate}% completion rate</p></div>${tests.trend.length ? `<div class="trend-bars">${tests.trend.map((item, index) => `<div title="${escapeHtml(item.focus)} · ${item.score}%"><span style="height:${Math.max(4, item.score)}%"></span><small>${index + 1}</small></div>`).join("")}</div>` : '<div class="empty">Your score movement will appear after your first completed test.</div>'}</section><section class="report-panel"><div class="section-head compact"><div><p class="eyebrow">Test formats</p><h2>How you practise</h2></div></div><div class="test-mode-list">${tests.by_mode.length ? tests.by_mode.map(item => `<div><span><strong>${escapeHtml(item.label)}</strong><small>${item.count} test${item.count === 1 ? "" : "s"}</small></span><b>${item.average_score}%</b></div>`).join("") : '<div class="empty">No completed formats yet.</div>'}</div></section></div><div class="section-head"><h2>Test history</h2><p>${tests.questions_in_tests} questions answered within completed tests</p></div><div class="test-history">${tests.recent_tests.length ? tests.recent_tests.map(item => `<article><time>${new Date(item.completed_at).toLocaleDateString(undefined, { day: "numeric", month: "short" })}</time><div><strong>${escapeHtml(item.focus)}</strong><small>${escapeHtml(item.mode_label)} · ${item.answered}/${item.total} answered</small></div><span>${item.score}%</span></article>`).join("") : '<div class="empty">Complete a test and it will appear here.</div>'}</div><div class="section-head"><h2>Academic detail</h2><p>${data.stats.total_attempts} individual answers recorded</p></div><div class="report-grid"><div class="report-panel"><h3>Subject & Course Performance</h3>${data.subjects.map(item => `<div class="report-row"><span>${escapeHtml(item.name)}<small>${item.total} answer${item.total === 1 ? "" : "s"}</small></span><strong>${item.accuracy}%</strong></div>`).join("") || '<div class="empty">No subject or course results yet.</div>'}</div><div class="report-panel"><h3>Topics Needing Attention</h3>${data.topics.filter(item => item.total >= 1).sort((a, b) => a.accuracy - b.accuracy).slice(0, 6).map(item => `<div class="report-row"><span>${escapeHtml(item.name)}<small>${subjectName(item.subject)} · ${item.total} answers</small></span><strong class="${item.accuracy < 50 ? "attention" : ""}">${item.accuracy}%</strong></div>`).join("") || '<div class="empty">Complete questions in any topic to identify focus areas.</div>'}</div></div><div class="supporting-stat"><span>Supporting activity</span><strong>${data.stats.total_attempts} questions answered · ${data.stats.accuracy}% answer accuracy · ${xp.xp} XP</strong></div></section>`;
+  const hasAnyActivity = data.stats.total_attempts > 0 || tests.tests_taken > 0;
+  const zeroStateHtml = !hasAnyActivity ? `
+    <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:36px 20px; text-align:center; margin-bottom:28px;">
+      <div style="width:60px; height:60px; margin:0 auto 16px; border-radius:50%; background:var(--forest-soft); color:var(--forest); display:grid; place-items:center;">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <h2 style="font-family:var(--serif); font-size:24px; margin:0 0 8px; color:var(--ink);">Your Performance Diagnostics are Ready</h2>
+      <p style="color:var(--muted); max-width:460px; margin:0 auto 20px; font-size:13.5px; line-height:1.5;">Answer questions in Practice mode, try a Timed Mock Exam, or take a Daily Sprint. Your subject mastery, topic diagnostics, and score trajectory will update here automatically.</p>
+      <button class="button" data-route="practice">Start Practice Now →</button>
+    </div>
+  ` : "";
+
+  const content = `<section class="page progress-page">
+    <p class="eyebrow">Insights & Diagnostics</p>
+    <h1>Your test record.</h1>
+    <p class="lede">Completed papers lead the analysis. Individual answers remain available as supporting evidence.</p>
+    ${zeroStateHtml}
+    <div class="metric-strip four test-metrics">
+      <div class="metric"><strong>${tests.tests_taken}</strong><span>tests taken</span></div>
+      <div class="metric"><strong>${tests.average_score}%</strong><span>average test score</span></div>
+      <div class="metric"><strong>${tests.best_score}%</strong><span>best test score</span></div>
+      <div class="metric ${tests.improvement !== null && tests.improvement >= 0 ? "xp-metric" : ""}"><strong>${movement}${tests.improvement === null ? "" : "<small> pts</small>"}</strong><span>recent movement</span></div>
+    </div>
+    <div class="test-analysis-grid">
+      <section class="report-panel test-trend">
+        <div class="section-head compact"><div><p class="eyebrow">Last ${tests.trend.length} tests</p><h2>Score movement</h2></div><p>${tests.completion_rate}% completion rate</p></div>
+        ${tests.trend.length ? `<div class="trend-bars">${tests.trend.map((item, index) => `<div title="${escapeHtml(item.focus)} · ${item.score}%"><span style="height:${Math.max(4, item.score)}%"></span><small>${index + 1}</small></div>`).join("")}</div>` : '<div class="empty">Your score movement will appear after your first completed test.</div>'}
+      </section>
+      <section class="report-panel">
+        <div class="section-head compact"><div><p class="eyebrow">Test formats</p><h2>How you practise</h2></div></div>
+        <div class="test-mode-list">${tests.by_mode.length ? tests.by_mode.map(item => `<div><span><strong>${escapeHtml(item.label)}</strong><small>${item.count} test${item.count === 1 ? "" : "s"}</small></span><b>${item.average_score}%</b></div>`).join("") : '<div class="empty">No completed formats yet.</div>'}</div>
+      </section>
+    </div>
+    <div class="section-head"><h2>Test history</h2><p>${tests.questions_in_tests} questions answered within completed tests</p></div>
+    <div class="test-history">${tests.recent_tests.length ? tests.recent_tests.map(item => `<article><time>${new Date(item.completed_at).toLocaleDateString(undefined, { day: "numeric", month: "short" })}</time><div><strong>${escapeHtml(item.focus)}</strong><small>${escapeHtml(item.mode_label)} · ${item.answered}/${item.total} answered</small></div><span>${item.score}%</span></article>`).join("") : '<div class="empty">Complete a test and it will appear here.</div>'}</div>
+    <div class="section-head"><h2>Academic detail</h2><p>${data.stats.total_attempts} individual answers recorded</p></div>
+    <div class="report-grid">
+      <div class="report-panel">
+        <h3>Subject & Course Performance</h3>
+        ${data.subjects.map(item => `<div class="report-row"><span>${escapeHtml(item.name)}<small>${item.total} answer${item.total === 1 ? "" : "s"}</small></span><strong>${item.accuracy}%</strong></div>`).join("") || '<div class="empty">No subject or course results yet.</div>'}
+      </div>
+      <div class="report-panel">
+        <h3>Topics Needing Attention</h3>
+        ${data.topics.filter(item => item.total >= 1).sort((a, b) => a.accuracy - b.accuracy).slice(0, 8).map(item => `<div class="report-row"><span>${escapeHtml(item.name)}<small>${subjectName(item.subject)} · ${item.total} answers</small></span><strong class="${item.accuracy < 50 ? "attention" : ""}">${item.accuracy}%</strong></div>`).join("") || '<div class="empty">Complete questions in any topic to identify focus areas.</div>'}
+      </div>
+    </div>
+    <div class="supporting-stat"><span>Supporting activity</span><strong>${data.stats.total_attempts} questions answered · ${data.stats.accuracy}% answer accuracy · ${xp.xp} XP</strong></div>
+  </section>`;
   app.innerHTML = shell(content); bindShell();
 }
 
