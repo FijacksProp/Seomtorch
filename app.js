@@ -716,12 +716,74 @@ function xpState() {
   return { xp, level, levelProgress, remaining: 250 - levelProgress, percent: levelProgress / 250 * 100 };
 }
 
-function showToast(message) {
+function showToast(message, options = {}) {
+  if (!toastRegion) return;
+
+  const existingToasts = toastRegion.querySelectorAll(".toast:not(.toast-out)");
+  if (existingToasts.length >= 2) {
+    dismissToast(existingToasts[0]);
+  }
+
   const toast = document.createElement("div");
   toast.className = "toast";
-  toast.textContent = message;
+  toast.setAttribute("role", "status");
+  toast.setAttribute("aria-live", "polite");
+
+  let iconHtml = `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"/>
+    </svg>
+  `;
+  if (typeof message === "string") {
+    if (message.includes("🔒") || message.toLowerCase().includes("lock")) {
+      iconHtml = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      `;
+    } else if (message.toLowerCase().includes("error") || message.toLowerCase().includes("failed") || message.toLowerCase().includes("prohibited")) {
+      iconHtml = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+      `;
+    }
+  }
+
+  toast.innerHTML = `<span class="toast-icon">${iconHtml}</span><span class="toast-text">${escapeHtml(message)}</span>`;
+
+  let timer = null;
+  const dismiss = () => {
+    if (toast.classList.contains("toast-out")) return;
+    toast.classList.add("toast-out");
+    clearTimeout(timer);
+    setTimeout(() => toast.remove(), 220);
+  };
+
+  toast.addEventListener("click", dismiss);
+
+  let touchStartY = 0;
+  toast.addEventListener("touchstart", (e) => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  toast.addEventListener("touchend", (e) => {
+    const touchEndY = e.changedTouches[0].clientY;
+    if (touchStartY - touchEndY > 14) {
+      dismiss();
+    }
+  }, { passive: true });
+
   toastRegion.appendChild(toast);
-  setTimeout(() => toast.remove(), 3200);
+  timer = setTimeout(dismiss, options.duration || 3000);
+}
+
+function dismissToast(toastEl) {
+  if (!toastEl || toastEl.classList.contains("toast-out")) return;
+  toastEl.classList.add("toast-out");
+  setTimeout(() => toastEl.remove(), 220);
 }
 
 function isStandalone() { return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true; }
