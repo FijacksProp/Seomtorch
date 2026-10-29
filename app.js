@@ -5349,23 +5349,25 @@ function showUpgradeModal(options = {}) {
         if (window.PaystackPop && hasLiveKey) {
           const handler = window.PaystackPop.setup({
             key: initRes.public_key,
-            email: initRes.email || currentUser?.email,
-            amount: initRes.amount_kobo,
+            email: initRes.email || currentUser?.email || "student@seomtorch.com",
+            amount: Math.round(Number(initRes.amount_kobo)),
             currency: "NGN",
             ref: initRes.reference,
-            callback: async function(paystackCallback) {
-              showLoadingOverlay("Verifying Payment", "Activating your course access...");
-              try {
-                const verifyRes = await api.verifyPayment(authToken, paystackCallback.reference || initRes.reference);
-                userAccessData = verifyRes.user_access;
-                hideLoadingOverlay();
-                backdrop.remove();
-                showToast("🎉 Payment verified! Course access is now active.");
-                render();
-              } catch (vErr) {
-                hideLoadingOverlay();
-                showToast(vErr.message || "Payment verification error. Please contact support.");
-              }
+            callback: function(paystackCallback) {
+              const ref = (paystackCallback && paystackCallback.reference) ? paystackCallback.reference : initRes.reference;
+              showLoadingOverlay("Verifying Payment", "Confirming with Paystack and activating access...");
+              api.verifyPayment(authToken, ref)
+                .then(function(verifyRes) {
+                  userAccessData = verifyRes.user_access;
+                  hideLoadingOverlay();
+                  backdrop.remove();
+                  showToast("🎉 Payment verified! Course access is now active.");
+                  render();
+                })
+                .catch(function(vErr) {
+                  hideLoadingOverlay();
+                  showToast(vErr.message || "Payment verification error. Please contact support.");
+                });
             },
             onClose: function() {
               btn.disabled = false;
@@ -5375,27 +5377,9 @@ function showUpgradeModal(options = {}) {
           });
           handler.openIframe();
         } else {
-          // Dev test mode fallback (or before live Paystack keys are entered)
-          backdrop.remove();
-          showConfirmDialog({
-            title: "Confirm Paystack Payment (Test Mode)",
-            message: `Simulate payment of ₦${initRes.amount.toLocaleString()} for ${initRes.access_type === "all_access" ? "All-Access Pass" : initRes.course_code}?`,
-            confirmLabel: "Complete Payment",
-            cancelLabel: "Cancel",
-            onConfirm: async () => {
-              showLoadingOverlay("Activating Access", "Unlocking course materials...");
-              try {
-                const verifyRes = await api.verifyPayment(authToken, initRes.reference);
-                userAccessData = verifyRes.user_access;
-                hideLoadingOverlay();
-                showToast("🎉 Payment verified! Course access unlocked.");
-                render();
-              } catch (vErr) {
-                hideLoadingOverlay();
-                showToast(vErr.message || "Could not complete payment.");
-              }
-            }
-          });
+          btn.disabled = false;
+          renderModalContent();
+          showToast("Payment gateway is temporarily unavailable. Please verify gateway keys or contact support.");
         }
       } catch (err) {
         btn.disabled = false;

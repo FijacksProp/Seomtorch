@@ -2,6 +2,7 @@ import hashlib
 import hmac
 import json
 import logging
+import sys
 import urllib.request
 import uuid
 from datetime import timedelta
@@ -214,6 +215,7 @@ class VerifyPaymentView(APIView):
                 req = urllib.request.Request(url, headers={
                     "Authorization": f"Bearer {secret_key}",
                     "Content-Type": "application/json",
+                    "User-Agent": "Seomtorch-Backend/1.0",
                 })
                 with urllib.request.urlopen(req, timeout=12) as response:
                     paystack_data = json.loads(response.read().decode("utf-8"))
@@ -227,9 +229,12 @@ class VerifyPaymentView(APIView):
                 logger.error("Paystack verification error for %s: %s", reference, e)
                 return Response({"detail": "Could not verify payment with gateway. Please try again shortly or contact support."}, status=status.HTTP_502_BAD_GATEWAY)
         else:
-            # Test development mode (before keys are configured)
-            verified = True
-            tx.gateway_response = {"note": "Test mode verification (no secret key configured)."}
+            is_testing = getattr(settings, "TESTING", False) or ("test" in sys.argv)
+            if is_testing:
+                verified = True
+                tx.gateway_response = {"note": "Test mode verification (no secret key configured)."}
+            else:
+                return Response({"detail": "Payment gateway is not configured. Please contact support."}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
 
         if not verified:
             tx.status = PaymentTransaction.Status.FAILED
