@@ -164,14 +164,14 @@
       {% for student in recent_students %}
       <a href="{% url 'monitor:student-detail' student.public_id %}">
         <span>{{ student.username|slice:":1"|upper }}</span>
-        <div style="flex:1;">
-          <div style="display:flex;align-items:center;gap:6px;">
-            <strong>{{ student.username }}</strong>
-            <span class="badge {% if student.active_mode == 'university' %}badge-uni{% else %}badge-aspirant{% endif %}" style="font-size:9.5px;padding:1px 6px;">
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:6px;min-width:0;">
+            <strong style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ student.username }}</strong>
+            <span class="badge {% if student.active_mode == 'university' %}badge-uni{% else %}badge-aspirant{% endif %}" style="font-size:9.5px;padding:1px 6px;flex-shrink:0;">
               {{ student.active_mode|title }}
             </span>
           </div>
-          <small>{{ student.public_id }} · joined {{ student.date_joined|timesince }} ago</small>
+          <small style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;">{{ student.public_id }} · joined {{ student.date_joined|timesince }} ago</small>
         </div>
       </a>
       {% empty %}
@@ -250,6 +250,9 @@ document.addEventListener("DOMContentLoaded", function() {
   closeBtn?.addEventListener("click", () => modal.classList.remove("open"));
   modal?.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("open"); });
 
+  const isMobile = window.innerWidth <= 640;
+  const doughnutLegendPos = isMobile ? "bottom" : "right";
+
   // 1. Daily Activity Bar Chart
   const actCtx = document.getElementById("dailyActivityChart")?.getContext("2d");
   if (actCtx) {
@@ -295,7 +298,7 @@ document.addEventListener("DOMContentLoaded", function() {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { position: "right", labels: { font: { family: "DM Sans", size: 11 }, boxWidth: 12 } }
+          legend: { position: doughnutLegendPos, labels: { font: { family: "DM Sans", size: 11 }, boxWidth: 12 } }
         },
         cutout: "68%"
       }
@@ -347,7 +350,7 @@ document.addEventListener("DOMContentLoaded", function() {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { position: "right", labels: { font: { family: "DM Sans", size: 11 }, boxWidth: 12 } }
+          legend: { position: doughnutLegendPos, labels: { font: { family: "DM Sans", size: 11 }, boxWidth: 12 } }
         }
       }
     });

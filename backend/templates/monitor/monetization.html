@@ -110,7 +110,7 @@
       </div>
     </div>
 
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid rgba(0,0,0,0.06);">
+    <div class="pricing-submit-row">
       <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;font-weight:700;">
         <input type="checkbox" name="launch_offer_active" {% if plan_config.launch_offer_active %}checked{% endif %} style="width:18px;height:18px;accent-color:var(--color-forest);">
         <span>Launch Offer Active (currently {% if plan_config.is_launch_offer_valid %}<strong style="color:#047857;">VALID</strong>{% else %}<strong style="color:#b91c1c;">EXPIRED</strong>{% endif %})</span>
@@ -177,6 +177,7 @@
   </form>
 
   <!-- Discount Codes Table -->
+  <div class="table-scroll-hint">← Swipe table sideways to view all columns →</div>
   <div class="table-wrap">
     <table>
       <thead>
@@ -319,6 +320,7 @@
   </form>
 
   <h3 style="margin:16px 0 10px;font-size:15px;color:var(--color-ink);">Active Student Access Grants (Recent)</h3>
+  <div class="table-scroll-hint">← Swipe table sideways to view all columns →</div>
   <div class="table-wrap">
     <table>
       <thead>
@@ -379,6 +381,7 @@
     <small style="color:var(--color-muted);">Online and manual payment reconciliation</small>
   </div>
 
+  <div class="table-scroll-hint">← Swipe table sideways to view all columns →</div>
   <div class="table-wrap">
     <table>
       <thead>

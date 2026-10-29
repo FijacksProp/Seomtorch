@@ -6,14 +6,14 @@
 
 <!-- Student Profile Header Card -->
 <div class="control-section" style="margin-bottom:24px;">
-  <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:20px;">
-    <div style="display:flex;align-items:center;gap:20px;">
-      <div class="hero-avatar" style="width:76px;height:76px;font-size:32px;">
+  <div class="student-header-row" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:18px;">
+    <div class="student-header-left" style="display:flex;align-items:center;gap:18px;min-width:0;flex:1;">
+      <div class="hero-avatar student-avatar-resp" style="width:68px;height:68px;font-size:28px;flex-shrink:0;">
         {{ student.username|slice:":1"|upper }}
       </div>
-      <div>
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-          <h1 style="margin:0;font-family:var(--font-serif);font-size:36px;font-weight:600;color:var(--color-ink);">
+      <div style="min-width:0;flex:1;">
+        <div class="student-title-wrap" style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:4px;">
+          <h1 style="margin:0;font-family:var(--font-serif);font-size:32px;font-weight:600;color:var(--color-ink);word-break:break-word;">
             {{ student.username }}
           </h1>
           <span class="badge {% if student.active_mode == 'university' %}badge-uni{% else %}badge-aspirant{% endif %}">
@@ -29,7 +29,7 @@
             <span class="badge badge-free">Free Tier</span>
           {% endif %}
         </div>
-        <p style="margin:0 0 6px;color:var(--color-muted);font-size:13px;">
+        <p style="margin:0 0 6px;color:var(--color-muted);font-size:12.5px;word-break:break-word;">
           <strong>{{ student.email }}</strong> · ID: <code>{{ student.public_id }}</code>
           {% if student.phone_number %} · Phone: <strong>{{ student.phone_number }}</strong>{% endif %}
           {% if student.gender %} · Gender: <strong>{{ student.get_gender_display }}</strong>{% endif %}
@@ -38,11 +38,11 @@
 
         <!-- Academic segmentation details -->
         {% if student.active_mode == 'university' and student.university_profile %}
-          <div style="font-size:12px;color:var(--color-forest);font-weight:600;background:var(--color-forest-light);padding:4px 10px;border-radius:6px;display:inline-block;">
+          <div style="font-size:12px;color:var(--color-forest);font-weight:600;background:var(--color-forest-light);padding:4px 10px;border-radius:6px;display:inline-block;word-break:break-word;">
             🏫 {{ student.university_profile.university_name }} · {{ student.university_profile.department }} ({{ student.university_profile.get_level_display }})
           </div>
         {% elif student.aspirant_profile %}
-          <div style="font-size:12px;color:#86198f;font-weight:600;background:#fdf4ff;padding:4px 10px;border-radius:6px;display:inline-block;">
+          <div style="font-size:12px;color:#86198f;font-weight:600;background:#fdf4ff;padding:4px 10px;border-radius:6px;display:inline-block;word-break:break-word;">
             🎯 Preparing for {{ student.aspirant_profile.get_exam_type_display }} {{ student.aspirant_profile.target_year }}
           </div>
         {% endif %}
@@ -50,11 +50,11 @@
     </div>
 
     <!-- Security & Password Reset -->
-    <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
-      <form method="post" action="{% url 'monitor:reset-student-password' student.public_id %}" onsubmit="return confirm('Reset this student’s password and sign them out on every device?');">
+    <div class="student-header-right" style="display:flex;flex-direction:column;gap:8px;align-self:flex-start;">
+      <form method="post" action="{% url 'monitor:reset-student-password' student.public_id %}" onsubmit="return confirm('Reset this student’s password and sign them out on every device?');" style="width:100%;">
         {% csrf_token %}
-        <button class="btn-outline" style="border-color:#b45309;color:#92400e;" type="submit">
-          🔑 Generate Temporary Password
+        <button class="btn-outline" style="border-color:#b45309;color:#92400e;width:100%;justify-content:center;" type="submit">
+          🔑 Temporary Password
         </button>
       </form>
     </div>
@@ -78,7 +78,7 @@
       {% endif %}
     </div>
 
-    <form method="post" action="{% url 'monitor:grant-student-access' student.public_id %}" style="display:grid;grid-template-columns:minmax(140px,1.2fr) minmax(140px,1fr) minmax(130px,1fr) auto;gap:10px;align-items:end;">
+    <form method="post" action="{% url 'monitor:grant-student-access' student.public_id %}" class="student-access-form-grid">
       {% csrf_token %}
       <div class="form-group" style="margin:0;">
         <label style="font-size:10px;">Select Plan</label>
@@ -401,6 +401,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // 3. Question Diagnostic Doughnut Chart
   const pieCtx = document.getElementById("studentPieChart")?.getContext("2d");
+  const isMobile = window.innerWidth <= 640;
   if (pieCtx) {
     new Chart(pieCtx, {
       type: "doughnut",
@@ -417,7 +418,7 @@ document.addEventListener("DOMContentLoaded", function() {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { position: "right", labels: { font: { family: "DM Sans", size: 11 }, boxWidth: 12 } }
+          legend: { position: isMobile ? "bottom" : "right", labels: { font: { family: "DM Sans", size: 11 }, boxWidth: 12 } }
         },
         cutout: "70%"
       }
