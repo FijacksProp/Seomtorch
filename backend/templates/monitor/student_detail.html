@@ -5,44 +5,54 @@
 <a class="back-link" href="{% url 'monitor:students' %}">← Back to Student Directory</a>
 
 <!-- Student Profile Header Card -->
-<div class="control-section" style="margin-bottom:24px;">
-  <div class="student-header-row" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:18px;">
-    <div class="student-header-left" style="display:flex;align-items:center;gap:18px;min-width:0;flex:1;">
-      <div class="hero-avatar student-avatar-resp" style="width:68px;height:68px;font-size:28px;flex-shrink:0;">
+<div class="control-section student-profile-card" style="margin-bottom:24px;">
+  <div class="student-profile-header">
+    <div class="student-profile-main">
+      <div class="hero-avatar student-avatar-circle">
         {{ student.username|slice:":1"|upper }}
       </div>
-      <div style="min-width:0;flex:1;">
-        <div class="student-title-wrap" style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:4px;">
-          <h1 style="margin:0;font-family:var(--font-serif);font-size:32px;font-weight:600;color:var(--color-ink);word-break:break-word;">
-            {{ student.username }}
-          </h1>
-          <span class="badge {% if student.active_mode == 'university' %}badge-uni{% else %}badge-aspirant{% endif %}">
-            {{ student.active_mode|title }} Mode
-          </span>
-          {% if access_summary.has_all_access %}
-            <span class="badge badge-all-access">⭐ All-Access</span>
-          {% elif access_summary.is_trial %}
-            <span class="badge badge-trial">✨ 3-Day Trial ({{ access_summary.trial_days_remaining }}d left)</span>
-          {% elif access_summary.unlocked_courses %}
-            <span class="badge badge-single">Course Access ({{ access_summary.unlocked_courses|join:", " }})</span>
-          {% else %}
-            <span class="badge badge-free">Free Tier</span>
-          {% endif %}
+      <div class="student-profile-info">
+        <div class="student-title-badges">
+          <h1 class="student-display-name">{{ student.username }}</h1>
+          <div class="student-badges-inline">
+            <span class="badge {% if student.active_mode == 'university' %}badge-uni{% else %}badge-aspirant{% endif %}">
+              {{ student.active_mode|title }} Mode
+            </span>
+            {% if access_summary.has_all_access %}
+              <span class="badge badge-all-access">⭐ All-Access</span>
+            {% elif access_summary.is_trial %}
+              <span class="badge badge-trial">✨ 3-Day Trial ({{ access_summary.trial_days_remaining }}d left)</span>
+            {% elif access_summary.unlocked_courses %}
+              <span class="badge badge-single">Course Access ({{ access_summary.unlocked_courses|join:", " }})</span>
+            {% else %}
+              <span class="badge badge-free">Free Tier</span>
+            {% endif %}
+          </div>
         </div>
-        <p style="margin:0 0 6px;color:var(--color-muted);font-size:12.5px;word-break:break-word;">
-          <strong>{{ student.email }}</strong> · ID: <code>{{ student.public_id }}</code>
-          {% if student.phone_number %} · Phone: <strong>{{ student.phone_number }}</strong>{% endif %}
-          {% if student.gender %} · Gender: <strong>{{ student.get_gender_display }}</strong>{% endif %}
-          · Joined {{ student.date_joined|date:"j F Y" }}
-        </p>
+
+        <div class="student-contact-meta">
+          <span class="meta-item"><strong>{{ student.email }}</strong></span>
+          <span class="meta-sep">·</span>
+          <span class="meta-item">ID: <code>{{ student.public_id }}</code></span>
+          {% if student.phone_number %}
+            <span class="meta-sep">·</span>
+            <span class="meta-item">Phone: <strong>{{ student.phone_number }}</strong></span>
+          {% endif %}
+          {% if student.gender %}
+            <span class="meta-sep">·</span>
+            <span class="meta-item">Gender: <strong>{{ student.get_gender_display }}</strong></span>
+          {% endif %}
+          <span class="meta-sep">·</span>
+          <span class="meta-item">Joined {{ student.date_joined|date:"j F Y" }}</span>
+        </div>
 
         <!-- Academic segmentation details -->
         {% if student.active_mode == 'university' and student.university_profile %}
-          <div style="font-size:12px;color:var(--color-forest);font-weight:600;background:var(--color-forest-light);padding:4px 10px;border-radius:6px;display:inline-block;word-break:break-word;">
+          <div class="academic-cohort-pill uni">
             🏫 {{ student.university_profile.university_name }} · {{ student.university_profile.department }} ({{ student.university_profile.get_level_display }})
           </div>
         {% elif student.aspirant_profile %}
-          <div style="font-size:12px;color:#86198f;font-weight:600;background:#fdf4ff;padding:4px 10px;border-radius:6px;display:inline-block;word-break:break-word;">
+          <div class="academic-cohort-pill aspirant">
             🎯 Preparing for {{ student.aspirant_profile.get_exam_type_display }} {{ student.aspirant_profile.target_year }}
           </div>
         {% endif %}
@@ -50,10 +60,10 @@
     </div>
 
     <!-- Security & Password Reset -->
-    <div class="student-header-right" style="display:flex;flex-direction:column;gap:8px;align-self:flex-start;">
+    <div class="student-profile-actions">
       <form method="post" action="{% url 'monitor:reset-student-password' student.public_id %}" onsubmit="return confirm('Reset this student’s password and sign them out on every device?');" style="width:100%;">
         {% csrf_token %}
-        <button class="btn-outline" style="border-color:#b45309;color:#92400e;width:100%;justify-content:center;" type="submit">
+        <button class="btn-outline password-reset-trigger" type="submit">
           🔑 Temporary Password
         </button>
       </form>
@@ -61,8 +71,8 @@
   </div>
 
   <!-- Quick Access Grant Panel -->
-  <div style="margin-top:20px;padding-top:18px;border-top:1px solid rgba(0,0,0,0.06);background:#fcfefd;padding:16px;border-radius:var(--radius-md);border:1px solid var(--color-forest-border);">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:10px;">
+  <div class="student-quick-grant-panel">
+    <div class="quick-grant-header">
       <div>
         <strong style="font-size:13px;color:var(--color-forest);text-transform:uppercase;letter-spacing:0.04em;">
           Direct Access Control for {{ student.username }}
@@ -79,6 +89,37 @@
     </div>
 
     <form method="post" action="{% url 'monitor:grant-student-access' student.public_id %}" class="student-access-form-grid">
+      {% csrf_token %}
+      <div class="form-group" style="margin:0;">
+        <label style="font-size:10px;">Select Plan</label>
+        <select name="access_type" id="student-plan-select" style="padding:7px 10px;font-size:12px;">
+          <option value="all_access">All-Access (All 3 Courses)</option>
+          <option value="single_course">Single Course</option>
+          <option value="trial">3-Day Free Trial</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin:0;" id="student-course-select-wrap">
+        <label style="font-size:10px;">Course Code</label>
+        <select name="course_code" style="padding:7px 10px;font-size:12px;">
+          <option value="all">All Courses</option>
+          <option value="ANA 201">ANA 201 (Upper &amp; Lower Limb)</option>
+          <option value="ANA 203">ANA 203 (Systemic Embryology)</option>
+          <option value="PIO 201">PIO 201 (Medical Physiology)</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin:0;">
+        <label style="font-size:10px;">Expires On</label>
+        <input type="date" name="expires_at" value="{{ plan_config.semester_end_date|date:'Y-m-d' }}" style="padding:6px 10px;font-size:12px;">
+      </div>
+
+      <button type="submit" class="btn-primary" style="padding:8px 16px;white-space:nowrap;font-size:12px;">
+        Grant Access
+      </button>
+    </form>
+  </div>
+</div>
       {% csrf_token %}
       <div class="form-group" style="margin:0;">
         <label style="font-size:10px;">Select Plan</label>
