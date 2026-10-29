@@ -623,16 +623,18 @@
 /* Student 360 Profile Header Card */
 .student-profile-header {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 20px;
+  gap: 18px;
+  width: 100%;
 }
 
 .student-profile-main {
   display: flex;
   align-items: flex-start;
   gap: 18px;
-  flex: 1;
+  flex: 1 1 280px;
   min-width: 0;
 }
 
@@ -1330,6 +1332,7 @@
 
   /* Student Profile Card Mobile Layout */
   .student-profile-header {
+    display: flex !important;
     flex-direction: column !important;
     align-items: stretch !important;
     gap: 14px !important;
@@ -1341,19 +1344,22 @@
     align-items: flex-start !important;
     gap: 14px !important;
     width: 100% !important;
+    min-width: 0 !important;
+    flex: 1 1 100% !important;
   }
 
   .student-avatar-circle {
-    width: 52px !important;
-    height: 52px !important;
-    font-size: 22px !important;
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 20px !important;
     flex-shrink: 0 !important;
   }
 
   .student-profile-info {
-    flex: 1 !important;
+    flex: 1 1 auto !important;
     min-width: 0 !important;
-    width: 100% !important;
+    width: calc(100% - 62px) !important;
+    max-width: 100% !important;
   }
 
   .student-title-badges {

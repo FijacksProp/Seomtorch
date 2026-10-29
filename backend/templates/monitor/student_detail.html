@@ -15,35 +15,37 @@
   }
   .student-profile-header {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 20px;
+    gap: 18px;
     width: 100%;
   }
   .student-profile-main {
     display: flex;
     align-items: flex-start;
     gap: 18px;
-    flex: 1 1 auto;
+    flex: 1 1 280px;
     min-width: 0;
   }
   .student-avatar-circle {
-    width: 68px;
-    height: 68px;
-    min-width: 68px;
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
     border-radius: 50%;
     background: #064d3b;
     color: #ffffff;
     display: grid;
     place-items: center;
     font-family: var(--font-serif, "Newsreader", serif);
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 600;
     flex-shrink: 0;
   }
   .student-profile-info {
     flex: 1 1 auto;
     min-width: 0;
+    max-width: 100%;
   }
   .student-title-badges {
     display: flex;
@@ -55,11 +57,11 @@
   .student-display-name {
     margin: 0;
     font-family: var(--font-serif, "Newsreader", serif);
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 600;
     color: #17231d;
-    line-height: 1.2;
-    word-break: normal;
+    line-height: 1.25;
+    word-break: break-word;
     overflow-wrap: break-word;
     white-space: normal;
   }
@@ -103,6 +105,8 @@
   }
   .student-profile-actions {
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
   }
   .password-reset-trigger {
     white-space: nowrap;
@@ -111,36 +115,41 @@
     font-weight: 600;
   }
 
-  /* Mobile Layout Rules (Screens <= 768px) */
-  @media (max-width: 768px) {
+  /* Mobile Layout Rules (Screens <= 860px) */
+  @media (max-width: 860px) {
     .student-profile-card {
       padding: 16px 14px !important;
     }
     .student-profile-header {
+      display: flex !important;
       flex-direction: column !important;
       align-items: stretch !important;
       gap: 14px !important;
     }
     .student-profile-main {
+      display: flex !important;
       flex-direction: row !important;
       align-items: flex-start !important;
       gap: 12px !important;
       width: 100% !important;
       min-width: 0 !important;
+      flex: 1 1 100% !important;
     }
     .student-avatar-circle {
-      width: 52px !important;
-      height: 52px !important;
-      min-width: 52px !important;
-      font-size: 22px !important;
+      width: 48px !important;
+      height: 48px !important;
+      min-width: 48px !important;
+      font-size: 20px !important;
       flex-shrink: 0 !important;
     }
     .student-profile-info {
-      width: calc(100% - 64px) !important;
-      min-width: 0 !important;
       flex: 1 1 auto !important;
+      min-width: 0 !important;
+      width: calc(100% - 60px) !important;
+      max-width: 100% !important;
     }
     .student-title-badges {
+      display: flex !important;
       flex-direction: column !important;
       align-items: flex-start !important;
       gap: 6px !important;
@@ -149,8 +158,8 @@
     }
     .student-display-name {
       font-size: 22px !important;
-      line-height: 1.2 !important;
-      word-break: normal !important;
+      line-height: 1.25 !important;
+      word-break: break-word !important;
       overflow-wrap: break-word !important;
       white-space: normal !important;
       margin: 0 !important;
@@ -161,6 +170,7 @@
       gap: 6px !important;
     }
     .student-contact-meta {
+      display: flex !important;
       flex-direction: column !important;
       align-items: flex-start !important;
       gap: 4px !important;
@@ -173,9 +183,10 @@
     }
     .student-contact-meta .meta-item {
       display: block !important;
-      word-break: break-all !important;
+      word-break: break-word !important;
+      overflow-wrap: anywhere !important;
       width: 100% !important;
-      line-height: 1.35 !important;
+      line-height: 1.4 !important;
     }
     .academic-cohort-pill {
       display: block !important;
@@ -186,10 +197,11 @@
     }
     .student-profile-actions {
       width: 100% !important;
-      margin-top: 2px !important;
+      margin-top: 4px !important;
     }
     .student-profile-actions form {
       width: 100% !important;
+      margin: 0 !important;
     }
     .password-reset-trigger {
       width: 100% !important;
