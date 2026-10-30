@@ -53,6 +53,10 @@ class PlanConfig(models.Model):
         max_length=150, blank=True, default="",
         help_text="Paystack Secret Key (starts with sk_live_ or sk_test_).",
     )
+    screenshot_protection_enabled = models.BooleanField(
+        default=True,
+        help_text="When True, blocks screenshots, blurs screen on switch, and displays watermarks. Set False for marketing/screenshot capture.",
+    )
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -77,6 +81,7 @@ class PlanConfig(models.Model):
                 "launch_offer_buyers_count": 0,
                 "semester_end_date": timezone.now() + timedelta(days=150),
                 "trial_duration_days": 3,
+                "screenshot_protection_enabled": True,
             }
         )
         return obj

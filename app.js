@@ -133,6 +133,14 @@ let uniNoteTranscriptOpenMap = {};
 
 /* ─── Monetization & Access Control State ──────────────────────────────── */
 let subscriptionConfig = null;
+let screenshotProtectionEnabled = (() => {
+  try {
+    const cached = localStorage.getItem("seomtorch-screenshot-protection");
+    return cached !== null ? cached === "true" : true;
+  } catch (e) {
+    return true;
+  }
+})();
 let userAccessData = {
   has_all_access: false,
   unlocked_courses: [],
@@ -152,6 +160,13 @@ async function loadSubscriptionState() {
     const data = await api.subscriptionConfig(authToken);
     if (data) {
       subscriptionConfig = data;
+      if (data.screenshot_protection_enabled !== undefined) {
+        screenshotProtectionEnabled = Boolean(data.screenshot_protection_enabled);
+        try {
+          localStorage.setItem("seomtorch-screenshot-protection", String(screenshotProtectionEnabled));
+        } catch (e) {}
+        updateScreenProtectionState();
+      }
       if (data.user_access) {
         userAccessData = data.user_access;
       }
@@ -4921,9 +4936,23 @@ function render() {
   if (route === "change-password") return renderPasswordChange(false);
 }
 
+function updateScreenProtectionState() {
+  if (!screenshotProtectionEnabled) {
+    document.body.classList.remove("shield-active");
+    const watermarkLayer = document.getElementById("screen-watermark-layer");
+    if (watermarkLayer) watermarkLayer.innerHTML = "";
+  } else {
+    updateScreenWatermark();
+  }
+}
+
 function updateScreenWatermark() {
   const watermarkLayer = document.getElementById("screen-watermark-layer");
   if (!watermarkLayer) return;
+  if (!screenshotProtectionEnabled) {
+    watermarkLayer.innerHTML = "";
+    return;
+  }
   const now = new Date();
   const day = String(now.getDate()).padStart(2, "0");
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -4941,6 +4970,7 @@ function initScreenProtection() {
   let shieldTimer = null;
 
   function showShield() {
+    if (!screenshotProtectionEnabled) return;
     document.body.classList.add("shield-active");
   }
 
@@ -4974,6 +5004,7 @@ function initScreenProtection() {
   // Mobile Screenshot Gesture Trapping (e.g. 3-Finger Swipe Down on Android / MIUI / ColorOS / OneUI)
   // Two fingers are allowed for pinch-to-zoom and natural navigation
   window.addEventListener("touchstart", (e) => {
+    if (!screenshotProtectionEnabled) return;
     if (e.touches && e.touches.length >= 3) {
       e.preventDefault();
       e.stopPropagation();
@@ -4984,6 +5015,7 @@ function initScreenProtection() {
   }, { capture: true, passive: false });
 
   window.addEventListener("touchmove", (e) => {
+    if (!screenshotProtectionEnabled) return;
     if (e.touches && e.touches.length >= 3) {
       e.preventDefault();
       e.stopPropagation();
@@ -4993,6 +5025,7 @@ function initScreenProtection() {
   }, { capture: true, passive: false });
 
   window.addEventListener("touchend", (e) => {
+    if (!screenshotProtectionEnabled) return;
     if (e.touches && e.touches.length >= 3) {
       showShield();
     }
@@ -5000,7 +5033,11 @@ function initScreenProtection() {
 
   // Screen recording API blocker
   if (navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) {
-    navigator.mediaDevices.getDisplayMedia = function () {
+    const origGetDisplayMedia = navigator.mediaDevices.getDisplayMedia.bind(navigator.mediaDevices);
+    navigator.mediaDevices.getDisplayMedia = function (...args) {
+      if (!screenshotProtectionEnabled) {
+        return origGetDisplayMedia(...args);
+      }
       showShield();
       triggerPrintScreenBlock("Screen recording is strictly prohibited on Seomtorch.");
       return Promise.reject(new DOMException("Screen recording is disabled for exam integrity", "NotAllowedError"));
@@ -5023,6 +5060,7 @@ function initScreenProtection() {
 
   // Intercept PrintScreen and flash the security shield
   function triggerPrintScreenBlock(customMsg) {
+    if (!screenshotProtectionEnabled) return;
     showShield();
     if (shieldTimer) clearTimeout(shieldTimer);
     shieldTimer = setTimeout(() => {
@@ -5037,6 +5075,7 @@ function initScreenProtection() {
   }
 
   window.addEventListener("keyup", (e) => {
+    if (!screenshotProtectionEnabled) return;
     if (e.key === "PrintScreen" || e.keyCode === 44) {
       e.preventDefault();
       triggerPrintScreenBlock();
@@ -5044,6 +5083,7 @@ function initScreenProtection() {
   });
 
   window.addEventListener("keydown", (e) => {
+    if (!screenshotProtectionEnabled) return;
     if (e.key === "PrintScreen" || e.keyCode === 44) {
       e.preventDefault();
       triggerPrintScreenBlock();

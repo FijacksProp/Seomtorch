@@ -18,6 +18,7 @@ class PlanConfigAdmin(admin.ModelAdmin):
         "all_access_price",
         "launch_offer_price",
         "launch_offer_active",
+        "screenshot_protection_enabled",
         "launch_offer_buyers_count",
         "launch_offer_max_buyers",
         "semester_end_date",
@@ -41,6 +42,10 @@ class PlanConfigAdmin(admin.ModelAdmin):
         ("Trial & Gateway Settings", {
             "fields": ("trial_duration_days", "paystack_public_key", "paystack_secret_key"),
             "description": "3-day trial settings and Paystack API keys.",
+        }),
+        ("Security & Screen Protection", {
+            "fields": ("screenshot_protection_enabled",),
+            "description": "Controls anti-screenshot blur, tab-switch obscuring, and watermark overlay across the student app.",
         }),
     )
 

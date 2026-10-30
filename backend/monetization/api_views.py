@@ -67,6 +67,7 @@ class SubscriptionConfigView(APIView):
             },
             "semester_end_date": config.semester_end_date.isoformat(),
             "trial_duration_days": config.trial_duration_days,
+            "screenshot_protection_enabled": config.screenshot_protection_enabled,
             "paystack_public_key": config.paystack_public_key or getattr(settings, "PAYSTACK_PUBLIC_KEY", ""),
             "user_access": user_access,
             "free_topics": _get_free_topics_map(),

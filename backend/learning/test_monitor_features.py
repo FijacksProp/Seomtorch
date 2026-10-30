@@ -139,3 +139,62 @@ class MonitorProFeatureTests(TestCase):
         self.assertEqual(q.correct_index, 0)
         self.assertEqual(q.options[0], "Mitochondria")
         self.assertEqual(q.explanation_status, Question.ExplanationStatus.REVIEWED)
+
+    def test_toggle_screenshot_protection(self):
+        config = PlanConfig.get_solo()
+        config.screenshot_protection_enabled = True
+        config.save()
+
+        # 1. Toggle off via monitor endpoint
+        res = self.client.post("/monitor/monetization/toggle-screenshot-protection/")
+        self.assertEqual(res.status_code, 302)
+        config.refresh_from_db()
+        self.assertFalse(config.screenshot_protection_enabled)
+
+        # 2. Check public API returns false
+        api_res = self.client.get("/api/subscriptions/config/")
+        self.assertEqual(api_res.status_code, 200)
+        self.assertFalse(api_res.json()["screenshot_protection_enabled"])
+
+        # 3. Toggle back on
+        res2 = self.client.post("/monitor/monetization/toggle-screenshot-protection/")
+        self.assertEqual(res2.status_code, 302)
+        config.refresh_from_db()
+        self.assertTrue(config.screenshot_protection_enabled)
+
+        # 4. Check public API returns true
+        api_res2 = self.client.get("/api/subscriptions/config/")
+        self.assertEqual(api_res2.status_code, 200)
+        self.assertTrue(api_res2.json()["screenshot_protection_enabled"])
+
+    def test_update_pricing_screenshot_toggle(self):
+        config = PlanConfig.get_solo()
+        config.screenshot_protection_enabled = True
+        config.save()
+
+        # Post update pricing with toggle explicitly unchecked
+        res = self.client.post("/monitor/monetization/update-pricing/", {
+            "single_course_price": "1500",
+            "all_access_price": "3000",
+            "launch_offer_price": "2000",
+            "launch_offer_max_buyers": "100",
+            "trial_duration_days": "3",
+            "semester_end_date": "2027-05-30",
+        })
+        self.assertEqual(res.status_code, 302)
+        config.refresh_from_db()
+        self.assertFalse(config.screenshot_protection_enabled)
+
+        # Post update pricing with toggle checked on
+        res2 = self.client.post("/monitor/monetization/update-pricing/", {
+            "single_course_price": "1500",
+            "all_access_price": "3000",
+            "launch_offer_price": "2000",
+            "launch_offer_max_buyers": "100",
+            "trial_duration_days": "3",
+            "semester_end_date": "2027-05-30",
+            "screenshot_protection_enabled": "on",
+        })
+        self.assertEqual(res2.status_code, 302)
+        config.refresh_from_db()
+        self.assertTrue(config.screenshot_protection_enabled)

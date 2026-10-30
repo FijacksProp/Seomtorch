@@ -38,6 +38,60 @@
   </article>
 </section>
 
+<!-- Content Protection & Anti-Screenshot Control -->
+<div class="control-section" style="border-left: 4px solid {% if plan_config.screenshot_protection_enabled %}#047857{% else %}#e11d48{% endif %};">
+  <div class="control-section-head">
+    <div>
+      <p class="kicker">App Protection &amp; Marketing</p>
+      <h2>Screenshot &amp; Content Shield</h2>
+      <p style="margin:4px 0 0;font-size:13px;color:var(--color-slate-muted);">
+        Controls anti-screenshot blur, tab-switch shield, PrintScreen interception, 3-finger mobile swipe block, and dynamic student ID watermarks across the student app.
+      </p>
+    </div>
+    {% if plan_config.screenshot_protection_enabled %}
+      <span class="badge badge-active" style="display:inline-flex;align-items:center;gap:6px;background:#d1fae5;color:#065f46;border-color:#a7f3d0;">
+        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#059669;"></span>
+        PROTECTION ACTIVE
+      </span>
+    {% else %}
+      <span class="badge" style="display:inline-flex;align-items:center;gap:6px;background:#ffe4e6;color:#9f1239;border:1px solid #fecdd3;">
+        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#e11d48;"></span>
+        SCREENSHOTS ALLOWED
+      </span>
+    {% endif %}
+  </div>
+
+  <div style="background:var(--color-paper);padding:18px 20px;border-radius:var(--radius-md);border:1px solid var(--color-card-border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+    <div style="max-width:680px;">
+      <strong style="display:block;font-size:14px;color:var(--color-ink);margin-bottom:4px;">
+        {% if plan_config.screenshot_protection_enabled %}
+          Shield is currently ON: Students cannot take screenshots, record screens, or capture question papers.
+        {% else %}
+          Shield is currently OFF: Screenshot blocking and screen blurring are temporarily suspended for marketing captures.
+        {% endif %}
+      </strong>
+      <span style="font-size:12px;color:var(--color-slate-muted);line-height:1.5;display:block;">
+        Switch OFF whenever you need to capture screenshots for marketing, tutorials, or app previews. When finished, switch back ON to protect curriculum integrity.
+      </span>
+    </div>
+
+    <form method="post" action="{% url 'monitor:toggle-screenshot-protection' %}" style="margin:0;">
+      {% csrf_token %}
+      {% if plan_config.screenshot_protection_enabled %}
+        <button type="submit" class="btn-outline" style="color:#b91c1c;border-color:#fca5a5;background:#fff;display:inline-flex;align-items:center;gap:8px;font-weight:700;padding:10px 18px;border-radius:8px;cursor:pointer;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+          <span>Turn Protection OFF (Allow Screenshots)</span>
+        </button>
+      {% else %}
+        <button type="submit" class="btn-primary" style="background:#047857;color:#fff;display:inline-flex;align-items:center;gap:8px;font-weight:700;padding:10px 18px;border-radius:8px;cursor:pointer;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Turn Protection ON (Block Screenshots)</span>
+        </button>
+      {% endif %}
+    </form>
+  </div>
+</div>
+
 <!-- Section 1: Pricing & Semester Settings -->
 <div class="control-section">
   <div class="control-section-head">
@@ -111,10 +165,16 @@
     </div>
 
     <div class="pricing-submit-row">
-      <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;font-weight:700;">
-        <input type="checkbox" name="launch_offer_active" {% if plan_config.launch_offer_active %}checked{% endif %} style="width:18px;height:18px;accent-color:var(--color-forest);">
-        <span>Launch Offer Active (currently {% if plan_config.is_launch_offer_valid %}<strong style="color:#047857;">VALID</strong>{% else %}<strong style="color:#b91c1c;">EXPIRED</strong>{% endif %})</span>
-      </label>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;font-weight:700;">
+          <input type="checkbox" name="launch_offer_active" {% if plan_config.launch_offer_active %}checked{% endif %} style="width:18px;height:18px;accent-color:var(--color-forest);">
+          <span>Launch Offer Active (currently {% if plan_config.is_launch_offer_valid %}<strong style="color:#047857;">VALID</strong>{% else %}<strong style="color:#b91c1c;">EXPIRED</strong>{% endif %})</span>
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;font-weight:700;">
+          <input type="checkbox" name="screenshot_protection_enabled" {% if plan_config.screenshot_protection_enabled %}checked{% endif %} style="width:18px;height:18px;accent-color:var(--color-forest);">
+          <span>Screenshot Protection Active ({% if plan_config.screenshot_protection_enabled %}<strong style="color:#047857;">SHIELD ON</strong>{% else %}<strong style="color:#e11d48;">SHIELD OFF / SCREENSHOTS ALLOWED</strong>{% endif %})</span>
+        </label>
+      </div>
 
       <button type="submit" class="btn-primary">
         <span>Save Pricing Configuration</span>

@@ -512,6 +512,7 @@ def update_pricing(request):
         config.all_access_price = int(request.POST.get("all_access_price", config.all_access_price))
         config.launch_offer_price = int(request.POST.get("launch_offer_price", config.launch_offer_price))
         config.launch_offer_active = request.POST.get("launch_offer_active") == "on"
+        config.screenshot_protection_enabled = request.POST.get("screenshot_protection_enabled") == "on"
         config.launch_offer_max_buyers = int(request.POST.get("launch_offer_max_buyers", config.launch_offer_max_buyers))
         config.trial_duration_days = int(request.POST.get("trial_duration_days", config.trial_duration_days))
 
@@ -535,6 +536,19 @@ def update_pricing(request):
     except Exception as e:
         messages.error(request, f"Error saving pricing settings: {e}")
 
+    return redirect("monitor:monetization")
+
+
+@staff_member_required
+@require_POST
+def toggle_screenshot_protection(request):
+    config = PlanConfig.get_solo()
+    config.screenshot_protection_enabled = not config.screenshot_protection_enabled
+    config.save(update_fields=["screenshot_protection_enabled"])
+    if config.screenshot_protection_enabled:
+        messages.success(request, "Screenshot & content protection is now ENABLED. Student content and exam integrity are protected.")
+    else:
+        messages.warning(request, "Screenshot protection is now DISABLED. You can now freely take app screenshots.")
     return redirect("monitor:monetization")
 
 
