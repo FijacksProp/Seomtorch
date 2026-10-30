@@ -3225,7 +3225,7 @@ function renderBuddies() {
           <p>Search any student on Seomtorch by their 6-character Student ID or username</p>
         </div>
         <form id="form-community-search" class="buddies-search-form">
-          <input type="text" id="input-community-search" placeholder="e.g. A7B2Q9 or Ada" value="${escapeHtml(communitySearchQuery)}" required autocomplete="off">
+          <input type="text" id="input-community-search" placeholder="e.g. Student ID, username, or email" value="${escapeHtml(communitySearchQuery)}" required autocomplete="off">
           <button class="button" type="submit">${communitySearching ? "Searching..." : "Search"}</button>
         </form>
         <div id="community-search-results-container">
@@ -3234,7 +3234,9 @@ function renderBuddies() {
               ${communitySearchResults.map(student => {
                 const avatarSrc = getAvatarSrc(student.avatar);
                 let actionBtn = "";
-                if (student.follow_state === "mutual") {
+                if (student.is_self || student.follow_state === "self") {
+                  actionBtn = `<span class="leaderboard-you-badge" style="font-size:12px; padding:6px 14px; border-radius:999px;">🌟 That's You!</span>`;
+                } else if (student.follow_state === "mutual") {
                   actionBtn = `<span class="btn-follow mutual-buddy">🤝 Buddies</span> <button type="button" class="button outline small" data-unfollow-student="${student.public_id}" data-student-name="${escapeHtml(student.username)}">Unfollow</button>`;
                 } else if (student.follow_state === "following") {
                   actionBtn = `<button type="button" class="btn-follow following" data-unfollow-student="${student.public_id}" data-student-name="${escapeHtml(student.username)}">Following ✓</button>`;
@@ -3263,7 +3265,7 @@ function renderBuddies() {
             </div>
           ` : communitySearchQuery ? `
             <div class="community-empty-card" style="padding:20px; margin-top:12px;">
-              <p>No student found matching "<strong>${escapeHtml(communitySearchQuery)}</strong>". Make sure the 6-character Student ID or username is correct.</p>
+              <p>No student found matching "<strong>${escapeHtml(communitySearchQuery)}</strong>". Make sure the Student ID, username, or email address is correct.</p>
             </div>
           ` : ''}
         </div>

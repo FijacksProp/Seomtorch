@@ -56,7 +56,7 @@ class FollowView(APIView):
             return Response({"detail": "public_id is required."}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            target = User.objects.get(public_id=public_id)
+            target = User.objects.get(public_id__iexact=public_id)
         except User.DoesNotExist:
             return Response({"detail": "Student not found."}, status=status.HTTP_404_NOT_FOUND)
 
@@ -87,7 +87,7 @@ class UnfollowView(APIView):
             return Response({"detail": "public_id is required."}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            target = User.objects.get(public_id=public_id)
+            target = User.objects.get(public_id__iexact=public_id)
         except User.DoesNotExist:
             return Response({"detail": "Student not found."}, status=status.HTTP_404_NOT_FOUND)
 
@@ -172,25 +172,38 @@ class LeaderboardView(APIView):
 
 
 class SearchView(APIView):
-    """GET /api/community/search/?q=... — Search students by public_id or username."""
+    """GET /api/community/search/?q=... — Search students by public_id, username, email, phone."""
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        query = (request.query_params.get("q") or "").strip()
-        if len(query) < 2:
+        raw_query = (request.query_params.get("q") or "").strip()
+        if len(raw_query) < 2:
             return Response(
                 {"detail": "Search query must be at least 2 characters."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        # Search by exact public_id (case-insensitive) or username contains
+        clean_query = raw_query.strip()
+
+        # Build flexible Q filter
+        # 1. Exact or partial Student ID
+        q_filter = Q(public_id__iexact=clean_query) | Q(public_id__icontains=clean_query)
+        # 2. Username
+        q_filter |= Q(username__icontains=clean_query)
+        # 3. First / last name
+        q_filter |= Q(first_name__icontains=clean_query) | Q(last_name__icontains=clean_query)
+        # 4. Email (if contains @ or looks like email)
+        if "@" in clean_query:
+            q_filter |= Q(email__iexact=clean_query.lower()) | Q(email__icontains=clean_query.lower())
+        # 5. Phone number
+        digits = "".join(c for c in clean_query if c.isdigit())
+        if len(digits) >= 6:
+            q_filter |= Q(phone_number__icontains=digits)
+
         results = User.objects.filter(
-            Q(public_id__iexact=query) | Q(username__icontains=query)
-        ).exclude(
-            id=request.user.id
-        ).exclude(
-            is_staff=True
-        ).select_related("learning_stats")[:20]
+            q_filter,
+            is_active=True,
+        ).select_related("learning_stats")[:25]
 
         # Determine follow state for each result
         following_ids = set(
@@ -202,19 +215,23 @@ class SearchView(APIView):
 
         entries = []
         for u in results:
-            i_follow = u.id in following_ids
-            they_follow = u.id in follower_ids
-            if i_follow and they_follow:
-                follow_state = "mutual"
-            elif i_follow:
-                follow_state = "following"
-            elif they_follow:
-                follow_state = "followed_by"
+            if u.id == request.user.id:
+                follow_state = "self"
             else:
-                follow_state = "none"
+                i_follow = u.id in following_ids
+                they_follow = u.id in follower_ids
+                if i_follow and they_follow:
+                    follow_state = "mutual"
+                elif i_follow:
+                    follow_state = "following"
+                elif they_follow:
+                    follow_state = "followed_by"
+                else:
+                    follow_state = "none"
 
             card = _user_card(u)
             card["follow_state"] = follow_state
+            card["is_self"] = (u.id == request.user.id)
             entries.append(card)
 
         return Response({"results": entries})

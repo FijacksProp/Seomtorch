@@ -253,12 +253,31 @@ class CommunityTests(APITestCase):
         res = self.client.get(f"/api/community/search/?q={self.bob.public_id}")
         self.assertEqual(res.data["results"][0]["follow_state"], "following")
 
-    def test_search_excludes_self(self):
+    def test_search_finds_self_marked_as_self(self):
         self._auth(self.alice_token)
         res = self.client.get(f"/api/community/search/?q={self.alice.public_id}")
         self.assertEqual(res.status_code, 200)
-        ids = [r["public_id"] for r in res.data["results"]]
-        self.assertNotIn(self.alice.public_id, ids)
+        self.assertEqual(len(res.data["results"]), 1)
+        self.assertEqual(res.data["results"][0]["public_id"], self.alice.public_id)
+        self.assertEqual(res.data["results"][0]["follow_state"], "self")
+        self.assertTrue(res.data["results"][0]["is_self"])
+
+    def test_search_finds_staff_student(self):
+        staff = get_user_model().objects.create_user(
+            email="staff@example.com", username="staffstudent", password="Securepass934!", is_staff=True
+        )
+        self._auth(self.alice_token)
+        res = self.client.get(f"/api/community/search/?q={staff.public_id}")
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(res.data["results"]), 1)
+        self.assertEqual(res.data["results"][0]["public_id"], staff.public_id)
+
+    def test_search_by_email(self):
+        self._auth(self.alice_token)
+        res = self.client.get(f"/api/community/search/?q={self.bob.email}")
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(res.data["results"]), 1)
+        self.assertEqual(res.data["results"][0]["public_id"], self.bob.public_id)
 
     def test_search_query_too_short(self):
         self._auth(self.alice_token)
