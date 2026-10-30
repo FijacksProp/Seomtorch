@@ -61,6 +61,12 @@ export const api = {
     return request("/auth/update-avatar/", { token, method: "POST", body });
   },
   matchContacts: (token, phones, emails) => request("/auth/contacts/match/", { token, method: "POST", body: { phones, emails } }),
+  // Community / Buddies
+  followUser: (token, public_id) => request("/community/follow/", { token, method: "POST", body: { public_id } }),
+  unfollowUser: (token, public_id) => request("/community/unfollow/", { token, method: "POST", body: { public_id } }),
+  communityNetwork: token => request("/community/network/", { token }),
+  communityLeaderboard: token => request("/community/leaderboard/", { token }),
+  communitySearch: (token, query) => request(`/community/search/?q=${encodeURIComponent(query)}`, { token }),
   // Monetization & Subscriptions
   subscriptionConfig: token => request("/subscriptions/config/", { token }),
   validateDiscountCode: (code, plan) => request("/subscriptions/validate-code/", { method: "POST", body: { code, plan } }),

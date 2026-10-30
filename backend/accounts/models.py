@@ -155,3 +155,36 @@ class UniversityProfile(models.Model):
 
     def __str__(self):
         return f"{self.user.username} – {self.university_name} ({self.level}L)"
+
+
+class StudentFollow(models.Model):
+    """Directional follow relationship between students.
+    When two students follow each other, they become 'Buddies' (mutual friends).
+    """
+    follower = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="following_set",
+        help_text="The student who initiated the follow.",
+    )
+    following = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="follower_set",
+        help_text="The student being followed.",
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("follower", "following")
+        ordering = ("-created_at",)
+        verbose_name = "Student Follow"
+        verbose_name_plural = "Student Follows"
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        if self.follower_id == self.following_id:
+            raise ValidationError("A student cannot follow themselves.")
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.follower} \u2192 {self.following}"

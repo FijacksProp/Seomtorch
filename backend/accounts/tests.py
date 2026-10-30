@@ -142,3 +142,136 @@ class ContactTests(APITestCase):
         res2 = self.client.post("/api/auth/contacts/match/", {"phones": ["1"] * 501, "emails": []}, format="json")
         self.assertEqual(res2.status_code, 400)
 
+
+class CommunityTests(APITestCase):
+    """Tests for the buddies/community follow system."""
+
+    def setUp(self):
+        User = get_user_model()
+        self.alice = User.objects.create_user(
+            email="alice@example.com", username="alice", password="Securepass934!"
+        )
+        self.bob = User.objects.create_user(
+            email="bob@example.com", username="bob", password="Securepass934!"
+        )
+        self.carol = User.objects.create_user(
+            email="carol@example.com", username="carol", password="Securepass934!"
+        )
+        self.alice_token = Token.objects.create(user=self.alice)
+        self.bob_token = Token.objects.create(user=self.bob)
+        # Give alice some XP
+        from learning.models import UserStats
+        UserStats.objects.filter(user=self.alice).update(xp=500)
+        UserStats.objects.filter(user=self.bob).update(xp=300)
+        UserStats.objects.filter(user=self.carol).update(xp=100)
+
+    def _auth(self, token):
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {token.key}")
+
+    def test_follow_creates_relationship(self):
+        self._auth(self.alice_token)
+        res = self.client.post("/api/community/follow/", {"public_id": self.bob.public_id}, format="json")
+        self.assertEqual(res.status_code, 201)
+        self.assertFalse(res.data["is_mutual"])
+        self.assertEqual(res.data["counts"]["following"], 1)
+
+    def test_follow_self_is_rejected(self):
+        self._auth(self.alice_token)
+        res = self.client.post("/api/community/follow/", {"public_id": self.alice.public_id}, format="json")
+        self.assertEqual(res.status_code, 400)
+
+    def test_mutual_follow_creates_buddies(self):
+        from accounts.models import StudentFollow
+        # Alice follows Bob
+        StudentFollow.objects.create(follower=self.alice, following=self.bob)
+        # Bob follows Alice
+        self._auth(self.bob_token)
+        res = self.client.post("/api/community/follow/", {"public_id": self.alice.public_id}, format="json")
+        self.assertEqual(res.status_code, 201)
+        self.assertTrue(res.data["is_mutual"])
+
+    def test_unfollow_removes_relationship(self):
+        from accounts.models import StudentFollow
+        StudentFollow.objects.create(follower=self.alice, following=self.bob)
+        self._auth(self.alice_token)
+        res = self.client.post("/api/community/unfollow/", {"public_id": self.bob.public_id}, format="json")
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.data["counts"]["following"], 0)
+
+    def test_network_returns_counts_and_lists(self):
+        from accounts.models import StudentFollow
+        # Mutual follow
+        StudentFollow.objects.create(follower=self.alice, following=self.bob)
+        StudentFollow.objects.create(follower=self.bob, following=self.alice)
+        # One-way: carol follows alice
+        StudentFollow.objects.create(follower=self.carol, following=self.alice)
+
+        self._auth(self.alice_token)
+        res = self.client.get("/api/community/network/")
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.data["counts"]["buddies"], 1)
+        self.assertEqual(res.data["counts"]["followers"], 2)  # bob + carol
+        self.assertEqual(res.data["counts"]["following"], 1)  # bob
+
+    def test_leaderboard_sorted_by_xp(self):
+        from accounts.models import StudentFollow
+        # Make alice and bob mutual buddies
+        StudentFollow.objects.create(follower=self.alice, following=self.bob)
+        StudentFollow.objects.create(follower=self.bob, following=self.alice)
+
+        self._auth(self.alice_token)
+        res = self.client.get("/api/community/leaderboard/")
+        self.assertEqual(res.status_code, 200)
+        board = res.data["leaderboard"]
+        self.assertEqual(len(board), 2)  # alice + bob
+        # Alice has 500 XP, Bob has 300 — alice should be first
+        self.assertEqual(board[0]["public_id"], self.alice.public_id)
+        self.assertTrue(board[0]["is_you"])
+        self.assertEqual(board[0]["rank"], 1)
+        self.assertEqual(board[1]["public_id"], self.bob.public_id)
+        self.assertEqual(board[1]["rank"], 2)
+
+    def test_search_by_public_id(self):
+        self._auth(self.alice_token)
+        res = self.client.get(f"/api/community/search/?q={self.bob.public_id}")
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(res.data["results"]), 1)
+        self.assertEqual(res.data["results"][0]["public_id"], self.bob.public_id)
+        self.assertEqual(res.data["results"][0]["follow_state"], "none")
+
+    def test_search_by_username(self):
+        self._auth(self.alice_token)
+        res = self.client.get("/api/community/search/?q=bo")
+        self.assertEqual(res.status_code, 200)
+        ids = [r["public_id"] for r in res.data["results"]]
+        self.assertIn(self.bob.public_id, ids)
+
+    def test_search_shows_follow_state(self):
+        from accounts.models import StudentFollow
+        StudentFollow.objects.create(follower=self.alice, following=self.bob)
+        self._auth(self.alice_token)
+        res = self.client.get(f"/api/community/search/?q={self.bob.public_id}")
+        self.assertEqual(res.data["results"][0]["follow_state"], "following")
+
+    def test_search_excludes_self(self):
+        self._auth(self.alice_token)
+        res = self.client.get(f"/api/community/search/?q={self.alice.public_id}")
+        self.assertEqual(res.status_code, 200)
+        ids = [r["public_id"] for r in res.data["results"]]
+        self.assertNotIn(self.alice.public_id, ids)
+
+    def test_search_query_too_short(self):
+        self._auth(self.alice_token)
+        res = self.client.get("/api/community/search/?q=a")
+        self.assertEqual(res.status_code, 400)
+
+    def test_duplicate_follow_is_idempotent(self):
+        self._auth(self.alice_token)
+        self.client.post("/api/community/follow/", {"public_id": self.bob.public_id}, format="json")
+        res = self.client.post("/api/community/follow/", {"public_id": self.bob.public_id}, format="json")
+        self.assertEqual(res.status_code, 200)  # Already following
+
+    def test_follow_nonexistent_student(self):
+        self._auth(self.alice_token)
+        res = self.client.post("/api/community/follow/", {"public_id": "ZZZZZZ"}, format="json")
+        self.assertEqual(res.status_code, 404)

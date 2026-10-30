@@ -230,6 +230,87 @@ function renderAvatarMarkup(avatarId, size = 36) {
 let buddiesMatches = { onApp: getSavedBuddies(), invites: [] };
 let buddiesLoading = false;
 let buddiesSearchOpen = false;
+let communityNetworkData = null;
+let communityLeaderboardData = null;
+let communityActiveTab = "leaderboard";
+let communitySearchResults = [];
+let communitySearchQuery = "";
+let communitySearching = false;
+let communityLoading = false;
+
+function getCachedCommunityNetwork() {
+  try { return JSON.parse(localStorage.getItem("seomtorch-community-network") || "null"); }
+  catch { return null; }
+}
+function getCachedCommunityLeaderboard() {
+  try { return JSON.parse(localStorage.getItem("seomtorch-community-leaderboard") || "null"); }
+  catch { return null; }
+}
+
+async function loadCommunityData(force = false) {
+  if (!authToken) return;
+  if (communityLoading && !force) return;
+  communityLoading = true;
+  if (!communityNetworkData) communityNetworkData = getCachedCommunityNetwork();
+  if (!communityLeaderboardData) communityLeaderboardData = getCachedCommunityLeaderboard();
+
+  try {
+    const [netRes, lbrRes] = await Promise.all([
+      api.communityNetwork(authToken).catch(() => null),
+      api.communityLeaderboard(authToken).catch(() => null)
+    ]);
+    if (netRes) {
+      communityNetworkData = netRes;
+      try { localStorage.setItem("seomtorch-community-network", JSON.stringify(netRes)); } catch {}
+    }
+    if (lbrRes) {
+      communityLeaderboardData = lbrRes;
+      try { localStorage.setItem("seomtorch-community-leaderboard", JSON.stringify(lbrRes)); } catch {}
+    }
+  } catch {
+    // Offline resilience
+  } finally {
+    communityLoading = false;
+    if (route === "buddies") renderBuddies();
+    if (route === "profile") renderProfile();
+  }
+}
+
+async function handleFollowStudent(publicId, studentName = "") {
+  if (!authToken) return;
+  try {
+    const res = await api.followUser(authToken, publicId);
+    showToast(res.is_mutual ? `🤝 You and ${studentName || publicId} are now Buddies!` : `Followed ${studentName || publicId}`);
+    // Also update any search results immediately
+    communitySearchResults = communitySearchResults.map(s => {
+      if (s.public_id === publicId) {
+        return { ...s, follow_state: res.is_mutual ? "mutual" : "following" };
+      }
+      return s;
+    });
+    await loadCommunityData(true);
+  } catch (err) {
+    showToast(err.message || "Failed to follow student");
+  }
+}
+
+async function handleUnfollowStudent(publicId, studentName = "") {
+  if (!authToken) return;
+  try {
+    await api.unfollowUser(authToken, publicId);
+    showToast(`Unfollowed ${studentName || publicId}`);
+    // Also update any search results immediately
+    communitySearchResults = communitySearchResults.map(s => {
+      if (s.public_id === publicId) {
+        return { ...s, follow_state: "none" };
+      }
+      return s;
+    });
+    await loadCommunityData(true);
+  } catch (err) {
+    showToast(err.message || "Failed to unfollow");
+  }
+}
 
 function getSavedBuddies() {
   try { return JSON.parse(localStorage.getItem("seomtorch-saved-buddies") || "[]"); }
@@ -2170,13 +2251,16 @@ async function loadProgress() {
 }
 
 function renderProfile(filter = "") {
+  if (!communityNetworkData && authToken && !communityLoading) {
+    loadCommunityData();
+  }
   const normalized = filter.trim().toLowerCase();
   const matches = FAQS.filter(item => !normalized || `${item.q} ${item.a} ${item.group}`.toLowerCase().includes(normalized));
   const groups = [...new Set(matches.map(item => item.group))];
   const xp = xpState();
   const testStats = profile.tests || { tests_taken: 0, average_score: 0 };
   const joined = currentUser?.date_joined ? new Date(currentUser.date_joined).toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) : "—";
-  const content = `<section class="page profile-page"><div class="profile-hero"><div class="profile-avatar-wrap" id="profile-avatar-trigger" role="button" tabindex="0" title="Click to customize your avatar">${renderAvatarMarkup(profile.avatar, 86)}<span class="profile-avatar-edit-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span></div><div><p class="eyebrow">Student profile</p><h1>${escapeHtml(currentUser?.username || profile.name)}</h1><p>${escapeHtml(currentUser?.email || profile.email)} · Member since ${joined}</p></div><button class="button outline" id="refresh-account">Refresh account</button></div><div class="profile-grid"><section class="profile-card identity-card"><span class="card-label">Student ID</span><strong>${escapeHtml(currentUser?.public_id || "—")}</strong><p>${currentUser?.phone_number ? `Phone: <strong>${escapeHtml(currentUser.phone_number)}</strong> · ` : ""}Share your ID for challenges or connect in <a href="#" data-route="buddies" style="text-decoration:underline; font-weight:600;">Buddies</a>.</p></section><section class="profile-card level-card"><span class="card-label">Level ${xp.level}</span><strong>${xp.xp} <small>XP</small></strong><div class="xp-track light"><i style="width:${xp.percent}%"></i></div><p>${xp.remaining} XP until level ${xp.level + 1}</p></section></div><div class="metric-strip four profile-metrics"><div class="metric"><strong>${attempts.length}</strong><span>answers recorded</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> days</small></strong><span>current streak</span></div><div class="metric"><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>best streak</span></div></div><div class="section-head"><h2>Academic Portals & Registrations</h2><p>Your enrollment across student portals</p></div><div class="uni-quick-grid" style="margin-bottom:28px;"><div class="uni-portal-status-card"><div><div class="uni-dept-svg-mark anatomy"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><strong>Aspirants Portal</strong><p>${hasAspirantProfile() ? `Registered for ${(currentUser?.aspirant_profile?.exam_type || "JAMB").toUpperCase()} ${currentUser?.aspirant_profile?.target_year || ""}` : "Not registered yet. Required for JAMB & SSCE practice."}</p></div><button class="button ${hasAspirantProfile() ? 'outline' : 'accent'} small" id="profile-manage-aspirant">${hasAspirantProfile() ? "Update Exam Details" : "Register for Aspirants Portal →"}</button></div><div class="uni-portal-status-card"><div><div class="uni-dept-svg-mark physiology"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M4 18h16M4 10h16M12 3L2 8h20z"/><path d="M6 10v8M10 10v8M14 10v8M18 10v8"/></svg></div><strong>University Portal</strong><p>${hasUniversityProfile() ? `Enrolled at ${escapeHtml(currentUser?.university_profile?.university_name || "")} · ${escapeHtml(currentUser?.university_profile?.department || "")} (${currentUser?.university_profile?.level || 200}L)` : "Not registered yet. Required for undergraduate course banks."}</p></div><button class="button ${hasUniversityProfile() ? 'outline' : 'accent'} small" id="profile-manage-university">${hasUniversityProfile() ? "Update University Details" : "Register for University Portal →"}</button></div></div>${renderAchievementSummary()}<div class="section-head"><h2>Subject record</h2><p>Synchronized account history</p></div><div class="profile-subjects">${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<article><span>${subject.name}</span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong><small>${stat.count} answer${stat.count === 1 ? "" : "s"}</small></article>`; }).join("")}</div><section class="settings-panel"><p class="eyebrow">Account data</p><h2>Portable, private and recoverable.</h2><p class="lede">The server keeps the authoritative account record. This device stores an offline copy and queues answers whenever the connection drops.</p><div class="button-row"><button class="button" id="export-data">Export backup</button><label class="button outline" for="import-data">Import backup</label><input class="file-input" id="import-data" type="file" accept="application/json"><button class="button outline" id="clear-cache">Refresh device cache</button><button class="button danger" id="sign-out">Sign out</button></div></section><section class="settings-panel guide-section"><p class="eyebrow">Guide and support</p><h2>Answers, without the noise.</h2><p class="lede">Quick guidance about practice, progress and account data.</p><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="faq-search" value="${escapeHtml(filter)}" placeholder="Search help topics" aria-label="Search help topics"></div><div id="faq-results">${groups.length ? groups.map(group => `<section class="faq-group"><h3>${group}</h3>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("") : '<div class="empty">No help entries match that search.</div>'}</div></section></section>`;
+  const content = `<section class="page profile-page"><div class="profile-hero"><div class="profile-avatar-wrap" id="profile-avatar-trigger" role="button" tabindex="0" title="Click to customize your avatar">${renderAvatarMarkup(profile.avatar, 86)}<span class="profile-avatar-edit-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span></div><div><p class="eyebrow">Student profile</p><h1>${escapeHtml(currentUser?.username || profile.name)}</h1><p>${escapeHtml(currentUser?.email || profile.email)} · Member since ${joined}</p></div><button class="button outline" id="refresh-account">Refresh account</button></div><div class="profile-grid"><section class="profile-card identity-card"><span class="card-label">Student ID</span><strong>${escapeHtml(currentUser?.public_id || "—")}</strong><p>${currentUser?.phone_number ? `Phone: <strong>${escapeHtml(currentUser.phone_number)}</strong> · ` : ""}Share your ID for challenges or connect in <a href="#" data-route="buddies" style="text-decoration:underline; font-weight:600;">Buddies</a>.</p></section><section class="profile-card level-card"><span class="card-label">Level ${xp.level}</span><strong>${xp.xp} <small>XP</small></strong><div class="xp-track light"><i style="width:${xp.percent}%"></i></div><p>${xp.remaining} XP until level ${xp.level + 1}</p></section></div><div class="profile-social-strip"><button type="button" class="profile-social-btn" data-goto-buddies="followers"><strong>${(communityNetworkData?.counts || getCachedCommunityNetwork()?.counts)?.followers || 0}</strong><span>Followers</span></button><button type="button" class="profile-social-btn" data-goto-buddies="following"><strong>${(communityNetworkData?.counts || getCachedCommunityNetwork()?.counts)?.following || 0}</strong><span>Following</span></button><button type="button" class="profile-social-btn buddies-highlight" data-goto-buddies="buddies"><strong>🤝 ${(communityNetworkData?.counts || getCachedCommunityNetwork()?.counts)?.buddies || 0}</strong><span>Buddies</span></button></div><div class="metric-strip four profile-metrics"><div class="metric"><strong>${attempts.length}</strong><span>answers recorded</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> days</small></strong><span>current streak</span></div><div class="metric"><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>best streak</span></div></div><div class="section-head"><h2>Academic Portals & Registrations</h2><p>Your enrollment across student portals</p></div><div class="uni-quick-grid" style="margin-bottom:28px;"><div class="uni-portal-status-card"><div><div class="uni-dept-svg-mark anatomy"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><strong>Aspirants Portal</strong><p>${hasAspirantProfile() ? `Registered for ${(currentUser?.aspirant_profile?.exam_type || "JAMB").toUpperCase()} ${currentUser?.aspirant_profile?.target_year || ""}` : "Not registered yet. Required for JAMB & SSCE practice."}</p></div><button class="button ${hasAspirantProfile() ? 'outline' : 'accent'} small" id="profile-manage-aspirant">${hasAspirantProfile() ? "Update Exam Details" : "Register for Aspirants Portal →"}</button></div><div class="uni-portal-status-card"><div><div class="uni-dept-svg-mark physiology"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M4 18h16M4 10h16M12 3L2 8h20z"/><path d="M6 10v8M10 10v8M14 10v8M18 10v8"/></svg></div><strong>University Portal</strong><p>${hasUniversityProfile() ? `Enrolled at ${escapeHtml(currentUser?.university_profile?.university_name || "")} · ${escapeHtml(currentUser?.university_profile?.department || "")} (${currentUser?.university_profile?.level || 200}L)` : "Not registered yet. Required for undergraduate course banks."}</p></div><button class="button ${hasUniversityProfile() ? 'outline' : 'accent'} small" id="profile-manage-university">${hasUniversityProfile() ? "Update University Details" : "Register for University Portal →"}</button></div></div>${renderAchievementSummary()}<div class="section-head"><h2>Subject record</h2><p>Synchronized account history</p></div><div class="profile-subjects">${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<article><span>${subject.name}</span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong><small>${stat.count} answer${stat.count === 1 ? "" : "s"}</small></article>`; }).join("")}</div><section class="settings-panel"><p class="eyebrow">Account data</p><h2>Portable, private and recoverable.</h2><p class="lede">The server keeps the authoritative account record. This device stores an offline copy and queues answers whenever the connection drops.</p><div class="button-row"><button class="button" id="export-data">Export backup</button><label class="button outline" for="import-data">Import backup</label><input class="file-input" id="import-data" type="file" accept="application/json"><button class="button outline" id="clear-cache">Refresh device cache</button><button class="button danger" id="sign-out">Sign out</button></div></section><section class="settings-panel guide-section"><p class="eyebrow">Guide and support</p><h2>Answers, without the noise.</h2><p class="lede">Quick guidance about practice, progress and account data.</p><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="faq-search" value="${escapeHtml(filter)}" placeholder="Search help topics" aria-label="Search help topics"></div><div id="faq-results">${groups.length ? groups.map(group => `<section class="faq-group"><h3>${group}</h3>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("") : '<div class="empty">No help entries match that search.</div>'}</div></section></section>`;
   app.innerHTML = shell(content);
   const profileMetrics = document.querySelectorAll(".profile-metrics .metric");
   if (profileMetrics[0]) profileMetrics[0].innerHTML = `<strong>${testStats.tests_taken}</strong><span>tests taken</span>`;
@@ -2966,157 +3050,358 @@ async function processContactsList(contacts) {
 }
 
 function renderBuddies() {
-  const hasContactPicker = "contacts" in navigator && "ContactsManager" in window;
-  const onApp = buddiesMatches?.onApp || [];
-  const invites = buddiesMatches?.invites || [];
-  const hasPhone = Boolean(currentUser?.phone_number);
+  if (!communityNetworkData && authToken && !communityLoading) {
+    loadCommunityData();
+  }
+  const net = communityNetworkData || getCachedCommunityNetwork() || {
+    counts: { followers: 0, following: 0, buddies: 0 },
+    buddies: [],
+    followers: [],
+    following: []
+  };
+  const counts = net.counts || { followers: 0, following: 0, buddies: 0 };
+  const lbr = (communityLeaderboardData || getCachedCommunityLeaderboard())?.leaderboard || [];
+  const myId = currentUser?.public_id || "—";
 
-  const phoneBanner = !hasPhone ? `
-    <div class="buddies-phone-banner">
-      <div class="buddies-banner-icon">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      </div>
-      <div class="buddies-banner-content">
-        <strong>Link your phone number so your classmates can find you</strong>
-        <p>When friends check their contacts on Seomtorch, they will see you as a study buddy.</p>
-        <form id="form-link-phone" class="buddies-phone-form">
-          <input type="tel" id="input-link-phone" placeholder="e.g. +2348012345678 or 080..." required>
-          <button class="button small" type="submit">Link Phone</button>
-        </form>
-        <div id="phone-link-error" class="auth-error" style="margin-top:6px;"></div>
-      </div>
-    </div>
-  ` : `
-    <div class="buddies-phone-linked-pill">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-      <span>Linked Phone: <strong>${escapeHtml(currentUser.phone_number)}</strong></span>
-      <button type="button" id="btn-edit-phone" class="button outline small" style="margin-left:auto; padding:4px 10px; font-size:11px;">Change</button>
-    </div>
-  `;
-
-  const searchBox = `
-    <div class="buddies-search-box ${buddiesSearchOpen ? "" : "collapsed"}" id="buddies-search-box">
-      <div class="section-head" style="margin-bottom:12px;">
-        <h2>Search by ID, Phone, or Email</h2>
-        <p>Find registered friends or generate instant invite links</p>
-      </div>
-      <form id="form-manual-buddy-lookup" class="buddies-search-form">
-        <input type="text" id="input-manual-lookup" placeholder="e.g. A7B2Q9, 08012345678, or friend@email.com" required>
-        <button class="button" type="submit">Search / Check</button>
-      </form>
-      <div id="manual-lookup-result" class="manual-lookup-result"></div>
-    </div>
-  `;
-
-  const onAppSection = onApp.length ? `
-    <div class="section-head">
-      <h2>Friends on Seomtorch (${onApp.length})</h2>
-      <p>Tap Challenge to set a shared timed paper</p>
-    </div>
-    <div class="buddies-grid">
-      ${onApp.map(buddy => `
-        <article class="buddy-card">
-          <span class="buddy-monogram">${buddyInitials(buddy.username)}</span>
-          <div class="buddy-details">
-            <h3>${escapeHtml(buddy.username)}</h3>
-            <p>Student ID: <strong>${escapeHtml(buddy.public_id)}</strong></p>
-          </div>
-          <div class="buddy-card-actions">
-            <button class="button small" data-challenge-buddy="${buddy.public_id}" data-buddy-name="${escapeHtml(buddy.username)}">Challenge →</button>
-            <button class="button outline small" data-copy-buddy-id="${buddy.public_id}" title="Copy Student ID">Copy ID</button>
-            <button class="remove-buddy-btn" data-remove-buddy="${buddy.public_id}" aria-label="Remove buddy" title="Remove from list">×</button>
-          </div>
-        </article>
-      `).join("")}
-    </div>
-  ` : "";
-
-  const invitesSection = invites.length ? `
-    <div class="section-head">
-      <h2>Contacts to Invite (${invites.length})</h2>
-      <p>Invite your classmates to join your study circle</p>
-    </div>
-    <div class="buddies-grid invites">
-      ${invites.map(c => `
-        <article class="buddy-card invite-card">
-          <span class="buddy-monogram invite">${buddyInitials(c.name)}</span>
-          <div class="buddy-details">
-            <h3>${escapeHtml(c.name || c.tel || c.email)}</h3>
-            <p>${escapeHtml(c.tel || c.email || "Contact")}</p>
-          </div>
-          <div class="buddy-card-actions">
-            ${c.tel ? `<a href="${whatsappInviteUrl(c.tel)}" target="_blank" rel="noopener noreferrer" class="button small whatsapp-invite-btn">WhatsApp</a>` : ""}
-            ${c.tel ? `<a href="${smsInviteUrl(c.tel)}" class="button outline small">SMS</a>` : ""}
-            ${c.email && !c.tel ? `<a href="mailto:${encodeURIComponent(c.email)}?subject=Study with me on Seomtorch&body=${encodeURIComponent('Join me on Seomtorch! My Student ID is ' + (currentUser?.public_id || '') + ': https://seomtorch.vercel.app')}" class="button outline small">Email</a>` : ""}
-          </div>
-        </article>
-      `).join("")}
-    </div>
-  ` : "";
-
-  const emptyGuide = (!onApp.length && !invites.length) ? `
-    <section class="buddies-guide-card">
-      <div class="guide-intro">
-        <span class="guide-icon">
-          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+  const identityBar = `
+    <div class="buddies-header-strip">
+      <div class="buddies-user-identity">
+        <span style="font-size:13px; color:var(--muted); font-weight:500;">Your Student ID:</span>
+        <span class="buddies-id-badge">
+          <strong>${escapeHtml(myId)}</strong>
+          <button type="button" class="buddies-id-copy-btn" id="btn-copy-my-id" title="Copy your Student ID" aria-label="Copy Student ID">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+          <button type="button" class="buddies-id-share-btn" id="btn-share-my-id" title="Share invite" aria-label="Share invite">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+          </button>
         </span>
-        <h2>How Study Circles & Buddies Work</h2>
-        <p>Studying with friends keeps you consistent and sharpens your exam readiness.</p>
       </div>
-      <div class="buddies-steps-grid">
-        <div class="step-card">
-          <span class="step-num">01</span>
-          <h4>Select Contacts</h4>
-          <p>Tap Select Contacts to see which classmates are already on Seomtorch.</p>
+      <div class="buddies-social-counts">
+        <button type="button" class="buddies-count-pill ${communityActiveTab === 'buddies' ? 'active' : ''}" data-community-tab="buddies">
+          🤝 <strong>${counts.buddies}</strong> Buddies
+        </button>
+        <button type="button" class="buddies-count-pill ${communityActiveTab === 'followers' ? 'active' : ''}" data-community-tab="followers">
+          <strong>${counts.followers}</strong> Followers
+        </button>
+        <button type="button" class="buddies-count-pill ${communityActiveTab === 'following' ? 'active' : ''}" data-community-tab="following">
+          <strong>${counts.following}</strong> Following
+        </button>
+      </div>
+    </div>
+  `;
+
+  const tabsNav = `
+    <nav class="buddies-tabs-nav" aria-label="Buddies navigation">
+      <button type="button" class="buddies-tab-btn ${communityActiveTab === 'leaderboard' ? 'active' : ''}" data-community-tab="leaderboard">
+        🏆 Leaderboard
+      </button>
+      <button type="button" class="buddies-tab-btn ${communityActiveTab === 'buddies' ? 'active' : ''}" data-community-tab="buddies">
+        🤝 My Buddies (${counts.buddies})
+      </button>
+      <button type="button" class="buddies-tab-btn ${communityActiveTab === 'find' ? 'active' : ''}" data-community-tab="find">
+        🔍 Find Friends
+      </button>
+      <button type="button" class="buddies-tab-btn ${communityActiveTab === 'followers' ? 'active' : ''}" data-community-tab="followers">
+        Followers (${counts.followers})
+      </button>
+      <button type="button" class="buddies-tab-btn ${communityActiveTab === 'following' ? 'active' : ''}" data-community-tab="following">
+        Following (${counts.following})
+      </button>
+    </nav>
+  `;
+
+  let tabBody = "";
+
+  if (communityActiveTab === "leaderboard") {
+    if (!lbr || lbr.length <= 1) {
+      tabBody = `
+        <div class="community-empty-card">
+          <div style="font-size:42px; margin-bottom:12px;">🏆</div>
+          <h3>Your Buddy Leaderboard is Waiting!</h3>
+          <p>When you and another student follow each other, you become <strong>Buddies</strong>. You'll compete right here on Gamified XP as you study and take tests.</p>
+          <button type="button" class="button" data-community-tab="find">Find Friends to Follow →</button>
         </div>
-        <div class="step-card">
-          <span class="step-num">02</span>
-          <h4>Invite Friends</h4>
-          <p>Send 1-tap WhatsApp or SMS invites with your Student ID (<strong>${currentUser?.public_id || "—"}</strong>).</p>
+      `;
+    } else {
+      tabBody = `
+        <div class="leaderboard-container">
+          <div class="leaderboard-header">
+            <div>
+              <h3>Buddy XP Leaderboard</h3>
+              <p>Rankings among you and your mutual study buddies</p>
+            </div>
+            <button type="button" class="button outline small" id="btn-refresh-community">Refresh</button>
+          </div>
+          <div class="leaderboard-list">
+            ${lbr.map(entry => {
+              const rankIcon = entry.rank === 1 ? "🥇" : entry.rank === 2 ? "🥈" : entry.rank === 3 ? "🥉" : `#${entry.rank}`;
+              const isYou = entry.is_you;
+              const avatarSrc = getAvatarSrc(entry.avatar);
+              return `
+                <div class="leaderboard-row ${isYou ? 'is-current-user' : ''}">
+                  <div class="leaderboard-rank rank-${entry.rank}">${rankIcon}</div>
+                  <div class="leaderboard-avatar-wrap">
+                    ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="buddy-monogram" style="display:none; width:100%; height:100%; font-size:14px;">${buddyInitials(entry.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%; font-size:14px;">${buddyInitials(entry.username)}</span>`}
+                  </div>
+                  <div class="leaderboard-info">
+                    <div class="leaderboard-info-top">
+                      <strong class="leaderboard-name">${escapeHtml(entry.username)}</strong>
+                      ${isYou ? '<span class="leaderboard-you-badge">You</span>' : ''}
+                    </div>
+                    <div class="leaderboard-meta">
+                      <span>ID: <strong>${escapeHtml(entry.public_id)}</strong></span>
+                      <span class="leaderboard-level-pill">Lvl ${entry.level || 1}</span>
+                      ${entry.streak ? `<span class="leaderboard-streak-pill">🔥 ${entry.streak}d</span>` : ''}
+                    </div>
+                  </div>
+                  <div class="leaderboard-xp-col">
+                    <span class="leaderboard-xp-value">${(entry.xp || 0).toLocaleString()}</span>
+                    <span class="leaderboard-xp-label">XP</span>
+                  </div>
+                  ${!isYou ? `
+                    <div class="leaderboard-action-col">
+                      <button type="button" class="button small" data-challenge-buddy="${entry.public_id}" data-buddy-name="${escapeHtml(entry.username)}">Challenge →</button>
+                    </div>
+                  ` : ''}
+                </div>
+              `;
+            }).join("")}
+          </div>
         </div>
-        <div class="step-card">
-          <span class="step-num">03</span>
-          <h4>Challenge Each Other</h4>
-          <p>Sit the same frozen question set under timed conditions and compare results privately.</p>
+      `;
+    }
+  } else if (communityActiveTab === "buddies") {
+    const buddies = net.buddies || [];
+    if (!buddies.length) {
+      tabBody = `
+        <div class="community-empty-card">
+          <div style="font-size:42px; margin-bottom:12px;">🤝</div>
+          <h3>No Mutual Buddies Yet</h3>
+          <p>Buddies are classmates who follow each other mutually. Find friends by their 6-character Student ID or invite them via WhatsApp.</p>
+          <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:8px;">
+            <button type="button" class="button" data-community-tab="find">Search by Student ID</button>
+            <button type="button" class="button outline" id="btn-whatsapp-invite-quick">Invite via WhatsApp</button>
+          </div>
+        </div>
+      `;
+    } else {
+      tabBody = `
+        <div class="section-head">
+          <h2>Your Study Buddies (${buddies.length})</h2>
+          <p>Mutual friends who can challenge each other and compete on your leaderboard</p>
+        </div>
+        <div class="buddies-grid">
+          ${buddies.map(buddy => {
+            const avatarSrc = getAvatarSrc(buddy.avatar);
+            return `
+              <article class="buddy-card">
+                <div class="leaderboard-avatar-wrap" style="width:48px; height:48px;">
+                  ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="buddy-monogram" style="display:none; width:100%; height:100%;">${buddyInitials(buddy.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%;">${buddyInitials(buddy.username)}</span>`}
+                </div>
+                <div class="buddy-details">
+                  <h3>${escapeHtml(buddy.username)}</h3>
+                  <p>ID: <strong>${escapeHtml(buddy.public_id)}</strong> · Lvl ${buddy.level || 1} · ${(buddy.xp || 0).toLocaleString()} XP</p>
+                </div>
+                <div class="buddy-card-actions">
+                  <button class="button small" data-challenge-buddy="${buddy.public_id}" data-buddy-name="${escapeHtml(buddy.username)}">Challenge →</button>
+                  <button class="button outline small" data-copy-buddy-id="${buddy.public_id}" title="Copy Student ID">Copy ID</button>
+                  <button class="remove-buddy-btn" data-unfollow-student="${buddy.public_id}" data-student-name="${escapeHtml(buddy.username)}" aria-label="Unfollow buddy" title="Unfollow">×</button>
+                </div>
+              </article>
+            `;
+          }).join("")}
+        </div>
+      `;
+    }
+  } else if (communityActiveTab === "find") {
+    const hasContactPicker = "contacts" in navigator && "ContactsManager" in window;
+    const hasPhone = Boolean(currentUser?.phone_number);
+
+    tabBody = `
+      <div class="buddies-search-box" style="display:block;">
+        <div class="section-head" style="margin-bottom:14px;">
+          <h2>Find Classmates & Friends</h2>
+          <p>Search any student on Seomtorch by their 6-character Student ID or username</p>
+        </div>
+        <form id="form-community-search" class="buddies-search-form">
+          <input type="text" id="input-community-search" placeholder="e.g. A7B2Q9 or Ada" value="${escapeHtml(communitySearchQuery)}" required autocomplete="off">
+          <button class="button" type="submit">${communitySearching ? "Searching..." : "Search"}</button>
+        </form>
+        <div id="community-search-results-container">
+          ${communitySearchResults.length ? `
+            <div class="community-search-results">
+              ${communitySearchResults.map(student => {
+                const avatarSrc = getAvatarSrc(student.avatar);
+                let actionBtn = "";
+                if (student.follow_state === "mutual") {
+                  actionBtn = `<span class="btn-follow mutual-buddy">🤝 Buddies</span> <button type="button" class="button outline small" data-unfollow-student="${student.public_id}" data-student-name="${escapeHtml(student.username)}">Unfollow</button>`;
+                } else if (student.follow_state === "following") {
+                  actionBtn = `<button type="button" class="btn-follow following" data-unfollow-student="${student.public_id}" data-student-name="${escapeHtml(student.username)}">Following ✓</button>`;
+                } else if (student.follow_state === "followed_by") {
+                  actionBtn = `<button type="button" class="btn-follow follow-back" data-follow-student="${student.public_id}" data-student-name="${escapeHtml(student.username)}">+ Follow Back</button>`;
+                } else {
+                  actionBtn = `<button type="button" class="btn-follow primary" data-follow-student="${student.public_id}" data-student-name="${escapeHtml(student.username)}">+ Follow</button>`;
+                }
+                return `
+                  <div class="community-student-row">
+                    <div class="community-student-left">
+                      <div class="leaderboard-avatar-wrap" style="width:40px; height:40px;">
+                        ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="buddy-monogram" style="display:none; width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>`}
+                      </div>
+                      <div>
+                        <strong>${escapeHtml(student.username)}</strong>
+                        <p style="margin:2px 0 0; font-size:12px; color:var(--muted);">ID: <strong>${escapeHtml(student.public_id)}</strong> · Lvl ${student.level || 1} · ${(student.xp || 0).toLocaleString()} XP</p>
+                      </div>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                      ${actionBtn}
+                    </div>
+                  </div>
+                `;
+              }).join("")}
+            </div>
+          ` : communitySearchQuery ? `
+            <div class="community-empty-card" style="padding:20px; margin-top:12px;">
+              <p>No student found matching "<strong>${escapeHtml(communitySearchQuery)}</strong>". Make sure the 6-character Student ID or username is correct.</p>
+            </div>
+          ` : ''}
         </div>
       </div>
-      <div class="buddies-guide-actions">
-        ${hasContactPicker ? `<button class="button" id="btn-scan-guide"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Select Contacts Now</span></button>` : ""}
-        <button class="button ${hasContactPicker ? 'outline' : ''}" id="btn-share-invite-guide">Share Invite via WhatsApp</button>
+
+      ${!hasPhone ? `
+        <div class="buddies-phone-banner">
+          <div class="buddies-banner-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="buddies-banner-content">
+            <strong>Link your phone number so classmates can discover you</strong>
+            <p>Classmates who check contacts on Seomtorch will automatically see your student profile.</p>
+            <form id="form-link-phone" class="buddies-phone-form">
+              <input type="tel" id="input-link-phone" placeholder="e.g. +2348012345678 or 080..." required>
+              <button class="button small" type="submit">Link Phone</button>
+            </form>
+            <div id="phone-link-error" class="auth-error" style="margin-top:6px;"></div>
+          </div>
+        </div>
+      ` : ''}
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:20px;">
+        ${hasContactPicker ? `
+          <button class="button outline" id="btn-scan-contacts">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span>${buddiesLoading ? "Checking contacts…" : "Select from Phone Contacts"}</span>
+          </button>
+        ` : ''}
+        <button class="button outline" id="btn-share-invite-link">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          <span>Share WhatsApp Invite</span>
+        </button>
       </div>
-    </section>
-  ` : "";
+    `;
+  } else if (communityActiveTab === "followers") {
+    const followers = net.followers || [];
+    if (!followers.length) {
+      tabBody = `
+        <div class="community-empty-card">
+          <div style="font-size:42px; margin-bottom:12px;">👥</div>
+          <h3>No Followers Yet</h3>
+          <p>When other students search your Student ID (<strong>${escapeHtml(myId)}</strong>) and follow you, they'll appear here.</p>
+          <button type="button" class="button" id="btn-share-invite-followers">Share Your Student ID</button>
+        </div>
+      `;
+    } else {
+      tabBody = `
+        <div class="section-head">
+          <h2>Students Following You (${followers.length})</h2>
+          <p>Follow them back to unlock mutual Buddies and compete on the leaderboard</p>
+        </div>
+        <div class="community-search-results">
+          ${followers.map(student => {
+            const avatarSrc = getAvatarSrc(student.avatar);
+            const isMutual = student.is_mutual;
+            return `
+              <div class="community-student-row">
+                <div class="community-student-left">
+                  <div class="leaderboard-avatar-wrap" style="width:40px; height:40px;">
+                    ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="buddy-monogram" style="display:none; width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>`}
+                  </div>
+                  <div>
+                    <strong>${escapeHtml(student.username)}</strong>
+                    <p style="margin:2px 0 0; font-size:12px; color:var(--muted);">ID: <strong>${escapeHtml(student.public_id)}</strong> · Lvl ${student.level || 1} · ${(student.xp || 0).toLocaleString()} XP</p>
+                  </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  ${isMutual ? `
+                    <span class="btn-follow mutual-buddy">🤝 Buddies</span>
+                    <button type="button" class="button small" data-challenge-buddy="${student.public_id}" data-buddy-name="${escapeHtml(student.username)}">Challenge →</button>
+                  ` : `
+                    <button type="button" class="btn-follow follow-back" data-follow-student="${student.public_id}" data-student-name="${escapeHtml(student.username)}">+ Follow Back</button>
+                  `}
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      `;
+    }
+  } else if (communityActiveTab === "following") {
+    const following = net.following || [];
+    if (!following.length) {
+      tabBody = `
+        <div class="community-empty-card">
+          <div style="font-size:42px; margin-bottom:12px;">🔍</div>
+          <h3>You're Not Following Anyone Yet</h3>
+          <p>Search for classmates by their Student ID to follow them and start building your study community.</p>
+          <button type="button" class="button" data-community-tab="find">Find Friends to Follow →</button>
+        </div>
+      `;
+    } else {
+      tabBody = `
+        <div class="section-head">
+          <h2>Students You Follow (${following.length})</h2>
+          <p>When they follow you back, you become mutual Buddies on the leaderboard</p>
+        </div>
+        <div class="community-search-results">
+          ${following.map(student => {
+            const avatarSrc = getAvatarSrc(student.avatar);
+            const isMutual = student.is_mutual;
+            return `
+              <div class="community-student-row">
+                <div class="community-student-left">
+                  <div class="leaderboard-avatar-wrap" style="width:40px; height:40px;">
+                    ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="buddy-monogram" style="display:none; width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>`}
+                  </div>
+                  <div>
+                    <strong>${escapeHtml(student.username)}</strong>
+                    <p style="margin:2px 0 0; font-size:12px; color:var(--muted);">ID: <strong>${escapeHtml(student.public_id)}</strong> · Lvl ${student.level || 1} · ${(student.xp || 0).toLocaleString()} XP</p>
+                  </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  ${isMutual ? '<span class="btn-follow mutual-buddy">🤝 Buddies</span>' : ''}
+                  <button type="button" class="btn-follow following" data-unfollow-student="${student.public_id}" data-student-name="${escapeHtml(student.username)}">Unfollow</button>
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      `;
+    }
+  }
 
   const content = `
     <section class="page buddies-page">
       <div class="buddies-head">
         <div>
-          <p class="eyebrow">Study together</p>
+          <p class="eyebrow">Study Community</p>
           <h1>Study Buddies.</h1>
-          <p class="lede">Connect with classmates, scan contacts to find friends on Seomtorch, and invite partners to private study circles.</p>
-        </div>
-        <div class="buddies-head-actions">
-          ${hasContactPicker ? `
-            <button class="button" id="btn-scan-contacts">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              <span>${buddiesLoading ? "Checking contacts…" : "Select Contacts"}</span>
-            </button>
-          ` : ""}
-          <button class="button ${hasContactPicker ? 'outline' : ''}" id="btn-share-invite-link">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-            <span>Share Invite</span>
-          </button>
-          <button class="button outline" id="btn-toggle-search">
-            ${buddiesSearchOpen ? "Close Search" : "Search ID / Phone"}
-          </button>
+          <p class="lede">Follow classmates, build your study circle, and compete on your private mutual XP leaderboard.</p>
         </div>
       </div>
 
-      ${phoneBanner}
-      ${searchBox}
-      ${onAppSection}
-      ${invitesSection}
-      ${emptyGuide}
+      ${identityBar}
+      ${tabsNav}
+      ${tabBody}
     </section>
   `;
 
@@ -3126,12 +3411,16 @@ function renderBuddies() {
 }
 
 function bindBuddies() {
-  document.querySelector("#btn-scan-contacts")?.addEventListener("click", () => handleScanContacts());
-  document.querySelector("#btn-scan-guide")?.addEventListener("click", () => handleScanContacts());
+  document.querySelectorAll("[data-community-tab]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      communityActiveTab = btn.dataset.communityTab;
+      renderBuddies();
+    });
+  });
 
   const shareHandler = async () => {
     const inviteUrl = "https://seomtorch.vercel.app";
-    const shareText = `Hey! Join me on Seomtorch to prepare for exams and take timed study challenges together. My Student ID is ${currentUser?.public_id || ""}:`;
+    const shareText = `Hey! Join me on Seomtorch to prepare for exams and compete on our study leaderboard together. My Student ID is ${currentUser?.public_id || ""}:`;
     if (navigator.share) {
       try {
         await navigator.share({ title: "Study with me on Seomtorch", text: shareText, url: inviteUrl });
@@ -3144,20 +3433,101 @@ function bindBuddies() {
     }
   };
 
-  document.querySelector("#btn-share-invite-link")?.addEventListener("click", shareHandler);
-  document.querySelector("#btn-share-invite-guide")?.addEventListener("click", shareHandler);
-
-  document.querySelector("#btn-toggle-search")?.addEventListener("click", () => {
-    buddiesSearchOpen = !buddiesSearchOpen;
-    renderBuddies();
+  document.querySelector("#btn-copy-my-id")?.addEventListener("click", async () => {
+    const id = currentUser?.public_id || "";
+    if (!id) return;
+    try {
+      await navigator.clipboard.writeText(id);
+      showToast(`Copied Student ID: ${id}`);
+    } catch {
+      showToast(`Student ID: ${id}`);
+    }
   });
 
-  document.querySelector("#btn-edit-phone")?.addEventListener("click", () => {
-    if (currentUser) {
-      currentUser.phone_number = "";
+  document.querySelector("#btn-share-my-id")?.addEventListener("click", shareHandler);
+  document.querySelector("#btn-share-invite-link")?.addEventListener("click", shareHandler);
+  document.querySelector("#btn-whatsapp-invite-quick")?.addEventListener("click", shareHandler);
+  document.querySelector("#btn-share-invite-followers")?.addEventListener("click", shareHandler);
+
+  document.querySelector("#btn-refresh-community")?.addEventListener("click", () => {
+    showToast("Refreshing leaderboard...");
+    loadCommunityData(true);
+  });
+
+  document.querySelectorAll("[data-follow-student]").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const publicId = btn.dataset.followStudent;
+      const name = btn.dataset.studentName || "";
+      btn.disabled = true;
+      btn.textContent = "Following...";
+      await handleFollowStudent(publicId, name);
+    });
+  });
+
+  document.querySelectorAll("[data-unfollow-student]").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const publicId = btn.dataset.unfollowStudent;
+      const name = btn.dataset.studentName || "";
+      if (confirm(`Unfollow ${name || publicId}?`)) {
+        btn.disabled = true;
+        await handleUnfollowStudent(publicId, name);
+      }
+    });
+  });
+
+  document.querySelectorAll("[data-challenge-buddy]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const publicId = btn.dataset.challengeBuddy;
+      const name = btn.dataset.buddyName || "Friend";
+      const buddy = { public_id: publicId, username: name };
+      if (!challengeInvitees.some(i => i.public_id === publicId)) {
+        challengeInvitees.push(buddy);
+      }
+      challengeComposerOpen = true;
+      route = "challenges";
+      selectedChallengeId = null;
+      render();
+      showToast(`Added ${name} to challenge`);
+    });
+  });
+
+  document.querySelectorAll("[data-copy-buddy-id]").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const publicId = btn.dataset.copyBuddyId;
+      try {
+        await navigator.clipboard.writeText(publicId);
+        showToast(`Copied Student ID: ${publicId}`);
+      } catch {
+        showToast(`Student ID: ${publicId}`);
+      }
+    });
+  });
+
+  document.querySelector("#form-community-search")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const input = document.querySelector("#input-community-search");
+    const query = (input?.value || "").trim();
+    if (query.length < 2) {
+      showToast("Search query must be at least 2 characters.");
+      return;
+    }
+    communitySearchQuery = query;
+    communitySearching = true;
+    renderBuddies();
+
+    try {
+      const res = await api.communitySearch(authToken, query);
+      communitySearchResults = res.results || [];
+    } catch (err) {
+      showToast(err.message || "Search failed.");
+      communitySearchResults = [];
+    } finally {
+      communitySearching = false;
       renderBuddies();
     }
   });
+
+  document.querySelector("#btn-scan-contacts")?.addEventListener("click", () => handleScanContacts());
 
   document.querySelector("#form-link-phone")?.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -3177,138 +3547,12 @@ function bindBuddies() {
       if (error) error.textContent = err.message || "Failed to link phone number";
     }
   });
-
-  document.querySelector("#form-manual-buddy-lookup")?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const input = document.querySelector("#input-manual-lookup");
-    const resultContainer = document.querySelector("#manual-lookup-result");
-    const query = input.value.trim();
-    if (!query) return;
-
-    resultContainer.innerHTML = '<div class="challenge-loading"><i></i><i></i><i></i><p>Searching...</p></div>';
-
-    // 1. If 6 chars and alphanumeric, try Student ID lookup first
-    if (/^[A-Za-z0-9]{6}$/.test(query)) {
-      try {
-        const student = await api.lookupStudent(authToken, query.toUpperCase());
-        const saved = getSavedBuddies();
-        if (!saved.some(b => b.public_id === student.public_id)) {
-          saved.push(student);
-          saveBuddies(saved);
-          buddiesMatches.onApp = saved;
-        }
-        resultContainer.innerHTML = `
-          <div class="lookup-found-card">
-            <span class="buddy-monogram">${buddyInitials(student.username)}</span>
-            <div>
-              <strong>${escapeHtml(student.username)}</strong>
-              <p>Student ID: <strong>${escapeHtml(student.public_id)}</strong></p>
-            </div>
-            <button class="button small" data-challenge-buddy="${student.public_id}" style="margin-left:auto;">Challenge →</button>
-          </div>
-        `;
-        resultContainer.querySelector("[data-challenge-buddy]")?.addEventListener("click", () => {
-          challengeInvitees = [student];
-          challengeComposerOpen = true;
-          route = "challenges";
-          render();
-        });
-        return;
-      } catch (err) {
-        // Not a student ID, proceed to phone/email match
-      }
-    }
-
-    // 2. Try matchContacts with phone or email
-    const isEmail = query.includes("@");
-    const phones = isEmail ? [] : [query];
-    const emails = isEmail ? [query.toLowerCase()] : [];
-
-    try {
-      const matchRes = await api.matchContacts(authToken, phones, emails);
-      if (matchRes.matches && matchRes.matches.length) {
-        const student = matchRes.matches[0];
-        const saved = getSavedBuddies();
-        if (!saved.some(b => b.public_id === student.public_id)) {
-          saved.push(student);
-          saveBuddies(saved);
-          buddiesMatches.onApp = saved;
-        }
-        resultContainer.innerHTML = `
-          <div class="lookup-found-card">
-            <span class="buddy-monogram">${buddyInitials(student.username)}</span>
-            <div>
-              <strong>${escapeHtml(student.username)}</strong>
-              <p>Student ID: <strong>${escapeHtml(student.public_id)}</strong></p>
-            </div>
-            <button class="button small" data-challenge-buddy="${student.public_id}" style="margin-left:auto;">Challenge →</button>
-          </div>
-        `;
-        resultContainer.querySelector("[data-challenge-buddy]")?.addEventListener("click", () => {
-          challengeInvitees = [student];
-          challengeComposerOpen = true;
-          route = "challenges";
-          render();
-        });
-      } else {
-        resultContainer.innerHTML = `
-          <div class="lookup-not-found-card">
-            <p>No registered user found with that ${isEmail ? "email" : "phone / ID"}.</p>
-            <div style="display:flex; gap:8px; margin-top:8px;">
-              ${!isEmail ? `<a href="${whatsappInviteUrl(query)}" target="_blank" rel="noopener noreferrer" class="button small whatsapp-invite-btn">Invite via WhatsApp</a>` : ""}
-              ${!isEmail ? `<a href="${smsInviteUrl(query)}" class="button outline small">Invite via SMS</a>` : ""}
-              ${isEmail ? `<a href="mailto:${encodeURIComponent(query)}?subject=Study with me on Seomtorch&body=${encodeURIComponent('Join me on Seomtorch! My Student ID is ' + (currentUser?.public_id || '') + ': https://seomtorch.vercel.app')}" class="button outline small">Invite via Email</a>` : ""}
-            </div>
-          </div>
-        `;
-      }
-    } catch (err) {
-      resultContainer.innerHTML = `<p class="auth-error">${escapeHtml(err.message || "Search failed")}</p>`;
-    }
-  });
-
-  document.querySelectorAll("[data-challenge-buddy]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const publicId = btn.dataset.challengeBuddy;
-      const buddy = (buddiesMatches?.onApp || []).find(b => b.public_id === publicId) || { public_id: publicId, username: btn.dataset.buddyName || "Friend" };
-      if (!challengeInvitees.some(i => i.public_id === publicId)) {
-        challengeInvitees.push(buddy);
-      }
-      challengeComposerOpen = true;
-      route = "challenges";
-      selectedChallengeId = null;
-      render();
-      showToast(`Added ${buddy.username} to challenge`);
-    });
-  });
-
-  document.querySelectorAll("[data-copy-buddy-id]").forEach(btn => {
-    btn.addEventListener("click", async () => {
-      const publicId = btn.dataset.copyBuddyId;
-      try {
-        await navigator.clipboard.writeText(publicId);
-        showToast(`Copied Student ID: ${publicId}`);
-      } catch {
-        showToast(`Student ID: ${publicId}`);
-      }
-    });
-  });
-
-  document.querySelectorAll("[data-remove-buddy]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const publicId = btn.dataset.removeBuddy;
-      const updated = (buddiesMatches?.onApp || []).filter(b => b.public_id !== publicId);
-      buddiesMatches.onApp = updated;
-      saveBuddies(updated);
-      renderBuddies();
-      showToast("Removed from buddies");
-    });
-  });
 }
 
 function showBuddiesPickerModal() {
   document.querySelector("#buddies-picker-modal")?.remove();
-  const saved = getSavedBuddies();
+  const netBuddies = (communityNetworkData?.buddies || getCachedCommunityNetwork()?.buddies || []);
+  const saved = netBuddies.length ? netBuddies : getSavedBuddies();
   const hasContactPicker = "contacts" in navigator && "ContactsManager" in window;
 
   const modal = document.createElement("div");
@@ -3441,6 +3685,13 @@ async function loadAchievements(filter = "") {
 }
 
 function bindProfile() {
+  document.querySelectorAll("[data-goto-buddies]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      communityActiveTab = btn.dataset.gotoBuddies || "buddies";
+      route = "buddies";
+      render();
+    });
+  });
   document.querySelectorAll(".faq-question").forEach(button => button.addEventListener("click", () => { const item = button.closest(".faq-item"); item.classList.toggle("open"); button.setAttribute("aria-expanded", item.classList.contains("open")); }));
   let timer; document.querySelector("#faq-search").addEventListener("input", event => { clearTimeout(timer); timer = setTimeout(() => renderProfile(event.target.value), 180); });
   document.querySelector("#export-data").addEventListener("click", exportData);
