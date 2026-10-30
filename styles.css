@@ -1323,19 +1323,23 @@ select:focus, textarea:focus, input:focus {
 @media (max-width: 840px) {
   html { scroll-padding-top: 125px; }
   html, body { overflow-x: hidden; overflow-x: clip; }
-  .layout { display: block; padding-bottom: 76px; }
+  .layout {
+    display: block;
+    padding-bottom: calc(92px + env(safe-area-inset-bottom, 16px));
+  }
   .sidebar {
     position: fixed;
-    z-index: 20;
+    z-index: 25;
     top: auto;
     bottom: 0;
     left: 0;
     right: 0;
     width: auto;
-    height: 66px;
-    max-height: 66px;
+    height: auto;
+    min-height: 60px;
+    max-height: none;
     overflow: visible;
-    padding: 5px max(6px, env(safe-area-inset-right)) max(5px, env(safe-area-inset-bottom));
+    padding: 6px max(6px, env(safe-area-inset-right, 6px)) max(6px, env(safe-area-inset-bottom, 6px)) max(6px, env(safe-area-inset-left, 6px));
     display: block;
     background: rgba(12, 37, 24, 0.96);
     backdrop-filter: blur(20px);
@@ -1344,17 +1348,35 @@ select:focus, textarea:focus, input:focus {
     box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.18);
   }
   .sidebar > .brand, .sidebar-foot, .mode-switcher-container { display: none !important; }
-  .nav { margin: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; width: 100%; }
+  .nav {
+    margin: 0;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 1px;
+    width: 100%;
+    align-items: center;
+  }
   .nav-button {
-    padding: 4px 1px;
+    padding: 5px 1px;
     flex-direction: column;
-    gap: 3px;
-    font-size: 9.5px;
+    gap: 2px;
+    font-size: clamp(8px, 2.3vw, 9.5px);
     font-weight: 600;
     justify-content: center;
     border-radius: 8px;
     color: rgba(255, 255, 255, 0.65);
     transition: all .15s ease;
+    min-width: 0;
+    letter-spacing: -0.025em;
+  }
+  .nav-button span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    display: block;
+    line-height: 1.15;
   }
   .nav-button:hover { color: #ffffff; background: rgba(255, 255, 255, 0.08); }
   .nav-button.active {
@@ -1366,7 +1388,7 @@ select:focus, textarea:focus, input:focus {
     color: #86EFAC;
     transform: scale(1.08);
   }
-  .nav-icon { width: 19px; height: 19px; transition: transform .15s ease; }
+  .nav-icon { width: 18px; height: 18px; transition: transform .15s ease; flex-shrink: 0; }
   .topbar {
     height: 64px;
     padding: 0 16px;
@@ -1498,27 +1520,71 @@ select:focus, textarea:focus, input:focus {
   .confirm-dialog .button-row { flex-direction: column-reverse; }
   .confirm-dialog .button { width: 100%; }
   .finish-summary { grid-template-columns: 1fr 1fr; }
-  .pwa-install-fab { right: 14px; bottom: 84px; }
+  .pwa-install-fab {
+    right: 12px;
+    bottom: calc(76px + env(safe-area-inset-bottom, 16px));
+    padding: 8px 13px;
+    font-size: 10.5px;
+  }
   .profile-grid { grid-template-columns: 1fr; }
   .profile-monogram { width: 64px; height: 64px; font-size: 25px; }
   .question-actions { flex-wrap: wrap; }
   .question-actions .button:last-child { flex: 1; }
+  .dialog-backdrop {
+    padding: 12px;
+    place-items: center;
+  }
+  .confirm-dialog {
+    max-height: min(88dvh, 720px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
-@media (max-width: 370px) {
-  .topbar { grid-template-columns: minmax(0, 1fr) auto auto auto 34px; gap: 5px; padding-inline: 8px; height: 60px; }
-  .mobile-brand { gap: 5px; }
-  .mobile-brand img { width: 28px; height: 28px; flex: 0 0 28px; }
-  .mobile-brand b { font-size: 14px; }
-  .sync-indicator { width: auto; min-width: 0; }
-  .top-xp { padding: 3px 8px; min-height: 34px; height: 34px; }
-  .top-xp small { font-size: 7.5px; }
-  .top-xp strong { font-size: 11.5px; }
-  .top-streak { padding: 3px 8px 3px 6px; min-height: 34px; height: 34px; gap: 4px; }
-  .top-streak svg { width: 16px; height: 16px; flex: 0 0 16px; }
-  .top-streak small { font-size: 7.5px; }
-  .top-streak strong { font-size: 12.5px; }
-  .avatar { width: 34px; min-width: 34px; height: 34px; min-height: 34px; flex: 0 0 34px; font-size: 11px; }
+@media (max-width: 600px) {
+  .top-badge-pill:not(.top-xp-level-pill) {
+    display: none !important;
+  }
+  .topbar-pills {
+    gap: 8px;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .topbar {
+    padding-inline: 10px;
+    height: 56px;
+    gap: 6px;
+  }
+  .mobile-brand {
+    gap: 6px;
+    font-size: 15px;
+  }
+  .mobile-brand img {
+    width: 26px;
+    height: 26px;
+    flex: 0 0 26px;
+  }
+  .mobile-brand b {
+    font-size: 13.5px;
+  }
+  .top-xp-level-pill {
+    padding: 0 3px 0 8px;
+  }
+  .top-xp-level-pill span {
+    font-size: 10.5px;
+  }
+  .topbar-avatar-btn .avatar {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    min-height: 30px;
+    flex: 0 0 30px;
+  }
+  .topbar-avatar-btn .avatar-caret-icon {
+    display: none;
+  }
 }
 
 @media (max-width: 330px) {
@@ -8359,4 +8425,176 @@ body.shield-active #main {
   max-width: 420px;
   margin-left: auto;
   margin-right: auto;
+}
+
+
+/* ── Community Mobile Responsive Rules ────────────────────────── */
+@media (max-width: 640px) {
+  .buddies-page {
+    padding-bottom: 70px;
+  }
+  .buddies-head {
+    margin-bottom: 14px;
+  }
+  .buddies-head h1 {
+    font-size: 26px;
+    margin: 4px 0 6px;
+  }
+  .buddies-header-strip {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+  }
+  .buddies-user-identity {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .buddies-id-badge {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+  .buddies-social-counts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    width: 100%;
+  }
+  .buddies-count-pill {
+    padding: 6px 4px;
+    font-size: 11px;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .buddies-count-pill strong {
+    font-size: 11.5px;
+  }
+  .buddies-tabs-nav {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 4px;
+    margin-bottom: 18px;
+    scrollbar-width: none;
+  }
+  .buddies-tabs-nav::-webkit-scrollbar {
+    display: none;
+  }
+  .buddies-tab-btn {
+    scroll-snap-align: start;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    flex-shrink: 0;
+  }
+
+  /* Leaderboard on Mobile */
+  .leaderboard-row {
+    padding: 12px 14px;
+    gap: 10px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .leaderboard-rank {
+    width: 26px;
+    font-size: 15px;
+  }
+  .leaderboard-rank.rank-1,
+  .leaderboard-rank.rank-2,
+  .leaderboard-rank.rank-3 {
+    font-size: 18px;
+  }
+  .leaderboard-avatar-wrap {
+    width: 38px;
+    height: 38px;
+  }
+  .leaderboard-info {
+    flex: 1 1 110px;
+    min-width: 0;
+  }
+  .leaderboard-name {
+    font-size: 13.5px;
+    max-width: 120px;
+  }
+  .leaderboard-xp-col {
+    margin-left: auto;
+    text-align: right;
+  }
+  .leaderboard-xp-value {
+    font-size: 14.5px;
+  }
+  .leaderboard-action-col {
+    width: 100%;
+    margin-top: 6px;
+    margin-left: 0;
+  }
+  .leaderboard-action-col .button {
+    width: 100%;
+    justify-content: center;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  /* Search & Student Rows on Mobile */
+  .community-student-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+  .community-student-left {
+    width: 100%;
+  }
+  .community-student-row > div:last-child {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+  }
+  .community-student-row > div:last-child .btn-follow,
+  .community-student-row > div:last-child .button {
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* Buddies Grid */
+  .buddies-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .buddy-card {
+    padding: 14px 16px;
+    flex-wrap: wrap;
+  }
+  .buddy-card-actions {
+    width: 100%;
+    margin-top: 8px;
+    justify-content: flex-end;
+  }
+  .buddy-card-actions .button {
+    flex: 1;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Profile Social Strip on Mobile */
+  .profile-social-strip {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .profile-social-btn {
+    padding: 10px 4px;
+  }
+  .profile-social-btn strong {
+    font-size: 15px;
+  }
+  .profile-social-btn span {
+    font-size: 10.5px;
+  }
 }

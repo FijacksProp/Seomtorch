@@ -903,7 +903,7 @@ function shell(content) {
   const mode = getActiveMode();
   const nav = mode === "university"
     ? [["home", "Home"], ["university", "Courses"], ["buddies", "Buddies"], ["progress", "Insights"], ["profile", "Profile"]]
-    : [["home", "Home"], ["practice", "Practice"], ["challenges", "Challenges"], ["buddies", "Buddies"], ["progress", "Insights"], ["profile", "Profile"]];
+    : [["home", "Home"], ["practice", "Practice"], ["challenges", "Challenge"], ["buddies", "Buddies"], ["progress", "Insights"], ["profile", "Profile"]];
 
   return `<div class="layout ${mode === 'university' ? 'layout-uni' : ''}">
     <aside class="sidebar">
