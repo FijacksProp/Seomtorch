@@ -894,6 +894,44 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
+  // Inactive Aspirant Subjects Toggle
+  const toggleInactiveBtn = document.getElementById("toggle-inactive-subjects-btn");
+  const inactiveGrid = document.getElementById("inactive-subjects-grid");
+  const inactiveBtnText = document.getElementById("inactive-btn-text");
+  const inactiveBtnIcon = document.getElementById("inactive-btn-icon");
+
+  if (toggleInactiveBtn && inactiveGrid) {
+    toggleInactiveBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      const isHidden = inactiveGrid.style.display === "none" || window.getComputedStyle(inactiveGrid).display === "none";
+      if (isHidden) {
+        inactiveGrid.style.display = "grid";
+        toggleInactiveBtn.setAttribute("aria-expanded", "true");
+        if (inactiveBtnText) {
+          inactiveBtnText.textContent = inactiveBtnText.textContent.replace(/^Show/i, "Hide");
+        }
+        if (inactiveBtnIcon) {
+          inactiveBtnIcon.textContent = "▲";
+        }
+        toggleInactiveBtn.style.background = "#f1f5f9";
+        toggleInactiveBtn.style.borderColor = "#94a3b8";
+        toggleInactiveBtn.style.color = "var(--color-ink)";
+      } else {
+        inactiveGrid.style.display = "none";
+        toggleInactiveBtn.setAttribute("aria-expanded", "false");
+        if (inactiveBtnText) {
+          inactiveBtnText.textContent = inactiveBtnText.textContent.replace(/^Hide/i, "Show");
+        }
+        if (inactiveBtnIcon) {
+          inactiveBtnIcon.textContent = "▼";
+        }
+        toggleInactiveBtn.style.background = "#f8fafc";
+        toggleInactiveBtn.style.borderColor = "#cbd5e1";
+        toggleInactiveBtn.style.color = "var(--color-muted)";
+      }
+    });
+  }
+
   // Modal handlers
   const modal = document.getElementById("all-events-modal");
   const openBtn = document.getElementById("open-all-events-btn");
