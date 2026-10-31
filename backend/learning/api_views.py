@@ -294,18 +294,24 @@ class AchievementView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class RecordUniversitySessionView(APIView):
+class RecordSessionView(APIView):
     """
-    Records a completed university medical course practice session
-    so university student analytics, XP, streaks, and monitor stats are tracked.
+    Records a completed practice session (university medical course or aspirant prep)
+    so student analytics, XP, streaks, and monitor stats are tracked.
     """
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated]
 
     @transaction.atomic
     def post(self, request):
+        track = str(request.data.get("track") or "").strip().lower()
         course_code = str(request.data.get("course_code") or "").strip().upper()
+        subject_slug = str(request.data.get("subject_slug") or request.data.get("subject") or "").strip().lower()
         topic_title = str(request.data.get("topic_title") or "").strip()
+
+        if not track:
+            track = "university" if course_code else "aspirant"
+
         try:
             total_questions = max(0, int(request.data.get("total_questions", 0)))
         except (ValueError, TypeError):
@@ -323,14 +329,19 @@ class RecordUniversitySessionView(APIView):
         if mode_str not in {PracticeSession.Mode.TIMED, PracticeSession.Mode.NORMAL, PracticeSession.Mode.DAILY}:
             mode_str = PracticeSession.Mode.TIMED
 
-        # Resolve university subject
+        # Resolve subject
         subject = None
-        if course_code:
+        if track == "university" and course_code:
             norm_code = course_code.replace(" ", "")
             subject = Subject.objects.filter(
                 Q(code__iexact=course_code) |
                 Q(slug__icontains=norm_code.lower()) |
                 Q(name__icontains=course_code)
+            ).first()
+        elif subject_slug:
+            subject = Subject.objects.filter(
+                Q(slug__iexact=subject_slug) |
+                Q(name__iexact=subject_slug)
             ).first()
 
         duration_minutes = max(1, round(time_spent_seconds / 60)) if time_spent_seconds else None
@@ -338,7 +349,7 @@ class RecordUniversitySessionView(APIView):
         session = PracticeSession.objects.create(
             user=request.user,
             subject=subject,
-            track="university",
+            track=track,
             course_code=course_code,
             topic_title=topic_title,
             total_questions=total_questions,
@@ -363,8 +374,9 @@ class RecordUniversitySessionView(APIView):
             event_type=ActivityEvent.Type.SESSION_COMPLETED,
             metadata={
                 "session_id": str(session.id),
-                "track": "university",
+                "track": track,
                 "course": course_code,
+                "subject": subject.slug if subject else subject_slug,
                 "topic": topic_title,
                 "accuracy": session.accuracy,
                 "total": total_questions,
@@ -377,7 +389,9 @@ class RecordUniversitySessionView(APIView):
 
         return Response({
             "session_id": str(session.id),
+            "track": track,
             "course_code": course_code,
+            "subject": subject.slug if subject else subject_slug,
             "topic_title": topic_title,
             "correct": session.correct_answers,
             "total": session.total_questions,
@@ -389,3 +403,6 @@ class RecordUniversitySessionView(APIView):
                 for item in earned
             ],
         }, status=status.HTTP_201_CREATED)
+
+
+RecordUniversitySessionView = RecordSessionView

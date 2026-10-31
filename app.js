@@ -1960,12 +1960,16 @@ function renderResult() {
     activeSession.reportedComplete = true;
     syncPendingAttempts().then(() => api.completeSession(authToken, activeSession.remoteId)).then(async response => { applyRemoteStats(response.stats); progressData = null; await put("profile", profile); handleEarnedBadges(response.badges_earned || []); }).catch(() => { activeSession.reportedComplete = false; });
   }
-  if (activeSession.isUniversity && !activeSession.reportedComplete && authToken) {
+  else if (!activeSession.reportedComplete && authToken) {
     activeSession.reportedComplete = true;
     const timeSpent = activeSession.startedAt ? Math.round((Date.now() - activeSession.startedAt) / 1000) : (activeSession.durationMinutes ? activeSession.durationMinutes * 60 : 0);
-    api.recordUniversitySession(authToken, {
-      course_code: activeSession.subject || "ANA 201",
-      topic_title: activeSession.topic || "University Practice",
+    const isUni = Boolean(activeSession.isUniversity);
+    const syncFunc = isUni ? api.recordUniversitySession : (api.recordSession || api.recordUniversitySession);
+    syncFunc(authToken, {
+      track: isUni ? "university" : "aspirant",
+      course_code: isUni ? (activeSession.subject || "ANA 201") : "",
+      subject_slug: !isUni ? (activeSession.subject || "general") : "",
+      topic_title: activeSession.topic || (isUni ? "University Practice" : "Practice Session"),
       total_questions: activeSession.queue.length,
       correct_answers: activeSession.correct,
       time_spent_seconds: timeSpent,

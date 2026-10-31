@@ -27,8 +27,8 @@ class MonitorProFeatureTests(TestCase):
         self.client.force_login(self.staff)
 
         # Base subject & topic
-        self.subject = Subject.objects.create(name="Biology", slug="biology", position=1)
-        self.topic = Topic.objects.create(subject=self.subject, name="Cell Biology", slug="cell-bio")
+        self.subject, _ = Subject.objects.get_or_create(slug="biology", defaults={"name": "Biology", "position": 1})
+        self.topic, _ = Topic.objects.get_or_create(subject=self.subject, slug="cell-bio", defaults={"name": "Cell Biology"})
 
     def test_dashboard_with_ranges(self):
         # Test range query params
@@ -231,6 +231,24 @@ class MonitorProFeatureTests(TestCase):
         self.assertEqual(sess.course_code, "ANA 201")
         self.assertEqual(sess.correct_answers, 16)
         self.assertEqual(sess.total_questions, 20)
+
+    def test_record_aspirant_session_api(self):
+        from rest_framework.authtoken.models import Token
+        token = Token.objects.create(user=self.student)
+        res = self.client.post("/api/sessions/record/", {
+            "track": "aspirant",
+            "subject_slug": "biology",
+            "topic_title": "Cell Biology",
+            "total_questions": 15,
+            "correct_answers": 12,
+            "time_spent_seconds": 300,
+            "mode": "timed",
+        }, content_type="application/json", HTTP_AUTHORIZATION=f"Token {token.key}")
+        self.assertEqual(res.status_code, 201)
+        data = res.json()
+        self.assertEqual(data["track"], "aspirant")
+        self.assertEqual(data["accuracy"], 80)
+        self.assertEqual(data["xp_earned"], 60)
 
     def test_dashboard_with_tracks(self):
         # Create an aspirant session and a university session

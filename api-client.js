@@ -26,6 +26,7 @@ export const api = {
   logout: token => request("/auth/logout/", { token, method: "POST" }),
   startSession: (token, body) => request("/sessions/", { token, method: "POST", body }),
   completeSession: (token, id) => request(`/sessions/${id}/complete/`, { token, method: "POST" }),
+  recordSession: (token, body) => request("/sessions/record/", { token, method: "POST", body }),
   recordUniversitySession: (token, body) => request("/sessions/record-university/", { token, method: "POST", body }),
   syncAttempt: (token, body) => request("/attempts/", { token, method: "POST", body }),
   attempts: token => request("/attempts/", { token }),
