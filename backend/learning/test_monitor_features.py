@@ -309,3 +309,21 @@ class MonitorProFeatureTests(TestCase):
         self.assertEqual(len(res.context["uni_courses_list"]), 1)
         self.assertEqual(res.context["uni_courses_list"][0]["code"], "ANA 201")
         self.assertEqual(res.context["uni_courses_list"][0]["accuracy"], 85)
+
+    def test_university_dashboard_view(self):
+        PracticeSession.objects.create(
+            user=self.student,
+            track="university",
+            course_code="ANA 201",
+            topic_title="Upper Limb Osteology",
+            total_questions=15,
+            correct_answers=12,
+            status=PracticeSession.Status.COMPLETED,
+            completed_at=timezone.now(),
+        )
+        res = self.client.get("/monitor/university/")
+        self.assertEqual(res.status_code, 200)
+        self.assertIn("courses", res.context)
+        self.assertIn("student_list", res.context)
+        self.assertIn("recent_sessions", res.context)
+        self.assertGreaterEqual(res.context["total_uni_tests_all"], 1)

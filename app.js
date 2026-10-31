@@ -1653,7 +1653,8 @@ function recordCompletedSessionToHistory(session) {
     duration_minutes: session.durationMinutes || 0,
     mode: session.mode || "normal",
     mode_label: session.mode === "timed" ? "Timed Practice" : (session.mode === "sprint" ? "Daily Sprint" : (session.mode === "challenge" ? "Friend Challenge" : "Guided Practice")),
-    isUniversity: Boolean(session.isUniversity)
+    isUniversity: Boolean(session.isUniversity),
+    syncedToBackend: Boolean(session.reportedComplete)
   };
   completedTests = [completedRecord, ...completedTests.filter(t => t.id !== completedRecord.id)].slice(0, 100);
   put("meta", { key: "completed_tests", list: completedTests }).catch(() => {});
@@ -1751,9 +1752,43 @@ async function syncPendingAttempts() {
     for (const item of pendingBookmarks) {
       if (item.action === "add" && !bookmarks.some(bookmark => bookmark.questionId === item.questionId)) { const bookmark = { questionId: item.questionId, savedAt: item.queuedAt }; await put("bookmarks", bookmark); bookmarks.push(bookmark); }
       if (item.action === "remove") { await storeAction("bookmarks", "readwrite", store => store.delete(item.questionId)); bookmarks = bookmarks.filter(bookmark => bookmark.questionId !== item.questionId); }
+      await syncPendingCompletedTests();
     }
   })().then(() => { pendingSyncCount = 0; if (route !== "session") render(); return true; }).catch(() => false).finally(() => { syncPromise = null; });
   return syncPromise;
+}
+
+async function syncPendingCompletedTests() {
+  if (!authToken || !navigator.onLine) return;
+  if (!Array.isArray(completedTests) || !completedTests.length) return;
+  let changed = false;
+  for (const t of completedTests) {
+    if (t.syncedToBackend) continue;
+    try {
+      const isUni = Boolean(t.isUniversity);
+      const syncFn = isUni ? api.recordUniversitySession : (api.recordSession || api.recordUniversitySession);
+      const response = await syncFn(authToken, {
+        track: isUni ? "university" : "aspirant",
+        course_code: isUni ? (t.subject || "ANA 201") : "",
+        subject_slug: !isUni ? (t.subject || "general") : "",
+        topic_title: t.topic || (isUni ? "University Practice" : "Practice Session"),
+        total_questions: t.total || t.answered || 10,
+        correct_answers: t.correct || 0,
+        time_spent_seconds: (t.duration_minutes || 0) * 60,
+        mode: t.mode || "timed",
+      });
+      t.syncedToBackend = true;
+      if (response?.session_id) t.remoteId = response.session_id;
+      changed = true;
+      if (response?.stats) applyRemoteStats(response.stats);
+    } catch {
+      // Retry next sync
+    }
+  }
+  if (changed) {
+    await put("meta", { key: "completed_tests", list: completedTests });
+    await put("profile", profile);
+  }
 }
 
 async function queueBookmarkAction(questionId, action) {

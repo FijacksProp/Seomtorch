@@ -1,0 +1,280 @@
+{% extends 'monitor/base.html' %}
+{% block title %}University Medical Track ({{ range_label }}){% endblock %}
+{% block content %}
+
+<div class="page-heading">
+  <div>
+    <p class="kicker">🩺 University Medical Track</p>
+    <h1>Pre-Clinical &amp; Medical Command Center.</h1>
+    <p>Specialized analytics for undergraduate MBBS/BDS courses, clinical anatomy, physiology, and topic diagnostics.</p>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <span class="badge" style="background:#0d9488;color:#ffffff;font-weight:700;padding:6px 12px;border-radius:20px;">Undergraduate Medical</span>
+    <span style="font-size:13px;color:var(--color-muted);">{% now "j F Y" %}</span>
+  </div>
+</div>
+
+<!-- Date Range Filter Bar -->
+<div class="range-filter-bar" style="margin-bottom:20px;">
+  <div class="range-filter-label">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    <span>Time Range:</span>
+  </div>
+  <div class="range-pills">
+    <a href="?range=today{% if query %}&q={{ query }}{% endif %}" class="{% if range_param == 'today' %}active{% endif %}">Today</a>
+    <a href="?range=7d{% if query %}&q={{ query }}{% endif %}" class="{% if range_param == '7d' %}active{% endif %}">Last 7 Days</a>
+    <a href="?range=30d{% if query %}&q={{ query }}{% endif %}" class="{% if range_param == '30d' %}active{% endif %}">Last 30 Days</a>
+    <a href="?range=all{% if query %}&q={{ query }}{% endif %}" class="{% if range_param == 'all' %}active{% endif %}">All Time</a>
+  </div>
+</div>
+
+<!-- University Metrics Grid -->
+<section class="metric-grid-enhanced" style="margin-bottom:28px;">
+  <article class="metric-card">
+    <span class="label">University Tests ({{ range_label }})</span>
+    <span class="value">{{ period_uni_tests }}</span>
+    <span class="subtext">All-time completed: <strong>{{ total_uni_tests_all }}</strong> tests</span>
+  </article>
+
+  <article class="metric-card">
+    <span class="label">Medical Students</span>
+    <span class="value">{{ total_uni_students }}</span>
+    <span class="subtext">Active in period: <strong>{{ period_active_students }}</strong></span>
+  </article>
+
+  <article class="metric-card">
+    <span class="label">Average Test Score</span>
+    <span class="value">{% if period_avg_score %}{{ period_avg_score }}%{% else %}—{% endif %}</span>
+    <span class="subtext">Overall question accuracy: <strong>{{ period_accuracy }}%</strong></span>
+  </article>
+
+  <article class="metric-card">
+    <span class="label">Course Access Coverage</span>
+    <span class="value" style="font-size:20px;line-height:1.3;display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;">
+      <span class="badge-all-access" style="padding:3px 8px;font-size:12px;border-radius:12px;">{{ all_access_count }} All-Access</span>
+      <span class="badge-trial" style="padding:3px 8px;font-size:12px;border-radius:12px;">{{ trial_count }} Trial</span>
+      <span class="badge-single" style="padding:3px 8px;font-size:12px;border-radius:12px;">{{ single_count }} Pass</span>
+    </span>
+    <span class="subtext">Free / Exploring students: <strong>{{ free_count }}</strong></span>
+  </article>
+</section>
+
+<!-- University Medical Courses Grid -->
+<section style="margin-bottom:36px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+    <div>
+      <h2 style="margin:0;font-size:20px;font-weight:700;color:var(--color-ink);">Medical Curriculum Diagnostics</h2>
+      <p style="margin:4px 0 0;font-size:13px;color:var(--color-muted);">Topic coverage, student test volume, and accuracy per pre-clinical course.</p>
+    </div>
+    <span class="badge" style="background:rgba(13,148,136,0.1);color:#0d9488;font-weight:600;padding:4px 10px;border-radius:12px;">{{ courses|length }} Courses Available</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(310px, 1fr));gap:20px;">
+    {% for c in courses %}
+    <div style="background:var(--color-surface, #ffffff);border:1px solid var(--color-border, #e2e8f0);border-radius:16px;padding:22px;box-shadow:0 4px 12px rgba(0,0,0,0.03);display:flex;flex-direction:column;justify-content:space-between;">
+      <div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+          <span style="display:inline-block;background:{{ c.color }};color:#ffffff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:8px;letter-spacing:0.04em;">{{ c.code }}</span>
+          <span style="font-size:12px;font-weight:600;color:var(--color-muted);">{{ c.topics_count }} Core Topics</span>
+        </div>
+        <h3 style="margin:0 0 10px;font-size:16px;font-weight:700;color:var(--color-ink);line-height:1.4;">{{ c.name }}</h3>
+        
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;padding:12px;background:var(--color-paper, rgba(0,0,0,0.02));border-radius:10px;">
+          <div>
+            <span style="display:block;font-size:11px;color:var(--color-muted);text-transform:uppercase;letter-spacing:0.05em;font-weight:600;">Tests Taken</span>
+            <strong style="font-size:18px;color:var(--color-ink);">{{ c.tests_count }}</strong>
+          </div>
+          <div>
+            <span style="display:block;font-size:11px;color:var(--color-muted);text-transform:uppercase;letter-spacing:0.05em;font-weight:600;">Practicing Medics</span>
+            <strong style="font-size:18px;color:var(--color-ink);">{{ c.students_count }}</strong>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="margin-bottom:12px;">
+          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;">
+            <span style="color:var(--color-muted);font-weight:600;">Course Accuracy</span>
+            <strong style="color:{% if c.accuracy >= 70 %}#059669{% elif c.accuracy >= 50 %}#d97706{% else %}#dc2626{% endif %};">{{ c.accuracy }}%</strong>
+          </div>
+          <div style="height:8px;background:#f1f5f9;border-radius:4px;overflow:hidden;">
+            <div style="height:100%;width:{{ c.accuracy }}%;background:{% if c.accuracy >= 70 %}#059669{% elif c.accuracy >= 50 %}#d97706{% else %}#dc2626{% endif %};border-radius:4px;"></div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--color-muted);padding-top:10px;border-top:1px solid var(--color-border, #e2e8f0);">
+          <span>Average Score: <strong style="color:var(--color-ink);">{{ c.avg_score }}%</strong></span>
+          <span>Pass Rate: <strong style="color:var(--color-ink);">{{ c.pass_rate }}%</strong></span>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Recent University Test Activity Stream -->
+<section style="margin-bottom:36px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+    <div>
+      <h2 style="margin:0;font-size:20px;font-weight:700;color:var(--color-ink);">Recent University Practice Activity</h2>
+      <p style="margin:4px 0 0;font-size:13px;color:var(--color-muted);">Live feed of university tests submitted by medical students.</p>
+    </div>
+    <span style="font-size:12px;color:var(--color-muted);">Showing latest {{ recent_sessions|length }} sessions</span>
+  </div>
+
+  <div style="background:var(--color-surface, #ffffff);border:1px solid var(--color-border, #e2e8f0);border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+    {% if recent_sessions %}
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;text-align:left;font-size:13px;">
+        <thead>
+          <tr style="background:var(--color-paper, rgba(0,0,0,0.02));border-bottom:1px solid var(--color-border, #e2e8f0);color:var(--color-muted);font-size:11.5px;text-transform:uppercase;letter-spacing:0.06em;">
+            <th style="padding:12px 18px;">Student</th>
+            <th style="padding:12px 18px;">Course</th>
+            <th style="padding:12px 18px;">Topic</th>
+            <th style="padding:12px 18px;">Score</th>
+            <th style="padding:12px 18px;">Time</th>
+            <th style="padding:12px 18px;">Completed</th>
+            <th style="padding:12px 18px;">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for sess in recent_sessions %}
+          <tr style="border-bottom:1px solid var(--color-border, #f1f5f9);">
+            <td style="padding:14px 18px;">
+              <a href="{% url 'monitor:student-detail' sess.user.public_id %}" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--color-ink);">
+                <span style="display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:#0d9488;color:#ffffff;font-size:12px;font-weight:700;">{{ sess.user.username|slice:":1"|upper }}</span>
+                <div>
+                  <strong style="display:block;font-size:13px;">{{ sess.user.username }}</strong>
+                  <span style="font-size:11px;color:var(--color-muted);font-family:monospace;">{{ sess.user.public_id }}</span>
+                </div>
+              </a>
+            </td>
+            <td style="padding:14px 18px;">
+              <span style="display:inline-block;background:rgba(13,148,136,0.1);color:#0d9488;font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:6px;">{{ sess.course_code|default:"ANA 201" }}</span>
+            </td>
+            <td style="padding:14px 18px;max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+              <span title="{{ sess.topic_title }}">{{ sess.topic_title|default:"Clinical Practice" }}</span>
+            </td>
+            <td style="padding:14px 18px;">
+              <strong>{{ sess.correct_answers }} / {{ sess.total_questions }}</strong>
+              <span style="font-size:11px;color:var(--color-muted);margin-left:4px;">({{ sess.score_pct }}%)</span>
+            </td>
+            <td style="padding:14px 18px;color:var(--color-muted);">
+              {{ sess.formatted_duration }}
+            </td>
+            <td style="padding:14px 18px;color:var(--color-muted);font-size:12px;">
+              {{ sess.completed_at|date:"d M Y, H:i" }}
+            </td>
+            <td style="padding:14px 18px;">
+              {% if sess.passed %}
+              <span style="display:inline-block;padding:3px 8px;border-radius:12px;background:#ecfdf5;color:#059669;border:1px solid #a7f3d0;font-size:11px;font-weight:700;">Passed</span>
+              {% else %}
+              <span style="display:inline-block;padding:3px 8px;border-radius:12px;background:#fff1f2;color:#e11d48;border:1px solid #fecdd3;font-size:11px;font-weight:700;">Review Needed</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div style="padding:48px 24px;text-align:center;color:var(--color-muted);">
+      <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.8" style="margin-bottom:8px;opacity:0.6;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <p style="margin:0 0 6px;font-size:15px;font-weight:600;color:var(--color-ink);">No university tests recorded yet in this time frame</p>
+      <p style="margin:0;font-size:13px;">As medical students complete practice sessions, their scores, durations, and answers will appear here in real time.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- University Medical Students Directory -->
+<section>
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:14px;">
+    <div>
+      <h2 style="margin:0;font-size:20px;font-weight:700;color:var(--color-ink);">University Medical Students</h2>
+      <p style="margin:4px 0 0;font-size:13px;color:var(--color-muted);">Student roster currently enrolled or active in the university track.</p>
+    </div>
+
+    <!-- Search Form -->
+    <form method="get" style="display:flex;gap:8px;max-width:320px;width:100%;">
+      <input type="hidden" name="range" value="{{ range_param }}">
+      <input type="text" name="q" value="{{ query }}" placeholder="Search by ID, username, medical school..." style="flex:1;padding:8px 12px;border:1px solid var(--color-border, #cbd5e1);border-radius:8px;font-size:13px;">
+      <button type="submit" class="button" style="padding:8px 14px;background:#0d9488;color:#ffffff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">Filter</button>
+    </form>
+  </div>
+
+  <div style="background:var(--color-surface, #ffffff);border:1px solid var(--color-border, #e2e8f0);border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+    {% if student_list %}
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;text-align:left;font-size:13px;">
+        <thead>
+          <tr style="background:var(--color-paper, rgba(0,0,0,0.02));border-bottom:1px solid var(--color-border, #e2e8f0);color:var(--color-muted);font-size:11.5px;text-transform:uppercase;letter-spacing:0.06em;">
+            <th style="padding:12px 18px;">Student</th>
+            <th style="padding:12px 18px;">Medical School / Level</th>
+            <th style="padding:12px 18px;">Uni Tests</th>
+            <th style="padding:12px 18px;">Average Score</th>
+            <th style="padding:12px 18px;">Accuracy</th>
+            <th style="padding:12px 18px;">Access Status</th>
+            <th style="padding:12px 18px;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in student_list %}
+          <tr style="border-bottom:1px solid var(--color-border, #f1f5f9);">
+            <td style="padding:14px 18px;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:#0d9488;color:#ffffff;font-size:13px;font-weight:700;">{{ student.username|slice:":1"|upper }}</span>
+                <div>
+                  <strong style="display:block;font-size:13.5px;color:var(--color-ink);">{{ student.username }}</strong>
+                  <span style="font-size:11px;color:var(--color-muted);font-family:monospace;">{{ student.public_id }}</span>
+                </div>
+              </div>
+            </td>
+            <td style="padding:14px 18px;color:var(--color-ink);">
+              {% if student.university_profile %}
+              <strong>{{ student.university_profile.institution|default:"Medical Faculty" }}</strong>
+              <span style="display:block;font-size:11.5px;color:var(--color-muted);">{{ student.university_profile.get_level_display|default:"Undergraduate" }} · {{ student.university_profile.field_of_study|default:"Medicine" }}</span>
+              {% else %}
+              <span style="color:var(--color-muted);">Pre-Clinical Medic</span>
+              {% endif %}
+            </td>
+            <td style="padding:14px 18px;">
+              <strong>{{ student.uni_test_count }}</strong>
+            </td>
+            <td style="padding:14px 18px;">
+              {% if student.uni_avg_score %}
+              <strong style="color:{% if student.uni_avg_score >= 70 %}#059669{% elif student.uni_avg_score >= 50 %}#d97706{% else %}#dc2626{% endif %};">{{ student.uni_avg_score }}%</strong>
+              {% else %}
+              <span style="color:var(--color-muted);">—</span>
+              {% endif %}
+            </td>
+            <td style="padding:14px 18px;">
+              {% if student.uni_accuracy %}
+              <strong>{{ student.uni_accuracy }}%</strong>
+              {% else %}
+              <span style="color:var(--color-muted);">—</span>
+              {% endif %}
+            </td>
+            <td style="padding:14px 18px;">
+              <span class="{{ student.access_badge_class }}" style="padding:3px 10px;font-size:11px;border-radius:12px;font-weight:700;">{{ student.access_badge }}</span>
+            </td>
+            <td style="padding:14px 18px;">
+              <a href="{% url 'monitor:student-detail' student.public_id %}" style="display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:#0d9488;text-decoration:none;">
+                View Diagnostics →
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div style="padding:48px 24px;text-align:center;color:var(--color-muted);">
+      <p style="margin:0 0 6px;font-size:15px;font-weight:600;color:var(--color-ink);">No university students found</p>
+      <p style="margin:0;font-size:13px;">Students who switch to university mode or take medical tests will be listed here.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

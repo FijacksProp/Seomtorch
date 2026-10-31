@@ -10,6 +10,7 @@ urlpatterns = [
 
     # Dashboard & Academic Overview
     path("", monitor_views.dashboard, name="dashboard"),
+    path("university/", monitor_views.university_dashboard, name="university"),
 
     # Student Directory & Detail
     path("students/", monitor_views.students, name="students"),

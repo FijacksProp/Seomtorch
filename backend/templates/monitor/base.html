@@ -29,6 +29,9 @@
       </a>
     </div>
     <div class="mobile-quick-actions">
+      <a href="{% url 'monitor:university' %}" class="mobile-btn-action" title="University Medical Track" style="color:#0d9488;border-color:rgba(13,148,136,0.3);">
+        <span>🩺 Uni</span>
+      </a>
       <a href="{% url 'monitor:add-question' %}" class="mobile-btn-action" title="Add Question">
         <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         <span>+Q</span>
@@ -55,6 +58,10 @@
         <a class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'monitor:dashboard' %}">
           <svg viewBox="0 0 24 24"><path d="M4 13h6V4H4ZM14 20h6v-9h-6ZM4 20h6v-3H4ZM14 7h6V4h-6Z"/></svg>
           <span>Overview</span>
+        </a>
+        <a class="{% if request.resolver_match.url_name == 'university' %}active{% endif %}" href="{% url 'monitor:university' %}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>
+          <span>🩺 University Track</span>
         </a>
         <a class="{% if 'student' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'monitor:students' %}">
           <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2.5 21v-2a6.5 6.5 0 0 1 13 0v2M16 4.5a4 4 0 0 1 0 7.5M18 15a6 6 0 0 1 3.5 5.5"/></svg>
@@ -86,6 +93,9 @@
       <header class="monitor-top">
         <div><span class="status-dot"></span>System online · Seomtorch 2.0</div>
         <div class="monitor-top-actions">
+          <a href="{% url 'monitor:university' %}" style="background:#0d9488;color:#ffffff;display:inline-flex;align-items:center;gap:6px;">
+            <span>🩺 University Track</span>
+          </a>
           <a href="{% url 'monitor:add-question' %}" style="display:inline-flex;align-items:center;gap:6px;">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             Add Question

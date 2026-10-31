@@ -323,6 +323,156 @@ def dashboard(request):
     return render(request, "monitor/dashboard.html", context)
 
 
+# ─── University Track Command Center ─────────────────────────────────────────
+
+@staff_member_required
+def university_dashboard(request):
+    range_param = request.GET.get("range", "all").lower().strip()
+    query = request.GET.get("q", "").strip()
+    now = timezone.now()
+    today_date = timezone.localdate()
+
+    if range_param == "today":
+        start_date = timezone.make_aware(datetime.combine(today_date, datetime.min.time()))
+        range_label = "Today"
+    elif range_param == "7d":
+        start_date = now - timedelta(days=7)
+        range_label = "Last 7 Days"
+    elif range_param == "30d":
+        start_date = now - timedelta(days=30)
+        range_label = "Last 30 Days"
+    else:
+        range_param = "all"
+        start_date = None
+        range_label = "All Time"
+
+    # Base university sessions
+    uni_sessions_all = PracticeSession.objects.filter(track="university", status=PracticeSession.Status.COMPLETED)
+    uni_sessions = uni_sessions_all
+    if start_date:
+        uni_sessions = uni_sessions.filter(completed_at__gte=start_date)
+
+    # University students
+    uni_student_ids = set(uni_sessions_all.values_list("user_id", flat=True))
+    uni_users_qs = User.objects.filter(
+        Q(active_mode="university") | Q(user_type="university") | Q(id__in=uni_student_ids),
+        is_staff=False
+    ).distinct()
+
+    total_uni_students = uni_users_qs.count()
+    total_uni_tests_all = uni_sessions_all.count()
+    period_uni_tests = uni_sessions.count()
+
+    tot_q = uni_sessions.aggregate(s=Sum("total_questions"))["s"] or 0
+    cor_q = uni_sessions.aggregate(s=Sum("correct_answers"))["s"] or 0
+    period_accuracy = percentage(cor_q, tot_q)
+
+    # Average score
+    completed_rows = list(uni_sessions.only("correct_answers", "total_questions"))
+    scores = [percentage(s.correct_answers, s.total_questions) for s in completed_rows if s.total_questions > 0]
+    period_avg_score = round(sum(scores) / len(scores)) if scores else 0
+
+    # Active students in period
+    period_active_students = uni_sessions.values("user_id").distinct().count()
+
+    # Access tier counts for university students
+    now_dt = timezone.now()
+    active_grants = CourseAccess.objects.filter(user__in=uni_users_qs, is_active=True, expires_at__gte=now_dt)
+    all_access_count = active_grants.filter(access_type=CourseAccess.AccessType.ALL_ACCESS).values("user_id").distinct().count()
+    trial_count = active_grants.filter(access_type=CourseAccess.AccessType.TRIAL).values("user_id").distinct().count()
+    single_count = active_grants.filter(access_type=CourseAccess.AccessType.SINGLE_COURSE).values("user_id").distinct().count()
+    free_count = max(0, total_uni_students - (all_access_count + trial_count + single_count))
+
+    # University Medical Courses breakdown
+    courses = [
+        {"code": "ANA 201", "name": "Gross Anatomy: Upper & Lower Limb", "topics_count": 5, "slug": "ana-201", "color": "#059669"},
+        {"code": "ANA 203", "name": "General & Systemic Embryology", "topics_count": 6, "slug": "ana-203", "color": "#0d9488"},
+        {"code": "PIO 201", "name": "Physiology and Blood", "topics_count": 4, "slug": "pio-201", "color": "#d97706"},
+    ]
+    for c in courses:
+        c_sess = uni_sessions.filter(Q(course_code__iexact=c["code"]) | Q(subject__code__iexact=c["code"]))
+        c["tests_count"] = c_sess.count()
+        c["students_count"] = c_sess.values("user_id").distinct().count()
+        c_tot = c_sess.aggregate(s=Sum("total_questions"))["s"] or 0
+        c_cor = c_sess.aggregate(s=Sum("correct_answers"))["s"] or 0
+        c["accuracy"] = percentage(c_cor, c_tot)
+        c_scores = [percentage(s.correct_answers, s.total_questions) for s in c_sess if s.total_questions > 0]
+        c["avg_score"] = round(sum(c_scores) / len(c_scores)) if c_scores else 0
+        pass_count = sum(1 for sc in c_scores if sc >= 50)
+        c["pass_rate"] = percentage(pass_count, len(c_scores)) if c_scores else 0
+
+    # Student list with university metrics
+    student_rows = uni_users_qs.select_related(
+        "learning_stats", "university_profile"
+    ).prefetch_related(
+        Prefetch("practice_sessions", queryset=uni_sessions_all, to_attr="uni_test_rows"),
+        "course_accesses"
+    ).order_by("-date_joined")
+
+    if query:
+        student_rows = student_rows.filter(
+            Q(public_id__iexact=query) | Q(username__icontains=query) | Q(email__icontains=query) |
+            Q(university_profile__institution__icontains=query)
+        )
+
+    student_list = []
+    for user in student_rows[:120]:
+        u_tests = user.uni_test_rows
+        u_scores = [percentage(item.correct_answers, item.total_questions) for item in u_tests if item.total_questions > 0]
+        user.uni_test_count = len(u_tests)
+        user.uni_avg_score = round(sum(u_scores) / len(u_scores)) if u_scores else 0
+        u_tot = sum(item.total_questions for item in u_tests)
+        u_cor = sum(item.correct_answers for item in u_tests)
+        user.uni_accuracy = percentage(u_cor, u_tot)
+
+        # Check access badge
+        active_grant = user.course_accesses.filter(is_active=True, expires_at__gte=now_dt).first()
+        if active_grant:
+            if active_grant.access_type == CourseAccess.AccessType.TRIAL:
+                user.access_badge = "3-Day Trial"
+                user.access_badge_class = "badge-trial"
+            elif active_grant.access_type == CourseAccess.AccessType.ALL_ACCESS:
+                user.access_badge = "All-Access Pass"
+                user.access_badge_class = "badge-all-access"
+            else:
+                user.access_badge = f"{active_grant.course_code} Pass"
+                user.access_badge_class = "badge-single"
+        else:
+            user.access_badge = "Free"
+            user.access_badge_class = "badge-free"
+
+        student_list.append(user)
+
+    # Recent University Sessions Log (latest 25)
+    recent_sessions = list(uni_sessions_all.select_related("user").order_by("-completed_at")[:25])
+    for sess in recent_sessions:
+        dur = sess.time_spent_seconds or ((sess.duration_minutes or 0) * 60)
+        sess.formatted_duration = f"{dur // 60}m {dur % 60}s" if dur >= 60 else f"{dur}s"
+        score = percentage(sess.correct_answers, sess.total_questions)
+        sess.score_pct = score
+        sess.passed = score >= 50
+
+    context = {
+        "range_param": range_param,
+        "range_label": range_label,
+        "query": query,
+        "total_uni_students": total_uni_students,
+        "total_uni_tests_all": total_uni_tests_all,
+        "period_uni_tests": period_uni_tests,
+        "period_accuracy": period_accuracy,
+        "period_avg_score": period_avg_score,
+        "period_active_students": period_active_students,
+        "all_access_count": all_access_count,
+        "trial_count": trial_count,
+        "single_count": single_count,
+        "free_count": free_count,
+        "courses": courses,
+        "student_list": student_list,
+        "recent_sessions": recent_sessions,
+    }
+    return render(request, "monitor/university.html", context)
+
+
 # ─── Students Directory ─────────────────────────────────────────────────────
 
 @staff_member_required
