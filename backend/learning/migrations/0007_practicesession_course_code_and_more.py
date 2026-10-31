@@ -3,6 +3,13 @@
 from django.db import migrations, models
 
 
+def set_statement_timeout(apps, schema_editor):
+    if schema_editor.connection.vendor == "postgresql":
+        with schema_editor.connection.cursor() as cursor:
+            # Prevent Supabase default 8-second statement timeout from canceling schema DDL
+            cursor.execute("SET statement_timeout = 0;")
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -10,6 +17,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunPython(set_statement_timeout, migrations.RunPython.noop),
         migrations.AddField(
             model_name='practicesession',
             name='course_code',

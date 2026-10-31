@@ -56,6 +56,22 @@ DATABASES = {
     )
 }
 
+if DATABASES["default"].get("ENGINE") == "django.db.backends.postgresql":
+    options_dict = DATABASES["default"].setdefault("OPTIONS", {})
+    existing_opts = options_dict.get("options", "")
+    new_opts = []
+    # Supabase default statement_timeout is 8-15s, which causes
+    # OperationalError: canceling statement due to statement timeout during migrations
+    # or concurrent DDL. Set to 5 minutes (300,000ms) by default.
+    if "statement_timeout" not in existing_opts:
+        timeout_ms = os.environ.get("DATABASE_STATEMENT_TIMEOUT", "300000")
+        new_opts.append(f"-c statement_timeout={timeout_ms}")
+    if "lock_timeout" not in existing_opts:
+        lock_ms = os.environ.get("DATABASE_LOCK_TIMEOUT", "60000")
+        new_opts.append(f"-c lock_timeout={lock_ms}")
+    if new_opts:
+        options_dict["options"] = f"{' '.join(new_opts)} {existing_opts}".strip()
+
 AUTH_USER_MODEL = "accounts.User"
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},

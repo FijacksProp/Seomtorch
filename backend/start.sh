@@ -3,6 +3,7 @@ set -o errexit
 
 # Render's free tier does not support pre-deploy commands. These operations are
 # idempotent, so they can safely run before each application start.
+python manage.py prepare_db_for_migration || true
 python manage.py migrate --noinput
 python manage.py create_initial_superuser
 
