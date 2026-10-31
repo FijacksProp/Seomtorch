@@ -77,7 +77,7 @@ def session_analytics(queryset, include_recent=False):
         "average_score": round(mean(scores)) if scores else 0,
         "best_score": max(scores, default=0),
         "improvement": improvement,
-        "questions_in_tests": sum(item.answered_count for item in sessions),
+        "questions_in_tests": sum(item.answered_count if item.answered_count > 0 else item.total_questions for item in sessions),
         "by_mode": [
             {"mode": mode, "label": dict(PracticeSession.Mode.choices).get(mode, mode.title()), "count": len(values), "average_score": round(mean(values))}
             for mode, values in mode_groups.items()

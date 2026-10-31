@@ -311,11 +311,13 @@ class RecordSessionView(APIView):
 
         if not track:
             track = "university" if course_code else "aspirant"
+        if (course_code and (course_code.startswith("ANA") or course_code.startswith("PIO"))) or subject_slug.startswith(("ana-", "pio-")):
+            track = "university"
 
         try:
-            total_questions = max(0, int(request.data.get("total_questions", 0)))
+            total_questions = max(1, int(request.data.get("total_questions", 1)))
         except (ValueError, TypeError):
-            total_questions = 0
+            total_questions = 1
         try:
             correct_answers = max(0, min(total_questions, int(request.data.get("correct_answers", 0))))
         except (ValueError, TypeError):
@@ -331,20 +333,52 @@ class RecordSessionView(APIView):
 
         # Resolve subject
         subject = None
-        if track == "university" and course_code:
+        if course_code:
             norm_code = course_code.replace(" ", "")
             subject = Subject.objects.filter(
                 Q(code__iexact=course_code) |
+                Q(code__iexact=norm_code) |
                 Q(slug__icontains=norm_code.lower()) |
                 Q(name__icontains=course_code)
             ).first()
-        elif subject_slug:
+        if not subject and subject_slug:
             subject = Subject.objects.filter(
                 Q(slug__iexact=subject_slug) |
                 Q(name__iexact=subject_slug)
             ).first()
 
+        if subject and getattr(subject, "track", "") == "university":
+            track = "university"
+            if not course_code and getattr(subject, "code", None):
+                course_code = subject.code
+
         duration_minutes = max(1, round(time_spent_seconds / 60)) if time_spent_seconds else None
+
+        # Idempotency check: if user already submitted identical session within last 5 minutes
+        recent_cutoff = timezone.now() - timedelta(minutes=5)
+        existing = PracticeSession.objects.filter(
+            user=request.user,
+            track=track,
+            course_code=course_code,
+            total_questions=total_questions,
+            correct_answers=correct_answers,
+            completed_at__gte=recent_cutoff,
+        ).first()
+
+        if existing:
+            return Response({
+                "session_id": str(existing.id),
+                "track": existing.track,
+                "course_code": existing.course_code,
+                "subject": existing.subject.slug if existing.subject else subject_slug,
+                "topic_title": existing.topic_title,
+                "correct": existing.correct_answers,
+                "total": existing.total_questions,
+                "accuracy": existing.accuracy,
+                "xp_earned": 0,
+                "stats": stats_payload(request.user),
+                "badges_earned": [],
+            }, status=status.HTTP_200_OK)
 
         session = PracticeSession.objects.create(
             user=request.user,
@@ -360,6 +394,11 @@ class RecordSessionView(APIView):
             status=PracticeSession.Status.COMPLETED,
             completed_at=timezone.now(),
         )
+
+        # Update User active mode if taking university course
+        if track == "university" and getattr(request.user, "active_mode", "") != "university":
+            request.user.active_mode = "university"
+            request.user.save(update_fields=("active_mode",))
 
         # Update UserStats XP and streak
         stats, _ = UserStats.objects.select_for_update().get_or_create(user=request.user)

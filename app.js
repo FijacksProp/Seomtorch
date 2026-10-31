@@ -1638,8 +1638,12 @@ function recordCompletedSessionToHistory(session) {
   const correct = typeof session.correct === "number" ? session.correct : (session.answers ? session.answers.filter(item => item.correct).length : 0);
   const total = session.queue ? session.queue.length : answered;
   const score = total ? Math.round((correct / total) * 100) : 0;
+  const localRecordId = session.remoteId || `test-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+  session.localRecordId = localRecordId;
+  const isAlreadySynced = Boolean(session.remoteId && !String(session.remoteId).startsWith("test-"));
   const completedRecord = {
-    id: session.remoteId || `test-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    id: localRecordId,
+    remoteId: isAlreadySynced ? session.remoteId : null,
     focus: session.isUniversity
       ? `${session.subject} · ${session.topic || "Practice"}`
       : (session.topic ? `${subjectName(session.subject)} · ${session.topic}` : (subjectName(session.subject) || "General Practice")),
@@ -1654,7 +1658,7 @@ function recordCompletedSessionToHistory(session) {
     mode: session.mode || "normal",
     mode_label: session.mode === "timed" ? "Timed Practice" : (session.mode === "sprint" ? "Daily Sprint" : (session.mode === "challenge" ? "Friend Challenge" : "Guided Practice")),
     isUniversity: Boolean(session.isUniversity),
-    syncedToBackend: Boolean(session.reportedComplete)
+    syncedToBackend: isAlreadySynced
   };
   completedTests = [completedRecord, ...completedTests.filter(t => t.id !== completedRecord.id)].slice(0, 100);
   put("meta", { key: "completed_tests", list: completedTests }).catch(() => {});
@@ -1752,8 +1756,8 @@ async function syncPendingAttempts() {
     for (const item of pendingBookmarks) {
       if (item.action === "add" && !bookmarks.some(bookmark => bookmark.questionId === item.questionId)) { const bookmark = { questionId: item.questionId, savedAt: item.queuedAt }; await put("bookmarks", bookmark); bookmarks.push(bookmark); }
       if (item.action === "remove") { await storeAction("bookmarks", "readwrite", store => store.delete(item.questionId)); bookmarks = bookmarks.filter(bookmark => bookmark.questionId !== item.questionId); }
-      await syncPendingCompletedTests();
     }
+    await syncPendingCompletedTests();
   })().then(() => { pendingSyncCount = 0; if (route !== "session") render(); return true; }).catch(() => false).finally(() => { syncPromise = null; });
   return syncPromise;
 }
@@ -1763,9 +1767,10 @@ async function syncPendingCompletedTests() {
   if (!Array.isArray(completedTests) || !completedTests.length) return;
   let changed = false;
   for (const t of completedTests) {
-    if (t.syncedToBackend) continue;
+    const isSynced = Boolean(t.syncedToBackend && t.remoteId && !String(t.remoteId).startsWith("test-"));
+    if (isSynced) continue;
     try {
-      const isUni = Boolean(t.isUniversity);
+      const isUni = Boolean(t.isUniversity || (t.subject && (t.subject.startsWith("ANA") || t.subject.startsWith("PIO"))));
       const syncFn = isUni ? api.recordUniversitySession : (api.recordSession || api.recordUniversitySession);
       const response = await syncFn(authToken, {
         track: isUni ? "university" : "aspirant",
@@ -2010,6 +2015,16 @@ function renderResult() {
       time_spent_seconds: timeSpent,
       mode: activeSession.durationMinutes > 0 ? "timed" : "normal",
     }).then(async response => {
+      if (response?.session_id) {
+        activeSession.remoteId = response.session_id;
+        const targetId = activeSession.localRecordId;
+        const record = completedTests.find(t => (targetId && t.id === targetId) || (!t.remoteId && t.isUniversity === isUni && t.subject === activeSession.subject && t.total === activeSession.queue.length));
+        if (record) {
+          record.syncedToBackend = true;
+          record.remoteId = response.session_id;
+          await put("meta", { key: "completed_tests", list: completedTests });
+        }
+      }
       if (response?.stats) {
         applyRemoteStats(response.stats);
         progressData = null;
@@ -4146,6 +4161,7 @@ async function fetchUniJson(path) {
 }
 
 async function renderUniversity() {
+  if (authToken && navigator.onLine) syncPendingCompletedTests().catch(() => {});
   if (uniRoute === "levels" && uniDeptId) return renderUniLevels();
   if (uniRoute === "courses" && uniDeptId && uniLevel) return renderUniCourses();
   if (uniRoute === "course" && uniDeptId && uniLevel && uniCourseId) return renderUniCourse();

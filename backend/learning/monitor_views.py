@@ -116,25 +116,42 @@ def dashboard(request):
     # Base QuerySets & Track Demarcation Counters
     student_filter = Q(is_staff=False)
     total_students_all = User.objects.filter(student_filter).count()
-    aspirant_students_count = User.objects.filter(student_filter, active_mode="aspirant").count()
-    university_students_count = User.objects.filter(student_filter, active_mode="university").count()
 
-    total_tests_all = PracticeSession.objects.filter(status=PracticeSession.Status.COMPLETED).count()
-    aspirant_tests_all = PracticeSession.objects.filter(status=PracticeSession.Status.COMPLETED, track="aspirant").count()
-    university_tests_all = PracticeSession.objects.filter(status=PracticeSession.Status.COMPLETED, track="university").count()
+    uni_q = (
+        Q(track="university") |
+        Q(course_code__in=["ANA 201", "ANA 203", "PIO 201"]) |
+        Q(course_code__istartswith="ANA") |
+        Q(course_code__istartswith="PIO") |
+        Q(subject__track="university") |
+        Q(subject__code__in=["ANA 201", "ANA 203", "PIO 201"]) |
+        Q(subject__slug__in=["ana-201", "ana-203", "pio-201"])
+    )
+    # Auto-heal legacy or unassigned sessions to university track
+    PracticeSession.objects.filter(uni_q).exclude(track="university").update(track="university")
 
-    sessions_qs = PracticeSession.objects.filter(status=PracticeSession.Status.COMPLETED)
+    total_completed_q = Q(status=PracticeSession.Status.COMPLETED) | Q(completed_at__isnull=False)
+    total_tests_all = PracticeSession.objects.filter(total_completed_q).count()
+    university_tests_all = PracticeSession.objects.filter(total_completed_q).filter(uni_q).count()
+    aspirant_tests_all = PracticeSession.objects.filter(total_completed_q).exclude(uni_q).count()
+
+    uni_user_ids = set(PracticeSession.objects.filter(total_completed_q).filter(uni_q).values_list("user_id", flat=True))
+    university_students_count = User.objects.filter(student_filter).filter(
+        Q(active_mode="university") | Q(user_type="university") | Q(id__in=uni_user_ids)
+    ).distinct().count()
+    aspirant_students_count = max(0, total_students_all - university_students_count)
+
+    sessions_qs = PracticeSession.objects.filter(total_completed_q)
     attempts_qs = Attempt.objects.all()
     events_qs = ActivityEvent.objects.filter(user__is_staff=False)
     users_qs = User.objects.filter(student_filter)
     tx_qs = PaymentTransaction.objects.filter(status=PaymentTransaction.Status.SUCCESS)
 
     if track_param == "aspirant":
-        sessions_qs = sessions_qs.filter(track="aspirant")
-        users_qs = users_qs.filter(active_mode="aspirant")
+        sessions_qs = sessions_qs.exclude(uni_q)
+        users_qs = users_qs.filter(Q(active_mode="aspirant") | Q(user_type="aspirant")).exclude(id__in=uni_user_ids)
     elif track_param == "university":
-        sessions_qs = sessions_qs.filter(track="university")
-        users_qs = users_qs.filter(active_mode="university")
+        sessions_qs = sessions_qs.filter(uni_q)
+        users_qs = users_qs.filter(Q(active_mode="university") | Q(user_type="university") | Q(id__in=uni_user_ids)).distinct()
 
     if start_date:
         sessions_qs = sessions_qs.filter(completed_at__gte=start_date)
@@ -149,8 +166,8 @@ def dashboard(request):
     all_time_revenue = tx_qs.aggregate(s=Sum("amount"))["s"] or 0
 
     period_tests = sessions_qs.count()
-    aspirant_tests_period = PracticeSession.objects.filter(status=PracticeSession.Status.COMPLETED, track="aspirant", completed_at__gte=start_date if start_date else datetime.min).count() if start_date else aspirant_tests_all
-    university_tests_period = PracticeSession.objects.filter(status=PracticeSession.Status.COMPLETED, track="university", completed_at__gte=start_date if start_date else datetime.min).count() if start_date else university_tests_all
+    aspirant_tests_period = PracticeSession.objects.filter(total_completed_q, completed_at__gte=start_date if start_date else datetime.min).exclude(uni_q).count() if start_date else aspirant_tests_all
+    university_tests_period = PracticeSession.objects.filter(total_completed_q, uni_q, completed_at__gte=start_date if start_date else datetime.min).count() if start_date else university_tests_all
 
     # Active students: users with attempts or completed sessions
     session_user_ids = set(sessions_qs.values_list("user_id", flat=True))
@@ -271,9 +288,15 @@ def dashboard(request):
     university_subjects = list(Subject.objects.filter(is_active=True, track="university"))
     for subject in university_subjects:
         code = subject.code or subject.name[:7].strip()
+        code_no_space = code.replace(" ", "")
         uni_sess = PracticeSession.objects.filter(
-            Q(subject=subject) | Q(course_code__iexact=code),
-            status=PracticeSession.Status.COMPLETED
+            Q(subject=subject) |
+            Q(course_code__iexact=code) |
+            Q(course_code__icontains=code) |
+            Q(course_code__icontains=code_no_space) |
+            Q(subject__code__iexact=code) |
+            Q(subject__slug__icontains=subject.slug),
+            Q(status=PracticeSession.Status.COMPLETED) | Q(completed_at__isnull=False)
         )
         subject.test_count = uni_sess.count()
         subject.student_count = uni_sess.values("user_id").distinct().count()
@@ -432,8 +455,20 @@ def university_dashboard(request):
         start_date = None
         range_label = "All Time"
 
+    uni_q = (
+        Q(track="university") |
+        Q(course_code__in=["ANA 201", "ANA 203", "PIO 201"]) |
+        Q(course_code__istartswith="ANA") |
+        Q(course_code__istartswith="PIO") |
+        Q(subject__track="university") |
+        Q(subject__code__in=["ANA 201", "ANA 203", "PIO 201"]) |
+        Q(subject__slug__in=["ana-201", "ana-203", "pio-201"])
+    )
+    PracticeSession.objects.filter(uni_q).exclude(track="university").update(track="university")
+
+    total_completed_q = Q(status=PracticeSession.Status.COMPLETED) | Q(completed_at__isnull=False)
     # Base university sessions
-    uni_sessions_all = PracticeSession.objects.filter(track="university", status=PracticeSession.Status.COMPLETED)
+    uni_sessions_all = PracticeSession.objects.filter(uni_q, total_completed_q)
     uni_sessions = uni_sessions_all
     if start_date:
         uni_sessions = uni_sessions.filter(completed_at__gte=start_date)
@@ -476,7 +511,14 @@ def university_dashboard(request):
         {"code": "PIO 201", "name": "Physiology and Blood", "topics_count": 4, "slug": "pio-201", "color": "#d97706"},
     ]
     for c in courses:
-        c_sess = uni_sessions.filter(Q(course_code__iexact=c["code"]) | Q(subject__code__iexact=c["code"]))
+        code_no_space = c["code"].replace(" ", "")
+        c_sess = uni_sessions.filter(
+            Q(course_code__iexact=c["code"]) |
+            Q(course_code__icontains=c["code"]) |
+            Q(course_code__icontains=code_no_space) |
+            Q(subject__code__iexact=c["code"]) |
+            Q(subject__slug__icontains=c["slug"])
+        )
         c["tests_count"] = c_sess.count()
         c["students_count"] = c_sess.values("user_id").distinct().count()
         c_tot = c_sess.aggregate(s=Sum("total_questions"))["s"] or 0
