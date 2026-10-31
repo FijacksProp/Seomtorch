@@ -8,7 +8,16 @@
     <h1>Learning, at a glance.</h1>
     <p>Comprehensive academic performance, student engagement, and monetization analytics.</p>
   </div>
-  <span>{% now "j F Y" %}</span>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+    <a href="{% url 'monitor:add-question' %}" class="btn-primary" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;font-size:12px;font-weight:700;">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add Question
+    </a>
+    <a href="{% url 'monitor:export-csv' %}" class="btn-outline" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;font-size:12px;font-weight:700;background:var(--color-surface, #fff);border:1px solid var(--line);color:var(--color-ink);">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Export CSV
+    </a>
+  </div>
 </div>
 
 <!-- Date Range Filter Bar -->
@@ -47,7 +56,14 @@
 <!-- Metric Grid -->
 <section class="metric-grid-enhanced">
   <article class="metric-card">
-    <span class="label">Tests Completed ({{ range_label }})</span>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:6px;">
+      <span class="label">Tests Completed ({{ range_label }})</span>
+      {% if has_prior_period %}
+        <span class="metric-trend-badge {% if trend_tests > 0 %}trend-up{% elif trend_tests < 0 %}trend-down{% else %}trend-flat{% endif %}">
+          {% if trend_tests > 0 %}↑ +{{ trend_tests }}%{% elif trend_tests < 0 %}↓ {{ trend_tests }}%{% else %}→ 0%{% endif %}
+        </span>
+      {% endif %}
+    </div>
     <strong>{{ period_tests }}</strong>
     <small>
       {% if track_param == 'all' %}
@@ -61,13 +77,27 @@
   </article>
 
   <article class="metric-card">
-    <span class="label">Average Score ({{ range_label }})</span>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:6px;">
+      <span class="label">Average Score ({{ range_label }})</span>
+      {% if has_prior_period %}
+        <span class="metric-trend-badge {% if trend_score > 0 %}trend-up{% elif trend_score < 0 %}trend-down{% else %}trend-flat{% endif %}">
+          {% if trend_score > 0 %}↑ +{{ trend_score }}%{% elif trend_score < 0 %}↓ {{ trend_score }}%{% else %}→ 0%{% endif %}
+        </span>
+      {% endif %}
+    </div>
     <strong>{{ period_avg_score }}%</strong>
     <small>Across completed test papers in period</small>
   </article>
 
   <article class="metric-card highlight">
-    <span class="label">Active Students ({{ range_label }})</span>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:6px;">
+      <span class="label">Active Students ({{ range_label }})</span>
+      {% if has_prior_period %}
+        <span class="metric-trend-badge {% if trend_active > 0 %}trend-up{% elif trend_active < 0 %}trend-down{% else %}trend-flat{% endif %}">
+          {% if trend_active > 0 %}↑ +{{ trend_active }}%{% elif trend_active < 0 %}↓ {{ trend_active }}%{% else %}→ 0%{% endif %}
+        </span>
+      {% endif %}
+    </div>
     <strong>{{ period_active_students }}</strong>
     <small>{{ period_new_students }} new registered in this window</small>
   </article>
@@ -79,7 +109,14 @@
   </article>
 
   <article class="metric-card accent">
-    <span class="label">Revenue ({{ range_label }})</span>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:6px;">
+      <span class="label">Revenue ({{ range_label }})</span>
+      {% if has_prior_period and period_revenue > 0 %}
+        <span class="metric-trend-badge {% if trend_revenue > 0 %}trend-up{% elif trend_revenue < 0 %}trend-down{% else %}trend-flat{% endif %}">
+          {% if trend_revenue > 0 %}↑ +{{ trend_revenue }}%{% elif trend_revenue < 0 %}↓ {{ trend_revenue }}%{% else %}→ 0%{% endif %}
+        </span>
+      {% endif %}
+    </div>
     <strong>₦{{ period_revenue|floatformat:"0" }}</strong>
     <small>₦{{ all_time_revenue|floatformat:"0" }} total all-time subscriptions</small>
   </article>
@@ -167,6 +204,32 @@
 
 <style>
 /* Academic Catalog Pro Layout */
+.metric-trend-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 6px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.trend-up {
+  background: #ecfdf5;
+  color: #059669;
+}
+.trend-down {
+  background: #fff1f2;
+  color: #e11d48;
+}
+.trend-flat {
+  background: #f1f5f9;
+  color: #64748b;
+}
+.inactive-toggle-btn:hover {
+  background: #f1f5f9 !important;
+  border-color: #94a3b8 !important;
+  color: var(--color-ink) !important;
+}
+
 .catalog-panel {
   grid-column: 1 / -1 !important;
   background: var(--color-surface, #ffffff);
@@ -643,12 +706,15 @@
             <span style="font-size:11.5px;color:var(--color-muted);">JAMB / WAEC / UTME curriculum covering 15 core subjects</span>
           </div>
         </div>
-        <span class="badge badge-aspirant" style="font-size:11px;padding:3px 9px;">15 Subjects Active</span>
+        <span class="badge badge-aspirant" style="font-size:11px;padding:3px 9px;">
+          {% if active_aspirant_subjects %}{{ active_aspirant_subjects|length }} Active In Period{% else %}15 Core Subjects{% endif %}
+        </span>
       </div>
       {% endif %}
 
+      <!-- Active Subjects Grid -->
       <div class="aspirant-subjects-grid">
-        {% for subject in aspirant_subjects %}
+        {% for subject in active_aspirant_subjects %}
         <a href="{% url 'monitor:subject-detail' subject.slug %}" class="aspirant-subject-row">
           <div>
             <strong>{{ subject.name }}</strong>
@@ -660,9 +726,36 @@
           <span>→</span>
         </a>
         {% empty %}
-        <div class="empty">Question data will appear after the first student session.</div>
+          {% if not inactive_aspirant_subjects %}
+          <div class="empty">Question data will appear after the first student session.</div>
+          {% endif %}
         {% endfor %}
       </div>
+
+      <!-- Inactive Subjects Toggle (Eliminates Empty State Clutter) -->
+      {% if inactive_aspirant_subjects %}
+      <div class="inactive-subjects-wrapper" style="margin-top:14px;">
+        <button type="button" class="inactive-toggle-btn" id="toggle-inactive-subjects-btn" style="width:100%;padding:10px 14px;border-radius:10px;background:#f8fafc;border:1px dashed #cbd5e1;color:var(--color-muted);font-weight:700;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.15s ease;">
+          <span id="inactive-btn-text">Show inactive subjects ({{ inactive_aspirant_subjects|length }})</span>
+          <span id="inactive-btn-icon">▼</span>
+        </button>
+
+        <div class="aspirant-subjects-grid" id="inactive-subjects-grid" style="display:none;margin-top:12px;opacity:0.85;">
+          {% for subject in inactive_aspirant_subjects %}
+          <a href="{% url 'monitor:subject-detail' subject.slug %}" class="aspirant-subject-row" style="background:#f1f5f9;border-style:dashed;">
+            <div>
+              <strong style="color:var(--color-muted);">{{ subject.name }}</strong>
+              <small>0 completed tests · {{ subject.question_count }} questions ready</small>
+              <small class="editorial-status" style="color:var(--color-muted);">{{ subject.explanation_coverage }}% explanation coverage</small>
+            </div>
+            <div class="bar"><i style="width:0%"></i></div>
+            <b style="color:var(--color-muted);">0%</b>
+            <span style="opacity:0.4;">→</span>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
     </div>
     {% endif %}
   </section>

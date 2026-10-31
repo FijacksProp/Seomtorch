@@ -2,94 +2,266 @@
 {% block title %}Student Directory{% endblock %}
 {% block content %}
 
+<style>
+.students-consolidated-table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+}
+.students-consolidated-table th {
+  padding: 12px 16px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  border-bottom: 1px solid var(--color-card-border, #e2e8f0);
+}
+.students-consolidated-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-card-border, #e2e8f0);
+  vertical-align: middle;
+}
+.clickable-student-row {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.clickable-student-row:hover {
+  background: #f8fafc !important;
+}
+.sort-header {
+  color: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.sort-header:hover {
+  color: var(--color-forest, #064d3b);
+}
+.sort-header .sort-icon {
+  font-size: 9px;
+  opacity: 0.7;
+}
+.student-id-pill {
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  color: #475569;
+  letter-spacing: 0.04em;
+}
+.track-tier-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+.page-pill {
+  padding: 5px 12px;
+  background: #ffffff;
+  border: 1px solid var(--color-card-border, #e2e8f0);
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-ink, #0f172a);
+  text-decoration: none;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+}
+.page-pill:hover {
+  background: var(--color-forest, #064d3b);
+  color: #ffffff;
+  border-color: var(--color-forest, #064d3b);
+}
+@media (max-width: 900px) {
+  .students-search-filter-wrap {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+}
+</style>
+
 <div class="page-heading">
   <div>
     <p class="kicker">Student Directory</p>
     <h1>Individual Progress &amp; Accounts</h1>
     <p>Search, review academic metrics, verify student identities, and manage course access.</p>
   </div>
-  <a href="{% url 'monitor:export-csv' %}" class="btn-primary">
-    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-    Export CSV Report
-  </a>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <a href="{% url 'monitor:export-csv' %}" class="btn-primary" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;font-size:12px;font-weight:700;">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Export CSV Report
+    </a>
+  </div>
 </div>
 
 <!-- Search & Segmentation Filter -->
 <div class="students-search-filter-wrap">
-  <form class="search-bar" method="get" style="margin-bottom:0;flex:1;max-width:540px;">
+  <form class="search-bar" method="get" style="margin-bottom:0;flex:1;max-width:520px;">
     <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
     <input name="q" value="{{ query }}" placeholder="Search by 6-char ID, username, or email">
     {% if mode_filter %}<input type="hidden" name="mode" value="{{ mode_filter }}">{% endif %}
+    {% if sort_param %}<input type="hidden" name="sort" value="{{ sort_param }}">{% endif %}
+    {% if hide_inactive %}<input type="hidden" name="hide_inactive" value="1">{% endif %}
     <button type="submit">Search</button>
   </form>
 
-  <div class="range-pills">
-    <a href="?{% if query %}q={{ query }}&{% endif %}" class="{% if not mode_filter %}active{% endif %}">All Students</a>
-    <a href="?{% if query %}q={{ query }}&{% endif %}mode=aspirant" class="{% if mode_filter == 'aspirant' %}active{% endif %}">Aspirants</a>
-    <a href="?{% if query %}q={{ query }}&{% endif %}mode=university" class="{% if mode_filter == 'university' %}active{% endif %}">University</a>
+  <div class="range-pills" style="flex-wrap:wrap;">
+    <a href="?{% if query %}q={{ query }}&{% endif %}{% if sort_param %}sort={{ sort_param }}&{% endif %}{% if hide_inactive %}hide_inactive=1&{% endif %}" class="{% if not mode_filter %}active{% endif %}">
+      All Students
+    </a>
+    <a href="?{% if query %}q={{ query }}&{% endif %}mode=aspirant{% if sort_param %}&sort={{ sort_param }}{% endif %}{% if hide_inactive %}&hide_inactive=1{% endif %}" class="{% if mode_filter == 'aspirant' %}active{% endif %}">
+      🎯 Aspirants
+    </a>
+    <a href="?{% if query %}q={{ query }}&{% endif %}mode=university{% if sort_param %}&sort={{ sort_param }}{% endif %}{% if hide_inactive %}&hide_inactive=1{% endif %}" class="{% if mode_filter == 'university' %}active{% endif %}">
+      🩺 University
+    </a>
+    <a href="?{% if query %}q={{ query }}&{% endif %}{% if mode_filter %}mode={{ mode_filter }}&{% endif %}{% if sort_param %}sort={{ sort_param }}&{% endif %}hide_inactive={% if hide_inactive %}0{% else %}1{% endif %}" class="{% if hide_inactive %}active{% endif %}" style="border:1px dashed var(--line);font-weight:700;">
+      {% if hide_inactive %}✓ Active Only (Tests > 0){% else %}Hide Inactive (0 Tests){% endif %}
+    </a>
   </div>
 </div>
 
 <section class="panel table-panel">
-  <div class="table-scroll-hint">← Swipe table sideways to view all columns →</div>
   <div class="table-wrap">
-    <table>
+    <table class="students-consolidated-table">
       <thead>
         <tr>
-          <th>Student</th>
-          <th>ID</th>
-          <th>Mode</th>
-          <th>Access Tier</th>
-          <th>Tests</th>
-          <th>Test Avg</th>
-          <th>Questions</th>
-          <th>XP &amp; Level</th>
-          <th>Streak</th>
-          <th>Actions</th>
+          <th>
+            <a href="?{% if query %}q={{ query }}&{% endif %}{% if mode_filter %}mode={{ mode_filter }}&{% endif %}{% if hide_inactive %}hide_inactive=1&{% endif %}sort={% if sort_param == '-joined' %}joined{% else %}-joined{% endif %}" class="sort-header">
+              Student &amp; ID
+              <span class="sort-icon">{% if sort_param == '-joined' %}▼{% elif sort_param == 'joined' %}▲{% else %}↕{% endif %}</span>
+            </a>
+          </th>
+          <th>Track &amp; Tier</th>
+          <th>
+            <a href="?{% if query %}q={{ query }}&{% endif %}{% if mode_filter %}mode={{ mode_filter }}&{% endif %}{% if hide_inactive %}hide_inactive=1&{% endif %}sort={% if sort_param == '-tests' %}tests{% else %}-tests{% endif %}" class="sort-header">
+              Tests
+              <span class="sort-icon">{% if sort_param == '-tests' %}▼{% elif sort_param == 'tests' %}▲{% else %}↕{% endif %}</span>
+            </a>
+          </th>
+          <th>
+            <a href="?{% if query %}q={{ query }}&{% endif %}{% if mode_filter %}mode={{ mode_filter }}&{% endif %}{% if hide_inactive %}hide_inactive=1&{% endif %}sort={% if sort_param == '-avg' %}avg{% else %}-avg{% endif %}" class="sort-header">
+              Test Avg
+              <span class="sort-icon">{% if sort_param == '-avg' %}▼{% elif sort_param == 'avg' %}▲{% else %}↕{% endif %}</span>
+            </a>
+          </th>
+          <th>
+            <a href="?{% if query %}q={{ query }}&{% endif %}{% if mode_filter %}mode={{ mode_filter }}&{% endif %}{% if hide_inactive %}hide_inactive=1&{% endif %}sort={% if sort_param == '-questions' %}questions{% else %}-questions{% endif %}" class="sort-header">
+              Questions
+              <span class="sort-icon">{% if sort_param == '-questions' %}▼{% elif sort_param == 'questions' %}▲{% else %}↕{% endif %}</span>
+            </a>
+          </th>
+          <th>
+            <a href="?{% if query %}q={{ query }}&{% endif %}{% if mode_filter %}mode={{ mode_filter }}&{% endif %}{% if hide_inactive %}hide_inactive=1&{% endif %}sort={% if sort_param == '-xp' %}xp{% else %}-xp{% endif %}" class="sort-header">
+              XP &amp; Level
+              <span class="sort-icon">{% if sort_param == '-xp' %}▼{% elif sort_param == 'xp' %}▲{% else %}↕{% endif %}</span>
+            </a>
+          </th>
+          <th>
+            <a href="?{% if query %}q={{ query }}&{% endif %}{% if mode_filter %}mode={{ mode_filter }}&{% endif %}{% if hide_inactive %}hide_inactive=1&{% endif %}sort={% if sort_param == '-joined' %}joined{% else %}-joined{% endif %}" class="sort-header">
+              Streak &amp; Joined
+              <span class="sort-icon">{% if sort_param == '-joined' %}▼{% elif sort_param == 'joined' %}▲{% else %}↕{% endif %}</span>
+            </a>
+          </th>
         </tr>
       </thead>
       <tbody>
         {% for student in students %}
-        <tr>
+        <tr class="clickable-student-row" onclick="window.location='{% url 'monitor:student-detail' student.public_id %}'" title="Open {{ student.username }}'s profile">
           <td>
             <div class="student-cell">
               <span>{{ student.username|slice:":1"|upper }}</span>
               <div>
-                <strong>{{ student.username }}</strong>
-                <small>{{ student.email }}</small>
-                {% if student.phone_number %}<small style="color:var(--color-forest);">📞 {{ student.phone_number }}</small>{% endif %}
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <strong style="color:var(--color-ink);font-size:13.5px;">{{ student.username }}</strong>
+                  <span class="student-id-pill">{{ student.public_id }}</span>
+                </div>
+                <small style="color:var(--color-muted);display:block;margin-top:2px;">{{ student.email }}</small>
+                {% if student.phone_number %}
+                  <small style="color:var(--color-forest);display:block;margin-top:1px;">📞 {{ student.phone_number }}</small>
+                {% endif %}
               </div>
             </div>
           </td>
-          <td><code>{{ student.public_id }}</code></td>
           <td>
-            <span class="badge {% if student.active_mode == 'university' %}badge-uni{% else %}badge-aspirant{% endif %}">
-              {{ student.active_mode|title }}
-            </span>
+            <div class="track-tier-stack">
+              <span class="badge {% if student.active_mode == 'university' %}badge-uni{% else %}badge-aspirant{% endif %}" style="font-size:9.5px;padding:2px 7px;">
+                {{ student.active_mode|title }}
+              </span>
+              <span class="badge {{ student.access_badge_class }}" style="font-size:9.5px;padding:1px 6px;">
+                {{ student.access_badge }}
+              </span>
+            </div>
+          </td>
+          <td><b style="font-size:14px;color:var(--color-ink);">{{ student.test_count }}</b></td>
+          <td><b style="font-size:14px;color:var(--color-ink);">{{ student.average_test_score }}%</b></td>
+          <td>
+            <div>
+              <span style="font-weight:700;font-size:13px;color:var(--color-ink);">{{ student.attempt_count }}</span>
+              <small style="display:block;color:var(--color-muted);font-size:10.5px;">{{ student.accuracy }}% acc</small>
+            </div>
           </td>
           <td>
-            <span class="badge {{ student.access_badge_class }}">
-              {{ student.access_badge }}
-            </span>
+            <div>
+              <strong style="font-size:13px;color:var(--color-ink);">{{ student.xp }} XP</strong>
+              <small style="display:block;color:var(--color-muted);font-size:10.5px;">Level {{ student.learning_stats.level|default:1 }}</small>
+            </div>
           </td>
-          <td><b>{{ student.test_count }}</b></td>
-          <td><b>{{ student.average_test_score }}%</b></td>
-          <td>{{ student.attempt_count }}</td>
-          <td>{{ student.learning_stats.xp }} (L{{ student.learning_stats.level }})</td>
-          <td>{{ student.learning_stats.live_current_streak }} days</td>
           <td>
-            <a class="row-link" href="{% url 'monitor:student-detail' student.public_id %}" style="font-weight:700;">
-              View Profile →
-            </a>
+            <div>
+              <span style="font-size:12.5px;font-weight:600;color:var(--color-ink);">🔥 {{ student.learning_stats.live_current_streak|default:0 }}d</span>
+              <small style="display:block;color:var(--color-muted);font-size:10px;margin-top:1px;">joined {{ student.date_joined|date:"d M Y" }}</small>
+            </div>
           </td>
         </tr>
         {% empty %}
         <tr>
-          <td colspan="10"><div class="empty">No students match this search filter.</div></td>
+          <td colspan="7">
+            <div class="empty">No students match this search query or filter.</div>
+          </td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
+  </div>
+
+  <!-- Server-Side Pagination Footer Bar -->
+  <div class="pagination-footer-bar" style="padding:14px 20px;border-top:1px solid var(--color-card-border, #e2e8f0);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;background:#f8fafc;border-radius:0 0 14px 14px;">
+    <div style="font-size:12.5px;color:var(--color-muted);font-weight:600;">
+      {% if paginator.count > 0 %}
+        Showing <strong style="color:var(--color-ink);">{{ page_obj.start_index }}–{{ page_obj.end_index }}</strong> of <strong style="color:var(--color-ink);">{{ paginator.count }}</strong> students
+        {% if hide_inactive %}<span style="color:var(--color-forest);font-size:11px;margin-left:4px;">(Filtered from {{ total_all_filtered }} total)</span>{% endif %}
+      {% else %}
+        Showing 0 students
+      {% endif %}
+    </div>
+
+    {% if paginator.num_pages > 1 %}
+    <div class="pagination-nav-btns" style="display:flex;gap:6px;align-items:center;">
+      {% if page_obj.has_previous %}
+      <a href="?page=1{% if query %}&q={{ query }}{% endif %}{% if mode_filter %}&mode={{ mode_filter }}{% endif %}{% if sort_param %}&sort={{ sort_param }}{% endif %}{% if hide_inactive %}&hide_inactive=1{% endif %}" class="page-pill" title="First page">« First</a>
+      <a href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}{% if mode_filter %}&mode={{ mode_filter }}{% endif %}{% if sort_param %}&sort={{ sort_param }}{% endif %}{% if hide_inactive %}&hide_inactive=1{% endif %}" class="page-pill">‹ Prev</a>
+      {% endif %}
+
+      <span class="page-current" style="padding:5px 11px;font-size:12px;font-weight:700;color:var(--color-ink);background:#ffffff;border:1px solid var(--color-card-border, #e2e8f0);border-radius:7px;">
+        Page {{ page_obj.number }} of {{ paginator.num_pages }}
+      </span>
+
+      {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}{% if mode_filter %}&mode={{ mode_filter }}{% endif %}{% if sort_param %}&sort={{ sort_param }}{% endif %}{% if hide_inactive %}&hide_inactive=1{% endif %}" class="page-pill">Next ›</a>
+      <a href="?page={{ paginator.num_pages }}{% if query %}&q={{ query }}{% endif %}{% if mode_filter %}&mode={{ mode_filter }}{% endif %}{% if sort_param %}&sort={{ sort_param }}{% endif %}{% if hide_inactive %}&hide_inactive=1{% endif %}" class="page-pill" title="Last page">Last »</a>
+      {% endif %}
+    </div>
+    {% endif %}
   </div>
 </section>
 

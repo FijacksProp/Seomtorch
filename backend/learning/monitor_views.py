@@ -6,6 +6,7 @@ import uuid
 from datetime import datetime, timedelta
 
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.db import models, transaction
@@ -179,6 +180,56 @@ def dashboard(request):
     scores = [percentage(s.correct_answers, s.total_questions) for s in completed_rows if s.total_questions > 0]
     period_avg_score = round(sum(scores) / len(scores)) if scores else 0
 
+    # Prior period comparison for trends
+    prior_start = None
+    prior_end = start_date
+    if range_param == "today":
+        prior_start = start_date - timedelta(days=1)
+    elif range_param == "7d":
+        prior_start = start_date - timedelta(days=7)
+    elif range_param == "30d":
+        prior_start = start_date - timedelta(days=30)
+
+    if prior_start and prior_end:
+        prior_sessions = PracticeSession.objects.filter(
+            status=PracticeSession.Status.COMPLETED,
+            completed_at__gte=prior_start,
+            completed_at__lt=prior_end
+        )
+        if track_param == "aspirant":
+            prior_sessions = prior_sessions.filter(track="aspirant")
+        elif track_param == "university":
+            prior_sessions = prior_sessions.filter(track="university")
+
+        prior_tests = prior_sessions.count()
+        prior_completed_rows = list(prior_sessions.only("correct_answers", "total_questions"))
+        prior_scores = [percentage(s.correct_answers, s.total_questions) for s in prior_completed_rows if s.total_questions > 0]
+        prior_avg_score = round(sum(prior_scores) / len(prior_scores)) if prior_scores else 0
+
+        prior_attempts = Attempt.objects.filter(answered_at__gte=prior_start, answered_at__lt=prior_end)
+        prior_session_user_ids = set(prior_sessions.values_list("user_id", flat=True))
+        prior_attempt_user_ids = set(prior_attempts.values_list("user_id", flat=True)) if track_param != "university" else set()
+        prior_active_students = len(prior_session_user_ids.union(prior_attempt_user_ids))
+
+        prior_revenue = tx_qs.filter(paid_at__gte=prior_start, paid_at__lt=prior_end).aggregate(s=Sum("amount"))["s"] or 0
+
+        def calc_trend(current, prior):
+            if prior == 0:
+                return 100 if current > 0 else 0
+            return round(((current - prior) / prior) * 100)
+
+        trend_tests = calc_trend(period_tests, prior_tests)
+        trend_score = period_avg_score - prior_avg_score
+        trend_active = calc_trend(period_active_students, prior_active_students)
+        trend_revenue = calc_trend(period_revenue, prior_revenue)
+        has_prior_period = True
+    else:
+        trend_tests = 0
+        trend_score = 0
+        trend_active = 0
+        trend_revenue = 0
+        has_prior_period = False
+
     # ── Chart 1: Daily Activity Trend (Past 7 or 14 days) ───────────────────
     chart_days = 14 if range_param in {"30d", "all"} else 7
     activity_labels = []
@@ -258,6 +309,10 @@ def dashboard(request):
         pass_count = sum(1 for sc in scores if sc >= 50)
         subject.pass_rate = percentage(pass_count, len(scores)) if scores else 0
 
+    # Partition active vs inactive subjects to reduce empty state clutter
+    active_aspirant_subjects = [s for s in aspirant_subjects if s.test_count > 0 or getattr(s, "total_attempts", 0) > 0]
+    inactive_aspirant_subjects = [s for s in aspirant_subjects if s.test_count == 0 and getattr(s, "total_attempts", 0) == 0]
+
     if track_param == "aspirant":
         display_subjects = aspirant_subjects
     elif track_param == "university":
@@ -329,6 +384,13 @@ def dashboard(request):
         "university_tests_period": university_tests_period,
         "subjects": display_subjects,
         "aspirant_subjects": aspirant_subjects,
+        "active_aspirant_subjects": active_aspirant_subjects,
+        "inactive_aspirant_subjects": inactive_aspirant_subjects,
+        "has_prior_period": has_prior_period,
+        "trend_tests": trend_tests,
+        "trend_score": trend_score,
+        "trend_active": trend_active,
+        "trend_revenue": trend_revenue,
         "university_subjects": university_subjects,
         "recent_students": recent_students,
         "recent_events_curbed": recent_events_curbed,
@@ -503,6 +565,9 @@ def university_dashboard(request):
 def students(request):
     query = request.GET.get("q", "").strip()
     mode_filter = request.GET.get("mode", "").strip().lower()
+    sort_param = request.GET.get("sort", "-xp").strip()
+    hide_inactive = request.GET.get("hide_inactive", "0").strip() in {"1", "true", "yes"}
+    page_number = request.GET.get("page", 1)
 
     completed_tests = PracticeSession.objects.filter(status=PracticeSession.Status.COMPLETED).only(
         "user_id", "total_questions", "correct_answers", "completed_at"
@@ -516,7 +581,7 @@ def students(request):
     ).annotate(
         attempt_count=Count("attempts", distinct=True),
         correct_count=Count("attempts", filter=Q(attempts__is_correct=True), distinct=True)
-    ).order_by("-date_joined")
+    )
 
     if query:
         users = users.filter(
@@ -530,7 +595,7 @@ def students(request):
 
     now_dt = timezone.now()
     user_list = []
-    for user in users[:250]:
+    for user in users:
         scores = [percentage(item.correct_answers, item.total_questions) for item in user.completed_test_rows]
         user.test_count = len(scores)
         user.average_test_score = round(sum(scores) / len(scores)) if scores else 0
@@ -557,17 +622,51 @@ def students(request):
             user.access_badge = "Free"
             user.access_badge_class = "badge-free"
 
+        user.xp = getattr(user.learning_stats, "xp", 0) if hasattr(user, "learning_stats") and user.learning_stats else 0
         user_list.append(user)
 
+    total_all_filtered = len(user_list)
+    if hide_inactive:
+        user_list = [u for u in user_list if u.test_count > 0]
+
+    # Sorting
+    if sort_param == "xp":
+        user_list.sort(key=lambda u: u.xp)
+    elif sort_param == "-tests":
+        user_list.sort(key=lambda u: u.test_count, reverse=True)
+    elif sort_param == "tests":
+        user_list.sort(key=lambda u: u.test_count)
+    elif sort_param == "-avg":
+        user_list.sort(key=lambda u: u.average_test_score, reverse=True)
+    elif sort_param == "avg":
+        user_list.sort(key=lambda u: u.average_test_score)
+    elif sort_param == "-questions":
+        user_list.sort(key=lambda u: u.attempt_count, reverse=True)
+    elif sort_param == "questions":
+        user_list.sort(key=lambda u: u.attempt_count)
+    elif sort_param == "-joined":
+        user_list.sort(key=lambda u: u.date_joined, reverse=True)
+    elif sort_param == "joined":
+        user_list.sort(key=lambda u: u.date_joined)
+    else:
+        sort_param = "-xp"
+        user_list.sort(key=lambda u: u.xp, reverse=True)
+
+    paginator = Paginator(user_list, 25)
+    page_obj = paginator.get_page(page_number)
+
     return render(request, "monitor/students.html", {
-        "students": user_list,
+        "page_obj": page_obj,
+        "students": page_obj.object_list,
+        "paginator": paginator,
         "query": query,
         "mode_filter": mode_filter,
-        "total_count": users.count() if not query and not mode_filter else len(user_list),
+        "sort_param": sort_param,
+        "hide_inactive": hide_inactive,
+        "total_count": len(user_list),
+        "total_all_filtered": total_all_filtered,
     })
 
-
-# ─── Student Detail View ────────────────────────────────────────────────────
 
 @staff_member_required
 def student_detail(request, public_id):
