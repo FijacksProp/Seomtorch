@@ -91,6 +91,9 @@ def monitor_logout(request):
 @staff_member_required
 def dashboard(request):
     range_param = request.GET.get("range", "7d").lower().strip()
+    track_param = request.GET.get("track", "all").lower().strip()
+    if track_param not in {"all", "aspirant", "university"}:
+        track_param = "all"
     now = timezone.now()
     today_date = timezone.localdate()
 
@@ -109,16 +112,28 @@ def dashboard(request):
         start_date = now - timedelta(days=7)
         range_label = "Last 7 Days"
 
-    # Base QuerySets
+    # Base QuerySets & Track Demarcation Counters
     student_filter = Q(is_staff=False)
     total_students_all = User.objects.filter(student_filter).count()
+    aspirant_students_count = User.objects.filter(student_filter, active_mode="aspirant").count()
+    university_students_count = User.objects.filter(student_filter, active_mode="university").count()
+
     total_tests_all = PracticeSession.objects.filter(status=PracticeSession.Status.COMPLETED).count()
+    aspirant_tests_all = PracticeSession.objects.filter(status=PracticeSession.Status.COMPLETED, track="aspirant").count()
+    university_tests_all = PracticeSession.objects.filter(status=PracticeSession.Status.COMPLETED, track="university").count()
 
     sessions_qs = PracticeSession.objects.filter(status=PracticeSession.Status.COMPLETED)
     attempts_qs = Attempt.objects.all()
     events_qs = ActivityEvent.objects.filter(user__is_staff=False)
     users_qs = User.objects.filter(student_filter)
     tx_qs = PaymentTransaction.objects.filter(status=PaymentTransaction.Status.SUCCESS)
+
+    if track_param == "aspirant":
+        sessions_qs = sessions_qs.filter(track="aspirant")
+        users_qs = users_qs.filter(active_mode="aspirant")
+    elif track_param == "university":
+        sessions_qs = sessions_qs.filter(track="university")
+        users_qs = users_qs.filter(active_mode="university")
 
     if start_date:
         sessions_qs = sessions_qs.filter(completed_at__gte=start_date)
@@ -127,15 +142,36 @@ def dashboard(request):
         period_new_students = users_qs.filter(date_joined__gte=start_date).count()
         period_revenue = tx_qs.filter(paid_at__gte=start_date).aggregate(s=Sum("amount"))["s"] or 0
     else:
-        period_new_students = total_students_all
+        period_new_students = users_qs.count()
         period_revenue = tx_qs.aggregate(s=Sum("amount"))["s"] or 0
 
     all_time_revenue = tx_qs.aggregate(s=Sum("amount"))["s"] or 0
 
     period_tests = sessions_qs.count()
-    period_active_students = attempts_qs.values("user_id").distinct().count()
-    period_attempts = attempts_qs.count()
-    period_correct = attempts_qs.filter(is_correct=True).count()
+    aspirant_tests_period = PracticeSession.objects.filter(status=PracticeSession.Status.COMPLETED, track="aspirant", completed_at__gte=start_date if start_date else datetime.min).count() if start_date else aspirant_tests_all
+    university_tests_period = PracticeSession.objects.filter(status=PracticeSession.Status.COMPLETED, track="university", completed_at__gte=start_date if start_date else datetime.min).count() if start_date else university_tests_all
+
+    # Active students: users with attempts or completed sessions
+    session_user_ids = set(sessions_qs.values_list("user_id", flat=True))
+    attempt_user_ids = set(attempts_qs.values_list("user_id", flat=True)) if track_param != "university" else set()
+    period_active_students = len(session_user_ids.union(attempt_user_ids))
+
+    # Calculate attempts and accuracy across both tracks
+    if track_param == "university":
+        uni_q_total = sessions_qs.aggregate(s=Sum("total_questions"))["s"] or 0
+        uni_q_correct = sessions_qs.aggregate(s=Sum("correct_answers"))["s"] or 0
+        period_attempts = uni_q_total
+        period_correct = uni_q_correct
+    elif track_param == "aspirant":
+        period_attempts = attempts_qs.count()
+        period_correct = attempts_qs.filter(is_correct=True).count()
+    else:
+        uni_in_period = sessions_qs.filter(track="university")
+        uni_q_total = uni_in_period.aggregate(s=Sum("total_questions"))["s"] or 0
+        uni_q_correct = uni_in_period.aggregate(s=Sum("correct_answers"))["s"] or 0
+        period_attempts = attempts_qs.count() + uni_q_total
+        period_correct = attempts_qs.filter(is_correct=True).count() + uni_q_correct
+
     period_accuracy = percentage(period_correct, period_attempts)
 
     # Average score in period
@@ -166,24 +202,49 @@ def dashboard(request):
     mode_labels = list(mode_counts.keys())
     mode_data = list(mode_counts.values())
 
-    # ── Chart 3: Subject Performance & Distribution ─────────────────────────
-    subjects = Subject.objects.filter(is_active=True).annotate(
+    # ── Chart 3 & Catalog: Dual-Track Subject & Course Performance ────────
+    # 1. Aspirant Subjects (JAMB / WAEC)
+    aspirant_subjects = list(Subject.objects.filter(is_active=True, track="aspirant").annotate(
         total_attempts=Count("topics__questions__attempts", distinct=True),
         correct_attempts=Count("topics__questions__attempts", filter=Q(topics__questions__attempts__is_correct=True), distinct=True),
         student_count=Count("topics__questions__attempts__user", distinct=True),
         test_count=Count("practice_sessions", filter=Q(practice_sessions__status=PracticeSession.Status.COMPLETED), distinct=True),
         question_count=Count("topics__questions", filter=Q(topics__questions__is_active=True), distinct=True),
         reviewed_count=Count("topics__questions", filter=Q(topics__questions__is_active=True, topics__questions__explanation_status=Question.ExplanationStatus.REVIEWED), distinct=True),
-    )
-    for subject in subjects:
+    ))
+    for subject in aspirant_subjects:
         subject.accuracy = percentage(subject.correct_attempts, subject.total_attempts)
         subject.explanation_coverage = percentage(subject.reviewed_count, subject.question_count)
 
-    # Sort top 8 subjects for horizontal bar chart
-    sorted_subjects = sorted(subjects, key=lambda s: s.total_attempts, reverse=True)[:8]
-    subject_chart_labels = [s.name for s in sorted_subjects]
+    # 2. University Medical Courses (ANA 201, ANA 203, PIO 201)
+    university_subjects = list(Subject.objects.filter(is_active=True, track="university"))
+    for subject in university_subjects:
+        code = subject.code or subject.name[:7].strip()
+        uni_sess = PracticeSession.objects.filter(
+            Q(subject=subject) | Q(course_code__iexact=code),
+            status=PracticeSession.Status.COMPLETED
+        )
+        subject.test_count = uni_sess.count()
+        subject.student_count = uni_sess.values("user_id").distinct().count()
+        tot_q = uni_sess.aggregate(s=Sum("total_questions"))["s"] or 0
+        cor_q = uni_sess.aggregate(s=Sum("correct_answers"))["s"] or 0
+        subject.total_attempts = tot_q
+        subject.correct_attempts = cor_q
+        subject.accuracy = percentage(cor_q, tot_q)
+        subject.question_count = 100
+        subject.explanation_coverage = 100
+
+    if track_param == "aspirant":
+        display_subjects = aspirant_subjects
+    elif track_param == "university":
+        display_subjects = university_subjects
+    else:
+        display_subjects = university_subjects + aspirant_subjects
+
+    sorted_subjects = sorted(display_subjects, key=lambda s: getattr(s, "total_attempts", 0), reverse=True)[:8]
+    subject_chart_labels = [getattr(s, "code", "") or s.name for s in sorted_subjects]
     subject_chart_accuracy = [s.accuracy for s in sorted_subjects]
-    subject_chart_attempts = [s.total_attempts for s in sorted_subjects]
+    subject_chart_attempts = [getattr(s, "total_attempts", 0) for s in sorted_subjects]
 
     # ── Chart 4: Monetization / Access Tier Breakdown ───────────────────────
     now_dt = timezone.now()
@@ -235,7 +296,16 @@ def dashboard(request):
         "period_new_students": period_new_students,
         "period_revenue": period_revenue,
         "all_time_revenue": all_time_revenue,
-        "subjects": subjects,
+        "track_param": track_param,
+        "aspirant_students_count": aspirant_students_count,
+        "university_students_count": university_students_count,
+        "aspirant_tests_all": aspirant_tests_all,
+        "university_tests_all": university_tests_all,
+        "aspirant_tests_period": aspirant_tests_period,
+        "university_tests_period": university_tests_period,
+        "subjects": display_subjects,
+        "aspirant_subjects": aspirant_subjects,
+        "university_subjects": university_subjects,
         "recent_students": recent_students,
         "recent_events_curbed": recent_events_curbed,
         "recent_events_all": recent_events_all,
@@ -287,10 +357,15 @@ def students(request):
     now_dt = timezone.now()
     user_list = []
     for user in users[:250]:
-        user.accuracy = percentage(user.correct_count, user.attempt_count)
         scores = [percentage(item.correct_answers, item.total_questions) for item in user.completed_test_rows]
         user.test_count = len(scores)
         user.average_test_score = round(sum(scores) / len(scores)) if scores else 0
+        tot_q = sum(item.total_questions for item in user.completed_test_rows)
+        cor_q = sum(item.correct_answers for item in user.completed_test_rows)
+        if tot_q > 0:
+            user.accuracy = percentage(cor_q, tot_q)
+        else:
+            user.accuracy = percentage(user.correct_count, user.attempt_count)
 
         # Check access badge
         active_grant = user.course_accesses.filter(is_active=True, expires_at__gte=now_dt).first()
@@ -356,6 +431,36 @@ def student_detail(request, public_id):
 
     tests = user_test_analytics(student, include_recent=True)
 
+    # Completed sessions split by track
+    completed_sessions = list(student.practice_sessions.filter(status=PracticeSession.Status.COMPLETED).order_by("-completed_at"))
+    uni_sessions = [s for s in completed_sessions if s.track == "university"]
+    asp_sessions = [s for s in completed_sessions if s.track != "university"]
+
+    uni_courses_summary = {}
+    for s in uni_sessions:
+        code = s.course_code or "ANA 201"
+        if code not in uni_courses_summary:
+            uni_courses_summary[code] = {"code": code, "tests": 0, "total_q": 0, "correct_q": 0, "topics": set()}
+        uni_courses_summary[code]["tests"] += 1
+        uni_courses_summary[code]["total_q"] += s.total_questions
+        uni_courses_summary[code]["correct_q"] += s.correct_answers
+        if s.topic_title:
+            uni_courses_summary[code]["topics"].add(s.topic_title)
+
+    for item in uni_courses_summary.values():
+        item["accuracy"] = percentage(item["correct_q"], item["total_q"])
+        item["topics_count"] = len(item["topics"])
+
+    uni_courses_list = list(uni_courses_summary.values())
+
+    # Overall accuracy combining both tracks
+    uni_tot_q = sum(s.total_questions for s in uni_sessions)
+    uni_cor_q = sum(s.correct_answers for s in uni_sessions)
+    comb_total = total + uni_tot_q
+    comb_correct = correct + uni_cor_q
+    if comb_total > 0:
+        student_accuracy = percentage(comb_correct, comb_total)
+
     # Access summary & active grants
     access_summary = CourseAccess.get_user_access_summary(student)
     all_grants = student.course_accesses.all().order_by("-created_at")
@@ -385,6 +490,9 @@ def student_detail(request, public_id):
         "wrong": wrong,
         "accuracy": student_accuracy,
         "tests": tests,
+        "uni_courses_list": uni_courses_list,
+        "uni_sessions": uni_sessions,
+        "asp_sessions": asp_sessions,
         "subject_rows": subject_rows,
         "topic_rows": topic_rows,
         "recent_attempts": attempts[:15],

@@ -7,6 +7,8 @@ from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from rest_framework import status
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -290,3 +292,100 @@ class AchievementView(APIView):
         codes = request.data.get("codes")
         mark_badges_seen(request.user, codes if isinstance(codes, list) else None)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class RecordUniversitySessionView(APIView):
+    """
+    Records a completed university medical course practice session
+    so university student analytics, XP, streaks, and monitor stats are tracked.
+    """
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    @transaction.atomic
+    def post(self, request):
+        course_code = str(request.data.get("course_code") or "").strip().upper()
+        topic_title = str(request.data.get("topic_title") or "").strip()
+        try:
+            total_questions = max(0, int(request.data.get("total_questions", 0)))
+        except (ValueError, TypeError):
+            total_questions = 0
+        try:
+            correct_answers = max(0, min(total_questions, int(request.data.get("correct_answers", 0))))
+        except (ValueError, TypeError):
+            correct_answers = 0
+        try:
+            time_spent_seconds = max(0, int(request.data.get("time_spent_seconds", 0)))
+        except (ValueError, TypeError):
+            time_spent_seconds = 0
+
+        mode_str = request.data.get("mode") or PracticeSession.Mode.TIMED
+        if mode_str not in {PracticeSession.Mode.TIMED, PracticeSession.Mode.NORMAL, PracticeSession.Mode.DAILY}:
+            mode_str = PracticeSession.Mode.TIMED
+
+        # Resolve university subject
+        subject = None
+        if course_code:
+            norm_code = course_code.replace(" ", "")
+            subject = Subject.objects.filter(
+                Q(code__iexact=course_code) |
+                Q(slug__icontains=norm_code.lower()) |
+                Q(name__icontains=course_code)
+            ).first()
+
+        duration_minutes = max(1, round(time_spent_seconds / 60)) if time_spent_seconds else None
+
+        session = PracticeSession.objects.create(
+            user=request.user,
+            subject=subject,
+            track="university",
+            course_code=course_code,
+            topic_title=topic_title,
+            total_questions=total_questions,
+            correct_answers=correct_answers,
+            duration_minutes=duration_minutes,
+            time_spent_seconds=time_spent_seconds,
+            mode=mode_str,
+            status=PracticeSession.Status.COMPLETED,
+            completed_at=timezone.now(),
+        )
+
+        # Update UserStats XP and streak
+        stats, _ = UserStats.objects.select_for_update().get_or_create(user=request.user)
+        xp_earned = correct_answers * 5
+        stats.xp += xp_earned
+        stats.register_study_day()
+        stats.save()
+
+        # Log ActivityEvent
+        ActivityEvent.objects.create(
+            user=request.user,
+            event_type=ActivityEvent.Type.SESSION_COMPLETED,
+            metadata={
+                "session_id": str(session.id),
+                "track": "university",
+                "course": course_code,
+                "topic": topic_title,
+                "accuracy": session.accuracy,
+                "total": total_questions,
+                "correct": correct_answers,
+                "xp_earned": xp_earned,
+            }
+        )
+
+        earned = evaluate_badges(request.user)
+
+        return Response({
+            "session_id": str(session.id),
+            "course_code": course_code,
+            "topic_title": topic_title,
+            "correct": session.correct_answers,
+            "total": session.total_questions,
+            "accuracy": session.accuracy,
+            "xp_earned": xp_earned,
+            "stats": stats_payload(request.user),
+            "badges_earned": [
+                {"code": item.badge.code, "name": item.badge.name, "description": item.badge.description, "tier": item.badge.tier}
+                for item in earned
+            ],
+        }, status=status.HTTP_201_CREATED)

@@ -1815,12 +1815,173 @@ async function performBookmarkToggle(questionId) {
   }
 }
 
+function buildReviewGuidanceCard(activeSession, score, answered, unanswered) {
+  const totalQ = activeSession.queue.length || 1;
+  const correctCount = activeSession.correct;
+  const incorrectCount = Math.max(0, answered - correctCount);
+
+  // 1. Overall stats comparison
+  const pastTests = (completedTests || []).filter(t => t.id !== activeSession.remoteId);
+  const hasHistory = pastTests.length > 0;
+  const historicalAvg = hasHistory
+    ? Math.round(pastTests.reduce((acc, t) => acc + (Number(t.score) || 0), 0) / pastTests.length)
+    : score;
+  const diff = score - historicalAvg;
+
+  let comparisonBadgeHtml = "";
+  if (!hasHistory) {
+    comparisonBadgeHtml = '<span class="review-diff-pill baseline">🌱 First Session Baseline</span>';
+  } else if (diff > 0) {
+    comparisonBadgeHtml = `<span class="review-diff-pill positive">▲ +${diff}% Above Your Average (${historicalAvg}%)</span>`;
+  } else if (diff === 0) {
+    comparisonBadgeHtml = `<span class="review-diff-pill neutral">● Matches Your Average (${historicalAvg}%)</span>`;
+  } else {
+    comparisonBadgeHtml = `<span class="review-diff-pill negative">▼ ${Math.abs(diff)}% Below Your Average (${historicalAvg}%)</span>`;
+  }
+
+  // 2. SVG Donut Chart Calculation
+  const radius = 42;
+  const circumference = 2 * Math.PI * radius; // ~263.89
+  const pctCorrect = (correctCount / totalQ);
+  const pctIncorrect = (incorrectCount / totalQ);
+  const pctUnanswered = (unanswered / totalQ);
+
+  const dashCorrect = pctCorrect * circumference;
+  const dashIncorrect = pctIncorrect * circumference;
+  const dashUnanswered = pctUnanswered * circumference;
+
+  const offsetCorrect = 0;
+  const offsetIncorrect = -dashCorrect;
+  const offsetUnanswered = -(dashCorrect + dashIncorrect);
+
+  const donutSvg = `
+    <svg viewBox="0 0 110 110" class="review-donut-svg" aria-label="Test result breakdown chart">
+      <circle cx="55" cy="55" r="${radius}" fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="12"/>
+      ${correctCount > 0 ? `<circle cx="55" cy="55" r="${radius}" fill="none" stroke="#10b981" stroke-width="12" stroke-dasharray="${dashCorrect} ${circumference}" stroke-dashoffset="${offsetCorrect}" transform="rotate(-90 55 55)"/>` : ""}
+      ${incorrectCount > 0 ? `<circle cx="55" cy="55" r="${radius}" fill="none" stroke="#ef4444" stroke-width="12" stroke-dasharray="${dashIncorrect} ${circumference}" stroke-dashoffset="${offsetIncorrect}" transform="rotate(-90 55 55)"/>` : ""}
+      ${unanswered > 0 ? `<circle cx="55" cy="55" r="${radius}" fill="none" stroke="#94a3b8" stroke-width="12" stroke-dasharray="${dashUnanswered} ${circumference}" stroke-dashoffset="${offsetUnanswered}" transform="rotate(-90 55 55)"/>` : ""}
+      <text x="55" y="52" text-anchor="middle" font-size="20" font-weight="800" fill="currentColor">${score}%</text>
+      <text x="55" y="68" text-anchor="middle" font-size="9" font-weight="600" fill="var(--color-muted, #64748b)" letter-spacing="0.05em">SCORE</text>
+    </svg>
+  `;
+
+  // 3. Pace & Speed Diagnosis
+  const elapsedSec = activeSession.startedAt
+    ? Math.max(1, Math.round((Date.now() - activeSession.startedAt) / 1000))
+    : (activeSession.durationMinutes ? activeSession.durationMinutes * 60 : 0);
+  const secPerQ = elapsedSec > 0 ? Math.round(elapsedSec / totalQ) : null;
+  let paceHtml = "";
+  if (secPerQ !== null && secPerQ > 0) {
+    if (secPerQ <= 40) {
+      paceHtml = `<span class="review-pace-pill fast">⚡ Fast Pace: ~${secPerQ}s / question</span>`;
+    } else if (secPerQ <= 65) {
+      paceHtml = `<span class="review-pace-pill steady">⏱️ Steady Pace: ~${secPerQ}s / question</span>`;
+    } else {
+      paceHtml = `<span class="review-pace-pill deliberate">⏳ Thorough Pace: ~${secPerQ}s / question</span>`;
+    }
+  }
+
+  // 4. Targeted Topic & Weak-Area Guidance
+  const missedByTopic = new Map();
+  activeSession.queue.forEach((q, idx) => {
+    if (!activeSession.answers[idx]?.correct) {
+      const topicName = q.topic || activeSession.topic || "Core Material";
+      missedByTopic.set(topicName, (missedByTopic.get(topicName) || 0) + 1);
+    }
+  });
+
+  const weakTopics = Array.from(missedByTopic.entries()).sort((a, b) => b[1] - a[1]);
+  let focusRecommendation = "";
+  if (weakTopics.length > 0) {
+    const [topWeakName, errCount] = weakTopics[0];
+    focusRecommendation = `Priority Focus: <strong>${escapeHtml(topWeakName)}</strong> (${errCount} missed ${errCount === 1 ? "question" : "questions"}). Review this topic's rationales before your next mock.`;
+  } else {
+    focusRecommendation = `Flawless accuracy! Every question in this session was answered correctly.`;
+  }
+
+  // Actionable strategic advice
+  let strategicTip = "";
+  if (score >= 85) {
+    strategicTip = "Outstanding mastery! You have strong retention of high-yield concepts. Maintain your streak to lock in this standard for your exams.";
+  } else if (score >= 65) {
+    strategicTip = "Solid understanding with good grasp of main principles. Check the solutions below to eliminate tricky distractor traps.";
+  } else if (score >= 50) {
+    strategicTip = "Passing performance, but vulnerable on subtle edge cases. Consider a guided untimed session on this subject to solidify foundations.";
+  } else {
+    strategicTip = "Foundational reinforcement recommended. Study the comprehensive answer explanations and diagrams below to master the core mechanisms.";
+  }
+
+  return `
+    <div class="review-guidance-card">
+      <div class="review-guidance-head">
+        <div>
+          <span class="review-kicker">Performance Diagnostic</span>
+          <h3 class="review-title">Review Guidance &amp; Quick Summary</h3>
+        </div>
+        ${comparisonBadgeHtml}
+      </div>
+
+      <div class="review-guidance-body">
+        <div class="review-chart-col">
+          <div class="review-donut-wrap">
+            ${donutSvg}
+          </div>
+          <div class="review-legend">
+            <div class="legend-item"><span class="legend-dot correct"></span><span>Correct: <strong>${correctCount}</strong> (${Math.round(pctCorrect * 100)}%)</span></div>
+            <div class="legend-item"><span class="legend-dot incorrect"></span><span>Incorrect: <strong>${incorrectCount}</strong> (${Math.round(pctIncorrect * 100)}%)</span></div>
+            ${unanswered > 0 ? `<div class="legend-item"><span class="legend-dot unanswered"></span><span>Unanswered: <strong>${unanswered}</strong> (${Math.round(pctUnanswered * 100)}%)</span></div>` : ""}
+          </div>
+        </div>
+
+        <div class="review-insight-col">
+          <div class="review-insight-callout">
+            <div class="review-callout-icon">💡</div>
+            <div class="review-callout-text">
+              <p class="review-tip-highlight">${strategicTip}</p>
+              <p class="review-focus-area">${focusRecommendation}</p>
+            </div>
+          </div>
+
+          <div class="review-meta-strip">
+            ${paceHtml}
+            ${unanswered > 0 ? `<span class="review-pace-pill warning">⚠️ ${unanswered} unattempted questions</span>` : ""}
+            <span class="review-pace-pill info">📊 ${hasHistory ? `All-Time Average: ${historicalAvg}%` : "First Session Logged"}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function renderResult() {
   clearInterval(sessionTimer);
   if (activeSession.mode === "challenge") return renderChallengeSubmission();
   if (activeSession.remoteId && !activeSession.reportedComplete) {
     activeSession.reportedComplete = true;
     syncPendingAttempts().then(() => api.completeSession(authToken, activeSession.remoteId)).then(async response => { applyRemoteStats(response.stats); progressData = null; await put("profile", profile); handleEarnedBadges(response.badges_earned || []); }).catch(() => { activeSession.reportedComplete = false; });
+  }
+  if (activeSession.isUniversity && !activeSession.reportedComplete && authToken) {
+    activeSession.reportedComplete = true;
+    const timeSpent = activeSession.startedAt ? Math.round((Date.now() - activeSession.startedAt) / 1000) : (activeSession.durationMinutes ? activeSession.durationMinutes * 60 : 0);
+    api.recordUniversitySession(authToken, {
+      course_code: activeSession.subject || "ANA 201",
+      topic_title: activeSession.topic || "University Practice",
+      total_questions: activeSession.queue.length,
+      correct_answers: activeSession.correct,
+      time_spent_seconds: timeSpent,
+      mode: activeSession.durationMinutes > 0 ? "timed" : "normal",
+    }).then(async response => {
+      if (response?.stats) {
+        applyRemoteStats(response.stats);
+        progressData = null;
+        await put("profile", profile);
+      }
+      if (response?.badges_earned?.length) {
+        handleEarnedBadges(response.badges_earned);
+      }
+    }).catch(() => {
+      activeSession.reportedComplete = false;
+    });
   }
   if (activeSession.mode === "sprint" && !dailySprintCompleted) {
     dailySprintCompleted = true;
@@ -1940,6 +2101,7 @@ function renderResult() {
         ${activeSession.mode === "sprint" ? "" : `<button class="button" id="retry-session">${retryLabel}</button>`}
       </div>
     </div>
+    ${buildReviewGuidanceCard(activeSession, score, answered, unanswered)}
     ${topicBreakdownHtml}
     ${review ? `<div class="result-review"><div class="section-head"><h2>Solutions</h2><p>Review every recorded answer</p></div>${review}</div>` : ""}
   </section>`;

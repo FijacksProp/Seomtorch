@@ -12,16 +12,35 @@
 </div>
 
 <!-- Date Range Filter Bar -->
-<div class="range-filter-bar">
+<div class="range-filter-bar" style="margin-bottom:8px;">
   <div class="range-filter-label">
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
     <span>Time Range:</span>
   </div>
   <div class="range-pills">
-    <a href="?range=today" class="{% if range_param == 'today' %}active{% endif %}">Today</a>
-    <a href="?range=7d" class="{% if range_param == '7d' %}active{% endif %}">Last 7 Days</a>
-    <a href="?range=30d" class="{% if range_param == '30d' %}active{% endif %}">Last 30 Days</a>
-    <a href="?range=all" class="{% if range_param == 'all' %}active{% endif %}">All Time</a>
+    <a href="?range=today&track={{ track_param }}" class="{% if range_param == 'today' %}active{% endif %}">Today</a>
+    <a href="?range=7d&track={{ track_param }}" class="{% if range_param == '7d' %}active{% endif %}">Last 7 Days</a>
+    <a href="?range=30d&track={{ track_param }}" class="{% if range_param == '30d' %}active{% endif %}">Last 30 Days</a>
+    <a href="?range=all&track={{ track_param }}" class="{% if range_param == 'all' %}active{% endif %}">All Time</a>
+  </div>
+</div>
+
+<!-- Academic Track Demarcation Bar -->
+<div class="range-filter-bar" style="margin-bottom:22px;">
+  <div class="range-filter-label">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    <span>Academic Track:</span>
+  </div>
+  <div class="range-pills">
+    <a href="?range={{ range_param }}&track=all" class="{% if track_param == 'all' %}active{% endif %}">
+      All Platform Tracks ({{ total_students_all }} Students · {{ total_tests_all }} Tests)
+    </a>
+    <a href="?range={{ range_param }}&track=aspirant" class="{% if track_param == 'aspirant' %}active{% endif %}">
+      🎯 Aspirant Prep ({{ aspirant_students_count }} Students · {{ aspirant_tests_all }} Tests)
+    </a>
+    <a href="?range={{ range_param }}&track=university" class="{% if track_param == 'university' %}active{% endif %}">
+      🩺 University Medical ({{ university_students_count }} Students · {{ university_tests_all }} Tests)
+    </a>
   </div>
 </div>
 
@@ -30,7 +49,15 @@
   <article class="metric-card">
     <span class="label">Tests Completed ({{ range_label }})</span>
     <strong>{{ period_tests }}</strong>
-    <small>{{ total_tests_all }} lifetime tests across platform</small>
+    <small>
+      {% if track_param == 'all' %}
+        {{ aspirant_tests_period }} Aspirant · {{ university_tests_period }} University
+      {% elif track_param == 'aspirant' %}
+        {{ aspirant_tests_all }} lifetime Aspirant tests
+      {% else %}
+        {{ university_tests_all }} lifetime University tests
+      {% endif %}
+    </small>
   </article>
 
   <article class="metric-card">
@@ -58,9 +85,21 @@
   </article>
 
   <article class="metric-card">
-    <span class="label">Total Registered Students</span>
-    <strong>{{ total_students_all }}</strong>
-    <small>Registered student database accounts</small>
+    <span class="label">
+      {% if track_param == 'all' %}Registered Students{% elif track_param == 'aspirant' %}Aspirant Students{% else %}University Students{% endif %}
+    </span>
+    <strong>
+      {% if track_param == 'all' %}{{ total_students_all }}{% elif track_param == 'aspirant' %}{{ aspirant_students_count }}{% else %}{{ university_students_count }}{% endif %}
+    </strong>
+    <small>
+      {% if track_param == 'all' %}
+        {{ aspirant_students_count }} Aspirant · {{ university_students_count }} University
+      {% elif track_param == 'aspirant' %}
+        JAMB / WAEC / Post-UTME candidates
+      {% else %}
+        Medicine &amp; Health Sciences undergraduates
+      {% endif %}
+    </small>
   </article>
 </section>
 
@@ -125,30 +164,76 @@
 
 <!-- Detailed Data Sections -->
 <div class="dashboard-grid">
-  <!-- Subject List -->
+  <!-- Subject & Course Catalog -->
   <section class="panel wide">
     <div class="panel-head">
       <div>
         <p class="kicker">Academic Catalog</p>
-        <h2>Subject Performance Breakdown</h2>
+        <h2>
+          {% if track_param == 'university' %}
+            University Course Performance Breakdown
+          {% elif track_param == 'aspirant' %}
+            Aspirant Subject Performance Breakdown
+          {% else %}
+            Curriculum Performance Breakdown (University &amp; Aspirant)
+          {% endif %}
+        </h2>
       </div>
+      <span class="badge {% if track_param == 'university' %}badge-uni{% elif track_param == 'aspirant' %}badge-aspirant{% else %}badge-all-access{% endif %}">
+        {% if track_param == 'university' %}University Track{% elif track_param == 'aspirant' %}Aspirant Track{% else %}Dual Track Overview{% endif %}
+      </span>
     </div>
-    <div class="subject-report">
-      {% for subject in subjects %}
-      <a href="{% url 'monitor:subject-detail' subject.slug %}">
-        <div>
-          <strong>{{ subject.name }}</strong>
-          <small>{{ subject.test_count }} completed tests · {{ subject.student_count }} students · {{ subject.question_count }} questions</small>
-          <small class="editorial-status">{{ subject.explanation_coverage }}% explanation coverage</small>
+
+    {% if track_param == 'all' or track_param == 'university' %}
+      <div style="padding:12px 18px 6px;font-size:12px;font-weight:800;color:var(--color-forest);text-transform:uppercase;letter-spacing:0.05em;display:flex;align-items:center;gap:6px;">
+        <span>🩺 University Medical Courses (200L Anatomy &amp; Physiology)</span>
+      </div>
+      <div class="subject-report" style="margin-bottom:16px;">
+        {% for subject in university_subjects %}
+        <div style="display:flex;align-items:center;padding:12px 18px;background:var(--color-paper);border-radius:var(--radius-md);border:1px solid var(--color-card-border);margin-bottom:8px;gap:16px;">
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <strong style="color:var(--color-ink);font-size:14px;">{{ subject.name }}</strong>
+              <span class="badge badge-uni" style="font-size:10px;padding:2px 7px;">{{ subject.code }}</span>
+            </div>
+            <small style="display:block;color:var(--color-slate-muted);margin-top:2px;">
+              {{ subject.test_count }} completed tests · {{ subject.student_count }} active students · {{ subject.total_attempts }} questions attempted
+            </small>
+          </div>
+          <div class="bar" style="max-width:140px;width:100%;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden;">
+            <i style="display:block;height:100%;background:#047857;border-radius:4px;width:{{ subject.accuracy }}%;"></i>
+          </div>
+          <b style="font-size:14px;color:var(--color-ink);min-width:42px;text-align:right;">{{ subject.accuracy }}%</b>
         </div>
-        <div class="bar"><i style="width:{{ subject.accuracy }}%"></i></div>
-        <b>{{ subject.accuracy }}%</b>
-        <span>→</span>
-      </a>
-      {% empty %}
-      <div class="empty">Question data will appear after the first student session.</div>
-      {% endfor %}
-    </div>
+        {% empty %}
+        <div class="empty">University course data will populate after students complete sessions.</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if track_param == 'all' or track_param == 'aspirant' %}
+      {% if track_param == 'all' %}
+        <div style="padding:12px 18px 6px;font-size:12px;font-weight:800;color:#86198f;text-transform:uppercase;letter-spacing:0.05em;display:flex;align-items:center;gap:6px;">
+          <span>🎯 Aspirant Prep Subjects (JAMB / WAEC / UTME)</span>
+        </div>
+      {% endif %}
+      <div class="subject-report">
+        {% for subject in aspirant_subjects %}
+        <a href="{% url 'monitor:subject-detail' subject.slug %}">
+          <div>
+            <strong>{{ subject.name }}</strong>
+            <small>{{ subject.test_count }} completed tests · {{ subject.student_count }} students · {{ subject.question_count }} questions</small>
+            <small class="editorial-status">{{ subject.explanation_coverage }}% explanation coverage</small>
+          </div>
+          <div class="bar"><i style="width:{{ subject.accuracy }}%"></i></div>
+          <b>{{ subject.accuracy }}%</b>
+          <span>→</span>
+        </a>
+        {% empty %}
+        <div class="empty">Question data will appear after the first student session.</div>
+        {% endfor %}
+      </div>
+    {% endif %}
   </section>
 
   <!-- Recent Students -->

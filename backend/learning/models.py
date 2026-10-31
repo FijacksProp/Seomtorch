@@ -6,9 +6,15 @@ from django.db import models
 from django.utils import timezone
 
 class Subject(models.Model):
+    class Track(models.TextChoices):
+        ASPIRANT = "aspirant", "Aspirant (JAMB / O-Level)"
+        UNIVERSITY = "university", "University (Undergraduate)"
+
     slug = models.SlugField(unique=True)
     name = models.CharField(max_length=120)
     description = models.CharField(max_length=240, blank=True)
+    track = models.CharField(max_length=20, choices=Track.choices, default=Track.ASPIRANT, db_index=True)
+    code = models.CharField(max_length=20, blank=True, default="", help_text="Course code for university courses (e.g. ANA 201).")
     position = models.PositiveSmallIntegerField(default=0)
     is_active = models.BooleanField(default=True)
 
@@ -107,6 +113,10 @@ class PracticeSession(models.Model):
     total_questions = models.PositiveSmallIntegerField(default=0)
     correct_answers = models.PositiveSmallIntegerField(default=0)
     duration_minutes = models.PositiveSmallIntegerField(null=True, blank=True)
+    time_spent_seconds = models.PositiveIntegerField(null=True, blank=True)
+    track = models.CharField(max_length=20, default="aspirant", db_index=True, help_text="Track category: 'aspirant' or 'university'.")
+    course_code = models.CharField(max_length=40, blank=True, default="", db_index=True, help_text="University course code (e.g. ANA 201).")
+    topic_title = models.CharField(max_length=200, blank=True, default="", help_text="Topic title for sessions.")
 
     class Meta:
         ordering = ("-started_at",)

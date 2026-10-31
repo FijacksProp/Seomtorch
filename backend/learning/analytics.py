@@ -8,6 +8,9 @@ from .models import ChallengeParticipant, PracticeSession
 
 
 def _focus_for(session):
+    if getattr(session, "course_code", None):
+        title = session.topic_title or (session.subject.name if session.subject else session.course_code)
+        return session.course_code.lower().replace(" ", "-"), f"{session.course_code} ({title})"
     if session.subject_id:
         return session.subject.slug, session.subject.name
     if session.mode == PracticeSession.Mode.SAVED:
@@ -37,22 +40,28 @@ def completed_session_queryset(queryset):
 
 def session_analytics(queryset, include_recent=False):
     sessions = list(completed_session_queryset(queryset))
-    scores = [round(item.recorded_correct / item.total_questions * 100) if item.total_questions else 0 for item in sessions]
+    scores = []
     mode_groups = defaultdict(list)
     focus_groups = defaultdict(lambda: {"name": "", "scores": [], "questions": 0})
     records = []
-    for session, score in zip(sessions, scores):
+    for session in sessions:
+        correct = session.recorded_correct if session.answered_count > 0 else session.correct_answers
+        answered = session.answered_count if session.answered_count > 0 else session.total_questions
+        score = round(correct / session.total_questions * 100) if session.total_questions else 0
+        scores.append(score)
         mode_groups[session.mode].append(score)
         focus_key, focus_name = _focus_for(session)
         focus_groups[focus_key]["name"] = focus_name
         focus_groups[focus_key]["scores"].append(score)
-        focus_groups[focus_key]["questions"] += session.answered_count
+        focus_groups[focus_key]["questions"] += answered
         records.append({
             "id": str(session.id), "mode": session.mode, "mode_label": session.get_mode_display(),
-            "focus": focus_name, "score": score, "correct": session.recorded_correct,
-            "answered": session.answered_count, "total": session.total_questions,
+            "focus": focus_name, "score": score, "correct": correct,
+            "answered": answered, "total": session.total_questions,
             "completed_at": session.completed_at,
             "duration_minutes": session.duration_minutes,
+            "track": getattr(session, "track", "aspirant"),
+            "course_code": getattr(session, "course_code", ""),
         })
     started = queryset.count()
     completed = len(sessions)

@@ -198,3 +198,96 @@ class MonitorProFeatureTests(TestCase):
         self.assertEqual(res2.status_code, 302)
         config.refresh_from_db()
         self.assertTrue(config.screenshot_protection_enabled)
+
+    def test_record_university_session_api(self):
+        uni_student = User.objects.create_user(
+            email="medstudent@example.com",
+            username="medstudent",
+            password="StudentPass123!",
+            user_type="university",
+            active_mode="university",
+        )
+        from rest_framework.authtoken.models import Token
+        token = Token.objects.create(user=uni_student)
+
+        # Call university session record endpoint
+        res = self.client.post("/api/sessions/record-university/", {
+            "course_code": "ANA 201",
+            "topic_title": "Bones of the Upper Limb",
+            "total_questions": 20,
+            "correct_answers": 16,
+            "time_spent_seconds": 480,
+            "mode": "timed",
+        }, content_type="application/json", HTTP_AUTHORIZATION=f"Token {token.key}")
+        self.assertEqual(res.status_code, 201)
+        data = res.json()
+        self.assertEqual(data["course_code"], "ANA 201")
+        self.assertEqual(data["accuracy"], 80)
+        self.assertEqual(data["xp_earned"], 80)
+
+        # Verify PracticeSession in DB
+        sess = PracticeSession.objects.filter(user=uni_student, track="university").first()
+        self.assertIsNotNone(sess)
+        self.assertEqual(sess.course_code, "ANA 201")
+        self.assertEqual(sess.correct_answers, 16)
+        self.assertEqual(sess.total_questions, 20)
+
+    def test_dashboard_with_tracks(self):
+        # Create an aspirant session and a university session
+        PracticeSession.objects.create(
+            user=self.student,
+            track="aspirant",
+            total_questions=10,
+            correct_answers=7,
+            status=PracticeSession.Status.COMPLETED,
+            completed_at=timezone.now(),
+        )
+        PracticeSession.objects.create(
+            user=self.student,
+            track="university",
+            course_code="ANA 201",
+            topic_title="Upper Limb",
+            total_questions=25,
+            correct_answers=20,
+            status=PracticeSession.Status.COMPLETED,
+            completed_at=timezone.now(),
+        )
+
+        for track in ["all", "aspirant", "university"]:
+            res = self.client.get(f"/monitor/?range=7d&track={track}")
+            self.assertEqual(res.status_code, 200)
+            self.assertEqual(res.context["track_param"], track)
+            self.assertIn("aspirant_subjects", res.context)
+            self.assertIn("university_subjects", res.context)
+            if track == "aspirant":
+                self.assertGreaterEqual(res.context["period_tests"], 1)
+            elif track == "university":
+                self.assertGreaterEqual(res.context["period_tests"], 1)
+            else:
+                self.assertGreaterEqual(res.context["period_tests"], 2)
+
+    def test_student_detail_university_diagnostics(self):
+        uni_student = User.objects.create_user(
+            email="doctortobe@example.com",
+            username="doctortobe",
+            password="DoctorPass123!",
+            user_type="university",
+            active_mode="university",
+        )
+        PracticeSession.objects.create(
+            user=uni_student,
+            track="university",
+            course_code="ANA 201",
+            topic_title="Bones of the Upper Limb",
+            total_questions=20,
+            correct_answers=17,
+            status=PracticeSession.Status.COMPLETED,
+            completed_at=timezone.now(),
+        )
+
+        res = self.client.get(f"/monitor/students/{uni_student.public_id}/")
+        self.assertEqual(res.status_code, 200)
+        self.assertIn("uni_courses_list", res.context)
+        self.assertEqual(len(res.context["uni_courses_list"]), 1)
+        self.assertEqual(res.context["uni_courses_list"][0]["code"], "ANA 201")
+        self.assertEqual(res.context["uni_courses_list"][0]["accuracy"], 85)
