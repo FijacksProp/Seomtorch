@@ -8191,8 +8191,9 @@ body.shield-active #main {
   background: var(--paper-hover);
 }
 .leaderboard-row.is-current-user {
-  background: rgba(45, 106, 79, 0.06);
-  border-left: 3px solid var(--brand-accent);
+  background: rgba(45, 106, 79, 0.07);
+  border: 1px solid rgba(45, 106, 79, 0.22);
+  border-radius: 8px;
 }
 .leaderboard-rank {
   width: 32px;
@@ -8719,9 +8720,10 @@ body.shield-active #main {
   display: flex;
   gap: 12px;
   padding: 14px 16px;
-  background: var(--paper, rgba(0, 0, 0, 0.02));
-  border-left: 4px solid var(--accent, #047857);
-  border-radius: 8px;
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 .review-callout-icon {
   font-size: 20px;
