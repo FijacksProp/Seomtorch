@@ -164,65 +164,495 @@
 
 <!-- Detailed Data Sections -->
 <div class="dashboard-grid">
-  <!-- Subject & Course Catalog -->
-  <section class="panel wide">
-    <div class="panel-head">
+
+<style>
+/* Academic Catalog Pro Layout */
+.catalog-panel {
+  grid-column: 1 / -1 !important;
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-card-border, #e2e8f0);
+  border-radius: 18px;
+  padding: 24px 26px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+  margin-bottom: 8px;
+}
+.catalog-head-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-card-border, #e2e8f0);
+}
+.catalog-head-wrap h2 {
+  margin: 3px 0 0;
+  font: 600 24px var(--serif);
+  color: var(--color-ink);
+}
+.catalog-track-tabs {
+  display: flex;
+  background: #f1f5f9;
+  padding: 4px;
+  border-radius: 12px;
+  gap: 4px;
+}
+.catalog-tab-btn {
+  background: transparent;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 9px;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-muted, #64748b);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.catalog-tab-btn:hover {
+  color: var(--color-ink, #0f172a);
+}
+.catalog-tab-btn.active {
+  background: #ffffff;
+  color: var(--color-forest, #064d3b);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+  font-weight: 700;
+}
+.catalog-uni-section {
+  background: linear-gradient(180deg, rgba(13, 148, 136, 0.05) 0%, rgba(255, 255, 255, 0.5) 100%);
+  border: 1px solid rgba(13, 148, 136, 0.18);
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 26px;
+}
+.catalog-uni-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.uni-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 18px;
+}
+.uni-course-card {
+  background: #ffffff;
+  border: 1px solid var(--color-card-border, #e2e8f0);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.uni-course-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(13, 148, 136, 0.08);
+  border-color: rgba(13, 148, 136, 0.4);
+}
+.uni-course-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--card-accent, #0d9488);
+}
+.uni-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.uni-card-badge {
+  display: inline-block;
+  color: #ffffff;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 3px 9px;
+  border-radius: 6px;
+}
+.uni-card-tier {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-muted, #64748b);
+  background: #f1f5f9;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.uni-card-title {
+  margin: 0 0 6px 0;
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--color-ink, #0f172a);
+  line-height: 1.35;
+}
+.uni-card-topics {
+  font-size: 12px;
+  color: var(--color-muted, #64748b);
+  margin-bottom: 16px;
+  line-height: 1.4;
+  min-height: 34px;
+}
+.uni-stat-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: #f8fafc;
+  padding: 12px 8px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #edf2f7;
+}
+.uni-stat-tile {
+  text-align: center;
+}
+.uni-stat-tile .num {
+  display: block;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-ink, #0f172a);
+  line-height: 1.1;
+}
+.uni-stat-tile .lbl {
+  display: block;
+  font-size: 9.5px;
+  color: var(--color-muted, #64748b);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-top: 3px;
+}
+.uni-accuracy-row {
+  margin-bottom: 12px;
+}
+.uni-accuracy-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.uni-accuracy-bar {
+  height: 7px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.uni-accuracy-bar > i {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+}
+.uni-card-footer {
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.uni-action-link {
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap 0.15s ease;
+}
+.uni-action-link:hover {
+  gap: 7px;
+}
+.aspirant-subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 10px;
+}
+.aspirant-subject-row {
+  display: grid;
+  grid-template-columns: 1fr 100px 42px 20px;
+  align-items: center;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border: 1px solid var(--color-card-border, #e2e8f0);
+  border-radius: 10px;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.aspirant-subject-row:hover {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.aspirant-subject-row strong {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--color-ink, #0f172a);
+}
+.aspirant-subject-row small {
+  display: block;
+  font-size: 10.5px;
+  color: var(--color-muted, #64748b);
+  margin-top: 2px;
+}
+.aspirant-subject-row .editorial-status {
+  color: #059669;
+  font-weight: 600;
+}
+.aspirant-subject-row .bar {
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.aspirant-subject-row .bar i {
+  display: block;
+  height: 100%;
+  background: #86198f;
+  border-radius: 3px;
+}
+.aspirant-subject-row b {
+  font-size: 13.5px;
+  font-weight: 700;
+  text-align: right;
+  color: var(--color-ink, #0f172a);
+}
+.aspirant-subject-row span {
+  color: #94a3b8;
+  font-size: 14px;
+  text-align: right;
+}
+@media (max-width: 768px) {
+  .catalog-panel {
+    padding: 16px 12px !important;
+  }
+  .catalog-head-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .catalog-track-tabs {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .catalog-tab-btn {
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+    padding: 7px 10px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+  .catalog-uni-section {
+    padding: 14px 10px;
+  }
+  .uni-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .uni-course-card {
+    padding: 16px 14px;
+  }
+  .uni-card-topics {
+    min-height: auto;
+    margin-bottom: 12px;
+  }
+  .uni-stat-tiles {
+    padding: 10px 4px;
+    gap: 4px;
+  }
+  .uni-stat-tile .num {
+    font-size: 16px;
+  }
+  .uni-stat-tile .lbl {
+    font-size: 9px;
+  }
+  .aspirant-subjects-grid {
+    grid-template-columns: 1fr;
+  }
+  .aspirant-subject-row {
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+  }
+  .aspirant-subject-row .bar {
+    display: none;
+  }
+  .aspirant-subject-row span {
+    display: none;
+  }
+}
+</style>
+
+  <!-- Subject & Course Catalog (Full Width, Spacious Design) -->
+  <section class="panel catalog-panel" id="academic-catalog-section">
+    <div class="catalog-head-wrap">
       <div>
         <p class="kicker">Academic Catalog</p>
         <h2>
           {% if track_param == 'university' %}
-            University Course Performance Breakdown
+            University Medical Course Diagnostics
           {% elif track_param == 'aspirant' %}
             Aspirant Subject Performance Breakdown
           {% else %}
-            Curriculum Performance Breakdown (University &amp; Aspirant)
+            Curriculum Performance Breakdown
           {% endif %}
         </h2>
+        <p style="margin:4px 0 0;font-size:12.5px;color:var(--color-muted);">
+          Cross-track accuracy, volume, and test completion benchmarks across medicine and university prep.
+        </p>
       </div>
-      <span class="badge {% if track_param == 'university' %}badge-uni{% elif track_param == 'aspirant' %}badge-aspirant{% else %}badge-all-access{% endif %}">
-        {% if track_param == 'university' %}University Track{% elif track_param == 'aspirant' %}Aspirant Track{% else %}Dual Track Overview{% endif %}
-      </span>
+
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        {% if track_param == 'all' %}
+        <div class="catalog-track-tabs">
+          <button type="button" class="catalog-tab-btn active" data-catalog-target="all">
+            <span>🌐 Dual Track (18)</span>
+          </button>
+          <button type="button" class="catalog-tab-btn" data-catalog-target="university">
+            <span>🩺 University (3)</span>
+          </button>
+          <button type="button" class="catalog-tab-btn" data-catalog-target="aspirant">
+            <span>🎯 Aspirants (15)</span>
+          </button>
+        </div>
+        {% else %}
+        <span class="badge {% if track_param == 'university' %}badge-uni{% else %}badge-aspirant{% endif %}">
+          {% if track_param == 'university' %}University Medical Track{% else %}Aspirant Track{% endif %}
+        </span>
+        {% endif %}
+      </div>
     </div>
 
+    <!-- 🩺 University Medical Track Section -->
     {% if track_param == 'all' or track_param == 'university' %}
-      <div style="padding:12px 18px 6px;font-size:12px;font-weight:800;color:var(--color-forest);text-transform:uppercase;letter-spacing:0.05em;display:flex;align-items:center;gap:6px;">
-        <span>🩺 University Medical Courses (200L Anatomy &amp; Physiology)</span>
-      </div>
-      <div class="subject-report" style="margin-bottom:16px;">
-        {% for subject in university_subjects %}
-        <div style="display:flex;align-items:center;padding:12px 18px;background:var(--color-paper);border-radius:var(--radius-md);border:1px solid var(--color-card-border);margin-bottom:8px;gap:16px;">
-          <div style="flex:1;min-width:0;">
-            <div style="display:flex;align-items:center;gap:8px;">
-              <strong style="color:var(--color-ink);font-size:14px;">{{ subject.name }}</strong>
-              <span class="badge badge-uni" style="font-size:10px;padding:2px 7px;">{{ subject.code }}</span>
+    <div class="catalog-track-group" id="catalog-group-university">
+      <div class="catalog-uni-section">
+        <div class="catalog-uni-section-head">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:34px;height:34px;border-radius:10px;background:rgba(13,148,136,0.12);display:grid;place-items:center;color:#0d9488;font-size:18px;">
+              🩺
             </div>
-            <small style="display:block;color:var(--color-slate-muted);margin-top:2px;">
-              {{ subject.test_count }} completed tests · {{ subject.student_count }} active students · {{ subject.total_attempts }} questions attempted
-            </small>
+            <div>
+              <h3 style="margin:0;font-size:16px;font-weight:700;color:var(--color-ink);letter-spacing:-0.01em;">
+                University Medical Curriculum (200L Pre-Clinical MBBS &amp; BDS)
+              </h3>
+              <p style="margin:2px 0 0;font-size:12px;color:var(--color-muted);">
+                Undergraduate human anatomy and systemic physiology performance diagnostics
+              </p>
+            </div>
           </div>
-          <div class="bar" style="max-width:140px;width:100%;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden;">
-            <i style="display:block;height:100%;background:#047857;border-radius:4px;width:{{ subject.accuracy }}%;"></i>
-          </div>
-          <b style="font-size:14px;color:var(--color-ink);min-width:42px;text-align:right;">{{ subject.accuracy }}%</b>
+          <a href="{% url 'monitor:university' %}" class="btn-outline" style="padding:5px 12px;font-size:11.5px;display:inline-flex;align-items:center;gap:5px;text-decoration:none;border-color:rgba(13,148,136,0.3);color:#0d9488;background:#ffffff;">
+            <span>🩺 Open Medical Center</span>
+            <span>→</span>
+          </a>
         </div>
-        {% empty %}
-        <div class="empty">University course data will populate after students complete sessions.</div>
-        {% endfor %}
+
+        <div class="uni-cards-grid">
+          {% for subject in university_subjects %}
+          <div class="uni-course-card" style="--card-accent: {{ subject.color|default:'#0d9488' }};">
+            <div>
+              <div class="uni-card-header">
+                <span class="uni-card-badge" style="background:{{ subject.color|default:'#0d9488' }};">
+                  {{ subject.code|default:subject.name|slice:":7" }}
+                </span>
+                <span class="uni-card-tier">200L Pre-Clinical</span>
+              </div>
+
+              <h4 class="uni-card-title">{{ subject.name }}</h4>
+              <div class="uni-card-topics">{{ subject.topic_names|default:subject.description }}</div>
+
+              <!-- 3-Column Micro-Stat Tiles -->
+              <div class="uni-stat-tiles">
+                <div class="uni-stat-tile">
+                  <span class="num">{{ subject.test_count }}</span>
+                  <span class="lbl">Tests</span>
+                </div>
+                <div class="uni-stat-tile">
+                  <span class="num">{{ subject.student_count }}</span>
+                  <span class="lbl">Medics</span>
+                </div>
+                <div class="uni-stat-tile">
+                  <span class="num">{{ subject.total_attempts }}</span>
+                  <span class="lbl">Solved</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="uni-accuracy-row">
+                <div class="uni-accuracy-meta">
+                  <span style="font-weight:600;color:var(--color-muted);font-size:11.5px;">Course Accuracy</span>
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <span style="font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:6px;{% if subject.accuracy >= 70 %}background:#ecfdf5;color:#059669;{% elif subject.accuracy >= 50 %}background:#fffbeb;color:#d97706;{% else %}background:#fff1f2;color:#e11d48;{% endif %}">
+                      {% if subject.accuracy >= 70 %}High Mastery{% elif subject.accuracy >= 50 %}Steady Progress{% else %}Needs Focus{% endif %}
+                    </span>
+                    <strong style="font-size:14px;color:var(--color-ink);">{{ subject.accuracy }}%</strong>
+                  </div>
+                </div>
+                <div class="uni-accuracy-bar">
+                  <i style="width:{{ subject.accuracy }}%;background:{{ subject.color|default:'#0d9488' }};"></i>
+                </div>
+              </div>
+
+              <div class="uni-card-footer">
+                <span style="font-size:11px;color:var(--color-muted);">
+                  Pass Rate: <strong style="color:var(--color-ink);">{{ subject.pass_rate }}%</strong>
+                </span>
+                <a href="{% url 'monitor:university' %}" class="uni-action-link" style="color:{{ subject.color|default:'#0d9488' }};">
+                  <span>Diagnostics</span>
+                  <span>→</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <div class="empty" style="grid-column: 1 / -1;text-align:center;padding:30px;background:#ffffff;border-radius:12px;">
+            University medical course metrics will appear once students complete test papers.
+          </div>
+          {% endfor %}
+        </div>
       </div>
+    </div>
     {% endif %}
 
+    <!-- 🎯 Aspirant Prep Subjects Section -->
     {% if track_param == 'all' or track_param == 'aspirant' %}
+    <div class="catalog-track-group" id="catalog-group-aspirant">
       {% if track_param == 'all' %}
-        <div style="padding:12px 18px 6px;font-size:12px;font-weight:800;color:#86198f;text-transform:uppercase;letter-spacing:0.05em;display:flex;align-items:center;gap:6px;">
-          <span>🎯 Aspirant Prep Subjects (JAMB / WAEC / UTME)</span>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin:0 0 14px 2px;flex-wrap:wrap;gap:10px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:rgba(134,25,143,0.1);color:#86198f;font-size:14px;">🎯</span>
+          <div>
+            <h3 style="margin:0;font-size:15px;font-weight:700;color:var(--color-ink);">Aspirant Preparatory Subjects</h3>
+            <span style="font-size:11.5px;color:var(--color-muted);">JAMB / WAEC / UTME curriculum covering 15 core subjects</span>
+          </div>
         </div>
+        <span class="badge badge-aspirant" style="font-size:11px;padding:3px 9px;">15 Subjects Active</span>
+      </div>
       {% endif %}
-      <div class="subject-report">
+
+      <div class="aspirant-subjects-grid">
         {% for subject in aspirant_subjects %}
-        <a href="{% url 'monitor:subject-detail' subject.slug %}">
+        <a href="{% url 'monitor:subject-detail' subject.slug %}" class="aspirant-subject-row">
           <div>
             <strong>{{ subject.name }}</strong>
-            <small>{{ subject.test_count }} completed tests · {{ subject.student_count }} students · {{ subject.question_count }} questions</small>
+            <small>{{ subject.test_count }} tests · {{ subject.student_count }} students · {{ subject.question_count }} questions</small>
             <small class="editorial-status">{{ subject.explanation_coverage }}% explanation coverage</small>
           </div>
           <div class="bar"><i style="width:{{ subject.accuracy }}%"></i></div>
@@ -233,6 +663,7 @@
         <div class="empty">Question data will appear after the first student session.</div>
         {% endfor %}
       </div>
+    </div>
     {% endif %}
   </section>
 
@@ -326,6 +757,31 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
+
+  // Catalog Track Tabs (Instant Client-Side Filtering)
+  const catalogTabs = document.querySelectorAll(".catalog-tab-btn");
+  const uniGroup = document.getElementById("catalog-group-university");
+  const aspGroup = document.getElementById("catalog-group-aspirant");
+
+  catalogTabs.forEach(btn => {
+    btn.addEventListener("click", function() {
+      catalogTabs.forEach(t => t.classList.remove("active"));
+      this.classList.add("active");
+      const target = this.dataset.catalogTarget;
+
+      if (target === "university") {
+        if (uniGroup) uniGroup.style.display = "block";
+        if (aspGroup) aspGroup.style.display = "none";
+      } else if (target === "aspirant") {
+        if (uniGroup) uniGroup.style.display = "none";
+        if (aspGroup) aspGroup.style.display = "block";
+      } else {
+        if (uniGroup) uniGroup.style.display = "block";
+        if (aspGroup) aspGroup.style.display = "block";
+      }
+    });
+  });
+
   // Modal handlers
   const modal = document.getElementById("all-events-modal");
   const openBtn = document.getElementById("open-all-events-btn");

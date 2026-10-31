@@ -234,6 +234,30 @@ def dashboard(request):
         subject.question_count = 100
         subject.explanation_coverage = 100
 
+        # Medical curriculum metadata for rich catalog presentation
+        code_upper = (subject.code or "").upper()
+        if "ANA 201" in code_upper:
+            subject.color = "#0d9488"
+            subject.topics_count = 6
+            subject.topic_names = "Upper Limb, Lower Limb, Osteology & Neurovascular"
+        elif "ANA 203" in code_upper:
+            subject.color = "#059669"
+            subject.topics_count = 5
+            subject.topic_names = "General & Systemic Embryology, Teratology"
+        elif "PIO 201" in code_upper:
+            subject.color = "#d97706"
+            subject.topics_count = 4
+            subject.topic_names = "General Physiology, Membrane Transport & Blood"
+        else:
+            subject.color = "#0284c7"
+            subject.topics_count = 5
+            subject.topic_names = "Pre-Clinical Medical Sciences"
+
+        scores = [percentage(s.correct_answers, s.total_questions) for s in uni_sess if s.total_questions > 0]
+        subject.avg_score = round(sum(scores) / len(scores)) if scores else 0
+        pass_count = sum(1 for sc in scores if sc >= 50)
+        subject.pass_rate = percentage(pass_count, len(scores)) if scores else 0
+
     if track_param == "aspirant":
         display_subjects = aspirant_subjects
     elif track_param == "university":
