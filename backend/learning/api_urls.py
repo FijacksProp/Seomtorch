@@ -2,6 +2,7 @@ from django.urls import path
 from .api_views import (
     AchievementView,
     AttemptSyncView,
+    BeginSessionView,
     BookmarkView,
     CompleteSessionView,
     DailySprintView,
@@ -14,10 +15,14 @@ from .api_views import (
     SubjectListView,
 )
 from .challenge_views import ChallengeDetailView, ChallengeListCreateView, ChallengeRespondView, ChallengeStartView, StudentLookupView
+from .content_views import UniversityContentView, UniversityMediaView
 
 urlpatterns = [
+    path("content/university/", UniversityContentView.as_view(), name="university-content"),
+    path("content/university-media/", UniversityMediaView.as_view(), name="university-media"),
     path("subjects/", SubjectListView.as_view(), name="subjects"),
     path("sessions/", StartSessionView.as_view(), name="session-start"),
+    path("sessions/<uuid:session_id>/begin/", BeginSessionView.as_view(), name="session-begin"),
     path("sessions/record/", RecordSessionView.as_view(), name="session-record"),
     path("sessions/record-university/", RecordUniversitySessionView.as_view(), name="session-record-university"),
     path("sessions/<uuid:session_id>/complete/", CompleteSessionView.as_view(), name="session-complete"),

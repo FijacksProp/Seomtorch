@@ -45,8 +45,11 @@ def session_analytics(queryset, include_recent=False):
     focus_groups = defaultdict(lambda: {"name": "", "scores": [], "questions": 0})
     records = []
     for session in sessions:
-        correct = session.recorded_correct if session.answered_count > 0 else session.correct_answers
-        answered = session.answered_count if session.answered_count > 0 else session.total_questions
+        # Old client-reported rows are retained for audit but are not verified tests.
+        if session.answered_count == 0:
+            continue
+        correct = session.recorded_correct
+        answered = session.answered_count
         score = round(correct / session.total_questions * 100) if session.total_questions else 0
         scores.append(score)
         mode_groups[session.mode].append(score)
@@ -63,21 +66,21 @@ def session_analytics(queryset, include_recent=False):
             "track": getattr(session, "track", "aspirant"),
             "course_code": getattr(session, "course_code", ""),
         })
-    started = queryset.count()
-    completed = len(sessions)
+    started = queryset.filter(Q(began_at__isnull=False) | Q(attempts__isnull=False)).distinct().count()
+    completed = len(records)
     newest = scores[:3]
     previous = scores[3:6]
     improvement = round(mean(newest) - mean(previous)) if len(newest) == 3 and len(previous) == 3 else None
     payload = {
         "tests_taken": completed,
-        "tests_today": sum(1 for item in sessions if item.completed_at and timezone.localdate(item.completed_at) == timezone.localdate()),
-        "in_progress": queryset.filter(status=PracticeSession.Status.ACTIVE).count(),
-        "unfinished": queryset.exclude(status=PracticeSession.Status.COMPLETED).count(),
+        "tests_today": sum(1 for item in records if item["completed_at"] and timezone.localdate(item["completed_at"]) == timezone.localdate()),
+        "in_progress": queryset.filter(status=PracticeSession.Status.ACTIVE, began_at__isnull=False).count(),
+        "unfinished": queryset.filter(began_at__isnull=False).exclude(status=PracticeSession.Status.COMPLETED).count(),
         "completion_rate": round(completed / started * 100) if started else 0,
         "average_score": round(mean(scores)) if scores else 0,
         "best_score": max(scores, default=0),
         "improvement": improvement,
-        "questions_in_tests": sum(item.answered_count if item.answered_count > 0 else item.total_questions for item in sessions),
+        "questions_in_tests": sum(item.answered_count for item in sessions if item.answered_count > 0),
         "by_mode": [
             {"mode": mode, "label": dict(PracticeSession.Mode.choices).get(mode, mode.title()), "count": len(values), "average_score": round(mean(values))}
             for mode, values in mode_groups.items()

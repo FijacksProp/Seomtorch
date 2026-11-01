@@ -61,11 +61,11 @@ def _public_questions(challenge):
 
 
 def _select_questions(subject_slug, limit):
-    subjects = list(Subject.objects.filter(is_active=True).order_by("position", "name"))
+    subjects = list(Subject.objects.filter(is_active=True, track=Subject.Track.ASPIRANT).order_by("position", "name"))
     priority = {"english": 0, "mathematics": 1, "general-paper": 2, "physics": 3}
     subjects.sort(key=lambda item: (priority.get(item.slug, 99), item.position))
     if subject_slug != "all":
-        subject = get_object_or_404(Subject, slug=subject_slug, is_active=True)
+        subject = get_object_or_404(Subject, slug=subject_slug, is_active=True, track=Subject.Track.ASPIRANT)
         pool = list(Question.objects.filter(topic__subject=subject, is_active=True).select_related("topic__subject", "passage"))
         random.shuffle(pool)
         return subject, pool[:limit]
@@ -367,6 +367,7 @@ class ChallengeStartView(APIView):
             session = PracticeSession.objects.create(
                 user=request.user, subject=challenge.subject, question_ids=[item["external_id"] for item in challenge.question_payload],
                 total_questions=challenge.question_count, duration_minutes=challenge.duration_minutes, mode=PracticeSession.Mode.CHALLENGE,
+                began_at=now,
             )
             participant.practice_session = session
             participant.status = ChallengeParticipant.Status.STARTED
@@ -377,6 +378,6 @@ class ChallengeStartView(APIView):
         return Response({
             "challenge_id": str(challenge.id), "session_id": str(participant.practice_session_id),
             "questions": _public_questions(challenge), "duration_minutes": challenge.duration_minutes,
-            "deadline_at": participant.deadline_at, "title": challenge.title,
+            "started_at": participant.started_at, "deadline_at": participant.deadline_at, "title": challenge.title,
             "answers": {attempt.question.external_id: attempt.selected_index for attempt in participant.practice_session.attempts.select_related("question")},
         }, status=status.HTTP_201_CREATED)

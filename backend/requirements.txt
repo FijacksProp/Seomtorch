@@ -1,7 +1,8 @@
-Django==5.2.5
+Django==5.2.18
 djangorestframework==3.16.1
 django-cors-headers==4.7.0
 dj-database-url==3.0.1
 gunicorn==23.0.0
 psycopg[binary]==3.2.13
 whitenoise==6.9.0
+django-rest-knox==5.1.0

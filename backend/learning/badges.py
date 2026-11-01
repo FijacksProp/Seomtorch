@@ -46,9 +46,11 @@ def sync_badge_catalog():
 def badge_progress(user):
     attempts = user.attempts.all()
     total_attempts = attempts.count()
-    completed = user.practice_sessions.filter(status=PracticeSession.Status.COMPLETED)
+    completed = user.practice_sessions.filter(status=PracticeSession.Status.COMPLETED).annotate(
+        answered_count=Count("attempts", distinct=True),
+    ).filter(answered_count__gt=0)
     strong_sessions = completed.filter(total_questions__gte=10).annotate(
-        recorded_correct=Count("attempts", filter=Q(attempts__is_correct=True))
+        recorded_correct=Count("attempts", filter=Q(attempts__is_correct=True), distinct=True)
     )
     strong_count = sum(1 for session in strong_sessions if session.recorded_correct / session.total_questions >= .8)
     clean_sheet = any(session.recorded_correct == session.total_questions for session in strong_sessions)

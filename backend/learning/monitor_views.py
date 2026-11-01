@@ -17,6 +17,7 @@ from django.utils import timezone
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_http_methods, require_POST
 from rest_framework.authtoken.models import Token
+from knox.models import AuthToken
 
 from monetization.models import (
     CourseAccess,
@@ -43,6 +44,19 @@ User = get_user_model()
 
 def percentage(correct, total):
     return round(correct / total * 100) if total else 0
+
+
+def verified_completed_sessions(queryset=None):
+    """Completed papers backed by at least one server-recorded answer."""
+    base = queryset if queryset is not None else PracticeSession.objects.all()
+    return (
+        base.filter(status=PracticeSession.Status.COMPLETED)
+        .annotate(
+            verified_answer_count=Count("attempts", distinct=True),
+            verified_correct_count=Count("attempts", filter=Q(attempts__is_correct=True), distinct=True),
+        )
+        .filter(verified_answer_count__gt=0)
+    )
 
 
 def csv_safe(value):
@@ -129,28 +143,30 @@ def dashboard(request):
     # Auto-heal legacy or unassigned sessions to university track
     PracticeSession.objects.filter(uni_q).exclude(track="university").update(track="university")
 
-    total_completed_q = Q(status=PracticeSession.Status.COMPLETED) | Q(completed_at__isnull=False)
-    total_tests_all = PracticeSession.objects.filter(total_completed_q).count()
-    university_tests_all = PracticeSession.objects.filter(total_completed_q).filter(uni_q).count()
-    aspirant_tests_all = PracticeSession.objects.filter(total_completed_q).exclude(uni_q).count()
+    all_verified_sessions = verified_completed_sessions()
+    total_tests_all = all_verified_sessions.count()
+    university_tests_all = all_verified_sessions.filter(uni_q).count()
+    aspirant_tests_all = all_verified_sessions.exclude(uni_q).count()
 
-    uni_user_ids = set(PracticeSession.objects.filter(total_completed_q).filter(uni_q).values_list("user_id", flat=True))
+    uni_user_ids = set(all_verified_sessions.filter(uni_q).values_list("user_id", flat=True))
     university_students_count = User.objects.filter(student_filter).filter(
         Q(active_mode="university") | Q(user_type="university") | Q(id__in=uni_user_ids)
     ).distinct().count()
     aspirant_students_count = max(0, total_students_all - university_students_count)
 
-    sessions_qs = PracticeSession.objects.filter(total_completed_q)
-    attempts_qs = Attempt.objects.all()
+    sessions_qs = all_verified_sessions
+    attempts_qs = Attempt.objects.filter(user__is_staff=False)
     events_qs = ActivityEvent.objects.filter(user__is_staff=False)
     users_qs = User.objects.filter(student_filter)
     tx_qs = PaymentTransaction.objects.filter(status=PaymentTransaction.Status.SUCCESS)
 
     if track_param == "aspirant":
         sessions_qs = sessions_qs.exclude(uni_q)
+        attempts_qs = attempts_qs.filter(question__topic__subject__track="aspirant")
         users_qs = users_qs.filter(Q(active_mode="aspirant") | Q(user_type="aspirant")).exclude(id__in=uni_user_ids)
     elif track_param == "university":
         sessions_qs = sessions_qs.filter(uni_q)
+        attempts_qs = attempts_qs.filter(question__topic__subject__track="university")
         users_qs = users_qs.filter(Q(active_mode="university") | Q(user_type="university") | Q(id__in=uni_user_ids)).distinct()
 
     if start_date:
@@ -166,35 +182,23 @@ def dashboard(request):
     all_time_revenue = tx_qs.aggregate(s=Sum("amount"))["s"] or 0
 
     period_tests = sessions_qs.count()
-    aspirant_tests_period = PracticeSession.objects.filter(total_completed_q, completed_at__gte=start_date if start_date else datetime.min).exclude(uni_q).count() if start_date else aspirant_tests_all
-    university_tests_period = PracticeSession.objects.filter(total_completed_q, uni_q, completed_at__gte=start_date if start_date else datetime.min).count() if start_date else university_tests_all
+    aspirant_tests_period = sessions_qs.exclude(uni_q).count() if track_param == "aspirant" else all_verified_sessions.filter(completed_at__gte=start_date).exclude(uni_q).count() if start_date else aspirant_tests_all
+    university_tests_period = sessions_qs.filter(uni_q).count() if track_param == "university" else all_verified_sessions.filter(uni_q, completed_at__gte=start_date).count() if start_date else university_tests_all
 
     # Active students: users with attempts or completed sessions
     session_user_ids = set(sessions_qs.values_list("user_id", flat=True))
-    attempt_user_ids = set(attempts_qs.values_list("user_id", flat=True)) if track_param != "university" else set()
+    attempt_user_ids = set(attempts_qs.values_list("user_id", flat=True))
     period_active_students = len(session_user_ids.union(attempt_user_ids))
 
     # Calculate attempts and accuracy across both tracks
-    if track_param == "university":
-        uni_q_total = sessions_qs.aggregate(s=Sum("total_questions"))["s"] or 0
-        uni_q_correct = sessions_qs.aggregate(s=Sum("correct_answers"))["s"] or 0
-        period_attempts = uni_q_total
-        period_correct = uni_q_correct
-    elif track_param == "aspirant":
-        period_attempts = attempts_qs.count()
-        period_correct = attempts_qs.filter(is_correct=True).count()
-    else:
-        uni_in_period = sessions_qs.filter(track="university")
-        uni_q_total = uni_in_period.aggregate(s=Sum("total_questions"))["s"] or 0
-        uni_q_correct = uni_in_period.aggregate(s=Sum("correct_answers"))["s"] or 0
-        period_attempts = attempts_qs.count() + uni_q_total
-        period_correct = attempts_qs.filter(is_correct=True).count() + uni_q_correct
+    period_attempts = attempts_qs.count()
+    period_correct = attempts_qs.filter(is_correct=True).count()
 
     period_accuracy = percentage(period_correct, period_attempts)
 
     # Average score in period
     completed_rows = list(sessions_qs.only("correct_answers", "total_questions"))
-    scores = [percentage(s.correct_answers, s.total_questions) for s in completed_rows if s.total_questions > 0]
+    scores = [percentage(s.verified_correct_count, s.total_questions) for s in completed_rows if s.total_questions > 0]
     period_avg_score = round(sum(scores) / len(scores)) if scores else 0
 
     # Prior period comparison for trends
@@ -208,11 +212,7 @@ def dashboard(request):
         prior_start = start_date - timedelta(days=30)
 
     if prior_start and prior_end:
-        prior_sessions = PracticeSession.objects.filter(
-            status=PracticeSession.Status.COMPLETED,
-            completed_at__gte=prior_start,
-            completed_at__lt=prior_end
-        )
+        prior_sessions = verified_completed_sessions().filter(completed_at__gte=prior_start, completed_at__lt=prior_end)
         if track_param == "aspirant":
             prior_sessions = prior_sessions.filter(track="aspirant")
         elif track_param == "university":
@@ -220,7 +220,7 @@ def dashboard(request):
 
         prior_tests = prior_sessions.count()
         prior_completed_rows = list(prior_sessions.only("correct_answers", "total_questions"))
-        prior_scores = [percentage(s.correct_answers, s.total_questions) for s in prior_completed_rows if s.total_questions > 0]
+        prior_scores = [percentage(s.verified_correct_count, s.total_questions) for s in prior_completed_rows if s.total_questions > 0]
         prior_avg_score = round(sum(prior_scores) / len(prior_scores)) if prior_scores else 0
 
         prior_attempts = Attempt.objects.filter(answered_at__gte=prior_start, answered_at__lt=prior_end)
@@ -253,10 +253,7 @@ def dashboard(request):
     activity_data = []
     for i in range(chart_days - 1, -1, -1):
         day = today_date - timedelta(days=i)
-        day_count = PracticeSession.objects.filter(
-            status=PracticeSession.Status.COMPLETED,
-            completed_at__date=day
-        ).count()
+        day_count = all_verified_sessions.filter(completed_at__date=day).count()
         activity_labels.append(day.strftime("%d %b"))
         activity_data.append(day_count)
 
@@ -273,10 +270,10 @@ def dashboard(request):
     # ── Chart 3 & Catalog: Dual-Track Subject & Course Performance ────────
     # 1. Aspirant Subjects (JAMB / WAEC)
     aspirant_subjects = list(Subject.objects.filter(is_active=True, track="aspirant").annotate(
-        total_attempts=Count("topics__questions__attempts", distinct=True),
-        correct_attempts=Count("topics__questions__attempts", filter=Q(topics__questions__attempts__is_correct=True), distinct=True),
-        student_count=Count("topics__questions__attempts__user", distinct=True),
-        test_count=Count("practice_sessions", filter=Q(practice_sessions__status=PracticeSession.Status.COMPLETED), distinct=True),
+        total_attempts=Count("topics__questions__attempts", filter=Q(topics__questions__attempts__user__is_staff=False), distinct=True),
+        correct_attempts=Count("topics__questions__attempts", filter=Q(topics__questions__attempts__is_correct=True, topics__questions__attempts__user__is_staff=False), distinct=True),
+        student_count=Count("topics__questions__attempts__user", filter=Q(topics__questions__attempts__user__is_staff=False), distinct=True),
+        test_count=Count("practice_sessions", filter=Q(practice_sessions__status=PracticeSession.Status.COMPLETED, practice_sessions__attempts__isnull=False), distinct=True),
         question_count=Count("topics__questions", filter=Q(topics__questions__is_active=True), distinct=True),
         reviewed_count=Count("topics__questions", filter=Q(topics__questions__is_active=True, topics__questions__explanation_status=Question.ExplanationStatus.REVIEWED), distinct=True),
     ))
@@ -289,19 +286,19 @@ def dashboard(request):
     for subject in university_subjects:
         code = subject.code or subject.name[:7].strip()
         code_no_space = code.replace(" ", "")
-        uni_sess = PracticeSession.objects.filter(
+        uni_sess = all_verified_sessions.filter(
             Q(subject=subject) |
             Q(course_code__iexact=code) |
             Q(course_code__icontains=code) |
             Q(course_code__icontains=code_no_space) |
             Q(subject__code__iexact=code) |
             Q(subject__slug__icontains=subject.slug),
-            Q(status=PracticeSession.Status.COMPLETED) | Q(completed_at__isnull=False)
         )
         subject.test_count = uni_sess.count()
         subject.student_count = uni_sess.values("user_id").distinct().count()
-        tot_q = uni_sess.aggregate(s=Sum("total_questions"))["s"] or 0
-        cor_q = uni_sess.aggregate(s=Sum("correct_answers"))["s"] or 0
+        subject_attempts = Attempt.objects.filter(question__topic__subject=subject, user__is_staff=False)
+        tot_q = subject_attempts.count()
+        cor_q = subject_attempts.filter(is_correct=True).count()
         subject.total_attempts = tot_q
         subject.correct_attempts = cor_q
         subject.accuracy = percentage(cor_q, tot_q)
@@ -327,7 +324,7 @@ def dashboard(request):
             subject.topics_count = 5
             subject.topic_names = "Pre-Clinical Medical Sciences"
 
-        scores = [percentage(s.correct_answers, s.total_questions) for s in uni_sess if s.total_questions > 0]
+        scores = [percentage(s.verified_correct_count, s.total_questions) for s in uni_sess if s.total_questions > 0]
         subject.avg_score = round(sum(scores) / len(scores)) if scores else 0
         pass_count = sum(1 for sc in scores if sc >= 50)
         subject.pass_rate = percentage(pass_count, len(scores)) if scores else 0
@@ -466,9 +463,8 @@ def university_dashboard(request):
     )
     PracticeSession.objects.filter(uni_q).exclude(track="university").update(track="university")
 
-    total_completed_q = Q(status=PracticeSession.Status.COMPLETED) | Q(completed_at__isnull=False)
     # Base university sessions
-    uni_sessions_all = PracticeSession.objects.filter(uni_q, total_completed_q)
+    uni_sessions_all = verified_completed_sessions().filter(uni_q)
     uni_sessions = uni_sessions_all
     if start_date:
         uni_sessions = uni_sessions.filter(completed_at__gte=start_date)
@@ -484,13 +480,14 @@ def university_dashboard(request):
     total_uni_tests_all = uni_sessions_all.count()
     period_uni_tests = uni_sessions.count()
 
-    tot_q = uni_sessions.aggregate(s=Sum("total_questions"))["s"] or 0
-    cor_q = uni_sessions.aggregate(s=Sum("correct_answers"))["s"] or 0
+    uni_period_rows = list(uni_sessions)
+    tot_q = sum(item.verified_answer_count for item in uni_period_rows)
+    cor_q = sum(item.verified_correct_count for item in uni_period_rows)
     period_accuracy = percentage(cor_q, tot_q)
 
     # Average score
-    completed_rows = list(uni_sessions.only("correct_answers", "total_questions"))
-    scores = [percentage(s.correct_answers, s.total_questions) for s in completed_rows if s.total_questions > 0]
+    completed_rows = uni_period_rows
+    scores = [percentage(s.verified_correct_count, s.total_questions) for s in completed_rows if s.total_questions > 0]
     period_avg_score = round(sum(scores) / len(scores)) if scores else 0
 
     # Active students in period
@@ -521,10 +518,11 @@ def university_dashboard(request):
         )
         c["tests_count"] = c_sess.count()
         c["students_count"] = c_sess.values("user_id").distinct().count()
-        c_tot = c_sess.aggregate(s=Sum("total_questions"))["s"] or 0
-        c_cor = c_sess.aggregate(s=Sum("correct_answers"))["s"] or 0
+        c_rows = list(c_sess)
+        c_tot = sum(item.verified_answer_count for item in c_rows)
+        c_cor = sum(item.verified_correct_count for item in c_rows)
         c["accuracy"] = percentage(c_cor, c_tot)
-        c_scores = [percentage(s.correct_answers, s.total_questions) for s in c_sess if s.total_questions > 0]
+        c_scores = [percentage(s.verified_correct_count, s.total_questions) for s in c_rows if s.total_questions > 0]
         c["avg_score"] = round(sum(c_scores) / len(c_scores)) if c_scores else 0
         pass_count = sum(1 for sc in c_scores if sc >= 50)
         c["pass_rate"] = percentage(pass_count, len(c_scores)) if c_scores else 0
@@ -546,11 +544,11 @@ def university_dashboard(request):
     student_list = []
     for user in student_rows[:120]:
         u_tests = user.uni_test_rows
-        u_scores = [percentage(item.correct_answers, item.total_questions) for item in u_tests if item.total_questions > 0]
+        u_scores = [percentage(item.verified_correct_count, item.total_questions) for item in u_tests if item.total_questions > 0]
         user.uni_test_count = len(u_tests)
         user.uni_avg_score = round(sum(u_scores) / len(u_scores)) if u_scores else 0
-        u_tot = sum(item.total_questions for item in u_tests)
-        u_cor = sum(item.correct_answers for item in u_tests)
+        u_tot = sum(item.verified_answer_count for item in u_tests)
+        u_cor = sum(item.verified_correct_count for item in u_tests)
         user.uni_accuracy = percentage(u_cor, u_tot)
 
         # Check access badge
@@ -576,7 +574,7 @@ def university_dashboard(request):
     for sess in recent_sessions:
         dur = sess.time_spent_seconds or ((sess.duration_minutes or 0) * 60)
         sess.formatted_duration = f"{dur // 60}m {dur % 60}s" if dur >= 60 else f"{dur}s"
-        score = percentage(sess.correct_answers, sess.total_questions)
+        score = percentage(sess.verified_correct_count, sess.total_questions)
         sess.score_pct = score
         sess.passed = score >= 50
 
@@ -611,7 +609,7 @@ def students(request):
     hide_inactive = request.GET.get("hide_inactive", "0").strip() in {"1", "true", "yes"}
     page_number = request.GET.get("page", 1)
 
-    completed_tests = PracticeSession.objects.filter(status=PracticeSession.Status.COMPLETED).only(
+    completed_tests = verified_completed_sessions().only(
         "user_id", "total_questions", "correct_answers", "completed_at"
     )
 
@@ -638,15 +636,10 @@ def students(request):
     now_dt = timezone.now()
     user_list = []
     for user in users:
-        scores = [percentage(item.correct_answers, item.total_questions) for item in user.completed_test_rows]
+        scores = [percentage(item.verified_correct_count, item.total_questions) for item in user.completed_test_rows]
         user.test_count = len(scores)
         user.average_test_score = round(sum(scores) / len(scores)) if scores else 0
-        tot_q = sum(item.total_questions for item in user.completed_test_rows)
-        cor_q = sum(item.correct_answers for item in user.completed_test_rows)
-        if tot_q > 0:
-            user.accuracy = percentage(cor_q, tot_q)
-        else:
-            user.accuracy = percentage(user.correct_count, user.attempt_count)
+        user.accuracy = percentage(user.correct_count, user.attempt_count)
 
         # Check access badge
         active_grant = user.course_accesses.filter(is_active=True, expires_at__gte=now_dt).first()
@@ -747,7 +740,7 @@ def student_detail(request, public_id):
     tests = user_test_analytics(student, include_recent=True)
 
     # Completed sessions split by track
-    completed_sessions = list(student.practice_sessions.filter(status=PracticeSession.Status.COMPLETED).order_by("-completed_at"))
+    completed_sessions = list(verified_completed_sessions(student.practice_sessions.all()).order_by("-completed_at"))
     uni_sessions = [s for s in completed_sessions if s.track == "university"]
     asp_sessions = [s for s in completed_sessions if s.track != "university"]
 
@@ -757,8 +750,8 @@ def student_detail(request, public_id):
         if code not in uni_courses_summary:
             uni_courses_summary[code] = {"code": code, "tests": 0, "total_q": 0, "correct_q": 0, "topics": set()}
         uni_courses_summary[code]["tests"] += 1
-        uni_courses_summary[code]["total_q"] += s.total_questions
-        uni_courses_summary[code]["correct_q"] += s.correct_answers
+        uni_courses_summary[code]["total_q"] += s.verified_answer_count
+        uni_courses_summary[code]["correct_q"] += s.verified_correct_count
         if s.topic_title:
             uni_courses_summary[code]["topics"].add(s.topic_title)
 
@@ -768,13 +761,8 @@ def student_detail(request, public_id):
 
     uni_courses_list = list(uni_courses_summary.values())
 
-    # Overall accuracy combining both tracks
-    uni_tot_q = sum(s.total_questions for s in uni_sessions)
-    uni_cor_q = sum(s.correct_answers for s in uni_sessions)
-    comb_total = total + uni_tot_q
-    comb_correct = correct + uni_cor_q
-    if comb_total > 0:
-        student_accuracy = percentage(comb_correct, comb_total)
+    # The attempt rows already include verified answers from both tracks.
+    # Adding university session aggregates here would count those answers twice.
 
     # Access summary & active grants
     access_summary = CourseAccess.get_user_access_summary(student)
@@ -1283,6 +1271,7 @@ def reset_student_password(request, public_id):
     student.must_change_password = True
     student.save(update_fields=("password", "must_change_password"))
     Token.objects.filter(user=student).delete()
+    AuthToken.objects.filter(user=student).delete()
     response = render(request, "monitor/password_reset_result.html", {
         "student": student, "temporary_password": generated_password
     })
@@ -1301,7 +1290,7 @@ def export_students_csv(request):
         "Tests Taken", "Average Test Score %", "Best Test Score %", "Questions Answered",
         "Correct Answers", "Answer Accuracy %", "XP", "Level", "Current Streak", "Best Streak", "Joined"
     ])
-    completed_tests = PracticeSession.objects.filter(status=PracticeSession.Status.COMPLETED).only(
+    completed_tests = verified_completed_sessions().only(
         "user_id", "total_questions", "correct_answers"
     )
     users = User.objects.filter(is_staff=False).select_related(
@@ -1318,7 +1307,7 @@ def export_students_csv(request):
         correct = user.correct_count
         accuracy = percentage(correct, total)
         stats = getattr(user, "learning_stats", None)
-        scores = [percentage(item.correct_answers, item.total_questions) for item in user.completed_test_rows]
+        scores = [percentage(item.verified_correct_count, item.total_questions) for item in user.completed_test_rows]
 
         academic_target = ""
         if user.active_mode == "university" and hasattr(user, "university_profile"):

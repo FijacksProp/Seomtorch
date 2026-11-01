@@ -1,6 +1,7 @@
 from django.contrib.auth import logout
 from rest_framework import permissions, status, throttling
 from rest_framework.authtoken.models import Token
+from knox.models import AuthToken
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -30,7 +31,8 @@ class RegisterView(APIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         UserStats.objects.get_or_create(user=user)
-        token = Token.objects.create(user=user)
+        Token.objects.filter(user=user).delete()
+        _, token = AuthToken.objects.create(user=user)
         ActivityEvent.objects.create(user=user, event_type=ActivityEvent.Type.REGISTERED)
 
         # Automatically grant 3-Day Free Trial upon registration
@@ -60,7 +62,7 @@ class RegisterView(APIView):
         except Exception:
             pass
         return Response(
-            {"token": token.key, "user": UserSerializer(user).data},
+            {"token": token, "user": UserSerializer(user).data},
             status=status.HTTP_201_CREATED,
         )
 
@@ -73,16 +75,18 @@ class LoginView(APIView):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data["user"]
-        token, _ = Token.objects.get_or_create(user=user)
+        _, token = AuthToken.objects.create(user=user)
         ActivityEvent.objects.create(user=user, event_type=ActivityEvent.Type.SIGNED_IN)
-        return Response({"token": token.key, "user": UserSerializer(user).data})
+        Token.objects.filter(user=user).delete()
+        return Response({"token": token, "user": UserSerializer(user).data})
 
 
 class LogoutView(APIView):
     def post(self, request):
         ActivityEvent.objects.create(user=request.user, event_type=ActivityEvent.Type.SIGNED_OUT)
-        # DRF's built-in token is shared by a user's signed-in devices. Keep it
-        # valid here so signing out on one browser does not disconnect the rest.
+        # Knox tokens are device-specific; invalidate only this device's token.
+        if hasattr(request.auth, "delete"):
+            request.auth.delete()
         logout(request)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -97,7 +101,12 @@ class ChangePasswordView(APIView):
         serializer = ChangePasswordSerializer(data=request.data, context={"request": request})
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        return Response({"user": UserSerializer(user).data})
+        # A password change invalidates every other device. Reissue only the
+        # current device a fresh, hashed, expiring Knox token.
+        AuthToken.objects.filter(user=user).delete()
+        Token.objects.filter(user=user).delete()
+        _, token = AuthToken.objects.create(user=user)
+        return Response({"token": token, "user": UserSerializer(user).data})
 
 
 class SwitchModeView(APIView):
@@ -197,14 +206,17 @@ class UpdateAvatarView(APIView):
 
 
 class ContactMatchView(APIView):
+    throttle_classes = [throttling.ScopedRateThrottle]
+    throttle_scope = "contacts"
+
     def post(self, request):
         import re
         phones = request.data.get("phones", [])
         emails = request.data.get("emails", [])
         if not isinstance(phones, list) or not isinstance(emails, list):
             return Response({"detail": "phones and emails must be lists."}, status=status.HTTP_400_BAD_REQUEST)
-        if len(phones) + len(emails) > 500:
-            return Response({"detail": "Too many contacts submitted. Maximum 500."}, status=status.HTTP_400_BAD_REQUEST)
+        if len(phones) + len(emails) > 100:
+            return Response({"detail": "Too many contacts submitted. Maximum 100."}, status=status.HTTP_400_BAD_REQUEST)
         
         # Normalize phones: strip spaces/dashes, ensure we match
         cleaned_phones = []

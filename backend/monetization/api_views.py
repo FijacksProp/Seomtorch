@@ -26,6 +26,47 @@ from .models import (
 logger = logging.getLogger(__name__)
 
 
+def _complete_verified_payment(tx, config, gateway_response):
+    """Apply a verified payment exactly once, regardless of callback ordering."""
+    if tx.status == PaymentTransaction.Status.SUCCESS:
+        return False
+
+    now = timezone.now()
+    tx.status = PaymentTransaction.Status.SUCCESS
+    tx.paid_at = now
+    tx.gateway_response = gateway_response or {}
+    tx.gateway_reference = str((gateway_response or {}).get("reference") or tx.reference)
+    tx.save(update_fields=("status", "paid_at", "gateway_response", "gateway_reference"))
+
+    CourseAccess.objects.get_or_create(
+        reference=tx.reference,
+        defaults={
+            "user": tx.user,
+            "access_type": tx.access_type,
+            "course_code": tx.course_code or "all",
+            "starts_at": now,
+            "expires_at": config.semester_end_date,
+            "is_active": True,
+            "granted_by": CourseAccess.GrantedBy.PAYMENT,
+        },
+    )
+    if tx.access_type == PaymentTransaction.AccessType.ALL_ACCESS and not tx.discount_code and config.is_launch_offer_valid:
+        PlanConfig.objects.filter(id=config.id).update(launch_offer_buyers_count=models.F("launch_offer_buyers_count") + 1)
+    if tx.discount_code:
+        DiscountCode.objects.filter(id=tx.discount_code_id).update(times_used=models.F("times_used") + 1)
+    MonetizationEvent.objects.create(
+        user=tx.user,
+        event_name="payment_succeeded",
+        metadata={"reference": tx.reference, "amount": tx.amount, "access_type": tx.access_type},
+    )
+    MonetizationEvent.objects.create(
+        user=tx.user,
+        event_name="package_bought",
+        metadata={"package": tx.access_type, "course": tx.course_code},
+    )
+    return True
+
+
 def _get_free_topics_map():
     configs = CourseTopicConfig.objects.all()
     free_map = {
@@ -117,8 +158,15 @@ class InitializePaymentView(APIView):
         course_code = str(request.data.get("course_code") or "").strip()
         code_str = str(request.data.get("discount_code") or "").strip().upper()
 
+        if access_type not in {PaymentTransaction.AccessType.SINGLE_COURSE, PaymentTransaction.AccessType.ALL_ACCESS}:
+            return Response({"detail": "Choose a valid access plan."}, status=status.HTTP_400_BAD_REQUEST)
+
         if access_type == "single_course" and not course_code:
             return Response({"detail": "Course code is required for single course purchase."}, status=status.HTTP_400_BAD_REQUEST)
+        if access_type == "single_course" and not CourseTopicConfig.objects.filter(course_code__iexact=course_code).exists():
+            from learning.models import Subject
+            if not Subject.objects.filter(track=Subject.Track.UNIVERSITY, code__iexact=course_code, is_active=True).exists():
+                return Response({"detail": "That course is not available for purchase."}, status=status.HTTP_400_BAD_REQUEST)
 
         discount_code_obj = None
         amount = 0
@@ -220,12 +268,21 @@ class VerifyPaymentView(APIView):
                 })
                 with urllib.request.urlopen(req, timeout=12) as response:
                     paystack_data = json.loads(response.read().decode("utf-8"))
-                    if paystack_data.get("status") and paystack_data.get("data", {}).get("status") == "success":
-                        paid_kobo = paystack_data["data"].get("amount", 0)
-                        if paid_kobo >= (tx.amount * 100):
+                    verified_data = paystack_data.get("data") or {}
+                    if (
+                        paystack_data.get("status")
+                        and verified_data.get("status") == "success"
+                        and str(verified_data.get("reference") or "") == tx.reference
+                        and str(verified_data.get("currency") or "").upper() == "NGN"
+                        and isinstance(verified_data.get("amount"), int)
+                        and not isinstance(verified_data.get("amount"), bool)
+                        and verified_data.get("amount") == tx.amount * 100
+                    ):
+                        customer_email = str((verified_data.get("customer") or {}).get("email") or "").strip().lower()
+                        if customer_email and customer_email == tx.user.email.strip().lower():
                             verified = True
-                            tx.gateway_response = paystack_data.get("data", {})
-                            tx.gateway_reference = paystack_data.get("data", {}).get("reference", "")
+                            tx.gateway_response = verified_data
+                            tx.gateway_reference = verified_data.get("reference", "")
             except Exception as e:
                 logger.error("Paystack verification error for %s: %s", reference, e)
                 return Response({"detail": "Could not verify payment with gateway. Please try again shortly or contact support."}, status=status.HTTP_502_BAD_GATEWAY)
@@ -247,41 +304,7 @@ class VerifyPaymentView(APIView):
             )
             return Response({"detail": "Payment was not successful."}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Mark success
-        tx.status = PaymentTransaction.Status.SUCCESS
-        tx.paid_at = timezone.now()
-        tx.save()
-
-        # Update launch offer count if applicable
-        if tx.access_type == PaymentTransaction.AccessType.ALL_ACCESS and not tx.discount_code and config.is_launch_offer_valid:
-            PlanConfig.objects.filter(id=config.id).update(launch_offer_buyers_count=models.F("launch_offer_buyers_count") + 1)
-
-        # Update discount code usage
-        if tx.discount_code:
-            DiscountCode.objects.filter(id=tx.discount_code_id).update(times_used=models.F("times_used") + 1)
-
-        # Unlock student access until semester end date
-        CourseAccess.objects.create(
-            user=request.user,
-            access_type=tx.access_type,
-            course_code=tx.course_code or "all",
-            starts_at=timezone.now(),
-            expires_at=config.semester_end_date,
-            is_active=True,
-            granted_by=CourseAccess.GrantedBy.PAYMENT,
-            reference=tx.reference,
-        )
-
-        MonetizationEvent.objects.create(
-            user=request.user,
-            event_name="payment_succeeded",
-            metadata={"reference": reference, "amount": tx.amount, "access_type": tx.access_type}
-        )
-        MonetizationEvent.objects.create(
-            user=request.user,
-            event_name="package_bought",
-            metadata={"package": tx.access_type, "course": tx.course_code}
-        )
+        _complete_verified_payment(tx, config, tx.gateway_response)
 
         return Response({
             "status": "success",
@@ -301,10 +324,14 @@ class PaystackWebhookView(APIView):
         secret_key = config.paystack_secret_key or getattr(settings, "PAYSTACK_SECRET_KEY", "")
         signature = request.META.get("HTTP_X_PAYSTACK_SIGNATURE")
 
-        if secret_key and signature:
-            computed = hmac.new(secret_key.encode("utf-8"), request.body, hashlib.sha512).hexdigest()
-            if not hmac.compare_digest(computed, signature):
-                return Response({"detail": "Invalid signature."}, status=status.HTTP_400_BAD_REQUEST)
+        if not secret_key:
+            logger.error("Paystack webhook rejected because no secret key is configured.")
+            return Response({"detail": "Payment gateway is not configured."}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+        if not signature:
+            return Response({"detail": "Missing Paystack signature."}, status=status.HTTP_400_BAD_REQUEST)
+        computed = hmac.new(secret_key.encode("utf-8"), request.body, hashlib.sha512).hexdigest()
+        if not hmac.compare_digest(computed, signature):
+            return Response({"detail": "Invalid signature."}, status=status.HTTP_400_BAD_REQUEST)
 
         event_data = request.data or {}
         event_name = event_data.get("event")
@@ -313,31 +340,27 @@ class PaystackWebhookView(APIView):
             data = event_data.get("data", {})
             reference = data.get("reference")
             if reference:
+                if data.get("status") != "success":
+                    return Response({"detail": "Payment status is not successful."}, status=status.HTTP_400_BAD_REQUEST)
                 try:
                     with transaction.atomic():
                         tx = PaymentTransaction.objects.select_for_update().get(reference=reference)
-                        if tx.status != PaymentTransaction.Status.SUCCESS:
-                            tx.status = PaymentTransaction.Status.SUCCESS
-                            tx.paid_at = timezone.now()
-                            tx.gateway_response = data
-                            tx.save()
-
-                            CourseAccess.objects.create(
-                                user=tx.user,
-                                access_type=tx.access_type,
-                                course_code=tx.course_code or "all",
-                                starts_at=timezone.now(),
-                                expires_at=config.semester_end_date,
-                                is_active=True,
-                                granted_by=CourseAccess.GrantedBy.PAYMENT,
-                                reference=tx.reference,
-                            )
-                            if tx.access_type == PaymentTransaction.AccessType.ALL_ACCESS and not tx.discount_code and config.is_launch_offer_valid:
-                                PlanConfig.objects.filter(id=config.id).update(launch_offer_buyers_count=models.F("launch_offer_buyers_count") + 1)
-                            if tx.discount_code:
-                                DiscountCode.objects.filter(id=tx.discount_code_id).update(times_used=models.F("times_used") + 1)
+                        customer_email = str((data.get("customer") or {}).get("email") or "").strip().lower()
+                        valid_payment = (
+                            str(data.get("reference") or "") == tx.reference
+                            and str(data.get("currency") or "").upper() == "NGN"
+                              and isinstance(data.get("amount"), int)
+                              and not isinstance(data.get("amount"), bool)
+                              and data.get("amount") == tx.amount * 100
+                              and bool(customer_email)
+                              and customer_email == tx.user.email.strip().lower()
+                        )
+                        if not valid_payment:
+                            return Response({"detail": "Payment details do not match the pending transaction."}, status=status.HTTP_400_BAD_REQUEST)
+                        _complete_verified_payment(tx, config, data)
                 except PaymentTransaction.DoesNotExist:
                     logger.warning("Paystack webhook received unknown reference: %s", reference)
+                    return Response({"detail": "Unknown transaction reference."}, status=status.HTTP_404_NOT_FOUND)
 
         return Response({"status": "received"}, status=status.HTTP_200_OK)
 

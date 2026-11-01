@@ -22,10 +22,10 @@ const ALL_SUBJECT_ORDER = ["biology", "chemistry", "civic-education", "computer-
 
 const FAQS = [
   { group: "Getting started", q: "What is Seomtorch designed for?", a: "Seomtorch is a personal study companion for structured JAMB, WAEC, NECO and Post-UTME preparation. It helps you practise by topic, learn from corrections and see where your next study session will matter most." },
-  { group: "Getting started", q: "Do I need an account or internet connection?", a: "An account is required so your progress can be monitored and restored across devices. After signing in once, practice can continue offline and pending answers synchronize when the connection returns." },
+  { group: "Getting started", q: "Do I need an account or internet connection?", a: "Use an account and an internet connection to save answers, XP and test results across devices. Questions already cached on this device can be practised offline, but those answers remain on this device and do not update your account." },
   { group: "Getting started", q: "Can I install Seomtorch on my device?", a: "Yes. Use the Install app button. On iPhone or iPad, open Seomtorch in Safari, tap Share, then choose Add to Home Screen." },
   { group: "Practice and review", q: "How are questions selected?", a: "Sessions prioritise questions you have not seen, topics where your accuracy is lower, and questions you previously missed. Recently answered questions receive less priority, which reduces unnecessary repetition." },
-  { group: "Practice and review", q: "Which subjects are available?", a: "Biology, Chemistry, Civic Education, Computer Studies, Economics, English Language, Further Mathematics, General Paper, Government, History, Literature in English, Marketing, Mathematics, Music and Physics are available. Question banks include verified questions with detailed written explanations." },
+  { group: "Practice and review", q: "Which subjects are available?", a: "Biology, Chemistry, Civic Education, Computer Studies, Economics, English Language, Further Mathematics, General Paper, Government, History, Literature in English, Marketing, Mathematics, Music and Physics are available. Explanation coverage varies by question; you can report an answer or explanation that needs review." },
   { group: "Practice and review", q: "Can I practise one topic only?", a: "Yes. Open Practice, select a subject, then choose a listed topic. You can also choose All topics for a mixed session within that subject." },
   { group: "Practice and review", q: "How do timed sessions work?", a: "Choose any question count from 10 to 100 and enter the number of minutes you want to study. One overall countdown runs across the complete session." },
   { group: "Practice and review", q: "Can I practise every subject together?", a: "Yes. Choose All subjects to build one balanced session. Questions are grouped into clear subject sections under one overall timer." },
@@ -34,9 +34,9 @@ const FAQS = [
   { group: "Progress and scoring", q: "How do XP and levels work?", a: "You earn 5 XP for each correct answer. Incorrect answers do not award XP. Every 250 XP advances your level, while accuracy shows how well you understand the material." },
   { group: "Progress and scoring", q: "What is a focus area?", a: "A focus area is a topic with enough attempts to measure and an accuracy rate that needs attention. It is guidance for your next session, not a judgement of your ability." },
   { group: "Progress and scoring", q: "Are these scores official exam predictions?", a: "No. Your dashboard reflects only your activity in Seomtorch. Use it to guide revision, not as an official predicted examination score." },
-  { group: "Data and offline use", q: "Where is my progress stored?", a: "Progress is stored securely in your Seomtorch account and cached in IndexedDB on this device for offline use. Pending offline activity synchronizes when the server is reachable." },
+  { group: "Data and offline use", q: "Where is my progress stored?", a: "Your Seomtorch account is the record for synchronized answers, XP, streaks and completed tests. The app also keeps cached questions and local-only practice on this device." },
   { group: "Data and offline use", q: "How do I protect my progress?", a: "Your account is the primary record. You can also use Export data in Profile to keep a personal JSON backup." },
-  { group: "Data and offline use", q: "What happens if I clear browser data?", a: "Signing in again restores synchronized progress from your account. Answers submitted while offline must reconnect and synchronize before browser data is cleared." },
+  { group: "Data and offline use", q: "What happens if I clear browser data?", a: "Signing in again restores synchronized progress. Practice completed offline without a server-backed session exists only in this browser and cannot be recovered after its data is cleared." },
 ];
 
 const ICONS = {
@@ -52,6 +52,19 @@ const ICONS = {
 const DB_NAME = "seomtorch";
 const DB_VERSION = 2;
 const app = document.querySelector("#app");
+app.addEventListener("click", event => {
+  const action = event.target.closest("[data-upgrade-course]");
+  if (!action) return;
+  showUpgradeModal({ trigger: "locked_explanation", courseCode: action.dataset.upgradeCourse || "ANA 201" });
+});
+// Keep broken-avatar fallbacks working without inline handlers; the production
+// Content Security Policy intentionally blocks HTML onerror attributes.
+document.addEventListener("error", event => {
+  const image = event.target;
+  if (!(image instanceof HTMLImageElement) || !image.dataset.fallbackDisplay) return;
+  image.style.display = "none";
+  if (image.nextElementSibling) image.nextElementSibling.style.display = image.dataset.fallbackDisplay;
+}, true);
 const toastRegion = document.querySelector("#toast-region");
 let loaderDismissed = false;
 
@@ -119,6 +132,7 @@ let uniDeptId = null;
 let uniLevel = null;
 let uniCourseId = null;
 let uniContentCache = {};
+let uniContentCacheOwner = "";
 let uniDepartments = null;
 let uniNoteFile = null;
 let uniNoteTitle = null;
@@ -237,7 +251,7 @@ function getAvatarSrc(avatarId) {
 function renderAvatarMarkup(avatarId, size = 36) {
   const src = getAvatarSrc(avatarId);
   if (src) {
-    return `<img src="${escapeHtml(src)}" alt="Student avatar" class="avatar-img-element" width="${size}" height="${size}" onerror="this.style.display='none'; if (this.nextElementSibling) this.nextElementSibling.style.display='grid';"><span class="avatar-fallback-initials" style="display:none;">${initials()}</span>`;
+    return `<img src="${escapeHtml(src)}" alt="Student avatar" class="avatar-img-element" width="${size}" height="${size}" data-fallback-display="grid"><span class="avatar-fallback-initials" style="display:none;">${initials()}</span>`;
   }
   return `<span class="avatar-fallback-initials">${initials()}</span>`;
 }
@@ -765,7 +779,7 @@ function renderExplanation(question) {
         <div class="explanation-locked-box" style="padding:14px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;margin-top:8px;">
           <strong style="display:flex;align-items:center;gap:6px;color:#92400e;font-size:13px;">🔒 Detailed Explanation Locked</strong>
           <p style="margin:4px 0 10px;font-size:12px;color:#78350f;">Full worked solutions and clinical rationales for this topic are included with Course Access.</p>
-          <button type="button" class="button small outline" style="border-color:#b45309;color:#92400e;" onclick="window.showUpgradeModal({trigger:'locked_explanation',courseCode:'${escapeHtml(courseCode || '')}'})">Unlock Explanations</button>
+          <button type="button" class="button small outline" style="border-color:#b45309;color:#92400e;" data-upgrade-course="${escapeHtml(courseCode || "ANA 201")}">Unlock Explanations</button>
         </div>
       </div>`;
     }
@@ -1471,9 +1485,13 @@ async function createSession(subject, topic, count = 10, durationMinutes = 10, m
         const remote = await Promise.race([startPromise, timeoutPromise]);
         remoteId = remote?.session_id || null;
         const selected = (remote?.questions || []).map(item => questionById(item.external_id)).filter(Boolean);
-        if (selected.length) queue = selected;
-      } catch {
-        // Smooth local offline fallback
+        if (!remoteId || selected.length !== remote.questions.length || !selected.length) {
+          throw new Error("The server could not prepare this session. Please try again.");
+        }
+        queue = selected;
+      } catch (error) {
+        showToast(error instanceof ApiError ? error.message : "The practice server could not prepare your session. Please try again.");
+        return;
       }
     }
     if (!queue || queue.length === 0) {
@@ -1503,6 +1521,8 @@ async function createSession(subject, topic, count = 10, durationMinutes = 10, m
       sections,
       answers: queue.map(() => ({ selected: null, confirmed: false, correct: false })),
       remoteId,
+      localOnly: !remoteId,
+      startedAt: null,
       index: 0,
       correct: 0,
       questionStartedAt: null,
@@ -1550,9 +1570,31 @@ function currentSection() {
 function renderSessionStart() {
   const mode = activeSession.isMixed ? `${activeSession.courseCode || activeSession.subject} · Mixed Timed Practice` : activeSession.subject === "all" ? "All subjects" : activeSession.subject === "saved" ? "Saved for review" : subjectName(activeSession.subject);
   const isNormal = activeSession.mode === "normal";
-  const content = `<section class="page page-narrow"><div class="session-ready"><p class="eyebrow">Ready when you are</p><h1>Your session is prepared.</h1><p class="lede">${isNormal ? "This guided session is untimed. You will see feedback after each answer." : "The countdown has not started. Once you begin, you may skip between questions and return using the numbered navigator."}</p><div class="ready-summary"><article><span>Focus</span><strong>${escapeHtml(mode)}</strong></article><article><span>Questions</span><strong>${activeSession.queue.length}</strong></article><article><span>Study time</span><strong>${isNormal ? "Untimed" : `${activeSession.durationMinutes} minutes`}</strong></article></div>${activeSession.sections.length > 1 ? `<div class="ready-sections">${activeSession.sections.map((section, index) => `<div><span>${String(index + 1).padStart(2, "0")}</span><strong>${escapeHtml(section.name)}</strong><small>${section.count} questions</small></div>`).join("")}</div>` : ""}<div class="button-row"><button class="button" id="begin-session">Begin session →</button><button class="button outline" id="cancel-session">Change selections</button></div></div></section>`;
+  const content = `<section class="page page-narrow"><div class="session-ready"><p class="eyebrow">Ready when you are</p><h1>Your session is prepared.</h1><p class="lede">${isNormal ? "This guided session is untimed. You will see feedback after each answer." : "The countdown has not started. Once you begin, you may skip between questions and return using the numbered navigator."}</p>${activeSession.localOnly ? '<p class="session-local-note">Device-only practice · This session will be saved on this device and will not update an account.</p>' : ""}<div class="ready-summary"><article><span>Focus</span><strong>${escapeHtml(mode)}</strong></article><article><span>Questions</span><strong>${activeSession.queue.length}</strong></article><article><span>Study time</span><strong>${isNormal ? "Untimed" : `${activeSession.durationMinutes} minutes`}</strong></article></div>${activeSession.sections.length > 1 ? `<div class="ready-sections">${activeSession.sections.map((section, index) => `<div><span>${String(index + 1).padStart(2, "0")}</span><strong>${escapeHtml(section.name)}</strong><small>${section.count} questions</small></div>`).join("")}</div>` : ""}<div class="button-row"><button class="button" id="begin-session">Begin session →</button><button class="button outline" id="cancel-session">Change selections</button></div></div></section>`;
   app.innerHTML = shell(content); bindShell();
-  document.querySelector("#begin-session").addEventListener("click", () => { activeSession.started = true; activeSession.deadline = isNormal ? null : Date.now() + activeSession.durationMinutes * 60000; activeSession.questionStartedAt = Date.now(); saveActiveSession(); render(); });
+  document.querySelector("#begin-session").addEventListener("click", async event => {
+    const button = event.currentTarget;
+    button.disabled = true;
+    const originalLabel = button.textContent;
+    button.textContent = "Starting…";
+    try {
+      let beganAt = Date.now();
+      if (activeSession.remoteId) {
+        const response = await api.beginSession(authToken, activeSession.remoteId);
+        beganAt = response.began_at ? new Date(response.began_at).getTime() : beganAt;
+      }
+      activeSession.startedAt = beganAt;
+      activeSession.started = true;
+      activeSession.deadline = isNormal ? null : beganAt + activeSession.durationMinutes * 60000;
+      activeSession.questionStartedAt = Date.now();
+      saveActiveSession();
+      render();
+    } catch (error) {
+      button.disabled = false;
+      button.textContent = originalLabel;
+      showToast(error instanceof ApiError ? error.message : "Could not begin this session. Check your connection and try again.");
+    }
+  });
   document.querySelector("#cancel-session").addEventListener("click", () => { const wasUni = activeSession?.isUniversity; activeSession = null; clearActiveSession(); route = wasUni ? "university" : "practice"; render(); });
 }
 
@@ -1577,7 +1619,10 @@ function renderSession() {
   bindQuestionMedia();
   runSessionTimer();
   document.querySelectorAll("[data-question-index]").forEach(button => button.addEventListener("click", () => goToQuestion(Number(button.dataset.questionIndex))));
-  document.querySelectorAll("[data-option]").forEach(button => button.addEventListener("click", () => selectAnswer(Number(button.dataset.option))));
+  document.querySelectorAll("[data-option]").forEach(button => {
+    button.disabled = Boolean(answer.confirmed || answer.submitting);
+    button.addEventListener("click", () => selectAnswer(Number(button.dataset.option)));
+  });
   document.querySelector("#bookmark").addEventListener("click", () => toggleBookmark(question.id));
   document.querySelector("#previous-question").addEventListener("click", () => goToQuestion(activeSession.index - 1));
   document.querySelector("#next-question").addEventListener("click", () => activeSession.index === activeSession.queue.length - 1 ? confirmFinishSession() : goToQuestion(activeSession.index + 1));
@@ -1591,7 +1636,7 @@ function goToQuestion(index) {
 
 function selectAnswer(selected) {
   const answer = activeSession.answers[activeSession.index];
-  if (answer.confirmed) return;
+  if (answer.confirmed || answer.submitting) return;
   const question = activeSession.queue[activeSession.index];
   answer.selected = selected;
   saveActiveSession();
@@ -1606,22 +1651,48 @@ function selectAnswer(selected) {
 async function submitConfirmedAnswer(questionIndex, shouldRender = true, syncNow = true) {
   if (!activeSession || activeSession.finished) return;
   const answer = activeSession.answers[questionIndex];
-  if (answer.confirmed || answer.selected === null) return;
+  if (answer.confirmed || answer.submitting || answer.selected === null) return answer.confirmed;
   const question = activeSession.queue[questionIndex];
   const selected = answer.selected;
-  const correct = selected === question.correct;
-  answer.confirmed = true; answer.correct = correct; if (correct) activeSession.correct++;
+  answer.submitting = true;
+  answer.clientId ||= crypto.randomUUID();
   saveActiveSession();
+  if (shouldRender) render();
   const attemptSubject = question.subject || activeSession?.subject || "general";
   const attemptTopic = question.topic || question.section || activeSession?.topic || "";
-  const attempt = { questionId: question.id, subject: attemptSubject, topic: attemptTopic, correct, selected, timestamp: Date.now(), durationMs: Date.now() - activeSession.questionStartedAt, clientId: crypto.randomUUID(), sessionId: activeSession.remoteId, synced: false };
-  attempt.id = await add("attempts", attempt); attempts.push(attempt);
-  profile.xp = (profile.xp || 0) + (correct ? 5 : 0);
-  await put("profile", profile);
-  await registerStudyDay();
+  let attempt = attempts.find(item => item.clientId === answer.clientId);
+  if (!attempt) {
+    attempt = { questionId: question.id, subject: attemptSubject, topic: attemptTopic, correct: null, selected, timestamp: Date.now(), durationMs: Date.now() - activeSession.questionStartedAt, clientId: answer.clientId, sessionId: activeSession.remoteId, synced: false };
+    attempt.id = await add("attempts", attempt);
+    attempts.push(attempt);
+  }
+  let correct = selected === question.correct;
+  if (authToken && activeSession.remoteId && syncNow) {
+    const response = await syncAttemptRecord(attempt);
+    if (!response) {
+      answer.submitting = false;
+      saveActiveSession();
+      if (shouldRender) render();
+      showToast("Your answer could not be verified yet. Check your connection and try again.");
+      return false;
+    }
+    if (typeof response.correct === "boolean") correct = response.correct;
+    if (typeof response.correct_index === "number") question.correct = response.correct_index;
+  }
+  answer.submitting = false;
+  answer.confirmed = true;
+  answer.correct = correct;
+  if (correct) activeSession.correct++;
+  attempt.correct = correct;
+  await put("attempts", attempt);
+  if (!authToken) {
+    profile.xp = (profile.xp || 0) + (correct ? 5 : 0);
+    await put("profile", profile);
+    await registerStudyDay();
+  }
+  saveActiveSession();
   if (shouldRender) render();
-  if (syncNow) await syncAttemptRecord(attempt);
-  if (syncNow && shouldRender && route === "session" && activeSession?.queue[questionIndex]?.id === question.id) render();
+  return true;
 }
 
 function confirmFinishSession() {
@@ -1662,7 +1733,7 @@ function recordCompletedSessionToHistory(session) {
   };
   completedTests = [completedRecord, ...completedTests.filter(t => t.id !== completedRecord.id)].slice(0, 100);
   put("meta", { key: "completed_tests", list: completedTests }).catch(() => {});
-  if (profile) {
+  if (profile && !authToken) {
     profile.tests = {
       tests_taken: completedTests.length,
       average_score: Math.round(completedTests.reduce((s, t) => s + (Number(t.score) || 0), 0) / completedTests.length)
@@ -1682,12 +1753,19 @@ async function finalizeSelectedAnswers(timedOut = false) {
   if (!activeSession || activeSession.finalizing) return;
   activeSession.finalizing = true;
   const selected = activeSession.answers.map((answer, index) => answer.selected !== null && !answer.confirmed ? index : -1).filter(index => index >= 0);
-  for (const index of selected) await submitConfirmedAnswer(index, false, false);
+  for (const index of selected) {
+    const recorded = await submitConfirmedAnswer(index, false, true);
+    if (!recorded) {
+      activeSession.finalizing = false;
+      showToast("Reconnect and finish recording your selected answers before viewing the result.");
+      return;
+    }
+  }
   activeSession.timedOut = timedOut;
   activeSession.finished = true;
   activeSession.finalizing = false;
   clearActiveSession();
-  syncPendingAttempts();
+  if (!authToken || !activeSession.remoteId) syncPendingAttempts();
   if (timedOut) {
     showConfirmDialog({ title: "Time’s up.", message: "Your study time has ended. Selected answers have been recorded; questions without a selection remain unanswered.", confirmLabel: "View results", tone: "timeup", dismissible: false, onConfirm: () => { activeSession.timeUpAcknowledged = true; render(); } });
   } else {
@@ -1696,12 +1774,18 @@ async function finalizeSelectedAnswers(timedOut = false) {
 }
 
 async function syncAttemptRecord(attempt) {
-  if (!authToken || attempt.synced || activeSession?.isUniversity || String(attempt.questionId || "").startsWith("ana201-")) return;
+  if (!authToken || attempt.synced) return attempt.synced ? { correct: attempt.correct } : null;
+  if (!attempt.sessionId) {
+    attempt.syncError = "This offline answer is stored on this device and is not included in verified account progress.";
+    await put("attempts", attempt);
+    return null;
+  }
   if (!attempt.clientId) attempt.clientId = crypto.randomUUID();
   try {
     const response = await api.syncAttempt(authToken, { question_id: attempt.questionId, selected_index: attempt.selected, client_id: attempt.clientId, session_id: attempt.sessionId || null, duration_ms: attempt.durationMs || null });
     attempt.synced = true; if (typeof response.correct === "boolean") attempt.correct = response.correct;
-    const localQuestion = questionById(attempt.questionId);
+    const localQuestion = questionById(attempt.questionId) || activeSession?.queue?.find(item => item.id === attempt.questionId);
+    if (localQuestion && typeof response.correct_index === "number") localQuestion.correct = response.correct_index;
     if (localQuestion && response.explanation !== undefined) {
       localQuestion.explanation = response.explanation || "";
       localQuestion.explanationStatus = response.explanation_status || localQuestion.explanationStatus;
@@ -1710,7 +1794,14 @@ async function syncAttemptRecord(attempt) {
     await put("attempts", attempt);
     applyRemoteStats(response.stats); await put("profile", profile);
     handleEarnedBadges(response.badges_earned || []);
-  } catch (error) { if (error instanceof ApiError && error.status >= 400 && error.status < 500 && error.status !== 401) { attempt.syncError = error.message; await put("attempts", attempt); } }
+    return response;
+  } catch (error) {
+    if (error instanceof ApiError && error.status >= 400 && error.status < 500 && error.status !== 401) {
+      attempt.syncError = error.message;
+      await put("attempts", attempt);
+    }
+    return null;
+  }
 }
 
 function applyRemoteStats(stats = {}) {
@@ -1726,11 +1817,13 @@ function applyRemoteStats(stats = {}) {
 }
 
 async function syncPendingAttempts() {
+  if (!authToken || !navigator.onLine) return false;
   if (syncPromise) return syncPromise;
   pendingSyncCount = attempts.filter(item => !item.synced && !item.syncError).length;
   if (pendingSyncCount > 0) render();
   syncPromise = (async () => {
     for (const attempt of attempts.filter(item => !item.synced && !item.syncError)) await syncAttemptRecord(attempt);
+    if (attempts.some(item => item.sessionId && !item.synced)) return false;
     const remote = await api.attempts(authToken);
     const unresolved = attempts.filter(item => !item.synced);
     const canonical = remote.attempts.map(item => ({
@@ -1758,42 +1851,13 @@ async function syncPendingAttempts() {
       if (item.action === "remove") { await storeAction("bookmarks", "readwrite", store => store.delete(item.questionId)); bookmarks = bookmarks.filter(bookmark => bookmark.questionId !== item.questionId); }
     }
     await syncPendingCompletedTests();
-  })().then(() => { pendingSyncCount = 0; if (route !== "session") render(); return true; }).catch(() => false).finally(() => { syncPromise = null; });
+  })().then(synced => { pendingSyncCount = 0; if (route !== "session") render(); return synced !== false; }).catch(() => false).finally(() => { syncPromise = null; });
   return syncPromise;
 }
 
 async function syncPendingCompletedTests() {
-  if (!authToken || !navigator.onLine) return;
-  if (!Array.isArray(completedTests) || !completedTests.length) return;
-  let changed = false;
-  for (const t of completedTests) {
-    const isSynced = Boolean(t.syncedToBackend && t.remoteId && !String(t.remoteId).startsWith("test-"));
-    if (isSynced) continue;
-    try {
-      const isUni = Boolean(t.isUniversity || (t.subject && (t.subject.startsWith("ANA") || t.subject.startsWith("PIO"))));
-      const syncFn = isUni ? api.recordUniversitySession : (api.recordSession || api.recordUniversitySession);
-      const response = await syncFn(authToken, {
-        track: isUni ? "university" : "aspirant",
-        course_code: isUni ? (t.subject || "ANA 201") : "",
-        subject_slug: !isUni ? (t.subject || "general") : "",
-        topic_title: t.topic || (isUni ? "University Practice" : "Practice Session"),
-        total_questions: t.total || t.answered || 10,
-        correct_answers: t.correct || 0,
-        time_spent_seconds: (t.duration_minutes || 0) * 60,
-        mode: t.mode || "timed",
-      });
-      t.syncedToBackend = true;
-      if (response?.session_id) t.remoteId = response.session_id;
-      changed = true;
-      if (response?.stats) applyRemoteStats(response.stats);
-    } catch {
-      // Retry next sync
-    }
-  }
-  if (changed) {
-    await put("meta", { key: "completed_tests", list: completedTests });
-    await put("profile", profile);
-  }
+  // Browser-created historical sessions remain device-local; the server now
+  // counts only sessions it issued and scored from recorded answers.
 }
 
 async function queueBookmarkAction(questionId, action) {
@@ -1998,44 +2062,15 @@ function renderResult() {
   if (activeSession.mode === "challenge") return renderChallengeSubmission();
   if (activeSession.remoteId && !activeSession.reportedComplete) {
     activeSession.reportedComplete = true;
-    syncPendingAttempts().then(() => api.completeSession(authToken, activeSession.remoteId)).then(async response => { applyRemoteStats(response.stats); progressData = null; await put("profile", profile); handleEarnedBadges(response.badges_earned || []); }).catch(() => { activeSession.reportedComplete = false; });
-  }
-  else if (!activeSession.reportedComplete && authToken) {
-    activeSession.reportedComplete = true;
-    const timeSpent = activeSession.startedAt ? Math.round((Date.now() - activeSession.startedAt) / 1000) : (activeSession.durationMinutes ? activeSession.durationMinutes * 60 : 0);
-    const isUni = Boolean(activeSession.isUniversity);
-    const syncFunc = isUni ? api.recordUniversitySession : (api.recordSession || api.recordUniversitySession);
-    syncFunc(authToken, {
-      track: isUni ? "university" : "aspirant",
-      course_code: isUni ? (activeSession.subject || "ANA 201") : "",
-      subject_slug: !isUni ? (activeSession.subject || "general") : "",
-      topic_title: activeSession.topic || (isUni ? "University Practice" : "Practice Session"),
-      total_questions: activeSession.queue.length,
-      correct_answers: activeSession.correct,
-      time_spent_seconds: timeSpent,
-      mode: activeSession.durationMinutes > 0 ? "timed" : "normal",
+    syncPendingAttempts().then(synced => {
+      if (!synced) throw new Error("Some answers are not synchronized yet.");
+      return api.completeSession(authToken, activeSession.remoteId);
     }).then(async response => {
-      if (response?.session_id) {
-        activeSession.remoteId = response.session_id;
-        const targetId = activeSession.localRecordId;
-        const record = completedTests.find(t => (targetId && t.id === targetId) || (!t.remoteId && t.isUniversity === isUni && t.subject === activeSession.subject && t.total === activeSession.queue.length));
-        if (record) {
-          record.syncedToBackend = true;
-          record.remoteId = response.session_id;
-          await put("meta", { key: "completed_tests", list: completedTests });
-        }
-      }
-      if (response?.stats) {
-        applyRemoteStats(response.stats);
-        progressData = null;
-        await put("profile", profile);
-      }
-      if (response?.badges_earned?.length) {
-        handleEarnedBadges(response.badges_earned);
-      }
-    }).catch(() => {
-      activeSession.reportedComplete = false;
-    });
+      applyRemoteStats(response.stats);
+      progressData = null;
+      await put("profile", profile);
+      handleEarnedBadges(response.badges_earned || []);
+    }).catch(() => { activeSession.reportedComplete = false; });
   }
   if (activeSession.mode === "sprint" && !dailySprintCompleted) {
     dailySprintCompleted = true;
@@ -2239,7 +2274,7 @@ function getSynthesizedProgressData() {
     });
   });
 
-  completedTests.forEach(t => {
+  if (!authToken) completedTests.forEach(t => {
     const key = String(t.id);
     if (!testMap.has(key)) {
       testMap.set(key, {
@@ -2259,37 +2294,17 @@ function getSynthesizedProgressData() {
 
   let allTests = Array.from(testMap.values()).sort((a, b) => new Date(b.completed_at) - new Date(a.completed_at));
 
-  // If student has answered questions in practice but no formal test session was completed yet,
-  // synthesize a first practice summary so they immediately see live progress charts!
-  if (allTests.length === 0 && attempts.length > 0) {
-    const correctCount = attempts.filter(a => a.correct).length;
-    const scorePct = Math.round((correctCount / attempts.length) * 100);
-    const lastAttempt = attempts[attempts.length - 1];
-    const subjTitle = subjectName(lastAttempt?.subject || "General");
-    allTests.push({
-      id: "synthetic-initial-practice",
-      focus: `${subjTitle} · Guided Practice`,
-      score: scorePct,
-      correct: correctCount,
-      answered: attempts.length,
-      total: attempts.length,
-      completed_at: new Date(lastAttempt?.timestamp || Date.now()).toISOString(),
-      duration_minutes: 0,
-      mode: "normal",
-      mode_label: "Guided Practice"
-    });
-  }
-
   const scores = allTests.map(t => t.score);
-  const testsTaken = allTests.length;
-  const avgScore = testsTaken ? Math.round(scores.reduce((a, b) => a + b, 0) / testsTaken) : 0;
-  const bestScore = testsTaken ? Math.max(...scores) : 0;
+  const remoteSummary = authToken ? (progressData?.tests || {}) : null;
+  const testsTaken = remoteSummary ? (Number(remoteSummary.tests_taken) || 0) : allTests.length;
+  const avgScore = remoteSummary ? (Number(remoteSummary.average_score) || 0) : (testsTaken ? Math.round(scores.reduce((a, b) => a + b, 0) / testsTaken) : 0);
+  const bestScore = remoteSummary ? (Number(remoteSummary.best_score) || 0) : (testsTaken ? Math.max(...scores) : 0);
 
   const newest = scores.slice(0, 3);
   const previous = scores.slice(3, 6);
-  const improvement = (newest.length === 3 && previous.length === 3)
+  const improvement = remoteSummary ? remoteSummary.improvement : ((newest.length === 3 && previous.length === 3)
     ? Math.round((newest.reduce((a, b) => a + b, 0) / 3) - (previous.reduce((a, b) => a + b, 0) / 3))
-    : null;
+    : null);
 
   const modeGroups = {};
   allTests.forEach(t => {
@@ -2324,7 +2339,7 @@ function getSynthesizedProgressData() {
   });
 
   // 2. Aggregate local attempts (whether synced or unsynced, university or aspirant)
-  attempts.forEach(att => {
+  if (!authToken) attempts.forEach(att => {
     const rawSubj = att.subject || "general";
     const displayName = subjectName(rawSubj);
     
@@ -2381,9 +2396,9 @@ function getSynthesizedProgressData() {
       accuracy: Math.round((t.correct / t.total) * 100)
     }));
 
-  const totalAttempts = Math.max(progressData?.stats?.total_attempts || 0, attempts.length);
+  const totalAttempts = authToken ? (progressData?.stats?.total_attempts || 0) : attempts.length;
   const correctAttempts = attempts.filter(a => a.correct).length;
-  const overallAcc = attempts.length ? Math.round((correctAttempts / attempts.length) * 100) : (progressData?.stats?.accuracy || 0);
+  const overallAcc = authToken ? (progressData?.stats?.accuracy || 0) : (attempts.length ? Math.round((correctAttempts / attempts.length) * 100) : 0);
 
   return {
     tests: {
@@ -2391,10 +2406,10 @@ function getSynthesizedProgressData() {
       average_score: avgScore,
       best_score: bestScore,
       improvement,
-      completion_rate: testsTaken ? 100 : 0,
-      questions_in_tests: allTests.reduce((sum, t) => sum + (Number(t.answered) || Number(t.total) || 0), 0),
+      completion_rate: remoteSummary ? (Number(remoteSummary.completion_rate) || 0) : (testsTaken ? 100 : 0),
+      questions_in_tests: remoteSummary ? (Number(remoteSummary.questions_in_tests) || 0) : allTests.reduce((sum, t) => sum + (Number(t.answered) || 0), 0),
       trend,
-      by_mode: byMode,
+      by_mode: remoteSummary?.by_mode || byMode,
       recent_tests: allTests.slice(0, 10)
     },
     subjects: subjectsList,
@@ -2670,7 +2685,8 @@ async function beginChallenge(item) {
     const remote = await api.startChallenge(authToken, item.id);
     const queue = remote.questions.map(question => ({ ...(questionById(question.external_id) || {}), ...question, id: question.external_id })).filter(question => question.id);
     if (!queue.length) throw new Error("The shared paper could not be prepared on this device.");
-    activeSession = { subject: item.subject, topic: null, requestedCount: queue.length, durationMinutes: item.duration_minutes, deadline: new Date(remote.deadline_at).getTime(), started: true, finished: false, queue, sections: buildSessionSections(queue), answers: queue.map(question => remote.answers?.[question.id] === undefined ? ({ selected: null, confirmed: false, correct: false }) : ({ selected: remote.answers[question.id], confirmed: true, correct: false })), remoteId: remote.session_id, challengeId: item.id, challengeTitle: item.title, index: 0, correct: 0, questionStartedAt: Date.now(), reportedComplete: false, timedOut: false, timeUpAcknowledged: false, mode: "challenge" };
+    const deadline = new Date(remote.deadline_at).getTime();
+    activeSession = { subject: item.subject, topic: null, requestedCount: queue.length, durationMinutes: item.duration_minutes, deadline, startedAt: new Date(remote.started_at).getTime(), started: true, finished: false, queue, sections: buildSessionSections(queue), answers: queue.map(question => remote.answers?.[question.id] === undefined ? ({ selected: null, confirmed: false, correct: false }) : ({ selected: remote.answers[question.id], confirmed: true, correct: false })), remoteId: remote.session_id, challengeId: item.id, challengeTitle: item.title, index: 0, correct: 0, questionStartedAt: Date.now(), reportedComplete: false, timedOut: false, timeUpAcknowledged: false, mode: "challenge" };
     saveActiveSession();
     route = "session"; render();
   } catch (caught) { showToast(caught instanceof ApiError ? caught.message : caught.message); challengesData = null; renderChallenges(); }
@@ -3373,7 +3389,7 @@ function renderBuddies() {
                 <div class="leaderboard-row ${isYou ? 'is-current-user' : ''}">
                   <div class="leaderboard-rank rank-${entry.rank}">${rankIcon}</div>
                   <div class="leaderboard-avatar-wrap">
-                    ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="buddy-monogram" style="display:none; width:100%; height:100%; font-size:14px;">${buddyInitials(entry.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%; font-size:14px;">${buddyInitials(entry.username)}</span>`}
+                    ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" data-fallback-display="flex"><span class="buddy-monogram" style="display:none; width:100%; height:100%; font-size:14px;">${buddyInitials(entry.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%; font-size:14px;">${buddyInitials(entry.username)}</span>`}
                   </div>
                   <div class="leaderboard-info">
                     <div class="leaderboard-info-top">
@@ -3428,7 +3444,7 @@ function renderBuddies() {
             return `
               <article class="buddy-card">
                 <div class="leaderboard-avatar-wrap" style="width:48px; height:48px;">
-                  ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="buddy-monogram" style="display:none; width:100%; height:100%;">${buddyInitials(buddy.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%;">${buddyInitials(buddy.username)}</span>`}
+                  ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" data-fallback-display="flex"><span class="buddy-monogram" style="display:none; width:100%; height:100%;">${buddyInitials(buddy.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%;">${buddyInitials(buddy.username)}</span>`}
                 </div>
                 <div class="buddy-details">
                   <h3>${escapeHtml(buddy.username)}</h3>
@@ -3480,7 +3496,7 @@ function renderBuddies() {
                   <div class="community-student-row">
                     <div class="community-student-left">
                       <div class="leaderboard-avatar-wrap" style="width:40px; height:40px;">
-                        ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="buddy-monogram" style="display:none; width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>`}
+                        ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" data-fallback-display="flex"><span class="buddy-monogram" style="display:none; width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>`}
                       </div>
                       <div>
                         <strong>${escapeHtml(student.username)}</strong>
@@ -3557,7 +3573,7 @@ function renderBuddies() {
               <div class="community-student-row">
                 <div class="community-student-left">
                   <div class="leaderboard-avatar-wrap" style="width:40px; height:40px;">
-                    ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="buddy-monogram" style="display:none; width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>`}
+                  ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" data-fallback-display="flex"><span class="buddy-monogram" style="display:none; width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>`}
                   </div>
                   <div>
                     <strong>${escapeHtml(student.username)}</strong>
@@ -3603,7 +3619,7 @@ function renderBuddies() {
               <div class="community-student-row">
                 <div class="community-student-left">
                   <div class="leaderboard-avatar-wrap" style="width:40px; height:40px;">
-                    ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="buddy-monogram" style="display:none; width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>`}
+            ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" data-fallback-display="flex"><span class="buddy-monogram" style="display:none; width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>`}
                   </div>
                   <div>
                     <strong>${escapeHtml(student.username)}</strong>
@@ -3960,6 +3976,10 @@ function renderPasswordChange(required = false) {
     submit.disabled = true; submit.textContent = "Saving…"; error.textContent = "";
     try {
       const response = await api.changePassword(authToken, { current_password: values.current_password, new_password: values.new_password });
+      if (response.token) {
+        authToken = response.token;
+        localStorage.setItem("seomtorch-auth-token", authToken);
+      }
       currentUser = response.user;
       localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
       await syncPendingAttempts();
@@ -4147,11 +4167,15 @@ function bindUniCrumbs(breadcrumbs) {
 }
 
 async function fetchUniJson(path) {
+  const cacheOwner = currentUser?.public_id || "guest";
+  if (uniContentCacheOwner !== cacheOwner) {
+    uniContentCache = {};
+    uniContentCacheOwner = cacheOwner;
+  }
   if (uniContentCache[path]) return uniContentCache[path];
   try {
-    const response = await fetch(path);
-    if (!response.ok) throw new Error(`Failed to load: ${path}`);
-    const data = await response.json();
+    if (!authToken) throw new Error("Sign in to open university course materials.");
+    const data = await api.universityContent(authToken, path);
     uniContentCache[path] = data;
     return data;
   } catch (error) {
@@ -4354,7 +4378,7 @@ async function renderUniCourse() {
         </div>`;
       }
 
-      return `<div class="uni-topic-item available" data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" role="button" tabindex="0">
+      return `<div class="uni-topic-item available" data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" data-uni-topic-id="${escapeHtml(topic.id || "")}" role="button" tabindex="0">
         <span class="uni-topic-status">${statusIcon}</span>
         <div class="uni-topic-info">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
@@ -4363,7 +4387,7 @@ async function renderUniCourse() {
           </div>
           ${isFree && !hasCourse ? `<span class="uni-topic-tag" style="color:var(--forest);font-weight:700;">Free Sample Topic</span>` : ""}
         </div>
-        <button class="uni-topic-target-btn" type="button" data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" aria-label="Configure practice: ${escapeHtml(topic.title)}">
+        <button class="uni-topic-target-btn" type="button" data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" data-uni-topic-id="${escapeHtml(topic.id || "")}" aria-label="Configure practice: ${escapeHtml(topic.title)}">
           <span class="uni-topic-target-dot"></span>
           <span class="uni-topic-target-label">Available</span>
           <span class="uni-topic-target-divider">•</span>
@@ -4660,8 +4684,9 @@ async function renderUniCourse() {
       e?.stopPropagation?.();
       const dataFile = item.dataset.uniDataFile;
       const topicTitle = item.dataset.uniTopicTitle;
+      const topicId = item.dataset.uniTopicId || null;
       if (!dataFile) return;
-      showTopicConfigModal(data.code || "ANA 201", topicTitle, dataFile);
+      showTopicConfigModal(data.code || "ANA 201", topicTitle, dataFile, topicId);
     };
     item.addEventListener("click", launch);
     item.addEventListener("keydown", (e) => {
@@ -4732,6 +4757,95 @@ function sampleStratifiedCourseQuestions(topicSets, targetCount) {
   return selected;
 }
 
+function buildUniversitySections(queue) {
+  const groups = new Map();
+  queue.forEach(question => {
+    const name = question.topic || "Course practice";
+    if (!groups.has(name)) groups.set(name, []);
+    groups.get(name).push(question);
+  });
+  const arranged = [];
+  const sections = [];
+  for (const [name, group] of groups) {
+    sections.push({ subject: name, name, count: group.length, start: arranged.length });
+    arranged.push(...group);
+  }
+  return { queue: arranged, sections };
+}
+
+async function createUniversitySession({ courseCode, topicTitle, topicId = null, questions, durationMinutes, courseData = null, isMixed = false }) {
+  if (!authToken || !navigator.onLine) {
+    showToast("Connect to the internet to start a university practice session.");
+    return;
+  }
+  showLoadingOverlay("Preparing practice", "Securing your question set and starting your session…");
+  try {
+    const sampled = [...questions].sort(() => Math.random() - 0.5).slice(0, Math.min(questions.length, 100));
+    const arranged = isMixed ? buildUniversitySections(sampled) : { queue: sampled, sections: [{ subject: courseCode, name: `${courseCode} · ${topicTitle}`, count: sampled.length, start: 0 }] };
+    const mode = durationMinutes > 0 ? "timed" : "normal";
+    const remote = await api.startSession(authToken, {
+      subject: topicSlug(courseCode),
+      topic: topicId || null,
+      limit: arranged.queue.length,
+      ...(durationMinutes > 0 ? { duration_minutes: durationMinutes } : {}),
+      mode,
+      question_ids: arranged.queue.map(question => question.id || question.external_id),
+    });
+    const localById = new Map(arranged.queue.map(question => [String(question.id || question.external_id), question]));
+    const queue = (remote.questions || []).map(item => {
+      const source = localById.get(String(item.external_id));
+      if (!source) return null;
+      return {
+        ...source,
+        id: item.external_id,
+        subject: courseCode,
+        courseCode,
+        topic: source.topic || item.topic || topicTitle,
+        topicId: source.topicId || topicId || "",
+        text: item.text,
+        options: item.options,
+      };
+    }).filter(Boolean);
+    if (!remote.session_id || queue.length !== arranged.queue.length) {
+      throw new Error("The server could not verify every selected question. Refresh the course and try again.");
+    }
+    const finalArrangement = isMixed ? buildUniversitySections(queue) : { queue, sections: arranged.sections };
+    activeSession = {
+      subject: courseCode,
+      topic: isMixed ? "Mixed Practice" : topicTitle,
+      courseTitle: courseData?.title || "",
+      courseCode,
+      isUniversity: true,
+      isMixed,
+      courseData,
+      requestedCount: finalArrangement.queue.length,
+      durationMinutes: durationMinutes || 0,
+      deadline: null,
+      started: false,
+      startedAt: null,
+      finished: false,
+      queue: finalArrangement.queue,
+      sections: finalArrangement.sections,
+      answers: finalArrangement.queue.map(() => ({ selected: null, confirmed: false, correct: false })),
+      remoteId: remote.session_id,
+      index: 0,
+      correct: 0,
+      questionStartedAt: null,
+      reportedComplete: false,
+      timedOut: false,
+      timeUpAcknowledged: false,
+      mode,
+    };
+    saveActiveSession();
+    route = "session";
+    render();
+  } catch (error) {
+    showToast(error instanceof ApiError ? error.message : error.message || "The university practice session could not be prepared.");
+  } finally {
+    hideLoadingOverlay();
+  }
+}
+
 async function startUniMixedPractice(courseData, requestedCount, durationMinutes) {
   showLoadingOverlay("Preparing Mixed Practice", "Loading course questions...");
   try {
@@ -4796,41 +4910,7 @@ async function startUniMixedPractice(courseData, requestedCount, durationMinutes
       detail,
       confirmLabel: "Begin Practice",
       cancelLabel: "Back to Course",
-      onConfirm: () => {
-        activeSession = {
-          subject: courseData.code,
-          topic: `Mixed Practice (${sampledQuestions.length} Qs)`,
-          courseTitle: courseData.title,
-          courseCode: courseData.code,
-          isUniversity: true,
-          isMixed: true,
-          courseData,
-          requestedCount: sampledQuestions.length,
-          durationMinutes,
-          deadline: null,
-          started: false,
-          finished: false,
-          queue: sampledQuestions,
-          sections: [{
-            subject: courseData.code,
-            name: `${courseData.code} · Mixed Timed Practice`,
-            count: sampledQuestions.length,
-            start: 0
-          }],
-          answers: sampledQuestions.map(() => ({ selected: null, confirmed: false, correct: false })),
-          remoteId: null,
-          index: 0,
-          correct: 0,
-          questionStartedAt: null,
-          reportedComplete: false,
-          timedOut: false,
-          timeUpAcknowledged: false,
-          mode: "timed"
-        };
-        saveActiveSession();
-        route = "session";
-        render();
-      }
+      onConfirm: () => createUniversitySession({ courseCode: courseData.code, topicTitle: "Mixed Timed Practice", questions: sampledQuestions, durationMinutes, courseData, isMixed: true })
     });
   } catch (err) {
     showToast("Error preparing mixed practice session.");
@@ -4839,7 +4919,7 @@ async function startUniMixedPractice(courseData, requestedCount, durationMinutes
   }
 }
 
-async function showTopicConfigModal(courseCode, topicTitle, dataFile) {
+async function showTopicConfigModal(courseCode, topicTitle, dataFile, topicId = null) {
   showLoadingOverlay("Loading topic", "Preparing question bank...");
   let data = null;
   try {
@@ -5077,11 +5157,11 @@ async function showTopicConfigModal(courseCode, topicTitle, dataFile) {
     const qCount = Math.max(5, Math.min(totalQuestions, parseInt(inputQ?.value, 10) || defaultQ));
     const mCount = Math.max(0, Math.min(180, parseInt(inputM?.value, 10) || 0));
     closeModal();
-    startUniConfiguredPractice(courseCode, topicTitle, data, qCount, mCount, dataFile);
+    startUniConfiguredPractice(courseCode, topicTitle, data, qCount, mCount, dataFile, topicId);
   });
 }
 
-function startUniConfiguredPractice(courseCode, topicTitle, data, requestedCount, durationMinutes, dataFile = null) {
+function startUniConfiguredPractice(courseCode, topicTitle, data, requestedCount, durationMinutes, dataFile = null, topicId = null) {
   const allQuestions = Array.isArray(data?.questions) ? data.questions : [];
   if (!allQuestions.length) {
     showToast("No questions available for this topic.");
@@ -5114,45 +5194,18 @@ function startUniConfiguredPractice(courseCode, topicTitle, data, requestedCount
     detail,
     confirmLabel: "Begin Practice",
     cancelLabel: "Change Settings",
-    onConfirm: () => {
-      activeSession = {
-        subject: courseCode,
-        topic: topicTitle,
-        dataFile,
-        isUniversity: true,
-        isMixed: false,
-        requestedCount: queue.length,
-        durationMinutes: isTimed ? durationMinutes : 0,
-        deadline: null,
-        started: false,
-        finished: false,
-        queue,
-        sections,
-        answers: queue.map(() => ({ selected: null, confirmed: false, correct: false })),
-        remoteId: null,
-        index: 0,
-        correct: 0,
-        questionStartedAt: null,
-        reportedComplete: false,
-        timedOut: false,
-        timeUpAcknowledged: false,
-        mode: isTimed ? "timed" : "normal"
-      };
-      saveActiveSession();
-      route = "session";
-      render();
-    },
+    onConfirm: () => createUniversitySession({ courseCode, topicTitle, topicId, questions: queue, durationMinutes: isTimed ? durationMinutes : 0 }),
     onCancel: () => {
       if (dataFile) {
-        showTopicConfigModal(courseCode, topicTitle, dataFile);
+        showTopicConfigModal(courseCode, topicTitle, dataFile, topicId);
       }
     }
   });
 }
 
-async function startUniPractice(courseCode, topicTitle, dataFile, requestedCount = null, durationMinutes = null) {
+async function startUniPractice(courseCode, topicTitle, dataFile, requestedCount = null, durationMinutes = null, topicId = null) {
   if (requestedCount === null || durationMinutes === null) {
-    showTopicConfigModal(courseCode, topicTitle, dataFile);
+    showTopicConfigModal(courseCode, topicTitle, dataFile, topicId);
     return;
   }
 
@@ -5163,7 +5216,7 @@ async function startUniPractice(courseCode, topicTitle, dataFile, requestedCount
       showToast("Questions not available yet for this topic.");
       return;
     }
-    startUniConfiguredPractice(courseCode, topicTitle, data, requestedCount, durationMinutes, dataFile);
+    startUniConfiguredPractice(courseCode, topicTitle, data, requestedCount, durationMinutes, dataFile, topicId);
   } catch (err) {
     showToast("Error loading question bank.");
   } finally {
@@ -5475,11 +5528,13 @@ async function renderDailySprint() {
   try {
     let sprintQuestions = [];
     let remoteId = null;
+    let serverBeganAt = null;
     try {
       const sprintPromise = api.dailySprint(authToken);
       const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), 6000));
       const remote = await Promise.race([sprintPromise, timeoutPromise]);
       remoteId = remote?.session_id || null;
+      serverBeganAt = remote?.began_at ? new Date(remote.began_at).getTime() : null;
       sprintQuestions = (remote?.questions || []).map(item => questionById(item.external_id)).filter(Boolean);
     } catch (e) {
       if (e instanceof ApiError && e.status === 409) {
@@ -5493,7 +5548,8 @@ async function renderDailySprint() {
     }
 
     if (sprintQuestions.length > 0) {
-      activeSession = { subject: 'sprint', topic: null, requestedCount: 5, durationMinutes: 5, deadline: Date.now() + 5 * 60000, started: true, finished: false, queue: sprintQuestions, sections: [{subject: 'sprint', name: 'Sprint', count: sprintQuestions.length, start: 0}], answers: sprintQuestions.map(() => ({ selected: null, confirmed: false, correct: false })), remoteId, index: 0, correct: 0, questionStartedAt: Date.now(), reportedComplete: false, timedOut: false, timeUpAcknowledged: false, mode: 'sprint' };
+      const beganAt = serverBeganAt || Date.now();
+      activeSession = { subject: 'sprint', topic: null, requestedCount: 5, durationMinutes: 5, deadline: beganAt + 5 * 60000, startedAt: beganAt, started: true, finished: false, queue: sprintQuestions, sections: [{subject: 'sprint', name: 'Sprint', count: sprintQuestions.length, start: 0}], answers: sprintQuestions.map(() => ({ selected: null, confirmed: false, correct: false })), remoteId, index: 0, correct: 0, questionStartedAt: Date.now(), reportedComplete: false, timedOut: false, timeUpAcknowledged: false, mode: 'sprint' };
       saveActiveSession();
       route = "session"; render();
     } else {
@@ -6767,7 +6823,12 @@ async function renderUniNote() {
     stopUniNoteAudio();
     const pTitle = noteData.practiceTopic?.title || noteData.noteTitle || "Practice";
     const pFile = noteData.practiceTopic?.dataFile || (noteData.id?.includes("muscles") ? "data/university/anatomy/200/questions-ana201-muscles.json" : "data/university/anatomy/200/questions-ana201-bones.json");
-    showTopicConfigModal(noteData.courseCode || "ANA 201", pTitle, pFile);
+    const courseCode = noteData.courseCode || "ANA 201";
+    const noteId = String(noteData.id || "");
+    const courseToken = topicSlug(courseCode).replace(/-/g, "");
+    const prefix = `note-${courseToken}-`;
+    const topicId = noteId.startsWith(prefix) ? noteId.slice(prefix.length) : null;
+    showTopicConfigModal(courseCode, pTitle, pFile, topicId);
   });
 
   // Bind Sibling Note Switcher

@@ -1,5 +1,9 @@
+import hashlib
+import hmac
+import json
 from datetime import timedelta
 from django.contrib.auth import get_user_model
+from django.test import override_settings
 from django.utils import timezone
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -125,3 +129,50 @@ class MonetizationTests(APITestCase):
         self.assertTrue(CourseAccess.user_has_course_access(self.user, "ANA 201"))
         self.assertFalse(CourseAccess.user_has_course_access(self.user, "ANA 203"))
         self.assertFalse(CourseAccess.user_has_course_access(self.user, "PIO 201"))
+
+    @override_settings(PAYSTACK_SECRET_KEY="webhook-test-secret")
+    def test_webhook_requires_signature_and_matching_payment_details(self):
+        transaction = PaymentTransaction.objects.create(
+            reference="seom_webhook_security_test",
+            user=self.user,
+            amount=1500,
+            access_type=PaymentTransaction.AccessType.SINGLE_COURSE,
+            course_code="ANA 201",
+        )
+        event = {
+            "event": "charge.success",
+            "data": {
+                "status": "success",
+                "reference": transaction.reference,
+                "amount": 150000,
+                "currency": "NGN",
+                "customer": {"email": self.user.email},
+            },
+        }
+        body = json.dumps(event, separators=(",", ":"))
+        signature = hmac.new(b"webhook-test-secret", body.encode(), hashlib.sha512).hexdigest()
+
+        missing = self.client.post("/api/subscriptions/paystack-webhook/", body, content_type="application/json")
+        self.assertEqual(missing.status_code, status.HTTP_400_BAD_REQUEST)
+
+        event["data"]["customer"]["email"] = "someone-else@example.com"
+        mismatched_body = json.dumps(event, separators=(",", ":"))
+        mismatched_signature = hmac.new(b"webhook-test-secret", mismatched_body.encode(), hashlib.sha512).hexdigest()
+        mismatched = self.client.post(
+            "/api/subscriptions/paystack-webhook/", mismatched_body,
+            content_type="application/json", HTTP_X_PAYSTACK_SIGNATURE=mismatched_signature,
+        )
+        self.assertEqual(mismatched.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertFalse(CourseAccess.objects.filter(reference=transaction.reference).exists())
+
+        event["data"]["customer"]["email"] = self.user.email
+        valid_body = json.dumps(event, separators=(",", ":"))
+        valid_signature = hmac.new(b"webhook-test-secret", valid_body.encode(), hashlib.sha512).hexdigest()
+        valid = self.client.post(
+            "/api/subscriptions/paystack-webhook/", valid_body,
+            content_type="application/json", HTTP_X_PAYSTACK_SIGNATURE=valid_signature,
+        )
+        self.assertEqual(valid.status_code, status.HTTP_200_OK)
+        transaction.refresh_from_db()
+        self.assertEqual(transaction.status, PaymentTransaction.Status.SUCCESS)
+        self.assertTrue(CourseAccess.objects.filter(reference=transaction.reference).exists())

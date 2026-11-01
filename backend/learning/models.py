@@ -109,6 +109,7 @@ class PracticeSession(models.Model):
     status = models.CharField(max_length=12, choices=Status.choices, default=Status.ACTIVE)
     mode = models.CharField(max_length=12, choices=Mode.choices, default=Mode.TIMED)
     started_at = models.DateTimeField(auto_now_add=True)
+    began_at = models.DateTimeField(null=True, blank=True, help_text="When the student actually began the session.")
     completed_at = models.DateTimeField(null=True, blank=True)
     total_questions = models.PositiveSmallIntegerField(default=0)
     correct_answers = models.PositiveSmallIntegerField(default=0)

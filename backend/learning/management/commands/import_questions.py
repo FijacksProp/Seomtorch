@@ -65,7 +65,12 @@ class Command(BaseCommand):
         manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path and manifest_path.exists() else None
         release_version = str(manifest.get("version")) if manifest else None
         if options["if_current"] and release_version and QuestionBankRelease.objects.filter(version=release_version).exists():
-            self.stdout.write(f"Question bank v{release_version} already imported; skipping.")
+            university_seen = set()
+            created, updated = self._process_university_questions(repo_root, university_seen)
+            self.stdout.write(
+                f"Aspirant question bank v{release_version} is current; university content checked: "
+                f"{created} created, {updated} updated."
+            )
             return
 
         seen = set(); created = updated = 0
@@ -84,10 +89,96 @@ class Command(BaseCommand):
             c, u = self._process_questions(payload.get("questions", []), seen)
             created += c; updated += u
 
+        # University question sets are also imported server-side. That lets
+        # timed sessions be scored against the database instead of trusting a
+        # score submitted by the browser.
+        university_created, university_updated = self._process_university_questions(repo_root, seen)
+        created += university_created
+        updated += university_updated
+
         deactivated = Question.objects.exclude(external_id__in=seen).update(is_active=False)
         if release_version:
             QuestionBankRelease.objects.update_or_create(version=release_version, defaults={"question_count": len(seen)})
         self.stdout.write(self.style.SUCCESS(f"Imported {len(seen)} questions: {created} created, {updated} updated, {deactivated} deactivated."))
+
+    def _process_university_questions(self, repo_root, seen):
+        base = repo_root / "data" / "university"
+        if not base.exists():
+            return 0, 0
+
+        created = updated = 0
+        for question_path in sorted(base.rglob("questions-*.json")):
+            try:
+                payload = json.loads(question_path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError) as exc:
+                raise CommandError(f"Could not read university question file {question_path}: {exc}") from exc
+
+            course_code = str(payload.get("course") or "").strip().upper()
+            course_file = question_path.parent / f"{slugify(course_code.replace(' ', '-'))}.json"
+            course_data = {}
+            if course_file.exists():
+                try:
+                    course_data = json.loads(course_file.read_text(encoding="utf-8"))
+                except json.JSONDecodeError:
+                    course_data = {}
+
+            relative_question_path = question_path.relative_to(repo_root).as_posix()
+            topic_id = ""
+            for section in course_data.get("sections", []):
+                for topic in section.get("topics", []):
+                    if str(topic.get("dataFile") or "").replace("\\", "/") == relative_question_path:
+                        topic_id = str(topic.get("id") or "").strip()
+                        break
+                if topic_id:
+                    break
+
+            subject_slug = slugify(course_code)
+            subject, _ = Subject.objects.update_or_create(
+                slug=subject_slug,
+                defaults={
+                    "name": str(course_data.get("title") or course_code or payload.get("title") or "University Course")[:120],
+                    "description": str(course_data.get("description") or payload.get("title") or "")[:240],
+                    "track": Subject.Track.UNIVERSITY,
+                    "code": course_code,
+                    "position": 100,
+                    "is_active": True,
+                },
+            )
+            topic_name = str(payload.get("title") or topic_id or "Course Practice").strip()[:160]
+            topic, _ = Topic.objects.update_or_create(
+                subject=subject,
+                slug=slugify(topic_id or topic_name),
+                defaults={"name": topic_name},
+            )
+
+            for item in payload.get("questions", []):
+                if not isinstance(item, dict) or not item.get("id") or not isinstance(item.get("options"), list):
+                    continue
+                try:
+                    correct_index = int(item.get("correct"))
+                except (TypeError, ValueError):
+                    continue
+                if not 0 <= correct_index < len(item["options"]):
+                    continue
+                external_id = str(item["id"]).strip()
+                defaults = {
+                    "topic": topic,
+                    "text": str(item.get("text") or ""),
+                    "options": item["options"],
+                    "correct_index": correct_index,
+                    "explanation": str(item.get("explanation") or ""),
+                    "explanation_status": "reviewed" if item.get("explanation") else "missing",
+                    "difficulty": str(item.get("difficulty") or "standard"),
+                    "source": "Seomtorch university question bank",
+                    "question_year": item.get("questionYear"),
+                    "image_url": str(item.get("image_url") or item.get("image") or ""),
+                    "is_active": True,
+                }
+                _, was_created = Question.objects.update_or_create(external_id=external_id, defaults=defaults)
+                created += int(was_created)
+                updated += int(not was_created)
+                seen.add(external_id)
+        return created, updated
 
     def _process_questions(self, questions, seen):
         created = updated = 0

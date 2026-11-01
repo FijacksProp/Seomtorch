@@ -2,7 +2,7 @@
 
 from django.contrib.auth import get_user_model
 from django.db.models import Q, Exists, OuterRef, Subquery, Value, BooleanField
-from rest_framework import status
+from rest_framework import status, throttling
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -172,8 +172,10 @@ class LeaderboardView(APIView):
 
 
 class SearchView(APIView):
-    """GET /api/community/search/?q=... — Search students by public_id, username, email, phone."""
+    """Search students by public ID or username; never use private contact details."""
     permission_classes = [IsAuthenticated]
+    throttle_classes = [throttling.ScopedRateThrottle]
+    throttle_scope = "community_search"
 
     def get(self, request):
         raw_query = (request.query_params.get("q") or "").strip()
@@ -185,20 +187,9 @@ class SearchView(APIView):
 
         clean_query = raw_query.strip()
 
-        # Build flexible Q filter
-        # 1. Exact or partial Student ID
-        q_filter = Q(public_id__iexact=clean_query) | Q(public_id__icontains=clean_query)
-        # 2. Username
-        q_filter |= Q(username__icontains=clean_query)
-        # 3. First / last name
-        q_filter |= Q(first_name__icontains=clean_query) | Q(last_name__icontains=clean_query)
-        # 4. Email (if contains @ or looks like email)
-        if "@" in clean_query:
-            q_filter |= Q(email__iexact=clean_query.lower()) | Q(email__icontains=clean_query.lower())
-        # 5. Phone number
-        digits = "".join(c for c in clean_query if c.isdigit())
-        if len(digits) >= 6:
-            q_filter |= Q(phone_number__icontains=digits)
+        # Keep directory discovery to public identifiers; do not expose names,
+        # email addresses, or phone numbers through a searchable endpoint.
+        q_filter = Q(public_id__iexact=clean_query) | Q(username__icontains=clean_query)
 
         results = User.objects.filter(
             q_filter,

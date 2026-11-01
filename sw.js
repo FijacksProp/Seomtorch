@@ -1,4 +1,4 @@
-const CACHE = "seomtorch-v128";
+const CACHE = "seomtorch-v129";
 const APP_ASSETS = [
   "./",
   "index.html",
@@ -93,7 +93,11 @@ const APP_ASSETS = [
   "data/questions-mathematics.json",
   "data/questions-music.json",
   "data/questions-physics.json"
-];
+].filter(path =>
+  !path.startsWith("data/university/") &&
+  !path.startsWith("assets/notes/") &&
+  !path.startsWith("data/questions")
+);
 
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(APP_ASSETS)));

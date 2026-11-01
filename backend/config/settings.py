@@ -3,6 +3,8 @@ import sys
 from pathlib import Path
 
 import dj_database_url
+from django.core.exceptions import ImproperlyConfigured
+from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 REPO_DIR = BASE_DIR.parent
@@ -11,19 +13,23 @@ REPO_DIR = BASE_DIR.parent
 def env_bool(name, default=False):
     return os.environ.get(name, str(default)).strip().lower() in {"1", "true", "yes", "on"}
 
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "development-only-change-me")
 DEBUG = os.environ.get("DJANGO_DEBUG", "False").lower() == "true"
+TESTING = "test" in sys.argv
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "development-only-change-me")
+if not DEBUG and not TESTING and (not os.environ.get("DJANGO_SECRET_KEY") or SECRET_KEY == "development-only-change-me"):
+    raise ImproperlyConfigured("Set a unique DJANGO_SECRET_KEY before running in production.")
 ALLOWED_HOSTS = [host.strip() for host in os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",") if host.strip()]
 
 INSTALLED_APPS = [
     "django.contrib.admin", "django.contrib.auth", "django.contrib.contenttypes",
     "django.contrib.sessions", "django.contrib.messages", "django.contrib.staticfiles",
-    "corsheaders", "rest_framework", "rest_framework.authtoken",
+    "corsheaders", "rest_framework", "rest_framework.authtoken", "knox",
     "accounts", "learning", "monetization",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "config.security_headers.SecurityHeadersMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -94,11 +100,25 @@ STORAGES = {"staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.Stati
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": ["rest_framework.authentication.TokenAuthentication"],
+    "DEFAULT_AUTHENTICATION_CLASSES": ["config.authentication.MultiTokenAuthentication"],
     "DEFAULT_PERMISSION_CLASSES": ["accounts.permissions.AccountReadyPermission"],
     "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
     "EXCEPTION_HANDLER": "config.exceptions.api_exception_handler",
-    "DEFAULT_THROTTLE_RATES": {"auth": "20/hour"},
+    "DEFAULT_THROTTLE_RATES": {
+        "auth": "20/hour",
+        "contacts": "10/hour",
+        "community_search": "30/hour",
+        "practice_start": "60/hour",
+        "practice_answers": "1000/hour",
+        "question_write": "30/hour",
+    },
+}
+
+REST_KNOX = {
+    "TOKEN_TTL": timedelta(days=30),
+    "AUTO_REFRESH": True,
+    "AUTO_REFRESH_MAX_TTL": timedelta(days=90),
+    "TOKEN_LIMIT_PER_USER": 8,
 }
 
 CORS_ALLOWED_ORIGINS = [origin.strip() for origin in os.environ.get("CORS_ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:4173").split(",") if origin.strip()]
@@ -108,12 +128,14 @@ CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in os.environ.get("CSRF_TRUSTE
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SESSION_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SECURE = not DEBUG
-SECURE_SSL_REDIRECT = os.environ.get("SECURE_SSL_REDIRECT", "False").lower() == "true"
-SECURE_HSTS_SECONDS = int(os.environ.get("SECURE_HSTS_SECONDS", "0"))
+SECURE_SSL_REDIRECT = env_bool("SECURE_SSL_REDIRECT", not DEBUG and not TESTING)
+SECURE_HSTS_SECONDS = int(os.environ.get("SECURE_HSTS_SECONDS", "0" if DEBUG or TESTING else "31536000"))
 SECURE_HSTS_INCLUDE_SUBDOMAINS = SECURE_HSTS_SECONDS > 0
 SECURE_HSTS_PRELOAD = SECURE_HSTS_SECONDS > 0
 X_FRAME_OPTIONS = "DENY"
 SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin"
 LOGIN_URL = "/monitor/login/"
 
 LOGGING = {

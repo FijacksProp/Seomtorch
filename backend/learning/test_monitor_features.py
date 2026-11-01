@@ -1,10 +1,11 @@
+import uuid
 from datetime import timedelta
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.utils import timezone
 
 from monetization.models import CourseAccess, DiscountCode, PlanConfig
-from learning.models import Subject, Topic, Question, PracticeSession
+from learning.models import Attempt, Subject, Topic, Question, PracticeSession
 
 User = get_user_model()
 
@@ -29,6 +30,42 @@ class MonitorProFeatureTests(TestCase):
         # Base subject & topic
         self.subject, _ = Subject.objects.get_or_create(slug="biology", defaults={"name": "Biology", "position": 1})
         self.topic, _ = Topic.objects.get_or_create(subject=self.subject, slug="cell-bio", defaults={"name": "Cell Biology"})
+
+    def _record_verified_session(self, user, total, correct, course_code=""):
+        now = timezone.now()
+        subject = self.subject
+        topic = self.topic
+        track = "aspirant"
+        if course_code:
+            slug = course_code.lower().replace(" ", "-")
+            subject, _ = Subject.objects.get_or_create(
+                slug=slug,
+                defaults={"name": course_code, "code": course_code, "track": Subject.Track.UNIVERSITY},
+            )
+            topic, _ = Topic.objects.get_or_create(subject=subject, slug="monitor-review", defaults={"name": "Monitor Review"})
+            track = "university"
+        questions = [Question.objects.create(
+            external_id=f"monitor-{uuid.uuid4()}", topic=topic,
+            text=f"Monitor test question {index + 1}",
+            options=["Correct", "Incorrect", "Option C", "Option D"],
+            correct_index=0, explanation="Verified by a server-recorded answer.",
+        ) for index in range(total)]
+        session = PracticeSession.objects.create(
+            user=user, subject=subject, track=track, course_code=course_code,
+            question_ids=[question.external_id for question in questions],
+            total_questions=total, correct_answers=correct,
+            status=PracticeSession.Status.COMPLETED,
+            began_at=now - timedelta(minutes=10), completed_at=now,
+        )
+        Attempt.objects.bulk_create([
+            Attempt(
+                user=user, question=question, session=session, client_id=uuid.uuid4(),
+                selected_index=0 if index < correct else 1,
+                is_correct=index < correct, xp_earned=5 if index < correct else 0,
+            )
+            for index, question in enumerate(questions)
+        ])
+        return session
 
     def test_dashboard_with_ranges(self):
         # Test range query params
@@ -210,7 +247,7 @@ class MonitorProFeatureTests(TestCase):
         from rest_framework.authtoken.models import Token
         token = Token.objects.create(user=uni_student)
 
-        # Call university session record endpoint
+        # The legacy endpoint must not accept a score asserted by the browser.
         res = self.client.post("/api/sessions/record-university/", {
             "course_code": "ANA 201",
             "topic_title": "Bones of the Upper Limb",
@@ -219,18 +256,8 @@ class MonitorProFeatureTests(TestCase):
             "time_spent_seconds": 480,
             "mode": "timed",
         }, content_type="application/json", HTTP_AUTHORIZATION=f"Token {token.key}")
-        self.assertEqual(res.status_code, 201)
-        data = res.json()
-        self.assertEqual(data["course_code"], "ANA 201")
-        self.assertEqual(data["accuracy"], 80)
-        self.assertEqual(data["xp_earned"], 80)
-
-        # Verify PracticeSession in DB
-        sess = PracticeSession.objects.filter(user=uni_student, track="university").first()
-        self.assertIsNotNone(sess)
-        self.assertEqual(sess.course_code, "ANA 201")
-        self.assertEqual(sess.correct_answers, 16)
-        self.assertEqual(sess.total_questions, 20)
+        self.assertEqual(res.status_code, 410)
+        self.assertFalse(PracticeSession.objects.filter(user=uni_student).exists())
 
     def test_record_aspirant_session_api(self):
         from rest_framework.authtoken.models import Token
@@ -244,32 +271,13 @@ class MonitorProFeatureTests(TestCase):
             "time_spent_seconds": 300,
             "mode": "timed",
         }, content_type="application/json", HTTP_AUTHORIZATION=f"Token {token.key}")
-        self.assertEqual(res.status_code, 201)
-        data = res.json()
-        self.assertEqual(data["track"], "aspirant")
-        self.assertEqual(data["accuracy"], 80)
-        self.assertEqual(data["xp_earned"], 60)
+        self.assertEqual(res.status_code, 410)
+        self.assertFalse(PracticeSession.objects.filter(user=self.student).exists())
 
     def test_dashboard_with_tracks(self):
         # Create an aspirant session and a university session
-        PracticeSession.objects.create(
-            user=self.student,
-            track="aspirant",
-            total_questions=10,
-            correct_answers=7,
-            status=PracticeSession.Status.COMPLETED,
-            completed_at=timezone.now(),
-        )
-        PracticeSession.objects.create(
-            user=self.student,
-            track="university",
-            course_code="ANA 201",
-            topic_title="Upper Limb",
-            total_questions=25,
-            correct_answers=20,
-            status=PracticeSession.Status.COMPLETED,
-            completed_at=timezone.now(),
-        )
+        self._record_verified_session(self.student, total=10, correct=7)
+        self._record_verified_session(self.student, total=25, correct=20, course_code="ANA 201")
 
         for track in ["all", "aspirant", "university"]:
             res = self.client.get(f"/monitor/?range=7d&track={track}")
@@ -292,16 +300,7 @@ class MonitorProFeatureTests(TestCase):
             user_type="university",
             active_mode="university",
         )
-        PracticeSession.objects.create(
-            user=uni_student,
-            track="university",
-            course_code="ANA 201",
-            topic_title="Bones of the Upper Limb",
-            total_questions=20,
-            correct_answers=17,
-            status=PracticeSession.Status.COMPLETED,
-            completed_at=timezone.now(),
-        )
+        self._record_verified_session(uni_student, total=20, correct=17, course_code="ANA 201")
 
         res = self.client.get(f"/monitor/students/{uni_student.public_id}/")
         self.assertEqual(res.status_code, 200)
@@ -309,18 +308,11 @@ class MonitorProFeatureTests(TestCase):
         self.assertEqual(len(res.context["uni_courses_list"]), 1)
         self.assertEqual(res.context["uni_courses_list"][0]["code"], "ANA 201")
         self.assertEqual(res.context["uni_courses_list"][0]["accuracy"], 85)
+        self.assertEqual(res.context["accuracy"], 85)
+        self.assertEqual(res.context["total"], 20)
 
     def test_university_dashboard_view(self):
-        PracticeSession.objects.create(
-            user=self.student,
-            track="university",
-            course_code="ANA 201",
-            topic_title="Upper Limb Osteology",
-            total_questions=15,
-            correct_answers=12,
-            status=PracticeSession.Status.COMPLETED,
-            completed_at=timezone.now(),
-        )
+        self._record_verified_session(self.student, total=15, correct=12, course_code="ANA 201")
         res = self.client.get("/monitor/university/")
         self.assertEqual(res.status_code, 200)
         self.assertIn("courses", res.context)

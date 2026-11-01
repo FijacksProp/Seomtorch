@@ -3,46 +3,105 @@ from datetime import timedelta
 from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
-from django.core.management import call_command
 from django.db import DatabaseError
 from django.test import TestCase
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient, APITestCase
 from django.utils import timezone
 
-from .models import ActivityEvent, Attempt, Bookmark, Challenge, ChallengeParticipant, PracticeSession, Question, UserBadge, UserStats
+from .models import ActivityEvent, Attempt, Bookmark, Challenge, ChallengeParticipant, PracticeSession, Question, Subject, Topic, UserBadge, UserStats
 
 class LearningApiTests(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        call_command("import_questions", verbosity=0)
+        # Keep API tests fast and deterministic; the production question bank
+        # is hundreds of megabytes and is validated separately at import time.
+        sample_subjects = [
+            ("english", "English Language", 1, 120),
+            ("mathematics", "Mathematics", 2, 20),
+            ("general-paper", "General Paper", 3, 20),
+            ("physics", "Physics", 4, 20),
+        ]
+        questions = []
+        for slug, name, position, count in sample_subjects:
+            subject, _ = Subject.objects.get_or_create(
+                slug=slug,
+                defaults={"name": name, "position": position, "track": Subject.Track.ASPIRANT},
+            )
+            topic, _ = Topic.objects.get_or_create(
+                subject=subject, slug="general-practice", defaults={"name": "General Practice"},
+            )
+            questions.extend(
+                Question(
+                    external_id=f"test-{slug}-{index:03d}", topic=topic,
+                    text=f"{name} sample question {index + 1}",
+                    options=["Option A", "Option B", "Option C", "Option D"],
+                    correct_index=0,
+                    explanation="The first option is the correct answer in this test fixture.",
+                )
+                for index in range(count)
+            )
+        Question.objects.bulk_create(questions)
         cls.user = get_user_model().objects.create_user(email="learner@example.com", username="learner", password="Securepass934!")
         cls.token = Token.objects.create(user=cls.user)
 
     def setUp(self):
         self.client.credentials(HTTP_AUTHORIZATION=f"Token {self.token.key}")
 
+    def _new_started_session(self, subject_slug="english", limit=10, mode="timed"):
+        started = self.client.post("/api/sessions/", {
+            "subject": subject_slug,
+            "limit": limit,
+            "duration_minutes": 30 if mode != "normal" else None,
+            "mode": mode,
+        }, format="json")
+        self.assertEqual(started.status_code, 201, started.data)
+        session_id = started.data["session_id"]
+        began = self.client.post(f"/api/sessions/{session_id}/begin/", {}, format="json")
+        self.assertEqual(began.status_code, 200, began.data)
+        question = Question.objects.get(external_id=started.data["questions"][0]["external_id"])
+        return started, PracticeSession.objects.get(id=session_id), question
+
+    def _submit_answer(self, session, question, selected_index=None, client_id=None):
+        return self.client.post("/api/attempts/", {
+            "question_id": question.external_id,
+            "selected_index": question.correct_index if selected_index is None else selected_index,
+            "client_id": str(client_id or uuid.uuid4()),
+            "session_id": str(session.id),
+        }, format="json")
+
     def test_correct_answer_awards_five_xp(self):
-        question = Question.objects.first()
-        response = self.client.post("/api/attempts/", {"question_id": question.external_id, "selected_index": question.correct_index, "client_id": str(uuid.uuid4())}, format="json")
+        _, session, question = self._new_started_session()
+        response = self._submit_answer(session, question)
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.data["attempt"]["xp_earned"], 5)
         self.assertEqual(response.data["stats"]["xp"], 5)
 
     def test_incorrect_answer_awards_no_xp(self):
-        question = Question.objects.first(); wrong = (question.correct_index + 1) % 4
-        response = self.client.post("/api/attempts/", {"question_id": question.external_id, "selected_index": wrong, "client_id": str(uuid.uuid4())}, format="json")
+        _, session, question = self._new_started_session()
+        wrong = (question.correct_index + 1) % len(question.options)
+        response = self._submit_answer(session, question, selected_index=wrong)
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.data["attempt"]["xp_earned"], 0)
         self.assertEqual(response.data["stats"]["xp"], 0)
 
     def test_duplicate_client_attempt_is_idempotent(self):
-        question = Question.objects.first(); client_id = str(uuid.uuid4())
-        body = {"question_id": question.external_id, "selected_index": question.correct_index, "client_id": client_id}
-        self.client.post("/api/attempts/", body, format="json"); response = self.client.post("/api/attempts/", body, format="json")
+        _, session, question = self._new_started_session()
+        client_id = str(uuid.uuid4())
+        self._submit_answer(session, question, client_id=client_id)
+        response = self._submit_answer(session, question, client_id=client_id)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Attempt.objects.filter(user=self.user).count(), 1)
         self.assertEqual(UserStats.objects.get(user=self.user).xp, 5)
+
+    def test_answer_cannot_be_recorded_before_session_begins(self):
+        started = self.client.post("/api/sessions/", {"subject": "english", "limit": 10, "duration_minutes": 10}, format="json")
+        self.assertEqual(started.status_code, 201)
+        question = Question.objects.get(external_id=started.data["questions"][0]["external_id"])
+        session = PracticeSession.objects.get(id=started.data["session_id"])
+        response = self._submit_answer(session, question)
+        self.assertEqual(response.status_code, 409)
+        self.assertFalse(Attempt.objects.filter(user=self.user).exists())
 
     def test_session_accepts_supported_hundred_question_length(self):
         response = self.client.post("/api/sessions/", {"subject": "english", "limit": 100, "duration_minutes": 45}, format="json")
@@ -71,6 +130,34 @@ class LearningApiTests(APITestCase):
     def test_session_rejects_out_of_range_length(self):
         response = self.client.post("/api/sessions/", {"subject": "english", "limit": 9, "duration_minutes": 10}, format="json")
         self.assertEqual(response.status_code, 400)
+
+    def test_university_mixed_session_can_only_use_the_free_topic_without_access(self):
+        subject, _ = Subject.objects.get_or_create(
+            slug="ana-201",
+            defaults={
+                "name": "Gross Anatomy", "code": "ANA 201",
+                "track": Subject.Track.UNIVERSITY,
+            },
+        )
+        free_topic = Topic.objects.create(subject=subject, name="Upper Limb Bones", slug="ul-bones")
+        paid_topic = Topic.objects.create(subject=subject, name="Upper Limb Muscles", slug="ul-muscles")
+        free_question = Question.objects.create(
+            external_id="test-ana201-free", topic=free_topic, text="Free sample?",
+            options=["A", "B", "C", "D"], correct_index=0,
+        )
+        paid_question = Question.objects.create(
+            external_id="test-ana201-paid", topic=paid_topic, text="Paid sample?",
+            options=["A", "B", "C", "D"], correct_index=0,
+        )
+        payload = {"subject": "ana-201", "limit": 1, "mode": "normal"}
+        allowed = self.client.post("/api/sessions/", {
+            **payload, "question_ids": [free_question.external_id],
+        }, format="json")
+        self.assertEqual(allowed.status_code, 201, allowed.data)
+        denied = self.client.post("/api/sessions/", {
+            **payload, "question_ids": [paid_question.external_id],
+        }, format="json")
+        self.assertEqual(denied.status_code, 403)
 
     def test_all_subject_session_is_balanced_and_grouped(self):
         response = self.client.post("/api/sessions/", {"subject": "all", "limit": 20, "duration_minutes": 10}, format="json")
@@ -101,8 +188,8 @@ class LearningApiTests(APITestCase):
         self.assertEqual(self.client.get("/api/bookmarks/").data, [])
 
     def test_progress_submitted_on_one_device_is_visible_on_another(self):
-        question = Question.objects.first()
-        self.client.post("/api/attempts/", {"question_id": question.external_id, "selected_index": question.correct_index, "client_id": str(uuid.uuid4())}, format="json")
+        _, session, question = self._new_started_session()
+        self._submit_answer(session, question)
         second_device = APIClient()
         second_device.credentials(HTTP_AUTHORIZATION=f"Token {self.token.key}")
         response = second_device.get("/api/attempts/")
@@ -131,7 +218,9 @@ class LearningApiTests(APITestCase):
         self.assertEqual(duplicate.status_code, 409)
 
     def test_completed_session_awards_first_step_badge(self):
-        session = PracticeSession.objects.create(user=self.user, total_questions=10, question_ids=[])
+        _, session, question = self._new_started_session()
+        answer = self._submit_answer(session, question)
+        self.assertEqual(answer.status_code, 201)
         response = self.client.post(f"/api/sessions/{session.id}/complete/", {}, format="json")
         self.assertEqual(response.status_code, 200)
         self.assertIn("First Step", [item["name"] for item in response.data["badges_earned"]])
@@ -140,13 +229,22 @@ class LearningApiTests(APITestCase):
         self.assertTrue(first_step["earned"])
         self.assertTrue(UserBadge.objects.filter(user=self.user, badge__code="first-step").exists())
 
+    def test_empty_started_session_is_closed_without_counting_as_a_test(self):
+        _, session, _ = self._new_started_session()
+        response = self.client.post(f"/api/sessions/{session.id}/complete/", {}, format="json")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data["status"], PracticeSession.Status.ABANDONED)
+        analytics = self.client.get("/api/progress/").data["tests"]
+        self.assertEqual(analytics["tests_taken"], 0)
+        self.assertEqual(analytics["in_progress"], 0)
+
     def test_progress_reports_completed_tests_as_primary_analysis(self):
         questions = list(Question.objects.all()[:20])
         for offset, correct_count in ((0, 8), (10, 5)):
             selected = questions[offset:offset + 10]
             session = PracticeSession.objects.create(
                 user=self.user, status=PracticeSession.Status.COMPLETED,
-                completed_at=timezone.now(), total_questions=10,
+                began_at=timezone.now(), completed_at=timezone.now(), total_questions=10,
                 question_ids=[item.external_id for item in selected],
             )
             for index, question in enumerate(selected):
@@ -166,14 +264,25 @@ class LearningApiTests(APITestCase):
 
     def test_five_completed_tests_award_test_milestone_badge(self):
         for _ in range(5):
-            PracticeSession.objects.create(
-                user=self.user, status=PracticeSession.Status.COMPLETED,
-                completed_at=timezone.now(), total_questions=10, question_ids=[],
-            )
+            _, session, question = self._new_started_session()
+            self.assertEqual(self._submit_answer(session, question).status_code, 201)
+            self.assertEqual(self.client.post(f"/api/sessions/{session.id}/complete/", {}, format="json").status_code, 200)
         response = self.client.get("/api/achievements/")
         badge = next(item for item in response.data["badges"] if item["code"] == "five-papers")
         self.assertTrue(badge["earned"])
         self.assertEqual(badge["current"], 5)
+
+    def test_unverified_completed_sessions_do_not_inflate_test_analytics_or_badges(self):
+        PracticeSession.objects.create(
+            user=self.user, status=PracticeSession.Status.COMPLETED,
+            completed_at=timezone.now(), total_questions=10, question_ids=[],
+        )
+        response = self.client.get("/api/progress/")
+        self.assertEqual(response.data["tests"]["tests_taken"], 0)
+        self.assertEqual(response.data["tests"]["tests_today"], 0)
+        achievements = self.client.get("/api/achievements/")
+        first_step = next(item for item in achievements.data["badges"] if item["code"] == "first-step")
+        self.assertFalse(first_step["earned"])
 
     def test_friend_challenge_freezes_paper_and_hides_group_scores_until_everyone_finishes(self):
         friend = get_user_model().objects.create_user(email="friend@example.com", username="studyfriend", password="Securepass934!")
@@ -223,6 +332,14 @@ class LearningApiTests(APITestCase):
         self.assertEqual(detail.data["results"], [])
         self.assertEqual(detail.data["my_result"]["correct"], 1)
         creator_started = self.client.post(f"/api/challenges/{challenge.id}/start/", {}, format="json")
+        creator_question = challenge.question_payload[0]
+        creator_answer = self.client.post("/api/attempts/", {
+            "question_id": creator_question["external_id"],
+            "selected_index": creator_question["correct"],
+            "client_id": str(uuid.uuid4()),
+            "session_id": creator_started.data["session_id"],
+        }, format="json")
+        self.assertTrue(creator_answer.data["accepted"])
         self.client.post(f"/api/sessions/{creator_started.data['session_id']}/complete/", {}, format="json")
         unlocked = friend_client.get(f"/api/challenges/{challenge.id}/")
         self.assertTrue(unlocked.data["results_unlocked"])

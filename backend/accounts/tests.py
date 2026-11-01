@@ -1,7 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.core.management import call_command
 from rest_framework.authtoken.models import Token
-from rest_framework.test import APITestCase
+from rest_framework.test import APIClient, APITestCase
+from knox.models import AuthToken
 from unittest.mock import patch
 
 class AuthenticationTests(APITestCase):
@@ -25,11 +26,16 @@ class AuthenticationTests(APITestCase):
 
     def test_signing_out_one_device_keeps_shared_account_token_valid(self):
         user = get_user_model().objects.create_user(email="multi@example.com", username="multi", password="Securepass934!")
-        token = Token.objects.create(user=user)
-        self.client.credentials(HTTP_AUTHORIZATION=f"Token {token.key}")
+        current_device, current_token = AuthToken.objects.create(user=user)
+        other_device, other_token = AuthToken.objects.create(user=user)
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {current_token}")
         response = self.client.post("/api/auth/logout/")
         self.assertEqual(response.status_code, 204)
-        self.assertTrue(Token.objects.filter(key=token.key).exists())
+        self.assertFalse(AuthToken.objects.filter(pk=current_device.pk).exists())
+        self.assertTrue(AuthToken.objects.filter(pk=other_device.pk).exists())
+        second_device = APIClient()
+        second_device.credentials(HTTP_AUTHORIZATION=f"Token {other_token}")
+        self.assertEqual(second_device.get("/api/auth/me/").status_code, 200)
 
     def test_initial_superuser_password_can_only_reset_with_explicit_flag(self):
         user = get_user_model().objects.create_superuser(email="admin@example.com", username="admin", password="OldSecure934!")
@@ -272,12 +278,11 @@ class CommunityTests(APITestCase):
         self.assertEqual(len(res.data["results"]), 1)
         self.assertEqual(res.data["results"][0]["public_id"], staff.public_id)
 
-    def test_search_by_email(self):
+    def test_search_does_not_expose_email_address(self):
         self._auth(self.alice_token)
         res = self.client.get(f"/api/community/search/?q={self.bob.email}")
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(len(res.data["results"]), 1)
-        self.assertEqual(res.data["results"][0]["public_id"], self.bob.public_id)
+        self.assertEqual(len(res.data["results"]), 0)
 
     def test_search_query_too_short(self):
         self._auth(self.alice_token)

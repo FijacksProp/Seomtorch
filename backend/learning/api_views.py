@@ -3,14 +3,14 @@ import uuid
 from datetime import timedelta
 
 from django.db import transaction
-from django.db.models import Count, Q
+from django.db.models import Count, Q, Sum
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from rest_framework import status
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework import status, throttling
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from monetization.models import CourseAccess, CourseTopicConfig
 
 from .badges import achievements_payload, evaluate_badges, mark_badges_seen
 from .analytics import user_test_analytics
@@ -19,12 +19,30 @@ from .serializers import AttemptSerializer, BookmarkSerializer, QuestionPractice
 
 def stats_payload(user, include_tests=True):
     stats, _ = UserStats.objects.get_or_create(user=user)
+    verified_answer_xp = user.attempts.filter(is_correct=True).aggregate(total=Sum("xp_earned"))["total"] or 0
+    challenge_bonus_xp = user.challenge_participations.filter(bonus_awarded_at__isnull=False).aggregate(total=Sum("bonus_xp"))["total"] or 0
+    verified_xp = verified_answer_xp + challenge_bonus_xp
+    if stats.xp != verified_xp:
+        stats.xp = verified_xp
+        stats.save(update_fields=("xp",))
     total = user.attempts.count()
     correct = user.attempts.filter(is_correct=True).count()
     payload = {"xp": stats.xp, "level": stats.level, "current_streak": stats.live_current_streak, "best_streak": stats.best_streak, "last_study_date": stats.last_study_date, "total_attempts": total, "accuracy": round(correct / total * 100) if total else 0}
     if include_tests:
         payload["tests"] = user_test_analytics(user)
     return payload
+
+
+def user_can_access_topic(user, subject, topic):
+    if subject.track != Subject.Track.UNIVERSITY or CourseAccess.user_has_course_access(user, subject.code):
+        return True
+    configured = CourseTopicConfig.objects.filter(course_code__iexact=subject.code).values_list("free_topic_id", flat=True).first()
+    free_topic_id = configured or {"ANA 201": "ul-bones", "ANA 203": "week-one", "PIO 201": "transport-homeostasis"}.get(subject.code.upper(), "")
+    return bool(topic and free_topic_id and topic.slug.casefold() == free_topic_id.casefold())
+
+
+def user_can_access_question(user, question):
+    return user_can_access_topic(user, question.topic.subject, question.topic)
 
 class SubjectListView(APIView):
     def get(self, request):
@@ -35,6 +53,9 @@ class SubjectListView(APIView):
         return Response(SubjectSerializer(subjects, many=True).data)
 
 class StartSessionView(APIView):
+    throttle_classes = [throttling.ScopedRateThrottle]
+    throttle_scope = "practice_start"
+
     @staticmethod
     def _select_questions(user, pool, limit):
         seen = set(user.attempts.filter(question__in=pool).values_list("question_id", flat=True))
@@ -58,33 +79,74 @@ class StartSessionView(APIView):
 
     def post(self, request):
         subject_slug = request.data.get("subject")
+        if not isinstance(subject_slug, str) or not subject_slug.strip():
+            return Response({"subject": ["Choose a valid subject."]}, status=400)
         all_subjects = subject_slug == "all"
         saved_questions = subject_slug == "saved"
         requested_mode = request.data.get("mode", PracticeSession.Mode.TIMED)
         valid_modes = {PracticeSession.Mode.TIMED, PracticeSession.Mode.NORMAL}
-        if requested_mode not in valid_modes:
+        if not isinstance(requested_mode, str) or requested_mode not in valid_modes:
             return Response({"mode": ["Choose timed or normal practice."]}, status=400)
         session_mode = PracticeSession.Mode.SAVED if saved_questions else requested_mode
         subject = None if all_subjects or saved_questions else get_object_or_404(Subject, slug=subject_slug, is_active=True)
         topic_slug = request.data.get("topic")
+        if topic_slug is not None and not isinstance(topic_slug, str):
+            return Response({"topic": ["Choose a valid topic."]}, status=400)
         topic = get_object_or_404(Topic, subject=subject, slug=topic_slug) if topic_slug and subject else None
-        try: limit = int(request.data.get("limit", 10))
+        has_course_access = bool(subject and CourseAccess.user_has_course_access(request.user, subject.code))
+        if subject and subject.track == Subject.Track.UNIVERSITY and not has_course_access:
+            if topic and not user_can_access_topic(request.user, subject, topic):
+                return Response({"detail": "Course access is required to start this practice session."}, status=status.HTTP_403_FORBIDDEN)
+            if topic is None and request.data.get("question_ids") is None:
+                return Response({"detail": "Course access is required to start this practice session."}, status=status.HTTP_403_FORBIDDEN)
+        raw_limit = request.data.get("limit", 10)
+        if isinstance(raw_limit, bool) or isinstance(raw_limit, float) and not raw_limit.is_integer():
+            return Response({"limit": ["Choose a valid number of questions."]}, status=400)
+        try: limit = int(raw_limit)
         except (TypeError, ValueError): limit = 10
-        minimum = 1 if saved_questions else 10
+        minimum = 1 if saved_questions or (subject and subject.track == Subject.Track.UNIVERSITY) else 10
         if not minimum <= limit <= 100:
             return Response({"limit": [f"Choose any number from {minimum} to 100 questions."]}, status=400)
         if requested_mode == PracticeSession.Mode.NORMAL:
             duration_minutes = None
         else:
+            raw_duration = request.data.get("duration_minutes")
+            if isinstance(raw_duration, bool) or isinstance(raw_duration, float) and not raw_duration.is_integer():
+                return Response({"duration_minutes": ["Enter a valid study duration in minutes."]}, status=400)
             try: duration_minutes = int(request.data.get("duration_minutes"))
             except (TypeError, ValueError):
                 return Response({"duration_minutes": ["Enter a valid study duration in minutes."]}, status=400)
             if not 1 <= duration_minutes <= 600:
                 return Response({"duration_minutes": ["Study duration must be between 1 and 600 minutes."]}, status=400)
 
-        sections = []
-        if saved_questions:
-            saved = list(request.user.bookmarks.select_related("question__topic__subject").order_by("-created_at")[:limit])
+        requested_ids = request.data.get("question_ids")
+        if requested_ids is not None:
+            if all_subjects or saved_questions or not isinstance(requested_ids, list) or not 1 <= len(requested_ids) <= 100:
+                return Response({"question_ids": ["Provide between 1 and 100 question IDs for a single-subject session."]}, status=400)
+            normalized_ids = [str(item) for item in requested_ids]
+            if len(set(normalized_ids)) != len(normalized_ids) or len(normalized_ids) != limit:
+                return Response({"question_ids": ["Question IDs must be unique and match the requested session length."]}, status=400)
+            pool = Question.objects.filter(topic__subject=subject, is_active=True)
+            if topic:
+                pool = pool.filter(topic=topic)
+            by_external_id = {item.external_id: item for item in pool.filter(external_id__in=normalized_ids).select_related("topic__subject")}
+            if len(by_external_id) != len(normalized_ids):
+                return Response({"question_ids": ["Every selected question must belong to this available subject and topic."]}, status=400)
+            selected = [by_external_id[item] for item in normalized_ids]
+            if subject.track == Subject.Track.UNIVERSITY and not has_course_access and any(not user_can_access_question(request.user, item) for item in selected):
+                return Response({"detail": "Course access is required for one or more selected questions."}, status=status.HTTP_403_FORBIDDEN)
+            sections = []
+            for item in selected:
+                section_name = item.topic.name if subject.track == Subject.Track.UNIVERSITY and not topic else subject.name
+                section_key = item.topic.slug if subject.track == Subject.Track.UNIVERSITY and not topic else subject.slug
+                if sections and sections[-1]["subject"] == section_key:
+                    sections[-1]["count"] += 1
+                else:
+                    sections.append({"subject": section_key, "name": section_name, "count": 1})
+        elif saved_questions:
+            sections = []
+            saved = list(request.user.bookmarks.select_related("question__topic__subject").order_by("-created_at")[:500])
+            saved = [bookmark for bookmark in saved if user_can_access_question(request.user, bookmark.question)][:limit]
             if not saved:
                 return Response({"detail": "Save at least one question before starting a review session."}, status=400)
             priority = {"english": 0, "mathematics": 1, "general-paper": 2, "physics": 3}
@@ -96,7 +158,8 @@ class StartSessionView(APIView):
                 else:
                     sections.append({"subject": item.topic.subject.slug, "name": item.topic.subject.name, "count": 1})
         elif all_subjects:
-            subjects = list(Subject.objects.filter(is_active=True))
+            sections = []
+            subjects = list(Subject.objects.filter(is_active=True, track=Subject.Track.ASPIRANT))
             priority = {"english": 0, "mathematics": 1, "general-paper": 2, "physics": 3}
             subjects.sort(key=lambda item: (priority.get(item.slug, 99), item.position, item.name))
             allocations = self._balanced_counts(subjects, limit)
@@ -110,32 +173,96 @@ class StartSessionView(APIView):
                 selected.extend(group)
                 sections.append({"subject": item.slug, "name": item.name, "count": len(group)})
         else:
+            sections = []
             pool = Question.objects.filter(topic__subject=subject, is_active=True)
             if topic: pool = pool.filter(topic=topic)
             selected = self._select_questions(request.user, pool, limit)
             sections.append({"subject": subject.slug, "name": subject.name, "count": len(selected)})
 
-        session = PracticeSession.objects.create(user=request.user, subject=subject, topic=topic, question_ids=[q.external_id for q in selected], total_questions=len(selected), duration_minutes=duration_minutes, mode=session_mode)
+        session = PracticeSession.objects.create(
+            user=request.user,
+            subject=subject,
+            topic=topic,
+            question_ids=[q.external_id for q in selected],
+            total_questions=len(selected),
+            duration_minutes=duration_minutes,
+            mode=session_mode,
+            track=subject.track if subject else "aspirant",
+            course_code=subject.code if subject and subject.track == Subject.Track.UNIVERSITY else "",
+            topic_title=topic.name if topic else ("Mixed practice" if subject and subject.track == Subject.Track.UNIVERSITY else ""),
+        )
         mode = "saved" if saved_questions else "all" if all_subjects else subject.slug
         ActivityEvent.objects.create(user=request.user, event_type=ActivityEvent.Type.SESSION_STARTED, metadata={"session_id": str(session.id), "subject": mode, "topic": topic.slug if topic else None, "duration_minutes": duration_minutes, "sections": sections})
         return Response({"session_id": session.id, "questions": QuestionPracticeSerializer(selected, many=True).data, "sections": sections, "duration_minutes": duration_minutes}, status=status.HTTP_201_CREATED)
 
+
+class BeginSessionView(APIView):
+    @transaction.atomic
+    def post(self, request, session_id):
+        session = get_object_or_404(
+            PracticeSession.objects.select_for_update(),
+            id=session_id,
+            user=request.user,
+        )
+        if session.status != PracticeSession.Status.ACTIVE:
+            return Response({"detail": "This practice session is no longer active."}, status=409)
+        if session.mode in {PracticeSession.Mode.DAILY, PracticeSession.Mode.CHALLENGE}:
+            return Response({"detail": "This session begins immediately when it is issued."}, status=409)
+        if session.began_at is None:
+            session.began_at = timezone.now()
+            session.save(update_fields=("began_at",))
+        return Response({"session_id": str(session.id), "began_at": session.began_at})
+
 class SubmitAttemptView(APIView):
+    throttle_classes = [throttling.ScopedRateThrottle]
+    throttle_scope = "practice_answers"
+
     @transaction.atomic
     def post(self, request):
-        question = get_object_or_404(Question.objects.select_related("topic__subject"), external_id=request.data.get("question_id"), is_active=True)
+        question_id = request.data.get("question_id")
+        if not isinstance(question_id, str):
+            return Response({"question_id": ["A valid question ID is required."]}, status=400)
+        question = get_object_or_404(Question.objects.select_related("topic__subject"), external_id=question_id, is_active=True)
         selected = request.data.get("selected_index")
+        if isinstance(selected, bool) or isinstance(selected, float) and not selected.is_integer():
+            return Response({"selected_index": ["A valid option index is required."]}, status=400)
         try: selected = int(selected)
         except (TypeError, ValueError): return Response({"selected_index": ["A valid option index is required."]}, status=400)
         if selected < 0 or selected >= len(question.options): return Response({"selected_index": ["Option index is out of range."]}, status=400)
         try: client_id = uuid.UUID(str(request.data.get("client_id")))
         except (TypeError, ValueError, AttributeError): return Response({"client_id": ["A valid UUID is required."]}, status=400)
+        raw_session_id = request.data.get("session_id")
+        try: session_id = uuid.UUID(str(raw_session_id))
+        except (TypeError, ValueError, AttributeError):
+            return Response({"session_id": ["Start a server-backed practice session before submitting an answer."]}, status=400)
+        raw_duration = request.data.get("duration_ms")
+        if isinstance(raw_duration, bool):
+            return Response({"duration_ms": ["Enter a valid answer duration."]}, status=400)
+        if raw_duration is not None:
+            if isinstance(raw_duration, float) and not raw_duration.is_integer():
+                return Response({"duration_ms": ["Enter a valid answer duration."]}, status=400)
+            try: duration_ms = int(raw_duration)
+            except (TypeError, ValueError): return Response({"duration_ms": ["Enter a valid answer duration."]}, status=400)
+            if not 0 <= duration_ms <= 3600000:
+                return Response({"duration_ms": ["Answer duration must be between 0 and 3600000 milliseconds."]}, status=400)
+        else:
+            duration_ms = None
+        session = get_object_or_404(PracticeSession.objects.select_for_update(), id=session_id, user=request.user)
         existing = Attempt.objects.filter(user=request.user, client_id=client_id).first()
-        if existing: return Response(self._response(existing))
-        session = None
-        if request.data.get("session_id"):
-            session = get_object_or_404(PracticeSession, id=request.data["session_id"], user=request.user)
-            if question.external_id not in session.question_ids: return Response({"question_id": ["Question is not part of this session."]}, status=400)
+        if existing:
+            if existing.question_id != question.id or existing.session_id != session.id or existing.selected_index != selected:
+                return Response({"detail": "This answer id has already been used for a different response."}, status=409)
+            return Response(self._response(existing))
+        if session.status != PracticeSession.Status.ACTIVE:
+            return Response({"detail": "This practice session is no longer active."}, status=409)
+        if question.external_id not in session.question_ids:
+            return Response({"question_id": ["Question is not part of this session."]}, status=400)
+        if not session.began_at:
+            return Response({"detail": "Begin this session before submitting an answer."}, status=409)
+        if session.mode != PracticeSession.Mode.CHALLENGE and session.duration_minutes and timezone.now() >= session.began_at + timedelta(minutes=session.duration_minutes, seconds=90):
+            return Response({"detail": "The session timer has expired."}, status=409)
+        if Attempt.objects.filter(user=request.user, session=session, question=question).exists():
+            return Response({"detail": "This question has already been recorded in the session."}, status=409)
         correct_index = question.correct_index
         challenge_participant = None
         if session and session.mode == PracticeSession.Mode.CHALLENGE:
@@ -151,7 +278,7 @@ class SubmitAttemptView(APIView):
             if session.attempts.filter(question=question).exists():
                 return Response({"detail": "This challenge question has already been recorded."}, status=409)
         correct = selected == correct_index
-        attempt = Attempt.objects.create(user=request.user, question=question, session=session, client_id=client_id, selected_index=selected, is_correct=correct, xp_earned=5 if correct else 0, duration_ms=request.data.get("duration_ms"))
+        attempt = Attempt.objects.create(user=request.user, question=question, session=session, client_id=client_id, selected_index=selected, is_correct=correct, xp_earned=5 if correct else 0, duration_ms=duration_ms)
         stats, _ = UserStats.objects.select_for_update().get_or_create(user=request.user)
         if correct: stats.register_correct_answer()
         else: stats.register_study_day()
@@ -176,6 +303,24 @@ class CompleteSessionView(APIView):
     @transaction.atomic
     def post(self, request, session_id):
         session = get_object_or_404(PracticeSession, id=session_id, user=request.user)
+        if session.status == PracticeSession.Status.COMPLETED:
+            return Response({"session_id": session.id, "correct": session.attempts.filter(is_correct=True).count(), "total": session.total_questions, "accuracy": session.accuracy, "challenge_id": None, "stats": stats_payload(request.user), "badges_earned": []})
+        if session.status != PracticeSession.Status.ACTIVE:
+            return Response({"detail": "This practice session cannot be completed."}, status=409)
+        if not session.began_at:
+            return Response({"detail": "Begin this session before completing it."}, status=409)
+        if not session.attempts.exists():
+            session.status = PracticeSession.Status.ABANDONED
+            session.save(update_fields=("status",))
+            return Response({
+                "session_id": str(session.id),
+                "status": session.status,
+                "correct": 0,
+                "total": session.total_questions,
+                "accuracy": 0,
+                "stats": stats_payload(request.user),
+                "badges_earned": [],
+            })
         session.status = PracticeSession.Status.COMPLETED
         session.completed_at = timezone.now()
         session.correct_answers = session.attempts.filter(is_correct=True).count()
@@ -217,6 +362,8 @@ class BookmarkView(APIView):
     def get(self, request): return Response(BookmarkSerializer(request.user.bookmarks.select_related("question").order_by("-created_at"), many=True).data)
     def post(self, request):
         question = get_object_or_404(Question, external_id=request.data.get("question_id"))
+        if not user_can_access_question(request.user, question):
+            return Response({"detail": "Course access is required to save this question."}, status=status.HTTP_403_FORBIDDEN)
         bookmark, created = Bookmark.objects.get_or_create(user=request.user, question=question)
         if created: ActivityEvent.objects.create(user=request.user, event_type=ActivityEvent.Type.BOOKMARKED, metadata={"question_id": question.external_id})
         return Response(BookmarkSerializer(bookmark).data, status=201 if created else 200)
@@ -225,6 +372,9 @@ class BookmarkView(APIView):
         return Response(status=204)
 
 class QuestionCommentView(APIView):
+    throttle_classes = [throttling.ScopedRateThrottle]
+    throttle_scope = "question_write"
+
     def get(self, request, question_id):
         question = get_object_or_404(Question, external_id=question_id, is_active=True)
         comments = question.comments.select_related("user").all()[:100]
@@ -239,6 +389,9 @@ class QuestionCommentView(APIView):
         return Response(QuestionCommentSerializer(comment).data, status=201)
 
 class QuestionReportView(APIView):
+    throttle_classes = [throttling.ScopedRateThrottle]
+    throttle_scope = "question_write"
+
     def post(self, request, question_id):
         question = get_object_or_404(Question, external_id=question_id, is_active=True)
         reason = request.data.get("reason", "")
@@ -263,13 +416,18 @@ class DailySprintView(APIView):
             return Response({"detail": "Today's sprint has already been started."}, status=409)
         seed = hashlib.sha256(f"seomtorch-sprint-{today.isoformat()}-{request.user.public_id}".encode()).hexdigest()
         rng = random.Random(seed)
-        all_questions = list(Question.objects.filter(is_active=True).select_related("topic__subject", "passage"))
+        all_questions = list(Question.objects.filter(
+            is_active=True,
+            topic__subject__track=Subject.Track.ASPIRANT,
+        ).select_related("topic__subject", "passage"))
         if len(all_questions) < 5:
             return Response({"detail": "Not enough questions for a daily sprint."}, status=400)
         selected = rng.sample(all_questions, min(5, len(all_questions)))
+        began_at = timezone.now()
         session = PracticeSession.objects.create(
             user=request.user,
             mode=PracticeSession.Mode.DAILY,
+            began_at=began_at,
             question_ids=[question.external_id for question in selected],
             total_questions=len(selected),
             duration_minutes=5,
@@ -278,6 +436,7 @@ class DailySprintView(APIView):
         return Response({
             "date": today.isoformat(),
             "session_id": session.id,
+            "began_at": began_at,
             "questions": QuestionPracticeSerializer(selected, many=True).data,
             "maximum_xp": len(selected) * 5,
         }, status=status.HTTP_201_CREATED)
@@ -295,153 +454,14 @@ class AchievementView(APIView):
 
 
 class RecordSessionView(APIView):
-    """
-    Records a completed practice session (university medical course or aspirant prep)
-    so student analytics, XP, streaks, and monitor stats are tracked.
-    """
-    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    """Reject browser-reported scores; use server-created sessions instead."""
     permission_classes = [IsAuthenticated]
 
-    @transaction.atomic
     def post(self, request):
-        track = str(request.data.get("track") or "").strip().lower()
-        course_code = str(request.data.get("course_code") or "").strip().upper()
-        subject_slug = str(request.data.get("subject_slug") or request.data.get("subject") or "").strip().lower()
-        topic_title = str(request.data.get("topic_title") or "").strip()
-
-        if not track:
-            track = "university" if course_code else "aspirant"
-        if (course_code and (course_code.startswith("ANA") or course_code.startswith("PIO"))) or subject_slug.startswith(("ana-", "pio-")):
-            track = "university"
-
-        try:
-            total_questions = max(1, int(request.data.get("total_questions", 1)))
-        except (ValueError, TypeError):
-            total_questions = 1
-        try:
-            correct_answers = max(0, min(total_questions, int(request.data.get("correct_answers", 0))))
-        except (ValueError, TypeError):
-            correct_answers = 0
-        try:
-            time_spent_seconds = max(0, int(request.data.get("time_spent_seconds", 0)))
-        except (ValueError, TypeError):
-            time_spent_seconds = 0
-
-        mode_str = request.data.get("mode") or PracticeSession.Mode.TIMED
-        if mode_str not in {PracticeSession.Mode.TIMED, PracticeSession.Mode.NORMAL, PracticeSession.Mode.DAILY}:
-            mode_str = PracticeSession.Mode.TIMED
-
-        # Resolve subject
-        subject = None
-        if course_code:
-            norm_code = course_code.replace(" ", "")
-            subject = Subject.objects.filter(
-                Q(code__iexact=course_code) |
-                Q(code__iexact=norm_code) |
-                Q(slug__icontains=norm_code.lower()) |
-                Q(name__icontains=course_code)
-            ).first()
-        if not subject and subject_slug:
-            subject = Subject.objects.filter(
-                Q(slug__iexact=subject_slug) |
-                Q(name__iexact=subject_slug)
-            ).first()
-
-        if subject and getattr(subject, "track", "") == "university":
-            track = "university"
-            if not course_code and getattr(subject, "code", None):
-                course_code = subject.code
-
-        duration_minutes = max(1, round(time_spent_seconds / 60)) if time_spent_seconds else None
-
-        # Idempotency check: if user already submitted identical session within last 5 minutes
-        recent_cutoff = timezone.now() - timedelta(minutes=5)
-        existing = PracticeSession.objects.filter(
-            user=request.user,
-            track=track,
-            course_code=course_code,
-            total_questions=total_questions,
-            correct_answers=correct_answers,
-            completed_at__gte=recent_cutoff,
-        ).first()
-
-        if existing:
-            return Response({
-                "session_id": str(existing.id),
-                "track": existing.track,
-                "course_code": existing.course_code,
-                "subject": existing.subject.slug if existing.subject else subject_slug,
-                "topic_title": existing.topic_title,
-                "correct": existing.correct_answers,
-                "total": existing.total_questions,
-                "accuracy": existing.accuracy,
-                "xp_earned": 0,
-                "stats": stats_payload(request.user),
-                "badges_earned": [],
-            }, status=status.HTTP_200_OK)
-
-        session = PracticeSession.objects.create(
-            user=request.user,
-            subject=subject,
-            track=track,
-            course_code=course_code,
-            topic_title=topic_title,
-            total_questions=total_questions,
-            correct_answers=correct_answers,
-            duration_minutes=duration_minutes,
-            time_spent_seconds=time_spent_seconds,
-            mode=mode_str,
-            status=PracticeSession.Status.COMPLETED,
-            completed_at=timezone.now(),
+        return Response(
+            {"detail": "Browser-reported scores are no longer accepted. Begin a server-backed practice session and submit its answers."},
+            status=status.HTTP_410_GONE,
         )
-
-        # Update User active mode if taking university course
-        if track == "university" and getattr(request.user, "active_mode", "") != "university":
-            request.user.active_mode = "university"
-            request.user.save(update_fields=("active_mode",))
-
-        # Update UserStats XP and streak
-        stats, _ = UserStats.objects.select_for_update().get_or_create(user=request.user)
-        xp_earned = correct_answers * 5
-        stats.xp += xp_earned
-        stats.register_study_day()
-        stats.save()
-
-        # Log ActivityEvent
-        ActivityEvent.objects.create(
-            user=request.user,
-            event_type=ActivityEvent.Type.SESSION_COMPLETED,
-            metadata={
-                "session_id": str(session.id),
-                "track": track,
-                "course": course_code,
-                "subject": subject.slug if subject else subject_slug,
-                "topic": topic_title,
-                "accuracy": session.accuracy,
-                "total": total_questions,
-                "correct": correct_answers,
-                "xp_earned": xp_earned,
-            }
-        )
-
-        earned = evaluate_badges(request.user)
-
-        return Response({
-            "session_id": str(session.id),
-            "track": track,
-            "course_code": course_code,
-            "subject": subject.slug if subject else subject_slug,
-            "topic_title": topic_title,
-            "correct": session.correct_answers,
-            "total": session.total_questions,
-            "accuracy": session.accuracy,
-            "xp_earned": xp_earned,
-            "stats": stats_payload(request.user),
-            "badges_earned": [
-                {"code": item.badge.code, "name": item.badge.name, "description": item.badge.description, "tier": item.badge.tier}
-                for item in earned
-            ],
-        }, status=status.HTTP_201_CREATED)
 
 
 RecordUniversitySessionView = RecordSessionView
