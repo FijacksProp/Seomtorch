@@ -2503,23 +2503,114 @@ function renderProfile(filter = "") {
   const normalized = filter.trim().toLowerCase();
   const matches = FAQS.filter(item => !normalized || `${item.q} ${item.a} ${item.group}`.toLowerCase().includes(normalized));
   const groups = [...new Set(matches.map(item => item.group))];
+  const faqResultsHtml = groups.length
+    ? groups.map(group => `<section class="faq-group"><h3>${escapeHtml(group)}</h3>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("")
+    : `<div class="empty">No help entries match that search.</div>`;
   const xp = xpState();
   const testStats = profile.tests || { tests_taken: 0, average_score: 0 };
   const joined = currentUser?.date_joined ? new Date(currentUser.date_joined).toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) : "—";
-  const content = `<section class="page profile-page"><div class="profile-hero"><div class="profile-avatar-wrap" id="profile-avatar-trigger" role="button" tabindex="0" title="Click to customize your avatar">${renderAvatarMarkup(profile.avatar, 86)}<span class="profile-avatar-edit-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span></div><div><p class="eyebrow">Student profile</p><h1>${escapeHtml(currentUser?.username || profile.name)}</h1><p>${escapeHtml(currentUser?.email || profile.email)} · Member since ${joined}</p></div><button class="button outline" id="refresh-account">Refresh account</button></div><div class="profile-grid"><section class="profile-card identity-card"><span class="card-label">Student ID</span><strong>${escapeHtml(currentUser?.public_id || "—")}</strong><p>${currentUser?.phone_number ? `Phone: <strong>${escapeHtml(currentUser.phone_number)}</strong> · ` : ""}Share your ID for challenges or connect in <a href="#" data-route="buddies" style="text-decoration:underline; font-weight:600;">Buddies</a>.</p></section><section class="profile-card level-card"><span class="card-label">Level ${xp.level}</span><strong>${xp.xp} <small>XP</small></strong><div class="xp-track light"><i style="width:${xp.percent}%"></i></div><p>${xp.remaining} XP until level ${xp.level + 1}</p></section></div><div class="profile-social-strip"><button type="button" class="profile-social-btn" data-goto-buddies="followers"><strong>${(communityNetworkData?.counts || getCachedCommunityNetwork()?.counts)?.followers || 0}</strong><span>Followers</span></button><button type="button" class="profile-social-btn" data-goto-buddies="following"><strong>${(communityNetworkData?.counts || getCachedCommunityNetwork()?.counts)?.following || 0}</strong><span>Following</span></button><button type="button" class="profile-social-btn buddies-highlight" data-goto-buddies="buddies"><strong>🤝 ${(communityNetworkData?.counts || getCachedCommunityNetwork()?.counts)?.buddies || 0}</strong><span>Buddies</span></button></div><div class="metric-strip four profile-metrics"><div class="metric"><strong>${attempts.length}</strong><span>answers recorded</span></div><div class="metric"><strong>${accuracy()}%</strong><span>overall accuracy</span></div><div class="metric streak-metric"><strong>${profile.rhythm || 0}<small> days</small></strong><span>current streak</span></div><div class="metric"><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>best streak</span></div></div><div class="section-head"><h2>Academic Portals & Registrations</h2><p>Your enrollment across student portals</p></div><div class="uni-quick-grid" style="margin-bottom:28px;"><div class="uni-portal-status-card"><div><div class="uni-dept-svg-mark anatomy"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><strong>Aspirants Portal</strong><p>${hasAspirantProfile() ? `Registered for ${(currentUser?.aspirant_profile?.exam_type || "JAMB").toUpperCase()} ${currentUser?.aspirant_profile?.target_year || ""}` : "Not registered yet. Required for JAMB & SSCE practice."}</p></div><button class="button ${hasAspirantProfile() ? 'outline' : 'accent'} small" id="profile-manage-aspirant">${hasAspirantProfile() ? "Update Exam Details" : "Register for Aspirants Portal →"}</button></div><div class="uni-portal-status-card"><div><div class="uni-dept-svg-mark physiology"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M4 18h16M4 10h16M12 3L2 8h20z"/><path d="M6 10v8M10 10v8M14 10v8M18 10v8"/></svg></div><strong>University Portal</strong><p>${hasUniversityProfile() ? `Enrolled at ${escapeHtml(currentUser?.university_profile?.university_name || "")} · ${escapeHtml(currentUser?.university_profile?.department || "")} (${currentUser?.university_profile?.level || 200}L)` : "Not registered yet. Required for undergraduate course banks."}</p></div><button class="button ${hasUniversityProfile() ? 'outline' : 'accent'} small" id="profile-manage-university">${hasUniversityProfile() ? "Update University Details" : "Register for University Portal →"}</button></div></div>${renderAchievementSummary()}<div class="section-head"><h2>Subject record</h2><p>Synchronized account history</p></div><div class="profile-subjects">${SUBJECTS.map(subject => { const stat = subjectStats(subject.id); return `<article><span>${subject.name}</span><strong>${stat.count ? `${stat.accuracy}%` : "—"}</strong><small>${stat.count} answer${stat.count === 1 ? "" : "s"}</small></article>`; }).join("")}</div><section class="settings-panel"><p class="eyebrow">Account data</p><h2>Portable, private and recoverable.</h2><p class="lede">The server keeps the authoritative account record. This device stores an offline copy and queues answers whenever the connection drops.</p><div class="button-row"><button class="button" id="export-data">Export backup</button><label class="button outline" for="import-data">Import backup</label><input class="file-input" id="import-data" type="file" accept="application/json"><button class="button outline" id="clear-cache">Refresh device cache</button><button class="button danger" id="sign-out">Sign out</button></div></section><section class="settings-panel guide-section"><p class="eyebrow">Guide and support</p><h2>Answers, without the noise.</h2><p class="lede">Quick guidance about practice, progress and account data.</p><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="faq-search" value="${escapeHtml(filter)}" placeholder="Search help topics" aria-label="Search help topics"></div><div id="faq-results">${groups.length ? groups.map(group => `<section class="faq-group"><h3>${group}</h3>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("") : '<div class="empty">No help entries match that search.</div>'}</div></section></section>`;
+  const displayName = currentUser?.username || profile.name;
+  const displayEmail = currentUser?.email || profile.email || "";
+  const profileId = currentUser?.public_id || "";
+  const profileIdLabel = profileId ? escapeHtml(profileId) : "Not assigned";
+  const faqDetailsOpen = normalized ? "open" : "";
+  const profileIdCopyButton = profileId ? `<button type="button" class="profile-copy-id" id="copy-profile-id" aria-label="Copy student ID">Copy ID</button>` : "";
+  const communityCounts = communityNetworkData?.counts || getCachedCommunityNetwork()?.counts || {};
+  const aspirantRegistered = hasAspirantProfile();
+  const universityRegistered = hasUniversityProfile();
+  const aspirantPortalSummary = aspirantRegistered
+    ? `Registered for ${(currentUser?.aspirant_profile?.exam_type || "JAMB").toUpperCase()} ${currentUser?.aspirant_profile?.target_year || ""}`.trim()
+    : "Set an exam target to personalize your practice.";
+  const universityPortalSummary = universityRegistered
+    ? `${currentUser?.university_profile?.university_name || "University"} · ${currentUser?.university_profile?.department || "Department"} · ${currentUser?.university_profile?.level || 200} Level`
+    : "Add your institution and course to access university materials.";
+  const subjectHighlights = SUBJECTS.map(subject => ({ ...subject, ...subjectStats(subject.id) }))
+    .filter(subject => subject.count > 0)
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 4);
+  const subjectPreviewHtml = subjectHighlights.length
+    ? subjectHighlights.map(subject => `<article class="profile-subject-row"><div class="profile-subject-copy"><strong>${escapeHtml(subject.name)}</strong><small>${subject.count} answer${subject.count === 1 ? "" : "s"}</small></div><div class="profile-subject-score"><strong>${subject.accuracy}%</strong><div class="profile-subject-track" role="progressbar" aria-label="${escapeHtml(subject.name)} accuracy" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${subject.accuracy}"><i style="width:${subject.accuracy}%"></i></div></div></article>`).join("")
+    : `<div class="profile-subject-empty"><p>Your subject breakdown will appear after your first answers.</p><button class="button outline small" type="button" data-route="practice">Start a practice session</button></div>`;
+  const content = `
+    <section class='page profile-page'>
+      <header class='profile-hero'>
+        <button type='button' class='profile-avatar-wrap' id='profile-avatar-trigger' aria-label='Change profile picture' title='Change profile picture'>
+          ${renderAvatarMarkup(profile.avatar, 86)}
+          <span class='profile-avatar-edit-badge' aria-hidden='true'><svg viewBox='0 0 24 24' width='14' height='14' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 20h9'/><path d='M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-4 1 1-4z'/></svg></span>
+        </button>
+        <div class='profile-identity'>
+          <p class='eyebrow'>Student profile</p>
+          <h1>${escapeHtml(displayName)}</h1>
+          <p class='profile-member-meta'>${escapeHtml(displayEmail)}${displayEmail ? ' · ' : ''}Member since ${joined}</p>
+          <div class='profile-id-row'><span>Student ID</span><strong>${profileIdLabel}</strong>${profileIdCopyButton}</div>
+        </div>
+        <button class='button outline profile-sync-btn' id='refresh-account' type='button'>
+          <svg viewBox='0 0 24 24' width='16' height='16' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M20 7v5h-5'/><path d='M4 17v-5h5'/><path d='M5.6 9a7 7 0 0 1 11.6-2L20 12M4 12l2.8 5a7 7 0 0 0 11.6-2'/></svg>
+          <span>Sync now</span>
+        </button>
+      </header>
+
+      <section class='profile-summary-grid' aria-label='Study summary'>
+        <article class='profile-level-card'>
+          <div class='profile-level-heading'><div><p class='eyebrow'>Learning level</p><h2>Level ${xp.level}</h2></div><strong>${xp.xp}<small> XP</small></strong></div>
+          <div class='profile-level-track' role='progressbar' aria-label='Progress to level ${xp.level + 1}' aria-valuemin='0' aria-valuemax='250' aria-valuenow='${xp.levelProgress}'><i style='width:${xp.percent}%'></i></div>
+          <p>${xp.remaining} XP to Level ${xp.level + 1}</p>
+        </article>
+        <div class='profile-stat-grid' aria-label='Progress statistics'>
+          <article><strong>${testStats.tests_taken}</strong><span>Tests taken</span></article>
+          <article><strong>${testStats.average_score}%</strong><span>Average test score</span></article>
+          <article class='profile-current-streak'><strong>${profile.rhythm || 0}<small> days</small></strong><span>Current streak</span></article>
+          <article><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>Best streak</span></article>
+        </div>
+      </section>
+
+      <section class='profile-content-section profile-subject-section'>
+        <div class='profile-section-heading'><div><p class='eyebrow'>Subject activity</p><h2>Your study focus</h2><p>Most-practised subjects, with accuracy from your recorded answers.</p></div><button class='button outline small' type='button' data-route='progress'>Full analysis <span aria-hidden='true'>→</span></button></div>
+        <div class='profile-subject-list'>${subjectPreviewHtml}</div>
+      </section>
+
+      ${renderAchievementSummary()}
+
+      <section class='profile-content-section profile-community-section'>
+        <div class='profile-section-heading'><div><p class='eyebrow'>Community</p><h2>Your study circle</h2></div><button class='profile-text-link' type='button' data-route='buddies'>Open community <span aria-hidden='true'>→</span></button></div>
+        <div class='profile-social-strip'>
+          <button type='button' class='profile-social-btn' data-goto-buddies='followers'><strong>${communityCounts.followers || 0}</strong><span>Followers</span></button>
+          <button type='button' class='profile-social-btn' data-goto-buddies='following'><strong>${communityCounts.following || 0}</strong><span>Following</span></button>
+          <button type='button' class='profile-social-btn' data-goto-buddies='buddies'><strong>${communityCounts.buddies || 0}</strong><span>Study buddies</span></button>
+        </div>
+      </section>
+
+      <section class='profile-content-section profile-portals-section'>
+        <div class='profile-section-heading'><div><p class='eyebrow'>Study setup</p><h2>Your academic portals</h2><p>Manage the course and exam details used to shape your materials.</p></div></div>
+        <div class='profile-portal-list'>
+          <article class='profile-portal-card'>
+            <div class='profile-portal-mark anatomy' aria-hidden='true'><svg viewBox='0 0 24 24' width='19' height='19' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M22 10v6L12 21 2 16v-6l10-5z'/><path d='M2 10l10 5 10-5M12 15v6'/></svg></div>
+            <div class='profile-portal-copy'><p class='eyebrow'>Exam preparation</p><h3>Aspirants portal</h3><p>${escapeHtml(aspirantPortalSummary)}</p></div>
+            <button class='button ${aspirantRegistered ? 'outline' : 'accent'} small' id='profile-manage-aspirant' type='button'>${aspirantRegistered ? 'Update details' : 'Set up portal'}</button>
+          </article>
+          <article class='profile-portal-card'>
+            <div class='profile-portal-mark physiology' aria-hidden='true'><svg viewBox='0 0 24 24' width='19' height='19' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M3 21h18M4 18h16M4 10h16M12 3 2 8h20z'/><path d='M6 10v8M10 10v8M14 10v8M18 10v8'/></svg></div>
+            <div class='profile-portal-copy'><p class='eyebrow'>Undergraduate study</p><h3>University portal</h3><p>${escapeHtml(universityPortalSummary)}</p></div>
+            <button class='button ${universityRegistered ? 'outline' : 'accent'} small' id='profile-manage-university' type='button'>${universityRegistered ? 'Update details' : 'Set up portal'}</button>
+          </article>
+        </div>
+      </section>
+
+      <details class='settings-panel profile-disclosure profile-account'>
+        <summary class='profile-disclosure-summary'><span><strong>Account &amp; privacy</strong><small>Backups, device data and sign-in</small></span><span class='profile-disclosure-mark' aria-hidden='true'></span></summary>
+        <div class='profile-disclosure-body'><p class='lede'>Your account record is kept on the server. This device also stores an offline copy and retries queued answers when the connection returns.</p><div class='button-row'><button class='button' id='export-data' type='button'>Export backup</button><label class='button outline' for='import-data'>Import backup</label><input class='file-input' id='import-data' type='file' accept='application/json'><button class='button outline' id='clear-cache' type='button'>Refresh device cache</button><button class='button danger' id='sign-out' type='button'>Sign out</button></div></div>
+      </details>
+
+      <details class='settings-panel guide-section profile-disclosure profile-help' ${faqDetailsOpen}>
+        <summary class='profile-disclosure-summary'><span><strong>Help and frequently asked questions</strong><small>Search quick guidance for practice, progress and your account</small></span><span class='profile-disclosure-mark' aria-hidden='true'></span></summary>
+        <div class='profile-disclosure-body'><div class='profile-help-intro'><p class='eyebrow'>Help center</p><h2>Answers, without the noise.</h2><p class='lede'>Find quick guidance about practice, progress and account data.</p></div><div class='search-wrap'><svg viewBox='0 0 24 24' aria-hidden='true'><circle cx='11' cy='11' r='7'/><path d='m16 16 5 5'/></svg><input type='search' id='faq-search' value='${escapeHtml(filter)}' placeholder='Search help topics' aria-label='Search help topics'></div><div id='faq-results'>${faqResultsHtml}</div></div>
+      </details>
+    </section>
+  `;
   app.innerHTML = shell(content);
-  const profileMetrics = document.querySelectorAll(".profile-metrics .metric");
-  if (profileMetrics[0]) profileMetrics[0].innerHTML = `<strong>${testStats.tests_taken}</strong><span>tests taken</span>`;
-  if (profileMetrics[1]) profileMetrics[1].innerHTML = `<strong>${testStats.average_score}%</strong><span>average test score</span>`;
   bindShell(); bindProfile();
   document.querySelector("#profile-avatar-trigger")?.addEventListener("click", () => {
     openAvatarPickerModal(() => renderProfile(filter));
-  });
-  document.querySelector("#profile-avatar-trigger")?.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      openAvatarPickerModal(() => renderProfile(filter));
-    }
   });
   document.querySelector("#profile-manage-aspirant")?.addEventListener("click", () => {
     showAspirantRegistrationModal(() => renderProfile(filter));
@@ -3942,10 +4033,48 @@ function bindProfile() {
     });
   });
   document.querySelectorAll(".faq-question").forEach(button => button.addEventListener("click", () => { const item = button.closest(".faq-item"); item.classList.toggle("open"); button.setAttribute("aria-expanded", item.classList.contains("open")); }));
-  let timer; document.querySelector("#faq-search").addEventListener("input", event => { clearTimeout(timer); timer = setTimeout(() => renderProfile(event.target.value), 180); });
+  let timer;
+  document.querySelector("#faq-search").addEventListener("input", event => {
+    const value = event.currentTarget.value;
+    const cursor = event.currentTarget.selectionStart ?? value.length;
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      renderProfile(value);
+      const nextSearch = document.querySelector("#faq-search");
+      nextSearch?.focus({ preventScroll: true });
+      nextSearch?.setSelectionRange(cursor, cursor);
+    }, 180);
+  });
   document.querySelector("#export-data").addEventListener("click", exportData);
   document.querySelector("#import-data").addEventListener("change", event => importData(event.target.files[0]));
-  document.querySelector("#refresh-account").addEventListener("click", async () => { const synced = await syncPendingAttempts(); showToast(synced ? "Account is up to date" : "Could not reach the account server"); renderProfile(); });
+  document.querySelector("#refresh-account").addEventListener("click", async (event) => {
+    const button = event.currentTarget;
+    const label = button.querySelector("span");
+    button.disabled = true;
+    if (label) label.textContent = "Syncing…";
+    try {
+      const synced = await syncPendingAttempts();
+      showToast(synced ? "Account is up to date" : "Could not reach the account server");
+    } catch {
+      showToast("Could not reach the account server");
+    } finally {
+      if (button.isConnected) {
+        button.disabled = false;
+        if (label) label.textContent = "Sync now";
+      }
+      if (route === "profile" && button.isConnected) renderProfile();
+    }
+  });
+  document.querySelector("#copy-profile-id")?.addEventListener("click", async () => {
+    const id = currentUser?.public_id || "";
+    if (!id) return;
+    try {
+      await navigator.clipboard.writeText(id);
+      showToast("Student ID copied");
+    } catch {
+      showToast(`Student ID: ${id}`);
+    }
+  });
   document.querySelector("#clear-cache").addEventListener("click", refreshDeviceCache);
   document.querySelector("#sign-out").addEventListener("click", signOut);
   document.querySelector("#open-achievements")?.addEventListener("click", () => navigate("achievements"));
