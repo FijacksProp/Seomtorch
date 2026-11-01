@@ -8883,3 +8883,536 @@ body.shield-active #main {
   color: #c2410c;
   border-color: #fed7aa;
 }
+
+/* University course pages: calmer hierarchy, clear actions, and roomy touch targets. */
+.uni-course-page {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  padding-bottom: 32px;
+}
+
+.uni-course-page .uni-course-hero {
+  padding: 30px 32px 24px;
+  margin-bottom: 26px;
+  border-color: #e5dfd1;
+  border-radius: 20px;
+  background: #fffdf8;
+  box-shadow: 0 8px 26px rgba(35, 43, 36, 0.045);
+}
+
+.uni-course-hero-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.uni-course-kicker {
+  margin: 0 0 8px;
+  color: #6b705f;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.uni-course-title {
+  margin: 0;
+  color: var(--uni-navy, #173b35);
+  font-family: var(--serif);
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+}
+
+.uni-course-access {
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: flex-end;
+  padding-top: 3px;
+}
+
+.uni-course-access-state {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid #c7ddca;
+  border-radius: 999px;
+  background: #f2f8f1;
+  color: #315b40;
+  font-size: 12px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.uni-course-upgrade-btn {
+  min-height: 40px;
+  padding: 0 15px !important;
+  border-radius: 10px !important;
+  font-size: 12px !important;
+}
+
+.uni-course-page .uni-course-desc {
+  max-width: 690px;
+  margin: 12px 0 20px;
+  color: #66695f;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.uni-course-page .uni-course-stats {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding-top: 15px;
+  border-top: 1px solid #ebe6dc;
+}
+
+.uni-course-page .uni-stat {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  padding: 0 20px;
+  border-right: 1px solid #e8e3d9;
+}
+
+.uni-course-page .uni-stat:first-child {
+  padding-left: 0;
+}
+
+.uni-course-page .uni-stat:last-child {
+  border-right: 0;
+}
+
+.uni-course-page .uni-stat strong {
+  color: #283e35;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.uni-course-page .uni-stat span {
+  color: #73766d;
+  font-size: 12px;
+  font-weight: 550;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.uni-course-sections {
+  display: grid;
+  gap: 30px;
+}
+
+.uni-course-page .uni-section {
+  margin: 0;
+}
+
+.uni-course-page .uni-section-header {
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  margin: 0 0 12px;
+  padding: 0 2px 11px;
+  border-bottom: 1px solid #e7e1d6;
+}
+
+.uni-course-page .uni-section-title-wrap {
+  gap: 10px;
+}
+
+.uni-course-page .uni-section-header .uni-section-heading {
+  color: #263c34;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.uni-course-page .uni-section-count-badge {
+  padding: 2px 0;
+  border: 0;
+  background: transparent;
+  color: #77796f;
+  font-size: 11px;
+  font-weight: 550;
+}
+
+.uni-course-page .uni-section-notes-shelf {
+  gap: 6px;
+  margin-left: auto;
+}
+
+.uni-course-page .uni-topic-list {
+  gap: 9px;
+}
+
+.uni-course-page .uni-topic-item {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 15px;
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid #e6e1d7;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 2px 7px rgba(36, 44, 38, 0.025);
+  transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.uni-course-page .uni-topic-item.available {
+  border-color: #e0e4d9;
+  cursor: default;
+}
+
+.uni-course-page .uni-topic-item.locked {
+  cursor: default;
+  opacity: 1;
+}
+
+.uni-course-page .uni-topic-item.available:hover {
+  border-color: #c5d4c6;
+  background: #fff;
+  box-shadow: 0 5px 15px rgba(36, 44, 38, 0.055);
+}
+
+.uni-course-page .uni-topic-item.locked:hover {
+  transform: none;
+  border-color: #e0d8c7;
+  background: #fffdf8;
+  box-shadow: 0 2px 7px rgba(36, 44, 38, 0.035);
+}
+
+.uni-course-page .uni-topic-item.coming-soon {
+  opacity: 1;
+  background: #faf9f5;
+}
+
+.uni-course-page .uni-topic-status {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: #f0f4ed;
+}
+
+.uni-course-page .uni-topic-status svg {
+  width: 15px;
+  height: 15px;
+  stroke: #55745d;
+}
+
+.uni-course-page .uni-topic-item.coming-soon .uni-topic-status {
+  background: #f1eee6;
+}
+
+.uni-course-page .uni-topic-item.coming-soon .uni-topic-status svg {
+  stroke: #898779;
+  opacity: 0.8;
+}
+
+.uni-course-page .uni-topic-info {
+  display: grid;
+  justify-content: initial;
+  gap: 7px;
+  min-width: 0;
+}
+
+.uni-course-page .uni-topic-info h4 {
+  color: #29372f;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.uni-topic-meta,
+.uni-topic-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  min-width: 0;
+}
+
+.uni-course-page .uni-topic-tag {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #7c6b42;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.075em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.uni-course-page .uni-topic-tag.free-tag {
+  color: #43734c;
+}
+
+.uni-course-page .uni-topic-tag.locked-tag {
+  color: #8c6a31;
+}
+
+.uni-course-page .uni-topic-note-link,
+.uni-course-page .uni-section-note-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 7px;
+  width: auto;
+  min-height: 38px;
+  padding: 4px 2px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  box-shadow: none;
+  color: #315f47;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 650;
+  text-align: left;
+  text-decoration: underline;
+  text-decoration-color: rgba(49, 95, 71, 0.42);
+  text-underline-offset: 3px;
+  transition: color 140ms ease, background-color 140ms ease;
+}
+
+.uni-course-page .uni-topic-note-link svg,
+.uni-course-page .uni-section-note-link svg {
+  display: none;
+}
+
+.uni-course-page .uni-topic-note-link:hover,
+.uni-course-page .uni-section-note-link:hover {
+  transform: none;
+  background: #f0f4ed;
+  box-shadow: none;
+  color: #183d2c;
+}
+
+.uni-topic-note-access,
+.uni-section-note-access {
+  color: #787b70;
+  font-size: 10px;
+  font-weight: 550;
+  text-decoration: none;
+}
+
+.uni-topic-actions {
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+}
+
+.uni-course-page .uni-topic-target-btn,
+.uni-topic-unlock-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-width: 112px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0 15px;
+  border: 1px solid #315f47;
+  border-radius: 10px;
+  background: #315f47;
+  box-shadow: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease;
+}
+
+.uni-course-page .uni-topic-target-btn:hover,
+.uni-topic-unlock-btn:hover {
+  transform: translateY(-1px);
+  border-color: #234b36;
+  background: #234b36;
+  box-shadow: none;
+}
+
+.uni-course-page .uni-topic-target-btn:active,
+.uni-topic-unlock-btn:active {
+  transform: translateY(0);
+}
+
+.uni-course-page .uni-topic-target-btn:focus-visible,
+.uni-topic-unlock-btn:focus-visible,
+.uni-course-page .uni-topic-note-link:focus-visible,
+.uni-course-page .uni-section-note-link:focus-visible {
+  outline: 3px solid rgba(191, 150, 70, 0.65);
+  outline-offset: 3px;
+}
+
+.uni-course-page .uni-topic-target-btn svg {
+  flex: 0 0 auto;
+}
+
+.uni-course-page .uni-topic-target-dot,
+.uni-course-page .uni-topic-target-label,
+.uni-course-page .uni-topic-target-divider,
+.uni-course-page .uni-topic-target-hint {
+  display: none;
+}
+
+@media (max-width: 620px) {
+  .uni-course-page {
+    padding-bottom: 24px;
+  }
+
+  .uni-course-page .uni-course-hero {
+    padding: 22px 18px 18px;
+    margin-bottom: 22px;
+    border-radius: 16px;
+  }
+
+  .uni-course-hero-heading {
+    display: grid;
+    gap: 12px;
+  }
+
+  .uni-course-title {
+    font-size: clamp(25px, 7vw, 30px);
+  }
+
+  .uni-course-access {
+    justify-content: flex-start;
+    padding: 0;
+  }
+
+  .uni-course-page .uni-course-desc {
+    margin: 12px 0 16px;
+    font-size: 13px;
+  }
+
+  .uni-course-page .uni-course-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    padding-top: 13px;
+  }
+
+  .uni-course-page .uni-stat,
+  .uni-course-page .uni-stat:first-child {
+    display: grid;
+    justify-items: start;
+    align-content: start;
+    gap: 4px;
+    padding: 0 8px;
+    border-right: 1px solid #e8e3d9;
+  }
+
+  .uni-course-page .uni-stat:last-child {
+    border-right: 0;
+  }
+
+  .uni-course-page .uni-stat strong {
+    font-size: 17px;
+  }
+
+  .uni-course-page .uni-stat span {
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  .uni-course-sections {
+    gap: 24px;
+  }
+
+  .uni-course-page .uni-section-header {
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 9px;
+    margin-bottom: 10px;
+  }
+
+  .uni-course-page .uni-section-title-wrap {
+    gap: 7px;
+  }
+
+  .uni-course-page .uni-section-header .uni-section-heading {
+    font-size: 19px;
+  }
+
+  .uni-course-page .uni-section-notes-shelf {
+    flex: 1 0 100%;
+    margin: 0;
+  }
+
+  .uni-course-page .uni-topic-item {
+    grid-template-columns: 26px minmax(0, 1fr);
+    align-items: start;
+    gap: 11px 12px;
+    padding: 15px 14px;
+    border-radius: 13px;
+  }
+
+  .uni-course-page .uni-topic-status {
+    width: 26px;
+    height: 26px;
+    margin-top: 1px;
+  }
+
+  .uni-course-page .uni-topic-info {
+    gap: 6px;
+  }
+
+  .uni-course-page .uni-topic-info h4 {
+    font-size: 14px;
+  }
+
+  .uni-topic-meta {
+    gap: 4px 12px;
+  }
+
+  .uni-topic-actions {
+    grid-column: 2;
+    width: 100%;
+  }
+
+  .uni-course-page .uni-topic-target-btn,
+  .uni-topic-unlock-btn {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .uni-course-page .uni-topic-note-link,
+  .uni-course-page .uni-section-note-link {
+    min-height: 40px;
+  }
+}
+
+@media (max-width: 380px) {
+  .uni-course-page .uni-course-stats {
+    gap: 3px;
+  }
+
+  .uni-course-page .uni-stat,
+  .uni-course-page .uni-stat:first-child {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+
+  .uni-course-page .uni-stat span {
+    font-size: 9.5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .uni-course-page .uni-topic-item,
+  .uni-course-page .uni-topic-target-btn,
+  .uni-topic-unlock-btn,
+  .uni-course-page .uni-topic-note-link,
+  .uni-course-page .uni-section-note-link {
+    transition: none;
+  }
+}

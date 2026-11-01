@@ -4304,6 +4304,9 @@ async function renderUniCourse() {
 
   const sections = data.sections || [];
   const hasCourse = hasCourseAccess(data.code);
+  const courseTopicNoteFiles = new Set(sections.flatMap(section => section.topics.map(topic => topic.noteFile).filter(Boolean)));
+  const displayedTopicNoteFiles = new Set();
+  const displayedSectionNoteFiles = new Set();
   const topicsHtml = sections.map((section, sIdx) => {
     const isNoteUnlocked = hasCourse || sIdx === 0;
     let noteBtnHtml = "";
@@ -4333,75 +4336,87 @@ async function renderUniCourse() {
         </button>`;
     }
 
+    const sectionNotes = [...(section.notes || [])];
+    if (section.noteFile && !sectionNotes.some(note => note.noteFile === section.noteFile)) {
+      sectionNotes.push({ noteFile: section.noteFile, title: section.noteTitle || `${section.title} notes` });
+    }
+    const additionalSectionNotes = sectionNotes.filter(note => {
+      if (!note.noteFile || courseTopicNoteFiles.has(note.noteFile) || displayedSectionNoteFiles.has(note.noteFile)) return false;
+      displayedSectionNoteFiles.add(note.noteFile);
+      return true;
+    });
+    noteBtnHtml = additionalSectionNotes.length ? `
+      <div class="uni-section-notes-shelf" aria-label="Additional section notes">
+        ${additionalSectionNotes.map(note => `
+          <button class="uni-notebook-btn uni-section-note-link ${isNoteUnlocked ? "" : "locked-note"}" type="button" data-uni-note-file="${escapeHtml(note.noteFile)}" data-uni-note-title="${escapeHtml(note.title)}" data-uni-course-code="${escapeHtml(data.code)}" data-note-locked="${isNoteUnlocked ? "0" : "1"}">
+            <span>${escapeHtml(note.title)}</span>
+            <span class="uni-section-note-access">${isNoteUnlocked ? (sIdx === 0 && !hasCourse ? "Preview" : "Study notes") : "Full access"}</span>
+          </button>
+        `).join("")}
+      </div>` : "";
+
     const topicItems = section.topics.map((topic, topicIdx) => {
       const isAvailable = topic.status !== "coming-soon";
       const isFree = isTopicFree(data.code, topic.id, topicIdx, sIdx);
       const isUnlocked = hasCourse || isFree;
       const statusIcon = isAvailable ? `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>` : `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`;
 
-      const topicHasNote = Boolean(topic.noteFile);
+      const topicHasNote = Boolean(topic.noteFile) && !displayedTopicNoteFiles.has(topic.noteFile);
+      if (topicHasNote) displayedTopicNoteFiles.add(topic.noteFile);
       const isTopicNoteUnlocked = hasCourse || sIdx === 0;
       const topicNoteBtnHtml = topicHasNote ? `
-        <button class="uni-topic-note-action-btn uni-notebook-btn ${isTopicNoteUnlocked ? "" : "locked-note"}" type="button" data-uni-note-file="${escapeHtml(topic.noteFile)}" data-uni-note-title="${escapeHtml(topic.noteTitle || topic.title + ' Notebook')}" data-uni-course-code="${escapeHtml(data.code)}" data-note-locked="${isTopicNoteUnlocked ? "0" : "1"}" aria-label="Open ${escapeHtml(topic.title)} Notebook">
+        <button class="uni-notebook-btn uni-topic-note-link ${isTopicNoteUnlocked ? "" : "locked-note"}" type="button" data-uni-note-file="${escapeHtml(topic.noteFile)}" data-uni-note-title="${escapeHtml(topic.noteTitle || topic.title + ' Notebook')}" data-uni-course-code="${escapeHtml(data.code)}" data-note-locked="${isTopicNoteUnlocked ? "0" : "1"}" aria-label="Read study notes for ${escapeHtml(topic.title)}">
           <svg class="uni-notebook-btn-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-0-5.5H20"/>
             <path d="M8 7h8M8 11h8M8 15h4"/>
           </svg>
-          <span>Study Note</span>
-          <span class="uni-topic-note-badge">${hasCourse ? "Notes &amp; Podcast" : "Free Preview"}</span>
+          <span>Read study notes</span>
+          <span class="uni-topic-note-access">${isTopicNoteUnlocked && !hasCourse ? "Free preview" : ""}</span>
         </button>` : "";
 
       if (!isAvailable) {
-        return `<div class="uni-topic-item coming-soon">
+        return `<article class="uni-topic-item coming-soon">
           <span class="uni-topic-status">${statusIcon}</span>
           <div class="uni-topic-info">
-            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-              <h4>${escapeHtml(topic.title)}</h4>
-              ${topicNoteBtnHtml}
-            </div>
-            <span class="uni-topic-tag">Coming soon</span>
+            <h4>${escapeHtml(topic.title)}</h4>
+            <div class="uni-topic-meta"><span class="uni-topic-tag">Coming soon</span>${topicNoteBtnHtml}</div>
           </div>
-        </div>`;
+        </article>`;
       }
 
       if (!isUnlocked) {
-        return `<div class="uni-topic-item locked" data-uni-topic-title="${escapeHtml(topic.title)}" data-uni-course-code="${escapeHtml(data.code)}" role="button" tabindex="0">
+        return `<article class="uni-topic-item locked">
           <span class="uni-topic-status locked"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
           <div class="uni-topic-info">
-            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-              <h4>${escapeHtml(topic.title)}</h4>
-              ${topicNoteBtnHtml}
-            </div>
-            <span class="uni-topic-tag" style="color:var(--ochre)">Locked · Full Course Access</span>
+            <h4>${escapeHtml(topic.title)}</h4>
+            <div class="uni-topic-meta"><span class="uni-topic-tag locked-tag">Full course access</span>${topicNoteBtnHtml}</div>
           </div>
-          <span class="uni-topic-lock-pill">🔒 Unlock</span>
-        </div>`;
+          <div class="uni-topic-actions">
+            <button class="uni-topic-unlock-btn" type="button" data-uni-topic-title="${escapeHtml(topic.title)}" data-uni-course-code="${escapeHtml(data.code)}">Unlock topic</button>
+          </div>
+        </article>`;
       }
 
-      return `<div class="uni-topic-item available" data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" data-uni-topic-id="${escapeHtml(topic.id || "")}" role="button" tabindex="0">
+      return `<article class="uni-topic-item available">
         <span class="uni-topic-status">${statusIcon}</span>
         <div class="uni-topic-info">
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-            <h4>${escapeHtml(topic.title)}</h4>
-            ${topicNoteBtnHtml}
-          </div>
-          ${isFree && !hasCourse ? `<span class="uni-topic-tag" style="color:var(--forest);font-weight:700;">Free Sample Topic</span>` : ""}
+          <h4>${escapeHtml(topic.title)}</h4>
+          <div class="uni-topic-meta">${isFree && !hasCourse ? '<span class="uni-topic-tag free-tag">Free sample</span>' : ""}${topicNoteBtnHtml}</div>
         </div>
-        <button class="uni-topic-target-btn" type="button" data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" data-uni-topic-id="${escapeHtml(topic.id || "")}" aria-label="Configure practice: ${escapeHtml(topic.title)}">
-          <span class="uni-topic-target-dot"></span>
-          <span class="uni-topic-target-label">Available</span>
-          <span class="uni-topic-target-divider">•</span>
-          <span class="uni-topic-target-hint">Pick Qs &amp; Time</span>
-          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-      </div>`;
+        <div class="uni-topic-actions">
+          <button class="uni-topic-target-btn uni-topic-practice-btn" type="button" data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" data-uni-topic-id="${escapeHtml(topic.id || "")}" aria-label="Set up practice for ${escapeHtml(topic.title)}">
+            <span>Practice</span>
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </article>`;
     }).join("");
 
     return `<div class="uni-section">
       <div class="uni-section-header">
         <div class="uni-section-title-wrap">
           <h3 class="uni-section-heading">${escapeHtml(section.title)}</h3>
-          <span class="uni-section-count-badge">${section.topics.length} topics</span>
+          <span class="uni-section-count-badge">${section.topics.length} ${section.topics.length === 1 ? "topic" : "topics"}</span>
         </div>
         ${noteBtnHtml}
       </div>
@@ -4422,10 +4437,10 @@ async function renderUniCourse() {
   // hasCourse already declared above
   const heroAccessBadge = hasCourse
     ? (userAccessData?.is_trial
-        ? `<span style="background:#f0fdf4;color:#065f46;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px;">✨ 3-Day Trial Active (${userAccessData?.trial_days_remaining}d left)</span>`
-        : `<span style="background:#f0fdf4;color:#065f46;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px;">✓ Full Course Access Active</span>`)
-    : `<button type="button" class="button small accent" id="uni-hero-upgrade-btn" style="padding:6px 14px;font-size:12.5px;">🔒 Upgrade to Full Access</button>`;
-  const statsHtml = `<div class="uni-course-stats"><div class="uni-stat"><strong>${totalTopics}</strong><span>Topics</span></div><div class="uni-stat"><strong>${availableTopics}</strong><span>Available</span></div><div class="uni-stat"><strong>${totalTopics - availableTopics}</strong><span>Coming soon</span></div></div><div style="margin-top:12px;">${heroAccessBadge}</div>`;
+        ? `<span class="uni-course-access-state">Trial active · ${escapeHtml(userAccessData?.trial_days_remaining ?? 0)} days left</span>`
+        : `<span class="uni-course-access-state">Full course access</span>`)
+    : `<button type="button" class="button small accent uni-course-upgrade-btn" id="uni-hero-upgrade-btn">Unlock full course</button>`;
+  const statsHtml = `<div class="uni-course-stats"><div class="uni-stat"><strong>${totalTopics}</strong><span>Topics</span></div><div class="uni-stat"><strong>${availableTopics}</strong><span>Published</span></div><div class="uni-stat"><strong>${totalTopics - availableTopics}</strong><span>Coming soon</span></div></div>`;
 
   let mixedCardHtml = "";
   if (availableTopics > 0) {
@@ -4512,7 +4527,7 @@ async function renderUniCourse() {
     </div>`;
   }
 
-  app.innerHTML = uniShell(`<div class="uni-course-hero"><div class="uni-course-code-lg">${escapeHtml(data.code)}</div><p class="uni-course-desc">${escapeHtml(data.description)}</p>${statsHtml}</div>${mixedCardHtml}${topicsHtml}`, breadcrumbs);
+  app.innerHTML = uniShell(`<div class="uni-course-page"><header class="uni-course-hero"><div class="uni-course-hero-heading"><div><p class="uni-course-kicker">${escapeHtml(data.code)} · ${escapeHtml(uniLevel)} Level</p><h1 class="uni-course-title">${escapeHtml(data.title || data.code)}</h1></div><div class="uni-course-access">${heroAccessBadge}</div></div><p class="uni-course-desc">${escapeHtml(data.description || "Course materials and practice")}</p>${statsHtml}</header>${mixedCardHtml}<div class="uni-course-sections">${topicsHtml}</div></div>`, breadcrumbs);
   bindShell(); bindUniCrumbs(breadcrumbs);
 
   const mixedCard = document.querySelector("#uni-mixed-card");
@@ -4662,38 +4677,25 @@ async function renderUniCourse() {
     });
   });
 
-  document.querySelectorAll(".uni-topic-item.locked").forEach(item => {
+  document.querySelectorAll(".uni-topic-unlock-btn").forEach(button => {
     const launchUpgrade = (e) => {
       e?.stopPropagation?.();
-      const courseCode = item.dataset.uniCourseCode || data.code;
-      const topicTitle = item.dataset.uniTopicTitle;
+      const courseCode = button.dataset.uniCourseCode || data.code;
+      const topicTitle = button.dataset.uniTopicTitle;
       api.logMonetizationEvent(authToken, "locked_topic_tapped", { course: courseCode, topic: topicTitle }).catch(() => {});
       showUpgradeModal({ trigger: "locked_topic", courseCode, topicTitle });
     };
-    item.addEventListener("click", launchUpgrade);
-    item.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        launchUpgrade(e);
-      }
-    });
+    button.addEventListener("click", launchUpgrade);
   });
 
-  document.querySelectorAll(".uni-topic-item.available").forEach(item => {
-    const launch = (e) => {
-      e?.stopPropagation?.();
-      const dataFile = item.dataset.uniDataFile;
-      const topicTitle = item.dataset.uniTopicTitle;
-      const topicId = item.dataset.uniTopicId || null;
+  document.querySelectorAll(".uni-topic-practice-btn").forEach(button => {
+    button.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const dataFile = button.dataset.uniDataFile;
+      const topicTitle = button.dataset.uniTopicTitle;
+      const topicId = button.dataset.uniTopicId || null;
       if (!dataFile) return;
       showTopicConfigModal(data.code || "ANA 201", topicTitle, dataFile, topicId);
-    };
-    item.addEventListener("click", launch);
-    item.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        launch(e);
-      }
     });
   });
 }
