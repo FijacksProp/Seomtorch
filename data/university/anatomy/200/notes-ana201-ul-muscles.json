@@ -1,0 +1,1421 @@
+{
+  "id": "note-ana201-ul-muscles",
+  "courseCode": "ANA 201",
+  "courseTitle": "Upper and Lower Limb",
+  "sectionTitle": "Upper Limb",
+  "noteTitle": "Muscles of the Upper Limb",
+  "subtitle": "Comprehensive Illustrated Anatomy Notebook & High-Yield Clinical Guide",
+  "howToUse": "How to use this resource: For each block, review the anatomical illustration to anchor muscle positions, origins and insertions. Read the structured notes to master innervation, actions and clinical relations. Listen to or read the tutor podcast for a clear conversational breakdown, and test yourself with the active-recall questions.",
+  "glossary": [
+    {
+      "term": "Origin",
+      "definition": "The proximal, relatively fixed attachment point of a muscle."
+    },
+    {
+      "term": "Insertion",
+      "definition": "The distal, movable attachment point of a muscle."
+    },
+    {
+      "term": "Extrinsic",
+      "definition": "Muscles originating outside the region on which they act (e.g. forearm bellies moving the fingers)."
+    },
+    {
+      "term": "Intrinsic",
+      "definition": "Muscles originating and inserting entirely within the same anatomical region (e.g. hand muscles)."
+    },
+    {
+      "term": "Pronation",
+      "definition": "Rotation of the forearm so the palm faces posteriorly in anatomical position."
+    },
+    {
+      "term": "Supination",
+      "definition": "Rotation of the forearm returning the palm anteriorly to anatomical position."
+    },
+    {
+      "term": "Abduction",
+      "definition": "Movement of a limb or digit away from the central midline or hand axial line."
+    },
+    {
+      "term": "Adduction",
+      "definition": "Movement of a limb or digit toward the central midline or hand axial line."
+    },
+    {
+      "term": "Opposition",
+      "definition": "Movement bringing the pad of the thumb to touch another fingertip across the palm."
+    },
+    {
+      "term": "Protraction",
+      "definition": "Forward/anterior movement of the scapula along the thoracic wall."
+    },
+    {
+      "term": "Retraction",
+      "definition": "Backward/posterior movement of the scapula toward the vertebral column."
+    },
+    {
+      "term": "Rotator cuff",
+      "definition": "Musculotendinous sleeve (supraspinatus, infraspinatus, teres minor, subscapularis) stabilizing the glenohumeral joint."
+    }
+  ],
+  "practiceTopic": {
+    "title": "Muscles of the Upper Limb",
+    "dataFile": "data/university/anatomy/200/questions-ana201-muscles.json"
+  },
+  "totalBlocks": 56,
+  "blocks": [
+    {
+      "number": 1,
+      "id": "block-1",
+      "title": "Overview: the six regions of the upper limb",
+      "rawTitle": "BLOCK 1 — OVERVIEW: THE SIX REGIONS OF THE UPPER LIMB",
+      "category": "Overview",
+      "image": "assets/notes/ana201-ul-muscles/block-01.webp",
+      "notes": [
+        "Core idea: The muscles of the upper limb are organized into six regions. This regional map helps you locate a muscle before learning its attachments, action and nerve supply.",
+        "1. Pectoral region — muscles on the anterior chest wall that exert force on the upper limb.",
+        "2. Shoulder region — includes extrinsic muscles connecting the trunk to shoulder bones and intrinsic muscles connecting the scapula and/or clavicle to the humerus.",
+        "3. Upper arm — the region between the shoulder joint and elbow joint. It has anterior and posterior compartments.",
+        "4. Anterior forearm — mainly associated with pronation and flexion of the wrist and fingers.",
+        "5. Posterior forearm — commonly called the extensor compartment; its muscles generally extend the wrist and fingers.",
+        "6. Hand — contains extrinsic muscles whose muscle bellies are in the forearm and intrinsic muscles located within the hand itself."
+      ],
+      "podcast": [
+        "Let’s start with the big picture. Don’t try to memorize every muscle at once. First, divide the upper limb into six regions. Once you know where you are, it becomes easier to organize the muscles. The anterior forearm is mainly about flexion and pronation, while the posterior forearm is mainly about extension. The hand has both muscles whose bellies are in the forearm and muscles that sit inside the hand."
+      ],
+      "quickRecall": [
+        "Name the six regions of the upper limb.",
+        "Which forearm compartment is commonly associated with extension?",
+        "What is the difference between extrinsic and intrinsic hand muscles?"
+      ]
+    },
+    {
+      "number": 2,
+      "id": "block-2",
+      "title": "Pectoral region: the four muscles",
+      "rawTitle": "BLOCK 2 — PECTORAL REGION: THE FOUR MUSCLES",
+      "category": "Pectoral Region",
+      "image": "assets/notes/ana201-ul-muscles/block-02.webp",
+      "notes": [
+        "Location: The pectoral region is on the anterior chest wall.",
+        "Four muscles: Pectoralis major, pectoralis minor, serratus anterior and subclavius.",
+        "Why group them? They are studied together because they lie around the chest/shoulder area and exert effects on the upper limb or shoulder girdle. Their positions are different: pectoralis major is superficial; pectoralis minor lies beneath it; serratus anterior is more lateral; and subclavius lies directly beneath the clavicle."
+      ],
+      "podcast": [
+        "Picture the front of the chest. There are four muscles to know in this region. Pectoralis major is the large, visible, fan-shaped muscle. Pectoralis minor is deeper. Serratus anterior sits more laterally along the ribs, and subclavius is a small muscle tucked underneath the clavicle. Learn their positions first; then attach the origin, insertion, action and nerve supply to each one."
+      ],
+      "quickRecall": [
+        "List the four muscles of the pectoral region.",
+        "Which is the most superficial muscle in the pectoral region?",
+        "Where are serratus anterior and subclavius located?"
+      ]
+    },
+    {
+      "number": 3,
+      "id": "block-3",
+      "title": "Pectoralis major",
+      "rawTitle": "BLOCK 3 — PECTORALIS MAJOR",
+      "category": "Pectoral Region",
+      "image": "assets/notes/ana201-ul-muscles/block-03.webp",
+      "notes": [
+        "Description: A large, fan-shaped muscle and the most superficial muscle in the pectoral region.",
+        "Parts: Clavicular head and sternocostal head.",
+        "Origin/attachments: The clavicular head arises from the anterior surface of the medial clavicle. The sternocostal head arises from the anterior surface of the sternum, the superior six costal cartilages and the aponeurosis of the external oblique muscle.",
+        "Actions: Adducts the humerus and medially rotates it. The lecture also states that it draws the scapula anteroinferiorly.",
+        "Exam phrasing: Describe it under situation, parts, attachments and actions. The supplied slide does not specify its nerve supply."
+      ],
+      "podcast": [
+        "Let’s take pectoralis major separately because it is a major landmark. It is large, superficial and fan-shaped. It has two heads: clavicular and sternocostal. The clavicular head begins from the medial clavicle, while the sternocostal head has a broader origin involving the sternum, the upper six costal cartilages and the external oblique aponeurosis. Its key actions are adduction and medial rotation of the humerus."
+      ],
+      "quickRecall": [
+        "Name the two heads of pectoralis major.",
+        "Give the origin of each head.",
+        "State its two principal actions on the humerus.",
+        "What does the supplied lecture say about its effect on the scapula?"
+      ]
+    },
+    {
+      "number": 4,
+      "id": "block-4",
+      "title": "Pectoralis minor",
+      "rawTitle": "BLOCK 4 — PECTORALIS MINOR",
+      "category": "Pectoral Region",
+      "image": "assets/notes/ana201-ul-muscles/block-04.webp",
+      "notes": [
+        "Position: Lies beneath pectoralis major. Together, pectoralis major and minor form part of the anterior wall of the axilla.",
+        "Origin: Ribs 3–5.",
+        "Insertion: Coracoid process of the scapula.",
+        "Action: Stabilizes the scapula by drawing it anteroinferiorly against the thoracic wall.",
+        "Innervation: Medial pectoral nerve."
+      ],
+      "podcast": [
+        "Think of pectoralis minor as a deeper muscle than pectoralis major. It starts from ribs three to five and attaches to the coracoid process of the scapula. Its job in this lecture is to stabilize the scapula by pulling it forward and downward against the chest wall. Remember its nerve: the medial pectoral nerve."
+      ],
+      "quickRecall": [
+        "Where does pectoralis minor originate and insert?",
+        "How does it help stabilize the scapula?",
+        "Which nerve innervates it?",
+        "Which wall of the axilla do pectoralis major and minor help form?"
+      ]
+    },
+    {
+      "number": 5,
+      "id": "block-5",
+      "title": "Serratus anterior",
+      "rawTitle": "BLOCK 5 — SERRATUS ANTERIOR",
+      "category": "Pectoral Region",
+      "image": "assets/notes/ana201-ul-muscles/block-05.webp",
+      "notes": [
+        "Position: Located more laterally on the chest wall and forms the medial border of the axillary region, as stated in the lecture.",
+        "Origin: External surface of the lateral parts of ribs 1–8.",
+        "Insertion: Anterior surface of the medial border of the scapula.",
+        "Actions: Protracts the scapula, holds it against the rib cage, rotates the scapula and allows the arm to be raised above 90 degrees.",
+        "Innervation: Long thoracic nerve."
+      ],
+      "podcast": [
+        "The easiest way to recognize serratus anterior is by its saw-toothed slips along the side of the ribs. It attaches to the front of the medial border of the scapula. It protracts the scapula, keeps it against the rib cage and helps rotate it so the arm can be raised above ninety degrees. Its nerve supply is the long thoracic nerve."
+      ],
+      "quickRecall": [
+        "State the origin and insertion of serratus anterior.",
+        "What does protraction mean in this context?",
+        "Why is serratus anterior important when raising the arm above 90 degrees?",
+        "Name its nerve supply."
+      ]
+    },
+    {
+      "number": 6,
+      "id": "block-6",
+      "title": "Subclavius",
+      "rawTitle": "BLOCK 6 — SUBCLAVIUS",
+      "category": "Pectoral Region",
+      "image": "assets/notes/ana201-ul-muscles/block-06.webp",
+      "notes": [
+        "Position: A small, horizontally running muscle directly beneath the clavicle.",
+        "Origin: Junction of the first rib and its costal cartilage.",
+        "Insertion: Inferior surface of the middle third of the clavicle.",
+        "Actions: Anchors and depresses the clavicle.",
+        "Additional role: Provides some protection to underlying neurovascular structures during clavicular fracture or other trauma.",
+        "Innervation: Nerve to subclavius."
+      ],
+      "podcast": [
+        "Subclavius is small, but its position matters. It lies directly under the clavicle and runs horizontally from the first rib/costal cartilage junction to the underside of the middle third of the clavicle. It anchors and depresses the clavicle, and it offers some protection to structures beneath the clavicle during trauma. Its nerve is called the nerve to subclavius."
+      ],
+      "quickRecall": [
+        "Where is subclavius located?",
+        "Give its origin and insertion.",
+        "State its actions and its protective role.",
+        "What is its nerve supply?"
+      ]
+    },
+    {
+      "number": 7,
+      "id": "block-7",
+      "title": "Shoulder region: extrinsic versus intrinsic muscles",
+      "rawTitle": "BLOCK 7 — SHOULDER REGION: EXTRINSIC VERSUS INTRINSIC MUSCLES",
+      "category": "Shoulder Region",
+      "image": "assets/notes/ana201-ul-muscles/block-07.webp",
+      "notes": [
+        "Extrinsic/superficial back muscles: Originate from the trunk or torso and attach to the clavicle, scapula or humerus. They are in the back and are arranged in superficial and deep layers.",
+        "Superficial layer: Trapezius and latissimus dorsi.",
+        "Deep layer: Levator scapulae, rhomboid major and rhomboid minor; these lie in the upper back beneath trapezius.",
+        "Intrinsic/scapulohumeral muscles: Originate from the scapula and/or clavicle and attach to the humerus.",
+        "Six intrinsic muscles listed: Deltoid, teres major, supraspinatus, infraspinatus, subscapularis and teres minor. The four rotator cuff muscles are supraspinatus, infraspinatus, subscapularis and teres minor."
+      ],
+      "podcast": [
+        "Here is the distinction to keep clear. Extrinsic muscles begin on the trunk and attach to bones of the shoulder or humerus. The superficial pair are trapezius and latissimus dorsi; the deeper group includes levator scapulae and the two rhomboids. Intrinsic shoulder muscles begin from the scapula or clavicle and attach to the humerus. There are six in this group, and four of them form the rotator cuff."
+      ],
+      "quickRecall": [
+        "Define extrinsic shoulder muscles by their attachments.",
+        "Name the superficial and deep extrinsic muscles.",
+        "List all six intrinsic shoulder muscles.",
+        "Name the four rotator cuff muscles."
+      ]
+    },
+    {
+      "number": 8,
+      "id": "block-8",
+      "title": "Trapezius",
+      "rawTitle": "BLOCK 8 — TRAPEZIUS",
+      "category": "Shoulder Region",
+      "image": "assets/notes/ana201-ul-muscles/block-08.webp",
+      "notes": [
+        "Description: A broad, flat, triangular muscle. Together, its two sides form a trapezoid shape. It is the most superficial of the back muscles.",
+        "Origin: Skull, nuchal ligament and spinous processes of C7–T12.",
+        "Insertion: Clavicle, acromion and spine of the scapula.",
+        "Upper fibres: Elevate the scapula and rotate it during abduction of the arm.",
+        "Middle fibres: Retract the scapula.",
+        "Lower fibres: Pull the scapula inferiorly (depress it).",
+        "Innervation: Motor supply from the accessory nerve; proprioceptive fibres from C3 and C4 spinal nerves."
+      ],
+      "podcast": [
+        "Trapezius is broad and superficial, covering much of the upper back. For the actions, divide it into three fibre groups. Upper fibres elevate and help rotate the scapula, middle fibres retract it, and lower fibres pull it downward. For nerve supply, remember the accessory nerve for motor innervation, with proprioceptive fibres from C3 and C4."
+      ],
+      "quickRecall": [
+        "Describe the shape and position of trapezius.",
+        "State its origin and insertion.",
+        "Differentiate the actions of its upper, middle and lower fibres.",
+        "What is its motor nerve supply, and which spinal nerves provide proprioceptive fibres?"
+      ]
+    },
+    {
+      "number": 9,
+      "id": "block-9",
+      "title": "Latissimus dorsi",
+      "rawTitle": "BLOCK 9 — LATISSIMUS DORSI",
+      "category": "Shoulder Region",
+      "image": "assets/notes/ana201-ul-muscles/block-09.webp",
+      "notes": [
+        "Position: A broad muscle arising from the lower part of the back and covering a wide area.",
+        "Origin: Spinous processes of T7–T12, iliac crest, thoracolumbar fascia and inferior three ribs.",
+        "Insertion: The fibres converge into a tendon attached to the intertubercular sulcus of the humerus.",
+        "Actions: Extends, adducts and medially rotates the upper limb.",
+        "Innervation: Thoracodorsal nerve."
+      ],
+      "podcast": [
+        "Latissimus dorsi is the large muscle that covers a wide area of the lower back. Its fibres converge into a tendon that attaches to the humerus at the intertubercular sulcus. Its actions are easy to group: extension, adduction and medial rotation of the upper limb. The nerve to remember is the thoracodorsal nerve."
+      ],
+      "quickRecall": [
+        "List the origins of latissimus dorsi.",
+        "Where does its tendon attach?",
+        "State its three actions.",
+        "Name its nerve supply."
+      ]
+    },
+    {
+      "number": 10,
+      "id": "block-10",
+      "title": "Levator scapulae",
+      "rawTitle": "BLOCK 10 — LEVATOR SCAPULAE",
+      "category": "Shoulder Region",
+      "image": "assets/notes/ana201-ul-muscles/block-10.webp",
+      "notes": [
+        "Description: A small, strap-like muscle that begins in the neck and descends to the scapula.",
+        "Origin: Transverse processes of C1–C4 vertebrae.",
+        "Insertion: Medial border of the scapula.",
+        "Action: Elevates the scapula.",
+        "Innervation: Dorsal scapular nerve."
+      ],
+      "podcast": [
+        "Levator scapulae does what its name suggests: it elevates the scapula. It runs from the transverse processes of the first four cervical vertebrae down to the medial border of the scapula. Its nerve supply in the lecture is the dorsal scapular nerve."
+      ],
+      "quickRecall": [
+        "Where does levator scapulae originate?",
+        "Where does it insert?",
+        "What is its action and nerve supply?"
+      ]
+    },
+    {
+      "number": 11,
+      "id": "block-11",
+      "title": "Rhomboid major and rhomboid minor",
+      "rawTitle": "BLOCK 11 — RHOMBOID MAJOR AND RHOMBOID MINOR",
+      "category": "Shoulder Region",
+      "image": "assets/notes/ana201-ul-muscles/block-11.webp",
+      "notes": [
+        "General arrangement: There are two rhomboid muscles. Rhomboid minor lies superior to rhomboid major.",
+        "Rhomboid major origin: Spinous processes of T2–T5 vertebrae.",
+        "Rhomboid major insertion: Medial border of the scapula between the scapular spine and inferior angle.",
+        "Rhomboid minor origin: Spinous processes of C7–T1 vertebrae.",
+        "Rhomboid minor insertion: Medial border of the scapula at the level of the scapular spine.",
+        "Actions: Both retract and rotate the scapula.",
+        "Innervation: Dorsal scapular nerve."
+      ],
+      "podcast": [
+        "Learn the rhomboids as a pair. Minor is higher, arising from C7 to T1 and attaching near the scapular spine. Major is lower, arising from T2 to T5 and attaching farther down the medial border, between the spine and inferior angle. Both retract and rotate the scapula, and both are supplied by the dorsal scapular nerve."
+      ],
+      "quickRecall": [
+        "Which rhomboid lies superiorly?",
+        "Give the origins and insertions of rhomboid major and minor.",
+        "What actions do they share?",
+        "Which nerve supplies them?"
+      ]
+    },
+    {
+      "number": 12,
+      "id": "block-12",
+      "title": "Deltoid",
+      "rawTitle": "BLOCK 12 — DELTOID",
+      "category": "Shoulder Region",
+      "image": "assets/notes/ana201-ul-muscles/block-12.webp",
+      "notes": [
+        "Shape and parts: An inverted-triangle-shaped muscle divided into anterior, middle and posterior parts.",
+        "Origin: Lateral third of the clavicle and spine of the scapula.",
+        "Insertion: Deltoid tuberosity on the lateral aspect of the humerus.",
+        "Anterior fibres: Flex and medially rotate the arm.",
+        "Posterior fibres: Extend and laterally rotate the arm.",
+        "Middle fibres: Are the major abductors of the arm. The lecture describes the deltoid as taking over after supraspinatus initiates abduction at about 15 degrees.",
+        "Innervation: Axillary nerve."
+      ],
+      "podcast": [
+        "Think of the deltoid in three parts. The anterior fibres bring the arm forward and medially rotate it; the posterior fibres move it backward and laterally rotate it; the middle fibres are the main abductors. The muscle starts from the lateral third of the clavicle and scapular spine and attaches to the deltoid tuberosity. It is supplied by the axillary nerve."
+      ],
+      "quickRecall": [
+        "Describe the shape and parts of deltoid.",
+        "State its origin and insertion.",
+        "Compare the actions of anterior, middle and posterior fibres.",
+        "Which nerve supplies deltoid?"
+      ]
+    },
+    {
+      "number": 13,
+      "id": "block-13",
+      "title": "Teres major",
+      "rawTitle": "BLOCK 13 — TERES MAJOR",
+      "category": "Shoulder Region",
+      "image": "assets/notes/ana201-ul-muscles/block-13.webp",
+      "notes": [
+        "Origin: Posterior surface of the inferior angle of the scapula.",
+        "Insertion: Lip of the intertubercular groove of the humerus.",
+        "Anatomical relationship: Forms the inferior border of the quadrangular space.",
+        "Actions: Adducts and extends the arm at the shoulder and medially rotates it.",
+        "Innervation: Lower subscapular nerve."
+      ],
+      "podcast": [
+        "Teres major starts from the back of the inferior angle of the scapula and attaches to the lip of the intertubercular groove of the humerus. It adducts, extends and medially rotates the arm. One anatomical relationship worth remembering is that it forms the inferior border of the quadrangular space."
+      ],
+      "quickRecall": [
+        "Where does teres major originate and insert?",
+        "What are its three actions?",
+        "Which border of the quadrangular space does it form?",
+        "Name its nerve supply."
+      ]
+    },
+    {
+      "number": 14,
+      "id": "block-14",
+      "title": "The rotator cuff: supraspinatus, infraspinatus, subscapularis and teres minor",
+      "rawTitle": "BLOCK 14 — THE ROTATOR CUFF: SUPRASPINATUS, INFRASPINATUS, SUBSCAPULARIS AND TERES MINOR",
+      "category": "Shoulder Region",
+      "image": "assets/notes/ana201-ul-muscles/block-14.webp",
+      "notes": [
+        "Group: The four rotator cuff muscles are supraspinatus, infraspinatus, subscapularis and teres minor.",
+        "Supraspinatus — origin/insertion: Originates from the supraspinous fossa of the scapula and inserts on the greater tubercle of the humerus.",
+        "Supraspinatus — action/nerve: Initiates abduction of the upper limb from 0–15 degrees and assists deltoid during approximately 15–90 degrees of abduction. Supplied by the suprascapular nerve.",
+        "Infraspinatus — origin/insertion: Originates from the infraspinous fossa of the scapula and inserts on the greater tubercle of the humerus.",
+        "Infraspinatus — action/nerve: Laterally rotates the arm. Supplied by the suprascapular nerve.",
+        "Subscapularis — origin/insertion: Originates from the subscapular fossa on the costal surface of the scapula and inserts on the lesser tubercle of the humerus.",
+        "Subscapularis — action/nerve: Medially rotates the arm. Supplied by the upper and lower subscapular nerves.",
+        "Teres minor — origin/insertion: Originates from the posterior surface of the scapula adjacent to its lateral border and inserts on the greater tubercle of the humerus.",
+        "Teres minor — action/nerve: Laterally rotates the arm. Supplied by the axillary nerve."
+      ],
+      "podcast": [
+        "These four muscles are grouped because they are the rotator cuff. Don’t mix up their fossae. Supraspinatus sits above the scapular spine and starts abduction. Infraspinatus sits below the spine and laterally rotates the arm. Subscapularis lies on the costal surface and medially rotates the arm. Teres minor lies near the lateral border and laterally rotates the arm. Supraspinatus and infraspinatus use the suprascapular nerve; subscapularis uses the upper and lower subscapular nerves; teres minor uses the axillary nerve."
+      ],
+      "quickRecall": [
+        "Name the four rotator cuff muscles.",
+        "Which muscle initiates abduction from 0–15 degrees?",
+        "Which rotator cuff muscle attaches to the lesser tubercle?",
+        "Which muscles laterally rotate the arm?",
+        "Give the nerve supply of each of the four muscles."
+      ]
+    },
+    {
+      "number": 15,
+      "id": "block-15",
+      "title": "Upper arm: compartments and muscle map",
+      "rawTitle": "BLOCK 15 — UPPER ARM: COMPARTMENTS AND MUSCLE MAP",
+      "category": "Upper Arm",
+      "image": "assets/notes/ana201-ul-muscles/block-15.webp",
+      "notes": [
+        "Extent: The upper arm is between the shoulder joint and elbow joint.",
+        "Anterior compartment: Biceps brachii, brachialis and coracobrachialis.",
+        "Posterior compartment: Triceps brachii.",
+        "Learning cue: Study the three anterior muscles together, then contrast them with the posterior triceps. The following blocks cover their attachments, actions and innervation."
+      ],
+      "podcast": [
+        "The upper arm is the section between the shoulder and elbow. It has three muscles in the anterior compartment—biceps brachii, brachialis and coracobrachialis—and one in the posterior compartment, triceps brachii. Keep that count clear because it is an easy introductory exam question."
+      ],
+      "quickRecall": [
+        "What are the boundaries of the upper arm?",
+        "Name the three anterior compartment muscles.",
+        "Which muscle occupies the posterior compartment?"
+      ]
+    },
+    {
+      "number": 16,
+      "id": "block-16",
+      "title": "Biceps brachii",
+      "rawTitle": "BLOCK 16 — BICEPS BRACHII",
+      "category": "Upper Arm",
+      "image": "assets/notes/ana201-ul-muscles/block-16.webp",
+      "notes": [
+        "Description: A two-headed muscle located anterior to the humerus. The lecture notes that it has no attachment to the humerus itself.",
+        "Long head origin: Supraglenoid tubercle of the scapula.",
+        "Short head origin: Coracoid process of the scapula.",
+        "Insertion: Both heads insert into the radial tuberosity and the fascia of the forearm through the bicipital aponeurosis.",
+        "Bicipital aponeurosis: A connective-tissue sheet given off as the biceps tendon enters the forearm; it forms the roof of the cubital fossa.",
+        "Actions: Supinates the forearm and flexes the arm at the elbow and shoulder joints.",
+        "Innervation: Musculocutaneous nerve."
+      ],
+      "podcast": [
+        "Biceps means two heads. The long head begins at the supraglenoid tubercle, and the short head begins at the coracoid process. Both attach to the radial tuberosity, and the tendon also gives off the bicipital aponeurosis into the forearm fascia. That aponeurosis forms the roof of the cubital fossa. Functionally, biceps flexes the elbow and shoulder and supinates the forearm."
+      ],
+      "quickRecall": [
+        "Where do the long and short heads originate?",
+        "Where does biceps brachii insert?",
+        "What is the bicipital aponeurosis and what does it form?",
+        "State the actions and nerve supply of biceps brachii."
+      ]
+    },
+    {
+      "number": 17,
+      "id": "block-17",
+      "title": "Coracobrachialis",
+      "rawTitle": "BLOCK 17 — CORACOBRACHIALIS",
+      "category": "Upper Arm",
+      "image": "assets/notes/ana201-ul-muscles/block-17.webp",
+      "notes": [
+        "Position: Lies deep to biceps brachii in the arm.",
+        "Origin: Coracoid process of the scapula; it passes through the axilla.",
+        "Insertion: Medial side of the humeral shaft at the level of the deltoid tuberosity.",
+        "Actions: Flexes the arm at the shoulder and assists weakly with adduction.",
+        "Innervation: Musculocutaneous nerve."
+      ],
+      "podcast": [
+        "Coracobrachialis is deep to biceps. It begins at the coracoid process, passes through the axilla and attaches to the medial humeral shaft around the level of the deltoid tuberosity. It flexes the arm at the shoulder and contributes weakly to adduction. Its nerve supply is the musculocutaneous nerve."
+      ],
+      "quickRecall": [
+        "Where is coracobrachialis positioned relative to biceps?",
+        "Give its origin and insertion.",
+        "What are its actions and nerve supply?"
+      ]
+    },
+    {
+      "number": 18,
+      "id": "block-18",
+      "title": "Brachialis",
+      "rawTitle": "BLOCK 18 — BRACHIALIS",
+      "category": "Upper Arm",
+      "image": "assets/notes/ana201-ul-muscles/block-18.webp",
+      "notes": [
+        "Position: Lies deep to biceps brachii and more distally than the other muscles in the anterior arm; forms the floor of the cubital fossa.",
+        "Origin: Medial and lateral surfaces of the humeral shaft.",
+        "Insertion: Ulnar tuberosity.",
+        "Action: Flexion at the elbow.",
+        "Innervation: Musculocutaneous nerve, with a small contribution from the radial nerve."
+      ],
+      "podcast": [
+        "Brachialis lies deep to biceps and is an important part of the cubital fossa floor. It arises from the humeral shaft and attaches to the ulnar tuberosity. Its action is elbow flexion. The main nerve is musculocutaneous, with a small contribution from the radial nerve according to the lecture."
+      ],
+      "quickRecall": [
+        "Which structure forms the floor of the cubital fossa?",
+        "Where does brachialis originate and insert?",
+        "What is its action and nerve supply?"
+      ]
+    },
+    {
+      "number": 19,
+      "id": "block-19",
+      "title": "Triceps brachii",
+      "rawTitle": "BLOCK 19 — TRICEPS BRACHII",
+      "category": "Upper Arm",
+      "image": "assets/notes/ana201-ul-muscles/block-19.webp",
+      "notes": [
+        "Description: A three-headed muscle; the medial head lies deeper than the other two.",
+        "Long head origin: Infraglenoid tubercle of the scapula.",
+        "Lateral head origin: Humerus superior to the radial groove.",
+        "Medial head origin: Humerus inferior to the radial groove.",
+        "Insertion: The heads converge distally into one tendon that inserts into the olecranon of the ulna.",
+        "Action: Extension of the forearm at the elbow.",
+        "Innervation and arterial supply: Radial nerve; arterial supply from the profunda brachii artery."
+      ],
+      "podcast": [
+        "Triceps has three heads, and the medial head is deeper. The long head begins on the scapula; the lateral and medial heads begin on opposite sides of the radial groove of the humerus. They converge into one tendon attached to the olecranon. Its main action is elbow extension, and it is supplied by the radial nerve. The lecture names the profunda brachii artery as its arterial supply."
+      ],
+      "quickRecall": [
+        "Name the three heads and their origins.",
+        "Where does triceps insert?",
+        "What is its action and nerve supply?",
+        "Which artery is listed as its arterial supply?"
+      ]
+    },
+    {
+      "number": 20,
+      "id": "block-20",
+      "title": "Anterior forearm: layers and general function",
+      "rawTitle": "BLOCK 20 — ANTERIOR FOREARM: LAYERS AND GENERAL FUNCTION",
+      "category": "Anterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-20.webp",
+      "notes": [
+        "General actions: The anterior forearm is associated with pronation of the forearm and flexion of the wrist and fingers.",
+        "Superficial layer: Flexor carpi ulnaris, palmaris longus, flexor carpi radialis and pronator teres.",
+        "Intermediate layer: Flexor digitorum superficialis, the only muscle in this layer.",
+        "Deep layer: Flexor pollicis longus, flexor digitorum profundus and pronator quadratus.",
+        "Innervation: The median nerve supplies the anterior forearm muscles except flexor carpi ulnaris and the medial half of flexor digitorum profundus, which are supplied by the ulnar nerve. The lateral half of flexor digitorum profundus is supplied by the anterior interosseous branch of the median nerve.",
+        "Arterial supply: Radial and ulnar arteries."
+      ],
+      "podcast": [
+        "Organize the anterior forearm by layers. Four superficial muscles, one intermediate muscle and three deep muscles. Their overall job is to flex the wrist and fingers and pronate the forearm. Most are supplied by the median nerve, but remember the exceptions: flexor carpi ulnaris and the medial half of flexor digitorum profundus are ulnar-nerve supplied. The lecture lists the radial and ulnar arteries as the arterial supply."
+      ],
+      "quickRecall": [
+        "List the muscles in each layer.",
+        "What are the general actions of the anterior forearm?",
+        "Which muscles are exceptions to median nerve innervation?",
+        "Which arteries supply this compartment?"
+      ]
+    },
+    {
+      "number": 21,
+      "id": "block-21",
+      "title": "Flexor carpi ulnaris",
+      "rawTitle": "BLOCK 21 — FLEXOR CARPI ULNARIS",
+      "category": "Anterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-21.webp",
+      "notes": [
+        "Origins: Humeral head from the medial epicondyle of the humerus; ulnar head from the olecranon of the ulna.",
+        "Insertions: Pisiform bone, hook of hamate and base of the fifth metacarpal.",
+        "Actions: Flexes and adducts the hand at the wrist.",
+        "Innervation: Ulnar nerve."
+      ],
+      "podcast": [
+        "Flexor carpi ulnaris has two heads. One comes from the medial epicondyle, and the other from the olecranon. Its tendon reaches the pisiform, hook of hamate and base of the fifth metacarpal. Because of its position, it flexes and adducts the wrist. Unlike most anterior forearm muscles, it is supplied by the ulnar nerve."
+      ],
+      "quickRecall": [
+        "Name the two origins of flexor carpi ulnaris.",
+        "List its three attachment sites in the hand/wrist.",
+        "What are its actions and nerve supply?"
+      ]
+    },
+    {
+      "number": 22,
+      "id": "block-22",
+      "title": "Palmaris longus",
+      "rawTitle": "BLOCK 22 — PALMARIS LONGUS",
+      "category": "Anterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-22.webp",
+      "notes": [
+        "Origin: Medial epicondyle of the humerus.",
+        "Insertion: Flexor retinaculum of the wrist.",
+        "Action: Flexes the wrist.",
+        "Innervation: Median nerve.",
+        "Variation: The lecture states that palmaris longus is absent in about 15% of the population."
+      ],
+      "podcast": [
+        "Palmaris longus is a superficial forearm muscle that starts at the medial epicondyle and attaches to the flexor retinaculum. Its action is wrist flexion, and it is supplied by the median nerve. One useful fact from the lecture is that it may be absent in about fifteen percent of people."
+      ],
+      "quickRecall": [
+        "Where does palmaris longus originate and insert?",
+        "What is its action and nerve supply?",
+        "What proportion of the population is stated to lack it in the lecture?"
+      ]
+    },
+    {
+      "number": 23,
+      "id": "block-23",
+      "title": "Flexor carpi radialis",
+      "rawTitle": "BLOCK 23 — FLEXOR CARPI RADIALIS",
+      "category": "Anterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-23.webp",
+      "notes": [
+        "Origin: Medial epicondyle of the humerus.",
+        "Insertion: Bases of metacarpals II and III.",
+        "Action listed in the lecture: Flexion at the wrist.",
+        "Innervation: Median nerve."
+      ],
+      "podcast": [
+        "Flexor carpi radialis starts from the medial epicondyle and attaches to the bases of the second and third metacarpals. The lecture lists wrist flexion as its action and the median nerve as its nerve supply. When revising, keep its insertion distinct from flexor carpi ulnaris, which attaches on the ulnar side."
+      ],
+      "quickRecall": [
+        "State the origin and insertion of flexor carpi radialis.",
+        "What action and nerve supply are given in the lecture?"
+      ]
+    },
+    {
+      "number": 24,
+      "id": "block-24",
+      "title": "Pronator teres",
+      "rawTitle": "BLOCK 24 — PRONATOR TERES",
+      "category": "Anterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-24.webp",
+      "notes": [
+        "Origins: One head from the medial epicondyle of the humerus and the other from the coronoid process of the ulna.",
+        "Insertion: Lateral aspect of the midshaft of the radius.",
+        "Anatomical relationship: Its lateral border forms the medial border of the cubital fossa, according to the lecture.",
+        "Action: Pronation of the forearm.",
+        "Innervation: Median nerve."
+      ],
+      "podcast": [
+        "Pronator teres has two origins: the medial epicondyle and coronoid process of the ulna. It crosses to the lateral midshaft of the radius. Its key action is pronation, meaning turning the forearm so the palm faces posteriorly in anatomical position or downward when the elbow is flexed. The lecture also identifies it as contributing to the medial border of the cubital fossa."
+      ],
+      "quickRecall": [
+        "Name the two heads/origins of pronator teres.",
+        "Where does it insert?",
+        "What is its action and nerve supply?",
+        "What border of the cubital fossa is it said to form?"
+      ]
+    },
+    {
+      "number": 25,
+      "id": "block-25",
+      "title": "Flexor digitorum superficialis",
+      "rawTitle": "BLOCK 25 — FLEXOR DIGITORUM SUPERFICIALIS",
+      "category": "Anterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-25.webp",
+      "notes": [
+        "Layer: The only muscle in the intermediate compartment. It can be described as superficial, but lies mostly between the superficial and deep muscles.",
+        "Origins: Medial epicondyle of the humerus and radius.",
+        "Tendons/insertion: Its tendon divides into four tendons at the wrist, passes through the carpal tunnel and attaches to the bases of the middle phalanges of the four fingers.",
+        "Anatomical relationship: The lecture describes it as a landmark because the median and ulnar nerves pass between its two heads and travel posteriorly.",
+        "Innervation: Median nerve."
+      ],
+      "podcast": [
+        "Flexor digitorum superficialis is the only muscle in the intermediate layer. It arises from the medial epicondyle and radius, then divides into four tendons that pass through the carpal tunnel to the middle phalanges of the fingers. It is a useful anatomical landmark because the lecture describes the median and ulnar nerves passing between its two heads. Its nerve supply is median."
+      ],
+      "quickRecall": [
+        "Which layer contains flexor digitorum superficialis?",
+        "Where does it originate and insert?",
+        "How many tendons does it form and where do they pass?",
+        "Which nerve supplies it?"
+      ]
+    },
+    {
+      "number": 26,
+      "id": "block-26",
+      "title": "Flexor digitorum profundus",
+      "rawTitle": "BLOCK 26 — FLEXOR DIGITORUM PROFUNDUS",
+      "category": "Anterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-26.webp",
+      "notes": [
+        "Origin: Ulna and associated interosseous membrane.",
+        "Insertion: Four tendons pass through the carpal tunnel and attach to the distal phalanges of the four fingers.",
+        "Actions: Flexes the distal interphalangeal joints, metacarpophalangeal joints and wrist. The lecture describes it as the only muscle that flexes the distal interphalangeal joints.",
+        "Innervation: Medial half by the ulnar nerve; lateral half by the anterior interosseous branch of the median nerve."
+      ],
+      "podcast": [
+        "Flexor digitorum profundus is the deep finger flexor. Its four tendons reach the distal phalanges, so it is the muscle emphasized for bending the fingertips at the distal interphalangeal joints. It also flexes the metacarpophalangeal joints and wrist. Its nerve supply is split: medial half ulnar nerve, lateral half anterior interosseous branch of the median nerve."
+      ],
+      "quickRecall": [
+        "Where does flexor digitorum profundus originate and insert?",
+        "Which joints does it flex?",
+        "Which half is supplied by the ulnar nerve?",
+        "Which nerve branch supplies the lateral half?"
+      ]
+    },
+    {
+      "number": 27,
+      "id": "block-27",
+      "title": "Flexor pollicis longus",
+      "rawTitle": "BLOCK 27 — FLEXOR POLLICIS LONGUS",
+      "category": "Anterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-27.webp",
+      "notes": [
+        "Position: Lies lateral to flexor digitorum profundus.",
+        "Origin: Anterior surface of the radius and surrounding interosseous membrane.",
+        "Insertion: Base of the distal phalanx of the thumb.",
+        "Actions listed: Flexes the interphalangeal joint and metacarpophalangeal joint of the thumb.",
+        "Innervation: Anterior interosseous branch of the median nerve."
+      ],
+      "podcast": [
+        "Flexor pollicis longus is the long flexor of the thumb. It lies lateral to flexor digitorum profundus and starts from the anterior radius and nearby interosseous membrane. Its tendon attaches to the distal phalanx of the thumb. The lecture lists flexion at the thumb’s interphalangeal and metacarpophalangeal joints, with innervation from the anterior interosseous branch of the median nerve."
+      ],
+      "quickRecall": [
+        "Where is flexor pollicis longus located relative to FDP?",
+        "Give its origin and insertion.",
+        "Which thumb joints does it flex?",
+        "Name its nerve supply."
+      ]
+    },
+    {
+      "number": 28,
+      "id": "block-28",
+      "title": "Pronator quadratus",
+      "rawTitle": "BLOCK 28 — PRONATOR QUADRATUS",
+      "category": "Anterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-28.webp",
+      "notes": [
+        "Shape and position: A square-shaped muscle deep to the tendons of flexor digitorum profundus and flexor pollicis longus.",
+        "Origin: Anterior surface of the ulna.",
+        "Insertion: Anterior surface of the radius.",
+        "Action: Pronates the forearm.",
+        "Innervation: Anterior interosseous branch of the median nerve."
+      ],
+      "podcast": [
+        "Pronator quadratus is a square-shaped muscle deep in the distal forearm. It runs from the anterior ulna to the anterior radius and pronates the forearm. Its nerve supply is the anterior interosseous branch of the median nerve."
+      ],
+      "quickRecall": [
+        "Describe its shape and location.",
+        "Where does pronator quadratus originate and insert?",
+        "What is its action and nerve supply?"
+      ]
+    },
+    {
+      "number": 29,
+      "id": "block-29",
+      "title": "Posterior forearm: general organization",
+      "rawTitle": "BLOCK 29 — POSTERIOR FOREARM: GENERAL ORGANIZATION",
+      "category": "Posterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-29.webp",
+      "notes": [
+        "General name/function: The posterior forearm is commonly called the extensor compartment. Its muscles generally extend the wrist and fingers.",
+        "Layers: Superficial and deep layers, separated by a layer of fascia.",
+        "Innervation: The lecture states that the posterior compartment muscles are all innervated by the radial nerve.",
+        "Deep group overview: The lecture describes five deep muscles and states that all act on the thumb and little finger except supinator. The listed deep muscles in the following slides are supinator, abductor pollicis longus, extensor pollicis brevis, extensor pollicis longus and extensor indicis."
+      ],
+      "podcast": [
+        "Now move to the back of the forearm. This is commonly called the extensor compartment because its muscles generally extend the wrist and fingers. It has superficial and deep layers separated by fascia, and the lecture groups their innervation under the radial nerve. Learn the superficial group first, then the deep muscles that act mainly on the thumb and index finger, with supinator as the exception."
+      ],
+      "quickRecall": [
+        "What are the general actions of the posterior forearm muscles?",
+        "How many layers are described?",
+        "Which nerve supplies this compartment according to the lecture?",
+        "Name the five deep muscles listed."
+      ]
+    },
+    {
+      "number": 30,
+      "id": "block-30",
+      "title": "Brachioradialis",
+      "rawTitle": "BLOCK 30 — BRACHIORADIALIS",
+      "category": "Posterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-30.webp",
+      "notes": [
+        "Why it is described as paradoxical: Its origin and innervation are characteristic of an extensor muscle, but it flexes the elbow.",
+        "Origin: Proximal part of the lateral supracondylar ridge of the humerus.",
+        "Insertion: Distal radius just before the radial styloid process.",
+        "Actions: Flexes the elbow and contributes to supination at the proximal radioulnar joint, as stated in the lecture.",
+        "Visible position: Most visible when the forearm is half-pronated and the elbow is flexing against resistance.",
+        "Relationship: The radial artery and nerve are described as lying between brachioradialis and the deep flexor muscles at the distal forearm."
+      ],
+      "podcast": [
+        "Brachioradialis is worth remembering because it is in the posterior/lateral forearm group but flexes the elbow. That is why the lecture calls it paradoxical. It starts from the lateral supracondylar ridge and attaches to the distal radius near the radial styloid. It is prominent when the forearm is midway between pronation and supination and the elbow flexes against resistance."
+      ],
+      "quickRecall": [
+        "Why is brachioradialis called paradoxical?",
+        "State its origin and insertion.",
+        "When is it most visible?",
+        "What structures are described between it and the deep flexor muscles distally?"
+      ]
+    },
+    {
+      "number": 31,
+      "id": "block-31",
+      "title": "Extensor carpi radialis longus and brevis",
+      "rawTitle": "BLOCK 31 — EXTENSOR CARPI RADIALIS LONGUS AND BREVIS",
+      "category": "Posterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-31.webp",
+      "notes": [
+        "Position: Situated on the lateral aspect of the posterior forearm.",
+        "Extensor carpi radialis longus origin: Lateral supracondylar ridge of the humerus.",
+        "Extensor carpi radialis brevis origin: Lateral epicondyle of the humerus.",
+        "Insertions: Their tendons attach to metacarpal bones II and III.",
+        "Actions: Extend and abduct the wrist.",
+        "Innervation: As posterior forearm muscles, they are included in the lecture’s radial-nerve supply statement."
+      ],
+      "podcast": [
+        "These two muscles are a useful pair. Longus begins higher, from the lateral supracondylar ridge; brevis begins from the lateral epicondyle. Their tendons attach to the second and third metacarpals. Because they lie on the radial side of the posterior forearm, they extend and abduct the wrist."
+      ],
+      "quickRecall": [
+        "How do the origins of ECRL and ECRB differ?",
+        "Where do their tendons attach?",
+        "What two actions do they produce?"
+      ]
+    },
+    {
+      "number": 32,
+      "id": "block-32",
+      "title": "Extensor digitorum communis",
+      "rawTitle": "BLOCK 32 — EXTENSOR DIGITORUM COMMUNIS",
+      "category": "Posterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-32.webp",
+      "notes": [
+        "Role: The main extensor of the fingers.",
+        "Origin: Lateral epicondyle of the humerus.",
+        "Tendons/insertion: The tendon divides into four in the distal forearm and inserts into the extensor hood of each finger.",
+        "Actions: Extends the digits at the interphalangeal and metacarpophalangeal joints.",
+        "Testing: The lecture describes testing it by pronating the forearm and extending the fingers against resistance."
+      ],
+      "podcast": [
+        "Extensor digitorum is the main finger extensor. It begins from the lateral epicondyle, then its tendon divides into four and reaches the extensor hood of each finger. It extends the fingers at the MCP and interphalangeal joints. To test it, place the forearm in pronation and ask the person to extend the fingers against resistance."
+      ],
+      "quickRecall": [
+        "What is the main finger extensor?",
+        "Where does it originate and insert?",
+        "Which joints does it extend?",
+        "How does the lecture say to test it?"
+      ]
+    },
+    {
+      "number": 33,
+      "id": "block-33",
+      "title": "Extensor digiti minimi",
+      "rawTitle": "BLOCK 33 — EXTENSOR DIGITI MINIMI",
+      "category": "Posterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-33.webp",
+      "notes": [
+        "Relationship: The lecture says it is thought to originate from extensor digitorum; in some people the two muscles are fused, with extensor digiti minimi lying medially.",
+        "Origin: Lateral epicondyle of the humerus.",
+        "Insertion: Joins extensor digitorum in the extensor hood of the little finger.",
+        "Actions: Extends the little finger and contributes to wrist extension."
+      ],
+      "podcast": [
+        "Extensor digiti minimi is the muscle specifically associated with extending the little finger. It begins from the lateral epicondyle and joins the extensor digitorum tendon system at the little finger’s extensor hood. The lecture notes that the two muscles may be fused in some people. It also contributes to wrist extension."
+      ],
+      "quickRecall": [
+        "Which digit is targeted by extensor digiti minimi?",
+        "Where does it originate and insert?",
+        "What anatomical variation does the lecture mention?",
+        "What additional action does it assist?"
+      ]
+    },
+    {
+      "number": 34,
+      "id": "block-34",
+      "title": "Extensor carpi ulnaris",
+      "rawTitle": "BLOCK 34 — EXTENSOR CARPI ULNARIS",
+      "category": "Posterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-34.webp",
+      "notes": [
+        "Position: Located on the medial aspect of the posterior forearm.",
+        "Origin: Lateral epicondyle of the humerus.",
+        "Insertion: Base of metacarpal V.",
+        "Actions: Extends and adducts the wrist.",
+        "Innervation: Included in the radial-nerve supply of the posterior forearm in the lecture."
+      ],
+      "podcast": [
+        "Extensor carpi ulnaris lies on the medial side of the posterior forearm. It starts at the lateral epicondyle and attaches to the base of the fifth metacarpal. Its position gives it two main actions: wrist extension and adduction."
+      ],
+      "quickRecall": [
+        "Where is extensor carpi ulnaris located?",
+        "State its origin and insertion.",
+        "What movements does it produce?"
+      ]
+    },
+    {
+      "number": 35,
+      "id": "block-35",
+      "title": "Anconeus",
+      "rawTitle": "BLOCK 35 — ANCONEUS",
+      "category": "Posterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-35.webp",
+      "notes": [
+        "Position: Situated medially and proximally in the extensor compartment of the forearm.",
+        "Relationship: Blends with triceps brachii fibres; the two muscles may be difficult to distinguish.",
+        "Origin: Lateral epicondyle of the humerus.",
+        "Insertion: Posterior and lateral part of the olecranon.",
+        "Actions: Extends and stabilizes the elbow joint; abducts the ulna during forearm pronation."
+      ],
+      "podcast": [
+        "Anconeus is a small muscle near the elbow that blends with triceps fibres. It arises from the lateral epicondyle and attaches to the posterior-lateral olecranon. It assists elbow extension, stabilizes the elbow and helps abduct the ulna during pronation, as described in the lecture."
+      ],
+      "quickRecall": [
+        "Where is anconeus located?",
+        "Why may it be hard to distinguish from triceps?",
+        "Give its origin and insertion.",
+        "List its actions."
+      ]
+    },
+    {
+      "number": 36,
+      "id": "block-36",
+      "title": "Supinator",
+      "rawTitle": "BLOCK 36 — SUPINATOR",
+      "category": "Posterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-36.webp",
+      "notes": [
+        "Position: Lies in front of the cubital fossa.",
+        "Origins: Two heads: one from the lateral epicondyle of the humerus and the other from the posterior surface of the ulna.",
+        "Insertion: Both heads insert together on the posterior surface of the radius.",
+        "Important relationship: The deep branch of the radial nerve passes between its two heads.",
+        "Action: Supinates the forearm."
+      ],
+      "podcast": [
+        "Supinator turns the forearm into supination. It has two heads, one arising from the lateral epicondyle and one from the posterior ulna, and both attach to the posterior radius. A key relationship is that the deep branch of the radial nerve passes between the two heads."
+      ],
+      "quickRecall": [
+        "Name the two origins of supinator.",
+        "Where does it insert?",
+        "Which nerve branch passes between its heads?",
+        "What is its action?"
+      ]
+    },
+    {
+      "number": 37,
+      "id": "block-37",
+      "title": "Abductor pollicis longus",
+      "rawTitle": "BLOCK 37 — ABDUCTOR POLLICIS LONGUS",
+      "category": "Posterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-37.webp",
+      "notes": [
+        "Position: Situated immediately distal to supinator.",
+        "Origin: Interosseous membrane and adjacent posterior surfaces of the radius and ulna.",
+        "Insertion: Lateral side of the base of metacarpal I.",
+        "Action: Abducts the thumb.",
+        "Anatomical relationship: Its tendon contributes to the radial/lateral border of the anatomical snuffbox."
+      ],
+      "podcast": [
+        "Abductor pollicis longus is a deep posterior forearm muscle that abducts the thumb. It arises from the posterior radius and ulna plus the interosseous membrane and attaches to the lateral base of the first metacarpal. Its tendon helps form the radial border of the anatomical snuffbox."
+      ],
+      "quickRecall": [
+        "Where is abductor pollicis longus positioned?",
+        "Give its origin and insertion.",
+        "What is its action?",
+        "Which border of the anatomical snuffbox does its tendon help form?"
+      ]
+    },
+    {
+      "number": 38,
+      "id": "block-38",
+      "title": "Extensor pollicis brevis",
+      "rawTitle": "BLOCK 38 — EXTENSOR POLLICIS BREVIS",
+      "category": "Posterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-38.webp",
+      "notes": [
+        "Position: Found medially and deep to abductor pollicis longus.",
+        "Origin: Posterior surface of the radius and interosseous membrane.",
+        "Insertion: The lecture describes attachment to the metacarpophalangeal and carpometacarpal joints of the thumb.",
+        "Action: Extends the thumb at the metacarpophalangeal and carpometacarpal joints, as stated in the lecture.",
+        "Anatomical relationship: Its tendon contributes to the radial/lateral border of the anatomical snuffbox."
+      ],
+      "podcast": [
+        "Extensor pollicis brevis is a deep thumb extensor. It lies medial and deep to abductor pollicis longus, begins on the posterior radius and interosseous membrane, and contributes to the radial border of the anatomical snuffbox. The lecture associates it with extension at the thumb’s MCP and CMC joints."
+      ],
+      "quickRecall": [
+        "Where does extensor pollicis brevis lie relative to APL?",
+        "Give its origin and the attachment described in the lecture.",
+        "What joints does it extend?",
+        "Which border of the anatomical snuffbox does its tendon help form?"
+      ]
+    },
+    {
+      "number": 39,
+      "id": "block-39",
+      "title": "Extensor pollicis longus",
+      "rawTitle": "BLOCK 39 — EXTENSOR POLLICIS LONGUS",
+      "category": "Posterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-39.webp",
+      "notes": [
+        "Muscle belly: Larger than that of extensor pollicis brevis.",
+        "Origin: Posterior surface of the ulna and interosseous membrane.",
+        "Tendon path: Passes medially to the dorsal tubercle at the wrist, which acts as a pulley to increase the force exerted.",
+        "Insertion: Distal phalanx of the thumb.",
+        "Action: Extends all joints of the thumb: carpometacarpal, metacarpophalangeal and interphalangeal.",
+        "Anatomical relationship: Its tendon forms the ulnar/medial border of the anatomical snuffbox."
+      ],
+      "podcast": [
+        "Extensor pollicis longus has a larger muscle belly than extensor pollicis brevis. Its tendon passes around the dorsal tubercle of the radius, which acts as a pulley, and attaches to the distal phalanx of the thumb. It extends all the thumb joints and forms the ulnar border of the anatomical snuffbox."
+      ],
+      "quickRecall": [
+        "How does EPL compare with EPB in muscle-belly size?",
+        "Where does EPL originate and insert?",
+        "What role does the dorsal tubercle play?",
+        "Which thumb joints does EPL extend?",
+        "Which border of the anatomical snuffbox does it form?"
+      ]
+    },
+    {
+      "number": 40,
+      "id": "block-40",
+      "title": "Extensor indicis proprius",
+      "rawTitle": "BLOCK 40 — EXTENSOR INDICIS PROPRIUS",
+      "category": "Posterior Forearm",
+      "image": "assets/notes/ana201-ul-muscles/block-40.webp",
+      "notes": [
+        "Function: Allows the index finger to extend independently of the other fingers.",
+        "Origin: Posterior surface of the ulna and interosseous membrane, distal to extensor pollicis longus.",
+        "Insertion: Extensor hood of the index finger.",
+        "Action: Extends the index finger."
+      ],
+      "podcast": [
+        "Extensor indicis is the muscle that allows the index finger to extend independently. It arises from the posterior ulna and interosseous membrane, distal to extensor pollicis longus, and inserts into the extensor hood of the index finger."
+      ],
+      "quickRecall": [
+        "What makes extensor indicis functionally distinctive?",
+        "Where does it originate and insert?",
+        "What is its action?"
+      ]
+    },
+    {
+      "number": 41,
+      "id": "block-41",
+      "title": "Hand muscles: extrinsic versus intrinsic",
+      "rawTitle": "BLOCK 41 — HAND MUSCLES: EXTRINSIC VERSUS INTRINSIC",
+      "category": "Hand Muscles",
+      "image": "assets/notes/ana201-ul-muscles/block-41.webp",
+      "notes": [
+        "Extrinsic muscles: Located in the anterior and posterior compartments of the forearm. They control crude movements and produce a forceful grip.",
+        "Intrinsic muscles: Located within the hand itself and responsible for fine motor functions.",
+        "Groups covered in the lecture: Thenar muscles, hypothenar muscles, lumbricals, interossei, palmaris brevis and adductor pollicis."
+      ],
+      "podcast": [
+        "To understand the hand, separate the muscles into extrinsic and intrinsic. Extrinsic muscles have their bellies in the forearm and send tendons into the hand; they help produce larger movements and a strong grip. Intrinsic muscles sit inside the hand and are important for fine control. The lecture then groups them by region and function."
+      ],
+      "quickRecall": [
+        "Define extrinsic and intrinsic hand muscles.",
+        "What functions are associated with each group?",
+        "List the intrinsic muscle groups covered in the lecture."
+      ]
+    },
+    {
+      "number": 42,
+      "id": "block-42",
+      "title": "Thenar eminence and thenar muscles",
+      "rawTitle": "BLOCK 42 — THENAR EMINENCE AND THENAR MUSCLES",
+      "category": "Hand Muscles",
+      "image": "assets/notes/ana201-ul-muscles/block-42.webp",
+      "notes": [
+        "Group: The thenar muscles are three short muscles at the base of the thumb.",
+        "Thenar eminence: The muscle bellies create a bulge called the thenar eminence.",
+        "Function: Responsible for fine movements of the thumb.",
+        "Innervation: The lecture states that all thenar muscles are innervated by the median nerve, while also specifying the more detailed nerve supply for individual muscles in the following blocks."
+      ],
+      "podcast": [
+        "The thenar eminence is the muscular mound at the base of the thumb. Three short muscles make up the thenar group: opponens pollicis, abductor pollicis brevis and flexor pollicis brevis. Together, they support fine thumb movements. Learn the group first, then the specific attachment and nerve details of each muscle."
+      ],
+      "quickRecall": [
+        "How many muscles are in the thenar group?",
+        "What is the thenar eminence?",
+        "What is the general function of the thenar muscles?"
+      ]
+    },
+    {
+      "number": 43,
+      "id": "block-43",
+      "title": "Opponens pollicis",
+      "rawTitle": "BLOCK 43 — OPPONENS POLLICIS",
+      "category": "Hand Muscles",
+      "image": "assets/notes/ana201-ul-muscles/block-43.webp",
+      "notes": [
+        "Position: Largest thenar muscle and lies beneath the other two thenar muscles.",
+        "Origin: Tubercle of the trapezium and associated flexor retinaculum.",
+        "Insertion: Lateral margin of the first metacarpal.",
+        "Action: Opposes the thumb by medially rotating and flexing the first metacarpal on the trapezium.",
+        "Innervation: Recurrent branch of the median nerve."
+      ],
+      "podcast": [
+        "Opponens pollicis is the largest thenar muscle and lies deep to the other two. It starts from the trapezium and flexor retinaculum and attaches to the lateral margin of the first metacarpal. It produces opposition by rotating and flexing the first metacarpal across the palm. Its nerve is the recurrent branch of the median nerve."
+      ],
+      "quickRecall": [
+        "Which thenar muscle is the largest and deepest?",
+        "Give its origin and insertion.",
+        "Explain the movement of opposition in the terms used by the lecture.",
+        "What nerve branch supplies it?"
+      ]
+    },
+    {
+      "number": 44,
+      "id": "block-44",
+      "title": "Abductor pollicis brevis",
+      "rawTitle": "BLOCK 44 — ABDUCTOR POLLICIS BREVIS",
+      "category": "Hand Muscles",
+      "image": "assets/notes/ana201-ul-muscles/block-44.webp",
+      "notes": [
+        "Position: Forms the anterolateral aspect of the thenar eminence and overlies opponens pollicis.",
+        "Origin: Tubercles of the scaphoid and trapezium and associated flexor retinaculum.",
+        "Insertion: Lateral side of the proximal phalanx of the thumb.",
+        "Action: Abducts the thumb.",
+        "Innervation: Recurrent branch of the median nerve."
+      ],
+      "podcast": [
+        "Abductor pollicis brevis lies on the surface of the thenar eminence, over opponens pollicis. It begins from the scaphoid and trapezium tubercles and flexor retinaculum, and attaches to the lateral side of the thumb’s proximal phalanx. Its action is thumb abduction, and it is supplied by the recurrent branch of the median nerve."
+      ],
+      "quickRecall": [
+        "Where is abductor pollicis brevis located?",
+        "Give its origin and insertion.",
+        "What movement does it produce?",
+        "What is its nerve supply?"
+      ]
+    },
+    {
+      "number": 45,
+      "id": "block-45",
+      "title": "Flexor pollicis brevis",
+      "rawTitle": "BLOCK 45 — FLEXOR POLLICIS BREVIS",
+      "category": "Hand Muscles",
+      "image": "assets/notes/ana201-ul-muscles/block-45.webp",
+      "notes": [
+        "Position/parts: Forms the medial aspect of the thenar eminence and has superficial and deep parts; the deep component varies in size.",
+        "Origin: Tubercle of the trapezium and associated flexor retinaculum.",
+        "Insertion: Base of the proximal phalanx of the thumb.",
+        "Action: Flexes the metacarpophalangeal joint of the thumb.",
+        "Innervation: The median nerve via its recurrent branch supplies the superficial part; the deep head is supplied by the deep branch of the ulnar nerve."
+      ],
+      "podcast": [
+        "Flexor pollicis brevis flexes the thumb at the metacarpophalangeal joint. It has superficial and deep parts, and the deep part can vary in size. Remember the nerve detail: the recurrent branch of the median nerve supplies the superficial part, while the deep head is supplied by the deep branch of the ulnar nerve."
+      ],
+      "quickRecall": [
+        "What are the parts of flexor pollicis brevis?",
+        "Where does it originate and insert?",
+        "Which joint does it flex?",
+        "Compare the nerve supply of its superficial and deep parts."
+      ]
+    },
+    {
+      "number": 46,
+      "id": "block-46",
+      "title": "Hypothenar eminence and hypothenar muscles",
+      "rawTitle": "BLOCK 46 — HYPOTHENAR EMINENCE AND HYPOTHENAR MUSCLES",
+      "category": "Hand Muscles",
+      "image": "assets/notes/ana201-ul-muscles/block-46.webp",
+      "notes": [
+        "Location: The hypothenar eminence is a muscular protrusion on the medial side of the palm at the base of the little finger.",
+        "Organization: Hypothenar muscles are similar to thenar muscles in name and organization.",
+        "Innervation: Ulnar nerve.",
+        "Muscles covered next: Opponens digiti minimi, abductor digiti minimi and flexor digiti minimi brevis."
+      ],
+      "podcast": [
+        "The hypothenar eminence is the mound at the base of the little finger, on the medial side of the palm. Its muscles have a similar naming pattern to the thenar muscles, but the group is supplied by the ulnar nerve. The three muscles in the lecture are opponens digiti minimi, abductor digiti minimi and flexor digiti minimi brevis."
+      ],
+      "quickRecall": [
+        "Where is the hypothenar eminence located?",
+        "Which nerve supplies the hypothenar group?",
+        "Name its three muscles."
+      ]
+    },
+    {
+      "number": 47,
+      "id": "block-47",
+      "title": "Opponens digiti minimi",
+      "rawTitle": "BLOCK 47 — OPPONENS DIGITI MINIMI",
+      "category": "Hand Muscles",
+      "image": "assets/notes/ana201-ul-muscles/block-47.webp",
+      "notes": [
+        "Position: Lies deep to the other hypothenar muscles.",
+        "Origin: Hook of hamate and associated flexor retinaculum.",
+        "Insertion: Medial margin of metacarpal V.",
+        "Action: Rotates the metacarpal of the little finger towards the palm, producing opposition.",
+        "Innervation: The hypothenar group is supplied by the ulnar nerve, as stated in the lecture."
+      ],
+      "podcast": [
+        "Opponens digiti minimi is the deep hypothenar muscle. It begins from the hook of hamate and flexor retinaculum and attaches to the medial margin of the fifth metacarpal. It rotates the fifth metacarpal toward the palm so the little finger can oppose the thumb."
+      ],
+      "quickRecall": [
+        "Where is opponens digiti minimi positioned?",
+        "Give its origin and insertion.",
+        "Explain its action.",
+        "Which nerve supplies the hypothenar group?"
+      ]
+    },
+    {
+      "number": 48,
+      "id": "block-48",
+      "title": "Abductor digiti minimi",
+      "rawTitle": "BLOCK 48 — ABDUCTOR DIGITI MINIMI",
+      "category": "Hand Muscles",
+      "image": "assets/notes/ana201-ul-muscles/block-48.webp",
+      "notes": [
+        "Position: The most superficial muscle of the hypothenar group.",
+        "Origin: Pisiform and tendon of flexor carpi ulnaris.",
+        "Insertion: Base of the proximal phalanx of the little finger.",
+        "Action: Abducts the little finger.",
+        "Innervation: Ulnar nerve, according to the group-level innervation given in the lecture."
+      ],
+      "podcast": [
+        "Abductor digiti minimi is the most superficial hypothenar muscle. It starts from the pisiform and the flexor carpi ulnaris tendon, then attaches to the base of the little finger’s proximal phalanx. Its action is to move the little finger away from the ring finger—abduction."
+      ],
+      "quickRecall": [
+        "Which hypothenar muscle is most superficial?",
+        "Where does it originate and insert?",
+        "What does it do?"
+      ]
+    },
+    {
+      "number": 49,
+      "id": "block-49",
+      "title": "Flexor digiti minimi brevis",
+      "rawTitle": "BLOCK 49 — FLEXOR DIGITI MINIMI BREVIS",
+      "category": "Hand Muscles",
+      "image": "assets/notes/ana201-ul-muscles/block-49.webp",
+      "notes": [
+        "Position: Lies lateral to abductor digiti minimi in the hand.",
+        "Origin: Hook of hamate and adjacent flexor retinaculum.",
+        "Insertion: Base of the proximal phalanx of the little finger.",
+        "Action: Flexes the metacarpophalangeal joint of the little finger.",
+        "Innervation: The lecture gives ulnar nerve supply for the hypothenar group."
+      ],
+      "podcast": [
+        "Flexor digiti minimi brevis is positioned lateral to abductor digiti minimi. It begins from the hook of hamate and nearby flexor retinaculum and attaches to the base of the little finger’s proximal phalanx. Its action is flexion at the MCP joint of the little finger."
+      ],
+      "quickRecall": [
+        "Where is flexor digiti minimi brevis located?",
+        "Give its origin and insertion.",
+        "Which joint does it flex?"
+      ]
+    },
+    {
+      "number": 50,
+      "id": "block-50",
+      "title": "Lumbricals",
+      "rawTitle": "BLOCK 50 — LUMBRICALS",
+      "category": "Hand Muscles",
+      "image": "assets/notes/ana201-ul-muscles/block-50.webp",
+      "notes": [
+        "Number and role: There are four lumbricals, each associated with a finger. They are crucial to finger movement and link flexor tendons to extensor tendons.",
+        "Origin: Tendons of flexor digitorum profundus.",
+        "Course/insertion: Pass dorsally and laterally around each finger and insert into the extensor hood.",
+        "Actions: Flex the metacarpophalangeal joints and extend the interphalangeal joints of each digit.",
+        "Innervation: Lateral two lumbricals by the median nerve; medial two by the ulnar nerve."
+      ],
+      "podcast": [
+        "Lumbricals are small but important because they coordinate finger movements. There are four, each linked to a finger. They arise from flexor digitorum profundus tendons, pass around the sides of the fingers and attach to the extensor hoods. Their combined action is MCP flexion with IP extension. The lateral two are supplied by the median nerve and the medial two by the ulnar nerve."
+      ],
+      "quickRecall": [
+        "How many lumbricals are there?",
+        "Where do they originate and insert?",
+        "What combination of joint actions do they produce?",
+        "Compare the nerve supply of the lateral and medial pairs."
+      ]
+    },
+    {
+      "number": 51,
+      "id": "block-51",
+      "title": "Interossei: general organization",
+      "rawTitle": "BLOCK 51 — INTEROSSEI: GENERAL ORGANIZATION",
+      "category": "Hand Muscles",
+      "image": "assets/notes/ana201-ul-muscles/block-51.webp",
+      "notes": [
+        "Location: Between the metacarpal bones of the hand.",
+        "Groups: Dorsal interossei and palmar interossei.",
+        "Shared additional actions: Besides abduction or adduction, they assist lumbricals in flexion at the MCP joints and extension at the IP joints.",
+        "Innervation: The lecture states that both dorsal and palmar interossei are supplied by the ulnar nerve."
+      ],
+      "podcast": [
+        "Interossei sit between the metacarpals. There are two groups: dorsal and palmar. The key distinction is that dorsal interossei abduct the digits, while palmar interossei adduct them. Both groups also help the lumbricals flex the MCP joints and extend the IP joints. Both are supplied by the ulnar nerve."
+      ],
+      "quickRecall": [
+        "Where are the interossei located?",
+        "How do dorsal and palmar interossei differ in action?",
+        "What additional actions do both groups assist with?",
+        "Which nerve supplies them?"
+      ]
+    },
+    {
+      "number": 52,
+      "id": "block-52",
+      "title": "Dorsal interossei",
+      "rawTitle": "BLOCK 52 — DORSAL INTEROSSEI",
+      "category": "Hand Muscles",
+      "image": "assets/notes/ana201-ul-muscles/block-52.webp",
+      "notes": [
+        "Number/position: Four dorsal interosseous muscles; they are among the most superficial dorsal hand muscles and can be palpated on the dorsum of the hand.",
+        "Origins: Adjacent lateral and medial surfaces of the metacarpal bones.",
+        "Insertions: Extensor hood and proximal phalanx of each finger.",
+        "Actions: Abduct the digits and assist flexion at the MCP joints and extension at the IP joints.",
+        "Innervation: Ulnar nerve."
+      ],
+      "podcast": [
+        "There are four dorsal interossei, and you can often feel them on the back of the hand. They arise from adjacent surfaces of the metacarpals and attach to the extensor hoods and proximal phalanges. Their main action is to abduct the fingers; they also help with MCP flexion and IP extension. They are supplied by the ulnar nerve."
+      ],
+      "quickRecall": [
+        "How many dorsal interossei are there?",
+        "Where do they originate and insert?",
+        "What is their main action?",
+        "Which nerve supplies them?"
+      ]
+    },
+    {
+      "number": 53,
+      "id": "block-53",
+      "title": "Palmar interossei",
+      "rawTitle": "BLOCK 53 — PALMAR INTEROSSEI",
+      "category": "Hand Muscles",
+      "image": "assets/notes/ana201-ul-muscles/block-53.webp",
+      "notes": [
+        "Number: The lecture lists three palmar interossei, while noting that some texts describe a fourth muscle at the base of the proximal phalanx of the thumb.",
+        "Position: Located anteriorly on the hand.",
+        "Origins: Medial or lateral surfaces of metacarpal bones.",
+        "Insertions: Extensor hood and proximal phalanx of the same finger.",
+        "Actions: Adduct the digits and assist flexion at the MCP joints and extension at the IP joints.",
+        "Innervation: Ulnar nerve."
+      ],
+      "podcast": [
+        "Palmar interossei are on the palmar side of the hand. The lecture describes three, while noting that some texts describe a fourth near the thumb. They attach to the extensor hood and proximal phalanx of the same finger. Their main action is adduction—bringing the digits toward the hand’s axial line—and they assist MCP flexion and IP extension. Their nerve is ulnar."
+      ],
+      "quickRecall": [
+        "How many palmar interossei does the lecture list?",
+        "What variation in the number does it mention?",
+        "Where do they originate and insert?",
+        "What are their actions and nerve supply?"
+      ]
+    },
+    {
+      "number": 54,
+      "id": "block-54",
+      "title": "Palmaris brevis",
+      "rawTitle": "BLOCK 54 — PALMARIS BREVIS",
+      "category": "Hand Muscles",
+      "image": "assets/notes/ana201-ul-muscles/block-54.webp",
+      "notes": [
+        "Description/location: A small, thin muscle in the subcutaneous tissue of the hypothenar eminence.",
+        "Origin: Palmar aponeurosis and flexor retinaculum.",
+        "Insertion: Dermis of the skin along the medial margin of the hand.",
+        "Actions: Wrinkles the skin of the hypothenar eminence and deepens the curvature of the hand, improving grip.",
+        "Innervation: Ulnar nerve."
+      ],
+      "podcast": [
+        "Palmaris brevis is a thin, superficial muscle over the hypothenar eminence. Unlike many muscles, it attaches into the skin. It wrinkles the skin in that area and deepens the palm’s curvature, which helps improve grip. It is supplied by the ulnar nerve."
+      ],
+      "quickRecall": [
+        "Where is palmaris brevis located?",
+        "Where does it originate and insert?",
+        "How does it help grip?",
+        "Which nerve supplies it?"
+      ]
+    },
+    {
+      "number": 55,
+      "id": "block-55",
+      "title": "Adductor pollicis",
+      "rawTitle": "BLOCK 55 — ADDUCTOR POLLICIS",
+      "category": "Hand Muscles",
+      "image": "assets/notes/ana201-ul-muscles/block-55.webp",
+      "notes": [
+        "Shape/heads: A large, triangular muscle with two heads.",
+        "Origins: One head originates from metacarpal III; the other originates from the capitate and adjacent areas of metacarpals II and III.",
+        "Insertion: Both heads attach to the base of the proximal phalanx of the thumb.",
+        "Anatomical relationship: The radial artery passes anteriorly through the space between the two heads, forming the deep palmar arch.",
+        "Action: Adducts the thumb.",
+        "Innervation: Ulnar nerve."
+      ],
+      "podcast": [
+        "Adductor pollicis is a large triangular muscle with two heads. One begins at the third metacarpal; the other begins from the capitate and nearby parts of the second and third metacarpals. Both attach to the base of the thumb’s proximal phalanx. It adducts the thumb. A key relationship from the lecture is that the radial artery passes between the heads and forms the deep palmar arch."
+      ],
+      "quickRecall": [
+        "Describe the shape and number of heads of adductor pollicis.",
+        "Give the origins and insertion.",
+        "What is its action and nerve supply?",
+        "What artery passes between its heads, and what does it form?"
+      ]
+    },
+    {
+      "number": 56,
+      "id": "block-56",
+      "title": "Clinical correlates listed in the lecture",
+      "rawTitle": "BLOCK 56 — CLINICAL CORRELATES LISTED IN THE LECTURE",
+      "category": "Clinical Correlates",
+      "image": "assets/notes/ana201-ul-muscles/block-56.webp",
+      "notes": [
+        "Clinical topics listed: Winged scapula; scapular rotation; pectoralis major rupture; latissimus dorsi tendonitis; thenar muscle atrophy; Dupuytren’s contracture.",
+        "Important limitation: The supplied lecture lists these clinical correlates but does not explain their causes, signs, examination findings or management. The list is retained here without attributing additional details to the lecture.",
+        "How to prepare for an exam: Be ready to list the six clinical correlates and, if asked to explain them, use your lecturer’s fuller teaching or a verified clinical anatomy source."
+      ],
+      "podcast": [
+        "Before we finish, notice the clinical correlates listed in the lecture. There are six: winged scapula, scapular rotation, pectoralis major rupture, latissimus dorsi tendonitis, thenar muscle atrophy and Dupuytren’s contracture. The slide only lists their names, so I’m not going to pretend the PDF provided explanations it did not contain. For an exam, learn the list and get the detailed clinical explanations from your lecturer or a trusted clinical anatomy text."
+      ],
+      "quickRecall": [
+        "List all six clinical correlates in the supplied lecture.",
+        "Which listed correlates involve the scapula?",
+        "Which listed correlates name a muscle/tendon problem?",
+        "Which listed correlate specifically concerns the thenar muscles?"
+      ]
+    }
+  ],
+  "checklist": [
+    "Write the six regions of the upper limb in order.",
+    "Name the four pectoral-region muscles and state one key fact about each.",
+    "Differentiate extrinsic and intrinsic shoulder muscles.",
+    "List the four rotator cuff muscles and give each muscle’s main action and nerve supply.",
+    "Name the muscles in the anterior and posterior compartments of the upper arm.",
+    "List the anterior forearm muscles by layer and identify the nerve-supply exceptions.",
+    "Compare flexor digitorum superficialis with flexor digitorum profundus.",
+    "List the superficial and deep posterior forearm muscles covered in this material.",
+    "Differentiate thenar and hypothenar eminences.",
+    "Compare dorsal and palmar interossei.",
+    "List the six clinical correlates stated in the lecture."
+  ],
+  "examChecklist": [
+    "Write the full muscle name the first time before using an abbreviation.",
+    "For each muscle, practise the same headings: situation/description, origin, insertion, action, innervation and important relationship.",
+    "Do not confuse origin with insertion; learn the two attachment points as a pair.",
+    "Use directional terms precisely: medial/lateral, anterior/posterior, superior/inferior.",
+    "Where the lecture gives a nerve supply, include it in your answer. Where it does not, do not invent it from this document.",
+    "Use the image prompts to create labelled images, but check every label against the note before studying from the generated image."
+  ]
+}

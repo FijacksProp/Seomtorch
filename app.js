@@ -4281,29 +4281,60 @@ async function renderUniCourse() {
   const sections = data.sections || [];
   const hasCourse = hasCourseAccess(data.code);
   const topicsHtml = sections.map((section, sIdx) => {
-    const hasNote = Boolean(section.noteFile);
     const isNoteUnlocked = hasCourse || sIdx === 0;
-    const noteBtnHtml = hasNote ? `
-      <button class="uni-notebook-btn ${isNoteUnlocked ? "" : "locked-note"}" type="button" data-uni-note-file="${escapeHtml(section.noteFile)}" data-uni-note-title="${escapeHtml(section.noteTitle || section.title + ' Notebook')}" data-uni-course-code="${escapeHtml(data.code)}" data-note-locked="${isNoteUnlocked ? "0" : "1"}" aria-label="Open ${escapeHtml(section.title)} Notebook">
-        <svg class="uni-notebook-btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-0-5.5H20"/>
-          <path d="M8 7h8M8 11h8M8 15h4"/>
-        </svg>
-        <span class="uni-notebook-btn-label">Notebook</span>
-        <span class="uni-notebook-btn-badge">${isNoteUnlocked ? (sIdx === 0 && !hasCourse ? "Free Showcase" : "Study Note") : "🔒 Locked"}</span>
-      </button>` : "";
+    let noteBtnHtml = "";
+    if (section.notes && section.notes.length > 0) {
+      noteBtnHtml = `
+        <div class="uni-section-notes-shelf">
+          ${section.notes.map(n => `
+            <button class="uni-notebook-btn ${isNoteUnlocked ? "" : "locked-note"}" type="button" data-uni-note-file="${escapeHtml(n.noteFile)}" data-uni-note-title="${escapeHtml(n.title)}" data-uni-course-code="${escapeHtml(data.code)}" data-note-locked="${isNoteUnlocked ? "0" : "1"}" aria-label="Open ${escapeHtml(n.title)} Notebook">
+              <svg class="uni-notebook-btn-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-0-5.5H20"/>
+                <path d="M8 7h8M8 11h8M8 15h4"/>
+              </svg>
+              <span class="uni-notebook-btn-label">${escapeHtml(n.title)}</span>
+              <span class="uni-notebook-btn-badge">${isNoteUnlocked ? (sIdx === 0 && !hasCourse ? "Free Preview" : "Study Note") : "🔒 Locked"}</span>
+            </button>
+          `).join("")}
+        </div>`;
+    } else if (section.noteFile) {
+      noteBtnHtml = `
+        <button class="uni-notebook-btn ${isNoteUnlocked ? "" : "locked-note"}" type="button" data-uni-note-file="${escapeHtml(section.noteFile)}" data-uni-note-title="${escapeHtml(section.noteTitle || section.title + ' Notebook')}" data-uni-course-code="${escapeHtml(data.code)}" data-note-locked="${isNoteUnlocked ? "0" : "1"}" aria-label="Open ${escapeHtml(section.title)} Notebook">
+          <svg class="uni-notebook-btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-0-5.5H20"/>
+            <path d="M8 7h8M8 11h8M8 15h4"/>
+          </svg>
+          <span class="uni-notebook-btn-label">Notebook</span>
+          <span class="uni-notebook-btn-badge">${isNoteUnlocked ? (sIdx === 0 && !hasCourse ? "Free Showcase" : "Study Note") : "🔒 Locked"}</span>
+        </button>`;
+    }
 
     const topicItems = section.topics.map((topic, topicIdx) => {
       const isAvailable = topic.status !== "coming-soon";
       const isFree = isTopicFree(data.code, topic.id, topicIdx, sIdx);
       const isUnlocked = hasCourse || isFree;
       const statusIcon = isAvailable ? `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>` : `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`;
-      
+
+      const topicHasNote = Boolean(topic.noteFile);
+      const isTopicNoteUnlocked = hasCourse || sIdx === 0;
+      const topicNoteBtnHtml = topicHasNote ? `
+        <button class="uni-topic-note-action-btn uni-notebook-btn ${isTopicNoteUnlocked ? "" : "locked-note"}" type="button" data-uni-note-file="${escapeHtml(topic.noteFile)}" data-uni-note-title="${escapeHtml(topic.noteTitle || topic.title + ' Notebook')}" data-uni-course-code="${escapeHtml(data.code)}" data-note-locked="${isTopicNoteUnlocked ? "0" : "1"}" aria-label="Open ${escapeHtml(topic.title)} Notebook">
+          <svg class="uni-notebook-btn-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-0-5.5H20"/>
+            <path d="M8 7h8M8 11h8M8 15h4"/>
+          </svg>
+          <span>Study Note</span>
+          <span class="uni-topic-note-badge">${hasCourse ? "Notes &amp; Podcast" : "Free Preview"}</span>
+        </button>` : "";
+
       if (!isAvailable) {
         return `<div class="uni-topic-item coming-soon">
           <span class="uni-topic-status">${statusIcon}</span>
           <div class="uni-topic-info">
-            <h4>${escapeHtml(topic.title)}</h4>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+              <h4>${escapeHtml(topic.title)}</h4>
+              ${topicNoteBtnHtml}
+            </div>
             <span class="uni-topic-tag">Coming soon</span>
           </div>
         </div>`;
@@ -4313,7 +4344,10 @@ async function renderUniCourse() {
         return `<div class="uni-topic-item locked" data-uni-topic-title="${escapeHtml(topic.title)}" data-uni-course-code="${escapeHtml(data.code)}" role="button" tabindex="0">
           <span class="uni-topic-status locked"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
           <div class="uni-topic-info">
-            <h4>${escapeHtml(topic.title)}</h4>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+              <h4>${escapeHtml(topic.title)}</h4>
+              ${topicNoteBtnHtml}
+            </div>
             <span class="uni-topic-tag" style="color:var(--ochre)">Locked · Full Course Access</span>
           </div>
           <span class="uni-topic-lock-pill">🔒 Unlock</span>
@@ -4323,7 +4357,10 @@ async function renderUniCourse() {
       return `<div class="uni-topic-item available" data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" role="button" tabindex="0">
         <span class="uni-topic-status">${statusIcon}</span>
         <div class="uni-topic-info">
-          <h4>${escapeHtml(topic.title)}</h4>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <h4>${escapeHtml(topic.title)}</h4>
+            ${topicNoteBtnHtml}
+          </div>
           ${isFree && !hasCourse ? `<span class="uni-topic-tag" style="color:var(--forest);font-weight:700;">Free Sample Topic</span>` : ""}
         </div>
         <button class="uni-topic-target-btn" type="button" data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" aria-label="Configure practice: ${escapeHtml(topic.title)}">
@@ -6427,11 +6464,20 @@ async function renderUniNote() {
   `;
 
   // Final Practice Call to Action Card
+  const practiceTitle = noteData.practiceTopic?.title || noteData.noteTitle || "Practice";
+  const practiceFile = noteData.practiceTopic?.dataFile || (noteData.id?.includes("muscles") ? "data/university/anatomy/200/questions-ana201-muscles.json" : "data/university/anatomy/200/questions-ana201-bones.json");
+
+  const siblingNote = (noteData.id === "note-ana201-ul-bones" || noteData.noteTitle?.includes("Bones"))
+    ? { title: "Muscles of the Upper Limb", file: "data/university/anatomy/200/notes-ana201-ul-muscles.json", icon: "→" }
+    : (noteData.id === "note-ana201-ul-muscles" || noteData.noteTitle?.includes("Muscles"))
+      ? { title: "Bones of the Upper Limb", file: "data/university/anatomy/200/notes-ana201-ul-bones.json", icon: "←" }
+      : null;
+
   const ctaCardHtml = `
     <section class="uni-note-cta-card">
       <div class="uni-note-cta-text">
         <h3>Ready to test your anatomical knowledge?</h3>
-        <p>Challenge yourself with the high-yield MCQs for Bones of the Upper Limb in ANA 201.</p>
+        <p>Challenge yourself with the high-yield MCQs for ${escapeHtml(practiceTitle)} in ${escapeHtml(noteData.courseCode || "ANA 201")}.</p>
       </div>
       <button class="uni-note-cta-btn" id="uni-note-start-practice">
         <span>Start Practice Quiz</span>
@@ -6453,7 +6499,7 @@ async function renderUniNote() {
       <div class="uni-note-hero-pills">
         <span class="uni-note-meta-pill">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          17 High-Yield Diagrams
+          ${totalBlocks} High-Yield Diagrams
         </span>
         <span class="uni-note-meta-pill">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
@@ -6464,6 +6510,14 @@ async function renderUniNote() {
           Quick Recall Self-Tests
         </span>
       </div>
+
+      ${siblingNote ? `
+        <div style="margin-top:10px; margin-bottom:14px;">
+          <button type="button" class="uni-note-switcher-btn" id="uni-note-switch-sibling" data-sibling-file="${escapeHtml(siblingNote.file)}" data-sibling-title="${escapeHtml(siblingNote.title)}" style="display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,0.18);color:#d97706;border:1px solid rgba(201,168,76,0.4);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.18s ease;">
+            <span>${siblingNote.icon} Switch to ${escapeHtml(siblingNote.title)} Notebook</span>
+          </button>
+        </div>
+      ` : ""}
 
       <div class="uni-note-toolbar">
         <div class="uni-note-mode-switch" role="group" aria-label="Reading mode">
@@ -6711,7 +6765,21 @@ async function renderUniNote() {
   // Bind Practice CTA
   document.querySelector("#uni-note-start-practice")?.addEventListener("click", () => {
     stopUniNoteAudio();
-    showTopicConfigModal(noteData.courseCode || "ANA 201", "Bones of the Upper Limb", "data/university/anatomy/200/questions-ana201-bones.json");
+    const pTitle = noteData.practiceTopic?.title || noteData.noteTitle || "Practice";
+    const pFile = noteData.practiceTopic?.dataFile || (noteData.id?.includes("muscles") ? "data/university/anatomy/200/questions-ana201-muscles.json" : "data/university/anatomy/200/questions-ana201-bones.json");
+    showTopicConfigModal(noteData.courseCode || "ANA 201", pTitle, pFile);
+  });
+
+  // Bind Sibling Note Switcher
+  document.querySelector("#uni-note-switch-sibling")?.addEventListener("click", function() {
+    stopUniNoteAudio();
+    uniNoteFile = this.dataset.siblingFile;
+    uniNoteTitle = this.dataset.siblingTitle;
+    uniNoteActiveBlock = 1;
+    uniNoteRevealedMap = {};
+    uniNoteTranscriptOpenMap = {};
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    render();
   });
 }
 
