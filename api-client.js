@@ -4,11 +4,14 @@ export class ApiError extends Error {
   constructor(message, status = 0, fields = null) { super(message); this.status = status; this.fields = fields; }
 }
 
-async function request(path, { token, method = "GET", body } = {}) {
+async function request(path, { token, method = "GET", body, signal } = {}) {
   let response;
   try {
-    response = await fetch(`${API_URL}${path}`, { method, cache: "no-store", headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Token ${token}` } : {}) }, ...(body !== undefined ? { body: JSON.stringify(body) } : {}) });
-  } catch { throw new ApiError("The server could not be reached. Check your connection and try again."); }
+    response = await fetch(`${API_URL}${path}`, { method, cache: "no-store", headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Token ${token}` } : {}) }, ...(body !== undefined ? { body: JSON.stringify(body) } : {}), ...(signal ? { signal } : {}) });
+  } catch (error) {
+    if (error?.name === "AbortError") throw new ApiError("The server took too long to prepare this session. Please try again.");
+    throw new ApiError("The server could not be reached. Check your connection and try again.");
+  }
   const data = response.status === 204 ? null : await response.json().catch(() => ({}));
   if (!response.ok) {
     const baseMessage = data?.non_field_errors?.[0] || data?.detail || Object.values(data || {}).flat()[0] || "The request could not be completed.";
@@ -24,7 +27,7 @@ export const api = {
   me: token => request("/auth/me/", { token }),
   changePassword: (token, body) => request("/auth/change-password/", { token, method: "POST", body }),
   logout: token => request("/auth/logout/", { token, method: "POST" }),
-  startSession: (token, body) => request("/sessions/", { token, method: "POST", body }),
+  startSession: (token, body, options = {}) => request("/sessions/", { ...options, token, method: "POST", body }),
   beginSession: (token, id) => request(`/sessions/${id}/begin/`, { token, method: "POST", body: {} }),
   universityContent: (token, path) => request(`/content/university/?path=${encodeURIComponent(path)}`, { token }),
   completeSession: (token, id) => request(`/sessions/${id}/complete/`, { token, method: "POST" }),

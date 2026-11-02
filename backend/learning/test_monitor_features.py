@@ -77,6 +77,22 @@ class MonitorProFeatureTests(TestCase):
             self.assertIn("chart_subject_labels", response.context)
             self.assertIn("chart_tier_labels", response.context)
 
+    def test_dashboard_subject_metrics_keep_independent_counts(self):
+        self._record_verified_session(self.student, total=4, correct=3)
+        self._record_verified_session(self.student, total=2, correct=1)
+
+        response = self.client.get("/monitor/?track=aspirant&range=all")
+        self.assertEqual(response.status_code, 200)
+        biology = next(item for item in response.context["aspirant_subjects"] if item.slug == "biology")
+        self.assertEqual(biology.total_attempts, 6)
+        self.assertEqual(biology.correct_attempts, 4)
+        self.assertEqual(biology.student_count, 1)
+        self.assertEqual(biology.test_count, 2)
+        self.assertEqual(biology.question_count, 6)
+        self.assertEqual(biology.reviewed_count, 6)
+        self.assertEqual(biology.accuracy, 67)
+        self.assertEqual(biology.explanation_coverage, 100)
+
     def test_student_detail_with_charts_and_access(self):
         response = self.client.get(f"/monitor/students/{self.student.public_id}/")
         self.assertEqual(response.status_code, 200)

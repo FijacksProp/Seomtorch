@@ -131,6 +131,59 @@ class LearningApiTests(APITestCase):
         response = self.client.post("/api/sessions/", {"subject": "english", "limit": 9, "duration_minutes": 10}, format="json")
         self.assertEqual(response.status_code, 400)
 
+    def test_session_resolves_topic_by_name_when_client_slug_differs(self):
+        subject = Subject.objects.get(slug="physics")
+        topic = Topic.objects.create(subject=subject, name="Motion/Projectile", slug="motionprojectile")
+        Question.objects.bulk_create([
+            Question(
+                external_id=f"topic-slug-fallback-{index}",
+                topic=topic,
+                text=f"Topic slug fallback question {index}",
+                options=["Option A", "Option B", "Option C", "Option D"],
+                correct_index=0,
+            )
+            for index in range(10)
+        ])
+
+        response = self.client.post("/api/sessions/", {
+            "subject": "physics",
+            "topic": "motion-projectile",
+            "topic_name": "Motion/Projectile",
+            "limit": 10,
+            "duration_minutes": 20,
+        }, format="json")
+
+        self.assertEqual(response.status_code, 201, response.data)
+        self.assertEqual(len(response.data["questions"]), 10)
+        session = PracticeSession.objects.get(id=response.data["session_id"])
+        self.assertEqual(session.topic_id, topic.id)
+
+    def test_session_rejects_missing_or_empty_topic_without_creating_session(self):
+        subject = Subject.objects.get(slug="physics")
+        empty_topic = Topic.objects.create(subject=subject, name="No questions yet", slug="no-questions-yet")
+        before = PracticeSession.objects.filter(user=self.user).count()
+
+        missing = self.client.post("/api/sessions/", {
+            "subject": "physics",
+            "topic": "not-in-database",
+            "topic_name": "Not in database",
+            "limit": 10,
+            "duration_minutes": 20,
+        }, format="json")
+        self.assertEqual(missing.status_code, 400)
+        self.assertIn("topic", missing.data)
+
+        empty = self.client.post("/api/sessions/", {
+            "subject": "physics",
+            "topic": empty_topic.slug,
+            "topic_name": empty_topic.name,
+            "limit": 10,
+            "duration_minutes": 20,
+        }, format="json")
+        self.assertEqual(empty.status_code, 400)
+        self.assertIn("No active questions", empty.data["detail"])
+        self.assertEqual(PracticeSession.objects.filter(user=self.user).count(), before)
+
     def test_university_mixed_session_can_only_use_the_free_topic_without_access(self):
         subject, _ = Subject.objects.get_or_create(
             slug="ana-201",

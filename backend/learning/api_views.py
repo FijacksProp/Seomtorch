@@ -92,7 +92,22 @@ class StartSessionView(APIView):
         topic_slug = request.data.get("topic")
         if topic_slug is not None and not isinstance(topic_slug, str):
             return Response({"topic": ["Choose a valid topic."]}, status=400)
-        topic = get_object_or_404(Topic, subject=subject, slug=topic_slug) if topic_slug and subject else None
+        topic_name = request.data.get("topic_name")
+        if topic_name is not None and not isinstance(topic_name, str):
+            return Response({"topic_name": ["Choose a valid topic name."]}, status=400)
+        topic = None
+        if topic_slug and subject:
+            topic = Topic.objects.filter(subject=subject, slug=topic_slug).first()
+            # Older clients derive a slug from the visible topic label. Resolve
+            # by the label too, so punctuation/Unicode slug differences do not
+            # turn a valid topic into a 404.
+            if topic is None and topic_name and topic_name.strip():
+                topic = Topic.objects.filter(subject=subject, name__iexact=topic_name.strip()).first()
+            if topic is None:
+                return Response(
+                    {"topic": ["This topic is not available for this subject yet. Choose another topic or All topics."]},
+                    status=400,
+                )
         has_course_access = bool(subject and CourseAccess.user_has_course_access(request.user, subject.code))
         if subject and subject.track == Subject.Track.UNIVERSITY and not has_course_access:
             if topic and not user_can_access_topic(request.user, subject, topic):
@@ -178,6 +193,10 @@ class StartSessionView(APIView):
             if topic: pool = pool.filter(topic=topic)
             selected = self._select_questions(request.user, pool, limit)
             sections.append({"subject": subject.slug, "name": subject.name, "count": len(selected)})
+
+        if not selected:
+            detail = "No active questions are available for this selection. Choose another topic or All topics."
+            return Response({"detail": detail}, status=400)
 
         session = PracticeSession.objects.create(
             user=request.user,

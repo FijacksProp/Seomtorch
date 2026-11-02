@@ -1464,7 +1464,39 @@ function buildSessionSections(queue) {
   return sections;
 }
 
-function topicSlug(value) { return String(value || "").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+function topicSlug(value) {
+  // Keep this in step with Django's slugify(..., allow_unicode=False), which
+  // is used when the question bank is imported into the server database.
+  return String(value || "")
+    .normalize("NFKD")
+    .replace(/[^\x00-\x7F]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9_\s-]/g, "")
+    .replace(/[-\s]+/g, "-")
+    .replace(/^[-_]+|[-_]+$/g, "");
+}
+
+function normalizePracticeQuestion(item) {
+  const local = questionById(item.external_id);
+  return {
+    ...(local || {}),
+    id: item.external_id,
+    subject: item.subject || local?.subject || "",
+    topic: item.topic || local?.topic || "",
+    text: item.text || local?.text || "",
+    options: Array.isArray(item.options) ? item.options : (local?.options || []),
+    difficulty: item.difficulty || local?.difficulty || "standard",
+    questionYear: item.questionYear ?? local?.questionYear ?? null,
+    passage_id: item.passage_id || local?.passage_id || null,
+    passage_title: item.passage_title || local?.passage_title || "",
+    passage_body: item.passage_body || local?.passage_body || "",
+    video_url: item.video_url || local?.video_url || "",
+    image_url: item.image_url || local?.image_url || "",
+    explanation: local?.explanation || "",
+    explanationStatus: local?.explanationStatus || (item.explanation_available ? "reviewed" : "missing"),
+    explanation_image_url: local?.explanation_image_url || "",
+  };
+}
 
 function startSession(subject, topic, count = 10, durationMinutes = 10, mode = selectedPracticeMode) {
   const label = subject === "all" ? "All subjects" : subject === "saved" ? "Saved for review" : subjectName(subject);
@@ -1480,12 +1512,25 @@ async function createSession(subject, topic, count = 10, durationMinutes = 10, m
     let remoteId = null;
     if (authToken && navigator.onLine) {
       try {
-        const startPromise = api.startSession(authToken, { subject, topic: topic ? topicSlug(topic) : null, limit: count, duration_minutes: durationMinutes, mode });
-        const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), 5000));
-        const remote = await Promise.race([startPromise, timeoutPromise]);
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 45000);
+        let remote;
+        try {
+          remote = await api.startSession(authToken, {
+            subject,
+            topic: topic ? topicSlug(topic) : null,
+            topic_name: topic || null,
+            limit: count,
+            duration_minutes: durationMinutes,
+            mode,
+          }, { signal: controller.signal });
+        } finally {
+          clearTimeout(timeout);
+        }
         remoteId = remote?.session_id || null;
-        const selected = (remote?.questions || []).map(item => questionById(item.external_id)).filter(Boolean);
-        if (!remoteId || selected.length !== remote.questions.length || !selected.length) {
+        const remoteQuestions = Array.isArray(remote?.questions) ? remote.questions : [];
+        const selected = remoteQuestions.map(normalizePracticeQuestion).filter(question => question.id && question.text && question.options.length);
+        if (!remoteId || selected.length !== remoteQuestions.length || !selected.length) {
           throw new Error("The server could not prepare this session. Please try again.");
         }
         queue = selected;

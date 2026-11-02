@@ -10,7 +10,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.db import models, transaction
-from django.db.models import Avg, Count, Prefetch, Q, Sum
+from django.db.models import Avg, Count, Exists, OuterRef, Prefetch, Q, Sum
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
@@ -269,15 +269,55 @@ def dashboard(request):
 
     # ── Chart 3 & Catalog: Dual-Track Subject & Course Performance ────────
     # 1. Aspirant Subjects (JAMB / WAEC)
-    aspirant_subjects = list(Subject.objects.filter(is_active=True, track="aspirant").annotate(
-        total_attempts=Count("topics__questions__attempts", filter=Q(topics__questions__attempts__user__is_staff=False), distinct=True),
-        correct_attempts=Count("topics__questions__attempts", filter=Q(topics__questions__attempts__is_correct=True, topics__questions__attempts__user__is_staff=False), distinct=True),
-        student_count=Count("topics__questions__attempts__user", filter=Q(topics__questions__attempts__user__is_staff=False), distinct=True),
-        test_count=Count("practice_sessions", filter=Q(practice_sessions__status=PracticeSession.Status.COMPLETED, practice_sessions__attempts__isnull=False), distinct=True),
-        question_count=Count("topics__questions", filter=Q(topics__questions__is_active=True), distinct=True),
-        reviewed_count=Count("topics__questions", filter=Q(topics__questions__is_active=True, topics__questions__explanation_status=Question.ExplanationStatus.REVIEWED), distinct=True),
-    ))
+    # Keep these aggregates independent. Joining attempts, sessions and questions
+    # together here creates a large cross-product (for example, attempts x
+    # questions x sessions) before COUNT(DISTINCT) runs, which can exhaust the
+    # database's temporary query space as the bank and student activity grow.
+    aspirant_subjects = list(Subject.objects.filter(is_active=True, track="aspirant"))
+    aspirant_subject_ids = [subject.id for subject in aspirant_subjects]
+    attempt_stats = {
+        row["question__topic__subject_id"]: row
+        for row in Attempt.objects.filter(
+            question__topic__subject_id__in=aspirant_subject_ids,
+            user__is_staff=False,
+        ).values("question__topic__subject_id").annotate(
+            total_attempts=Count("id"),
+            correct_attempts=Count("id", filter=Q(is_correct=True)),
+            student_count=Count("user_id", distinct=True),
+        )
+    }
+    question_stats = {
+        row["topic__subject_id"]: row
+        for row in Question.objects.filter(
+            topic__subject_id__in=aspirant_subject_ids,
+            is_active=True,
+        ).values("topic__subject_id").annotate(
+            question_count=Count("id"),
+            reviewed_count=Count(
+                "id",
+                filter=Q(explanation_status=Question.ExplanationStatus.REVIEWED),
+            ),
+        )
+    }
+    sessions_with_answers = Attempt.objects.filter(session_id=OuterRef("pk"))
+    session_stats = {
+        row["subject_id"]: row["test_count"]
+        for row in PracticeSession.objects.filter(
+            subject_id__in=aspirant_subject_ids,
+            status=PracticeSession.Status.COMPLETED,
+        ).annotate(_has_answers=Exists(sessions_with_answers)).filter(
+            _has_answers=True,
+        ).values("subject_id").annotate(test_count=Count("id"))
+    }
     for subject in aspirant_subjects:
+        attempts_for_subject = attempt_stats.get(subject.id, {})
+        questions_for_subject = question_stats.get(subject.id, {})
+        subject.total_attempts = attempts_for_subject.get("total_attempts", 0)
+        subject.correct_attempts = attempts_for_subject.get("correct_attempts", 0)
+        subject.student_count = attempts_for_subject.get("student_count", 0)
+        subject.test_count = session_stats.get(subject.id, 0)
+        subject.question_count = questions_for_subject.get("question_count", 0)
+        subject.reviewed_count = questions_for_subject.get("reviewed_count", 0)
         subject.accuracy = percentage(subject.correct_attempts, subject.total_attempts)
         subject.explanation_coverage = percentage(subject.reviewed_count, subject.question_count)
 
