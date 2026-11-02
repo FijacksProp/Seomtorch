@@ -85,6 +85,48 @@ class LearningApiTests(APITestCase):
         self.assertEqual(response.data["attempt"]["xp_earned"], 0)
         self.assertEqual(response.data["stats"]["xp"], 0)
 
+    def test_bulk_submission_records_answers_and_is_idempotent(self):
+        _, session, _ = self._new_started_session(limit=10)
+        selected = list(Question.objects.filter(external_id__in=session.question_ids).order_by("external_id")[:2])
+        payload = {
+            "session_id": str(session.id),
+            "attempts": [
+                {
+                    "question_id": question.external_id,
+                    "selected_index": question.correct_index if index == 0 else (question.correct_index + 1) % len(question.options),
+                    "client_id": str(uuid.uuid4()),
+                }
+                for index, question in enumerate(selected)
+            ],
+        }
+
+        first = self.client.post("/api/attempts/bulk/", payload, format="json")
+        self.assertEqual(first.status_code, 200, first.data)
+        self.assertEqual(len(first.data["results"]), 2)
+        self.assertEqual([item["correct"] for item in first.data["results"]], [True, False])
+        self.assertEqual(first.data["stats"]["xp"], 5)
+        self.assertEqual(Attempt.objects.filter(user=self.user, session=session).count(), 2)
+        self.assertEqual(ActivityEvent.objects.filter(user=self.user, event_type=ActivityEvent.Type.ANSWERED).count(), 2)
+
+        retry = self.client.post("/api/attempts/bulk/", payload, format="json")
+        self.assertEqual(retry.status_code, 200, retry.data)
+        self.assertEqual(Attempt.objects.filter(user=self.user, session=session).count(), 2)
+        self.assertEqual(retry.data["stats"]["xp"], 5)
+
+    def test_bulk_submission_rejects_answers_outside_the_session(self):
+        _, session, _ = self._new_started_session(limit=10)
+        outside = Question.objects.exclude(external_id__in=session.question_ids).filter(topic__subject__slug="english").first()
+        response = self.client.post("/api/attempts/bulk/", {
+            "session_id": str(session.id),
+            "attempts": [{
+                "question_id": outside.external_id,
+                "selected_index": 0,
+                "client_id": str(uuid.uuid4()),
+            }],
+        }, format="json")
+        self.assertEqual(response.status_code, 400)
+        self.assertFalse(Attempt.objects.filter(user=self.user, session=session).exists())
+
     def test_duplicate_client_attempt_is_idempotent(self):
         _, session, question = self._new_started_session()
         client_id = str(uuid.uuid4())
@@ -155,6 +197,32 @@ class LearningApiTests(APITestCase):
 
         self.assertEqual(response.status_code, 201, response.data)
         self.assertEqual(len(response.data["questions"]), 10)
+        session = PracticeSession.objects.get(id=response.data["session_id"])
+        self.assertEqual(session.topic_id, topic.id)
+
+    def test_session_resolves_university_topic_from_explicit_question_set(self):
+        subject, _ = Subject.objects.get_or_create(
+            slug="ana-201",
+            defaults={"name": "Gross Anatomy", "code": "ANA 201", "track": Subject.Track.UNIVERSITY},
+        )
+        topic = Topic.objects.create(subject=subject, name="Lower Limb", slug="ul-bones")
+        Question.objects.bulk_create([
+            Question(
+                external_id=f"test-university-topic-inference-{index}", topic=topic,
+                text=f"University topic inference question {index}",
+                options=["Option A", "Option B", "Option C", "Option D"], correct_index=0,
+            )
+            for index in range(2)
+        ])
+        response = self.client.post("/api/sessions/", {
+            "subject": "ana-201",
+            "topic": "catalog-topic-id-that-differs",
+            "topic_name": "Catalog label that differs",
+            "limit": 2,
+            "mode": "normal",
+            "question_ids": [f"test-university-topic-inference-{index}" for index in range(2)],
+        }, format="json")
+        self.assertEqual(response.status_code, 201, response.data)
         session = PracticeSession.objects.get(id=response.data["session_id"])
         self.assertEqual(session.topic_id, topic.id)
 

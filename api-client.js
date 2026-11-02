@@ -32,6 +32,7 @@ export const api = {
   universityContent: (token, path) => request(`/content/university/?path=${encodeURIComponent(path)}`, { token }),
   completeSession: (token, id) => request(`/sessions/${id}/complete/`, { token, method: "POST" }),
   syncAttempt: (token, body) => request("/attempts/", { token, method: "POST", body }),
+  syncAttemptsBulk: (token, body) => request("/attempts/bulk/", { token, method: "POST", body }),
   attempts: token => request("/attempts/", { token }),
   progress: token => request("/progress/", { token }),
   bookmarks: token => request("/bookmarks/", { token }),

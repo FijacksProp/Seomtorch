@@ -103,6 +103,23 @@ class StartSessionView(APIView):
             # turn a valid topic into a 404.
             if topic is None and topic_name and topic_name.strip():
                 topic = Topic.objects.filter(subject=subject, name__iexact=topic_name.strip()).first()
+            # University course catalogs and the imported bank can use slightly
+            # different topic IDs. When the client supplies an explicit set of
+            # questions, safely resolve the topic from that set if every ID is
+            # active, belongs to this subject, and points to one topic.
+            requested_topic_ids = request.data.get("question_ids")
+            if topic is None and isinstance(requested_topic_ids, list) and requested_topic_ids:
+                requested_ids = [str(item) for item in requested_topic_ids]
+                if len(requested_ids) == len(set(requested_ids)):
+                    selected_questions = Question.objects.filter(
+                        external_id__in=requested_ids,
+                        topic__subject=subject,
+                        is_active=True,
+                    )
+                    selected_question_topics = list(selected_questions.values_list("external_id", "topic_id"))
+                    selected_topic_ids = {topic_id for _, topic_id in selected_question_topics}
+                    if len(selected_question_topics) == len(requested_ids) and len(selected_topic_ids) == 1:
+                        topic = Topic.objects.filter(id=next(iter(selected_topic_ids)), subject=subject).first()
             if topic is None:
                 return Response(
                     {"topic": ["This topic is not available for this subject yet. Choose another topic or All topics."]},
@@ -317,6 +334,157 @@ class SubmitAttemptView(APIView):
                 "stats": stats_payload(attempt.user, include_tests=False),
             }
         return {"attempt": AttemptSerializer(attempt).data, "correct": attempt.is_correct, "correct_index": attempt.question.correct_index, "explanation": attempt.question.explanation, "explanation_status": attempt.question.explanation_status, "explanation_image_url": attempt.question.explanation_image_url, "stats": stats_payload(attempt.user, include_tests=False)}
+
+
+class BulkSubmitAttemptsView(APIView):
+    """Record a finished timed session's deferred answers in one round trip."""
+    throttle_classes = [throttling.ScopedRateThrottle]
+    throttle_scope = "practice_answers"
+
+    @transaction.atomic
+    def post(self, request):
+        raw_session_id = request.data.get("session_id")
+        try:
+            session_id = uuid.UUID(str(raw_session_id))
+        except (TypeError, ValueError, AttributeError):
+            return Response({"session_id": ["Start a server-backed practice session before submitting answers."]}, status=400)
+
+        raw_items = request.data.get("attempts")
+        if not isinstance(raw_items, list) or not 1 <= len(raw_items) <= 100:
+            return Response({"attempts": ["Submit between 1 and 100 selected answers."]}, status=400)
+
+        parsed = []
+        client_ids = set()
+        question_ids = set()
+        for index, item in enumerate(raw_items):
+            if not isinstance(item, dict):
+                return Response({"attempts": [f"Answer {index + 1} is invalid."]}, status=400)
+            question_id = item.get("question_id")
+            if not isinstance(question_id, str) or not question_id:
+                return Response({"attempts": [f"Answer {index + 1} needs a valid question ID."]}, status=400)
+            try:
+                client_id = uuid.UUID(str(item.get("client_id")))
+            except (TypeError, ValueError, AttributeError):
+                return Response({"attempts": [f"Answer {index + 1} needs a valid response ID."]}, status=400)
+            selected = item.get("selected_index")
+            if isinstance(selected, bool) or isinstance(selected, float) and not selected.is_integer():
+                return Response({"attempts": [f"Answer {index + 1} has an invalid option."]}, status=400)
+            try:
+                selected = int(selected)
+            except (TypeError, ValueError):
+                return Response({"attempts": [f"Answer {index + 1} has an invalid option."]}, status=400)
+            raw_duration = item.get("duration_ms")
+            if isinstance(raw_duration, bool) or isinstance(raw_duration, float) and not raw_duration.is_integer():
+                return Response({"attempts": [f"Answer {index + 1} has an invalid duration."]}, status=400)
+            try:
+                duration_ms = None if raw_duration is None else int(raw_duration)
+            except (TypeError, ValueError):
+                return Response({"attempts": [f"Answer {index + 1} has an invalid duration."]}, status=400)
+            if duration_ms is not None and not 0 <= duration_ms <= 3600000:
+                return Response({"attempts": [f"Answer {index + 1} has an invalid duration."]}, status=400)
+            if client_id in client_ids or question_id in question_ids:
+                return Response({"attempts": ["Each question and response ID must appear only once."]}, status=400)
+            client_ids.add(client_id)
+            question_ids.add(question_id)
+            parsed.append({"question_id": question_id, "client_id": client_id, "selected_index": selected, "duration_ms": duration_ms})
+
+        session = get_object_or_404(PracticeSession.objects.select_for_update(), id=session_id, user=request.user)
+        if session.mode == PracticeSession.Mode.CHALLENGE:
+            return Response({"detail": "Challenge answers must be submitted through the challenge flow."}, status=409)
+        if session.status != PracticeSession.Status.ACTIVE:
+            return Response({"detail": "This practice session is no longer active."}, status=409)
+        if not session.began_at:
+            return Response({"detail": "Begin this session before submitting answers."}, status=409)
+        if session.duration_minutes and timezone.now() >= session.began_at + timedelta(minutes=session.duration_minutes, seconds=90):
+            return Response({"detail": "The session timer has expired."}, status=409)
+
+        questions = {
+            item.external_id: item
+            for item in Question.objects.filter(external_id__in=question_ids, is_active=True).select_related("topic__subject")
+        }
+        if len(questions) != len(parsed):
+            return Response({"attempts": ["One or more questions are no longer available."]}, status=400)
+        if not question_ids.issubset(set(session.question_ids)):
+            return Response({"attempts": ["Every answer must belong to this practice session."]}, status=400)
+        for item in parsed:
+            question = questions[item["question_id"]]
+            if item["selected_index"] < 0 or item["selected_index"] >= len(question.options):
+                return Response({"attempts": ["An answer option is out of range."]}, status=400)
+
+        prior_by_client = {
+            str(attempt.client_id): attempt
+            for attempt in Attempt.objects.filter(user=request.user, client_id__in=client_ids).select_related("question__topic__subject", "session")
+        }
+        prior_in_session = {
+            attempt.question.external_id: attempt
+            for attempt in Attempt.objects.filter(user=request.user, session=session, question__external_id__in=question_ids).select_related("question__topic__subject")
+        }
+        new_items = []
+        response_attempts = {}
+        for item in parsed:
+            question = questions[item["question_id"]]
+            prior = prior_by_client.get(str(item["client_id"]))
+            if prior:
+                if prior.question_id != question.id or prior.session_id != session.id or prior.selected_index != item["selected_index"]:
+                    return Response({"detail": "A response ID has already been used for a different answer."}, status=409)
+                response_attempts[str(item["client_id"])] = prior
+                continue
+            prior_question = prior_in_session.get(question.external_id)
+            if prior_question:
+                return Response({"detail": "This question has already been recorded in the session."}, status=409)
+            correct = item["selected_index"] == question.correct_index
+            attempt = Attempt(
+                user=request.user,
+                question=question,
+                session=session,
+                client_id=item["client_id"],
+                selected_index=item["selected_index"],
+                is_correct=correct,
+                xp_earned=5 if correct else 0,
+                duration_ms=item["duration_ms"],
+            )
+            new_items.append((item, question, attempt))
+
+        created = Attempt.objects.bulk_create([row[2] for row in new_items])
+        response_attempts.update({str(attempt.client_id): attempt for attempt in created})
+        ActivityEvent.objects.bulk_create([
+            ActivityEvent(user=request.user, event_type=ActivityEvent.Type.ANSWERED, metadata={
+                "question_id": question.external_id,
+                "subject": question.topic.subject.slug,
+                "correct": attempt.is_correct,
+                "xp": attempt.xp_earned,
+            })
+            for _, question, attempt in new_items
+        ])
+
+        if new_items:
+            stats, _ = UserStats.objects.select_for_update().get_or_create(user=request.user)
+            correct_count = sum(1 for _, _, attempt in new_items if attempt.is_correct)
+            stats.xp += correct_count * 5
+            today = timezone.localdate()
+            if stats.last_study_date != today:
+                from datetime import timedelta as date_timedelta
+                stats.current_streak = stats.current_streak + 1 if stats.last_study_date == today - date_timedelta(days=1) else 1
+                stats.best_streak = max(stats.best_streak, stats.current_streak)
+                stats.last_study_date = today
+            stats.save()
+            session.correct_answers = session.attempts.filter(is_correct=True).count()
+            session.save(update_fields=("correct_answers",))
+
+        results = []
+        for item in parsed:
+            attempt = response_attempts[str(item["client_id"])]
+            question = attempt.question
+            results.append({
+                "client_id": str(attempt.client_id),
+                "question_id": question.external_id,
+                "correct": attempt.is_correct,
+                "correct_index": question.correct_index,
+                "explanation": question.explanation,
+                "explanation_status": question.explanation_status,
+                "explanation_image_url": question.explanation_image_url,
+            })
+        return Response({"results": results, "stats": stats_payload(request.user, include_tests=False), "badges_earned": []})
 
 class CompleteSessionView(APIView):
     @transaction.atomic

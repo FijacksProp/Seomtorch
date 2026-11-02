@@ -1798,12 +1798,85 @@ async function finalizeSelectedAnswers(timedOut = false) {
   if (!activeSession || activeSession.finalizing) return;
   activeSession.finalizing = true;
   const selected = activeSession.answers.map((answer, index) => answer.selected !== null && !answer.confirmed ? index : -1).filter(index => index >= 0);
-  for (const index of selected) {
-    const recorded = await submitConfirmedAnswer(index, false, true);
-    if (!recorded) {
+  if (authToken && activeSession.remoteId && activeSession.mode !== "challenge" && selected.length) {
+    showLoadingOverlay("Preparing your review", "Checking your answers and building your session analysis…");
+    try {
+      const pending = [];
+      for (const index of selected) {
+        const answer = activeSession.answers[index];
+        const question = activeSession.queue[index];
+        answer.clientId ||= crypto.randomUUID();
+        let attempt = attempts.find(item => item.clientId === answer.clientId);
+        if (!attempt) {
+          attempt = {
+            questionId: question.id,
+            subject: question.subject || activeSession.subject || "general",
+            topic: question.topic || question.section || activeSession.topic || "",
+            correct: null,
+            selected: answer.selected,
+            timestamp: Date.now(),
+            durationMs: null,
+            clientId: answer.clientId,
+            sessionId: activeSession.remoteId,
+            synced: false,
+          };
+          attempt.id = await add("attempts", attempt);
+          attempts.push(attempt);
+        }
+        answer.submitting = true;
+        pending.push({ index, answer, question, attempt });
+      }
+      saveActiveSession();
+      const result = await api.syncAttemptsBulk(authToken, {
+        session_id: activeSession.remoteId,
+        attempts: pending.map(({ question, answer, attempt }) => ({
+          question_id: question.id,
+          selected_index: answer.selected,
+          client_id: attempt.clientId,
+          duration_ms: attempt.durationMs,
+        })),
+      });
+      const resultsByClientId = new Map((result.results || []).map(item => [item.client_id, item]));
+      if (resultsByClientId.size !== pending.length) throw new Error("The server returned an incomplete answer review.");
+      for (const { answer, question, attempt } of pending) {
+        const verified = resultsByClientId.get(attempt.clientId);
+        if (!verified || verified.question_id !== question.id || typeof verified.correct !== "boolean") {
+          throw new Error("The server could not verify every selected answer. Please retry.");
+        }
+        answer.submitting = false;
+        answer.confirmed = true;
+        answer.correct = verified.correct;
+        question.correct = verified.correct_index;
+        question.explanation = verified.explanation || "";
+        question.explanationStatus = verified.explanation_status || question.explanationStatus;
+        question.explanation_image_url = verified.explanation_image_url || question.explanation_image_url || "";
+        attempt.correct = verified.correct;
+        attempt.synced = true;
+        attempt.syncError = null;
+        await put("attempts", attempt);
+      }
+      activeSession.correct = activeSession.answers.filter(answer => answer.confirmed && answer.correct).length;
+      if (result.stats) {
+        applyRemoteStats(result.stats);
+        await put("profile", profile);
+      }
+    } catch (error) {
+      for (const index of selected) activeSession.answers[index].submitting = false;
       activeSession.finalizing = false;
-      showToast("Reconnect and finish recording your selected answers before viewing the result.");
+      saveActiveSession();
+      hideLoadingOverlay();
+      showToast(error instanceof ApiError ? error.message : "Your answers could not be verified yet. Please try finishing again.");
       return;
+    }
+    hideLoadingOverlay();
+  } else {
+    for (const index of selected) {
+      const recorded = await submitConfirmedAnswer(index, false, true);
+      if (!recorded) {
+        activeSession.finalizing = false;
+        showToast("Reconnect and finish recording your selected answers before viewing the result.");
+        return;
+      }
     }
   }
   activeSession.timedOut = timedOut;
@@ -4962,6 +5035,7 @@ async function createUniversitySession({ courseCode, topicTitle, topicId = null,
     const remote = await api.startSession(authToken, {
       subject: topicSlug(courseCode),
       topic: topicId || null,
+      topic_name: topicTitle || null,
       limit: arranged.queue.length,
       ...(durationMinutes > 0 ? { duration_minutes: durationMinutes } : {}),
       mode,
