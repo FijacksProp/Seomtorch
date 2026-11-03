@@ -9035,6 +9035,7 @@ body.shield-active #main {
 }
 
 .profile-level-heading h2 {
+  color: #f7fbf5;
   margin: 0;
   font-family: var(--serif);
   font-size: 25px;

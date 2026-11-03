@@ -93,6 +93,7 @@ export const api = {
   blockBuddy: (token, public_id) => request("/community/blocks/", { token, method: "POST", body: { public_id } }),
   unblockBuddy: (token, id) => request(`/community/blocks/${encodeURIComponent(id)}/`, { token, method: "DELETE" }),
   feedback: token => request("/community/feedback/", { token }),
+  claimFeedbackPrompt: (token, session_id) => request("/community/feedback-prompt/", { token, method: "POST", body: { session_id }, timeoutMs: 30000 }),
   submitFeedback: (token, body) => request("/community/feedback/", { token, method: "POST", body, timeoutMs: 60000 }),
   subscriptionConfig: token => request("/subscriptions/config/", { token }),
   validateDiscountCode: (code, plan) => request("/subscriptions/validate-code/", { method: "POST", body: { code, plan } }),

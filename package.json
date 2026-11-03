@@ -5,7 +5,7 @@
   "scripts": {
     "start": "serve .",
     "check": "node --check app.js && node --check api-client.js && node --check community-ui.js && node --check buddy-chat.js && node --check student-engagement.js && node --check sw.js && node --check scripts/build-question-bank.mjs && node --check scripts/scrape-myschool-questions.mjs && node --check scripts/prepare-myschool-questions.mjs && node --check scripts/build-myschool-pack.mjs && node --check scripts/generate-physics-explanations.mjs",
-    "community:test": "node --test scripts/community-ui.test.mjs",
+    "community:test": "node --test scripts/community-ui.test.mjs scripts/feedback-prompt.test.mjs",
     "questions:build": "node scripts/build-question-bank.mjs",
     "questions:myschool": "node scripts/scrape-myschool-questions.mjs",
     "questions:myschool:test": "node scripts/scrape-myschool-questions.test.mjs",

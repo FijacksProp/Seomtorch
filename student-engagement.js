@@ -1,5 +1,49 @@
 let activeDialog = null;
 const introductionMemory = new Map();
+let postPracticeJob = null;
+const checkedFeedbackSessions = new Set();
+
+export function cancelPostPracticeFeedback() {
+  if (postPracticeJob) clearTimeout(postPracticeJob.timer);
+  postPracticeJob = null;
+}
+
+export function schedulePostPracticeFeedback({ api, token, sessionId, completedTests, isCurrentResult, isBlocked, escapeHtml }) {
+  if (!sessionId || !token || !Number.isFinite(completedTests) || completedTests < 3 || checkedFeedbackSessions.has(sessionId)) return;
+  if (postPracticeJob?.sessionId === sessionId) return;
+  cancelPostPracticeFeedback();
+  const job = { sessionId, timer: null, granted: false, expiresAt: Date.now() + 120000 };
+  postPracticeJob = job;
+  const current = () => postPracticeJob === job && Date.now() < job.expiresAt && isCurrentResult();
+  const blocked = () => document.hidden || isBlocked() || document.querySelector('[aria-modal="true"]');
+  const retry = () => { if (current()) job.timer = setTimeout(check, 1000); };
+  const remember = () => {
+    checkedFeedbackSessions.add(sessionId);
+    if (checkedFeedbackSessions.size > 200) checkedFeedbackSessions.delete(checkedFeedbackSessions.values().next().value);
+  };
+  async function check() {
+    if (!current()) { if (postPracticeJob === job) cancelPostPracticeFeedback(); return; }
+    if (blocked()) { retry(); return; }
+    if (!job.granted) {
+      try {
+        const response = await api.claimFeedbackPrompt(token, sessionId);
+        if (!current()) return;
+        remember();
+        if (!response.show) { cancelPostPracticeFeedback(); return; }
+        job.granted = true;
+      } catch {
+        // Feedback is optional. A network failure must never interrupt results.
+        if (current()) { remember(); cancelPostPracticeFeedback(); }
+        return;
+      }
+    }
+    if (!current()) return;
+    if (blocked()) { retry(); return; }
+    cancelPostPracticeFeedback();
+    showFeedbackPanel({ api, token, escapeHtml });
+  }
+  job.timer = setTimeout(check, 1800);
+}
 
 export function closeStudentDialogs() {
   activeDialog?.();
@@ -63,7 +107,7 @@ export function showFeedbackPanel({ api, token, escapeHtml: e, reportMessage = n
   const maxLength = isReport ? 1000 : 4000;
   let submitting = false, completed = false;
   const { overlay, close, signal } = openStudentDialog({
-    title: isReport ? "Report a message." : "What should we do better?",
+    title: isReport ? "Report a message." : "What should Seomtorch improve?",
     eyebrow: isReport ? "Keep your study circle safe" : "The listening desk",
     escapeHtml: e,
     canClose: () => {

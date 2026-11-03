@@ -224,6 +224,13 @@ class BuddyMessage(models.Model):
         ]
 
 
+class FeedbackPromptState(models.Model):
+    user = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE, related_name="feedback_prompt_state")
+    next_test_count = models.PositiveIntegerField(default=3)
+    last_prompt_at = models.DateTimeField(null=True, blank=True)
+    last_prompt_session = models.UUIDField(null=True, blank=True)
+
+
 class StudentFeedback(models.Model):
     class Category(models.TextChoices):
         GENERAL = "general", "General feedback"

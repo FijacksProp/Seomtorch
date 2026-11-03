@@ -12,6 +12,7 @@ from rest_framework.views import APIView
 
 from .community_views import _blocked_ids, _get_buddy_ids, _user_card
 from .models import BuddyMessage, StudentBlock, StudentFeedback, StudentFollow
+from .feedback_prompts import claim_post_practice_prompt
 
 User = get_user_model()
 
@@ -89,6 +90,18 @@ class FeedbackView(WriteThrottleView):
         if item.body != data["body"] or item.category != data["category"]:
             return Response({"detail": "This submission ID belongs to a different message."}, status=409)
         return Response(_feedback_payload(item), status=201 if created else 200)
+
+
+class FeedbackPromptView(WriteThrottleView):
+    throttle_scope = "feedback_prompt"
+
+    def post(self, request):
+        class PromptInput(serializers.Serializer):
+            session_id = serializers.UUIDField()
+
+        serializer = PromptInput(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        return Response({"show": claim_post_practice_prompt(request.user, serializer.validated_data["session_id"])})
 
 
 class BuddyInboxView(PrivateView):

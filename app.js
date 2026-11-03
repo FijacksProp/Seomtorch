@@ -2,7 +2,7 @@ import { api, ApiError } from "./api-client.js";
 import { jambCalculator } from "./calculator.js";
 import { communityPage } from "./community-ui.js";
 import { mountBuddyChat, unmountBuddyChat } from "./buddy-chat.js";
-import { closeStudentDialogs, eligibleForUniversityOffer, maybeShowUniversityIntroduction, openStudentDialog, showFeedbackPanel } from "./student-engagement.js";
+import { cancelPostPracticeFeedback, closeStudentDialogs, eligibleForUniversityOffer, maybeShowUniversityIntroduction, openStudentDialog, schedulePostPracticeFeedback, showFeedbackPanel } from "./student-engagement.js";
 
 const SUBJECTS = [
   { id: "biology", name: "Biology", description: "JAMB cell biology, physiology, ecology, genetics and evolution" },
@@ -2237,20 +2237,33 @@ function buildReviewGuidanceCard(activeSession, score, answered, unanswered) {
   `;
 }
 
+function offerPostPracticeFeedback(session, stats) {
+  const token = authToken;
+  schedulePostPracticeFeedback({
+    api, token, sessionId: session.remoteId, completedTests: Number(stats?.tests?.tests_taken || 0), escapeHtml,
+    isCurrentResult: () => token === authToken && route === "session" && activeSession === session && session.finished && (!session.timedOut || session.timeUpAcknowledged) && (session.mode !== "challenge" || Boolean(session.challengeResult)),
+    isBlocked: () => badgeCelebrationActive || badgeCelebrationQueue.length > 0,
+  });
+}
+
 function renderResult() {
   clearInterval(sessionTimer);
   if (activeSession.mode === "challenge") return renderChallengeSubmission();
   if (activeSession.remoteId && !activeSession.reportedComplete) {
-    activeSession.reportedComplete = true;
+    const session = activeSession, token = authToken;
+    session.reportedComplete = true;
     syncPendingAttempts().then(synced => {
       if (!synced) throw new Error("Some answers are not synchronized yet.");
-      return api.completeSession(authToken, activeSession.remoteId);
+      return api.completeSession(token, session.remoteId);
     }).then(async response => {
+      if (token !== authToken) return;
       applyRemoteStats(response.stats);
       progressData = null;
       await put("profile", profile);
+      if (token !== authToken) return;
       handleEarnedBadges(response.badges_earned || []);
-    }).catch(() => { activeSession.reportedComplete = false; });
+      offerPostPracticeFeedback(session, response.stats);
+    }).catch(() => { session.reportedComplete = false; });
   }
   if (activeSession.mode === "sprint" && !dailySprintCompleted) {
     dailySprintCompleted = true;
@@ -2401,6 +2414,7 @@ function renderResult() {
 }
 
 function renderChallengeSubmission() {
+  const session = activeSession, token = authToken;
   const result = activeSession.challengeResult;
   const shareBtn = result?.results_unlocked ? `<button class="button outline challenge-share-btn" id="share-submission-win"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg><span>Share Win</span></button>` : "";
   const content = result ? `<section class="page page-narrow"><div class="challenge-submitted"><span class="submission-mark"><i></i><i></i><i></i></span><p class="eyebrow">Challenge submitted</p><h1>${escapeHtml(activeSession.challengeTitle)}</h1><div class="submitted-score"><strong>${result.my_result?.correct ?? activeSession.correct}<small> / ${result.question_count}</small></strong><span>${result.my_result?.accuracy ?? Math.round(activeSession.correct / result.question_count * 100)}% accuracy</span></div><p class="lede">${result.results_unlocked ? "The private group result is ready. See how everyone progressed and the recognition each participant earned." : "Your work is recorded. Other scores remain hidden until everyone finishes or the challenge deadline passes."}</p><div class="button-row"><button class="button" id="view-challenge-result">${result.results_unlocked ? "View group result" : "Return to challenges"} →</button>${shareBtn}<button class="button outline" data-route="home">Return home</button></div></div></section>` : `<section class="page page-narrow"><div class="challenge-submitted sending"><span class="submission-mark"><i></i><i></i><i></i></span><p class="eyebrow">Securing your paper</p><h1>Submitting your challenge.</h1><p class="lede">Your confirmed answers are being synchronized before the result is sealed.</p></div></section>`;
@@ -2408,12 +2422,24 @@ function renderChallengeSubmission() {
   document.querySelector("#view-challenge-result")?.addEventListener("click", () => { challengesData = challengesData ? challengesData.map(item => item.id === result.id ? result : item) : [result]; selectedChallengeId = result.id; activeSession = null; route = "challenges"; renderChallenges(); });
   document.querySelector("#share-submission-win")?.addEventListener("click", () => openChallengeShareModal(result));
   if (result || activeSession.challengeCompletionStarted) return;
-  activeSession.challengeCompletionStarted = true;
+  session.challengeCompletionStarted = true;
   syncPendingAttempts()
-    .then(() => api.completeSession(authToken, activeSession.remoteId))
-    .then(async response => { applyRemoteStats(response.stats); progressData = null; await put("profile", profile); handleEarnedBadges(response.badges_earned || []); return api.challenge(authToken, activeSession.challengeId); })
-    .then(challenge => { activeSession.challengeResult = challenge; applyRemoteStats(challenge.stats); put("profile", profile); challengesData = null; achievementsData = null; renderChallengeSubmission(); })
-    .catch(() => { activeSession.challengeCompletionStarted = false; showToast("Your paper is saved locally. Reconnect to submit it."); });
+    .then(() => api.completeSession(token, session.remoteId))
+    .then(async response => {
+      if (token !== authToken) return null;
+      session.feedbackPromptStats = response.stats;
+      applyRemoteStats(response.stats); progressData = null; await put("profile", profile);
+      if (token !== authToken) return null;
+      handleEarnedBadges(response.badges_earned || []);
+      return api.challenge(token, session.challengeId);
+    })
+    .then(challenge => {
+      if (!challenge || token !== authToken || activeSession !== session) return;
+      session.challengeResult = challenge; applyRemoteStats(challenge.stats); put("profile", profile);
+      challengesData = null; achievementsData = null; renderChallengeSubmission();
+      offerPostPracticeFeedback(session, session.feedbackPromptStats);
+    })
+    .catch(() => { session.challengeCompletionStarted = false; if (token === authToken) showToast("Your paper is saved locally. Reconnect to submit it."); });
 }
 
 function handleEarnedBadges(badges) {
@@ -4078,6 +4104,7 @@ async function submitAuth(event) {
 
 async function prepareLocalUser(user) {
   if (communityOwnerId !== user.public_id) {
+    cancelPostPracticeFeedback();
     unmountBuddyChat(); closeStudentDialogs();
     communityOwnerId = user.public_id; communityRequestNonce++;
     communityNetworkData = null; communityLeaderboardData = null; communityInboxData = null;
@@ -4105,6 +4132,7 @@ async function restoreAuth() {
 }
 
 async function signOut() {
+  cancelPostPracticeFeedback();
   unmountBuddyChat(); closeStudentDialogs(); clearTimeout(universityIntroductionTimer);
   universityIntroductionPending = false; subscriptionStateReady = false; subscriptionConfig = null;
   communityRequestNonce++; communityOwnerId = null;
@@ -5211,6 +5239,7 @@ async function startUniPractice(courseCode, topicTitle, dataFile, requestedCount
 // ─── End University Module ──────────────────────────────────────────────────
 
 function render() {
+  if (route !== "session") cancelPostPracticeFeedback();
   if (route !== "buddies" || communityActiveTab !== "messages") unmountBuddyChat();
   updateScreenWatermark();
   if (!authToken || !currentUser || !profile) return renderAuth();
