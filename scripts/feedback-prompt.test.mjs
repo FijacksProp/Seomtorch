@@ -86,5 +86,5 @@ test("learning-level heading explicitly uses a light text color", () => {
 test("chat no longer displays a refresh-interval note", () => {
   const source = readFileSync(new URL("../buddy-chat.js", import.meta.url), "utf8");
   assert.doesNotMatch(source, /conversations?\s+refresh(?:es)?\s+every/i);
-  assert.ok(source.includes("15000"), "Background message polling must remain functional");
+  assert.match(source, /ACTIVE_CHAT_SYNC_MS = 1000/, "Open chats should sync every second");
 });

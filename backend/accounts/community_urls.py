@@ -6,7 +6,7 @@ from .community_views import (
     SearchView,
     UnfollowView,
 )
-from .social_views import BuddyBlocksView, BuddyInboxView, BuddyMessagesView, BuddyUnblockView, FeedbackView, FeedbackPromptView, MessageReportView
+from .social_views import BuddyBlocksView, BuddyInboxView, BuddyMessagesView, BuddyReadMessagesView, BuddyUnblockView, FeedbackView, FeedbackPromptView, MessageReportView
 
 urlpatterns = [
     path("follow/", FollowView.as_view(), name="community-follow"),
@@ -18,6 +18,7 @@ urlpatterns = [
     path("feedback-prompt/", FeedbackPromptView.as_view(), name="student-feedback-prompt"),
     path("inbox/", BuddyInboxView.as_view(), name="buddy-inbox"),
     path("messages/<str:public_id>/", BuddyMessagesView.as_view(), name="buddy-messages"),
+    path("messages/<str:public_id>/read/", BuddyReadMessagesView.as_view(), name="buddy-message-read"),
     path("message-reports/<int:message_id>/", MessageReportView.as_view(), name="buddy-message-report"),
     path("blocks/", BuddyBlocksView.as_view(), name="buddy-blocks"),
     path("blocks/<str:public_id>/", BuddyUnblockView.as_view(), name="buddy-unblock"),

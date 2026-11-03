@@ -44,10 +44,20 @@ Create a Python Web Service manually in Render and connect it to Supabase Postgr
 - Synchronized Saved for review library with offline retries and timed review sessions
 - Exam-style numbered navigation, answer locking, start/finish confirmations and PWA installation
 - Private scheduled friend challenges with invitations, frozen shared papers, server-controlled timers and supportive group results
+- Filterable challenge desk, draft-preserving setup, and mobile-friendly private results
+- Mutual-buddy text chat with immediate sending feedback, active-conversation sync and Seen receipts
 - Extensible server-awarded achievements with progress tracking and animated badge unlocks
 - Branded, reduced-motion-aware application pre-loader
 - JSON progress export and import
 
 To scale the bank, add valid question objects to the JSON file or split it into packs and list those packs in a small manifest. Question IDs must remain stable so historical attempts continue to resolve correctly.
+
+## Chat delivery and receipts
+
+Open, focused conversations sync about once per second (plus network/server response time); inbox summaries refresh separately about every 12 seconds. Hidden tabs pause requests and reconnect when visible. Retries back off on failures, and messages retain stable client IDs so retrying does not create duplicates. There is no new messaging service, WebSocket server or environment variable to configure.
+
+“Sending…” is local feedback, “Sent” means the API saved the message, and “Seen” means the recipient's client acknowledged that message after it was visible in their focused conversation. Fetching history or receiving a message in a hidden tab does not mark it seen. Read acknowledgements are restricted to the recipient and their mutual buddy; blocking stops both messages and receipts. This is private account messaging, not end-to-end encryption.
+
+Render's free-tier cold starts and slow networks can still delay initial connection. Deploy the backend and frontend together for the new read-acknowledgement endpoint; no database migration is needed for this update. Run frontend checks with `npm run check` and `npm run community:test`, and the focused backend suite with `python manage.py test accounts.test_social` from the backend directory.
 
 The supplied 2019 text files can be rebuilt with `npm run questions:build`. The importer normalizes embedded answer choices, assigns topics, generates concise explanations, removes exact duplicate question texts and stores all derived metadata in the compiled JSON bank.

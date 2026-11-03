@@ -2,6 +2,7 @@ import { api, ApiError } from "./api-client.js";
 import { jambCalculator } from "./calculator.js";
 import { communityPage } from "./community-ui.js";
 import { mountBuddyChat, unmountBuddyChat } from "./buddy-chat.js";
+import { challengeHubPage, challengeComposerPage, challengeDetailPage, challengeSetupSummary } from "./challenges-ui.js";
 import { cancelPostPracticeFeedback, closeStudentDialogs, eligibleForUniversityOffer, maybeShowUniversityIntroduction, openStudentDialog, schedulePostPracticeFeedback, showFeedbackPanel } from "./student-engagement.js";
 
 const SUBJECTS = [
@@ -125,6 +126,12 @@ let challengesData = null;
 let selectedChallengeId = null;
 let challengeComposerOpen = false;
 let challengeInvitees = [];
+let challengeDraft = null;
+let challengeFilter = "all";
+let challengesLoading = false;
+let challengesError = "";
+let challengeCreating = false;
+let challengeRefreshTimer = null;
 let achievementsData = null;
 let progressData = null;
 let badgeCelebrationQueue = [];
@@ -976,7 +983,7 @@ function navigate(nextRoute) {
     return;
   }
   if (route === "session" && activeSession && !activeSession.started) clearActiveSession();
-  if (nextRoute === "challenges") { selectedChallengeId = null; challengesData = null; }
+  if (nextRoute === "challenges") { selectedChallengeId = null; challengesData = null; challengesError = ""; }
   if (nextRoute === "university") { uniRoute = "departments"; uniDeptId = null; uniLevel = null; uniCourseId = null; }
   route = nextRoute;
   if (nextRoute !== "practice") selectedSubject = null;
@@ -2837,75 +2844,124 @@ function challengeTime(value) {
   return new Date(value).toLocaleString(undefined, { weekday: "short", day: "numeric", month: "short", hour: "numeric", minute: "2-digit" });
 }
 
-function challengeStatusLabel(status) {
-  return ({ invited: "Awaiting your reply", accepted: "Ready", declined: "Declined", started: "In progress", completed: "Completed", abandoned: "Left challenge" })[status] || status;
+function ensureChallengeDraft() {
+  if (!challengeDraft) challengeDraft = {
+    title: "", subject: "all", question_count: "20", duration_minutes: "20", message: "",
+    starts_at: localDateTimeValue(new Date(Date.now() + 30 * 60000)),
+    ends_at: localDateTimeValue(new Date(Date.now() + 24 * 60 * 60000)),
+  };
+  return challengeDraft;
 }
 
-function challengeCard(item) {
-  const participantCount = item.participants.filter(person => !["declined", "abandoned"].includes(person.status)).length;
-  const urgent = item.can_respond || item.can_start;
-  return `<button class="challenge-card ${urgent ? "urgent" : ""}" data-challenge-id="${item.id}"><div class="challenge-card-top"><span class="challenge-state ${item.state}">${item.can_respond ? "Invitation" : item.state}</span><span>${participantCount} participant${participantCount === 1 ? "" : "s"}</span></div><h3>${escapeHtml(item.title)}</h3><p>By ${escapeHtml(item.creator.username)} · ${escapeHtml(item.subject_label)}</p><div class="challenge-facts"><span><strong>${item.question_count}</strong> questions</span><span><strong>${item.duration_minutes}</strong> minutes</span></div><div class="challenge-card-foot"><span>${challengeStatusLabel(item.my_status)}</span><strong>${item.state === "upcoming" ? challengeTime(item.starts_at) : item.state === "open" ? `Closes ${challengeTime(item.ends_at)}` : "View result"} →</strong></div></button>`;
+function captureChallengeDraft() {
+  const form = document.querySelector("#challenge-form");
+  if (form) challengeDraft = Object.fromEntries(new FormData(form));
+  return challengeDraft;
 }
 
-function renderChallengeComposer() {
-  const starts = new Date(Date.now() + 30 * 60000);
-  const ends = new Date(Date.now() + 24 * 60 * 60000);
-  return `<section class="challenge-composer"><div class="composer-intro"><p class="eyebrow">Create a private challenge</p><h2>Set the paper. Invite your people.</h2><p>Everyone receives the same frozen question set. Each accepted friend gets one timed attempt inside your chosen window.</p></div><form id="challenge-form"><div class="challenge-form-grid"><div class="field"><label for="challenge-title">Challenge title</label><input id="challenge-title" name="title" maxlength="100" value="Weekend study circle" required></div><div class="field"><label for="challenge-subject">Focus</label><select id="challenge-subject" name="subject"><option value="all">All subjects</option>${SUBJECTS.map(subject => `<option value="${subject.id}">${subject.name}</option>`).join("")}</select></div><div class="field"><label for="challenge-count">Questions</label><input id="challenge-count" name="question_count" type="number" min="10" max="100" value="20" required></div><div class="field"><label for="challenge-duration">Timer in minutes</label><input id="challenge-duration" name="duration_minutes" type="number" min="1" max="180" value="20" required></div><div class="field"><label for="challenge-start">Opens</label><input id="challenge-start" name="starts_at" type="datetime-local" value="${localDateTimeValue(starts)}" required></div><div class="field"><label for="challenge-end">Completion deadline</label><input id="challenge-end" name="ends_at" type="datetime-local" value="${localDateTimeValue(ends)}" required></div></div><div class="field"><label for="challenge-message">Invitation note <span>optional</span></label><textarea id="challenge-message" name="message" maxlength="280" placeholder="A short note for the group"></textarea></div><div class="invite-builder"><label for="friend-id">Invite with Student ID or Buddies</label><div><input id="friend-id" maxlength="6" autocomplete="off" placeholder="e.g. A7B2Q9"><button class="button outline" type="button" id="add-friend">Add</button><button class="button outline" type="button" id="open-buddies-picker">From Buddies</button></div><small>Invite up to nine registered friends you know.</small><div class="invitee-list">${challengeInvitees.length ? challengeInvitees.map(item => `<span>${escapeHtml(item.username)} <small>${item.public_id}</small><button type="button" data-remove-invitee="${item.public_id}" aria-label="Remove ${escapeHtml(item.username)}">×</button></span>`).join("") : '<p>No friends added yet.</p>'}</div></div><div id="challenge-error" class="auth-error" role="alert"></div><div class="button-row"><button class="button" type="submit">Review challenge →</button><button class="button outline" type="button" id="close-composer">Cancel</button></div></form></section>`;
-}
-
-function renderChallengeDetail(item) {
-  const statusCopy = item.results_unlocked ? "The group result is ready." : item.my_status === "completed" ? "Your paper is submitted. Group results unlock when everyone responds and finishes, or when the deadline passes." : item.state === "upcoming" ? `This challenge opens ${challengeTime(item.starts_at)}.` : item.state === "open" ? "Your attempt timer starts only when you confirm Begin challenge." : "This challenge window is closed.";
-  const shareBtn = item.results_unlocked && item.results?.length ? `<button class="button challenge-share-btn" data-share-challenge="${item.id}" title="Share challenge win on social media"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg><span>Share Win</span></button>` : "";
-  const myResult = item.my_result ? `<section class="my-challenge-result"><div class="my-challenge-result-top"><p class="eyebrow">Your work</p>${shareBtn}</div><strong>${item.my_result.correct}<small> / ${item.my_result.total}</small></strong><div><h3>${item.my_result.accuracy}% accuracy${item.my_result.bonus_xp ? ` · +${item.my_result.bonus_xp} challenge XP` : ""}</h3><p>${item.my_result.change_from_average === null ? "Your first personal comparison will appear after more practice." : item.my_result.change_from_average >= 0 ? `${item.my_result.change_from_average} points above your recent average.` : "Use the challenge review to choose your next focus."}</p></div></section>` : "";
-  const resultBoard = item.results_unlocked && item.results.length ? `<section class="challenge-results"><div class="section-head"><div class="challenge-result-heading"><p class="eyebrow">Private group result</p><h2>Challenge Results</h2></div><div class="challenge-result-actions">${shareBtn}<p>Accuracy first. Time breaks ties only.</p></div></div>${item.results.map(row => `<article class="result-person ${row.public_id === currentUser.public_id ? "you" : ""}"><span class="result-position">${String(row.position).padStart(2, "0")}</span><div><h3>${escapeHtml(row.username)}${row.public_id === currentUser.public_id ? " · You" : ""}</h3><p>${escapeHtml(row.recognition)}${row.bonus_xp ? ` · +${row.bonus_xp} XP` : ""}</p></div><strong>${row.correct}/${row.total}<small>${row.accuracy}%</small></strong></article>`).join("")}</section>` : `<section class="results-quiet"><span class="quiet-lines"><i></i><i></i><i></i></span><h3>Scores stay quiet for now.</h3><p>${escapeHtml(statusCopy)}</p></section>`;
-  const removeLabel = item.removal_mode === "cancel" ? "Cancel and leave challenge" : item.removal_mode === "abandon" ? "Leave challenge" : "Remove from my challenges";
-  return `<section class="page"><button class="button outline" id="back-challenges">← All challenges</button><div class="challenge-detail-head"><div><p class="eyebrow">${item.can_respond ? "Challenge invitation" : "Friend challenge"}</p><h1>${escapeHtml(item.title)}</h1><p class="lede">${escapeHtml(item.message || `${item.creator.username} invited this group to practise together.`)}</p></div><span class="challenge-state ${item.state}">${item.state}</span></div><div class="challenge-detail-grid"><section class="challenge-brief"><span>Created by</span><strong>${escapeHtml(item.creator.username)}</strong><span>Focus</span><strong>${escapeHtml(item.subject_label)}</strong><span>Paper</span><strong>${item.question_count} questions · ${item.duration_minutes} minutes</strong><span>Challenge window</span><strong>${challengeTime(item.starts_at)}<br>to ${challengeTime(item.ends_at)}</strong></section><section class="participant-panel"><div class="section-head"><h2>Study circle</h2><p>${item.participants.length} invited</p></div>${item.participants.map(person => `<div class="participant-row"><span class="participant-monogram">${escapeHtml(person.username.slice(0, 2).toUpperCase())}</span><div><strong>${escapeHtml(person.username)}${person.public_id === currentUser.public_id ? " · You" : ""}</strong><small>${person.is_creator ? "Creator" : person.public_id}</small></div><span class="participant-status ${person.status}">${challengeStatusLabel(person.status)}</span></div>`).join("")}</section></div><div class="challenge-actions">${item.can_respond ? '<button class="button" data-challenge-response="accept">Accept invitation</button><button class="button outline" data-challenge-response="decline">Decline</button>' : ""}${item.can_start ? `<button class="button challenge-start" id="begin-challenge">${item.my_status === "started" ? "Continue attempt" : "Begin challenge"} →</button>` : ""}${item.can_remove ? `<button class="button danger challenge-remove" id="remove-challenge">${removeLabel}</button>` : ""}</div>${myResult}${resultBoard}</section>`;
+function refreshChallengeSummary() {
+  captureChallengeDraft();
+  const summary = document.querySelector("#challenge-setup-summary");
+  if (summary && challengeDraft) summary.innerHTML = challengeSetupSummary(challengeDraft, SUBJECTS, challengeInvitees.length);
 }
 
 function renderChallenges() {
-  const selected = challengesData?.find(item => item.id === selectedChallengeId);
-  if (selected) {
-    app.innerHTML = shell(renderChallengeDetail(selected)); bindShell(); bindChallengeDetail(selected); return;
+  clearTimeout(challengeRefreshTimer);
+  const selected = challengesData?.find(item => String(item.id) === String(selectedChallengeId));
+  if (challengeComposerOpen) {
+    captureChallengeDraft();
+    app.innerHTML = shell(challengeComposerPage({ draft: ensureChallengeDraft(), subjects: SUBJECTS, invitees: challengeInvitees, saving: challengeCreating }));
+    bindShell(); bindChallenges(); renderInviteeList(); return;
   }
-  const invitations = challengesData?.filter(item => item.can_respond) || [];
-  const current = challengesData?.filter(item => !item.can_respond && ["upcoming", "open"].includes(item.state) && !["declined", "completed"].includes(item.my_status)) || [];
-  const history = challengesData?.filter(item => item.state === "closed" || item.my_status === "completed" || item.my_status === "declined") || [];
-  const content = `<section class="page challenges-page"><div class="challenge-page-head"><div><p class="eyebrow">Study together</p><h1>Challenges.</h1><p class="lede">A private place to invite people you know, sit the same paper and compare progress without public pressure.</p></div><button class="button" id="toggle-challenge-composer">${challengeComposerOpen ? "Close creator" : "Create a challenge"}</button></div>${challengeComposerOpen ? renderChallengeComposer() : ""}${!challengesData ? '<div class="challenge-loading"><i></i><i></i><i></i><p>Gathering your study circle…</p></div>' : `${invitations.length ? `<div class="section-head"><h2>Invitations</h2><p>Waiting for your response</p></div><div class="challenge-grid">${invitations.map(challengeCard).join("")}</div>` : ""}<div class="section-head"><h2>Upcoming and active</h2><p>${current.length ? `${current.length} challenge${current.length === 1 ? "" : "s"}` : "Nothing scheduled"}</p></div>${current.length ? `<div class="challenge-grid">${current.map(challengeCard).join("")}</div>` : '<div class="challenge-empty"><span>Make room for shared effort.</span><p>Create a private challenge or ask a friend to invite you with your Student ID.</p></div>'}${history.length ? `<div class="section-head"><h2>Completed</h2><p>Your private challenge record</p></div><div class="challenge-grid history">${history.map(challengeCard).join("")}</div>` : ""}`}</section>`;
-  app.innerHTML = shell(content); bindShell(); bindChallenges();
-  if (!challengesData) loadChallenges();
+  if (selected) {
+    app.innerHTML = shell(challengeDetailPage({ item: selected, studentId: currentUser.public_id }));
+    bindShell(); bindChallengeDetail(selected);
+  } else {
+    app.innerHTML = shell(challengeHubPage({ items: challengesData, filter: challengeFilter, loading: challengesLoading || (!challengesData && !challengesError), error: challengesError, studentId: currentUser.public_id }));
+    bindShell(); bindChallenges();
+  }
+  if (!challengesData && !challengesLoading && !challengesError) loadChallenges();
+  // Refresh once at the next opening/deadline, not continuously while editing.
+  const nextBoundary = (challengesData || []).flatMap(item => [Date.parse(item.starts_at), Date.parse(item.ends_at)]).filter(time => time > Date.now()).sort((a, b) => a - b)[0];
+  if (nextBoundary) challengeRefreshTimer = setTimeout(() => { if (route === "challenges" && !challengeComposerOpen) loadChallenges(); }, Math.min(2147483647, nextBoundary - Date.now() + 1000));
 }
 
 async function loadChallenges() {
-  try { challengesData = await api.challenges(authToken); if (challengesData.at(-1)?.stats) { applyRemoteStats(challengesData.at(-1).stats); put("profile", profile); } if (route === "challenges") renderChallenges(); else if (route === "home") renderHome(); }
-  catch { if (route === "challenges") showToast("Challenges could not be loaded"); }
+  if (challengesLoading || !authToken) return;
+  const ownerToken = authToken;
+  challengesLoading = true; challengesError = "";
+  try {
+    const data = await api.challenges(ownerToken);
+    if (authToken !== ownerToken) return;
+    challengesData = data;
+    if (data.at(-1)?.stats) { applyRemoteStats(data.at(-1).stats); put("profile", profile); }
+  } catch (error) {
+    if (authToken === ownerToken) challengesError = error instanceof ApiError ? error.message : "Check your connection and try again.";
+  } finally {
+    if (authToken === ownerToken) {
+      challengesLoading = false;
+      if (route === "challenges") renderChallenges();
+      else if (route === "home") renderHome();
+    }
+  }
 }
 
 function bindChallenges() {
   document.querySelector("#toggle-challenge-composer")?.addEventListener("click", () => {
     if (!hasAllAccess()) {
       api.logMonetizationEvent(authToken, "upgrade_screen_viewed", { trigger: "create_challenge" }).catch(() => {});
-      showUpgradeModal({ trigger: "create_challenge" });
-      return;
+      showUpgradeModal({ trigger: "create_challenge" }); return;
     }
-    challengeComposerOpen = !challengeComposerOpen;
-    renderChallenges();
+    selectedChallengeId = null; challengeComposerOpen = true; renderChallenges();
+    document.querySelector("#challenge-title")?.focus();
   });
-  document.querySelector("#close-composer")?.addEventListener("click", () => { challengeComposerOpen = false; challengeInvitees = []; renderChallenges(); });
-  document.querySelectorAll("[data-challenge-id]").forEach(button => button.addEventListener("click", () => { selectedChallengeId = button.dataset.challengeId; renderChallenges(); }));
+  document.querySelector("#close-composer")?.addEventListener("click", () => {
+    captureChallengeDraft();
+    // Keep the in-memory draft so returning to the creator doesn't discard work.
+    challengeComposerOpen = false; renderChallenges();
+  });
+  document.querySelectorAll("[data-challenge-id]").forEach(button => button.addEventListener("click", () => {
+    selectedChallengeId = button.dataset.challengeId; renderChallenges();
+    document.querySelector(".duel-detail-head")?.scrollIntoView({ block: "start" });
+  }));
+  document.querySelectorAll("[data-challenge-filter]").forEach(button => button.addEventListener("click", () => {
+    challengeFilter = button.dataset.challengeFilter; renderChallenges();
+    document.querySelector(`[data-challenge-filter="${challengeFilter}"]`)?.focus({ preventScroll: true });
+  }));
+  document.querySelectorAll("[data-refresh-challenges]").forEach(button => button.addEventListener("click", () => {
+    if (challengesLoading) return;
+    const refresh = loadChallenges(); renderChallenges(); refresh.catch(() => {});
+  }));
   document.querySelector("#add-friend")?.addEventListener("click", addChallengeFriend);
   document.querySelector("#open-buddies-picker")?.addEventListener("click", showBuddiesPickerModal);
+  document.querySelector("#friend-id")?.addEventListener("keydown", event => {
+    if (event.key === "Enter") { event.preventDefault(); addChallengeFriend(); }
+  });
   bindInviteeRemoval();
-  document.querySelector("#challenge-form")?.addEventListener("submit", reviewChallengeForm);
+  const form = document.querySelector("#challenge-form");
+  form?.addEventListener("submit", reviewChallengeForm);
+  form?.addEventListener("input", refreshChallengeSummary);
+  form?.addEventListener("change", refreshChallengeSummary);
 }
 
 async function addChallengeFriend() {
   const input = document.querySelector("#friend-id");
   const error = document.querySelector("#challenge-error");
+  const button = document.querySelector("#add-friend");
+  if (!input || !button || button.disabled) return;
   const publicId = input.value.trim().toUpperCase();
+  if (!/^[A-Z0-9]{6}$/.test(publicId)) { error.textContent = "Enter the six-character Student ID."; return; }
   if (challengeInvitees.some(item => item.public_id === publicId)) { error.textContent = "That friend is already included."; return; }
   if (challengeInvitees.length >= 9) { error.textContent = "A challenge can include up to nine invited friends."; return; }
-  try { const student = await api.lookupStudent(authToken, publicId); challengeInvitees.push(student); input.value = ""; error.textContent = ""; renderInviteeList(); }
-  catch (caught) { error.textContent = caught instanceof ApiError ? caught.message : "That student could not be found."; }
+  const ownerToken = authToken;
+  button.disabled = true; button.textContent = "Finding…";
+  try {
+    const student = await api.lookupStudent(ownerToken, publicId);
+    if (authToken !== ownerToken) return;
+    if (!challengeInvitees.some(item => item.public_id === student.public_id) && challengeInvitees.length < 9) challengeInvitees.push(student);
+    input.value = ""; error.textContent = ""; renderInviteeList();
+  } catch (caught) { if (authToken === ownerToken) error.textContent = caught instanceof ApiError ? caught.message : "That student could not be found."; }
+  finally { if (button.isConnected) { button.disabled = false; button.textContent = "Add friend"; } }
 }
 
 function bindInviteeRemoval() {
@@ -2917,6 +2973,7 @@ function renderInviteeList() {
   if (!list) return;
   list.innerHTML = challengeInvitees.length ? challengeInvitees.map(item => `<span>${escapeHtml(item.username)} <small>${item.public_id}</small><button type="button" data-remove-invitee="${item.public_id}" aria-label="Remove ${escapeHtml(item.username)}">×</button></span>`).join("") : '<p>No friends added yet.</p>';
   bindInviteeRemoval();
+  refreshChallengeSummary();
 }
 
 function reviewChallengeForm(event) {
@@ -2924,6 +2981,14 @@ function reviewChallengeForm(event) {
   const form = event.currentTarget;
   const values = Object.fromEntries(new FormData(form));
   const error = document.querySelector("#challenge-error");
+  if (challengeCreating) return;
+  challengeDraft = values;
+  const start = Date.parse(values.starts_at), end = Date.parse(values.ends_at);
+  const count = Number(values.question_count), minutes = Number(values.duration_minutes);
+  if (!values.title.trim() || values.title.trim().length < 3) { error.textContent = "Give the challenge a name of at least 3 characters."; return; }
+  if (!Number.isInteger(count) || count < 10 || count > 100 || !Number.isInteger(minutes) || minutes < 1 || minutes > 180) { error.textContent = "Choose 10–100 questions and a timer of 1–180 minutes."; return; }
+  if (!Number.isFinite(start) || !Number.isFinite(end) || start < Date.now() - 120000) { error.textContent = "Choose a valid opening time, now or later."; return; }
+  if (end - start < minutes * 60000) { error.textContent = "The study window must be at least as long as the attempt timer."; return; }
   if (!challengeInvitees.length) { error.textContent = "Add at least one friend before sending the challenge."; return; }
   const body = { ...values, question_count: Number(values.question_count), duration_minutes: Number(values.duration_minutes), starts_at: new Date(values.starts_at).toISOString(), ends_at: new Date(values.ends_at).toISOString(), participant_ids: challengeInvitees.map(item => item.public_id) };
   const detail = `<dl class="session-confirm-summary"><div><dt>Focus</dt><dd>${escapeHtml(values.subject === "all" ? "All subjects" : subjectName(values.subject))}</dd></div><div><dt>Paper</dt><dd>${body.question_count} questions · ${body.duration_minutes} minutes</dd></div><div><dt>Friends</dt><dd>${challengeInvitees.map(item => escapeHtml(item.username)).join(", ")}</dd></div><div><dt>Opens</dt><dd>${challengeTime(body.starts_at)}</dd></div><div><dt>Deadline</dt><dd>${challengeTime(body.ends_at)}</dd></div></dl>`;
@@ -2931,18 +2996,37 @@ function reviewChallengeForm(event) {
 }
 
 async function createChallenge(body) {
+  if (challengeCreating) return;
+  challengeCreating = true;
+  const ownerToken = authToken;
+  const submit = document.querySelector('#challenge-form button[type="submit"]');
+  if (submit) { submit.disabled = true; submit.textContent = "Sending invitations…"; }
   try {
-    const challenge = await api.createChallenge(authToken, body);
-    challengesData = [challenge, ...(challengesData || [])]; challengeInvitees = []; challengeComposerOpen = false; selectedChallengeId = challenge.id;
-    showToast("Challenge invitations sent"); renderChallenges();
-  } catch (caught) { showToast(caught instanceof ApiError ? caught.message : "The challenge could not be created"); }
+    const challenge = await api.createChallenge(ownerToken, body);
+    if (ownerToken !== authToken) return;
+    challengesData = [challenge, ...(challengesData || [])]; challengeInvitees = []; challengeDraft = null; challengeComposerOpen = false; selectedChallengeId = challenge.id;
+    showToast("Challenge invitations sent");
+    if (route === "challenges") renderChallenges();
+  } catch (caught) {
+    if (ownerToken !== authToken) return;
+    const message = caught instanceof ApiError ? caught.message : "The challenge could not be created";
+    const error = document.querySelector("#challenge-error");
+    if (error) { error.textContent = message; error.scrollIntoView({ block: "center" }); }
+    else showToast(message);
+  } finally {
+    if (ownerToken === authToken) {
+      challengeCreating = false;
+      const currentSubmit = document.querySelector('#challenge-form button[type="submit"]');
+      if (currentSubmit) { currentSubmit.disabled = false; currentSubmit.textContent = "Review challenge →"; }
+    }
+  }
 }
 
 function bindChallengeDetail(item) {
   document.querySelector("#back-challenges")?.addEventListener("click", () => { selectedChallengeId = null; renderChallenges(); });
   document.querySelectorAll("[data-share-challenge]").forEach(button => button.addEventListener("click", () => openChallengeShareModal(item)));
   document.querySelectorAll("[data-challenge-response]").forEach(button => button.addEventListener("click", () => { const response = button.dataset.challengeResponse; showConfirmDialog({ title: `${response === "accept" ? "Accept" : "Decline"} this challenge?`, message: response === "accept" ? "It will be added to your study schedule. Your timer starts only when you begin inside the challenge window." : "The creator will see that you declined, but no academic score will be recorded.", confirmLabel: response === "accept" ? "Accept invitation" : "Decline invitation", tone: response === "decline" ? "warning" : "default", onConfirm: () => respondToChallenge(item.id, response) }); }));
-  document.querySelector("#begin-challenge")?.addEventListener("click", () => showConfirmDialog({ title: "Begin your challenge attempt?", message: `Your ${item.duration_minutes}-minute timer will start immediately. You have one attempt at the shared paper.`, detail: `<p class="dialog-question-preview">${item.question_count} questions · ${escapeHtml(item.subject_label)} · results stay private until the group finishes.</p>`, confirmLabel: "Begin challenge", cancelLabel: "Not yet", onConfirm: () => beginChallenge(item) }));
+  document.querySelector("#begin-challenge")?.addEventListener("click", () => showConfirmDialog({ title: item.my_status === "started" ? "Continue your attempt?" : "Begin your challenge attempt?", message: item.my_status === "started" ? "Your original timer is still running. Return to your paper with the time remaining." : `Your ${item.duration_minutes}-minute timer will start immediately. You have one attempt at the shared paper.`, detail: `<p class="dialog-question-preview">${item.question_count} questions · ${escapeHtml(item.subject_label)} · results stay private until the group finishes.</p>`, confirmLabel: item.my_status === "started" ? "Continue attempt" : "Begin challenge", cancelLabel: "Not yet", onConfirm: () => beginChallenge(item) }));
   document.querySelector("#remove-challenge")?.addEventListener("click", () => {
     const cancelling = item.removal_mode === "cancel";
     const abandoning = item.removal_mode === "abandon";
@@ -4104,6 +4188,9 @@ async function submitAuth(event) {
 
 async function prepareLocalUser(user) {
   if (communityOwnerId !== user.public_id) {
+    clearTimeout(challengeRefreshTimer);
+    challengesData = null; challengesLoading = false; challengesError = "";
+    challengeDraft = null; challengeInvitees = []; challengeComposerOpen = false; challengeCreating = false; challengeFilter = "all"; selectedChallengeId = null;
     cancelPostPracticeFeedback();
     unmountBuddyChat(); closeStudentDialogs();
     communityOwnerId = user.public_id; communityRequestNonce++;
@@ -4132,6 +4219,8 @@ async function restoreAuth() {
 }
 
 async function signOut() {
+  clearTimeout(challengeRefreshTimer);
+  challengesLoading = false; challengesError = ""; challengeDraft = null; challengeInvitees = []; challengeComposerOpen = false; challengeCreating = false;
   cancelPostPracticeFeedback();
   unmountBuddyChat(); closeStudentDialogs(); clearTimeout(universityIntroductionTimer);
   universityIntroductionPending = false; subscriptionStateReady = false; subscriptionConfig = null;
@@ -5239,11 +5328,16 @@ async function startUniPractice(courseCode, topicTitle, dataFile, requestedCount
 // ─── End University Module ──────────────────────────────────────────────────
 
 function render() {
+  if (route !== "challenges") clearTimeout(challengeRefreshTimer);
   if (route !== "session") cancelPostPracticeFeedback();
   if (route !== "buddies" || communityActiveTab !== "messages") unmountBuddyChat();
   updateScreenWatermark();
   if (!authToken || !currentUser || !profile) return renderAuth();
   if (currentUser.must_change_password) return renderPasswordChange(true);
+  // Background account sync must not replace a live chat or an edited form.
+  // These views update themselves; intentional navigation uses their renderers.
+  if (route === "buddies" && communityActiveTab === "messages" && document.querySelector("#buddy-messenger")) return;
+  if (route === "challenges" && challengeComposerOpen && document.querySelector("#challenge-form")) return;
   if (route === "daily-sprint") return renderDailySprint();
   if (route === "home") return renderHome();
   if (route === "practice") return renderPractice();

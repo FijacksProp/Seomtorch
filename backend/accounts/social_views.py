@@ -2,7 +2,7 @@
 
 from django.contrib.auth import get_user_model
 from django.db import transaction
-from django.db.models import Count, F, OuterRef, Q, Subquery
+from django.db.models import Count, Exists, F, OuterRef, Q, Subquery
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from rest_framework import serializers, throttling
@@ -20,6 +20,13 @@ User = get_user_model()
 class MessageInput(serializers.Serializer):
     body = serializers.CharField(max_length=2000, trim_whitespace=True)
     client_id = serializers.UUIDField()
+
+
+class ReadMessagesInput(serializers.Serializer):
+    message_ids = serializers.ListField(
+        child=serializers.IntegerField(min_value=1, max_value=9223372036854775807),
+        min_length=1, max_length=100,
+    )
 
 
 class FeedbackInput(serializers.Serializer):
@@ -47,13 +54,22 @@ def _feedback_payload(item):
 def _message_payload(item, user):
     return {
         "id": item.id, "client_id": str(item.client_id), "body": item.body,
-        "mine": item.sender_id == user.id, "created_at": item.created_at,
+        "mine": item.sender_id == user.id, "created_at": item.created_at, "read_at": item.read_at,
     }
 
 
 def _peer(user, public_id):
-    peer = get_object_or_404(User, public_id__iexact=public_id, is_active=True)
-    if peer.id == user.id or peer.id not in _get_buddy_ids(user):
+    # One indexed query for the peer and permissions instead of loading the
+    # student's entire social graph on every active-conversation sync.
+    peers = User.objects.select_related("learning_stats").annotate(
+        i_follow=Exists(StudentFollow.objects.filter(follower=user, following=OuterRef("pk"))),
+        follows_me=Exists(StudentFollow.objects.filter(follower=OuterRef("pk"), following=user)),
+        connection_blocked=Exists(StudentBlock.objects.filter(
+            Q(blocker=user, blocked=OuterRef("pk")) | Q(blocker=OuterRef("pk"), blocked=user)
+        )),
+    )
+    peer = get_object_or_404(peers, public_id__iexact=public_id, is_active=True)
+    if peer.id == user.id or not peer.i_follow or not peer.follows_me or peer.connection_blocked:
         raise PermissionDenied("Messaging is available only between mutual buddies. Follow each other to chat.")
     return peer
 
@@ -157,13 +173,25 @@ class BuddyMessagesView(WriteThrottleView):
         rows = rows[:40]
         if not after:
             rows.reverse()
-        # Mark only the delivered incoming messages, never unseen older pages.
-        BuddyMessage.objects.filter(
-            id__in=[item.id for item in rows], recipient=request.user, read_at__isnull=True,
-        ).update(read_at=timezone.now())
+        # Downloading is not proof of seeing. Only a visible-message
+        # acknowledgement from the recipient updates read_at.
+        receipt_ids = request.query_params.get("receipt_ids", "")
+        receipts = []
+        if receipt_ids:
+            if len(receipt_ids) > 2100:
+                raise ValidationError({"receipt_ids": "Request up to 100 message receipts."})
+            try:
+                ids = [int(value) for value in receipt_ids.split(",")]
+            except (ValueError, TypeError):
+                raise ValidationError({"receipt_ids": "Use valid message IDs."})
+            if len(ids) > 100 or any(value < 1 or value > 9223372036854775807 for value in ids):
+                raise ValidationError({"receipt_ids": "Request up to 100 valid message IDs."})
+            receipts = list(BuddyMessage.objects.filter(
+                sender=request.user, recipient=peer, id__in=ids, read_at__isnull=False,
+            ).values("id", "read_at"))
         return Response({
             "peer": _user_card(peer), "messages": [_message_payload(item, request.user) for item in rows],
-            "has_more": has_more, "next_before": rows[0].id if rows else None,
+            "has_more": has_more, "next_before": rows[0].id if rows else None, "receipts": receipts,
         })
 
     @transaction.atomic
@@ -179,6 +207,22 @@ class BuddyMessagesView(WriteThrottleView):
         if message.recipient_id != peer.id or message.body != data["body"]:
             return Response({"detail": "This response ID belongs to a different message."}, status=409)
         return Response(_message_payload(message, request.user), status=201 if created else 200)
+
+
+class BuddyReadMessagesView(WriteThrottleView):
+    throttle_scope = "buddy_reads"
+
+    @transaction.atomic
+    def post(self, request, public_id):
+        peer = _peer(request.user, public_id)
+        serializer = ReadMessagesInput(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        ids = set(serializer.validated_data["message_ids"])
+        incoming = BuddyMessage.objects.filter(sender=peer, recipient=request.user, id__in=ids)
+        if incoming.count() != len(ids):
+            raise ValidationError({"message_ids": "Only messages received in this conversation can be marked seen."})
+        incoming.filter(read_at__isnull=True).update(read_at=timezone.now())
+        return Response({"read": list(incoming.values("id", "read_at"))})
 
 
 class MessageReportView(WriteThrottleView):

@@ -114,6 +114,7 @@ REST_FRAMEWORK = {
         "student_feedback": "10/hour",
         "feedback_prompt": "60/hour",
         "buddy_messages": "60/minute",
+        "buddy_reads": "120/minute",
         "community_actions": "60/hour",
     },
 }

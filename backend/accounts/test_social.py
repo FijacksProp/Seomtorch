@@ -129,7 +129,7 @@ class StudentSocialTests(APITestCase):
         self.client.force_authenticate(self.staff)
         self.assertEqual(self.client.get(f"/api/community/messages/{self.alice.public_id}/").status_code, 403)
 
-    def test_history_pagination_and_read_counts_mark_only_delivered_messages(self):
+    def test_history_download_does_not_mark_seen_until_explicit_acknowledgement(self):
         messages = BuddyMessage.objects.bulk_create([
             BuddyMessage(sender=self.bob, recipient=self.alice, body=f"Revision note {index}")
             for index in range(45)
@@ -139,6 +139,11 @@ class StudentSocialTests(APITestCase):
         self.assertEqual(len(initial.data["messages"]), 40)
         self.assertTrue(initial.data["has_more"])
         self.assertEqual([item["id"] for item in initial.data["messages"]], [item.id for item in messages[5:]])
+        self.assertEqual(BuddyMessage.objects.filter(recipient=self.alice, read_at__isnull=True).count(), 45)
+        ack = self.client.post(f"/api/community/messages/{self.bob.public_id}/read/", {
+            "message_ids": [item["id"] for item in initial.data["messages"]],
+        }, format="json")
+        self.assertEqual(ack.status_code, 200, ack.data)
         self.assertEqual(BuddyMessage.objects.filter(recipient=self.alice, read_at__isnull=True).count(), 5)
         older = self.client.get(f"/api/community/messages/{self.bob.public_id}/", {"before": initial.data["next_before"]})
         self.assertEqual(len(older.data["messages"]), 5)
@@ -146,7 +151,67 @@ class StudentSocialTests(APITestCase):
         latest = BuddyMessage.objects.create(sender=self.bob, recipient=self.alice, body="One more thing")
         polled = self.client.get(f"/api/community/messages/{self.bob.public_id}/", {"after": messages[-1].id})
         self.assertEqual([item["id"] for item in polled.data["messages"]], [latest.id])
+        self.assertEqual(self.client.get("/api/community/inbox/").data["unread"], 6)
+        ack = self.client.post(f"/api/community/messages/{self.bob.public_id}/read/", {
+            "message_ids": [item.id for item in messages[:5]] + [latest.id],
+        }, format="json")
+        self.assertEqual(ack.status_code, 200, ack.data)
         self.assertEqual(self.client.get("/api/community/inbox/").data["unread"], 0)
+
+    def test_seen_receipts_are_idempotent_and_arrive_after_message_cursor(self):
+        sent = BuddyMessage.objects.create(sender=self.alice, recipient=self.bob, body="See you at revision")
+        later = BuddyMessage.objects.create(sender=self.bob, recipient=self.alice, body="Ready!")
+        url = f"/api/community/messages/{self.bob.public_id}/"
+        pending = self.client.get(url, {"after": later.id, "receipt_ids": str(sent.id)})
+        self.assertEqual(pending.data["receipts"], [])
+        self.client.force_authenticate(self.bob)
+        read_url = f"/api/community/messages/{self.alice.public_id}/read/"
+        first = self.client.post(read_url, {"message_ids": [sent.id]}, format="json")
+        self.assertEqual(first.status_code, 200, first.data)
+        sent.refresh_from_db()
+        seen_at = sent.read_at
+        self.assertIsNotNone(seen_at)
+        again = self.client.post(read_url, {"message_ids": [sent.id, sent.id]}, format="json")
+        self.assertEqual(again.status_code, 200, again.data)
+        sent.refresh_from_db()
+        self.assertEqual(sent.read_at, seen_at)
+        self.client.force_authenticate(self.alice)
+        response = self.client.get(url, {"after": later.id, "receipt_ids": f"{sent.id},{later.id}"})
+        self.assertEqual(response.data["messages"], [])
+        self.assertEqual([item["id"] for item in response.data["receipts"]], [sent.id])
+        self.assertIsNotNone(response.data["receipts"][0]["read_at"])
+        self.assertEqual(response["Cache-Control"], "private, no-store")
+
+    def test_seen_ack_cannot_mark_outgoing_or_another_conversation(self):
+        received = BuddyMessage.objects.create(sender=self.bob, recipient=self.alice, body="Visible")
+        outgoing = BuddyMessage.objects.create(sender=self.alice, recipient=self.bob, body="Not mine to read")
+        private = BuddyMessage.objects.create(sender=self.bob, recipient=self.other, body="Another conversation")
+        url = f"/api/community/messages/{self.bob.public_id}/read/"
+        for invalid in (outgoing.id, private.id, 9223372036854775807):
+            response = self.client.post(url, {"message_ids": [received.id, invalid]}, format="json")
+            self.assertEqual(response.status_code, 400, response.data)
+            received.refresh_from_db()
+            self.assertIsNone(received.read_at, "Mixed invalid batches must be all-or-nothing")
+        self.client.force_authenticate(self.other)
+        self.assertEqual(self.client.post(url, {"message_ids": [private.id]}, format="json").status_code, 403)
+        self.client.force_authenticate(self.alice)
+        StudentBlock.objects.create(blocker=self.bob, blocked=self.alice)
+        self.assertEqual(self.client.post(url, {"message_ids": [received.id]}, format="json").status_code, 403)
+
+    def test_seen_validation_and_receipt_queries_are_bounded(self):
+        url = f"/api/community/messages/{self.bob.public_id}/"
+        for payload in ({}, {"message_ids": []}, {"message_ids": [0]}, {"message_ids": ["bad"]},
+                        {"message_ids": list(range(1, 102))}, {"message_ids": [2**64]}, ["not an object"]):
+            self.assertEqual(self.client.post(url + "read/", payload, format="json").status_code, 400)
+        for ids in ("bad", "0", "-1", "1,,2", str(2**64), ",".join(["1"] * 101)):
+            self.assertEqual(self.client.get(url, {"receipt_ids": ids}).status_code, 400)
+
+    def test_seen_receipts_do_not_leak_between_buddies(self):
+        from django.utils import timezone
+        private = BuddyMessage.objects.create(sender=self.alice, recipient=self.other, body="Private", read_at=timezone.now())
+        response = self.client.get(f"/api/community/messages/{self.bob.public_id}/", {"receipt_ids": str(private.id)})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data["receipts"], [])
 
     def test_message_cursors_are_validated(self):
         for cursor in ({"before": "-1"}, {"after": "bad"}, {"after": "9" * 40}, {"before": "1", "after": "2"}):

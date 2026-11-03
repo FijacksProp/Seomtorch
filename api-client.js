@@ -84,7 +84,8 @@ export const api = {
   communityNetwork: token => request("/community/network/", { token }),
   communityLeaderboard: token => request("/community/leaderboard/", { token }),
   communitySearch: (token, query) => request(`/community/search/?q=${encodeURIComponent(query)}`, { token }),
-  // Monetization & Subscriptions
+  // Private buddy conversations
+  readBuddyMessages: (token, id, message_ids, options = {}) => request(`/community/messages/${encodeURIComponent(id)}/read/`, { ...options, token, method: "POST", body: { message_ids } }),
   buddyInbox: (token, options = {}) => request("/community/inbox/", { ...options, token }),
   buddyMessages: (token, id, cursor = {}, options = {}) => request(`/community/messages/${encodeURIComponent(id)}/?${new URLSearchParams(cursor)}`, { ...options, token }),
   sendBuddyMessage: (token, id, body, options = {}) => request(`/community/messages/${encodeURIComponent(id)}/`, { ...options, token, method: "POST", body }),
@@ -95,6 +96,7 @@ export const api = {
   feedback: token => request("/community/feedback/", { token }),
   claimFeedbackPrompt: (token, session_id) => request("/community/feedback-prompt/", { token, method: "POST", body: { session_id }, timeoutMs: 30000 }),
   submitFeedback: (token, body) => request("/community/feedback/", { token, method: "POST", body, timeoutMs: 60000 }),
+  // Monetization & Subscriptions
   subscriptionConfig: token => request("/subscriptions/config/", { token }),
   validateDiscountCode: (code, plan) => request("/subscriptions/validate-code/", { method: "POST", body: { code, plan } }),
   initPayment: (token, body) => request("/subscriptions/initialize/", { token, method: "POST", body }),

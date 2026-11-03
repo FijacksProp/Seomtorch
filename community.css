@@ -248,3 +248,5 @@
   .course-access-note i, .student-dialog { animation: none; }
   .chat-log { scroll-behavior: auto; }
 }
+.chat-message.is-pending { opacity: .65; }
+.chat-message.mine footer .is-seen { color: #d9edc5; font-weight: 650; }
