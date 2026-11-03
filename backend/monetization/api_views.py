@@ -14,6 +14,7 @@ from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .course_topics import DEFAULT_FREE_TOPICS, canonical_topic_id
 from .models import (
     PlanConfig,
     DiscountCode,
@@ -69,14 +70,10 @@ def _complete_verified_payment(tx, config, gateway_response):
 
 def _get_free_topics_map():
     configs = CourseTopicConfig.objects.all()
-    free_map = {
-        "ANA 201": "ul-bones",
-        "ANA 203": "week-one",
-        "PIO 201": "transport-homeostasis",
-    }
+    free_map = DEFAULT_FREE_TOPICS.copy()
     for c in configs:
         if c.free_topic_id:
-            free_map[c.course_code.upper()] = c.free_topic_id
+            free_map[c.course_code.upper()] = canonical_topic_id(c.course_code, c.free_topic_id)
     return free_map
 
 

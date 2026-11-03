@@ -11,6 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from monetization.models import CourseAccess, CourseTopicConfig
+from monetization.course_topics import DEFAULT_FREE_TOPICS, canonical_topic_id
 
 from .badges import achievements_payload, evaluate_badges, mark_badges_seen
 from .analytics import user_test_analytics
@@ -37,8 +38,8 @@ def user_can_access_topic(user, subject, topic):
     if subject.track != Subject.Track.UNIVERSITY or CourseAccess.user_has_course_access(user, subject.code):
         return True
     configured = CourseTopicConfig.objects.filter(course_code__iexact=subject.code).values_list("free_topic_id", flat=True).first()
-    free_topic_id = configured or {"ANA 201": "ul-bones", "ANA 203": "week-one", "PIO 201": "transport-homeostasis"}.get(subject.code.upper(), "")
-    return bool(topic and free_topic_id and topic.slug.casefold() == free_topic_id.casefold())
+    free_topic_id = configured or DEFAULT_FREE_TOPICS.get(subject.code.upper(), "")
+    return bool(topic and free_topic_id and canonical_topic_id(subject.code, topic.slug) == canonical_topic_id(subject.code, free_topic_id))
 
 
 def user_can_access_question(user, question):

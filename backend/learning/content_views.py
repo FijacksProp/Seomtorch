@@ -15,12 +15,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from monetization.models import CourseAccess, CourseTopicConfig
+from monetization.course_topics import DEFAULT_FREE_TOPICS, canonical_topic_id
 
 
 REPO_DIR = settings.BASE_DIR.parent
 UNIVERSITY_DIR = REPO_DIR / "data" / "university"
 NOTES_ASSET_DIR = REPO_DIR / "assets" / "notes"
-DEFAULT_FREE_TOPICS = {"ANA 201": "ul-bones", "ANA 203": "week-one", "PIO 201": "transport-homeostasis"}
 ALLOWED_IMAGE_TYPES = {".png", ".jpg", ".jpeg", ".webp", ".avif"}
 
 
@@ -113,7 +113,7 @@ def _has_access(user, course_code, topic_id=""):
         return True
     configured = CourseTopicConfig.objects.filter(course_code__iexact=course_code).values_list("free_topic_id", flat=True).first()
     free_topic_id = configured or next((topic for code, topic in DEFAULT_FREE_TOPICS.items() if code.upper() == course_code.upper()), "")
-    return bool(free_topic_id and topic_id and free_topic_id.casefold() == topic_id.casefold())
+    return bool(free_topic_id and topic_id and canonical_topic_id(course_code, free_topic_id) == canonical_topic_id(course_code, topic_id))
 
 
 def _safe_relative_file(relative_path, root):

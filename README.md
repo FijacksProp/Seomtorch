@@ -26,7 +26,7 @@ The frontend expects the Render service at `https://seomtorch.onrender.com`. If 
 
 ## Deploy the backend to Render
 
-Create a Python Web Service manually in Render and connect it to Supabase PostgreSQL. Set the service root directory to `backend`, the build command to `bash build.sh`, and the start command to `bash start.sh`.
+Create a Python Web Service manually in Render and connect it to Supabase PostgreSQL. Leave the service Root Directory blank, set Build Command to `bash backend/build.sh`, and Start Command to `bash backend/start.sh`. The backend must be able to read the shared `data/` and `assets/` directories at the repository root.
 
 ## Architecture
 

@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
 set -o errexit
+cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
 
 # Render's free tier does not support pre-deploy commands. These operations are
 # idempotent, so they can safely run before each application start.
 python manage.py prepare_db_for_migration || true
 python manage.py migrate --noinput
 python manage.py create_initial_superuser
+
+# University sessions use catalog topic IDs and server-scored questions. Commit
+# this small, batched bank before serving requests, independently of the much
+# larger aspirant import below. Unchanged university content is skipped.
+python manage.py import_questions --university-only --if-current
 
 # Importing the full question bank against a remote database can take several
 # minutes. Run it in the background so Render can detect Gunicorn's port while

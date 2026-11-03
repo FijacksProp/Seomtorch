@@ -25,9 +25,9 @@ Create a Web Service from the GitHub repository with these settings:
 
 ```text
 Language: Python 3
-Root Directory: backend
-Build Command: bash build.sh
-Start Command: bash start.sh
+Root Directory: (leave blank — repository root)
+Build Command: bash backend/build.sh
+Start Command: bash backend/start.sh
 Health Check Path: /api/health/
 ```
 
@@ -50,7 +50,11 @@ SECURE_HSTS_SECONDS=31536000
 SECURE_SSL_REDIRECT=True
 ```
 
-Do not add the database password or secret key to Git. Use Supabase's Session pooler rather than its transaction pooler: this is a persistent Django service, and the Session pooler is available over IPv4. `start.sh` runs migrations and creates the initial administrator before starting Gunicorn. The question bank import runs in the background so a large remote-database import cannot prevent Render from detecting the web port. It imports automatically when the bank is empty; set `IMPORT_QUESTIONS_ON_START=True` for one deployment when an existing question bank needs to be refreshed, then return it to `False`.
+Do not add the database password or secret key to Git. Use Supabase's Session pooler rather than its transaction pooler: this is a persistent Django service, and the Session pooler is available over IPv4. `start.sh` runs migrations, creates the initial administrator, and imports the small university bank in bulk before starting Gunicorn. The university import uses catalog topic IDs and a content fingerprint to skip unchanged files. The much larger aspirant question bank imports in the background so it cannot prevent Render from detecting the web port. Set `IMPORT_QUESTIONS_ON_START=True` for one deployment when that bank needs to be refreshed, then return it to `False`.
+
+Keep Root Directory blank: Render does not make files outside a configured service root available at runtime, and the backend needs `data/university/` and `assets/notes/`. Both shell scripts change into their own backend directory, so the commands above work from the repository root.
+
+If university practice reports that a topic is unavailable, confirm Render uses `bash backend/start.sh` (not a bare Gunicorn start command). A successful startup now includes `University question bank ready`. To explicitly repair only university data from the repository root, run `cd backend && python manage.py import_questions --university-only`; this preserves question IDs, student answers and the aspirant bank. Missing source files now stop startup with an actionable error instead of silently skipping the import.
 
 If the existing administrator password is lost, set a new `DJANGO_SUPERUSER_PASSWORD`, temporarily set `DJANGO_SUPERUSER_RESET_PASSWORD=True`, and deploy once. After confirming access, immediately change `DJANGO_SUPERUSER_RESET_PASSWORD` back to `False` so future deploys cannot reset the account unexpectedly.
 
