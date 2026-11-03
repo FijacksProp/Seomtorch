@@ -1,0 +1,59 @@
+/* A brief brand introduction, never an artificial delay. */
+#app-loader.boot-screen { background: #f6f4ed; color: #173e30; z-index: 250; }
+#app-loader.boot-screen::before, #app-loader.boot-screen::after { display: none; }
+.boot-screen { padding: max(28px,env(safe-area-inset-top)) clamp(24px,6vw,88px) max(24px,env(safe-area-inset-bottom)); }
+.boot-topline, .boot-bottomline { position: absolute; left: clamp(24px,6vw,88px); right: clamp(24px,6vw,88px); display: flex; align-items: center; justify-content: space-between; gap: 20px; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: #788170; line-height: 1.8; }
+.boot-topline { top: max(28px,env(safe-area-inset-top)); padding-bottom: 18px; border-bottom: 1px solid #dcded1; }
+.boot-topline > strong { color: #3c5947; font-weight: 650; }
+.boot-bottomline { bottom: max(24px,env(safe-area-inset-bottom)); padding-top: 18px; border-top: 1px solid #dcded1; letter-spacing: .06em; }
+.boot-bottomline > span:last-child { text-transform: none; font: italic 18px var(--serif,Georgia,serif); letter-spacing: -.01em; color: #77836e; }
+.boot-centre { width: min(390px,100%); text-align: center; animation: boot-arrive .5s ease both; }
+.boot-mark { display: grid; place-items: center; position: relative; width: 114px; height: 114px; margin: 0 auto 24px; border: 1px solid #d9dfd1; border-radius: 26px; background: #fcfcf5; box-shadow: 0 6px 0 -3px #e7eadc; }
+.boot-mark img { display: block; width: 108px; height: 108px; object-fit: contain; }
+.boot-wordmark { display: block; font-family: var(--sans,system-ui,sans-serif); font-size: clamp(35px,7vw,48px); line-height: 1.1; letter-spacing: -.055em; font-weight: 700; color: #123f30; }
+.boot-tagline { margin: 12px 0 33px; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: #728167; }
+.boot-track { width: 170px; height: 2px; background: #dce2d2; margin: 0 auto 20px; overflow: hidden; }
+.boot-track > i { display: block; width: 42%; height: 100%; background: #5a8158; animation: boot-travel 1.65s ease-in-out infinite; }
+.boot-status { margin: 0; font-size: 12px; color: #64725d; line-height: 1.8; }
+.boot-help { margin: 10px auto 0; max-width: 300px; font-size: 11px; color: #7a806f; line-height: 1.8; }
+.boot-retry { margin-top: 17px; padding: 11px 20px; min-height: 44px; color: #234d38; background: transparent; border: 1px solid #a7b49a; border-radius: 5px; font: 600 11px var(--sans,system-ui,sans-serif); cursor: pointer; }
+.boot-retry:focus-visible { outline: 3px solid #aa8248; outline-offset: 4px; }
+.boot-retry:hover { background: #e8eddf; }
+.boot-screen[data-state="error"] .boot-track > i { animation: none; width: 100%; background: #a68a58; }
+.boot-screen [hidden] { display: none !important; }
+.boot-recovery { text-align: center; display: grid; place-content: center; min-height: 100dvh; padding: 30px; background: #f6f4ed; }
+.boot-recovery h1 { font: 500 36px var(--serif,Georgia,serif); }
+.boot-recovery p { max-width: 430px; font-size: 13px; line-height: 1.9; color: #6c7565; }
+.boot-recovery button { justify-self: center; }
+/* Share the quieter identity with short, in-app preparation overlays. */
+#session-loading-overlay.app-loader { background: rgba(247,248,240,.97); color: #173e30; backdrop-filter: blur(6px); }
+#session-loading-overlay::before, #session-loading-overlay::after { display: none; }
+#session-loading-overlay .loader-composition { width: min(390px,calc(100vw - 48px)); grid-template-columns: 1fr; gap: 23px; text-align: center; }
+#session-loading-overlay .loader-emblem { margin: auto; animation: none; }
+#session-loading-overlay .loader-halo { display: none; }
+#session-loading-overlay .loader-logo-frame { background: #fffef8; border: 1px solid #d9dfd1; box-shadow: 0 6px 0 -3px #e7eadc; }
+#session-loading-overlay .loader-logo-frame img { width: 100%; height: 100%; }
+#session-loading-overlay .loader-copy > span { color: #708366; animation: none; }
+#session-loading-overlay .loader-copy strong { font: 500 30px/1.2 var(--serif,Georgia,serif); color: #173e30; letter-spacing: -.02em; animation: none; }
+#session-loading-overlay .loader-copy p { color: #6a7762; font-size: 12px; line-height: 1.8; animation: none; }
+#session-loading-overlay .loader-rule { width: 160px; justify-self: center; background: #dce2d2; }
+#session-loading-overlay .loader-rule i { background: #5a8158; }
+@keyframes boot-travel { 0% { transform: translateX(-105%); } 70%,100% { transform: translateX(345%); } }
+@keyframes boot-arrive { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+@media (max-width: 520px) {
+  .boot-topline, .boot-bottomline { font-size: 8px; }
+  .boot-topline > span { display: none; }
+  .boot-bottomline > span:last-child { font-size: 15px; }
+  .boot-mark { width: 100px; height: 100px; border-radius: 22px; }
+  .boot-mark img { width: 94px; height: 94px; }
+  .boot-status { font-size: 11px; }
+}
+@media (max-height: 540px) {
+  .boot-mark { width: 64px; height: 64px; border-radius: 15px; margin-bottom: 15px; }
+  .boot-mark img { width: 60px; height: 60px; }
+  .boot-wordmark { font-size: 31px; }
+  .boot-tagline { margin: 8px 0 18px; }
+  .boot-track { margin-bottom: 10px; }
+  .boot-topline, .boot-bottomline { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .boot-centre, .boot-track > i { animation: none; } .boot-track > i { width: 100%; opacity: .55; } }

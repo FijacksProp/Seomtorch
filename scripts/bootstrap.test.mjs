@@ -1,0 +1,35 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import vm from 'node:vm';
+const source = readFileSync(new URL('../assets/bootstrap.js', import.meta.url), 'utf8');
+function setup(online = true) {
+  const timers = new Map(), events = {}, elements = {};
+  let mutation, reloads = 0, next = 0;
+  for (const id of ['app', 'app-loader', 'boot-status', 'boot-help', 'boot-retry']) elements[id] = { childElementCount: 0, hidden: true, dataset: {}, classList: { add(value) { this.value = value; } }, remove() { this.removed = true; }, addEventListener(type, fn) { this[type] = fn; } };
+  const window = { addEventListener(type, fn) { events[type] = fn; } };
+  vm.runInNewContext(source, { window, document: { readyState: 'complete', getElementById: id => elements[id] }, navigator: { onLine: online }, location: { reload() { reloads++; } }, MutationObserver: class { constructor(fn) { mutation = fn; } observe() {} disconnect() {} }, setTimeout(fn, delay) { const id = ++next; timers.set(id, { fn, delay }); return id; }, clearTimeout(id) { timers.delete(id); } });
+  return { window, elements, events, timers, mutate: () => mutation(), reloads: () => reloads, run(delay) { const timer = [...timers.values()].find(x => x.delay === delay); assert.ok(timer); timer.fn(); } };
+}
+const slow = setup();
+assert.ok(![...slow.timers.values()].some(x => x.delay === 5000));
+slow.run(8000);
+assert.equal(slow.elements['app-loader'].dataset.state, 'slow');
+assert.equal(slow.elements['app-loader'].classList.value, undefined);
+assert.equal(slow.elements['boot-retry'].hidden, false);
+slow.run(30000);
+assert.equal(slow.elements['app-loader'].dataset.state, 'error');
+slow.elements['boot-retry'].click();
+assert.equal(slow.reloads(), 1);
+slow.elements.app.childElementCount = 1;
+slow.mutate();
+assert.equal(slow.elements['app-loader'].classList.value, 'dismissed');
+assert.ok(![...slow.timers.values()].some(x => x.delay === 30000));
+slow.run(500);
+assert.equal(slow.elements['app-loader'].removed, true);
+const offline = setup(false);
+offline.run(8000);
+assert.match(offline.elements['boot-help'].textContent, /offline/);
+const failed = setup();
+failed.events.error({ target: { tagName: 'SCRIPT', type: 'module' } });
+assert.equal(failed.elements['app-loader'].dataset.state, 'error');
+console.log('Bootstrap recovery checks passed.');

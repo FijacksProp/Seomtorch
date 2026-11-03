@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "home:test": "node scripts/home-ui.test.mjs && node scripts/bootstrap.test.mjs",
     "start": "serve .",
-    "check": "node --check app.js && node --check api-client.js && node --check community-ui.js && node --check challenges-ui.js && node --check buddy-chat.js && node --check student-engagement.js && node --check sw.js && node --check scripts/build-question-bank.mjs && node --check scripts/scrape-myschool-questions.mjs && node --check scripts/prepare-myschool-questions.mjs && node --check scripts/build-myschool-pack.mjs && node --check scripts/generate-physics-explanations.mjs",
+    "check": "node --check app.js && node --check assets/bootstrap.js && node --check home-ui.js && node --check api-client.js && node --check community-ui.js && node --check challenges-ui.js && node --check buddy-chat.js && node --check student-engagement.js && node --check sw.js && node --check scripts/build-question-bank.mjs && node --check scripts/scrape-myschool-questions.mjs && node --check scripts/prepare-myschool-questions.mjs && node --check scripts/build-myschool-pack.mjs && node --check scripts/generate-physics-explanations.mjs",
     "community:test": "node scripts/community-ui.test.mjs && node scripts/feedback-prompt.test.mjs && node scripts/buddy-chat.test.mjs && node scripts/challenges-ui.test.mjs",
     "questions:build": "node scripts/build-question-bank.mjs",
     "questions:myschool": "node scripts/scrape-myschool-questions.mjs",

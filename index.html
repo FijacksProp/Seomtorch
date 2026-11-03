@@ -14,7 +14,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="assets/seomtorch_logo.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/seomtorch_logo.png">
-  <script src="assets/bootstrap.js"></script>
+  <script src="assets/bootstrap.js?v=133"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
@@ -24,6 +24,8 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="community.css">
   <link rel="stylesheet" href="challenges.css">
+  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="loader.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -34,20 +36,20 @@
     <span class="ambient-orbit orbit-one"></span>
     <span class="ambient-orbit orbit-two"></span>
   </div>
-  <div id="app-loader" class="app-loader" role="status" aria-live="polite" aria-label="Preparing Seomtorch">
-    <div class="loader-composition">
-      <div class="loader-emblem" aria-hidden="true">
-        <span class="loader-halo"></span>
-        <span class="loader-logo-frame"><img src="assets/seomtorch_logo.png" alt=""></span>
-      </div>
-      <div class="loader-copy">
-        <span>Focused preparation</span>
-        <strong>Seomtorch</strong>
-        <p>Opening your study space</p>
-      </div>
-      <div class="loader-rule" aria-hidden="true"><i></i></div>
+  <div id="app-loader" class="app-loader boot-screen" aria-label="Preparing Seomtorch">
+    <div class="boot-topline" aria-hidden="true"><strong>Seomtorch / Study space</strong><span>A place for steady progress</span></div>
+    <div class="boot-centre">
+      <div class="boot-mark" aria-hidden="true"><img src="assets/seomtorch_logo.png" alt="" width="108" height="108" fetchpriority="high"></div>
+      <strong class="boot-wordmark">Seomtorch</strong>
+      <p class="boot-tagline">Prepare with purpose</p>
+      <div class="boot-track" aria-hidden="true"><i></i></div>
+      <p class="boot-status" id="boot-status" role="status" aria-live="polite">Opening your study space</p>
+      <p class="boot-help" id="boot-help" hidden></p>
+      <button type="button" class="boot-retry" id="boot-retry" hidden>Reload Seomtorch</button>
     </div>
+    <div class="boot-bottomline" aria-hidden="true"><span>Prepare. Practise. Progress.</span><span>A little further, every day.</span></div>
   </div>
+  <noscript><style>#app-loader{display:none!important}</style><main class="boot-recovery"><h1>Let’s open your study space.</h1><p>Seomtorch needs JavaScript to run. Enable it in your browser, then reload this page.</p></main></noscript>
   <div id="app" class="app-shell" aria-live="polite"></div>
   <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
   <div id="screen-privacy-shield" class="screen-privacy-shield" aria-hidden="true">

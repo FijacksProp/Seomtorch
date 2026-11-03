@@ -1,6 +1,7 @@
 import { api, ApiError } from "./api-client.js";
 import { jambCalculator } from "./calculator.js";
 import { communityPage } from "./community-ui.js";
+import { homePage, homeSubjectRows } from "./home-ui.js";
 import { mountBuddyChat, unmountBuddyChat } from "./buddy-chat.js";
 import { challengeHubPage, challengeComposerPage, challengeDetailPage, challengeSetupSummary } from "./challenges-ui.js";
 import { cancelPostPracticeFeedback, closeStudentDialogs, eligibleForUniversityOffer, maybeShowUniversityIntroduction, openStudentDialog, schedulePostPracticeFeedback, showFeedbackPanel } from "./student-engagement.js";
@@ -75,7 +76,7 @@ let loaderDismissed = false;
 function dismissAppLoader() {
   if (loaderDismissed) return;
   loaderDismissed = true;
-  clearTimeout(window.__seomtorchLoaderFailsafe);
+  if (window.SeomtorchBoot?.ready) { window.SeomtorchBoot.ready(); return; }
   const loader = document.querySelector("#app-loader");
   requestAnimationFrame(() => {
     loader?.classList.add("dismissed");
@@ -88,6 +89,9 @@ function showLoadingOverlay(title = "Preparing your session", subtitle = "Loadin
   const overlay = document.createElement("div");
   overlay.id = "session-loading-overlay";
   overlay.className = "app-loader";
+  overlay.setAttribute("role", "status");
+  overlay.setAttribute("aria-live", "polite");
+  overlay.setAttribute("aria-label", title);
   overlay.style.zIndex = "300";
   overlay.innerHTML = `<div class="loader-composition"><div class="loader-emblem" aria-hidden="true"><span class="loader-halo"></span><span class="loader-logo-frame"><img src="assets/seomtorch_logo.png" alt=""></span></div><div class="loader-copy"><span>Please wait</span><strong style="font-size:clamp(22px, 5vw, 30px);">${escapeHtml(title)}</strong><p>${escapeHtml(subtitle)}</p></div><div class="loader-rule" aria-hidden="true"><i></i></div></div>`;
   document.body.appendChild(overlay);
@@ -1163,229 +1167,51 @@ function subjectStats(subjectId) {
   return { count: list.length, accuracy: accuracy(list) };
 }
 
-function renderUniHome() {
-  const uniProf = currentUser?.university_profile || {};
-  const greeting = new Date().getHours() < 12 ? "Good morning" : new Date().getHours() < 17 ? "Good afternoon" : "Good evening";
-  const uniName = uniProf.university_name || "University Studies";
-  const deptTitle = uniProf.department ? `Department of ${uniProf.department}` : "Undergraduate Studies";
-  const levelText = uniProf.level ? `${uniProf.level} Level` : "Undergraduate";
+function renderUniHome() { return renderHomeDesk(true); }
 
-  const content = `<section class="page">
-    <div class="uni-workspace-masthead">
-      <div class="uni-institution-strip">
-        <svg class="uni-crest-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M12 3L2 8l10 5 10-5-10-5z"/><path d="M6 10.5v5c0 3 3 5.5 6 5.5s6-2.5 6-5.5v-5"/><path d="M22 8v6"/>
-        </svg>
-        <span class="uni-inst-name">${escapeHtml(uniName)}</span>
-        <span class="uni-sep-dot">·</span>
-        <span class="uni-level-pill">${escapeHtml(levelText)}</span>
-      </div>
+function renderHome() { return renderHomeDesk(getActiveMode() === "university"); }
 
-      <div class="uni-dept-block">
-        <span class="uni-dept-prefix">Academic Program</span>
-        <h2 class="uni-dept-title">${escapeHtml(deptTitle)}</h2>
-        ${uniProf.faculty ? `<span class="uni-fac-name">Faculty of ${escapeHtml(uniProf.faculty)}</span>` : ""}
-      </div>
-
-      <div class="uni-masthead-divider"></div>
-
-      <div class="uni-greeting-group">
-        <h1>${greeting}, ${escapeHtml(firstName())}.</h1>
-        <p>Review course materials, practise departmental questions, and track topic mastery.</p>
-      </div>
-
-      <div class="uni-masthead-actions">
-        <button class="button accent" id="uni-home-open-courses">
-          <span>Explore Department Courses</span>
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-        <button class="button outline" id="uni-home-edit-profile">
-          <span>Update Academic Info</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="section-head">
-      <h2>Active Department Modules</h2>
-      <p>Current semester practice banks</p>
-    </div>
-
-    <div class="uni-featured-card">
-      <div>
-        <span class="uni-featured-badge">Featured Course · 200 Level</span>
-        <h3 class="uni-featured-title">ANA 201: Upper and Lower Limb</h3>
-        <p class="uni-featured-desc">High-Yield clinical practice covering Bones, Muscles, Joints, Brachial Plexus, and specialized anatomical regions with detailed rationale.</p>
-      </div>
-      <button class="button accent" id="uni-home-jump-ana201">Open ANA 201 →</button>
-    </div>
-
-    <div class="section-head">
-      <h2>Departments Catalog</h2>
-      <p>Browse courses by department</p>
-    </div>
-
-    <div class="uni-quick-grid">
-      <div class="uni-portal-status-card">
-        <div>
-          <div class="uni-dept-svg-mark anatomy">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20M7 7l10 10M17 7L7 17"/></svg>
-          </div>
-          <strong>Human Anatomy</strong>
-          <p>Gross anatomy, neuroanatomy, embryology and histology with detailed anatomical landmarks and clinical correlations.</p>
-        </div>
-        <button class="button outline small" data-uni-browse-dept="anatomy">Browse Anatomy Courses →</button>
-      </div>
-
-      <div class="uni-portal-status-card">
-        <div>
-          <div class="uni-dept-svg-mark physiology">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          </div>
-          <strong>Human Physiology</strong>
-          <p>Cellular physiology, cardiovascular, respiratory, renal, and neuro-endocrine system mechanics.</p>
-        </div>
-        <button class="button outline small" data-uni-browse-dept="physiology">Browse Physiology Courses →</button>
-      </div>
-    </div>
-  </section>`;
-
-  app.innerHTML = shell(content);
+function renderHomeDesk(university) {
+  const now = new Date();
+  const greeting = now.getHours() < 12 ? "Good morning" : now.getHours() < 17 ? "Good afternoon" : "Good evening";
+  const last = lastTopic();
+  const recent = last && SUBJECTS.some(subject => subject.id === last.subject)
+    ? { ...last, subjectLabel: subjectName(last.subject) } : null;
+  const urgentChallenge = challengesData?.find(item => item.can_respond) || challengesData?.find(item => item.can_start);
+  const subjects = SUBJECTS.map(subject => ({ ...subject, stats: subjectStats(subject.id) }));
+  app.innerHTML = shell(homePage({
+    university, name: firstName(), greeting, now, profile, attempts, recent, subjects,
+    questionCount: questions.length, savedCount: bookmarks.length,
+    sprintDone: dailySprintCompleted, challenge: urgentChallenge, academic: currentUser?.university_profile || {},
+  }));
   bindShell();
-
+  document.querySelector("#continue-study")?.addEventListener("click", () => { selectedSubject = recent?.subject || null; route = "practice"; render(); });
+  document.querySelector("#home-saved")?.addEventListener("click", () => { selectedSubject = "saved"; route = "practice"; render(); });
+  document.querySelector("#start-sprint")?.addEventListener("click", () => { if (!dailySprintCompleted) { route = "daily-sprint"; render(); } });
+  document.querySelector("#open-urgent-challenge")?.addEventListener("click", () => { challengeComposerOpen = false; selectedChallengeId = urgentChallenge.id; route = "challenges"; renderChallenges(); });
+  const search = document.querySelector("#home-subject-query");
+  document.querySelector("#home-subject-search")?.addEventListener("submit", event => event.preventDefault());
+  search?.addEventListener("input", () => {
+    const list = document.querySelector("#home-subjects");
+    list.innerHTML = homeSubjectRows(subjects, search.value);
+    const count = list.querySelectorAll("[data-home-subject]").length;
+    document.querySelector("#home-subject-count").textContent = count + (count === 1 ? " subject" : " subjects");
+  });
+  document.querySelector("#home-subjects")?.addEventListener("click", event => {
+    const button = event.target.closest("[data-home-subject]");
+    if (!button) return;
+    selectedSubject = button.dataset.homeSubject; route = "practice"; render();
+  });
   document.querySelector("#uni-home-open-courses")?.addEventListener("click", () => {
-    route = "university";
-    uniRoute = "departments";
-    uniDeptId = null;
-    render();
+    route = "university"; uniRoute = "departments"; uniDeptId = null; render();
   });
   document.querySelector("#uni-home-jump-ana201")?.addEventListener("click", () => {
-    route = "university";
-    uniRoute = "course";
-    uniDeptId = "anatomy";
-    uniLevel = 200;
-    uniCourseId = "ana201";
-    render();
+    route = "university"; uniRoute = "course"; uniDeptId = "anatomy"; uniLevel = 200; uniCourseId = "ana201"; render();
   });
-  document.querySelector("#uni-home-edit-profile")?.addEventListener("click", () => {
-    showUniversityRegistrationModal(() => render());
-  });
-  document.querySelectorAll("[data-uni-browse-dept]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      route = "university";
-      uniRoute = "levels";
-      uniDeptId = btn.dataset.uniBrowseDept;
-      render();
-    });
-  });
-}
-
-function renderHome() {
-  if (getActiveMode() === "university") {
-    return renderUniHome();
-  }
-  const recent = lastTopic();
-  const greeting = new Date().getHours() < 12 ? "Good morning" : new Date().getHours() < 17 ? "Good afternoon" : "Good evening";
-  const displayName = currentUser?.username || firstName();
-  const todayAttempts = attempts.filter(item => new Date(item.timestamp).toISOString().slice(0, 10) === today());
-  const testStats = profile.tests || { tests_today: 0, average_score: 0 };
-  const urgentChallenge = challengesData?.find(item => item.can_respond) || challengesData?.find(item => item.can_start);
-
-  const content = `<section class="page page-home">
-    <div class="home-greeting-block">
-      <h1 class="home-greeting-title">${greeting}, ${escapeHtml(displayName)}.</h1>
-      <p class="home-greeting-sub">A clear view of what you have done, where to focus, and what to tackle next.</p>
-    </div>
-
-    ${urgentChallenge ? `<article class="challenge-nudge"><div><span>${urgentChallenge.can_respond ? "Challenge invitation" : urgentChallenge.my_status === "started" ? "Attempt in progress" : "Challenge ready"}</span><h2>${escapeHtml(urgentChallenge.title)}</h2><p>${escapeHtml(urgentChallenge.creator.username)} · ${urgentChallenge.question_count} questions · ${urgentChallenge.duration_minutes} minutes</p></div><button class="button" id="open-urgent-challenge">${urgentChallenge.can_respond ? "Review invitation" : urgentChallenge.my_status === "started" ? "Continue attempt" : "Open challenge"} →</button></article>` : ""}
-
-    <!-- Hero Card: "Start with a focused session" -->
-    <article class="hero-focus-card">
-      <div class="hero-focus-content">
-        <span class="hero-focus-tag">${recent ? "CONTINUE WHERE YOU STOPPED" : "BEGIN YOUR PREPARATION"}</span>
-        <h2 class="hero-focus-heading">${recent ? escapeHtml(recent.topic) : "Start with a focused session"}</h2>
-        <p class="hero-focus-desc">${recent ? `${subjectName(recent.subject)} · personalised question selection` : "Pick a subject, set your focus, and build knowledge that lasts."}</p>
-        <button class="hero-focus-btn" id="continue-study">
-          <span>${recent ? "Continue studying" : "Choose a subject"}</span>
-          <span aria-hidden="true">→</span>
-        </button>
-      </div>
-    </article>
-
-    <!-- Daily Challenge Banner ("5-Minute Sprint") -->
-    <article class="sprint-banner-card">
-      <div class="sprint-banner-left">
-        <div class="sprint-lightning-circle">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="#D97706"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        </div>
-        <div class="sprint-banner-text">
-          <span class="sprint-banner-kicker">DAILY CHALLENGE</span>
-          <h3 class="sprint-banner-title">5-Minute Sprint</h3>
-          <p class="sprint-banner-desc">5 quick questions worth up to 25 XP. ${dailySprintCompleted ? 'Completed today ✓' : 'Ready to attempt'}</p>
-        </div>
-      </div>
-      <button class="sprint-banner-btn ${dailySprintCompleted ? 'completed' : ''}" id="start-sprint">
-        <span>${dailySprintCompleted ? 'Sprint completed ✓' : 'Start sprint →'}</span>
-      </button>
-    </article>
-
-    <!-- "Today, at a glance" Stats Grid -->
-    <div class="section-heading-clean">
-      <h2>Today, at a glance</h2>
-    </div>
-    <div class="glance-metrics-grid">
-      <div class="glance-metric-card">
-        <div class="glance-card-top">
-          <svg class="glance-icon icon-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-          <span class="glance-card-label">Tests completed today</span>
-        </div>
-        <strong class="glance-card-val">${testStats.tests_today || 0}</strong>
-        <div class="glance-card-foot"><span class="glance-dot">●</span> Today</div>
-      </div>
-
-      <div class="glance-metric-card accent-card">
-        <div class="glance-card-top">
-          <svg class="glance-icon icon-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
-          <span class="glance-card-label">Average test score</span>
-        </div>
-        <strong class="glance-card-val">${testStats.average_score}%</strong>
-        <div class="glance-card-foot trend-positive"><span>↑</span> ${testStats.average_score > 0 ? '6% vs yesterday' : '● Today'}</div>
-      </div>
-
-      <div class="glance-metric-card">
-        <div class="glance-card-top">
-          <svg class="glance-icon icon-question" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          <span class="glance-card-label">Questions today</span>
-        </div>
-        <strong class="glance-card-val">${todayAttempts.length}</strong>
-        <div class="glance-card-foot"><span class="glance-dot">●</span> Today</div>
-      </div>
-
-      <div class="glance-metric-card">
-        <div class="glance-card-top">
-          <svg class="glance-icon icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 23c4.97 0 9-4.03 9-9 0-4.5-3.5-7.5-5-9.5-1.5 2-3 3-4.5 3-2 0-3.5-1.5-3.5-3.5 0-.5.1-1 .2-1.5C5.2 4.7 3 8.6 3 14c0 4.97 4.03 9 9 9z"/></svg>
-          <span class="glance-card-label">Current streak</span>
-        </div>
-        <strong class="glance-card-val">${profile.rhythm || 0} days</strong>
-        <div class="glance-card-foot">${profile.rhythm > 0 ? 'Active streak!' : 'Keep going!'}</div>
-      </div>
-    </div>
-
-    <!-- Subjects Section -->
-    <div class="section-heading-clean subjects-head-row">
-      <h2>Subjects</h2>
-      <span class="subjects-avail-count">${questions.length ? questions.length.toLocaleString() : "32,777"} questions available</span>
-    </div>
-    <div class="subject-list">
-      ${SUBJECTS.map((subject, index) => { const stats = subjectStats(subject.id); return `<button class="subject-row" data-subject="${subject.id}"><span class="subject-num">0${index + 1}</span><span><span class="subject-title">${subject.name}</span><span class="subject-meta">${stats.count ? `${stats.accuracy}% accuracy across ${stats.count} attempts` : subject.description}</span></span><span class="mini-progress"><i style="width:${stats.accuracy}%"></i></span><span class="row-arrow" aria-hidden="true">→</span></button>`; }).join("")}
-    </div>
-  </section>`;
-
-  app.innerHTML = shell(content);
-  bindShell();
-  document.querySelector("#continue-study").addEventListener("click", () => { route = "practice"; selectedSubject = recent?.subject || null; render(); });
-  document.querySelector("#start-sprint").addEventListener("click", () => { if (!dailySprintCompleted) { route = "daily-sprint"; render(); } });
-  document.querySelector("#open-urgent-challenge")?.addEventListener("click", () => { selectedChallengeId = urgentChallenge.id; route = "challenges"; renderChallenges(); });
-  document.querySelectorAll("[data-subject]").forEach(button => button.addEventListener("click", () => { route = "practice"; selectedSubject = button.dataset.subject; render(); }));
+  document.querySelector("#uni-home-edit-profile")?.addEventListener("click", () => showUniversityRegistrationModal(() => render()));
+  document.querySelectorAll("[data-uni-browse-dept]").forEach(button => button.addEventListener("click", () => {
+    route = "university"; uniRoute = "levels"; uniDeptId = button.dataset.uniBrowseDept; render();
+  }));
 }
 
 function topicAccuracy(subject, topic) {
@@ -5618,7 +5444,8 @@ async function init() {
     if ("serviceWorker" in navigator && location.protocol !== "file:") navigator.serviceWorker.register("sw.js").catch(() => {});
   } catch (error) {
     console.error(error);
-    app.innerHTML = `<main class="onboard-form" style="min-height:100dvh"><div><p class="eyebrow">Unable to start</p><h1>Seomtorch needs a local web server.</h1><p class="lede">Open this project through localhost or a secure website so its question bank and offline storage can load correctly.</p><p><code>npx serve .</code></p></div></main>`;
+    app.innerHTML = '<main class="boot-recovery"><h1>Let’s try that again.</h1><p>We couldn’t finish opening your study space. Check your connection and reload. If this keeps happening, check that your browser allows site storage.</p><button type="button" class="boot-retry" id="retry-app-start">Reload Seomtorch</button></main>';
+    document.querySelector("#retry-app-start").addEventListener("click", () => location.reload());
   } finally {
     dismissAppLoader();
     initScreenProtection();
