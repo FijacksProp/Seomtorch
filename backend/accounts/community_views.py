@@ -7,9 +7,15 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import StudentFollow
+from .models import StudentBlock, StudentFollow
 
 User = get_user_model()
+
+
+def _blocked_ids(user):
+    return set(StudentBlock.objects.filter(blocker=user).values_list("blocked_id", flat=True)) | set(
+        StudentBlock.objects.filter(blocked=user).values_list("blocker_id", flat=True)
+    )
 
 
 def _get_buddy_ids(user):
@@ -20,7 +26,7 @@ def _get_buddy_ids(user):
     follower_ids = set(
         StudentFollow.objects.filter(following=user).values_list("follower_id", flat=True)
     )
-    return following_ids & follower_ids
+    return (following_ids & follower_ids) - _blocked_ids(user)
 
 
 def _user_card(user, stats=None, is_mutual=None):
@@ -51,17 +57,19 @@ class FollowView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        public_id = (request.data.get("public_id") or "").strip().upper()
+        public_id = str(request.data.get("public_id") or "").strip().upper()
         if not public_id:
             return Response({"detail": "public_id is required."}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            target = User.objects.get(public_id__iexact=public_id)
+            target = User.objects.get(public_id__iexact=public_id, is_active=True)
         except User.DoesNotExist:
             return Response({"detail": "Student not found."}, status=status.HTTP_404_NOT_FOUND)
 
         if target == request.user:
             return Response({"detail": "You cannot follow yourself."}, status=status.HTTP_400_BAD_REQUEST)
+        if target.id in _blocked_ids(request.user):
+            return Response({"detail": "This connection is unavailable."}, status=status.HTTP_403_FORBIDDEN)
 
         _, created = StudentFollow.objects.get_or_create(follower=request.user, following=target)
         if not created:
@@ -82,7 +90,7 @@ class UnfollowView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        public_id = (request.data.get("public_id") or "").strip().upper()
+        public_id = str(request.data.get("public_id") or "").strip().upper()
         if not public_id:
             return Response({"detail": "public_id is required."}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -110,17 +118,17 @@ class NetworkView(APIView):
         buddy_ids = _get_buddy_ids(user)
 
         # Buddies (mutual) — with stats
-        buddy_users = User.objects.filter(id__in=buddy_ids).select_related("learning_stats")
+        buddy_users = User.objects.filter(id__in=buddy_ids, is_active=True).select_related("learning_stats")
         buddies = [_user_card(u, is_mutual=True) for u in buddy_users]
 
         # Followers
         follower_ids_qs = StudentFollow.objects.filter(following=user).values_list("follower_id", flat=True)
-        follower_users = User.objects.filter(id__in=follower_ids_qs).select_related("learning_stats")
+        follower_users = User.objects.filter(id__in=follower_ids_qs, is_active=True).exclude(id__in=_blocked_ids(user)).select_related("learning_stats")
         followers = [_user_card(u, is_mutual=(u.id in buddy_ids)) for u in follower_users]
 
         # Following
         following_ids_qs = StudentFollow.objects.filter(follower=user).values_list("following_id", flat=True)
-        following_users = User.objects.filter(id__in=following_ids_qs).select_related("learning_stats")
+        following_users = User.objects.filter(id__in=following_ids_qs, is_active=True).exclude(id__in=_blocked_ids(user)).select_related("learning_stats")
         following = [_user_card(u, is_mutual=(u.id in buddy_ids)) for u in following_users]
 
         return Response({
@@ -145,7 +153,7 @@ class LeaderboardView(APIView):
 
         # Include self + buddies
         all_ids = buddy_ids | {user.id}
-        users = User.objects.filter(id__in=all_ids).select_related("learning_stats")
+        users = User.objects.filter(id__in=all_ids, is_active=True).select_related("learning_stats")
 
         entries = []
         for u in users:
@@ -194,7 +202,7 @@ class SearchView(APIView):
         results = User.objects.filter(
             q_filter,
             is_active=True,
-        ).select_related("learning_stats")[:25]
+        ).exclude(id__in=_blocked_ids(request.user)).select_related("learning_stats")[:25]
 
         # Determine follow state for each result
         following_ids = set(

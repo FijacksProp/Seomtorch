@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import AspirantProfile, StudentFollow, UniversityProfile, User
+from .models import AspirantProfile, StudentFeedback, StudentFollow, UniversityProfile, User
 
 
 class AspirantProfileInline(admin.StackedInline):
@@ -37,3 +37,14 @@ class StudentFollowAdmin(admin.ModelAdmin):
     list_filter = ("created_at",)
     search_fields = ("follower__username", "follower__public_id", "following__username", "following__public_id")
     raw_id_fields = ("follower", "following")
+
+
+@admin.register(StudentFeedback)
+class StudentFeedbackAdmin(admin.ModelAdmin):
+    list_display = ("user", "category", "status", "created_at")
+    list_filter = ("status", "category", "created_at")
+    search_fields = ("user__username", "user__public_id", "body")
+    readonly_fields = ("user", "client_id", "category", "body", "reported_message", "created_at", "updated_at")
+
+    def has_add_permission(self, request):
+        return False

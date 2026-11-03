@@ -55,10 +55,11 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = (
             "public_id", "email", "username", "phone_number", "gender", "avatar", "date_joined",
-            "must_change_password", "user_type", "active_mode",
+            "must_change_password", "user_type", "active_mode", "is_staff",
             "has_aspirant_profile", "has_university_profile",
             "aspirant_profile", "university_profile", "stats",
         )
+        read_only_fields = ("is_staff",)
 
     def get_stats(self, user):
         stats, _ = UserStats.objects.get_or_create(user=user)

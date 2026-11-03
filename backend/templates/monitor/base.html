@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{% static 'monitor/monitor.css' %}?v=2.3">
   <link rel="stylesheet" href="{% static 'monitor/brand-refresh.css' %}?v=2.3">
   <link rel="stylesheet" href="{% static 'monitor/monitor-pro.css' %}?v=2.3">
+  <link rel="stylesheet" href="{% static 'monitor/feedback.css' %}">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
@@ -76,6 +77,10 @@
         <a class="{% if request.resolver_match.url_name == 'flags' %}active{% endif %}" href="{% url 'monitor:flags' %}">
           <svg viewBox="0 0 24 24"><path d="M5 3v18M5 3l9 4.5L5 12l9 4.5"/></svg>
           <span>Flags</span>
+        </a>
+        <a class="{% if 'feedback' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'monitor:feedback' %}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H3l2-5a8.5 8.5 0 1 1 16-3.5Z"/><path d="M8 9h8M8 13h5"/></svg>
+          <span>Student feedback</span>
         </a>
         <a href="/internal-admin/" target="_blank" title="Open Django Internal Admin">
           <svg viewBox="0 0 24 24"><path d="M12 3 4 7v10l8 4 8-4V7Z"/><path d="m4 7 8 4 8-4M12 11v10"/></svg>

@@ -4,13 +4,24 @@ export class ApiError extends Error {
   constructor(message, status = 0, fields = null) { super(message); this.status = status; this.fields = fields; }
 }
 
-async function request(path, { token, method = "GET", body, signal } = {}) {
+async function request(path, { token, method = "GET", body, signal, timeoutMs } = {}) {
+  const timeoutController = timeoutMs ? new AbortController() : null;
+  const forwardAbort = () => timeoutController?.abort();
+  if (timeoutController && signal) {
+    if (signal.aborted) timeoutController.abort();
+    else signal.addEventListener("abort", forwardAbort, { once: true });
+  }
+  const requestSignal = timeoutController?.signal || signal;
+  const timeout = timeoutController ? setTimeout(() => timeoutController.abort(), timeoutMs) : null;
   let response;
   try {
-    response = await fetch(`${API_URL}${path}`, { method, cache: "no-store", headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Token ${token}` } : {}) }, ...(body !== undefined ? { body: JSON.stringify(body) } : {}), ...(signal ? { signal } : {}) });
+    response = await fetch(`${API_URL}${path}`, { method, cache: "no-store", headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Token ${token}` } : {}) }, ...(body !== undefined ? { body: JSON.stringify(body) } : {}), ...(requestSignal ? { signal: requestSignal } : {}) });
   } catch (error) {
-    if (error?.name === "AbortError") throw new ApiError("The server took too long to prepare this session. Please try again.");
+    if (error?.name === "AbortError") throw new ApiError(timeoutMs ? "This request took too long. Please try again." : "The server took too long to prepare this session. Please try again.");
     throw new ApiError("The server could not be reached. Check your connection and try again.");
+  } finally {
+    clearTimeout(timeout);
+    if (timeoutController && signal) signal.removeEventListener("abort", forwardAbort);
   }
   const data = response.status === 204 ? null : await response.json().catch(() => ({}));
   if (!response.ok) {
@@ -74,6 +85,15 @@ export const api = {
   communityLeaderboard: token => request("/community/leaderboard/", { token }),
   communitySearch: (token, query) => request(`/community/search/?q=${encodeURIComponent(query)}`, { token }),
   // Monetization & Subscriptions
+  buddyInbox: (token, options = {}) => request("/community/inbox/", { ...options, token }),
+  buddyMessages: (token, id, cursor = {}, options = {}) => request(`/community/messages/${encodeURIComponent(id)}/?${new URLSearchParams(cursor)}`, { ...options, token }),
+  sendBuddyMessage: (token, id, body, options = {}) => request(`/community/messages/${encodeURIComponent(id)}/`, { ...options, token, method: "POST", body }),
+  reportBuddyMessage: (token, id, reason) => request(`/community/message-reports/${id}/`, { token, method: "POST", body: { reason }, timeoutMs: 60000 }),
+  blockedBuddies: token => request("/community/blocks/", { token }),
+  blockBuddy: (token, public_id) => request("/community/blocks/", { token, method: "POST", body: { public_id } }),
+  unblockBuddy: (token, id) => request(`/community/blocks/${encodeURIComponent(id)}/`, { token, method: "DELETE" }),
+  feedback: token => request("/community/feedback/", { token }),
+  submitFeedback: (token, body) => request("/community/feedback/", { token, method: "POST", body, timeoutMs: 60000 }),
   subscriptionConfig: token => request("/subscriptions/config/", { token }),
   validateDiscountCode: (code, plan) => request("/subscriptions/validate-code/", { method: "POST", body: { code, plan } }),
   initPayment: (token, body) => request("/subscriptions/initialize/", { token, method: "POST", body }),

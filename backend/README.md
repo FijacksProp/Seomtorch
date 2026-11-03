@@ -72,6 +72,15 @@ If Render assigns a URL other than `https://seomtorch-api.onrender.com`, update 
 - The six-character `public_id` is unique and indexed for administrator search.
 - Source question files remain ignored; the normalized bank is imported from `data/questions.json`.
 
+## Feedback and buddy chat
+
+- Startup migrations create the feedback, message and block tables automatically; no additional hosting service or WebSocket server is required.
+- Profile and Buddies open a private feedback form. Students can see the review status of their own recent submissions. Administrators manage feedback and explicitly reported messages at `/monitor/feedback/`; internal review notes are never returned to students.
+- Chat requires mutual follows and an active peer account. Either person blocking the other removes both follows and denies messaging in both directions. Unblocking does not automatically restore follows. Normal conversations do not appear in the admin monitor; a safety report shares only the reported message and the reporter’s reason.
+- Messages are text only (2,000 characters), with cursor-paged history and retry-safe client IDs. The open, visible messaging page checks for new messages every 15 seconds. Messages are stored in the Django database; this is access-controlled chat, not end-to-end encrypted messaging.
+- Feedback and message writes have separate rate limits. Feedback is limited to 4,000 characters and safety-report reasons to 1,000.
+- The university course introduction is limited to signed-in university-mode users with no current paid course or trial access. Its 24-hour cooldown is per account on that device. It is never scheduled during a practice session. The quiet course-plans link remains available outside practice; payment and course access continue to be enforced by the existing backend.
+
 ## Checks
 
 ```powershell

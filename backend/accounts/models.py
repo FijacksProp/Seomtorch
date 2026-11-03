@@ -1,5 +1,6 @@
 import secrets
 import string
+import uuid
 
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
@@ -188,3 +189,68 @@ class StudentFollow(models.Model):
 
     def __str__(self):
         return f"{self.follower} \u2192 {self.following}"
+
+
+class StudentBlock(models.Model):
+    blocker = models.ForeignKey(User, on_delete=models.CASCADE, related_name="student_blocks")
+    blocked = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blocked_by_students")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=("blocker", "blocked"), name="unique_student_block_pair"),
+            models.CheckConstraint(condition=~models.Q(blocker=models.F("blocked")), name="no_self_student_block"),
+        ]
+
+
+class BuddyMessage(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sent_buddy_messages")
+    recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name="received_buddy_messages")
+    client_id = models.UUIDField(default=uuid.uuid4)
+    body = models.TextField(max_length=2000)
+    created_at = models.DateTimeField(auto_now_add=True)
+    read_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ("id",)
+        constraints = [
+            models.UniqueConstraint(fields=("sender", "client_id"), name="unique_sender_message_client"),
+            models.CheckConstraint(condition=~models.Q(sender=models.F("recipient")), name="no_self_buddy_message"),
+        ]
+        indexes = [
+            models.Index(fields=("sender", "recipient", "id"), name="buddy_dialog_out_idx"),
+            models.Index(fields=("recipient", "sender", "id"), name="buddy_dialog_in_idx"),
+            models.Index(fields=("recipient", "read_at"), name="buddy_unread_idx"),
+        ]
+
+
+class StudentFeedback(models.Model):
+    class Category(models.TextChoices):
+        GENERAL = "general", "General feedback"
+        IMPROVEMENT = "improvement", "Suggest an improvement"
+        BUG = "bug", "Report a problem"
+        SAFETY = "safety", "Message safety report"
+
+    class Status(models.TextChoices):
+        NEW = "new", "Received"
+        REVIEWING = "reviewing", "Under review"
+        DONE = "done", "Reviewed"
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="feedback_submissions")
+    client_id = models.UUIDField(default=uuid.uuid4)
+    category = models.CharField(max_length=20, choices=Category.choices, default=Category.GENERAL)
+    body = models.TextField(max_length=4000)
+    status = models.CharField(max_length=16, choices=Status.choices, default=Status.NEW)
+    admin_note = models.TextField(max_length=2000, blank=True)
+    reported_message = models.ForeignKey(BuddyMessage, on_delete=models.SET_NULL, null=True, blank=True, related_name="safety_reports")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ("-created_at",)
+        constraints = [
+            models.UniqueConstraint(fields=("user", "client_id"), name="unique_student_feedback_client"),
+            models.UniqueConstraint(fields=("user", "reported_message"), name="unique_feedback_message_report"),
+        ]
+        indexes = [models.Index(fields=("status", "-created_at"), name="student_feedback_inbox_idx")]

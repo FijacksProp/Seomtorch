@@ -1,5 +1,8 @@
 import { api, ApiError } from "./api-client.js";
 import { jambCalculator } from "./calculator.js";
+import { communityPage } from "./community-ui.js";
+import { mountBuddyChat, unmountBuddyChat } from "./buddy-chat.js";
+import { closeStudentDialogs, eligibleForUniversityOffer, maybeShowUniversityIntroduction, openStudentDialog, showFeedbackPanel } from "./student-engagement.js";
 
 const SUBJECTS = [
   { id: "biology", name: "Biology", description: "JAMB cell biology, physiology, ecology, genetics and evolution" },
@@ -147,6 +150,9 @@ let uniNoteTranscriptOpenMap = {};
 
 /* ─── Monetization & Access Control State ──────────────────────────────── */
 let subscriptionConfig = null;
+let subscriptionStateReady = false;
+let universityIntroductionPending = false;
+let universityIntroductionTimer = null;
 let screenshotProtectionEnabled = (() => {
   try {
     const cached = localStorage.getItem("seomtorch-screenshot-protection");
@@ -170,10 +176,14 @@ let freeTopicsMap = {
 };
 
 async function loadSubscriptionState() {
+  const ownerToken = authToken;
+  subscriptionStateReady = false;
   try {
-    const data = await api.subscriptionConfig(authToken);
+    const data = await api.subscriptionConfig(ownerToken);
+    if (ownerToken !== authToken) return;
     if (data) {
       subscriptionConfig = data;
+      subscriptionStateReady = Boolean(data.user_access && authToken);
       if (data.screenshot_protection_enabled !== undefined) {
         screenshotProtectionEnabled = Boolean(data.screenshot_protection_enabled);
         try {
@@ -206,6 +216,23 @@ function hasCourseAccess(courseCode) {
 
 function hasAllAccess() {
   return Boolean(userAccessData?.has_all_access || userAccessData?.is_trial);
+}
+
+function universityOfferOptions() {
+  return { user: currentUser, mode: getActiveMode(), access: userAccessData, ready: subscriptionStateReady };
+}
+
+function queueUniversityIntroduction() {
+  clearTimeout(universityIntroductionTimer);
+  if (!universityIntroductionPending || route === "session" || !eligibleForUniversityOffer(universityOfferOptions())) return;
+  universityIntroductionTimer = setTimeout(() => {
+    if (route === "session" || !authToken) return;
+    const shown = maybeShowUniversityIntroduction({
+      ...universityOfferOptions(), config: subscriptionConfig, escapeHtml,
+      onViewPlans: () => showUpgradeModal({ trigger: "signin_introduction" }),
+    });
+    if (shown || !document.querySelector('[aria-modal="true"]')) universityIntroductionPending = false;
+  }, 900);
 }
 
 function isTopicFree(courseCode, topicId, topicIdx = 0, sectionIdx = 0) {
@@ -261,55 +288,60 @@ let buddiesLoading = false;
 let buddiesSearchOpen = false;
 let communityNetworkData = null;
 let communityLeaderboardData = null;
-let communityActiveTab = "leaderboard";
+let communityActiveTab = "buddies";
+let communityLoaded = false;
+let communityError = "";
+let communityInboxData = null;
+let communityChatPeer = null;
+let communityOwnerId = null;
+let communityRequestNonce = 0;
 let communitySearchResults = [];
 let communitySearchQuery = "";
 let communitySearching = false;
 let communityLoading = false;
 
 function getCachedCommunityNetwork() {
-  try { return JSON.parse(localStorage.getItem("seomtorch-community-network") || "null"); }
+  try { return JSON.parse(localStorage.getItem("seomtorch-community-network:" + currentUser?.public_id) || "null"); }
   catch { return null; }
 }
 function getCachedCommunityLeaderboard() {
-  try { return JSON.parse(localStorage.getItem("seomtorch-community-leaderboard") || "null"); }
+  try { return JSON.parse(localStorage.getItem("seomtorch-community-leaderboard:" + currentUser?.public_id) || "null"); }
   catch { return null; }
 }
 
 async function loadCommunityData(force = false) {
-  if (!authToken) return;
-  if (communityLoading && !force) return;
+  if (!authToken || (communityLoading && !force)) return;
+  const token = authToken, owner = currentUser?.public_id, requestId = ++communityRequestNonce;
   communityLoading = true;
-  if (!communityNetworkData) communityNetworkData = getCachedCommunityNetwork();
-  if (!communityLeaderboardData) communityLeaderboardData = getCachedCommunityLeaderboard();
-
-  try {
-    const [netRes, lbrRes] = await Promise.all([
-      api.communityNetwork(authToken).catch(() => null),
-      api.communityLeaderboard(authToken).catch(() => null)
-    ]);
-    if (netRes) {
-      communityNetworkData = netRes;
-      try { localStorage.setItem("seomtorch-community-network", JSON.stringify(netRes)); } catch {}
-    }
-    if (lbrRes) {
-      communityLeaderboardData = lbrRes;
-      try { localStorage.setItem("seomtorch-community-leaderboard", JSON.stringify(lbrRes)); } catch {}
-    }
-  } catch {
-    // Offline resilience
-  } finally {
-    communityLoading = false;
-    if (route === "buddies") renderBuddies();
-    if (route === "profile") renderProfile();
+  communityNetworkData ||= getCachedCommunityNetwork();
+  communityLeaderboardData ||= getCachedCommunityLeaderboard();
+  const [net, board, inbox] = await Promise.all([
+    api.communityNetwork(token).catch(() => null),
+    api.communityLeaderboard(token).catch(() => null),
+    api.buddyInbox(token).catch(() => null),
+  ]);
+  if (token !== authToken || owner !== currentUser?.public_id || requestId !== communityRequestNonce) return;
+  communityLoaded = true;
+  communityLoading = false;
+  communityError = net ? "" : "We couldn’t refresh your connections.";
+  if (net) {
+    communityNetworkData = net;
+    try { localStorage.setItem("seomtorch-community-network:" + owner, JSON.stringify(net)); } catch {}
   }
+  if (board) {
+    communityLeaderboardData = board;
+    try { localStorage.setItem("seomtorch-community-leaderboard:" + owner, JSON.stringify(board)); } catch {}
+  }
+  if (inbox) communityInboxData = inbox;
+  if (route === "buddies" && (communityActiveTab !== "messages" || !document.querySelector("#buddy-messenger"))) renderBuddies();
+  if (route === "profile") renderProfile();
 }
 
 async function handleFollowStudent(publicId, studentName = "") {
   if (!authToken) return;
   try {
     const res = await api.followUser(authToken, publicId);
-    showToast(res.is_mutual ? `🤝 You and ${studentName || publicId} are now Buddies!` : `Followed ${studentName || publicId}`);
+    showToast(res.is_mutual ? `You and ${studentName || publicId} are now buddies.` : `Followed ${studentName || publicId}`);
     // Also update any search results immediately
     communitySearchResults = communitySearchResults.map(s => {
       if (s.public_id === publicId) {
@@ -323,15 +355,39 @@ async function handleFollowStudent(publicId, studentName = "") {
   }
 }
 
+function removeLocalCommunityConnection(publicId, blocked = false) {
+  const net = communityNetworkData || getCachedCommunityNetwork();
+  if (net) {
+    const keep = item => item.public_id !== publicId;
+    const buddies = (net.buddies || []).filter(keep);
+    const following = (net.following || []).filter(keep);
+    const followers = blocked ? (net.followers || []).filter(keep) : (net.followers || []);
+    communityNetworkData = { ...net, buddies, following, followers, counts: { buddies: buddies.length, following: following.length, followers: followers.length } };
+    try { localStorage.setItem("seomtorch-community-network:" + currentUser.public_id, JSON.stringify(communityNetworkData)); } catch {}
+  }
+  if (communityChatPeer?.public_id === publicId) communityChatPeer = null;
+  const board = communityLeaderboardData || getCachedCommunityLeaderboard();
+  if (board) {
+    communityLeaderboardData = { ...board, leaderboard: (board.leaderboard || []).filter(item => item.public_id !== publicId) };
+    try { localStorage.setItem("seomtorch-community-leaderboard:" + currentUser.public_id, JSON.stringify(communityLeaderboardData)); } catch {}
+  }
+  if (communityInboxData) {
+    const conversations = communityInboxData.conversations.filter(item => item.public_id !== publicId);
+    communityInboxData = { conversations, unread: conversations.reduce((total, item) => total + (item.unread || 0), 0) };
+  }
+}
+
 async function handleUnfollowStudent(publicId, studentName = "") {
   if (!authToken) return;
   try {
     await api.unfollowUser(authToken, publicId);
+    removeLocalCommunityConnection(publicId);
     showToast(`Unfollowed ${studentName || publicId}`);
     // Also update any search results immediately
     communitySearchResults = communitySearchResults.map(s => {
       if (s.public_id === publicId) {
-        return { ...s, follow_state: "none" };
+        const followsYou = communityNetworkData?.followers?.some(item => item.public_id === publicId);
+        return { ...s, follow_state: followsYou ? "followed_by" : "none" };
       }
       return s;
     });
@@ -342,12 +398,12 @@ async function handleUnfollowStudent(publicId, studentName = "") {
 }
 
 function getSavedBuddies() {
-  try { return JSON.parse(localStorage.getItem("seomtorch-saved-buddies") || "[]"); }
+  try { return JSON.parse(localStorage.getItem("seomtorch-saved-buddies:" + currentUser?.public_id) || "[]"); }
   catch { return []; }
 }
 
 function saveBuddies(list) {
-  try { localStorage.setItem("seomtorch-saved-buddies", JSON.stringify(list)); }
+  try { localStorage.setItem("seomtorch-saved-buddies:" + currentUser?.public_id, JSON.stringify(list)); }
   catch {}
 }
 window.addEventListener("beforeinstallprompt", event => {
@@ -414,6 +470,8 @@ async function performModeSwitch(targetMode) {
     localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
   }
   localStorage.setItem("seomtorch-active-mode", targetMode);
+  closeStudentDialogs();
+  universityIntroductionPending = targetMode === "university";
   if (authToken) {
     api.switchMode(authToken, targetMode).catch(() => {});
   }
@@ -959,6 +1017,7 @@ function shell(content) {
       </div>
 
       <div class="sidebar-foot">
+        <button type="button" class="sidebar-feedback-link" data-open-feedback>Send feedback <span aria-hidden="true">↗</span></button>
         <div class="streak-panel">
           <svg class="streak-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/><path d="M12 19.2c-1.7 0-2.9-1.1-3-2.7-.1-1.2.5-2.3 1.5-3.2.1 1 .6 1.5 1.1 1.8-.2-1.7.7-2.7 1.6-3.7 1.2 1.5 1.8 3.1 1.7 4.6-.1 1.9-1.2 3.2-2.9 3.2Z"/></svg>
           <div><span>Current streak</span><strong>${profile.rhythm || 0}<small> day${profile.rhythm === 1 ? "" : "s"}</small></strong></div>
@@ -1019,7 +1078,7 @@ function shell(content) {
           </div>
         </div>
       </div>
-      <main id="main">${content}</main>
+      <main id="main">${route !== "session" && eligibleForUniversityOffer(universityOfferOptions()) ? '<div class="course-access-note"><span><i aria-hidden="true"></i>University course access</span><button type="button" data-view-course-plans>View plans <span aria-hidden="true">→</span></button></div>' : ""}${content}</main>
     </div>
   </div>${!isStandalone() && route !== "session" ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ""}`;
 }
@@ -1047,6 +1106,9 @@ function renderMath(html) {
 }
 
 function bindShell() {
+  document.querySelectorAll("[data-open-feedback]").forEach(button => button.addEventListener("click", () => showFeedbackPanel({ api, token: authToken, escapeHtml })));
+  document.querySelectorAll("[data-view-course-plans]").forEach(button => button.addEventListener("click", () => showUpgradeModal({ trigger: "portal_plans_link" })));
+  queueUniversityIntroduction();
   document.querySelectorAll("[data-route]").forEach(button => button.addEventListener("click", () => navigate(button.dataset.route)));
   document.querySelectorAll("[data-install-app]").forEach(button => button.addEventListener("click", installApp));
   document.querySelectorAll("[data-switch-mode]").forEach(button => {
@@ -2615,7 +2677,7 @@ async function loadProgress() {
 }
 
 function renderProfile(filter = "") {
-  if (!communityNetworkData && authToken && !communityLoading) {
+  if (!communityLoaded && authToken && !communityLoading) {
     loadCommunityData();
   }
   const normalized = filter.trim().toLowerCase();
@@ -2714,6 +2776,7 @@ function renderProfile(filter = "") {
         </div>
       </section>
 
+      <section class="profile-feedback-invite"><div><p class="eyebrow">Help shape Seomtorch</p><h2>We’d like your honest take.</h2><p>A small frustration, a missing feature, or something that helped—tell our team privately.</p></div><button type="button" class="button outline" data-open-feedback>Share feedback <span aria-hidden="true">→</span></button></section>
       <details class='settings-panel profile-disclosure profile-account'>
         <summary class='profile-disclosure-summary'><span><strong>Account &amp; privacy</strong><small>Backups, device data and sign-in</small></span><span class='profile-disclosure-mark' aria-hidden='true'></span></summary>
         <div class='profile-disclosure-body'><p class='lede'>Your account record is kept on the server. This device also stores an offline copy and retries queued answers when the connection returns.</p><div class='button-row'><button class='button' id='export-data' type='button'>Export backup</button><label class='button outline' for='import-data'>Import backup</label><input class='file-input' id='import-data' type='file' accept='application/json'><button class='button outline' id='clear-cache' type='button'>Refresh device cache</button><button class='button danger' id='sign-out' type='button'>Sign out</button></div></div>
@@ -3506,504 +3569,162 @@ async function processContactsList(contacts) {
 }
 
 function renderBuddies() {
-  if (!communityNetworkData && authToken && !communityLoading) {
-    loadCommunityData();
-  }
-  const net = communityNetworkData || getCachedCommunityNetwork() || {
-    counts: { followers: 0, following: 0, buddies: 0 },
-    buddies: [],
-    followers: [],
-    following: []
-  };
-  const counts = net.counts || { followers: 0, following: 0, buddies: 0 };
-  const lbr = (communityLeaderboardData || getCachedCommunityLeaderboard())?.leaderboard || [];
-  const myId = currentUser?.public_id || "—";
-
-  const identityBar = `
-    <div class="buddies-header-strip">
-      <div class="buddies-user-identity">
-        <span style="font-size:13px; color:var(--muted); font-weight:500;">Your Student ID:</span>
-        <span class="buddies-id-badge">
-          <strong>${escapeHtml(myId)}</strong>
-          <button type="button" class="buddies-id-copy-btn" id="btn-copy-my-id" title="Copy your Student ID" aria-label="Copy Student ID">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-          </button>
-          <button type="button" class="buddies-id-share-btn" id="btn-share-my-id" title="Share invite" aria-label="Share invite">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
-          </button>
-        </span>
-      </div>
-      <div class="buddies-social-counts">
-        <button type="button" class="buddies-count-pill ${communityActiveTab === 'buddies' ? 'active' : ''}" data-community-tab="buddies">
-          🤝 <strong>${counts.buddies}</strong> Buddies
-        </button>
-        <button type="button" class="buddies-count-pill ${communityActiveTab === 'followers' ? 'active' : ''}" data-community-tab="followers">
-          <strong>${counts.followers}</strong> Followers
-        </button>
-        <button type="button" class="buddies-count-pill ${communityActiveTab === 'following' ? 'active' : ''}" data-community-tab="following">
-          <strong>${counts.following}</strong> Following
-        </button>
-      </div>
-    </div>
-  `;
-
-  const tabsNav = `
-    <nav class="buddies-tabs-nav" aria-label="Buddies navigation">
-      <button type="button" class="buddies-tab-btn ${communityActiveTab === 'leaderboard' ? 'active' : ''}" data-community-tab="leaderboard">
-        🏆 Leaderboard
-      </button>
-      <button type="button" class="buddies-tab-btn ${communityActiveTab === 'buddies' ? 'active' : ''}" data-community-tab="buddies">
-        🤝 My Buddies (${counts.buddies})
-      </button>
-      <button type="button" class="buddies-tab-btn ${communityActiveTab === 'find' ? 'active' : ''}" data-community-tab="find">
-        🔍 Find Friends
-      </button>
-      <button type="button" class="buddies-tab-btn ${communityActiveTab === 'followers' ? 'active' : ''}" data-community-tab="followers">
-        Followers (${counts.followers})
-      </button>
-      <button type="button" class="buddies-tab-btn ${communityActiveTab === 'following' ? 'active' : ''}" data-community-tab="following">
-        Following (${counts.following})
-      </button>
-    </nav>
-  `;
-
-  let tabBody = "";
-
-  if (communityActiveTab === "leaderboard") {
-    if (!lbr || lbr.length <= 1) {
-      tabBody = `
-        <div class="community-empty-card">
-          <div style="font-size:42px; margin-bottom:12px;">🏆</div>
-          <h3>Your Buddy Leaderboard is Waiting!</h3>
-          <p>When you and another student follow each other, you become <strong>Buddies</strong>. You'll compete right here on Gamified XP as you study and take tests.</p>
-          <button type="button" class="button" data-community-tab="find">Find Friends to Follow →</button>
-        </div>
-      `;
-    } else {
-      tabBody = `
-        <div class="leaderboard-container">
-          <div class="leaderboard-header">
-            <div>
-              <h3>Buddy XP Leaderboard</h3>
-              <p>Rankings among you and your mutual study buddies</p>
-            </div>
-            <button type="button" class="button outline small" id="btn-refresh-community">Refresh</button>
-          </div>
-          <div class="leaderboard-list">
-            ${lbr.map(entry => {
-              const rankIcon = entry.rank === 1 ? "🥇" : entry.rank === 2 ? "🥈" : entry.rank === 3 ? "🥉" : `#${entry.rank}`;
-              const isYou = entry.is_you;
-              const avatarSrc = getAvatarSrc(entry.avatar);
-              return `
-                <div class="leaderboard-row ${isYou ? 'is-current-user' : ''}">
-                  <div class="leaderboard-rank rank-${entry.rank}">${rankIcon}</div>
-                  <div class="leaderboard-avatar-wrap">
-                    ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" data-fallback-display="flex"><span class="buddy-monogram" style="display:none; width:100%; height:100%; font-size:14px;">${buddyInitials(entry.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%; font-size:14px;">${buddyInitials(entry.username)}</span>`}
-                  </div>
-                  <div class="leaderboard-info">
-                    <div class="leaderboard-info-top">
-                      <strong class="leaderboard-name">${escapeHtml(entry.username)}</strong>
-                      ${isYou ? '<span class="leaderboard-you-badge">You</span>' : ''}
-                    </div>
-                    <div class="leaderboard-meta">
-                      <span>ID: <strong>${escapeHtml(entry.public_id)}</strong></span>
-                      <span class="leaderboard-level-pill">Lvl ${entry.level || 1}</span>
-                      ${entry.streak ? `<span class="leaderboard-streak-pill">🔥 ${entry.streak}d</span>` : ''}
-                    </div>
-                  </div>
-                  <div class="leaderboard-xp-col">
-                    <span class="leaderboard-xp-value">${(entry.xp || 0).toLocaleString()}</span>
-                    <span class="leaderboard-xp-label">XP</span>
-                  </div>
-                  ${!isYou ? `
-                    <div class="leaderboard-action-col">
-                      <button type="button" class="button small" data-challenge-buddy="${entry.public_id}" data-buddy-name="${escapeHtml(entry.username)}">Challenge →</button>
-                    </div>
-                  ` : ''}
-                </div>
-              `;
-            }).join("")}
-          </div>
-        </div>
-      `;
-    }
-  } else if (communityActiveTab === "buddies") {
-    const buddies = net.buddies || [];
-    if (!buddies.length) {
-      tabBody = `
-        <div class="community-empty-card">
-          <div style="font-size:42px; margin-bottom:12px;">🤝</div>
-          <h3>No Mutual Buddies Yet</h3>
-          <p>Buddies are classmates who follow each other mutually. Find friends by their 6-character Student ID or invite them via WhatsApp.</p>
-          <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:8px;">
-            <button type="button" class="button" data-community-tab="find">Search by Student ID</button>
-            <button type="button" class="button outline" id="btn-whatsapp-invite-quick">Invite via WhatsApp</button>
-          </div>
-        </div>
-      `;
-    } else {
-      tabBody = `
-        <div class="section-head">
-          <h2>Your Study Buddies (${buddies.length})</h2>
-          <p>Mutual friends who can challenge each other and compete on your leaderboard</p>
-        </div>
-        <div class="buddies-grid">
-          ${buddies.map(buddy => {
-            const avatarSrc = getAvatarSrc(buddy.avatar);
-            return `
-              <article class="buddy-card">
-                <div class="leaderboard-avatar-wrap" style="width:48px; height:48px;">
-                  ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" data-fallback-display="flex"><span class="buddy-monogram" style="display:none; width:100%; height:100%;">${buddyInitials(buddy.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%;">${buddyInitials(buddy.username)}</span>`}
-                </div>
-                <div class="buddy-details">
-                  <h3>${escapeHtml(buddy.username)}</h3>
-                  <p>ID: <strong>${escapeHtml(buddy.public_id)}</strong> · Lvl ${buddy.level || 1} · ${(buddy.xp || 0).toLocaleString()} XP</p>
-                </div>
-                <div class="buddy-card-actions">
-                  <button class="button small" data-challenge-buddy="${buddy.public_id}" data-buddy-name="${escapeHtml(buddy.username)}">Challenge →</button>
-                  <button class="button outline small" data-copy-buddy-id="${buddy.public_id}" title="Copy Student ID">Copy ID</button>
-                  <button class="remove-buddy-btn" data-unfollow-student="${buddy.public_id}" data-student-name="${escapeHtml(buddy.username)}" aria-label="Unfollow buddy" title="Unfollow">×</button>
-                </div>
-              </article>
-            `;
-          }).join("")}
-        </div>
-      `;
-    }
-  } else if (communityActiveTab === "find") {
-    const hasContactPicker = "contacts" in navigator && "ContactsManager" in window;
-    const hasPhone = Boolean(currentUser?.phone_number);
-
-    tabBody = `
-      <div class="buddies-search-box" style="display:block;">
-        <div class="section-head" style="margin-bottom:14px;">
-          <h2>Find Classmates & Friends</h2>
-          <p>Search any student on Seomtorch by their 6-character Student ID or username</p>
-        </div>
-        <form id="form-community-search" class="buddies-search-form">
-          <input type="text" id="input-community-search" placeholder="e.g. Student ID, username, or email" value="${escapeHtml(communitySearchQuery)}" required autocomplete="off">
-          <button class="button" type="submit">${communitySearching ? "Searching..." : "Search"}</button>
-        </form>
-        <div id="community-search-results-container">
-          ${communitySearchResults.length ? `
-            <div class="community-search-results">
-              ${communitySearchResults.map(student => {
-                const avatarSrc = getAvatarSrc(student.avatar);
-                let actionBtn = "";
-                if (student.is_self || student.follow_state === "self") {
-                  actionBtn = `<span class="leaderboard-you-badge" style="font-size:12px; padding:6px 14px; border-radius:999px;">🌟 That's You!</span>`;
-                } else if (student.follow_state === "mutual") {
-                  actionBtn = `<span class="btn-follow mutual-buddy">🤝 Buddies</span> <button type="button" class="button outline small" data-unfollow-student="${student.public_id}" data-student-name="${escapeHtml(student.username)}">Unfollow</button>`;
-                } else if (student.follow_state === "following") {
-                  actionBtn = `<button type="button" class="btn-follow following" data-unfollow-student="${student.public_id}" data-student-name="${escapeHtml(student.username)}">Following ✓</button>`;
-                } else if (student.follow_state === "followed_by") {
-                  actionBtn = `<button type="button" class="btn-follow follow-back" data-follow-student="${student.public_id}" data-student-name="${escapeHtml(student.username)}">+ Follow Back</button>`;
-                } else {
-                  actionBtn = `<button type="button" class="btn-follow primary" data-follow-student="${student.public_id}" data-student-name="${escapeHtml(student.username)}">+ Follow</button>`;
-                }
-                return `
-                  <div class="community-student-row">
-                    <div class="community-student-left">
-                      <div class="leaderboard-avatar-wrap" style="width:40px; height:40px;">
-                        ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" data-fallback-display="flex"><span class="buddy-monogram" style="display:none; width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>`}
-                      </div>
-                      <div>
-                        <strong>${escapeHtml(student.username)}</strong>
-                        <p style="margin:2px 0 0; font-size:12px; color:var(--muted);">ID: <strong>${escapeHtml(student.public_id)}</strong> · Lvl ${student.level || 1} · ${(student.xp || 0).toLocaleString()} XP</p>
-                      </div>
-                    </div>
-                    <div style="display:flex; align-items:center; gap:8px;">
-                      ${actionBtn}
-                    </div>
-                  </div>
-                `;
-              }).join("")}
-            </div>
-          ` : communitySearchQuery ? `
-            <div class="community-empty-card" style="padding:20px; margin-top:12px;">
-              <p>No student found matching "<strong>${escapeHtml(communitySearchQuery)}</strong>". Make sure the Student ID, username, or email address is correct.</p>
-            </div>
-          ` : ''}
-        </div>
-      </div>
-
-      ${!hasPhone ? `
-        <div class="buddies-phone-banner">
-          <div class="buddies-banner-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          </div>
-          <div class="buddies-banner-content">
-            <strong>Link your phone number so classmates can discover you</strong>
-            <p>Classmates who check contacts on Seomtorch will automatically see your student profile.</p>
-            <form id="form-link-phone" class="buddies-phone-form">
-              <input type="tel" id="input-link-phone" placeholder="e.g. +2348012345678 or 080..." required>
-              <button class="button small" type="submit">Link Phone</button>
-            </form>
-            <div id="phone-link-error" class="auth-error" style="margin-top:6px;"></div>
-          </div>
-        </div>
-      ` : ''}
-
-      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:20px;">
-        ${hasContactPicker ? `
-          <button class="button outline" id="btn-scan-contacts">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            <span>${buddiesLoading ? "Checking contacts…" : "Select from Phone Contacts"}</span>
-          </button>
-        ` : ''}
-        <button class="button outline" id="btn-share-invite-link">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-          <span>Share WhatsApp Invite</span>
-        </button>
-      </div>
-    `;
-  } else if (communityActiveTab === "followers") {
-    const followers = net.followers || [];
-    if (!followers.length) {
-      tabBody = `
-        <div class="community-empty-card">
-          <div style="font-size:42px; margin-bottom:12px;">👥</div>
-          <h3>No Followers Yet</h3>
-          <p>When other students search your Student ID (<strong>${escapeHtml(myId)}</strong>) and follow you, they'll appear here.</p>
-          <button type="button" class="button" id="btn-share-invite-followers">Share Your Student ID</button>
-        </div>
-      `;
-    } else {
-      tabBody = `
-        <div class="section-head">
-          <h2>Students Following You (${followers.length})</h2>
-          <p>Follow them back to unlock mutual Buddies and compete on the leaderboard</p>
-        </div>
-        <div class="community-search-results">
-          ${followers.map(student => {
-            const avatarSrc = getAvatarSrc(student.avatar);
-            const isMutual = student.is_mutual;
-            return `
-              <div class="community-student-row">
-                <div class="community-student-left">
-                  <div class="leaderboard-avatar-wrap" style="width:40px; height:40px;">
-                  ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" data-fallback-display="flex"><span class="buddy-monogram" style="display:none; width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>`}
-                  </div>
-                  <div>
-                    <strong>${escapeHtml(student.username)}</strong>
-                    <p style="margin:2px 0 0; font-size:12px; color:var(--muted);">ID: <strong>${escapeHtml(student.public_id)}</strong> · Lvl ${student.level || 1} · ${(student.xp || 0).toLocaleString()} XP</p>
-                  </div>
-                </div>
-                <div style="display:flex; align-items:center; gap:8px;">
-                  ${isMutual ? `
-                    <span class="btn-follow mutual-buddy">🤝 Buddies</span>
-                    <button type="button" class="button small" data-challenge-buddy="${student.public_id}" data-buddy-name="${escapeHtml(student.username)}">Challenge →</button>
-                  ` : `
-                    <button type="button" class="btn-follow follow-back" data-follow-student="${student.public_id}" data-student-name="${escapeHtml(student.username)}">+ Follow Back</button>
-                  `}
-                </div>
-              </div>
-            `;
-          }).join("")}
-        </div>
-      `;
-    }
-  } else if (communityActiveTab === "following") {
-    const following = net.following || [];
-    if (!following.length) {
-      tabBody = `
-        <div class="community-empty-card">
-          <div style="font-size:42px; margin-bottom:12px;">🔍</div>
-          <h3>You're Not Following Anyone Yet</h3>
-          <p>Search for classmates by their Student ID to follow them and start building your study community.</p>
-          <button type="button" class="button" data-community-tab="find">Find Friends to Follow →</button>
-        </div>
-      `;
-    } else {
-      tabBody = `
-        <div class="section-head">
-          <h2>Students You Follow (${following.length})</h2>
-          <p>When they follow you back, you become mutual Buddies on the leaderboard</p>
-        </div>
-        <div class="community-search-results">
-          ${following.map(student => {
-            const avatarSrc = getAvatarSrc(student.avatar);
-            const isMutual = student.is_mutual;
-            return `
-              <div class="community-student-row">
-                <div class="community-student-left">
-                  <div class="leaderboard-avatar-wrap" style="width:40px; height:40px;">
-            ${avatarSrc ? `<img src="${escapeHtml(avatarSrc)}" alt="" data-fallback-display="flex"><span class="buddy-monogram" style="display:none; width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>` : `<span class="buddy-monogram" style="width:100%; height:100%; font-size:12px;">${buddyInitials(student.username)}</span>`}
-                  </div>
-                  <div>
-                    <strong>${escapeHtml(student.username)}</strong>
-                    <p style="margin:2px 0 0; font-size:12px; color:var(--muted);">ID: <strong>${escapeHtml(student.public_id)}</strong> · Lvl ${student.level || 1} · ${(student.xp || 0).toLocaleString()} XP</p>
-                  </div>
-                </div>
-                <div style="display:flex; align-items:center; gap:8px;">
-                  ${isMutual ? '<span class="btn-follow mutual-buddy">🤝 Buddies</span>' : ''}
-                  <button type="button" class="btn-follow following" data-unfollow-student="${student.public_id}" data-student-name="${escapeHtml(student.username)}">Unfollow</button>
-                </div>
-              </div>
-            `;
-          }).join("")}
-        </div>
-      `;
-    }
-  }
-
-  const content = `
-    <section class="page buddies-page">
-      <div class="buddies-head">
-        <div>
-          <p class="eyebrow">Study Community</p>
-          <h1>Study Buddies.</h1>
-          <p class="lede">Follow classmates, build your study circle, and compete on your private mutual XP leaderboard.</p>
-        </div>
-      </div>
-
-      ${identityBar}
-      ${tabsNav}
-      ${tabBody}
-    </section>
-  `;
-
-  app.innerHTML = shell(content);
+  if (!communityLoaded && authToken && !communityLoading) loadCommunityData();
+  unmountBuddyChat();
+  const net = communityNetworkData || getCachedCommunityNetwork() || { counts: {}, buddies: [], followers: [], following: [] };
+  const leaderboard = (communityLeaderboardData || getCachedCommunityLeaderboard())?.leaderboard || [];
+  app.innerHTML = shell(communityPage({
+    net, leaderboard, tab: communityActiveTab, query: communitySearchQuery,
+    results: communitySearchResults, searching: communitySearching, loading: communityLoading,
+    error: communityError, myId: currentUser?.public_id || "", unread: communityInboxData?.unread || 0,
+    hasPhone: Boolean(currentUser?.phone_number), canPickContacts: "contacts" in navigator && "ContactsManager" in window, escapeHtml, getAvatarSrc, buddyInitials,
+  }));
   bindShell();
   bindBuddies();
+  if (communityActiveTab === "messages") mountBuddyChat(document.querySelector("#buddy-messenger"), {
+    api, token: authToken, selectedPeer: communityChatPeer, escapeHtml,
+    onPeer: peer => { communityChatPeer = peer; },
+    onInbox: data => {
+      communityInboxData = data;
+      const button = document.querySelector('[data-community-tab="messages"]');
+      if (!button) return;
+      let badge = button.querySelector("span");
+      if (!data.unread) { badge?.remove(); return; }
+      if (!badge) { badge = document.createElement("span"); button.appendChild(badge); }
+      badge.className = "unread"; badge.textContent = String(data.unread);
+    },
+    onReport: message => showFeedbackPanel({ api, token: authToken, escapeHtml, reportMessage: message }),
+    onBlock: peer => blockStudyBuddy(peer.public_id, peer.username),
+  });
+}
+
+function blockStudyBuddy(publicId, username) {
+  showConfirmDialog({
+    title: `Block ${username || publicId}?`,
+    message: "This removes both follows and stops messages in either direction. You can unblock them later from Connections, but follows will not be restored automatically.",
+    confirmLabel: "Block account", cancelLabel: "Keep connection", tone: "warning",
+    onConfirm: async () => {
+      try {
+        await api.blockBuddy(authToken, publicId);
+        removeLocalCommunityConnection(publicId, true);
+        communityChatPeer = null;
+        communityActiveTab = "buddies";
+        communitySearchResults = communitySearchResults.filter(item => item.public_id !== publicId);
+        await loadCommunityData(true);
+        if (route === "buddies") renderBuddies();
+        showToast("Account blocked.");
+      } catch (error) { showToast(error.message); }
+    },
+  });
+}
+
+async function showBlockedStudyAccounts() {
+  const { overlay } = openStudentDialog({
+    title: "Blocked accounts.", eyebrow: "Your study circle", escapeHtml,
+    content: '<p class="student-dialog-lede">Blocked accounts cannot message you or appear in your circle. Unblocking does not restore follows.</p><div data-blocked-list role="status">Loading…</div>',
+  });
+  try {
+    const data = await api.blockedBuddies(authToken);
+    if (!overlay.isConnected) return;
+    const list = overlay.querySelector("[data-blocked-list]");
+    list.innerHTML = data.blocked.length ? data.blocked.map(item => `<div class="blocked-account-row"><div><strong>${escapeHtml(item.username)}</strong><small>${escapeHtml(item.public_id)}</small></div><button type="button" class="button outline small" data-unblock-account="${escapeHtml(item.public_id)}">Unblock</button></div>`).join("") : "<p>You haven’t blocked anyone.</p>";
+    list.addEventListener("click", async event => {
+      const button = event.target.closest("[data-unblock-account]");
+      if (!button) return;
+      button.disabled = true;
+      try {
+        await api.unblockBuddy(authToken, button.dataset.unblockAccount);
+        button.closest(".blocked-account-row").remove();
+        if (!list.querySelector(".blocked-account-row")) list.textContent = "You haven’t blocked anyone.";
+        showToast("Account unblocked. You can find and follow them again.");
+      } catch (error) { button.disabled = false; showToast(error.message); }
+    });
+  } catch (error) { if (overlay.isConnected) overlay.querySelector("[data-blocked-list]").textContent = error.message; }
 }
 
 function bindBuddies() {
-  document.querySelectorAll("[data-community-tab]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      communityActiveTab = btn.dataset.communityTab;
-      renderBuddies();
-    });
-  });
-
-  const shareHandler = async () => {
-    const inviteUrl = "https://seomtorch.vercel.app";
-    const shareText = `Hey! Join me on Seomtorch to prepare for exams and compete on our study leaderboard together. My Student ID is ${currentUser?.public_id || ""}:`;
-    if (navigator.share) {
-      try {
-        await navigator.share({ title: "Study with me on Seomtorch", text: shareText, url: inviteUrl });
-        showToast("Invite link shared!");
-      } catch (err) {
-        if (err.name !== "AbortError") window.open(whatsappInviteUrl(), "_blank");
-      }
-    } else {
-      window.open(whatsappInviteUrl(), "_blank");
-    }
-  };
-
+  document.querySelectorAll("[data-community-tab]").forEach(button => button.addEventListener("click", () => {
+    communityActiveTab = button.dataset.communityTab === "connections" ? "followers" : button.dataset.communityTab;
+    renderBuddies();
+  }));
   document.querySelector("#btn-copy-my-id")?.addEventListener("click", async () => {
     const id = currentUser?.public_id || "";
-    if (!id) return;
+    try { await navigator.clipboard.writeText(id); showToast("Student ID copied."); }
+    catch { showToast("Your Student ID: " + id); }
+  });
+  document.querySelector("#btn-share-my-id")?.addEventListener("click", async () => {
+    const text = `Study with me on Seomtorch. Find me using Student ID ${currentUser?.public_id || ""}.`;
     try {
-      await navigator.clipboard.writeText(id);
-      showToast(`Copied Student ID: ${id}`);
-    } catch {
-      showToast(`Student ID: ${id}`);
-    }
+      if (navigator.share) await navigator.share({ title: "Join my Seomtorch study circle", text, url: location.origin });
+      else { await navigator.clipboard.writeText(text + " " + location.origin); showToast("Invite copied. Share it with a classmate."); }
+    } catch (error) { if (error.name !== "AbortError") showToast("Share your Student ID: " + currentUser?.public_id); }
   });
-
-  document.querySelector("#btn-share-my-id")?.addEventListener("click", shareHandler);
-  document.querySelector("#btn-share-invite-link")?.addEventListener("click", shareHandler);
-  document.querySelector("#btn-whatsapp-invite-quick")?.addEventListener("click", shareHandler);
-  document.querySelector("#btn-share-invite-followers")?.addEventListener("click", shareHandler);
-
-  document.querySelector("#btn-refresh-community")?.addEventListener("click", () => {
-    showToast("Refreshing leaderboard...");
-    loadCommunityData(true);
+  document.querySelector("#btn-refresh-community")?.addEventListener("click", async event => {
+    event.currentTarget.disabled = true;
+    await loadCommunityData(true);
+    if (route === "buddies") renderBuddies();
   });
-
-  document.querySelectorAll("[data-follow-student]").forEach(btn => {
-    btn.addEventListener("click", async () => {
-      const publicId = btn.dataset.followStudent;
-      const name = btn.dataset.studentName || "";
-      btn.disabled = true;
-      btn.textContent = "Following...";
-      await handleFollowStudent(publicId, name);
+  document.querySelectorAll("[data-follow-student]").forEach(button => button.addEventListener("click", async () => {
+    const label = button.textContent;
+    button.disabled = true; button.textContent = "Following…";
+    await handleFollowStudent(button.dataset.followStudent, button.dataset.studentName);
+    if (button.isConnected) { button.disabled = false; button.textContent = label; }
+  }));
+  document.querySelectorAll("[data-unfollow-student]").forEach(button => button.addEventListener("click", () => {
+    showConfirmDialog({
+      title: `Unfollow ${button.dataset.studentName || button.dataset.unfollowStudent}?`,
+      message: "You will no longer be mutual buddies. Messaging will pause unless you follow each other again.",
+      confirmLabel: "Unfollow", cancelLabel: "Keep following",
+      onConfirm: () => handleUnfollowStudent(button.dataset.unfollowStudent, button.dataset.studentName),
     });
-  });
-
-  document.querySelectorAll("[data-unfollow-student]").forEach(btn => {
-    btn.addEventListener("click", async () => {
-      const publicId = btn.dataset.unfollowStudent;
-      const name = btn.dataset.studentName || "";
-      if (confirm(`Unfollow ${name || publicId}?`)) {
-        btn.disabled = true;
-        await handleUnfollowStudent(publicId, name);
-      }
-    });
-  });
-
-  document.querySelectorAll("[data-challenge-buddy]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const publicId = btn.dataset.challengeBuddy;
-      const name = btn.dataset.buddyName || "Friend";
-      const buddy = { public_id: publicId, username: name };
-      if (!challengeInvitees.some(i => i.public_id === publicId)) {
-        challengeInvitees.push(buddy);
-      }
-      challengeComposerOpen = true;
-      route = "challenges";
-      selectedChallengeId = null;
-      render();
-      showToast(`Added ${name} to challenge`);
-    });
-  });
-
-  document.querySelectorAll("[data-copy-buddy-id]").forEach(btn => {
-    btn.addEventListener("click", async () => {
-      const publicId = btn.dataset.copyBuddyId;
-      try {
-        await navigator.clipboard.writeText(publicId);
-        showToast(`Copied Student ID: ${publicId}`);
-      } catch {
-        showToast(`Student ID: ${publicId}`);
-      }
-    });
-  });
-
-  document.querySelector("#form-community-search")?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const input = document.querySelector("#input-community-search");
-    const query = (input?.value || "").trim();
-    if (query.length < 2) {
-      showToast("Search query must be at least 2 characters.");
-      return;
-    }
-    communitySearchQuery = query;
-    communitySearching = true;
+  }));
+  document.querySelectorAll("[data-message-buddy]").forEach(button => button.addEventListener("click", () => {
+    communityChatPeer = { public_id: button.dataset.messageBuddy, username: button.dataset.studentName || "Buddy" };
+    communityActiveTab = "messages";
     renderBuddies();
-
+  }));
+  document.querySelectorAll("[data-block-buddy]").forEach(button => button.addEventListener("click", () => blockStudyBuddy(button.dataset.blockBuddy, button.dataset.studentName)));
+  document.querySelectorAll("[data-manage-blocks]").forEach(button => button.addEventListener("click", showBlockedStudyAccounts));
+  document.querySelectorAll("[data-challenge-buddy]").forEach(button => button.addEventListener("click", () => {
+    const buddy = { public_id: button.dataset.challengeBuddy, username: button.dataset.buddyName || "Friend" };
+    if (!challengeInvitees.some(item => item.public_id === buddy.public_id)) challengeInvitees.push(buddy);
+    challengeComposerOpen = true; route = "challenges"; selectedChallengeId = null; render();
+  }));
+  document.querySelector("#form-community-search")?.addEventListener("submit", async event => {
+    event.preventDefault();
+    const query = document.querySelector("#input-community-search").value.trim();
+    if (query.length < 2) return;
+    const token = authToken;
+    communitySearchQuery = query; communitySearching = true; communitySearchResults = [];
+    renderBuddies();
     try {
-      const res = await api.communitySearch(authToken, query);
-      communitySearchResults = res.results || [];
-    } catch (err) {
-      showToast(err.message || "Search failed.");
-      communitySearchResults = [];
-    } finally {
-      communitySearching = false;
-      renderBuddies();
+      const response = await api.communitySearch(token, query);
+      if (token === authToken && query === communitySearchQuery) communitySearchResults = response.results || [];
+    } catch (error) { if (token === authToken) showToast(error.message); }
+    finally {
+      if (token === authToken) {
+        communitySearching = false;
+        if (route === "buddies") renderBuddies();
+      }
     }
   });
-
-  document.querySelector("#btn-scan-contacts")?.addEventListener("click", () => handleScanContacts());
-
-  document.querySelector("#form-link-phone")?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const input = document.querySelector("#input-link-phone");
-    const error = document.querySelector("#phone-link-error");
-    const phone = input.value.trim();
-    if (!phone) return;
+  document.querySelector("#btn-scan-contacts")?.addEventListener("click", handleScanContacts);
+  document.querySelector("#form-link-phone")?.addEventListener("submit", async event => {
+    event.preventDefault();
+    const button = event.target.querySelector("button");
+    button.disabled = true;
     try {
-      const res = await api.updatePhone(authToken, phone);
-      if (res?.user) {
-        currentUser = res.user;
+      const response = await api.updatePhone(authToken, document.querySelector("#input-link-phone").value.trim());
+      if (response?.user) {
+        currentUser = response.user;
         localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
-        showToast("Phone number linked successfully!");
-        renderBuddies();
+        if (route === "buddies") renderBuddies();
       }
-    } catch (err) {
-      if (error) error.textContent = err.message || "Failed to link phone number";
-    }
+      showToast("Phone number linked.");
+    } catch (error) {
+      const target = document.querySelector("#phone-link-error");
+      if (target) target.textContent = error.message;
+    } finally { if (button.isConnected) button.disabled = false; }
   });
 }
 
@@ -4344,6 +4065,7 @@ async function submitAuth(event) {
     localStorage.setItem("seomtorch-active-mode", currentUser.active_mode || "aspirant");
     await prepareLocalUser(currentUser);
     await loadSubscriptionState();
+    universityIntroductionPending = true;
     await syncPendingAttempts();
     route = "home";
     render();
@@ -4355,6 +4077,14 @@ async function submitAuth(event) {
 }
 
 async function prepareLocalUser(user) {
+  if (communityOwnerId !== user.public_id) {
+    unmountBuddyChat(); closeStudentDialogs();
+    communityOwnerId = user.public_id; communityRequestNonce++;
+    communityNetworkData = null; communityLeaderboardData = null; communityInboxData = null;
+    communityChatPeer = null; communityLoaded = false; communityLoading = false; communityError = "";
+    communitySearchResults = []; communitySearchQuery = ""; communitySearching = false; communityActiveTab = "buddies";
+    localStorage.removeItem("seomtorch-community-network"); localStorage.removeItem("seomtorch-community-leaderboard");
+  }
   if (profile && profile.remoteId !== user.public_id) {
     await clearStore("profile"); await clearStore("attempts"); await clearStore("bookmarks"); await put("meta", { key: "bookmarkQueue", actions: [] }); await put("meta", { key: "completed_tests", list: [] });
   completedTests = []; attempts = []; bookmarks = [];
@@ -4366,7 +4096,7 @@ async function prepareLocalUser(user) {
 
 async function restoreAuth() {
   if (!authToken) return false;
-  try { currentUser = await api.me(authToken); localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser)); await prepareLocalUser(currentUser); await loadSubscriptionState(); return true; }
+  try { currentUser = await api.me(authToken); localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser)); await prepareLocalUser(currentUser); await loadSubscriptionState(); universityIntroductionPending = true; return true; }
   catch (error) {
     if (error instanceof ApiError && error.status === 401) { authToken = null; currentUser = null; localStorage.removeItem("seomtorch-auth-token"); localStorage.removeItem("seomtorch-auth-user"); return false; }
     if (currentUser) { await prepareLocalUser(currentUser); return true; }
@@ -4375,9 +4105,13 @@ async function restoreAuth() {
 }
 
 async function signOut() {
+  unmountBuddyChat(); closeStudentDialogs(); clearTimeout(universityIntroductionTimer);
+  universityIntroductionPending = false; subscriptionStateReady = false; subscriptionConfig = null;
+  communityRequestNonce++; communityOwnerId = null;
+  communityNetworkData = null; communityLeaderboardData = null; communityInboxData = null; communityChatPeer = null;
+  communityLoaded = false; communityLoading = false; communitySearchResults = []; communitySearchQuery = "";
   try { await syncBookmarkQueue(); await api.logout(authToken); } catch {}
   userAccessData = { has_all_access: false, unlocked_courses: [], is_trial: false, trial_days_remaining: 0, trial_used: false, expires_at: null };
-  await loadSubscriptionState();
   await clearStore("profile"); await clearStore("attempts"); await clearStore("bookmarks"); await put("meta", { key: "bookmarkQueue", actions: [] }); await put("meta", { key: "completed_tests", list: [] });
   completedTests = [];
   authToken = null; currentUser = null; profile = null; attempts = []; bookmarks = []; challengesData = null; achievementsData = null; progressData = null; selectedChallengeId = null; badgeCelebrationKnown.clear(); badgeCelebrationQueue = []; localStorage.removeItem("seomtorch-auth-token"); localStorage.removeItem("seomtorch-auth-user"); renderAuth();
@@ -5477,6 +5211,7 @@ async function startUniPractice(courseCode, topicTitle, dataFile, requestedCount
 // ─── End University Module ──────────────────────────────────────────────────
 
 function render() {
+  if (route !== "buddies" || communityActiveTab !== "messages") unmountBuddyChat();
   updateScreenWatermark();
   if (!authToken || !currentUser || !profile) return renderAuth();
   if (currentUser.must_change_password) return renderPasswordChange(true);

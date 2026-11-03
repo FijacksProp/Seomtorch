@@ -1,5 +1,6 @@
 from django.urls import path
 from . import monitor_views
+from accounts.feedback_monitor import feedback_inbox, update_feedback
 
 app_name = "monitor"
 
@@ -25,6 +26,8 @@ urlpatterns = [
 
     # Moderation Flags
     path("flags/", monitor_views.question_flags, name="flags"),
+    path("feedback/", feedback_inbox, name="feedback"),
+    path("feedback/<uuid:feedback_id>/", update_feedback, name="feedback-update"),
     path("flags/<uuid:report_id>/resolve/", monitor_views.resolve_flag, name="resolve-flag"),
 
     # Monetization & Site Controls Hub

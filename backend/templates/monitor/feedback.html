@@ -1,0 +1,34 @@
+{% extends "monitor/base.html" %}
+{% block title %}Student feedback{% endblock %}
+{% block content %}
+<div class="page-heading"><p class="kicker">Listening desk</p><h1>Student feedback</h1><p>Private suggestions, problems and reported messages. Ordinary buddy conversations are not shown here.</p></div>
+<section class="feedback-summary">
+  <div><strong>{{ counts.new }}</strong><span>Received</span></div>
+  <div><strong>{{ counts.reviewing }}</strong><span>Under review</span></div>
+  <div><strong>{{ counts.done }}</strong><span>Reviewed</span></div>
+</section>
+<form method="get" class="feedback-filters">
+  <label>Search<input name="q" value="{{ query }}" placeholder="Student ID, username or feedback"></label>
+  <label>Status<select name="status"><option value="">All statuses</option>{% for value,label in statuses %}<option value="{{ value }}" {% if value == selected_status %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+  <label>Category<select name="category"><option value="">All categories</option>{% for value,label in categories %}<option value="{{ value }}" {% if value == selected_category %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+  <button class="button" type="submit">Apply filters</button>
+</form>
+<div class="feedback-inbox">
+{% for item in page %}
+  <article class="feedback-entry">
+    <header><div><span class="feedback-category {% if item.category == 'safety' %}safety{% endif %}">{{ item.get_category_display }}</span><h2>{{ item.user.username }} <a href="{% url 'monitor:student-detail' item.user.public_id %}">{{ item.user.public_id }}</a></h2><p>{{ item.created_at|date:"j M Y · H:i" }} · Ref {{ item.id|stringformat:"s"|slice:":8" }}</p></div><span class="feedback-status">{{ item.get_status_display }}</span></header>
+    <div class="feedback-body">{{ item.body|linebreaksbr }}</div>
+    <details><summary>Review and internal notes</summary>
+      <form method="post" action="{% url 'monitor:feedback-update' item.id %}" class="feedback-review">{% csrf_token %}
+        <label>Status<select name="status">{% for value,label in statuses %}<option value="{{ value }}" {% if value == item.status %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+        <label>Internal note <small>Only administrators can see this</small><textarea name="admin_note" rows="3" maxlength="2000">{{ item.admin_note }}</textarea></label>
+        <button class="button" type="submit">Save review</button>
+      </form>
+    </details>
+  </article>
+{% empty %}
+  <div class="panel empty"><h2>No feedback here yet.</h2><p>New submissions will appear here. Try clearing the filters if you expected a result.</p></div>
+{% endfor %}
+</div>
+{% if page.has_other_pages %}<nav class="feedback-pagination" aria-label="Feedback pages">{% if page.has_previous %}<a href="?page={{ page.previous_page_number }}&amp;status={{ selected_status|urlencode }}&amp;category={{ selected_category|urlencode }}&amp;q={{ query|urlencode }}">← Previous</a>{% endif %}<span>Page {{ page.number }} of {{ page.paginator.num_pages }}</span>{% if page.has_next %}<a href="?page={{ page.next_page_number }}&amp;status={{ selected_status|urlencode }}&amp;category={{ selected_category|urlencode }}&amp;q={{ query|urlencode }}">Next →</a>{% endif %}</nav>{% endif %}
+{% endblock %}

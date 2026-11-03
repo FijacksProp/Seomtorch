@@ -111,6 +111,9 @@ REST_FRAMEWORK = {
         "practice_start": "60/hour",
         "practice_answers": "1000/hour",
         "question_write": "30/hour",
+        "student_feedback": "10/hour",
+        "buddy_messages": "60/minute",
+        "community_actions": "60/hour",
     },
 }
 

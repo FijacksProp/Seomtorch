@@ -1,4 +1,4 @@
-const CACHE = "seomtorch-v129";
+const CACHE = "seomtorch-v130";
 const APP_ASSETS = [
   "./",
   "index.html",
@@ -6,6 +6,10 @@ const APP_ASSETS = [
   "app.js",
   "calculator.js",
   "api-client.js",
+  "community.css",
+  "community-ui.js",
+  "buddy-chat.js",
+  "student-engagement.js",
   "manifest.webmanifest",
   "assets/avatars/varsity-male.webp",
   "assets/avatars/varsity-female.webp",
@@ -124,7 +128,7 @@ self.addEventListener("fetch", event => {
 
   // Fetch application code and configuration first so deployments reach users
   // promptly, with the existing cache retained as an offline fallback.
-  if (["/", "/index.html", "/styles.css", "/app.js", "/api-client.js", "/config.js", "/sw.js", "/manifest.webmanifest", "/data/manifest.json"].includes(url.pathname) || isKaTeX) {
+  if (["/", "/index.html", "/styles.css", "/community.css", "/app.js", "/api-client.js", "/community-ui.js", "/buddy-chat.js", "/student-engagement.js", "/config.js", "/sw.js", "/manifest.webmanifest", "/data/manifest.json"].includes(url.pathname) || isKaTeX) {
     event.respondWith(fetch(event.request).then(response => {
       const copy = response.clone();
       caches.open(CACHE).then(cache => cache.put(event.request, copy));
