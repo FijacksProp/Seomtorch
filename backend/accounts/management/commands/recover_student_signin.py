@@ -3,7 +3,7 @@ from django.db import transaction
 from django.utils import timezone
 from knox.models import AuthToken
 from rest_framework.authtoken.models import Token
-from accounts.models import User, EmailSignInChallenge
+from accounts.models import User, EmailSignInChallenge, EmailChangeRequest
 from learning.models import ActivityEvent
 
 
@@ -24,6 +24,7 @@ class Command(BaseCommand):
         AuthToken.objects.filter(user=user).delete()
         Token.objects.filter(user=user).delete()
         EmailSignInChallenge.objects.filter(user=user, consumed_at__isnull=True).update(consumed_at=timezone.now())
+        EmailChangeRequest.objects.filter(user=user, consumed_at__isnull=True).update(consumed_at=timezone.now())
         ActivityEvent.objects.create(user=user, event_type=ActivityEvent.Type.SIGNED_OUT,
             metadata={"reason": "support_signin_recovery", "ticket": options["reason"][:200]})
         self.stdout.write("Sign-ins revoked. The student must sign in with their password and verify their registered inbox again.")

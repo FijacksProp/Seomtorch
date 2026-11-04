@@ -33,6 +33,8 @@ class MultiTokenAuthentication(BaseAuthentication):
             from accounts.email_security import security_status
             if security_status(authenticated[0])["verification_required"] and request.path.rstrip("/") not in {
                 "/api/auth/me", "/api/auth/logout", "/api/auth/email/request", "/api/auth/change-password", "/api/auth/security",
+                "/api/auth/email/change/request", "/api/auth/email/change/resend", "/api/auth/email/change/confirm",
+                "/api/auth/email/change/cancel",
             }:
                 raise PermissionDenied({"detail": "Verify your email to continue. Your progress and subscription are safe.", "code": "email_verification_required"})
         return authenticated

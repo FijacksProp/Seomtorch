@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "email-change:test": "node --check email-change-ui.js && node scripts/email-change.test.mjs",
     "security:test": "node --check account-security-ui.js && node scripts/account-security.test.mjs",
     "home:test": "node scripts/home-ui.test.mjs && node scripts/bootstrap.test.mjs",
     "start": "serve .",

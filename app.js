@@ -3,6 +3,7 @@ import { jambCalculator } from "./calculator.js";
 import { communityPage } from "./community-ui.js";
 import { homePage, homeSubjectRows } from "./home-ui.js";
 import { trustedBrowserKey, securityNotice, emailApprovalPage, mountEmailApproval } from "./account-security-ui.js";
+import { emailChangePage, mountEmailChange } from "./email-change-ui.js";
 import { mountBuddyChat, unmountBuddyChat } from "./buddy-chat.js";
 import { challengeHubPage, challengeComposerPage, challengeDetailPage, challengeSetupSummary } from "./challenges-ui.js";
 import { cancelPostPracticeFeedback, closeStudentDialogs, eligibleForUniversityOffer, maybeShowUniversityIntroduction, openStudentDialog, schedulePostPracticeFeedback, showFeedbackPanel } from "./student-engagement.js";
@@ -110,6 +111,7 @@ let questions = [];
 let profile = null;
 let authToken = localStorage.getItem("seomtorch-auth-token");
 let pendingEmailApproval = null, pendingAuthRegistration = null, emailApprovalCleanup = null;
+let pendingEmailChange = null, emailChangeCleanup = null, emailChangeBusy = false, deferredEmailAuthExpiry = null;
 let currentUser = readCachedUser();
 let attempts = [];
 let bookmarks = [];
@@ -2583,6 +2585,7 @@ function renderProfile(filter = "") {
           <p class='eyebrow'>Student profile</p>
           <h1>${escapeHtml(displayName)}</h1>
           <p class='profile-member-meta'>${escapeHtml(displayEmail)}${displayEmail ? ' · ' : ''}Member since ${joined}</p>
+          ${currentUser?.account_security?.email_change_available ? '<button type="button" class="profile-text-link" id="change-account-email">Change email <span aria-hidden="true">↗</span></button>' : ''}
           <div class='profile-id-row'><span>Student ID</span><strong>${profileIdLabel}</strong>${profileIdCopyButton}</div>
         </div>
         <button class='button outline profile-sync-btn' id='refresh-account' type='button'>
@@ -3811,6 +3814,7 @@ async function loadAchievements(filter = "") {
 }
 
 function bindProfile() {
+  document.querySelector("#change-account-email")?.addEventListener("click", () => { pendingEmailChange = null; route = "change-email"; render(); });
   document.querySelectorAll("[data-goto-buddies]").forEach(btn => {
     btn.addEventListener("click", () => {
       communityActiveTab = btn.dataset.gotoBuddies || "buddies";
@@ -3953,6 +3957,7 @@ function renderAuth() {
 
 
 async function finishSignIn(data) {
+  emailChangeCleanup?.(); emailChangeCleanup = null; pendingEmailChange = null;
   authToken = data.token; currentUser = data.user;
   pendingEmailApproval = null; pendingAuthRegistration = null;
   emailApprovalCleanup?.(); emailApprovalCleanup = null;
@@ -3991,6 +3996,7 @@ function renderEmailApproval() {
   const root = app.firstElementChild;
   emailApprovalCleanup = mountEmailApproval({
     root, api, challenge, token,
+    onChangeEmail: () => { pendingEmailApproval = null; pendingEmailChange = null; route = "change-email"; render(); },
     isCurrent: () => root.isConnected && authToken === token,
     onChallenge: next => { pendingEmailApproval = next; renderEmailApproval(); },
     onVerified: async data => {
@@ -4003,6 +4009,29 @@ function renderEmailApproval() {
       else if (token) signOut();
       else renderAuth();
     },
+  });
+}
+
+function renderEmailChange() {
+  emailApprovalCleanup?.(); emailApprovalCleanup = null; emailChangeCleanup?.();
+  unmountBuddyChat(); closeStudentDialogs(); cancelPostPracticeFeedback(); clearTimeout(universityIntroductionTimer);
+  const token = authToken;
+  app.innerHTML = emailChangePage({ email: currentUser.email, pending: pendingEmailChange, available: Boolean(currentUser.account_security?.email_change_available) });
+  const root = app.firstElementChild;
+  emailChangeCleanup = mountEmailChange({ root, api, token, pending: pendingEmailChange,
+    isCurrent: () => root.isConnected && token === authToken,
+    onBusy: value => {
+      emailChangeBusy = value;
+      if (!value && deferredEmailAuthExpiry) {
+        const expiredToken = deferredEmailAuthExpiry; deferredEmailAuthExpiry = null;
+        queueMicrotask(() => {
+          if (authToken === expiredToken && !emailChangeBusy) window.dispatchEvent(new CustomEvent("seomtorch-auth-expired", { detail: { token: expiredToken } }));
+        });
+      }
+    },
+    onPending: next => { pendingEmailChange = next; renderEmailChange(); },
+    onComplete: async data => { await finishSignIn(data); route = "profile"; render(); showToast("Email updated and verified. Use your new email to sign in."); },
+    onCancel: () => { pendingEmailChange = null; pendingEmailApproval = null; route = currentUser.account_security?.verification_required ? "email-verification" : "profile"; render(); },
   });
 }
 
@@ -4065,6 +4094,7 @@ async function restoreAuth() {
 }
 
 async function signOut() {
+  emailChangeCleanup?.(); emailChangeCleanup = null; pendingEmailChange = null;
   clearTimeout(challengeRefreshTimer);
   challengesLoading = false; challengesError = ""; challengeDraft = null; challengeInvitees = []; challengeComposerOpen = false; challengeCreating = false;
   cancelPostPracticeFeedback();
@@ -5174,6 +5204,11 @@ async function startUniPractice(courseCode, topicTitle, dataFile, requestedCount
 // ─── End University Module ──────────────────────────────────────────────────
 
 function render() {
+  if (authToken && currentUser && route === "change-email" && !currentUser.must_change_password) {
+    if (!document.querySelector(".email-change-screen")) renderEmailChange();
+    return;
+  }
+  emailChangeCleanup?.(); emailChangeCleanup = null;
   if (pendingEmailApproval || (authToken && currentUser?.account_security?.verification_required) || (authToken && route === "email-verification")) {
     if (!document.querySelector(".email-security-screen")) renderEmailApproval();
     return;
@@ -5479,6 +5514,7 @@ async function init() {
 
 let securityHeartbeatBusy = false;
 async function refreshAccountSecurity() {
+  if (route === "change-email") return;
   if (securityHeartbeatBusy || !authToken || !currentUser || !navigator.onLine || document.hidden) return;
   const token = authToken;
   securityHeartbeatBusy = true;
@@ -5494,6 +5530,8 @@ async function refreshAccountSecurity() {
 }
 window.addEventListener("seomtorch-auth-expired", event => {
   if (event.detail?.token !== authToken) return;
+  if (emailChangeBusy) { deferredEmailAuthExpiry = event.detail.token; return; }
+  emailChangeCleanup?.(); emailChangeCleanup = null; pendingEmailChange = null;
   const savedToken = localStorage.getItem("seomtorch-auth-token");
   if (savedToken && savedToken !== authToken) { authToken = savedToken; restoreAuth().then(() => render()); return; }
   emailApprovalCleanup?.(); pendingEmailApproval = null; pendingAuthRegistration = null;
@@ -5516,6 +5554,7 @@ window.addEventListener("focus", refreshAccountSecurity);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshAccountSecurity(); });
 window.addEventListener("storage", event => {
   if (event.key !== "seomtorch-auth-token" || event.newValue === authToken) return;
+  emailChangeCleanup?.(); emailChangeCleanup = null; pendingEmailChange = null;
   authToken = event.newValue; pendingEmailApproval = null; pendingAuthRegistration = null;
   emailApprovalCleanup?.(); unmountBuddyChat(); clearInterval(sessionTimer); route = "home";
   if (authToken) restoreAuth().then(() => render());

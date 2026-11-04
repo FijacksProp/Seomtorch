@@ -15,7 +15,7 @@ from knox.models import AuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import APIException, Throttled, ValidationError
 
-from .models import EmailSignInChallenge, User, AccountSecurityPolicy
+from .models import EmailSignInChallenge, User, AccountSecurityPolicy, EmailChangeRequest
 
 
 class DeliveryUnavailable(APIException):
@@ -53,6 +53,7 @@ def security_status(user):
     required = enabled and not user.email_verified_at and (not deadline or timezone.now() >= deadline)
     local, _, domain = user.email.partition("@")
     return {"enabled": enabled, "email_verified": bool(user.email_verified_at), "verification_required": bool(required),
+            "email_change_available": bool(settings.BREVO_API_KEY and settings.BREVO_SENDER_EMAIL and not user.is_staff),
             "grace_until": deadline.isoformat() if enabled and deadline else None,
             "masked_email": f"{local[:1]}***@{domain}", "single_signin": enabled and bool(user.email_verified_at)}
 
@@ -95,6 +96,20 @@ def check_transfer_limit(user):
         raise ValidationError({"detail": "Your browser-transfer limit has been reached. Your current browser still works. Contact support if you changed or lost your device."})
 
 
+def check_email_rate_limit(user, cost=1):
+    """Caller holds the user lock. Changes consume two code-email slots."""
+    now = timezone.now()
+    logins = EmailSignInChallenge.objects.filter(user=user)
+    changes = EmailChangeRequest.objects.filter(user=user)
+    latest = [value for value in (logins.order_by("-created_at").values_list("created_at", flat=True).first(), changes.order_by("-created_at").values_list("created_at", flat=True).first()) if value]
+    if latest and (now - max(latest)).total_seconds() < 60:
+        raise Throttled(wait=max(1, int(60 - (now - max(latest)).total_seconds())))
+    for window, limit in [(timedelta(hours=1), 5), (timedelta(days=1), 10)]:
+        total = logins.filter(created_at__gte=now - window).count() + 2 * changes.filter(created_at__gte=now - window).count()
+        if total + cost > limit:
+            raise Throttled(detail="Too many email-code requests. Please try again later.", wait=3600)
+
+
 def issue_challenge(user, browser_key):
     browser_hash = browser_digest(browser_key)
     delivery_failed = False
@@ -104,15 +119,12 @@ def issue_challenge(user, browser_key):
             raise ValidationError("Email approval is not enabled for this account yet.")
         now = timezone.now()
         recent = EmailSignInChallenge.objects.filter(user=user)
-        last = recent.order_by("-created_at").first()
-        if last and (now - last.created_at).total_seconds() < 60:
-            raise Throttled(wait=max(1, int(60 - (now - last.created_at).total_seconds())))
-        if recent.filter(created_at__gte=now - timedelta(hours=1)).count() >= 5 or recent.filter(created_at__gte=now - timedelta(days=1)).count() >= 10:
-            raise Throttled(detail="Too many code requests. Please try again later.", wait=3600)
+        check_email_rate_limit(user)
         transfer = bool(user.trusted_browser_hash and not constant_time_compare(user.trusted_browser_hash, browser_hash))
         if transfer:
             check_transfer_limit(user)
         recent.filter(consumed_at__isnull=True).update(consumed_at=now)
+        EmailChangeRequest.objects.filter(user=user, consumed_at__isnull=True).update(consumed_at=now)
         challenge_id = uuid.uuid4()
         code = f"{secrets.randbelow(1000000):06d}"
         challenge = EmailSignInChallenge.objects.create(id=challenge_id, user=user, email=user.email, browser_hash=browser_hash,

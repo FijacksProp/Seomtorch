@@ -10,7 +10,7 @@ Deploy this feature **disabled** until real transactional delivery succeeds. It 
 - An approved browser can sign in with its password without repeated OTP emails. New/different browser storage requires password plus email approval.
 - A successful approval or approved-browser login revokes all previous student API tokens under a database user lock. Failed codes, failed delivery and merely requesting a transfer do not revoke the owner's token.
 - Browser transfers require explicit confirmation. Two accepted transfers are allowed per rolling 30 days; initial enrollment does not count. This discourages taking turns but cannot stop an owner deliberately forwarding codes.
-- Five code-check attempts per challenge; 60-second resend cooldown; five requests/hour and ten/day per account, stored in the database. IP throttles add another layer but do not replace these persistent limits.
+- Five code-check attempts per challenge; 60-second resend cooldown; five code emails/hour and ten/day per account, stored in the database. Email changes send two codes and consume two slots. IP throttles add another layer but do not replace these persistent limits.
 - Codes and browser keys are stored only as keyed digests. Challenge IDs/codes are sent in POST bodies, not URLs. No API key, OTP or browser secret appears in admin screens or logs.
 - Student email verification status appears in Monitor's individual student view. Read-only request/transfer history is available in Django administration under Email sign in challenges. Staff accounts and Monitor's separate Django sessions are deliberately excluded from this student anti-sharing policy.
 
@@ -79,6 +79,16 @@ python manage.py recover_student_signin ABC123 --reason SUPPORT-TICKET-123
 ```
 
 This revokes student tokens, invalidates pending codes and clears the browser binding. It does not grant access, alter the subscription, erase progress, or verify a new email. The student still needs their password and registered inbox. The recovery is logged in their activity. For an independently approved email correction, use Django User administration; changing an email clears its verification and browser binding, and pending codes for the old address cannot be redeemed. Perform sign-in recovery as well to revoke old tokens.
+
+## Student email changes
+
+Students can use **Profile → Change email** (also available from the signed-in verification screen). This is not a way around inbox verification: the current password and separate codes from **both the current and proposed inbox** are required. The new address is entered twice to reduce mistakes, and the final form requires explicit confirmation. Both codes expire after five minutes. Resending replaces the pair; Cancel invalidates the pending request on the server.
+
+The old email remains unchanged until both codes are accepted. Codes are stored as keyed hashes, tied to the account, requesting browser and current password; five unsuccessful checks exhaust a request. Addresses are normalized, checked for conflicts when requested and again at confirmation, and protected by the database uniqueness constraint. Delivery failures are counted toward the shared rate limit without revoking the current sign-in. No password or code is saved in frontend storage.
+
+A successful change preserves the Student ID, progress and subscription, marks the new email verified, revokes old API sign-ins and returns a fresh token to the current browser. Existing verified students must use their active browser; this flow cannot reset the browser-transfer counter or redirect an account using only a shared password. A best-effort security notice is sent to the former inbox after commit; notification failure does not undo a completed change. Read-only change history is in Django Admin under Email change requests; code hashes are not displayed.
+
+Students who cannot access their registered inbox need the independently verified support recovery process above. Do not remove the old-inbox approval step just to work around a typo or inaccessible email. Staff accounts use administrator recovery rather than this student workflow. No additional environment variables are needed; migration 0012 runs through the existing startup script and the existing Brevo sender/key are reused. Each request/resend sends two emails, plus a post-change security notice after success, so monitor the shared Brevo quota.
 
 ## Limits of browser enforcement
 

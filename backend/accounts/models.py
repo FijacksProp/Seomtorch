@@ -105,6 +105,7 @@ class User(AbstractUser):
             AuthToken.objects.filter(user=self).delete()
             Token.objects.filter(user=self).delete()
             EmailSignInChallenge.objects.filter(user=self, consumed_at__isnull=True).update(consumed_at=timezone.now())
+            EmailChangeRequest.objects.filter(user=self, consumed_at__isnull=True).update(consumed_at=timezone.now())
 
     @property
     def has_aspirant_profile(self):
@@ -266,6 +267,25 @@ class EmailSignInChallenge(models.Model):
 
     class Meta:
         indexes = [models.Index(fields=("user", "-created_at"), name="email_signin_user_created_idx")]
+
+
+class EmailChangeRequest(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="email_change_requests")
+    old_email = models.EmailField()
+    new_email = models.EmailField()
+    browser_hash = models.CharField(max_length=64)
+    password_fingerprint = models.CharField(max_length=64)
+    old_code_hash = models.CharField(max_length=64)
+    new_code_hash = models.CharField(max_length=64)
+    attempts = models.PositiveSmallIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    consumed_at = models.DateTimeField(null=True, blank=True)
+    accepted_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        indexes = [models.Index(fields=("user", "-created_at"), name="email_change_user_created_idx")]
 
 
 class AccountSecurityPolicy(models.Model):

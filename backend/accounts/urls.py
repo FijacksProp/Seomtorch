@@ -1,5 +1,6 @@
 from django.urls import path
 from .security_views import RequestEmailVerificationView, VerifyEmailCodeView, ResendEmailCodeView, AccountSecurityView
+from .security_views import RequestEmailChangeView, ResendEmailChangeView, ConfirmEmailChangeView, CancelEmailChangeView
 from .views import (
     AspirantProfileView,
     ChangePasswordView,
@@ -15,6 +16,10 @@ from .views import (
 )
 
 urlpatterns = [
+    path("email/change/cancel/", CancelEmailChangeView.as_view(), name="email-change-cancel"),
+    path("email/change/request/", RequestEmailChangeView.as_view(), name="email-change-request"),
+    path("email/change/resend/", ResendEmailChangeView.as_view(), name="email-change-resend"),
+    path("email/change/confirm/", ConfirmEmailChangeView.as_view(), name="email-change-confirm"),
     path("security/", AccountSecurityView.as_view(), name="account-security"),
     path("email/request/", RequestEmailVerificationView.as_view(), name="email-request"),
     path("email/verify/", VerifyEmailCodeView.as_view(), name="email-verify"),
