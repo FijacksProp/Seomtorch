@@ -5,6 +5,7 @@ from rest_framework.test import APIClient
 from knox.models import AuthToken
 from .models import User, AccountSecurityPolicy, AccountSecurityPolicyChange
 from .email_security import effective_grace_deadline, security_status
+from unittest.mock import patch
 
 
 @override_settings(ACCOUNT_SECURITY_ENABLED=True, ACCOUNT_SECURITY_GRACE_UNTIL="2099-01-01T00:00:00+00:00", PASSWORD_HASHERS=["django.contrib.auth.hashers.MD5PasswordHasher"])
@@ -19,6 +20,57 @@ class SecurityMonitorTests(TestCase):
 
     def save(self, **extra):
         return self.client.post(self.path, {**self.data, "action": "save", "confirm": "on", **extra})
+
+    def test_content_shield_is_only_on_account_security_and_keeps_saved_state(self):
+        from monetization.models import PlanConfig
+        config = PlanConfig.get_solo()
+        config.screenshot_protection_enabled = False
+        config.save(update_fields=["screenshot_protection_enabled"])
+        security = self.client.get(self.path)
+        self.assertContains(security, "Screenshot &amp; Content Shield")
+        self.assertContains(security, 'action="/monitor/account-security/content-shield/"')
+        self.assertContains(security, "Shield disabled")
+        pricing = self.client.get("/monitor/monetization/")
+        self.assertNotContains(pricing, "Screenshot &amp; Content Shield")
+        self.assertNotContains(pricing, 'name="screenshot_protection_enabled"')
+        config.refresh_from_db()
+        self.assertFalse(config.screenshot_protection_enabled)
+
+    def test_shield_setting_is_explicit_idempotent_and_returns_to_security(self):
+        from monetization.models import PlanConfig
+        for enabled in ["false", "false", "true", "true"]:
+            response = self.client.post(self.path + "content-shield/", {"enabled": enabled})
+            self.assertRedirects(response, self.path, fetch_redirect_response=False)
+            self.assertEqual(PlanConfig.get_solo().screenshot_protection_enabled, enabled == "true")
+        self.client.post(self.path + "content-shield/", {})
+        self.assertTrue(PlanConfig.get_solo().screenshot_protection_enabled)
+        self.assertEqual(self.client.get(self.path + "content-shield/").status_code, 405)
+
+    def test_shield_controls_require_staff_and_csrf(self):
+        from monetization.models import PlanConfig
+        config = PlanConfig.get_solo()
+        before = config.screenshot_protection_enabled
+        csrf_client = Client(enforce_csrf_checks=True)
+        csrf_client.force_login(self.admin)
+        self.assertEqual(csrf_client.post(self.path + "content-shield/", {"enabled": "false"}).status_code, 403)
+        self.client.force_login(self.student)
+        self.assertEqual(self.client.post(self.path + "content-shield/", {"enabled": "false"}).status_code, 302)
+        self.client.logout()
+        self.assertEqual(self.client.post(self.path + "content-shield/", {"enabled": "false"}).status_code, 302)
+        config.refresh_from_db()
+        self.assertEqual(config.screenshot_protection_enabled, before)
+
+    def test_a_stale_pricing_save_cannot_overwrite_shield_or_purchase_counter(self):
+        from monetization.models import PlanConfig
+        stale = PlanConfig.get_solo()
+        PlanConfig.objects.filter(pk=stale.pk).update(screenshot_protection_enabled=False, launch_offer_buyers_count=17)
+        with patch("learning.monitor_views.PlanConfig.get_solo", return_value=stale):
+            response = self.client.post("/monitor/monetization/update-pricing/", {"single_course_price": "1600", "semester_end_date": "2027-05-30"})
+        self.assertEqual(response.status_code, 302)
+        stale.refresh_from_db()
+        self.assertEqual(stale.single_course_price, 1600)
+        self.assertFalse(stale.screenshot_protection_enabled)
+        self.assertEqual(stale.launch_offer_buyers_count, 17)
 
     def test_get_is_read_only_and_shows_existing_environment_deadline(self):
         response = self.client.get(self.path)

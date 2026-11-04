@@ -8,6 +8,7 @@ from urllib.request import Request, urlopen
 
 from django.conf import settings
 from django.db import transaction
+from django.db.models import Sum
 from django.utils import timezone
 from django.utils.crypto import salted_hmac, constant_time_compare
 from django.utils.dateparse import parse_datetime
@@ -97,7 +98,7 @@ def check_transfer_limit(user):
 
 
 def check_email_rate_limit(user, cost=1):
-    """Caller holds the user lock. Changes consume two code-email slots."""
+    """Caller holds the user lock. Preserve actual send cost for older two-code requests."""
     now = timezone.now()
     logins = EmailSignInChallenge.objects.filter(user=user)
     changes = EmailChangeRequest.objects.filter(user=user)
@@ -105,7 +106,7 @@ def check_email_rate_limit(user, cost=1):
     if latest and (now - max(latest)).total_seconds() < 60:
         raise Throttled(wait=max(1, int(60 - (now - max(latest)).total_seconds())))
     for window, limit in [(timedelta(hours=1), 5), (timedelta(days=1), 10)]:
-        total = logins.filter(created_at__gte=now - window).count() + 2 * changes.filter(created_at__gte=now - window).count()
+        total = logins.filter(created_at__gte=now - window).count() + (changes.filter(created_at__gte=now - window).aggregate(total=Sum("code_email_count"))["total"] or 0)
         if total + cost > limit:
             raise Throttled(detail="Too many email-code requests. Please try again later.", wait=3600)
 

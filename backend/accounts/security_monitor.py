@@ -7,6 +7,7 @@ from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_http_methods
+from monetization.models import PlanConfig
 
 from .email_security import effective_grace_deadline
 from .models import AccountSecurityPolicy, AccountSecurityPolicyChange, User
@@ -76,5 +77,6 @@ def account_security_settings(request):
         "unverified_students": User.objects.filter(is_staff=False, email_verified_at__isnull=True, is_active=True).count(),
         "grace_open": bool(before and before > timezone.now()),
         "changes": AccountSecurityPolicyChange.objects.select_related("changed_by")[:20],
+        "plan_config": PlanConfig.get_solo(),
     }
     return render(request, "monitor/account_security.html", context, status=status)

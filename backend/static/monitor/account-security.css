@@ -43,3 +43,8 @@
 .grace-page :is(button,input,textarea,a):focus-visible { outline: 3px solid #aa8248; outline-offset: 3px; }
 @media(max-width:1000px) { .grace-layout { grid-template-columns: 1fr; gap: 22px; } }
 @media(max-width:600px) { .grace-summary { grid-template-columns: 1fr; padding: 0; } .grace-summary > div,.grace-summary > div:first-child { border-right: 0; border-bottom: 1px solid #d9dfd1; padding: 20px 0; } .grace-editor { padding: 22px 18px; } .grace-field input,.grace-field textarea { font-size: 16px; } .grace-history article header { flex-direction: column; gap: 7px; } .grace-buttons { flex-direction: column; } .grace-editor .button { min-height: 44px; } }
+.content-shield { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin: 24px 0; }
+.content-shield > div { max-width: 720px; }
+.content-shield form { flex-shrink: 0; margin: 0; }
+.content-shield .content-shield-note { font-size: 13px; }
+@media (max-width: 640px) { .content-shield { align-items: stretch; flex-direction: column; gap: 12px; } .content-shield button { width: 100%; } }

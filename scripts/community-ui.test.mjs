@@ -36,10 +36,10 @@ test("challenges have a visible entry and one direct action per buddy", () => {
   assert.doesNotMatch(communityPage({ ...base, tab: 'messages' }), /circle-challenge-callout/);
 });
 
-test("the new challenge entry uses the existing access check and composer", () => {
+test("challenge entry allows university course selection without requiring an all-access plan", () => {
   const source = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
   const handler = source.slice(source.indexOf('document.querySelector("#circle-create-challenge")'), source.indexOf('document.querySelector("#form-community-search")', source.indexOf('document.querySelector("#circle-create-challenge")')));
-  assert.match(handler, /if \(!hasAllAccess\(\)\)/);
+  assert.match(handler, /if \(getActiveMode\(\) !== "university" && !hasAllAccess\(\)\)/);
   assert.match(handler, /showUpgradeModal/);
   assert.match(handler, /challengeComposerOpen = true/);
   assert.match(handler, /route = "challenges"/);

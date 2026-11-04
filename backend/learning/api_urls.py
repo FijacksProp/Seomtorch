@@ -15,7 +15,7 @@ from .api_views import (
     StartSessionView,
     SubjectListView,
 )
-from .challenge_views import ChallengeDetailView, ChallengeListCreateView, ChallengeRespondView, ChallengeStartView, StudentLookupView
+from .challenge_views import ChallengeCatalogView, ChallengeDetailView, ChallengeListCreateView, ChallengeRespondView, ChallengeStartView, StudentLookupView
 from .content_views import UniversityContentView, UniversityMediaView
 
 urlpatterns = [
@@ -37,6 +37,7 @@ urlpatterns = [
     path("achievements/", AchievementView.as_view(), name="achievements"),
     path("students/lookup/", StudentLookupView.as_view(), name="student-lookup"),
     path("challenges/", ChallengeListCreateView.as_view(), name="challenges"),
+    path("challenges/catalog/", ChallengeCatalogView.as_view(), name="challenge-catalog"),
     path("challenges/<uuid:challenge_id>/", ChallengeDetailView.as_view(), name="challenge-detail"),
     path("challenges/<uuid:challenge_id>/respond/", ChallengeRespondView.as_view(), name="challenge-respond"),
     path("challenges/<uuid:challenge_id>/start/", ChallengeStartView.as_view(), name="challenge-start"),

@@ -210,3 +210,12 @@
   .duel-result-row { gap: 10px; padding-inline: 9px; }
 }
 @media (prefers-reduced-motion: reduce) { .duel-loading-rule::after { animation: none; } .duel-row { transition: none; } }
+.challenge-analysis { max-width: 580px; margin: clamp(28px, 9vh, 100px) auto; padding: clamp(24px, 5vw, 48px); background: var(--surface, #fffdf8); border: 1px solid var(--border, #deddd2); border-radius: 20px; text-align: center; }
+.challenge-analysis > img { object-fit: contain; margin-bottom: 24px; }
+.challenge-analysis h1 { font-size: clamp(28px, 6vw, 38px); line-height: 1.15; }
+.challenge-analysis .lede { font-size: 16px; margin: 16px 0 28px; }
+.challenge-analysis-note { font-size: 13px; line-height: 1.6; color: var(--muted, #59675e); margin: 18px 0 0; }
+.challenge-analysis-rule { max-width: 260px; height: 3px; margin: 0 auto; background: #e3e9e2; overflow: hidden; border-radius: 8px; }
+.challenge-analysis-rule i { display: block; width: 38%; height: 100%; border-radius: inherit; background: #1e6653; animation: challenge-analysis-sweep 1.7s ease-in-out infinite alternate; }
+@keyframes challenge-analysis-sweep { from { transform: translateX(-100%); } to { transform: translateX(265%); } }
+@media (prefers-reduced-motion: reduce) { .challenge-analysis-rule i { animation: none; width: 100%; opacity: .7; } }

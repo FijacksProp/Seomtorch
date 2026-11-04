@@ -4,15 +4,19 @@ from datetime import timedelta
 
 from django.contrib.auth import get_user_model
 from django.db import DatabaseError, transaction
-from django.db.models import Sum
+from django.db.models import Count, Q, Sum
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.utils.dateparse import parse_datetime
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.exceptions import PermissionDenied, ValidationError
+from monetization.models import CourseAccess
+from monetization.course_topics import canonical_topic_id
 
-from .models import ActivityEvent, Challenge, ChallengeParticipant, PracticeSession, Question, Subject, UserStats
+from .access import free_topic_id, user_can_access_topic
+from .models import ActivityEvent, Challenge, ChallengeParticipant, PracticeSession, Question, Subject, Topic, UserStats
 
 logger = logging.getLogger(__name__)
 
@@ -42,6 +46,7 @@ def _question_snapshot(question):
         "external_id": question.external_id,
         "subject": question.topic.subject.slug,
         "topic": question.topic.name,
+        "topic_slug": question.topic.slug,
         "text": question.text,
         "options": question.options,
         "correct": question.correct_index,
@@ -60,22 +65,41 @@ def _public_questions(challenge):
     return [{key: value for key, value in item.items() if key not in private_fields} for item in challenge.question_payload]
 
 
-def _select_questions(subject_slug, limit):
+def _sample_questions(pool, limit):
+    # Sample lightweight IDs, not every question's passage and explanation.
+    ids = list(pool.values_list("pk", flat=True))
+    selected = random.sample(ids, min(limit, len(ids)))
+    rows = {q.pk: q for q in pool.filter(pk__in=selected).select_related("topic__subject", "passage")}
+    return [rows[pk] for pk in selected]
+
+
+def _select_questions(subject_slug, limit, *, track="aspirant", topic_slug=None, user=None):
+    if track == Subject.Track.UNIVERSITY:
+        if subject_slug == "all":
+            raise ValidationError({"subject": ["Choose one university course for this challenge."]})
+        subject = get_object_or_404(Subject, slug=subject_slug, is_active=True, track=track)
+        topic = get_object_or_404(Topic, subject=subject, slug=topic_slug) if topic_slug else None
+        if not user_can_access_topic(user, subject, topic):
+            raise PermissionDenied("Course access is required for this paper. You can also choose the course’s free topic.")
+        pool = Question.objects.filter(topic__subject=subject, is_active=True)
+        if topic:
+            pool = pool.filter(topic=topic)
+        selected = _sample_questions(pool, limit)
+        # Keep course-wide papers grouped by topic.
+        if not topic:
+            selected.sort(key=lambda q: (q.topic.name, q.topic.slug))
+        return subject, selected
     subjects = list(Subject.objects.filter(is_active=True, track=Subject.Track.ASPIRANT).order_by("position", "name"))
     priority = {"english": 0, "mathematics": 1, "general-paper": 2, "physics": 3}
     subjects.sort(key=lambda item: (priority.get(item.slug, 99), item.position))
     if subject_slug != "all":
         subject = get_object_or_404(Subject, slug=subject_slug, is_active=True, track=Subject.Track.ASPIRANT)
-        pool = list(Question.objects.filter(topic__subject=subject, is_active=True).select_related("topic__subject", "passage"))
-        random.shuffle(pool)
-        return subject, pool[:limit]
+        return subject, _sample_questions(Question.objects.filter(topic__subject=subject, is_active=True), limit)
 
     pools = {}
     allocations = {subject.id: 0 for subject in subjects}
     for subject in subjects:
-        pool = list(Question.objects.filter(topic__subject=subject, is_active=True).select_related("topic__subject", "passage"))
-        random.shuffle(pool)
-        pools[subject.id] = pool
+        pools[subject.id] = _sample_questions(Question.objects.filter(topic__subject=subject, is_active=True), limit)
     while sum(allocations.values()) < limit:
         progressed = False
         for subject in subjects:
@@ -88,6 +112,35 @@ def _select_questions(subject_slug, limit):
     for subject in subjects:
         selected.extend(pools[subject.id][:allocations[subject.id]])
     return None, selected
+
+
+def _check_challenge_access(challenge, user):
+    subject = challenge.subject
+    if not subject or subject.track != Subject.Track.UNIVERSITY:
+        return
+    if not subject.is_active:
+        raise PermissionDenied("This course is no longer available.")
+    if CourseAccess.user_has_course_access(user, subject.code):
+        return
+    free_id = free_topic_id(subject)
+    if not free_id or any(canonical_topic_id(subject.code, q.get("topic_slug", "")) != free_id for q in challenge.question_payload):
+        raise PermissionDenied("You need access to this university course to accept or begin this challenge. The host’s access is not shared with invitees.")
+
+
+class ChallengeCatalogView(APIView):
+    def get(self, request):
+        courses = Subject.objects.filter(is_active=True, track=Subject.Track.UNIVERSITY).order_by("position", "name")
+        rows = []
+        for course in courses:
+            full_access = CourseAccess.user_has_course_access(request.user, course.code)
+            free_id = "" if full_access else free_topic_id(course)
+            topics = course.topics.annotate(question_count=Count("questions", filter=Q(questions__is_active=True))).filter(question_count__gte=1)
+            available = [{"id": t.slug, "name": t.name, "question_count": t.question_count,
+                          "accessible": full_access or bool(free_id and canonical_topic_id(course.code, t.slug) == free_id)} for t in topics]
+            if available:
+                rows.append({"id": course.slug, "name": f"{course.code} · {course.name}" if course.code else course.name,
+                             "code": course.code, "full_access": full_access, "topics": available})
+        return Response(rows)
 
 
 def _challenge_state(challenge, now=None):
@@ -178,6 +231,9 @@ def challenge_payload(challenge, user):
         "id": str(challenge.id), "title": challenge.title, "message": challenge.message,
         "creator": {"public_id": challenge.creator.public_id, "username": challenge.creator.username},
         "subject": challenge.subject.slug if challenge.subject else "all", "subject_label": challenge.subject_label,
+        "track": challenge.subject.track if challenge.subject else Subject.Track.ASPIRANT,
+        "course_code": challenge.subject.code if challenge.subject and challenge.subject.track == Subject.Track.UNIVERSITY else "",
+        "topic_label": next(iter({q.get("topic", "") for q in challenge.question_payload}), "") if len({q.get("topic") for q in challenge.question_payload}) == 1 else "Mixed course topics",
         "question_count": challenge.question_count, "duration_minutes": challenge.duration_minutes,
         "starts_at": challenge.starts_at, "ends_at": challenge.ends_at, "state": _challenge_state(challenge, now),
         "my_status": mine.status, "is_creator": challenge.creator_id == user.id,
@@ -247,10 +303,15 @@ class ChallengeListCreateView(APIView):
         if len(invitees) != len(normalized_ids) or request.user.public_id in normalized_ids:
             return Response({"participant_ids": ["One or more Student IDs are invalid."]}, status=400)
         subject_slug = request.data.get("subject") or "all"
-        subject, questions = _select_questions(subject_slug, question_count)
+        track = request.data.get("track", Subject.Track.ASPIRANT)
+        if track not in Subject.Track.values:
+            return Response({"track": ["Choose aspirant or university."]}, status=400)
+        subject, questions = _select_questions(subject_slug, question_count, track=track, topic_slug=request.data.get("topic") or None, user=request.user)
         if len(questions) < question_count:
             return Response({"question_count": ["The selected focus does not have enough active questions."]}, status=400)
         subject_label = subject.name if subject else "All subjects"
+        if subject and subject.track == Subject.Track.UNIVERSITY and subject.code:
+            subject_label = f"{subject.code} · {subject.name}"[:120]
         challenge = Challenge.objects.create(
             creator=request.user, title=title, message=message, subject=subject, subject_label=subject_label,
             question_payload=[_question_snapshot(item) for item in questions], question_count=question_count,
@@ -330,6 +391,8 @@ class ChallengeRespondView(APIView):
             return Response({"detail": "This challenge invitation has expired."}, status=409)
         if response not in {"accept", "decline"}:
             return Response({"response": ["Choose accept or decline."]}, status=400)
+        if response == "accept":
+            _check_challenge_access(participant.challenge, request.user)
         participant.status = ChallengeParticipant.Status.ACCEPTED if response == "accept" else ChallengeParticipant.Status.DECLINED
         participant.responded_at = timezone.now()
         participant.save(update_fields=("status", "responded_at"))
@@ -363,11 +426,19 @@ class ChallengeStartView(APIView):
             return Response({"detail": "This challenge window has closed."}, status=409)
         if participant.status == ChallengeParticipant.Status.COMPLETED:
             return Response({"detail": "You have already completed this challenge."}, status=409)
+        _check_challenge_access(challenge, request.user)
         if not participant.practice_session:
+            subject = challenge.subject
+            university = subject and subject.track == Subject.Track.UNIVERSITY
+            topic_slugs = {q.get("topic_slug") for q in challenge.question_payload}
+            topic = Topic.objects.filter(subject=subject, slug=next(iter(topic_slugs))).first() if university and len(topic_slugs) == 1 else None
             session = PracticeSession.objects.create(
                 user=request.user, subject=challenge.subject, question_ids=[item["external_id"] for item in challenge.question_payload],
                 total_questions=challenge.question_count, duration_minutes=challenge.duration_minutes, mode=PracticeSession.Mode.CHALLENGE,
                 began_at=now,
+                track=subject.track if subject else Subject.Track.ASPIRANT,
+                course_code=subject.code if university else "", topic=topic,
+                topic_title=topic.name if topic else "Mixed course challenge" if university else "",
             )
             participant.practice_session = session
             participant.status = ChallengeParticipant.Status.STARTED
@@ -379,5 +450,6 @@ class ChallengeStartView(APIView):
             "challenge_id": str(challenge.id), "session_id": str(participant.practice_session_id),
             "questions": _public_questions(challenge), "duration_minutes": challenge.duration_minutes,
             "started_at": participant.started_at, "deadline_at": participant.deadline_at, "title": challenge.title,
+            "track": participant.practice_session.track, "course_code": participant.practice_session.course_code,
             "answers": {attempt.question.external_id: attempt.selected_index for attempt in participant.practice_session.attempts.select_related("question")},
         }, status=status.HTTP_201_CREATED)

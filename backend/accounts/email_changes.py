@@ -30,12 +30,10 @@ def check_browser(user, browser_hash):
         raise serializers.ValidationError("Use your active browser to change your email. Sign in again if necessary.")
 
 
-def send_change_codes(change, old_code, new_code):
+def send_change_code(change, new_code):
     base = {"sender": {"name": settings.BREVO_SENDER_NAME, "email": settings.BREVO_SENDER_EMAIL}}
-    _send_payload({**base, "to": [{"email": change.old_email}], "subject": "Seomtorch · Approve your email change",
-        "textContent": f"Your CURRENT-EMAIL approval code is {old_code}. It expires in 5 minutes.\n\nSomeone requested changing your Seomtorch email to {mask_email(change.new_email)}. Only enter this code if you requested this change. A separate code is required from the new inbox. Never share either code. If this wasn't you, ignore this request; your email has not changed."})
     _send_payload({**base, "to": [{"email": change.new_email}], "subject": "Seomtorch · Verify your new email",
-        "textContent": f"Your NEW-EMAIL verification code is {new_code}. It expires in 5 minutes.\n\nEnter it together with the approval code from your current email to finish the change. Your account email stays unchanged until both codes are confirmed. Never share your code. If you did not request this, ignore this email."})
+        "textContent": f"Your NEW-EMAIL verification code is {new_code}. It expires in 5 minutes.\n\nEnter this code in the browser where you requested the change to verify your new sign-in email. No code is needed from your previous inbox. Your account email stays unchanged until this code is confirmed. Never share your code. If you did not request this, ignore this email."})
 
 
 def valid_pending(user, value, browser_hash):
@@ -65,21 +63,17 @@ def request_change(user, browser_key, *, current_password=None, new_email=None, 
             raise serializers.ValidationError({"new_email": "Enter a different email address."})
         if User.objects.filter(email__iexact=target).exclude(pk=user.pk).exists():
             raise serializers.ValidationError({"new_email": "This email address cannot be used. Choose another address."})
-        check_email_rate_limit(user, cost=2)
+        check_email_rate_limit(user)
         now = timezone.now()
         EmailChangeRequest.objects.filter(user=user, consumed_at__isnull=True).update(consumed_at=now)
         EmailSignInChallenge.objects.filter(user=user, consumed_at__isnull=True).update(consumed_at=now)
         request_id = uuid.uuid4()
-        old_code = f"{secrets.randbelow(1000000):06d}"
         new_code = f"{secrets.randbelow(1000000):06d}"
-        while new_code == old_code:
-            new_code = f"{secrets.randbelow(1000000):06d}"
         change = EmailChangeRequest.objects.create(id=request_id, user=user, old_email=user.email, new_email=target,
             browser_hash=browser_hash, password_fingerprint=digest(user.password, "password"),
-            old_code_hash=digest(f"{request_id}:{old_code}", "email-change-current"),
             new_code_hash=digest(f"{request_id}:{new_code}", "email-change-new"), expires_at=now + timedelta(minutes=5))
         try:
-            send_change_codes(change, old_code, new_code)
+            send_change_code(change, new_code)
         except DeliveryUnavailable:
             change.consumed_at = now
             change.save(update_fields=("consumed_at",))
@@ -93,12 +87,12 @@ def _notify_previous_inbox(email, new_email):
     try:
         _send_payload({"sender": {"name": settings.BREVO_SENDER_NAME, "email": settings.BREVO_SENDER_EMAIL},
             "to": [{"email": email}], "subject": "Seomtorch · Your email was changed",
-            "textContent": f"Your Seomtorch account email has been changed to {mask_email(new_email)} after approval from both inboxes. Your progress and subscription are unchanged. Other browser sign-ins were revoked. If you did not approve this change, contact Seomtorch support immediately. Never send anyone your password or verification codes."})
+            "textContent": f"Your Seomtorch account email has been changed to {mask_email(new_email)} after a password check and verification of the new inbox. Your progress and subscription are unchanged. Other browser sign-ins were revoked. If you did not approve this change, contact Seomtorch support immediately. Never send anyone your password or verification codes."})
     except DeliveryUnavailable:
         logger.warning("Email-change security notification was not accepted; account change remains committed.")
 
 
-def confirm_change(user, request_id, browser_key, old_code, new_code):
+def confirm_change(user, request_id, browser_key, new_code):
     browser_hash = browser_digest(browser_key)
     error = None
     try:
@@ -108,18 +102,18 @@ def confirm_change(user, request_id, browser_key, old_code, new_code):
             change = valid_pending(user, request_id, browser_hash)
             now = timezone.now()
             if change.expires_at <= now or change.attempts >= 5:
-                error = "These codes have expired or reached the attempt limit. Request a new pair of codes."
+                error = "This code has expired or reached the attempt limit. Request a new code."
             else:
                 change.attempts += 1
-                shaped = all(isinstance(code, str) and len(code) == 6 and code.isascii() and code.isdigit() for code in (old_code, new_code))
-                old_matches = constant_time_compare(change.old_code_hash, digest(f"{change.id}:{old_code}", "email-change-current")) if shaped else False
+                shaped = isinstance(new_code, str) and len(new_code) == 6 and new_code.isascii() and new_code.isdigit()
                 new_matches = constant_time_compare(change.new_code_hash, digest(f"{change.id}:{new_code}", "email-change-new")) if shaped else False
-                if not old_matches or not new_matches:
+                if not new_matches:
                     change.save(update_fields=("attempts",))
-                    error = "One or both codes are incorrect. Use the latest pair and check which inbox each code came from."
+                    error = "That code is incorrect. Use the latest code sent to your new email."
                 elif User.objects.filter(email__iexact=change.new_email).exclude(pk=user.pk).exists():
                     error = "The new address is no longer available. Start again with a different email."
                 else:
+                    notify_previous = bool(user.email_verified_at)
                     user.email = change.new_email
                     # User.save revokes every token and pending code on an email change.
                     user.save(update_fields=("email",))
@@ -131,7 +125,9 @@ def confirm_change(user, request_id, browser_key, old_code, new_code):
                     token = issue_token(user)
                     from learning.models import ActivityEvent
                     ActivityEvent.objects.create(user=user, event_type=ActivityEvent.Type.SIGNED_IN, metadata={"reason": "email_changed"})
-                    transaction.on_commit(lambda: _notify_previous_inbox(change.old_email, change.new_email))
+                    # Don't send notices to an unverified address that may be a typo.
+                    if notify_previous:
+                        transaction.on_commit(lambda: _notify_previous_inbox(change.old_email, change.new_email))
     except IntegrityError:
         raise serializers.ValidationError("The new address could not be saved. Your previous email is unchanged. Please try a different address.") from None
     if error:

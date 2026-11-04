@@ -276,7 +276,10 @@ class EmailChangeRequest(models.Model):
     new_email = models.EmailField()
     browser_hash = models.CharField(max_length=64)
     password_fingerprint = models.CharField(max_length=64)
-    old_code_hash = models.CharField(max_length=64)
+    # Retained for rolling-deploy compatibility; new requests never use an old-inbox code.
+    old_code_hash = models.CharField(max_length=64, blank=True, default="")
+    # Old deployed workers omit this column and still send two codes; new code sends one.
+    code_email_count = models.PositiveSmallIntegerField(default=1, db_default=2)
     new_code_hash = models.CharField(max_length=64)
     attempts = models.PositiveSmallIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)

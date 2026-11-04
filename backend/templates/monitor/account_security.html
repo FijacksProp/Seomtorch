@@ -4,11 +4,22 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'monitor/account-security.css' %}">
 <div class="grace-page">
-  <header class="grace-heading"><p>Account security / Verification rollout</p><h1>A little time to get verified.</h1><span>Manage the shared email-verification deadline for existing students. All dates and times on this page use Lagos time (UTC+1).</span></header>
+  <header class="grace-heading"><p>Account security</p><h1>Protect accounts. Manage access.</h1><span>Manage email verification and the student app’s content shield. All dates and times on this page use Lagos time (UTC+1).</span></header>
   <section class="grace-summary" aria-label="Current rollout settings">
     <div><span>Current grace deadline</span><strong>{% if deadline %}{{ deadline|date:"j M Y" }}<small>{{ deadline|date:"g:i:s A" }} · Lagos</small>{% else %}Not configured{% endif %}</strong><p>{% if policy %}Managed in Monitor{% else %}Using Render’s configured deadline{% endif %}</p></div>
     <div><span>Email approval</span><strong>{% if security_enabled %}Enabled{% else %}Off{% endif %}</strong><p>{% if security_enabled %}{% if grace_open %}Grace period is open{% else %}Verification is required now{% endif %}{% else %}Enable separately in Render after delivery testing{% endif %}</p></div>
     <div><span>Active students not verified</span><strong>{{ unverified_students }}</strong><p>Verified students keep their current protection</p></div>
+  </section>
+  <section class="grace-editor content-shield" aria-labelledby="content-shield-title">
+    <div><p class="grace-eyebrow">Student content</p><h2 id="content-shield-title">Screenshot &amp; Content Shield</h2>
+      <p>Browser blur, tab-switch shielding, capture-key deterrents and student ID watermarks across the student app.</p>
+      <p><strong>{% if plan_config.screenshot_protection_enabled %}Shield enabled{% else %}Shield disabled · screenshots allowed{% endif %}</strong></p>
+      <p class="content-shield-note">These are browser-level deterrents, not a guarantee against screenshots or screen recording. Temporarily disable the shield for marketing captures, then enable it again.</p>
+    </div>
+    <form method="post" action="{% url 'monitor:toggle-screenshot-protection' %}">{% csrf_token %}
+      <input type="hidden" name="enabled" value="{% if plan_config.screenshot_protection_enabled %}false{% else %}true{% endif %}">
+      <button type="submit" class="button{% if plan_config.screenshot_protection_enabled %} secondary{% endif %}">{% if plan_config.screenshot_protection_enabled %}Disable shield{% else %}Enable shield{% endif %}</button>
+    </form>
   </section>
   <div class="grace-layout">
     <section class="grace-editor">

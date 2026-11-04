@@ -5,7 +5,7 @@ import { load } from 'cheerio';
 import { emailChangePage, mountEmailChange } from '../email-change-ui.js';
 import { emailApprovalPage } from '../account-security-ui.js';
 
-test('both steps escape email data, label inboxes, and require explicit consent', () => {
+test('email change requires only the new inbox code and explicit consent', () => {
   const html = emailChangePage({ email: '<img src=x onerror=1>' });
   assert.ok(!html.includes('<img src=x'));
   let $ = load(html);
@@ -14,10 +14,11 @@ test('both steps escape email data, label inboxes, and require explicit consent'
   assert.equal($('#change-confirm-email').length, 1);
   const codes = emailChangePage({ pending: { request_id:'ID', current_email:'a***@old.example', new_email:'b***@new.example' } });
   $ = load(codes);
-  assert.equal($('input[inputmode=numeric]').length, 2);
+  assert.equal($('input[inputmode=numeric]').length, 1);
   assert.equal($('[name=confirm_change][required]').length, 1);
-  assert.match(codes, /Current inbox code/);
-  assert.match(codes, /New inbox code/);
+  assert.equal($('#old-email-code').length, 0);
+  assert.match(codes, /New email verification code/);
+  assert.match(codes, /No code is needed from your previous inbox/);
   assert.match(codes, /email hasn’t changed yet/);
   assert.ok(!emailChangePage({ available:false }).includes('<form'));
 });
@@ -32,7 +33,7 @@ function fixture(codes = false) {
   const nodes = Object.fromEntries(ids.map(id => [id, { textContent:'', disabled:false, addEventListener(type, fn) { this[type] = fn; } }]));
   const form = nodes[codes ? 'email-change-confirm-form' : 'email-change-request-form'];
   form.reportValidity = () => true;
-  form.elements = codes ? { old_code:{value:'123456'}, new_code:{value:'654321'}, confirm_change:{checked:false} } : { current_password:{value:'test-only'}, new_email:{value:'NEW@example.com'}, confirm_email:{value:'new@example.com'} };
+  form.elements = codes ? { new_code:{value:'654321'}, confirm_change:{checked:false} } : { current_password:{value:'test-only'}, new_email:{value:'NEW@example.com'}, confirm_email:{value:'new@example.com'} };
   const root = { isConnected:true, querySelector: selector => nodes[selector.slice(1)] || null, querySelectorAll: () => [nodes['cancel-email-change']] };
   return { root, nodes, form, submit() { form.submit({ preventDefault() {}, currentTarget:form }); } };
 }
@@ -52,14 +53,14 @@ test('request checks repeated email, sends once, clears password and retains no 
   } finally { cleanup(); restore(); }
 });
 
-test('confirmation requires consent and sends both codes with server confirmation', async () => {
+test('confirmation sends only the new code with server confirmation', async () => {
   const restore = storage(), view = fixture(true); let calls = 0, payload, completed = 0;
   const cleanup = mountEmailChange({ ...view, pending:{request_id:'ID'}, api:{confirmEmailChange:async(_token,body)=>{calls++;payload=body;return {token:'fresh'};}}, token:'old', onComplete:()=>completed++, onPending(){}, onCancel(){} });
   try {
     view.submit(); assert.equal(calls, 0);
     view.form.elements.confirm_change.checked = true; view.submit(); await flush();
     assert.equal(calls, 1); assert.equal(payload.confirm_change, true);
-    assert.equal(payload.old_code, '123456'); assert.equal(payload.new_code, '654321');
+    assert.ok(!('old_code' in payload)); assert.equal(payload.new_code, '654321');
     assert.equal(completed, 1);
   } finally { cleanup(); restore(); }
 });

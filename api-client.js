@@ -70,6 +70,7 @@ export const api = {
   markBadgesSeen: (token, codes) => request("/achievements/", { token, method: "POST", body: { codes } }),
   lookupStudent: (token, publicId) => request(`/students/lookup/?id=${encodeURIComponent(publicId)}`, { token }),
   challenges: token => request("/challenges/", { token }),
+  challengeCatalog: token => request("/challenges/catalog/", { token }),
   createChallenge: (token, body) => request("/challenges/", { token, method: "POST", body }),
   challenge: (token, id) => request(`/challenges/${id}/`, { token }),
   removeChallenge: (token, id) => request(`/challenges/${id}/`, { token, method: "DELETE" }),

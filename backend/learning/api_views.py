@@ -10,11 +10,12 @@ from rest_framework import status, throttling
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from monetization.models import CourseAccess, CourseTopicConfig
-from monetization.course_topics import DEFAULT_FREE_TOPICS, canonical_topic_id
+from monetization.models import CourseAccess
+from monetization.course_topics import canonical_topic_id
 
 from .badges import achievements_payload, evaluate_badges, mark_badges_seen
 from .analytics import user_test_analytics
+from .access import free_topic_id, user_can_access_question, user_can_access_topic
 from .models import ActivityEvent, Attempt, Bookmark, ChallengeParticipant, PracticeSession, Question, Subject, Topic, UserStats, QuestionComment, QuestionReport
 from .serializers import AttemptSerializer, BookmarkSerializer, QuestionPracticeSerializer, SubjectSerializer, QuestionCommentSerializer, QuestionReportSerializer
 
@@ -33,17 +34,6 @@ def stats_payload(user, include_tests=True):
         payload["tests"] = user_test_analytics(user)
     return payload
 
-
-def user_can_access_topic(user, subject, topic):
-    if subject.track != Subject.Track.UNIVERSITY or CourseAccess.user_has_course_access(user, subject.code):
-        return True
-    configured = CourseTopicConfig.objects.filter(course_code__iexact=subject.code).values_list("free_topic_id", flat=True).first()
-    free_topic_id = configured or DEFAULT_FREE_TOPICS.get(subject.code.upper(), "")
-    return bool(topic and free_topic_id and canonical_topic_id(subject.code, topic.slug) == canonical_topic_id(subject.code, free_topic_id))
-
-
-def user_can_access_question(user, question):
-    return user_can_access_topic(user, question.topic.subject, question.topic)
 
 class SubjectListView(APIView):
     def get(self, request):
@@ -260,6 +250,8 @@ class SubmitAttemptView(APIView):
         if not isinstance(question_id, str):
             return Response({"question_id": ["A valid question ID is required."]}, status=400)
         question = get_object_or_404(Question.objects.select_related("topic__subject"), external_id=question_id, is_active=True)
+        if not user_can_access_question(request.user, question):
+            return Response({"detail": "Course access is required to answer this question."}, status=403)
         selected = request.data.get("selected_index")
         if isinstance(selected, bool) or isinstance(selected, float) and not selected.is_integer():
             return Response({"selected_index": ["A valid option index is required."]}, status=400)
@@ -390,13 +382,23 @@ class BulkSubmitAttemptsView(APIView):
             parsed.append({"question_id": question_id, "client_id": client_id, "selected_index": selected, "duration_ms": duration_ms})
 
         session = get_object_or_404(PracticeSession.objects.select_for_update(), id=session_id, user=request.user)
+        challenge = None
+        snapshots = {}
         if session.mode == PracticeSession.Mode.CHALLENGE:
-            return Response({"detail": "Challenge answers must be submitted through the challenge flow."}, status=409)
+            from .challenge_views import _check_challenge_access
+            participant = get_object_or_404(ChallengeParticipant.objects.select_for_update().select_related("challenge"), practice_session=session, user=request.user)
+            if participant.status != ChallengeParticipant.Status.STARTED or participant.challenge.cancelled_at:
+                return Response({"detail": "This challenge attempt is no longer active."}, status=409)
+            _check_challenge_access(participant.challenge, request.user)
+            if not participant.deadline_at or timezone.now() >= participant.deadline_at + timedelta(seconds=90):
+                return Response({"detail": "The challenge timer has expired."}, status=409)
+            challenge = participant.challenge
+            snapshots = {q["external_id"]: q for q in challenge.question_payload}
         if session.status != PracticeSession.Status.ACTIVE:
             return Response({"detail": "This practice session is no longer active."}, status=409)
         if not session.began_at:
             return Response({"detail": "Begin this session before submitting answers."}, status=409)
-        if session.duration_minutes and timezone.now() >= session.began_at + timedelta(minutes=session.duration_minutes, seconds=90):
+        if not challenge and session.duration_minutes and timezone.now() >= session.began_at + timedelta(minutes=session.duration_minutes, seconds=90):
             return Response({"detail": "The session timer has expired."}, status=409)
 
         questions = {
@@ -407,9 +409,23 @@ class BulkSubmitAttemptsView(APIView):
             return Response({"attempts": ["One or more questions are no longer available."]}, status=400)
         if not question_ids.issubset(set(session.question_ids)):
             return Response({"attempts": ["Every answer must belong to this practice session."]}, status=400)
+        allowed_courses = {}
+        free_topics = {}
         for item in parsed:
             question = questions[item["question_id"]]
-            if item["selected_index"] < 0 or item["selected_index"] >= len(question.options):
+            subject = question.topic.subject
+            if not challenge and subject.track == Subject.Track.UNIVERSITY:
+                if subject.pk not in allowed_courses:
+                    allowed_courses[subject.pk] = CourseAccess.user_has_course_access(request.user, subject.code)
+                    if not allowed_courses[subject.pk]:
+                        free_topics[subject.pk] = free_topic_id(subject)
+                if not allowed_courses[subject.pk] and (not free_topics[subject.pk] or canonical_topic_id(subject.code, question.topic.slug) != free_topics[subject.pk]):
+                    return Response({"detail": "Course access is required to answer this paper."}, status=403)
+            snapshot = snapshots.get(question.external_id)
+            if challenge and not snapshot:
+                return Response({"detail": "A question is not part of the shared challenge paper."}, status=400)
+            options = snapshot["options"] if challenge else question.options
+            if item["selected_index"] < 0 or item["selected_index"] >= len(options):
                 return Response({"attempts": ["An answer option is out of range."]}, status=400)
 
         prior_by_client = {
@@ -433,7 +449,8 @@ class BulkSubmitAttemptsView(APIView):
             prior_question = prior_in_session.get(question.external_id)
             if prior_question:
                 return Response({"detail": "This question has already been recorded in the session."}, status=409)
-            correct = item["selected_index"] == question.correct_index
+            correct_index = snapshots[question.external_id]["correct"] if challenge else question.correct_index
+            correct = item["selected_index"] == correct_index
             attempt = Attempt(
                 user=request.user,
                 question=question,
@@ -476,6 +493,10 @@ class BulkSubmitAttemptsView(APIView):
         for item in parsed:
             attempt = response_attempts[str(item["client_id"])]
             question = attempt.question
+            if challenge:
+                # Never reveal the frozen answer key while the paper is active.
+                results.append({"client_id": str(attempt.client_id), "question_id": question.external_id, "accepted": True})
+                continue
             results.append({
                 "client_id": str(attempt.client_id),
                 "question_id": question.external_id,
@@ -485,14 +506,20 @@ class BulkSubmitAttemptsView(APIView):
                 "explanation_status": question.explanation_status,
                 "explanation_image_url": question.explanation_image_url,
             })
+        if challenge:
+            return Response({"results": results, "accepted": True, "badges_earned": []})
         return Response({"results": results, "stats": stats_payload(request.user, include_tests=False), "badges_earned": []})
 
 class CompleteSessionView(APIView):
     @transaction.atomic
     def post(self, request, session_id):
-        session = get_object_or_404(PracticeSession, id=session_id, user=request.user)
+        session = get_object_or_404(PracticeSession.objects.select_for_update(), id=session_id, user=request.user)
         if session.status == PracticeSession.Status.COMPLETED:
-            return Response({"session_id": session.id, "correct": session.attempts.filter(is_correct=True).count(), "total": session.total_questions, "accuracy": session.accuracy, "challenge_id": None, "stats": stats_payload(request.user), "badges_earned": []})
+            challenge_id = ChallengeParticipant.objects.filter(practice_session=session, user=request.user).values_list("challenge_id", flat=True).first() if session.mode == PracticeSession.Mode.CHALLENGE else None
+            return Response({"session_id": session.id, "correct": session.correct_answers, "total": session.total_questions, "accuracy": session.accuracy, "challenge_id": challenge_id, "stats": stats_payload(request.user), "badges_earned": []})
+        if session.mode == PracticeSession.Mode.CHALLENGE and session.status == PracticeSession.Status.ABANDONED and not session.attempts.exists():
+            # A lost response to an empty-paper submission must also be retryable.
+            return Response({"session_id": session.id, "status": session.status, "correct": 0, "total": session.total_questions, "accuracy": 0, "stats": stats_payload(request.user), "badges_earned": []})
         if session.status != PracticeSession.Status.ACTIVE:
             return Response({"detail": "This practice session cannot be completed."}, status=409)
         if not session.began_at:
@@ -500,6 +527,8 @@ class CompleteSessionView(APIView):
         if not session.attempts.exists():
             session.status = PracticeSession.Status.ABANDONED
             session.save(update_fields=("status",))
+            if session.mode == PracticeSession.Mode.CHALLENGE:
+                ChallengeParticipant.objects.filter(practice_session=session, user=request.user).update(status=ChallengeParticipant.Status.ABANDONED)
             return Response({
                 "session_id": str(session.id),
                 "status": session.status,

@@ -87,7 +87,7 @@ class ConfirmEmailChangeView(APIView):
         from .email_changes import confirm_change
         if not serializers.BooleanField().run_validation(request.data.get("confirm_change")):
             raise serializers.ValidationError("Confirm that you want to replace your sign-in email.")
-        user, token = confirm_change(request.user, request.data.get("request_id"), request.data.get("browser_key"), request.data.get("old_code"), request.data.get("new_code"))
+        user, token = confirm_change(request.user, request.data.get("request_id"), request.data.get("browser_key"), request.data.get("new_code"))
         return Response({"token": token, "user": UserSerializer(user).data})
 
 

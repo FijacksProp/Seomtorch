@@ -199,7 +199,7 @@ class MonitorProFeatureTests(TestCase):
         config.save()
 
         # 1. Toggle off via monitor endpoint
-        res = self.client.post("/monitor/monetization/toggle-screenshot-protection/")
+        res = self.client.post("/monitor/account-security/content-shield/", {"enabled": "false"})
         self.assertEqual(res.status_code, 302)
         config.refresh_from_db()
         self.assertFalse(config.screenshot_protection_enabled)
@@ -210,7 +210,7 @@ class MonitorProFeatureTests(TestCase):
         self.assertFalse(api_res.json()["screenshot_protection_enabled"])
 
         # 3. Toggle back on
-        res2 = self.client.post("/monitor/monetization/toggle-screenshot-protection/")
+        res2 = self.client.post("/monitor/account-security/content-shield/", {"enabled": "true"})
         self.assertEqual(res2.status_code, 302)
         config.refresh_from_db()
         self.assertTrue(config.screenshot_protection_enabled)
@@ -220,12 +220,12 @@ class MonitorProFeatureTests(TestCase):
         self.assertEqual(api_res2.status_code, 200)
         self.assertTrue(api_res2.json()["screenshot_protection_enabled"])
 
-    def test_update_pricing_screenshot_toggle(self):
+    def test_pricing_saves_cannot_change_content_shield(self):
         config = PlanConfig.get_solo()
         config.screenshot_protection_enabled = True
         config.save()
 
-        # Post update pricing with toggle explicitly unchecked
+        # Pricing no longer owns this setting: even a stale form cannot change it.
         res = self.client.post("/monitor/monetization/update-pricing/", {
             "single_course_price": "1500",
             "all_access_price": "3000",
@@ -236,9 +236,11 @@ class MonitorProFeatureTests(TestCase):
         })
         self.assertEqual(res.status_code, 302)
         config.refresh_from_db()
-        self.assertFalse(config.screenshot_protection_enabled)
+        self.assertTrue(config.screenshot_protection_enabled)
 
-        # Post update pricing with toggle checked on
+        config.screenshot_protection_enabled = False
+        config.save(update_fields=["screenshot_protection_enabled"])
+        # An obsolete checked checkbox must not turn the shield back on either.
         res2 = self.client.post("/monitor/monetization/update-pricing/", {
             "single_course_price": "1500",
             "all_access_price": "3000",
@@ -250,7 +252,7 @@ class MonitorProFeatureTests(TestCase):
         })
         self.assertEqual(res2.status_code, 302)
         config.refresh_from_db()
-        self.assertTrue(config.screenshot_protection_enabled)
+        self.assertFalse(config.screenshot_protection_enabled)
 
     def test_record_university_session_api(self):
         uni_student = User.objects.create_user(

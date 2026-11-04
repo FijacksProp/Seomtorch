@@ -24,7 +24,7 @@ class EmailChangeTests(APITestCase):
         UserStats.objects.filter(user=self.user).update(xp=50)
         _, self.token = AuthToken.objects.create(self.user)
         self.client.credentials(HTTP_AUTHORIZATION=f"Token {self.token}")
-        self.sender = patch("accounts.email_changes.send_change_codes").start()
+        self.sender = patch("accounts.email_changes.send_change_code").start()
         self.addCleanup(patch.stopall)
 
     def request(self, **overrides):
@@ -33,15 +33,15 @@ class EmailChangeTests(APITestCase):
     def issue(self):
         result = self.request()
         self.assertEqual(result.status_code, 202, result.data)
-        return result.data, self.sender.call_args.args[1:]
+        return result.data, self.sender.call_args.args[1]
 
     def confirm(self, data, codes, **overrides):
-        return self.client.post(self.url + "confirm/", {"request_id": data["request_id"], "old_code": codes[0], "new_code": codes[1], "confirm_change": True, "browser_key": self.key, **overrides}, format="json")
+        return self.client.post(self.url + "confirm/", {"request_id": data["request_id"], "new_code": codes, "confirm_change": True, "browser_key": self.key, **overrides}, format="json")
 
     def age(self):
         EmailChangeRequest.objects.filter(user=self.user).update(created_at=timezone.now() - timedelta(minutes=2))
 
-    def test_both_codes_required_before_email_changes_and_progress_is_preserved(self):
+    def test_new_inbox_code_alone_confirms_change_and_preserves_progress(self):
         public_id = self.user.public_id
         data, codes = self.issue()
         self.user.refresh_from_db()
@@ -75,13 +75,12 @@ class EmailChangeTests(APITestCase):
         self.assertEqual(result.status_code, 202)
         self.assertEqual(EmailChangeRequest.objects.get().new_email, "new@example.com")
 
-    def test_codes_are_hashed_and_cannot_be_swapped_or_used_on_other_browser(self):
+    def test_new_code_is_hashed_and_cannot_be_used_on_other_browser(self):
         data, codes = self.issue()
         row = EmailChangeRequest.objects.get()
-        self.assertNotEqual(row.old_code_hash, codes[0])
-        self.assertNotEqual(row.new_code_hash, codes[1])
-        self.assertNotEqual(codes[0], codes[1])
-        self.assertEqual(self.confirm(data, tuple(reversed(codes))).status_code, 400)
+        self.assertEqual(row.old_code_hash, "")
+        self.assertEqual(row.code_email_count, 1)
+        self.assertNotEqual(row.new_code_hash, codes)
         self.assertEqual(self.confirm(data, codes, browser_key="b" * 64).status_code, 400)
         self.user.refresh_from_db()
         self.assertEqual(self.user.email, "old@example.com")
@@ -96,7 +95,7 @@ class EmailChangeTests(APITestCase):
         EmailChangeRequest.objects.filter(pk=data["request_id"]).update(expires_at=timezone.now() - timedelta(seconds=1))
         self.assertEqual(self.confirm(data, codes).status_code, 400)
 
-    def test_resend_has_persistent_cooldown_and_replaces_both_codes(self):
+    def test_resend_has_persistent_cooldown_and_replaces_new_code(self):
         data, codes = self.issue()
         payload = {"request_id": data["request_id"], "browser_key": self.key}
         cache.clear()
@@ -105,18 +104,18 @@ class EmailChangeTests(APITestCase):
         result = self.client.post(self.url + "resend/", payload)
         self.assertEqual(result.status_code, 202, result.data)
         self.assertEqual(self.confirm(data, codes).status_code, 400)
-        self.assertEqual(self.confirm(result.data, self.sender.call_args.args[1:]).status_code, 200)
+        self.assertEqual(self.confirm(result.data, self.sender.call_args.args[1]).status_code, 200)
 
     def test_code_email_budget_is_shared_with_login(self):
-        self.issue(); self.age(); self.issue(); self.age()
-        self.assertEqual(self.request().status_code, 429)  # four code emails + two would exceed five/hour
+        for _ in range(4):
+            self.issue(); self.age()
         with patch("accounts.email_security.send_code"):
             result = self.client.post("/api/auth/login/", {"email": self.user.email, "password": "Securepass934!", "browser_key": "b" * 64})
         self.assertEqual(result.status_code, 202)
         self.assertEqual(EmailSignInChallenge.objects.count(), 1)
         EmailSignInChallenge.objects.update(created_at=timezone.now() - timedelta(minutes=2))
         self.assertEqual(self.request().status_code, 429)
-        self.assertEqual(EmailChangeRequest.objects.count(), 2)
+        self.assertEqual(EmailChangeRequest.objects.count(), 4)
 
     def test_cancellation_and_explicit_consent(self):
         data, codes = self.issue()
@@ -153,13 +152,15 @@ class EmailChangeTests(APITestCase):
         self.client.credentials()
         self.assertEqual(self.request().status_code, 401)
 
-    def test_unverified_existing_students_can_use_flow_after_grace_but_need_old_inbox(self):
+    def test_unverified_signed_in_students_can_correct_email_without_old_inbox(self):
         self.user.email_verified_at = None
         self.user.save(update_fields=("email_verified_at",))
         with override_settings(ACCOUNT_SECURITY_GRACE_UNTIL="2000-01-01T00:00:00Z"):
             self.assertEqual(self.client.get("/api/community/network/").status_code, 403)
             data, codes = self.issue()
-            self.assertEqual(self.confirm(data, codes).status_code, 200)
+            with patch("accounts.email_changes._notify_previous_inbox") as notice, self.captureOnCommitCallbacks(execute=True):
+                self.assertEqual(self.confirm(data, codes).status_code, 200)
+            notice.assert_not_called()
 
     def test_security_notice_failure_cannot_undo_confirmed_change(self):
         data, codes = self.issue()

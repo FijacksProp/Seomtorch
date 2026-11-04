@@ -34,7 +34,9 @@ urlpatterns = [
 
     # Monetization & Site Controls Hub
     path("monetization/", monitor_views.monetization_hub, name="monetization"),
-    path("monetization/toggle-screenshot-protection/", monitor_views.toggle_screenshot_protection, name="toggle-screenshot-protection"),
+    path("account-security/content-shield/", monitor_views.toggle_screenshot_protection, name="toggle-screenshot-protection"),
+    # Keep old admin links safe during a rolling deployment.
+    path("monetization/toggle-screenshot-protection/", monitor_views.toggle_screenshot_protection),
     path("monetization/update-pricing/", monitor_views.update_pricing, name="update-pricing"),
     path("monetization/create-discount/", monitor_views.create_discount_code, name="create-discount"),
     path("monetization/toggle-discount/<int:discount_id>/", monitor_views.toggle_discount_code, name="toggle-discount"),

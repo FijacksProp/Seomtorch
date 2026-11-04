@@ -963,7 +963,6 @@ def update_pricing(request):
         config.all_access_price = int(request.POST.get("all_access_price", config.all_access_price))
         config.launch_offer_price = int(request.POST.get("launch_offer_price", config.launch_offer_price))
         config.launch_offer_active = request.POST.get("launch_offer_active") == "on"
-        config.screenshot_protection_enabled = request.POST.get("screenshot_protection_enabled") == "on"
         config.launch_offer_max_buyers = int(request.POST.get("launch_offer_max_buyers", config.launch_offer_max_buyers))
         config.trial_duration_days = int(request.POST.get("trial_duration_days", config.trial_duration_days))
 
@@ -982,7 +981,8 @@ def update_pricing(request):
         if sk and not sk.startswith("••••"):
             config.paystack_secret_key = sk
 
-        config.save()
+        # Pricing must not overwrite a simultaneous shield change or purchase count.
+        config.save(update_fields=("single_course_price", "all_access_price", "launch_offer_price", "launch_offer_active", "launch_offer_max_buyers", "trial_duration_days", "launch_offer_end_date", "semester_end_date", "paystack_public_key", "paystack_secret_key", "updated_at"))
         messages.success(request, "Monetization prices and semester settings updated successfully.")
     except Exception as e:
         messages.error(request, f"Error saving pricing settings: {e}")
@@ -993,14 +993,18 @@ def update_pricing(request):
 @staff_member_required
 @require_POST
 def toggle_screenshot_protection(request):
+    enabled = request.POST.get("enabled")
+    if enabled not in {"true", "false"}:
+        messages.error(request, "Choose a content protection setting and try again.")
+        return redirect("monitor:account-security")
     config = PlanConfig.get_solo()
-    config.screenshot_protection_enabled = not config.screenshot_protection_enabled
+    config.screenshot_protection_enabled = enabled == "true"
     config.save(update_fields=["screenshot_protection_enabled"])
     if config.screenshot_protection_enabled:
-        messages.success(request, "Screenshot & content protection is now ENABLED. Student content and exam integrity are protected.")
+        messages.success(request, "Screenshot & content shield is enabled. Browser deterrents and student watermarks are active.")
     else:
         messages.warning(request, "Screenshot protection is now DISABLED. You can now freely take app screenshots.")
-    return redirect("monitor:monetization")
+    return redirect("monitor:account-security")
 
 
 @staff_member_required
