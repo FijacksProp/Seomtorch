@@ -15,7 +15,7 @@ from knox.models import AuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import APIException, Throttled, ValidationError
 
-from .models import EmailSignInChallenge, User
+from .models import EmailSignInChallenge, User, AccountSecurityPolicy
 
 
 class DeliveryUnavailable(APIException):
@@ -37,9 +37,19 @@ def enabled_for(user):
     return settings.ACCOUNT_SECURITY_ENABLED and not user.is_staff
 
 
+def effective_grace_deadline():
+    # Read shared database state, not a worker-local cache: edits affect all workers.
+    stored = AccountSecurityPolicy.objects.filter(pk=1).values_list("grace_until", flat=True).first()
+    if stored is not None:
+        return stored
+    return parse_datetime(settings.ACCOUNT_SECURITY_GRACE_UNTIL) if settings.ACCOUNT_SECURITY_GRACE_UNTIL else None
+
+
 def security_status(user):
     enabled = enabled_for(user)
-    deadline = parse_datetime(settings.ACCOUNT_SECURITY_GRACE_UNTIL) if settings.ACCOUNT_SECURITY_GRACE_UNTIL else None
+    # Verified accounts are unaffected by grace edits; avoid a policy query on
+    # every answer submission/chat poll for these students.
+    deadline = effective_grace_deadline() if enabled and not user.email_verified_at else None
     required = enabled and not user.email_verified_at and (not deadline or timezone.now() >= deadline)
     local, _, domain = user.email.partition("@")
     return {"enabled": enabled, "email_verified": bool(user.email_verified_at), "verification_required": bool(required),

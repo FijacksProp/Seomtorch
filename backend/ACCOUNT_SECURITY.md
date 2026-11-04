@@ -54,6 +54,14 @@ Deploy this feature **disabled** until real transactional delivery succeeds. It 
 6. Verify an existing student's prompt, an incorrect/expired code, resend cooldown, sign-out, progress preservation and a new registration. Do not bulk-email OTPs to everyone: send on the student's request and monitor the daily quota.
 7. Check Monitor/Admin for verification and transfer records. If delivery fails in production, set `ACCOUNT_SECURITY_ENABLED=False` and redeploy to stop requiring approvals. This does not restore revoked tokens; students can sign in normally while disabled. Never automatically bypass OTP verification because a send failed.
 
+## Editable grace deadline in Monitor
+
+Open **Monitor → Account security** (`/monitor/account-security/`) as an active staff administrator. Choose the date and time in **Africa/Lagos (UTC+1)**, give a reason, click **Review change**, then confirm the impact and save. Dates in the past intentionally end the grace period immediately for unverified sessions on their next protected API request. An extension reopens grace for those sessions, but new-browser logins still require email approval.
+
+Until the first confirmed Monitor save, the existing `ACCOUNT_SECURITY_GRACE_UNTIL` environment value remains authoritative. After a save, the shared database deadline takes priority and persists across deployments. Keep the valid Render environment value as the initial fallback; changing it later does not override a saved Monitor deadline. No redeploy is required for a Monitor edit. Student screens update on their next account refresh (visible online tabs check roughly once a minute).
+
+This page cannot enable/disable `ACCOUNT_SECURITY_ENABLED`, verify student inboxes, or bypass browser transfer checks. Changes are CSRF-protected, require staff access and explicit confirmation, and record the old/new date, reason, actor and time. Stale forms are rejected if another administrator has saved first. The latest 20 changes appear in Monitor; complete read-only history is available in Django administration under Account security policy changes. Migration 0011 must run before this page is used; the normal startup migration command handles it.
+
 ## Quota and retention
 
 Brevo's free plan currently allows 300 total email sends per day. Other Brevo traffic shares that limit. A provider queue can deliver a code after expiry: do not enable mandatory verification during a mass-mail campaign or near quota exhaustion. Monitor Brevo usage and delivery logs; upgrade or increase capacity before authentication traffic outgrows the allowance. This implementation does not promise guaranteed delivery or automatically purchase capacity.

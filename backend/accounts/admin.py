@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import AspirantProfile, StudentFeedback, StudentFollow, UniversityProfile, User, EmailSignInChallenge
+from .models import AspirantProfile, StudentFeedback, StudentFollow, UniversityProfile, User, EmailSignInChallenge, AccountSecurityPolicyChange
 
 
 class AspirantProfileInline(admin.StackedInline):
@@ -37,6 +37,22 @@ class EmailSignInChallengeAdmin(admin.ModelAdmin):
     list_filter = ("is_transfer", "accepted_at")
     search_fields = ("user__public_id", "user__username")
     fields = readonly_fields = ("user", "created_at", "expires_at", "is_transfer", "attempts", "consumed_at", "accepted_at")
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(AccountSecurityPolicyChange)
+class AccountSecurityPolicyChangeAdmin(admin.ModelAdmin):
+    list_display = ("created_at", "changed_by", "previous_deadline", "new_deadline", "reason")
+    fields = readonly_fields = ("created_at", "changed_by", "previous_deadline", "new_deadline", "reason")
+    search_fields = ("changed_by__username", "reason")
 
     def has_add_permission(self, request):
         return False

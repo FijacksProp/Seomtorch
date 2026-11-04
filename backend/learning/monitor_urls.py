@@ -1,10 +1,12 @@
 from django.urls import path
 from . import monitor_views
 from accounts.feedback_monitor import feedback_inbox, update_feedback
+from accounts.security_monitor import account_security_settings
 
 app_name = "monitor"
 
 urlpatterns = [
+    path("account-security/", account_security_settings, name="account-security"),
     # Auth
     path("login/", monitor_views.monitor_login, name="login"),
     path("logout/", monitor_views.monitor_logout, name="logout"),

@@ -1,0 +1,40 @@
+{% extends 'monitor/base.html' %}
+{% load static tz %}
+{% block title %}Account security{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'monitor/account-security.css' %}">
+<div class="grace-page">
+  <header class="grace-heading"><p>Account security / Verification rollout</p><h1>A little time to get verified.</h1><span>Manage the shared email-verification deadline for existing students. All dates and times on this page use Lagos time (UTC+1).</span></header>
+  <section class="grace-summary" aria-label="Current rollout settings">
+    <div><span>Current grace deadline</span><strong>{% if deadline %}{{ deadline|date:"j M Y" }}<small>{{ deadline|date:"g:i:s A" }} · Lagos</small>{% else %}Not configured{% endif %}</strong><p>{% if policy %}Managed in Monitor{% else %}Using Render’s configured deadline{% endif %}</p></div>
+    <div><span>Email approval</span><strong>{% if security_enabled %}Enabled{% else %}Off{% endif %}</strong><p>{% if security_enabled %}{% if grace_open %}Grace period is open{% else %}Verification is required now{% endif %}{% else %}Enable separately in Render after delivery testing{% endif %}</p></div>
+    <div><span>Active students not verified</span><strong>{{ unverified_students }}</strong><p>Verified students keep their current protection</p></div>
+  </section>
+  <div class="grace-layout">
+    <section class="grace-editor">
+      {% if reviewing %}
+      <p class="grace-eyebrow">Review before saving</p><h2>Confirm the new deadline.</h2>
+      <dl class="grace-comparison"><div><dt>Current deadline</dt><dd>{{ deadline|date:"j M Y, g:i:s A"|default:"Not configured" }}</dd></div><div><dt>New deadline</dt><dd>{{ proposed|date:"j M Y, g:i:s A" }}</dd></div><div><dt>Reason</dt><dd>{{ form.reason.value }}</dd></div></dl>
+      <p class="grace-impact">{% if proposed and deadline and proposed < deadline %}You are shortening the grace period. If the new deadline has passed, unverified students will need to verify on their next protected server request.{% else %}Extending the deadline allows unverified existing sessions to continue during the grace period. New-browser sign-ins still require email approval.{% endif %}</p>
+      <form method="post">{% csrf_token %}<input type="hidden" name="action" value="save">{{ form.grace_until.as_hidden }}{{ form.reason.as_hidden }}{{ form.expected_version }}
+        {{ form.non_field_errors }}{{ form.confirm.errors }}
+        <label class="grace-confirm"><input type="checkbox" name="confirm" required><span>I understand this applies to all unverified existing students and takes effect without a redeploy.</span></label>
+        <div class="grace-buttons"><button class="button" type="submit">Confirm &amp; save deadline</button><button class="button secondary" type="submit" name="action" value="edit" formnovalidate>Change date</button></div>
+      </form>
+      {% else %}
+      <p class="grace-eyebrow">Shared deadline</p><h2>Give students a clear window.</h2>
+      <p>Choose when existing unverified sessions must complete email verification. You’ll review the impact before anything changes.</p>
+      <form method="post">{% csrf_token %}{{ form.expected_version }}{{ form.non_field_errors }}
+        <div class="grace-field">{{ form.grace_until.label_tag }}{{ form.grace_until }}{{ form.grace_until.errors }}<small>The selected time is in Africa/Lagos, not your device’s local timezone.</small></div>
+        <div class="grace-field">{{ form.reason.label_tag }}{{ form.reason }}{{ form.reason.errors }}<small>Recorded with your administrator account in the change history.</small></div>
+        <button class="button" type="submit" name="action" value="review">Review change →</button>
+      </form>
+      {% endif %}
+    </section>
+    <aside class="grace-notes"><h2>What changes—and what doesn’t.</h2><p>A deadline in the past means the grace period has ended. Shortening it can affect students who are studying now.</p><p>This setting does not verify anyone’s email, erase progress, change subscriptions, or disable the one-active-sign-in rule.</p><p>After the first confirmed save, Monitor’s deadline takes priority over the Render date and survives deployments. Keep the Render value as the initial fallback.</p><p>The master switch, <code>ACCOUNT_SECURITY_ENABLED</code>, remains in Render. Saving a date does not enable email enforcement.</p><a href="{% url 'monitor:account-security' %}">Reload current settings ↗</a></aside>
+  </div>
+  <section class="grace-history"><div><p class="grace-eyebrow">Accountability</p><h2>Recent deadline changes</h2><p>The latest 20 confirmed updates, newest first. Times are shown in Lagos time.</p></div>
+    {% for change in changes %}<article><header><strong>{{ change.changed_by.username|default:"Former administrator" }}</strong><time>{{ change.created_at|date:"j M Y, g:i A" }}</time></header><p>{{ change.previous_deadline|date:"j M Y, g:i:s A"|default:"Not configured" }} <span aria-hidden="true">→</span> {{ change.new_deadline|date:"j M Y, g:i:s A" }}</p><small>{{ change.reason }}</small></article>{% empty %}<p class="grace-history-empty">No Monitor changes yet. Your existing Render deadline stays in effect until an administrator confirms a change here.</p>{% endfor %}
+  </section>
+</div>
+{% endblock %}

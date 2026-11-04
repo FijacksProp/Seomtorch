@@ -268,6 +268,28 @@ class EmailSignInChallenge(models.Model):
         indexes = [models.Index(fields=("user", "-created_at"), name="email_signin_user_created_idx")]
 
 
+class AccountSecurityPolicy(models.Model):
+    id = models.PositiveSmallIntegerField(primary_key=True, default=1, editable=False)
+    grace_until = models.DateTimeField()
+    version = models.PositiveIntegerField(default=0)
+    updated_at = models.DateTimeField(auto_now=True)
+    updated_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="security_policy_updates")
+
+    class Meta:
+        constraints = [models.CheckConstraint(condition=models.Q(id=1), name="single_account_security_policy")]
+
+
+class AccountSecurityPolicyChange(models.Model):
+    previous_deadline = models.DateTimeField(null=True)
+    new_deadline = models.DateTimeField()
+    reason = models.CharField(max_length=240)
+    changed_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="security_policy_changes")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ("-created_at", "-pk")
+
+
 class StudentFeedback(models.Model):
     class Category(models.TextChoices):
         GENERAL = "general", "General feedback"
