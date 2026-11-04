@@ -106,6 +106,7 @@ REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "config.exceptions.api_exception_handler",
     "DEFAULT_THROTTLE_RATES": {
         "auth": "20/hour",
+        "email_code": "30/hour",
         "contacts": "10/hour",
         "community_search": "30/hour",
         "practice_start": "60/hour",
@@ -125,6 +126,22 @@ REST_KNOX = {
     "AUTO_REFRESH_MAX_TTL": timedelta(days=90),
     "TOKEN_LIMIT_PER_USER": 8,
 }
+
+# Deploy disabled first. Enable only after a real inbox delivery test succeeds.
+ACCOUNT_SECURITY_ENABLED = env_bool("ACCOUNT_SECURITY_ENABLED")
+ACCOUNT_SECURITY_GRACE_UNTIL = os.environ.get("ACCOUNT_SECURITY_GRACE_UNTIL", "")
+BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")
+BREVO_SENDER_EMAIL = os.environ.get("BREVO_SENDER_EMAIL", "")
+BREVO_SENDER_NAME = os.environ.get("BREVO_SENDER_NAME", "Seomtorch")
+ACCOUNT_SECURITY_MAX_TRANSFERS = 2  # rolling 30 days; staff-assisted recovery remains available
+if ACCOUNT_SECURITY_ENABLED:
+    from django.utils.dateparse import parse_datetime
+    from django.utils.timezone import is_aware
+    _security_deadline = parse_datetime(ACCOUNT_SECURITY_GRACE_UNTIL)
+    if not _security_deadline or not is_aware(_security_deadline):
+        raise ImproperlyConfigured("ACCOUNT_SECURITY_GRACE_UNTIL must be an ISO timestamp with timezone.")
+    if not BREVO_API_KEY or not BREVO_SENDER_EMAIL:
+        raise ImproperlyConfigured("Configure Brevo and test delivery before enabling account security.")
 
 CORS_ALLOWED_ORIGINS = [origin.strip() for origin in os.environ.get("CORS_ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:4173").split(",") if origin.strip()]
 CORS_ALLOW_CREDENTIALS = False

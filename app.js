@@ -2,10 +2,10 @@ import { api, ApiError } from "./api-client.js";
 import { jambCalculator } from "./calculator.js";
 import { communityPage } from "./community-ui.js";
 import { homePage, homeSubjectRows } from "./home-ui.js";
+import { trustedBrowserKey, securityNotice, emailApprovalPage, mountEmailApproval } from "./account-security-ui.js";
 import { mountBuddyChat, unmountBuddyChat } from "./buddy-chat.js";
 import { challengeHubPage, challengeComposerPage, challengeDetailPage, challengeSetupSummary } from "./challenges-ui.js";
 import { cancelPostPracticeFeedback, closeStudentDialogs, eligibleForUniversityOffer, maybeShowUniversityIntroduction, openStudentDialog, schedulePostPracticeFeedback, showFeedbackPanel } from "./student-engagement.js";
-
 const SUBJECTS = [
   { id: "biology", name: "Biology", description: "JAMB cell biology, physiology, ecology, genetics and evolution" },
   { id: "chemistry", name: "Chemistry", description: "JAMB physical, inorganic and organic chemistry" },
@@ -109,6 +109,7 @@ let db;
 let questions = [];
 let profile = null;
 let authToken = localStorage.getItem("seomtorch-auth-token");
+let pendingEmailApproval = null, pendingAuthRegistration = null, emailApprovalCleanup = null;
 let currentUser = readCachedUser();
 let attempts = [];
 let bookmarks = [];
@@ -1089,7 +1090,7 @@ function shell(content) {
           </div>
         </div>
       </div>
-      <main id="main">${route !== "session" && eligibleForUniversityOffer(universityOfferOptions()) ? '<div class="course-access-note"><span><i aria-hidden="true"></i>University course access</span><button type="button" data-view-course-plans>View plans <span aria-hidden="true">→</span></button></div>' : ""}${content}</main>
+      <main id="main">${route !== "session" && eligibleForUniversityOffer(universityOfferOptions()) ? '<div class="course-access-note"><span><i aria-hidden="true"></i>University course access</span><button type="button" data-view-course-plans>View plans <span aria-hidden="true">→</span></button></div>' : ""}${route !== "session" ? securityNotice(currentUser?.account_security) : ""}${content}</main>
     </div>
   </div>${!isStandalone() && route !== "session" ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ""}`;
 }
@@ -1117,6 +1118,7 @@ function renderMath(html) {
 }
 
 function bindShell() {
+  document.querySelectorAll("[data-verify-account]").forEach(button => button.addEventListener("click", () => { route = "email-verification"; renderEmailApproval(); }));
   document.querySelectorAll("[data-open-feedback]").forEach(button => button.addEventListener("click", () => showFeedbackPanel({ api, token: authToken, escapeHtml })));
   document.querySelectorAll("[data-view-course-plans]").forEach(button => button.addEventListener("click", () => showUpgradeModal({ trigger: "portal_plans_link" })));
   queueUniversityIntroduction();
@@ -1809,7 +1811,7 @@ async function syncAttemptRecord(attempt) {
     handleEarnedBadges(response.badges_earned || []);
     return response;
   } catch (error) {
-    if (error instanceof ApiError && error.status >= 400 && error.status < 500 && error.status !== 401) {
+    if (error instanceof ApiError && error.status >= 400 && error.status < 500 && error.status !== 401 && error.fields?.code !== "email_verification_required") {
       attempt.syncError = error.message;
       await put("attempts", attempt);
     }
@@ -3510,6 +3512,7 @@ function renderBuddies() {
   const net = communityNetworkData || getCachedCommunityNetwork() || { counts: {}, buddies: [], followers: [], following: [] };
   const leaderboard = (communityLeaderboardData || getCachedCommunityLeaderboard())?.leaderboard || [];
   app.innerHTML = shell(communityPage({
+    university: getActiveMode() === "university",
     net, leaderboard, tab: communityActiveTab, query: communitySearchQuery,
     results: communitySearchResults, searching: communitySearching, loading: communityLoading,
     error: communityError, myId: currentUser?.public_id || "", unread: communityInboxData?.unread || 0,
@@ -3626,6 +3629,14 @@ function bindBuddies() {
     if (!challengeInvitees.some(item => item.public_id === buddy.public_id)) challengeInvitees.push(buddy);
     challengeComposerOpen = true; route = "challenges"; selectedChallengeId = null; render();
   }));
+  document.querySelector("#circle-create-challenge")?.addEventListener("click", () => {
+    if (!hasAllAccess()) {
+      api.logMonetizationEvent(authToken, "upgrade_screen_viewed", { trigger: "create_challenge" }).catch(() => {});
+      showUpgradeModal({ trigger: "create_challenge" }); return;
+    }
+    challengeComposerOpen = true; route = "challenges"; selectedChallengeId = null; render();
+    document.querySelector("#challenge-title")?.focus();
+  });
   document.querySelector("#form-community-search")?.addEventListener("submit", async event => {
     event.preventDefault();
     const query = document.querySelector("#input-community-search").value.trim();
@@ -3940,75 +3951,84 @@ function renderAuth() {
   document.querySelector("#auth-form").addEventListener("submit", submitAuth);
 }
 
+
+async function finishSignIn(data) {
+  authToken = data.token; currentUser = data.user;
+  pendingEmailApproval = null; pendingAuthRegistration = null;
+  emailApprovalCleanup?.(); emailApprovalCleanup = null;
+  localStorage.setItem("seomtorch-auth-token", authToken);
+  localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
+  localStorage.setItem("seomtorch-active-mode", currentUser.active_mode || "aspirant");
+  await prepareLocalUser(currentUser);
+  await loadSubscriptionState();
+  universityIntroductionPending = true;
+  await syncPendingAttempts();
+  route = "home"; render();
+}
+
+async function saveInitialAuthProfile(data, body) {
+  const university = body.user_type === "university";
+  const payload = university ? {
+    university_name: body.university_name || "University", faculty: body.department || "Faculty",
+    department: body.department || "General Studies", level: Number(body.level || 200), current_courses: [],
+  } : { exam_type: body.exam_type || "jamb", target_year: Number(body.target_year || 2026), preferred_subjects: [] };
+  try {
+    const response = university ? await api.saveUniversityProfile(data.token, payload) : await api.saveAspirantProfile(data.token, payload);
+    if (response?.user) data.user = response.user;
+    else {
+      data.user[university ? "has_university_profile" : "has_aspirant_profile"] = true;
+      data.user[university ? "university_profile" : "aspirant_profile"] = payload;
+    }
+  } catch { /* Account remains valid; students can finish academic details in Profile. */ }
+}
+
+function renderEmailApproval() {
+  emailApprovalCleanup?.();
+  unmountBuddyChat(); closeStudentDialogs(); cancelPostPracticeFeedback();
+  clearTimeout(universityIntroductionTimer);
+  const challenge = pendingEmailApproval, token = authToken;
+  app.innerHTML = emailApprovalPage({ challenge, security: currentUser?.account_security || {}, signedIn: Boolean(token) });
+  const root = app.firstElementChild;
+  emailApprovalCleanup = mountEmailApproval({
+    root, api, challenge, token,
+    isCurrent: () => root.isConnected && authToken === token,
+    onChallenge: next => { pendingEmailApproval = next; renderEmailApproval(); },
+    onVerified: async data => {
+      if (pendingAuthRegistration) await saveInitialAuthProfile(data, pendingAuthRegistration);
+      await finishSignIn(data);
+    },
+    onCancel: () => {
+      pendingEmailApproval = null; pendingAuthRegistration = null;
+      if (token && !currentUser?.account_security?.verification_required) { route = "profile"; render(); }
+      else if (token) signOut();
+      else renderAuth();
+    },
+  });
+}
+
 async function submitAuth(event) {
   event.preventDefault();
-  const form = event.currentTarget; const button = form.querySelector("button[type=submit]"); const error = document.querySelector("#auth-error");
-  const body = Object.fromEntries(new FormData(form)); button.disabled = true; button.textContent = "Please wait…"; error.textContent = "";
+  const form = event.currentTarget, button = form.querySelector('button[type=submit]'), error = document.querySelector("#auth-error");
+  const body = Object.fromEntries(new FormData(form));
+  button.disabled = true; button.textContent = "Please wait…"; error.textContent = "";
   try {
+    body.browser_key = trustedBrowserKey();
     let data;
     if (authMode === "register") {
-      const userType = body.user_type || "aspirant";
-      const gender = (body.gender || "male").toLowerCase();
-      data = await api.register({
-        email: body.email,
-        username: body.username,
-        password: body.password,
-        user_type: userType,
-        gender: gender
-      });
-      // Register initial profile according to their selected path
-      if (userType === "university") {
-        try {
-          await api.saveUniversityProfile(data.token, {
-            university_name: body.university_name || "University",
-            faculty: body.department || "Faculty",
-            department: body.department || "General Studies",
-            level: Number(body.level || 200),
-            current_courses: []
-          });
-          data.user.has_university_profile = true;
-          data.user.university_profile = {
-            university_name: body.university_name || "University",
-            faculty: body.department || "Faculty",
-            department: body.department || "General Studies",
-            level: Number(body.level || 200),
-            current_courses: []
-          };
-          data.user.active_mode = "university";
-        } catch (e) { console.error("Initial university profile save error", e); }
-      } else {
-        try {
-          await api.saveAspirantProfile(data.token, {
-            exam_type: body.exam_type || "jamb",
-            target_year: Number(body.target_year || 2026),
-            preferred_subjects: []
-          });
-          data.user.has_aspirant_profile = true;
-          data.user.aspirant_profile = {
-            exam_type: body.exam_type || "jamb",
-            target_year: Number(body.target_year || 2026),
-            preferred_subjects: []
-          };
-          data.user.active_mode = "aspirant";
-        } catch (e) { console.error("Initial aspirant profile save error", e); }
+      data = await api.register({ email: body.email, username: body.username, password: body.password,
+        user_type: body.user_type || "aspirant", gender: (body.gender || "male").toLowerCase(), browser_key: body.browser_key });
+      if (data.verification_required) {
+        const { password, ...registration } = body;
+        pendingAuthRegistration = registration; pendingEmailApproval = data; renderEmailApproval(); return;
       }
-    } else {
-      data = await api.login(body);
-    }
-    authToken = data.token; currentUser = data.user;
-    localStorage.setItem("seomtorch-auth-token", authToken);
-    localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
-    localStorage.setItem("seomtorch-active-mode", currentUser.active_mode || "aspirant");
-    await prepareLocalUser(currentUser);
-    await loadSubscriptionState();
-    universityIntroductionPending = true;
-    await syncPendingAttempts();
-    route = "home";
-    render();
+      await saveInitialAuthProfile(data, body);
+    } else data = await api.login(body);
+    if (data.verification_required) { pendingEmailApproval = data; renderEmailApproval(); return; }
+    await finishSignIn(data);
   } catch (caught) {
-    error.textContent = caught instanceof ApiError ? caught.message : "Something went wrong. Please try again.";
-    button.disabled = false;
-    button.textContent = authMode === "register" ? "Create account →" : "Sign in →";
+    error.textContent = caught instanceof ApiError ? caught.message : "Couldn’t sign in. Check that site storage is enabled and try again.";
+    if (authMode === "register" && caught?.status === 503) error.textContent += " If your account was created, use Sign in to request another code.";
+    button.disabled = false; button.textContent = authMode === "register" ? "Create account →" : "Sign in →";
   }
 }
 
@@ -5154,6 +5174,11 @@ async function startUniPractice(courseCode, topicTitle, dataFile, requestedCount
 // ─── End University Module ──────────────────────────────────────────────────
 
 function render() {
+  if (pendingEmailApproval || (authToken && currentUser?.account_security?.verification_required) || (authToken && route === "email-verification")) {
+    if (!document.querySelector(".email-security-screen")) renderEmailApproval();
+    return;
+  }
+  emailApprovalCleanup?.(); emailApprovalCleanup = null;
   if (route !== "challenges") clearTimeout(challengeRefreshTimer);
   if (route !== "session") cancelPostPracticeFeedback();
   if (route !== "buddies" || communityActiveTab !== "messages") unmountBuddyChat();
@@ -5452,6 +5477,50 @@ async function init() {
   }
 }
 
+let securityHeartbeatBusy = false;
+async function refreshAccountSecurity() {
+  if (securityHeartbeatBusy || !authToken || !currentUser || !navigator.onLine || document.hidden) return;
+  const token = authToken;
+  securityHeartbeatBusy = true;
+  try {
+    const state = await api.accountSecurity(token);
+    if (token !== authToken || !currentUser) return;
+    const changed = JSON.stringify(currentUser.account_security) !== JSON.stringify(state);
+    currentUser.account_security = state;
+    localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
+    if (state.verification_required || (changed && ["home", "profile"].includes(route))) render();
+  } catch { /* Offline/temporary delivery issues must not discard local progress. */ }
+  finally { securityHeartbeatBusy = false; }
+}
+window.addEventListener("seomtorch-auth-expired", event => {
+  if (event.detail?.token !== authToken) return;
+  const savedToken = localStorage.getItem("seomtorch-auth-token");
+  if (savedToken && savedToken !== authToken) { authToken = savedToken; restoreAuth().then(() => render()); return; }
+  emailApprovalCleanup?.(); pendingEmailApproval = null; pendingAuthRegistration = null;
+  unmountBuddyChat(); closeStudentDialogs(); cancelPostPracticeFeedback();
+  clearTimeout(challengeRefreshTimer); clearTimeout(universityIntroductionTimer);
+  clearInterval(sessionTimer); route = "home";
+  authToken = null; currentUser = null; subscriptionStateReady = false;
+  uniContentCache = {}; universityIntroductionPending = false;
+  localStorage.removeItem("seomtorch-auth-token"); localStorage.removeItem("seomtorch-auth-user");
+  renderAuth();
+  document.querySelector("#auth-error").textContent = "Your sign-in expired or was moved to another browser. Sign in again to continue. Your account progress is safe.";
+});
+window.addEventListener("seomtorch-email-required", event => {
+  if (event.detail?.token !== authToken || !currentUser) return;
+  currentUser.account_security = { ...currentUser.account_security, enabled: true, verification_required: true };
+  if (!document.querySelector(".email-security-screen")) renderEmailApproval();
+});
+setInterval(refreshAccountSecurity, 60000);
+window.addEventListener("focus", refreshAccountSecurity);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshAccountSecurity(); });
+window.addEventListener("storage", event => {
+  if (event.key !== "seomtorch-auth-token" || event.newValue === authToken) return;
+  authToken = event.newValue; pendingEmailApproval = null; pendingAuthRegistration = null;
+  emailApprovalCleanup?.(); unmountBuddyChat(); clearInterval(sessionTimer); route = "home";
+  if (authToken) restoreAuth().then(() => render());
+  else { currentUser = null; renderAuth(); }
+});
 init();
 
 

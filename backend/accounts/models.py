@@ -47,6 +47,8 @@ class Gender(models.TextChoices):
 
 class User(AbstractUser):
     email = models.EmailField(unique=True)
+    email_verified_at = models.DateTimeField(null=True, blank=True, editable=False)
+    trusted_browser_hash = models.CharField(max_length=64, blank=True, editable=False)
     public_id = models.CharField(max_length=6, unique=True, default=generate_public_id, editable=False, db_index=True)
     must_change_password = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -86,7 +88,23 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         self.email = self.email.lower().strip()
+        email_changed = False
+        if self.pk and (kwargs.get("update_fields") is None or "email" in kwargs["update_fields"]):
+            old_email = type(self).objects.filter(pk=self.pk).values_list("email", flat=True).first()
+            if old_email and old_email != self.email:
+                email_changed = True
+                self.email_verified_at = None
+                self.trusted_browser_hash = ""
+                if kwargs.get("update_fields"):
+                    kwargs["update_fields"] = set(kwargs["update_fields"]) | {"email_verified_at", "trusted_browser_hash"}
         super().save(*args, **kwargs)
+        if email_changed:
+            from django.utils import timezone
+            from knox.models import AuthToken
+            from rest_framework.authtoken.models import Token
+            AuthToken.objects.filter(user=self).delete()
+            Token.objects.filter(user=self).delete()
+            EmailSignInChallenge.objects.filter(user=self, consumed_at__isnull=True).update(consumed_at=timezone.now())
 
     @property
     def has_aspirant_profile(self):
@@ -229,6 +247,25 @@ class FeedbackPromptState(models.Model):
     next_test_count = models.PositiveIntegerField(default=3)
     last_prompt_at = models.DateTimeField(null=True, blank=True)
     last_prompt_session = models.UUIDField(null=True, blank=True)
+
+
+class EmailSignInChallenge(models.Model):
+    """Only keyed digests are retained; no plaintext codes or browser keys."""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="email_signin_challenges")
+    email = models.EmailField()
+    browser_hash = models.CharField(max_length=64)
+    password_fingerprint = models.CharField(max_length=64)
+    code_hash = models.CharField(max_length=64)
+    is_transfer = models.BooleanField(default=False)
+    attempts = models.PositiveSmallIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    consumed_at = models.DateTimeField(null=True, blank=True)
+    accepted_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        indexes = [models.Index(fields=("user", "-created_at"), name="email_signin_user_created_idx")]
 
 
 class StudentFeedback(models.Model):

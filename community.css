@@ -17,6 +17,22 @@
 .circle-tabs button > span { display: inline-grid; place-items: center; min-width: 20px; padding: 2px 5px; margin-left: 6px; border-radius: 4px; background: #eeece6; font-size: 10px; }
 .circle-tabs button > span.unread { color: white; background: #17523e; }
 .circle-tab-body { padding-top: 30px; }
+.circle-challenge-callout { display: flex; justify-content: space-between; align-items: center; gap: 28px; margin-bottom: 32px; padding: 27px 28px; background: #eaf0e5; border: 1px solid #d4dfcb; border-left: 3px solid #4b7250; border-radius: 10px; }
+.circle-challenge-copy { min-width: 0; max-width: 570px; }
+.circle-challenge-copy .eyebrow { margin: 0 0 10px; color: #536e4b; font-size: 9px; }
+.circle-challenge-copy h2 { margin: 0 0 12px; font: 500 30px/1.15 var(--serif); letter-spacing: -.025em; color: #20452e; }
+.circle-challenge-copy > p:not(.eyebrow) { margin: 0; color: #58664f; font-size: 12px; line-height: 1.8; }
+.circle-challenge-note { display: block; margin-top: 15px; color: #66765d; font-size: 10px; line-height: 1.8; }
+.circle-challenge-actions { display: grid; justify-items: start; gap: 7px; flex-shrink: 0; }
+.circle-challenge-actions .button { gap: 22px; min-height: 44px; font-size: 12px; }
+.circle-challenge-actions .circle-text-button { font-size: 11px; }
+.circle-challenge-callout button:focus-visible, .circle-challenge-person:focus-visible { outline: 3px solid #aa8248; outline-offset: 4px; }
+@media (max-width: 1050px) {
+  .circle-challenge-callout { align-items: flex-start; flex-direction: column; gap: 18px; }
+  .circle-challenge-actions { display: flex; flex-wrap: wrap; align-items: center; column-gap: 22px; }
+  .circle-person:has(.circle-challenge-person) { grid-template-columns: 45px minmax(0,1fr); }
+  .circle-person:has(.circle-challenge-person) .circle-person-actions { grid-column: 2; flex-wrap: wrap; }
+}
 .circle-section-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 22px; margin-bottom: 22px; }
 .circle-section-head h2, .circle-how h2 { margin: 0 0 7px; font-family: var(--serif); font-size: 27px; font-weight: 500; letter-spacing: -.02em; }
 .circle-section-head p { color: var(--muted); font-size: 13px; line-height: 1.7; max-width: 620px; margin: 0; }
@@ -188,6 +204,12 @@
   .buddy-messenger { grid-template-columns: 210px minmax(0,1fr); }
 }
 @media (max-width: 680px) {
+  .circle-challenge-callout { padding: 22px 19px; margin-bottom: 27px; }
+  .circle-challenge-copy h2 { font-size: 27px; }
+  .circle-challenge-actions { display: grid; width: 100%; }
+  .circle-challenge-actions .button { width: 100%; justify-content: space-between; }
+  .circle-person:has(.circle-challenge-person) { grid-template-columns: 37px minmax(0,1fr); }
+  .circle-person:has(.circle-challenge-person) .circle-person-actions { gap: 8px; }
   .circle-page-head { margin-bottom: 20px; }
   .circle-identity { padding-bottom: 12px; }
   .circle-tab-body { padding-top: 24px; }

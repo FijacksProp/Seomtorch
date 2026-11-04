@@ -25,6 +25,8 @@ async function request(path, { token, method = "GET", body, signal, timeoutMs } 
   }
   const data = response.status === 204 ? null : await response.json().catch(() => ({}));
   if (!response.ok) {
+    if (token && response.status === 401) window.dispatchEvent(new CustomEvent("seomtorch-auth-expired", { detail: { token } }));
+    if (token && data?.code === "email_verification_required") window.dispatchEvent(new CustomEvent("seomtorch-email-required", { detail: { token } }));
     const baseMessage = data?.non_field_errors?.[0] || data?.detail || Object.values(data || {}).flat()[0] || "The request could not be completed.";
     const message = data?.reference ? `${baseMessage} Reference: ${data.reference}` : baseMessage;
     throw new ApiError(String(message), response.status, data);
@@ -35,7 +37,11 @@ async function request(path, { token, method = "GET", body, signal, timeoutMs } 
 export const api = {
   register: body => request("/auth/register/", { method: "POST", body }),
   login: body => request("/auth/login/", { method: "POST", body }),
+  requestEmailCode: (token, browser_key) => request("/auth/email/request/", { token, method: "POST", body: { browser_key }, timeoutMs: 20000 }),
+  resendEmailCode: (challenge_id, browser_key) => request("/auth/email/resend/", { method: "POST", body: { challenge_id, browser_key }, timeoutMs: 20000 }),
+  verifyEmailCode: (challenge_id, code, browser_key) => request("/auth/email/verify/", { method: "POST", body: { challenge_id, code, browser_key }, timeoutMs: 20000 }),
   me: token => request("/auth/me/", { token }),
+  accountSecurity: token => request("/auth/security/", { token, timeoutMs: 15000 }),
   changePassword: (token, body) => request("/auth/change-password/", { token, method: "POST", body }),
   logout: token => request("/auth/logout/", { token, method: "POST" }),
   startSession: (token, body, options = {}) => request("/sessions/", { ...options, token, method: "POST", body }),

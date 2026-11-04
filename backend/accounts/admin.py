@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import AspirantProfile, StudentFeedback, StudentFollow, UniversityProfile, User
+from .models import AspirantProfile, StudentFeedback, StudentFollow, UniversityProfile, User, EmailSignInChallenge
 
 
 class AspirantProfileInline(admin.StackedInline):
@@ -18,17 +18,34 @@ class UniversityProfileInline(admin.StackedInline):
 
 @admin.register(User)
 class SeomtorchUserAdmin(UserAdmin):
-    list_display = ("username", "email", "public_id", "user_type", "active_mode", "must_change_password", "is_staff", "is_active", "date_joined")
+    list_display = ("username", "email", "public_id", "email_verified_at", "user_type", "active_mode", "must_change_password", "is_staff", "is_active", "date_joined")
     list_filter = ("user_type", "active_mode", "is_staff", "is_active", "date_joined")
     search_fields = ("public_id", "username", "email")
     ordering = ("-date_joined",)
-    readonly_fields = ("public_id", "date_joined", "last_login", "created_at")
+    readonly_fields = ("public_id", "date_joined", "last_login", "created_at", "email_verified_at")
     fieldsets = UserAdmin.fieldsets + (
-        ("Seomtorch identity", {"fields": ("public_id", "created_at", "must_change_password")}),
+        ("Seomtorch identity", {"fields": ("public_id", "created_at", "must_change_password", "email_verified_at")}),
         ("Segmentation", {"fields": ("user_type", "active_mode")}),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (("Contact", {"fields": ("email",)}),)
     inlines = [AspirantProfileInline, UniversityProfileInline]
+
+
+@admin.register(EmailSignInChallenge)
+class EmailSignInChallengeAdmin(admin.ModelAdmin):
+    list_display = ("user", "created_at", "expires_at", "is_transfer", "attempts", "accepted_at")
+    list_filter = ("is_transfer", "accepted_at")
+    search_fields = ("user__public_id", "user__username")
+    fields = readonly_fields = ("user", "created_at", "expires_at", "is_transfer", "attempts", "consumed_at", "accepted_at")
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(StudentFollow)

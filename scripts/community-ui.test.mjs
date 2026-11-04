@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFileSync } from "node:fs";
 import { communityPage } from "../community-ui.js";
 import { eligibleForUniversityOffer } from "../student-engagement.js";
 
@@ -17,6 +18,32 @@ test("Buddies has one navigation row and one primary action per person", () => {
   assert.equal((html.match(/data-message-buddy=/g) || []).length, 1);
   assert.equal((html.match(/id="btn-copy-my-id"/g) || []).length, 1);
   assert.doesNotMatch(html, /buddies-count-pill|Gamified|🥇|🤝/);
+});
+
+test("challenges have a visible entry and one direct action per buddy", () => {
+  for (const university of [false, true]) {
+    const html = communityPage({ ...base, university });
+    assert.equal((html.match(/id="circle-create-challenge"/g) || []).length, 1);
+    assert.equal((html.match(/data-challenge-buddy=/g) || []).length, 1);
+    assert.match(html, /Invitations &amp; challenges/);
+    assert.ok(html.indexOf('circle-challenge-callout') < html.indexOf('People in your corner'));
+    assert.doesNotMatch(html.match(/<details class="circle-row-menu">[\s\S]*?<\/details>/)?.[0] || '', /data-challenge-buddy/);
+    assert.equal(html.includes('For your university study circle'), university);
+  }
+  const empty = communityPage({ ...base, net: { counts: {}, buddies: [] } });
+  assert.match(empty, /id="circle-create-challenge"/);
+  assert.match(empty, /No buddies yet/);
+  assert.doesNotMatch(communityPage({ ...base, tab: 'messages' }), /circle-challenge-callout/);
+});
+
+test("the new challenge entry uses the existing access check and composer", () => {
+  const source = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  const handler = source.slice(source.indexOf('document.querySelector("#circle-create-challenge")'), source.indexOf('document.querySelector("#form-community-search")', source.indexOf('document.querySelector("#circle-create-challenge")')));
+  assert.match(handler, /if \(!hasAllAccess\(\)\)/);
+  assert.match(handler, /showUpgradeModal/);
+  assert.match(handler, /challengeComposerOpen = true/);
+  assert.match(handler, /route = "challenges"/);
+  assert.match(source, /university: getActiveMode\(\) === "university"/);
 });
 
 test("untrusted usernames, search text and errors are escaped", () => {

@@ -1,4 +1,5 @@
 from django.contrib.auth import logout
+from django.db import transaction
 from rest_framework import permissions, status, throttling
 from rest_framework.authtoken.models import Token
 from knox.models import AuthToken
@@ -7,6 +8,7 @@ from rest_framework.views import APIView
 
 from learning.models import ActivityEvent, UserStats
 from .models import AspirantProfile, UniversityProfile, User
+from .email_security import enabled_for, browser_digest, issue_challenge, issue_token
 from .serializers import (
     AspirantProfileSerializer,
     ChangePasswordSerializer,
@@ -29,10 +31,13 @@ class RegisterView(APIView):
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        from django.conf import settings
+        if settings.ACCOUNT_SECURITY_ENABLED:
+            browser_digest(request.data.get("browser_key"))
         user = serializer.save()
         UserStats.objects.get_or_create(user=user)
         Token.objects.filter(user=user).delete()
-        _, token = AuthToken.objects.create(user=user)
+        token = None if enabled_for(user) else AuthToken.objects.create(user=user)[1]
         ActivityEvent.objects.create(user=user, event_type=ActivityEvent.Type.REGISTERED)
 
         # Automatically grant 3-Day Free Trial upon registration
@@ -61,6 +66,10 @@ class RegisterView(APIView):
             )
         except Exception:
             pass
+        if enabled_for(user):
+            # No usable session is returned before the new account proves inbox ownership.
+            AuthToken.objects.filter(user=user).delete()
+            return Response(issue_challenge(user, request.data.get("browser_key")), status=status.HTTP_202_ACCEPTED)
         return Response(
             {"token": token, "user": UserSerializer(user).data},
             status=status.HTTP_201_CREATED,
@@ -75,7 +84,21 @@ class LoginView(APIView):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data["user"]
-        _, token = AuthToken.objects.create(user=user)
+        if enabled_for(user):
+            from django.utils.crypto import constant_time_compare
+            with transaction.atomic():
+                user = User.objects.select_for_update().get(pk=user.pk)
+                if not user.is_active or not user.check_password(request.data.get("password", "")):
+                    from rest_framework.exceptions import ValidationError
+                    raise ValidationError("The email or password is incorrect.")
+                browser_hash = browser_digest(request.data.get("browser_key"))
+                approved_browser = user.email_verified_at and user.trusted_browser_hash and constant_time_compare(user.trusted_browser_hash, browser_hash)
+                if approved_browser:
+                    token = issue_token(user)
+            if not approved_browser:
+                return Response(issue_challenge(user, request.data.get("browser_key")), status=status.HTTP_202_ACCEPTED)
+        else:
+            _, token = AuthToken.objects.create(user=user)
         ActivityEvent.objects.create(user=user, event_type=ActivityEvent.Type.SIGNED_IN)
         Token.objects.filter(user=user).delete()
         return Response({"token": token, "user": UserSerializer(user).data})

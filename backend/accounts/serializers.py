@@ -45,6 +45,7 @@ class UniversityProfileSerializer(serializers.ModelSerializer):
 # ── User Serializer ──────────────────────────────────────────────────────────
 
 class UserSerializer(serializers.ModelSerializer):
+    account_security = serializers.SerializerMethodField()
     stats = serializers.SerializerMethodField()
     has_aspirant_profile = serializers.SerializerMethodField()
     has_university_profile = serializers.SerializerMethodField()
@@ -57,9 +58,13 @@ class UserSerializer(serializers.ModelSerializer):
             "public_id", "email", "username", "phone_number", "gender", "avatar", "date_joined",
             "must_change_password", "user_type", "active_mode", "is_staff",
             "has_aspirant_profile", "has_university_profile",
-            "aspirant_profile", "university_profile", "stats",
+            "aspirant_profile", "university_profile", "stats", "account_security",
         )
         read_only_fields = ("is_staff",)
+
+    def get_account_security(self, user):
+        from .email_security import security_status
+        return security_status(user)
 
     def get_stats(self, user):
         stats, _ = UserStats.objects.get_or_create(user=user)

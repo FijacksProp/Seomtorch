@@ -259,6 +259,7 @@
 
         <div class="student-contact-meta">
           <span class="meta-item"><strong>{{ student.email }}</strong></span>
+          <span class="meta-item">Email {% if student.email_verified_at %}verified · {{ student.email_verified_at|date:"j M Y" }}{% else %}not verified{% endif %}</span>
           <span class="meta-sep">·</span>
           <span class="meta-item">ID: <code>{{ student.public_id }}</code></span>
           {% if student.phone_number %}

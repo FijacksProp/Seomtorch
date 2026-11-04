@@ -1,0 +1,29 @@
+.account-security-notice { margin: 20px 32px 0; padding: 17px 20px; border: 1px solid #d7dfcd; border-left: 3px solid #7b8d60; background: #eef1e7; border-radius: 7px; display: flex; gap: 20px; align-items: center; justify-content: space-between; }
+.account-security-notice strong { display: block; font-size: 12px; color: #234b34; margin-bottom: 6px; }
+.account-security-notice span { display: block; font-size: 11px; color: #5f6d55; line-height: 1.7; }
+.account-security-notice .button { flex-shrink: 0; }
+.email-security-screen { min-height: 100dvh; display: grid; place-items: center; padding: 40px 24px; background: #f6f4ed; }
+.email-security-card { width: min(490px,100%); padding: 36px; border: 1px solid #dedfd2; border-radius: 14px; background: #fffef9; }
+.email-security-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #164631; margin-bottom: 34px; font: 700 22px var(--sans); letter-spacing: -.04em; }
+.email-security-brand img { flex-shrink: 0; object-fit: contain; border-radius: 8px; background: #f2f5e9; }
+.email-security-brand small { display: block; font: 500 8px var(--sans); text-transform: uppercase; letter-spacing: .14em; margin-top: 6px; }
+.email-security-card > .eyebrow { font-size: 9px; color: #677b58; }
+.email-security-card h1 { font: 500 clamp(32px,6vw,41px)/1.1 var(--serif); letter-spacing: -.025em; color: #173e2d; margin: 12px 0 18px; }
+.email-security-intro { font-size: 13px; color: #69705f; line-height: 1.9; overflow-wrap: anywhere; }
+.email-security-policy { padding: 17px; border-left: 2px solid #8ea67b; background: #eef2e7; margin: 24px 0; }
+.email-security-policy strong { color: #3b5734; font-size: 12px; }
+.email-security-policy p { font-size: 11px; color: #627157; line-height: 1.8; margin: 8px 0 0; }
+.email-security-card form { display: grid; gap: 12px; }
+.email-security-card label { font-size: 12px; color: #405537; }
+#email-code { display: block; width: 100%; min-width: 0; padding: 15px; background: #fff; border: 1px solid #bac8ae; border-radius: 6px; font: 500 26px var(--sans); text-align: center; letter-spacing: .3em; color: #25482f; }
+.email-transfer-consent { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; font-size: 11px!important; line-height: 1.8; cursor: pointer; }
+.email-transfer-consent input { width: 18px; height: 18px; flex-shrink: 0; accent-color: #255238; margin-top: 2px; }
+.email-security-card .button { min-height: 46px; width: 100%; justify-content: center; font-size: 12px; }
+.email-security-text { display: block; width: 100%; min-height: 44px; border: 0; background: none; color: #3e6344; font: 600 11px var(--sans); cursor: pointer; padding: 12px 0; }
+.email-security-text:disabled { color: #788170; cursor: default; }
+.email-security-status { color: #5e7351; font-size: 11px; line-height: 1.8; }
+.email-security-help { border-top: 1px solid #e0e3d6; padding-top: 18px; margin-top: 16px; color: #67715d; }
+.email-security-help summary { font-size: 12px; cursor: pointer; }
+.email-security-help p { font-size: 11px; line-height: 1.9; }
+.email-security-card :is(button,input,a,summary):focus-visible { outline: 3px solid #aa8248; outline-offset: 3px; }
+@media(max-width:680px) { .account-security-notice { margin: 16px 20px 0; flex-direction: column; align-items: flex-start; gap: 10px; } .email-security-screen { padding: 24px 16px; } .email-security-card { padding: 25px 21px; } }
