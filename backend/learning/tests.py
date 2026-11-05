@@ -10,6 +10,7 @@ from rest_framework.test import APIClient, APITestCase
 from django.utils import timezone
 
 from .models import ActivityEvent, Attempt, Bookmark, Challenge, ChallengeParticipant, PracticeSession, Question, Subject, Topic, UserBadge, UserStats
+from .badges import BADGE_CATALOG, badge_progress
 
 class LearningApiTests(APITestCase):
     @classmethod
@@ -349,6 +350,19 @@ class LearningApiTests(APITestCase):
         first_step = next(item for item in achievements.data["badges"] if item["code"] == "first-step")
         self.assertTrue(first_step["earned"])
         self.assertTrue(UserBadge.objects.filter(user=self.user, badge__code="first-step").exists())
+
+    def test_badge_progress_covers_every_catalog_entry(self):
+        progress = badge_progress(self.user)
+        catalog_codes = {item["code"] for item in BADGE_CATALOG}
+        achievements = self.client.get("/api/achievements/")
+        self.assertEqual(achievements.status_code, 200)
+        self.assertEqual({item["code"] for item in achievements.data["badges"]}, catalog_codes)
+        self.assertTrue(catalog_codes.issubset(progress))
+
+    def test_bookmark_shelf_badge_tracks_saved_questions(self):
+        questions = list(Question.objects.filter(topic__subject__slug="english")[:3])
+        Bookmark.objects.bulk_create([Bookmark(user=self.user, question=question) for question in questions])
+        self.assertEqual(badge_progress(self.user)["bookmark-shelf"], 3)
 
     def test_empty_started_session_is_closed_without_counting_as_a_test(self):
         _, session, _ = self._new_started_session()

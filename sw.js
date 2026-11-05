@@ -1,4 +1,4 @@
-const CACHE = "seomtorch-v138";
+const CACHE = "seomtorch-v139";
 const APP_ASSETS = [
   "./",
   "index.html",
@@ -30,6 +30,7 @@ const APP_ASSETS = [
   "assets/avatars/medic-male.webp",
   "assets/avatars/hijab-female.webp",
   "assets/seomtorch_logo.png",
+  "assets/badges.svg",
   "config.js",
   "data/manifest.json",
   "data/university/index.json",

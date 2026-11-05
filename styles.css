@@ -1891,10 +1891,8 @@ select:focus, textarea:focus, input:focus {
 .achievement-summary-copy > p:last-child { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
 .earned-badge-strip { min-width: 0; display: flex; align-items: center; gap: 13px; overflow: hidden; }
 .mini-badge { width: 48px; flex: 0 0 48px; display: grid; justify-items: center; gap: 5px; }
-.mini-badge i { width: 38px; height: 42px; display: grid; place-items: center; clip-path: polygon(50% 0, 92% 20%, 92% 75%, 50% 100%, 8% 75%, 8% 20%); color: white; background: var(--forest); font: 700 11px var(--serif); font-style: normal; }
-.mini-badge.bronze i { background: #9c673e; }
-.mini-badge.silver i { color: var(--ink); background: #c8cdc8; }
-.mini-badge.gold i { color: var(--ink); background: var(--ochre); }
+.badge-art { display: block; overflow: visible; }
+.mini-badge .badge-art { width: 42px; height: 42px; }
 .mini-badge small { width: 58px; overflow: hidden; color: var(--muted); font-size: 7px; font-weight: 700; line-height: 1.2; text-align: center; white-space: nowrap; text-overflow: ellipsis; }
 .no-badges-yet { color: var(--muted); font-size: 11px; }
 .achievement-open { min-width: 155px; padding: 13px 0 13px 18px; border: 0; border-left: 1px solid var(--line); display: grid; grid-template-columns: 1fr auto; gap: 3px 14px; color: var(--ink); background: transparent; cursor: pointer; text-align: left; }
@@ -1911,14 +1909,12 @@ select:focus, textarea:focus, input:focus {
 .achievement-tally span { display: block; margin-top: 8px; color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .badge-category { margin-top: 48px; }
 .badge-ledger { border-top: 1px solid var(--line-dark); }
-.badge-ledger-row { width: 100%; min-height: 78px; padding: 13px 4px; border: 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 44px minmax(150px, 1fr) minmax(90px, 180px) 24px; align-items: center; gap: 14px; color: var(--ink); background: transparent; cursor: pointer; text-align: left; transition: background .16s ease; }
+.badge-ledger-row { width: 100%; min-height: 78px; padding: 13px 4px; border: 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 48px minmax(150px, 1fr) minmax(90px, 180px) 24px; align-items: center; gap: 14px; color: var(--ink); background: transparent; cursor: pointer; text-align: left; transition: background .16s ease; }
 .badge-ledger-row:hover { background: rgba(255,255,255,.48); }
 .badge-ledger-row.locked { color: #747a75; }
-.badge-ledger-seal { width: 38px; height: 42px; display: grid; place-items: center; clip-path: polygon(50% 0, 92% 20%, 92% 75%, 50% 100%, 8% 75%, 8% 20%); color: var(--muted); background: var(--paper-deep); font: 700 10px var(--serif); }
-.badge-ledger-row.earned .badge-ledger-seal { color: white; background: var(--forest); }
-.badge-ledger-row.earned.bronze .badge-ledger-seal { background: #9c673e; }
-.badge-ledger-row.earned.silver .badge-ledger-seal { color: var(--ink); background: #c8cdc8; }
-.badge-ledger-row.earned.gold .badge-ledger-seal { color: var(--ink); background: var(--ochre); }
+.badge-ledger-art { width: 46px; height: 46px; filter: grayscale(.92); opacity: .48; transition: filter .2s ease, opacity .2s ease, transform .2s ease; }
+.badge-ledger-row.earned .badge-ledger-art { filter: none; opacity: 1; }
+.badge-ledger-row:hover .badge-ledger-art { transform: translateY(-2px) rotate(-3deg); }
 .badge-ledger-row strong, .badge-ledger-row small { display: block; }
 .badge-ledger-row strong { font-size: 12px; }
 .badge-ledger-row small { margin-top: 4px; color: var(--muted); font-size: 9px; }
@@ -1933,11 +1929,8 @@ select:focus, textarea:focus, input:focus {
 .badge-detail-backdrop.leaving { animation: badge-leave .18s ease both; }
 .badge-detail { width: min(430px, 100%); padding: 34px; position: relative; border-radius: var(--radius-lg); background: var(--surface); box-shadow: 0 30px 90px rgba(0,0,0,.22); animation: badge-arrive .38s cubic-bezier(.2,.9,.25,1.1) both; }
 .badge-detail-close { position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: transparent; cursor: pointer; font-size: 20px; }
-.badge-detail-seal { width: 74px; height: 82px; margin-bottom: 26px; display: grid; place-items: center; clip-path: polygon(50% 0, 92% 20%, 92% 75%, 50% 100%, 8% 75%, 8% 20%); color: var(--muted); background: var(--paper-deep); font: 700 18px var(--serif); }
-.badge-detail-seal.earned { color: white; background: var(--forest); }
-.badge-detail-seal.earned.bronze { background: #9c673e; }
-.badge-detail-seal.earned.silver { color: var(--ink); background: #c8cdc8; }
-.badge-detail-seal.earned.gold { color: var(--ink); background: var(--ochre); }
+.badge-detail-art { width: 104px; height: 104px; margin: 0 auto 22px; transition: filter .2s ease, opacity .2s ease; }
+.badge-detail-art.locked { filter: grayscale(.88); opacity: .55; }
 .badge-detail h2 { margin: 6px 0 10px; font-size: 36px; }
 .badge-detail > p:not(.eyebrow) { color: var(--muted); font-size: 12px; line-height: 1.65; }
 .badge-detail-status { margin: 24px 0 8px; padding-block: 14px; border-block: 1px solid var(--line); display: flex; justify-content: space-between; gap: 20px; font-size: 10px; }
@@ -1947,11 +1940,7 @@ select:focus, textarea:focus, input:focus {
 .badge-unlock-backdrop { position: fixed; z-index: 150; inset: 0; padding: 20px; display: grid; place-items: center; background: rgba(15,29,23,.72); backdrop-filter: blur(8px); animation: badge-backdrop .3s ease both; }
 .badge-unlock-backdrop.leaving { animation: badge-leave .22s ease both; }
 .badge-unlock { width: min(430px, 100%); padding: 44px 36px 34px; border-radius: var(--radius-lg); color: var(--ink); background: var(--surface); box-shadow: 0 30px 90px rgba(0,0,0,.22); text-align: center; animation: badge-arrive .55s cubic-bezier(.2,.9,.25,1.2) both; }
-.badge-unlock-seal { width: 108px; height: 118px; margin: 0 auto 28px; position: relative; display: grid; place-items: center; color: white; background: var(--forest); clip-path: polygon(50% 0, 92% 20%, 92% 75%, 50% 100%, 8% 75%, 8% 20%); }
-.badge-unlock-seal.bronze { background: #9c673e; }
-.badge-unlock-seal.silver { color: var(--ink); background: #c8cdc8; }
-.badge-unlock-seal.gold { color: var(--ink); background: var(--ochre); }
-.badge-unlock-seal span { font: 600 30px var(--serif); }
+.badge-unlock-art { width: 140px; height: 140px; margin: 0 auto 21px; animation: badge-art-arrive .7s cubic-bezier(.2,.9,.25,1.2) both; }
 .badge-unlock h2 { margin: 7px 0 9px; font: 600 38px/1 var(--serif); }
 .badge-unlock > p:not(.eyebrow) { margin: 0 auto 24px; max-width: 310px; color: var(--muted); font-size: 12px; line-height: 1.6; }
 @keyframes challenge-rise { from { opacity: 0; transform: translateY(10px); } }
@@ -1959,6 +1948,7 @@ select:focus, textarea:focus, input:focus {
 @keyframes submission-breathe { from { transform: scale(.9); opacity: .45; } to { transform: scale(1.05); opacity: 1; } }
 @keyframes badge-backdrop { from { opacity: 0; } }
 @keyframes badge-arrive { from { opacity: 0; transform: translateY(22px) scale(.9) rotate(-2deg); } }
+@keyframes badge-art-arrive { from { transform: scale(.72) rotate(-12deg); } to { transform: scale(1) rotate(0); } }
 @keyframes badge-leave { to { opacity: 0; } }
 
 @media (max-width: 720px) {

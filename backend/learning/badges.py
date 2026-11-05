@@ -25,6 +25,26 @@ BADGE_CATALOG = [
     {"code": "friendly-rivalry", "name": "Friendly Rivalry", "description": "Complete your first friend challenge.", "category": "Challenges", "tier": "field", "target": 1},
     {"code": "good-sport", "name": "Good Sport", "description": "Complete ten accepted challenges, whatever the result.", "category": "Challenges", "tier": "silver", "target": 10},
     {"code": "challenge-champion", "name": "Challenge Champion", "description": "Finish first in five completed group challenges.", "category": "Challenges", "tier": "gold", "target": 5},
+    {"code": "thousand-strong", "name": "Thousand Strong", "description": "Record 1,000 answers across your practice.", "category": "Answer milestones", "tier": "silver", "target": 1000},
+    {"code": "question-architect", "name": "Question Architect", "description": "Record 2,500 answers across your practice.", "category": "Answer milestones", "tier": "gold", "target": 2500},
+    {"code": "fifty-tests", "name": "Fifty on Record", "description": "Complete fifty practice tests.", "category": "Test milestones", "tier": "silver", "target": 50},
+    {"code": "two-hundred-fifty-tests", "name": "Paper Library", "description": "Complete two hundred and fifty practice tests.", "category": "Test milestones", "tier": "gold", "target": 250},
+    {"code": "ten-day-thread", "name": "Ten-Day Thread", "description": "Study on ten consecutive days.", "category": "Consistency", "tier": "silver", "target": 10},
+    {"code": "three-week-practice", "name": "Three Weeks of Practice", "description": "Study on twenty-one consecutive days.", "category": "Consistency", "tier": "gold", "target": 21},
+    {"code": "sixty-day-study", "name": "Sixty-Day Study", "description": "Keep a study streak going for sixty days.", "category": "Consistency", "tier": "gold", "target": 60},
+    {"code": "perfect-five", "name": "Five Clean Sheets", "description": "Earn five perfect scores in sessions of at least 10 questions.", "category": "Performance", "tier": "gold", "target": 5},
+    {"code": "long-form-focus", "name": "Long-Form Focus", "description": "Complete ten sessions of at least 20 questions.", "category": "Practice craft", "tier": "silver", "target": 10},
+    {"code": "deep-practice", "name": "Deep Practice", "description": "Complete fifty sessions of at least 20 questions.", "category": "Practice craft", "tier": "gold", "target": 50},
+    {"code": "subject-explorer", "name": "Subject Explorer", "description": "Answer questions in five different subjects.", "category": "Subject study", "tier": "silver", "target": 5},
+    {"code": "three-subject-depth", "name": "Three-Subject Depth", "description": "Record at least 50 answers in each of three subjects.", "category": "Subject study", "tier": "gold", "target": 3},
+    {"code": "subject-specialist", "name": "Subject Specialist", "description": "Record 250 answers in a single subject.", "category": "Subject study", "tier": "silver", "target": 250},
+    {"code": "sprint-starter", "name": "Sprint Starter", "description": "Complete five daily sprint sessions.", "category": "Daily sprint", "tier": "bronze", "target": 5},
+    {"code": "sprint-routine", "name": "Sprint Routine", "description": "Complete twenty-five daily sprint sessions.", "category": "Daily sprint", "tier": "gold", "target": 25},
+    {"code": "timed-ten", "name": "Clockwork Ten", "description": "Complete ten timed practice sessions.", "category": "Timed practice", "tier": "bronze", "target": 10},
+    {"code": "timed-fifty", "name": "Clockwork Fifty", "description": "Complete fifty timed practice sessions.", "category": "Timed practice", "tier": "gold", "target": 50},
+    {"code": "review-routine", "name": "Review Routine", "description": "Complete five saved-question review sessions.", "category": "Learning habits", "tier": "silver", "target": 5},
+    {"code": "bookmark-shelf", "name": "Bookmark Shelf", "description": "Save twenty-five questions for another look.", "category": "Learning habits", "tier": "bronze", "target": 25},
+    {"code": "challenge-host", "name": "Bring the Group", "description": "Create five friend challenges.", "category": "Challenges", "tier": "silver", "target": 5},
 ]
 
 
@@ -57,6 +77,9 @@ def badge_progress(user):
     incorrect_ids = set(attempts.filter(is_correct=False).values_list("question_id", flat=True))
     corrected_mistakes = attempts.filter(is_correct=True, question_id__in=incorrect_ids).values("question_id").distinct().count()
     subject_count = attempts.values("question__topic__subject_id").distinct().count()
+    subject_answer_counts = list(attempts.values("question__topic__subject_id").annotate(answer_count=Count("id")))
+    deeply_studied_subjects = sum(1 for subject in subject_answer_counts if subject["answer_count"] >= 50)
+    strongest_subject = max((subject["answer_count"] for subject in subject_answer_counts), default=0)
     stats, _ = UserStats.objects.get_or_create(user=user)
     completed_challenges = ChallengeParticipant.objects.filter(user=user, status=ChallengeParticipant.Status.COMPLETED)
     wins = 0
@@ -74,6 +97,21 @@ def badge_progress(user):
         "clean-sheet": int(clean_sheet), "sharp-mind": strong_count, "second-look": completed.filter(mode=PracticeSession.Mode.SAVED).count(),
         "mistake-turner": corrected_mistakes, "balanced-learner": subject_count,
         "friendly-rivalry": completed_challenges.count(), "good-sport": completed_challenges.count(), "challenge-champion": wins,
+        "thousand-strong": total_attempts, "question-architect": total_attempts,
+        "fifty-tests": completed.count(), "two-hundred-fifty-tests": completed.count(),
+        "ten-day-thread": stats.best_streak, "three-week-practice": stats.best_streak, "sixty-day-study": stats.best_streak,
+        "perfect-five": sum(1 for session in strong_sessions if session.recorded_correct == session.total_questions),
+        "long-form-focus": completed.filter(total_questions__gte=20).count(),
+        "deep-practice": completed.filter(total_questions__gte=20).count(),
+        "subject-explorer": subject_count, "three-subject-depth": deeply_studied_subjects,
+        "subject-specialist": strongest_subject,
+        "sprint-starter": completed.filter(mode=PracticeSession.Mode.DAILY).count(),
+        "sprint-routine": completed.filter(mode=PracticeSession.Mode.DAILY).count(),
+        "timed-ten": completed.filter(mode=PracticeSession.Mode.TIMED).count(),
+        "timed-fifty": completed.filter(mode=PracticeSession.Mode.TIMED).count(),
+        "review-routine": completed.filter(mode=PracticeSession.Mode.SAVED).count(),
+        "bookmark-shelf": user.bookmarks.count(),
+        "challenge-host": user.created_challenges.count(),
     }
 
 
