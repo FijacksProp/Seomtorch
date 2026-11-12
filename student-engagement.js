@@ -82,19 +82,19 @@ export function openStudentDialog({ title, eyebrow = "Seomtorch", content, escap
 }
 
 export function eligibleForUniversityOffer({ user, mode, access, ready }) {
-  return Boolean(ready && user && !user.is_staff && !user.is_superuser && !user.must_change_password && mode === "university" && !access?.has_all_access && !access?.is_trial && !(access?.unlocked_courses || []).length);
+  return Boolean(ready && user && !user.is_staff && !user.is_superuser && !user.must_change_password && mode === "university" && !access?.has_all_access);
 }
 
 export function maybeShowUniversityIntroduction({ user, mode, access, ready, config, escapeHtml: e, onViewPlans }) {
   if (!eligibleForUniversityOffer({ user, mode, access, ready }) || document.querySelector('[aria-modal="true"]')) return false;
+  const previewDays = Math.max(1, Number(config?.limited_access_days) || 14);
   const key = `seomtorch-access-introduction:${user.public_id}`;
   let lastShown = introductionMemory.get(key) || 0;
   try { lastShown = Math.max(lastShown, Number(localStorage.getItem(key)) || 0); } catch {}
   if (Date.now() - lastShown < 24 * 60 * 60 * 1000) return false;
-  const price = Number(config?.single_course_price);
   const { overlay, close } = openStudentDialog({
     title: "Make room for the whole course.", eyebrow: "University course access", escapeHtml: e, className: "course-introduction",
-    content: `<div class="course-intro-art" aria-hidden="true"><span class="course-art-rule"></span><div class="course-art-book book-one"><small>SEOMTORCH</small><strong>ANA<br>201</strong><span>Upper &amp; Lower Limb</span></div><div class="course-art-book book-two"><small>SEOMTORCH</small><strong>ANA<br>203</strong><span>Embryology</span></div><div class="course-art-book book-three"><small>SEOMTORCH</small><strong>PIO<br>201</strong><span>Physiology</span></div></div><p class="student-dialog-lede">Keep exploring the free topics, or choose a pass for the materials and practice you need this semester.</p><ul class="course-intro-benefits"><li>Course topics and worked explanations</li><li>Timed practice and available study notes</li><li>Your progress, saved to your account</li></ul>${Number.isFinite(price) && price > 0 ? `<p class="course-intro-price">Single-course passes from <strong>₦${price.toLocaleString()}</strong>. See plans for access periods and options.</p>` : ""}<div class="student-dialog-actions"><button type="button" class="button" data-intro-plans>View course plans <span aria-hidden="true">→</span></button><button type="button" class="circle-text-button" data-close-student-dialog>Keep exploring</button></div><p class="student-dialog-fine">No pressure to decide now. You can find plans in the university portal whenever you’re ready.</p>`,
+    content: `<div class="course-intro-art" aria-hidden="true"><span class="course-art-rule"></span><div class="course-art-book book-one"><small>SEOMTORCH</small><strong>ANA<br>201</strong><span>Upper &amp; Lower Limb</span></div><div class="course-art-book book-two"><small>SEOMTORCH</small><strong>ANA<br>203</strong><span>Embryology</span></div><div class="course-art-book book-three"><small>SEOMTORCH</small><strong>PIO<br>201</strong><span>Physiology</span></div></div><p class="student-dialog-lede">Use about 20% of each topic’s questions and notes during the ${previewDays}-day preview. Afterward, a 5% sample remains available.</p><ul class="course-intro-benefits"><li>Practice across every published university topic</li><li>Small topics keep at least one question or note block available</li><li>Your progress remains saved to your account</li></ul><p class="course-intro-price">Full access is <strong>₦2,500 for the semester</strong>, through the current semester end date.</p><div class="student-dialog-actions"><button type="button" class="button" data-intro-plans>View semester pass <span aria-hidden="true">→</span></button><button type="button" class="circle-text-button" data-close-student-dialog>Keep exploring</button></div><p class="student-dialog-fine">No pressure to decide now. You can return to the pass details from the university portal.</p>`,
   });
   introductionMemory.set(key, Date.now());
   try { localStorage.setItem(key, String(Date.now())); } catch {}

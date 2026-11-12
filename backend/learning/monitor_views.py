@@ -21,12 +21,10 @@ from knox.models import AuthToken
 
 from monetization.models import (
     CourseAccess,
-    CourseTopicConfig,
-    DiscountCode,
-    MonetizationEvent,
     PaymentTransaction,
     PlanConfig,
 )
+from monetization.access_policy import limited_access_duration_days, limited_access_percentage, limited_access_is_active, is_university_user
 from .analytics import session_analytics, user_test_analytics
 from .models import (
     ActivityEvent,
@@ -44,6 +42,13 @@ User = get_user_model()
 
 def percentage(correct, total):
     return round(correct / total * 100) if total else 0
+
+
+def count_limited_users(user_queryset, paid_user_ids, now=None):
+    """Count students within the monitor-managed registration preview window."""
+    now = now or timezone.now()
+    cutoff = now - timedelta(days=limited_access_duration_days())
+    return user_queryset.exclude(pk__in=paid_user_ids).filter(created_at__gt=cutoff).count()
 
 
 def verified_completed_sessions(queryset=None):
@@ -387,14 +392,21 @@ def dashboard(request):
 
     # ── Chart 4: Monetization / Access Tier Breakdown ───────────────────────
     now_dt = timezone.now()
-    active_grants = CourseAccess.objects.filter(is_active=True, expires_at__gte=now_dt)
-    all_access_count = active_grants.filter(access_type=CourseAccess.AccessType.ALL_ACCESS).values("user_id").distinct().count()
-    trial_count = active_grants.filter(access_type=CourseAccess.AccessType.TRIAL).values("user_id").distinct().count()
-    single_course_count = active_grants.filter(access_type=CourseAccess.AccessType.SINGLE_COURSE).values("user_id").distinct().count()
-    free_users_count = max(0, total_students_all - (all_access_count + trial_count + single_course_count))
+    active_grants = CourseAccess.objects.filter(
+        is_active=True, access_type=CourseAccess.AccessType.ALL_ACCESS,
+        granted_by=CourseAccess.GrantedBy.PAYMENT,
+        starts_at__lte=now_dt, expires_at__gte=now_dt,
+    )
+    university_users = User.objects.filter(is_staff=False).filter(
+        Q(user_type="university") | Q(active_mode="university") | Q(university_profile__isnull=False)
+    ).distinct()
+    paid_user_ids = active_grants.values("user_id").distinct()
+    paid_user_count = university_users.filter(id__in=paid_user_ids).count()
+    limited_user_count = count_limited_users(university_users, paid_user_ids, now_dt)
+    expired_user_count = max(0, university_users.count() - paid_user_count - limited_user_count)
 
-    tier_labels = ["Free Accounts", "3-Day Trial Active", "Single Course Pass", "All-Access Pass"]
-    tier_data = [free_users_count, trial_count, single_course_count, all_access_count]
+    tier_labels = ["Registration preview (20%)", "Ongoing sample (5%)", "University semester pass"]
+    tier_data = [limited_user_count, expired_user_count, paid_user_count]
 
     # ── Curbed Recent Events ────────────────────────────────────────────────
     # Return 6 for the immediate clean card, plus 40 for the expandable modal
@@ -413,7 +425,7 @@ def dashboard(request):
         elif "session" in et or "test" in et:
             ev.icon_class = "test"
             ev.icon_char = "📝"
-        elif "pay" in et or "trial" in et or "sub" in et:
+        elif "pay" in et or "sub" in et:
             ev.icon_class = "payment"
             ev.icon_char = "💳"
         else:
@@ -535,11 +547,18 @@ def university_dashboard(request):
 
     # Access tier counts for university students
     now_dt = timezone.now()
-    active_grants = CourseAccess.objects.filter(user__in=uni_users_qs, is_active=True, expires_at__gte=now_dt)
+    active_grants = CourseAccess.objects.filter(
+        user__in=uni_users_qs, is_active=True,
+        access_type=CourseAccess.AccessType.ALL_ACCESS,
+        granted_by=CourseAccess.GrantedBy.PAYMENT,
+        starts_at__lte=now_dt, expires_at__gte=now_dt,
+    )
     all_access_count = active_grants.filter(access_type=CourseAccess.AccessType.ALL_ACCESS).values("user_id").distinct().count()
-    trial_count = active_grants.filter(access_type=CourseAccess.AccessType.TRIAL).values("user_id").distinct().count()
-    single_count = active_grants.filter(access_type=CourseAccess.AccessType.SINGLE_COURSE).values("user_id").distinct().count()
-    free_count = max(0, total_uni_students - (all_access_count + trial_count + single_count))
+    single_count = 0
+    paid_user_ids = active_grants.values("user_id").distinct()
+    limited_count = count_limited_users(uni_users_qs, paid_user_ids, now_dt)
+    paid_users_count = uni_users_qs.filter(id__in=paid_user_ids).count()
+    free_count = max(0, total_uni_students - paid_users_count - limited_count)
 
     # University Medical Courses breakdown
     courses = [
@@ -592,19 +611,19 @@ def university_dashboard(request):
         user.uni_accuracy = percentage(u_cor, u_tot)
 
         # Check access badge
-        active_grant = user.course_accesses.filter(is_active=True, expires_at__gte=now_dt).first()
+        active_grant = user.course_accesses.filter(
+            is_active=True, access_type=CourseAccess.AccessType.ALL_ACCESS,
+            granted_by=CourseAccess.GrantedBy.PAYMENT,
+            starts_at__lte=now_dt, expires_at__gte=now_dt,
+        ).first()
         if active_grant:
-            if active_grant.access_type == CourseAccess.AccessType.TRIAL:
-                user.access_badge = "3-Day Trial"
-                user.access_badge_class = "badge-trial"
-            elif active_grant.access_type == CourseAccess.AccessType.ALL_ACCESS:
-                user.access_badge = "All-Access Pass"
-                user.access_badge_class = "badge-all-access"
-            else:
-                user.access_badge = f"{active_grant.course_code} Pass"
-                user.access_badge_class = "badge-single"
+            user.access_badge = "Semester pass"
+            user.access_badge_class = "badge-all-access"
+        elif limited_access_is_active(user, now=now_dt):
+            user.access_badge = f"{limited_access_percentage(user, now=now_dt)}% free sample"
+            user.access_badge_class = "badge-limited"
         else:
-            user.access_badge = "Free"
+            user.access_badge = "No university access"
             user.access_badge_class = "badge-free"
 
         student_list.append(user)
@@ -629,7 +648,7 @@ def university_dashboard(request):
         "period_avg_score": period_avg_score,
         "period_active_students": period_active_students,
         "all_access_count": all_access_count,
-        "trial_count": trial_count,
+        "limited_count": limited_count,
         "single_count": single_count,
         "free_count": free_count,
         "courses": courses,
@@ -682,19 +701,20 @@ def students(request):
         user.accuracy = percentage(user.correct_count, user.attempt_count)
 
         # Check access badge
-        active_grant = user.course_accesses.filter(is_active=True, expires_at__gte=now_dt).first()
+        active_grant = user.course_accesses.filter(
+            is_active=True, access_type=CourseAccess.AccessType.ALL_ACCESS,
+            granted_by=CourseAccess.GrantedBy.PAYMENT,
+            starts_at__lte=now_dt, expires_at__gte=now_dt,
+        ).first()
         if active_grant:
-            if active_grant.access_type == CourseAccess.AccessType.TRIAL:
-                user.access_badge = "Trial"
-                user.access_badge_class = "badge-trial"
-            elif active_grant.access_type == CourseAccess.AccessType.ALL_ACCESS:
-                user.access_badge = "All-Access"
-                user.access_badge_class = "badge-all-access"
-            else:
-                user.access_badge = active_grant.course_code
-                user.access_badge_class = "badge-single"
+            user.access_badge = "Semester pass"
+            user.access_badge_class = "badge-all-access"
+        elif limited_access_is_active(user, now=now_dt):
+            user.access_badge = f"{limited_access_percentage(user, now=now_dt)}% free sample"
+            user.access_badge_class = "badge-limited"
         else:
-            user.access_badge = "Free"
+            user.access_badge = "No university access"
+            user.access_badge_class = "badge-free"
             user.access_badge_class = "badge-free"
 
         user.xp = getattr(user.learning_stats, "xp", 0) if hasattr(user, "learning_stats") and user.learning_stats else 0
@@ -806,7 +826,10 @@ def student_detail(request, public_id):
 
     # Access summary & active grants
     access_summary = CourseAccess.get_user_access_summary(student)
-    all_grants = student.course_accesses.all().order_by("-created_at")
+    all_grants = student.course_accesses.filter(
+        granted_by=CourseAccess.GrantedBy.PAYMENT,
+        access_type=CourseAccess.AccessType.ALL_ACCESS,
+    ).order_by("-created_at")
 
     # Payment transactions for this student
     transactions = PaymentTransaction.objects.filter(user=student).order_by("-created_at")[:10]
@@ -859,50 +882,6 @@ def student_detail(request, public_id):
 
 @staff_member_required
 @require_POST
-def grant_student_access(request, public_id):
-    student = get_object_or_404(User, public_id=public_id, is_staff=False)
-    plan_config = PlanConfig.get_solo()
-
-    access_type = request.POST.get("access_type", "all_access").strip()
-    course_code = request.POST.get("course_code", "all").strip().upper()
-    expires_str = request.POST.get("expires_at", "").strip()
-
-    if expires_str:
-        try:
-            expires_at = timezone.make_aware(datetime.strptime(expires_str, "%Y-%m-%d"))
-        except Exception:
-            expires_at = plan_config.semester_end_date
-    else:
-        expires_at = plan_config.semester_end_date
-
-    CourseAccess.objects.create(
-        user=student,
-        access_type=access_type,
-        course_code=course_code if access_type == "single_course" else "all",
-        starts_at=timezone.now(),
-        expires_at=expires_at,
-        is_active=True,
-        granted_by=CourseAccess.GrantedBy.ADMIN_MANUAL,
-        reference=f"manual_{request.user.username}_{int(timezone.now().timestamp())}",
-    )
-
-    MonetizationEvent.objects.create(
-        user=student,
-        event_name="manual_access_granted",
-        metadata={
-            "granted_by": request.user.username,
-            "access_type": access_type,
-            "course_code": course_code,
-            "expires_at": expires_at.isoformat(),
-        }
-    )
-
-    messages.success(request, f"Successfully granted {access_type.upper()} ({course_code}) access to {student.username} until {expires_at.strftime('%Y-%m-%d')}.")
-    return redirect("monitor:student-detail", public_id=student.public_id)
-
-
-@staff_member_required
-@require_POST
 def revoke_student_access(request, public_id):
     student = get_object_or_404(User, public_id=public_id, is_staff=False)
     access_id = request.POST.get("access_id")
@@ -925,31 +904,37 @@ def revoke_student_access(request, public_id):
 @staff_member_required
 def monetization_hub(request):
     plan_config = PlanConfig.get_solo()
-    discount_codes = DiscountCode.objects.all().order_by("-created_at")
 
     now_dt = timezone.now()
-    active_grants_qs = CourseAccess.objects.filter(is_active=True, expires_at__gte=now_dt)
-    active_grants = active_grants_qs.select_related("user").order_by("-created_at")[:40]
+    university_users = User.objects.filter(is_staff=False).filter(
+        Q(user_type="university") | Q(active_mode="university") | Q(university_profile__isnull=False)
+    ).distinct()
+    active_grants_qs = CourseAccess.objects.filter(
+        user__in=university_users,
+        is_active=True, access_type=CourseAccess.AccessType.ALL_ACCESS,
+        granted_by=CourseAccess.GrantedBy.PAYMENT,
+        starts_at__lte=now_dt, expires_at__gte=now_dt,
+    )
+    active_grants = active_grants_qs.filter(access_type=CourseAccess.AccessType.ALL_ACCESS).select_related("user").order_by("-created_at")[:40]
     recent_transactions = PaymentTransaction.objects.select_related("user", "discount_code").all().order_by("-created_at")[:30]
 
     # Stats
     total_revenue = PaymentTransaction.objects.filter(status=PaymentTransaction.Status.SUCCESS).aggregate(s=Sum("amount"))["s"] or 0
     all_access_active = active_grants_qs.filter(access_type=CourseAccess.AccessType.ALL_ACCESS).count()
-    trial_active = active_grants_qs.filter(access_type=CourseAccess.AccessType.TRIAL).count()
-    single_active = active_grants_qs.filter(access_type=CourseAccess.AccessType.SINGLE_COURSE).count()
-
-    free_topics = CourseTopicConfig.objects.all()
+    single_active = 0
+    paid_ids = active_grants_qs.values("user_id").distinct()
+    limited_count = count_limited_users(university_users, paid_ids, now_dt)
+    sample_count = max(0, university_users.count() - active_grants_qs.filter(user__in=university_users).values("user_id").distinct().count() - limited_count)
 
     context = {
         "plan_config": plan_config,
-        "discount_codes": discount_codes,
         "active_grants": active_grants,
         "recent_transactions": recent_transactions,
         "total_revenue": total_revenue,
         "all_access_active": all_access_active,
-        "trial_active": trial_active,
         "single_active": single_active,
-        "free_topics": free_topics,
+        "limited_count": limited_count,
+        "sample_count": sample_count,
     }
     return render(request, "monitor/monetization.html", context)
 
@@ -959,20 +944,19 @@ def monetization_hub(request):
 def update_pricing(request):
     config = PlanConfig.get_solo()
     try:
-        config.single_course_price = int(request.POST.get("single_course_price", config.single_course_price))
-        config.all_access_price = int(request.POST.get("all_access_price", config.all_access_price))
-        config.launch_offer_price = int(request.POST.get("launch_offer_price", config.launch_offer_price))
-        config.launch_offer_active = request.POST.get("launch_offer_active") == "on"
-        config.launch_offer_max_buyers = int(request.POST.get("launch_offer_max_buyers", config.launch_offer_max_buyers))
-        config.trial_duration_days = int(request.POST.get("trial_duration_days", config.trial_duration_days))
-
-        launch_end_str = request.POST.get("launch_offer_end_date", "").strip()
-        if launch_end_str:
-            config.launch_offer_end_date = timezone.make_aware(datetime.strptime(launch_end_str, "%Y-%m-%d"))
-
+        # Semester pricing is fixed by policy; only its active date window and
+        # gateway configuration are editable here.
         semester_end_str = request.POST.get("semester_end_date", "").strip()
         if semester_end_str:
-            config.semester_end_date = timezone.make_aware(datetime.strptime(semester_end_str, "%Y-%m-%d"))
+            semester_end = datetime.strptime(semester_end_str, "%Y-%m-%d")
+            config.semester_end_date = timezone.make_aware(semester_end.replace(hour=23, minute=59, second=59, microsecond=999999))
+
+        access_days_str = request.POST.get("limited_access_days", "").strip()
+        if access_days_str:
+            access_days = int(access_days_str)
+            if not 1 <= access_days <= 365:
+                raise ValueError("Limited-access duration must be between 1 and 365 days.")
+            config.limited_access_days = access_days
 
         pk = request.POST.get("paystack_public_key", "").strip()
         sk = request.POST.get("paystack_secret_key", "").strip()
@@ -982,8 +966,8 @@ def update_pricing(request):
             config.paystack_secret_key = sk
 
         # Pricing must not overwrite a simultaneous shield change or purchase count.
-        config.save(update_fields=("single_course_price", "all_access_price", "launch_offer_price", "launch_offer_active", "launch_offer_max_buyers", "trial_duration_days", "launch_offer_end_date", "semester_end_date", "paystack_public_key", "paystack_secret_key", "updated_at"))
-        messages.success(request, "Monetization prices and semester settings updated successfully.")
+        config.save(update_fields=("semester_end_date", "limited_access_days", "paystack_public_key", "paystack_secret_key", "updated_at"))
+        messages.success(request, f"Access settings saved. Limited access now lasts {config.limited_access_days} days from registration; the semester pass remains ₦2,500.")
     except Exception as e:
         messages.error(request, f"Error saving pricing settings: {e}")
 
@@ -1009,101 +993,6 @@ def toggle_screenshot_protection(request):
 
 @staff_member_required
 @require_POST
-def create_discount_code(request):
-    code = request.POST.get("code", "").strip().upper()
-    label = request.POST.get("label", "").strip()
-    price = request.POST.get("discounted_price", "").strip()
-    target_plan = request.POST.get("target_plan", "all_access").strip()
-    max_uses_str = request.POST.get("max_uses", "").strip()
-    expires_str = request.POST.get("expires_at", "").strip()
-
-    if not code or not price:
-        messages.error(request, "Code and discounted price are required.")
-        return redirect("monitor:monetization")
-
-    try:
-        max_uses = int(max_uses_str) if max_uses_str else None
-        expires_at = timezone.make_aware(datetime.strptime(expires_str, "%Y-%m-%d")) if expires_str else None
-
-        DiscountCode.objects.create(
-            code=code,
-            label=label or code,
-            discounted_price=int(price),
-            target_plan=target_plan,
-            max_uses=max_uses,
-            expires_at=expires_at,
-            is_active=True,
-        )
-        messages.success(request, f"Discount / class code '{code}' created successfully!")
-    except Exception as e:
-        messages.error(request, f"Error creating code: {e}")
-
-    return redirect("monitor:monetization")
-
-
-@staff_member_required
-@require_POST
-def toggle_discount_code(request, discount_id):
-    discount = get_object_or_404(DiscountCode, id=discount_id)
-    discount.is_active = not discount.is_active
-    discount.save(update_fields=["is_active"])
-    status_str = "activated" if discount.is_active else "disabled"
-    messages.success(request, f"Code '{discount.code}' has been {status_str}.")
-    return redirect("monitor:monetization")
-
-
-@staff_member_required
-@require_POST
-def delete_discount_code(request, discount_id):
-    discount = get_object_or_404(DiscountCode, id=discount_id)
-    code = discount.code
-    discount.delete()
-    messages.warning(request, f"Discount code '{code}' was removed.")
-    return redirect("monitor:monetization")
-
-
-@staff_member_required
-@require_POST
-def quick_grant_access(request):
-    student_ident = request.POST.get("student_ident", "").strip()
-    access_type = request.POST.get("access_type", "all_access").strip()
-    course_code = request.POST.get("course_code", "all").strip().upper()
-    expires_str = request.POST.get("expires_at", "").strip()
-
-    student = User.objects.filter(
-        Q(public_id__iexact=student_ident) | Q(username__iexact=student_ident) | Q(email__iexact=student_ident)
-    ).first()
-
-    if not student:
-        messages.error(request, f"Could not find student '{student_ident}'. Enter a valid ID, username, or email.")
-        return redirect("monitor:monetization")
-
-    plan_config = PlanConfig.get_solo()
-    if expires_str:
-        try:
-            expires_at = timezone.make_aware(datetime.strptime(expires_str, "%Y-%m-%d"))
-        except Exception:
-            expires_at = plan_config.semester_end_date
-    else:
-        expires_at = plan_config.semester_end_date
-
-    CourseAccess.objects.create(
-        user=student,
-        access_type=access_type,
-        course_code=course_code if access_type == "single_course" else "all",
-        starts_at=timezone.now(),
-        expires_at=expires_at,
-        is_active=True,
-        granted_by=CourseAccess.GrantedBy.ADMIN_MANUAL,
-        reference=f"quick_{request.user.username}_{int(timezone.now().timestamp())}",
-    )
-
-    messages.success(request, f"Granted {access_type.upper()} ({course_code}) to {student.username} until {expires_at.strftime('%Y-%m-%d')}.")
-    return redirect("monitor:monetization")
-
-
-@staff_member_required
-@require_POST
 def quick_revoke_access(request, access_id):
     grant = get_object_or_404(CourseAccess, id=access_id)
     grant.is_active = False
@@ -1118,6 +1007,10 @@ def verify_transaction_manual(request, reference):
     tx = get_object_or_404(PaymentTransaction, reference=reference)
     config = PlanConfig.get_solo()
 
+    if tx.access_type != PaymentTransaction.AccessType.ALL_ACCESS or tx.amount != 2500 or not is_university_user(tx.user):
+        messages.error(request, "Only a verified ₦2,500 university semester-pass transaction can be confirmed here.")
+        return redirect("monitor:monetization")
+
     if tx.status == PaymentTransaction.Status.SUCCESS:
         messages.info(request, f"Transaction {reference} is already marked as successful.")
         return redirect("monitor:monetization")
@@ -1128,33 +1021,20 @@ def verify_transaction_manual(request, reference):
         tx.gateway_response = {"note": f"Manually verified by admin {request.user.username}"}
         tx.save()
 
-        CourseAccess.objects.create(
-            user=tx.user,
-            access_type=tx.access_type,
-            course_code=tx.course_code or "all",
-            starts_at=timezone.now(),
-            expires_at=config.semester_end_date,
-            is_active=True,
-            granted_by=CourseAccess.GrantedBy.ADMIN_MANUAL,
+        CourseAccess.objects.get_or_create(
             reference=tx.reference,
+            defaults={
+                "user": tx.user,
+                "access_type": CourseAccess.AccessType.ALL_ACCESS,
+                "course_code": "all",
+                "starts_at": timezone.now(),
+                "expires_at": config.semester_end_date,
+                "is_active": True,
+                "granted_by": CourseAccess.GrantedBy.PAYMENT,
+            },
         )
 
     messages.success(request, f"Transaction {reference} verified and course access unlocked for {tx.user.username}!")
-    return redirect("monitor:monetization")
-
-
-@staff_member_required
-@require_POST
-def update_free_topics(request):
-    for code in ["ANA 201", "ANA 203", "PIO 201"]:
-        field_name = f"free_topic_{code.replace(' ', '_').lower()}"
-        topic_id = request.POST.get(field_name, "").strip()
-        if topic_id:
-            cfg, _ = CourseTopicConfig.objects.get_or_create(course_code=code)
-            cfg.free_topic_id = topic_id
-            cfg.save()
-
-    messages.success(request, "Free sample topics per course updated successfully.")
     return redirect("monitor:monetization")
 
 

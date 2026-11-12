@@ -1,2 +1,5 @@
+# University questions, study notes, and their private images are served only
+# through the authenticated Render API. Keep the source files in Git for the
+# backend importer, but never upload them as public Vercel static assets.
 data/university/**
 assets/notes/**

@@ -13,9 +13,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.exceptions import PermissionDenied, ValidationError
 from monetization.models import CourseAccess
-from monetization.course_topics import canonical_topic_id
+from monetization.access_policy import limited_access_is_active, limited_access_percentage
 
-from .access import free_topic_id, user_can_access_topic
+from .access import accessible_university_question_ids, free_question_limit, user_can_access_questions, user_can_access_topic
 from .models import ActivityEvent, Challenge, ChallengeParticipant, PracticeSession, Question, Subject, Topic, UserStats
 
 logger = logging.getLogger(__name__)
@@ -79,11 +79,16 @@ def _select_questions(subject_slug, limit, *, track="aspirant", topic_slug=None,
             raise ValidationError({"subject": ["Choose one university course for this challenge."]})
         subject = get_object_or_404(Subject, slug=subject_slug, is_active=True, track=track)
         topic = get_object_or_404(Topic, subject=subject, slug=topic_slug) if topic_slug else None
-        if not user_can_access_topic(user, subject, topic):
-            raise PermissionDenied("Course access is required for this paper. You can also choose the course’s free topic.")
+        if topic and not user_can_access_topic(user, subject, topic):
+            raise PermissionDenied("This topic’s limited question sample is unavailable. A semester pass unlocks the full topic.")
         pool = Question.objects.filter(topic__subject=subject, is_active=True)
         if topic:
             pool = pool.filter(topic=topic)
+        if not CourseAccess.user_has_course_access(user, subject.code):
+            accessible_ids = accessible_university_question_ids(user, subject, topic)
+            pool = pool.filter(external_id__in=accessible_ids or set())
+        if limit > pool.count():
+            raise ValidationError({"question_count": [f"This selection has {pool.count()} accessible questions. Choose a smaller paper or purchase the semester pass."]})
         selected = _sample_questions(pool, limit)
         # Keep course-wide papers grouped by topic.
         if not topic:
@@ -120,11 +125,10 @@ def _check_challenge_access(challenge, user):
         return
     if not subject.is_active:
         raise PermissionDenied("This course is no longer available.")
-    if CourseAccess.user_has_course_access(user, subject.code):
-        return
-    free_id = free_topic_id(subject)
-    if not free_id or any(canonical_topic_id(subject.code, q.get("topic_slug", "")) != free_id for q in challenge.question_payload):
-        raise PermissionDenied("You need access to this university course to accept or begin this challenge. The host’s access is not shared with invitees.")
+    question_ids = [str(item.get("external_id") or "") for item in challenge.question_payload]
+    questions = list(Question.objects.filter(external_id__in=question_ids, is_active=True).select_related("topic__subject"))
+    if len(questions) != len(question_ids) or not user_can_access_questions(user, questions):
+        raise PermissionDenied("This challenge uses questions outside your current access. A semester pass unlocks every university challenge.")
 
 
 class ChallengeCatalogView(APIView):
@@ -133,10 +137,16 @@ class ChallengeCatalogView(APIView):
         rows = []
         for course in courses:
             full_access = CourseAccess.user_has_course_access(request.user, course.code)
-            free_id = "" if full_access else free_topic_id(course)
+            limited_access = limited_access_is_active(request.user)
+            sample_percentage = limited_access_percentage(request.user)
             topics = course.topics.annotate(question_count=Count("questions", filter=Q(questions__is_active=True))).filter(question_count__gte=1)
-            available = [{"id": t.slug, "name": t.name, "question_count": t.question_count,
-                          "accessible": full_access or bool(free_id and canonical_topic_id(course.code, t.slug) == free_id)} for t in topics]
+            available = [{
+                "id": t.slug,
+                "name": t.name,
+                "question_count": t.question_count,
+                "accessible_question_count": t.question_count if full_access else free_question_limit(t.question_count, sample_percentage) if limited_access else 0,
+                "accessible": full_access or (limited_access and t.question_count > 0),
+            } for t in topics]
             if available:
                 rows.append({"id": course.slug, "name": f"{course.code} · {course.name}" if course.code else course.name,
                              "code": course.code, "full_access": full_access, "topics": available})

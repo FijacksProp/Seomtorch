@@ -19,7 +19,6 @@ urlpatterns = [
     path("students/", monitor_views.students, name="students"),
     path("students/<str:public_id>/", monitor_views.student_detail, name="student-detail"),
     path("students/<str:public_id>/reset-password/", monitor_views.reset_student_password, name="reset-student-password"),
-    path("students/<str:public_id>/grant-access/", monitor_views.grant_student_access, name="grant-student-access"),
     path("students/<str:public_id>/revoke-access/", monitor_views.revoke_student_access, name="revoke-student-access"),
 
     # Subject Performance & Export
@@ -38,13 +37,8 @@ urlpatterns = [
     # Keep old admin links safe during a rolling deployment.
     path("monetization/toggle-screenshot-protection/", monitor_views.toggle_screenshot_protection),
     path("monetization/update-pricing/", monitor_views.update_pricing, name="update-pricing"),
-    path("monetization/create-discount/", monitor_views.create_discount_code, name="create-discount"),
-    path("monetization/toggle-discount/<int:discount_id>/", monitor_views.toggle_discount_code, name="toggle-discount"),
-    path("monetization/delete-discount/<int:discount_id>/", monitor_views.delete_discount_code, name="delete-discount"),
-    path("monetization/grant-access/", monitor_views.quick_grant_access, name="quick-grant-access"),
     path("monetization/revoke-access/<int:access_id>/", monitor_views.quick_revoke_access, name="quick-revoke-access"),
     path("monetization/verify-transaction/<str:reference>/", monitor_views.verify_transaction_manual, name="verify-transaction"),
-    path("monetization/update-free-topics/", monitor_views.update_free_topics, name="update-free-topics"),
 
     # Question Bank Management & Add Question
     path("questions/", monitor_views.questions_list, name="questions"),

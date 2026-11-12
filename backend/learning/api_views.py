@@ -11,11 +11,15 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from monetization.models import CourseAccess
-from monetization.course_topics import canonical_topic_id
 
 from .badges import achievements_payload, evaluate_badges, mark_badges_seen
 from .analytics import user_test_analytics
-from .access import free_topic_id, user_can_access_question, user_can_access_topic
+from .access import (
+    accessible_university_question_ids,
+    user_can_access_question,
+    user_can_access_questions,
+    user_can_access_topic,
+)
 from .models import ActivityEvent, Attempt, Bookmark, ChallengeParticipant, PracticeSession, Question, Subject, Topic, UserStats, QuestionComment, QuestionReport
 from .serializers import AttemptSerializer, BookmarkSerializer, QuestionPracticeSerializer, SubjectSerializer, QuestionCommentSerializer, QuestionReportSerializer
 
@@ -117,11 +121,8 @@ class StartSessionView(APIView):
                     status=400,
                 )
         has_course_access = bool(subject and CourseAccess.user_has_course_access(request.user, subject.code))
-        if subject and subject.track == Subject.Track.UNIVERSITY and not has_course_access:
-            if topic and not user_can_access_topic(request.user, subject, topic):
-                return Response({"detail": "Course access is required to start this practice session."}, status=status.HTTP_403_FORBIDDEN)
-            if topic is None and request.data.get("question_ids") is None:
-                return Response({"detail": "Course access is required to start this practice session."}, status=status.HTTP_403_FORBIDDEN)
+        if subject and subject.track == Subject.Track.UNIVERSITY and topic and not user_can_access_topic(request.user, subject, topic):
+            return Response({"detail": "The limited-access question sample is unavailable or has expired. A semester pass unlocks this topic."}, status=status.HTTP_403_FORBIDDEN)
         raw_limit = request.data.get("limit", 10)
         if isinstance(raw_limit, bool) or isinstance(raw_limit, float) and not raw_limit.is_integer():
             return Response({"limit": ["Choose a valid number of questions."]}, status=400)
@@ -152,11 +153,14 @@ class StartSessionView(APIView):
             pool = Question.objects.filter(topic__subject=subject, is_active=True)
             if topic:
                 pool = pool.filter(topic=topic)
+            if subject.track == Subject.Track.UNIVERSITY and not has_course_access:
+                accessible_ids = accessible_university_question_ids(request.user, subject, topic)
+                pool = pool.filter(external_id__in=accessible_ids or set())
             by_external_id = {item.external_id: item for item in pool.filter(external_id__in=normalized_ids).select_related("topic__subject")}
             if len(by_external_id) != len(normalized_ids):
                 return Response({"question_ids": ["Every selected question must belong to this available subject and topic."]}, status=400)
             selected = [by_external_id[item] for item in normalized_ids]
-            if subject.track == Subject.Track.UNIVERSITY and not has_course_access and any(not user_can_access_question(request.user, item) for item in selected):
+            if subject.track == Subject.Track.UNIVERSITY and not has_course_access and not user_can_access_questions(request.user, selected):
                 return Response({"detail": "Course access is required for one or more selected questions."}, status=status.HTTP_403_FORBIDDEN)
             sections = []
             for item in selected:
@@ -199,9 +203,16 @@ class StartSessionView(APIView):
             sections = []
             pool = Question.objects.filter(topic__subject=subject, is_active=True)
             if topic: pool = pool.filter(topic=topic)
+            if subject.track == Subject.Track.UNIVERSITY and not has_course_access:
+                accessible_ids = accessible_university_question_ids(request.user, subject, topic)
+                pool = pool.filter(external_id__in=accessible_ids or set())
             selected = self._select_questions(request.user, pool, limit)
             sections.append({"subject": subject.slug, "name": subject.name, "count": len(selected)})
 
+        if subject and subject.track == Subject.Track.UNIVERSITY and not saved_questions and len(selected) < limit:
+            return Response({
+                "detail": f"Only {len(selected)} questions are available with your current access for this selection. Choose a smaller paper or get the semester pass."
+            }, status=status.HTTP_400_BAD_REQUEST)
         if not selected:
             detail = "No active questions are available for this selection. Choose another topic or All topics."
             return Response({"detail": detail}, status=400)
@@ -409,18 +420,14 @@ class BulkSubmitAttemptsView(APIView):
             return Response({"attempts": ["One or more questions are no longer available."]}, status=400)
         if not question_ids.issubset(set(session.question_ids)):
             return Response({"attempts": ["Every answer must belong to this practice session."]}, status=400)
-        allowed_courses = {}
-        free_topics = {}
+        if not challenge and not user_can_access_questions(
+            request.user,
+            [questions[item["question_id"]] for item in parsed],
+        ):
+            return Response({"detail": "Access to one or more questions has expired or is not included in your free sample."}, status=403)
+
         for item in parsed:
             question = questions[item["question_id"]]
-            subject = question.topic.subject
-            if not challenge and subject.track == Subject.Track.UNIVERSITY:
-                if subject.pk not in allowed_courses:
-                    allowed_courses[subject.pk] = CourseAccess.user_has_course_access(request.user, subject.code)
-                    if not allowed_courses[subject.pk]:
-                        free_topics[subject.pk] = free_topic_id(subject)
-                if not allowed_courses[subject.pk] and (not free_topics[subject.pk] or canonical_topic_id(subject.code, question.topic.slug) != free_topics[subject.pk]):
-                    return Response({"detail": "Course access is required to answer this paper."}, status=403)
             snapshot = snapshots.get(question.external_id)
             if challenge and not snapshot:
                 return Response({"detail": "A question is not part of the shared challenge paper."}, status=400)
@@ -594,11 +601,15 @@ class QuestionCommentView(APIView):
 
     def get(self, request, question_id):
         question = get_object_or_404(Question, external_id=question_id, is_active=True)
+        if not user_can_access_question(request.user, question):
+            return Response({"detail": "This question is outside your current access."}, status=status.HTTP_403_FORBIDDEN)
         comments = question.comments.select_related("user").all()[:100]
         return Response(QuestionCommentSerializer(comments, many=True).data)
 
     def post(self, request, question_id):
         question = get_object_or_404(Question, external_id=question_id, is_active=True)
+        if not user_can_access_question(request.user, question):
+            return Response({"detail": "This question is outside your current access."}, status=status.HTTP_403_FORBIDDEN)
         text = (request.data.get("text") or "").strip()
         if not text or len(text) > 2000:
             return Response({"text": ["Comment must be between 1 and 2000 characters."]}, status=400)
@@ -611,6 +622,8 @@ class QuestionReportView(APIView):
 
     def post(self, request, question_id):
         question = get_object_or_404(Question, external_id=question_id, is_active=True)
+        if not user_can_access_question(request.user, question):
+            return Response({"detail": "This question is outside your current access."}, status=status.HTTP_403_FORBIDDEN)
         reason = request.data.get("reason", "")
         valid_reasons = [c[0] for c in QuestionReport.Reason.choices]
         if reason not in valid_reasons:

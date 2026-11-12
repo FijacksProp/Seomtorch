@@ -61,14 +61,13 @@ test("connections and study board are opt-in views", () => {
   assert.ok(board.includes("not a measure of ability"));
 });
 
-test("upgrade offer requires confirmed, unsubscribed university access", () => {
+test("semester pass introduction is limited to university users without full access", () => {
   const eligible = { user: { public_id: "ME1234" }, mode: "university", ready: true, access: { unlocked_courses: [] } };
   assert.equal(eligibleForUniversityOffer(eligible), true);
   for (const override of [
     { mode: "aspirant" }, { ready: false }, { user: null },
     { user: { is_staff: true } }, { user: { is_superuser: true } },
     { user: { must_change_password: true } },
-    { access: { has_all_access: true } }, { access: { is_trial: true } },
-    { access: { unlocked_courses: ["ANA 201"] } },
+    { access: { has_all_access: true } },
   ]) assert.equal(eligibleForUniversityOffer({ ...eligible, ...override }), false);
 });

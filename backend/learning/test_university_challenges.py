@@ -16,9 +16,9 @@ from .models import Attempt, Challenge, ChallengeParticipant, PracticeSession, Q
 class UniversityChallengeTests(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.host = get_user_model().objects.create_user(email="host@example.com", username="host", password="SecurePass934!")
-        cls.friend = get_user_model().objects.create_user(email="friend@example.com", username="friend", password="SecurePass934!")
-        cls.outsider = get_user_model().objects.create_user(email="outsider@example.com", username="outsider", password="SecurePass934!")
+        cls.host = get_user_model().objects.create_user(email="host@example.com", username="host", password="SecurePass934!", user_type="university", active_mode="university")
+        cls.friend = get_user_model().objects.create_user(email="friend@example.com", username="friend", password="SecurePass934!", user_type="university", active_mode="university")
+        cls.outsider = get_user_model().objects.create_user(email="outsider@example.com", username="outsider", password="SecurePass934!", user_type="university", active_mode="university")
         cls.course = Subject.objects.create(slug="challenge-ana-201", name="Anatomy", code="ANA 201", track="university")
         cls.free = Topic.objects.create(subject=cls.course, slug="ul-bones", name="Bones of the Upper Limb")
         cls.paid = Topic.objects.create(subject=cls.course, slug="ul-joints", name="Joints of the Upper Limb")
@@ -34,7 +34,7 @@ class UniversityChallengeTests(TestCase):
         self.friend_client.force_authenticate(self.friend)
 
     def grant(self, user):
-        return CourseAccess.objects.create(user=user, access_type="single_course", course_code="ANA 201", expires_at=timezone.now() + timedelta(days=30))
+        return CourseAccess.objects.create(user=user, access_type="all_access", course_code="all", granted_by="payment", expires_at=timezone.now() + timedelta(days=30))
 
     def create(self, **extra):
         now = timezone.now()
@@ -64,29 +64,28 @@ class UniversityChallengeTests(TestCase):
             self.assertNotIn("correct", question)
             self.assertNotIn("explanation", question)
 
-    def test_paid_topic_requires_own_access_at_creation_acceptance_and_start(self):
-        self.assertEqual(self.create(topic=self.paid.slug).status_code, 403)
-        self.grant(self.host)
-        created = self.create(topic=self.paid.slug)
+    def test_each_topic_has_a_ten_question_sample_and_participant_access_is_rechecked(self):
+        self.assertEqual(self.create(topic=self.paid.slug, question_count=12).status_code, 400)
+        created = self.create(topic=self.paid.slug, question_count=10)
         self.assertEqual(created.status_code, 201, created.data)
         url = f"/api/challenges/{created.data['id']}/respond/"
-        self.assertEqual(self.friend_client.post(url, {"response": "accept"}, format="json").status_code, 403)
-        grant = self.grant(self.friend)
         self.assertEqual(self.friend_client.post(url, {"response": "accept"}, format="json").status_code, 200)
-        grant.is_active = False
-        grant.save()
+        self.friend.created_at = timezone.now() - timedelta(days=100)
+        self.friend.save(update_fields=("created_at",))
         self.assertEqual(self.start(created, self.friend_client).status_code, 403)
         self.assertFalse(PracticeSession.objects.filter(user=self.friend).exists())
 
     def test_locked_invitation_can_still_be_declined(self):
         self.grant(self.host)
         created = self.create(topic=self.paid.slug)
+        self.friend.created_at = timezone.now() - timedelta(days=100)
+        self.friend.save(update_fields=("created_at",))
         result = self.friend_client.post(f"/api/challenges/{created.data['id']}/respond/", {"response": "decline"}, format="json")
         self.assertEqual(result.status_code, 200)
         self.assertEqual(result.data["my_status"], "declined")
 
-    def test_mixed_course_is_grouped_and_cannot_be_created_without_course_access(self):
-        self.assertEqual(self.create(topic="").status_code, 403)
+    def test_mixed_course_paper_is_limited_to_the_combined_topic_quotas(self):
+        self.assertEqual(self.create(topic="", question_count=21).status_code, 400)
         self.grant(self.host)
         created = self.create(topic="", question_count=24)
         self.assertEqual(created.status_code, 201, created.data)
@@ -102,8 +101,9 @@ class UniversityChallengeTests(TestCase):
         topics = {t["id"]: t for t in course["topics"]}
         self.assertFalse(course["full_access"])
         self.assertTrue(topics[self.free.slug]["accessible"])
-        self.assertFalse(topics[self.paid.slug]["accessible"])
+        self.assertTrue(topics[self.paid.slug]["accessible"])
         self.assertEqual(topics[self.free.slug]["question_count"], 12)
+        self.assertEqual(topics[self.free.slug]["accessible_question_count"], 10)
         self.assertNotIn("questions", course)
         self.grant(self.host)
         full = self.client.get("/api/challenges/catalog/")
@@ -152,6 +152,7 @@ class UniversityChallengeTests(TestCase):
         self.assertFalse(Attempt.objects.exists())
 
     def test_hundred_question_batch_has_bounded_database_work(self):
+        self.grant(self.host)
         Question.objects.bulk_create([
             Question(external_id=f"uni-extra-{i}", topic=self.free, text=f"Question {i}", options=["A", "B"], correct_index=0)
             for i in range(88)

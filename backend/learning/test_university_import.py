@@ -9,12 +9,14 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.management import call_command
 from django.core.management.base import CommandError
-from django.test import override_settings
+from django.test import RequestFactory, override_settings
 from django.utils import timezone
 from rest_framework.test import APITestCase
+from urllib.parse import parse_qs, urlparse
 
-from monetization.course_topics import DEFAULT_FREE_TOPICS
-from monetization.models import CourseAccess, CourseTopicConfig
+from monetization.models import CourseAccess
+from .content_views import _signed_media_url
+from .access import accessible_university_question_ids, free_question_limit, limited_sample_count
 from .management.commands.import_questions import Command
 from .models import Attempt, Bookmark, PracticeSession, Question, Subject, Topic
 
@@ -44,17 +46,30 @@ class UniversityImportTests(APITestCase):
         cls.student = get_user_model().objects.create_user(
             email="university-import@example.com", username="university-import",
             password="TestOnlyPassword123!",
-        )
-        CourseAccess.objects.create(
-            user=cls.student, access_type=CourseAccess.AccessType.ALL_ACCESS,
-            expires_at=timezone.now() + timedelta(days=30),
+            user_type="university", active_mode="university",
         )
 
     def setUp(self):
         self.client.force_authenticate(user=self.student)
 
+    def test_limited_access_exposes_about_twenty_percent_per_topic(self):
+        self.assertEqual(free_question_limit(100), 20)
+        self.assertEqual(free_question_limit(50), 10)
+        self.assertEqual(free_question_limit(30), 6)
+        self.assertEqual(free_question_limit(29), 6)
+        self.assertEqual(free_question_limit(9), 2)
+        self.assertEqual(free_question_limit(1), 1)
+        self.assertEqual(free_question_limit(0), 0)
+        self.assertEqual(free_question_limit(100, 5), 5)
+        self.assertEqual(free_question_limit(50, 5), 3)
+        self.assertEqual(free_question_limit(30, 5), 2)
+        self.assertEqual(free_question_limit(1, 5), 1)
+
     def _start(self, catalog, topic, payload):
-        selected = payload["questions"][:10]
+        subject = Subject.objects.get(code=catalog["code"], track=Subject.Track.UNIVERSITY)
+        topic_row = Topic.objects.get(subject=subject, slug=topic["id"])
+        allowed_ids = accessible_university_question_ids(self.student, subject, topic_row)
+        selected = [question for question in payload["questions"] if question["id"] in allowed_ids][:10]
         return self.client.post("/api/sessions/", {
             "subject": catalog["code"].lower().replace(" ", "-"),
             "topic": topic["id"],
@@ -82,16 +97,20 @@ class UniversityImportTests(APITestCase):
                     expected_count += 1
         self.assertEqual(len(actual), expected_count)
 
-    def test_subscriber_can_start_every_shipped_university_topic(self):
+    def test_limited_student_can_start_every_shipped_university_topic(self):
         for catalog, topic, payload in university_catalog_topics():
             with self.subTest(course=catalog["code"], topic=topic["id"]):
                 response = self._start(catalog, topic, payload)
                 self.assertEqual(response.status_code, 201, response.data)
                 session = PracticeSession.objects.get(id=response.data["session_id"])
                 self.assertEqual(session.topic.slug, topic["id"])
-                self.assertEqual(len(response.data["questions"]), 10)
+                self.assertEqual(len(response.data["questions"]), min(10, free_question_limit(len(payload["questions"]))))
 
     def test_real_bones_timed_session_can_be_started_scored_and_completed(self):
+        CourseAccess.objects.create(
+            user=self.student, access_type=CourseAccess.AccessType.ALL_ACCESS,
+            expires_at=timezone.now() + timedelta(days=30),
+        )
         root = Path(settings.BASE_DIR).parent
         payload = json.loads((root / "data/university/anatomy/200/questions-ana201-bones.json").read_text(encoding="utf-8"))
         started = self.client.post("/api/sessions/", {
@@ -118,29 +137,66 @@ class UniversityImportTests(APITestCase):
         self.assertEqual(completed.data["correct"], 100)
         self.assertEqual(completed.data["stats"]["xp"], 500)
 
-    def test_default_free_topics_work_for_content_and_practice(self):
-        CourseAccess.objects.filter(user=self.student).delete()
+    def test_question_bank_and_notes_follow_topic_quotas(self):
         for catalog, topic, payload in university_catalog_topics():
-            if topic["id"] != DEFAULT_FREE_TOPICS.get(catalog["code"]):
-                continue
             with self.subTest(course=catalog["code"]):
                 content = self.client.get("/api/content/university/", {"path": topic["dataFile"]})
                 self.assertEqual(content.status_code, 200, content.data)
+                subject = Subject.objects.get(code=catalog["code"], track=Subject.Track.UNIVERSITY)
+                topic_row = Topic.objects.get(subject=subject, slug=topic["id"])
+                allowed_ids = accessible_university_question_ids(self.student, subject, topic_row)
+                expected_count = free_question_limit(len(payload["questions"]))
+                self.assertEqual(len(content.data["questions"]), expected_count)
+                self.assertEqual({item["id"] for item in content.data["questions"]}, allowed_ids)
+                self.assertTrue(all("correct" not in item and "explanation" not in item for item in content.data["questions"]))
                 started = self._start(catalog, topic, payload)
                 self.assertEqual(started.status_code, 201, started.data)
+        notes = self.client.get("/api/content/university/", {"path": "data/university/anatomy/200/notes-ana201-ul-bones.json"})
+        self.assertEqual(notes.status_code, 200, notes.data)
+        source_notes = json.loads((Path(settings.BASE_DIR).parent / "data/university/anatomy/200/notes-ana201-ul-bones.json").read_text(encoding="utf-8"))
+        expected_blocks = limited_sample_count(len(source_notes["blocks"]))
+        self.assertEqual(len(notes.data["blocks"]), expected_blocks)
+        self.assertEqual(len(notes.data["lockedBlocks"]), len(source_notes["blocks"]) - expected_blocks)
+        self.assertTrue(all(set(block) <= {"id", "number", "title", "category", "isLocked"} for block in notes.data["lockedBlocks"]))
 
-    def test_legacy_admin_free_topic_setting_keeps_its_meaning(self):
-        CourseAccess.objects.filter(user=self.student).delete()
-        CourseTopicConfig.objects.create(course_code="ANA 203", free_topic_id="week-one")
-        for catalog, topic, payload in university_catalog_topics():
-            if catalog["code"] == "ANA 203" and topic["id"] == "ge-week-one":
-                content = self.client.get("/api/content/university/", {"path": topic["dataFile"]})
-                self.assertEqual(content.status_code, 200, content.data)
-                started = self._start(catalog, topic, payload)
-                self.assertEqual(started.status_code, 201, started.data)
-                break
-        else:
-            self.fail("The real ANA 203 week-one topic is missing")
+    def test_expired_pass_limits_note_images_and_prevents_browser_caching(self):
+        self.student.created_at = timezone.now() - timedelta(days=15)
+        self.student.save(update_fields=("created_at",))
+        CourseAccess.objects.create(
+            user=self.student, access_type=CourseAccess.AccessType.ALL_ACCESS,
+            expires_at=timezone.now() - timedelta(days=1),
+        )
+        note_path = "data/university/anatomy/200/notes-ana201-ul-bones.json"
+        notes = self.client.get("/api/content/university/", {"path": note_path})
+        self.assertEqual(notes.status_code, 200, notes.data)
+        self.assertEqual(notes["Cache-Control"], "private, no-store")
+
+        source_path = Path(settings.BASE_DIR).parent / note_path
+        source_notes = json.loads(source_path.read_text(encoding="utf-8"))
+        accessible_count = limited_sample_count(len(source_notes["blocks"]), 5)
+
+        question_path = "data/university/anatomy/200/questions-ana201-bones.json"
+        source_questions = json.loads((Path(settings.BASE_DIR).parent / question_path).read_text(encoding="utf-8"))
+        questions = self.client.get("/api/content/university/", {"path": question_path})
+        self.assertEqual(questions.status_code, 200, questions.data)
+        expected_question_count = free_question_limit(len(source_questions["questions"]), 5)
+        self.assertEqual(questions.data["accessPercentage"], 5)
+        self.assertEqual(len(questions.data["questions"]), expected_question_count)
+        self.assertTrue(all("correct" not in item and "explanation" not in item for item in questions.data["questions"]))
+
+        allowed_image = parse_qs(urlparse(notes.data["blocks"][0]["image"]).query)["path"][0]
+        locked_image = source_notes["blocks"][accessible_count]["image"]
+        request = RequestFactory().get("/")
+
+        def fetch_image(relative_path):
+            signed_url = _signed_media_url(request, relative_path)
+            query = urlparse(signed_url).query
+            return self.client.get(f"/api/content/university-media/?{query}")
+
+        allowed_response = fetch_image(allowed_image)
+        self.assertEqual(allowed_response.status_code, 200)
+        self.assertEqual(allowed_response["Cache-Control"], "private, no-store")
+        self.assertEqual(fetch_image(locked_image).status_code, 403)
 
     def test_reimport_repairs_legacy_topic_without_losing_progress(self):
         question = Question.objects.select_related("topic").get(external_id="ana201-bones-1")

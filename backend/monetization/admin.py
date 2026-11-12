@@ -5,44 +5,21 @@ from .models import (
     DiscountCode,
     CourseAccess,
     PaymentTransaction,
-    CourseTopicConfig,
     MonetizationEvent,
 )
+from .access_policy import SEMESTER_ACCESS_PRICE, is_university_user
 
 
 @admin.register(PlanConfig)
 class PlanConfigAdmin(admin.ModelAdmin):
-    list_display = (
-        "__str__",
-        "single_course_price",
-        "all_access_price",
-        "launch_offer_price",
-        "launch_offer_active",
-        "screenshot_protection_enabled",
-        "launch_offer_buyers_count",
-        "launch_offer_max_buyers",
-        "semester_end_date",
-        "trial_duration_days",
-    )
+    list_display = ("semester_pass_price", "limited_access_days", "semester_end_date", "screenshot_protection_enabled", "updated_at")
+    readonly_fields = ("semester_pass_price",)
     fieldsets = (
-        ("Standard Semester Pricing (NGN)", {
-            "fields": ("single_course_price", "all_access_price", "semester_end_date"),
-            "description": "Base prices and semester expiration date for university courses.",
+        ("University Semester Access", {
+            "fields": ("semester_pass_price", "limited_access_days", "semester_end_date"),
+            "description": "The pass is fixed at ₦2,500. Set the university preview duration and current semester end date.",
         }),
-        ("Launch Offer (Auto-reverting)", {
-            "fields": (
-                "launch_offer_active",
-                "launch_offer_price",
-                "launch_offer_end_date",
-                "launch_offer_max_buyers",
-                "launch_offer_buyers_count",
-            ),
-            "description": "Discounted launch price that automatically returns to standard price when max buyers or end date is reached.",
-        }),
-        ("Trial & Gateway Settings", {
-            "fields": ("trial_duration_days", "paystack_public_key", "paystack_secret_key"),
-            "description": "3-day trial settings and Paystack API keys.",
-        }),
+        ("Paystack", {"fields": ("paystack_public_key", "paystack_secret_key")}),
         ("Security & Screen Protection", {
             "fields": ("screenshot_protection_enabled",),
             "description": "Controls anti-screenshot blur, tab-switch obscuring, and watermark overlay across the student app.",
@@ -52,6 +29,10 @@ class PlanConfigAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         # Enforce singleton
         return not PlanConfig.objects.exists()
+
+    @admin.display(description="Semester pass price")
+    def semester_pass_price(self, obj):
+        return f"₦{SEMESTER_ACCESS_PRICE:,}"
 
     def has_delete_permission(self, request, obj=None):
         return False
@@ -74,6 +55,15 @@ class DiscountCodeAdmin(admin.ModelAdmin):
     search_fields = ("code", "label")
     readonly_fields = ("times_used", "created_at")
 
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 @admin.register(CourseAccess)
 class CourseAccessAdmin(admin.ModelAdmin):
@@ -90,42 +80,21 @@ class CourseAccessAdmin(admin.ModelAdmin):
     list_filter = ("access_type", "course_code", "is_active", "granted_by")
     search_fields = ("user__email", "user__username", "user__public_id", "course_code", "reference")
     autocomplete_fields = ("user",)
-    actions = ["grant_all_access_semester", "grant_ana201_semester", "revoke_access"]
+    actions = ["revoke_access"]
 
-    @admin.action(description="Grant ALL-ACCESS until Semester End Date")
-    def grant_all_access_semester(self, request, queryset):
-        config = PlanConfig.get_solo()
-        count = 0
-        for access in queryset:
-            access.access_type = CourseAccess.AccessType.ALL_ACCESS
-            access.course_code = "all"
-            access.expires_at = config.semester_end_date
-            access.is_active = True
-            access.granted_by = CourseAccess.GrantedBy.ADMIN_MANUAL
-            access.reference = f"admin_manual_{request.user.username}_{int(timezone.now().timestamp())}"
-            access.save()
-            count += 1
-        messages.success(request, f"Updated {count} access grants to ALL-ACCESS until {config.semester_end_date.strftime('%Y-%m-%d')}.")
-
-    @admin.action(description="Grant ANA 201 until Semester End Date")
-    def grant_ana201_semester(self, request, queryset):
-        config = PlanConfig.get_solo()
-        count = 0
-        for access in queryset:
-            access.access_type = CourseAccess.AccessType.SINGLE_COURSE
-            access.course_code = "ANA 201"
-            access.expires_at = config.semester_end_date
-            access.is_active = True
-            access.granted_by = CourseAccess.GrantedBy.ADMIN_MANUAL
-            access.reference = f"admin_manual_{request.user.username}_{int(timezone.now().timestamp())}"
-            access.save()
-            count += 1
-        messages.success(request, f"Updated {count} access grants to ANA 201 until {config.semester_end_date.strftime('%Y-%m-%d')}.")
-
-    @admin.action(description="Revoke selected access grants")
+    @admin.action(description="Revoke selected paid access grants")
     def revoke_access(self, request, queryset):
         count = queryset.update(is_active=False)
         messages.warning(request, f"Revoked {count} access grants.")
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def get_readonly_fields(self, request, obj=None):
+        return tuple(field.name for field in self.model._meta.fields)
 
 
 @admin.register(PaymentTransaction)
@@ -150,7 +119,9 @@ class PaymentTransactionAdmin(admin.ModelAdmin):
     def manually_unlock_transaction(self, request, queryset):
         config = PlanConfig.get_solo()
         count = 0
-        for tx in queryset.filter(status__in=[PaymentTransaction.Status.PENDING, PaymentTransaction.Status.FAILED]):
+        for tx in queryset.filter(status__in=[PaymentTransaction.Status.PENDING, PaymentTransaction.Status.FAILED], amount=SEMESTER_ACCESS_PRICE, access_type=PaymentTransaction.AccessType.ALL_ACCESS):
+            if not is_university_user(tx.user):
+                continue
             tx.status = PaymentTransaction.Status.SUCCESS
             tx.paid_at = timezone.now()
             tx.gateway_response = {"note": f"Manually verified by admin {request.user.username}"}
@@ -163,17 +134,11 @@ class PaymentTransactionAdmin(admin.ModelAdmin):
                 starts_at=timezone.now(),
                 expires_at=config.semester_end_date,
                 is_active=True,
-                granted_by=CourseAccess.GrantedBy.ADMIN_MANUAL,
+                granted_by=CourseAccess.GrantedBy.PAYMENT,
                 reference=tx.reference,
             )
             count += 1
         messages.success(request, f"Successfully verified and unlocked access for {count} transactions.")
-
-
-@admin.register(CourseTopicConfig)
-class CourseTopicConfigAdmin(admin.ModelAdmin):
-    list_display = ("course_code", "free_topic_id", "showcase_note_id", "updated_at")
-    search_fields = ("course_code", "free_topic_id")
 
 
 @admin.register(MonetizationEvent)

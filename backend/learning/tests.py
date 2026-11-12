@@ -9,6 +9,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient, APITestCase
 from django.utils import timezone
 
+from .access import accessible_university_question_ids
 from .models import ActivityEvent, Attempt, Bookmark, Challenge, ChallengeParticipant, PracticeSession, Question, Subject, Topic, UserBadge, UserStats
 from .badges import BADGE_CATALOG, badge_progress
 
@@ -253,7 +254,7 @@ class LearningApiTests(APITestCase):
         self.assertIn("No active questions", empty.data["detail"])
         self.assertEqual(PracticeSession.objects.filter(user=self.user).count(), before)
 
-    def test_university_mixed_session_can_only_use_the_free_topic_without_access(self):
+    def test_university_limited_period_includes_each_topic_and_expires_after_fourteen_days(self):
         subject, _ = Subject.objects.get_or_create(
             slug="ana-201",
             defaults={
@@ -263,23 +264,43 @@ class LearningApiTests(APITestCase):
         )
         free_topic = Topic.objects.create(subject=subject, name="Upper Limb Bones", slug="ul-bones")
         paid_topic = Topic.objects.create(subject=subject, name="Upper Limb Muscles", slug="ul-muscles")
-        free_question = Question.objects.create(
-            external_id="test-ana201-free", topic=free_topic, text="Free sample?",
+        free_questions = [Question.objects.create(
+            external_id=f"test-ana201-free-{index:02d}", topic=free_topic, text=f"Preview question {index}?",
             options=["A", "B", "C", "D"], correct_index=0,
-        )
-        paid_question = Question.objects.create(
-            external_id="test-ana201-paid", topic=paid_topic, text="Paid sample?",
+        ) for index in range(20)]
+        sample_questions = [Question.objects.create(
+            external_id=f"test-ana201-sample-{index:02d}", topic=paid_topic, text=f"Sample question {index}?",
             options=["A", "B", "C", "D"], correct_index=0,
-        )
+        ) for index in range(20)]
+        self.user.user_type = "university"
+        self.user.active_mode = "university"
+        self.user.save(update_fields=("user_type", "active_mode"))
         payload = {"subject": "ana-201", "limit": 1, "mode": "normal"}
+        preview_ids = accessible_university_question_ids(self.user, subject, free_topic)
+        self.assertEqual(len(preview_ids), 4)
         allowed = self.client.post("/api/sessions/", {
-            **payload, "question_ids": [free_question.external_id],
+            **payload, "topic": free_topic.slug, "question_ids": [free_questions[0].external_id],
         }, format="json")
         self.assertEqual(allowed.status_code, 201, allowed.data)
         denied = self.client.post("/api/sessions/", {
-            **payload, "question_ids": [paid_question.external_id],
+            **payload, "topic": paid_topic.slug, "question_ids": [sample_questions[-1].external_id],
         }, format="json")
-        self.assertEqual(denied.status_code, 403)
+        self.assertEqual(denied.status_code, 400, denied.data)
+
+        self.user.created_at = timezone.now() - timedelta(days=15)
+        self.user.save(update_fields=("created_at",))
+        ongoing_sample_ids = accessible_university_question_ids(self.user, subject, free_topic)
+        self.assertEqual(len(ongoing_sample_ids), 1)
+        ongoing_sample = self.client.post("/api/sessions/", {
+            **payload, "topic": free_topic.slug, "question_ids": [free_questions[0].external_id],
+        }, format="json")
+        self.assertEqual(ongoing_sample.status_code, 201, ongoing_sample.data)
+        outside_sample = self.client.post("/api/sessions/", {
+            **payload, "topic": free_topic.slug, "question_ids": [free_questions[-1].external_id],
+        }, format="json")
+        self.assertEqual(outside_sample.status_code, 400, outside_sample.data)
+        self.assertEqual(self.client.get(f"/api/questions/{free_questions[-1].external_id}/comments/").status_code, 403)
+        self.assertEqual(self.client.post(f"/api/questions/{free_questions[-1].external_id}/report/", {"reason": "wrong_key"}, format="json").status_code, 403)
 
     def test_all_subject_session_is_balanced_and_grouped(self):
         response = self.client.post("/api/sessions/", {"subject": "all", "limit": 20, "duration_minutes": 10}, format="json")

@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.utils import timezone
 
-from monetization.models import CourseAccess, DiscountCode, PlanConfig
+from monetization.models import CourseAccess, PlanConfig
 from learning.models import Attempt, Subject, Topic, Question, PracticeSession
 
 User = get_user_model()
@@ -100,16 +100,16 @@ class MonitorProFeatureTests(TestCase):
         self.assertIn("chart_test_labels", response.context)
         self.assertIn("chart_pie_labels", response.context)
 
-    def test_grant_and_revoke_student_access(self):
-        # Grant all-access
+    def test_direct_admin_grants_are_retired_and_paid_passes_can_be_revoked(self):
         grant_res = self.client.post(
             f"/monitor/students/{self.student.public_id}/grant-access/",
             {"access_type": "all_access", "course_code": "all", "expires_at": "2027-04-01"}
         )
-        self.assertEqual(grant_res.status_code, 302)
-        grant = CourseAccess.objects.filter(user=self.student, is_active=True).first()
-        self.assertIsNotNone(grant)
-        self.assertEqual(grant.access_type, "all_access")
+        self.assertEqual(grant_res.status_code, 404)
+        grant = CourseAccess.objects.create(
+            user=self.student, access_type=CourseAccess.AccessType.ALL_ACCESS,
+            granted_by=CourseAccess.GrantedBy.PAYMENT, expires_at=timezone.now() + timedelta(days=30),
+        )
 
         # Revoke access
         revoke_res = self.client.post(
@@ -126,12 +126,7 @@ class MonitorProFeatureTests(TestCase):
 
         # Update pricing
         post_res = self.client.post("/monitor/monetization/update-pricing/", {
-            "single_course_price": "1800",
-            "all_access_price": "3500",
-            "launch_offer_price": "2200",
-            "launch_offer_active": "on",
-            "launch_offer_max_buyers": "150",
-            "trial_duration_days": "4",
+            "limited_access_days": "14",
             "semester_end_date": "2027-05-30",
             "paystack_public_key": "pk_test_sample",
             "paystack_secret_key": "sk_test_sample",
@@ -139,13 +134,21 @@ class MonitorProFeatureTests(TestCase):
         self.assertEqual(post_res.status_code, 302)
 
         config = PlanConfig.get_solo()
-        self.assertEqual(config.single_course_price, 1800)
-        self.assertEqual(config.all_access_price, 3500)
-        self.assertEqual(config.launch_offer_price, 2200)
-        self.assertTrue(config.launch_offer_active)
-        self.assertEqual(config.trial_duration_days, 4)
+        self.assertEqual(timezone.localtime(config.semester_end_date).date().isoformat(), "2027-05-30")
+        self.assertEqual(config.limited_access_days, 14)
+        self.assertEqual(config.paystack_public_key, "pk_test_sample")
+        self.assertEqual(config.paystack_secret_key, "sk_test_sample")
 
-    def test_create_and_toggle_discount_code(self):
+    def test_monetization_hub_rejects_invalid_limited_access_duration(self):
+        config = PlanConfig.get_solo()
+        config.limited_access_days = 14
+        config.save(update_fields=("limited_access_days",))
+        response = self.client.post("/monitor/monetization/update-pricing/", {"limited_access_days": "0"})
+        self.assertEqual(response.status_code, 302)
+        config.refresh_from_db()
+        self.assertEqual(config.limited_access_days, 14)
+
+    def test_legacy_discount_code_controls_are_retired(self):
         create_res = self.client.post("/monitor/monetization/create-discount/", {
             "code": "TESTMED25",
             "label": "Medical Class 2025",
@@ -153,18 +156,8 @@ class MonitorProFeatureTests(TestCase):
             "target_plan": "all_access",
             "max_uses": "50",
         })
-        self.assertEqual(create_res.status_code, 302)
-
-        code_obj = DiscountCode.objects.filter(code="TESTMED25").first()
-        self.assertIsNotNone(code_obj)
-        self.assertTrue(code_obj.is_active)
-        self.assertEqual(code_obj.discounted_price, 2400)
-
-        # Toggle inactive
-        toggle_res = self.client.post(f"/monitor/monetization/toggle-discount/{code_obj.id}/")
-        self.assertEqual(toggle_res.status_code, 302)
-        code_obj.refresh_from_db()
-        self.assertFalse(code_obj.is_active)
+        self.assertEqual(create_res.status_code, 404)
+        self.assertEqual(self.client.post("/monitor/monetization/toggle-discount/1/").status_code, 404)
 
     def test_questions_list_and_add_question(self):
         # View list

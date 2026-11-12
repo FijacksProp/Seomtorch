@@ -14,14 +14,18 @@ from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from monetization.models import CourseAccess, CourseTopicConfig
-from monetization.course_topics import DEFAULT_FREE_TOPICS, canonical_topic_id
+from monetization.models import CourseAccess
+from monetization.access_policy import limited_access_is_active, limited_access_percentage
+from monetization.course_topics import canonical_topic_id
+from .access import accessible_university_question_ids, limited_sample_count
+from .models import Subject, Topic, Question
 
 
 REPO_DIR = settings.BASE_DIR.parent
 UNIVERSITY_DIR = REPO_DIR / "data" / "university"
 NOTES_ASSET_DIR = REPO_DIR / "assets" / "notes"
 ALLOWED_IMAGE_TYPES = {".png", ".jpg", ".jpeg", ".webp", ".avif"}
+_NOTE_MEDIA_BLOCK_POSITIONS = {}
 
 
 def _normalized(value):
@@ -31,7 +35,9 @@ def _normalized(value):
 @lru_cache(maxsize=1)
 def _content_access_map():
     """Map private question/note files and note images to their course/topic."""
+    global _NOTE_MEDIA_BLOCK_POSITIONS
     content_map = {}
+    note_media_positions = {}
     note_files = []
     if not UNIVERSITY_DIR.exists():
         return content_map
@@ -92,28 +98,63 @@ def _content_access_map():
         except (OSError, json.JSONDecodeError):
             continue
 
-        def collect_images(value):
+        def collect_images(value, found=None):
             if isinstance(value, dict):
                 for key, child in value.items():
                     if key in {"image", "image_url", "imageUrl"} and isinstance(child, str):
                         image_rel = _normalized(child)
                         if image_rel.startswith("assets/notes/"):
                             content_map[image_rel] = (course_code, topic_id)
-                    collect_images(child)
+                            if found is not None:
+                                found.add(image_rel)
+                    collect_images(child, found)
             elif isinstance(value, list):
                 for child in value:
-                    collect_images(child)
+                    collect_images(child, found)
 
         collect_images(note_data)
+        blocks = note_data.get("blocks")
+        if isinstance(blocks, list):
+            for block_index, block in enumerate(blocks):
+                image_paths = set()
+                collect_images(block, image_paths)
+                for image_path in image_paths:
+                    note_media_positions.setdefault(image_path, set()).add((len(blocks), block_index))
+    _NOTE_MEDIA_BLOCK_POSITIONS = {path: tuple(positions) for path, positions in note_media_positions.items()}
     return content_map
 
 
-def _has_access(user, course_code, topic_id=""):
+def _note_image_is_accessible(user, relative_path):
+    percentage = limited_access_percentage(user)
+    return any(
+        block_index < limited_sample_count(total_blocks, percentage)
+        for total_blocks, block_index in _NOTE_MEDIA_BLOCK_POSITIONS.get(relative_path, ())
+    )
+
+
+def _resolve_subject_topic(course_code, topic_id, question_rows=None):
+    subject = Subject.objects.filter(code__iexact=course_code, track=Subject.Track.UNIVERSITY, is_active=True).first()
+    if not subject:
+        return None, None
+    if topic_id:
+        target = canonical_topic_id(course_code, topic_id)
+        topic = next((item for item in subject.topics.all() if canonical_topic_id(course_code, item.slug) == target), None)
+        if topic:
+            return subject, topic
+    external_ids = [str(row.get("id") or row.get("external_id") or "") for row in (question_rows or [])]
+    external_ids = [item for item in external_ids if item]
+    if external_ids:
+        matches = list(Question.objects.filter(external_id__in=external_ids, topic__subject=subject, is_active=True).select_related("topic"))
+        topic_ids = {item.topic_id for item in matches}
+        if len(topic_ids) == 1:
+            return subject, matches[0].topic
+    return subject, None
+
+
+def _has_access(user, course_code, *, is_note=False):
     if CourseAccess.user_has_course_access(user, course_code):
         return True
-    configured = CourseTopicConfig.objects.filter(course_code__iexact=course_code).values_list("free_topic_id", flat=True).first()
-    free_topic_id = configured or next((topic for code, topic in DEFAULT_FREE_TOPICS.items() if code.upper() == course_code.upper()), "")
-    return bool(free_topic_id and topic_id and canonical_topic_id(course_code, free_topic_id) == canonical_topic_id(course_code, topic_id))
+    return limited_access_is_active(user)
 
 
 def _safe_relative_file(relative_path, root):
@@ -130,9 +171,10 @@ def _safe_relative_file(relative_path, root):
 
 def _signed_media_url(request, relative_path):
     expires = int(timezone.now().timestamp()) + 900
-    payload = f"{relative_path}:{expires}".encode("utf-8")
+    user_id = str(request.user.pk)
+    payload = f"{user_id}:{relative_path}:{expires}".encode("utf-8")
     signature = hmac.new(settings.SECRET_KEY.encode("utf-8"), payload, hashlib.sha256).hexdigest()
-    query = urlencode({"path": relative_path, "expires": expires, "signature": signature})
+    query = urlencode({"path": relative_path, "user": user_id, "expires": expires, "signature": signature})
     return request.build_absolute_uri(f"/api/content/university-media/?{query}")
 
 
@@ -172,16 +214,54 @@ class UniversityContentView(APIView):
                 is_metadata = False
         if not entitlement and not is_metadata:
             return Response({"detail": "University content was not found."}, status=status.HTTP_404_NOT_FOUND)
-        if entitlement and not _has_access(request.user, *entitlement):
-            return Response({"detail": "Course access is required to open this content."}, status=status.HTTP_403_FORBIDDEN)
-        if path.name.startswith("questions-") and not entitlement:
-            return Response({"detail": "University content was not found."}, status=status.HTTP_404_NOT_FOUND)
-
         try:
             data = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
             return Response({"detail": "This course file could not be read."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         if entitlement:
+            course_code, topic_id = entitlement
+            is_note = path.name.startswith("notes-") or "blocks" in data
+            if not _has_access(request.user, course_code, is_note=is_note):
+                return Response({"detail": "University access is required to open this content."}, status=status.HTTP_403_FORBIDDEN)
+
+            if path.name.startswith("questions-"):
+                subject, topic = _resolve_subject_topic(course_code, topic_id, data.get("questions"))
+                if not subject:
+                    return Response({"detail": "University content was not found."}, status=status.HTTP_404_NOT_FOUND)
+                full_course_access = CourseAccess.user_has_course_access(request.user, course_code)
+                if not full_course_access and not topic:
+                    return Response({"detail": "This question sample is not currently available."}, status=status.HTTP_403_FORBIDDEN)
+                allowed = accessible_university_question_ids(request.user, subject, topic)
+                if allowed is not None:
+                    data["questions"] = [
+                        item for item in (data.get("questions") or [])
+                        if str(item.get("id") or item.get("external_id") or "") in allowed
+                    ]
+                    for item in data["questions"]:
+                        for key in ("correct", "correctAnswer", "answer", "explanation"):
+                            item.pop(key, None)
+                    data["totalQuestions"] = len(data["questions"])
+                    data["limitedAccess"] = True
+                    data["accessPercentage"] = limited_access_percentage(request.user)
+                    data["accessibleQuestionCount"] = len(data["questions"])
+                if not data.get("questions"):
+                    return Response({"detail": "This question sample is not currently available."}, status=status.HTTP_403_FORBIDDEN)
+
+            if is_note and isinstance(data.get("blocks"), list) and not CourseAccess.user_has_course_access(request.user, course_code):
+                full_blocks = data["blocks"]
+                access_percentage = limited_access_percentage(request.user)
+                accessible_count = limited_sample_count(len(full_blocks), access_percentage)
+                data["totalBlocks"] = len(full_blocks)
+                data["accessibleBlocks"] = accessible_count
+                data["limitedAccess"] = True
+                data["accessPercentage"] = access_percentage
+                data["lockedBlocks"] = [
+                    {"id": block.get("id"), "number": block.get("number"), "title": block.get("title", "Locked study note"), "category": block.get("category", "Study note"), "isLocked": True}
+                    for block in full_blocks[accessible_count:]
+                ]
+                data["blocks"] = full_blocks[:accessible_count]
+                data["glossary"] = []
+                data["checklist"] = []
             _rewrite_private_images(data, request)
         response = Response(data)
         response["Cache-Control"] = "private, no-store"
@@ -201,21 +281,33 @@ class UniversityMediaView(APIView):
         except (TypeError, ValueError):
             expires = 0
         signature = str(request.query_params.get("signature") or "")
+        user_id = str(request.query_params.get("user") or "")
         now = int(timezone.now().timestamp())
         if not relative.startswith("assets/notes/") or expires < now or expires > now + 960:
             return Response(status=status.HTTP_403_FORBIDDEN)
         expected = hmac.new(
             settings.SECRET_KEY.encode("utf-8"),
-            f"{relative}:{expires}".encode("utf-8"),
+            f"{user_id}:{relative}:{expires}".encode("utf-8"),
             hashlib.sha256,
         ).hexdigest()
-        if not hmac.compare_digest(expected, signature) or relative not in _content_access_map():
+        entitlement = _content_access_map().get(relative)
+        if not user_id.isdigit() or not hmac.compare_digest(expected, signature) or not entitlement:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+        from django.contrib.auth import get_user_model
+        media_user = get_user_model().objects.filter(pk=user_id).first()
+        has_full_access = bool(media_user and CourseAccess.user_has_course_access(media_user, entitlement[0]))
+        has_limited_image_access = bool(
+            media_user
+            and _note_image_is_accessible(media_user, relative)
+            and limited_access_is_active(media_user)
+        )
+        if not media_user or not (has_full_access or has_limited_image_access):
             return Response(status=status.HTTP_403_FORBIDDEN)
         path = _safe_relative_file(relative, REPO_DIR)
         if not path or not path.is_file() or path.suffix.lower() not in ALLOWED_IMAGE_TYPES:
             return Response(status=status.HTTP_404_NOT_FOUND)
         content_type = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
         response = FileResponse(path.open("rb"), content_type=content_type)
-        response["Cache-Control"] = "private, max-age=300"
+        response["Cache-Control"] = "private, no-store"
         response["X-Content-Type-Options"] = "nosniff"
         return response

@@ -1,4 +1,4 @@
-const CACHE = "seomtorch-v139";
+const CACHE = "seomtorch-v141";
 const APP_ASSETS = [
   "./",
   "index.html",
@@ -126,6 +126,16 @@ self.addEventListener("activate", event => {
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
   const url = new URL(event.request.url);
+
+  // Course banks and note media are private API content. Never reuse a stale
+  // public-file/offline cache entry left by an older app deployment.
+  if (url.origin === self.location.origin && (
+    url.pathname.startsWith("/data/university/") ||
+    url.pathname.startsWith("/assets/notes/")
+  )) {
+    event.respondWith(fetch(event.request, { cache: "no-store" }));
+    return;
+  }
 
   const isKaTeX = url.href.startsWith("https://cdn.jsdelivr.net/npm/katex");
 

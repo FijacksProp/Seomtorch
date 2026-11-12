@@ -170,6 +170,10 @@ let subscriptionConfig = null;
 let subscriptionStateReady = false;
 let universityIntroductionPending = false;
 let universityIntroductionTimer = null;
+let subscriptionRefreshTimer = null;
+let subscriptionExpiryTimer = null;
+let subscriptionRefreshBusy = false;
+let subscriptionRequestSequence = 0;
 let screenshotProtectionEnabled = (() => {
   try {
     const cached = localStorage.getItem("seomtorch-screenshot-protection");
@@ -181,24 +185,50 @@ let screenshotProtectionEnabled = (() => {
 let userAccessData = {
   has_all_access: false,
   unlocked_courses: [],
-  is_trial: false,
-  trial_days_remaining: 0,
-  trial_used: false,
+  limited_access_active: false,
+  limited_access_days_remaining: 0,
+  limited_access_expires_at: null,
+  access_percentage: 0,
+  access_status: "not_applicable",
+  semester_price: 2500,
   expires_at: null,
 };
-let freeTopicsMap = {
-  "ANA 201": "ul-bones",
-  "ANA 203": "ge-gametes",
-  "PIO 201": "pio-transport-homeostasis",
-};
 
-async function loadSubscriptionState() {
+function subscriptionAccessFingerprint(access) {
+  return JSON.stringify({
+    has_all_access: Boolean(access?.has_all_access),
+    unlocked_courses: [...(access?.unlocked_courses || [])].sort(),
+    limited_access_active: Boolean(access?.limited_access_active),
+    limited_access_expires_at: access?.limited_access_expires_at || null,
+    access_percentage: Number(access?.access_percentage) || 0,
+    access_status: access?.access_status || "not_applicable",
+    expires_at: access?.expires_at || null,
+  });
+}
+
+function scheduleSubscriptionExpiryRefresh() {
+  clearTimeout(subscriptionExpiryTimer);
+  const expiresAt = userAccessData?.has_all_access
+    ? userAccessData?.expires_at
+    : userAccessData?.limited_access_active ? userAccessData?.limited_access_expires_at : null;
+  const expiryTime = expiresAt ? new Date(expiresAt).getTime() : NaN;
+  if (!Number.isFinite(expiryTime) || !authToken) return;
+  // Re-check at the boundary; long dates are chunked to the maximum safe timeout.
+  const delay = Math.max(1000, Math.min(expiryTime - Date.now() + 1000, 2147480000));
+  subscriptionExpiryTimer = setTimeout(() => {
+    loadSubscriptionState({ refreshCurrentUniversity: true }).catch(() => {});
+  }, delay);
+}
+
+async function loadSubscriptionState({ refreshCurrentUniversity = false } = {}) {
   const ownerToken = authToken;
+  const requestSequence = ++subscriptionRequestSequence;
   subscriptionStateReady = false;
   try {
     const data = await api.subscriptionConfig(ownerToken);
-    if (ownerToken !== authToken) return;
+    if (ownerToken !== authToken || requestSequence !== subscriptionRequestSequence) return;
     if (data) {
+      const previousAccess = subscriptionAccessFingerprint(userAccessData);
       subscriptionConfig = data;
       subscriptionStateReady = Boolean(data.user_access && authToken);
       if (data.screenshot_protection_enabled !== undefined) {
@@ -211,9 +241,13 @@ async function loadSubscriptionState() {
       if (data.user_access) {
         userAccessData = data.user_access;
       }
-      if (data.free_topics) {
-        freeTopicsMap = { ...freeTopicsMap, ...data.free_topics };
+      const accessChanged = previousAccess !== subscriptionAccessFingerprint(userAccessData);
+      if (accessChanged) {
+        // The browser cache may contain notes/questions fetched under the previous entitlement.
+        uniContentCache = {};
+        if (refreshCurrentUniversity && route === "university") render();
       }
+      scheduleSubscriptionExpiryRefresh();
     }
   } catch (err) {
     // offline or backend not reachable
@@ -226,13 +260,11 @@ function hasCourseAccess(courseCode) {
   const isUniCourse = ["ANA 201", "ANA 203", "PIO 201", "ANA201", "ANA203", "PIO201"].some(c => norm.includes(c));
   if (!isUniCourse) return true; // Non-university content remains free
   if (userAccessData?.has_all_access) return true;
-  if (userAccessData?.is_trial) return true;
-  if (userAccessData?.unlocked_courses?.some(c => norm.includes(c.toUpperCase()))) return true;
   return false;
 }
 
 function hasAllAccess() {
-  return Boolean(userAccessData?.has_all_access || userAccessData?.is_trial);
+  return Boolean(userAccessData?.has_all_access);
 }
 
 function universityOfferOptions() {
@@ -252,17 +284,8 @@ function queueUniversityIntroduction() {
   }, 900);
 }
 
-function isTopicFree(courseCode, topicId, topicIdx = 0, sectionIdx = 0) {
-  const norm = String(courseCode || "").trim().toUpperCase();
-  const configured = freeTopicsMap[norm] || freeTopicsMap[norm.replace(/\s+/g, "")];
-  if (configured && topicId) {
-    const cId = String(configured).toLowerCase();
-    const tId = String(topicId).toLowerCase();
-    if (tId === cId || tId.includes(cId) || cId.includes(tId)) {
-      return true;
-    }
-  }
-  return sectionIdx === 0 && topicIdx === 0;
+function hasLimitedUniversityAccess() {
+  return Boolean(userAccessData?.limited_access_active);
 }
 
 const AVATAR_PRESETS = [
@@ -851,8 +874,8 @@ function renderExplanation(question) {
   const isUni = Boolean(question?.isUniversity || question?.courseCode);
   if (isUni) {
     const courseCode = question.courseCode || question.subject;
-    const isFree = isTopicFree(courseCode, question.topicId || question.topic);
-    if (!hasCourseAccess(courseCode) && !isFree) {
+    const limited = hasLimitedUniversityAccess();
+    if (!hasCourseAccess(courseCode) && !limited) {
       return `<div class="explanation-content">
         <div class="explanation-locked-box" style="padding:14px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;margin-top:8px;">
           <strong style="display:flex;align-items:center;gap:6px;color:#92400e;font-size:13px;">🔒 Detailed Explanation Locked</strong>
@@ -997,11 +1020,15 @@ function navigate(nextRoute) {
   }
   if (route === "session" && activeSession && !activeSession.started) clearActiveSession();
   if (nextRoute === "challenges") { selectedChallengeId = null; challengesData = null; challengesError = ""; }
-  if (nextRoute === "university") { uniRoute = "departments"; uniDeptId = null; uniLevel = null; uniCourseId = null; }
+  if (nextRoute === "university") {
+    uniRoute = "departments"; uniDeptId = null; uniLevel = null; uniCourseId = null;
+    uniContentCache = {};
+  }
   route = nextRoute;
   if (nextRoute !== "practice") selectedSubject = null;
   window.scrollTo({ top: 0, behavior: "smooth" });
   render();
+  if (nextRoute === "university") loadSubscriptionState({ refreshCurrentUniversity: true }).catch(() => {});
 }
 
 function shell(content) {
@@ -1098,7 +1125,7 @@ function shell(content) {
           </div>
         </div>
       </div>
-      <main id="main">${route !== "session" && eligibleForUniversityOffer(universityOfferOptions()) ? '<div class="course-access-note"><span><i aria-hidden="true"></i>University course access</span><button type="button" data-view-course-plans>View plans <span aria-hidden="true">→</span></button></div>' : ""}${route !== "session" ? securityNotice(currentUser?.account_security) : ""}${content}</main>
+      <main id="main">${route !== "session" && eligibleForUniversityOffer(universityOfferOptions()) ? '<div class="course-access-note"><span><i aria-hidden="true"></i>University course access</span><button type="button" data-view-course-plans>View semester pass <span aria-hidden="true">→</span></button></div>' : ""}${route !== "session" ? securityNotice(currentUser?.account_security) : ""}${content}</main>
     </div>
   </div>${!isStandalone() && route !== "session" ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ""}`;
 }
@@ -4164,6 +4191,8 @@ async function restoreAuth() {
 async function signOut() {
   emailChangeCleanup?.(); emailChangeCleanup = null; pendingEmailChange = null;
   clearTimeout(challengeRefreshTimer);
+  clearTimeout(subscriptionExpiryTimer);
+  subscriptionRequestSequence++;
   challengesLoading = false; challengesError = ""; challengeDraft = null; challengeInvitees = []; challengeComposerOpen = false; challengeCreating = false;
   challengeCatalog = null; challengeCatalogLoading = false; challengeCatalogError = "";
   cancelPostPracticeFeedback();
@@ -4173,10 +4202,10 @@ async function signOut() {
   communityNetworkData = null; communityLeaderboardData = null; communityInboxData = null; communityChatPeer = null;
   communityLoaded = false; communityLoading = false; communitySearchResults = []; communitySearchQuery = "";
   try { await syncBookmarkQueue(); await api.logout(authToken); } catch {}
-  userAccessData = { has_all_access: false, unlocked_courses: [], is_trial: false, trial_days_remaining: 0, trial_used: false, expires_at: null };
+  userAccessData = { has_all_access: false, unlocked_courses: [], limited_access_active: false, limited_access_days_remaining: 0, limited_access_expires_at: null, access_percentage: 0, access_status: "not_applicable", semester_price: 2500, expires_at: null };
   await clearStore("profile"); await clearStore("attempts"); await clearStore("bookmarks"); await put("meta", { key: "bookmarkQueue", actions: [] }); await put("meta", { key: "completed_tests", list: [] });
   completedTests = [];
-  authToken = null; currentUser = null; profile = null; attempts = []; bookmarks = []; challengesData = null; achievementsData = null; progressData = null; selectedChallengeId = null; badgeCelebrationKnown.clear(); badgeCelebrationQueue = []; localStorage.removeItem("seomtorch-auth-token"); localStorage.removeItem("seomtorch-auth-user"); renderAuth();
+  authToken = null; currentUser = null; profile = null; attempts = []; bookmarks = []; challengesData = null; achievementsData = null; progressData = null; selectedChallengeId = null; badgeCelebrationKnown.clear(); badgeCelebrationQueue = []; uniContentCache = {}; localStorage.removeItem("seomtorch-auth-token"); localStorage.removeItem("seomtorch-auth-user"); renderAuth();
 }
 
 
@@ -4347,11 +4376,13 @@ async function renderUniCourse() {
 
   const sections = data.sections || [];
   const hasCourse = hasCourseAccess(data.code);
+  const hasLimitedAccess = Boolean(userAccessData?.limited_access_active);
+  const samplePercentage = Number(userAccessData?.access_percentage) || 5;
   const courseTopicNoteFiles = new Set(sections.flatMap(section => section.topics.map(topic => topic.noteFile).filter(Boolean)));
   const displayedTopicNoteFiles = new Set();
   const displayedSectionNoteFiles = new Set();
   const topicsHtml = sections.map((section, sIdx) => {
-    const isNoteUnlocked = hasCourse || sIdx === 0;
+    const isNoteUnlocked = hasCourse || hasLimitedAccess;
     let noteBtnHtml = "";
     if (section.notes && section.notes.length > 0) {
       noteBtnHtml = `
@@ -4363,7 +4394,7 @@ async function renderUniCourse() {
                 <path d="M8 7h8M8 11h8M8 15h4"/>
               </svg>
               <span class="uni-notebook-btn-label">${escapeHtml(n.title)}</span>
-              <span class="uni-notebook-btn-badge">${isNoteUnlocked ? (sIdx === 0 && !hasCourse ? "Free Preview" : "Study Note") : "🔒 Locked"}</span>
+              <span class="uni-notebook-btn-badge">${isNoteUnlocked ? (!hasCourse ? `${samplePercentage}% note sample` : "Study Note") : "🔒 Locked"}</span>
             </button>
           `).join("")}
         </div>`;
@@ -4375,7 +4406,7 @@ async function renderUniCourse() {
             <path d="M8 7h8M8 11h8M8 15h4"/>
           </svg>
           <span class="uni-notebook-btn-label">Notebook</span>
-          <span class="uni-notebook-btn-badge">${isNoteUnlocked ? (sIdx === 0 && !hasCourse ? "Free Showcase" : "Study Note") : "🔒 Locked"}</span>
+          <span class="uni-notebook-btn-badge">${isNoteUnlocked ? (!hasCourse ? `${samplePercentage}% note sample` : "Study Note") : "🔒 Locked"}</span>
         </button>`;
     }
 
@@ -4400,13 +4431,13 @@ async function renderUniCourse() {
 
     const topicItems = section.topics.map((topic, topicIdx) => {
       const isAvailable = topic.status !== "coming-soon";
-      const isFree = isTopicFree(data.code, topic.id, topicIdx, sIdx);
-      const isUnlocked = hasCourse || isFree;
+      const hasLimitedSample = hasLimitedUniversityAccess();
+      const isUnlocked = hasCourse || hasLimitedSample;
       const statusIcon = isAvailable ? `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>` : `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`;
 
       const topicHasNote = Boolean(topic.noteFile) && !displayedTopicNoteFiles.has(topic.noteFile);
       if (topicHasNote) displayedTopicNoteFiles.add(topic.noteFile);
-      const isTopicNoteUnlocked = hasCourse || sIdx === 0;
+      const isTopicNoteUnlocked = hasCourse || hasLimitedAccess;
       const topicNoteBtnHtml = topicHasNote ? `
         <button class="uni-notebook-btn uni-topic-note-link ${isTopicNoteUnlocked ? "" : "locked-note"}" type="button" data-uni-note-file="${escapeHtml(topic.noteFile)}" data-uni-note-title="${escapeHtml(topic.noteTitle || topic.title + ' Notebook')}" data-uni-course-code="${escapeHtml(data.code)}" data-note-locked="${isTopicNoteUnlocked ? "0" : "1"}" aria-label="Read study notes for ${escapeHtml(topic.title)}">
           <svg class="uni-notebook-btn-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -4414,7 +4445,7 @@ async function renderUniCourse() {
             <path d="M8 7h8M8 11h8M8 15h4"/>
           </svg>
           <span>Read study notes</span>
-          <span class="uni-topic-note-access">${isTopicNoteUnlocked && !hasCourse ? "Free preview" : ""}</span>
+          <span class="uni-topic-note-access">${isTopicNoteUnlocked && !hasCourse ? `About ${samplePercentage}% available` : ""}</span>
         </button>` : "";
 
       if (!isAvailable) {
@@ -4444,7 +4475,7 @@ async function renderUniCourse() {
         <span class="uni-topic-status">${statusIcon}</span>
         <div class="uni-topic-info">
           <h4>${escapeHtml(topic.title)}</h4>
-          <div class="uni-topic-meta">${isFree && !hasCourse ? '<span class="uni-topic-tag free-tag">Free sample</span>' : ""}${topicNoteBtnHtml}</div>
+          <div class="uni-topic-meta">${hasLimitedSample && !hasCourse ? '<span class="uni-topic-tag free-tag">Limited question sample</span>' : ""}${topicNoteBtnHtml}</div>
         </div>
         <div class="uni-topic-actions">
           <button class="uni-topic-target-btn uni-topic-practice-btn" type="button" data-uni-data-file="${escapeHtml(topic.dataFile || "")}" data-uni-topic-title="${escapeHtml(topic.title)}" data-uni-topic-id="${escapeHtml(topic.id || "")}" aria-label="Set up practice for ${escapeHtml(topic.title)}">
@@ -4479,10 +4510,10 @@ async function renderUniCourse() {
 
   // hasCourse already declared above
   const heroAccessBadge = hasCourse
-    ? (userAccessData?.is_trial
-        ? `<span class="uni-course-access-state">Trial active · ${escapeHtml(userAccessData?.trial_days_remaining ?? 0)} days left</span>`
-        : `<span class="uni-course-access-state">Full course access</span>`)
-    : `<button type="button" class="button small accent uni-course-upgrade-btn" id="uni-hero-upgrade-btn">Unlock full course</button>`;
+    ? `<span class="uni-course-access-state">Semester pass active · ends ${escapeHtml(new Date(userAccessData?.expires_at || subscriptionConfig?.semester_end_date || Date.now()).toLocaleDateString())}</span>`
+    : hasLimitedAccess
+      ? `<span class="uni-course-access-state">${userAccessData?.access_status === "preview" ? `Preview · ${samplePercentage}% access · ${escapeHtml(userAccessData?.limited_access_days_remaining ?? 0)} days left` : `${samplePercentage}% ongoing free sample`}</span><button type="button" class="button small accent uni-course-upgrade-btn" id="uni-hero-upgrade-btn">Get semester pass · ₦2,500</button>`
+      : `<button type="button" class="button small accent uni-course-upgrade-btn" id="uni-hero-upgrade-btn">Get semester pass · ₦2,500</button>`;
   const statsHtml = `<div class="uni-course-stats"><div class="uni-stat"><strong>${totalTopics}</strong><span>Topics</span></div><div class="uni-stat"><strong>${availableTopics}</strong><span>Published</span></div><div class="uni-stat"><strong>${totalTopics - availableTopics}</strong><span>Coming soon</span></div></div>`;
 
   let mixedCardHtml = "";
@@ -5582,6 +5613,12 @@ async function init() {
 }
 
 let securityHeartbeatBusy = false;
+async function refreshUniversityAccess() {
+  if (subscriptionRefreshBusy || !authToken || !currentUser || !navigator.onLine || document.hidden || route !== "university") return;
+  subscriptionRefreshBusy = true;
+  try { await loadSubscriptionState({ refreshCurrentUniversity: true }); }
+  finally { subscriptionRefreshBusy = false; }
+}
 async function refreshAccountSecurity() {
   if (route === "change-email") return;
   if (securityHeartbeatBusy || !authToken || !currentUser || !navigator.onLine || document.hidden) return;
@@ -5607,6 +5644,7 @@ window.addEventListener("seomtorch-auth-expired", event => {
   unmountBuddyChat(); closeStudentDialogs(); cancelPostPracticeFeedback();
   clearTimeout(challengeRefreshTimer); clearTimeout(universityIntroductionTimer);
   clearInterval(sessionTimer); route = "home";
+  clearTimeout(subscriptionExpiryTimer); subscriptionRequestSequence++;
   authToken = null; currentUser = null; subscriptionStateReady = false;
   uniContentCache = {}; universityIntroductionPending = false;
   localStorage.removeItem("seomtorch-auth-token"); localStorage.removeItem("seomtorch-auth-user");
@@ -5621,6 +5659,9 @@ window.addEventListener("seomtorch-email-required", event => {
 setInterval(refreshAccountSecurity, 60000);
 window.addEventListener("focus", refreshAccountSecurity);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshAccountSecurity(); });
+subscriptionRefreshTimer = setInterval(refreshUniversityAccess, 5 * 60 * 1000);
+window.addEventListener("focus", refreshUniversityAccess);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshUniversityAccess(); });
 window.addEventListener("storage", event => {
   if (event.key !== "seomtorch-auth-token" || event.newValue === authToken) return;
   emailChangeCleanup?.(); emailChangeCleanup = null; pendingEmailChange = null;
@@ -5834,283 +5875,96 @@ function renderNormalSession() {
 
 function showUpgradeModal(options = {}) {
   document.querySelector("#upgrade-modal-backdrop")?.remove();
-
   const trigger = options.trigger || "general";
-  const defaultCourse = options.courseCode ? options.courseCode.toUpperCase() : "ANA 201";
-
-  api.logMonetizationEvent(authToken, "upgrade_screen_viewed", {
-    trigger,
-    course: defaultCourse,
-    topic: options.topicTitle || null
-  }).catch(() => {});
-
-  let selectedPlan = "all_access"; // default to all_access
-  let selectedCourse = defaultCourse;
-  let appliedDiscount = null;
-
-  const config = subscriptionConfig || {};
-  const singlePrice = config.single_course_price || 1500;
-  const regularAllPrice = config.all_access_price || 3000;
-  const launchOffer = config.launch_offer || {};
-  const isLaunchActive = Boolean(launchOffer.active);
-  const currentAllPrice = config.current_all_access_price || (isLaunchActive ? (launchOffer.price || 2000) : 3000);
-  const trialEligible = !userAccessData?.trial_used && Boolean(authToken);
+  const courseCode = options.courseCode ? String(options.courseCode).toUpperCase() : "all university courses";
+  api.logMonetizationEvent(authToken, "upgrade_screen_viewed", { trigger, course: courseCode }).catch(() => {});
 
   const backdrop = document.createElement("div");
   backdrop.id = "upgrade-modal-backdrop";
   backdrop.className = "upgrade-modal-backdrop";
-
-  const renderModalContent = () => {
-    const rawPrice = selectedPlan === "all_access" ? currentAllPrice : singlePrice;
-    const finalPrice = appliedDiscount ? appliedDiscount.discounted_price : rawPrice;
-
-    backdrop.innerHTML = `
-      <div class="upgrade-modal" role="dialog" aria-modal="true" aria-labelledby="upgrade-modal-title">
-        <div class="upgrade-header">
-          <div>
-            <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(45,106,79,0.1);color:var(--forest);font-size:11px;font-weight:800;letter-spacing:0.5px;padding:3px 10px;border-radius:10px;margin-bottom:6px;text-transform:uppercase;">
-              <span>⭐ Seomtorch Medical Pass</span>
-            </div>
-            <h2 id="upgrade-modal-title" style="margin:0;font-size:20px;font-weight:800;color:var(--ink);">Unlock Full Course Access</h2>
-            <p style="margin:4px 0 0;font-size:13px;color:var(--muted);">Instant automatic unlock across medical anatomy and physiology.</p>
-          </div>
-          <button type="button" class="uni-topic-config-close" id="upgrade-modal-close" aria-label="Close dialog">✕</button>
+  const previewDays = Number(subscriptionConfig?.limited_access_days) || 14;
+  const samplePercentage = Number(userAccessData?.access_percentage) || 5;
+  const semesterEnd = subscriptionConfig?.semester_end_date
+    ? new Date(subscriptionConfig.semester_end_date).toLocaleDateString()
+    : "the current semester end date";
+  backdrop.innerHTML = `
+    <div class="upgrade-modal" role="dialog" aria-modal="true" aria-labelledby="upgrade-modal-title">
+      <div class="upgrade-header">
+        <div>
+          <div class="eyebrow">University access</div>
+          <h2 id="upgrade-modal-title">Your semester pass</h2>
+          <p>One clear plan for every university course on Seomtorch.</p>
         </div>
-
-        ${trialEligible ? `
-        <div class="upgrade-trial-callout">
-          <div>
-            <strong>🎁 Eligible for 3-Day Free Trial</strong>
-            <p>Get full 72-hour access to all 3 courses immediately. No card required.</p>
-          </div>
-          <button type="button" class="button small accent" id="upgrade-activate-trial">Activate Free Trial</button>
-        </div>` : ""}
-
-        <div class="upgrade-plans-grid">
-          <div class="upgrade-plan-card ${selectedPlan === "single_course" ? "selected" : ""}" id="plan-single-course" role="button" tabindex="0">
-            <div class="upgrade-plan-head">
-              <h3 class="upgrade-plan-title">Single Course</h3>
-              <div class="upgrade-plan-price">₦${singlePrice.toLocaleString()} <small>/ semester</small></div>
-            </div>
-            <p style="font-size:12px;color:var(--muted);margin:0;">Full access to 1 chosen course through semester exams.</p>
-            <div style="margin-top:4px;">
-              <label style="font-size:11px;font-weight:700;color:var(--ink-secondary);display:block;margin-bottom:4px;">Choose Course:</label>
-              <select id="upgrade-course-select" class="input" style="padding:6px 10px;font-size:12px;width:100%;font-weight:700;">
-                <option value="ANA 201" ${selectedCourse === "ANA 201" ? "selected" : ""}>ANA 201: Upper & Lower Limb</option>
-                <option value="ANA 203" ${selectedCourse === "ANA 203" ? "selected" : ""}>ANA 203: Systemic Embryology</option>
-                <option value="PIO 201" ${selectedCourse === "PIO 201" ? "selected" : ""}>PIO 201: Medical Physiology</option>
-              </select>
-            </div>
-            <ul class="upgrade-plan-features">
-              <li><span class="check">✓</span> All topics &amp; worked solutions</li>
-              <li><span class="check">✓</span> Topic drills &amp; audio notes</li>
-              <li><span class="check">✓</span> Pass until semester end date</li>
-            </ul>
-          </div>
-
-          <div class="upgrade-plan-card ${selectedPlan === "all_access" ? "selected" : ""}" id="plan-all-access" role="button" tabindex="0">
-            ${isLaunchActive ? `<div class="upgrade-plan-ribbon">Launch Offer · Save ₦${(regularAllPrice - currentAllPrice).toLocaleString()}</div>` : `<div class="upgrade-plan-ribbon">Most Popular</div>`}
-            <div class="upgrade-plan-head">
-              <h3 class="upgrade-plan-title">All-Access Pass</h3>
-              <div class="upgrade-plan-price">
-                ₦${currentAllPrice.toLocaleString()} <small>/ semester</small>
-                ${isLaunchActive ? `<div style="font-size:11px;color:var(--muted);text-decoration:line-through;font-weight:500;">₦${regularAllPrice.toLocaleString()}</div>` : ""}
-              </div>
-            </div>
-            <p style="font-size:12px;color:var(--muted);margin:0;">Unlock all 3 courses (ANA 201, ANA 203, PIO 201).</p>
-            <ul class="upgrade-plan-features">
-              <li><span class="check">✓</span> <strong>All 3 Courses</strong> fully unlocked</li>
-              <li><span class="check">✓</span> <strong>Timed Mock Exams</strong> across topics</li>
-              <li><span class="check">✓</span> <strong>Weak-Topic Diagnostic</strong> analytics</li>
-              <li><span class="check">✓</span> <strong>Create Challenges</strong> &amp; leaderboards</li>
-              <li><span class="check">✓</span> All conversational audio podcasts</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="upgrade-discount-box">
-          <label style="font-size:11.5px;font-weight:700;color:var(--ink-secondary);display:flex;justify-content:space-between;align-items:center;">
-            <span>Class Code / Discount Code</span>
-            <span style="font-size:10.5px;color:var(--muted);font-weight:500;">e.g. your class group code</span>
-          </label>
-          ${appliedDiscount ? `
-            <div class="upgrade-discount-badge">
-              <span>🎉 ${escapeHtml(appliedDiscount.label || appliedDiscount.code)}: ₦${appliedDiscount.discounted_price.toLocaleString()}</span>
-              <button type="button" id="remove-discount-btn" style="background:none;border:none;cursor:pointer;color:#065f46;font-size:14px;padding:0 4px;font-weight:800;" aria-label="Remove code">✕</button>
-            </div>
-          ` : `
-            <div class="upgrade-discount-input-row">
-              <input type="text" id="discount-code-input" class="input" placeholder="ENTER CODE (e.g. MEDILAG24)" autocomplete="off">
-              <button type="button" class="button outline small" id="apply-discount-btn" style="white-space:nowrap;">Apply</button>
-            </div>
-          `}
-          <div id="discount-error-text" style="color:var(--crimson);font-size:11.5px;display:none;"></div>
-        </div>
-
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <button type="button" class="button accent" id="upgrade-checkout-btn" style="width:100%;padding:14px;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;">
-            <span>Pay ₦${finalPrice.toLocaleString()} with Paystack</span>
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </button>
-          <div class="upgrade-security-badge">
-            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            <span>Secured by Paystack · 256-bit encryption · Instant automatic unlock</span>
-          </div>
-        </div>
+        <button type="button" class="uni-topic-config-close" id="upgrade-modal-close" aria-label="Close dialog">✕</button>
       </div>
-    `;
-
-    bindModalEvents();
-  };
-
-  const bindModalEvents = () => {
-    backdrop.querySelector("#upgrade-modal-close")?.addEventListener("click", () => backdrop.remove());
-
-    backdrop.querySelector("#plan-single-course")?.addEventListener("click", (e) => {
-      if (e.target.tagName === "SELECT") return;
-      selectedPlan = "single_course";
-      appliedDiscount = null;
-      renderModalContent();
-    });
-
-    backdrop.querySelector("#plan-all-access")?.addEventListener("click", () => {
-      selectedPlan = "all_access";
-      appliedDiscount = null;
-      renderModalContent();
-    });
-
-    backdrop.querySelector("#upgrade-course-select")?.addEventListener("change", (e) => {
-      selectedCourse = e.target.value;
-    });
-
-    backdrop.querySelector("#upgrade-activate-trial")?.addEventListener("click", async () => {
-      if (!authToken) {
-        backdrop.remove();
-        showToast("Please sign in or create an account to start your free trial.");
-        route = "home";
-        authMode = "register";
-        renderAuth();
-        return;
-      }
-      showLoadingOverlay("Starting Free Trial", "Unlocking courses...");
-      try {
-        const res = await api.startTrial(authToken);
-        userAccessData = res.user_access;
-        hideLoadingOverlay();
-        backdrop.remove();
-        showToast("🎉 3-Day Free Trial Activated! All courses unlocked.");
-        render();
-      } catch (err) {
-        hideLoadingOverlay();
-        showToast(err.message || "Could not start trial.");
-      }
-    });
-
-    backdrop.querySelector("#apply-discount-btn")?.addEventListener("click", async () => {
-      const input = backdrop.querySelector("#discount-code-input");
-      const errBox = backdrop.querySelector("#discount-error-text");
-      const codeStr = (input?.value || "").trim();
-      if (!codeStr) return;
-      try {
-        if (errBox) errBox.style.display = "none";
-        const res = await api.validateDiscountCode(codeStr, selectedPlan);
-        if (res.valid) {
-          appliedDiscount = res;
-          renderModalContent();
-          showToast(`Discount applied: ${res.label}`);
-        }
-      } catch (err) {
-        if (errBox) {
-          errBox.textContent = err.message || "Invalid discount code.";
-          errBox.style.display = "block";
-        }
-      }
-    });
-
-    backdrop.querySelector("#remove-discount-btn")?.addEventListener("click", () => {
-      appliedDiscount = null;
-      renderModalContent();
-    });
-
-    backdrop.querySelector("#upgrade-checkout-btn")?.addEventListener("click", async () => {
-      const btn = backdrop.querySelector("#upgrade-checkout-btn");
-      if (!authToken) {
-        backdrop.remove();
-        showToast("Please sign in or register to secure your course subscription.");
-        route = "home";
-        authMode = "register";
-        renderAuth();
-        return;
-      }
-
-      btn.disabled = true;
-      btn.textContent = "Connecting to Paystack...";
-
-      try {
-        api.logMonetizationEvent(authToken, "upgrade_button_tapped", {
-          plan: selectedPlan,
-          course: selectedCourse,
-          discount_code: appliedDiscount?.code || null
-        }).catch(() => {});
-
-        const initRes = await api.initPayment(authToken, {
-          access_type: selectedPlan,
-          course_code: selectedPlan === "single_course" ? selectedCourse : "all",
-          discount_code: appliedDiscount?.code || ""
-        });
-
-        // Check if PaystackPop inline is available
-        const hasLiveKey = initRes.public_key && !initRes.public_key.startsWith("test_dummy");
-        if (window.PaystackPop && hasLiveKey) {
-          const handler = window.PaystackPop.setup({
-            key: initRes.public_key,
-            email: initRes.email || currentUser?.email || "student@seomtorch.com",
-            amount: Math.round(Number(initRes.amount_kobo)),
-            currency: "NGN",
-            ref: initRes.reference,
-            callback: function(paystackCallback) {
-              const ref = (paystackCallback && paystackCallback.reference) ? paystackCallback.reference : initRes.reference;
-              showLoadingOverlay("Verifying Payment", "Confirming with Paystack and activating access...");
-              api.verifyPayment(authToken, ref)
-                .then(function(verifyRes) {
-                  userAccessData = verifyRes.user_access;
-                  hideLoadingOverlay();
-                  backdrop.remove();
-                  showToast("🎉 Payment verified! Course access is now active.");
-                  render();
-                })
-                .catch(function(vErr) {
-                  hideLoadingOverlay();
-                  showToast(vErr.message || "Payment verification error. Please contact support.");
-                });
-            },
-            onClose: function() {
-              btn.disabled = false;
-              renderModalContent();
-              showToast("Payment window closed.");
-            }
-          });
-          handler.openIframe();
-        } else {
-          btn.disabled = false;
-          renderModalContent();
-          showToast("Payment gateway is temporarily unavailable. Please verify gateway keys or contact support.");
-        }
-      } catch (err) {
-        btn.disabled = false;
-        renderModalContent();
-        showToast(err.message || "Could not initialize checkout. Please try again.");
-      }
-    });
-  };
-
-  backdrop.addEventListener("click", (e) => {
-    if (e.target === backdrop) backdrop.remove();
-  });
-
+      <article class="upgrade-plan-card selected">
+        <div class="upgrade-plan-head"><h3 class="upgrade-plan-title">Full university access</h3><div class="upgrade-plan-price">₦2,500 <small>/ semester</small></div></div>
+        <p>Available questions, study notes, and paid university features through ${escapeHtml(semesterEnd)}.</p>
+        <ul class="upgrade-plan-features">
+          <li><span class="check">✓</span> Every question across all university topics</li>
+          <li><span class="check">✓</span> Complete notes, diagrams, podcasts and recall guides</li>
+          <li><span class="check">✓</span> University challenges and other paid features</li>
+        </ul>
+        ${userAccessData?.access_status === "preview" ? `<p class="muted">Your ${samplePercentage}% preview lasts until ${escapeHtml(userAccessData.limited_access_expires_at ? new Date(userAccessData.limited_access_expires_at).toLocaleDateString() : `the end of your ${previewDays}-day period`)}. After that, a 5% sample remains available.</p>` : userAccessData?.access_status === "sample" ? `<p class="muted">Your ${previewDays}-day preview has ended. You can keep using a 5% sample, or get the pass for full access.</p>` : ""}
+        <button type="button" class="button accent" id="upgrade-checkout-btn" style="width:100%;padding:14px;font-size:15px;font-weight:800;">Pay ₦2,500 with Paystack →</button>
+        <div class="upgrade-security-badge"><span>Secured and verified by Paystack</span></div>
+      </article>
+    </div>`;
   document.body.appendChild(backdrop);
-  renderModalContent();
+
+  const close = () => backdrop.remove();
+  backdrop.querySelector("#upgrade-modal-close")?.addEventListener("click", close);
+  backdrop.addEventListener("click", event => { if (event.target === backdrop) close(); });
+  backdrop.querySelector("#upgrade-checkout-btn")?.addEventListener("click", async event => {
+    const button = event.currentTarget;
+    if (!authToken) {
+      close();
+      showToast("Sign in to purchase the university semester pass.");
+      return;
+    }
+    button.disabled = true;
+    button.textContent = "Connecting to Paystack…";
+    try {
+      api.logMonetizationEvent(authToken, "upgrade_button_tapped", { plan: "university_semester", amount: 2500 }).catch(() => {});
+      const initRes = await api.initPayment(authToken, { access_type: "all_access" });
+      if (!window.PaystackPop || !initRes.public_key || initRes.public_key.startsWith("test_dummy")) {
+        throw new Error("Payment is temporarily unavailable. Please try again later.");
+      }
+      const handler = window.PaystackPop.setup({
+        key: initRes.public_key,
+        email: initRes.email || currentUser?.email,
+        amount: Number(initRes.amount_kobo),
+        currency: "NGN",
+        ref: initRes.reference,
+        callback: async response => {
+          showLoadingOverlay("Verifying payment", "Confirming your semester pass with Paystack…");
+          try {
+            const result = await api.verifyPayment(authToken, response?.reference || initRes.reference);
+            userAccessData = result.user_access;
+            await loadSubscriptionState();
+            close();
+            showToast("Payment confirmed. Your university access is now unlocked.");
+            render();
+          } catch (error) {
+            showToast(error.message || "Payment verification failed. Contact support if you were charged.");
+          } finally {
+            hideLoadingOverlay();
+          }
+        },
+        onClose: () => {
+          button.disabled = false;
+          button.textContent = "Pay ₦2,500 with Paystack →";
+        },
+      });
+      handler.openIframe();
+    } catch (error) {
+      button.disabled = false;
+      button.textContent = "Pay ₦2,500 with Paystack →";
+      showToast(error.message || "Could not start checkout.");
+    }
+  });
 }
+
 
 window.showUpgradeModal = showUpgradeModal;
 
@@ -6212,8 +6066,12 @@ async function renderUniNote() {
     { label: noteData.noteTitle || "Notebook" }
   ];
 
-  const allBlocks = noteData.blocks || [];
-  const totalBlocks = allBlocks.length;
+  const visibleBlocks = noteData.blocks || [];
+  const allBlocks = [...visibleBlocks, ...(noteData.lockedBlocks || [])].sort((a, b) => Number(a.number || 0) - Number(b.number || 0));
+  const totalBlocks = Number(noteData.totalBlocks) || allBlocks.length;
+  const accessibleBlocks = Number(noteData.accessibleBlocks) || visibleBlocks.length;
+  const accessPercentage = Number(noteData.accessPercentage) || Number(userAccessData?.access_percentage) || 5;
+  const unlockedNoteBlockIds = new Set(visibleBlocks.map(block => String(block.id)));
   const categories = ["all", ...new Set(allBlocks.map(b => b.category))];
   const filteredBlocks = uniNoteCategoryFilter === "all" ? allBlocks : allBlocks.filter(b => b.category === uniNoteCategoryFilter);
 
@@ -6244,7 +6102,7 @@ async function renderUniNote() {
             <div class="uni-block-badges">
               <span class="uni-block-num-pill">BLOCK ${String(b.number).padStart(2, "0")}</span>
               <span class="uni-block-cat-pill">${escapeHtml(b.category)}</span>
-              <span class="uni-block-lock-pill">🔒 Course Access Required</span>
+              <span class="uni-block-lock-pill">🔒 Included in semester pass</span>
             </div>
             <h2 class="uni-block-title">${escapeHtml(b.title)}</h2>
           </div>
@@ -6277,7 +6135,7 @@ async function renderUniNote() {
             </div>
             <h3 class="locked-cta-title">Unlock Block ${b.number}: ${escapeHtml(b.title)}</h3>
             <p class="locked-cta-desc">
-              Block 01 is open for free trial reading. Upgrade to <strong>${escapeHtml(courseCode)} Course Access</strong> or <strong>All-Access</strong> to unlock all ${totalBlocks} illustrated blocks, high-yield diagrams, audio podcasts, and self-test recall guides.
+              The remaining ${Math.max(0, totalBlocks - accessibleBlocks)} blocks are locked. Get the ₦2,500 semester pass for complete course notes and university access.
             </p>
             <div class="locked-feature-tags">
               <span class="locked-tag">✓ All ${totalBlocks} Illustrated Blocks</span>
@@ -6286,11 +6144,11 @@ async function renderUniNote() {
             </div>
             <div class="locked-cta-actions">
               <button type="button" class="button uni-btn locked-upgrade-trigger" data-course-code="${escapeHtml(courseCode)}" style="background:linear-gradient(135deg, #d97706, #b45309); color:#fff; font-weight:700; padding:12px 24px;">
-                <span>Unlock Course Access</span>
+                <span>Get the ₦2,500 semester pass</span>
                 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
               </button>
               <button type="button" class="button outline small" id="uni-return-free-block" style="border-color:#cedbd1; color:var(--ink);">
-                ← Back to Free Block 01
+                ← Back to available notes
               </button>
             </div>
           </div>
@@ -6502,10 +6360,10 @@ async function renderUniNote() {
   let contentBodyHtml = "";
 
   if (uniNoteViewMode === "step") {
-    const isCurrentBlockUnlocked = isNoteFullyUnlocked || activeBlock.number === 1;
+    const isCurrentBlockUnlocked = isNoteFullyUnlocked || !activeBlock.isLocked;
     const progressPercent = Math.round((activeBlock.number / totalBlocks) * 100);
     const selectOptionsHtml = allBlocks.map(b => {
-      const isBlockUnlocked = isNoteFullyUnlocked || b.number === 1;
+      const isBlockUnlocked = isNoteFullyUnlocked || !b.isLocked;
       return `
         <option value="${b.number}" ${b.number === activeBlock.number ? "selected" : ""}>
           Block ${String(b.number).padStart(2, "0")}: ${escapeHtml(b.title)}${isBlockUnlocked ? "" : " 🔒 (Locked)"}
@@ -6531,10 +6389,10 @@ async function renderUniNote() {
         </select>
       </div>
 
-      ${(!isNoteFullyUnlocked && activeBlock.number === 1) ? `
+      ${(!isNoteFullyUnlocked && accessibleBlocks > 0 && activeBlock.number === 1) ? `
         <div class="uni-free-showcase-banner">
-          <span>⭐ <strong>Free Showcase Block</strong> · Blocks 02–${totalBlocks} included with Course Access</span>
-          <button type="button" class="locked-upgrade-trigger" data-course-code="${escapeHtml(courseCode)}">Unlock All Blocks</button>
+          <span><strong>Limited notes</strong> · ${accessibleBlocks} of ${totalBlocks} blocks available during your access period</span>
+          <button type="button" class="locked-upgrade-trigger" data-course-code="${escapeHtml(courseCode)}">Unlock all notes</button>
         </div>
       ` : ""}
 
@@ -6546,7 +6404,7 @@ async function renderUniNote() {
         </button>
         <span style="font-size:12px; font-weight:600; color:var(--muted);">Block ${activeBlock.number} / ${totalBlocks}</span>
         <button class="uni-step-nav-btn next" id="uni-step-next">
-          ${activeBlock.number >= totalBlocks ? "Review Checklist ✓" : (!isNoteFullyUnlocked && activeBlock.number === 1 ? "Next Block 🔒" : "Next Block →")}
+          ${activeBlock.number >= totalBlocks ? "Review Checklist ✓" : "Next Block →"}
         </button>
       </div>
     `;
@@ -6560,26 +6418,23 @@ async function renderUniNote() {
         </div>
       `;
     } else {
-      // Free User in Continuous Reading Mode: Only Block 1 is visible, remaining blocks are blurred/locked
-      const hasBlockOneInFilter = filteredBlocks.some(b => b.number === 1);
-      const blockOne = allBlocks.find(b => b.number === 1);
-      const previewBlockTwo = allBlocks.find(b => b.number === 2);
-      const previewBlockThree = allBlocks.find(b => b.number === 3);
+      const openFilteredBlocks = filteredBlocks.filter(block => !block.isLocked);
+      const lockedFilteredBlocks = filteredBlocks.filter(block => block.isLocked);
+      const previewBlocks = lockedFilteredBlocks.slice(0, 2);
 
       contentBodyHtml = `
         <div class="uni-note-continuous-stack">
-          ${hasBlockOneInFilter && blockOne ? `
+          ${openFilteredBlocks.length ? `
             <div class="uni-free-showcase-banner">
-              <span>⭐ <strong>Free Showcase Block</strong> · Blocks 02–${totalBlocks} included with Course Access</span>
-              <button type="button" class="locked-upgrade-trigger" data-course-code="${escapeHtml(courseCode)}">Unlock All Blocks</button>
+              <span><strong>Limited notes</strong> · ${accessibleBlocks} of ${totalBlocks} blocks available</span>
+              <button type="button" class="locked-upgrade-trigger" data-course-code="${escapeHtml(courseCode)}">Unlock all notes</button>
             </div>
-            ${renderBlockCardHtml(blockOne)}
+            ${openFilteredBlocks.map(block => renderBlockCardHtml(block)).join("")}
           ` : ""}
 
           <div class="uni-continuous-locked-barrier">
             <div class="uni-continuous-blurred-preview" aria-hidden="true">
-              ${renderBlurredBlockPreviewHtml(previewBlockTwo)}
-              ${renderBlurredBlockPreviewHtml(previewBlockThree)}
+              ${previewBlocks.map(block => renderBlurredBlockPreviewHtml(block)).join("")}
             </div>
             <div class="uni-continuous-lock-overlay">
               <div class="locked-shield-icon">
@@ -6588,18 +6443,18 @@ async function renderUniNote() {
                   <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                 </svg>
               </div>
-              <h3>Unlock Remaining ${totalBlocks - 1} Illustrated Blocks</h3>
+              <h3>Unlock Remaining ${totalBlocks - accessibleBlocks} Blocks</h3>
               <p>
-                Block 01 is open for free continuous reading. Upgrade to <strong>${escapeHtml(courseCode)} Course Access</strong> or <strong>All-Access</strong> to read all ${totalBlocks} continuous blocks with diagrams, full podcasts, and clinical pearls.
+                Your current access includes about ${accessPercentage}% of these study notes. The semester pass unlocks all ${totalBlocks} blocks, diagrams, audio guides and other university features.
               </p>
               <div class="locked-feature-tags">
-                <span class="locked-tag">✓ Full Continuous Notebook Reading</span>
+                <span class="locked-tag">✓ Full continuous notebook reading</span>
                 <span class="locked-tag">✓ All ${totalBlocks} High-Yield Diagrams</span>
                 <span class="locked-tag">✓ Conversational Audio Podcasts</span>
-                <span class="locked-tag">✓ Self-Assessment Checklist</span>
+                <span class="locked-tag">✓ Self-assessment checklist</span>
               </div>
               <button type="button" class="button uni-btn locked-upgrade-trigger" data-course-code="${escapeHtml(courseCode)}" style="background:linear-gradient(135deg, #d97706, #b45309); color:#fff; font-weight:700; padding:13px 28px; font-size:15px;">
-                <span>Unlock Complete Notebook</span>
+                <span>Get the ₦2,500 semester pass</span>
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
               </button>
             </div>
@@ -6610,7 +6465,7 @@ async function renderUniNote() {
   }
 
   // Checklist Card HTML
-  const checklistHtml = `
+  const checklistHtml = checklistItems.length ? `
     <section class="uni-checklist-card" id="checklist">
       <div class="uni-checklist-header">
         <h3 class="uni-checklist-title">Self-Assessment Mastery Checklist</h3>
@@ -6629,7 +6484,7 @@ async function renderUniNote() {
         }).join("")}
       </div>
     </section>
-  `;
+  ` : "";
 
   // Final Practice Call to Action Card
   const practiceTitle = noteData.practiceTopic?.title || noteData.noteTitle || "Practice";
@@ -6825,8 +6680,8 @@ async function renderUniNote() {
       e?.stopPropagation?.();
       const blockId = btn.dataset.audioBlockId;
       const textToSpeak = btn.dataset.audioText || "";
-      if (!isNoteFullyUnlocked && blockId !== "block-1") {
-        showToast("🔒 Audio guide for this block is included with Course Access.");
+      if (!isNoteFullyUnlocked && !unlockedNoteBlockIds.has(String(blockId))) {
+        showToast("🔒 Audio guide for this block is included with the semester pass.");
         api.logMonetizationEvent(authToken, "locked_podcast_tapped", { course: courseCode, block: blockId }).catch(() => {});
         showUpgradeModal({ trigger: "locked_notebook_podcast", courseCode });
         return;
@@ -6851,8 +6706,8 @@ async function renderUniNote() {
   document.querySelectorAll("[data-recall-toggle]").forEach(btn => {
     btn.addEventListener("click", () => {
       const blockId = btn.dataset.recallToggle;
-      if (!isNoteFullyUnlocked && blockId !== "block-1") {
-        showToast("🔒 Recall guide for this block is included with Course Access.");
+      if (!isNoteFullyUnlocked && !unlockedNoteBlockIds.has(String(blockId))) {
+        showToast("🔒 Recall guide for this block is included with the semester pass.");
         api.logMonetizationEvent(authToken, "locked_recall_tapped", { course: courseCode, block: blockId }).catch(() => {});
         showUpgradeModal({ trigger: "locked_recall_guide", courseCode });
         return;
@@ -6902,8 +6757,8 @@ async function renderUniNote() {
     const toggle = (e) => {
       e?.stopPropagation?.();
       const blockId = btn.dataset.transcriptToggle;
-      if (!isNoteFullyUnlocked && blockId !== "block-1") {
-        showToast("🔒 Transcript for this block is included with Course Access.");
+      if (!isNoteFullyUnlocked && !unlockedNoteBlockIds.has(String(blockId))) {
+        showToast("🔒 Transcript for this block is included with the semester pass.");
         showUpgradeModal({ trigger: "locked_podcast_transcript", courseCode });
         return;
       }

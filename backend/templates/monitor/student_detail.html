@@ -246,13 +246,13 @@
               {{ student.active_mode|title }} Mode
             </span>
             {% if access_summary.has_all_access %}
-              <span class="badge badge-all-access">⭐ All-Access</span>
-            {% elif access_summary.is_trial %}
-              <span class="badge badge-trial">✨ 3-Day Trial ({{ access_summary.trial_days_remaining }}d left)</span>
-            {% elif access_summary.unlocked_courses %}
-              <span class="badge badge-single">Course Access ({{ access_summary.unlocked_courses|join:", " }})</span>
+              <span class="badge badge-all-access">University semester pass</span>
+            {% elif access_summary.access_status == 'preview' %}
+              <span class="badge badge-limited">20% preview · {{ access_summary.limited_access_days_remaining }} days remaining</span>
+            {% elif access_summary.access_status == 'sample' %}
+              <span class="badge badge-limited">5% ongoing sample</span>
             {% else %}
-              <span class="badge badge-free">Free Tier</span>
+              <span class="badge badge-free">No university access</span>
             {% endif %}
           </div>
         </div>
@@ -298,54 +298,28 @@
     </div>
   </div>
 
-  <!-- Quick Access Grant Panel -->
+  <!-- Current access policy -->
   <div class="student-quick-grant-panel">
     <div class="quick-grant-header">
       <div>
         <strong style="font-size:13px;color:var(--color-forest);text-transform:uppercase;letter-spacing:0.04em;">
-          Direct Access Control for {{ student.username }}
+          University access for {{ student.username }}
         </strong>
-        <p style="margin:2px 0 0;font-size:11.5px;color:var(--color-muted);">Grant or revoke course passes directly to this student.</p>
+        <p style="margin:2px 0 0;font-size:11.5px;color:var(--color-muted);">
+          {% if access_summary.has_all_access %}Full semester access is active until {{ access_summary.expires_at|slice:":10" }}.
+          {% elif access_summary.access_status == 'preview' %}The 20% preview ends {{ access_summary.limited_access_expires_at|slice:":10" }}; a 5% question-and-notes sample remains afterward.
+          {% elif access_summary.access_status == 'sample' %}The {{ access_summary.limited_access_duration_days }}-day preview has ended. This student retains 5% sample access; records and progress remain intact.
+          {% else %}No university preview applies to this account. Student records remain intact.{% endif %}
+        </p>
       </div>
 
-      {% if access_summary.has_all_access or access_summary.is_trial or access_summary.unlocked_courses %}
+      {% if access_summary.has_all_access %}
         <form method="post" action="{% url 'monitor:revoke-student-access' student.public_id %}" onsubmit="return confirm('Revoke all active access for this student?');" style="display:inline;">
           {% csrf_token %}
           <button type="submit" class="btn-danger" style="padding:6px 14px;">Revoke All Active Access</button>
         </form>
       {% endif %}
     </div>
-
-    <form method="post" action="{% url 'monitor:grant-student-access' student.public_id %}" class="student-access-form-grid">
-      {% csrf_token %}
-      <div class="form-group" style="margin:0;">
-        <label style="font-size:10px;">Select Plan</label>
-        <select name="access_type" id="student-plan-select" style="padding:7px 10px;font-size:12px;">
-          <option value="all_access">All-Access (All 3 Courses)</option>
-          <option value="single_course">Single Course</option>
-          <option value="trial">3-Day Free Trial</option>
-        </select>
-      </div>
-
-      <div class="form-group" style="margin:0;" id="student-course-select-wrap">
-        <label style="font-size:10px;">Course Code</label>
-        <select name="course_code" style="padding:7px 10px;font-size:12px;">
-          <option value="all">All Courses</option>
-          <option value="ANA 201">ANA 201 (Upper &amp; Lower Limb)</option>
-          <option value="ANA 203">ANA 203 (Systemic Embryology)</option>
-          <option value="PIO 201">PIO 201 (Medical Physiology)</option>
-        </select>
-      </div>
-
-      <div class="form-group" style="margin:0;">
-        <label style="font-size:10px;">Expires On</label>
-        <input type="date" name="expires_at" value="{{ plan_config.semester_end_date|date:'Y-m-d' }}" style="padding:6px 10px;font-size:12px;">
-      </div>
-
-      <button type="submit" class="btn-primary" style="padding:8px 16px;white-space:nowrap;font-size:12px;">
-        Grant Access
-      </button>
-    </form>
   </div>
 </div>
 

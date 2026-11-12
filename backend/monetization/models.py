@@ -1,49 +1,20 @@
 import uuid
 from datetime import timedelta
 from django.conf import settings
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils import timezone
 
 
 class PlanConfig(models.Model):
-    """
-    Singleton configuration for all monetization prices, dates, and limits.
-    Editable in Django Admin. Nothing hardcoded.
-    """
-    single_course_price = models.PositiveIntegerField(
-        default=1500,
-        help_text="Standard price for 1 course per semester (NGN).",
-    )
-    all_access_price = models.PositiveIntegerField(
-        default=3000,
-        help_text="Standard price for all 3 courses per semester (NGN).",
-    )
-    launch_offer_price = models.PositiveIntegerField(
-        default=2000,
-        help_text="Special launch offer price for all-access (NGN).",
-    )
-    launch_offer_active = models.BooleanField(
-        default=True,
-        help_text="Enable or disable the launch offer.",
-    )
-    launch_offer_end_date = models.DateTimeField(
-        null=True, blank=True,
-        help_text="Expiry date for the launch offer (e.g. Nov 15, 2026).",
-    )
-    launch_offer_max_buyers = models.PositiveIntegerField(
-        default=100,
-        help_text="Maximum number of users who can claim the launch offer.",
-    )
-    launch_offer_buyers_count = models.PositiveIntegerField(
-        default=0,
-        help_text="Current number of users who claimed the launch offer.",
-    )
+    """Singleton configuration for the active university semester end date and payment keys."""
     semester_end_date = models.DateTimeField(
         help_text="Semester end date when all paid access expires (e.g. March 31, 2027).",
     )
-    trial_duration_days = models.PositiveIntegerField(
-        default=3,
-        help_text="Full-access trial duration in days from user signup.",
+    limited_access_days = models.PositiveSmallIntegerField(
+        default=14,
+        validators=[MinValueValidator(1), MaxValueValidator(365)],
+        help_text="Number of days university students receive limited access after registration (1–365).",
     )
     paystack_public_key = models.CharField(
         max_length=150, blank=True, default="",
@@ -64,7 +35,7 @@ class PlanConfig(models.Model):
         verbose_name_plural = "Plan & Pricing Configuration"
 
     def __str__(self):
-        return f"Plan Configuration (Single: ₦{self.single_course_price:,} · All: ₦{self.all_access_price:,})"
+        return f"University Semester Configuration (ends {self.semester_end_date:%Y-%m-%d})"
 
     @classmethod
     def get_solo(cls):
@@ -72,35 +43,12 @@ class PlanConfig(models.Model):
         obj, created = cls.objects.get_or_create(
             id=1,
             defaults={
-                "single_course_price": 1500,
-                "all_access_price": 3000,
-                "launch_offer_price": 2000,
-                "launch_offer_active": True,
-                "launch_offer_end_date": timezone.now() + timedelta(days=18),
-                "launch_offer_max_buyers": 100,
-                "launch_offer_buyers_count": 0,
                 "semester_end_date": timezone.now() + timedelta(days=150),
-                "trial_duration_days": 3,
+                "limited_access_days": 14,
                 "screenshot_protection_enabled": True,
             }
         )
         return obj
-
-    @property
-    def is_launch_offer_valid(self):
-        """Check if launch offer is currently available."""
-        if not self.launch_offer_active:
-            return False
-        if self.launch_offer_end_date and timezone.now() > self.launch_offer_end_date:
-            return False
-        if self.launch_offer_max_buyers and self.launch_offer_buyers_count >= self.launch_offer_max_buyers:
-            return False
-        return True
-
-    @property
-    def current_all_access_price(self):
-        """Returns 2000 during valid launch offer, otherwise 3000."""
-        return self.launch_offer_price if self.is_launch_offer_valid else self.all_access_price
 
 
 class DiscountCode(models.Model):
@@ -148,7 +96,7 @@ class DiscountCode(models.Model):
 
 class CourseAccess(models.Model):
     """
-    Tracks unlocked courses or trial for each student.
+    Tracks university semester-pass entitlements. Legacy rows remain available for audit.
     """
     class AccessType(models.TextChoices):
         TRIAL = "trial", "3-Day Free Trial"
@@ -188,32 +136,40 @@ class CourseAccess(models.Model):
 
     @property
     def is_currently_valid(self):
-        return self.is_active and timezone.now() <= self.expires_at
+        now = timezone.now()
+        return (
+            self.is_active
+            and self.access_type == self.AccessType.ALL_ACCESS
+            and self.granted_by == self.GrantedBy.PAYMENT
+            and self.starts_at <= now <= self.expires_at
+        )
 
     @classmethod
     def user_has_course_access(cls, user, course_code):
         """
-        Check if student has active access to a course (via trial, all-access, or single course).
+        Check for a currently valid, payment-backed course entitlement.
         """
         if not user or not user.is_authenticated:
             return False
         if user.is_staff or user.is_superuser:
             return True
+        from .access_policy import is_university_user
+        if not is_university_user(user):
+            return False
         now = timezone.now()
-        normalized_code = str(course_code).strip().upper()
         return cls.objects.filter(
             user=user,
+            access_type=cls.AccessType.ALL_ACCESS,
             is_active=True,
+            granted_by=cls.GrantedBy.PAYMENT,
+            starts_at__lte=now,
             expires_at__gte=now,
-        ).filter(
-            models.Q(access_type__in=[cls.AccessType.ALL_ACCESS, cls.AccessType.TRIAL]) |
-            models.Q(course_code__iexact=normalized_code)
         ).exists()
 
     @classmethod
     def get_user_access_summary(cls, user):
         """
-        Returns summary dictionary of what courses are unlocked and trial status.
+        Returns the current semester-pass and registration-based limited-access status.
         """
         if not user or not user.is_authenticated:
             return {
@@ -222,34 +178,63 @@ class CourseAccess(models.Model):
                 "is_trial": False,
                 "trial_days_remaining": 0,
                 "trial_used": False,
+                "limited_access_active": False,
+                "limited_access_days_remaining": 0,
+                "limited_access_expires_at": None,
+                "limited_access_duration_days": 14,
+                "preview_active": False,
+                "access_percentage": 0,
+                "access_status": "not_applicable",
+                "semester_price": 2500,
                 "expires_at": None,
             }
+        from .access_policy import (
+            limited_access_end,
+            limited_access_duration_days,
+            limited_access_is_applicable,
+            limited_access_is_in_preview,
+            limited_access_percentage,
+        )
+
+        from .access_policy import is_university_user
+        is_university = is_university_user(user)
         now = timezone.now()
-        valid_grants = cls.objects.filter(user=user, is_active=True, expires_at__gte=now)
-        has_all = valid_grants.filter(access_type__in=[cls.AccessType.ALL_ACCESS, cls.AccessType.TRIAL]).exists()
-        trial_grant = valid_grants.filter(access_type=cls.AccessType.TRIAL).first()
-        trial_used = cls.objects.filter(user=user, access_type=cls.AccessType.TRIAL).exists()
+        valid_grants = cls.objects.filter(
+            user=user,
+            is_active=True,
+            access_type=cls.AccessType.ALL_ACCESS,
+            granted_by=cls.GrantedBy.PAYMENT,
+            starts_at__lte=now,
+            expires_at__gte=now,
+        ) if is_university else cls.objects.none()
+        has_all = user.is_staff or user.is_superuser or (is_university and valid_grants.exists())
 
         unlocked = []
         if has_all:
             unlocked = ["all", "ANA 201", "ANA 203", "PIO 201"]
-        else:
-            for g in valid_grants:
-                if g.course_code:
-                    unlocked.append(g.course_code.upper())
-
         latest_expiry = valid_grants.aggregate(models.Max("expires_at"))["expires_at__max"]
-        trial_days_left = 0
-        if trial_grant:
-            delta = trial_grant.expires_at - now
-            trial_days_left = max(0, delta.days + (1 if delta.seconds > 0 else 0))
+        limited_access_applicable = limited_access_is_applicable(user)
+        limited_days = limited_access_duration_days() if limited_access_applicable else 0
+        limited_end = limited_access_end(user, days=limited_days) if limited_days else None
+        preview_active = limited_access_is_in_preview(user, now=now, end=limited_end) if limited_end else False
+        access_percentage = limited_access_percentage(user, now=now, end=limited_end)
+        limited_active = access_percentage > 0
+        limited_days_left = max(0, (limited_end - now).days + (1 if limited_end and (limited_end - now).seconds > 0 else 0)) if preview_active else 0
 
         return {
             "has_all_access": has_all,
             "unlocked_courses": list(set(unlocked)),
-            "is_trial": bool(trial_grant),
-            "trial_days_remaining": trial_days_left,
-            "trial_used": trial_used,
+            "is_trial": False,
+            "trial_days_remaining": 0,
+            "trial_used": False,
+            "limited_access_active": limited_active,
+            "preview_active": preview_active,
+            "limited_access_days_remaining": limited_days_left,
+            "limited_access_expires_at": limited_end.isoformat() if limited_end else None,
+            "limited_access_duration_days": limited_days,
+            "access_percentage": 100 if has_all or unlocked else access_percentage,
+            "access_status": "full" if has_all or unlocked else "preview" if preview_active else "sample" if limited_active else "not_applicable",
+            "semester_price": 2500,
             "expires_at": latest_expiry.isoformat() if latest_expiry else None,
         }
 
@@ -288,23 +273,6 @@ class PaymentTransaction(models.Model):
 
     def __str__(self):
         return f"{self.reference} · {self.user.username} · ₦{self.amount:,} ({self.status})"
-
-
-class CourseTopicConfig(models.Model):
-    """
-    Admin control to mark each topic as free or paid, and designate the free showcase topic.
-    """
-    course_code = models.CharField(max_length=40, unique=True, help_text="e.g. ANA 201, ANA 203, PIO 201")
-    free_topic_id = models.CharField(max_length=120, default="", help_text="ID of the topic that is free (e.g. 'ul-bones').")
-    showcase_note_id = models.CharField(max_length=120, blank=True, default="", help_text="ID or filename of the showcase note.")
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = "Course Topic Access Configuration"
-        verbose_name_plural = "Course Topic Access Configurations"
-
-    def __str__(self):
-        return f"{self.course_code} (Free Topic: {self.free_topic_id or 'First topic'})"
 
 
 class MonetizationEvent(models.Model):

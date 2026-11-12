@@ -60,17 +60,15 @@ class SecurityMonitorTests(TestCase):
         config.refresh_from_db()
         self.assertEqual(config.screenshot_protection_enabled, before)
 
-    def test_a_stale_pricing_save_cannot_overwrite_shield_or_purchase_counter(self):
+    def test_a_stale_pricing_save_cannot_overwrite_content_shield(self):
         from monetization.models import PlanConfig
         stale = PlanConfig.get_solo()
-        PlanConfig.objects.filter(pk=stale.pk).update(screenshot_protection_enabled=False, launch_offer_buyers_count=17)
+        PlanConfig.objects.filter(pk=stale.pk).update(screenshot_protection_enabled=False)
         with patch("learning.monitor_views.PlanConfig.get_solo", return_value=stale):
-            response = self.client.post("/monitor/monetization/update-pricing/", {"single_course_price": "1600", "semester_end_date": "2027-05-30"})
+            response = self.client.post("/monitor/monetization/update-pricing/", {"semester_end_date": "2027-05-30"})
         self.assertEqual(response.status_code, 302)
         stale.refresh_from_db()
-        self.assertEqual(stale.single_course_price, 1600)
         self.assertFalse(stale.screenshot_protection_enabled)
-        self.assertEqual(stale.launch_offer_buyers_count, 17)
 
     def test_get_is_read_only_and_shows_existing_environment_deadline(self):
         response = self.client.get(self.path)

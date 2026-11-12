@@ -2,18 +2,15 @@ import hashlib
 import hmac
 import json
 from datetime import timedelta
+
 from django.contrib.auth import get_user_model
 from django.test import override_settings
 from django.utils import timezone
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from .models import (
-    PlanConfig,
-    DiscountCode,
-    CourseAccess,
-    PaymentTransaction,
-)
+from .access_policy import limited_access_end
+from .models import CourseAccess, PaymentTransaction, PlanConfig
 
 User = get_user_model()
 
@@ -21,158 +18,106 @@ User = get_user_model()
 class MonetizationTests(APITestCase):
     def setUp(self):
         self.user = User.objects.create_user(
-            email="medstudent@example.com",
-            username="medstudent",
-            password="StrongPass2026!"
+            email="medstudent@example.com", username="medstudent",
+            password="StrongPass2026!", user_type="university", active_mode="university",
         )
         self.client.force_authenticate(user=self.user)
         self.config = PlanConfig.get_solo()
+        self.config.semester_end_date = timezone.now() + timedelta(days=150)
+        self.config.save(update_fields=("semester_end_date",))
 
-    def test_plan_config_defaults_and_launch_offer(self):
-        self.assertEqual(self.config.single_course_price, 1500)
-        self.assertEqual(self.config.all_access_price, 3000)
-        self.assertEqual(self.config.launch_offer_price, 2000)
-        self.assertTrue(self.config.is_launch_offer_valid)
-        self.assertEqual(self.config.current_all_access_price, 2000)
+    def test_registration_window_is_fourteen_days_and_price_is_fixed(self):
+        response = self.client.get("/api/subscriptions/config/")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["semester_price"], 2500)
+        self.assertEqual(response.data["limited_access_days"], 14)
+        access = response.data["user_access"]
+        self.assertTrue(access["limited_access_active"])
+        self.assertTrue(access["preview_active"])
+        self.assertEqual(access["access_percentage"], 20)
+        self.assertEqual(access["limited_access_expires_at"], limited_access_end(self.user).isoformat())
+        self.assertNotIn("launch_offer", response.data)
+        self.assertNotIn("single_course_price", response.data)
 
-        # Deactivate launch offer
-        self.config.launch_offer_active = False
-        self.config.save()
-        self.assertFalse(self.config.is_launch_offer_valid)
-        self.assertEqual(self.config.current_all_access_price, 3000)
+    def test_monitor_managed_duration_recalculates_from_registration(self):
+        self.config.limited_access_days = 21
+        self.config.save(update_fields=("limited_access_days",))
+        self.user.refresh_from_db()
+        expected = self.user.created_at + timedelta(days=21)
+        self.assertEqual(limited_access_end(self.user), expected)
 
-    def test_start_3_day_free_trial(self):
-        response = self.client.post("/api/subscriptions/start-trial/")
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertTrue(response.data["user_access"]["is_trial"])
-        self.assertTrue(response.data["user_access"]["has_all_access"])
-        self.assertGreaterEqual(response.data["user_access"]["trial_days_remaining"], 2)
-
-        # Trying to start trial a second time must be rejected
-        response2 = self.client.post("/api/subscriptions/start-trial/")
-        self.assertEqual(response2.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("already redeemed", response2.data["detail"])
-
-    def test_initialize_and_verify_all_access_payment(self):
-        # Initialize
-        init_resp = self.client.post("/api/subscriptions/initialize/", {
-            "access_type": "all_access",
-        }, format="json")
-        self.assertEqual(init_resp.status_code, status.HTTP_201_CREATED)
-        reference = init_resp.data["reference"]
-        self.assertEqual(init_resp.data["amount"], 2000) # Launch offer
-
-        # Verify
-        verify_resp = self.client.post("/api/subscriptions/verify/", {
-            "reference": reference,
-        }, format="json")
-        self.assertEqual(verify_resp.status_code, status.HTTP_200_OK)
-        self.assertTrue(verify_resp.data["user_access"]["has_all_access"])
-        self.assertIn("ANA 201", verify_resp.data["user_access"]["unlocked_courses"])
-
-        # Check model query
-        self.assertTrue(CourseAccess.user_has_course_access(self.user, "ANA 201"))
-        self.assertTrue(CourseAccess.user_has_course_access(self.user, "ANA 203"))
-        self.assertTrue(CourseAccess.user_has_course_access(self.user, "PIO 201"))
-
-    def test_class_discount_code(self):
-        discount = DiscountCode.objects.create(
-            code="UNILAG25",
-            label="UNILAG 200L Anatomy",
-            discounted_price=2500,
-            target_plan=DiscountCode.PlanType.ALL_ACCESS,
-            is_active=True,
-            max_uses=50,
+    def test_aspirants_do_not_receive_the_university_limited_access_window(self):
+        aspirant = User.objects.create_user(
+            email="aspirant@example.com", username="aspirant",
+            password="StrongPass2026!", user_type="aspirant", active_mode="aspirant",
         )
+        self.assertFalse(CourseAccess.get_user_access_summary(aspirant)["limited_access_active"])
 
-        # Validate code endpoint
-        val_resp = self.client.post("/api/subscriptions/validate-code/", {
-            "code": "unilag25",
-            "plan": "all_access",
+    def test_trial_route_and_single_course_checkout_are_retired(self):
+        trial = self.client.post("/api/subscriptions/start-trial/")
+        self.assertEqual(trial.status_code, status.HTTP_404_NOT_FOUND)
+        single = self.client.post("/api/subscriptions/initialize/", {
+            "access_type": "single_course", "course_code": "ANA 201",
         }, format="json")
-        self.assertEqual(val_resp.status_code, status.HTTP_200_OK)
-        self.assertTrue(val_resp.data["valid"])
-        self.assertEqual(val_resp.data["discounted_price"], 2500)
+        self.assertEqual(single.status_code, status.HTTP_410_GONE)
+        self.assertFalse(CourseAccess.objects.filter(user=self.user).exists())
 
-        # Initialize with code
-        init_resp = self.client.post("/api/subscriptions/initialize/", {
-            "access_type": "all_access",
-            "discount_code": "UNILAG25",
+    def test_fixed_semester_payment_unlocks_all_university_courses(self):
+        init = self.client.post("/api/subscriptions/initialize/", {"access_type": "all_access"}, format="json")
+        self.assertEqual(init.status_code, status.HTTP_201_CREATED, init.data)
+        self.assertEqual(init.data["amount"], 2500)
+        verified = self.client.post("/api/subscriptions/verify/", {"reference": init.data["reference"]}, format="json")
+        self.assertEqual(verified.status_code, status.HTTP_200_OK, verified.data)
+        self.assertTrue(verified.data["user_access"]["has_all_access"])
+        for course_code in ("ANA 201", "ANA 203", "PIO 201"):
+            self.assertTrue(CourseAccess.user_has_course_access(self.user, course_code))
+
+    def test_discount_codes_are_retired_and_cannot_change_the_fixed_amount(self):
+        validate = self.client.post("/api/subscriptions/validate-code/", {"code": "OLD"}, format="json")
+        self.assertEqual(validate.status_code, status.HTTP_404_NOT_FOUND)
+        init = self.client.post("/api/subscriptions/initialize/", {
+            "access_type": "all_access", "discount_code": "OLD",
         }, format="json")
-        self.assertEqual(init_resp.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(init_resp.data["amount"], 2500)
-        reference = init_resp.data["reference"]
+        self.assertEqual(init.status_code, status.HTTP_410_GONE)
+        self.assertFalse(PaymentTransaction.objects.exists())
 
-        # Verify
-        verify_resp = self.client.post("/api/subscriptions/verify/", {
-            "reference": reference,
-        }, format="json")
-        self.assertEqual(verify_resp.status_code, status.HTTP_200_OK)
+    def test_expired_preview_keeps_five_percent_sample_access_and_account(self):
+        self.user.created_at = timezone.now() - timedelta(days=15)
+        self.user.save(update_fields=("created_at",))
+        access = self.client.get("/api/subscriptions/my-access/")
+        self.assertEqual(access.status_code, status.HTTP_200_OK)
+        self.assertTrue(access.data["limited_access_active"])
+        self.assertFalse(access.data["preview_active"])
+        self.assertEqual(access.data["access_percentage"], 5)
+        self.assertEqual(access.data["access_status"], "sample")
+        self.assertTrue(User.objects.filter(pk=self.user.pk).exists())
 
-        discount.refresh_from_db()
-        self.assertEqual(discount.times_used, 1)
-
-    def test_single_course_purchase(self):
-        init_resp = self.client.post("/api/subscriptions/initialize/", {
-            "access_type": "single_course",
-            "course_code": "ANA 201",
-        }, format="json")
-        self.assertEqual(init_resp.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(init_resp.data["amount"], 1500)
-        reference = init_resp.data["reference"]
-
-        verify_resp = self.client.post("/api/subscriptions/verify/", {
-            "reference": reference,
-        }, format="json")
-        self.assertEqual(verify_resp.status_code, status.HTTP_200_OK)
-
-        self.assertTrue(CourseAccess.user_has_course_access(self.user, "ANA 201"))
-        self.assertFalse(CourseAccess.user_has_course_access(self.user, "ANA 203"))
-        self.assertFalse(CourseAccess.user_has_course_access(self.user, "PIO 201"))
+    def test_legacy_single_course_and_trial_grants_cannot_unlock(self):
+        for access_type, granted_by in (("single_course", "payment"), ("trial", "trial")):
+            CourseAccess.objects.create(
+                user=self.user, access_type=access_type, granted_by=granted_by,
+                course_code="ANA 201", expires_at=timezone.now() + timedelta(days=30),
+            )
+        self.assertFalse(CourseAccess.user_has_course_access(self.user, "ANA 201"))
+        self.assertFalse(CourseAccess.get_user_access_summary(self.user)["has_all_access"])
 
     @override_settings(PAYSTACK_SECRET_KEY="webhook-test-secret")
-    def test_webhook_requires_signature_and_matching_payment_details(self):
-        transaction = PaymentTransaction.objects.create(
-            reference="seom_webhook_security_test",
-            user=self.user,
-            amount=1500,
-            access_type=PaymentTransaction.AccessType.SINGLE_COURSE,
-            course_code="ANA 201",
+    def test_webhook_requires_signature_and_rejects_nonfixed_or_single_course_payment(self):
+        tx = PaymentTransaction.objects.create(
+            reference="seom_webhook_security_test", user=self.user, amount=1500,
+            access_type=PaymentTransaction.AccessType.SINGLE_COURSE, course_code="ANA 201",
         )
-        event = {
-            "event": "charge.success",
-            "data": {
-                "status": "success",
-                "reference": transaction.reference,
-                "amount": 150000,
-                "currency": "NGN",
-                "customer": {"email": self.user.email},
-            },
-        }
+        event = {"event": "charge.success", "data": {
+            "status": "success", "reference": tx.reference, "amount": 150000,
+            "currency": "NGN", "customer": {"email": self.user.email},
+        }}
         body = json.dumps(event, separators=(",", ":"))
-        signature = hmac.new(b"webhook-test-secret", body.encode(), hashlib.sha512).hexdigest()
-
         missing = self.client.post("/api/subscriptions/paystack-webhook/", body, content_type="application/json")
         self.assertEqual(missing.status_code, status.HTTP_400_BAD_REQUEST)
-
-        event["data"]["customer"]["email"] = "someone-else@example.com"
-        mismatched_body = json.dumps(event, separators=(",", ":"))
-        mismatched_signature = hmac.new(b"webhook-test-secret", mismatched_body.encode(), hashlib.sha512).hexdigest()
-        mismatched = self.client.post(
-            "/api/subscriptions/paystack-webhook/", mismatched_body,
-            content_type="application/json", HTTP_X_PAYSTACK_SIGNATURE=mismatched_signature,
+        signature = hmac.new(b"webhook-test-secret", body.encode(), hashlib.sha512).hexdigest()
+        invalid = self.client.post(
+            "/api/subscriptions/paystack-webhook/", body, content_type="application/json",
+            HTTP_X_PAYSTACK_SIGNATURE=signature,
         )
-        self.assertEqual(mismatched.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertFalse(CourseAccess.objects.filter(reference=transaction.reference).exists())
-
-        event["data"]["customer"]["email"] = self.user.email
-        valid_body = json.dumps(event, separators=(",", ":"))
-        valid_signature = hmac.new(b"webhook-test-secret", valid_body.encode(), hashlib.sha512).hexdigest()
-        valid = self.client.post(
-            "/api/subscriptions/paystack-webhook/", valid_body,
-            content_type="application/json", HTTP_X_PAYSTACK_SIGNATURE=valid_signature,
-        )
-        self.assertEqual(valid.status_code, status.HTTP_200_OK)
-        transaction.refresh_from_db()
-        self.assertEqual(transaction.status, PaymentTransaction.Status.SUCCESS)
-        self.assertTrue(CourseAccess.objects.filter(reference=transaction.reference).exists())
+        self.assertEqual(invalid.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertFalse(CourseAccess.objects.filter(reference=tx.reference).exists())

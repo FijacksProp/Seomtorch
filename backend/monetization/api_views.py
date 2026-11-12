@@ -5,23 +5,24 @@ import logging
 import sys
 import urllib.request
 import uuid
-from datetime import timedelta
 
 from django.conf import settings
-from django.db import models, transaction
+from django.db import transaction
 from django.utils import timezone
 from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .course_topics import DEFAULT_FREE_TOPICS, canonical_topic_id
 from .models import (
     PlanConfig,
-    DiscountCode,
     CourseAccess,
     PaymentTransaction,
-    CourseTopicConfig,
     MonetizationEvent,
+)
+from .access_policy import (
+    SEMESTER_ACCESS_PRICE,
+    has_full_university_access,
+    is_university_user,
 )
 
 logger = logging.getLogger(__name__)
@@ -30,6 +31,13 @@ logger = logging.getLogger(__name__)
 def _complete_verified_payment(tx, config, gateway_response):
     """Apply a verified payment exactly once, regardless of callback ordering."""
     if tx.status == PaymentTransaction.Status.SUCCESS:
+        return False
+    if (
+        tx.access_type != PaymentTransaction.AccessType.ALL_ACCESS
+        or tx.amount != SEMESTER_ACCESS_PRICE
+        or not is_university_user(tx.user)
+        or config.semester_end_date <= timezone.now()
+    ):
         return False
 
     now = timezone.now()
@@ -51,10 +59,6 @@ def _complete_verified_payment(tx, config, gateway_response):
             "granted_by": CourseAccess.GrantedBy.PAYMENT,
         },
     )
-    if tx.access_type == PaymentTransaction.AccessType.ALL_ACCESS and not tx.discount_code and config.is_launch_offer_valid:
-        PlanConfig.objects.filter(id=config.id).update(launch_offer_buyers_count=models.F("launch_offer_buyers_count") + 1)
-    if tx.discount_code:
-        DiscountCode.objects.filter(id=tx.discount_code_id).update(times_used=models.F("times_used") + 1)
     MonetizationEvent.objects.create(
         user=tx.user,
         event_name="payment_succeeded",
@@ -68,18 +72,9 @@ def _complete_verified_payment(tx, config, gateway_response):
     return True
 
 
-def _get_free_topics_map():
-    configs = CourseTopicConfig.objects.all()
-    free_map = DEFAULT_FREE_TOPICS.copy()
-    for c in configs:
-        if c.free_topic_id:
-            free_map[c.course_code.upper()] = canonical_topic_id(c.course_code, c.free_topic_id)
-    return free_map
-
-
 class SubscriptionConfigView(APIView):
     """
-    Public live config for plans, prices, launch offer status, and user's current access.
+    Public configuration for the fixed semester pass and the user's current access.
     """
     permission_classes = [permissions.AllowAny]
 
@@ -88,57 +83,13 @@ class SubscriptionConfigView(APIView):
         user = request.user if request.user.is_authenticated else None
         user_access = CourseAccess.get_user_access_summary(user)
 
-        launch_valid = config.is_launch_offer_valid
-        remaining_spots = max(0, config.launch_offer_max_buyers - config.launch_offer_buyers_count)
-
         return Response({
-            "single_course_price": config.single_course_price,
-            "all_access_price": config.all_access_price,
-            "current_all_access_price": config.current_all_access_price,
-            "launch_offer": {
-                "active": launch_valid,
-                "price": config.launch_offer_price,
-                "end_date": config.launch_offer_end_date.isoformat() if config.launch_offer_end_date else None,
-                "max_buyers": config.launch_offer_max_buyers,
-                "buyers_count": config.launch_offer_buyers_count,
-                "spots_remaining": remaining_spots,
-            },
+            "semester_price": SEMESTER_ACCESS_PRICE,
             "semester_end_date": config.semester_end_date.isoformat(),
-            "trial_duration_days": config.trial_duration_days,
+            "limited_access_days": config.limited_access_days,
             "screenshot_protection_enabled": config.screenshot_protection_enabled,
             "paystack_public_key": config.paystack_public_key or getattr(settings, "PAYSTACK_PUBLIC_KEY", ""),
             "user_access": user_access,
-            "free_topics": _get_free_topics_map(),
-        })
-
-
-class ValidateDiscountCodeView(APIView):
-    """
-    Validate a class or promo code at checkout.
-    """
-    permission_classes = [permissions.AllowAny]
-
-    def post(self, request):
-        code_str = str(request.data.get("code") or "").strip().upper()
-        plan = str(request.data.get("plan") or "all_access").strip().lower()
-        if not code_str:
-            return Response({"valid": False, "detail": "Enter a valid code."}, status=status.HTTP_400_BAD_REQUEST)
-
-        try:
-            discount = DiscountCode.objects.get(code__iexact=code_str)
-        except DiscountCode.DoesNotExist:
-            return Response({"valid": False, "detail": "Invalid discount code."}, status=status.HTTP_404_NOT_FOUND)
-
-        is_valid, msg = discount.is_valid_for(plan)
-        if not is_valid:
-            return Response({"valid": False, "detail": msg}, status=status.HTTP_400_BAD_REQUEST)
-
-        return Response({
-            "valid": True,
-            "code": discount.code,
-            "label": discount.label,
-            "discounted_price": discount.discounted_price,
-            "target_plan": discount.target_plan,
         })
 
 
@@ -151,41 +102,20 @@ class InitializePaymentView(APIView):
     @transaction.atomic
     def post(self, request):
         config = PlanConfig.get_solo()
-        access_type = str(request.data.get("access_type") or "all_access").strip().lower()
-        course_code = str(request.data.get("course_code") or "").strip()
-        code_str = str(request.data.get("discount_code") or "").strip().upper()
+        if not is_university_user(request.user):
+            return Response({"detail": "This university semester pass is available to university accounts only."}, status=status.HTTP_403_FORBIDDEN)
+        access_type = PaymentTransaction.AccessType.ALL_ACCESS
+        requested_access_type = str(request.data.get("access_type") or "").strip()
+        if requested_access_type and requested_access_type != PaymentTransaction.AccessType.ALL_ACCESS:
+            return Response({"detail": "Only the ₦2,500 university semester pass is available."}, status=status.HTTP_410_GONE)
+        if str(request.data.get("discount_code") or "").strip():
+            return Response({"detail": "Discount codes are no longer available. The semester pass has a fixed price of ₦2,500."}, status=status.HTTP_410_GONE)
+        if config.semester_end_date <= timezone.now():
+            return Response({"detail": "The current semester access period has ended. Please contact Seomtorch support."}, status=status.HTTP_400_BAD_REQUEST)
+        if has_full_university_access(request.user):
+            return Response({"detail": "Your university semester pass is already active."}, status=status.HTTP_409_CONFLICT)
 
-        if access_type not in {PaymentTransaction.AccessType.SINGLE_COURSE, PaymentTransaction.AccessType.ALL_ACCESS}:
-            return Response({"detail": "Choose a valid access plan."}, status=status.HTTP_400_BAD_REQUEST)
-
-        if access_type == "single_course" and not course_code:
-            return Response({"detail": "Course code is required for single course purchase."}, status=status.HTTP_400_BAD_REQUEST)
-        if access_type == "single_course" and not CourseTopicConfig.objects.filter(course_code__iexact=course_code).exists():
-            from learning.models import Subject
-            if not Subject.objects.filter(track=Subject.Track.UNIVERSITY, code__iexact=course_code, is_active=True).exists():
-                return Response({"detail": "That course is not available for purchase."}, status=status.HTTP_400_BAD_REQUEST)
-
-        discount_code_obj = None
-        amount = 0
-
-        # Check discount code first
-        if code_str:
-            try:
-                discount = DiscountCode.objects.get(code__iexact=code_str)
-                is_valid, msg = discount.is_valid_for(access_type)
-                if is_valid:
-                    discount_code_obj = discount
-                    amount = discount.discounted_price
-                else:
-                    return Response({"detail": msg}, status=status.HTTP_400_BAD_REQUEST)
-            except DiscountCode.DoesNotExist:
-                return Response({"detail": "Invalid discount code."}, status=status.HTTP_404_NOT_FOUND)
-
-        if not amount:
-            if access_type == "all_access":
-                amount = config.current_all_access_price
-            else:
-                amount = config.single_course_price
+        amount = SEMESTER_ACCESS_PRICE
 
         reference = f"seom_{int(timezone.now().timestamp())}_{uuid.uuid4().hex[:8]}"
 
@@ -195,8 +125,7 @@ class InitializePaymentView(APIView):
             amount=amount,
             status=PaymentTransaction.Status.PENDING,
             access_type=access_type,
-            course_code=course_code if access_type == "single_course" else "all",
-            discount_code=discount_code_obj,
+            course_code="all",
             gateway="paystack",
         )
 
@@ -207,8 +136,8 @@ class InitializePaymentView(APIView):
                 "reference": reference,
                 "amount": amount,
                 "access_type": access_type,
-                "course_code": course_code,
-                "discount_code": code_str or None,
+                "course_code": "all",
+                "semester_end_date": config.semester_end_date.isoformat(),
             }
         )
 
@@ -222,7 +151,7 @@ class InitializePaymentView(APIView):
             "email": request.user.email,
             "public_key": public_key,
             "access_type": access_type,
-            "course_code": tx.course_code,
+            "course_code": "all",
         }, status=status.HTTP_201_CREATED)
 
 
@@ -243,6 +172,9 @@ class VerifyPaymentView(APIView):
             tx = PaymentTransaction.objects.select_for_update().get(reference=reference, user=request.user)
         except PaymentTransaction.DoesNotExist:
             return Response({"detail": "Transaction not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        if tx.access_type != PaymentTransaction.AccessType.ALL_ACCESS or tx.amount != SEMESTER_ACCESS_PRICE:
+            return Response({"detail": "This legacy transaction cannot unlock the current university semester pass."}, status=status.HTTP_410_GONE)
 
         if tx.status == PaymentTransaction.Status.SUCCESS:
             return Response({
@@ -301,7 +233,8 @@ class VerifyPaymentView(APIView):
             )
             return Response({"detail": "Payment was not successful."}, status=status.HTTP_400_BAD_REQUEST)
 
-        _complete_verified_payment(tx, config, tx.gateway_response)
+        if not _complete_verified_payment(tx, config, tx.gateway_response):
+            return Response({"detail": "The current university semester pass is no longer available. Contact support if you were charged."}, status=status.HTTP_409_CONFLICT)
 
         return Response({
             "status": "success",
@@ -345,6 +278,8 @@ class PaystackWebhookView(APIView):
                         customer_email = str((data.get("customer") or {}).get("email") or "").strip().lower()
                         valid_payment = (
                             str(data.get("reference") or "") == tx.reference
+                            and tx.access_type == PaymentTransaction.AccessType.ALL_ACCESS
+                            and tx.amount == SEMESTER_ACCESS_PRICE
                             and str(data.get("currency") or "").upper() == "NGN"
                               and isinstance(data.get("amount"), int)
                               and not isinstance(data.get("amount"), bool)
@@ -354,59 +289,13 @@ class PaystackWebhookView(APIView):
                         )
                         if not valid_payment:
                             return Response({"detail": "Payment details do not match the pending transaction."}, status=status.HTTP_400_BAD_REQUEST)
-                        _complete_verified_payment(tx, config, data)
+                        if tx.status != PaymentTransaction.Status.SUCCESS and not _complete_verified_payment(tx, config, data):
+                            return Response({"detail": "The current university semester pass is no longer available."}, status=status.HTTP_409_CONFLICT)
                 except PaymentTransaction.DoesNotExist:
                     logger.warning("Paystack webhook received unknown reference: %s", reference)
                     return Response({"detail": "Unknown transaction reference."}, status=status.HTTP_404_NOT_FOUND)
 
         return Response({"status": "received"}, status=status.HTTP_200_OK)
-
-
-class StartTrialView(APIView):
-    """
-    Redeem the 3-day full-access trial (once per student account).
-    """
-    permission_classes = [permissions.IsAuthenticated]
-
-    @transaction.atomic
-    def post(self, request):
-        config = PlanConfig.get_solo()
-        user = request.user
-
-        # Check if user ever redeemed a trial
-        existing_trial = CourseAccess.objects.filter(user=user, access_type=CourseAccess.AccessType.TRIAL).exists()
-        if existing_trial:
-            return Response({
-                "detail": "You have already redeemed your 3-day free trial on this account.",
-                "user_access": CourseAccess.get_user_access_summary(user),
-            }, status=status.HTTP_400_BAD_REQUEST)
-
-        trial_days = config.trial_duration_days or 3
-        now = timezone.now()
-        expires = now + timedelta(days=trial_days)
-
-        trial = CourseAccess.objects.create(
-            user=user,
-            access_type=CourseAccess.AccessType.TRIAL,
-            course_code="all",
-            starts_at=now,
-            expires_at=expires,
-            is_active=True,
-            granted_by=CourseAccess.GrantedBy.TRIAL,
-            reference=f"trial_{user.public_id}",
-        )
-
-        MonetizationEvent.objects.create(
-            user=user,
-            event_name="trial_started",
-            metadata={"expires_at": expires.isoformat(), "trial_days": trial_days}
-        )
-
-        return Response({
-            "status": "success",
-            "message": f"Your {trial_days}-day full-access trial is active! Explore all courses, explanations, and notes.",
-            "user_access": CourseAccess.get_user_access_summary(user),
-        }, status=status.HTTP_201_CREATED)
 
 
 class UserAccessSummaryView(APIView):

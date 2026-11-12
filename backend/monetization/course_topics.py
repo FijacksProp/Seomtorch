@@ -1,10 +1,4 @@
-"""Catalog topic IDs shared by content delivery, practice and subscriptions."""
-
-DEFAULT_FREE_TOPICS = {
-    "ANA 201": "ul-bones",
-    "ANA 203": "ge-gametes",
-    "PIO 201": "pio-transport-homeostasis",
-}
+"""Compatibility mapping for course catalog IDs retained by imported content."""
 
 LEGACY_TOPIC_IDS = {
     "ANA 203": {"week-one": "ge-week-one"},

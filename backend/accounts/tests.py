@@ -4,6 +4,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient, APITestCase
 from knox.models import AuthToken
 from unittest.mock import patch
+from monetization.models import CourseAccess
 
 class AuthenticationTests(APITestCase):
     def test_register_returns_token_and_six_character_id(self):
@@ -12,6 +13,21 @@ class AuthenticationTests(APITestCase):
         self.assertEqual(len(response.data["user"]["public_id"]), 6)
         self.assertTrue(response.data["token"])
         self.assertEqual(get_user_model().objects.get().email, "ada@example.com")
+
+    def test_new_university_registration_gets_limited_preview_not_full_trial(self):
+        response = self.client.post("/api/auth/register/", {
+            "email": "uni.preview@example.com",
+            "username": "unipreview",
+            "password": "Securepass934!",
+            "user_type": "university",
+        }, format="json")
+        self.assertEqual(response.status_code, 201)
+        user = get_user_model().objects.get(email="uni.preview@example.com")
+        self.assertFalse(CourseAccess.objects.filter(user=user).exists())
+        access = CourseAccess.get_user_access_summary(user)
+        self.assertFalse(access["has_all_access"])
+        self.assertEqual(access["access_percentage"], 20)
+        self.assertEqual(access["access_status"], "preview")
 
     def test_sign_in_uses_email_not_username(self):
         get_user_model().objects.create_user(email="student@example.com", username="different-name", password="Securepass934!")

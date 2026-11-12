@@ -40,32 +40,8 @@ class RegisterView(APIView):
         token = None if enabled_for(user) else AuthToken.objects.create(user=user)[1]
         ActivityEvent.objects.create(user=user, event_type=ActivityEvent.Type.REGISTERED)
 
-        # Automatically grant 3-Day Free Trial upon registration
-        try:
-            from datetime import timedelta
-            from django.utils import timezone
-            from monetization.models import CourseAccess, PlanConfig, MonetizationEvent
-            config = PlanConfig.get_solo()
-            trial_days = config.trial_duration_days or 3
-            now = timezone.now()
-            expires = now + timedelta(days=trial_days)
-            CourseAccess.objects.create(
-                user=user,
-                access_type=CourseAccess.AccessType.TRIAL,
-                course_code="all",
-                starts_at=now,
-                expires_at=expires,
-                is_active=True,
-                granted_by=CourseAccess.GrantedBy.TRIAL,
-                reference=f"trial_signup_{user.public_id}",
-            )
-            MonetizationEvent.objects.create(
-                user=user,
-                event_name="trial_started",
-                metadata={"trigger": "signup", "expires_at": expires.isoformat(), "trial_days": trial_days}
-            )
-        except Exception:
-            pass
+        # University limited access is calculated from the account registration
+        # timestamp; no trial or pilot grant is created in the access table.
         if enabled_for(user):
             # No usable session is returned before the new account proves inbox ownership.
             AuthToken.objects.filter(user=user).delete()
