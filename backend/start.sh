@@ -12,6 +12,9 @@ python manage.py create_initial_superuser
 # this small, batched bank before serving requests, independently of the much
 # larger aspirant import below. Unchanged university content is skipped.
 python manage.py import_questions --university-only --if-current
+if ! python manage.py build_university_access_manifest; then
+    echo "Warning: university access manifest build failed; requests will use the development fallback scan."
+fi
 
 # Importing the full question bank against a remote database can take several
 # minutes. Run it in the background so Render can detect Gunicorn's port while

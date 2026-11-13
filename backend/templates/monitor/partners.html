@@ -1,0 +1,21 @@
+{% extends 'monitor/base.html' %}
+{% block title %}Partner institutes{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="kicker">University partnerships</p><h1>Institute partners</h1><p>Manage partner organizations, named portal access and institute-attributed student cohorts.</p></div><a href="{% url 'monitor:monetization' %}" class="btn-outline">← Monetization</a></div>
+
+<section class="control-section"><div class="control-section-head"><div><p class="kicker">Create</p><h2>Add an institute</h2></div></div>
+  <form method="post" action="{% url 'monitor:create-partner' %}">{% csrf_token %}<div class="form-grid-3"><div class="form-group"><label>Institute name</label><input name="name" maxlength="180" required placeholder="Example University"></div><div class="form-group"><label>Portal slug (optional)</label><input name="slug" maxlength="190" placeholder="example-university"></div><div class="form-group"><label>Contact email (optional)</label><input name="contact_email" type="email" placeholder="partnerships@example.edu"></div></div><button class="btn-primary" type="submit">Create institute</button></form>
+</section>
+
+<section class="control-section"><div class="control-section-head"><div><p class="kicker">Admin access</p><h2>Assign a partner administrator</h2></div><span class="badge badge-disabled">Named account</span></div>
+  <p>The person must first register with Seomtorch. Assign their exact account email; they can then sign in at <code>/partner/login/</code>. Partner accounts do not receive staff-monitor permissions.</p>
+  <form method="post" action="{% url 'monitor:assign-partner-admin' %}">{% csrf_token %}<div class="form-grid-3"><div class="form-group"><label>Institute</label><select name="organization_id" required><option value="">Select institute</option>{% for organization in organizations %}{% if organization.is_active %}<option value="{{ organization.id }}">{{ organization.name }}</option>{% endif %}{% endfor %}</select></div><div class="form-group"><label>Registered user email</label><input name="email" type="email" required placeholder="admin@university.edu"></div></div><button class="btn-primary" type="submit">Grant partner portal access</button></form>
+</section>
+
+<section class="control-section"><div class="control-section-head"><div><p class="kicker">Organization reporting</p><h2>Partner cohort overview</h2></div><a href="/partner/" class="btn-outline">Open all partner dashboards ↗</a></div>
+  <div class="table-scroll-hint">← Swipe table sideways to view all columns →</div><div class="table-wrap"><table><thead><tr><th>Institute</th><th>Attributed students</th><th>Partner admins</th><th>Paid partner codes</th><th>Recent cohort links</th><th>Dashboard</th></tr></thead><tbody>
+    {% for organization in organizations %}<tr><td><strong>{{ organization.name }}</strong><small>{{ organization.slug }} · {% if organization.is_active %}Active{% else %}Archived{% endif %}</small></td><td>{{ organization.student_count }}</td><td>{{ organization.admin_count }}</td><td>{% for code in organization.discount_codes.all %}{% if code.is_active %}<small>{{ code.code }} · {{ code.times_used }} uses</small>{% endif %}{% empty %}<small>No partner codes</small>{% endfor %}</td><td>{% for membership in organization.recent_students %}<small><a href="{% url 'monitor:student-detail' membership.user.public_id %}">{{ membership.user.username }}</a> · {{ membership.linked_at|date:'j M Y' }}</small>{% empty %}<small>None yet</small>{% endfor %}</td><td><a class="btn-primary" href="/partner/?org={{ organization.slug }}">View cohort</a></td></tr>
+    {% empty %}<tr><td colspan="6"><div class="empty">No partner institutes created yet.</div></td></tr>{% endfor %}
+  </tbody></table></div>
+</section>
+{% endblock %}

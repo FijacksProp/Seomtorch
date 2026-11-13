@@ -1,11 +1,13 @@
 import hashlib
 import hmac
 import json
+import logging
 import mimetypes
 import re
 from functools import lru_cache
 from pathlib import Path, PurePosixPath
 from urllib.parse import urlencode
+import time
 
 from django.conf import settings
 from django.http import FileResponse
@@ -24,17 +26,18 @@ from .models import Subject, Topic, Question
 REPO_DIR = settings.BASE_DIR.parent
 UNIVERSITY_DIR = REPO_DIR / "data" / "university"
 NOTES_ASSET_DIR = REPO_DIR / "assets" / "notes"
+ACCESS_MANIFEST_PATH = settings.BASE_DIR / ".university-access-manifest.json"
 ALLOWED_IMAGE_TYPES = {".png", ".jpg", ".jpeg", ".webp", ".avif"}
 _NOTE_MEDIA_BLOCK_POSITIONS = {}
+logger = logging.getLogger(__name__)
 
 
 def _normalized(value):
     return str(value or "").replace("\\", "/").lstrip("./")
 
 
-@lru_cache(maxsize=1)
-def _content_access_map():
-    """Map private question/note files and note images to their course/topic."""
+def _build_content_access_map():
+    """Build the access map from course catalog files and note metadata."""
     global _NOTE_MEDIA_BLOCK_POSITIONS
     content_map = {}
     note_media_positions = {}
@@ -43,7 +46,7 @@ def _content_access_map():
         return content_map
 
     for course_path in UNIVERSITY_DIR.rglob("*.json"):
-        if course_path.name in {"index.json", "meta.json", "courses.json"}:
+        if course_path.name in {"index.json", "meta.json", "courses.json"} or course_path.name.startswith(("questions-", "notes-")):
             continue
         try:
             course = json.loads(course_path.read_text(encoding="utf-8"))
@@ -124,6 +127,42 @@ def _content_access_map():
     return content_map
 
 
+@lru_cache(maxsize=1)
+def _content_access_map():
+    """Load the deployment-built private content map; scan only as a dev fallback."""
+    global _NOTE_MEDIA_BLOCK_POSITIONS
+    manifest_started = time.perf_counter()
+    if ACCESS_MANIFEST_PATH.is_file():
+        try:
+            manifest = json.loads(ACCESS_MANIFEST_PATH.read_text(encoding="utf-8"))
+            _NOTE_MEDIA_BLOCK_POSITIONS = {
+                path: tuple((int(total), int(index)) for total, index in positions)
+                for path, positions in (manifest.get("note_media_positions") or {}).items()
+            }
+            content_map = {path: (str(value[0]), str(value[1])) for path, value in manifest.get("content_map", {}).items()}
+            logger.info("University access manifest loaded entries=%d elapsed=%.3fs", len(content_map), time.perf_counter() - manifest_started)
+            return content_map
+        except (OSError, ValueError, TypeError, IndexError):
+            pass
+    content_map = _build_content_access_map()
+    logger.warning("University access manifest unavailable; request worker performed fallback scan entries=%d elapsed=%.3fs", len(content_map), time.perf_counter() - manifest_started)
+    return content_map
+
+
+def write_content_access_manifest():
+    """Generate the compact per-worker map before Gunicorn starts serving requests."""
+    content_map = _build_content_access_map()
+    manifest = {
+        "content_map": content_map,
+        "note_media_positions": _NOTE_MEDIA_BLOCK_POSITIONS,
+    }
+    temporary = ACCESS_MANIFEST_PATH.with_suffix(".tmp")
+    temporary.write_text(json.dumps(manifest, separators=(",", ":")), encoding="utf-8")
+    temporary.replace(ACCESS_MANIFEST_PATH)
+    _content_access_map.cache_clear()
+    return len(content_map)
+
+
 def _note_image_is_accessible(user, relative_path):
     percentage = limited_access_percentage(user)
     return any(
@@ -197,6 +236,8 @@ class UniversityContentView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
+        request_started = time.perf_counter()
+        worker_cache_warm = _content_access_map.cache_info().currsize > 0
         relative = _normalized(request.query_params.get("path"))
         if not relative.startswith("data/university/") or not relative.endswith(".json"):
             return Response({"detail": "University content was not found."}, status=status.HTTP_404_NOT_FOUND)
@@ -266,6 +307,11 @@ class UniversityContentView(APIView):
         response = Response(data)
         response["Cache-Control"] = "private, no-store"
         response["Vary"] = "Authorization"
+        elapsed = time.perf_counter() - request_started
+        if elapsed >= 1.0:
+            logger.warning("Slow university content request path=%s worker_cache=%s elapsed=%.3fs", relative, "warm" if worker_cache_warm else "cold", elapsed)
+        else:
+            logger.info("University content request path=%s worker_cache=%s elapsed=%.3fs", relative, "warm" if worker_cache_warm else "cold", elapsed)
         return response
 
 

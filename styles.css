@@ -1063,10 +1063,20 @@ select:focus, textarea:focus, input:focus {
 .test-analysis-grid { margin-top: 36px; display: grid; grid-template-columns: 1.3fr .7fr; gap: 17px; }
 .section-head.compact { margin: 0 0 22px; }
 .section-head.compact h2 { font-size: 25px; }
-.trend-bars { height: 210px; padding-top: 18px; border-bottom: 1px solid var(--line-dark); display: flex; align-items: end; gap: clamp(8px, 2vw, 20px); }
-.trend-bars > div { height: 100%; flex: 1; display: grid; grid-template-rows: 1fr 18px; align-items: end; gap: 7px; }
-.trend-bars span { width: 100%; min-height: 4px; display: block; background: linear-gradient(180deg, var(--ochre), #b9781c); transform-origin: bottom; animation: test-bar-rise .55s cubic-bezier(.2,.8,.2,1) both; }
-.trend-bars small { color: var(--muted); font-size: 8px; text-align: center; }
+.trend-method-note, .trend-movement-explainer { color: var(--muted); font-size: 12px; line-height: 1.55; }
+.trend-chart { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 8px; min-height: 250px; margin-top: 14px; }
+.trend-y-axis { display: flex; flex-direction: column; justify-content: space-between; padding: 22px 0 52px; color: var(--muted); font-size: 10px; text-align: right; }
+.trend-chart-main { position: relative; min-width: 0; }
+.trend-grid-lines { position: absolute; inset: 24px 0 52px; display: flex; flex-direction: column; justify-content: space-between; pointer-events: none; }
+.trend-grid-lines i { border-top: 1px solid var(--line); }
+.trend-columns { position: relative; height: 250px; display: flex; align-items: stretch; gap: clamp(8px, 2vw, 18px); overflow-x: auto; padding: 0 2px; }
+.trend-column { position: relative; z-index: 1; flex: 1 0 58px; max-width: 120px; min-width: 58px; display: grid; grid-template-rows: 24px minmax(0, 1fr) 34px 32px; align-items: end; text-align: center; }
+.trend-column > strong { color: var(--ink); font-size: 11px; }
+.trend-bar-track { height: 100%; min-height: 0; display: flex; align-items: end; border-bottom: 1px solid var(--line-dark); }
+.trend-bar-track i { width: 100%; min-height: 2px; display: block; background: linear-gradient(180deg, var(--ochre), #b9781c); transform-origin: bottom; animation: test-bar-rise .55s cubic-bezier(.2,.8,.2,1) both; }
+.trend-column > small { align-self: center; color: var(--muted); font-size: 9px; line-height: 1.4; }
+.trend-column > b { align-self: start; overflow: hidden; color: var(--ink-soft); font-size: 9px; font-weight: 600; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
+.trend-accessible-summary { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 @keyframes test-bar-rise { from { transform: scaleY(0); } to { transform: scaleY(1); } }
 .test-mode-list > div { padding: 15px 0; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 15px; }
 .test-mode-list strong, .test-mode-list small { display: block; }
@@ -3065,6 +3075,13 @@ select:focus, textarea:focus, input:focus {
 }
 
 /* Course Cards */
+.uni-course-loading { min-height: 300px; padding: 44px 24px; display: grid; align-content: center; justify-items: start; border: 1px solid var(--line); border-radius: var(--radius-lg); background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(245,241,232,.78)); }
+.uni-course-loading h2 { margin: 8px 0; font-family: var(--serif); font-size: clamp(25px, 4vw, 38px); }
+.uni-course-loading p { color: var(--muted); }
+.uni-course-loading > div { display: flex; gap: 7px; margin-top: 14px; }
+.uni-course-loading i { width: 7px; height: 7px; border-radius: 50%; background: var(--ochre); animation: quiet-pulse .8s ease-in-out infinite alternate; }
+.uni-course-loading i:nth-child(2) { animation-delay: .16s; }
+.uni-course-loading i:nth-child(3) { animation-delay: .32s; }
 .uni-course-list {
   display: grid;
   gap: 16px;
@@ -7949,6 +7966,35 @@ body.shield-active #main {
   justify-content: space-between;
   align-items: flex-start;
   gap: 12px;
+}
+
+.upgrade-plan-choice { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.upgrade-plan-option { min-width: 0; min-height: 94px; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; text-align: left; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); cursor: pointer; transition: border-color .16s ease, box-shadow .16s ease, background .16s ease; }
+.upgrade-plan-option:hover, .upgrade-plan-option.selected { border-color: var(--forest); background: #fff; }
+.upgrade-plan-option.selected { box-shadow: 0 0 0 2px var(--forest-soft); }
+.upgrade-plan-option > span, .upgrade-plan-option > b { display: block; }
+.upgrade-plan-option strong, .upgrade-plan-option small { display: block; }
+.upgrade-plan-option strong { font-size: 13px; }
+.upgrade-plan-option span small { margin-top: 4px; color: var(--muted); font-size: 10px; line-height: 1.4; }
+.upgrade-plan-option > b { color: var(--forest); font: 700 19px var(--serif); }
+.upgrade-plan-option > b small { display: inline; color: var(--muted); font: 500 10px var(--sans); }
+.upgrade-course-field { display: grid; gap: 7px; color: var(--ink); font-size: 12px; font-weight: 700; }
+.upgrade-course-field[hidden] { display: none; }
+.upgrade-course-field select, .upgrade-discount-row input { width: 100%; min-height: 44px; padding: 10px 12px; color: var(--ink); background: #fff; border: 1px solid var(--line-dark); border-radius: 9px; font: 500 13px var(--sans); }
+.upgrade-discount-row > label { display: block; margin-bottom: 7px; color: var(--ink); font-size: 12px; font-weight: 700; }
+.upgrade-discount-row > label span { color: var(--muted); font-weight: 400; }
+.upgrade-discount-row > div { display: flex; gap: 8px; }
+.upgrade-discount-row > div .button { flex: 0 0 auto; }
+.upgrade-discount-row p { min-height: 17px; margin: 5px 0 0; color: var(--muted); font-size: 11px; }
+.upgrade-discount-row p.is-success { color: #167047; }
+.upgrade-discount-row p.is-error { color: #a73d35; }
+.upgrade-access-note { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
+
+@media (max-width: 520px) {
+  .upgrade-plan-choice { grid-template-columns: 1fr; }
+  .upgrade-plan-option { min-height: 80px; }
+  .upgrade-discount-row > div { align-items: stretch; }
+  .upgrade-discount-row > div .button { padding-inline: 12px; }
 }
 
 .upgrade-plan-card {

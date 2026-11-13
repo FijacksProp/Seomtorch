@@ -1,6 +1,7 @@
 from django.urls import path
 from .api_views import (
     SubscriptionConfigView,
+    ValidateDiscountCodeView,
     InitializePaymentView,
     VerifyPaymentView,
     PaystackWebhookView,
@@ -12,6 +13,7 @@ app_name = "monetization"
 
 urlpatterns = [
     path("config/", SubscriptionConfigView.as_view(), name="config"),
+    path("validate-code/", ValidateDiscountCodeView.as_view(), name="validate-code"),
     path("initialize/", InitializePaymentView.as_view(), name="initialize"),
     path("verify/", VerifyPaymentView.as_view(), name="verify"),
     path("paystack-webhook/", PaystackWebhookView.as_view(), name="webhook"),

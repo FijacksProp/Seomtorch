@@ -1,4 +1,5 @@
 from django.contrib import admin, messages
+from django.db.models import F
 from django.utils import timezone
 from .models import (
     PlanConfig,
@@ -6,18 +7,20 @@ from .models import (
     CourseAccess,
     PaymentTransaction,
     MonetizationEvent,
+    PartnerOrganization,
+    PartnerAdminMembership,
+    PartnerStudentMembership,
 )
-from .access_policy import SEMESTER_ACCESS_PRICE, is_university_user
+from .access_policy import is_university_user
 
 
 @admin.register(PlanConfig)
 class PlanConfigAdmin(admin.ModelAdmin):
-    list_display = ("semester_pass_price", "limited_access_days", "semester_end_date", "screenshot_protection_enabled", "updated_at")
-    readonly_fields = ("semester_pass_price",)
+    list_display = ("all_access_price", "single_course_price", "limited_access_days", "semester_end_date", "screenshot_protection_enabled", "updated_at")
     fieldsets = (
         ("University Semester Access", {
-            "fields": ("semester_pass_price", "limited_access_days", "semester_end_date"),
-            "description": "The pass is fixed at ₦2,500. Set the university preview duration and current semester end date.",
+            "fields": ("all_access_price", "single_course_price", "limited_access_days", "semester_end_date"),
+            "description": "Set the university preview duration and current semester end date. Prices apply to new purchases only.",
         }),
         ("Paystack", {"fields": ("paystack_public_key", "paystack_secret_key")}),
         ("Security & Screen Protection", {
@@ -29,10 +32,6 @@ class PlanConfigAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         # Enforce singleton
         return not PlanConfig.objects.exists()
-
-    @admin.display(description="Semester pass price")
-    def semester_pass_price(self, obj):
-        return f"₦{SEMESTER_ACCESS_PRICE:,}"
 
     def has_delete_permission(self, request, obj=None):
         return False
@@ -119,7 +118,7 @@ class PaymentTransactionAdmin(admin.ModelAdmin):
     def manually_unlock_transaction(self, request, queryset):
         config = PlanConfig.get_solo()
         count = 0
-        for tx in queryset.filter(status__in=[PaymentTransaction.Status.PENDING, PaymentTransaction.Status.FAILED], amount=SEMESTER_ACCESS_PRICE, access_type=PaymentTransaction.AccessType.ALL_ACCESS):
+        for tx in queryset.filter(status__in=[PaymentTransaction.Status.PENDING, PaymentTransaction.Status.FAILED], amount__gt=0, access_type__in=[PaymentTransaction.AccessType.ALL_ACCESS, PaymentTransaction.AccessType.SINGLE_COURSE]):
             if not is_university_user(tx.user):
                 continue
             tx.status = PaymentTransaction.Status.SUCCESS
@@ -137,6 +136,13 @@ class PaymentTransactionAdmin(admin.ModelAdmin):
                 granted_by=CourseAccess.GrantedBy.PAYMENT,
                 reference=tx.reference,
             )
+            if tx.discount_code_id:
+                DiscountCode.objects.filter(pk=tx.discount_code_id).update(times_used=F("times_used") + 1)
+                if tx.discount_code.partner_organization_id:
+                    PartnerStudentMembership.objects.get_or_create(
+                        user=tx.user,
+                        defaults={"organization_id": tx.discount_code.partner_organization_id, "discount_code": tx.discount_code},
+                    )
             count += 1
         messages.success(request, f"Successfully verified and unlocked access for {count} transactions.")
 
@@ -147,3 +153,24 @@ class MonetizationEventAdmin(admin.ModelAdmin):
     list_filter = ("event_name", "created_at")
     search_fields = ("event_name", "user__email", "user__username")
     readonly_fields = ("created_at",)
+
+
+@admin.register(PartnerOrganization)
+class PartnerOrganizationAdmin(admin.ModelAdmin):
+    list_display = ("name", "slug", "is_active", "created_at")
+    list_filter = ("is_active",)
+    search_fields = ("name", "slug", "contact_email")
+
+
+@admin.register(PartnerAdminMembership)
+class PartnerAdminMembershipAdmin(admin.ModelAdmin):
+    list_display = ("organization", "user", "is_active", "invited_by", "created_at")
+    list_filter = ("is_active", "organization")
+    search_fields = ("organization__name", "user__email", "user__username")
+
+
+@admin.register(PartnerStudentMembership)
+class PartnerStudentMembershipAdmin(admin.ModelAdmin):
+    list_display = ("organization", "user", "discount_code", "linked_at")
+    list_filter = ("organization",)
+    search_fields = ("organization__name", "user__public_id", "user__username")

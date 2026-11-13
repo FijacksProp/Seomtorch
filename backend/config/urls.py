@@ -15,5 +15,6 @@ urlpatterns = [
     path("api/subscriptions/", include("monetization.api_urls")),
     path("api/", include("learning.api_urls")),
     path("monitor/", include("learning.monitor_urls")),
+    path("partner/", include("learning.partner_urls")),
     path("internal-admin/", admin.site.urls),
 ]

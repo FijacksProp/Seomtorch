@@ -9,11 +9,13 @@ from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate, get_user_model, login, logout
-from django.db import models, transaction
+from django.core.exceptions import ValidationError
+from django.db import IntegrityError, models, transaction
 from django.db.models import Avg, Count, Exists, OuterRef, Prefetch, Q, Sum
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.utils.text import slugify
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_http_methods, require_POST
 from rest_framework.authtoken.models import Token
@@ -21,8 +23,13 @@ from knox.models import AuthToken
 
 from monetization.models import (
     CourseAccess,
+    DiscountCode,
+    PartnerAdminMembership,
+    PartnerOrganization,
+    PartnerStudentMembership,
     PaymentTransaction,
     PlanConfig,
+    MonetizationEvent,
 )
 from monetization.access_policy import limited_access_duration_days, limited_access_percentage, limited_access_is_active, is_university_user
 from .analytics import session_analytics, user_test_analytics
@@ -394,19 +401,30 @@ def dashboard(request):
     now_dt = timezone.now()
     active_grants = CourseAccess.objects.filter(
         is_active=True, access_type=CourseAccess.AccessType.ALL_ACCESS,
-        granted_by=CourseAccess.GrantedBy.PAYMENT,
+        granted_by__in=(CourseAccess.GrantedBy.PAYMENT, CourseAccess.GrantedBy.ADMIN_MANUAL),
         starts_at__lte=now_dt, expires_at__gte=now_dt,
     )
     university_users = User.objects.filter(is_staff=False).filter(
         Q(user_type="university") | Q(active_mode="university") | Q(university_profile__isnull=False)
     ).distinct()
     paid_user_ids = active_grants.values("user_id").distinct()
+    course_only_ids = CourseAccess.objects.filter(
+        is_active=True, access_type=CourseAccess.AccessType.SINGLE_COURSE,
+        granted_by__in=(CourseAccess.GrantedBy.PAYMENT, CourseAccess.GrantedBy.ADMIN_MANUAL),
+        starts_at__lte=now_dt, expires_at__gte=now_dt,
+    ).exclude(user_id__in=paid_user_ids).values("user_id").distinct()
+    entitlement_user_ids = CourseAccess.objects.filter(
+        is_active=True, access_type__in=(CourseAccess.AccessType.ALL_ACCESS, CourseAccess.AccessType.SINGLE_COURSE),
+        granted_by__in=(CourseAccess.GrantedBy.PAYMENT, CourseAccess.GrantedBy.ADMIN_MANUAL),
+        starts_at__lte=now_dt, expires_at__gte=now_dt,
+    ).values("user_id").distinct()
     paid_user_count = university_users.filter(id__in=paid_user_ids).count()
-    limited_user_count = count_limited_users(university_users, paid_user_ids, now_dt)
-    expired_user_count = max(0, university_users.count() - paid_user_count - limited_user_count)
+    course_only_count = university_users.filter(id__in=course_only_ids).count()
+    limited_user_count = count_limited_users(university_users, entitlement_user_ids, now_dt)
+    expired_user_count = max(0, university_users.count() - paid_user_count - course_only_count - limited_user_count)
 
-    tier_labels = ["Registration preview (20%)", "Ongoing sample (5%)", "University semester pass"]
-    tier_data = [limited_user_count, expired_user_count, paid_user_count]
+    tier_labels = ["Registration preview (20%)", "Ongoing sample (5%)", "Single-course access", "All-course access"]
+    tier_data = [limited_user_count, expired_user_count, course_only_count, paid_user_count]
 
     # ── Curbed Recent Events ────────────────────────────────────────────────
     # Return 6 for the immediate clean card, plus 40 for the expandable modal
@@ -549,16 +567,18 @@ def university_dashboard(request):
     now_dt = timezone.now()
     active_grants = CourseAccess.objects.filter(
         user__in=uni_users_qs, is_active=True,
-        access_type=CourseAccess.AccessType.ALL_ACCESS,
-        granted_by=CourseAccess.GrantedBy.PAYMENT,
+        access_type__in=(CourseAccess.AccessType.ALL_ACCESS, CourseAccess.AccessType.SINGLE_COURSE),
+        granted_by__in=(CourseAccess.GrantedBy.PAYMENT, CourseAccess.GrantedBy.ADMIN_MANUAL),
         starts_at__lte=now_dt, expires_at__gte=now_dt,
     )
     all_access_count = active_grants.filter(access_type=CourseAccess.AccessType.ALL_ACCESS).values("user_id").distinct().count()
-    single_count = 0
-    paid_user_ids = active_grants.values("user_id").distinct()
-    limited_count = count_limited_users(uni_users_qs, paid_user_ids, now_dt)
-    paid_users_count = uni_users_qs.filter(id__in=paid_user_ids).count()
-    free_count = max(0, total_uni_students - paid_users_count - limited_count)
+    all_access_ids = active_grants.filter(access_type=CourseAccess.AccessType.ALL_ACCESS).values("user_id").distinct()
+    single_ids = active_grants.filter(access_type=CourseAccess.AccessType.SINGLE_COURSE).exclude(user_id__in=all_access_ids).values("user_id").distinct()
+    single_count = uni_users_qs.filter(id__in=single_ids).count()
+    entitlement_ids = active_grants.values("user_id").distinct()
+    limited_count = count_limited_users(uni_users_qs, entitlement_ids, now_dt)
+    paid_users_count = uni_users_qs.filter(id__in=all_access_ids).count()
+    free_count = max(0, total_uni_students - paid_users_count - single_count - limited_count)
 
     # University Medical Courses breakdown
     courses = [
@@ -612,12 +632,12 @@ def university_dashboard(request):
 
         # Check access badge
         active_grant = user.course_accesses.filter(
-            is_active=True, access_type=CourseAccess.AccessType.ALL_ACCESS,
-            granted_by=CourseAccess.GrantedBy.PAYMENT,
+            is_active=True, access_type__in=(CourseAccess.AccessType.ALL_ACCESS, CourseAccess.AccessType.SINGLE_COURSE),
+            granted_by__in=(CourseAccess.GrantedBy.PAYMENT, CourseAccess.GrantedBy.ADMIN_MANUAL),
             starts_at__lte=now_dt, expires_at__gte=now_dt,
-        ).first()
+        ).order_by("access_type").first()
         if active_grant:
-            user.access_badge = "Semester pass"
+            user.access_badge = "All courses" if active_grant.access_type == CourseAccess.AccessType.ALL_ACCESS else f"Course pass · {active_grant.course_code}"
             user.access_badge_class = "badge-all-access"
         elif limited_access_is_active(user, now=now_dt):
             user.access_badge = f"{limited_access_percentage(user, now=now_dt)}% free sample"
@@ -702,12 +722,12 @@ def students(request):
 
         # Check access badge
         active_grant = user.course_accesses.filter(
-            is_active=True, access_type=CourseAccess.AccessType.ALL_ACCESS,
-            granted_by=CourseAccess.GrantedBy.PAYMENT,
+            is_active=True, access_type__in=(CourseAccess.AccessType.ALL_ACCESS, CourseAccess.AccessType.SINGLE_COURSE),
+            granted_by__in=(CourseAccess.GrantedBy.PAYMENT, CourseAccess.GrantedBy.ADMIN_MANUAL),
             starts_at__lte=now_dt, expires_at__gte=now_dt,
-        ).first()
+        ).order_by("access_type").first()
         if active_grant:
-            user.access_badge = "Semester pass"
+            user.access_badge = "All courses" if active_grant.access_type == CourseAccess.AccessType.ALL_ACCESS else f"Course pass · {active_grant.course_code}"
             user.access_badge_class = "badge-all-access"
         elif limited_access_is_active(user, now=now_dt):
             user.access_badge = f"{limited_access_percentage(user, now=now_dt)}% free sample"
@@ -826,10 +846,7 @@ def student_detail(request, public_id):
 
     # Access summary & active grants
     access_summary = CourseAccess.get_user_access_summary(student)
-    all_grants = student.course_accesses.filter(
-        granted_by=CourseAccess.GrantedBy.PAYMENT,
-        access_type=CourseAccess.AccessType.ALL_ACCESS,
-    ).order_by("-created_at")
+    all_grants = student.course_accesses.select_related("granted_by_user").order_by("-created_at")
 
     # Payment transactions for this student
     transactions = PaymentTransaction.objects.filter(user=student).order_by("-created_at")[:10]
@@ -867,6 +884,7 @@ def student_detail(request, public_id):
         "all_grants": all_grants,
         "transactions": transactions,
         "plan_config": plan_config,
+        "university_courses": Subject.objects.filter(track=Subject.Track.UNIVERSITY, is_active=True).exclude(code="").order_by("position", "code"),
         # JSON chart data
         "chart_subject_labels": json.dumps(subject_chart_labels),
         "chart_subject_accuracy": json.dumps(subject_chart_accuracy),
@@ -891,11 +909,89 @@ def revoke_student_access(request, public_id):
         if grant:
             grant.is_active = False
             grant.save(update_fields=["is_active"])
+            MonetizationEvent.objects.create(
+                user=student,
+                event_name="admin_access_revoked",
+                metadata={"access_id": grant.id, "access_type": grant.access_type, "course_code": grant.course_code, "staff": request.user.username, "reason": grant.admin_note},
+            )
     else:
         # Revoke all active
+        grants = list(CourseAccess.objects.filter(user=student, is_active=True).values("id", "access_type", "course_code", "admin_note"))
         CourseAccess.objects.filter(user=student, is_active=True).update(is_active=False)
+        if grants:
+            MonetizationEvent.objects.create(
+                user=student,
+                event_name="admin_access_revoked",
+                metadata={"access_ids": [grant["id"] for grant in grants], "staff": request.user.username, "reason": "All active access revoked from student monitor."},
+            )
 
     messages.warning(request, f"Course access revoked for {student.username}.")
+    return redirect("monitor:student-detail", public_id=student.public_id)
+
+
+@staff_member_required
+@require_POST
+def grant_student_access(request, public_id):
+    student = get_object_or_404(User, public_id=public_id, is_staff=False)
+    if not is_university_user(student):
+        messages.error(request, "Manual course access is available only for university students.")
+        return redirect("monitor:student-detail", public_id=student.public_id)
+
+    access_type = request.POST.get("access_type", "").strip()
+    reason = request.POST.get("reason", "").strip()
+    course_codes = [value.strip().upper() for value in request.POST.getlist("course_codes") if value.strip()]
+    expires_value = request.POST.get("expires_at", "").strip()
+    config = PlanConfig.get_solo()
+    if not reason:
+        messages.error(request, "A reason is required for every manual access grant.")
+        return redirect("monitor:student-detail", public_id=student.public_id)
+    if access_type == CourseAccess.AccessType.ALL_ACCESS:
+        targets = [(CourseAccess.AccessType.ALL_ACCESS, "all")]
+    elif access_type == CourseAccess.AccessType.SINGLE_COURSE:
+        valid_codes = set(Subject.objects.filter(
+            track=Subject.Track.UNIVERSITY, is_active=True, code__in=course_codes,
+        ).values_list("code", flat=True))
+        if not valid_codes:
+            messages.error(request, "Select at least one valid university course.")
+            return redirect("monitor:student-detail", public_id=student.public_id)
+        targets = [(CourseAccess.AccessType.SINGLE_COURSE, code) for code in sorted(valid_codes)]
+    else:
+        messages.error(request, "Choose full access or one or more courses.")
+        return redirect("monitor:student-detail", public_id=student.public_id)
+
+    try:
+        if expires_value:
+            expires = datetime.strptime(expires_value, "%Y-%m-%d")
+            expires_at = timezone.make_aware(expires.replace(hour=23, minute=59, second=59, microsecond=999999))
+        else:
+            expires_at = config.semester_end_date
+        if expires_at <= timezone.now():
+            raise ValueError("Expiry must be in the future.")
+    except ValueError as error:
+        messages.error(request, str(error) or "Enter a valid expiry date.")
+        return redirect("monitor:student-detail", public_id=student.public_id)
+
+    with transaction.atomic():
+        for grant_type, course_code in targets:
+            reference = f"admin_{uuid.uuid4().hex}"
+            CourseAccess.objects.create(
+                user=student,
+                access_type=grant_type,
+                course_code=course_code,
+                starts_at=timezone.now(),
+                expires_at=expires_at,
+                is_active=True,
+                granted_by=CourseAccess.GrantedBy.ADMIN_MANUAL,
+                granted_by_user=request.user,
+                admin_note=reason,
+                reference=reference,
+            )
+        MonetizationEvent.objects.create(
+            user=student,
+            event_name="admin_access_granted",
+            metadata={"access_type": access_type, "courses": [code for _, code in targets], "expires_at": expires_at.isoformat(), "reason": reason, "granted_by": request.user.username},
+        )
+    messages.success(request, f"Granted {len(targets)} audited access entitlement(s) to {student.username} through {expires_at:%d %b %Y}.")
     return redirect("monitor:student-detail", public_id=student.public_id)
 
 
@@ -911,18 +1007,19 @@ def monetization_hub(request):
     ).distinct()
     active_grants_qs = CourseAccess.objects.filter(
         user__in=university_users,
-        is_active=True, access_type=CourseAccess.AccessType.ALL_ACCESS,
-        granted_by=CourseAccess.GrantedBy.PAYMENT,
+        is_active=True,
+        access_type__in=(CourseAccess.AccessType.ALL_ACCESS, CourseAccess.AccessType.SINGLE_COURSE),
+        granted_by__in=(CourseAccess.GrantedBy.PAYMENT, CourseAccess.GrantedBy.ADMIN_MANUAL),
         starts_at__lte=now_dt, expires_at__gte=now_dt,
     )
-    active_grants = active_grants_qs.filter(access_type=CourseAccess.AccessType.ALL_ACCESS).select_related("user").order_by("-created_at")[:40]
+    active_grants = active_grants_qs.select_related("user", "granted_by_user").order_by("-created_at")[:80]
     recent_transactions = PaymentTransaction.objects.select_related("user", "discount_code").all().order_by("-created_at")[:30]
 
     # Stats
     total_revenue = PaymentTransaction.objects.filter(status=PaymentTransaction.Status.SUCCESS).aggregate(s=Sum("amount"))["s"] or 0
     all_access_active = active_grants_qs.filter(access_type=CourseAccess.AccessType.ALL_ACCESS).count()
-    single_active = 0
-    paid_ids = active_grants_qs.values("user_id").distinct()
+    single_active = active_grants_qs.filter(access_type=CourseAccess.AccessType.SINGLE_COURSE).values("user_id").distinct().count()
+    paid_ids = active_grants_qs.filter(access_type=CourseAccess.AccessType.ALL_ACCESS).values("user_id").distinct()
     limited_count = count_limited_users(university_users, paid_ids, now_dt)
     sample_count = max(0, university_users.count() - active_grants_qs.filter(user__in=university_users).values("user_id").distinct().count() - limited_count)
 
@@ -935,6 +1032,9 @@ def monetization_hub(request):
         "single_active": single_active,
         "limited_count": limited_count,
         "sample_count": sample_count,
+        "discount_codes": DiscountCode.objects.select_related("partner_organization").order_by("-created_at")[:100],
+        "partner_organizations": PartnerOrganization.objects.filter(is_active=True).order_by("name"),
+        "partner_count": PartnerOrganization.objects.filter(is_active=True).count(),
     }
     return render(request, "monitor/monetization.html", context)
 
@@ -944,8 +1044,12 @@ def monetization_hub(request):
 def update_pricing(request):
     config = PlanConfig.get_solo()
     try:
-        # Semester pricing is fixed by policy; only its active date window and
-        # gateway configuration are editable here.
+        all_price = int(request.POST.get("all_access_price", config.all_access_price))
+        single_price = int(request.POST.get("single_course_price", config.single_course_price))
+        if all_price < 1 or single_price < 1:
+            raise ValueError("Both access prices must be greater than zero.")
+        config.all_access_price = all_price
+        config.single_course_price = single_price
         semester_end_str = request.POST.get("semester_end_date", "").strip()
         if semester_end_str:
             semester_end = datetime.strptime(semester_end_str, "%Y-%m-%d")
@@ -966,8 +1070,8 @@ def update_pricing(request):
             config.paystack_secret_key = sk
 
         # Pricing must not overwrite a simultaneous shield change or purchase count.
-        config.save(update_fields=("semester_end_date", "limited_access_days", "paystack_public_key", "paystack_secret_key", "updated_at"))
-        messages.success(request, f"Access settings saved. Limited access now lasts {config.limited_access_days} days from registration; the semester pass remains ₦2,500.")
+        config.save(update_fields=("all_access_price", "single_course_price", "semester_end_date", "limited_access_days", "paystack_public_key", "paystack_secret_key", "updated_at"))
+        messages.success(request, f"Pricing saved: all courses ₦{config.all_access_price:,}; one course ₦{config.single_course_price:,}. Existing and pending transactions are unchanged.")
     except Exception as e:
         messages.error(request, f"Error saving pricing settings: {e}")
 
@@ -997,45 +1101,186 @@ def quick_revoke_access(request, access_id):
     grant = get_object_or_404(CourseAccess, id=access_id)
     grant.is_active = False
     grant.save(update_fields=["is_active"])
+    MonetizationEvent.objects.create(
+        user=grant.user,
+        event_name="admin_access_revoked",
+        metadata={"access_id": grant.id, "access_type": grant.access_type, "course_code": grant.course_code, "staff": request.user.username, "reason": grant.admin_note},
+    )
     messages.warning(request, f"Access grant #{access_id} for {grant.user.username} revoked.")
     return redirect("monitor:monetization")
 
 
 @staff_member_required
 @require_POST
+@transaction.atomic
 def verify_transaction_manual(request, reference):
-    tx = get_object_or_404(PaymentTransaction, reference=reference)
+    tx = get_object_or_404(PaymentTransaction.objects.select_for_update().select_related("discount_code"), reference=reference)
     config = PlanConfig.get_solo()
 
-    if tx.access_type != PaymentTransaction.AccessType.ALL_ACCESS or tx.amount != 2500 or not is_university_user(tx.user):
-        messages.error(request, "Only a verified ₦2,500 university semester-pass transaction can be confirmed here.")
+    if tx.access_type not in {PaymentTransaction.AccessType.ALL_ACCESS, PaymentTransaction.AccessType.SINGLE_COURSE} or tx.amount < 1 or not is_university_user(tx.user):
+        messages.error(request, "Only a valid university access transaction can be confirmed here.")
         return redirect("monitor:monetization")
 
     if tx.status == PaymentTransaction.Status.SUCCESS:
         messages.info(request, f"Transaction {reference} is already marked as successful.")
         return redirect("monitor:monetization")
 
-    with transaction.atomic():
-        tx.status = PaymentTransaction.Status.SUCCESS
-        tx.paid_at = timezone.now()
-        tx.gateway_response = {"note": f"Manually verified by admin {request.user.username}"}
-        tx.save()
-
-        CourseAccess.objects.get_or_create(
-            reference=tx.reference,
-            defaults={
-                "user": tx.user,
-                "access_type": CourseAccess.AccessType.ALL_ACCESS,
-                "course_code": "all",
-                "starts_at": timezone.now(),
-                "expires_at": config.semester_end_date,
-                "is_active": True,
-                "granted_by": CourseAccess.GrantedBy.PAYMENT,
-            },
-        )
+    tx.status = PaymentTransaction.Status.SUCCESS
+    tx.paid_at = timezone.now()
+    tx.gateway_response = {"note": f"Manually verified by admin {request.user.username}"}
+    tx.save(update_fields=["status", "paid_at", "gateway_response"])
+    CourseAccess.objects.get_or_create(
+        reference=tx.reference,
+        defaults={
+            "user": tx.user,
+            "access_type": tx.access_type,
+            "course_code": tx.course_code or "all",
+            "starts_at": timezone.now(),
+            "expires_at": config.semester_end_date,
+            "is_active": True,
+            "granted_by": CourseAccess.GrantedBy.PAYMENT,
+        },
+    )
+    if tx.discount_code_id:
+        DiscountCode.objects.filter(pk=tx.discount_code_id).update(times_used=models.F("times_used") + 1)
+        if tx.discount_code.partner_organization_id:
+            PartnerStudentMembership.objects.get_or_create(
+                user=tx.user,
+                defaults={"organization_id": tx.discount_code.partner_organization_id, "discount_code": tx.discount_code},
+            )
 
     messages.success(request, f"Transaction {reference} verified and course access unlocked for {tx.user.username}!")
     return redirect("monitor:monetization")
+
+
+@staff_member_required
+@require_POST
+def create_discount_code(request):
+    code = request.POST.get("code", "").strip().upper()
+    label = request.POST.get("label", "").strip()
+    target_plan = request.POST.get("target_plan", "").strip()
+    organization_id = request.POST.get("partner_organization", "").strip()
+    config = PlanConfig.get_solo()
+    if not code or not label or target_plan not in {DiscountCode.PlanType.ALL_ACCESS, DiscountCode.PlanType.SINGLE_COURSE}:
+        messages.error(request, "Enter a code, label, and valid plan type.")
+        return redirect("monitor:monetization")
+    try:
+        discounted_price = int(request.POST.get("discounted_price", ""))
+        base_price = config.all_access_price if target_plan == DiscountCode.PlanType.ALL_ACCESS else config.single_course_price
+        if discounted_price <= 0 or discounted_price >= base_price:
+            raise ValueError("The code's final price must be at least ₦1 and lower than the selected plan price.")
+        max_uses = request.POST.get("max_uses", "").strip()
+        max_uses = int(max_uses) if max_uses else None
+        if max_uses is not None and max_uses < 1:
+            raise ValueError("Use limit must be at least one, or left blank for unlimited use.")
+        expires_at = None
+        expiry_value = request.POST.get("expires_at", "").strip()
+        if expiry_value:
+            expiry = datetime.strptime(expiry_value, "%Y-%m-%d")
+            expires_at = timezone.make_aware(expiry.replace(hour=23, minute=59, second=59, microsecond=999999))
+        organization = get_object_or_404(PartnerOrganization, pk=organization_id, is_active=True) if organization_id else None
+        discount = DiscountCode(
+            code=code, label=label, target_plan=target_plan,
+            discounted_price=discounted_price, max_uses=max_uses,
+            expires_at=expires_at, partner_organization=organization,
+            is_active=True,
+        )
+        discount.full_clean()
+        discount.save()
+    except (ValueError, ValidationError) as error:
+        messages.error(request, str(error) or "Could not create this discount code.")
+        return redirect("monitor:monetization")
+    except IntegrityError:
+        messages.error(request, "That code already exists. Choose a different code.")
+        return redirect("monitor:monetization")
+    messages.success(request, f"Discount code {discount.code} created at ₦{discount.discounted_price:,}.")
+    return redirect("monitor:monetization")
+
+
+@staff_member_required
+@require_POST
+def toggle_discount_code(request, code_id):
+    discount = get_object_or_404(DiscountCode, pk=code_id)
+    discount.is_active = not discount.is_active
+    discount.save(update_fields=["is_active"])
+    messages.success(request, f"{discount.code} is now {'active' if discount.is_active else 'inactive'}.")
+    return redirect("monitor:monetization")
+
+
+@staff_member_required
+def partners_hub(request):
+    organizations = list(PartnerOrganization.objects.annotate(
+        student_count=Count("students", distinct=True),
+        admin_count=Count("admins", filter=Q(admins__is_active=True), distinct=True),
+    ).order_by("name"))
+    for organization in organizations:
+        organization.recent_students = PartnerStudentMembership.objects.filter(
+            organization=organization,
+        ).select_related("user").order_by("-linked_at")[:6]
+    context = {
+        "organizations": organizations,
+        "university_users": User.objects.filter(is_staff=False).filter(
+            Q(user_type="university") | Q(active_mode="university") | Q(university_profile__isnull=False)
+        ).order_by("username"),
+    }
+    return render(request, "monitor/partners.html", context)
+
+
+@staff_member_required
+@require_POST
+def create_partner_organization(request):
+    name = request.POST.get("name", "").strip()
+    contact_email = request.POST.get("contact_email", "").strip().lower()
+    if not name:
+        messages.error(request, "Enter the institute name.")
+        return redirect("monitor:partners")
+    base_slug = slugify(request.POST.get("slug", "").strip() or name)[:190] or f"partner-{uuid.uuid4().hex[:8]}"
+    slug = base_slug
+    suffix = 2
+    while PartnerOrganization.objects.filter(slug=slug).exists():
+        slug = f"{base_slug[:185]}-{suffix}"
+        suffix += 1
+    try:
+        organization = PartnerOrganization.objects.create(name=name, slug=slug, contact_email=contact_email)
+    except IntegrityError:
+        messages.error(request, "An institute with that name already exists.")
+        return redirect("monitor:partners")
+    messages.success(request, f"{organization.name} is ready. Create a partner discount code from Monetization.")
+    return redirect("monitor:partners")
+
+
+@staff_member_required
+@require_POST
+def assign_partner_admin(request):
+    organization = get_object_or_404(PartnerOrganization, pk=request.POST.get("organization_id"), is_active=True)
+    email = request.POST.get("email", "").strip().lower()
+    admin_user = User.objects.filter(email__iexact=email, is_active=True).first()
+    if not admin_user:
+        messages.error(request, "No active Seomtorch account has that email. Ask the person to register first, then assign their account here.")
+        return redirect("monitor:partners")
+    membership, created = PartnerAdminMembership.objects.update_or_create(
+        organization=organization, user=admin_user,
+        defaults={"is_active": True, "invited_by": request.user},
+    )
+    messages.success(request, f"Partner portal access {'granted' if created else 'restored'} for {admin_user.username} at {organization.name}.")
+    return redirect("monitor:partners")
+
+
+@staff_member_required
+@require_POST
+def reassign_partner_student(request, membership_id):
+    membership = get_object_or_404(PartnerStudentMembership, pk=membership_id)
+    organization = get_object_or_404(PartnerOrganization, pk=request.POST.get("organization_id"), is_active=True)
+    previous_name = membership.organization.name
+    membership.organization = organization
+    membership.save(update_fields=["organization"])
+    MonetizationEvent.objects.create(
+        user=membership.user,
+        event_name="partner_affiliation_reassigned",
+        metadata={"from": previous_name, "to": organization.name, "staff": request.user.username},
+    )
+    messages.success(request, f"{membership.user.username}'s affiliation was moved to {organization.name}.")
+    return redirect("monitor:partners")
 
 
 # ─── Questions Management ───────────────────────────────────────────────────

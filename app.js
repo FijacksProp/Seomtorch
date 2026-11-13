@@ -190,7 +190,8 @@ let userAccessData = {
   limited_access_expires_at: null,
   access_percentage: 0,
   access_status: "not_applicable",
-  semester_price: 2500,
+  semester_price: 3000,
+  single_course_price: 1500,
   expires_at: null,
 };
 
@@ -208,7 +209,7 @@ function subscriptionAccessFingerprint(access) {
 
 function scheduleSubscriptionExpiryRefresh() {
   clearTimeout(subscriptionExpiryTimer);
-  const expiresAt = userAccessData?.has_all_access
+  const expiresAt = (userAccessData?.has_all_access || (userAccessData?.unlocked_courses || []).length > 0)
     ? userAccessData?.expires_at
     : userAccessData?.limited_access_active ? userAccessData?.limited_access_expires_at : null;
   const expiryTime = expiresAt ? new Date(expiresAt).getTime() : NaN;
@@ -257,10 +258,16 @@ async function loadSubscriptionState({ refreshCurrentUniversity = false } = {}) 
 function hasCourseAccess(courseCode) {
   if (!courseCode) return false;
   const norm = String(courseCode).trim().toUpperCase();
-  const isUniCourse = ["ANA 201", "ANA 203", "PIO 201", "ANA201", "ANA203", "PIO201"].some(c => norm.includes(c));
-  if (!isUniCourse) return true; // Non-university content remains free
+  const normalizedCode = norm.replace(/\s+/g, "");
+  const catalogCodes = (subscriptionConfig?.university_courses || []).map(course => String(course.code || "").toUpperCase().replace(/\s+/g, ""));
+  const legacyCodes = ["ANA201", "ANA203", "PIO201"];
+  const isUniCourse = [...catalogCodes, ...legacyCodes].some(code => code && (normalizedCode.includes(code) || code.includes(normalizedCode)));
+  if (!isUniCourse) return true;
   if (userAccessData?.has_all_access) return true;
-  return false;
+  return (userAccessData?.unlocked_courses || []).some(code => {
+    const unlockedCode = String(code || "").toUpperCase().replace(/\s+/g, "");
+    return unlockedCode === "ALL" || unlockedCode === normalizedCode || (unlockedCode && normalizedCode.includes(unlockedCode));
+  });
 }
 
 function hasAllAccess() {
@@ -2422,10 +2429,15 @@ function getSynthesizedProgressData() {
     average_score: Math.round(data.totalScore / data.count)
   }));
 
-  const trend = allTests.slice(0, 8).reverse().map(t => ({
+  const trend = allTests.slice(0, 8).reverse().map((t, index, list) => ({
+    id: t.id,
     focus: t.focus,
     score: t.score,
-    completed_at: t.completed_at
+    completed_at: t.completed_at,
+    mode_label: t.mode_label || "Practice",
+    answered: t.answered,
+    total: t.total,
+    change: index ? t.score - list[index - 1].score : null
   }));
 
   // Build Subjects & Topics comprehensively from attempts + remote
@@ -2534,7 +2546,7 @@ function renderProgress() {
   const xp = xpState();
   const data = getSynthesizedProgressData();
   const tests = data.tests;
-  const movement = tests.improvement === null ? "Building" : `${tests.improvement >= 0 ? "+" : ""}${tests.improvement}`;
+  const movement = tests.improvement === null ? "Need 6 tests" : `${tests.improvement >= 0 ? "+" : ""}${tests.improvement}`;
   const hasAnyActivity = data.stats.total_attempts > 0 || tests.tests_taken > 0;
   const zeroStateHtml = !hasAnyActivity ? `
     <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:36px 20px; text-align:center; margin-bottom:28px;">
@@ -2561,7 +2573,9 @@ function renderProgress() {
     <div class="test-analysis-grid">
       <section class="report-panel test-trend">
         <div class="section-head compact"><div><p class="eyebrow">Last ${tests.trend.length} tests</p><h2>Score movement</h2></div><p>${tests.completion_rate}% completion rate</p></div>
-        ${tests.trend.length ? `<div class="trend-bars">${tests.trend.map((item, index) => `<div title="${escapeHtml(item.focus)} · ${item.score}%"><span style="height:${Math.max(4, item.score)}%"></span><small>${index + 1}</small></div>`).join("")}</div>` : '<div class="empty">Your score movement will appear after your first completed test.</div>'}
+        <p class="trend-method-note">Each bar is one completed test, scored from 0 to 100. Recent movement compares the latest three tests with the three immediately before them.</p>
+        ${tests.trend.length ? `<div class="trend-chart" role="img" aria-label="Scores for the last ${tests.trend.length} completed tests, on a scale from zero to one hundred percent"><div class="trend-y-axis" aria-hidden="true"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div><div class="trend-chart-main"><div class="trend-grid-lines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><div class="trend-columns">${tests.trend.map((item, index) => { const date = new Date(item.completed_at); const dateLabel = Number.isNaN(date.getTime()) ? "—" : date.toLocaleDateString(undefined, { day: "numeric", month: "short" }); return `<div class="trend-column" title="${escapeHtml(item.focus)} · ${item.score}% · ${escapeHtml(dateLabel)}"><strong>${item.score}%</strong><span class="trend-bar-track"><i style="height:${Math.max(0, Math.min(100, item.score))}%"></i></span><small>Test ${index + 1}<br>${escapeHtml(dateLabel)}</small><b>${escapeHtml(item.focus)}</b></div>`; }).join("")}</div></div></div><ol class="trend-accessible-summary">${tests.trend.map((item, index) => { const date = new Date(item.completed_at); const dateLabel = Number.isNaN(date.getTime()) ? "date unavailable" : date.toLocaleDateString(); return `<li>Test ${index + 1}: ${escapeHtml(item.focus)}, ${item.score}%, ${escapeHtml(item.mode_label)}, ${escapeHtml(dateLabel)}, ${item.answered}/${item.total} questions answered.</li>`; }).join("")}</ol>` : '<div class="empty">Your score movement will appear after your first completed test.</div>'}
+        ${tests.improvement === null ? `<p class="trend-movement-explainer">${tests.tests_taken} of 6 tests recorded. Complete six tests to compare the latest three against the previous three.</p>` : `<p class="trend-movement-explainer">${tests.improvement >= 0 ? "Average score increased" : "Average score decreased"} by ${Math.abs(tests.improvement)} points across those two three-test groups.</p>`}
       </section>
       <section class="report-panel">
         <div class="section-head compact"><div><p class="eyebrow">Test formats</p><h2>How you practise</h2></div></div>
@@ -4202,7 +4216,7 @@ async function signOut() {
   communityNetworkData = null; communityLeaderboardData = null; communityInboxData = null; communityChatPeer = null;
   communityLoaded = false; communityLoading = false; communitySearchResults = []; communitySearchQuery = "";
   try { await syncBookmarkQueue(); await api.logout(authToken); } catch {}
-  userAccessData = { has_all_access: false, unlocked_courses: [], limited_access_active: false, limited_access_days_remaining: 0, limited_access_expires_at: null, access_percentage: 0, access_status: "not_applicable", semester_price: 2500, expires_at: null };
+  userAccessData = { has_all_access: false, unlocked_courses: [], limited_access_active: false, limited_access_days_remaining: 0, limited_access_expires_at: null, access_percentage: 0, access_status: "not_applicable", semester_price: 3000, single_course_price: 1500, expires_at: null };
   await clearStore("profile"); await clearStore("attempts"); await clearStore("bookmarks"); await put("meta", { key: "bookmarkQueue", actions: [] }); await put("meta", { key: "completed_tests", list: [] });
   completedTests = [];
   authToken = null; currentUser = null; profile = null; attempts = []; bookmarks = []; challengesData = null; achievementsData = null; progressData = null; selectedChallengeId = null; badgeCelebrationKnown.clear(); badgeCelebrationQueue = []; uniContentCache = {}; localStorage.removeItem("seomtorch-auth-token"); localStorage.removeItem("seomtorch-auth-user"); renderAuth();
@@ -4360,6 +4374,15 @@ async function renderUniCourse() {
   const dept = uniDepartments?.find(d => d.id === uniDeptId);
   if (!dept) { uniRoute = "departments"; return renderUniDepartments(); }
 
+  const loadingBreadcrumbs = [
+    { label: "University", action: () => { uniRoute = "departments"; uniDeptId = null; uniLevel = null; uniCourseId = null; } },
+    { label: dept.name, action: () => { uniRoute = "levels"; uniCourseId = null; } },
+    { label: `${uniLevel} Level`, action: () => { uniRoute = "courses"; uniCourseId = null; } },
+    { label: "Opening course" }
+  ];
+  app.innerHTML = uniShell(`<section class="uni-course-loading" role="status" aria-live="polite" aria-busy="true"><span class="eyebrow">Course materials</span><h2>Opening ${escapeHtml(String(uniCourseId || "course").toUpperCase())}</h2><p>Preparing the course outline and study options…</p><div aria-hidden="true"><i></i><i></i><i></i></div></section>`, loadingBreadcrumbs);
+  bindShell(); bindUniCrumbs(loadingBreadcrumbs);
+
   const data = await fetchUniJson(`data/university/${uniDeptId}/${uniLevel}/${uniCourseId}.json`);
   if (!data) {
     const breadcrumbs = [
@@ -4512,8 +4535,8 @@ async function renderUniCourse() {
   const heroAccessBadge = hasCourse
     ? `<span class="uni-course-access-state">Semester pass active · ends ${escapeHtml(new Date(userAccessData?.expires_at || subscriptionConfig?.semester_end_date || Date.now()).toLocaleDateString())}</span>`
     : hasLimitedAccess
-      ? `<span class="uni-course-access-state">${userAccessData?.access_status === "preview" ? `Preview · ${samplePercentage}% access · ${escapeHtml(userAccessData?.limited_access_days_remaining ?? 0)} days left` : `${samplePercentage}% ongoing free sample`}</span><button type="button" class="button small accent uni-course-upgrade-btn" id="uni-hero-upgrade-btn">Get semester pass · ₦2,500</button>`
-      : `<button type="button" class="button small accent uni-course-upgrade-btn" id="uni-hero-upgrade-btn">Get semester pass · ₦2,500</button>`;
+      ? `<span class="uni-course-access-state">${userAccessData?.access_status === "preview" ? `Preview · ${samplePercentage}% access · ${escapeHtml(userAccessData?.limited_access_days_remaining ?? 0)} days left` : `${samplePercentage}% ongoing free sample`}</span><button type="button" class="button small accent uni-course-upgrade-btn" id="uni-hero-upgrade-btn">View access options · ₦${Number(subscriptionConfig?.single_course_price || 1500).toLocaleString()} per course</button>`
+      : `<button type="button" class="button small accent uni-course-upgrade-btn" id="uni-hero-upgrade-btn">View access options · ₦${Number(subscriptionConfig?.single_course_price || 1500).toLocaleString()} per course</button>`;
   const statsHtml = `<div class="uni-course-stats"><div class="uni-stat"><strong>${totalTopics}</strong><span>Topics</span></div><div class="uni-stat"><strong>${availableTopics}</strong><span>Published</span></div><div class="uni-stat"><strong>${totalTopics - availableTopics}</strong><span>Coming soon</span></div></div>`;
 
   let mixedCardHtml = "";
@@ -5873,7 +5896,7 @@ function renderNormalSession() {
 
 /* ─── Upgrade Modal & Paystack Checkout ────────────────────────────────── */
 
-function showUpgradeModal(options = {}) {
+function showLegacyUpgradeModal(options = {}) {
   document.querySelector("#upgrade-modal-backdrop")?.remove();
   const trigger = options.trigger || "general";
   const courseCode = options.courseCode ? String(options.courseCode).toUpperCase() : "all university courses";
@@ -5898,7 +5921,7 @@ function showUpgradeModal(options = {}) {
         <button type="button" class="uni-topic-config-close" id="upgrade-modal-close" aria-label="Close dialog">✕</button>
       </div>
       <article class="upgrade-plan-card selected">
-        <div class="upgrade-plan-head"><h3 class="upgrade-plan-title">Full university access</h3><div class="upgrade-plan-price">₦2,500 <small>/ semester</small></div></div>
+        <div class="upgrade-plan-head"><h3 class="upgrade-plan-title">Full university access</h3><div class="upgrade-plan-price">₦${Number(subscriptionConfig?.all_access_price || 3000).toLocaleString()} <small>/ semester</small></div></div>
         <p>Available questions, study notes, and paid university features through ${escapeHtml(semesterEnd)}.</p>
         <ul class="upgrade-plan-features">
           <li><span class="check">✓</span> Every question across all university topics</li>
@@ -5906,7 +5929,7 @@ function showUpgradeModal(options = {}) {
           <li><span class="check">✓</span> University challenges and other paid features</li>
         </ul>
         ${userAccessData?.access_status === "preview" ? `<p class="muted">Your ${samplePercentage}% preview lasts until ${escapeHtml(userAccessData.limited_access_expires_at ? new Date(userAccessData.limited_access_expires_at).toLocaleDateString() : `the end of your ${previewDays}-day period`)}. After that, a 5% sample remains available.</p>` : userAccessData?.access_status === "sample" ? `<p class="muted">Your ${previewDays}-day preview has ended. You can keep using a 5% sample, or get the pass for full access.</p>` : ""}
-        <button type="button" class="button accent" id="upgrade-checkout-btn" style="width:100%;padding:14px;font-size:15px;font-weight:800;">Pay ₦2,500 with Paystack →</button>
+        <button type="button" class="button accent" id="upgrade-checkout-btn" style="width:100%;padding:14px;font-size:15px;font-weight:800;">Pay ₦${Number(subscriptionConfig?.all_access_price || 3000).toLocaleString()} with Paystack →</button>
         <div class="upgrade-security-badge"><span>Secured and verified by Paystack</span></div>
       </article>
     </div>`;
@@ -5925,7 +5948,7 @@ function showUpgradeModal(options = {}) {
     button.disabled = true;
     button.textContent = "Connecting to Paystack…";
     try {
-      api.logMonetizationEvent(authToken, "upgrade_button_tapped", { plan: "university_semester", amount: 2500 }).catch(() => {});
+      api.logMonetizationEvent(authToken, "upgrade_button_tapped", { plan: "university_semester", amount: Number(subscriptionConfig?.all_access_price || 3000) }).catch(() => {});
       const initRes = await api.initPayment(authToken, { access_type: "all_access" });
       if (!window.PaystackPop || !initRes.public_key || initRes.public_key.startsWith("test_dummy")) {
         throw new Error("Payment is temporarily unavailable. Please try again later.");
@@ -5953,13 +5976,135 @@ function showUpgradeModal(options = {}) {
         },
         onClose: () => {
           button.disabled = false;
-          button.textContent = "Pay ₦2,500 with Paystack →";
+          button.textContent = `Pay ₦${Number(subscriptionConfig?.all_access_price || 3000).toLocaleString()} with Paystack →`;
         },
       });
       handler.openIframe();
     } catch (error) {
       button.disabled = false;
-      button.textContent = "Pay ₦2,500 with Paystack →";
+      button.textContent = `Pay ₦${Number(subscriptionConfig?.all_access_price || 3000).toLocaleString()} with Paystack →`;
+      showToast(error.message || "Could not start checkout.");
+    }
+  });
+}
+
+function showUpgradeModal(options = {}) {
+  document.querySelector("#upgrade-modal-backdrop")?.remove();
+  const trigger = options.trigger || "general";
+  const courses = Array.isArray(subscriptionConfig?.university_courses) ? subscriptionConfig.university_courses : [];
+  const requestedCode = String(options.courseCode || "").toUpperCase().replace(/\s+/g, "");
+  const matchedCourse = courses.find(item => String(item.code || "").toUpperCase().replace(/\s+/g, "") === requestedCode) || null;
+  const initialCourse = matchedCourse || courses[0] || null;
+  const startsSingle = Boolean(matchedCourse);
+  api.logMonetizationEvent(authToken, "upgrade_screen_viewed", { trigger, course: matchedCourse?.code || "all university courses" }).catch(() => {});
+  const backdrop = document.createElement("div");
+  backdrop.id = "upgrade-modal-backdrop";
+  backdrop.className = "upgrade-modal-backdrop";
+  const semesterEnd = subscriptionConfig?.semester_end_date
+    ? new Date(subscriptionConfig.semester_end_date).toLocaleDateString()
+    : "the current semester end date";
+  const allPrice = Number(subscriptionConfig?.all_access_price ?? userAccessData?.semester_price ?? 3000) || 3000;
+  const singlePrice = Number(subscriptionConfig?.single_course_price ?? userAccessData?.single_course_price ?? 1500) || 1500;
+  const courseOptions = courses.map(item => `<option value="${escapeHtml(item.code)}" ${initialCourse && item.code === initialCourse.code ? "selected" : ""}>${escapeHtml(item.code)} · ${escapeHtml(item.name)}</option>`).join("");
+  backdrop.innerHTML = `
+    <div class="upgrade-modal" role="dialog" aria-modal="true" aria-labelledby="upgrade-modal-title">
+      <div class="upgrade-header"><div><div class="eyebrow">University access</div><h2 id="upgrade-modal-title">Choose your access</h2><p>Both options end with the current semester on ${escapeHtml(semesterEnd)}.</p></div><button type="button" class="uni-topic-config-close" id="upgrade-modal-close" aria-label="Close dialog">×</button></div>
+      <div class="upgrade-plan-choice" role="radiogroup" aria-label="University access plan">
+        <button type="button" class="upgrade-plan-option ${startsSingle ? "" : "selected"}" data-plan="all_access" aria-pressed="${!startsSingle}"><span><strong>All university courses</strong><small>Questions, notes and paid university features</small></span><b>₦${allPrice.toLocaleString()}<small> / semester</small></b></button>
+        <button type="button" class="upgrade-plan-option ${startsSingle ? "selected" : ""}" data-plan="single_course" aria-pressed="${startsSingle}"><span><strong>One course</strong><small>Full access to a single course</small></span><b>₦${singlePrice.toLocaleString()}<small> / semester</small></b></button>
+      </div>
+      <label class="upgrade-course-field" id="upgrade-course-field" ${startsSingle ? "" : "hidden"}>Choose a course<select id="upgrade-course-select">${courseOptions || `<option value="${escapeHtml(initialCourse?.code || options.courseCode || "")}">${escapeHtml(initialCourse?.code || options.courseCode || "Choose course")}</option>`}</select></label>
+      <div class="upgrade-discount-row"><label for="upgrade-discount-code">Discount code <span>(optional)</span></label><div><input id="upgrade-discount-code" type="text" autocomplete="off" maxlength="40" placeholder="Enter code"><button type="button" class="button outline small" id="upgrade-validate-code">Apply</button></div><p id="upgrade-discount-message" aria-live="polite"></p></div>
+      <p class="upgrade-access-note">Free preview: 20% for the period set by Seomtorch, then a 5% sample remains. Your history and progress are always retained.</p>
+      <button type="button" class="button accent" id="upgrade-checkout-btn" style="width:100%;padding:14px;font-size:15px;font-weight:800;"></button>
+      <div class="upgrade-security-badge"><span>Payment secured and verified by Paystack</span></div>
+    </div>`;
+  document.body.appendChild(backdrop);
+
+  let plan = startsSingle ? "single_course" : "all_access";
+  let validatedCode = null;
+  const courseField = backdrop.querySelector("#upgrade-course-field");
+  const courseSelect = backdrop.querySelector("#upgrade-course-select");
+  const codeInput = backdrop.querySelector("#upgrade-discount-code");
+  const codeMessage = backdrop.querySelector("#upgrade-discount-message");
+  const checkoutButton = backdrop.querySelector("#upgrade-checkout-btn");
+  const amountForPlan = () => validatedCode?.amount || (plan === "all_access" ? allPrice : singlePrice);
+  const updatePlan = () => {
+    backdrop.querySelectorAll("[data-plan]").forEach(card => {
+      const chosen = card.dataset.plan === plan;
+      card.classList.toggle("selected", chosen);
+      card.setAttribute("aria-pressed", String(chosen));
+    });
+    courseField.hidden = plan !== "single_course";
+    checkoutButton.textContent = `Pay ₦${Number(amountForPlan()).toLocaleString()} with Paystack →`;
+  };
+  const invalidateCode = () => {
+    validatedCode = null;
+    codeMessage.textContent = "";
+    codeMessage.className = "";
+    updatePlan();
+  };
+  backdrop.querySelectorAll("[data-plan]").forEach(card => card.addEventListener("click", () => {
+    if (plan === card.dataset.plan) return;
+    plan = card.dataset.plan;
+    invalidateCode();
+  }));
+  courseSelect?.addEventListener("change", invalidateCode);
+  codeInput?.addEventListener("input", invalidateCode);
+  backdrop.querySelector("#upgrade-validate-code")?.addEventListener("click", async event => {
+    const button = event.currentTarget;
+    const code = codeInput.value.trim().toUpperCase();
+    if (!code) { invalidateCode(); codeMessage.textContent = "Enter a code first."; return; }
+    if (!authToken) { codeMessage.textContent = "Sign in to validate a code."; return; }
+    button.disabled = true;
+    codeMessage.textContent = "Checking code…";
+    try {
+      validatedCode = await api.validateDiscountCode(authToken, { code, access_type: plan, course_code: courseSelect?.value || "" });
+      codeMessage.textContent = `${validatedCode.label || validatedCode.code} applied${validatedCode.partner ? ` · ${validatedCode.partner}` : ""}.`;
+      codeMessage.className = "is-success";
+      updatePlan();
+    } catch (error) {
+      validatedCode = null;
+      codeMessage.textContent = error.message || "This code could not be applied.";
+      codeMessage.className = "is-error";
+      updatePlan();
+    } finally { button.disabled = false; }
+  });
+  const close = () => backdrop.remove();
+  backdrop.querySelector("#upgrade-modal-close")?.addEventListener("click", close);
+  backdrop.addEventListener("click", event => { if (event.target === backdrop) close(); });
+  updatePlan();
+
+  checkoutButton.addEventListener("click", async () => {
+    if (!authToken) { close(); showToast("Sign in to purchase university access."); return; }
+    if (plan === "single_course" && !courseSelect?.value) { showToast("Choose a course first."); return; }
+    checkoutButton.disabled = true;
+    checkoutButton.textContent = "Connecting to Paystack…";
+    try {
+      const courseCode = plan === "single_course" ? courseSelect.value : "all";
+      api.logMonetizationEvent(authToken, "upgrade_button_tapped", { plan, course: courseCode, amount: amountForPlan() }).catch(() => {});
+      const initRes = await api.initPayment(authToken, { access_type: plan, course_code: courseCode, discount_code: codeInput.value.trim().toUpperCase() });
+      if (!window.PaystackPop || !initRes.public_key || initRes.public_key.startsWith("test_dummy")) throw new Error("Payment is temporarily unavailable. Please try again later.");
+      const paystack = window.PaystackPop.setup({
+        key: initRes.public_key, email: initRes.email || currentUser?.email, amount: Number(initRes.amount_kobo), currency: "NGN", ref: initRes.reference,
+        callback: async response => {
+          showLoadingOverlay("Verifying payment", "Confirming your purchase with Paystack…");
+          try {
+            const result = await api.verifyPayment(authToken, response?.reference || initRes.reference);
+            userAccessData = result.user_access;
+            await loadSubscriptionState();
+            close();
+            showToast("Payment confirmed. Your university access is now unlocked.");
+            render();
+          } catch (error) { showToast(error.message || "Payment verification failed. Contact support if you were charged."); }
+          finally { hideLoadingOverlay(); }
+        },
+        onClose: () => { checkoutButton.disabled = false; updatePlan(); }
+      });
+      paystack.openIframe();
+    } catch (error) {
+      checkoutButton.disabled = false;
+      updatePlan();
       showToast(error.message || "Could not start checkout.");
     }
   });
@@ -6135,7 +6280,7 @@ async function renderUniNote() {
             </div>
             <h3 class="locked-cta-title">Unlock Block ${b.number}: ${escapeHtml(b.title)}</h3>
             <p class="locked-cta-desc">
-              The remaining ${Math.max(0, totalBlocks - accessibleBlocks)} blocks are locked. Get the ₦2,500 semester pass for complete course notes and university access.
+              The remaining ${Math.max(0, totalBlocks - accessibleBlocks)} blocks are locked. Choose a single-course pass for ₦${Number(subscriptionConfig?.single_course_price || 1500).toLocaleString()} or all-course access for ₦${Number(subscriptionConfig?.all_access_price || 3000).toLocaleString()}.
             </p>
             <div class="locked-feature-tags">
               <span class="locked-tag">✓ All ${totalBlocks} Illustrated Blocks</span>
@@ -6144,7 +6289,7 @@ async function renderUniNote() {
             </div>
             <div class="locked-cta-actions">
               <button type="button" class="button uni-btn locked-upgrade-trigger" data-course-code="${escapeHtml(courseCode)}" style="background:linear-gradient(135deg, #d97706, #b45309); color:#fff; font-weight:700; padding:12px 24px;">
-                <span>Get the ₦2,500 semester pass</span>
+                <span>View access options</span>
                 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
               </button>
               <button type="button" class="button outline small" id="uni-return-free-block" style="border-color:#cedbd1; color:var(--ink);">
@@ -6454,7 +6599,7 @@ async function renderUniNote() {
                 <span class="locked-tag">✓ Self-assessment checklist</span>
               </div>
               <button type="button" class="button uni-btn locked-upgrade-trigger" data-course-code="${escapeHtml(courseCode)}" style="background:linear-gradient(135deg, #d97706, #b45309); color:#fff; font-weight:700; padding:13px 28px; font-size:15px;">
-                <span>Get the ₦2,500 semester pass</span>
+                <span>View access options</span>
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
               </button>
             </div>

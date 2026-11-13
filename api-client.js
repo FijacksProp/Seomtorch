@@ -109,6 +109,7 @@ export const api = {
   submitFeedback: (token, body) => request("/community/feedback/", { token, method: "POST", body, timeoutMs: 60000 }),
   // Monetization & Subscriptions
   subscriptionConfig: token => request("/subscriptions/config/", { token }),
+  validateDiscountCode: (token, body) => request("/subscriptions/validate-code/", { token, method: "POST", body }),
   initPayment: (token, body) => request("/subscriptions/initialize/", { token, method: "POST", body }),
   verifyPayment: (token, reference) => request("/subscriptions/verify/", { token, method: "POST", body: { reference } }),
   myAccess: token => request("/subscriptions/my-access/", { token }),

@@ -8,7 +8,8 @@ from django.utils import timezone
 DEFAULT_LIMITED_ACCESS_DAYS = 14
 PREVIEW_ACCESS_PERCENT = 20
 ONGOING_SAMPLE_PERCENT = 5
-SEMESTER_ACCESS_PRICE = 2500
+DEFAULT_ALL_ACCESS_PRICE = 3000
+DEFAULT_SINGLE_COURSE_PRICE = 1500
 
 
 def limited_access_duration_days():
@@ -62,7 +63,7 @@ def limited_access_is_active(user, now=None, end=None):
 
 
 def has_paid_university_access(user, course_code=None, now=None):
-    """Only university learners with a verified semester pass have full access."""
+    """Whether an account has active paid or staff-granted access to the course."""
     if not user or not getattr(user, "is_authenticated", False):
         return False
     if getattr(user, "is_staff", False) or getattr(user, "is_superuser", False):
@@ -72,20 +73,11 @@ def has_paid_university_access(user, course_code=None, now=None):
 
     from .models import CourseAccess
 
-    now = now or timezone.now()
-    grants = CourseAccess.objects.filter(
-        user=user,
-        access_type=CourseAccess.AccessType.ALL_ACCESS,
-        is_active=True,
-        granted_by=CourseAccess.GrantedBy.PAYMENT,
-        starts_at__lte=now,
-        expires_at__gte=now,
-    )
-    return grants.exists()
+    return CourseAccess.user_has_course_access(user, course_code)
 
 
 def has_full_university_access(user, now=None):
-    """True only for an all-university paid grant (or a staff account)."""
+    """True for an active all-course payment or staff-granted pass."""
     if not user or not getattr(user, "is_authenticated", False):
         return False
     if getattr(user, "is_staff", False) or getattr(user, "is_superuser", False):
@@ -100,7 +92,7 @@ def has_full_university_access(user, now=None):
         user=user,
         access_type=CourseAccess.AccessType.ALL_ACCESS,
         is_active=True,
-        granted_by=CourseAccess.GrantedBy.PAYMENT,
+        granted_by__in=(CourseAccess.GrantedBy.PAYMENT, CourseAccess.GrantedBy.ADMIN_MANUAL),
         starts_at__lte=now,
         expires_at__gte=now,
     ).exists()

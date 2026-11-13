@@ -418,13 +418,15 @@
       {% for grant in all_grants %}
       <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--color-paper);border-radius:8px;font-size:12px;">
         <div>
-          <strong>{{ grant.get_access_type_display }}</strong>
+          <strong>{{ grant.get_access_type_display }} · {{ grant.get_granted_by_display }}</strong>
           {% if grant.course_code != 'all' %}({{ grant.course_code }}){% endif %}
           <small style="display:block;color:var(--color-muted);">Expires {{ grant.expires_at|date:'j M Y' }}</small>
+          {% if grant.granted_by_user %}<small style="display:block;color:var(--color-muted);">Granted by {{ grant.granted_by_user.username }} · {{ grant.admin_note }}</small>{% endif %}
         </div>
         <div>
           {% if grant.is_currently_valid %}
             <span class="badge badge-active">Active</span>
+            <form method="post" action="{% url 'monitor:revoke-student-access' student.public_id %}" onsubmit="return confirm('Revoke this access grant?');" style="margin-top:6px;">{% csrf_token %}<input type="hidden" name="access_id" value="{{ grant.id }}"><button class="btn-danger" type="submit">Revoke</button></form>
           {% else %}
             <span class="badge badge-disabled">Expired</span>
           {% endif %}
@@ -436,6 +438,21 @@
     </div>
   </div>
 </div>
+
+{% if student.active_mode == 'university' or student.user_type == 'university' or student.university_profile %}
+<section class="panel" style="margin:18px 0;">
+  <div class="panel-head"><div><p class="kicker">Staff action · audited</p><h2>Grant course access</h2><p>Reason, granting staff member and expiry are recorded. Grants can be revoked above.</p></div></div>
+  <form method="post" action="{% url 'monitor:grant-student-access' student.public_id %}">{% csrf_token %}
+    <div class="form-grid-3">
+      <div class="form-group"><label>Grant type</label><select name="access_type" required><option value="all_access">All university courses</option><option value="single_course">Selected complete courses</option></select></div>
+      <div class="form-group"><label>Courses (select one or more)</label><select name="course_codes" multiple size="4">{% for course in university_courses %}<option value="{{ course.code }}">{{ course.code }} · {{ course.name }}</option>{% endfor %}</select><small class="hint">Required only for selected-course grants. Use Ctrl/Command to select multiple.</small></div>
+      <div class="form-group"><label>Expiry date</label><input type="date" name="expires_at" value="{{ plan_config.semester_end_date|date:'Y-m-d' }}"><small class="hint">Defaults to the configured semester end.</small></div>
+      <div class="form-group"><label>Reason for access</label><textarea name="reason" required minlength="5" maxlength="1000" rows="3" placeholder="Document why this exception is being granted."></textarea></div>
+    </div>
+    <button type="submit" class="btn-primary">Grant access</button>
+  </form>
+</section>
+{% endif %}
 
 <!-- Detailed Records Section -->
 <div class="dashboard-grid">
