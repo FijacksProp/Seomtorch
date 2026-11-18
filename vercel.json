@@ -2,13 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
-    { "source": "/sign-in", "destination": "/" },
-    { "source": "/register", "destination": "/" },
-    { "source": "/aspirant/sign-in", "destination": "/" },
-    { "source": "/aspirant/register", "destination": "/" },
-    { "source": "/university/sign-in", "destination": "/" },
-    { "source": "/university/register", "destination": "/" }
+  "redirects": [
+    { "source": "/aspirant/sign-in", "destination": "/sign-in", "permanent": true },
+    { "source": "/university/sign-in", "destination": "/sign-in", "permanent": true },
+    { "source": "/aspirant/register", "destination": "/register", "permanent": true },
+    { "source": "/university/register", "destination": "/register", "permanent": true }
   ],
   "headers": [
     {

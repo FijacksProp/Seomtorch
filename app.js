@@ -1046,15 +1046,12 @@ function navigate(nextRoute) {
 
 function publicRouteFromLocation() {
   const path = location.pathname.replace(/\/+$/, "") || "/";
-  const match = path.match(/^\/(aspirant|university)\/(sign-in|register)$/i);
-  if (match) return { page: "auth", portal: match[1].toLowerCase(), mode: match[2] === "register" ? "register" : "signin" };
   if (path === "/sign-in" || path === "/register") return { page: "auth", portal: null, mode: path === "/register" ? "register" : "signin" };
   return { page: "landing", portal: null, mode: "signin" };
 }
 
 function publicAuthPath(mode, portal = null) {
-  const suffix = mode === "register" ? "register" : "sign-in";
-  return portal ? `/${portal}/${suffix}` : `/${suffix}`;
+  return mode === "register" ? "/register" : "/sign-in";
 }
 
 function openPublicAuth(mode, portal = null, replace = false) {
@@ -4111,11 +4108,35 @@ function renderAuth() {
   const register = authMode === "register";
   app.innerHTML = `<main class="onboarding auth-screen ${authPortal ? `auth-${authPortal}` : "auth-general"} ${register ? "auth-register" : "auth-signin"}"><section class="onboard-brand"><span class="brand"><span class="brand-symbol" aria-hidden="true"><img src="assets/seomtorch_logo.png" alt=""></span><span class="brand-name">Seomtorch<small>Prepare with purpose</small></span></span><div><blockquote>${authPortal === "university" ? "Make every course count." : authPortal === "aspirant" ? "Your next result starts here." : "Your progress should follow you."}</blockquote><p>${authPortal === "university" ? "Build confidence across your university courses with focused practice and clear progress." : authPortal === "aspirant" ? "Prepare for your next examination with purposeful practice and clear explanations." : "Sign in to keep every answer, streak and milestone connected to your account."}</p></div><small>Prepare. Practise. Progress.</small></section><section class="onboard-form"><div><a class="auth-home-link" href="/" data-auth-home>← Back to Seomtorch</a><div class="auth-tabs"><button class="${!register ? "active" : ""}" data-auth-mode="signin">Sign in</button><button class="${register ? "active" : ""}" data-auth-mode="register">Create account</button></div><p class="eyebrow">${register ? "Your learning journey" : "Welcome back"}</p><h1>${register ? (authPortal === "university" ? "Start your university journey." : "Get ready for what’s next.") : "Good to have you back."}</h1><p class="lede">${register ? "Create your account and set up your study space." : "Sign in to pick up where your learning left off."}</p><form id="auth-form" class="auth-form">${register ? '<div class="field"><label for="auth-username">Username</label><input id="auth-username" name="username" type="text" maxlength="150" autocomplete="username" required></div>' : ""}<div class="field"><label for="auth-email">Email address</label><input id="auth-email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="auth-password">Password</label><input id="auth-password" name="password" type="password" minlength="8" autocomplete="${register ? "new-password" : "current-password"}" required></div>${register ? `<div class="field"><label style="font-weight:700;margin-bottom:8px;display:block;">Gender:</label><div class="reg-gender-selector"><label class="reg-gender-option"><input type="radio" name="gender" value="male" checked><div class="reg-gender-card"><span class="reg-gender-symbol">♂</span><div><strong>Male</strong><small>Allocates male avatar</small></div></div></label><label class="reg-gender-option"><input type="radio" name="gender" value="female"><div class="reg-gender-card female"><span class="reg-gender-symbol">♀</span><div><strong>Female</strong><small>Allocates female avatar</small></div></div></label></div></div><div class="field"><label style="font-weight:700;margin-bottom:8px;display:block;">Choose your primary portal:</label><div class="reg-path-selector"><label class="reg-path-option"><input type="radio" name="user_type" value="aspirant" checked><div class="reg-path-card"><strong>Exam Aspirant</strong><small>JAMB, WAEC, NECO & Post-UTME</small></div></label><label class="reg-path-option"><input type="radio" name="user_type" value="university"><div class="reg-path-card uni-path"><strong>University Student</strong><small>Undergraduate degree study</small></div></label></div></div><div id="reg-aspirant-fields"><div class="field"><label for="auth-exam-type">Target Examination</label><select id="auth-exam-type" name="exam_type"><option value="jamb">JAMB UTME</option><option value="waec">WAEC SSCE</option><option value="neco">NECO SSCE</option><option value="post_utme">POST-UTME</option></select></div><div class="field"><label for="auth-target-year">Target Year</label><input id="auth-target-year" name="target_year" type="number" min="2024" max="2035" value="2026"></div></div><div id="reg-uni-fields" style="display:none;"><div class="field"><label for="auth-uni-name">University / Institution *</label><input id="auth-uni-name" name="university_name" type="text" placeholder="e.g. University of Lagos (UNILAG)"></div><div class="field"><label for="auth-uni-dept">Department *</label><input id="auth-uni-dept" name="department" type="text" placeholder="e.g. Anatomy"></div><div class="field"><label for="auth-uni-level">Level</label><select id="auth-uni-level" name="level"><option value="100">100 Level</option><option value="200" selected>200 Level</option><option value="300">300 Level</option><option value="400">400 Level</option><option value="500">500 Level</option><option value="600">600 Level</option></select></div></div>` : ""}<div id="auth-error" class="auth-error" role="alert"></div><button class="button auth-submit" type="submit">${register ? "Create my account" : "Sign in"} →</button></form><p class="auth-switch-prompt">${register ? "Already have a Seomtorch account?" : "New to Seomtorch?"} <button type="button" data-auth-mode="${register ? "signin" : "register"}">${register ? "Sign in" : "Create your account"}</button></p></div></section></main>${!isStandalone() ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ''}`;
   app.querySelector("[data-auth-home]")?.addEventListener("click", event => { event.preventDefault(); history.pushState({}, "", "/"); render(); });
+  const genderField = app.querySelector(".reg-gender-selector")?.closest(".field");
+  if (genderField) genderField.innerHTML = '<label for="auth-gender">Gender</label><select id="auth-gender" name="gender" required><option value="" disabled selected>Select gender</option><option value="male">Male</option><option value="female">Female</option></select>';
+  app.querySelectorAll(".reg-path-card").forEach((card, index) => {
+    const symbol = index === 0
+      ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9 12 4l10 5-10 5L2 9Zm4 3v5c3 3 9 3 12 0v-5M22 9v6"/></svg>'
+      : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M4 10h16M12 3 2 8h20l-10-5ZM6 10v8m4-8v8m4-8v8m4-8v8"/></svg>';
+    card.insertAdjacentHTML("afterbegin", symbol);
+  });
+  const departmentInput = app.querySelector("#auth-uni-dept");
+  if (departmentInput) {
+    const departmentSelect = document.createElement("select");
+    departmentSelect.id = departmentInput.id;
+    departmentSelect.name = departmentInput.name;
+    departmentSelect.required = true;
+    departmentSelect.innerHTML = '<option value="" selected disabled>Select your department</option><option>Anatomy</option><option>Physiology</option><option>Biochemistry</option><option>Medicine and Surgery</option><option>Nursing</option><option>Pharmacy</option><option>Microbiology</option><option>Computer Science</option><option>Engineering</option><option>Law</option><option>Education</option><option>Business Administration</option><option>Other</option>';
+    departmentInput.replaceWith(departmentSelect);
+  }
+  const levelSelect = app.querySelector("#auth-uni-level");
+  if (levelSelect) {
+    levelSelect.required = true;
+    levelSelect.insertAdjacentHTML("afterbegin", '<option value="" selected disabled>Select academic level</option>');
+    levelSelect.querySelector('option[value="200"]')?.removeAttribute("selected");
+    levelSelect.value = "";
+  }
   if (authPortal) {
     const context = document.createElement("p");
     context.className = "auth-portal-context";
     const otherPortal = authPortal === "university" ? "aspirant" : "university";
-    context.innerHTML = `${authPortal === "university" ? "University student access" : "Exam aspirant access"}<span>${register ? "This account will be created for this learning path." : "Use your existing account for this learning path."}</span><a href="/${otherPortal}/register" data-other-portal="${otherPortal}">Need the other learning path? Create a separate account</a>`;
+    context.innerHTML = `${authPortal === "university" ? "University student access" : "Exam aspirant access"}<span>${register ? "This account will be created for this learning path." : "Use your existing account for this learning path."}</span><a href="/register" data-other-portal="${otherPortal}">Need the other learning path? Create a separate account</a>`;
     app.querySelector(".auth-tabs")?.before(context);
     context.querySelector("[data-other-portal]")?.addEventListener("click", event => {
       event.preventDefault();
@@ -4125,7 +4146,7 @@ function renderAuth() {
   if (!authPortal && !register) {
     const chooser = document.createElement("div");
     chooser.className = "auth-path-chooser";
-    chooser.innerHTML = `<p>Choose your learning path to sign in</p><a href="/aspirant/sign-in" data-auth-path="aspirant">Exam aspirant <span>→</span></a><a href="/university/sign-in" data-auth-path="university">University student <span>→</span></a>`;
+    chooser.innerHTML = `<p>Choose your learning path to sign in</p><a href="/sign-in" data-auth-path="aspirant">Exam aspirant <span>→</span></a><a href="/sign-in" data-auth-path="university">University student <span>→</span></a>`;
     app.querySelector("#auth-form")?.before(chooser);
     chooser.querySelectorAll("[data-auth-path]").forEach(link => link.addEventListener("click", event => {
       event.preventDefault();
@@ -4144,6 +4165,7 @@ function renderAuth() {
     }
     radioInputs.forEach(r => r.addEventListener("change", () => {
       const isUni = document.querySelector("input[name=user_type]:checked")?.value === "university";
+      authPortal = isUni ? "university" : "aspirant";
       if (aspFields) aspFields.style.display = isUni ? "none" : "block";
       if (uniFields) uniFields.style.display = isUni ? "block" : "none";
     }));
@@ -4238,7 +4260,7 @@ async function submitAuth(event) {
   const form = event.currentTarget, button = form.querySelector('button[type=submit]'), error = document.querySelector("#auth-error");
   const body = Object.fromEntries(new FormData(form));
   if (authPortal) {
-    if (authMode === "register") body.user_type = authPortal;
+    if (authMode === "register") body.user_type = document.querySelector('input[name="user_type"]:checked')?.value || authPortal;
     else body.portal = authPortal;
   }
   button.disabled = true; button.textContent = "Please wait…"; error.textContent = "";
