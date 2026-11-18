@@ -79,6 +79,7 @@ if DATABASES["default"].get("ENGINE") == "django.db.backends.postgresql":
         options_dict["options"] = f"{' '.join(new_opts)} {existing_opts}".strip()
 
 AUTH_USER_MODEL = "accounts.User"
+AUTHENTICATION_BACKENDS = ["accounts.backends.EmailOrUsernameBackend"]
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", "OPTIONS": {"min_length": 8}},

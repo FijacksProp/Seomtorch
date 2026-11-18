@@ -85,8 +85,10 @@ class User(AbstractUser):
     class Meta:
         constraints = [models.UniqueConstraint(fields=("email", "user_type"), name="accounts_email_user_type_unique")]
 
-    USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username"]
+    # Username remains Django's unique authentication identifier. Student-facing
+    # email login resolves by email + learning path in the account API.
+    USERNAME_FIELD = "username"
+    REQUIRED_FIELDS = ["email"]
     objects = UserManager()
 
     def save(self, *args, **kwargs):
