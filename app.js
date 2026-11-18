@@ -130,6 +130,7 @@ let deferredInstallPrompt = window.__deferredInstallPrompt || null;
 let authMode = "signin";
 let authPortal = null;
 let authMotionController = null;
+let landingMotionController = null;
 let selectedPracticeMode = "timed"; // 'timed' or 'normal'
 let dailySprintCompleted = localStorage.getItem("seomtorch-sprint-" + new Date().toISOString().slice(0,10)) === "done";
 let challengesData = null;
@@ -1065,6 +1066,31 @@ function openPublicAuth(mode, portal = null, replace = false) {
 
 function renderPublicLanding() {
   app.innerHTML = landingPage();
+  landingMotionController?.abort();
+  landingMotionController = new AbortController();
+  let pointerFrame = 0;
+  let landingPulseTimeout = 0;
+  const updateLandingPointer = event => {
+    if (pointerFrame || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    pointerFrame = requestAnimationFrame(() => {
+      document.documentElement.style.setProperty("--landing-pointer-x", `${event.clientX}px`);
+      document.documentElement.style.setProperty("--landing-pointer-y", `${event.clientY}px`);
+      pointerFrame = 0;
+    });
+  };
+  const pulseLandingPointer = event => {
+    document.documentElement.style.setProperty("--landing-pointer-x", `${event.clientX}px`);
+    document.documentElement.style.setProperty("--landing-pointer-y", `${event.clientY}px`);
+    document.body.classList.remove("landing-pointer-pulse");
+    void document.body.offsetWidth;
+    document.body.classList.add("landing-pointer-pulse");
+    window.clearTimeout(landingPulseTimeout);
+    landingPulseTimeout = window.setTimeout(() => document.body.classList.remove("landing-pointer-pulse"), 760);
+  };
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.addEventListener("pointermove", updateLandingPointer, { passive: true, signal: landingMotionController.signal });
+    app.addEventListener("pointerdown", pulseLandingPointer, { passive: true, signal: landingMotionController.signal });
+  }
   const revealItems = app.querySelectorAll(".landing-preview, .landing-section-heading, .landing-info-card, .landing-step, .landing-path-card, .landing-cta, .landing-footer");
   if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
@@ -1081,17 +1107,25 @@ function renderPublicLanding() {
   }));
   const menu = app.querySelector(".landing-menu-toggle");
   const nav = app.querySelector(".landing-nav");
-  menu?.addEventListener("click", () => {
-    const expanded = menu.getAttribute("aria-expanded") === "true";
-    menu.setAttribute("aria-expanded", String(!expanded));
-    menu.setAttribute("aria-label", expanded ? "Open navigation" : "Close navigation");
-    nav?.classList.toggle("is-open", !expanded);
-  });
+  const header = app.querySelector(".landing-header");
+  const setNavigationOpen = open => {
+    menu?.setAttribute("aria-expanded", String(open));
+    menu?.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+    nav?.classList.toggle("is-open", open);
+  };
+  menu?.addEventListener("click", () => setNavigationOpen(menu.getAttribute("aria-expanded") !== "true"));
   nav?.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
-    menu?.setAttribute("aria-expanded", "false");
-    menu?.setAttribute("aria-label", "Open navigation");
-    nav.classList.remove("is-open");
+    setNavigationOpen(false);
   }));
+  document.addEventListener("pointerdown", event => {
+    if (!header?.contains(event.target)) setNavigationOpen(false);
+  }, { passive: true, signal: landingMotionController.signal });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") setNavigationOpen(false);
+  }, { signal: landingMotionController.signal });
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 860) setNavigationOpen(false);
+  }, { passive: true, signal: landingMotionController.signal });
 }
 
 window.addEventListener("popstate", () => {
