@@ -7,6 +7,7 @@ import { emailChangePage, mountEmailChange } from "./email-change-ui.js";
 import { mountBuddyChat, unmountBuddyChat } from "./buddy-chat.js";
 import { challengeAnalysisPanel, challengeHubPage, challengeComposerPage, challengeDetailPage, challengeSetupSummary } from "./challenges-ui.js";
 import { cancelPostPracticeFeedback, closeStudentDialogs, eligibleForUniversityOffer, maybeShowUniversityIntroduction, openStudentDialog, schedulePostPracticeFeedback, showFeedbackPanel } from "./student-engagement.js";
+import { landingPage } from "./landing-page.js";
 const SUBJECTS = [
   { id: "biology", name: "Biology", description: "JAMB cell biology, physiology, ecology, genetics and evolution" },
   { id: "chemistry", name: "Chemistry", description: "JAMB physical, inorganic and organic chemistry" },
@@ -127,6 +128,7 @@ let syncPromise = null;
 let pendingSyncCount = 0;
 let deferredInstallPrompt = window.__deferredInstallPrompt || null;
 let authMode = "signin";
+let authPortal = null;
 let selectedPracticeMode = "timed"; // 'timed' or 'normal'
 let dailySprintCompleted = localStorage.getItem("seomtorch-sprint-" + new Date().toISOString().slice(0,10)) === "done";
 let challengesData = null;
@@ -490,6 +492,10 @@ function hasUniversityProfile() {
 async function handleModeSwitch(targetMode) {
   const currentMode = getActiveMode();
   if (targetMode === currentMode) return;
+  if (currentUser?.user_type && targetMode !== currentUser.user_type) {
+    showToast("This account is registered for one learning path. Create a separate account for the other path.");
+    return;
+  }
 
   if (targetMode === "university") {
     if (!hasUniversityProfile()) {
@@ -1037,6 +1043,55 @@ function navigate(nextRoute) {
   render();
   if (nextRoute === "university") loadSubscriptionState({ refreshCurrentUniversity: true }).catch(() => {});
 }
+
+function publicRouteFromLocation() {
+  const path = location.pathname.replace(/\/+$/, "") || "/";
+  const match = path.match(/^\/(aspirant|university)\/(sign-in|register)$/i);
+  if (match) return { page: "auth", portal: match[1].toLowerCase(), mode: match[2] === "register" ? "register" : "signin" };
+  if (path === "/sign-in" || path === "/register") return { page: "auth", portal: null, mode: path === "/register" ? "register" : "signin" };
+  return { page: "landing", portal: null, mode: "signin" };
+}
+
+function publicAuthPath(mode, portal = null) {
+  const suffix = mode === "register" ? "register" : "sign-in";
+  return portal ? `/${portal}/${suffix}` : `/${suffix}`;
+}
+
+function openPublicAuth(mode, portal = null, replace = false) {
+  authMode = mode === "register" ? "register" : "signin";
+  authPortal = portal === "university" || portal === "aspirant" ? portal : null;
+  history[replace ? "replaceState" : "pushState"]({}, "", publicAuthPath(authMode, authPortal));
+  render();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderPublicLanding() {
+  app.innerHTML = landingPage();
+  app.querySelectorAll("[data-public-auth]").forEach(link => link.addEventListener("click", event => {
+    event.preventDefault();
+    const action = link.dataset.publicAuth;
+    if (action === "sign-in") return openPublicAuth("signin");
+    const [, portal, mode] = action.match(/^(aspirant|university)-(register|signin)$/) || [];
+    if (portal) openPublicAuth(mode === "register" ? "register" : "signin", portal);
+  }));
+  const menu = app.querySelector(".landing-menu-toggle");
+  const nav = app.querySelector(".landing-nav");
+  menu?.addEventListener("click", () => {
+    const expanded = menu.getAttribute("aria-expanded") === "true";
+    menu.setAttribute("aria-expanded", String(!expanded));
+    menu.setAttribute("aria-label", expanded ? "Open navigation" : "Close navigation");
+    nav?.classList.toggle("is-open", !expanded);
+  });
+  nav?.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+    menu?.setAttribute("aria-expanded", "false");
+    menu?.setAttribute("aria-label", "Open navigation");
+    nav.classList.remove("is-open");
+  }));
+}
+
+window.addEventListener("popstate", () => {
+  if (!authToken || !currentUser || !profile) render();
+});
 
 function shell(content) {
   const xp = xpState();
@@ -4048,17 +4103,33 @@ async function refreshDeviceCache() {
 function renderAuth() {
   const register = authMode === "register";
   app.innerHTML = `<main class="onboarding auth-screen"><section class="onboard-brand"><span class="brand"><span class="brand-symbol" aria-hidden="true"><img src="assets/seomtorch_logo.png" alt=""></span><span class="brand-name">Seomtorch<small>Prepare with purpose</small></span></span><div><blockquote>Your progress should follow you.</blockquote><p>Sign in to keep every answer, streak and milestone connected to your account.</p></div><small>Biology · Chemistry · Civic Education · Computer Studies · Economics · English Language · General Paper · Government · History · Literature in English · Marketing · Mathematics · Music · Physics · University Courses</small></section><section class="onboard-form"><div><div class="auth-tabs"><button class="${!register ? "active" : ""}" data-auth-mode="signin">Sign in</button><button class="${register ? "active" : ""}" data-auth-mode="register">Register</button></div><p class="eyebrow">${register ? "Create your account" : "Welcome back"}</p><h1>${register ? "Begin your preparation." : "Return to your study desk."}</h1><p class="lede">${register ? "Select your path and create a secure profile." : "Sign in with your email address and password."}</p><form id="auth-form" class="auth-form">${register ? '<div class="field"><label for="auth-username">Username</label><input id="auth-username" name="username" type="text" maxlength="150" autocomplete="username" required></div>' : ""}<div class="field"><label for="auth-email">Email address</label><input id="auth-email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="auth-password">Password</label><input id="auth-password" name="password" type="password" minlength="8" autocomplete="${register ? "new-password" : "current-password"}" required></div>${register ? `<div class="field"><label style="font-weight:700;margin-bottom:8px;display:block;">Gender:</label><div class="reg-gender-selector"><label class="reg-gender-option"><input type="radio" name="gender" value="male" checked><div class="reg-gender-card"><span class="reg-gender-symbol">♂</span><div><strong>Male</strong><small>Allocates male avatar</small></div></div></label><label class="reg-gender-option"><input type="radio" name="gender" value="female"><div class="reg-gender-card female"><span class="reg-gender-symbol">♀</span><div><strong>Female</strong><small>Allocates female avatar</small></div></div></label></div></div><div class="field"><label style="font-weight:700;margin-bottom:8px;display:block;">Choose your primary portal:</label><div class="reg-path-selector"><label class="reg-path-option"><input type="radio" name="user_type" value="aspirant" checked><div class="reg-path-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg><strong>Exam Aspirant</strong><small>JAMB, WAEC, NECO & Post-UTME</small></div></label><label class="reg-path-option"><input type="radio" name="user_type" value="university"><div class="reg-path-card uni-path"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M3 10h18M5 10v11M9 10v11M15 10v11M19 10v11M12 2L2 7h20L12 2z"/></svg><strong>University Student</strong><small>Undergraduate Degree (100L - 600L)</small></div></label></div></div><div id="reg-aspirant-fields"><div class="field"><label for="auth-exam-type">Target Examination</label><select id="auth-exam-type" name="exam_type"><option value="jamb">JAMB UTME</option><option value="waec">WAEC SSCE</option><option value="neco">NECO SSCE</option><option value="post_utme">POST-UTME</option></select></div><div class="field"><label for="auth-target-year">Target Year</label><input id="auth-target-year" name="target_year" type="number" min="2024" max="2035" value="2026"></div></div><div id="reg-uni-fields" style="display:none;"><div class="field"><label for="auth-uni-name">University / Institution *</label><input id="auth-uni-name" name="university_name" type="text" placeholder="e.g. University of Lagos (UNILAG)"></div><div class="field"><label for="auth-uni-dept">Department *</label><input id="auth-uni-dept" name="department" type="text" placeholder="e.g. Anatomy"></div><div class="field"><label for="auth-uni-level">Level</label><select id="auth-uni-level" name="level"><option value="100">100 Level</option><option value="200" selected>200 Level</option><option value="300">300 Level</option><option value="400">400 Level</option><option value="500">500 Level</option><option value="600">600 Level</option></select></div></div>` : ""}<div id="auth-error" class="auth-error" role="alert"></div><button class="button auth-submit" type="submit">${register ? "Create account" : "Sign in"} →</button></form></div></section></main>${!isStandalone() ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ''}`;
-  document.querySelectorAll("[data-auth-mode]").forEach(button => button.addEventListener("click", () => { authMode = button.dataset.authMode; renderAuth(); }));
+  if (authPortal) {
+    const context = document.createElement("p");
+    context.className = "auth-portal-context";
+    const otherPortal = authPortal === "university" ? "aspirant" : "university";
+    context.innerHTML = `${authPortal === "university" ? "University student access" : "Exam aspirant access"}<span>${register ? "This account will be created for this learning path." : "Use your existing account for this learning path."}</span><a href="/${otherPortal}/register" data-other-portal="${otherPortal}">Need the other learning path? Create a separate account</a>`;
+    app.querySelector(".auth-tabs")?.before(context);
+    context.querySelector("[data-other-portal]")?.addEventListener("click", event => {
+      event.preventDefault();
+      openPublicAuth("register", otherPortal);
+    });
+  }
+  document.querySelectorAll("[data-auth-mode]").forEach(button => button.addEventListener("click", () => openPublicAuth(button.dataset.authMode, authPortal)));
   document.querySelectorAll("[data-install-app]").forEach(button => button.addEventListener("click", installApp));
   if (register) {
     const radioInputs = document.querySelectorAll("input[name=user_type]");
     const aspFields = document.querySelector("#reg-aspirant-fields");
     const uniFields = document.querySelector("#reg-uni-fields");
+    if (authPortal === "university") {
+      const universityChoice = document.querySelector('input[name="user_type"][value="university"]');
+      if (universityChoice) universityChoice.checked = true;
+    }
     radioInputs.forEach(r => r.addEventListener("change", () => {
       const isUni = document.querySelector("input[name=user_type]:checked")?.value === "university";
       if (aspFields) aspFields.style.display = isUni ? "none" : "block";
       if (uniFields) uniFields.style.display = isUni ? "block" : "none";
     }));
+    if (authPortal === "university") document.querySelector('input[name="user_type"][value="university"]')?.dispatchEvent(new Event("change"));
   }
   document.querySelector("#auth-form").addEventListener("submit", submitAuth);
 }
@@ -4067,6 +4138,7 @@ function renderAuth() {
 async function finishSignIn(data) {
   emailChangeCleanup?.(); emailChangeCleanup = null; pendingEmailChange = null;
   authToken = data.token; currentUser = data.user;
+  history.replaceState({}, "", "/");
   pendingEmailApproval = null; pendingAuthRegistration = null;
   emailApprovalCleanup?.(); emailApprovalCleanup = null;
   localStorage.setItem("seomtorch-auth-token", authToken);
@@ -4147,6 +4219,10 @@ async function submitAuth(event) {
   event.preventDefault();
   const form = event.currentTarget, button = form.querySelector('button[type=submit]'), error = document.querySelector("#auth-error");
   const body = Object.fromEntries(new FormData(form));
+  if (authPortal) {
+    if (authMode === "register") body.user_type = authPortal;
+    else body.portal = authPortal;
+  }
   button.disabled = true; button.textContent = "Please wait…"; error.textContent = "";
   try {
     body.browser_key = trustedBrowserKey();
@@ -5341,7 +5417,13 @@ function render() {
   if (route !== "session") cancelPostPracticeFeedback();
   if (route !== "buddies" || communityActiveTab !== "messages") unmountBuddyChat();
   updateScreenWatermark();
-  if (!authToken || !currentUser || !profile) return renderAuth();
+  if (!authToken || !currentUser || !profile) {
+    const publicRoute = publicRouteFromLocation();
+    if (publicRoute.page === "landing") return renderPublicLanding();
+    authMode = publicRoute.mode;
+    authPortal = publicRoute.portal;
+    return renderAuth();
+  }
   if (currentUser.must_change_password) return renderPasswordChange(true);
   // Background account sync must not replace a live chat or an edited form.
   // These views update themselves; intentional navigation uses their renderers.
@@ -5603,9 +5685,7 @@ async function init() {
         showToast("Resumed your active practice session.");
       }
       render();
-    } else {
-      renderAuth();
-    }
+    } else render();
     dismissAppLoader();
     await loadSubscriptionState();
     const authenticated = await restoreAuth();

@@ -61,7 +61,7 @@ def request_change(user, browser_key, *, current_password=None, new_email=None, 
             target = serializers.EmailField(max_length=254).run_validation(new_email).strip().lower()
         if target == user.email:
             raise serializers.ValidationError({"new_email": "Enter a different email address."})
-        if User.objects.filter(email__iexact=target).exclude(pk=user.pk).exists():
+        if User.objects.filter(email__iexact=target, user_type=user.user_type).exclude(pk=user.pk).exists():
             raise serializers.ValidationError({"new_email": "This email address cannot be used. Choose another address."})
         check_email_rate_limit(user)
         now = timezone.now()
@@ -110,7 +110,7 @@ def confirm_change(user, request_id, browser_key, new_code):
                 if not new_matches:
                     change.save(update_fields=("attempts",))
                     error = "That code is incorrect. Use the latest code sent to your new email."
-                elif User.objects.filter(email__iexact=change.new_email).exclude(pk=user.pk).exists():
+                elif User.objects.filter(email__iexact=change.new_email, user_type=user.user_type).exclude(pk=user.pk).exists():
                     error = "The new address is no longer available. Start again with a different email."
                 else:
                     notify_previous = bool(user.email_verified_at)

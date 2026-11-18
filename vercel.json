@@ -2,6 +2,14 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    { "source": "/sign-in", "destination": "/" },
+    { "source": "/register", "destination": "/" },
+    { "source": "/aspirant/sign-in", "destination": "/" },
+    { "source": "/aspirant/register", "destination": "/" },
+    { "source": "/university/sign-in", "destination": "/" },
+    { "source": "/university/register", "destination": "/" }
+  ],
   "headers": [
     {
       "source": "/sw.js",

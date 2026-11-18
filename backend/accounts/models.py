@@ -46,7 +46,7 @@ class Gender(models.TextChoices):
 
 
 class User(AbstractUser):
-    email = models.EmailField(unique=True)
+    email = models.EmailField()
     email_verified_at = models.DateTimeField(null=True, blank=True, editable=False)
     trusted_browser_hash = models.CharField(max_length=64, blank=True, editable=False)
     public_id = models.CharField(max_length=6, unique=True, default=generate_public_id, editable=False, db_index=True)
@@ -81,6 +81,9 @@ class User(AbstractUser):
         default=UserType.ASPIRANT,
         help_text="The mode the user is currently using.",
     )
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=("email", "user_type"), name="accounts_email_user_type_unique")]
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]

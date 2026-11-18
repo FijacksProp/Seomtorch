@@ -60,6 +60,9 @@ class LoginView(APIView):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data["user"]
+        if not user.is_staff and user.active_mode != user.user_type:
+            user.active_mode = user.user_type
+            user.save(update_fields=("active_mode",))
         if enabled_for(user):
             from django.utils.crypto import constant_time_compare
             with transaction.atomic():
@@ -129,6 +132,8 @@ class AspirantProfileView(APIView):
         return Response(AspirantProfileSerializer(request.user.aspirant_profile).data)
 
     def post(self, request):
+        if not request.user.is_staff and request.user.user_type != "aspirant":
+            return Response({"detail": "This account is registered for the university path. Use a separate aspirant account to access this portal."}, status=status.HTTP_403_FORBIDDEN)
         profile, created = AspirantProfile.objects.get_or_create(user=request.user)
         serializer = AspirantProfileSerializer(profile, data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -155,6 +160,8 @@ class UniversityProfileView(APIView):
         return Response(UniversityProfileSerializer(request.user.university_profile).data)
 
     def post(self, request):
+        if not request.user.is_staff and request.user.user_type != "university":
+            return Response({"detail": "This account is registered for the aspirant path. Use a separate university account to access this portal."}, status=status.HTTP_403_FORBIDDEN)
         profile, created = UniversityProfile.objects.get_or_create(user=request.user)
         serializer = UniversityProfileSerializer(profile, data=request.data)
         serializer.is_valid(raise_exception=True)

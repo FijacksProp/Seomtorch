@@ -35,10 +35,41 @@ class AuthenticationTests(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["user"]["username"], "different-name")
 
+    def test_portal_sign_in_rejects_account_from_other_learning_path(self):
+        get_user_model().objects.create_user(email="uni.portal@example.com", username="uniportal", password="Securepass934!", user_type="university", active_mode="university")
+        response = self.client.post("/api/auth/login/", {"email": "uni.portal@example.com", "password": "Securepass934!", "portal": "aspirant"}, format="json")
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("portal", response.data)
+
+    def test_account_cannot_switch_to_the_other_learning_path(self):
+        user = get_user_model().objects.create_user(email="fixed.path@example.com", username="fixedpath", password="Securepass934!", user_type="aspirant", active_mode="aspirant")
+        token = Token.objects.create(user=user)
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {token.key}")
+        response = self.client.post("/api/auth/switch-mode/", {"mode": "university"}, format="json")
+        self.assertEqual(response.status_code, 400)
+
+    def test_account_cannot_create_profile_for_other_learning_path(self):
+        user = get_user_model().objects.create_user(email="fixed.profile@example.com", username="fixedprofile", password="Securepass934!", user_type="aspirant", active_mode="aspirant")
+        token = Token.objects.create(user=user)
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {token.key}")
+        response = self.client.post("/api/auth/university-profile/", {"university_name": "University", "department": "Anatomy", "level": 200}, format="json")
+        self.assertEqual(response.status_code, 403)
+        self.assertFalse(hasattr(user, "university_profile"))
+
     def test_duplicate_email_is_rejected_case_insensitively(self):
         get_user_model().objects.create_user(email="student@example.com", username="first", password="Securepass934!")
         response = self.client.post("/api/auth/register/", {"email": "STUDENT@example.com", "username": "second", "password": "Securepass934!"}, format="json")
         self.assertEqual(response.status_code, 400)
+
+    def test_same_email_can_register_one_account_per_learning_path(self):
+        user_model = get_user_model()
+        user_model.objects.create_user(email="shared@example.com", username="sharedasp", password="Securepass934!", user_type="aspirant")
+        response = self.client.post("/api/auth/register/", {"email": "SHARED@example.com", "username": "shareduni", "password": "Securepass934!", "user_type": "university"}, format="json")
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(user_model.objects.filter(email="shared@example.com").count(), 2)
+        login = self.client.post("/api/auth/login/", {"email": "shared@example.com", "password": "Securepass934!", "portal": "university"}, format="json")
+        self.assertEqual(login.status_code, 200)
+        self.assertEqual(login.data["user"]["user_type"], "university")
 
     def test_signing_out_one_device_keeps_shared_account_token_valid(self):
         user = get_user_model().objects.create_user(email="multi@example.com", username="multi", password="Securepass934!")

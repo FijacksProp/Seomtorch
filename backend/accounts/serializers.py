@@ -109,10 +109,13 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ("email", "username", "password", "user_type", "gender", "avatar")
 
     def validate_email(self, value):
-        value = value.lower().strip()
-        if User.objects.filter(email__iexact=value).exists():
-            raise serializers.ValidationError("An account with this email already exists.")
-        return value
+        return value.lower().strip()
+
+    def validate(self, attrs):
+        account_type = attrs.get("user_type", UserType.ASPIRANT)
+        if User.objects.filter(email__iexact=attrs["email"], user_type=account_type).exists():
+            raise serializers.ValidationError({"email": "An account for this learning path already uses this email. Sign in instead."})
+        return attrs
 
     def validate_password(self, value):
         password_validation.validate_password(value)
@@ -159,9 +162,21 @@ class RegisterSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(trim_whitespace=False)
+    portal = serializers.ChoiceField(choices=UserType.choices, required=False)
 
     def validate(self, attrs):
-        user = authenticate(email=attrs["email"].lower().strip(), password=attrs["password"])
+        email = attrs["email"].lower().strip()
+        requested_portal = attrs.get("portal")
+        all_accounts = User.objects.filter(email__iexact=email)
+        if not requested_portal and all_accounts.count() > 1:
+            raise serializers.ValidationError({"portal": "Choose the learning path for this account."})
+        accounts = all_accounts.filter(user_type=requested_portal) if requested_portal else all_accounts
+        user = next((candidate for candidate in accounts if candidate.check_password(attrs["password"])), None)
+        if not user and requested_portal:
+            other = next((candidate for candidate in all_accounts if candidate.check_password(attrs["password"])), None)
+            if other and other.is_active:
+                portal_name = "university" if other.user_type == UserType.UNIVERSITY else "exam aspirant"
+                raise serializers.ValidationError({"portal": f"This email and password belong to the {portal_name} path. Please use that sign-in page."})
         if not user or not user.is_active:
             raise serializers.ValidationError("The email or password is incorrect.")
         attrs["user"] = user
@@ -194,6 +209,10 @@ class SwitchModeSerializer(serializers.Serializer):
 
     def validate_mode(self, value):
         user = self.context["request"].user
+        if not user.is_staff and value != user.user_type:
+            raise serializers.ValidationError(
+                "This account is registered for one learning path. Create a separate account to use the other path."
+            )
         if value == UserType.ASPIRANT and not user.has_aspirant_profile:
             raise serializers.ValidationError(
                 "Complete your aspirant profile setup before switching to aspirant mode."
