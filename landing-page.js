@@ -15,13 +15,17 @@ const icon = name => {
   return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name] || paths.arrow}</svg>`;
 };
 
+export function landingNavigation(authPage = false) {
+  return `<header class="landing-header ${authPage ? "auth-site-header" : ""}"><a class="landing-brand" href="/" aria-label="Seomtorch home"><img src="assets/seomtorch_logo.png" alt="Seomtorch" width="84" height="84"></a>
+    <nav class="landing-nav" aria-label="Main navigation"><a href="/#top">Home</a><a href="/#how-it-works">How it works</a><a href="/#features">Features</a><a href="/#who-its-for">About</a></nav>
+    <div class="landing-nav-actions"><a class="landing-signin" href="/sign-in">Sign in</a><a class="landing-button landing-button-small" href="/register">Get started ${icon("arrow")}</a></div>
+    <button class="landing-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
+  </header>`;
+}
+
 export function landingPage() {
   return `<main class="public-landing" id="main">
-    <header class="landing-header"><a class="landing-brand" href="/" aria-label="Seomtorch home"><img src="assets/seomtorch_logo.png" alt="Seomtorch" width="84" height="84"></a>
-      <nav class="landing-nav" aria-label="Main navigation"><a href="#top">Home</a><a href="#how-it-works">How it works</a><a href="#features">Features</a><a href="#who-its-for">About</a></nav>
-      <div class="landing-nav-actions"><a class="landing-signin" href="/sign-in" data-public-auth="sign-in">Sign in</a><a class="landing-button landing-button-small" href="#who-its-for">Get started ${icon("arrow")}</a></div>
-      <button class="landing-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
-    </header>
+    ${landingNavigation()}
     <section class="landing-hero" id="top"><div class="landing-hero-copy"><p class="landing-eyebrow">Your learning journey starts here</p><h1>Learn smarter.<br>Prepare better.<br>Achieve more.</h1><p class="landing-lede">Seomtorch gives you the tools to practise, understand exams, and track your learning progress—from secondary school to university.</p><div class="landing-hero-actions"><a class="landing-button" href="#who-its-for">Get started ${icon("arrow")}</a><a class="landing-text-link" href="#features">Explore learning ${icon("arrow")}</a></div><p class="landing-trust-note">Built for steady progress, one focused session at a time.</p></div>
       <div class="landing-preview" aria-label="Preview of the Seomtorch student dashboard"><div class="preview-window"><div class="preview-top"><strong>SEOMTORCH</strong><span aria-label="Ready"></span></div><div class="preview-welcome"><h2>Welcome back, learner</h2><p>Ready to make progress today?</p></div><div class="preview-progress"><h3>Your learning progress</h3><strong>68%</strong><div class="preview-progress-track"><i></i></div><small>Keep building on what you know</small></div><div class="preview-continue"><h3>Continue practising</h3><p>Pick up where you left off and strengthen your understanding.</p><span>Open your study desk ${icon("arrow")}</span></div></div></div>
     </section>
