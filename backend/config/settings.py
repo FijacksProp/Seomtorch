@@ -144,7 +144,12 @@ if ACCOUNT_SECURITY_ENABLED:
     if not BREVO_API_KEY or not BREVO_SENDER_EMAIL:
         raise ImproperlyConfigured("Configure Brevo and test delivery before enabling account security.")
 
-CORS_ALLOWED_ORIGINS = [origin.strip() for origin in os.environ.get("CORS_ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:4173").split(",") if origin.strip()]
+configured_cors_origins = [origin.strip() for origin in os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",") if origin.strip()]
+local_frontend_origins = [
+    "http://localhost:3000", "http://127.0.0.1:3000",
+    "http://localhost:4173", "http://127.0.0.1:4173",
+]
+CORS_ALLOWED_ORIGINS = list(dict.fromkeys([*configured_cors_origins, *local_frontend_origins]))
 CORS_ALLOW_CREDENTIALS = False
 CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",") if origin.strip()]
 
