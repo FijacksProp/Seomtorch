@@ -8,6 +8,10 @@
     { "source": "/aspirant/register", "destination": "/register", "permanent": true },
     { "source": "/university/register", "destination": "/register", "permanent": true }
   ],
+  "rewrites": [
+    { "source": "/sign-in", "destination": "/" },
+    { "source": "/register", "destination": "/" }
+  ],
   "headers": [
     {
       "source": "/sw.js",
