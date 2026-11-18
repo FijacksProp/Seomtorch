@@ -18,7 +18,7 @@ const icon = name => {
 export function landingNavigation(authPage = false) {
   return `<header class="landing-header ${authPage ? "auth-site-header" : ""}"><a class="landing-brand" href="/" aria-label="Seomtorch home"><img src="assets/seomtorch_logo.png" alt="Seomtorch" width="84" height="84"></a>
     <nav class="landing-nav" aria-label="Main navigation"><a href="/#top">Home</a><a href="/#how-it-works">How it works</a><a href="/#features">Features</a><a href="/#who-its-for">About</a></nav>
-    <div class="landing-nav-actions"><a class="landing-signin" href="/sign-in">Sign in</a><a class="landing-button landing-button-small" href="/register">Get started ${icon("arrow")}</a></div>
+    <div class="landing-nav-actions"><a class="landing-signin" href="/sign-in" data-public-auth="sign-in">Sign in</a><a class="landing-button landing-button-small" href="/register">Get started ${icon("arrow")}</a></div>
     <button class="landing-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
   </header>`;
 }
