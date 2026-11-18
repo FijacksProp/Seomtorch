@@ -2328,6 +2328,53 @@ select:focus, textarea:focus, input:focus {
   }
 }
 
+/* Student dashboard navigation: light institutional rail from the handoff,
+   shared by every authenticated screen and mirrored in the mobile dock. */
+.sidebar { color:#26392e; background:#fff; border-right:1px solid #e4eae5; box-shadow:3px 0 22px rgba(21,50,32,.035); }
+.sidebar > .brand { color:#1e563a; }
+.sidebar .brand-symbol { background:#f3f8f4; border-color:#e4eee6; box-shadow:none; }
+.sidebar .brand-name { color:#214b35; }
+.sidebar .brand-name small { color:#819087; }
+.sidebar .nav { margin-top:25px; gap:7px; }
+.sidebar .nav-button { min-height:48px; border-radius:9px; color:#596a60; font-weight:550; }
+.sidebar .nav-button:hover { color:#176c43; background:#f4f8f4; }
+.sidebar .nav-button.active { color:#176c43; background:#eaf3ec; font-weight:700; }
+.sidebar .nav-button.active .nav-icon { color:#176c43; }
+.sidebar .nav-icon { stroke-width:1.9; }
+.sidebar .mode-switcher-container { padding-top:22px; border-top:1px solid #e4eae5; }
+.sidebar .mode-switcher-pill { padding:4px; border:1px solid #e3eae4; border-radius:10px; background:#f7f9f7; }
+.sidebar .mode-pill-btn { color:#617066; }
+.sidebar .mode-pill-btn.active { color:#176c43; background:#e6f1e8; box-shadow:none; }
+.sidebar .sidebar-foot { padding-top:16px; border-color:#e4eae5; }
+.sidebar .sidebar-feedback-link { color:#53675a; }
+.sidebar .streak-panel { border-color:#ead7b7; background:#fffaf1; color:#b36b13; }
+.sidebar .streak-panel span { color:#7f7869; }
+.sidebar .streak-panel strong { color:#945b16; }
+.sidebar .streak-panel strong small { color:#7f7869; }
+.sidebar .xp-panel { padding:13px 14px; border:1px solid #e1e9e2; border-radius:10px; background:#fff; }
+.sidebar .xp-panel > div:first-child { color:#42584a; }
+.sidebar .xp-panel > div:first-child span { color:#176c43; }
+.sidebar .xp-track { background:#e8eee9; }
+.sidebar .xp-track i { background:#20834e; }
+.sidebar .xp-panel > small { color:#87938a; }
+@media(max-width:840px) {
+  .sidebar { background:rgba(255,255,255,.97); border-top:1px solid #e2e9e3; box-shadow:0 -5px 22px rgba(25,52,35,.09); }
+  .sidebar .nav { gap:3px; }
+  .sidebar .nav-button { min-height:52px; color:#68766d; }
+  .sidebar .nav-button.active { color:#176c43; background:#eaf3ec; }
+  .sidebar .nav-button.active .nav-icon { color:#176c43; }
+}
+@media(max-width:600px) {
+  .topbar .top-badge-pill:not(.top-xp-level-pill) { display:inline-flex!important; min-height:30px; height:30px; padding-inline:6px; gap:4px; font-size:9px; box-shadow:none; }
+  .topbar .top-badge-pill:not(.top-xp-level-pill) svg { display:none; }
+  .topbar .topbar-pills { gap:4px; }
+  .topbar .top-xp-level-pill { min-height:30px; height:30px; padding-inline:7px 3px; gap:5px; font-size:9px; }
+  .topbar .level-badge-ring,.topbar .level-radial-chart { width:21px; height:21px; }
+  .topbar .level-badge-number { font-size:9px; }
+  .topbar .topbar-avatar-btn .avatar { width:31px; height:31px; min-width:31px; min-height:31px; flex-basis:31px; }
+  .topbar .topbar-avatar-btn .avatar-caret-icon { display:none; }
+}
+
 /* Daily sprint */
 .sprint-card {
   background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
