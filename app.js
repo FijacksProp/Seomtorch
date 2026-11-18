@@ -47,13 +47,13 @@ const FAQS = [
 ];
 
 const ICONS = {
-  home: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V21H3V10.5Z"/><path d="M9 21v-6h6v6"/></svg>',
+  home: '<svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg>',
   practice: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
-  progress: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/><path d="M3 20h18"/></svg>',
+  progress: '<svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V12M10 20V5M16 20V9M22 20V3"/></svg>',
   challenges: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/><path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M4 5h16v4a6 6 0 0 1-12 0V5z"/><path d="M12 15v4"/><path d="M8 21h8"/></svg>',
-  profile: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
-  university: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 3 2 9l10 6 10-6Z"/><path d="M2 9v8"/><path d="M6 11.2V17c0 1.1 2.7 3 6 3s6-1.9 6-3v-5.8"/></svg>',
-  buddies: '<svg class="nav-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  profile: '<svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="8" r="5"/><path d="M2 21a8 8 0 0 1 14.4-4.8"/><path d="m16 19 2 2 4-4"/></svg>',
+  university: '<svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18V5a2 2 0 0 1 2-2h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h1a2 2 0 0 1 2 2v13h-3a4 4 0 0 0-4 3 4 4 0 0 0-4-3H3Z"/></svg>',
+  buddies: '<svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21a7 7 0 0 0-14 0"/><circle cx="9" cy="8" r="4"/><path d="M22 21a7 7 0 0 0-5-6.7"/><path d="M16 3.3a4 4 0 0 1 0 7.4"/></svg>',
 };
 
 const DB_NAME = "seomtorch";
@@ -111,6 +111,7 @@ let db;
 let questions = [];
 let profile = null;
 let authToken = localStorage.getItem("seomtorch-auth-token");
+const localDemoMode = ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname);
 let pendingEmailApproval = null, pendingAuthRegistration = null, emailApprovalCleanup = null;
 let pendingEmailChange = null, emailChangeCleanup = null, emailChangeBusy = false, deferredEmailAuthExpiry = null;
 let currentUser = readCachedUser();
@@ -520,10 +521,11 @@ async function performModeSwitch(targetMode) {
 
   await new Promise(resolve => setTimeout(resolve, 140));
 
-  if (currentUser) {
+  if (currentUser && !localDemoMode) {
     currentUser.active_mode = targetMode;
     localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
   }
+  if (currentUser && localDemoMode) currentUser.active_mode = targetMode;
   localStorage.setItem("seomtorch-active-mode", targetMode);
   closeStudentDialogs();
   universityIntroductionPending = targetMode === "university";
@@ -4448,6 +4450,15 @@ async function fetchUniJson(path) {
   }
   if (uniContentCache[path]) return uniContentCache[path];
   try {
+    if (localDemoMode) {
+      const safePath = String(path).replace(/^\/+/, "");
+      if (!safePath.startsWith("data/university/") || safePath.split("/").includes("..")) throw new Error("Invalid local course path");
+      const response = await fetch(safePath, { cache: "no-store" });
+      if (!response.ok) throw new Error(`Course file returned ${response.status}`);
+      const data = await response.json();
+      uniContentCache[path] = data;
+      return data;
+    }
     if (!authToken) throw new Error("Sign in to open university course materials.");
     const data = await api.universityContent(authToken, path);
     uniContentCache[path] = data;
@@ -5529,7 +5540,7 @@ function render() {
   if (route !== "session") cancelPostPracticeFeedback();
   if (route !== "buddies" || communityActiveTab !== "messages") unmountBuddyChat();
   updateScreenWatermark();
-  if (!authToken || !currentUser || !profile) {
+  if (!localDemoMode && (!authToken || !currentUser || !profile)) {
     const publicRoute = publicRouteFromLocation();
     if (publicRoute.page === "landing") return renderPublicLanding();
     authMode = publicRoute.mode;
@@ -5562,6 +5573,31 @@ function updateScreenProtectionState() {
   } else {
     updateScreenWatermark();
   }
+}
+
+function enableLocalDemoAccount() {
+  // UI-only preview account: no token is created or sent to the hosted API.
+  authToken = null;
+  const mode = localStorage.getItem("seomtorch-active-mode") || "university";
+  currentUser = {
+    public_id: "LOCAL01", username: profile?.name || "Local Student", email: "local-preview@seomtorch.test",
+    active_mode: mode, user_type: null, has_aspirant_profile: true, has_university_profile: true,
+    university_profile: { university_name: "University of Ilorin", faculty: "Basic Medical Sciences", department: "Physiology", level: 400 },
+    aspirant_profile: { exam_type: "jamb", target_year: new Date().getFullYear() },
+  };
+  profile = {
+    ...(profile || {}), id: profile?.id || "local-preview", remoteId: "LOCAL01",
+    name: profile?.name || "Local Student", email: "local-preview@seomtorch.test",
+    avatar: profile?.avatar || "varsity-male", xp: Number(profile?.xp) || 0,
+    rhythm: Number(profile?.rhythm) || 0, bestRhythm: Number(profile?.bestRhythm) || 0,
+    tests: profile?.tests || { tests_taken: completedTests.length, average_score: 0, tests_today: 0 },
+  };
+  challengesData = [];
+  achievementsData = { badges: [], earned_count: 0, total_count: 0 };
+  progressData = {};
+  subscriptionStateReady = true;
+  userAccessData = { has_all_access: true, unlocked_courses: ["ALL"], limited_access_active: false };
+  localStorage.setItem("seomtorch-active-mode", mode);
 }
 
 function updateScreenWatermark() {
@@ -5781,7 +5817,10 @@ async function init() {
   try {
     db = await openDatabase();
     await Promise.all([loadQuestions(), loadData()]);
-    if (authToken && currentUser) {
+    if (localDemoMode) {
+      enableLocalDemoAccount();
+      render();
+    } else if (authToken && currentUser) {
       await prepareLocalUser(currentUser);
       const savedSession = restoreActiveSession();
       if (savedSession) {
@@ -5799,8 +5838,8 @@ async function init() {
       render();
     } else render();
     dismissAppLoader();
-    await loadSubscriptionState();
-    const authenticated = await restoreAuth();
+    if (!localDemoMode) await loadSubscriptionState();
+    const authenticated = localDemoMode ? false : await restoreAuth();
     render();
     if (authenticated) {
       syncPendingAttempts();

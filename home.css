@@ -167,6 +167,80 @@
 .desk-activity-grid dt { color:#5b695f; font-size:11px; }
 .desk-activity-grid dd { margin:11px 0 7px; color:#203c2d; font:600 34px/1 var(--serif); font-variant-numeric:tabular-nums; }
 .desk-activity-grid span { color:#859086; font-size:9px; }
+
+/* University dashboard composition follows the supplied page as the source
+   layout: quiet white workspace, framed academic welcome, featured module,
+   department cards and a compact activity summary. */
+.study-home-university { max-width:none; width:100%; padding:26px clamp(22px,3.4vw,52px) 58px; background:#f7f8f7; }
+.uni-dashboard-welcome { position:relative; min-height:340px; padding:31px clamp(25px,3vw,44px); border:1px solid #d7e1d9; border-radius:17px; background:#fff; box-shadow:0 2px 8px rgba(25,55,37,.025); }
+.uni-dashboard-identity { max-width:100%; }
+.uni-dashboard-welcome .desk-kicker { color:#718078; font-size:11px; letter-spacing:.04em; }
+.uni-dashboard-tags { display:inline-flex; gap:0; margin:10px 0 9px; overflow:hidden; border-radius:99px; background:#eaf2ec; color:#243b2d; }
+.uni-dashboard-tags span { padding:9px 14px; font-size:12px; }
+.uni-dashboard-tags span + span { font-weight:650; }
+.uni-dashboard-welcome h1 { margin:0; color:#202d25; font-size:clamp(30px,3vw,42px); font-weight:750; letter-spacing:-.035em; line-height:1.15; }
+.uni-dashboard-faculty { margin:8px 0 15px; color:#78867e; font-size:17px; }
+.uni-dashboard-greeting h2 { margin:17px 0 3px; color:#26332b; font-size:clamp(22px,2.1vw,30px); font-weight:700; letter-spacing:-.025em; }
+.uni-dashboard-greeting p { max-width:790px; margin:0; color:#718078; font-size:15px; line-height:1.6; }
+.uni-dashboard-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:25px; }
+.uni-dashboard-actions .button,.uni-featured-card > .button { min-height:46px; padding:0 17px; border-radius:7px; background:#245c43; border-color:#245c43; color:#fff; box-shadow:none; font-size:14px; }
+.uni-dashboard-actions .button.outline { color:#245c43; background:white; }
+.uni-dashboard-welcome > .desk-date { position:absolute; top:24px; right:26px; }
+.uni-featured-module { margin-top:32px; }
+.uni-featured-heading { display:flex; align-items:baseline; justify-content:space-between; gap:20px; margin-bottom:16px; }
+.uni-featured-heading h2 { margin:7px 0 0; color:#243129; font-size:26px; letter-spacing:-.025em; }
+.uni-featured-heading > span { color:#89968e; font-size:13px; }
+.uni-featured-card { min-height:177px; display:flex; align-items:center; justify-content:space-between; gap:28px; padding:23px 32px; border:1px solid #d8e3da; border-radius:13px; background:#fff; }
+.uni-featured-card > div { max-width:760px; }
+.uni-featured-meta { display:flex; gap:9px; align-items:center; }
+.uni-featured-meta span { padding:6px 10px; border-radius:99px; background:#eaf3ec; color:#286345; font-size:9px; font-weight:750; letter-spacing:.055em; text-transform:uppercase; }
+.uni-featured-card h3 { margin:11px 0 9px; color:#222f27; font-size:clamp(21px,2.2vw,29px); letter-spacing:-.03em; }
+.uni-featured-card p { margin:0; color:#879188; font-size:13px; line-height:1.7; }
+.uni-featured-card > .button { flex:none; }
+.study-home-university .desk-course-catalog { margin-top:33px; }
+.study-home-university .desk-section-heading { align-items:baseline; }
+.study-home-university .desk-section-heading h2 { color:#26332b; font-size:27px; }
+.study-home-university .desk-departments { grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
+.study-home-university .desk-department { min-height:202px; position:relative; grid-template-columns:1fr 24px; align-items:start; gap:12px; padding:23px 25px; border-color:#dce5de; border-radius:13px; box-shadow:0 2px 8px rgba(25,55,37,.025); transition:border-color .18s,transform .18s,box-shadow .18s; }
+.study-home-university .desk-department:hover { transform:translateY(-2px); border-color:#b4cbb9; box-shadow:0 10px 25px rgba(25,55,37,.07); }
+.study-home-university .desk-dept-mark { width:38px; height:38px; border:0; border-radius:8px; }
+.study-home-university .desk-dept-mark svg { width:25px; height:25px; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.study-home-university .anatomy-mark { color:#b66e18; background:#fff5e8; }
+.study-home-university .physiology-mark { color:#286345; background:#edf5ef; }
+.study-home-university .desk-department > span:nth-child(2) { grid-column:1/-1; }
+.study-home-university .desk-department strong { color:#2b372f; font-size:17px; }
+.study-home-university .desk-department > span > span { font-size:13px; line-height:1.65; }
+.study-home-university .desk-department small { font-size:10px; }
+.study-home-university .desk-dept-arrow { grid-column:2; grid-row:1; color:#286345; font-size:20px; }
+.study-home-university .desk-activity { margin-top:31px; padding:20px 25px; }
+.study-home-university .desk-activity .desk-section-heading h2 { font-size:21px; }
+.study-home-university .desk-activity-grid dd { font-size:29px; }
+@media(max-width:760px) {
+  .study-home-university { padding:18px 16px 40px; }
+  .uni-dashboard-welcome { min-height:0; padding:22px 19px; border-radius:13px; }
+  .uni-dashboard-welcome > .desk-date { top:18px; right:17px; font-size:9px; }
+  .uni-dashboard-welcome .desk-kicker { max-width:calc(100% - 90px); }
+  .uni-dashboard-tags { max-width:100%; margin-top:12px; }
+  .uni-dashboard-tags span { padding:8px 10px; font-size:10px; }
+  .uni-dashboard-welcome h1 { max-width:100%; font-size:28px; }
+  .uni-dashboard-faculty { font-size:14px; }
+  .uni-dashboard-greeting h2 { font-size:22px; }
+  .uni-dashboard-greeting p { font-size:13px; }
+  .uni-dashboard-actions { display:grid; grid-template-columns:1fr; gap:8px; margin-top:19px; }
+  .uni-dashboard-actions .button { width:100%; justify-content:center; }
+  .uni-featured-heading { align-items:flex-start; flex-direction:column; gap:5px; }
+  .uni-featured-heading h2,.study-home-university .desk-section-heading h2 { font-size:23px; }
+  .uni-featured-heading > span { font-size:11px; }
+  .uni-featured-card { min-height:0; align-items:flex-start; flex-direction:column; gap:17px; padding:20px; }
+  .uni-featured-card h3 { font-size:21px; }
+  .uni-featured-card p { font-size:12px; }
+  .uni-featured-card > .button { width:100%; justify-content:center; }
+  .study-home-university .desk-departments { grid-template-columns:1fr; gap:12px; }
+  .study-home-university .desk-department { min-height:165px; padding:20px; }
+  .study-home-university .desk-activity { padding:18px 14px; }
+  .study-home-university .desk-activity-grid > div { padding-inline:8px; }
+  .study-home-university .desk-activity-grid dd { font-size:24px; }
+}
 @media(max-width:760px) {
   .desk-academic { padding:17px 96px 17px 16px; align-items:flex-start; }
   .desk-academic .desk-level-chip { top:auto; right:14px; bottom:15px; padding:6px 8px; font-size:8px; transform:none; }
