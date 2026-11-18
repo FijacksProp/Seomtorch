@@ -4122,7 +4122,7 @@ function renderAuth() {
     departmentSelect.id = departmentInput.id;
     departmentSelect.name = departmentInput.name;
     departmentSelect.required = true;
-    departmentSelect.innerHTML = '<option value="" selected disabled>Select your department</option><option>Anatomy</option><option>Physiology</option><option>Biochemistry</option><option>Medicine and Surgery</option><option>Nursing</option><option>Pharmacy</option><option>Microbiology</option><option>Computer Science</option><option>Engineering</option><option>Law</option><option>Education</option><option>Business Administration</option><option>Other</option>';
+    departmentSelect.innerHTML = '<option value="" selected disabled>e.g. Physiology</option><option>Anatomy</option><option>Physiology</option><option>Biochemistry</option><option>Medicine and Surgery</option><option>Nursing</option><option>Pharmacy</option><option>Microbiology</option><option>Computer Science</option><option>Engineering</option><option>Law</option><option>Education</option><option>Business Administration</option><option>Other</option>';
     departmentInput.replaceWith(departmentSelect);
   }
   const levelSelect = app.querySelector("#auth-uni-level");
@@ -4131,6 +4131,16 @@ function renderAuth() {
     levelSelect.insertAdjacentHTML("afterbegin", '<option value="" selected disabled>Select academic level</option>');
     levelSelect.querySelector('option[value="200"]')?.removeAttribute("selected");
     levelSelect.value = "";
+  }
+  const formTitle = app.querySelector(".onboard-form h1");
+  if (formTitle) formTitle.textContent = register ? "Create your account" : "Welcome back";
+  const intro = app.querySelector(".onboard-form .lede");
+  if (intro) intro.textContent = register ? "Set up your learning profile to access courses, practice questions and track your progress." : "Sign in to continue your learning journey.";
+  if (register) {
+    const personal = document.createElement("div");
+    personal.className = "auth-personal-heading";
+    personal.innerHTML = "<h2>Personal Information</h2><p>Tell us a little about yourself</p>";
+    app.querySelector("#auth-form")?.prepend(personal);
   }
   if (authPortal) {
     const context = document.createElement("p");
@@ -4144,14 +4154,10 @@ function renderAuth() {
     });
   }
   if (!authPortal && !register) {
-    const chooser = document.createElement("div");
-    chooser.className = "auth-path-chooser";
-    chooser.innerHTML = `<p>Choose your learning path to sign in</p><a href="/sign-in" data-auth-path="aspirant">Exam aspirant <span>→</span></a><a href="/sign-in" data-auth-path="university">University student <span>→</span></a>`;
-    app.querySelector("#auth-form")?.before(chooser);
-    chooser.querySelectorAll("[data-auth-path]").forEach(link => link.addEventListener("click", event => {
-      event.preventDefault();
-      openPublicAuth("signin", link.dataset.authPath);
-    }));
+    const portalField = document.createElement("div");
+    portalField.className = "field auth-learning-path-field";
+    portalField.innerHTML = '<label for="auth-portal">Learning path</label><select id="auth-portal" name="portal" required><option value="" selected disabled>Select your learning path</option><option value="aspirant">Exam aspirant</option><option value="university">University student</option></select>';
+    app.querySelector("#auth-password")?.closest(".field")?.after(portalField);
   }
   document.querySelectorAll("[data-auth-mode]").forEach(button => button.addEventListener("click", () => openPublicAuth(button.dataset.authMode, authPortal)));
   document.querySelectorAll("[data-install-app]").forEach(button => button.addEventListener("click", installApp));
