@@ -1102,6 +1102,7 @@ function renderPublicLanding() {
     event.preventDefault();
     const action = link.dataset.publicAuth;
     if (action === "sign-in") return openPublicAuth("signin");
+    if (action === "register") return openPublicAuth("register");
     const [, portal, mode] = action.match(/^(aspirant|university)-(register|signin)$/) || [];
     if (portal) openPublicAuth(mode === "register" ? "register" : "signin", portal);
   }));
@@ -4147,7 +4148,19 @@ function renderAuth() {
   if (brandPanel) brandPanel.innerHTML = `<span class="brand"><span class="brand-symbol"><img src="assets/seomtorch_logo.png" alt=""></span><span class="brand-name">Seomtorch<small>Prepare with purpose</small></span></span><div class="auth-story"><p class="landing-eyebrow">${authPortal === "university" ? "For university students" : authPortal === "aspirant" ? "For exam aspirants" : "A better way to prepare"}</p><h2>${register ? "Make your next step a confident one." : "Your learning, in one place."}</h2><p>${register ? "Set up your learning space once, then build steady momentum with practice shaped around your goals." : "Return to your study desk and keep your practice, progress and plans moving forward."}</p><div class="auth-story-points"><span><i>01</i><b>Focused practice</b><small>Work through topics at your pace.</small></span><span><i>02</i><b>Clear progress</b><small>See what is improving over time.</small></span></div><small class="auth-story-signoff">Prepare with purpose.</small></div>`;
   const authMenu = app.querySelector(".landing-menu-toggle");
   const authNav = app.querySelector(".landing-nav");
-  authMenu?.addEventListener("click", () => { const expanded = authMenu.getAttribute("aria-expanded") === "true"; authMenu.setAttribute("aria-expanded", String(!expanded)); authNav?.classList.toggle("is-open", !expanded); });
+  const setAuthNavOpen = open => {
+    authMenu?.setAttribute("aria-expanded", String(open));
+    authMenu?.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+    authNav?.classList.toggle("is-open", open);
+  };
+  authMenu?.addEventListener("click", () => setAuthNavOpen(authMenu.getAttribute("aria-expanded") !== "true"));
+  app.querySelectorAll(".landing-header [data-public-auth]").forEach(link => link.addEventListener("click", event => {
+    event.preventDefault();
+    const action = link.dataset.publicAuth;
+    if (action === "sign-in") return openPublicAuth("signin");
+    if (action === "register") return openPublicAuth("register");
+  }));
+  authNav?.querySelectorAll("a").forEach(link => link.addEventListener("click", () => setAuthNavOpen(false)));
   authMotionController?.abort();
   authMotionController = new AbortController();
   let pointerFrame = 0;
