@@ -30,6 +30,7 @@ class UniversityProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UniversityProfile
         fields = ("university_name", "faculty", "department", "level", "current_courses")
+        extra_kwargs = {"faculty": {"required": False, "allow_blank": True}}
 
     def validate_university_name(self, value):
         if len(value.strip()) < 3:
@@ -150,13 +151,16 @@ class RegisterSerializer(serializers.ModelSerializer):
             else:
                 avatar = random.choice(all_avatars)
 
-        user = User.objects.create_user(**validated_data)
-        user.user_type = user_type
-        user.active_mode = user_type
-        user.gender = gender
-        user.avatar = avatar
-        user.save(update_fields=("user_type", "active_mode", "gender", "avatar"))
-        return user
+        # Set the path before the first insert. Creating with the default path
+        # and updating afterward can violate the email/path unique constraint
+        # for students who already have the other legacy path account.
+        return User.objects.create_user(
+            **validated_data,
+            user_type=user_type,
+            active_mode=user_type,
+            gender=gender,
+            avatar=avatar,
+        )
 
 
 class LoginSerializer(serializers.Serializer):
@@ -170,10 +174,25 @@ class LoginSerializer(serializers.Serializer):
         all_accounts = User.objects.filter(email__iexact=email)
         if not requested_portal and all_accounts.count() > 1:
             raise serializers.ValidationError({"portal": "Choose the learning path for this account."})
-        accounts = all_accounts.filter(user_type=requested_portal) if requested_portal else all_accounts
-        user = next((candidate for candidate in accounts if candidate.check_password(attrs["password"])), None)
+        matching_accounts = [candidate for candidate in all_accounts if candidate.check_password(attrs["password"])]
+        user = None
+        if requested_portal:
+            # Prefer a complete dual-profile account when legacy per-path
+            # accounts with the same email are also present.
+            user = next((candidate for candidate in matching_accounts if candidate.has_aspirant_profile and candidate.has_university_profile), None)
+            if not user:
+                user = next((candidate for candidate in matching_accounts if (
+                    candidate.has_university_profile if requested_portal == UserType.UNIVERSITY
+                    else candidate.has_aspirant_profile
+                )), None)
+            # Preserve the old per-path sign-in behavior if no saved profile
+            # matches (for example, during initial account setup).
+            if not user:
+                user = next((candidate for candidate in matching_accounts if candidate.user_type == requested_portal), None)
+        else:
+            user = matching_accounts[0] if matching_accounts else None
         if not user and requested_portal:
-            other = next((candidate for candidate in all_accounts if candidate.check_password(attrs["password"])), None)
+            other = matching_accounts[0] if matching_accounts else None
             if other and other.is_active:
                 portal_name = "university" if other.user_type == UserType.UNIVERSITY else "exam aspirant"
                 raise serializers.ValidationError({"portal": f"This email and password belong to the {portal_name} path. Please use that sign-in page."})
@@ -209,10 +228,6 @@ class SwitchModeSerializer(serializers.Serializer):
 
     def validate_mode(self, value):
         user = self.context["request"].user
-        if not user.is_staff and value != user.user_type:
-            raise serializers.ValidationError(
-                "This account is registered for one learning path. Create a separate account to use the other path."
-            )
         if value == UserType.ASPIRANT and not user.has_aspirant_profile:
             raise serializers.ValidationError(
                 "Complete your aspirant profile setup before switching to aspirant mode."

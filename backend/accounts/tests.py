@@ -5,6 +5,7 @@ from rest_framework.test import APIClient, APITestCase
 from knox.models import AuthToken
 from unittest.mock import patch
 from monetization.models import CourseAccess
+from .models import AspirantProfile, UniversityProfile
 
 class AuthenticationTests(APITestCase):
     def test_register_returns_token_and_six_character_id(self):
@@ -41,20 +42,51 @@ class AuthenticationTests(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertIn("portal", response.data)
 
-    def test_account_cannot_switch_to_the_other_learning_path(self):
+    def test_switch_to_other_path_requires_a_saved_profile(self):
         user = get_user_model().objects.create_user(email="fixed.path@example.com", username="fixedpath", password="Securepass934!", user_type="aspirant", active_mode="aspirant")
         token = Token.objects.create(user=user)
         self.client.credentials(HTTP_AUTHORIZATION=f"Token {token.key}")
         response = self.client.post("/api/auth/switch-mode/", {"mode": "university"}, format="json")
         self.assertEqual(response.status_code, 400)
 
-    def test_account_cannot_create_profile_for_other_learning_path(self):
+    def test_account_can_add_and_switch_to_the_other_learning_path(self):
         user = get_user_model().objects.create_user(email="fixed.profile@example.com", username="fixedprofile", password="Securepass934!", user_type="aspirant", active_mode="aspirant")
         token = Token.objects.create(user=user)
         self.client.credentials(HTTP_AUTHORIZATION=f"Token {token.key}")
         response = self.client.post("/api/auth/university-profile/", {"university_name": "University", "department": "Anatomy", "level": 200}, format="json")
-        self.assertEqual(response.status_code, 403)
-        self.assertFalse(hasattr(user, "university_profile"))
+        self.assertEqual(response.status_code, 201)
+        self.assertTrue(response.data["user"]["has_university_profile"])
+        self.assertEqual(response.data["user"]["user_type"], "aspirant")
+
+        switched = self.client.post("/api/auth/switch-mode/", {"mode": "university"}, format="json")
+        self.assertEqual(switched.status_code, 200)
+        self.assertEqual(switched.data["user"]["active_mode"], "university")
+
+    def test_invalid_secondary_profile_is_not_left_half_created(self):
+        user = get_user_model().objects.create_user(email="invalid.profile@example.com", username="invalidprofile", password="Securepass934!", user_type="aspirant")
+        token = Token.objects.create(user=user)
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {token.key}")
+        response = self.client.post("/api/auth/university-profile/", {"university_name": "No", "department": "Anatomy", "level": 200}, format="json")
+        self.assertEqual(response.status_code, 400)
+        user.refresh_from_db()
+        self.assertFalse(user.has_university_profile)
+
+    def test_dual_profile_account_can_sign_in_through_either_portal(self):
+        user = get_user_model().objects.create_user(email="dual@example.com", username="dual", password="Securepass934!", user_type="aspirant", active_mode="aspirant")
+        UniversityProfile.objects.create(user=user, university_name="University", faculty="", department="Anatomy", level=200)
+        response = self.client.post("/api/auth/login/", {"email": user.email, "password": "Securepass934!", "portal": "university"}, format="json")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data["user"]["active_mode"], "university")
+
+    def test_sign_in_prefers_dual_profile_over_legacy_duplicate_path_account(self):
+        user_model = get_user_model()
+        dual = user_model.objects.create_user(email="returning@example.com", username="returningasp", password="Securepass934!", user_type="aspirant")
+        AspirantProfile.objects.create(user=dual, exam_type="jamb", target_year=2026, preferred_subjects=[])
+        UniversityProfile.objects.create(user=dual, university_name="University", faculty="", department="Anatomy", level=200)
+        user_model.objects.create_user(email="returning@example.com", username="returninguni", password="Securepass934!", user_type="university")
+        response = self.client.post("/api/auth/login/", {"email": "returning@example.com", "password": "Securepass934!", "portal": "university"}, format="json")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data["user"]["public_id"], dual.public_id)
 
     def test_duplicate_email_is_rejected_case_insensitively(self):
         get_user_model().objects.create_user(email="student@example.com", username="first", password="Securepass934!")

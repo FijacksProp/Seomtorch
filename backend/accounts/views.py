@@ -60,8 +60,18 @@ class LoginView(APIView):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data["user"]
-        if not user.is_staff and user.active_mode != user.user_type:
-            user.active_mode = user.user_type
+        requested_mode = request.data.get("portal")
+        if requested_mode and (
+            (requested_mode == "aspirant" and user.has_aspirant_profile)
+            or (requested_mode == "university" and user.has_university_profile)
+        ) and user.active_mode != requested_mode:
+            user.active_mode = requested_mode
+            user.save(update_fields=("active_mode",))
+        elif not user.is_staff and user.active_mode == "university" and not user.has_university_profile:
+            user.active_mode = "aspirant" if user.has_aspirant_profile else user.user_type
+            user.save(update_fields=("active_mode",))
+        elif not user.is_staff and user.active_mode == "aspirant" and not user.has_aspirant_profile:
+            user.active_mode = "university" if user.has_university_profile else user.user_type
             user.save(update_fields=("active_mode",))
         if enabled_for(user):
             from django.utils.crypto import constant_time_compare
@@ -132,16 +142,15 @@ class AspirantProfileView(APIView):
         return Response(AspirantProfileSerializer(request.user.aspirant_profile).data)
 
     def post(self, request):
-        if not request.user.is_staff and request.user.user_type != "aspirant":
-            return Response({"detail": "This account is registered for the university path. Use a separate aspirant account to access this portal."}, status=status.HTTP_403_FORBIDDEN)
-        profile, created = AspirantProfile.objects.get_or_create(user=request.user)
-        serializer = AspirantProfileSerializer(profile, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+        with transaction.atomic():
+            profile, created = AspirantProfile.objects.get_or_create(user=request.user)
+            serializer = AspirantProfileSerializer(profile, data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
 
-        # If this is a fresh profile, set active_mode to aspirant
-        if created:
-            if not request.user.has_university_profile:
+            # Keep a dual-profile account in its current portal; first-time setup
+            # of its only profile may set that portal as the active one.
+            if created and not request.user.has_university_profile:
                 request.user.active_mode = "aspirant"
                 request.user.save(update_fields=("active_mode",))
 
@@ -160,16 +169,15 @@ class UniversityProfileView(APIView):
         return Response(UniversityProfileSerializer(request.user.university_profile).data)
 
     def post(self, request):
-        if not request.user.is_staff and request.user.user_type != "university":
-            return Response({"detail": "This account is registered for the aspirant path. Use a separate university account to access this portal."}, status=status.HTTP_403_FORBIDDEN)
-        profile, created = UniversityProfile.objects.get_or_create(user=request.user)
-        serializer = UniversityProfileSerializer(profile, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+        with transaction.atomic():
+            profile, created = UniversityProfile.objects.get_or_create(user=request.user)
+            serializer = UniversityProfileSerializer(profile, data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
 
-        # If this is a fresh profile, set active_mode to university
-        if created:
-            if not request.user.has_aspirant_profile:
+            # Keep a dual-profile account in its current portal; first-time setup
+            # of its only profile may set that portal as the active one.
+            if created and not request.user.has_aspirant_profile:
                 request.user.active_mode = "university"
                 request.user.save(update_fields=("active_mode",))
 

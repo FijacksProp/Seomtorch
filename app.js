@@ -495,18 +495,13 @@ function hasUniversityProfile() {
 async function handleModeSwitch(targetMode) {
   const currentMode = getActiveMode();
   if (targetMode === currentMode) return;
-  if (currentUser?.user_type && targetMode !== currentUser.user_type) {
-    showToast("This account is registered for one learning path. Create a separate account for the other path.");
-    return;
-  }
-
   if (targetMode === "university") {
     if (!hasUniversityProfile()) {
       showUniversityRegistrationModal();
       return;
     }
   } else if (targetMode === "aspirant") {
-    if (!hasAspirantProfile() && currentUser?.user_type === "university") {
+    if (!hasAspirantProfile()) {
       showAspirantRegistrationModal();
       return;
     }
@@ -516,6 +511,16 @@ async function handleModeSwitch(targetMode) {
 }
 
 async function performModeSwitch(targetMode) {
+  if (authToken && !localDemoMode) {
+    try {
+      const response = await api.switchMode(authToken, targetMode);
+      if (response.user) currentUser = response.user;
+    } catch (caught) {
+      showToast(caught instanceof ApiError ? caught.message : "Could not switch learning portals. Please try again.");
+      return false;
+    }
+  }
+
   const shellEl = document.querySelector(".app-shell") || document.body;
   shellEl.classList.add("portal-switching");
 
@@ -529,9 +534,6 @@ async function performModeSwitch(targetMode) {
   localStorage.setItem("seomtorch-active-mode", targetMode);
   closeStudentDialogs();
   universityIntroductionPending = targetMode === "university";
-  if (authToken) {
-    api.switchMode(authToken, targetMode).catch(() => {});
-  }
   route = "home";
   if (targetMode === "university") {
     uniRoute = "departments";
@@ -551,9 +553,10 @@ async function performModeSwitch(targetMode) {
   });
 
   showToast(targetMode === "university" ? "Switched to University Portal" : "Switched to Aspirants Portal");
+  return true;
 }
 
-function showUniversityRegistrationModal(onSuccess) {
+function showUniversityRegistrationModal(onSuccess, { activateOnSave = true } = {}) {
   const existingModal = document.querySelector("#mode-modal-backdrop");
   if (existingModal) existingModal.remove();
 
@@ -566,8 +569,8 @@ function showUniversityRegistrationModal(onSuccess) {
         <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3L2 8l10 5 10-5-10-5z"/><path d="M6 10.5v5c0 3 3 5.5 6 5.5s6-2.5 6-5.5v-5"/><path d="M22 8v6"/></svg>
         <span>Academic Enrollment</span>
       </span>
-      <h2>Register Your University Details</h2>
-      <p class="mode-modal-desc">Enter your institution, department and level to unlock your specialized undergraduate course modules and past questions.</p>
+      <h2>${currentUser?.university_profile ? "Review your university profile" : "Set up your university profile"}</h2>
+      <p class="mode-modal-desc">Add your institution, department and current level. Review the details before saving; you can update them later.</p>
       <form id="uni-reg-modal-form" class="mode-modal-form">
         <div class="field">
           <label for="modal-uni-name">University / Institution *</label>
@@ -592,10 +595,11 @@ function showUniversityRegistrationModal(onSuccess) {
             <option value="600" ${currentUser?.university_profile?.level === 600 ? "selected" : ""}>600 Level</option>
           </select>
         </div>
+        <label class="portal-confirm-check"><input type="checkbox" name="confirm_profile" required><span>I have reviewed these details and confirm they are accurate.</span></label>
         <div id="uni-modal-error" class="auth-error" role="alert"></div>
         <div class="button-row">
           <button type="button" class="button outline" id="close-uni-modal">Cancel</button>
-          <button type="submit" class="button accent">Continue to University Portal →</button>
+          <button type="submit" class="button accent">${activateOnSave ? "Save and continue to University Portal →" : "Save University profile"}</button>
         </div>
       </form>
     </div>
@@ -631,26 +635,33 @@ function showUniversityRegistrationModal(onSuccess) {
       if (!currentUser) currentUser = {};
       currentUser.has_university_profile = true;
       currentUser.university_profile = payload;
-      currentUser.active_mode = "university";
+      const nextMode = activateOnSave ? "university" : getActiveMode();
+      if (activateOnSave && authToken && !localDemoMode) {
+        const switched = await api.switchMode(authToken, "university");
+        if (switched.user) currentUser = switched.user;
+      }
+      currentUser.active_mode = nextMode;
       localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
-      localStorage.setItem("seomtorch-active-mode", "university");
+      localStorage.setItem("seomtorch-active-mode", nextMode);
       backdrop.remove();
-      showToast("University profile registered!");
+      showToast(activateOnSave ? "University profile confirmed. Portal ready." : "University profile saved. You can switch to it whenever you’re ready.");
       if (onSuccess) onSuccess();
-      else {
+      else if (activateOnSave) {
         route = "home";
         uniRoute = "departments";
         render();
+      } else {
+        renderProfile();
       }
     } catch (caught) {
       err.textContent = caught instanceof ApiError ? caught.message : "Failed to save profile. Please try again.";
       btn.disabled = false;
-      btn.textContent = "Continue to University Portal →";
+      btn.textContent = activateOnSave ? "Save and continue to University Portal →" : "Save University profile";
     }
   });
 }
 
-function showAspirantRegistrationModal(onSuccess) {
+function showAspirantRegistrationModal(onSuccess, { activateOnSave = true } = {}) {
   const existingModal = document.querySelector("#mode-modal-backdrop");
   if (existingModal) existingModal.remove();
 
@@ -663,35 +674,37 @@ function showAspirantRegistrationModal(onSuccess) {
         <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
         <span>Exam Preparation</span>
       </span>
-      <h2>Set up Exam Aspirant Profile</h2>
-      <p class="mode-modal-desc">Select your target examination and target year to access full syllabus question banks and timed mock practice.</p>
+      <h2>${currentUser?.aspirant_profile ? "Review your aspirant profile" : "Set up your aspirant profile"}</h2>
+      <p class="mode-modal-desc">Set your target examination, year and (optionally) subjects. Review the details before saving; you can update them later.</p>
       <form id="aspirant-reg-modal-form" class="mode-modal-form">
         <div class="field">
           <label for="modal-exam-type">Target Examination *</label>
           <select id="modal-exam-type" name="exam_type" required>
-            <option value="jamb">JAMB UTME</option>
-            <option value="waec">WAEC SSCE</option>
-            <option value="neco">NECO SSCE</option>
-            <option value="post_utme">POST-UTME</option>
+            <option value="jamb" ${(!currentUser?.aspirant_profile?.exam_type || currentUser.aspirant_profile.exam_type === "jamb") ? "selected" : ""}>JAMB UTME</option>
+            <option value="waec" ${currentUser?.aspirant_profile?.exam_type === "waec" ? "selected" : ""}>WAEC SSCE</option>
+            <option value="neco" ${currentUser?.aspirant_profile?.exam_type === "neco" ? "selected" : ""}>NECO SSCE</option>
+            <option value="post_utme" ${currentUser?.aspirant_profile?.exam_type === "post_utme" ? "selected" : ""}>POST-UTME</option>
           </select>
         </div>
         <div class="field">
           <label for="modal-target-year">Target Year *</label>
-          <input id="modal-target-year" name="target_year" type="number" min="2024" max="2035" value="2026" required>
+          <input id="modal-target-year" name="target_year" type="number" min="2020" max="2035" value="${escapeHtml(currentUser?.aspirant_profile?.target_year || 2026)}" required>
         </div>
         <div class="field">
           <label>Target Subjects <span>(Optional)</span></label>
           <div class="subject-pills-select">
             ${["english", "mathematics", "biology", "chemistry", "physics", "economics", "government", "literature-in-english", "computer-studies"].map(sId => {
               const sObj = SUBJECTS.find(s => s.id === sId) || { name: sId };
-              return `<label class="subject-pill-label"><input type="checkbox" name="preferred_subjects" value="${sId}"> ${sObj.name}</label>`;
+              const preferred = currentUser?.aspirant_profile?.preferred_subjects || [];
+              return `<label class="subject-pill-label"><input type="checkbox" name="preferred_subjects" value="${sId}" ${preferred.includes(sId) ? "checked" : ""}> ${sObj.name}</label>`;
             }).join("")}
           </div>
         </div>
+        <label class="portal-confirm-check"><input type="checkbox" name="confirm_profile" required><span>I have reviewed these details and confirm they are accurate.</span></label>
         <div id="aspirant-modal-error" class="auth-error" role="alert"></div>
         <div class="button-row">
           <button type="button" class="button outline" id="close-aspirant-modal">Cancel</button>
-          <button type="submit" class="button accent">Continue to Aspirants Portal →</button>
+          <button type="submit" class="button accent">${activateOnSave ? "Save and continue to Aspirants Portal →" : "Save Aspirant profile"}</button>
         </div>
       </form>
     </div>
@@ -726,21 +739,28 @@ function showAspirantRegistrationModal(onSuccess) {
       if (!currentUser) currentUser = {};
       currentUser.has_aspirant_profile = true;
       currentUser.aspirant_profile = payload;
-      currentUser.active_mode = "aspirant";
+      const nextMode = activateOnSave ? "aspirant" : getActiveMode();
+      if (activateOnSave && authToken && !localDemoMode) {
+        const switched = await api.switchMode(authToken, "aspirant");
+        if (switched.user) currentUser = switched.user;
+      }
+      currentUser.active_mode = nextMode;
       localStorage.setItem("seomtorch-auth-user", JSON.stringify(currentUser));
-      localStorage.setItem("seomtorch-active-mode", "aspirant");
+      localStorage.setItem("seomtorch-active-mode", nextMode);
       backdrop.remove();
-      showToast("Aspirants profile registered!");
+      showToast(activateOnSave ? "Aspirant profile confirmed. Portal ready." : "Aspirant profile saved. You can switch to it whenever you’re ready.");
       if (onSuccess) onSuccess();
-      else {
+      else if (activateOnSave) {
         route = "home";
         selectedSubject = null;
         render();
+      } else {
+        renderProfile();
       }
     } catch (caught) {
       err.textContent = caught instanceof ApiError ? caught.message : "Failed to save profile. Please try again.";
       btn.disabled = false;
-      btn.textContent = "Continue to Aspirants Portal →";
+      btn.textContent = activateOnSave ? "Save and continue to Aspirants Portal →" : "Save Aspirant profile";
     }
   });
 }
@@ -938,7 +958,7 @@ function bindQuestionMedia() {
   });
 }
 function xpState() {
-  const xp = profile?.xp || 0;
+  const xp = Math.max(0, Number(profile?.xp ?? currentUser?.stats?.xp ?? 0));
   const level = 1 + Math.floor(xp / 250);
   const levelProgress = xp % 250;
   return { xp, level, levelProgress, remaining: 250 - levelProgress, percent: levelProgress / 250 * 100 };
@@ -1168,7 +1188,7 @@ function shell(content) {
       </div>
 
       <div class="sidebar-foot">
-        <button type="button" class="sidebar-feedback-link" data-open-feedback>Send feedback <span aria-hidden="true">↗</span></button>
+        ${route !== "profile" ? '<button type="button" class="sidebar-feedback-link" data-open-feedback>Send feedback <span aria-hidden="true">↗</span></button>' : ""}
         <div class="streak-panel">
           <svg class="streak-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.5c.5 3.2-.8 4.7-2.1 6.1-1.1 1.2-2.1 2.3-1.7 4.3-1.3-.7-2-2-1.9-3.7C5.3 11 4 13.5 4.3 16.1 4.7 19.6 7.6 22 11.2 22c4.8 0 8-3.1 8-7.7 0-4.1-2.5-8.3-6-11.8Z"/><path d="M12 19.2c-1.7 0-2.9-1.1-3-2.7-.1-1.2.5-2.3 1.5-3.2.1 1 .6 1.5 1.1 1.8-.2-1.7.7-2.7 1.6-3.7 1.2 1.5 1.8 3.1 1.7 4.6-.1 1.9-1.2 3.2-2.9 3.2Z"/></svg>
           <div><span>Current streak</span><strong>${profile.rhythm || 0}<small> day${profile.rhythm === 1 ? "" : "s"}</small></strong></div>
@@ -1229,9 +1249,9 @@ function shell(content) {
           </div>
         </div>
       </div>
-      <main id="main">${route !== "session" && eligibleForUniversityOffer(universityOfferOptions()) ? '<div class="course-access-note"><span><i aria-hidden="true"></i>University course access</span><button type="button" data-view-course-plans>View semester pass <span aria-hidden="true">→</span></button></div>' : ""}${route !== "session" ? securityNotice(currentUser?.account_security) : ""}${content}</main>
+      <main id="main">${route !== "session" && eligibleForUniversityOffer(universityOfferOptions()) ? '<div class="course-access-note"><span><i aria-hidden="true"></i>University course access</span><button type="button" data-view-course-plans>View semester pass <span aria-hidden="true">→</span></button></div>' : ""}${route !== "session" && route !== "profile" ? securityNotice(currentUser?.account_security) : ""}${content}</main>
     </div>
-  </div>${!isStandalone() && route !== "session" ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ""}`;
+  </div>${!isStandalone() && route !== "session" && route !== "profile" ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ""}`;
 }
 
 function escapeHtml(value = "") {
@@ -2610,6 +2630,9 @@ function getSynthesizedProgressData() {
   const totalAttempts = authToken ? (progressData?.stats?.total_attempts || 0) : attempts.length;
   const correctAttempts = attempts.filter(a => a.correct).length;
   const overallAcc = authToken ? (progressData?.stats?.accuracy || 0) : (attempts.length ? Math.round((correctAttempts / attempts.length) * 100) : 0);
+  const weeklyAccuracy = authToken && Array.isArray(progressData?.weekly_accuracy)
+    ? progressData.weekly_accuracy
+    : getLocalWeeklyPracticeAccuracy();
 
   return {
     tests: {
@@ -2625,11 +2648,115 @@ function getSynthesizedProgressData() {
     },
     subjects: subjectsList,
     topics: topicsList,
+    weekly_accuracy: weeklyAccuracy,
     stats: {
       total_attempts: totalAttempts,
       accuracy: overallAcc
     }
   };
+}
+
+function getLocalWeeklyPracticeAccuracy(weekCount = 8) {
+  const startOfWeek = value => {
+    const date = new Date(value.getFullYear(), value.getMonth(), value.getDate());
+    date.setDate(date.getDate() - ((date.getDay() + 6) % 7));
+    return date;
+  };
+  const weekKey = date => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+  const currentWeek = startOfWeek(new Date());
+  const firstWeek = new Date(currentWeek);
+  firstWeek.setDate(firstWeek.getDate() - (weekCount - 1) * 7);
+  const totals = new Map();
+
+  attempts.forEach(attempt => {
+    if (typeof attempt.correct !== "boolean") return;
+    const timestamp = attempt.timestamp ?? attempt.answered_at;
+    if (timestamp === undefined || timestamp === null) return;
+    const answeredAt = new Date(timestamp);
+    if (Number.isNaN(answeredAt.getTime())) return;
+    const week = startOfWeek(answeredAt);
+    const key = weekKey(week);
+    const bucket = totals.get(key) || { answered: 0, correct: 0 };
+    bucket.answered += 1;
+    if (attempt.correct) bucket.correct += 1;
+    totals.set(key, bucket);
+  });
+
+  return Array.from({ length: weekCount }, (_, index) => {
+    const week = new Date(firstWeek);
+    week.setDate(week.getDate() + index * 7);
+    const weekStart = weekKey(week);
+    const bucket = totals.get(weekStart) || { answered: 0, correct: 0 };
+    return {
+      week_start: weekStart,
+      answered: bucket.answered,
+      correct: bucket.correct,
+      accuracy: bucket.answered ? Math.round(bucket.correct / bucket.answered * 100) : null
+    };
+  });
+}
+
+function renderWeeklyAccuracyChart(series = []) {
+  const weeks = Array.isArray(series) ? series : [];
+  if (!weeks.some(item => Number(item.answered) > 0)) {
+    return `<div class="weekly-accuracy-empty"><strong>No weekly trend yet</strong><span>Answer a few practice questions and your accuracy will appear here, week by week.</span></div>`;
+  }
+
+  const width = Math.max(690, 114 + (weeks.length - 1) * 82);
+  const height = 258;
+  const left = 52;
+  const right = width - 26;
+  const top = 30;
+  const bottom = 166;
+  const xFor = index => left + (right - left) * (weeks.length > 1 ? index / (weeks.length - 1) : 0.5);
+  const yFor = score => bottom - (Math.max(0, Math.min(100, score)) / 100) * (bottom - top);
+  const points = weeks.map((item, index) => {
+    const answered = Math.max(0, Number(item.answered) || 0);
+    const score = item.accuracy === null || item.accuracy === undefined ? null : Number(item.accuracy);
+    const weekDate = new Date(`${item.week_start}T12:00:00`);
+    return {
+      answered,
+      accuracy: Number.isFinite(score) ? Math.max(0, Math.min(100, score)) : null,
+      x: xFor(index),
+      y: Number.isFinite(score) ? yFor(score) : null,
+      label: Number.isNaN(weekDate.getTime()) ? "—" : weekDate.toLocaleDateString(undefined, { day: "numeric", month: "short" }),
+      fullDate: Number.isNaN(weekDate.getTime()) ? "Date unavailable" : `Week of ${weekDate.toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" })}`
+    };
+  });
+  const paths = [];
+  let segment = [];
+  const flushSegment = () => {
+    if (segment.length > 1) paths.push(`<path class="weekly-accuracy-line" d="${segment.map((point, index) => `${index ? "L" : "M"} ${point.x.toFixed(1)} ${point.y.toFixed(1)}`).join(" ")}"/>`);
+    segment = [];
+  };
+  points.forEach((point, index) => {
+    if (point.answered >= 5 && point.accuracy !== null) {
+      if (segment.length && segment[segment.length - 1].index !== index - 1) flushSegment();
+      segment.push({ ...point, index });
+    } else flushSegment();
+  });
+  flushSegment();
+
+  const grid = [0, 25, 50, 75, 100].map(value => {
+    const y = yFor(value);
+    return `<g class="weekly-accuracy-grid"><line x1="${left}" x2="${right}" y1="${y}" y2="${y}"/><text x="5" y="${y + 3}">${value}%</text></g>`;
+  }).join("");
+  const markers = points.map(point => {
+    if (!point.answered || point.accuracy === null) {
+      return `<g class="weekly-accuracy-week"><text class="weekly-accuracy-week-label" x="${point.x}" y="${bottom + 24}" text-anchor="middle">${escapeHtml(point.label)}</text><text class="weekly-accuracy-count no-answers" x="${point.x}" y="${bottom + 43}" text-anchor="middle">No answers</text><title>${escapeHtml(point.fullDate)}: no answers recorded</title></g>`;
+    }
+    const smallSample = point.answered < 5;
+    return `<g class="weekly-accuracy-week ${smallSample ? "small-sample" : ""}"><circle cx="${point.x}" cy="${point.y}" r="${smallSample ? 5 : 4}"/><text class="weekly-accuracy-value" x="${point.x}" y="${point.y - 11}" text-anchor="middle">${point.accuracy}%</text><text class="weekly-accuracy-week-label" x="${point.x}" y="${bottom + 24}" text-anchor="middle">${escapeHtml(point.label)}</text><text class="weekly-accuracy-count" x="${point.x}" y="${bottom + 43}" text-anchor="middle">${point.answered} answer${point.answered === 1 ? "" : "s"}</text><title>${escapeHtml(point.fullDate)}: ${point.accuracy}% accuracy from ${point.answered} answer${point.answered === 1 ? "" : "s"}${smallSample ? "; small sample" : ""}</title></g>`;
+  }).join("");
+  const summary = points.map(point => `<li>${escapeHtml(point.fullDate)}: ${point.answered ? `${point.accuracy}% accuracy from ${point.answered} answer${point.answered === 1 ? "" : "s"}${point.answered < 5 ? ", a small sample" : ""}` : "no answers recorded"}.</li>`).join("");
+
+  return `<div class="weekly-accuracy-visual">
+    <div class="weekly-accuracy-chart-scroll" role="region" aria-label="Weekly practice accuracy chart. Scroll horizontally to review all eight weeks." tabindex="0">
+      <svg class="weekly-accuracy-svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="weekly-accuracy-svg-title weekly-accuracy-svg-desc"><title id="weekly-accuracy-svg-title">Weekly practice accuracy over the last eight weeks</title><desc id="weekly-accuracy-svg-desc">Each point shows the percentage of answered questions that were correct. The number of answers is listed below each week. The trend line only connects weeks with at least five answers.</desc>${grid}${paths.join("")}${markers}</svg>
+    </div>
+    <div class="weekly-accuracy-legend"><span><i class="legend-line"></i>Accuracy trend <small>(weeks with 5+ answers)</small></span><span><i class="legend-small-sample"></i>Small sample <small>(under 5 answers)</small></span></div>
+    <ol class="weekly-accuracy-accessible-summary">${summary}</ol>
+  </div>`;
 }
 
 function renderProgress() {
@@ -2646,53 +2773,59 @@ function renderProgress() {
   const movement = tests.improvement === null ? "Need 6 tests" : `${tests.improvement >= 0 ? "+" : ""}${tests.improvement}`;
   const hasAnyActivity = data.stats.total_attempts > 0 || tests.tests_taken > 0;
   const zeroStateHtml = !hasAnyActivity ? `
-    <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:36px 20px; text-align:center; margin-bottom:28px;">
-      <div style="width:60px; height:60px; margin:0 auto 16px; border-radius:50%; background:var(--forest-soft); color:var(--forest); display:grid; place-items:center;">
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-      </div>
-      <h2 style="font-family:var(--serif); font-size:24px; margin:0 0 8px; color:var(--ink);">Your Performance Diagnostics are Ready</h2>
-      <p style="color:var(--muted); max-width:460px; margin:0 auto 20px; font-size:13.5px; line-height:1.5;">Answer questions in Practice mode, try a Timed Mock Exam, or take a Daily Sprint. Your subject mastery, topic diagnostics, and score trajectory will update here automatically.</p>
-      <button class="button" data-route="practice">Start Practice Now →</button>
+    <div class="insights-empty-state">
+      <span class="insights-empty-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V6m0 12h16M7 15l4-4 3 2 5-6"/><path d="M16 7h3v3"/></svg></span>
+      <div><p class="eyebrow">Getting started</p><h2>Your first test will give you a useful starting point.</h2><p>Finish a practice test to see your score, subject accuracy, and topics you may want to revisit.</p></div>
+      <button class="button" data-route="practice">Start practising <span aria-hidden="true">&rarr;</span></button>
     </div>
   ` : "";
 
   const content = `<section class="page progress-page">
-    <p class="eyebrow">Insights & Diagnostics</p>
-    <h1>Your test record.</h1>
-    <p class="lede">Completed papers lead the analysis. Individual answers remain available as supporting evidence.</p>
+    <header class="insights-header">
+      <div><p class="eyebrow">Your learning report</p><h1>Insights</h1><p class="lede">Review your test scores, see where you’re strongest, and decide what to study next.</p></div>
+      <div class="insights-update-note"><span aria-hidden="true"></span><div><strong>Updated from your practice</strong><small>Tests and questions completed</small></div></div>
+    </header>
     ${zeroStateHtml}
-    <div class="metric-strip four test-metrics">
-      <div class="metric"><strong>${tests.tests_taken}</strong><span>tests taken</span></div>
-      <div class="metric"><strong>${tests.average_score}%</strong><span>average test score</span></div>
-      <div class="metric"><strong>${tests.best_score}%</strong><span>best test score</span></div>
-      <div class="metric ${tests.improvement !== null && tests.improvement >= 0 ? "xp-metric" : ""}"><strong>${movement}${tests.improvement === null ? "" : "<small> pts</small>"}</strong><span>recent movement</span></div>
+    <div class="metric-strip four test-metrics insights-metrics" aria-label="Test performance summary">
+      <div class="metric insight-metric"><span>Completed tests</span><strong>${tests.tests_taken}</strong><small>Finished practice sessions</small></div>
+      <div class="metric insight-metric"><span>Average score</span><strong>${tests.average_score}<small>%</small></strong><small>Across your completed tests</small></div>
+      <div class="metric insight-metric"><span>Personal best</span><strong>${tests.best_score}<small>%</small></strong><small>Your highest test score</small></div>
+      <div class="metric insight-metric insight-movement ${tests.improvement !== null && tests.improvement >= 0 ? "positive" : ""}"><span>Recent movement</span><strong>${tests.improvement === null ? "—" : `${movement}<small> pts</small>`}</strong><small>${tests.improvement === null ? "After six completed tests" : "Latest 3 compared with previous 3"}</small></div>
     </div>
     <div class="test-analysis-grid">
-      <section class="report-panel test-trend">
-        <div class="section-head compact"><div><p class="eyebrow">Last ${tests.trend.length} tests</p><h2>Score movement</h2></div><p>${tests.completion_rate}% completion rate</p></div>
-        <p class="trend-method-note">Each bar is one completed test, scored from 0 to 100. Recent movement compares the latest three tests with the three immediately before them.</p>
-        ${tests.trend.length ? `<div class="trend-chart" role="img" aria-label="Scores for the last ${tests.trend.length} completed tests, on a scale from zero to one hundred percent"><div class="trend-y-axis" aria-hidden="true"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div><div class="trend-chart-main"><div class="trend-grid-lines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><div class="trend-columns">${tests.trend.map((item, index) => { const date = new Date(item.completed_at); const dateLabel = Number.isNaN(date.getTime()) ? "—" : date.toLocaleDateString(undefined, { day: "numeric", month: "short" }); return `<div class="trend-column" title="${escapeHtml(item.focus)} · ${item.score}% · ${escapeHtml(dateLabel)}"><strong>${item.score}%</strong><span class="trend-bar-track"><i style="height:${Math.max(0, Math.min(100, item.score))}%"></i></span><small>Test ${index + 1}<br>${escapeHtml(dateLabel)}</small><b>${escapeHtml(item.focus)}</b></div>`; }).join("")}</div></div></div><ol class="trend-accessible-summary">${tests.trend.map((item, index) => { const date = new Date(item.completed_at); const dateLabel = Number.isNaN(date.getTime()) ? "date unavailable" : date.toLocaleDateString(); return `<li>Test ${index + 1}: ${escapeHtml(item.focus)}, ${item.score}%, ${escapeHtml(item.mode_label)}, ${escapeHtml(dateLabel)}, ${item.answered}/${item.total} questions answered.</li>`; }).join("")}</ol>` : '<div class="empty">Your score movement will appear after your first completed test.</div>'}
-        ${tests.improvement === null ? `<p class="trend-movement-explainer">${tests.tests_taken} of 6 tests recorded. Complete six tests to compare the latest three against the previous three.</p>` : `<p class="trend-movement-explainer">${tests.improvement >= 0 ? "Average score increased" : "Average score decreased"} by ${Math.abs(tests.improvement)} points across those two three-test groups.</p>`}
+      <section class="report-panel test-trend insight-panel">
+        <div class="insight-panel-heading"><div><p class="eyebrow">Score history · latest ${tests.trend.length}</p><h2>How your scores are moving</h2></div><span class="chart-scale-label">Scale: 0–100%</span></div>
+        <p class="trend-method-note">Each column is one completed test. Compare results over time—not against other students.</p>
+        ${tests.trend.length ? `<div class="trend-chart" role="img" aria-label="Scores for the last ${tests.trend.length} completed tests, on a scale from zero to one hundred percent"><div class="trend-y-axis" aria-hidden="true"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div><div class="trend-chart-main"><div class="trend-grid-lines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><div class="trend-columns">${tests.trend.map((item, index) => { const date = new Date(item.completed_at); const dateLabel = Number.isNaN(date.getTime()) ? "—" : date.toLocaleDateString(undefined, { day: "numeric", month: "short" }); return `<div class="trend-column" title="${escapeHtml(item.focus)} · ${item.score}% · ${escapeHtml(dateLabel)}"><strong>${item.score}%</strong><span class="trend-bar-track"><i style="height:${Math.max(0, Math.min(100, item.score))}%"></i></span><small>Test ${index + 1}<br>${escapeHtml(dateLabel)}</small><b>${escapeHtml(item.focus)}</b></div>`; }).join("")}</div></div></div><ol class="trend-accessible-summary">${tests.trend.map((item, index) => { const date = new Date(item.completed_at); const dateLabel = Number.isNaN(date.getTime()) ? "date unavailable" : date.toLocaleDateString(); return `<li>Test ${index + 1}: ${escapeHtml(item.focus)}, ${item.score}%, ${escapeHtml(item.mode_label)}, ${escapeHtml(dateLabel)}, ${item.answered}/${item.total} questions answered.</li>`; }).join("")}</ol>` : '<div class="empty">Your score history will appear after your first completed test.</div>'}
+        <div class="trend-movement-explainer"><strong>About recent movement</strong><span>${tests.improvement === null ? `${tests.tests_taken} of 6 tests recorded. After six tests, this compares your latest three-test average with the three before them.` : `${tests.improvement >= 0 ? "Your average increased" : "Your average decreased"} by ${Math.abs(tests.improvement)} points between the latest three tests and the previous three.`}</span></div>
       </section>
-      <section class="report-panel">
-        <div class="section-head compact"><div><p class="eyebrow">Test formats</p><h2>How you practise</h2></div></div>
-        <div class="test-mode-list">${tests.by_mode.length ? tests.by_mode.map(item => `<div><span><strong>${escapeHtml(item.label)}</strong><small>${item.count} test${item.count === 1 ? "" : "s"}</small></span><b>${item.average_score}%</b></div>`).join("") : '<div class="empty">No completed formats yet.</div>'}</div>
+      <section class="report-panel insight-panel insight-modes">
+        <div class="insight-panel-heading"><div><p class="eyebrow">Your approach</p><h2>Practice formats</h2></div></div>
+        <p class="insight-panel-copy">A look at the different ways you have studied.</p>
+        <div class="test-mode-list">${tests.by_mode.length ? tests.by_mode.map(item => `<div><span><strong>${escapeHtml(item.label)}</strong><small>${item.count} completed test${item.count === 1 ? "" : "s"}</small></span><b>${item.average_score}<small>% avg.</small></b></div>`).join("") : '<div class="empty">Your practice formats will appear here after your first test.</div>'}</div>
+        <div class="completion-note"><span>${tests.completion_rate}%</span><p><strong>Completion rate</strong><small>Completed tests compared with tests started</small></p></div>
       </section>
     </div>
-    <div class="section-head"><h2>Test history</h2><p>${tests.questions_in_tests} questions answered within completed tests</p></div>
-    <div class="test-history">${tests.recent_tests.length ? tests.recent_tests.map(item => `<article><time>${new Date(item.completed_at).toLocaleDateString(undefined, { day: "numeric", month: "short" })}</time><div><strong>${escapeHtml(item.focus)}</strong><small>${escapeHtml(item.mode_label)} · ${item.answered}/${item.total} answered</small></div><span>${item.score}%</span></article>`).join("") : '<div class="empty">Complete a test and it will appear here.</div>'}</div>
-    <div class="section-head"><h2>Academic detail</h2><p>${data.stats.total_attempts} individual answers recorded</p></div>
+    <section class="report-panel insight-panel weekly-accuracy-panel">
+      <div class="insight-panel-heading"><div><p class="eyebrow">Question-level trend · last 8 weeks</p><h2>Practice accuracy over time</h2></div><span class="chart-scale-label">Correct answers ÷ answered</span></div>
+      <p class="weekly-accuracy-intro">See how often your answers are correct from week to week. Each point shows the number of answers behind that result.</p>
+      ${renderWeeklyAccuracyChart(data.weekly_accuracy)}
+      <p class="weekly-accuracy-note">Weeks with fewer than five answers are marked as a small sample and are not joined into the trend line.</p>
+    </section>
+    <div class="section-head insight-section-heading"><div><p class="eyebrow">Your recent work</p><h2>Test history</h2></div><p>${tests.questions_in_tests} questions answered in completed tests</p></div>
+    <div class="test-history insight-history">${tests.recent_tests.length ? tests.recent_tests.map(item => `<article><time>${new Date(item.completed_at).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" })}</time><div><strong>${escapeHtml(item.focus)}</strong><small>${escapeHtml(item.mode_label)} · ${item.answered}/${item.total} questions answered</small></div><span>${item.score}<small>%</small></span></article>`).join("") : '<div class="empty">Complete a test and it will appear here.</div>'}</div>
+    <div class="section-head insight-section-heading"><div><p class="eyebrow">Where to focus</p><h2>Subject &amp; topic detail</h2></div><p>${data.stats.total_attempts} individual answers recorded</p></div>
     <div class="report-grid">
-      <div class="report-panel">
-        <h3>Subject & Course Performance</h3>
-        ${data.subjects.map(item => `<div class="report-row"><span>${escapeHtml(item.name)}<small>${item.total} answer${item.total === 1 ? "" : "s"}</small></span><strong>${item.accuracy}%</strong></div>`).join("") || '<div class="empty">No subject or course results yet.</div>'}
+      <div class="report-panel insight-panel insight-detail-panel">
+        <div class="insight-panel-heading"><div><p class="eyebrow">By subject</p><h2>Performance overview</h2></div></div>
+        ${data.subjects.map(item => `<div class="report-row insight-report-row"><span><strong>${escapeHtml(item.name)}</strong><small>${item.total} question${item.total === 1 ? "" : "s"} answered</small><i class="insight-progress-track" aria-hidden="true"><b style="width:${Math.max(0, Math.min(100, item.accuracy))}%"></b></i></span><strong>${item.accuracy}%</strong></div>`).join("") || '<div class="empty">Subject results will appear after you answer practice questions.</div>'}
       </div>
-      <div class="report-panel">
-        <h3>Topics Needing Attention</h3>
-        ${data.topics.filter(item => item.total >= 1).sort((a, b) => a.accuracy - b.accuracy).slice(0, 8).map(item => `<div class="report-row"><span>${escapeHtml(item.name)}<small>${subjectName(item.subject)} · ${item.total} answers</small></span><strong class="${item.accuracy < 50 ? "attention" : ""}">${item.accuracy}%</strong></div>`).join("") || '<div class="empty">Complete questions in any topic to identify focus areas.</div>'}
+      <div class="report-panel insight-panel insight-detail-panel">
+        <div class="insight-panel-heading"><div><p class="eyebrow">By topic</p><h2>Good next areas to revisit</h2></div></div>
+        ${data.topics.filter(item => item.total >= 1).sort((a, b) => a.accuracy - b.accuracy).slice(0, 8).map(item => `<div class="report-row insight-report-row"><span><strong>${escapeHtml(item.name)}</strong><small>${subjectName(item.subject)} · ${item.total} question${item.total === 1 ? "" : "s"}</small><i class="insight-progress-track" aria-hidden="true"><b class="${item.accuracy < 50 ? "low" : ""}" style="width:${Math.max(0, Math.min(100, item.accuracy))}%"></b></i></span><strong class="${item.accuracy < 50 ? "attention" : ""}">${item.accuracy}%</strong></div>`).join("") || '<div class="empty">Answer questions across topics to see which ones may benefit from another look.</div>'}
       </div>
     </div>
-    <div class="supporting-stat"><span>Supporting activity</span><strong>${data.stats.total_attempts} questions answered · ${data.stats.accuracy}% answer accuracy · ${xp.xp} XP</strong></div>
+    <div class="supporting-stat insight-supporting-stat"><span>Practice activity</span><strong>${data.stats.total_attempts} questions answered <i>·</i> ${data.stats.accuracy}% answer accuracy <i>·</i> ${xp.xp} XP earned</strong></div>
   </section>`;
   app.innerHTML = shell(content); bindShell();
 }
@@ -2719,8 +2852,6 @@ function renderProfile(filter = "") {
   const faqResultsHtml = groups.length
     ? groups.map(group => `<section class="faq-group"><h3>${escapeHtml(group)}</h3>${matches.filter(item => item.group === group).map(item => `<div class="faq-item"><button class="faq-question" aria-expanded="false"><span>${item.q}</span><span aria-hidden="true">+</span></button><div class="faq-answer">${item.a}</div></div>`).join("")}</section>`).join("")
     : `<div class="empty">No help entries match that search.</div>`;
-  const xp = xpState();
-  const testStats = profile.tests || { tests_taken: 0, average_score: 0 };
   const joined = currentUser?.date_joined ? new Date(currentUser.date_joined).toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) : "—";
   const displayName = currentUser?.username || profile.name;
   const displayEmail = currentUser?.email || profile.email || "";
@@ -2729,97 +2860,150 @@ function renderProfile(filter = "") {
   const faqDetailsOpen = normalized ? "open" : "";
   const profileIdCopyButton = profileId ? `<button type="button" class="profile-copy-id" id="copy-profile-id" aria-label="Copy student ID">Copy ID</button>` : "";
   const communityCounts = communityNetworkData?.counts || getCachedCommunityNetwork()?.counts || {};
+  const activeMode = getActiveMode();
+  const xp = xpState();
   const aspirantRegistered = hasAspirantProfile();
   const universityRegistered = hasUniversityProfile();
-  const aspirantPortalSummary = aspirantRegistered
-    ? `Registered for ${(currentUser?.aspirant_profile?.exam_type || "JAMB").toUpperCase()} ${currentUser?.aspirant_profile?.target_year || ""}`.trim()
-    : "Set an exam target to personalize your practice.";
-  const universityPortalSummary = universityRegistered
-    ? `${currentUser?.university_profile?.university_name || "University"} · ${currentUser?.university_profile?.department || "Department"} · ${currentUser?.university_profile?.level || 200} Level`
-    : "Add your institution and course to access university materials.";
-  const subjectHighlights = SUBJECTS.map(subject => ({ ...subject, ...subjectStats(subject.id) }))
-    .filter(subject => subject.count > 0)
-    .sort((a, b) => b.count - a.count)
-    .slice(0, 4);
-  const subjectPreviewHtml = subjectHighlights.length
-    ? subjectHighlights.map(subject => `<article class="profile-subject-row"><div class="profile-subject-copy"><strong>${escapeHtml(subject.name)}</strong><small>${subject.count} answer${subject.count === 1 ? "" : "s"}</small></div><div class="profile-subject-score"><strong>${subject.accuracy}%</strong><div class="profile-subject-track" role="progressbar" aria-label="${escapeHtml(subject.name)} accuracy" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${subject.accuracy}"><i style="width:${subject.accuracy}%"></i></div></div></article>`).join("")
-    : `<div class="profile-subject-empty"><p>Your subject breakdown will appear after your first answers.</p><button class="button outline small" type="button" data-route="practice">Start a practice session</button></div>`;
+  const universityProfile = currentUser?.university_profile || {};
+  const aspirantProfile = currentUser?.aspirant_profile || {};
+  const activeManageId = activeMode === "university" ? "profile-manage-university" : "profile-manage-aspirant";
+  const activePortalTitle = activeMode === "university" ? "University Student" : "Exam Aspirant";
+  const activePortalSummary = activeMode === "university"
+    ? (universityRegistered
+      ? `${universityProfile.university_name || "University"} · ${universityProfile.department || "Department"} · ${universityProfile.level || 200} Level`
+      : "Add your institution and course to personalize your study space.")
+    : (aspirantRegistered
+      ? `${String(aspirantProfile.exam_type || "JAMB").replaceAll("_", " ").toUpperCase()} ${aspirantProfile.target_year || ""}`.trim()
+      : "Add your target examination to personalize your study space.");
+  const academicFields = activeMode === "university"
+    ? [
+      ["University", universityProfile.university_name || "Not added yet"],
+      ["Department", universityProfile.department || "Not added yet"],
+      ["Academic level", universityProfile.level ? `${universityProfile.level} Level` : "Not added yet"],
+    ]
+    : [
+      ["Target examination", String(aspirantProfile.exam_type || "JAMB").replaceAll("_", " ").toUpperCase()],
+      ["Target year", aspirantProfile.target_year || "Not added yet"],
+      ["Preferred subjects", Array.isArray(aspirantProfile.preferred_subjects) && aspirantProfile.preferred_subjects.length ? aspirantProfile.preferred_subjects.length : "Not selected"],
+    ];
+  const academicFieldsHtml = academicFields.map(([label, value]) => `<div><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`).join("");
+  const portalCard = (mode, registered) => {
+    const isUniversity = mode === "university";
+    const isActive = activeMode === mode;
+    const title = isUniversity ? "University student" : "Exam aspirant";
+    const summary = isUniversity
+      ? (registered ? `${universityProfile.university_name || "University"} · ${universityProfile.department || "Department"} · ${universityProfile.level || 200} Level` : "Set your institution, department and academic level.")
+      : (registered ? `${String(aspirantProfile.exam_type || "JAMB").replaceAll("_", " ").toUpperCase()} ${aspirantProfile.target_year || ""}`.trim() : "Choose your target exam, year and preferred subjects.");
+    const status = isActive ? "Active portal" : registered ? "Ready to switch" : "Setup required";
+    const action = isActive
+      ? registered
+        ? `<span class="profile-portal-current" aria-current="page">You’re here</span>`
+        : `<button type="button" class="button outline small" data-portal-setup="${mode}">Complete setup</button>`
+      : registered
+        ? `<button type="button" class="button outline small" data-portal-switch="${mode}">Switch portal <span aria-hidden="true">→</span></button>`
+        : `<button type="button" class="button outline small" data-portal-setup="${mode}">Set up this portal <span aria-hidden="true">→</span></button>`;
+    const icon = isUniversity
+      ? `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 4v2H2V7l10-4Z"/><path d="M4 11v7m4-7v7m8-7v7m4-7v7M2 21h20M3 18h18"/></svg>`
+      : `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10 12 5l9 5-9 5-9-5Z"/><path d="M6 12v5c3.5 3 8.5 3 12 0v-5M4 10v6"/></svg>`;
+    return `<article class="profile-portal-option ${isActive ? "is-active" : ""} ${registered ? "is-ready" : "is-incomplete"}"><div class="profile-portal-option-top"><span class="profile-portal-icon">${icon}</span><span class="profile-portal-state ${isActive ? "active" : registered ? "ready" : "pending"}"><i aria-hidden="true"></i>${status}</span></div><h3>${title}</h3><p>${escapeHtml(summary)}</p><div class="profile-portal-option-action">${action}</div></article>`;
+  };
+  const security = currentUser?.account_security || {};
+  const emailVerified = Boolean(security.email_verified);
+  const verificationMarkup = emailVerified
+    ? `<span class="profile-status-pill verified"><i aria-hidden="true"></i>Email verified</span>`
+    : security.enabled
+      ? `<button type="button" class="button outline small" data-verify-account>Verify email</button>`
+      : `<span class="profile-status-pill pending"><i aria-hidden="true"></i>Not verified</span>`;
   const content = `
-    <section class='page profile-page'>
-      <header class='profile-hero'>
+    <section class='page profile-page profile-design'>
+      <header class='profile-design-heading'>
+        <p class='eyebrow'>Your account</p>
+        <h1>My Profile</h1>
+        <p class='lede'>Manage your identity, academic details, and account preferences.</p>
+      </header>
+
+      <section class='profile-identity-card' aria-label='Student identity'>
         <button type='button' class='profile-avatar-wrap' id='profile-avatar-trigger' aria-label='Change profile picture' title='Change profile picture'>
           ${renderAvatarMarkup(profile.avatar, 86)}
           <span class='profile-avatar-edit-badge' aria-hidden='true'><svg viewBox='0 0 24 24' width='14' height='14' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 20h9'/><path d='M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-4 1 1-4z'/></svg></span>
         </button>
-        <div class='profile-identity'>
-          <p class='eyebrow'>Student profile</p>
-          <h1>${escapeHtml(displayName)}</h1>
-          <p class='profile-member-meta'>${escapeHtml(displayEmail)}${displayEmail ? ' · ' : ''}Member since ${joined}</p>
-          ${currentUser?.account_security?.email_change_available ? '<button type="button" class="profile-text-link" id="change-account-email">Change email <span aria-hidden="true">↗</span></button>' : ''}
-          <div class='profile-id-row'><span>Student ID</span><strong>${profileIdLabel}</strong>${profileIdCopyButton}</div>
+        <div class='profile-identity-copy'>
+          <h2>${escapeHtml(displayName)}</h2>
+          <p class='profile-identity-email'>${escapeHtml(displayEmail)}</p>
+          <p class='profile-identity-academic'>${escapeHtml(activePortalSummary)}</p>
+          <p class='profile-identity-member'>Member since ${escapeHtml(joined)}</p>
         </div>
-        <button class='button outline profile-sync-btn' id='refresh-account' type='button'>
-          <svg viewBox='0 0 24 24' width='16' height='16' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M20 7v5h-5'/><path d='M4 17v-5h5'/><path d='M5.6 9a7 7 0 0 1 11.6-2L20 12M4 12l2.8 5a7 7 0 0 0 11.6-2'/></svg>
-          <span>Sync now</span>
-        </button>
-      </header>
-
-      <section class='profile-summary-grid' aria-label='Study summary'>
-        <article class='profile-level-card'>
-          <div class='profile-level-heading'><div><p class='eyebrow'>Learning level</p><h2>Level ${xp.level}</h2></div><strong>${xp.xp}<small> XP</small></strong></div>
-          <div class='profile-level-track' role='progressbar' aria-label='Progress to level ${xp.level + 1}' aria-valuemin='0' aria-valuemax='250' aria-valuenow='${xp.levelProgress}'><i style='width:${xp.percent}%'></i></div>
-          <p>${xp.remaining} XP to Level ${xp.level + 1}</p>
-        </article>
-        <div class='profile-stat-grid' aria-label='Progress statistics'>
-          <article><strong>${testStats.tests_taken}</strong><span>Tests taken</span></article>
-          <article><strong>${testStats.average_score}%</strong><span>Average test score</span></article>
-          <article class='profile-current-streak'><strong>${profile.rhythm || 0}<small> days</small></strong><span>Current streak</span></article>
-          <article><strong>${profile.bestRhythm || 0}<small> days</small></strong><span>Best streak</span></article>
-        </div>
+        <button type='button' class='button profile-edit-button' id='profile-edit-current'>Edit Profile</button>
       </section>
 
-      <section class='profile-content-section profile-subject-section'>
-        <div class='profile-section-heading'><div><p class='eyebrow'>Subject activity</p><h2>Your study focus</h2><p>Most-practised subjects, with accuracy from your recorded answers.</p></div><button class='button outline small' type='button' data-route='progress'>Full analysis <span aria-hidden='true'>→</span></button></div>
-        <div class='profile-subject-list'>${subjectPreviewHtml}</div>
-      </section>
-
-      ${renderAchievementSummary()}
-
-      <section class='profile-content-section profile-community-section'>
-        <div class='profile-section-heading'><div><p class='eyebrow'>Community</p><h2>Your study circle</h2></div><button class='profile-text-link' type='button' data-route='buddies'>Open community <span aria-hidden='true'>→</span></button></div>
-        <div class='profile-social-strip'>
+      <section class='profile-design-panel profile-community-panel'>
+        <div class='profile-design-section-heading'><div><h2>Community &amp; Connections</h2><p>Connect with other learners and build your study community.</p></div></div>
+        <div class='profile-social-strip' aria-label='Community connections'>
           <button type='button' class='profile-social-btn' data-goto-buddies='followers'><strong>${communityCounts.followers || 0}</strong><span>Followers</span></button>
           <button type='button' class='profile-social-btn' data-goto-buddies='following'><strong>${communityCounts.following || 0}</strong><span>Following</span></button>
           <button type='button' class='profile-social-btn' data-goto-buddies='buddies'><strong>${communityCounts.buddies || 0}</strong><span>Study buddies</span></button>
         </div>
+        <div class='profile-community-footer'><p>Find learners and grow your study circle.</p><button type='button' class='button' data-route='buddies'>View Community <span aria-hidden='true'>→</span></button></div>
       </section>
 
-      <section class='profile-content-section profile-portals-section'>
-        <div class='profile-section-heading'><div><p class='eyebrow'>Study setup</p><h2>Your academic portals</h2><p>Manage the course and exam details used to shape your materials.</p></div></div>
-        <div class='profile-portal-list'>
-          <article class='profile-portal-card'>
-            <div class='profile-portal-mark anatomy' aria-hidden='true'><svg viewBox='0 0 24 24' width='19' height='19' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M22 10v6L12 21 2 16v-6l10-5z'/><path d='M2 10l10 5 10-5M12 15v6'/></svg></div>
-            <div class='profile-portal-copy'><p class='eyebrow'>Exam preparation</p><h3>Aspirants portal</h3><p>${escapeHtml(aspirantPortalSummary)}</p></div>
-            <button class='button ${aspirantRegistered ? 'outline' : 'accent'} small' id='profile-manage-aspirant' type='button'>${aspirantRegistered ? 'Update details' : 'Set up portal'}</button>
-          </article>
-          <article class='profile-portal-card'>
-            <div class='profile-portal-mark physiology' aria-hidden='true'><svg viewBox='0 0 24 24' width='19' height='19' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M3 21h18M4 18h16M4 10h16M12 3 2 8h20z'/><path d='M6 10v8M10 10v8M14 10v8M18 10v8'/></svg></div>
-            <div class='profile-portal-copy'><p class='eyebrow'>Undergraduate study</p><h3>University portal</h3><p>${escapeHtml(universityPortalSummary)}</p></div>
-            <button class='button ${universityRegistered ? 'outline' : 'accent'} small' id='profile-manage-university' type='button'>${universityRegistered ? 'Update details' : 'Set up portal'}</button>
-          </article>
+      <section class='profile-id-card' aria-label='Student ID'>
+        <div><span>Student ID</span><strong>${profileIdLabel}</strong></div>
+        ${profileIdCopyButton || '<span class="profile-id-unavailable">Your ID will appear here when your account is connected.</span>'}
+      </section>
+
+      <section class='profile-level-card' aria-label='Learning level and XP'>
+        <div class='profile-level-main'><div class='profile-level-mark' aria-hidden='true'>${xp.level}</div><div class='profile-level-copy'><span>Learning level</span><h2>Level ${xp.level}</h2><p>${xp.remaining} XP to Level ${xp.level + 1}</p></div><strong class='profile-total-xp'>${xp.xp.toLocaleString()}<small> XP earned</small></strong></div>
+        <div class='profile-level-track' role='progressbar' aria-label='Progress to Level ${xp.level + 1}' aria-valuemin='0' aria-valuemax='250' aria-valuenow='${xp.levelProgress}'><i style='width:${xp.percent}%'></i></div>
+        <div class='profile-level-foot'><span>${xp.levelProgress} / 250 XP toward your next level</span><span>Keep practising to move up</span></div>
+      </section>
+
+      <section class='profile-design-panel profile-academic-panel'>
+        <div class='profile-design-section-heading'><div><h2>Academic Profile</h2><p>These details help tailor your study space.</p></div><span class='profile-portal-badge'>${activePortalTitle}</span></div>
+        <div class='profile-academic-fields'>${academicFieldsHtml}</div>
+        <div class='profile-academic-actions'><button type='button' class='button outline' id='${activeManageId}'>${activeMode === 'university' ? universityRegistered ? 'Update details' : 'Add academic details' : aspirantRegistered ? 'Update details' : 'Add exam details'}</button></div>
+      </section>
+
+      <section class='profile-design-panel profile-portals-panel'>
+        <div class='profile-design-section-heading'><div><h2>Your learning portals</h2><p>Set up both paths under this account, then switch whenever your goals change. Your progress stays with you.</p></div></div>
+        <div class='profile-portals-grid'>${portalCard("aspirant", aspirantRegistered)}${portalCard("university", universityRegistered)}</div>
+      </section>
+
+      ${renderAchievementSummary()}
+
+      <section class='profile-design-panel profile-account-panel'>
+        <div class='profile-design-section-heading'><div><h2>Account &amp; Security</h2><p>Keep your account details current and your learning record safe.</p></div></div>
+        <div class='profile-action-list'>
+          <div class='profile-action-row profile-email-row'>
+            <div><strong>Email address</strong><small>${escapeHtml(displayEmail)}</small></div>
+            <div class='profile-action-controls'>${verificationMarkup}${security.email_change_available ? '<button type="button" class="profile-text-link" id="change-account-email">Change email</button>' : ''}</div>
+          </div>
+          <div class='profile-action-row'>
+            <div><strong>Change password</strong><small>Update the password you use to sign in.</small></div>
+            <button type='button' class='profile-text-link' id='profile-change-password'>Update password <span aria-hidden='true'>→</span></button>
+          </div>
+          <details class='profile-data-details'>
+            <summary><span><strong>Backup &amp; device data</strong><small>Manage your offline copy and saved backup.</small></span><span class='profile-detail-action'>Manage data <i aria-hidden='true'></i></span></summary>
+            <div class='profile-data-details-body'>
+              <p>Your account is securely stored online. This device also keeps an offline copy and syncs queued answers when your connection returns.</p>
+              <div class='profile-data-actions'><button type='button' class='button outline small' id='export-data'>Export backup</button><label class='button outline small' for='import-data'>Restore backup</label><input class='file-input' id='import-data' type='file' accept='application/json'><button type='button' class='button outline small' id='clear-cache'>Refresh device cache</button><button type='button' class='button outline small' id='refresh-account'>Sync now</button></div>
+              <small class='profile-data-note'>You can export or restore a copy of your learning data at any time.</small>
+            </div>
+          </details>
+          <div class='profile-action-row profile-signout-row'><div><strong>Sign out</strong><small>Sign out of your account on this device.</small></div><button type='button' class='profile-text-link danger-link' id='sign-out'>Sign out</button></div>
         </div>
       </section>
 
-      <section class="profile-feedback-invite"><div><p class="eyebrow">Help shape Seomtorch</p><h2>We’d like your honest take.</h2><p>A small frustration, a missing feature, or something that helped—tell our team privately.</p></div><button type="button" class="button outline" data-open-feedback>Share feedback <span aria-hidden="true">→</span></button></section>
-      <details class='settings-panel profile-disclosure profile-account'>
-        <summary class='profile-disclosure-summary'><span><strong>Account &amp; privacy</strong><small>Backups, device data and sign-in</small></span><span class='profile-disclosure-mark' aria-hidden='true'></span></summary>
-        <div class='profile-disclosure-body'><p class='lede'>Your account record is kept on the server. This device also stores an offline copy and retries queued answers when the connection returns.</p><div class='button-row'><button class='button' id='export-data' type='button'>Export backup</button><label class='button outline' for='import-data'>Import backup</label><input class='file-input' id='import-data' type='file' accept='application/json'><button class='button outline' id='clear-cache' type='button'>Refresh device cache</button><button class='button danger' id='sign-out' type='button'>Sign out</button></div></div>
-      </details>
-
-      <details class='settings-panel guide-section profile-disclosure profile-help' ${faqDetailsOpen}>
-        <summary class='profile-disclosure-summary'><span><strong>Help and frequently asked questions</strong><small>Search quick guidance for practice, progress and your account</small></span><span class='profile-disclosure-mark' aria-hidden='true'></span></summary>
-        <div class='profile-disclosure-body'><div class='profile-help-intro'><p class='eyebrow'>Help center</p><h2>Answers, without the noise.</h2><p class='lede'>Find quick guidance about practice, progress and account data.</p></div><div class='search-wrap'><svg viewBox='0 0 24 24' aria-hidden='true'><circle cx='11' cy='11' r='7'/><path d='m16 16 5 5'/></svg><input type='search' id='faq-search' value='${escapeHtml(filter)}' placeholder='Search help topics' aria-label='Search help topics'></div><div id='faq-results'>${faqResultsHtml}</div></div>
-      </details>
+      <section class='profile-design-panel profile-help-panel'>
+        <div class='profile-design-section-heading'><div><h2>Help &amp; Support</h2><p>Find an answer or tell us how we can improve your learning experience.</p></div></div>
+        <div class='profile-action-list'>
+          <details class='profile-help-details profile-disclosure' ${faqDetailsOpen}>
+            <summary><span><strong>Help Center</strong><small>Answers to common questions about Seomtorch.</small></span><span class='profile-detail-action'>Browse FAQs <i aria-hidden='true'></i></span></summary>
+            <div class='profile-disclosure-body'><div class='search-wrap'><svg viewBox='0 0 24 24' aria-hidden='true'><circle cx='11' cy='11' r='7'/><path d='m16 16 5 5'/></svg><input type='search' id='faq-search' value='${escapeHtml(filter)}' placeholder='Search help topics' aria-label='Search help topics'></div><div id='faq-results'>${faqResultsHtml}</div></div>
+          </details>
+          <div class='profile-action-row'><div><strong>Send feedback</strong><small>Share a suggestion or report an issue privately.</small></div><button type='button' class='profile-text-link' data-open-feedback>Share your thoughts <span aria-hidden='true'>→</span></button></div>
+          <div class='profile-action-row'><div><strong>Install Seomtorch</strong><small>Keep your study space close on this device.</small></div>${isStandalone() ? '<span class="profile-status-pill verified"><i aria-hidden="true"></i>Installed</span>' : '<button type="button" class="profile-text-link" data-install-app>Install app <span aria-hidden="true">→</span></button>'}</div>
+        </div>
+      </section>
     </section>
   `;
   app.innerHTML = shell(content);
@@ -2833,6 +3017,12 @@ function renderProfile(filter = "") {
   document.querySelector("#profile-manage-university")?.addEventListener("click", () => {
     showUniversityRegistrationModal(() => renderProfile(filter));
   });
+  document.querySelectorAll("[data-portal-setup]").forEach(button => button.addEventListener("click", () => {
+    const target = button.dataset.portalSetup;
+    if (target === "university") showUniversityRegistrationModal(() => renderProfile(filter), { activateOnSave: false });
+    else showAspirantRegistrationModal(() => renderProfile(filter), { activateOnSave: false });
+  }));
+  document.querySelectorAll("[data-portal-switch]").forEach(button => button.addEventListener("click", () => handleModeSwitch(button.dataset.portalSwitch)));
   if (!achievementsData) loadAchievements(filter);
 }
 
@@ -4020,6 +4210,11 @@ async function loadAchievements(filter = "") {
 
 function bindProfile() {
   document.querySelector("#change-account-email")?.addEventListener("click", () => { pendingEmailChange = null; route = "change-email"; render(); });
+  document.querySelector("#profile-edit-current")?.addEventListener("click", () => {
+    if (getActiveMode() === "university") showUniversityRegistrationModal(() => renderProfile());
+    else showAspirantRegistrationModal(() => renderProfile());
+  });
+  document.querySelector("#profile-change-password")?.addEventListener("click", () => navigate("change-password"));
   document.querySelectorAll("[data-goto-buddies]").forEach(btn => {
     btn.addEventListener("click", () => {
       communityActiveTab = btn.dataset.gotoBuddies || "buddies";
@@ -4029,7 +4224,7 @@ function bindProfile() {
   });
   document.querySelectorAll(".faq-question").forEach(button => button.addEventListener("click", () => { const item = button.closest(".faq-item"); item.classList.toggle("open"); button.setAttribute("aria-expanded", item.classList.contains("open")); }));
   let timer;
-  document.querySelector("#faq-search").addEventListener("input", event => {
+  document.querySelector("#faq-search")?.addEventListener("input", event => {
     const value = event.currentTarget.value;
     const cursor = event.currentTarget.selectionStart ?? value.length;
     clearTimeout(timer);
@@ -4040,9 +4235,9 @@ function bindProfile() {
       nextSearch?.setSelectionRange(cursor, cursor);
     }, 180);
   });
-  document.querySelector("#export-data").addEventListener("click", exportData);
-  document.querySelector("#import-data").addEventListener("change", event => importData(event.target.files[0]));
-  document.querySelector("#refresh-account").addEventListener("click", async (event) => {
+  document.querySelector("#export-data")?.addEventListener("click", exportData);
+  document.querySelector("#import-data")?.addEventListener("change", event => importData(event.target.files[0]));
+  document.querySelector("#refresh-account")?.addEventListener("click", async (event) => {
     const button = event.currentTarget;
     const label = button.querySelector("span");
     button.disabled = true;
@@ -4070,18 +4265,9 @@ function bindProfile() {
       showToast(`Student ID: ${id}`);
     }
   });
-  document.querySelector("#clear-cache").addEventListener("click", refreshDeviceCache);
-  document.querySelector("#sign-out").addEventListener("click", signOut);
+  document.querySelector("#clear-cache")?.addEventListener("click", refreshDeviceCache);
+  document.querySelector("#sign-out")?.addEventListener("click", signOut);
   document.querySelector("#open-achievements")?.addEventListener("click", () => navigate("achievements"));
-  const accountActions = document.querySelector(".settings-panel .button-row");
-  if (accountActions) {
-    const changePassword = document.createElement("button");
-    changePassword.className = "button outline";
-    changePassword.type = "button";
-    changePassword.textContent = "Change password";
-    changePassword.addEventListener("click", () => navigate("change-password"));
-    accountActions.prepend(changePassword);
-  }
 }
 
 function renderPasswordChange(required = false) {
@@ -4213,13 +4399,8 @@ function renderAuth() {
   if (authPortal) {
     const context = document.createElement("p");
     context.className = "auth-portal-context";
-    const otherPortal = authPortal === "university" ? "aspirant" : "university";
-    context.innerHTML = `${authPortal === "university" ? "University student access" : "Exam aspirant access"}<span>${register ? "This account will be created for this learning path." : "Use your existing account for this learning path."}</span><a href="/register" data-other-portal="${otherPortal}">Need the other learning path? Create a separate account</a>`;
+    context.innerHTML = `${authPortal === "university" ? "University student access" : "Exam aspirant access"}<span>${register ? "This is your primary portal. You can add the other one later from your Profile." : "Sign in to the account linked to this learning path. You can switch portals from your Profile."}</span>`;
     app.querySelector(".auth-tabs")?.before(context);
-    context.querySelector("[data-other-portal]")?.addEventListener("click", event => {
-      event.preventDefault();
-      openPublicAuth("register", otherPortal);
-    });
   }
   if (!authPortal && !register) {
     const portalField = document.createElement("div");
@@ -4417,10 +4598,10 @@ async function signOut() {
 
 function getDeptIconSvg(deptId) {
   if (deptId === "anatomy") {
-    return `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20M7 7l10 10M17 7L7 17"/></svg>`;
+    return `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="1"/><path d="m9 20 3-6 3 6M6 8l6 2 6-2M12 10v4"/></svg>`;
   }
   if (deptId === "physiology") {
-    return `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`;
+    return `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`;
   }
   return `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-0-5.5H20"/></svg>`;
 }
@@ -4487,10 +4668,10 @@ async function renderUniDepartments() {
     return;
   }
   uniDepartments = data.departments;
-  const cards = data.departments.map(dept => `<button class="uni-dept-card" data-uni-dept="${dept.id}" style="--dept-color:${dept.color};--dept-accent:${dept.accentColor}"><span class="uni-dept-icon">${getDeptIconSvg(dept.id)}</span><div class="uni-dept-info"><h3>${escapeHtml(dept.name)}</h3><span class="uni-dept-faculty">${escapeHtml(dept.faculty)}</span><p>${escapeHtml(dept.tagline)}</p></div><span class="uni-dept-levels">${dept.levels.length} level${dept.levels.length > 1 ? "s" : ""} available</span><span class="row-arrow" aria-hidden="true">→</span></button>`).join("");
+  const cards = data.departments.map(dept => `<button class="uni-dept-card" data-uni-dept="${dept.id}" style="--dept-color:${dept.color};--dept-accent:${dept.accentColor}"><span class="uni-dept-icon">${getDeptIconSvg(dept.id)}</span><div class="uni-dept-info"><h3>${escapeHtml(dept.name)}</h3><p>${escapeHtml(dept.tagline)}</p></div><span class="uni-dept-levels">${dept.levels.length} level${dept.levels.length > 1 ? "s" : ""} available</span><span class="row-arrow" aria-hidden="true">→</span></button>`).join("");
 
   const breadcrumbs = [{ label: "University" }];
-  app.innerHTML = uniShell(`<p class="uni-subtitle">Select a department to begin studying.</p><div class="uni-dept-list">${cards}</div>`, breadcrumbs);
+  app.innerHTML = uniShell(`<header class="uni-catalog-heading"><p class="uni-catalog-kicker">Your course library</p><h1>Explore your departments.</h1><p>Choose a study area to browse available levels, courses, materials, and practice.</p></header><div class="uni-dept-list">${cards}</div>`, breadcrumbs);
   bindShell();
   document.querySelectorAll("[data-uni-dept]").forEach(button => {
     button.addEventListener("click", () => {
@@ -4556,7 +4737,7 @@ async function renderUniCourses() {
     { label: `${uniLevel} Level` }
   ];
 
-  app.innerHTML = uniShell(`<div class="uni-course-list">${courseCards}</div>`, breadcrumbs);
+  app.innerHTML = uniShell(`<header class="uni-catalog-heading uni-catalog-heading-compact"><p class="uni-catalog-kicker">${escapeHtml(dept.name)} · ${uniLevel} level</p><h1>Course catalog</h1><p>Choose a course to open its materials, topic notes, and practice questions.</p></header><div class="uni-course-list">${courseCards}</div>`, breadcrumbs);
   bindShell(); bindUniCrumbs(breadcrumbs);
 
   document.querySelectorAll("[data-uni-course]").forEach(button => {

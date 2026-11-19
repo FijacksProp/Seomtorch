@@ -13,7 +13,7 @@ from rest_framework.views import APIView
 from monetization.models import CourseAccess
 
 from .badges import achievements_payload, evaluate_badges, mark_badges_seen
-from .analytics import user_test_analytics
+from .analytics import user_test_analytics, weekly_practice_accuracy
 from .access import (
     accessible_university_question_ids,
     user_can_access_question,
@@ -580,7 +580,7 @@ class ProgressView(APIView):
         topic_rows = attempts.values("question__topic__subject__slug", "question__topic__name").annotate(total=Count("id"), correct=Count("id", filter=Q(is_correct=True))).order_by("question__topic__subject__slug", "question__topic__name")
         def rows(values, subject_key, name_key):
             return [{"subject": row[subject_key], "name": row[name_key], "total": row["total"], "correct": row["correct"], "accuracy": round(row["correct"] / row["total"] * 100)} for row in values]
-        return Response({"stats": stats_payload(request.user), "tests": user_test_analytics(request.user, include_recent=True), "subjects": rows(subject_rows, "question__topic__subject__slug", "question__topic__subject__name"), "topics": rows(topic_rows, "question__topic__subject__slug", "question__topic__name")})
+        return Response({"stats": stats_payload(request.user), "tests": user_test_analytics(request.user, include_recent=True), "weekly_accuracy": weekly_practice_accuracy(request.user), "subjects": rows(subject_rows, "question__topic__subject__slug", "question__topic__subject__name"), "topics": rows(topic_rows, "question__topic__subject__slug", "question__topic__name")})
 
 class BookmarkView(APIView):
     def get(self, request): return Response(BookmarkSerializer(request.user.bookmarks.select_related("question").order_by("-created_at"), many=True).data)

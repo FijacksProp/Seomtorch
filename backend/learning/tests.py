@@ -1,5 +1,5 @@
 import uuid
-from datetime import timedelta
+from datetime import datetime, timedelta
 from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
@@ -417,6 +417,47 @@ class LearningApiTests(APITestCase):
         self.assertEqual(response.data["tests"]["best_score"], 80)
         self.assertEqual(len(response.data["tests"]["recent_tests"]), 2)
         self.assertEqual(response.data["stats"]["tests"]["tests_taken"], 2)
+
+    def test_progress_includes_eight_week_accuracy_series_with_answer_counts(self):
+        questions = list(Question.objects.filter(topic__subject__slug="english")[:6])
+        now = timezone.now()
+        today = timezone.localtime(now).date()
+        current_week = today - timedelta(days=today.weekday())
+        previous_week = current_week - timedelta(weeks=1)
+        older_week = current_week - timedelta(weeks=8)
+        previous_week_at = timezone.make_aware(
+            datetime.combine(previous_week, datetime.min.time()) + timedelta(hours=12)
+        )
+        older_week_at = timezone.make_aware(
+            datetime.combine(older_week, datetime.min.time()) + timedelta(hours=12)
+        )
+        schedule = [
+            (questions[0], now - timedelta(minutes=1), True),
+            (questions[1], now - timedelta(minutes=1), True),
+            (questions[2], now - timedelta(minutes=1), False),
+            (questions[3], previous_week_at, True),
+            (questions[4], previous_week_at, False),
+            (questions[5], older_week_at, True),
+        ]
+        for question, answered_at, is_correct in schedule:
+            Attempt.objects.create(
+                user=self.user,
+                question=question,
+                client_id=uuid.uuid4(),
+                selected_index=question.correct_index if is_correct else (question.correct_index + 1) % len(question.options),
+                is_correct=is_correct,
+                answered_at=answered_at,
+            )
+
+        response = self.client.get("/api/progress/")
+        self.assertEqual(response.status_code, 200)
+        series = response.data["weekly_accuracy"]
+        self.assertEqual(len(series), 8)
+        self.assertEqual(series[-1]["week_start"], current_week.isoformat())
+        self.assertEqual((series[-1]["answered"], series[-1]["correct"], series[-1]["accuracy"]), (3, 2, 67))
+        self.assertEqual(series[-2]["week_start"], previous_week.isoformat())
+        self.assertEqual((series[-2]["answered"], series[-2]["correct"], series[-2]["accuracy"]), (2, 1, 50))
+        self.assertEqual((series[0]["answered"], series[0]["accuracy"]), (0, None))
 
     def test_five_completed_tests_award_test_milestone_badge(self):
         for _ in range(5):

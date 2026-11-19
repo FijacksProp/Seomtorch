@@ -1,7 +1,9 @@
 from collections import defaultdict
+from datetime import datetime, timedelta
 from statistics import mean
 
 from django.db.models import Count, Q
+from django.db.models.functions import TruncWeek
 from django.utils import timezone
 
 from .models import ChallengeParticipant, PracticeSession
@@ -98,3 +100,43 @@ def session_analytics(queryset, include_recent=False):
 
 def user_test_analytics(user, include_recent=False):
     return session_analytics(user.practice_sessions.all(), include_recent=include_recent)
+
+
+def weekly_practice_accuracy(user, weeks=8):
+    """Return a fixed, oldest-to-newest series of weekly answer accuracy."""
+    now = timezone.now()
+    local_today = timezone.localtime(now).date()
+    current_week = local_today - timedelta(days=local_today.weekday())
+    first_week = current_week - timedelta(weeks=weeks - 1)
+    start_at = timezone.make_aware(datetime.combine(first_week, datetime.min.time()))
+
+    grouped = (
+        user.attempts.filter(answered_at__gte=start_at, answered_at__lte=now)
+        .annotate(week=TruncWeek("answered_at", tzinfo=timezone.get_current_timezone()))
+        .values("week")
+        .annotate(
+            answered=Count("id"),
+            correct=Count("id", filter=Q(is_correct=True)),
+        )
+        .order_by("week")
+    )
+    by_week = {}
+    for row in grouped:
+        week_value = row["week"]
+        if timezone.is_aware(week_value):
+            week_value = timezone.localtime(week_value)
+        by_week[week_value.date()] = row
+
+    series = []
+    for offset in range(weeks):
+        week_start = first_week + timedelta(weeks=offset)
+        row = by_week.get(week_start)
+        answered = row["answered"] if row else 0
+        correct = row["correct"] if row else 0
+        series.append({
+            "week_start": week_start.isoformat(),
+            "answered": answered,
+            "correct": correct,
+            "accuracy": round(correct / answered * 100) if answered else None,
+        })
+    return series
