@@ -120,6 +120,8 @@ let bookmarks = [];
 let completedTests = [];
 let progressDataLoading = false;
 let route = "home";
+let lastRenderedViewKey = "";
+let pageTransitionPending = false;
 let selectedSubject = null;
 let selectedQuestionCount = 10;
 let selectedStudyMinutes = 10;
@@ -1159,6 +1161,8 @@ function shell(content) {
   const xp = xpState();
   const testStats = profile.tests || { tests_taken: 0, average_score: 0 };
   const mode = getActiveMode();
+  const transitionClass = pageTransitionPending ? "page-transition-enter" : "";
+  pageTransitionPending = false;
   const nav = mode === "university"
     ? [["home", "Home"], ["university", "Courses"], ["buddies", "Buddies"], ["progress", "Insights"], ["profile", "Profile"]]
     : [["home", "Home"], ["practice", "Practice"], ["challenges", "Challenge"], ["buddies", "Buddies"], ["progress", "Insights"], ["profile", "Profile"]];
@@ -1212,7 +1216,7 @@ function shell(content) {
             <i></i>${pendingSyncCount > 0 ? `<small>${pendingSyncCount}</small>` : ''}
           </span>
           <div class="topbar-pills">
-            <div class="top-badge-pill" title="Tests completed">
+            <div class="top-badge-pill top-tests-pill" title="Tests completed">
               <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
               <span>${testStats.tests_taken || 0} tests</span>
             </div>
@@ -1249,7 +1253,7 @@ function shell(content) {
           </div>
         </div>
       </div>
-      <main id="main">${route !== "session" && eligibleForUniversityOffer(universityOfferOptions()) ? '<div class="course-access-note"><span><i aria-hidden="true"></i>University course access</span><button type="button" data-view-course-plans>View semester pass <span aria-hidden="true">→</span></button></div>' : ""}${route !== "session" && route !== "profile" ? securityNotice(currentUser?.account_security) : ""}${content}</main>
+      <main id="main" class="${transitionClass}">${route !== "session" && eligibleForUniversityOffer(universityOfferOptions()) ? '<div class="course-access-note"><span><i aria-hidden="true"></i>University course access</span><button type="button" data-view-course-plans>View semester pass <span aria-hidden="true">→</span></button></div>' : ""}${route !== "session" && route !== "profile" ? securityNotice(currentUser?.account_security) : ""}${content}</main>
     </div>
   </div>${!isStandalone() && route !== "session" && route !== "profile" ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ""}`;
 }
@@ -2894,18 +2898,17 @@ function renderProfile(filter = "") {
     const summary = isUniversity
       ? (registered ? `${universityProfile.university_name || "University"} · ${universityProfile.department || "Department"} · ${universityProfile.level || 200} Level` : "Set your institution, department and academic level.")
       : (registered ? `${String(aspirantProfile.exam_type || "JAMB").replaceAll("_", " ").toUpperCase()} ${aspirantProfile.target_year || ""}`.trim() : "Choose your target exam, year and preferred subjects.");
-    const status = isActive ? "Active portal" : registered ? "Ready to switch" : "Setup required";
     const action = isActive
       ? registered
-        ? `<span class="profile-portal-current" aria-current="page">You’re here</span>`
+        ? ""
         : `<button type="button" class="button outline small" data-portal-setup="${mode}">Complete setup</button>`
       : registered
-        ? `<button type="button" class="button outline small" data-portal-switch="${mode}">Switch portal <span aria-hidden="true">→</span></button>`
-        : `<button type="button" class="button outline small" data-portal-setup="${mode}">Set up this portal <span aria-hidden="true">→</span></button>`;
+        ? `<button type="button" class="button outline small" data-portal-switch="${mode}">Switch to ${isUniversity ? "University" : "Aspirant"}</button>`
+        : `<button type="button" class="button outline small" data-portal-setup="${mode}">Set up ${isUniversity ? "University" : "Aspirant"} details</button>`;
     const icon = isUniversity
       ? `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 4v2H2V7l10-4Z"/><path d="M4 11v7m4-7v7m8-7v7m4-7v7M2 21h20M3 18h18"/></svg>`
       : `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10 12 5l9 5-9 5-9-5Z"/><path d="M6 12v5c3.5 3 8.5 3 12 0v-5M4 10v6"/></svg>`;
-    return `<article class="profile-portal-option ${isActive ? "is-active" : ""} ${registered ? "is-ready" : "is-incomplete"}"><div class="profile-portal-option-top"><span class="profile-portal-icon">${icon}</span><span class="profile-portal-state ${isActive ? "active" : registered ? "ready" : "pending"}"><i aria-hidden="true"></i>${status}</span></div><h3>${title}</h3><p>${escapeHtml(summary)}</p><div class="profile-portal-option-action">${action}</div></article>`;
+    return `<article class="profile-portal-option ${isActive ? "is-active" : ""} ${registered ? "is-ready" : "is-incomplete"}"><div class="profile-portal-option-top"><span class="profile-portal-icon">${icon}</span></div><h3>${title}</h3><p>${escapeHtml(summary)}</p>${action ? `<div class="profile-portal-option-action">${action}</div>` : ""}</article>`;
   };
   const security = currentUser?.account_security || {};
   const emailVerified = Boolean(security.email_verified);
@@ -5733,6 +5736,9 @@ function render() {
   // These views update themselves; intentional navigation uses their renderers.
   if (route === "buddies" && communityActiveTab === "messages" && document.querySelector("#buddy-messenger")) return;
   if (route === "challenges" && challengeComposerOpen && document.querySelector("#challenge-form")) return;
+  const viewKey = [getActiveMode(), route, route === "university" ? uniRoute : "", route === "university" ? uniDeptId || "" : "", route === "university" ? uniLevel || "" : "", route === "university" ? uniCourseId || "" : "", route === "university" ? (uniNoteFile?.id || uniNoteFile?.filename || "") : ""].join(":");
+  pageTransitionPending = Boolean(lastRenderedViewKey && lastRenderedViewKey !== viewKey);
+  lastRenderedViewKey = viewKey;
   if (route === "daily-sprint") return renderDailySprint();
   if (route === "home") return renderHome();
   if (route === "practice") return renderPractice();
