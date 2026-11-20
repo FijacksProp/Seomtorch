@@ -28,7 +28,8 @@ test("challenges have a visible entry and one direct action per buddy", () => {
     assert.match(html, /Invitations &amp; challenges/);
     assert.ok(html.indexOf('circle-challenge-callout') < html.indexOf('People in your corner'));
     assert.doesNotMatch(html.match(/<details class="circle-row-menu">[\s\S]*?<\/details>/)?.[0] || '', /data-challenge-buddy/);
-    assert.equal(html.includes('For your university study circle'), university);
+    assert.equal(html.includes('Group practice · university courses'), university);
+    assert.match(html, /Challenge your buddies to a practice session/);
   }
   const empty = communityPage({ ...base, net: { counts: {}, buddies: [] } });
   assert.match(empty, /id="circle-create-challenge"/);

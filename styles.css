@@ -6,11 +6,11 @@
   --ink-secondary: #3d3d3d;
   --muted: #6b7280;
   --muted-light: #9ca3af;
-  --forest: #0C2518;
-  --forest-deep: #091E13;
-  --forest-soft: #ecfdf5;
-  --brand-accent: #2D6A4F;
-  --brand-accent-soft: #d1fae5;
+  --forest: #0B4A2B;
+  --forest-deep: #073820;
+  --forest-soft: #E8F1EA;
+  --brand-accent: #0B5A34;
+  --brand-accent-soft: #E8F1EA;
   --ochre: #d97706;
   --ochre-soft: #fef3c7;
   --brick: #e11d48;
@@ -10649,3 +10649,32 @@ body.shield-active #main {
 @media (prefers-reduced-motion: reduce) {
   #main.page-transition-enter { animation: none; }
 }
+
+/* Seomtorch brand green: keep primary actions and selected navigation on one
+   deep, consistent shade; pale greens remain supporting surfaces only. */
+:root { --forest:#0B4A2B; --forest-deep:#073820; --brand-accent:#0B4A2B; }
+.button:not(.outline):not(.light):not(.danger),
+.button.accent,
+.profile-edit-button,
+.profile-community-footer .button,
+.profile-academic-actions .button,
+.topbar .portal-switch-tab.active {
+  background-color:#0B4A2B;
+  border-color:#0B4A2B;
+}
+.sidebar .nav-button.active,
+.sidebar .mode-pill-btn.active { color:#0B4A2B; background-color:#E8F1EA; border-color:#C9DFCF; }
+.button.accent:hover,
+.button:not(.outline):not(.light):not(.danger):hover { background-color:#073820; border-color:#073820; }
+.profile-design .profile-text-link,
+.profile-design .profile-detail-action,
+.profile-identity-academic,
+.profile-design .profile-copy-id,
+.profile-portal-option-action .button,
+.sidebar .nav-button.active .nav-icon,
+.uni-course-card .row-arrow,
+.uni-course-info h3 { color:#0B4A2B; }
+.profile-design .profile-copy-id,
+.profile-academic-actions .button { border-color:#0B4A2B; }
+.profile-academic-actions .button { color:#fff; background:#0B4A2B; }
+.profile-academic-actions .button:hover { color:#fff; border-color:#073820; background:#073820; }

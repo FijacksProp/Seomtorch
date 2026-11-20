@@ -150,6 +150,81 @@
 }
 @media (prefers-reduced-motion: reduce) { .desk-main-bottom .button:hover { transform: none; } .desk-subject { transition: none; } }
 
+/* Aspirant home keeps its familiar editorial tone, while sharing the university
+   dashboard's quiet canvas, clean cards and Seomtorch green accents. */
+.study-home:not(.study-home-university) {
+  width: 100%;
+  max-width: none;
+  padding: 26px clamp(22px,3.4vw,52px) 58px;
+  background: #f7f8f7;
+}
+.study-home:not(.study-home-university) .desk-heading {
+  margin-bottom: 22px;
+  padding: 24px 27px;
+  border: 1px solid #dce5dd;
+  border-radius: 13px;
+  background: #fff;
+}
+.study-home:not(.study-home-university) .desk-heading h1 { color:#1d3025; }
+.study-home:not(.study-home-university) .desk-kicker { color:#34704d; }
+.study-home:not(.study-home-university) .desk-main { border-color:#176c43; background:#176c43; }
+.study-home:not(.study-home-university) .desk-main-top { border-color:rgba(255,255,255,.2); }
+.study-home:not(.study-home-university) .desk-main-bottom .button { border-color:#fff; background:#fff; color:#176c43; }
+.study-home:not(.study-home-university) .desk-feature { border-color:#dce8dd; background:#eff6f0; }
+.study-home:not(.study-home-university) .desk-feature .desk-kicker,
+.study-home:not(.study-home-university) .desk-status,
+.study-home:not(.study-home-university) .desk-sprint-clock,
+.study-home:not(.study-home-university) .desk-sprint-clock > span { color:#34704d; }
+.study-home:not(.study-home-university) .desk-status { border-color:#cbded0; }
+.study-home:not(.study-home-university) .desk-feature h2 { color:#24392d; }
+.study-home:not(.study-home-university) .desk-feature > p:not(.desk-kicker) { color:#637368; }
+.study-home:not(.study-home-university) .desk-feature-foot { border-color:#d5e3d8; color:#6d7d71; }
+.study-home:not(.study-home-university) .desk-progress,
+.study-home:not(.study-home-university) .desk-library {
+  padding:24px 27px;
+  border:1px solid #dce5dd;
+  border-radius:13px;
+  background:#fff;
+}
+.study-home:not(.study-home-university) .desk-progress { margin-top:22px; }
+.study-home:not(.study-home-university) .desk-library { margin-top:22px; }
+.study-home:not(.study-home-university) .desk-section-heading h2 { color:#26372c; }
+.study-home:not(.study-home-university) .desk-metrics { border-color:#e4ebe5; }
+.study-home:not(.study-home-university) .desk-metrics dd { color:#176c43; }
+.study-home:not(.study-home-university) .desk-subject { border-color:#e8ede8; }
+.study-home:not(.study-home-university) .desk-subjects { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:15px; }
+.study-home:not(.study-home-university) .desk-subject {
+  grid-template-columns:34px minmax(0,1fr) 18px;
+  align-items:start;
+  gap:12px;
+  min-height:126px;
+  padding:16px;
+  border:1px solid #dce5dd;
+  border-radius:11px;
+  background:#fff;
+  transition:border-color .18s ease,background-color .18s ease,transform .18s ease,box-shadow .18s ease;
+}
+.study-home:not(.study-home-university) .desk-subject:hover { border-color:#9ab8a2; background:#f8fbf8; transform:translateY(-2px); box-shadow:0 8px 20px rgba(11,74,43,.07); }
+.study-home:not(.study-home-university) .desk-subject-number { display:grid; width:32px; height:32px; place-items:center; border-radius:8px; color:#fff; background:#0b4a2b; font:600 11px var(--sans); }
+.study-home:not(.study-home-university) .desk-subject-copy strong { color:#0b4a2b; margin:1px 0 5px; font-size:13px; }
+.study-home:not(.study-home-university) .desk-subject-copy > span { line-height:1.55; }
+.study-home:not(.study-home-university) .desk-subject-copy small { margin-top:9px; color:#0b5a34; }
+.study-home:not(.study-home-university) .desk-subject-arrow { align-self:center; color:#0b4a2b; }
+.study-home:not(.study-home-university) .desk-subject-number { color:#7b9a83; }
+.study-home:not(.study-home-university) .desk-subject-copy strong,
+.study-home:not(.study-home-university) .desk-subject-copy small,
+.study-home:not(.study-home-university) .desk-subject-arrow { color:#286345; }
+.study-home:not(.study-home-university) .desk-shortcuts > button { border-color:#b8d0be; }
+.study-home:not(.study-home-university) .desk-shortcuts strong { color:#244d35; }
+@media (max-width:760px) {
+  .study-home:not(.study-home-university) { padding:18px 15px 38px; }
+  .study-home:not(.study-home-university) .desk-heading { padding:18px 16px; margin-bottom:15px; }
+  .study-home:not(.study-home-university) .desk-progress,
+  .study-home:not(.study-home-university) .desk-library { padding:18px 16px; }
+  .study-home:not(.study-home-university) .desk-subjects { grid-template-columns:1fr; gap:9px; }
+  .study-home:not(.study-home-university) .desk-subject { min-height:0; padding:14px; }
+}
+
 /* Student dashboard details carried through from the dashboard handoff. */
 .desk-date { display:grid; gap:5px; text-align:right; }
 .desk-date span { color:#687769; font-size:8px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }

@@ -219,3 +219,98 @@
 .challenge-analysis-rule i { display: block; width: 38%; height: 100%; border-radius: inherit; background: #1e6653; animation: challenge-analysis-sweep 1.7s ease-in-out infinite alternate; }
 @keyframes challenge-analysis-sweep { from { transform: translateX(-100%); } to { transform: translateX(265%); } }
 @media (prefers-reduced-motion: reduce) { .challenge-analysis-rule i { animation: none; width: 100%; opacity: .7; } }
+
+/* Challenge hub: practical, scannable and visually aligned with the student
+   dashboard rather than a decorative event or game landing page. */
+.challenge-workspace { width:100%; max-width:none; padding:26px clamp(22px,3.4vw,52px) 54px; background:#f7f8f7; }
+.duel-page-head { align-items:center; margin:0 0 14px; padding:23px 26px; border:1px solid #dce5dd; border-radius:13px; background:#fff; }
+.duel-page-head .eyebrow { color:#0B4A2B; }
+.duel-page-head h1 { margin:8px 0 9px; color:#192b20; font:700 clamp(29px,3vw,39px)/1.15 var(--sans); letter-spacing:-.035em; }
+.duel-page-head .lede { max-width:620px; margin:0; color:#69776e; font-size:13px; line-height:1.65; }
+.duel-head-action { min-width:200px; padding:0; }
+.duel-head-action .button { min-height:44px; justify-content:center; gap:12px; border-radius:8px; background:#0B4A2B; }
+.duel-head-action > small { margin-top:8px; color:#718078; font-size:10px; }
+.duel-notice { min-height:55px; align-items:center; padding:10px 16px; border:1px solid #dce5dd; border-radius:9px; background:#fff; }
+.duel-notice strong { color:#0B4A2B; }
+.duel-notice > span:last-child strong { display:inline-block; padding:5px 8px; border-radius:5px; background:#e8f1ea; }
+.duel-filter-bar { margin:12px 0 25px; padding:0 16px; border:1px solid #dce5dd; border-radius:9px; background:#fff; }
+.duel-filters { gap:23px; }
+.duel-filters button { padding-block:15px 13px; }
+.duel-filters button[aria-pressed="true"] { border-bottom-color:#0B4A2B; color:#0B4A2B; }
+.duel-filters button > span { background:#eef3ef; color:#52665a; }
+.duel-group { margin-bottom:26px; }
+.duel-group-head { align-items:center; margin-bottom:11px; }
+.duel-group-head h2 { color:#203328; font:650 19px/1.3 var(--sans); letter-spacing:-.02em; }
+.duel-group-head h2 small { display:inline-grid; min-width:23px; height:23px; place-items:center; margin-left:6px; border-radius:6px; background:#e8f1ea; color:#0B4A2B; font:650 10px var(--sans); }
+.duel-group-head p { color:#78857c; font-size:10px; }
+.duel-list { border-color:#dce5dd; border-radius:10px; box-shadow:0 2px 8px rgba(15,45,28,.025); }
+.duel-row { padding:19px 20px; gap:17px; }
+.duel-row:hover { background:#f7faf7; }
+.duel-calendar { border-color:#d8e5db; border-radius:7px; background:#fff; }
+.duel-calendar small { color:#0B4A2B; background:#e8f1ea; }
+.duel-calendar strong { font:650 23px var(--sans); }
+.duel-row-title { margin:8px 0 5px; color:#23342a; font-size:14px; font-weight:650; }
+.duel-row-action { color:#0B4A2B; }
+.duel-status.live { color:#0B4A2B; background:#e8f1ea; }
+.duel-empty { padding:42px 24px; border-color:#dce5dd; border-radius:10px; background:#fff; }
+.duel-empty h2 { margin:0 0 9px; color:#203328; font:650 21px/1.35 var(--sans); }
+.duel-empty p { max-width:440px; font-size:12px; line-height:1.7; }
+.duel-footer { margin-top:25px; padding-top:15px; font-size:10px; }
+.challenge-workspace :is(button,summary):focus-visible { outline-color:#0B4A2B; }
+@media (max-width:760px) {
+  .challenge-workspace { padding:18px 14px 38px; }
+  .duel-page-head { padding:18px 16px; border-radius:11px; }
+  .duel-page-head h1 { font-size:29px; }
+  .duel-head-action { min-width:0; }
+  .duel-head-action .button { width:100%; }
+  .duel-head-action > small { text-align:left; }
+  .duel-notice { padding:10px 12px; }
+  .duel-filter-bar { align-items:flex-start; padding-inline:11px; }
+  .duel-filters { gap:18px; }
+  .duel-row { padding:15px 12px; }
+  .duel-row-end { align-items:center; }
+  .duel-footer { align-items:flex-start; }
+}
+
+/* Challenge setup: a calm three-part form with a genuinely useful review card. */
+.duel-setup-layout { grid-template-columns:minmax(0,1fr) minmax(260px,320px); gap:20px; }
+.duel-form fieldset { margin-bottom:14px; padding:22px 24px; border:1px solid #dce5dd; border-radius:11px; box-shadow:none; }
+.duel-form legend { display:flex; align-items:center; gap:10px; padding-bottom:18px; color:#203328; font:650 16px var(--sans); }
+.duel-form legend > span { display:grid; width:29px; height:29px; place-items:center; padding:0; border-radius:8px; color:#0B4A2B; background:#e8f1ea; font:700 10px var(--sans); }
+.duel-form fieldset > p { margin-bottom:15px; color:#68776d; }
+.duel-form .field label,.duel-invite-heading > label { color:#33463a; font-size:11px; font-weight:650; }
+.duel-form input,.duel-form select,.duel-form textarea { min-height:45px; border-color:#d5dfd7; border-radius:7px; color:#26382d; }
+.duel-form textarea { min-height:96px; }
+.duel-form input:focus,.duel-form select:focus,.duel-form textarea:focus { outline:2px solid #0B4A2B; outline-offset:1px; border-color:#0B4A2B; }
+.duel-form small { color:#79867e; }
+.duel-invite-heading { margin-bottom:12px; }
+.duel-invite-heading .duel-text-button { color:#0B4A2B; font-size:10px; }
+.duel-id-entry input { text-transform:uppercase; letter-spacing:.12em; }
+.duel-id-entry > .button { min-width:105px; border-color:#d4e0d7; color:#0B4A2B; }
+.duel-form .invitee-list { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 20px; }
+.duel-form .invitee-list > p { width:100%; padding:9px 0; color:#829087; font-size:10px; }
+.duel-form .invitee-list > span { display:inline-flex; align-items:center; gap:7px; padding:7px 9px; border:1px solid #d8e5db; border-radius:7px; color:#26382d; background:#f5f9f6; font-size:11px; }
+.duel-form .invitee-list > span small { margin:0; color:#718078; font-size:9px; }
+.duel-form .invitee-list > span button { width:22px; height:22px; border:0; border-radius:5px; color:#627268; background:transparent; cursor:pointer; }
+.duel-form .invitee-list > span button:hover { color:#a33a31; background:#f8e9e7; }
+.duel-form-submit { padding:3px 2px; }
+.duel-form-submit > p { max-width:260px; margin:0; font-size:10px; }
+.duel-form-submit .button { min-height:45px; border-radius:8px; background:#0B4A2B; }
+.duel-setup-summary { position:sticky; top:110px; padding:22px; border:1px solid #dce5dd; border-radius:11px; background:#fff; }
+.duel-setup-summary > .eyebrow { color:#0B4A2B; }
+.duel-setup-summary h2 { margin:11px 0; color:#203328; font:650 21px/1.3 var(--sans); }
+.duel-setup-summary > p:not(.eyebrow) { margin:5px 0; color:#526459; font-size:12px; line-height:1.5; }
+.duel-setup-summary dl { margin:17px 0 13px; padding:8px 0; border-color:#e4ebe5; }
+.duel-setup-summary dl > div { padding:8px 0; font-size:10px; }
+.duel-setup-summary dt { color:#748178; }
+.duel-setup-summary dd { color:#26382d; font-weight:650; }
+.duel-setup-summary > small { color:#718078; font-size:10px; line-height:1.65; }
+@media (max-width:760px) {
+  .duel-setup-layout { gap:14px; }
+  .duel-form fieldset { margin-bottom:11px; padding:18px 15px; }
+  .duel-form legend { padding-bottom:15px; }
+  .duel-form-pair { grid-template-columns:1fr; gap:12px; }
+  .duel-invite-heading { display:flex; align-items:flex-start; flex-direction:column; gap:4px; }
+  .duel-setup-summary { padding:18px 16px; }
+  .duel-form-submit { padding-bottom:8px; }
+}

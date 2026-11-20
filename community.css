@@ -272,3 +272,92 @@
 }
 .chat-message.is-pending { opacity: .65; }
 .chat-message.mine footer .is-seen { color: #d9edc5; font-weight: 650; }
+
+/* Community views follow the student dashboard handoff: light canvas, crisp
+   white surfaces, restrained borders, and one consistent Seomtorch green. */
+.circle-page {
+  width: 100%;
+  max-width: none;
+  padding: 26px clamp(22px,3.4vw,52px) 54px;
+  background: #f7f8f7;
+}
+.circle-page-head {
+  padding: 23px 26px;
+  margin: 0 0 14px;
+  border: 1px solid #dce5dd;
+  border-radius: 13px;
+  background: #fff;
+}
+.circle-page-head h1 { color:#192b20; font:700 clamp(28px,3vw,38px)/1.15 var(--sans); letter-spacing:-.035em; }
+.circle-page-head .eyebrow { color:#0B4A2B; }
+.circle-page-head .lede { color:#69776e; font-size:13px; }
+.circle-page-head > .button { min-height:43px; border-color:#0B4A2B; color:#0B4A2B; background:#fff; }
+.circle-identity {
+  min-height:60px;
+  padding:10px 17px;
+  border:1px solid #dce5dd;
+  border-radius:10px 10px 0 0;
+  background:#fff;
+}
+.circle-identity p { display:flex; align-items:center; flex-wrap:wrap; gap:8px; color:#617067; }
+.circle-identity p button { margin:0; color:#0B4A2B; background:#e8f1ea; border:1px solid #d6e4d9; }
+.circle-text-button { color:#0B4A2B; }
+.circle-tabs { gap:25px; padding:0 17px; border:1px solid #dce5dd; border-top:0; background:#fff; }
+.circle-tabs button[aria-current="page"] { color:#0B4A2B; border-bottom-color:#0B4A2B; }
+.circle-tabs button > span.unread { background:#0B4A2B; }
+.circle-tab-body {
+  min-height:220px;
+  padding:25px;
+  border:1px solid #dce5dd;
+  border-top:0;
+  border-radius:0 0 12px 12px;
+  background:#fff;
+}
+.circle-challenge-callout {
+  align-items:center;
+  margin:0 0 27px;
+  padding:22px 24px;
+  border:1px solid #d5e3d8;
+  border-left:1px solid #d5e3d8;
+  border-radius:10px;
+  background:linear-gradient(115deg,#f2f7f3 0%,#f8fbf8 65%,#fff 100%);
+}
+.circle-challenge-copy .eyebrow,
+.circle-challenge-copy h2 { color:#0B4A2B; }
+.circle-challenge-copy h2 { font:650 clamp(22px,2.4vw,29px)/1.2 var(--sans); letter-spacing:-.03em; }
+.circle-challenge-copy > p:not(.eyebrow) { color:#617067; }
+.circle-challenge-note { color:#53695b; }
+.circle-challenge-callout button:focus-visible,
+.circle-challenge-person:focus-visible { outline-color:#0B4A2B; }
+.circle-section-head h2 { color:#1d3025; font:650 22px/1.25 var(--sans); letter-spacing:-.025em; }
+.circle-people { border-color:#e0e8e2; border-radius:10px; }
+.circle-person { min-height:86px; padding:17px 19px; border-color:#e8ede9; }
+.circle-person:hover { background:#fbfdfb; }
+.circle-avatar { color:#0B4A2B; background:#e8f1ea; }
+.circle-empty { border-color:#d4e0d6; border-radius:10px; background:#fbfdfb; }
+.circle-empty-mark i { border-color:#0B4A2B; }
+.circle-empty-mark i + i { border-color:#75927d; }
+.circle-segment button[aria-pressed="true"] { border-color:#0B4A2B; background:#e8f1ea; color:#0B4A2B; }
+.circle-how { border-color:#e0e8e2; }
+.circle-how .eyebrow { color:#0B4A2B; }
+.circle-board-row.is-you { background:#f0f6f1; }
+.circle-board-xp { color:#0B4A2B; }
+.buddy-messenger { border-color:#dce5dd; border-radius:11px; }
+.chat-contact.selected { background:#e8f1ea; box-shadow:inset 3px 0 #0B4A2B; }
+.chat-contact-monogram { color:#0B4A2B; background:#e8f1ea; }
+.chat-unread { background:#0B4A2B; }
+.chat-message.mine { background:#0B4A2B; }
+.circle-page :is(button,input,textarea,summary):focus-visible { outline-color:#0B4A2B; }
+@media (max-width:680px) {
+  .circle-page { padding:18px 14px 36px; }
+  .circle-page-head { padding:18px 16px; border-radius:11px; }
+  .circle-page-head h1 { font-size:29px; }
+  .circle-identity { align-items:flex-start; padding:11px 12px; }
+  .circle-tabs { gap:20px; padding-inline:12px; }
+  .circle-tab-body { padding:17px 13px; }
+  .circle-challenge-callout { padding:18px 16px; }
+  .circle-person { padding:15px 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .circle-person, .circle-challenge-callout { transition:none; }
+}
