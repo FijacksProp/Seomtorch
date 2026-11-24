@@ -334,7 +334,10 @@ def dashboard(request):
         subject.explanation_coverage = percentage(subject.reviewed_count, subject.question_count)
 
     # 2. University Medical Courses (ANA 201, ANA 203, PIO 201)
-    university_subjects = list(Subject.objects.filter(is_active=True, track="university"))
+    university_subjects = list(Subject.objects.filter(is_active=True, track="university").annotate(
+        bank_question_count=Count("topics__questions", filter=Q(topics__questions__is_active=True), distinct=True),
+    ))
+    university_question_count = sum(subject.bank_question_count for subject in university_subjects)
     for subject in university_subjects:
         code = subject.code or subject.name[:7].strip()
         code_no_space = code.replace(" ", "")
@@ -354,7 +357,7 @@ def dashboard(request):
         subject.total_attempts = tot_q
         subject.correct_attempts = cor_q
         subject.accuracy = percentage(cor_q, tot_q)
-        subject.question_count = 100
+        subject.question_count = subject.bank_question_count
         subject.explanation_coverage = 100
 
         # Medical curriculum metadata for rich catalog presentation
@@ -482,6 +485,7 @@ def dashboard(request):
         "trend_active": trend_active,
         "trend_revenue": trend_revenue,
         "university_subjects": university_subjects,
+        "university_question_count": university_question_count,
         "recent_students": recent_students,
         "recent_events_curbed": recent_events_curbed,
         "recent_events_all": recent_events_all,

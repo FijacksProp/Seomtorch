@@ -635,7 +635,7 @@
                 University Medical Curriculum (200L Pre-Clinical MBBS &amp; BDS)
               </h3>
               <p style="margin:2px 0 0;font-size:12px;color:var(--color-muted);">
-                Undergraduate human anatomy and systemic physiology performance diagnostics
+                Undergraduate course performance · {{ university_question_count|default:0 }} active questions in the bank
               </p>
             </div>
           </div>
@@ -675,6 +675,10 @@
               <div class="uni-row-stat">
                 <span class="num">{{ subject.total_attempts }}</span>
                 <span class="lbl">Solved</span>
+              </div>
+              <div class="uni-row-stat">
+                <span class="num">{{ subject.question_count }}</span>
+                <span class="lbl">Questions</span>
               </div>
               <div class="uni-row-stat">
                 <span class="num">{{ subject.pass_rate }}%</span>
