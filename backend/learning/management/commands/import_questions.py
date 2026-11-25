@@ -16,14 +16,15 @@ SUBJECT_DETAILS = {
     "computer-studies": ("Computer Studies", "Hardware, software, networking, logic, programming and data processing", 4),
     "economics": ("Economics", "Microeconomics, macroeconomics, national income, trade and public finance", 5),
     "english": ("English Language", "Usage, comprehension and oral forms", 6),
-    "general-paper": ("General Paper", "Civics, current affairs and general knowledge", 7),
-    "government": ("Government", "Political theories, Nigerian constitutional development, institutions and foreign policy", 8),
-    "history": ("History", "Nigerian, African and world history from pre-colonial to modern times", 9),
-    "literature-in-english": ("Literature in English", "Literary devices, African and non-African prose, drama, and poetry", 10),
-    "marketing": ("Marketing", "Marketing concepts, 4Ps, distribution channels, promotion and consumer behavior", 11),
-    "mathematics": ("Mathematics", "Numbers, algebra, geometry and calculus", 12),
-    "music": ("Music", "JAMB music theory, African music and Western art music", 13),
-    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 14),
+    "further-mathematics": ("Further Mathematics", "Pure mathematics, mechanics, statistics, vectors, matrices and calculus", 7),
+    "general-paper": ("General Paper", "Civics, current affairs and general knowledge", 8),
+    "government": ("Government", "Political theories, Nigerian constitutional development, institutions and foreign policy", 9),
+    "history": ("History", "Nigerian, African and world history from pre-colonial to modern times", 10),
+    "literature-in-english": ("Literature in English", "Literary devices, African and non-African prose, drama, and poetry", 11),
+    "marketing": ("Marketing", "Marketing concepts, 4Ps, distribution channels, promotion and consumer behavior", 12),
+    "mathematics": ("Mathematics", "Numbers, algebra, geometry and calculus", 13),
+    "music": ("Music", "JAMB music theory, African music and Western art music", 14),
+    "physics": ("Physics", "JAMB mechanics, waves, electricity and modern physics", 15),
 }
 
 class Command(BaseCommand):
@@ -79,7 +80,14 @@ class Command(BaseCommand):
 
         manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path and manifest_path.exists() else None
         release_version = str(manifest.get("version")) if manifest else None
-        if options["if_current"] and release_version and QuestionBankRelease.objects.filter(version=release_version).exists():
+        expected_pack_slugs = {pack["id"] for pack in manifest.get("packs", [])} if manifest else set()
+        active_aspirant_slugs = set(
+            Question.objects.filter(topic__subject__track=Subject.Track.ASPIRANT, is_active=True)
+            .values_list("topic__subject__slug", flat=True)
+            .distinct()
+        )
+        all_packs_populated = expected_pack_slugs.issubset(active_aspirant_slugs)
+        if options["if_current"] and release_version and all_packs_populated and QuestionBankRelease.objects.filter(version=release_version).exists():
             university_seen = set()
             created, updated = self._sync_university_questions(repo_root, university_seen, if_current=True)
             self.stdout.write(
@@ -111,7 +119,11 @@ class Command(BaseCommand):
         created += university_created
         updated += university_updated
 
-        deactivated = Question.objects.exclude(external_id__in=seen).update(is_active=False)
+        active_ids = set(Question.objects.filter(is_active=True).values_list("external_id", flat=True))
+        stale_ids = list(active_ids - seen)
+        deactivated = 0
+        for idx in range(0, len(stale_ids), 500):
+            deactivated += Question.objects.filter(external_id__in=stale_ids[idx : idx + 500]).update(is_active=False)
         if release_version:
             QuestionBankRelease.objects.update_or_create(version=release_version, defaults={"question_count": len(seen)})
         self.stdout.write(self.style.SUCCESS(f"Imported {len(seen)} questions: {created} created, {updated} updated, {deactivated} deactivated."))
@@ -257,24 +269,58 @@ class Command(BaseCommand):
     def _process_questions(self, questions, seen):
         created = updated = 0
         from learning.models import Passage
+
+        subjects = {}
+        topics = {}
+        passages = {}
+        rows = {}
+        now = timezone.now()
+
         for item in questions:
             subject_slug = item["subject"]
-            name, description, position = SUBJECT_DETAILS.get(subject_slug, (subject_slug.replace("-", " ").title(), "", 99))
-            subject, _ = Subject.objects.update_or_create(slug=subject_slug, defaults={"name": name, "description": description, "position": position, "is_active": True})
+            subject = subjects.get(subject_slug)
+            if subject is None:
+                name, description, position = SUBJECT_DETAILS.get(
+                    subject_slug, (subject_slug.replace("-", " ").title(), "", 99)
+                )
+                subject, _ = Subject.objects.update_or_create(
+                    slug=subject_slug,
+                    defaults={
+                        "name": name,
+                        "description": description,
+                        "position": position,
+                        "track": Subject.Track.ASPIRANT,
+                        "is_active": True,
+                    },
+                )
+                subjects[subject_slug] = subject
 
             topic_slug = slugify(item["topic"])
-            topic, _ = Topic.objects.get_or_create(subject=subject, slug=topic_slug, defaults={"name": item["topic"]})
+            topic_key = (subject.id, topic_slug)
+            topic = topics.get(topic_key)
+            if topic is None:
+                topic, _ = Topic.objects.get_or_create(
+                    subject=subject, slug=topic_slug, defaults={"name": item["topic"]}
+                )
+                topics[topic_key] = topic
 
             passage = None
             if "passage_title" in item or "passage_body" in item:
-                passage, _ = Passage.objects.get_or_create(
-                    subject=subject,
-                    title=item.get("passage_title", ""),
-                    body=item.get("passage_body", ""),
-                    defaults={"source": item.get("source", "")}
-                )
+                p_title = item.get("passage_title", "")
+                p_body = item.get("passage_body", "")
+                p_key = (subject.id, p_title, p_body)
+                passage = passages.get(p_key)
+                if passage is None:
+                    passage, _ = Passage.objects.get_or_create(
+                        subject=subject,
+                        title=p_title,
+                        body=p_body,
+                        defaults={"source": item.get("source", "")},
+                    )
+                    passages[p_key] = passage
 
-            defaults = {
+            external_id = str(item["id"]).strip()
+            rows[external_id] = {
                 "topic": topic,
                 "passage": passage,
                 "text": item["text"],
@@ -290,8 +336,30 @@ class Command(BaseCommand):
                 "video_url": item.get("video_url", ""),
                 "image_url": item.get("image_url", ""),
                 "source_url": item.get("source_url", ""),
-                "is_active": True
+                "is_active": True,
+                "updated_at": now,
             }
-            _, was_created = Question.objects.update_or_create(external_id=item["id"], defaults=defaults)
-            created += int(was_created); updated += int(not was_created); seen.add(item["id"])
+
+        if rows:
+            all_ext_ids = list(rows.keys())
+            existing_ids = set()
+            for idx in range(0, len(all_ext_ids), 500):
+                batch_ids = all_ext_ids[idx : idx + 500]
+                existing_ids.update(
+                    Question.objects.filter(external_id__in=batch_ids)
+                    .order_by()
+                    .values_list("external_id", flat=True)
+                )
+            update_fields = list(next(iter(rows.values())))
+            Question.objects.bulk_create(
+                [Question(external_id=ext_id, **defaults) for ext_id, defaults in rows.items()],
+                update_conflicts=True,
+                unique_fields=["external_id"],
+                update_fields=update_fields,
+                batch_size=250,
+            )
+            created = len(rows) - len(existing_ids)
+            updated = len(existing_ids)
+            seen.update(rows)
+
         return created, updated
