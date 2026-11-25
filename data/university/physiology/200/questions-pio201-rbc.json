@@ -1,0 +1,1514 @@
+{
+  "title": "Red Blood Cell",
+  "course": "PIO 201",
+  "totalQuestions": 100,
+  "sections": [
+    "Erythrocyte Structure, Counts & Haemoglobin Basics (Q1-Q20)",
+    "Erythrocyte Membrane, Gas Transport & Blood Groups (Q21-Q40)",
+    "Erythropoiesis, Metabolism & Red Cell Indices (Q41-Q60)",
+    "Haemoglobin Breakdown, Anaemias & Maturation (Q61-Q80)",
+    "Clinical Correlations, Haemodynamics & Special Topics (Q81-Q100)"
+  ],
+  "questions": [
+    {
+      "id": "pio201-rbc-1",
+      "text": "Within the cellular composition of human whole blood, red blood cells (erythrocytes) constitute approximately what proportion of all formed elements?",
+      "options": [
+        "$45%$",
+        "$99%$",
+        "$55%$",
+        "$75%$"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. $99%$",
+      "explanation": "Red blood cells vastly outnumber white blood cells and platelets, making up approximately $99%$ of all formed (cellular) elements in human blood.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 1
+    },
+    {
+      "id": "pio201-rbc-2",
+      "text": "Red blood cells play a central role in carbon dioxide ($CO_2$) transport. Approximately what proportion of blood $CO_2$ is transported as bicarbonate ions ($HCO_3^-$), and which RBC enzyme catalyzes this reaction?",
+      "options": [
+        "$63%$ to $70%$; catalyzed by carbonic anhydrase",
+        "$97%$; catalyzed by catalase",
+        "$20%$; catalyzed by ferrochelatase",
+        "$7%$; catalyzed by myeloperoxidase"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. $63%$ to $70%$; catalyzed by carbonic anhydrase",
+      "explanation": "Roughly $63%$ to $70%$ of $CO_2$ is carried as bicarbonate formed rapidly inside RBCs by carbonic anhydrase, while $20%$ to $23%$ is carried as carbaminohaemoglobin and $7%$ dissolved in plasma.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 2
+    },
+    {
+      "id": "pio201-rbc-3",
+      "text": "What is the immunological mechanism underlying haemolytic disease of the newborn (erythroblastosis fetalis) due to Rh incompatibility?",
+      "options": [
+        "Maternal IgM anti-A antibodies cross the placenta during the first trimester",
+        "Fetal IgG antibodies cross the placenta to destroy maternal RBCs",
+        "An Rh-negative mother sensitized by Rh-positive fetal RBCs produces IgG anti-D antibodies that cross the placenta in subsequent Rh-positive pregnancies and lyse fetal RBCs",
+        "Maternal complement proteins directly dissolve fetal bone marrow stem cells"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. An Rh-negative mother sensitized by Rh-positive fetal RBCs produces IgG anti-D antibodies that cross the placenta in subsequent Rh-positive pregnancies and lyse fetal RBCs",
+      "explanation": "During delivery of a first Rh-positive baby, fetal RBCs sensitize an Rh-negative mother to form IgG anti-D antibodies, which cross the placenta in subsequent pregnancies and cause fetal haemolysis.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 3
+    },
+    {
+      "id": "pio201-rbc-4",
+      "text": "What outer membrane component imparts a net negative surface charge (zeta potential) to red blood cells, helping prevent spontaneous clumping in the circulation?",
+      "options": [
+        "Free cholesterol molecules",
+        "Intracellular spectrin dimers",
+        "Sialic acid residues on membrane glycophorins",
+        "Phosphatidylserine on the inner leaflet"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Sialic acid residues on membrane glycophorins",
+      "explanation": "Sialic acid (N-acetylneuraminic acid) residues attached to transmembrane glycoproteins such as glycophorins create a negative surface charge that generates mutual electrostatic repulsion between RBCs.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 4
+    },
+    {
+      "id": "pio201-rbc-5",
+      "text": "Which physiological phenomenon describes the rightward shift of the oxygen-haemoglobin dissociation curve caused by elevated $pCO_2$ and decreased pH in active tissues, and which other factors also shift the curve to the right?",
+      "options": [
+        "Haldane effect; decreased temperature and decreased $2,3$-DPG",
+        "Hamburger phenomenon; increased pH and decreased $2,3$-DPG",
+        "Donnan effect; decreased temperature and fetal haemoglobin",
+        "Bohr effect; increased temperature and increased $2,3$-DPG"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Bohr effect; increased temperature and increased $2,3$-DPG",
+      "explanation": "The Bohr effect describes reduced $O_2$ affinity at high $pCO_2$ and low pH, promoting oxygen unloading in tissues; increased temperature and elevated $2,3$-DPG also shift the curve to the right.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 5
+    },
+    {
+      "id": "pio201-rbc-6",
+      "text": "Which physiological states are normally associated with a slight physiological DECREASE in the circulating red blood cell count?",
+      "options": [
+        "High altitude and vigorous exercise",
+        "Deep sleep, high barometric pressure, and normal pregnancy (due to plasma volume expansion/haemodilution)",
+        "Newborn infancy and emotional stress",
+        "Exposure to high environmental temperature"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Deep sleep, high barometric pressure, and normal pregnancy (due to plasma volume expansion/haemodilution)",
+      "explanation": "During sleep, reduced metabolic demand lowers the RBC count slightly; at high barometric pressure, increased $O_2$ tension suppresses erythropoiesis; and in pregnancy, increased plasma volume causes physiological haemodilution.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 6
+    },
+    {
+      "id": "pio201-rbc-7",
+      "text": "Why is the intermediate normoblast also termed the polychromatic erythroblast?",
+      "options": [
+        "It contains multiple fragmented nuclei",
+        "It lacks all cytoplasmic RNA and ribosomes",
+        "It stains exclusively with basic methylene blue dye",
+        "It contains both basophilic RNA and newly visible acidophilic haemoglobin, taking up both acidic and basic stains"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. It contains both basophilic RNA and newly visible acidophilic haemoglobin, taking up both acidic and basic stains",
+      "explanation": "Because haemoglobin first becomes visible in the intermediate normoblast ($10$ to $12\\ \\mu\\text{m}$) while basophilic RNA is still present, the cytoplasm exhibits polychromatic staining.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 7
+    },
+    {
+      "id": "pio201-rbc-8",
+      "text": "Haemolysis is defined as the rupture of the erythrocyte membrane with release of haemoglobin. Which organ serves as the primary physiological site of senile RBC destruction and is termed the \"graveyard of red blood cells\"?",
+      "options": [
+        "Kidney",
+        "Thymus",
+        "Pancreas",
+        "Spleen (along with the liver and bone marrow)"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Spleen (along with the liver and bone marrow)",
+      "explanation": "Senile erythrocytes are primarily destroyed by macrophages of the reticuloendothelial system in the spleen (\"graveyard of RBCs\"), as well as in the liver and bone marrow.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 8
+    },
+    {
+      "id": "pio201-rbc-9",
+      "text": "What is the exact molecular genetic defect responsible for Sickle Cell Disease (Haemoglobin S)?",
+      "options": [
+        "Complete deletion of all four $\\alpha$-globin genes on chromosome $16$",
+        "A single point mutation in the $\\beta$-globin gene substituting valine for glutamic acid at the $6\\text{th}$ amino acid position",
+        "Substitution of lysine for glutamic acid at position $6$ of the $\\alpha$-globin chain",
+        "Deficiency of the enzyme glucose-6-phosphate dehydrogenase (G6PD)"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A single point mutation in the $\\beta$-globin gene substituting valine for glutamic acid at the $6\\text{th}$ amino acid position",
+      "explanation": "Sickle cell disease results from a single nucleotide substitution in the $\\beta$-globin gene, replacing hydrophilic glutamic acid with hydrophobic valine at position $6$ ($\\beta^6\\ \\text{Glu}\\rightarrow\\text{Val}$), producing HbS.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 9
+    },
+    {
+      "id": "pio201-rbc-10",
+      "text": "Which two endocrine hormones physiologically stimulate erythropoiesis by enhancing erythropoietin production or increasing general tissue oxygen demand?",
+      "options": [
+        "Testosterone and thyroxine",
+        "Oestrogen and calcitonin",
+        "Melatonin and oxytocin",
+        "Parathyroid hormone and aldosterone"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Testosterone and thyroxine",
+      "explanation": "Testosterone directly stimulates erythropoiesis and erythropoietin secretion (accounting for higher male RBC counts), while thyroxine increases general metabolic rate and oxygen consumption, indirectly stimulating erythropoiesis.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 10
+    },
+    {
+      "id": "pio201-rbc-11",
+      "text": "Which statement accurately reflects Landsteiner's Law and explains why its second part does NOT apply to the Rh blood group system?",
+      "options": [
+        "Part 1: if an antigen is present on RBCs, its antibody is absent in plasma; Part 2: if an antigen is absent, its antibody is present—this fails in the Rh system because Rh-negative individuals lack natural anti-D antibodies without prior sensitization",
+        "Part 1 states antigens and antibodies coexist; Part 2 fails in the Rh system because Rh antigens are in plasma",
+        "Both parts apply strictly to the Rh system but not to the ABO system",
+        "Part 2 fails in the Rh system because Rh-positive individuals naturally carry anti-D antibodies"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Part 1: if an antigen is present on RBCs, its antibody is absent in plasma; Part 2: if an antigen is absent, its antibody is present—this fails in the Rh system because Rh-negative individuals lack natural anti-D antibodies without prior sensitization",
+      "explanation": "Landsteiner's Law governs the ABO system, where antibodies occur naturally against absent antigens. In the Rh system, anti-D antibodies are immune antibodies formed only after exposure to Rh-positive blood.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 11
+    },
+    {
+      "id": "pio201-rbc-12",
+      "text": "What is the normal specific gravity of human red blood cells, which causes them to settle below the plasma layer during centrifugation?",
+      "options": [
+        "$1.022$ to $1.026$",
+        "$1.092$ to $1.101$",
+        "$1.052$ to $1.061$",
+        "$1.150$ to $1.180$"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. $1.092$ to $1.101$",
+      "explanation": "The specific gravity of RBCs ($1.092$ to $1.101$) is significantly higher than that of plasma ($1.022$ to $1.026$) and whole blood ($1.052$ to $1.061$).",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 12
+    },
+    {
+      "id": "pio201-rbc-13",
+      "text": "What is the polypeptide chain composition and approximate molecular weight of normal adult haemoglobin (HbA)?",
+      "options": [
+        "Two $\\alpha$-chains ($141$ amino acids each) and two $\\beta$-chains ($146$ amino acids each); molecular weight $\\approx 68,000$",
+        "Two $\\alpha$-chains ($146$ amino acids each) and two $\\beta$-chains ($141$ amino acids each); molecular weight $\\approx 34,000$",
+        "Two $\\alpha$-chains and two $\\gamma$-chains; molecular weight $\\approx 120,000$",
+        "Four identical $\\beta$-chains; molecular weight $\\approx 68,000$"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Two $\\alpha$-chains ($141$ amino acids each) and two $\\beta$-chains ($146$ amino acids each); molecular weight $\\approx 68,000$",
+      "explanation": "Normal adult haemoglobin (HbA, $\\approx 97%$ of adult Hb) is a tetramer of two $\\alpha$-chains ($141$ aa each) and two $\\beta$-chains ($146$ aa each), with a molecular weight of about $68,000$.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 13
+    },
+    {
+      "id": "pio201-rbc-14",
+      "text": "Why is Mean Corpuscular Haemoglobin Concentration (MCHC) regarded as the most reliable absolute index of cellular haemoglobin saturation?",
+      "options": [
+        "It relies solely on the white blood cell count",
+        "Its calculation does not depend on the RBC count, which is prone to greater manual counting error",
+        "It measures only fetal haemoglobin concentration",
+        "It remains unchanged even in severe hypochromic states"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Its calculation does not depend on the RBC count, which is prone to greater manual counting error",
+      "explanation": "Because MCHC uses only haemoglobin concentration and packed cell volume (PCV), it avoids potential errors in RBC enumeration and directly reflects true intracellular haemoglobin concentration.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 14
+    },
+    {
+      "id": "pio201-rbc-15",
+      "text": "Within the bone marrow haemopoietic lineage, which committed progenitor cell directly gives rise to the erythroid series?",
+      "options": [
+        "Lymphoid stem cell (LSC)",
+        "Colony-forming unit-granulocyte/monocyte (CFU-GM)",
+        "Colony-forming unit-megakaryocyte (CFU-M)",
+        "Colony-forming unit-erythrocyte (CFU-E)"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Colony-forming unit-erythrocyte (CFU-E)",
+      "explanation": "Pluripotent haemopoietic stem cells differentiate into committed myeloid progenitors, among which CFU-E is strictly committed to developing into erythrocytes.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 15
+    },
+    {
+      "id": "pio201-rbc-16",
+      "text": "What is the normal average circulating lifespan of a mature human red blood cell?",
+      "options": [
+        "$30$ days",
+        "$60$ days",
+        "$120$ days",
+        "$240$ days"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. $120$ days",
+      "explanation": "Mature human erythrocytes circulate in the bloodstream for an average lifespan of $120$ days before being removed by the reticuloendothelial system.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 16
+    },
+    {
+      "id": "pio201-rbc-17",
+      "text": "Why does true \"hyperchromia\" (supersaturation of haemoglobin beyond normal MCHC) not physiologically occur in red blood cells?",
+      "options": [
+        "Haemoglobin cannot bind iron above $20\\ \\text{pg}$ per cell",
+        "Intracellular haemoglobin is already near its physical solubility limit in normal RBCs; cells that appear darker (such as spherocytes) look darker due to increased thickness rather than true haemoglobin supersaturation",
+        "Acidic dyes cannot stain haemoglobin above $30%$ concentration",
+        "Red blood cells actively pump excess haemoglobin out into plasma"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Intracellular haemoglobin is already near its physical solubility limit in normal RBCs; cells that appear darker (such as spherocytes) look darker due to increased thickness rather than true haemoglobin supersaturation",
+      "explanation": "Normal RBCs are already near maximal haemoglobin solubility ($\\approx 34$ to $36\\ \\text{g/dL}$). Apparent \"hyperchromia\" in spherocytes is an optical effect of greater cell thickness and absence of central pallor.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 17
+    },
+    {
+      "id": "pio201-rbc-18",
+      "text": "In healthy adults over $20$ years of age, fatty yellow marrow replaces red marrow in the shafts of long bones. Which sites continue active erythropoiesis throughout adulthood?",
+      "options": [
+        "Membranous (flat) bones such as vertebrae, sternum, ribs, iliac bones, and skull, plus proximal epiphyses of long bones",
+        "Mid-shafts (diaphyses) of the femur, tibia, and humerus",
+        "Splenic white pulp and regional lymph nodes",
+        "Renal cortex and adrenal medulla"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Membranous (flat) bones such as vertebrae, sternum, ribs, iliac bones, and skull, plus proximal epiphyses of long bones",
+      "explanation": "After age $20$, erythropoiesis is restricted to membranous bones (vertebrae, sternum, ribs, scapula, iliac bones, skull) and the proximal ends of long bones.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 18
+    },
+    {
+      "id": "pio201-rbc-19",
+      "text": "How is the iron liberated from destroyed red blood cells conserved and recycled by the body?",
+      "options": [
+        "Stored as ferritin/hemosiderin in macrophages and hepatocytes or transported bound to transferrin back to the bone marrow for new erythropoiesis",
+        "Excreted completely in the bile along with bilirubin",
+        "Eliminated rapidly via renal glomerular filtration",
+        "Converted into carbonic anhydrase within plasma"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Stored as ferritin/hemosiderin in macrophages and hepatocytes or transported bound to transferrin back to the bone marrow for new erythropoiesis",
+      "explanation": "Iron is tightly conserved; liberated iron either combines with apoferritin to form ferritin (and hemosiderin) for storage or binds apotransferrin (forming transferrin) to return to red bone marrow.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 19
+    },
+    {
+      "id": "pio201-rbc-20",
+      "text": "Derived from the Greek roots erythros (red) and kytos (cell), how is a mature human erythrocyte most accurately defined?",
+      "options": [
+        "A nucleated, phagocytic cell specialized for immune defence",
+        "A cytoplasmic fragment derived from bone marrow megakaryocytes",
+        "A specialized, non-nucleated, haemoglobin-containing blood cell adapted for respiratory gas transport",
+        "A self-replicating stem cell circulating within the peripheral vasculature"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A specialized, non-nucleated, haemoglobin-containing blood cell adapted for respiratory gas transport",
+      "explanation": "Mature human erythrocytes are specialized, non-nucleated, biconcave blood cells rich in haemoglobin, whose primary role is transporting respiratory gases.",
+      "section": "Erythrocyte Structure, Counts & Haemoglobin Basics",
+      "questionNumber": 20
+    },
+    {
+      "id": "pio201-rbc-21",
+      "text": "Which non-respiratory function of red blood cells is determined by the presence of specific agglutinogens on their plasma membrane?",
+      "options": [
+        "Blood coagulation cascade initiation",
+        "Blood group determination",
+        "Antibody synthesis",
+        "Complement activation"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Blood group determination",
+      "explanation": "Red blood cells carry genetically determined surface antigens (agglutinogens such as A, B, and Rh/D) on their plasma membrane, which determine an individual's blood group.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 21
+    },
+    {
+      "id": "pio201-rbc-22",
+      "text": "Cyanosis—the bluish discoloration of skin and mucous membranes—typically becomes clinically apparent when the concentration of deoxygenated haemoglobin in capillary blood exceeds which threshold?",
+      "options": [
+        "$1\\ \\text{g/dL}$",
+        "$5\\ \\text{g/dL}$",
+        "$10\\ \\text{g/dL}$",
+        "$15\\ \\text{g/dL}$"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. $5\\ \\text{g/dL}$",
+      "explanation": "Cyanosis is determined by the absolute concentration of reduced (deoxygenated) haemoglobin rather than percentage saturation alone, appearing when capillary deoxyhaemoglobin exceeds $5\\ \\text{g/dL}$.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 22
+    },
+    {
+      "id": "pio201-rbc-23",
+      "text": "Which of the following is a primary physiological advantage of the biconcave discoid shape of a mature red blood cell?",
+      "options": [
+        "High surface-area-to-volume ratio facilitating rapid gas diffusion and easy deformability through narrow capillaries",
+        "Increased membrane tension during minor osmotic volume changes",
+        "Enhanced capacity for mitotic division within the microcirculation",
+        "Greater resistance to oxygen binding in pulmonary capillaries"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. High surface-area-to-volume ratio facilitating rapid gas diffusion and easy deformability through narrow capillaries",
+      "explanation": "The biconcave contour maximizes the surface-area-to-volume ratio for rapid $O_2$ and $CO_2$ diffusion, allows erythrocytes to deform through capillaries narrower than their own diameter, and accommodates slight volume increases without rupturing.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 23
+    },
+    {
+      "id": "pio201-rbc-24",
+      "text": "Approximately $10%$ of glucose metabolized in erythrocytes is shunted through the hexose monophosphate (pentose phosphate) pathway. What is the primary protective role of this pathway?",
+      "options": [
+        "Generating NADPH to keep glutathione in its reduced state (GSH), protecting haemoglobin and membrane lipids from oxidative damage",
+        "Synthesizing ribose sugars for continuous DNA replication",
+        "Producing excess ATP during muscular exercise",
+        "Synthesizing new globin polypeptide chains"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Generating NADPH to keep glutathione in its reduced state (GSH), protecting haemoglobin and membrane lipids from oxidative damage",
+      "explanation": "Initiated by glucose-6-phosphate dehydrogenase (G6PD), the hexose monophosphate shunt generates NADPH to maintain reduced glutathione (GSH), which neutralizes reactive oxygen species.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 24
+    },
+    {
+      "id": "pio201-rbc-25",
+      "text": "In peripheral blood smear morphology, what do the terms anisocytosis and poikilocytosis specifically denote respectively?",
+      "options": [
+        "Variation in RBC colour; variation in RBC count",
+        "Variation in RBC size; variation in RBC shape",
+        "Presence of nucleated RBCs; presence of reticulocytes",
+        "Variation in RBC shape; variation in RBC size"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Variation in RBC size; variation in RBC shape",
+      "explanation": "Anisocytosis refers to abnormal variation in erythrocyte size (e.g., coexistence of microcytes and macrocytes), whereas poikilocytosis refers to abnormal variation in erythrocyte shape.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 25
+    },
+    {
+      "id": "pio201-rbc-26",
+      "text": "During the initial mesoblastic stage of intrauterine erythropoiesis (first $2$ months of fetal life), where are red blood cells primarily produced?",
+      "options": [
+        "Mesenchyme of the yolk sac",
+        "Hepatic sinusoids",
+        "Red bone marrow",
+        "Splenic red pulp"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Mesenchyme of the yolk sac",
+      "explanation": "During the mesoblastic stage (first $2$ months of gestation), primitive erythrocytes are produced from the mesenchyme of the yolk sac.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 26
+    },
+    {
+      "id": "pio201-rbc-27",
+      "text": "In a standard osmotic fragility test using serial dilutions of sodium chloride, at what approximate saline concentrations do the onset and completion of normal RBC haemolysis occur?",
+      "options": [
+        "Onset at $0.45%$ NaCl; completion at $0.35%$ NaCl",
+        "Onset at $0.90%$ NaCl; completion at $0.60%$ NaCl",
+        "Onset at $0.75%$ NaCl; completion at $0.50%$ NaCl",
+        "Onset at $0.20%$ NaCl; completion at $0.05%$ NaCl"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Onset at $0.45%$ NaCl; completion at $0.35%$ NaCl",
+      "explanation": "Normal RBCs remain intact in isotonic ($0.9%$) saline down to $0.6%$ NaCl; osmotic haemolysis begins around $0.45%$ NaCl (lysing older cells) and is complete around $0.35%$ NaCl.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 27
+    },
+    {
+      "id": "pio201-rbc-28",
+      "text": "What is the underlying structural defect in Hereditary Spherocytosis, and how does it affect the osmotic fragility of affected red blood cells?",
+      "options": [
+        "Deficiency of intrinsic factor; decreases osmotic fragility",
+        "Point mutation in the $\\beta$-globin chain; leaves osmotic fragility completely unchanged",
+        "Genetic defect in erythrocyte membrane cytoskeletal proteins (such as spectrin, ankyrin, or Band 3), causing membrane loss, spherical RBCs, increased osmotic fragility, and premature splenic destruction",
+        "Deficiency of carbonic anhydrase; causes crenation in hypotonic saline"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Genetic defect in erythrocyte membrane cytoskeletal proteins (such as spectrin, ankyrin, or Band 3), causing membrane loss, spherical RBCs, increased osmotic fragility, and premature splenic destruction",
+      "explanation": "Defects in cytoskeletal anchoring proteins (spectrin, ankyrin, Band 3, protein 4.2) cause progressive loss of membrane surface area, converting biconcave discs into rigid spherocytes with markedly increased osmotic fragility that are trapped and destroyed in the spleen.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 28
+    },
+    {
+      "id": "pio201-rbc-29",
+      "text": "Approximately what percentage of total oxygen in arterial blood is transported in chemical combination with haemoglobin inside red blood cells?",
+      "options": [
+        "$50%$",
+        "$97%$",
+        "$70%$",
+        "$23%$"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. $97%$",
+      "explanation": "About $97%$ of arterial oxygen is carried bound to haemoglobin as oxyhaemoglobin, while only about $3%$ is physically dissolved in plasma.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 29
+    },
+    {
+      "id": "pio201-rbc-30",
+      "text": "Among the six antigens of the Rh blood group system ($C, D, E, c, d, e$), which specific antigen is the most strongly immunogenic and determines whether an individual is Rh-positive?",
+      "options": [
+        "C antigen",
+        "D antigen",
+        "E antigen",
+        "c antigen"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. D antigen",
+      "explanation": "The D antigen is far more antigenic than the other Rh antigens; its presence on the RBC membrane defines an individual as Rh-positive, while its absence defines Rh-negative status.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 30
+    },
+    {
+      "id": "pio201-rbc-31",
+      "text": "Whole blood is approximately five times more viscous than water. Which two components are the primary determinants of blood viscosity?",
+      "options": [
+        "Platelets and dissolved electrolytes",
+        "White blood cells and chylomicrons",
+        "Dissolved gases and glucose",
+        "Red blood cells and plasma proteins"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Red blood cells and plasma proteins",
+      "explanation": "Blood viscosity depends primarily on the concentration of red blood cells (haematocrit) and the concentration of plasma proteins.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 31
+    },
+    {
+      "id": "pio201-rbc-32",
+      "text": "Which molecular property of haemoglobin accounts for the characteristic sigmoid (S-shaped) contour of the oxygen-haemoglobin dissociation curve?",
+      "options": [
+        "Cooperative binding (positive allostery), where binding of the first $O_2$ shifts Hb from the T-state to the R-state and increases affinity at the remaining heme sites",
+        "Independent, identical oxygen affinity across all four heme sites",
+        "Competitive binding between oxygen and plasma albumin",
+        "Irreversible covalent attachment of the fourth oxygen molecule"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Cooperative binding (positive allostery), where binding of the first $O_2$ shifts Hb from the T-state to the R-state and increases affinity at the remaining heme sites",
+      "explanation": "Cooperative binding among the four subunits transitions haemoglobin from the low-affinity tense (T) state to the high-affinity relaxed (R) state as successive $O_2$ molecules bind, creating the sigmoid curve.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 32
+    },
+    {
+      "id": "pio201-rbc-33",
+      "text": "Which group of normal physiological conditions is characteristically associated with a physiological INCREASE in the circulating red blood cell count?",
+      "options": [
+        "Deep sleep, pregnancy, and high barometric pressure",
+        "Advanced old age, recumbent posture, and morning hours",
+        "Prolonged fasting and haemodilution",
+        "Newborn infancy ($6$ to $7\\ \\text{million}/\\text{mm}^3$), high altitude, vigorous muscular exercise, and emotional excitement"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Newborn infancy ($6$ to $7\\ \\text{million}/\\text{mm}^3$), high altitude, vigorous muscular exercise, and emotional excitement",
+      "explanation": "RBC count physiologically rises in newborns (due to intrauterine hypoxia), at high altitudes (hypoxic EPO drive), and during exercise or emotional excitement (sympathetic splenic contraction and haemoconcentration).",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 33
+    },
+    {
+      "id": "pio201-rbc-34",
+      "text": "Which microscopic feature specifically characterizes the early normoblast (basophilic erythroblast) stage of erythropoiesis?",
+      "options": [
+        "Disappearance of nucleoli with chromatin condensation and deeply basophilic cytoplasm",
+        "Presence of an extruded pyknotic ink-spot nucleus",
+        "Polychromatic cytoplasm containing visible haemoglobin",
+        "Presence of a supravital reticular network without a nucleus"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Disappearance of nucleoli with chromatin condensation and deeply basophilic cytoplasm",
+      "explanation": "The early normoblast ($15\\ \\mu\\text{m}$) is marked by the disappearance of nucleoli, condensation of chromatin into a dense network, and strongly basophilic cytoplasm.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 34
+    },
+    {
+      "id": "pio201-rbc-35",
+      "text": "In adult red bone marrow, roughly $75%$ of haemopoiesis produces leukocytes while $25%$ produces erythrocytes, yet circulating RBCs outnumber WBCs by about $500:1$. What explains this ratio?",
+      "options": [
+        "Erythrocytes have a vastly longer circulating lifespan ($120$ days) than most leukocytes ($\\frac{1}{2}$ to $15$ days)",
+        "Erythrocytes undergo continuous binary fission in the peripheral blood",
+        "Leukocytes are destroyed immediately before leaving the bone marrow",
+        "Only $1%$ of newly formed leukocytes enter the bloodstream"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Erythrocytes have a vastly longer circulating lifespan ($120$ days) than most leukocytes ($\\frac{1}{2}$ to $15$ days)",
+      "explanation": "Because leukocytes have a much shorter lifespan than erythrocytes, the bone marrow must devote a greater proportion of its production capacity to leukocytes to maintain their circulating counts.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 35
+    },
+    {
+      "id": "pio201-rbc-36",
+      "text": "How does primary polycythaemia (polycythaemia vera) differ pathophysiologically from secondary polycythaemia?",
+      "options": [
+        "Primary polycythaemia is caused by high-altitude hypoxia with high EPO; secondary is a bone marrow neoplasm with low EPO",
+        "Both primary and secondary polycythaemia are caused exclusively by dehydration",
+        "Primary polycythaemia is an autonomous myeloproliferative disorder of the bone marrow with suppressed (low) erythropoietin levels, whereas secondary polycythaemia is driven by chronic hypoxia or excess erythropoietin secretion",
+        "Primary polycythaemia affects only RBCs without affecting WBCs or platelets; secondary polycythaemia elevates only platelets"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Primary polycythaemia is an autonomous myeloproliferative disorder of the bone marrow with suppressed (low) erythropoietin levels, whereas secondary polycythaemia is driven by chronic hypoxia or excess erythropoietin secretion",
+      "explanation": "Polycythaemia vera is an autonomous neoplastic proliferation of myeloid stem cells (elevating RBCs, WBCs, and platelets) with feedback-suppressed EPO, whereas secondary polycythaemia is a compensatory response to hypoxia or inappropriate EPO secretion.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 36
+    },
+    {
+      "id": "pio201-rbc-37",
+      "text": "How does erythropoietin act on the bone marrow, and how long does it take after an acute hypoxic stimulus for newly formed RBCs to appear in the circulation?",
+      "options": [
+        "It causes mature RBCs to divide in blood; effect appears in $6$ hours",
+        "It stimulates CFU-E differentiation into proerythroblasts and accelerates maturation; new RBCs appear in $4$ to $5$ days",
+        "It prevents splenic destruction of old RBCs; effect appears in $1$ day",
+        "It inhibits haemoglobin synthesis; effect appears in $14$ days"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It stimulates CFU-E differentiation into proerythroblasts and accelerates maturation; new RBCs appear in $4$ to $5$ days",
+      "explanation": "Erythropoietin stimulates the differentiation of CFU-E into proerythroblasts, accelerates haemoglobin synthesis, and speeds up maturation, with newly formed RBCs entering circulation in $4$ to $5$ days.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 37
+    },
+    {
+      "id": "pio201-rbc-38",
+      "text": "Chemically, what are the ABO blood group antigens (agglutinogens) on the RBC membrane, and when do ABO antigens and naturally occurring antibodies first appear?",
+      "options": [
+        "Pure triglycerides; both appear at puberty",
+        "Oligosaccharides on membrane glycoproteins/glycolipids; antigens appear in the $6\\text{th}$ month of fetal life, while antibodies develop $2$ to $3$ months after birth",
+        "Nucleic acid polymers; antibodies appear in utero while antigens appear after birth",
+        "Free plasma proteins; both appear only after blood transfusion"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Oligosaccharides on membrane glycoproteins/glycolipids; antigens appear in the $6\\text{th}$ month of fetal life, while antibodies develop $2$ to $3$ months after birth",
+      "explanation": "A and B agglutinogens are carbohydrate determinants on membrane glycoproteins and glycolipids that appear around the $6\\text{th}$ fetal month, whereas anti-A and anti-B agglutinins develop $2$ to $3$ months postnatally.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 38
+    },
+    {
+      "id": "pio201-rbc-39",
+      "text": "What are the normal average circulating red blood cell counts in a healthy adult male and a healthy adult female respectively?",
+      "options": [
+        "Males $3.5\\ \\text{million}/\\text{mm}^3$; females $3.0\\ \\text{million}/\\text{mm}^3$",
+        "Males $6.5\\ \\text{million}/\\text{mm}^3$; females $6.0\\ \\text{million}/\\text{mm}^3$",
+        "Males $4.5\\ \\text{million}/\\text{mm}^3$; females $5.0\\ \\text{million}/\\text{mm}^3$",
+        "Males $5.0\\ \\text{million}/\\text{mm}^3$; females $4.5\\ \\text{million}/\\text{mm}^3$"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Males $5.0\\ \\text{million}/\\text{mm}^3$; females $4.5\\ \\text{million}/\\text{mm}^3$",
+      "explanation": "The normal adult RBC count averages $5.0\\ \\text{million}/\\text{mm}^3$ ($4.5$ to $5.5\\ \\text{million}/\\text{mm}^3$) in males and $4.5\\ \\text{million}/\\text{mm}^3$ ($4.0$ to $5.0\\ \\text{million}/\\text{mm}^3$) in females.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 39
+    },
+    {
+      "id": "pio201-rbc-40",
+      "text": "Structurally, how is the iron-containing pigment moiety (heme) of haemoglobin assembled?",
+      "options": [
+        "Two benzene rings linked to a ferric ($Fe^{3+}$) ion",
+        "Six indole rings complexed with a copper atom",
+        "Four amino acid chains bound to a zinc atom",
+        "Four pyrrole rings linked by methene bridges (protoporphyrin IX) complexed with a central ferrous ($Fe^{2+}$) iron atom"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Four pyrrole rings linked by methene bridges (protoporphyrin IX) complexed with a central ferrous ($Fe^{2+}$) iron atom",
+      "explanation": "Heme consists of a tetrapyrrole porphyrin ring (four pyrrole rings joined by methene bridges) with a central ferrous iron atom ($Fe^{2+}$) coordinated to the pyrrole nitrogens and the globin chain.",
+      "section": "Erythrocyte Membrane, Gas Transport & Blood Groups",
+      "questionNumber": 40
+    },
+    {
+      "id": "pio201-rbc-41",
+      "text": "Which formula and normal adult reference range correctly define Mean Corpuscular Haemoglobin Concentration (MCHC)?",
+      "options": [
+        "$\\text{MCHC} = \\frac{\\text{PCV (%)} \\times 10}{\\text{RBC count}}$; normal range $78%$ to $90%$",
+        "$\\text{MCHC} = \\frac{\\text{Hb (g/dL)} \\times 10}{\\text{RBC count}}$; normal range $27%$ to $32%$",
+        "$\\text{MCHC} = \\frac{\\text{PCV (%)} \\times 100}{\\text{Hb (g/dL)}}$; normal range $40%$ to $45%$",
+        "$\\text{MCHC} = \\frac{\\text{Hb (g/dL)} \\times 100}{\\text{PCV (%)}}$; normal range $30%$ to $38%$ (or $30$ to $38\\ \\text{g/dL}$)"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. $\\text{MCHC} = \\frac{\\text{Hb (g/dL)} \\times 100}{\\text{PCV (%)}}$; normal range $30%$ to $38%$ (or $30$ to $38\\ \\text{g/dL}$)",
+      "explanation": "MCHC expresses the concentration of haemoglobin per unit volume of packed red blood cells, calculated as $\\frac{\\text{Hb} \\times 100}{\\text{PCV}}$, normally ranging from $30%$ to $38%$.",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 41
+    },
+    {
+      "id": "pio201-rbc-42",
+      "text": "Approximately what percentage of the dry weight of a mature human erythrocyte is composed of haemoglobin, and which organelles are absent from its cytoplasm?",
+      "options": [
+        "$95%$ haemoglobin; lacks nucleus, mitochondria, ribosomes, and Golgi apparatus",
+        "$50%$ haemoglobin; lacks only the nucleus while retaining abundant mitochondria",
+        "$33%$ haemoglobin; retains ribosomes and rough endoplasmic reticulum",
+        "$75%$ haemoglobin; retains a Golgi apparatus for lipid secretion"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. $95%$ haemoglobin; lacks nucleus, mitochondria, ribosomes, and Golgi apparatus",
+      "explanation": "Haemoglobin accounts for about $95%$ of the dry weight (and $33%$ of the wet weight) of a mature RBC, which expels its nucleus and loses mitochondria, ribosomes, and Golgi apparatus during maturation.",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 42
+    },
+    {
+      "id": "pio201-rbc-43",
+      "text": "Why is continuous ATP supply to the membrane-bound $Na^+/K^+$-ATPase pump critical for mature red blood cell survival?",
+      "options": [
+        "It prevents intracellular $Na^+$ accumulation, water influx, osmotic swelling, and cell lysis",
+        "It actively pumps $O_2$ molecules into the cell against a concentration gradient",
+        "It transports $HCO_3^-$ out of the cell during the chloride shift",
+        "It synthesizes membrane phospholipids to repair capillary tears"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. It prevents intracellular $Na^+$ accumulation, water influx, osmotic swelling, and cell lysis",
+      "explanation": "By extruding $3\\ Na^+$ for every $2\\ K^+$ imported, the $Na^+/K^+$-ATPase pump maintains intracellular osmotic balance, preventing water influx and osmotic lysis.",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 43
+    },
+    {
+      "id": "pio201-rbc-44",
+      "text": "In describing RBC colour abnormalities on a stained blood smear, what do hypochromia and polychromasia indicate respectively?",
+      "options": [
+        "Hypochromia: bluish-grey tint; polychromasia: complete absence of stain",
+        "Hypochromia: deep red staining; polychromasia: loss of central pallor",
+        "Hypochromia: pale RBCs with central pallor exceeding one-third of cell diameter due to low Hb; polychromasia: bluish-grey tint indicating immature reticulocytes containing residual RNA",
+        "Hypochromia: excess iron accumulation; polychromasia: senile erythrocytes"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Hypochromia: pale RBCs with central pallor exceeding one-third of cell diameter due to low Hb; polychromasia: bluish-grey tint indicating immature reticulocytes containing residual RNA",
+      "explanation": "Hypochromic cells appear pale with an enlarged central pallor ($> \\frac{1}{3}$ of cell diameter) due to reduced haemoglobin content, whereas polychromasia reflects bluish-grey staining of young reticulocytes rich in residual RNA.",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 44
+    },
+    {
+      "id": "pio201-rbc-45",
+      "text": "In newborns and children up to approximately $20$ years of age, where does active red blood cell production occur?",
+      "options": [
+        "Exclusively within the liver and spleen",
+        "In the red bone marrow of all bones, including the shafts of long bones",
+        "Exclusively within the sternum and skull",
+        "Within peripheral lymph nodes"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. In the red bone marrow of all bones, including the shafts of long bones",
+      "explanation": "From birth until about $20$ years of age, RBCs are actively produced in the red bone marrow of all bones, including the diaphyses (shafts) of long bones.",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 45
+    },
+    {
+      "id": "pio201-rbc-46",
+      "text": "What is the normal physiological fate of the globin polypeptide chains liberated during red blood cell destruction?",
+      "options": [
+        "Excreted unchanged in the urine",
+        "Hydrolyzed into amino acids and returned to the body's amino acid pool for new protein synthesis",
+        "Converted directly into bilirubin in the spleen",
+        "Stored permanently as insoluble granules in the liver"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Hydrolyzed into amino acids and returned to the body's amino acid pool for new protein synthesis",
+      "explanation": "Globin is broken down into its constituent amino acids, which enter the systemic amino acid pool to be reused for synthesizing new proteins, including new globin chains.",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 46
+    },
+    {
+      "id": "pio201-rbc-47",
+      "text": "From an evolutionary and physiological standpoint, why are red blood cells indispensable for sustaining aerobic metabolism in large multicellular vertebrates?",
+      "options": [
+        "They actively synthesize glucose for peripheral organs",
+        "They generate the hydrostatic pressure required for arterial flow",
+        "They directly phagocytose circulating bacterial pathogens",
+        "They provide a specialized intracellular vehicle to transport large quantities of $O_2$ from the lungs to tissues"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. They provide a specialized intracellular vehicle to transport large quantities of $O_2$ from the lungs to tissues",
+      "explanation": "Because oxygen has very low solubility in plasma, red blood cells packed with haemoglobin are required to carry sufficient $O_2$ to support aerobic cellular respiration across tissues.",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 47
+    },
+    {
+      "id": "pio201-rbc-48",
+      "text": "During $CO_2$ uptake in systemic capillaries, bicarbonate ions ($HCO_3^-$) diffuse out of erythrocytes into the plasma. How do RBCs maintain electrical neutrality during this process?",
+      "options": [
+        "By pumping $Na^+$ out of the cell",
+        "By exporting $K^+$ ions into plasma",
+        "By releasing $H^+$ ions into plasma",
+        "By importing chloride ions ($Cl^-$) from plasma into the RBC (chloride shift / Hamburger phenomenon)"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. By importing chloride ions ($Cl^-$) from plasma into the RBC (chloride shift / Hamburger phenomenon)",
+      "explanation": "As negatively charged $HCO_3^-$ exits the RBC down its concentration gradient, negatively charged $Cl^-$ enters via Band 3 protein (the chloride shift), preserving electrical neutrality.",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 48
+    },
+    {
+      "id": "pio201-rbc-49",
+      "text": "Why does excessive red blood cell destruction lead to haemolytic (pre-hepatic) jaundice?",
+      "options": [
+        "Complete obstruction of the common bile duct prevents bile outflow",
+        "Hepatocytes lose the ability to synthesize plasma albumin",
+        "Excess iron pigments directly stain the sclera yellow",
+        "Accelerated haemoglobin breakdown generates large amounts of unconjugated bilirubin that exceed the liver's conjugating capacity"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Accelerated haemoglobin breakdown generates large amounts of unconjugated bilirubin that exceed the liver's conjugating capacity",
+      "explanation": "In haemolytic jaundice, massive RBC destruction overwhelms hepatic glucuronidation, elevating unconjugated bilirubin in the blood and causing yellow discoloration of skin and sclerae.",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 49
+    },
+    {
+      "id": "pio201-rbc-50",
+      "text": "What are the approximate mean surface area and mean cellular volume of a normal mature human red blood cell?",
+      "options": [
+        "Surface area $60\\ \\mu\\text{m}^2$; volume $45\\ \\mu\\text{m}^3$",
+        "Surface area $120\\ \\mu\\text{m}^2$; volume $87\\ \\mu\\text{m}^3$",
+        "Surface area $240\\ \\mu\\text{m}^2$; volume $150\\ \\mu\\text{m}^3$",
+        "Surface area $80\\ \\mu\\text{m}^2$; volume $110\\ \\mu\\text{m}^3$"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Surface area $120\\ \\mu\\text{m}^2$; volume $87\\ \\mu\\text{m}^3$",
+      "explanation": "A normal human erythrocyte has an average surface area of approximately $120\\ \\mu\\text{m}^2$ and an average volume of about $87\\ \\mu\\text{m}^3$ ($78$ to $90\\ \\mu\\text{m}^3$).",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 50
+    },
+    {
+      "id": "pio201-rbc-51",
+      "text": "How does glucose enter the mature human red blood cell from the surrounding plasma?",
+      "options": [
+        "Active sodium-glucose cotransport requiring ATP",
+        "Strictly insulin-dependent vesicular endocytosis",
+        "Simple diffusion through cholesterol channels",
+        "Insulin-independent facilitated diffusion via GLUT1 transporters"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Insulin-independent facilitated diffusion via GLUT1 transporters",
+      "explanation": "Mature erythrocytes lack insulin receptors and take up glucose continuously via insulin-independent facilitated diffusion mediated by GLUT1 membrane transporters.",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 51
+    },
+    {
+      "id": "pio201-rbc-52",
+      "text": "What is the general medical term for a pathological reduction in the circulating red blood cell count, haemoglobin concentration, or packed cell volume below normal reference limits for age and sex?",
+      "options": [
+        "Erythrocytosis",
+        "Polycythaemia",
+        "Anaemia",
+        "Reticulocytosis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Anaemia",
+      "explanation": "Anaemia is defined as a pathological decrease in RBC count, haemoglobin concentration, and/or haematocrit below normal reference values, reducing the oxygen-carrying capacity of blood.",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 52
+    },
+    {
+      "id": "pio201-rbc-53",
+      "text": "What is the normal circulating reticulocyte count in a healthy adult, and how many total days are required for a proerythroblast to mature into a biconcave erythrocyte?",
+      "options": [
+        "$5%$ to $10%$; $21$ days total",
+        "$\\le 1%$; $7$ days total ($5$ days to reticulocyte plus $2$ days to mature RBC)",
+        "$2%$ to $6%$; $14$ days total",
+        "$0%$; $3$ days total"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. $\\le 1%$; $7$ days total ($5$ days to reticulocyte plus $2$ days to mature RBC)",
+      "explanation": "Reticulocytes normally represent $\\le 1%$ of adult circulating RBCs (showing organelle remnants on supravital staining). Erythropoiesis takes $7$ days total: $5$ days to reach the reticulocyte stage and $2$ more days to mature into an erythrocyte.",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 53
+    },
+    {
+      "id": "pio201-rbc-54",
+      "text": "How does extravascular haemolysis differ fundamentally from intravascular haemolysis?",
+      "options": [
+        "Extravascular haemolysis occurs inside arterial capillaries; intravascular occurs in the bone marrow",
+        "Extravascular haemolysis involves macrophage phagocytosis within the reticuloendothelial system (spleen/liver), whereas intravascular haemolysis involves direct RBC rupture within the bloodstream releasing free haemoglobin",
+        "Extravascular haemolysis releases free haemoglobin directly into urine; intravascular produces only bilirubin",
+        "Extravascular haemolysis occurs only in neonates; intravascular is the normal adult pathway"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Extravascular haemolysis involves macrophage phagocytosis within the reticuloendothelial system (spleen/liver), whereas intravascular haemolysis involves direct RBC rupture within the bloodstream releasing free haemoglobin",
+      "explanation": "Normal senile RBC clearance is extravascular (within splenic/hepatic macrophages), whereas intravascular haemolysis releases free haemoglobin directly into plasma, where it is bound by haptoglobin.",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 54
+    },
+    {
+      "id": "pio201-rbc-55",
+      "text": "What is the fundamental molecular defect characterizing the thalassaemias ($\\alpha$-thalassaemia and $\\beta$-thalassaemia)?",
+      "options": [
+        "A qualitative amino acid substitution that causes haemoglobin polymerization",
+        "An acquired autoimmune antibody directed against RBC Band 3 protein",
+        "A deficiency of dietary folic acid impairing nuclear division",
+        "A quantitative reduction or complete absence in the synthesis of normal $\\alpha$- or $\\beta$-globin polypeptide chains, leading to imbalanced chain ratios, ineffective erythropoiesis, and microcytic hypochromic anaemia"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. A quantitative reduction or complete absence in the synthesis of normal $\\alpha$- or $\\beta$-globin polypeptide chains, leading to imbalanced chain ratios, ineffective erythropoiesis, and microcytic hypochromic anaemia",
+      "explanation": "Unlike sickle cell disease (a qualitative structural defect), thalassaemias are quantitative disorders of reduced or absent $\\alpha$- or $\\beta$-globin chain production; excess unpaired chains precipitate and damage erythroid cells.",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 55
+    },
+    {
+      "id": "pio201-rbc-56",
+      "text": "Which combination accurately pairs supportive trace metals and hemopoietic growth factors with their roles in erythropoiesis?",
+      "options": [
+        "Calcium synthesizes globin; IL-$1$ inhibits stem cells",
+        "Sodium forms heme; IL-$2$ lyses normoblasts",
+        "Zinc replaces iron in heme; IL-$8$ extrudes the nucleus",
+        "Copper aids intestinal iron absorption, cobalt/nickel aid iron utilization, and IL-$3$, IL-$6$, and IL-$11$ stimulate stem cell proliferation"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Copper aids intestinal iron absorption, cobalt/nickel aid iron utilization, and IL-$3$, IL-$6$, and IL-$11$ stimulate stem cell proliferation",
+      "explanation": "Beyond iron (for heme), copper is essential for iron absorption, cobalt and nickel assist iron utilization, and interleukins (IL-$3$, IL-$6$, and osteoblast-derived IL-$11$) stimulate pluripotent stem cell proliferation.",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 56
+    },
+    {
+      "id": "pio201-rbc-57",
+      "text": "What is the antigenic and antibody basis for classifying Blood Group O as the universal donor and Blood Group AB as the universal recipient in the ABO system?",
+      "options": [
+        "Group O plasma lacks antibodies; Group AB RBCs lack antigens",
+        "Group O RBCs have both A and B antigens; Group AB plasma has both anti-A and anti-B",
+        "Group O RBCs are resistant to complement lysis; Group AB RBCs have no membrane proteins",
+        "Group O RBCs lack A and B agglutinogens; Group AB plasma lacks anti-A and anti-B agglutinins"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Group O RBCs lack A and B agglutinogens; Group AB plasma lacks anti-A and anti-B agglutinins",
+      "explanation": "Group O RBCs have no A or B surface antigens to be attacked by recipient antibodies, while Group AB plasma lacks anti-A and anti-B antibodies to attack donor RBCs.",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 57
+    },
+    {
+      "id": "pio201-rbc-58",
+      "text": "Which physiological property allows red blood cells to remain uniformly dispersed throughout circulating plasma without settling during normal blood flow?",
+      "options": [
+        "Suspension stability",
+        "Capillary margination",
+        "Osmotic fragility",
+        "Diapedesis"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Suspension stability",
+      "explanation": "Suspension stability refers to the ability of RBCs to remain uniformly suspended in circulating blood; loss of suspension stability increases the erythrocyte sedimentation rate (ESR).",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 58
+    },
+    {
+      "id": "pio201-rbc-59",
+      "text": "Why is the binding of oxygen to haemoglobin classified as oxygenation rather than oxidation, and how many $O_2$ molecules bind to one fully saturated haemoglobin molecule?",
+      "options": [
+        "Iron transitions from $Fe^{2+}$ to $Fe^{3+}$; binds $2\\ O_2$ molecules",
+        "Oxygen forms a permanent covalent bond with globin; binds $1\\ O_2$ molecule",
+        "Oxygen binds loosely and reversibly while iron remains in the ferrous ($Fe^{2+}$) state; binds $4\\ O_2$ molecules",
+        "Oxygen displaces the porphyrin ring; binds $8\\ O_2$ molecules"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Oxygen binds loosely and reversibly while iron remains in the ferrous ($Fe^{2+}$) state; binds $4\\ O_2$ molecules",
+      "explanation": "Oxygenation is a loose, reversible association in which each of the four heme $Fe^{2+}$ atoms binds one $O_2$ molecule ($4\\ O_2$ per Hb, or $1.34\\ \\text{mL}\\ O_2/\\text{g}$ Hb) without oxidizing $Fe^{2+}$ to $Fe^{3+}$.",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 59
+    },
+    {
+      "id": "pio201-rbc-60",
+      "text": "How are red blood cells classified when their MCV is below $78\\ \\text{fL}$ and their MCHC is below $30%$?",
+      "options": [
+        "Macrocytic and normochromic",
+        "Normocytic and normochromic",
+        "Microcytic and hypochromic",
+        "Macrocytic and hypochromic"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Microcytic and hypochromic",
+      "explanation": "An MCV below the normal range indicates small cells (microcytic), and an MCHC below $30%$ indicates reduced haemoglobin concentration (hypochromic).",
+      "section": "Erythropoiesis, Metabolism & Red Cell Indices",
+      "questionNumber": 60
+    },
+    {
+      "id": "pio201-rbc-61",
+      "text": "At which earliest recognizable nucleated stage of erythropoiesis does the biochemical synthesis of haemoglobin begin, even though it is not yet microscopically visible?",
+      "options": [
+        "Early normoblast",
+        "Proerythroblast",
+        "Intermediate normoblast",
+        "Late normoblast"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Proerythroblast",
+      "explanation": "Haemoglobin synthesis commences at the proerythroblast stage, although it only becomes visible microscopically at the intermediate normoblast stage.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 61
+    },
+    {
+      "id": "pio201-rbc-62",
+      "text": "Why do mature human red blood cells inevitably age and have a strictly finite lifespan of about $120$ days?",
+      "options": [
+        "They exhaust their chromosomal telomeres during peripheral mitosis",
+        "Lacking a nucleus and ribosomes, they cannot synthesize new enzymes or membrane proteins, leading to progressive metabolic decline and membrane rigidity",
+        "Plasma antibodies progressively lyse all RBCs after $4$ months",
+        "Haemoglobin crystallizes spontaneously after $100$ pulmonary transits"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Lacking a nucleus and ribosomes, they cannot synthesize new enzymes or membrane proteins, leading to progressive metabolic decline and membrane rigidity",
+      "explanation": "Because mature RBCs lack nuclei and ribosomes, they cannot replace worn-out glycolytic enzymes or membrane proteins; as ATP production falls, membranes become fragile and rigid.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 62
+    },
+    {
+      "id": "pio201-rbc-63",
+      "text": "What is the fundamental cellular mechanism by which Vitamin $B_{12}$ or folic acid deficiency produces megaloblastic anaemia?",
+      "options": [
+        "Direct oxidation of ferrous iron to ferric iron inside mature RBCs",
+        "Destruction of spectrin filaments in the erythrocyte cytoskeleton",
+        "Excess production of erythropoietin by the renal tubules",
+        "Impaired DNA synthesis slows nuclear maturation and cell division while cytoplasmic RNA/haemoglobin synthesis continues, producing abnormally large, fragile macrocytes"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Impaired DNA synthesis slows nuclear maturation and cell division while cytoplasmic RNA/haemoglobin synthesis continues, producing abnormally large, fragile macrocytes",
+      "explanation": "Deficiency of Vitamin $B_{12}$ or folate impairs thymidine/DNA synthesis, creating nuclear-cytoplasmic asynchrony that results in large nucleated megaloblasts in marrow and oversized macrocytes in blood.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 63
+    },
+    {
+      "id": "pio201-rbc-64",
+      "text": "Which specific cells secrete approximately $85%$ to $90%$ of circulating erythropoietin in response to hypoxia?",
+      "options": [
+        "Juxtaglomerular smooth muscle cells of the afferent arteriole",
+        "Hepatocytes of the liver lobules",
+        "Gastric parietal cells",
+        "Peritubular capillary endothelial/interstitial cells of the kidney"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Peritubular capillary endothelial/interstitial cells of the kidney",
+      "explanation": "The vast majority ($85%$ to $90%$) of erythropoietin (a $165$-amino-acid glycoprotein) is secreted by peritubular capillary endothelial/interstitial cells in the kidney, with minor secretion by the liver and brain.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 64
+    },
+    {
+      "id": "pio201-rbc-65",
+      "text": "Inside hepatocytes, unconjugated bilirubin is made water-soluble for biliary excretion by conjugation with which substance, and what does colonic bacterial action convert it into?",
+      "options": [
+        "Conjugated with glycine; converted into transferrin",
+        "Conjugated with sulfuric acid; converted into biliverdin",
+        "Conjugated with hydrochloric acid; converted into haemosiderin",
+        "Conjugated with glucuronic acid; converted into urobilinogen and excreted mainly in faeces as stercobilin"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Conjugated with glucuronic acid; converted into urobilinogen and excreted mainly in faeces as stercobilin",
+      "explanation": "Hepatocytes conjugate bilirubin with glucuronic acid (via UDP-glucuronyl transferase); in the intestine, bacteria convert it into urobilinogen, most of which is excreted as stercobilin (giving stool its brown colour), with a small fraction excreted in urine as urobilin.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 65
+    },
+    {
+      "id": "pio201-rbc-66",
+      "text": "Although mature erythrocytes in almost all mammals are non-nucleated, which mammal represents a classic exception by retaining nucleated red blood cells in its mature circulation?",
+      "options": [
+        "Elephant",
+        "Camel",
+        "Whale",
+        "Giraffe"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Camel",
+      "explanation": "The camel is a notable mammalian exception that possesses oval, nucleated red blood cells in its mature peripheral circulation.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 66
+    },
+    {
+      "id": "pio201-rbc-67",
+      "text": "What is the normal blood haemoglobin concentration range in healthy adult males and healthy adult females respectively?",
+      "options": [
+        "Males $10$ to $12\\ \\text{g/dL}$; females $8$ to $10\\ \\text{g/dL}$",
+        "Males $18$ to $22\\ \\text{g/dL}$; females $16$ to $18\\ \\text{g/dL}$",
+        "Males $14$ to $16\\ \\text{g/dL}$; females $12$ to $14\\ \\text{g/dL}$",
+        "Males $12$ to $13\\ \\text{g/dL}$; females $12$ to $13\\ \\text{g/dL}$"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Males $14$ to $16\\ \\text{g/dL}$; females $12$ to $14\\ \\text{g/dL}$",
+      "explanation": "Normal adult haemoglobin concentration is $14$ to $16\\ \\text{g/dL}$ (average $15\\ \\text{g/dL}$) in males and $12$ to $14\\ \\text{g/dL}$ in females.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 67
+    },
+    {
+      "id": "pio201-rbc-68",
+      "text": "Which formula and normal adult reference range correctly define Mean Corpuscular Haemoglobin (MCH)?",
+      "options": [
+        "$\\text{MCH} = \\frac{\\text{PCV (%)} \\times 10}{\\text{RBC count}}$; normal range $78$ to $90\\ \\text{pg}$",
+        "$\\text{MCH} = \\frac{\\text{Hb (g/dL)} \\times 100}{\\text{PCV (%)}}$; normal range $30$ to $38\\ \\text{pg}$",
+        "$\\text{MCH} = \\frac{\\text{Hb (g/dL)} \\times 10}{\\text{RBC count (millions/mm}^3\\text{)}}$; normal range $27$ to $32\\ \\text{pg}$",
+        "$\\text{MCH} = \\frac{\\text{Hb (%)}}{\\text{RBC (%)}}$; normal range $0.8$ to $1.2\\ \\text{pg}$"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. $\\text{MCH} = \\frac{\\text{Hb (g/dL)} \\times 10}{\\text{RBC count (millions/mm}^3\\text{)}}$; normal range $27$ to $32\\ \\text{pg}$",
+      "explanation": "MCH represents the average weight of haemoglobin in a single RBC, calculated as $\\frac{\\text{Hb} \\times 10}{\\text{RBC count}}$, with a normal value of $27$ to $32\\ \\text{pg}$.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 68
+    },
+    {
+      "id": "pio201-rbc-69",
+      "text": "Which major integral transmembrane protein of the erythrocyte membrane serves both as an anchor point for ankyrin and as the anion exchanger mediating $Cl^-/HCO_3^-$ exchange?",
+      "options": [
+        "Glycophorin A",
+        "Band 3 protein",
+        "Tropomodulin",
+        "Adducin"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Band 3 protein",
+      "explanation": "Band 3 protein (anion exchanger 1) is the most abundant integral membrane protein in RBCs; it anchors the spectrin-actin cytoskeleton via ankyrin and mediates the 1:1 chloride-bicarbonate shift.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 69
+    },
+    {
+      "id": "pio201-rbc-70",
+      "text": "Small quantities of haemoglobin spontaneously oxidize to non-functional methemoglobin ($Fe^{3+}$) daily. Which intracellular RBC enzyme system performs $95%$ of the reduction back to ferrous haemoglobin ($Fe^{2+}$)?",
+      "options": [
+        "Carbonic anhydrase II",
+        "NADH-dependent methemoglobin reductase (Diaphorase I)",
+        "Superoxide dismutase",
+        "Ferrochelatase"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. NADH-dependent methemoglobin reductase (Diaphorase I)",
+      "explanation": "The NADH-dependent methemoglobin reductase system (Diaphorase I) accounts for roughly $95%$ of intracellular methemoglobin reduction back to functional $Fe^{2+}$ haemoglobin.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 70
+    },
+    {
+      "id": "pio201-rbc-71",
+      "text": "Which of the following correctly matches an abnormal RBC shape (poikilocyte) with its classic morphological appearance?",
+      "options": [
+        "Spherocyte: small, dense, spherical RBC lacking central pallor; Target cell (codocyte): bull's-eye appearance with central haemoglobin dot; Drepanocyte: crescent/sickle shape",
+        "Spherocyte: elongated cigar shape; Target cell: spiked projections; Drepanocyte: teardrop shape",
+        "Spherocyte: expanded central pallor; Target cell: biconcave normal disc; Drepanocyte: spherical shape",
+        "Spherocyte: ring-shaped hollow cell; Target cell: crescent shape; Drepanocyte: fragmented helmet shape"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Spherocyte: small, dense, spherical RBC lacking central pallor; Target cell (codocyte): bull's-eye appearance with central haemoglobin dot; Drepanocyte: crescent/sickle shape",
+      "explanation": "Spherocytes lose biconcavity and central pallor; target cells (codocytes) show a central haemoglobin density surrounded by a pale ring; drepanocytes are crescent-shaped sickle cells.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 71
+    },
+    {
+      "id": "pio201-rbc-72",
+      "text": "When does the myeloid stage of erythropoiesis—in which red bone marrow takes over RBC production—begin during human development?",
+      "options": [
+        "During the first $4$ weeks of gestation",
+        "During the second month of gestation",
+        "Immediately after puberty",
+        "During the last $3$ months of intrauterine life"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. During the last $3$ months of intrauterine life",
+      "explanation": "The myeloid stage begins during the last $3$ months of intrauterine life, as red bone marrow progressively replaces the liver as the main site of erythropoiesis.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 72
+    },
+    {
+      "id": "pio201-rbc-73",
+      "text": "Inside reticuloendothelial macrophages following senile RBC destruction, haemoglobin is initially broken down into which three primary components?",
+      "options": [
+        "Bilirubin, albumin, and glucose",
+        "Ferritin, transferrin, and urobilin",
+        "Amino acids, fatty acids, and glycerol",
+        "Iron, globin, and porphyrin"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Iron, globin, and porphyrin",
+      "explanation": "Tissue macrophages cleave haemoglobin into its three structural constituents: iron, the globin protein chains, and the porphyrin ring.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 73
+    },
+    {
+      "id": "pio201-rbc-74",
+      "text": "In a healthy adult, red blood cells normally occupy approximately what percentage of total whole blood volume (the haematocrit)?",
+      "options": [
+        "$40%$ to $45%$",
+        "$15%$ to $20%$",
+        "$60%$ to $65%$",
+        "$80%$ to $85%$"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. $40%$ to $45%$",
+      "explanation": "Whole blood consists of roughly $55%$ liquid plasma and $40%$ to $45%$ packed red blood cells, with leukocytes and platelets occupying less than $1%$.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 74
+    },
+    {
+      "id": "pio201-rbc-75",
+      "text": "How do red blood cells contribute significantly to systemic acid-base balance in the blood?",
+      "options": [
+        "By excreting hydrogen ions directly through the alveolar membrane",
+        "By synthesizing ammonia from plasma urea",
+        "Through the buffering action of haemoglobin, which provides roughly six times the buffering power of plasma proteins",
+        "By actively secreting hydrochloric acid into venous plasma"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Through the buffering action of haemoglobin, which provides roughly six times the buffering power of plasma proteins",
+      "explanation": "Haemoglobin is a major blood buffer (about $6$ times more potent than plasma proteins); deoxygenated haemoglobin has a higher $pK$, allowing its histidine residues to bind $H^+$ generated from carbonic acid dissociation.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 75
+    },
+    {
+      "id": "pio201-rbc-76",
+      "text": "What is the primary pathophysiological sequence during an acute ABO-incompatible haemolytic transfusion reaction?",
+      "options": [
+        "Recipient antibodies bind donor RBC antigens, causing agglutination, complement-mediated intravascular haemolysis, haemoglobinaemia, and haemoglobinuria",
+        "Donor RBCs immediately differentiate into leukocytes in recipient marrow",
+        "Recipient plasma proteins induce harmless rouleaux formation that resolves spontaneously",
+        "Donor platelets prevent oxygen release from recipient haemoglobin"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Recipient antibodies bind donor RBC antigens, causing agglutination, complement-mediated intravascular haemolysis, haemoglobinaemia, and haemoglobinuria",
+      "explanation": "In an incompatible transfusion, pre-formed recipient antibodies agglutinate donor RBCs and activate complement, causing rapid intravascular haemolysis and release of free haemoglobin into plasma and urine.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 76
+    },
+    {
+      "id": "pio201-rbc-77",
+      "text": "Which set of morphometric dimensions accurately describes a normal mature human biconcave erythrocyte?",
+      "options": [
+        "Diameter $10.0\\ \\mu\\text{m}$; central thickness $2.5\\ \\mu\\text{m}$; peripheral thickness $1.0\\ \\mu\\text{m}$",
+        "Diameter $5.5\\ \\mu\\text{m}$; central thickness $1.5\\ \\mu\\text{m}$; peripheral thickness $3.0\\ \\mu\\text{m}$",
+        "Diameter $8.5\\ \\mu\\text{m}$; central thickness $2.2\\ \\mu\\text{m}$; peripheral thickness $1.0\\ \\mu\\text{m}$",
+        "Diameter $7.2\\ \\mu\\text{m}$; central thickness $1.0\\ \\mu\\text{m}$; peripheral thickness $2.2\\ \\mu\\text{m}$"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Diameter $7.2\\ \\mu\\text{m}$; central thickness $1.0\\ \\mu\\text{m}$; peripheral thickness $2.2\\ \\mu\\text{m}$",
+      "explanation": "A normal mature erythrocyte has a mean diameter of $7.2\\ \\mu\\text{m}$ (range $6.9$ to $7.4\\ \\mu\\text{m}$), a central thickness of $1.0\\ \\mu\\text{m}$, and a peripheral thickness of $2.2\\ \\mu\\text{m}$.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 77
+    },
+    {
+      "id": "pio201-rbc-78",
+      "text": "Because mature human erythrocytes lack mitochondria, through which metabolic pathway do they generate their ATP, and what is its final end product?",
+      "options": [
+        "Citric acid cycle; carbon dioxide and water",
+        "Anaerobic glycolysis (Embden-Meyerhof pathway); lactate",
+        "Beta-oxidation of fatty acids; acetyl-CoA",
+        "Oxidative phosphorylation; pyruvate"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Anaerobic glycolysis (Embden-Meyerhof pathway); lactate",
+      "explanation": "Without mitochondria, mature RBCs depend exclusively on anaerobic glycolysis (Embden-Meyerhof pathway) for ATP production, reducing pyruvate to lactate to regenerate $NAD^+$.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 78
+    },
+    {
+      "id": "pio201-rbc-79",
+      "text": "What is the general medical term for a pathological increase in the circulating red blood cell count above normal physiological limits?",
+      "options": [
+        "Polycythaemia",
+        "Anaemia",
+        "Leukocytosis",
+        "Thrombocytosis"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Polycythaemia",
+      "explanation": "Polycythaemia refers to a pathological elevation in the RBC count (typically above $7\\ \\text{million}/\\text{mm}^3$), which increases blood viscosity and haematocrit.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 79
+    },
+    {
+      "id": "pio201-rbc-80",
+      "text": "Which developmental events occur at the late normoblast (orthochromic erythroblast) stage of erythropoiesis?",
+      "options": [
+        "Onset of rapid mitotic division and nucleolar enlargement",
+        "Initial transcription of globin mRNA",
+        "Cessation of mitosis, shrinkage into an ink-spot nucleus, and nuclear extrusion by pyknosis",
+        "Complete dissolution of all haemoglobin into biliverdin"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Cessation of mitosis, shrinkage into an ink-spot nucleus, and nuclear extrusion by pyknosis",
+      "explanation": "In the late normoblast ($8$ to $10\\ \\mu\\text{m}$), active mitosis ceases, the cytoplasm becomes acidophilic, and the nucleus condenses into a dense \"ink-spot\" nucleus that is extruded to form a reticulocyte.",
+      "section": "Haemoglobin Breakdown, Anaemias & Maturation",
+      "questionNumber": 80
+    },
+    {
+      "id": "pio201-rbc-81",
+      "text": "What anatomical feature of the spleen specifically triggers the mechanical destruction of aged, fragile red blood cells?",
+      "options": [
+        "Strongly acidic pH within the splenic white pulp",
+        "High concentrations of bile salts in the splenic vein",
+        "Very narrow capillaries and endothelial slits in the splenic red pulp that rigid senile RBCs cannot squeeze through without rupturing",
+        "Hypotonic plasma environment within the splenic artery"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Very narrow capillaries and endothelial slits in the splenic red pulp that rigid senile RBCs cannot squeeze through without rupturing",
+      "explanation": "As RBCs age, they lose membrane deformability; when forced through the extremely narrow capillaries and slits of the splenic red pulp, senile RBCs fragment and are phagocytosed by macrophages.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 81
+    },
+    {
+      "id": "pio201-rbc-82",
+      "text": "Under conditions of low oxygen tension, how does Haemoglobin S (HbS) cause the characteristic pathology of Sickle Cell Disease?",
+      "options": [
+        "Deoxygenated HbS polymerizes into rigid, elongated tactoids/fibres that deform RBCs into fragile crescent (sickle) shapes, causing microvascular occlusion and chronic haemolysis",
+        "Oxygenated HbS binds irreversibly to plasma albumin and blocks renal tubules",
+        "HbS converts into methemoglobin and prevents carbonic anhydrase activity",
+        "HbS causes RBCs to swell into giant macrocytes that cannot exit the bone marrow"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Deoxygenated HbS polymerizes into rigid, elongated tactoids/fibres that deform RBCs into fragile crescent (sickle) shapes, causing microvascular occlusion and chronic haemolysis",
+      "explanation": "When deoxygenated, hydrophobic valine residues on HbS promote polymerization into rigid intracellular fibres, distorting the RBC into a sickle shape that obstructs microvessels and undergoes premature haemolysis.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 82
+    },
+    {
+      "id": "pio201-rbc-83",
+      "text": "Vitamin $B_{12}$ and folic acid are essential maturation factors for erythropoiesis. What is their primary biochemical role, and which gastric cells secrete the intrinsic factor needed for Vitamin $B_{12}$ absorption?",
+      "options": [
+        "Heme iron chelation; chief cells",
+        "Spectrin cross-linking; enterochromaffin cells",
+        "DNA synthesis for nuclear maturation and cell division; parietal (oxyntic) cells",
+        "Glycolytic ATP production; mucous neck cells"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. DNA synthesis for nuclear maturation and cell division; parietal (oxyntic) cells",
+      "explanation": "Vitamin $B_{12}$ and folic acid are essential for nucleic acid (DNA) synthesis during erythroid maturation. Gastric parietal cells secrete intrinsic factor, which is required for Vitamin $B_{12}$ absorption in the terminal ileum.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 83
+    },
+    {
+      "id": "pio201-rbc-84",
+      "text": "To which immunoglobulin classes do naturally occurring ABO agglutinins (anti-A, anti-B) and immune Rh antibodies (anti-D) predominantly belong respectively?",
+      "options": [
+        "ABO are IgG (cross placenta); anti-D are IgM (cannot cross placenta)",
+        "Both ABO and anti-D are strictly IgA",
+        "ABO are predominantly IgM (large pentamers, cannot cross placenta); anti-D are predominantly IgG (monomers, can cross placenta)",
+        "ABO are IgE; anti-D are IgD"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. ABO are predominantly IgM (large pentamers, cannot cross placenta); anti-D are predominantly IgG (monomers, can cross placenta)",
+      "explanation": "Naturally occurring anti-A and anti-B are predominantly large pentameric IgM antibodies that do not cross the placenta, whereas anti-D antibodies are smaller IgG molecules capable of crossing the placental barrier.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 84
+    },
+    {
+      "id": "pio201-rbc-85",
+      "text": "When anticoagulated blood stands in a vertical tube, red blood cells tend to stack together like a pile of coins (rouleaux formation). Which plasma proteins primarily accelerate this phenomenon?",
+      "options": [
+        "Albumin and transferrin",
+        "Prothrombin and plasminogen",
+        "Fibrinogen and globulins",
+        "Haptoglobin and ceruloplasmin"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Fibrinogen and globulins",
+      "explanation": "High-molecular-weight plasma proteins—specifically fibrinogen and globulins—reduce the electrostatic repulsion between RBCs and accelerate rouleaux formation.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 85
+    },
+    {
+      "id": "pio201-rbc-86",
+      "text": "How does fetal haemoglobin (HbF) differ structurally and functionally from normal adult haemoglobin (HbA)?",
+      "options": [
+        "HbF has two $\\alpha$- and two $\\delta$-chains and a lower oxygen affinity than HbA",
+        "HbF has two $\\alpha$- and two $\\gamma$-chains and a higher oxygen affinity than HbA due to weaker $2,3$-DPG binding",
+        "HbF has four $\\gamma$-chains and transports only carbon dioxide",
+        "HbF contains ferric iron ($Fe^{3+}$) and shifts the oxygen dissociation curve to the right"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. HbF has two $\\alpha$- and two $\\gamma$-chains and a higher oxygen affinity than HbA due to weaker $2,3$-DPG binding",
+      "explanation": "HbF ($\\alpha_2\\gamma_2$) replaces $\\beta$-chains with $\\gamma$-chains, which bind $2,3$-DPG less avidly; this gives HbF a higher affinity for $O_2$, facilitating placental oxygen transfer from mother to fetus.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 86
+    },
+    {
+      "id": "pio201-rbc-87",
+      "text": "For a blood sample with $\\text{PCV} = 45%$, $\\text{RBC count} = 5.0\\ \\text{million}/\\text{mm}^3$, and $\\text{Hb} = 15\\ \\text{g/dL}$, what are the calculated values of MCV, MCH, and MCHC respectively?",
+      "options": [
+        "$\\text{MCV} = 90\\ \\text{fL}$; $\\text{MCH} = 30\\ \\text{pg}$; $\\text{MCHC} = 33.3%$",
+        "$\\text{MCV} = 75\\ \\text{fL}$; $\\text{MCH} = 25\\ \\text{pg}$; $\\text{MCHC} = 30.0%$",
+        "$\\text{MCV} = 90\\ \\text{fL}$; $\\text{MCH} = 33.3\\ \\text{pg}$; $\\text{MCHC} = 30.0%$",
+        "$\\text{MCV} = 100\\ \\text{fL}$; $\\text{MCH} = 30\\ \\text{pg}$; $\\text{MCHC} = 35.0%$"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. $\\text{MCV} = 90\\ \\text{fL}$; $\\text{MCH} = 30\\ \\text{pg}$; $\\text{MCHC} = 33.3%$",
+      "explanation": "$\\text{MCV} = \\frac{45 \\times 10}{5.0} = 90\\ \\text{fL}$; $\\text{MCH} = \\frac{15 \\times 10}{5.0} = 30\\ \\text{pg}$; $\\text{MCHC} = \\frac{15 \\times 100}{45} = 33.3%$.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 87
+    },
+    {
+      "id": "pio201-rbc-88",
+      "text": "As a developing erythroid cell matures from a proerythroblast into a mature erythrocyte, which of the following changes does NOT normally occur?",
+      "options": [
+        "Progressive decrease in overall cell diameter",
+        "Condensation and eventual extrusion of the nucleus",
+        "Shift in cytoplasmic staining from acidophilic to strongly basophilic",
+        "Progressive accumulation of intracellular haemoglobin"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Shift in cytoplasmic staining from acidophilic to strongly basophilic",
+      "explanation": "Cytoplasmic staining shifts in the opposite direction—from strongly basophilic (rich in RNA/ribosomes) in early precursors to acidophilic (eosinophilic) as haemoglobin accumulates and RNA disappears.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 88
+    },
+    {
+      "id": "pio201-rbc-89",
+      "text": "Which laboratory technique is standardly used to determine the in vivo lifespan of human red blood cells?",
+      "options": [
+        "Westergren sedimentation tube measurement",
+        "Supravital staining with brilliant cresyl blue",
+        "Serial hypotonic saline dilution testing",
+        "Radioisotope tagging of RBCs with radioactive chromium ($^{51}Cr$) or radioactive iron"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Radioisotope tagging of RBCs with radioactive chromium ($^{51}Cr$) or radioactive iron",
+      "explanation": "The lifespan of RBCs is measured by tagging erythrocytes with radioisotopes such as $^{51}Cr$ and tracking the progressive decline of circulating radioactivity over time.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 89
+    },
+    {
+      "id": "pio201-rbc-90",
+      "text": "In the morphological classification of anaemia, which pairing correctly matches the morphological type with a classic aetiological example?",
+      "options": [
+        "Microcytic hypochromic: iron deficiency anaemia; Macrocytic normochromic: Vitamin $B_{12}$/folate deficiency; Normocytic normochromic: acute blood loss or aplastic anaemia",
+        "Microcytic hypochromic: Vitamin $B_{12}$ deficiency; Macrocytic normochromic: iron deficiency anaemia; Normocytic normochromic: thalassaemia",
+        "Microcytic hypochromic: acute haemorrhage; Macrocytic normochromic: hereditary spherocytosis; Normocytic normochromic: folic acid deficiency",
+        "Microcytic hypochromic: aplastic anaemia; Macrocytic normochromic: iron deficiency; Normocytic normochromic: megaloblastic anaemia"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Microcytic hypochromic: iron deficiency anaemia; Macrocytic normochromic: Vitamin $B_{12}$/folate deficiency; Normocytic normochromic: acute blood loss or aplastic anaemia",
+      "explanation": "Impaired haemoglobin synthesis (iron deficiency, thalassaemia) yields microcytic hypochromic RBCs; impaired DNA synthesis ($B_{12}$/folate deficiency) yields macrocytic RBCs; acute haemorrhage or marrow aplasia yields normocytic normochromic RBCs.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 90
+    },
+    {
+      "id": "pio201-rbc-91",
+      "text": "What is the single most potent physiological stimulus that accelerates the rate of erythropoiesis?",
+      "options": [
+        "Hypercapnia",
+        "Hyperglycaemia",
+        "Tissue hypoxia",
+        "Metabolic alkalosis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Tissue hypoxia",
+      "explanation": "Tissue hypoxia (reduced oxygen delivery to tissues) is the primary physiological stimulus that triggers erythropoietin secretion and increases red blood cell production.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 91
+    },
+    {
+      "id": "pio201-rbc-92",
+      "text": "What is the sequential metabolic fate of the iron-free porphyrin ring released during haemoglobin breakdown?",
+      "options": [
+        "Converted directly into stercobilin inside the spleen",
+        "Reused intact to synthesize new red blood cell membranes",
+        "Degraded to biliverdin and then unconjugated bilirubin, which travels in plasma bound to albumin to the liver",
+        "Excreted directly through the lungs as volatile gases"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Degraded to biliverdin and then unconjugated bilirubin, which travels in plasma bound to albumin to the liver",
+      "explanation": "The porphyrin ring is opened to form green biliverdin, reduced to yellow unconjugated (water-insoluble) bilirubin, and transported in plasma bound to albumin to the liver.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 92
+    },
+    {
+      "id": "pio201-rbc-93",
+      "text": "Which pair of fundamental biological characteristics strictly distinguishes mature human red blood cells from white blood cells (leukocytes)?",
+      "options": [
+        "Absence of a nucleus and presence of intracellular haemoglobin",
+        "Presence of mitochondria and ability to undergo mitosis in blood",
+        "Larger cellular diameter and absence of a plasma membrane",
+        "Presence of a multi-lobed nucleus and synthesis of antibodies"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Absence of a nucleus and presence of intracellular haemoglobin",
+      "explanation": "Unlike leukocytes, which are nucleated and lack haemoglobin, mature human RBCs are anucleate and filled with haemoglobin, giving blood its red colour.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 93
+    },
+    {
+      "id": "pio201-rbc-94",
+      "text": "How do red blood cells influence haemodynamics and peripheral vascular resistance within the circulatory system?",
+      "options": [
+        "By contributing substantially to blood viscosity, which helps maintain peripheral resistance and arterial blood pressure",
+        "By secreting nitric oxide synthase from their nuclei to constrict arterioles",
+        "By directly contracting to propel blood through venous valves",
+        "By lowering blood density below that of water"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. By contributing substantially to blood viscosity, which helps maintain peripheral resistance and arterial blood pressure",
+      "explanation": "Because RBCs are a major determinant of blood viscosity, their concentration directly influences peripheral vascular resistance and overall haemodynamics.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 94
+    },
+    {
+      "id": "pio201-rbc-95",
+      "text": "Which formula and normal adult reference range correctly define Mean Corpuscular Volume (MCV)?",
+      "options": [
+        "$\\text{MCV} = \\frac{\\text{PCV (%)} \\times 10}{\\text{RBC count (millions/mm}^3\\text{)}}$; normal range $78$ to $90\\ \\text{fL}$",
+        "$\\text{MCV} = \\frac{\\text{Hb (g/dL)} \\times 10}{\\text{RBC count (millions/mm}^3\\text{)}}$; normal range $27$ to $32\\ \\text{fL}$",
+        "$\\text{MCV} = \\frac{\\text{Hb (g/dL)} \\times 100}{\\text{PCV (%)}}$; normal range $30$ to $38\\ \\text{fL}$",
+        "$\\text{MCV} = \\frac{\\text{RBC count} \\times 10}{\\text{PCV (%)}}$; normal range $40$ to $45\\ \\text{fL}$"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. $\\text{MCV} = \\frac{\\text{PCV (%)} \\times 10}{\\text{RBC count (millions/mm}^3\\text{)}}$; normal range $78$ to $90\\ \\text{fL}$",
+      "explanation": "MCV measures the average volume of a single RBC in femtolitres ($\\text{fL}$ or $\\mu\\text{m}^3$), calculated as $\\frac{\\text{PCV} \\times 10}{\\text{RBC count}}$, with a normal range of $78$ to $90\\ \\text{fL}$.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 95
+    },
+    {
+      "id": "pio201-rbc-96",
+      "text": "Which pair of submembranous cytoskeletal proteins forms a flexible meshwork anchored to transmembrane proteins via ankyrin to maintain the biconcave shape of the RBC?",
+      "options": [
+        "Myosin and troponin",
+        "Tubulin and dynein",
+        "Spectrin and actin",
+        "Keratin and vimentin"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Spectrin and actin",
+      "explanation": "The erythrocyte cytoskeleton consists primarily of spectrin and actin filaments, linked via ankyrin and Band 4.1 proteins to integral membrane proteins to preserve biconcavity and flexibility.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 96
+    },
+    {
+      "id": "pio201-rbc-97",
+      "text": "What is the physiological function of the Rapoport-Luebering shunt within red blood cell glycolysis?",
+      "options": [
+        "Converting lactate back into glucose",
+        "Synthesizing porphyrin rings for heme assembly",
+        "Producing $2,3$-diphosphoglycerate ($2,3$-DPG) to regulate oxygen unloading from haemoglobin",
+        "Generating NADH for methemoglobin reduction"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Producing $2,3$-diphosphoglycerate ($2,3$-DPG) to regulate oxygen unloading from haemoglobin",
+      "explanation": "The Rapoport-Luebering shunt diverts $1,3$-bisphosphoglycerate to form $2,3$-DPG, an organic phosphate that stabilizes deoxyhaemoglobin and promotes oxygen release to tissues.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 97
+    },
+    {
+      "id": "pio201-rbc-98",
+      "text": "How are microcytes and macrocytes quantitatively defined based on erythrocyte diameter and MCV?",
+      "options": [
+        "Microcytes $> 8\\ \\mu\\text{m}$ ($\\text{MCV} > 95\\ \\text{fL}$); macrocytes $< 6\\ \\mu\\text{m}$ ($\\text{MCV} < 78\\ \\text{fL}$)",
+        "Microcytes $7.2\\ \\mu\\text{m}$; macrocytes $7.4\\ \\mu\\text{m}$",
+        "Microcytes have no central pallor; macrocytes have no haemoglobin",
+        "Microcytes are abnormally small RBCs ($< 6\\ \\mu\\text{m}$, $\\text{MCV} < 78\\ \\text{fL}$); macrocytes are abnormally large RBCs ($> 8\\ \\mu\\text{m}$, $\\text{MCV} > 95\\ \\text{fL}$)"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Microcytes are abnormally small RBCs ($< 6\\ \\mu\\text{m}$, $\\text{MCV} < 78\\ \\text{fL}$); macrocytes are abnormally large RBCs ($> 8\\ \\mu\\text{m}$, $\\text{MCV} > 95\\ \\text{fL}$)",
+      "explanation": "Microcytes are smaller than normal ($< 6\\ \\mu\\text{m}$ diameter, low MCV), typical of iron deficiency and thalassaemia; macrocytes are larger than normal ($> 8\\ \\mu\\text{m}$ diameter, high MCV), typical of megaloblastic anaemia.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 98
+    },
+    {
+      "id": "pio201-rbc-99",
+      "text": "Starting from the third month of intrauterine life, which organ becomes the primary site of erythropoiesis during the hepatic stage?",
+      "options": [
+        "Kidney",
+        "Thymus",
+        "Liver (assisted by spleen and lymphoid organs)",
+        "Pancreas"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Liver (assisted by spleen and lymphoid organs)",
+      "explanation": "During the hepatic stage (from the $3\\text{rd}$ month of fetal life), the liver assumes the primary role in RBC production, assisted by the spleen and lymphoid tissues.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 99
+    },
+    {
+      "id": "pio201-rbc-100",
+      "text": "What morphological change occurs when normal human red blood cells are placed in a hypertonic ($2.0%$) sodium chloride solution?",
+      "options": [
+        "Endosmosis, spherical swelling, and immediate haemolysis",
+        "No change in cell volume or shape",
+        "Exosmosis (water loss), cellular shrinkage, and spiky wrinkling (crenation)",
+        "Spontaneous rouleaux formation followed by nuclear regeneration"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Exosmosis (water loss), cellular shrinkage, and spiky wrinkling (crenation)",
+      "explanation": "In a hypertonic solution, water leaves the erythrocyte down its osmotic gradient (exosmosis), causing shrinkage and a characteristic spiky appearance termed crenation rather than haemolysis.",
+      "section": "Clinical Correlations, Haemodynamics & Special Topics",
+      "questionNumber": 100
+    }
+  ]
+}
