@@ -1,0 +1,35 @@
+{% extends 'monitor/base.html' %}
+{% load humanize %}
+{% block title %}Partner commission reports{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="kicker">Partner accounting</p><h1>Monthly commission report</h1><p>Review successful partner-attributed payments and export a transaction-level statement.</p></div><a href="{% url 'monitor:partners' %}" class="btn-outline">← Institute partners</a></div>
+
+<section class="control-section" aria-labelledby="period-heading">
+  <div class="control-section-head"><div><p class="kicker">Report period</p><h2 id="period-heading">Select institute and month</h2></div></div>
+  <form method="get"><div class="form-grid-3">
+    <div class="form-group"><label for="report-org">Institute</label><select name="organization" id="report-org"><option value="">All institutes</option>{% for item in organizations %}<option value="{{ item.id }}" {% if organization.id == item.id %}selected{% endif %}>{{ item.name }}</option>{% endfor %}</select></div>
+    <div class="form-group"><label for="report-month">Month</label><select name="month" id="report-month"><option value="1" {% if month == 1 %}selected{% endif %}>January</option><option value="2" {% if month == 2 %}selected{% endif %}>February</option><option value="3" {% if month == 3 %}selected{% endif %}>March</option><option value="4" {% if month == 4 %}selected{% endif %}>April</option><option value="5" {% if month == 5 %}selected{% endif %}>May</option><option value="6" {% if month == 6 %}selected{% endif %}>June</option><option value="7" {% if month == 7 %}selected{% endif %}>July</option><option value="8" {% if month == 8 %}selected{% endif %}>August</option><option value="9" {% if month == 9 %}selected{% endif %}>September</option><option value="10" {% if month == 10 %}selected{% endif %}>October</option><option value="11" {% if month == 11 %}selected{% endif %}>November</option><option value="12" {% if month == 12 %}selected{% endif %}>December</option></select></div>
+    <div class="form-group"><label for="report-year">Year</label><input id="report-year" type="number" name="year" min="2000" max="2200" value="{{ year }}" required></div>
+  </div><button class="btn-primary" type="submit">View report</button></form>
+</section>
+
+<section class="control-section" aria-labelledby="summary-heading">
+  <div class="control-section-head"><div><p class="kicker">{{ month }}/{{ year }} · {% if organization %}{{ organization.name }}{% else %}all institutes{% endif %}</p><h2 id="summary-heading">Revenue and commission summary</h2></div>
+    <a class="btn-outline" href="?organization={{ organization.id|default:'' }}&month={{ month }}&year={{ year }}&export=csv">Download CSV</a></div>
+  <div class="metric-grid-enhanced" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px">
+    <article class="metric-card"><span class="label">Successful payments</span><strong>{{ payment_count }}</strong></article>
+    <article class="metric-card"><span class="label">Gross collected</span><strong>₦{{ gross_revenue|intcomma }}</strong></article>
+    <article class="metric-card"><span class="label">Partner commission accrued</span><strong>₦{{ commission_total|intcomma }}</strong></article>
+    <article class="metric-card"><span class="label">Seomtorch net</span><strong>₦{{ seomtorch_net|intcomma }}</strong></article>
+  </div>
+  <p class="hint" style="margin-top:14px">This is a draft accounting report of successful transactions during the selected month. Commission is accrued, not a confirmation that a payout has been made. Pending and failed payments are excluded. Historical transaction commission snapshots are not changed when an institute's rate is edited.</p>
+</section>
+
+<section class="control-section" aria-labelledby="payments-heading">
+  <div class="control-section-head"><div><p class="kicker">Transaction ledger</p><h2 id="payments-heading">Payments included in this report</h2></div></div>
+  <div class="table-scroll-hint">← Swipe table sideways to view all columns →</div><div class="table-wrap"><table><thead><tr><th>Institute</th><th>Paid</th><th>Reference</th><th>Student ID</th><th>Purchase</th><th>Gross</th><th>Commission</th><th>Seomtorch net</th></tr></thead><tbody>
+  {% for tx in payments %}<tr><td>{{ tx.partner_organization.name }}</td><td>{{ tx.paid_at|date:'j M Y, H:i' }}</td><td><code>{{ tx.reference }}</code></td><td>{{ tx.user.public_id }}</td><td>{{ tx.get_access_type_display }}{% if tx.course_code and tx.course_code != 'all' %}<small>{{ tx.course_code }}</small>{% endif %}</td><td>₦{{ tx.amount|intcomma }}</td><td>₦{{ tx.partner_commission_amount|intcomma }}</td><td>₦{{ tx.partner_net|intcomma }}</td></tr>
+  {% empty %}<tr><td colspan="8"><div class="empty">No successful affiliate payments for this period.</div></td></tr>{% endfor %}
+  </tbody></table></div>
+</section>
+{% endblock %}

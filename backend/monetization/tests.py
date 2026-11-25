@@ -228,6 +228,84 @@ class MonetizationTests(APITestCase):
         code.refresh_from_db()
         self.assertEqual(code.times_used, 1)
 
+    @override_settings(TESTING=True)
+    def test_affiliate_commission_is_snapshotted_per_successful_payment(self):
+        organization = PartnerOrganization.objects.create(
+            name="Affiliate Campus", slug="affiliate-campus", commission_amount=400,
+        )
+        PartnerStudentMembership.objects.create(
+            user=self.user, organization=organization,
+            attribution_source=PartnerStudentMembership.AttributionSource.AFFILIATE_LINK,
+        )
+        first = self.client.post("/api/subscriptions/initialize/", {"access_type": "all_access"}, format="json")
+        self.assertEqual(first.status_code, status.HTTP_201_CREATED, first.data)
+        first_tx = PaymentTransaction.objects.get(reference=first.data["reference"])
+        self.assertEqual(first_tx.partner_organization, organization)
+        self.assertEqual(first_tx.partner_commission_amount, 400)
+        self.assertEqual(first_tx.partner_attribution_source, PartnerStudentMembership.AttributionSource.AFFILIATE_LINK)
+
+        organization.commission_amount = 650
+        organization.save(update_fields=("commission_amount",))
+        first_tx.refresh_from_db()
+        self.assertEqual(first_tx.partner_commission_amount, 400)
+
+        second_course = Subject.objects.create(
+            slug="pio-201-affiliate", name="Physiology", code="PIO 201", track=Subject.Track.UNIVERSITY,
+        )
+        second = self.client.post("/api/subscriptions/initialize/", {
+            "access_type": "single_course", "course_code": second_course.code,
+        }, format="json")
+        self.assertEqual(second.status_code, status.HTTP_201_CREATED, second.data)
+        second_tx = PaymentTransaction.objects.get(reference=second.data["reference"])
+        self.assertEqual(second_tx.partner_organization, organization)
+        self.assertEqual(second_tx.partner_commission_amount, 650)
+
+        self.assertEqual(self.client.post("/api/subscriptions/verify/", {"reference": first_tx.reference}, format="json").status_code, status.HTTP_200_OK)
+        self.assertEqual(self.client.post("/api/subscriptions/verify/", {"reference": second_tx.reference}, format="json").status_code, status.HTTP_200_OK)
+        first_tx.refresh_from_db()
+        second_tx.refresh_from_db()
+        self.assertEqual(first_tx.status, PaymentTransaction.Status.SUCCESS)
+        self.assertEqual(second_tx.status, PaymentTransaction.Status.SUCCESS)
+        self.assertEqual(first_tx.partner_commission_amount + second_tx.partner_commission_amount, 1050)
+        self.assertEqual(PartnerStudentMembership.objects.filter(user=self.user).count(), 1)
+
+    def test_staff_monthly_report_totals_and_exports_partner_payment_ledger(self):
+        from django.test import Client
+
+        organization = PartnerOrganization.objects.create(
+            name="Report Campus", slug="report-campus", commission_amount=400,
+        )
+        transaction = PaymentTransaction.objects.create(
+            reference="seom_partner_report_row", user=self.user, amount=3000,
+            status=PaymentTransaction.Status.SUCCESS, access_type=PaymentTransaction.AccessType.ALL_ACCESS,
+            partner_organization=organization, partner_commission_amount=400,
+            paid_at=timezone.now(),
+        )
+        staff = User.objects.create_superuser(email="partner-report-staff@example.com", username="reportstaff", password="StrongPass2026!")
+        client = Client()
+        client.force_login(staff)
+        overview = client.get("/monitor/partners/")
+        self.assertEqual(overview.status_code, 200)
+        self.assertContains(overview, "https://seomtorch.vercel.app/register?partner=report-campus")
+        updated = client.post(f"/monitor/partners/{organization.pk}/commission/", {"commission_amount": "600"})
+        self.assertEqual(updated.status_code, 302)
+        organization.refresh_from_db()
+        self.assertEqual(organization.commission_amount, 600)
+        monetization_page = client.get("/monitor/monetization/")
+        self.assertEqual(monetization_page.status_code, 200)
+        self.assertContains(monetization_page, "Seomtorch net revenue")
+        self.assertContains(monetization_page, "Partner share")
+        now = timezone.localtime()
+        query = f"?organization={organization.pk}&year={now.year}&month={now.month}"
+        page = client.get(f"/monitor/partners/reports/{query}")
+        self.assertEqual(page.status_code, 200)
+        self.assertContains(page, "₦3,000")
+        self.assertContains(page, "₦400")
+        self.assertContains(page, "₦2,600")
+        csv_response = client.get(f"/monitor/partners/reports/{query}&export=csv")
+        self.assertEqual(csv_response.status_code, 200)
+        self.assertIn(transaction.reference, csv_response.content.decode())
+
     def test_student_cannot_redeem_another_institute_code_when_already_affiliated(self):
         one = PartnerOrganization.objects.create(name="West College", slug="west-college")
         two = PartnerOrganization.objects.create(name="East College", slug="east-college")
@@ -298,3 +376,28 @@ class PartnerPortalTests(APITestCase):
         self.assertContains(response, "PIO 201")
         self.assertContains(response, "50%")
         self.assertNotContains(response, self.other_student.email)
+
+    def test_partner_monthly_commission_report_is_limited_to_its_own_institute(self):
+        from django.test import Client
+
+        own_payment = PaymentTransaction.objects.create(
+            reference="seom_own_partner_ledger", user=self.other_student, amount=3000,
+            status=PaymentTransaction.Status.SUCCESS, access_type=PaymentTransaction.AccessType.ALL_ACCESS,
+            partner_organization=self.org_one, partner_commission_amount=400, paid_at=timezone.now(),
+        )
+        PaymentTransaction.objects.create(
+            reference="seom_other_partner_ledger", user=self.other_student, amount=5000,
+            status=PaymentTransaction.Status.SUCCESS, access_type=PaymentTransaction.AccessType.ALL_ACCESS,
+            partner_organization=self.org_two, partner_commission_amount=900, paid_at=timezone.now(),
+        )
+        client = Client()
+        client.force_login(self.partner_admin)
+        now = timezone.localtime()
+        report = client.get(
+            f"/partner/?org={self.org_one.slug}&year={now.year}&month={now.month}&export=csv",
+        )
+        self.assertEqual(report.status_code, 200)
+        report_text = report.content.decode()
+        self.assertIn(own_payment.reference, report_text)
+        self.assertNotIn("seom_other_partner_ledger", report_text)
+        self.assertIn(",400,", report_text)

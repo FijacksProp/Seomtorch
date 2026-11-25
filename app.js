@@ -1076,8 +1076,15 @@ function publicRouteFromLocation() {
   return { page: "landing", portal: null, mode: "signin" };
 }
 
+function partnerReferralFromLocation() {
+  const value = new URLSearchParams(location.search).get("partner")?.trim().toLowerCase() || "";
+  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value) ? value : "";
+}
+
 function publicAuthPath(mode, portal = null) {
-  return mode === "register" ? "/register" : "/sign-in";
+  const path = mode === "register" ? "/register" : "/sign-in";
+  const referral = partnerReferralFromLocation();
+  return referral ? `${path}?partner=${encodeURIComponent(referral)}` : path;
 }
 
 function openPublicAuth(mode, portal = null, replace = false) {
@@ -4333,6 +4340,7 @@ async function refreshDeviceCache() {
 
 function renderAuth() {
   const register = authMode === "register";
+  const partnerReferral = partnerReferralFromLocation();
   app.innerHTML = `<main class="onboarding auth-screen ${authPortal ? `auth-${authPortal}` : "auth-general"} ${register ? "auth-register" : "auth-signin"}"><section class="onboard-brand"><span class="brand"><span class="brand-symbol" aria-hidden="true"><img src="assets/seomtorch_logo.png" alt=""></span><span class="brand-name">Seomtorch<small>Prepare with purpose</small></span></span><div><blockquote>${authPortal === "university" ? "Make every course count." : authPortal === "aspirant" ? "Your next result starts here." : "Your progress should follow you."}</blockquote><p>${authPortal === "university" ? "Build confidence across your university courses with focused practice and clear progress." : authPortal === "aspirant" ? "Prepare for your next examination with purposeful practice and clear explanations." : "Sign in to keep every answer, streak and milestone connected to your account."}</p></div><small>Prepare. Practise. Progress.</small></section><section class="onboard-form"><div><a class="auth-home-link" href="/" data-auth-home>← Back to Seomtorch</a><div class="auth-tabs"><button class="${!register ? "active" : ""}" data-auth-mode="signin">Sign in</button><button class="${register ? "active" : ""}" data-auth-mode="register">Create account</button></div><p class="eyebrow">${register ? "Your learning journey" : "Welcome back"}</p><h1>${register ? (authPortal === "university" ? "Start your university journey." : "Get ready for what’s next.") : "Good to have you back."}</h1><p class="lede">${register ? "Create your account and set up your study space." : "Sign in to pick up where your learning left off."}</p><form id="auth-form" class="auth-form">${register ? '<div class="field"><label for="auth-username">Username</label><input id="auth-username" name="username" type="text" maxlength="150" autocomplete="username" required></div>' : ""}<div class="field"><label for="auth-email">Email address</label><input id="auth-email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="auth-password">Password</label><input id="auth-password" name="password" type="password" minlength="8" autocomplete="${register ? "new-password" : "current-password"}" required></div>${register ? `<div class="field"><label style="font-weight:700;margin-bottom:8px;display:block;">Gender:</label><div class="reg-gender-selector"><label class="reg-gender-option"><input type="radio" name="gender" value="male" checked><div class="reg-gender-card"><span class="reg-gender-symbol">♂</span><div><strong>Male</strong><small>Allocates male avatar</small></div></div></label><label class="reg-gender-option"><input type="radio" name="gender" value="female"><div class="reg-gender-card female"><span class="reg-gender-symbol">♀</span><div><strong>Female</strong><small>Allocates female avatar</small></div></div></label></div></div><div class="field"><label style="font-weight:700;margin-bottom:8px;display:block;">Choose your primary portal:</label><div class="reg-path-selector"><label class="reg-path-option"><input type="radio" name="user_type" value="aspirant" checked><div class="reg-path-card"><strong>Exam Aspirant</strong><small>JAMB, WAEC, NECO & Post-UTME</small></div></label><label class="reg-path-option"><input type="radio" name="user_type" value="university"><div class="reg-path-card uni-path"><strong>University Student</strong><small>Undergraduate degree study</small></div></label></div></div><div id="reg-aspirant-fields"><div class="field"><label for="auth-exam-type">Target Examination</label><select id="auth-exam-type" name="exam_type"><option value="jamb">JAMB UTME</option><option value="waec">WAEC SSCE</option><option value="neco">NECO SSCE</option><option value="post_utme">POST-UTME</option></select></div><div class="field"><label for="auth-target-year">Target Year</label><input id="auth-target-year" name="target_year" type="number" min="2024" max="2035" value="2026"></div></div><div id="reg-uni-fields" style="display:none;"><div class="field"><label for="auth-uni-name">University / Institution *</label><input id="auth-uni-name" name="university_name" type="text" placeholder="e.g. University of Lagos (UNILAG)"></div><div class="field"><label for="auth-uni-dept">Department *</label><input id="auth-uni-dept" name="department" type="text" placeholder="e.g. Anatomy"></div><div class="field"><label for="auth-uni-level">Level</label><select id="auth-uni-level" name="level"><option value="100">100 Level</option><option value="200" selected>200 Level</option><option value="300">300 Level</option><option value="400">400 Level</option><option value="500">500 Level</option><option value="600">600 Level</option></select></div></div>` : ""}<div id="auth-error" class="auth-error" role="alert"></div><button class="button auth-submit" type="submit">${register ? "Create my account" : "Sign in"} →</button></form><p class="auth-switch-prompt">${register ? "Already have a Seomtorch account?" : "New to Seomtorch?"} <button type="button" data-auth-mode="${register ? "signin" : "register"}">${register ? "Sign in" : "Create your account"}</button></p></div></section></main>${!isStandalone() ? '<button class="pwa-install-fab" data-install-app>Install app</button>' : ''}`;
   app.insertAdjacentHTML("afterbegin", landingNavigation(true));
   const brandPanel = app.querySelector(".onboard-brand");
@@ -4399,6 +4407,17 @@ function renderAuth() {
     personal.innerHTML = "<h2>Personal Information</h2><p>Tell us a little about yourself</p>";
     app.querySelector("#auth-form")?.prepend(personal);
   }
+  if (register && partnerReferral) {
+    const aspirantChoice = app.querySelector('input[name="user_type"][value="aspirant"]');
+    if (aspirantChoice) aspirantChoice.closest(".reg-path-option").hidden = true;
+    const universityChoice = app.querySelector('input[name="user_type"][value="university"]');
+    if (universityChoice) universityChoice.checked = true;
+    const portalField = app.querySelector(".reg-path-selector")?.closest(".field");
+    const referralNote = document.createElement("p");
+    referralNote.className = "auth-portal-context";
+    referralNote.textContent = "You’re joining through an institute partner link. This registration will be added to its university cohort.";
+    portalField?.append(referralNote);
+  }
   if (authPortal) {
     const context = document.createElement("p");
     context.className = "auth-portal-context";
@@ -4427,7 +4446,7 @@ function renderAuth() {
       if (aspFields) aspFields.style.display = isUni ? "none" : "block";
       if (uniFields) uniFields.style.display = isUni ? "block" : "none";
     }));
-    if (authPortal === "university") document.querySelector('input[name="user_type"][value="university"]')?.dispatchEvent(new Event("change"));
+    if (authPortal === "university" || partnerReferral) document.querySelector('input[name="user_type"][value="university"]')?.dispatchEvent(new Event("change"));
   }
   document.querySelector("#auth-form").addEventListener("submit", submitAuth);
 }
@@ -4527,7 +4546,8 @@ async function submitAuth(event) {
     let data;
     if (authMode === "register") {
       data = await api.register({ email: body.email, username: body.username, password: body.password,
-        user_type: body.user_type || "aspirant", gender: (body.gender || "male").toLowerCase(), browser_key: body.browser_key });
+        user_type: body.user_type || "aspirant", gender: (body.gender || "male").toLowerCase(), browser_key: body.browser_key,
+        ...(partnerReferralFromLocation() ? { partner_referral: partnerReferralFromLocation() } : {}) });
       if (data.verification_required) {
         const { password, ...registration } = body;
         pendingAuthRegistration = registration; pendingEmailApproval = data; renderEmailApproval(); return;

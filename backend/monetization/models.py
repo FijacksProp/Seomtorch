@@ -114,6 +114,7 @@ class PartnerOrganization(models.Model):
     name = models.CharField(max_length=180, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
     contact_email = models.EmailField(blank=True, default="")
+    commission_amount = models.PositiveIntegerField(default=0, help_text="Institute commission in NGN for each successful payment by an attributed student.")
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -142,9 +143,16 @@ class PartnerAdminMembership(models.Model):
 
 
 class PartnerStudentMembership(models.Model):
+    class AttributionSource(models.TextChoices):
+        AFFILIATE_LINK = "affiliate_link", "Affiliate link"
+        DISCOUNT_CODE = "discount_code", "Partner discount code"
+        STAFF = "staff", "Staff assignment"
+        STAFF_REASSIGNED = "staff_reassigned", "Staff reassignment"
+
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="partner_student_membership")
     organization = models.ForeignKey(PartnerOrganization, on_delete=models.PROTECT, related_name="students")
     discount_code = models.ForeignKey(DiscountCode, null=True, blank=True, on_delete=models.SET_NULL, related_name="attributed_students")
+    attribution_source = models.CharField(max_length=24, choices=AttributionSource.choices, default=AttributionSource.DISCOUNT_CODE)
     linked_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -329,6 +337,9 @@ class PaymentTransaction(models.Model):
     access_type = models.CharField(max_length=20, choices=AccessType.choices, default=AccessType.ALL_ACCESS)
     course_code = models.CharField(max_length=40, blank=True, default="all")
     discount_code = models.ForeignKey(DiscountCode, null=True, blank=True, on_delete=models.SET_NULL, related_name="transactions")
+    partner_organization = models.ForeignKey("PartnerOrganization", null=True, blank=True, on_delete=models.SET_NULL, related_name="payment_transactions")
+    partner_commission_amount = models.PositiveIntegerField(default=0, help_text="Commission snapshot in NGN, fixed when checkout is initialized.")
+    partner_attribution_source = models.CharField(max_length=24, choices=PartnerStudentMembership.AttributionSource.choices, blank=True, default="")
     gateway = models.CharField(max_length=30, default="paystack")
     gateway_reference = models.CharField(max_length=120, blank=True, default="")
     gateway_response = models.JSONField(default=dict, blank=True)

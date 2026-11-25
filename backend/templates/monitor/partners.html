@@ -1,21 +1,56 @@
 {% extends 'monitor/base.html' %}
-{% block title %}Partner institutes{% endblock %}
+{% block title %}Institute partners{% endblock %}
 {% block content %}
-<div class="page-heading"><div><p class="kicker">University partnerships</p><h1>Institute partners</h1><p>Manage partner organizations, named portal access and institute-attributed student cohorts.</p></div><a href="{% url 'monitor:monetization' %}" class="btn-outline">← Monetization</a></div>
+<div class="page-heading">
+  <div><p class="kicker">University partnerships</p><h1>Institute partners</h1><p>Manage referral links, named dashboard access and payment commissions for each institute.</p></div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap"><a href="{% url 'monitor:partner-reports' %}" class="btn-primary">Monthly commission reports</a><a href="{% url 'monitor:monetization' %}" class="btn-outline">← Monetization</a></div>
+</div>
 
-<section class="control-section"><div class="control-section-head"><div><p class="kicker">Create</p><h2>Add an institute</h2></div></div>
-  <form method="post" action="{% url 'monitor:create-partner' %}">{% csrf_token %}<div class="form-grid-3"><div class="form-group"><label>Institute name</label><input name="name" maxlength="180" required placeholder="Example University"></div><div class="form-group"><label>Portal slug (optional)</label><input name="slug" maxlength="190" placeholder="example-university"></div><div class="form-group"><label>Contact email (optional)</label><input name="contact_email" type="email" placeholder="partnerships@example.edu"></div></div><button class="btn-primary" type="submit">Create institute</button></form>
+<section class="control-section" aria-labelledby="partner-link-heading">
+  <div class="control-section-head"><div><p class="kicker">Referral programme</p><h2 id="partner-link-heading">Create an institute</h2></div></div>
+  <p>Each institute receives a unique registration link. Students who create a university account through it are attributed immediately, even before they pay. Partner attribution is separate from discount codes.</p>
+  <form method="post" action="{% url 'monitor:create-partner' %}">{% csrf_token %}
+    <div class="form-grid-3">
+      <div class="form-group"><label for="partner-name">Institute name</label><input id="partner-name" name="name" maxlength="180" required placeholder="Example University"></div>
+      <div class="form-group"><label for="partner-slug">Link identifier (optional)</label><input id="partner-slug" name="slug" maxlength="190" placeholder="example-university"><small class="hint">Used in the shareable registration link.</small></div>
+      <div class="form-group"><label for="partner-email">Contact email (optional)</label><input id="partner-email" name="contact_email" type="email" placeholder="partnerships@example.edu"></div>
+      <div class="form-group"><label for="partner-commission">Commission per successful payment (₦)</label><input id="partner-commission" name="commission_amount" type="number" min="0" step="1" required value="0"><small class="hint">Snapshotted for each new checkout and capped at the payment amount. Zero is allowed.</small></div>
+    </div>
+    <button class="btn-primary" type="submit">Create institute and referral link</button>
+  </form>
 </section>
 
-<section class="control-section"><div class="control-section-head"><div><p class="kicker">Admin access</p><h2>Assign a partner administrator</h2></div><span class="badge badge-disabled">Named account</span></div>
-  <p>The person must first register with Seomtorch. Assign their exact account email; they can then sign in at <code>/partner/login/</code>. Partner accounts do not receive staff-monitor permissions.</p>
-  <form method="post" action="{% url 'monitor:assign-partner-admin' %}">{% csrf_token %}<div class="form-grid-3"><div class="form-group"><label>Institute</label><select name="organization_id" required><option value="">Select institute</option>{% for organization in organizations %}{% if organization.is_active %}<option value="{{ organization.id }}">{{ organization.name }}</option>{% endif %}{% endfor %}</select></div><div class="form-group"><label>Registered user email</label><input name="email" type="email" required placeholder="admin@university.edu"></div></div><button class="btn-primary" type="submit">Grant partner portal access</button></form>
+<section class="control-section" aria-labelledby="partner-admin-heading">
+  <div class="control-section-head"><div><p class="kicker">Named access</p><h2 id="partner-admin-heading">Assign a partner administrator</h2></div><span class="badge badge-disabled">Restricted portal</span></div>
+  <p>The person must first register with Seomtorch. Partner administrators can view only the institute(s) assigned to them; they do not receive staff-monitor access.</p>
+  <form method="post" action="{% url 'monitor:assign-partner-admin' %}">{% csrf_token %}<div class="form-grid-3">
+    <div class="form-group"><label for="partner-org-select">Institute</label><select id="partner-org-select" name="organization_id" required><option value="">Select institute</option>{% for organization in organizations %}{% if organization.is_active %}<option value="{{ organization.id }}">{{ organization.name }}</option>{% endif %}{% endfor %}</select></div>
+    <div class="form-group"><label for="partner-admin-email">Registered user email</label><input id="partner-admin-email" name="email" type="email" required placeholder="admin@university.edu"></div>
+  </div><button class="btn-primary" type="submit">Grant partner portal access</button></form>
 </section>
 
-<section class="control-section"><div class="control-section-head"><div><p class="kicker">Organization reporting</p><h2>Partner cohort overview</h2></div><a href="/partner/" class="btn-outline">Open all partner dashboards ↗</a></div>
-  <div class="table-scroll-hint">← Swipe table sideways to view all columns →</div><div class="table-wrap"><table><thead><tr><th>Institute</th><th>Attributed students</th><th>Partner admins</th><th>Paid partner codes</th><th>Recent cohort links</th><th>Dashboard</th></tr></thead><tbody>
-    {% for organization in organizations %}<tr><td><strong>{{ organization.name }}</strong><small>{{ organization.slug }} · {% if organization.is_active %}Active{% else %}Archived{% endif %}</small></td><td>{{ organization.student_count }}</td><td>{{ organization.admin_count }}</td><td>{% for code in organization.discount_codes.all %}{% if code.is_active %}<small>{{ code.code }} · {{ code.times_used }} uses</small>{% endif %}{% empty %}<small>No partner codes</small>{% endfor %}</td><td>{% for membership in organization.recent_students %}<small><a href="{% url 'monitor:student-detail' membership.user.public_id %}">{{ membership.user.username }}</a> · {{ membership.linked_at|date:'j M Y' }}</small>{% empty %}<small>None yet</small>{% endfor %}</td><td><a class="btn-primary" href="/partner/?org={{ organization.slug }}">View cohort</a></td></tr>
-    {% empty %}<tr><td colspan="6"><div class="empty">No partner institutes created yet.</div></td></tr>{% endfor %}
+<section class="control-section" aria-labelledby="partner-cohort-heading">
+  <div class="control-section-head"><div><p class="kicker">Cohorts and referral links</p><h2 id="partner-cohort-heading">Institute overview</h2><p>Affiliate signups are attributed at registration. Commission is recorded once per successful payment.</p></div><a href="/partner/" class="btn-outline">Open partner portal ↗</a></div>
+  <div class="table-scroll-hint">← Swipe table sideways to view all columns →</div>
+  <div class="table-wrap"><table><thead><tr><th>Institute</th><th>Referral link</th><th>Commission rate</th><th>Students</th><th>Partner admins</th><th>Discount codes</th><th>Recent signups</th></tr></thead><tbody>
+    {% for organization in organizations %}
+      <tr>
+        <td><strong>{{ organization.name }}</strong><small>{{ organization.slug }} · {% if organization.is_active %}Active{% else %}Archived{% endif %}</small></td>
+        <td style="min-width:260px"><input id="partner-link-{{ organization.id }}" aria-label="Referral link for {{ organization.name }}" type="text" readonly value="{{ organization.affiliate_url }}" style="width:100%;margin-bottom:6px"><button type="button" class="btn-outline" data-copy-value="{{ organization.affiliate_url }}">Copy referral link</button></td>
+        <td style="min-width:205px"><strong>₦{{ organization.commission_amount|floatformat:'0' }} per payment</strong><form method="post" action="{% url 'monitor:update-partner-commission' organization.id %}" style="margin-top:8px">{% csrf_token %}<input id="commission-{{ organization.id }}" aria-label="New commission for {{ organization.name }} in naira" type="number" min="0" step="1" name="commission_amount" value="{{ organization.commission_amount }}" required style="max-width:125px"><button type="submit" class="btn-outline">Update</button></form></td>
+        <td>{{ organization.student_count }}</td><td>{{ organization.admin_count }}</td>
+        <td>{% for code in organization.discount_codes.all %}<small>{{ code.code }} · {{ code.times_used }} use{{ code.times_used|pluralize }}{% if code.is_active %} · active{% else %} · inactive{% endif %}</small>{% empty %}<small>None</small>{% endfor %}</td>
+        <td>{% for membership in organization.recent_students %}<small><a href="{% url 'monitor:student-detail' membership.user.public_id %}">{{ membership.user.username }}</a> · {{ membership.get_attribution_source_display }} · {{ membership.linked_at|date:'j M Y' }}</small>{% empty %}<small>No signups yet</small>{% endfor %}<a class="btn-outline" href="/partner/?org={{ organization.slug }}" style="margin-top:8px">View cohort</a></td>
+      </tr>
+    {% empty %}<tr><td colspan="7"><div class="empty">No partner institutes have been created yet.</div></td></tr>{% endfor %}
   </tbody></table></div>
+  <p class="hint" style="margin-top:14px">A student's commission rate is copied to each transaction when checkout starts. Later rate changes apply only to new checkouts. Reports show successful payments only and are a statement of accrued commission, not proof of payout.</p>
 </section>
+<script>
+document.querySelectorAll('[data-copy-value]').forEach(button => button.addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText(button.dataset.copyValue); button.textContent = 'Copied'; }
+  catch { const field = document.getElementById(button.closest('td').querySelector('input').id); field.focus(); field.select(); button.textContent = 'Select and copy link'; }
+  window.setTimeout(() => { button.textContent = 'Copy referral link'; }, 1800);
+}));
+</script>
 {% endblock %}

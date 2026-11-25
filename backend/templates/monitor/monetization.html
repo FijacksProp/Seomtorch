@@ -1,4 +1,5 @@
 {% extends 'monitor/base.html' %}
+{% load humanize %}
 {% block title %}University Access{% endblock %}
 {% block content %}
 
@@ -12,7 +13,9 @@
 </div>
 
 <section class="metric-grid-enhanced">
-  <article class="metric-card accent"><span class="label">Verified platform revenue</span><strong>₦{{ total_revenue|floatformat:"0" }}</strong><small>From recorded payment transactions</small></article>
+  <article class="metric-card accent"><span class="label">Gross payments received</span><strong>₦{{ total_revenue|intcomma }}</strong><small>Successful recorded transactions</small></article>
+  <article class="metric-card"><span class="label">Partner commission accrued</span><strong>₦{{ partner_commission_total|intcomma }}</strong><small>Commission recorded on partner payments</small></article>
+  <article class="metric-card highlight"><span class="label">Seomtorch net revenue</span><strong>₦{{ seomtorch_net_revenue|intcomma }}</strong><small>Gross less recorded partner commission</small></article>
   <article class="metric-card highlight"><span class="label">Active all-course passes</span><strong>{{ all_access_active }}</strong><small>Payments and staff grants</small></article>
   <article class="metric-card"><span class="label">Students with a course pass</span><strong>{{ single_active }}</strong><small>One or more individually unlocked courses</small></article>
   <article class="metric-card"><span class="label">Registration preview active</span><strong>{{ limited_count }}</strong><small>20% access · {{ plan_config.limited_access_days }} days</small></article>
@@ -21,7 +24,7 @@
 
 <section class="control-section">
   <div class="control-section-head"><div><p class="kicker">Promotions &amp; institute cohorts</p><h2>Discount codes</h2></div><a class="btn-outline" href="{% url 'monitor:partners' %}">Manage partner institutes · {{ partner_count }}</a></div>
-  <p>Create a fixed final checkout price for one plan. Partner codes attribute a student to that institute only after payment succeeds; general codes do not create an affiliation.</p>
+  <p>Create a fixed final checkout price for one plan. Partner affiliate links attribute university students at registration; discount codes remain a separate checkout offer and can also attribute a student after a successful purchase.</p>
   <form method="post" action="{% url 'monitor:create-discount-code' %}">
     {% csrf_token %}
     <div class="form-grid-3">
@@ -114,19 +117,20 @@
   <div class="control-section-head"><div><p class="kicker">Payment reconciliation</p><h2>Recent transactions</h2></div><span class="badge badge-disabled">History retained</span></div>
   <div class="table-scroll-hint">← Swipe table sideways to view all columns →</div>
   <div class="table-wrap"><table>
-    <thead><tr><th>Reference</th><th>Student</th><th>Amount</th><th>Plan</th><th>Status</th><th>Date</th><th>Action</th></tr></thead>
+    <thead><tr><th>Reference</th><th>Student</th><th>Amount</th><th>Plan</th><th>Partner share</th><th>Status</th><th>Date</th><th>Action</th></tr></thead>
     <tbody>
       {% for tx in recent_transactions %}
       <tr>
         <td><code>{{ tx.reference }}</code></td>
         <td><a href="{% url 'monitor:student-detail' tx.user.public_id %}">{{ tx.user.username }}</a></td>
         <td><strong>₦{{ tx.amount|floatformat:'0' }}</strong></td>
-        <td>{% if tx.access_type == 'single_course' %}{{ tx.course_code }} · single course{% elif tx.access_type == 'all_access' %}All university courses{% else %}Legacy transaction{% endif %}{% if tx.discount_code %}<small>{{ tx.discount_code.code }}{% if tx.discount_code.partner_organization %} · {{ tx.discount_code.partner_organization.name }}{% endif %}</small>{% endif %}</td>
+        <td>{% if tx.access_type == 'single_course' %}{{ tx.course_code }} · single course{% elif tx.access_type == 'all_access' %}All university courses{% else %}Legacy transaction{% endif %}{% if tx.discount_code %}<small>{{ tx.discount_code.code }}</small>{% endif %}</td>
+        <td>{% if tx.partner_organization %}<strong>{{ tx.partner_organization.name }}</strong><small>₦{{ tx.partner_commission_amount|intcomma }} commission{% if tx.partner_attribution_source %} · {{ tx.get_partner_attribution_source_display|default:tx.partner_attribution_source }}{% endif %}</small>{% else %}—{% endif %}</td>
         <td>{% if tx.status == 'success' %}<span class="badge badge-active">SUCCESS</span>{% elif tx.status == 'pending' %}<span class="badge badge-pending">PENDING</span>{% else %}<span class="badge badge-disabled">{{ tx.get_status_display|upper }}</span>{% endif %}</td>
         <td>{{ tx.created_at|date:'j M Y, H:i' }}</td>
         <td>{% if tx.status == 'pending' and tx.access_type == 'all_access' or tx.status == 'pending' and tx.access_type == 'single_course' %}<form method="post" action="{% url 'monitor:verify-transaction' tx.reference %}" onsubmit="return confirm('Confirm this transaction against your payment evidence?');">{% csrf_token %}<button type="submit" class="btn-primary">Confirm payment</button></form>{% elif tx.status == 'success' %}<span style="color:#047857;font-size:11px;font-weight:700;">✓ Verified</span>{% else %}—{% endif %}</td>
       </tr>
-      {% empty %}<tr><td colspan="7"><div class="empty">No payment transactions recorded yet.</div></td></tr>{% endfor %}
+      {% empty %}<tr><td colspan="8"><div class="empty">No payment transactions recorded yet.</div></td></tr>{% endfor %}
     </tbody>
   </table></div>
 </section>

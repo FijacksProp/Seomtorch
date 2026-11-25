@@ -106,12 +106,14 @@ class PaymentTransactionAdmin(admin.ModelAdmin):
         "access_type",
         "course_code",
         "discount_code",
+        "partner_organization",
+        "partner_commission_amount",
         "paid_at",
         "created_at",
     )
     list_filter = ("status", "access_type", "gateway", "created_at")
     search_fields = ("reference", "user__email", "user__username", "user__public_id", "gateway_reference")
-    readonly_fields = ("created_at", "paid_at")
+    readonly_fields = ("created_at", "paid_at", "partner_organization", "partner_commission_amount", "partner_attribution_source")
     actions = ["manually_unlock_transaction"]
 
     @admin.action(description="Manually confirm payment & unlock student access")
@@ -138,11 +140,16 @@ class PaymentTransactionAdmin(admin.ModelAdmin):
             )
             if tx.discount_code_id:
                 DiscountCode.objects.filter(pk=tx.discount_code_id).update(times_used=F("times_used") + 1)
-                if tx.discount_code.partner_organization_id:
-                    PartnerStudentMembership.objects.get_or_create(
-                        user=tx.user,
-                        defaults={"organization_id": tx.discount_code.partner_organization_id, "discount_code": tx.discount_code},
-                    )
+            partner_id = tx.partner_organization_id or (tx.discount_code.partner_organization_id if tx.discount_code_id else None)
+            if partner_id:
+                PartnerStudentMembership.objects.get_or_create(
+                    user=tx.user,
+                    defaults={
+                        "organization_id": partner_id,
+                        "discount_code": tx.discount_code if tx.discount_code_id else None,
+                        "attribution_source": tx.partner_attribution_source or PartnerStudentMembership.AttributionSource.DISCOUNT_CODE,
+                    },
+                )
             count += 1
         messages.success(request, f"Successfully verified and unlocked access for {count} transactions.")
 
@@ -157,9 +164,10 @@ class MonetizationEventAdmin(admin.ModelAdmin):
 
 @admin.register(PartnerOrganization)
 class PartnerOrganizationAdmin(admin.ModelAdmin):
-    list_display = ("name", "slug", "is_active", "created_at")
+    list_display = ("name", "slug", "commission_amount", "is_active", "created_at")
     list_filter = ("is_active",)
     search_fields = ("name", "slug", "contact_email")
+    readonly_fields = ("commission_amount",)
 
 
 @admin.register(PartnerAdminMembership)
@@ -171,6 +179,6 @@ class PartnerAdminMembershipAdmin(admin.ModelAdmin):
 
 @admin.register(PartnerStudentMembership)
 class PartnerStudentMembershipAdmin(admin.ModelAdmin):
-    list_display = ("organization", "user", "discount_code", "linked_at")
+    list_display = ("organization", "user", "attribution_source", "discount_code", "linked_at")
     list_filter = ("organization",)
     search_fields = ("organization__name", "user__public_id", "user__username")

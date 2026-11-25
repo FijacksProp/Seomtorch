@@ -1,4 +1,6 @@
 from collections import defaultdict
+import csv
+from datetime import datetime
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -6,14 +8,14 @@ from django.core.paginator import Paginator
 from django.db.models import Avg, Case, CharField, Count, ExpressionWrapper, F, FloatField, Max, OuterRef, Q, Subquery, Sum, Value, When, Window
 from django.db.models.functions import Coalesce
 from django.db.models.functions import RowNumber
-from django.http import HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_POST
 
 from .models import Attempt, PracticeSession
-from monetization.models import PartnerAdminMembership, PartnerOrganization, PartnerStudentMembership
+from monetization.models import PartnerAdminMembership, PartnerOrganization, PartnerStudentMembership, PaymentTransaction
 
 
 def partner_login(request):
@@ -57,6 +59,50 @@ def partner_dashboard(request):
 
     context = {"organizations": organizations, "organization": organization, "now": timezone.now(), "can_manage_partners": request.user.is_staff or request.user.is_superuser}
     if organization:
+        report_now = timezone.localtime()
+        try:
+            report_year = int(request.GET.get("year", report_now.year))
+            report_month = int(request.GET.get("month", report_now.month))
+            if not (2000 <= report_year <= 2200 and 1 <= report_month <= 12):
+                raise ValueError
+        except (TypeError, ValueError):
+            report_year, report_month = report_now.year, report_now.month
+            messages.error(request, "Choose a valid report month.")
+        report_start = timezone.make_aware(datetime(report_year, report_month, 1))
+        next_year = report_year + (1 if report_month == 12 else 0)
+        next_month = 1 if report_month == 12 else report_month + 1
+        report_end = timezone.make_aware(datetime(next_year, next_month, 1))
+        partner_payments = PaymentTransaction.objects.filter(
+            partner_organization=organization,
+            status=PaymentTransaction.Status.SUCCESS,
+            paid_at__gte=report_start,
+            paid_at__lt=report_end,
+        ).select_related("user").order_by("paid_at", "reference")
+        report_rows = list(partner_payments)
+        gross_total = sum(payment.amount for payment in report_rows)
+        commission_total = sum(payment.partner_commission_amount for payment in report_rows)
+        if request.GET.get("export") == "csv":
+            response = HttpResponse(content_type="text/csv; charset=utf-8")
+            response["Content-Disposition"] = f'attachment; filename="partner-{organization.slug}-{report_year}-{report_month:02d}.csv"'
+            writer = csv.writer(response)
+            writer.writerow(["Report status", "Draft — accrued commission, not a payout confirmation"])
+            writer.writerow(["Paid at", "Reference", "Student ID", "Amount NGN", "Commission NGN", "Seomtorch net NGN", "Purchase type", "Course"])
+            for payment in report_rows:
+                writer.writerow([
+                    timezone.localtime(payment.paid_at).isoformat(), payment.reference, payment.user.public_id,
+                    payment.amount, payment.partner_commission_amount,
+                    max(0, payment.amount - payment.partner_commission_amount),
+                    payment.get_access_type_display(), payment.course_code,
+                ])
+            return response
+        context.update({
+            "report_year": report_year,
+            "report_month": report_month,
+            "report_payment_count": len(report_rows),
+            "report_gross": gross_total,
+            "report_commission": commission_total,
+            "report_net": max(0, gross_total - commission_total),
+        })
         member_qs = PartnerStudentMembership.objects.filter(organization=organization).select_related("user").order_by("-linked_at")
         member_rows = list(member_qs)
         user_ids = [row.user_id for row in member_rows]

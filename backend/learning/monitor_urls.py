@@ -43,7 +43,9 @@ urlpatterns = [
     path("monetization/discount-codes/create/", monitor_views.create_discount_code, name="create-discount-code"),
     path("monetization/discount-codes/<int:code_id>/toggle/", monitor_views.toggle_discount_code, name="toggle-discount-code"),
     path("partners/", monitor_views.partners_hub, name="partners"),
+    path("partners/reports/", monitor_views.partner_monthly_report, name="partner-reports"),
     path("partners/create/", monitor_views.create_partner_organization, name="create-partner"),
+    path("partners/<int:organization_id>/commission/", monitor_views.update_partner_commission, name="update-partner-commission"),
     path("partners/assign-admin/", monitor_views.assign_partner_admin, name="assign-partner-admin"),
     path("partners/students/<int:membership_id>/reassign/", monitor_views.reassign_partner_student, name="reassign-partner-student"),
 

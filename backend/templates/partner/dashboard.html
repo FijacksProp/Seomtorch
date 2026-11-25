@@ -1,4 +1,5 @@
 {% extends 'partner/base.html' %}
+{% load humanize %}
 {% block title %}Institute dashboard{% endblock %}
 {% block content %}
 <p class="eyebrow">Partner institute · University cohort</p>
@@ -7,13 +8,29 @@
   <nav class="org-switch" aria-label="Your organizations">{% for item in organizations %}<a href="?org={{ item.slug }}" class="{% if organization.id == item.id %}active{% endif %}">{{ item.name }}</a>{% endfor %}</nav>
 {% endif %}
 {% if organization %}
-  <h1>{{ organization.name }}</h1><p class="lede">A focused view of students who joined through this institute’s paid partner code. Progress records stay with their students if a pass expires.</p>
+  <h1>{{ organization.name }}</h1><p class="lede">A focused view of university students attributed to this institute by referral link, partner discount code or staff assignment. Progress records stay with students if access expires.</p>
   {% if organizations|length > 1 %}<nav class="org-switch" aria-label="Switch organization">{% for item in organizations %}<a href="?org={{ item.slug }}" class="{% if organization.id == item.id %}active{% endif %}">{{ item.name }}</a>{% endfor %}</nav>{% endif %}
 
   <section class="stats" aria-label="Institute summary">
     <article class="stat"><strong>{{ student_count|default:0 }}</strong><span>Attributed students</span></article>
     <article class="stat"><strong>{{ test_count|default:0 }}</strong><span>Completed university tests</span></article>
     <article class="stat"><strong>{{ average_score|default:0 }}%</strong><span>Mean score across active testers</span></article>
+  </section>
+
+  <section class="panel" aria-labelledby="commission-report-heading">
+    <div class="panel-head"><div><p class="eyebrow">Partner accounting</p><h2 id="commission-report-heading">Monthly payment report</h2></div><a class="pill" href="?org={{ organization.slug }}&year={{ report_year }}&month={{ report_month }}&export=csv">Download CSV</a></div>
+    <form method="get" style="display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin-bottom:16px">
+      <input type="hidden" name="org" value="{{ organization.slug }}">
+      <label style="display:grid;gap:5px;font-size:11px">Month<select name="month" required><option value="1" {% if report_month == 1 %}selected{% endif %}>January</option><option value="2" {% if report_month == 2 %}selected{% endif %}>February</option><option value="3" {% if report_month == 3 %}selected{% endif %}>March</option><option value="4" {% if report_month == 4 %}selected{% endif %}>April</option><option value="5" {% if report_month == 5 %}selected{% endif %}>May</option><option value="6" {% if report_month == 6 %}selected{% endif %}>June</option><option value="7" {% if report_month == 7 %}selected{% endif %}>July</option><option value="8" {% if report_month == 8 %}selected{% endif %}>August</option><option value="9" {% if report_month == 9 %}selected{% endif %}>September</option><option value="10" {% if report_month == 10 %}selected{% endif %}>October</option><option value="11" {% if report_month == 11 %}selected{% endif %}>November</option><option value="12" {% if report_month == 12 %}selected{% endif %}>December</option></select></label>
+      <label style="display:grid;gap:5px;font-size:11px">Year<input type="number" name="year" min="2000" max="2200" value="{{ report_year }}" required></label>
+      <button type="submit">View month</button>
+    </form>
+    <div class="stats" aria-label="Monthly payment and commission totals">
+      <article class="stat"><strong>₦{{ report_gross|default:0|intcomma }}</strong><span>Gross collected</span></article>
+      <article class="stat"><strong>₦{{ report_commission|default:0|intcomma }}</strong><span>Commission accrued</span></article>
+      <article class="stat"><strong>₦{{ report_net|default:0|intcomma }}</strong><span>Seomtorch net</span></article>
+    </div>
+    <p style="color:var(--muted);font-size:12px;margin:12px 0 0">{{ report_payment_count|default:0 }} successful payment{{ report_payment_count|default:0|pluralize }} in this period. This is an accrued-commission report, not confirmation of payout. Pending and failed payments are excluded.</p>
   </section>
 
   <div class="grid">
@@ -29,7 +46,7 @@
       {% for row in students %}
       <tr><td class="student-detail"><strong>{{ row.user.username }}</strong><small>Student ID · {{ row.user.public_id }}</small><small>Joined cohort {{ row.linked_at|date:'j M Y' }}</small></td><td>{{ row.tests }}</td><td>{% if row.tests %}<span class="pill">{{ row.average_score }}%</span>{% else %}—{% endif %}</td><td>{% if row.tests %}{{ row.accuracy }}%{% else %}—{% endif %}</td><td>{% if row.latest_activity %}{{ row.latest_activity|date:'j M Y' }}{% else %}<small>No completed test</small>{% endif %}</td>
         <td><details class="student-detail"><summary>View scores and courses</summary><ul>{% for test in row.recent_tests %}<li>{{ test.date|date:'j M Y' }} · {{ test.focus }} · <strong>{{ test.score }}%</strong></li>{% empty %}<li>No completed tests recorded.</li>{% endfor %}</ul>{% if row.courses %}<strong style="font-size:10px">By course</strong><ul>{% for course in row.courses %}<li>{{ course.code }} · {{ course.accuracy }}% accuracy · {{ course.tests }} tests</li>{% endfor %}</ul>{% endif %}{% if can_manage_partners %}<form method="post" action="{% url 'monitor:reassign-partner-student' row.membership_id %}" style="margin:12px 0;">{% csrf_token %}<label style="display:block;font-weight:700;margin-bottom:5px">Correct institute attribution</label><select name="organization_id" required style="max-width:220px">{% for item in organizations %}<option value="{{ item.id }}" {% if item.id == organization.id %}selected{% endif %}>{{ item.name }}</option>{% endfor %}</select><button type="submit" style="margin-left:6px;border:0;border-radius:6px;background:var(--green);color:#fff;padding:7px 10px;font:700 10px 'DM Sans',sans-serif;cursor:pointer">Reassign</button></form>{% endif %}</details></td></tr>
-      {% empty %}<tr><td colspan="6"><div class="empty">No students have joined through this institute’s paid code yet.</div></td></tr>{% endfor %}
+      {% empty %}<tr><td colspan="6"><div class="empty">No students have been attributed to this institute yet. Share the institute referral link to begin building a cohort.</div></td></tr>{% endfor %}
     </tbody></table></div>
     {% if students.paginator.num_pages > 1 %}<nav class="pagination"><span>Page {{ students.number }} of {{ students.paginator.num_pages }}</span><span>{% if students.has_previous %}<a href="?org={{ organization.slug }}&page={{ students.previous_page_number }}">Previous</a>{% endif %} {% if students.has_next %}<a href="?org={{ organization.slug }}&page={{ students.next_page_number }}">Next</a>{% endif %}</span></nav>{% endif %}
   </section>

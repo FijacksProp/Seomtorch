@@ -4,7 +4,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient, APITestCase
 from knox.models import AuthToken
 from unittest.mock import patch
-from monetization.models import CourseAccess
+from monetization.models import CourseAccess, PartnerOrganization, PartnerStudentMembership
 from .models import AspirantProfile, UniversityProfile
 
 class AuthenticationTests(APITestCase):
@@ -29,6 +29,40 @@ class AuthenticationTests(APITestCase):
         self.assertFalse(access["has_all_access"])
         self.assertEqual(access["access_percentage"], 20)
         self.assertEqual(access["access_status"], "preview")
+
+    def test_affiliate_registration_links_university_student_before_payment(self):
+        organization = PartnerOrganization.objects.create(
+            name="Referral University", slug="referral-university", commission_amount=450,
+        )
+        response = self.client.post("/api/auth/register/", {
+            "email": "referred@example.com", "username": "referred",
+            "password": "Securepass934!", "user_type": "university",
+            "partner_referral": organization.slug,
+        }, format="json")
+        self.assertEqual(response.status_code, 201, response.data)
+        user = get_user_model().objects.get(email="referred@example.com")
+        membership = PartnerStudentMembership.objects.get(user=user)
+        self.assertEqual(membership.organization, organization)
+        self.assertEqual(membership.attribution_source, PartnerStudentMembership.AttributionSource.AFFILIATE_LINK)
+        self.assertIsNone(membership.discount_code)
+
+    def test_affiliate_registration_rejects_inactive_links_and_aspirant_accounts(self):
+        inactive = PartnerOrganization.objects.create(
+            name="Closed Institute", slug="closed-institute", is_active=False,
+        )
+        inactive_response = self.client.post("/api/auth/register/", {
+            "email": "inactive-referral@example.com", "username": "inactive-referral",
+            "password": "Securepass934!", "user_type": "university",
+            "partner_referral": inactive.slug,
+        }, format="json")
+        aspirant_response = self.client.post("/api/auth/register/", {
+            "email": "aspirant-referral@example.com", "username": "aspirant-referral",
+            "password": "Securepass934!", "user_type": "aspirant",
+            "partner_referral": inactive.slug,
+        }, format="json")
+        self.assertEqual(inactive_response.status_code, 400)
+        self.assertEqual(aspirant_response.status_code, 400)
+        self.assertFalse(get_user_model().objects.filter(username__in=["inactive-referral", "aspirant-referral"]).exists())
 
     def test_sign_in_uses_email_not_username(self):
         get_user_model().objects.create_user(email="student@example.com", username="different-name", password="Securepass934!")

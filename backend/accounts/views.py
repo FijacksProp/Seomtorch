@@ -31,11 +31,36 @@ class RegisterView(APIView):
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        partner_referral = str(request.data.get("partner_referral") or "").strip().lower()
+        partner_organization = None
+        if partner_referral:
+            import re
+            from monetization.models import PartnerOrganization
+            if serializer.validated_data.get("user_type") != "university":
+                return Response({"partner_referral": "Institute referral links are for university student accounts."}, status=status.HTTP_400_BAD_REQUEST)
+            if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", partner_referral):
+                return Response({"partner_referral": "This institute referral link is not valid."}, status=status.HTTP_400_BAD_REQUEST)
+            partner_organization = PartnerOrganization.objects.filter(slug=partner_referral, is_active=True).first()
+            if not partner_organization:
+                return Response({"partner_referral": "This institute referral link is no longer active."}, status=status.HTTP_400_BAD_REQUEST)
         from django.conf import settings
         if settings.ACCOUNT_SECURITY_ENABLED:
             browser_digest(request.data.get("browser_key"))
-        user = serializer.save()
-        UserStats.objects.get_or_create(user=user)
+        with transaction.atomic():
+            user = serializer.save()
+            UserStats.objects.get_or_create(user=user)
+            if partner_organization:
+                from monetization.models import PartnerStudentMembership, MonetizationEvent
+                PartnerStudentMembership.objects.create(
+                    user=user,
+                    organization=partner_organization,
+                    attribution_source=PartnerStudentMembership.AttributionSource.AFFILIATE_LINK,
+                )
+                MonetizationEvent.objects.create(
+                    user=user,
+                    event_name="partner_affiliate_registration",
+                    metadata={"organization_id": partner_organization.pk, "organization_slug": partner_organization.slug},
+                )
         Token.objects.filter(user=user).delete()
         token = None if enabled_for(user) else AuthToken.objects.create(user=user)[1]
         ActivityEvent.objects.create(user=user, event_type=ActivityEvent.Type.REGISTERED)

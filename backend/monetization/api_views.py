@@ -63,13 +63,24 @@ def _complete_verified_payment(tx, config, gateway_response):
     )
     if tx.discount_code_id:
         DiscountCode.objects.filter(pk=tx.discount_code_id).update(times_used=F("times_used") + 1)
-        if tx.discount_code.partner_organization_id:
-            membership, created = PartnerStudentMembership.objects.get_or_create(
-                user=tx.user,
-                defaults={"organization_id": tx.discount_code.partner_organization_id, "discount_code": tx.discount_code},
-            )
-            if not created and membership.organization_id != tx.discount_code.partner_organization_id:
-                logger.warning("Partner attribution conflict for paid code %s; original affiliation retained.", tx.discount_code.code)
+    partner_organization_id = tx.partner_organization_id or (tx.discount_code.partner_organization_id if tx.discount_code_id else None)
+    if partner_organization_id:
+        membership, created = PartnerStudentMembership.objects.get_or_create(
+            user=tx.user,
+            defaults={
+                "organization_id": partner_organization_id,
+                "discount_code": tx.discount_code if tx.discount_code_id else None,
+                "attribution_source": tx.partner_attribution_source or PartnerStudentMembership.AttributionSource.DISCOUNT_CODE,
+            },
+        )
+        if not created and membership.organization_id != partner_organization_id:
+            logger.warning("Partner attribution conflict for payment %s; original student affiliation retained.", tx.reference)
+        if not tx.partner_organization_id and tx.discount_code_id and tx.discount_code.partner_organization_id:
+            # Legacy pending code checkouts are attributed at confirmation, but no
+            # commission is backfilled because the rate was not snapshotted at checkout.
+            tx.partner_organization = tx.discount_code.partner_organization
+            tx.partner_attribution_source = PartnerStudentMembership.AttributionSource.DISCOUNT_CODE
+            tx.save(update_fields=("partner_organization", "partner_attribution_source"))
     MonetizationEvent.objects.create(
         user=tx.user,
         event_name="payment_succeeded",
@@ -186,6 +197,13 @@ class InitializePaymentView(APIView):
                     return Response({"detail": "Your account is already linked to another partner institution."}, status=status.HTTP_409_CONFLICT)
             amount = discount.discounted_price
 
+        membership = PartnerStudentMembership.objects.select_related("organization").filter(user=request.user).first()
+        partner_organization = membership.organization if membership else (discount.partner_organization if discount and discount.partner_organization_id else None)
+        partner_source = membership.attribution_source if membership else (
+            PartnerStudentMembership.AttributionSource.DISCOUNT_CODE if discount and discount.partner_organization_id else ""
+        )
+        partner_commission = min(partner_organization.commission_amount, amount) if partner_organization else 0
+
         reference = f"seom_{int(timezone.now().timestamp())}_{uuid.uuid4().hex[:8]}"
 
         tx = PaymentTransaction.objects.create(
@@ -196,6 +214,9 @@ class InitializePaymentView(APIView):
             access_type=access_type,
             course_code=selected_course,
             discount_code=discount,
+            partner_organization=partner_organization,
+            partner_commission_amount=partner_commission,
+            partner_attribution_source=partner_source,
             gateway="paystack",
         )
 
@@ -209,6 +230,8 @@ class InitializePaymentView(APIView):
                 "course_code": selected_course,
                 "semester_end_date": config.semester_end_date.isoformat(),
                 "discount_code": discount.code if discount else None,
+                "partner_organization_id": partner_organization.pk if partner_organization else None,
+                "partner_commission_amount": partner_commission,
             }
         )
 

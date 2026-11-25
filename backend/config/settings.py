@@ -22,7 +22,7 @@ ALLOWED_HOSTS = [host.strip() for host in os.environ.get("DJANGO_ALLOWED_HOSTS",
 
 INSTALLED_APPS = [
     "django.contrib.admin", "django.contrib.auth", "django.contrib.contenttypes",
-    "django.contrib.sessions", "django.contrib.messages", "django.contrib.staticfiles",
+    "django.contrib.sessions", "django.contrib.messages", "django.contrib.staticfiles", "django.contrib.humanize",
     "corsheaders", "rest_framework", "rest_framework.authtoken", "knox",
     "accounts", "learning", "monetization",
 ]
@@ -134,6 +134,7 @@ ACCOUNT_SECURITY_GRACE_UNTIL = os.environ.get("ACCOUNT_SECURITY_GRACE_UNTIL", ""
 BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")
 BREVO_SENDER_EMAIL = os.environ.get("BREVO_SENDER_EMAIL", "")
 BREVO_SENDER_NAME = os.environ.get("BREVO_SENDER_NAME", "Seomtorch")
+FRONTEND_URL = os.environ.get("FRONTEND_URL", "https://seomtorch.vercel.app").rstrip("/")
 ACCOUNT_SECURITY_MAX_TRANSFERS = 2  # rolling 30 days; staff-assisted recovery remains available
 if ACCOUNT_SECURITY_ENABLED:
     from django.utils.dateparse import parse_datetime

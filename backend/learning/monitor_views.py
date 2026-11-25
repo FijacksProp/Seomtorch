@@ -1017,10 +1017,13 @@ def monetization_hub(request):
         starts_at__lte=now_dt, expires_at__gte=now_dt,
     )
     active_grants = active_grants_qs.select_related("user", "granted_by_user").order_by("-created_at")[:80]
-    recent_transactions = PaymentTransaction.objects.select_related("user", "discount_code").all().order_by("-created_at")[:30]
+    recent_transactions = PaymentTransaction.objects.select_related("user", "discount_code", "partner_organization").all().order_by("-created_at")[:30]
 
     # Stats
-    total_revenue = PaymentTransaction.objects.filter(status=PaymentTransaction.Status.SUCCESS).aggregate(s=Sum("amount"))["s"] or 0
+    successful_payments = PaymentTransaction.objects.filter(status=PaymentTransaction.Status.SUCCESS)
+    revenue_totals = successful_payments.aggregate(gross=Sum("amount"), partner_commission=Sum("partner_commission_amount"))
+    total_revenue = revenue_totals["gross"] or 0
+    partner_commission_total = revenue_totals["partner_commission"] or 0
     all_access_active = active_grants_qs.filter(access_type=CourseAccess.AccessType.ALL_ACCESS).count()
     single_active = active_grants_qs.filter(access_type=CourseAccess.AccessType.SINGLE_COURSE).values("user_id").distinct().count()
     paid_ids = active_grants_qs.filter(access_type=CourseAccess.AccessType.ALL_ACCESS).values("user_id").distinct()
@@ -1032,6 +1035,8 @@ def monetization_hub(request):
         "active_grants": active_grants,
         "recent_transactions": recent_transactions,
         "total_revenue": total_revenue,
+        "partner_commission_total": partner_commission_total,
+        "seomtorch_net_revenue": max(0, total_revenue - partner_commission_total),
         "all_access_active": all_access_active,
         "single_active": single_active,
         "limited_count": limited_count,
@@ -1147,11 +1152,16 @@ def verify_transaction_manual(request, reference):
     )
     if tx.discount_code_id:
         DiscountCode.objects.filter(pk=tx.discount_code_id).update(times_used=models.F("times_used") + 1)
-        if tx.discount_code.partner_organization_id:
-            PartnerStudentMembership.objects.get_or_create(
-                user=tx.user,
-                defaults={"organization_id": tx.discount_code.partner_organization_id, "discount_code": tx.discount_code},
-            )
+    partner_id = tx.partner_organization_id or (tx.discount_code.partner_organization_id if tx.discount_code_id else None)
+    if partner_id:
+        PartnerStudentMembership.objects.get_or_create(
+            user=tx.user,
+            defaults={
+                "organization_id": partner_id,
+                "discount_code": tx.discount_code if tx.discount_code_id else None,
+                "attribution_source": tx.partner_attribution_source or PartnerStudentMembership.AttributionSource.DISCOUNT_CODE,
+            },
+        )
 
     messages.success(request, f"Transaction {reference} verified and course access unlocked for {tx.user.username}!")
     return redirect("monitor:monetization")
@@ -1213,11 +1223,13 @@ def toggle_discount_code(request, code_id):
 
 @staff_member_required
 def partners_hub(request):
-    organizations = list(PartnerOrganization.objects.annotate(
+    from django.conf import settings
+    organizations = list(PartnerOrganization.objects.prefetch_related("discount_codes").annotate(
         student_count=Count("students", distinct=True),
         admin_count=Count("admins", filter=Q(admins__is_active=True), distinct=True),
     ).order_by("name"))
     for organization in organizations:
+        organization.affiliate_url = f"{settings.FRONTEND_URL}/register?partner={organization.slug}"
         organization.recent_students = PartnerStudentMembership.objects.filter(
             organization=organization,
         ).select_related("user").order_by("-linked_at")[:6]
@@ -1235,6 +1247,13 @@ def partners_hub(request):
 def create_partner_organization(request):
     name = request.POST.get("name", "").strip()
     contact_email = request.POST.get("contact_email", "").strip().lower()
+    try:
+        commission_amount = int(request.POST.get("commission_amount", ""))
+        if commission_amount < 0:
+            raise ValueError
+    except (TypeError, ValueError):
+        messages.error(request, "Enter a valid commission amount in naira (zero is allowed).")
+        return redirect("monitor:partners")
     if not name:
         messages.error(request, "Enter the institute name.")
         return redirect("monitor:partners")
@@ -1245,12 +1264,114 @@ def create_partner_organization(request):
         slug = f"{base_slug[:185]}-{suffix}"
         suffix += 1
     try:
-        organization = PartnerOrganization.objects.create(name=name, slug=slug, contact_email=contact_email)
+        organization = PartnerOrganization.objects.create(
+            name=name, slug=slug, contact_email=contact_email, commission_amount=commission_amount,
+        )
     except IntegrityError:
         messages.error(request, "An institute with that name already exists.")
         return redirect("monitor:partners")
-    messages.success(request, f"{organization.name} is ready. Create a partner discount code from Monetization.")
+    MonetizationEvent.objects.create(
+        user=request.user,
+        event_name="partner_organization_created",
+        metadata={
+            "organization_id": organization.pk,
+            "organization_name": organization.name,
+            "organization_slug": organization.slug,
+            "commission_amount": organization.commission_amount,
+            "staff": request.user.username,
+        },
+    )
+    messages.success(request, f"{organization.name} is ready. Its registration referral link is active.")
     return redirect("monitor:partners")
+
+
+@staff_member_required
+@require_POST
+def update_partner_commission(request, organization_id):
+    organization = get_object_or_404(PartnerOrganization, pk=organization_id)
+    try:
+        commission_amount = int(request.POST.get("commission_amount", ""))
+        if commission_amount < 0:
+            raise ValueError
+    except (TypeError, ValueError):
+        messages.error(request, "Enter a valid commission amount in naira (zero is allowed).")
+        return redirect("monitor:partners")
+    previous_amount = organization.commission_amount
+    organization.commission_amount = commission_amount
+    organization.save(update_fields=["commission_amount"])
+    MonetizationEvent.objects.create(
+        user=request.user,
+        event_name="partner_commission_rate_updated",
+        metadata={
+            "organization_id": organization.pk,
+            "organization_name": organization.name,
+            "previous_amount": previous_amount,
+            "new_amount": commission_amount,
+            "staff": request.user.username,
+        },
+    )
+    messages.success(request, f"{organization.name}'s commission is now ₦{commission_amount:,} per payment. Existing transaction reports are unchanged.")
+    return redirect("monitor:partners")
+
+
+@staff_member_required
+def partner_monthly_report(request):
+    organizations = PartnerOrganization.objects.order_by("name")
+    now = timezone.localtime()
+    try:
+        year = int(request.GET.get("year", now.year))
+        month = int(request.GET.get("month", now.month))
+        if not (2000 <= year <= 2200 and 1 <= month <= 12):
+            raise ValueError
+    except (TypeError, ValueError):
+        year, month = now.year, now.month
+        messages.error(request, "Choose a valid report month.")
+    organization_id = request.GET.get("organization", "").strip()
+    organization = get_object_or_404(PartnerOrganization, pk=organization_id) if organization_id else None
+    start = timezone.make_aware(datetime(year, month, 1))
+    next_year = year + (1 if month == 12 else 0)
+    next_month = 1 if month == 12 else month + 1
+    end = timezone.make_aware(datetime(next_year, next_month, 1))
+    payments = PaymentTransaction.objects.filter(
+        status=PaymentTransaction.Status.SUCCESS,
+        paid_at__gte=start,
+        paid_at__lt=end,
+        partner_organization__isnull=False,
+    ).select_related("user", "partner_organization").order_by("paid_at", "reference")
+    if organization:
+        payments = payments.filter(partner_organization=organization)
+    totals = payments.aggregate(gross=Sum("amount"), commission=Sum("partner_commission_amount"))
+    gross = totals["gross"] or 0
+    commission = totals["commission"] or 0
+    payment_rows = list(payments)
+    for payment in payment_rows:
+        payment.partner_net = max(0, payment.amount - payment.partner_commission_amount)
+    if request.GET.get("export") == "csv":
+        response = HttpResponse(content_type="text/csv; charset=utf-8")
+        org_part = organization.slug if organization else "all-partners"
+        response["Content-Disposition"] = f'attachment; filename="seomtorch-partner-{org_part}-{year}-{month:02d}.csv"'
+        writer = csv.writer(response)
+        writer.writerow(["Report status", "Draft — accrued commission, not a payout confirmation"])
+        writer.writerow(["Institute", "Paid at", "Reference", "Student ID", "Amount NGN", "Commission NGN", "Seomtorch net NGN", "Purchase type", "Course"])
+        for tx in payment_rows:
+            writer.writerow([
+                tx.partner_organization.name, timezone.localtime(tx.paid_at).isoformat(), tx.reference,
+                tx.user.public_id, tx.amount, tx.partner_commission_amount,
+                max(0, tx.amount - tx.partner_commission_amount), tx.get_access_type_display(), tx.course_code,
+            ])
+        return response
+    context = {
+        "organizations": organizations,
+        "organization": organization,
+        "year": year,
+        "month": month,
+        "gross_revenue": gross,
+        "commission_total": commission,
+        "seomtorch_net": max(0, gross - commission),
+        "payment_count": len(payment_rows),
+        "payments": payment_rows,
+    }
+    return render(request, "monitor/partner_report.html", context)
 
 
 @staff_member_required
@@ -1277,7 +1398,9 @@ def reassign_partner_student(request, membership_id):
     organization = get_object_or_404(PartnerOrganization, pk=request.POST.get("organization_id"), is_active=True)
     previous_name = membership.organization.name
     membership.organization = organization
-    membership.save(update_fields=["organization"])
+    membership.attribution_source = PartnerStudentMembership.AttributionSource.STAFF_REASSIGNED
+    membership.discount_code = None
+    membership.save(update_fields=["organization", "attribution_source", "discount_code"])
     MonetizationEvent.objects.create(
         user=membership.user,
         event_name="partner_affiliation_reassigned",
