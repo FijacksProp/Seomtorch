@@ -2,19 +2,19 @@
 {% block title %}Institute partners{% endblock %}
 {% block content %}
 <div class="page-heading">
-  <div><p class="kicker">University partnerships</p><h1>Institute partners</h1><p>Manage referral links, named dashboard access and payment commissions for each institute.</p></div>
-  <div style="display:flex;gap:10px;flex-wrap:wrap"><a href="{% url 'monitor:partner-reports' %}" class="btn-primary">Monthly commission reports</a><a href="{% url 'monitor:monetization' %}" class="btn-outline">← Monetization</a></div>
+  <div><p class="kicker">University partnerships</p><h1>Institute partners</h1><p>Manage referral links, named dashboard access and institute commissions.</p></div>
+  <div class="partner-page-actions"><a href="{% url 'monitor:partner-reports' %}" class="btn-primary">Monthly commission reports</a><a href="{% url 'monitor:monetization' %}" class="btn-outline">Back to Monetization</a></div>
 </div>
 
 <section class="control-section" aria-labelledby="partner-link-heading">
   <div class="control-section-head"><div><p class="kicker">Referral programme</p><h2 id="partner-link-heading">Create an institute</h2></div></div>
-  <p>Each institute receives a unique registration link. Students who create a university account through it are attributed immediately, even before they pay. Partner attribution is separate from discount codes.</p>
+  <p>Each institute receives a unique registration link. University students who register through it are attributed immediately, even before they pay. Partner attribution is separate from discount codes.</p>
   <form method="post" action="{% url 'monitor:create-partner' %}">{% csrf_token %}
     <div class="form-grid-3">
       <div class="form-group"><label for="partner-name">Institute name</label><input id="partner-name" name="name" maxlength="180" required placeholder="Example University"></div>
       <div class="form-group"><label for="partner-slug">Link identifier (optional)</label><input id="partner-slug" name="slug" maxlength="190" placeholder="example-university"><small class="hint">Used in the shareable registration link.</small></div>
       <div class="form-group"><label for="partner-email">Contact email (optional)</label><input id="partner-email" name="contact_email" type="email" placeholder="partnerships@example.edu"></div>
-      <div class="form-group"><label for="partner-commission">Commission per successful payment (₦)</label><input id="partner-commission" name="commission_amount" type="number" min="0" step="1" required value="0"><small class="hint">Snapshotted for each new checkout and capped at the payment amount. Zero is allowed.</small></div>
+      <div class="form-group"><label for="partner-commission">Commission per successful payment (NGN)</label><input id="partner-commission" name="commission_amount" type="number" min="0" step="1" required value="0"><small class="hint">Recorded at checkout, and capped at the payment amount.</small></div>
     </div>
     <button class="btn-primary" type="submit">Create institute and referral link</button>
   </form>
@@ -30,27 +30,48 @@
 </section>
 
 <section class="control-section" aria-labelledby="partner-cohort-heading">
-  <div class="control-section-head"><div><p class="kicker">Cohorts and referral links</p><h2 id="partner-cohort-heading">Institute overview</h2><p>Affiliate signups are attributed at registration. Commission is recorded once per successful payment.</p></div><a href="/partner/" class="btn-outline">Open partner portal ↗</a></div>
-  <div class="table-scroll-hint">← Swipe table sideways to view all columns →</div>
-  <div class="table-wrap"><table><thead><tr><th>Institute</th><th>Referral link</th><th>Commission rate</th><th>Students</th><th>Partner admins</th><th>Discount codes</th><th>Recent signups</th></tr></thead><tbody>
+  <div class="control-section-head"><div><p class="kicker">Cohorts and referral links</p><h2 id="partner-cohort-heading">Institute overview</h2><p>Affiliate signups are attributed at registration. Commission is recorded once per successful payment.</p></div><a href="/partner/" class="btn-outline">Open partner portal</a></div>
+  <div class="partner-org-list">
     {% for organization in organizations %}
-      <tr>
-        <td><strong>{{ organization.name }}</strong><small>{{ organization.slug }} · {% if organization.is_active %}Active{% else %}Archived{% endif %}</small></td>
-        <td style="min-width:260px"><input id="partner-link-{{ organization.id }}" aria-label="Referral link for {{ organization.name }}" type="text" readonly value="{{ organization.affiliate_url }}" style="width:100%;margin-bottom:6px"><button type="button" class="btn-outline" data-copy-value="{{ organization.affiliate_url }}">Copy referral link</button></td>
-        <td style="min-width:205px"><strong>₦{{ organization.commission_amount|floatformat:'0' }} per payment</strong><form method="post" action="{% url 'monitor:update-partner-commission' organization.id %}" style="margin-top:8px">{% csrf_token %}<input id="commission-{{ organization.id }}" aria-label="New commission for {{ organization.name }} in naira" type="number" min="0" step="1" name="commission_amount" value="{{ organization.commission_amount }}" required style="max-width:125px"><button type="submit" class="btn-outline">Update</button></form></td>
-        <td>{{ organization.student_count }}</td><td>{{ organization.admin_count }}</td>
-        <td>{% for code in organization.discount_codes.all %}<small>{{ code.code }} · {{ code.times_used }} use{{ code.times_used|pluralize }}{% if code.is_active %} · active{% else %} · inactive{% endif %}</small>{% empty %}<small>None</small>{% endfor %}</td>
-        <td>{% for membership in organization.recent_students %}<small><a href="{% url 'monitor:student-detail' membership.user.public_id %}">{{ membership.user.username }}</a> · {{ membership.get_attribution_source_display }} · {{ membership.linked_at|date:'j M Y' }}</small>{% empty %}<small>No signups yet</small>{% endfor %}<a class="btn-outline" href="/partner/?org={{ organization.slug }}" style="margin-top:8px">View cohort</a></td>
-      </tr>
-    {% empty %}<tr><td colspan="7"><div class="empty">No partner institutes have been created yet.</div></td></tr>{% endfor %}
-  </tbody></table></div>
-  <p class="hint" style="margin-top:14px">A student's commission rate is copied to each transaction when checkout starts. Later rate changes apply only to new checkouts. Reports show successful payments only and are a statement of accrued commission, not proof of payout.</p>
+      <article class="partner-org-card" aria-labelledby="partner-org-name-{{ organization.id }}">
+        <header class="partner-org-card-head">
+          <div><span class="partner-org-status {% if organization.is_active %}is-active{% endif %}">{% if organization.is_active %}Active partnership{% else %}Archived{% endif %}</span><h3 id="partner-org-name-{{ organization.id }}">{{ organization.name }}</h3><p>{{ organization.slug }}</p></div>
+          <a class="btn-outline partner-cohort-link" href="/partner/?org={{ organization.slug }}">Open cohort</a>
+        </header>
+
+        <div class="partner-org-stats" aria-label="{{ organization.name }} summary">
+          <div><strong>{{ organization.student_count }}</strong><span>Attributed students</span></div>
+          <div><strong>{{ organization.admin_count }}</strong><span>Partner admins</span></div>
+          <div><strong>{{ organization.discount_codes.count }}</strong><span>Discount codes</span></div>
+        </div>
+
+        <div class="partner-org-settings">
+          <section class="partner-org-field" aria-labelledby="partner-link-label-{{ organization.id }}">
+            <span class="partner-field-label" id="partner-link-label-{{ organization.id }}">Registration referral link</span>
+            <p>New university accounts using this link join the institute cohort.</p>
+            <div class="partner-link-control"><input class="partner-link-input" aria-label="Referral link for {{ organization.name }}" type="text" readonly value="{{ organization.affiliate_url }}"><button type="button" class="btn-outline" data-copy-value="{{ organization.affiliate_url }}">Copy link</button></div>
+          </section>
+          <section class="partner-org-field" aria-labelledby="partner-commission-label-{{ organization.id }}">
+            <span class="partner-field-label" id="partner-commission-label-{{ organization.id }}">Commission per successful payment</span>
+            <strong class="partner-current-rate">₦{{ organization.commission_amount|floatformat:'0' }} <small>per payment</small></strong>
+            <form class="partner-rate-form" method="post" action="{% url 'monitor:update-partner-commission' organization.id %}">{% csrf_token %}<label for="commission-{{ organization.id }}">New rate (₦)</label><div><input id="commission-{{ organization.id }}" aria-label="New commission for {{ organization.name }} in naira" type="number" min="0" step="1" name="commission_amount" value="{{ organization.commission_amount }}" required><button type="submit" class="btn-outline">Save rate</button></div></form>
+          </section>
+        </div>
+
+        <div class="partner-org-details">
+          <section><h4>Discount codes</h4><div class="partner-chip-list">{% for code in organization.discount_codes.all %}<span class="partner-code-chip">{{ code.code }} <small>{{ code.times_used }} use{{ code.times_used|pluralize }} · {% if code.is_active %}active{% else %}inactive{% endif %}</small></span>{% empty %}<span class="partner-muted">No codes linked</span>{% endfor %}</div></section>
+          <section><h4>Recent cohort signups</h4><div class="partner-signup-list">{% for membership in organization.recent_students %}<a href="{% url 'monitor:student-detail' membership.user.public_id %}"><strong>{{ membership.user.username }}</strong><span>{{ membership.get_attribution_source_display }} · {{ membership.linked_at|date:'j M Y' }}</span></a>{% empty %}<span class="partner-muted">No signups yet</span>{% endfor %}</div></section>
+        </div>
+      </article>
+    {% empty %}<div class="empty">No partner institutes have been created yet.</div>{% endfor %}
+  </div>
+  <p class="hint" style="margin-top:14px">A student's commission rate is copied to each transaction when checkout starts. Later rate changes apply only to new checkouts. Reports show successful payments and accrued commission, not proof of payout.</p>
 </section>
 <script>
 document.querySelectorAll('[data-copy-value]').forEach(button => button.addEventListener('click', async () => {
   try { await navigator.clipboard.writeText(button.dataset.copyValue); button.textContent = 'Copied'; }
-  catch { const field = document.getElementById(button.closest('td').querySelector('input').id); field.focus(); field.select(); button.textContent = 'Select and copy link'; }
-  window.setTimeout(() => { button.textContent = 'Copy referral link'; }, 1800);
+  catch { const field = button.closest('.partner-org-card').querySelector('.partner-link-input'); field.focus(); field.select(); button.textContent = 'Select and copy'; }
+  window.setTimeout(() => { button.textContent = 'Copy link'; }, 1800);
 }));
 </script>
 {% endblock %}
