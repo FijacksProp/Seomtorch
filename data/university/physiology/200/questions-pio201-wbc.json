@@ -1,0 +1,1519 @@
+{
+  "title": "White Blood Cell",
+  "course": "PIO 201",
+  "totalQuestions": 100,
+  "sections": [
+    "Leukocyte Morphology, Classification & Staining (Q1-Q10)",
+    "Granulocyte Functions & Mediators (Q11-Q20)",
+    "Leukocyte Counts, Variations & Disorders (Q21-Q30)",
+    "Leukopoiesis & Bone Marrow Lineage (Q31-Q40)",
+    "Innate Immunity, Cytokines & Antimicrobial Peptides (Q41-Q50)",
+    "Advanced Neutrophil & Macrophage Biology (Q51-Q60)",
+    "Cytokines, Inflammation & Immunodeficiency (Q61-Q70)",
+    "Adaptive Immunity, MHC & Phagocytosis (Q71-Q80)",
+    "Leukemia, Hematologic Malignancy & Immune Markers (Q81-Q90)",
+    "Complement, Immunodeficiency & Clinical Correlations (Q91-Q100)"
+  ],
+  "questions": [
+    {
+      "id": "pio201-wbc-1",
+      "text": "Which leukocyte presents with a bilobed, spectacle-shaped nucleus and coarse cytoplasmic granules that characteristically stain pink or red with eosin?",
+      "options": [
+        "Neutrophil",
+        "Basophil",
+        "Eosinophil",
+        "Monocyte"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Eosinophil",
+      "explanation": "Eosinophils are granulocytes characterized by a bilobed nucleus and coarse granules that take up acidic stains like eosin, appearing pink or red.",
+      "section": "Leukocyte Morphology, Classification & Staining",
+      "questionNumber": 1
+    },
+    {
+      "id": "pio201-wbc-2",
+      "text": "The transient movement of leukocytes squeezing through narrow blood vessel walls to reach interstitial tissues is physiologically termed:",
+      "options": [
+        "Chemotaxis",
+        "Diapedesis",
+        "Phagocytosis",
+        "Opsonization"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Diapedesis",
+      "explanation": "Diapedesis is the specific process by which white blood cells squeeze through the narrow pores of blood capillaries to enter the surrounding tissue spaces.",
+      "section": "Leukocyte Morphology, Classification & Staining",
+      "questionNumber": 2
+    },
+    {
+      "id": "pio201-wbc-3",
+      "text": "During the respiratory burst phenomenon in neutrophils, which membrane-bound enzyme is directly activated to generate superoxide radicals?",
+      "options": [
+        "NADPH oxidase",
+        "Myeloperoxidase",
+        "Superoxide dismutase",
+        "Elastase"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. NADPH oxidase",
+      "explanation": "NADPH oxidase, located in the cell membrane of neutrophils, is activated by toxic metabolites to generate superoxide and hydrogen peroxide during the respiratory burst.",
+      "section": "Leukocyte Morphology, Classification & Staining",
+      "questionNumber": 3
+    },
+    {
+      "id": "pio201-wbc-4",
+      "text": "Which of the following pathological states is characteristically associated with a marked reduction in the total circulating eosinophil count (eosinopenia)?",
+      "options": [
+        "Bronchial asthma",
+        "Intestinal parasitism",
+        "Malaria",
+        "Cushing's syndrome"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Cushing's syndrome",
+      "explanation": "Cushing's syndrome, characterized by elevated levels of glucocorticoids, leads to eosinopenia. Asthma and parasitic infections typically cause eosinophilia.",
+      "section": "Leukocyte Morphology, Classification & Staining",
+      "questionNumber": 4
+    },
+    {
+      "id": "pio201-wbc-5",
+      "text": "The largest leukocytes in the peripheral blood stream, characterized by a clear cytoplasm and a horseshoe or kidney-shaped nucleus, function primarily to:",
+      "options": [
+        "Release histamine during allergic reactions",
+        "Synthesize immunoglobulins",
+        "Differentiate into tissue macrophages",
+        "Secrete major basic protein against helminths"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Differentiate into tissue macrophages",
+      "explanation": "Monocytes are the largest leukocytes. Upon leaving the bloodstream and entering target tissues, they mature into tissue macrophages (e.g., Kupffer cells, alveolar macrophages).",
+      "section": "Leukocyte Morphology, Classification & Staining",
+      "questionNumber": 5
+    },
+    {
+      "id": "pio201-wbc-6",
+      "text": "An absolute lack of granulocytes in the peripheral blood due to severe bone marrow depression is most accurately defined as:",
+      "options": [
+        "Granulocytopenia",
+        "Agranulocytosis",
+        "Leukopenia",
+        "Neutropenia"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Agranulocytosis",
+      "explanation": "Agranulocytosis is an acute pathological condition characterized by an absolute lack of granulocytes, distinguishing it from granulocytopenia, which is merely a reduction in number.",
+      "section": "Leukocyte Morphology, Classification & Staining",
+      "questionNumber": 6
+    },
+    {
+      "id": "pio201-wbc-7",
+      "text": "Among the white blood cells, which specific cell type has the longest potential lifespan under normal physiological conditions?",
+      "options": [
+        "Basophil",
+        "Eosinophil",
+        "Monocyte",
+        "Lymphocyte"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Basophil",
+      "explanation": "Basophils have a lifespan of approximately 12 to 15 days in the tissues, which is longer than the typical lifespan of neutrophils, eosinophils, monocytes, and circulating lymphocytes.",
+      "section": "Leukocyte Morphology, Classification & Staining",
+      "questionNumber": 7
+    },
+    {
+      "id": "pio201-wbc-8",
+      "text": "Which specific antimicrobial peptides, secreted by neutrophils, are highly active against both bacteria and fungi as part of the innate immune response?",
+      "options": [
+        "Interleukins",
+        "Defensins and cathelicidins",
+        "Bradykinin and serotonin",
+        "Major basic proteins"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Defensins and cathelicidins",
+      "explanation": "Defensins and cathelicidins are antibody-like antimicrobial peptides stored in neutrophil granules that effectively destroy bacterial and fungal pathogens.",
+      "section": "Leukocyte Morphology, Classification & Staining",
+      "questionNumber": 8
+    },
+    {
+      "id": "pio201-wbc-9",
+      "text": "Which leukocyte is predominantly responsible for synthesizing and releasing platelet-activating factor (PAF) to accelerate platelet aggregation during vascular injury?",
+      "options": [
+        "Lymphocyte",
+        "Eosinophil",
+        "Neutrophil",
+        "Basophil"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Neutrophil",
+      "explanation": "Neutrophils secrete platelet-activating factor (PAF), a cytokine that accelerates platelet aggregation during blood vessel injury to prevent excessive blood loss. (Monocytes also secrete PAF, but neutrophils are a primary source).",
+      "section": "Leukocyte Morphology, Classification & Staining",
+      "questionNumber": 9
+    },
+    {
+      "id": "pio201-wbc-10",
+      "text": "Physiological leukocytosis is commonly observed in all the following normal physiological states EXCEPT:",
+      "options": [
+        "During deep sleep",
+        "Following severe muscular exercise",
+        "Throughout the progression of pregnancy",
+        "During acute emotional anxiety"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. During deep sleep",
+      "explanation": "The total white blood cell count physiologically decreases during sleep. Exercise, emotional anxiety, and pregnancy all trigger physiological leukocytosis.",
+      "section": "Leukocyte Morphology, Classification & Staining",
+      "questionNumber": 10
+    },
+    {
+      "id": "pio201-wbc-11",
+      "text": "The highly toxic substance responsible for the detachment of the tegumental sheath in parasitic worms, secreted by eosinophils, is known as:",
+      "options": [
+        "Eosinophil peroxidase",
+        "Myeloperoxidase",
+        "Eosinophil cationic protein",
+        "Major basic protein"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Major basic protein",
+      "explanation": "Major basic protein (MBP) destroys parasitic worms by causing the distension and detachment of their tegumental sheath.",
+      "section": "Granulocyte Functions & Mediators",
+      "questionNumber": 11
+    },
+    {
+      "id": "pio201-wbc-12",
+      "text": "What specific receptor type is uniquely present on the cell membrane of basophils and mast cells, facilitating their role in acute hypersensitivity reactions?",
+      "options": [
+        "Receptors for IgA",
+        "Receptors for IgG",
+        "Receptors for IgE",
+        "Receptors for IgM"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Receptors for IgE",
+      "explanation": "Basophils and mast cells possess surface receptors for IgE. The binding of IgE to these receptors triggers degranulation and the release of histamine during allergic reactions.",
+      "section": "Granulocyte Functions & Mediators",
+      "questionNumber": 12
+    },
+    {
+      "id": "pio201-wbc-13",
+      "text": "In the context of leukopoiesis, which colony-stimulating factor is exclusively secreted by both monocytes and endothelial cells to promote monocyte lineage?",
+      "options": [
+        "G-CSF",
+        "M-CSF",
+        "GM-CSF",
+        "Multi-CSF"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. M-CSF",
+      "explanation": "Macrophage colony-stimulating factor (M-CSF) is secreted by monocytes and endothelial cells and specifically targets the production and maturation of monocytes.",
+      "section": "Granulocyte Functions & Mediators",
+      "questionNumber": 13
+    },
+    {
+      "id": "pio201-wbc-14",
+      "text": "The morphological differentiation of a mature neutrophil typically reveals a multi-lobed nucleus. How many lobes are normally present in an older, mature neutrophil?",
+      "options": [
+        "2 to 5 lobes",
+        "1 to 2 lobes",
+        "6 to 8 lobes",
+        "Unilobed"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. 2 to 5 lobes",
+      "explanation": "The nucleus of a neutrophil is multi-lobed, and the number of lobes increases with the cell's age. Older neutrophils typically exhibit 2 to 5 lobes.",
+      "section": "Granulocyte Functions & Mediators",
+      "questionNumber": 14
+    },
+    {
+      "id": "pio201-wbc-15",
+      "text": "Which of the following conditions is a recognized pathological cause of marked monocytosis?",
+      "options": [
+        "Cushing's syndrome",
+        "Chickenpox",
+        "Tuberculosis",
+        "Anaphylactic shock"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Tuberculosis",
+      "explanation": "Monocytosis (an increase in monocyte count) characteristically occurs in chronic infections such as tuberculosis, syphilis, and malaria.",
+      "section": "Granulocyte Functions & Mediators",
+      "questionNumber": 15
+    },
+    {
+      "id": "pio201-wbc-16",
+      "text": "During the formation of pus at an infection site, the term \"pus cells\" specifically refers to:",
+      "options": [
+        "Phagocytized bacteria",
+        "Liquefied tissue cells",
+        "Dead macrophages",
+        "Dead white blood cells"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Dead white blood cells",
+      "explanation": "Pus is a localized collection of cellular debris, dead bacteria, and dead white blood cells. The dead white blood cells that accumulate after combating an infection are termed \"pus cells.\"",
+      "section": "Granulocyte Functions & Mediators",
+      "questionNumber": 16
+    },
+    {
+      "id": "pio201-wbc-17",
+      "text": "Which of the following features accurately distinguishes white blood cells (WBCs) from red blood cells (RBCs)?",
+      "options": [
+        "WBCs possess a distinct biconcave shape.",
+        "WBCs are strictly uniform in size and structure.",
+        "WBCs contain a nucleus and lack hemoglobin.",
+        "WBCs have a significantly longer lifespan in circulation."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. WBCs contain a nucleus and lack hemoglobin.",
+      "explanation": "Unlike mature RBCs, all leukocytes are nucleated, colorless (lacking hemoglobin), and generally larger and less numerous.",
+      "section": "Granulocyte Functions & Mediators",
+      "questionNumber": 17
+    },
+    {
+      "id": "pio201-wbc-18",
+      "text": "The normal differential leukocyte count for eosinophils in a healthy adult is approximately:",
+      "options": [
+        "0 to 1 percent",
+        "2 to 4 percent",
+        "20 to 30 percent",
+        "50 to 70 percent"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. 2 to 4 percent",
+      "explanation": "In a normal differential white blood cell count, eosinophils account for 2% to 4% of the total circulating leukocytes.",
+      "section": "Granulocyte Functions & Mediators",
+      "questionNumber": 18
+    },
+    {
+      "id": "pio201-wbc-19",
+      "text": "Which intracellular enzyme is present in the granules of basophils and is responsible for destroying microorganisms?",
+      "options": [
+        "Myeloperoxidase",
+        "Eosinophil peroxidase",
+        "Elastase",
+        "Cathelicidin"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Myeloperoxidase",
+      "explanation": "Basophil granules contain proteases and myeloperoxidases, which are key enzymes utilized to destroy phagocytosed microorganisms.",
+      "section": "Granulocyte Functions & Mediators",
+      "questionNumber": 19
+    },
+    {
+      "id": "pio201-wbc-20",
+      "text": "In addition to histamine and heparin, which newly generated mediators are produced by mast cells only during their activation?",
+      "options": [
+        "Chondroitin sulfates",
+        "Hydrolytic enzymes",
+        "Serotonin and proteoglycans",
+        "Leukotriene C and prostaglandins"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Leukotriene C and prostaglandins",
+      "explanation": "While histamine and serotonin are preformed mediators stored in granules, leukotriene C, prostaglandins, and cytokines are newly generated mediators synthesized only upon mast cell activation.",
+      "section": "Granulocyte Functions & Mediators",
+      "questionNumber": 20
+    },
+    {
+      "id": "pio201-wbc-21",
+      "text": "Lymphocytopenia, an abnormal decrease in the peripheral lymphocyte count, is a characteristic finding in which of the following clinical conditions?",
+      "options": [
+        "Mumps",
+        "Infectious hepatitis",
+        "Hodgkin's disease",
+        "Thyrotoxicosis"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Hodgkin's disease",
+      "explanation": "Hodgkin's disease, malnutrition, and steroid administration induce lymphocytopenia. Viral infections like mumps and hepatitis typically cause lymphocytosis.",
+      "section": "Leukocyte Counts, Variations & Disorders",
+      "questionNumber": 21
+    },
+    {
+      "id": "pio201-wbc-22",
+      "text": "Which of the following leukocytes is uniquely recognized for secreting both Interleukin-4 and Interleukin-5 to accelerate the body's inflammatory responses against invading parasites?",
+      "options": [
+        "Eosinophil",
+        "Neutrophil",
+        "Basophil",
+        "Monocyte"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Eosinophil",
+      "explanation": "Eosinophils secrete the cytokines interleukin-4 and interleukin-5, which play a major role in accelerating inflammatory responses and destroying invading parasites.",
+      "section": "Leukocyte Counts, Variations & Disorders",
+      "questionNumber": 22
+    },
+    {
+      "id": "pio201-wbc-23",
+      "text": "Which of the following serves as the specific chemical signal to attract neutrophils to an area of tissue injury?",
+      "options": [
+        "Opsonins",
+        "Chemoattractants",
+        "Perforins",
+        "Defensins"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Chemoattractants",
+      "explanation": "Chemoattractants are the chemical substances released at an infection or injury site that induce chemotaxis, drawing neutrophils to the area.",
+      "section": "Leukocyte Counts, Variations & Disorders",
+      "questionNumber": 23
+    },
+    {
+      "id": "pio201-wbc-24",
+      "text": "A patient presents with severe polycythemia vera. Which specific alteration in the leukocyte differential count is frequently associated with this myeloproliferative disorder?",
+      "options": [
+        "Neutropenia",
+        "Eosinopenia",
+        "Lymphocytopenia",
+        "Basophilia"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Basophilia",
+      "explanation": "Basophilia (an increase in basophil count) is classically associated with myeloproliferative disorders such as polycythemia vera, as well as viral infections like smallpox.",
+      "section": "Leukocyte Counts, Variations & Disorders",
+      "questionNumber": 24
+    },
+    {
+      "id": "pio201-wbc-25",
+      "text": "Which of the following accurately describes the staining properties of neutrophil granules when treated with Leishman's stain?",
+      "options": [
+        "They stain bright red due to strong affinity for eosin.",
+        "They stain deep blue due to high methylene blue uptake.",
+        "They appear violet because they take up both acidic and basic stains.",
+        "They remain completely unstained and clear."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. They appear violet because they take up both acidic and basic stains.",
+      "explanation": "Neutrophil granules are neutral; thus, they take up both the acidic (eosin) and basic (methylene blue) components of Leishman's stain, resulting in a violet appearance.",
+      "section": "Leukocyte Counts, Variations & Disorders",
+      "questionNumber": 25
+    },
+    {
+      "id": "pio201-wbc-26",
+      "text": "Which of the following statements accurately characterizes the developmental trajectory of mast cells?",
+      "options": [
+        "They mature completely in the bone marrow before entering the bloodstream.",
+        "They arise from B-lymphocytes within secondary lymphoid organs.",
+        "They mature only after migrating from the bone marrow into the peripheral tissues.",
+        "They are direct descendants of circulating mature basophils."
+      ],
+      "correct": 2,
+      "correctAnswer": "C. They mature only after migrating from the bone marrow into the peripheral tissues.",
+      "explanation": "Mast cells originate in the bone marrow but enter the circulation in an immature form. They complete their maturation only after they have migrated into target tissues.",
+      "section": "Leukocyte Counts, Variations & Disorders",
+      "questionNumber": 26
+    },
+    {
+      "id": "pio201-wbc-27",
+      "text": "During the differentiation of white blood cells, the colony forming unit-granulocyte/monocyte (CFU-GM) directly gives rise to all of the following EXCEPT:",
+      "options": [
+        "Megakaryocytes",
+        "Neutrophils",
+        "Eosinophils",
+        "Monocytes"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Megakaryocytes",
+      "explanation": "The CFU-GM gives rise to granulocytes (neutrophils, eosinophils, basophils) and monocytes. Megakaryocytes arise from a separate lineage, the colony forming unit-megakaryocytes (CFU-M).",
+      "section": "Leukocyte Counts, Variations & Disorders",
+      "questionNumber": 27
+    },
+    {
+      "id": "pio201-wbc-28",
+      "text": "Which of the following conditions is classically recognized as a cause of pathological leukopenia?",
+      "options": [
+        "Tuberculosis",
+        "Typhoid",
+        "Glandular fever",
+        "Acute hemorrhage"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Typhoid",
+      "explanation": "Typhoid and paratyphoid fevers, along with viral infections and severe cirrhosis, are classic infectious/pathological causes of leukopenia.",
+      "section": "Leukocyte Counts, Variations & Disorders",
+      "questionNumber": 28
+    },
+    {
+      "id": "pio201-wbc-29",
+      "text": "The term \"shift to the left\" in the context of leukocyte morphology often implies an increase in immature forms. In normal adults, what is the maximum diameter of a circulating monocyte?",
+      "options": [
+        "8 to 10 micrometers",
+        "10 to 14 micrometers",
+        "14 to 18 micrometers",
+        "20 to 25 micrometers"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. 14 to 18 micrometers",
+      "explanation": "Monocytes are the largest leukocytes in the peripheral blood, typically measuring 14 to 18 micrometers in diameter.",
+      "section": "Leukocyte Counts, Variations & Disorders",
+      "questionNumber": 29
+    },
+    {
+      "id": "pio201-wbc-30",
+      "text": "According to the standard classifications of circulating leukocytes, which cell type lacks cytoplasmic granules and presents with a large nucleus that occupies almost the entire volume of the cytoplasm?",
+      "options": [
+        "Monocyte",
+        "Eosinophil",
+        "Neutrophil",
+        "Lymphocyte"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Lymphocyte",
+      "explanation": "Lymphocytes are agranulocytes featuring a single, large nucleus that dominates the cell volume, leaving only a thin rim of clear cytoplasm.",
+      "section": "Leukocyte Counts, Variations & Disorders",
+      "questionNumber": 30
+    },
+    {
+      "id": "pio201-wbc-31",
+      "text": "In the bone marrow, the pluripotent stem cell differentiates into a committed pluripotent hemopoietic stem cell, which subsequently gives rise to the lymphoid stem cell and the:",
+      "options": [
+        "Proerythroblast",
+        "Myeloblast",
+        "Reticulocyte",
+        "Colony forming blastocyte"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Colony forming blastocyte",
+      "explanation": "The committed pluripotent hemopoietic stem cell bifurcates into the lymphoid stem cell (yielding lymphocytes) and the colony forming blastocyte (yielding all myeloid cells).",
+      "section": "Leukopoiesis & Bone Marrow Lineage",
+      "questionNumber": 31
+    },
+    {
+      "id": "pio201-wbc-32",
+      "text": "Small lymphocytes, typically representing older cells in the circulation, have an average diameter of:",
+      "options": [
+        "7 to 10 micrometers",
+        "10 to 12 micrometers",
+        "12 to 14 micrometers",
+        "14 to 18 micrometers"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. 7 to 10 micrometers",
+      "explanation": "Older, small lymphocytes generally range from 7 to 10 micrometers in diameter, in contrast to younger, large lymphocytes which measure 10 to 12 micrometers.",
+      "section": "Leukopoiesis & Bone Marrow Lineage",
+      "questionNumber": 32
+    },
+    {
+      "id": "pio201-wbc-33",
+      "text": "Which subset of white blood cells utilizes the release of eosinophil-derived neurotoxin to specifically destroy myelinated nerve fibers of parasitic organisms?",
+      "options": [
+        "Basophils",
+        "Eosinophils",
+        "Neutrophils",
+        "Monocytes"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Eosinophils",
+      "explanation": "Eosinophils release eosinophil-derived neurotoxin from their granules, which is highly toxic to myelinated nerve fibers of invading parasites.",
+      "section": "Leukopoiesis & Bone Marrow Lineage",
+      "questionNumber": 33
+    },
+    {
+      "id": "pio201-wbc-34",
+      "text": "Prolonged administration of which specific pharmacological agent is known to induce monocytopenia?",
+      "options": [
+        "Penicillin",
+        "Aspirin",
+        "Prednisone",
+        "Chloroquine"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Prednisone",
+      "explanation": "Prednisone, an immunosuppressant steroid, can induce a marked decrease in the monocyte count (monocytopenia) upon prolonged administration.",
+      "section": "Leukopoiesis & Bone Marrow Lineage",
+      "questionNumber": 34
+    },
+    {
+      "id": "pio201-wbc-35",
+      "text": "The normal absolute value of neutrophils per cubic millimeter of blood in a healthy adult ranges between:",
+      "options": [
+        "150 to 450",
+        "200 to 600",
+        "1,500 to 2,700",
+        "3,000 to 6,000"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. 3,000 to 6,000",
+      "explanation": "Neutrophils are the most abundant leukocyte, comprising 50% to 70% of the total WBC count, which translates to an absolute value of 3,000 to 6,000 cells per cubic millimeter.",
+      "section": "Leukopoiesis & Bone Marrow Lineage",
+      "questionNumber": 35
+    },
+    {
+      "id": "pio201-wbc-36",
+      "text": "Which structural feature strictly distinguishes a monocyte from a mature lymphocyte in a stained peripheral blood smear?",
+      "options": [
+        "Monocytes possess distinct, heavily stained, coarse basophilic granules.",
+        "Monocytes have a nucleus that frequently appears folded, horseshoe, or kidney-shaped.",
+        "Monocytes contain a massive nucleus that occupies the entire cytoplasm leaving no rim.",
+        "Monocytes lack mitochondria and rely entirely on anaerobic glycolysis."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Monocytes have a nucleus that frequently appears folded, horseshoe, or kidney-shaped.",
+      "explanation": "The monocyte's nucleus is characteristically pleomorphic (round, oval, bean-shaped, or horseshoe-shaped), unlike the consistently round, cell-filling nucleus of a lymphocyte.",
+      "section": "Leukopoiesis & Bone Marrow Lineage",
+      "questionNumber": 36
+    },
+    {
+      "id": "pio201-wbc-37",
+      "text": "The fundamental function of the colony-stimulating factor M-CSF is to accelerate the growth and development of:",
+      "options": [
+        "Monocytes and macrophages",
+        "Megakaryocytes and platelets",
+        "Neutrophils and basophils",
+        "T and B lymphocytes"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Monocytes and macrophages",
+      "explanation": "M-CSF (Monocyte Colony Stimulating Factor) acts specifically on progenitor cells to induce their differentiation and proliferation into monocytes and macrophages.",
+      "section": "Leukopoiesis & Bone Marrow Lineage",
+      "questionNumber": 37
+    },
+    {
+      "id": "pio201-wbc-38",
+      "text": "In the bone marrow, the immediate precursor cell that undergoes specific lineage commitment to form a promyelocyte is the:",
+      "options": [
+        "Pluripotent stem cell",
+        "Lymphoid stem cell",
+        "Myeloblast",
+        "Reticulocyte"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Myeloblast",
+      "explanation": "In the granulopoiesis lineage, the myeloblast is the earliest recognizable precursor, which subsequently matures into a promyelocyte before differentiating into specific granulocytes.",
+      "section": "Leukopoiesis & Bone Marrow Lineage",
+      "questionNumber": 38
+    },
+    {
+      "id": "pio201-wbc-39",
+      "text": "Which of the following pathological conditions generally manifests with an abnormally low total white blood cell count (leukopenia)?",
+      "options": [
+        "Acute appendicitis",
+        "Allergic rhinitis",
+        "Glandular fever",
+        "Cirrhosis of the liver"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Cirrhosis of the liver",
+      "explanation": "Severe cirrhosis of the liver is a classic pathological cause of leukopenia. Most acute bacterial infections and glandular fever cause leukocytosis.",
+      "section": "Leukopoiesis & Bone Marrow Lineage",
+      "questionNumber": 39
+    },
+    {
+      "id": "pio201-wbc-40",
+      "text": "The highly destructive oxidants generated by neutrophils during the respiratory burst include:",
+      "options": [
+        "Nitric oxide and peroxynitrite",
+        "Superoxide and hydrogen peroxide",
+        "Carbon monoxide and hydroxyl radicals",
+        "Hypochlorous acid and lipid peroxides"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Superoxide and hydrogen peroxide",
+      "explanation": "Upon activation of NADPH oxidase during the respiratory burst, neutrophils rapidly produce superoxide (O2-) and hydrogen peroxide (H2O2) to kill phagocytosed microbes.",
+      "section": "Leukopoiesis & Bone Marrow Lineage",
+      "questionNumber": 40
+    },
+    {
+      "id": "pio201-wbc-41",
+      "text": "In an infant, the total white blood cell count is typically expected to be around:",
+      "options": [
+        "20,000 per cu mm",
+        "10,000 per cu mm",
+        "6,000 per cu mm",
+        "4,000 per cu mm"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. 20,000 per cu mm",
+      "explanation": "Physiological leukocytosis is normal in infancy; a newborn or infant typically exhibits a total WBC count of approximately 20,000 per cubic millimeter.",
+      "section": "Innate Immunity, Cytokines & Antimicrobial Peptides",
+      "questionNumber": 41
+    },
+    {
+      "id": "pio201-wbc-42",
+      "text": "Which of the following components uniquely characterizes the preformed mediators stored within the secretory granules of mast cells?",
+      "options": [
+        "Interleukin-1 and nitric oxide",
+        "Leukotriene C and prostaglandins",
+        "Defensins and major basic protein",
+        "Serotonin and chondroitin sulfates"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Serotonin and chondroitin sulfates",
+      "explanation": "Mast cells contain preformed mediators like histamine, heparin, serotonin, hydrolytic enzymes, and chondroitin sulfates in their granules, ready for immediate release upon activation.",
+      "section": "Innate Immunity, Cytokines & Antimicrobial Peptides",
+      "questionNumber": 42
+    },
+    {
+      "id": "pio201-wbc-43",
+      "text": "The primary immunologic cells responsible for orchestrating the development of cellular immunity are the:",
+      "options": [
+        "T lymphocytes",
+        "B lymphocytes",
+        "Monocytes",
+        "Eosinophils"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. T lymphocytes",
+      "explanation": "T lymphocytes are the core mediators of cell-mediated (cellular) immunity, whereas B lymphocytes are primarily responsible for humoral (antibody-mediated) immunity.",
+      "section": "Innate Immunity, Cytokines & Antimicrobial Peptides",
+      "questionNumber": 43
+    },
+    {
+      "id": "pio201-wbc-44",
+      "text": "Which of the following statements correctly identifies the function of the cytokine platelet-activating factor (PAF) when secreted by neutrophils?",
+      "options": [
+        "It induces vasodilation of peripheral arterioles.",
+        "It accelerates the aggregation of platelets to prevent excess blood loss.",
+        "It competitively inhibits the synthesis of leukotrienes.",
+        "It triggers the direct lysis of extracellular bacterial cell walls."
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It accelerates the aggregation of platelets to prevent excess blood loss.",
+      "explanation": "Neutrophils and monocytes secrete platelet-activating factor (PAF), which promotes rapid platelet aggregation to secure hemostasis at sites of vascular injury.",
+      "section": "Innate Immunity, Cytokines & Antimicrobial Peptides",
+      "questionNumber": 44
+    },
+    {
+      "id": "pio201-wbc-45",
+      "text": "Eosinophil cationic protein (ECP) is a specialized granular substance that primarily acts to:",
+      "options": [
+        "Dilate peripheral blood vessels",
+        "Destroy helminths through complete disintegration",
+        "Initiate the rapid coagulation cascade",
+        "Suppress T-lymphocyte proliferation"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Destroy helminths through complete disintegration",
+      "explanation": "ECP is highly toxic (about 10 times more toxic than major basic protein) and acts as the major destroyer of parasitic helminths by causing their complete structural disintegration.",
+      "section": "Innate Immunity, Cytokines & Antimicrobial Peptides",
+      "questionNumber": 45
+    },
+    {
+      "id": "pio201-wbc-46",
+      "text": "During an acute parasitic infection, which of the following leukocytes is most likely to undergo a significant pathological increase in the peripheral blood?",
+      "options": [
+        "Neutrophils",
+        "Lymphocytes",
+        "Eosinophils",
+        "Basophils"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Eosinophils",
+      "explanation": "Eosinophilia is a hallmark hematological finding in blood and intestinal parasitism, as eosinophils possess specialized cytotoxic proteins to combat large parasites.",
+      "section": "Innate Immunity, Cytokines & Antimicrobial Peptides",
+      "questionNumber": 46
+    },
+    {
+      "id": "pio201-wbc-47",
+      "text": "Monocytes are circulating precursor cells that, upon entering target tissues, differentiate directly into:",
+      "options": [
+        "Tissue macrophages",
+        "Memory B cells",
+        "Plasma cells",
+        "Mast cells"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Tissue macrophages",
+      "explanation": "After circulating briefly in the bloodstream (for a few hours to days), monocytes migrate into various tissues where they differentiate into highly phagocytic tissue macrophages.",
+      "section": "Innate Immunity, Cytokines & Antimicrobial Peptides",
+      "questionNumber": 47
+    },
+    {
+      "id": "pio201-wbc-48",
+      "text": "Which of the following physiological variations is correctly paired with its effect on the total leukocyte count?",
+      "options": [
+        "Normal sleep - Slight increase in leukocyte count",
+        "Morning hours - Maximum physiological peak of leukocyte count",
+        "Menstruation - Significant decrease in leukocyte count",
+        "Parturition - Identifiable increase in the total leukocyte count"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Parturition - Identifiable increase in the total leukocyte count",
+      "explanation": "Parturition (childbirth), along with pregnancy, exercise, and strong emotions, causes a physiological leukocytosis. Sleep decreases the count, and the count peaks in the afternoon rather than the morning.",
+      "section": "Innate Immunity, Cytokines & Antimicrobial Peptides",
+      "questionNumber": 48
+    },
+    {
+      "id": "pio201-wbc-49",
+      "text": "Which subset of white blood cells is classically recognized to have a short lifespan of only half a day to one day?",
+      "options": [
+        "Lymphocytes",
+        "Neutrophils",
+        "Monocytes",
+        "Basophils"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Lymphocytes",
+      "explanation": "While varying depending on immune demand, standard physiological tables note the lifespan of lymphocytes in the peripheral blood is relatively short, often cited as 1/2 to 1 day before migrating or turning over.",
+      "section": "Innate Immunity, Cytokines & Antimicrobial Peptides",
+      "questionNumber": 49
+    },
+    {
+      "id": "pio201-wbc-50",
+      "text": "The synthesis of specific defensins and cathelicidins by leukocytes directly serves to:",
+      "options": [
+        "Promote massive intravascular coagulation during shock",
+        "Trigger systemic anaphylactic shock during allergy",
+        "Accelerate the proliferation of malignant tumor cells",
+        "Provide potent antimicrobial defense against invading bacteria and fungi"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Provide potent antimicrobial defense against invading bacteria and fungi",
+      "explanation": "Defensins and cathelicidins are critical antimicrobial peptides secreted by innate immune cells, particularly neutrophils, to combat a wide spectrum of bacterial and fungal pathogens.",
+      "section": "Innate Immunity, Cytokines & Antimicrobial Peptides",
+      "questionNumber": 50
+    },
+    {
+      "id": "pio201-wbc-51",
+      "text": "Which of the following terms describes the physiological phenomenon where a large number of neutrophils are temporarily adhered to the endothelial lining of blood vessels rather than circulating freely?",
+      "options": [
+        "Opsonization",
+        "The marginating pool",
+        "Leukemoid reaction",
+        "The respiratory burst"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The marginating pool",
+      "explanation": "The marginating pool refers to neutrophils that stick to the capillary endothelial walls and are not counted in a standard blood draw. Stress or exercise can mobilize this pool, rapidly increasing the circulating WBC count.",
+      "section": "Advanced Neutrophil & Macrophage Biology",
+      "questionNumber": 51
+    },
+    {
+      "id": "pio201-wbc-52",
+      "text": "Which enzyme within the azurophilic (primary) granules of neutrophils is primarily responsible for converting hydrogen peroxide into the highly bactericidal compound hypochlorous acid (HOCl)?",
+      "options": [
+        "Lysozyme",
+        "Superoxide dismutase",
+        "Myeloperoxidase",
+        "Catalase"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Myeloperoxidase",
+      "explanation": "Myeloperoxidase (MPO) uses hydrogen peroxide and chloride ions to produce hypochlorous acid, a potent antimicrobial agent that heavily contributes to the killing capacity of neutrophils.",
+      "section": "Advanced Neutrophil & Macrophage Biology",
+      "questionNumber": 52
+    },
+    {
+      "id": "pio201-wbc-53",
+      "text": "In a patient with a severe bacterial infection, a peripheral blood smear often reveals neutrophils containing dark, coarse, basophilic granules. These stress-induced cytoplasmic inclusions are called:",
+      "options": [
+        "Howell-Jolly bodies",
+        "Heinz bodies",
+        "Toxic granulations",
+        "Auer rods"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Toxic granulations",
+      "explanation": "Toxic granulations are exaggerated, deeply staining primary granules seen in neutrophils during severe infection, inflammation, or tissue necrosis.",
+      "section": "Advanced Neutrophil & Macrophage Biology",
+      "questionNumber": 53
+    },
+    {
+      "id": "pio201-wbc-54",
+      "text": "Which specific type of lymphocyte is primarily responsible for the direct destruction of virally infected cells and tumor cells without prior sensitization?",
+      "options": [
+        "Cytotoxic T cells (CD8+)",
+        "Natural Killer (NK) cells",
+        "Helper T cells (CD4+)",
+        "B lymphocytes"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Natural Killer (NK) cells",
+      "explanation": "Natural Killer (NK) cells are part of the innate immune system and can recognize and destroy infected or malignant cells directly without the need for prior antigen sensitization or MHC restriction.",
+      "section": "Advanced Neutrophil & Macrophage Biology",
+      "questionNumber": 54
+    },
+    {
+      "id": "pio201-wbc-55",
+      "text": "Leukocyte Adhesion Deficiency (LAD) is a genetic disorder that prevents white blood cells from effectively migrating to sites of infection. This is primarily due to a defect in the expression of which surface proteins?",
+      "options": [
+        "Immunoglobulins",
+        "Selectins",
+        "Integrins",
+        "Toll-like receptors"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Integrins",
+      "explanation": "LAD is typically caused by a defect in the CD18 subunit of integrins, preventing leukocytes from firmly adhering to the endothelium, which is a required step before diapedesis.",
+      "section": "Advanced Neutrophil & Macrophage Biology",
+      "questionNumber": 55
+    },
+    {
+      "id": "pio201-wbc-56",
+      "text": "A \"shift to the left\" on a complete blood count (CBC) differential primarily indicates the increased presence of which specific cell type in the peripheral blood?",
+      "options": [
+        "Hypersegmented neutrophils",
+        "Band cells (immature neutrophils)",
+        "Mature typical lymphocytes",
+        "Atypical (reactive) lymphocytes"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Band cells (immature neutrophils)",
+      "explanation": "A \"shift to the left\" indicates an increase in immature neutrophils, primarily band cells, released prematurely from the bone marrow, usually in response to an acute bacterial infection.",
+      "section": "Advanced Neutrophil & Macrophage Biology",
+      "questionNumber": 56
+    },
+    {
+      "id": "pio201-wbc-57",
+      "text": "The Chediak-Higashi syndrome is a rare autosomal recessive disorder characterized by recurrent pyogenic infections and partial albinism. What is the fundamental cellular defect in the leukocytes of these patients?",
+      "options": [
+        "Absence of NADPH oxidase",
+        "Defective fusion of phagosomes and lysosomes",
+        "Lack of surface integrins",
+        "Inability to synthesize myeloperoxidase"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Defective fusion of phagosomes and lysosomes",
+      "explanation": "Chediak-Higashi syndrome involves a defect in lysosomal trafficking, leading to giant granules and the failure of phagosomes to fuse with lysosomes, impairing the destruction of phagocytosed bacteria.",
+      "section": "Advanced Neutrophil & Macrophage Biology",
+      "questionNumber": 57
+    },
+    {
+      "id": "pio201-wbc-58",
+      "text": "Which cytokine, produced by macrophages and T cells, is a potent stimulator of neutrophil production and maturation in the bone marrow?",
+      "options": [
+        "Erythropoietin (EPO)",
+        "Interleukin-2 (IL-2)",
+        "Granulocyte colony-stimulating factor (G-CSF)",
+        "Thrombopoietin (TPO)"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Granulocyte colony-stimulating factor (G-CSF)",
+      "explanation": "G-CSF is a critical growth factor that specifically stimulates the bone marrow to increase the proliferation, differentiation, and release of neutrophils.",
+      "section": "Advanced Neutrophil & Macrophage Biology",
+      "questionNumber": 58
+    },
+    {
+      "id": "pio201-wbc-59",
+      "text": "Which of the following cells is a specialized tissue macrophage located within the central nervous system?",
+      "options": [
+        "Kupffer cell",
+        "Microglia",
+        "Osteoclast",
+        "Langerhans cell"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Microglia",
+      "explanation": "Microglial cells are the resident tissue macrophages of the central nervous system, acting as the primary form of active immune defense in the brain and spinal cord.",
+      "section": "Advanced Neutrophil & Macrophage Biology",
+      "questionNumber": 59
+    },
+    {
+      "id": "pio201-wbc-60",
+      "text": "Which class of immunoglobulins is most effective at opsonizing bacteria to enhance their phagocytosis by neutrophils and macrophages?",
+      "options": [
+        "IgA",
+        "IgE",
+        "IgG",
+        "IgM"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. IgG",
+      "explanation": "IgG antibodies are highly effective opsonins. Neutrophils and macrophages have surface Fc receptors that specifically bind to the Fc portion of IgG-coated pathogens, facilitating phagocytosis.",
+      "section": "Advanced Neutrophil & Macrophage Biology",
+      "questionNumber": 60
+    },
+    {
+      "id": "pio201-wbc-61",
+      "text": "During the inflammatory response, macrophages secrete a specific cytokine that induces fever, acute-phase protein synthesis in the liver, and endothelial cell activation. Which cytokine is this?",
+      "options": [
+        "Interleukin-1 (IL-1)",
+        "Interleukin-10 (IL-10)",
+        "Transforming growth factor beta (TGF-beta)",
+        "Interferon-gamma (IFN-gamma)"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Interleukin-1 (IL-1)",
+      "explanation": "Interleukin-1 (IL-1), along with Tumor Necrosis Factor-alpha (TNF-alpha), is a primary pro-inflammatory cytokine secreted by macrophages that mediates systemic responses like fever and local endothelial activation.",
+      "section": "Cytokines, Inflammation & Immunodeficiency",
+      "questionNumber": 61
+    },
+    {
+      "id": "pio201-wbc-62",
+      "text": "Chronic Granulomatous Disease (CGD) is an inherited immunodeficiency characterized by recurrent infections with catalase-positive organisms. It is caused by a defect in which functional component of the leukocyte?",
+      "options": [
+        "The microtubule network",
+        "The NADPH oxidase complex",
+        "The myeloperoxidase enzyme",
+        "The integrin adhesion molecules"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The NADPH oxidase complex",
+      "explanation": "CGD results from a defect in the NADPH oxidase complex. Phagocytes can ingest bacteria but cannot generate the superoxide burst needed to kill them, leading to chronic granuloma formation.",
+      "section": "Cytokines, Inflammation & Immunodeficiency",
+      "questionNumber": 62
+    },
+    {
+      "id": "pio201-wbc-63",
+      "text": "Which of the following is an example of an agranulocyte that primarily mediates the adaptive, rather than innate, immune response?",
+      "options": [
+        "Monocyte",
+        "Eosinophil",
+        "T Lymphocyte",
+        "Neutrophil"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. T Lymphocyte",
+      "explanation": "T lymphocytes are agranulocytes that form the basis of the cell-mediated adaptive immune response, requiring specific antigen presentation to become activated.",
+      "section": "Cytokines, Inflammation & Immunodeficiency",
+      "questionNumber": 63
+    },
+    {
+      "id": "pio201-wbc-64",
+      "text": "When a monocyte migrates from the bloodstream into the epidermis of the skin, it differentiates into a specialized dendritic cell known as a:",
+      "options": [
+        "Kupffer cell",
+        "Langerhans cell",
+        "Mesangial cell",
+        "Microglia"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Langerhans cell",
+      "explanation": "Langerhans cells are specialized dendritic cells (derived from monocyte precursors) that reside in the skin and mucosa, where they act as primary antigen-presenting cells.",
+      "section": "Cytokines, Inflammation & Immunodeficiency",
+      "questionNumber": 64
+    },
+    {
+      "id": "pio201-wbc-65",
+      "text": "Which of the following substances acts as a primary chemoattractant, drawing neutrophils to the site of bacterial infection?",
+      "options": [
+        "Complement component C5a",
+        "Complement component C3b",
+        "Interleukin-10",
+        "Major basic protein"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Complement component C5a",
+      "explanation": "C5a is a potent anaphylatoxin and chemotactic factor produced during complement activation that strongly attracts neutrophils and monocytes to the site of inflammation.",
+      "section": "Cytokines, Inflammation & Immunodeficiency",
+      "questionNumber": 65
+    },
+    {
+      "id": "pio201-wbc-66",
+      "text": "Which leukocyte abnormality is defined by the presence of giant, fused granules in the cytoplasm of neutrophils and other white blood cells?",
+      "options": [
+        "Pelger-Huet anomaly",
+        "Chediak-Higashi syndrome",
+        "May-Hegglin anomaly",
+        "Alder-Reilly anomaly"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Chediak-Higashi syndrome",
+      "explanation": "Chediak-Higashi syndrome is characterized microscopically by massive, fused, dysfunctional primary granules within the cytoplasm of neutrophils, monocytes, and lymphocytes.",
+      "section": "Cytokines, Inflammation & Immunodeficiency",
+      "questionNumber": 66
+    },
+    {
+      "id": "pio201-wbc-67",
+      "text": "What is the primary function of the T-helper 1 (Th1) subset of CD4+ T lymphocytes?",
+      "options": [
+        "To stimulate B cells to produce IgE",
+        "To activate macrophages and promote cell-mediated immunity",
+        "To suppress the immune response to prevent autoimmunity",
+        "To directly induce apoptosis in virally infected cells"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. To activate macrophages and promote cell-mediated immunity",
+      "explanation": "Th1 cells secrete cytokines, particularly Interferon-gamma (IFN-gamma), which potently activate tissue macrophages to enhance their phagocytic and microbial killing capacities.",
+      "section": "Cytokines, Inflammation & Immunodeficiency",
+      "questionNumber": 67
+    },
+    {
+      "id": "pio201-wbc-68",
+      "text": "In a patient suffering from a severe, acute viral infection, which of the following alterations in the leukocyte differential count is most typically observed?",
+      "options": [
+        "Absolute neutrophilia",
+        "Eosinophilia",
+        "Monocytopenia",
+        "Lymphocytosis"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Lymphocytosis",
+      "explanation": "Viral infections typically trigger a reactive lymphocytosis, often characterized by the appearance of atypical (reactive) lymphocytes in the peripheral blood.",
+      "section": "Cytokines, Inflammation & Immunodeficiency",
+      "questionNumber": 68
+    },
+    {
+      "id": "pio201-wbc-69",
+      "text": "Which specific granule component of eosinophils is known to induce the degranulation of mast cells and basophils, thus amplifying the allergic response?",
+      "options": [
+        "Eosinophil peroxidase",
+        "Major basic protein",
+        "Defensins",
+        "Lactoferrin"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Major basic protein",
+      "explanation": "Major Basic Protein (MBP), aside from being toxic to helminths, can also trigger histamine release from mast cells and basophils, worsening allergic inflammation.",
+      "section": "Cytokines, Inflammation & Immunodeficiency",
+      "questionNumber": 69
+    },
+    {
+      "id": "pio201-wbc-70",
+      "text": "Which of the following markers is universally expressed on the surface of all mature T lymphocytes?",
+      "options": [
+        "CD3",
+        "CD4",
+        "CD8",
+        "CD19"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. CD3",
+      "explanation": "The CD3 complex is universally associated with the T-cell receptor (TCR) on all mature T lymphocytes, functioning in signal transduction upon antigen recognition.",
+      "section": "Cytokines, Inflammation & Immunodeficiency",
+      "questionNumber": 70
+    },
+    {
+      "id": "pio201-wbc-71",
+      "text": "Which component of the immune system bridges the innate and adaptive responses by capturing antigens in tissues, migrating to lymph nodes, and presenting them to naive T cells?",
+      "options": [
+        "Neutrophils",
+        "Basophils",
+        "Dendritic cells",
+        "Eosinophils"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Dendritic cells",
+      "explanation": "Dendritic cells are professional antigen-presenting cells that continuously sample their environment, migrate to draining lymph nodes, and present antigens to activate T cells, linking innate and adaptive immunity.",
+      "section": "Adaptive Immunity, MHC & Phagocytosis",
+      "questionNumber": 71
+    },
+    {
+      "id": "pio201-wbc-72",
+      "text": "A leukocyte count revealing marked hypersegmentation of neutrophils (more than 5 lobes) is a classic hematological finding in which of the following conditions?",
+      "options": [
+        "Iron deficiency anemia",
+        "Megaloblastic anemia (Vitamin B12 or Folate deficiency)",
+        "Acute myeloid leukemia",
+        "Severe bacterial sepsis"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Megaloblastic anemia (Vitamin B12 or Folate deficiency)",
+      "explanation": "Hypersegmented neutrophils are a hallmark of megaloblastic anemias caused by impaired DNA synthesis, most commonly due to Vitamin B12 or folate deficiency.",
+      "section": "Adaptive Immunity, MHC & Phagocytosis",
+      "questionNumber": 72
+    },
+    {
+      "id": "pio201-wbc-73",
+      "text": "Which class of major histocompatibility complex (MHC) molecules is recognized exclusively by Cytotoxic T (CD8+) cells?",
+      "options": [
+        "MHC Class I",
+        "MHC Class II",
+        "MHC Class III",
+        "Both MHC Class I and II"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. MHC Class I",
+      "explanation": "CD8+ cytotoxic T cells recognize processed endogenous antigens presented solely by MHC Class I molecules, which are expressed on almost all nucleated cells in the body.",
+      "section": "Adaptive Immunity, MHC & Phagocytosis",
+      "questionNumber": 73
+    },
+    {
+      "id": "pio201-wbc-74",
+      "text": "What is the primary role of regulatory T cells (Tregs) in the immune system?",
+      "options": [
+        "To enhance the activation of CD8+ T cells",
+        "To stimulate the production of antibodies by B cells",
+        "To suppress immune responses and maintain self-tolerance",
+        "To phagocytose apoptotic cellular debris"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. To suppress immune responses and maintain self-tolerance",
+      "explanation": "Regulatory T cells (Tregs) are crucial for immune homeostasis; they suppress potentially auto-reactive T cells and dampen immune responses to prevent excessive tissue damage and autoimmunity.",
+      "section": "Adaptive Immunity, MHC & Phagocytosis",
+      "questionNumber": 74
+    },
+    {
+      "id": "pio201-wbc-75",
+      "text": "Which specific B-cell surface marker is commonly targeted by monoclonal antibody therapies (like Rituximab) in the treatment of B-cell lymphomas and certain autoimmune diseases?",
+      "options": [
+        "CD3",
+        "CD4",
+        "CD20",
+        "CD56"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. CD20",
+      "explanation": "CD20 is a surface antigen expressed exclusively on B cells (from pre-B to mature stages). Therapies targeting CD20 effectively deplete the B cell population to treat B-cell malignancies and autoimmune conditions.",
+      "section": "Adaptive Immunity, MHC & Phagocytosis",
+      "questionNumber": 75
+    },
+    {
+      "id": "pio201-wbc-76",
+      "text": "In the process of phagocytosis, the ingested particle is enclosed within a vesicle called a phagosome. Destruction of the particle occurs only after the phagosome fuses with a:",
+      "options": [
+        "Ribosome",
+        "Lysosome",
+        "Golgi apparatus",
+        "Mitochondrion"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Lysosome",
+      "explanation": "The phagosome fuses with a lysosome to form a phagolysosome, exposing the ingested microorganism to hydrolytic enzymes and reactive oxygen species for complete degradation.",
+      "section": "Adaptive Immunity, MHC & Phagocytosis",
+      "questionNumber": 76
+    },
+    {
+      "id": "pio201-wbc-77",
+      "text": "The Pelger-Huet anomaly is a benign inherited condition characterized by an abnormality in which specific white blood cell feature?",
+      "options": [
+        "Neutrophil nuclear lobation (hyposegmentation)",
+        "Eosinophil granule color",
+        "Lymphocyte size",
+        "Monocyte phagocytic ability"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Neutrophil nuclear lobation (hyposegmentation)",
+      "explanation": "Pelger-Huet anomaly causes hyposegmentation of the neutrophil nucleus, often presenting with a bi-lobed \"pince-nez\" appearance, though the cells function normally.",
+      "section": "Adaptive Immunity, MHC & Phagocytosis",
+      "questionNumber": 77
+    },
+    {
+      "id": "pio201-wbc-78",
+      "text": "Which of the following cytokines is primarily responsible for inducing the differentiation of a naive CD4+ T cell into a Th2 helper cell?",
+      "options": [
+        "Interleukin-12 (IL-12)",
+        "Interferon-gamma (IFN-gamma)",
+        "Interleukin-4 (IL-4)",
+        "Tumor Necrosis Factor-alpha (TNF-alpha)"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Interleukin-4 (IL-4)",
+      "explanation": "Interleukin-4 (IL-4) is the signature cytokine that polarizes naive CD4+ T cells toward the Th2 lineage, which subsequently promotes humoral immunity and defense against parasites.",
+      "section": "Adaptive Immunity, MHC & Phagocytosis",
+      "questionNumber": 78
+    },
+    {
+      "id": "pio201-wbc-79",
+      "text": "Which specific type of cell is responsible for the secretion of large volumes of antibodies (immunoglobulins) into the circulation?",
+      "options": [
+        "Memory B cells",
+        "Plasma cells",
+        "Helper T cells",
+        "Natural Killer cells"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Plasma cells",
+      "explanation": "Plasma cells are terminally differentiated B lymphocytes whose sole function is the massive synthesis and secretion of antigen-specific antibodies.",
+      "section": "Adaptive Immunity, MHC & Phagocytosis",
+      "questionNumber": 79
+    },
+    {
+      "id": "pio201-wbc-80",
+      "text": "Which of the following acute-phase reactants, produced by the liver under the influence of macrophage-derived IL-6, binds to bacterial surfaces and acts as an opsonin?",
+      "options": [
+        "Albumin",
+        "Transferrin",
+        "C-reactive protein (CRP)",
+        "Fibrinogen"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. C-reactive protein (CRP)",
+      "explanation": "C-reactive protein (CRP) is a classic acute-phase reactant that binds to phosphocholine on the surface of dead/dying cells and some bacteria, acting as an opsonin and activating the complement system.",
+      "section": "Adaptive Immunity, MHC & Phagocytosis",
+      "questionNumber": 80
+    },
+    {
+      "id": "pio201-wbc-81",
+      "text": "Which condition is characterized by a massive, uncontrolled proliferation of highly immature white blood cell precursors (blasts) in the bone marrow, leading to rapid bone marrow failure?",
+      "options": [
+        "Chronic myeloid leukemia (CML)",
+        "Acute leukemia (ALL or AML)",
+        "Infectious mononucleosis",
+        "Polycythemia vera"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Acute leukemia (ALL or AML)",
+      "explanation": "Acute leukemias are characterized by the rapid accumulation of immature blast cells in the marrow, severely disrupting the production of normal red blood cells, platelets, and functional leukocytes.",
+      "section": "Leukemia, Hematologic Malignancy & Immune Markers",
+      "questionNumber": 81
+    },
+    {
+      "id": "pio201-wbc-82",
+      "text": "During the secondary immune response upon re-exposure to a known pathogen, which specific cell type ensures a rapid, high-affinity antibody surge?",
+      "options": [
+        "Naive B cells",
+        "Memory B cells",
+        "Cytotoxic T cells",
+        "Macrophages"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Memory B cells",
+      "explanation": "Memory B cells, formed during the primary infection, persist for years and rapidly differentiate into plasma cells to produce large amounts of high-affinity IgG upon secondary exposure.",
+      "section": "Leukemia, Hematologic Malignancy & Immune Markers",
+      "questionNumber": 82
+    },
+    {
+      "id": "pio201-wbc-83",
+      "text": "The presence of Auer rods in the cytoplasm of blast cells on a peripheral blood smear is highly pathognomonic for which specific hematological malignancy?",
+      "options": [
+        "Acute lymphoblastic leukemia (ALL)",
+        "Chronic lymphocytic leukemia (CLL)",
+        "Acute myeloid leukemia (AML)",
+        "Hodgkin's lymphoma"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Acute myeloid leukemia (AML)",
+      "explanation": "Auer rods are crystalline cytoplasmic inclusions formed from the fusion of primary granules. They are a classic diagnostic hallmark of Acute Myeloid Leukemia (AML) and are never seen in lymphoid malignancies.",
+      "section": "Leukemia, Hematologic Malignancy & Immune Markers",
+      "questionNumber": 83
+    },
+    {
+      "id": "pio201-wbc-84",
+      "text": "In infectious mononucleosis, commonly caused by the Epstein-Barr virus (EBV), the \"atypical lymphocytes\" seen on the peripheral smear are predominantly reacting:",
+      "options": [
+        "CD8+ Cytotoxic T cells",
+        "Infected B cells",
+        "Activated Natural Killer cells",
+        "Proliferating monocytes"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. CD8+ Cytotoxic T cells",
+      "explanation": "While EBV primarily infects B cells, the large, atypical reactive lymphocytes seen in the blood are actually the host's CD8+ cytotoxic T cells mounting an immune response against the infected B cells.",
+      "section": "Leukemia, Hematologic Malignancy & Immune Markers",
+      "questionNumber": 84
+    },
+    {
+      "id": "pio201-wbc-85",
+      "text": "Which cluster of differentiation (CD) marker is characteristically found on the surface of Helper T cells, acting as a coreceptor for MHC Class II molecules?",
+      "options": [
+        "CD8",
+        "CD4",
+        "CD19",
+        "CD56"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. CD4",
+      "explanation": "CD4 is the defining surface coreceptor for Helper T cells, recognizing and binding to the invariant region of MHC Class II molecules on antigen-presenting cells.",
+      "section": "Leukemia, Hematologic Malignancy & Immune Markers",
+      "questionNumber": 85
+    },
+    {
+      "id": "pio201-wbc-86",
+      "text": "The phenomenon known as the \"respiratory burst\" in phagocytes consumes large amounts of which specific gas to generate toxic reactive oxygen species?",
+      "options": [
+        "Nitrogen",
+        "Carbon dioxide",
+        "Oxygen",
+        "Hydrogen"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Oxygen",
+      "explanation": "The respiratory burst involves a sharp, rapid increase in cellular oxygen consumption. The NADPH oxidase enzyme uses this oxygen to generate the superoxide anion, initiating the production of bactericidal compounds.",
+      "section": "Leukemia, Hematologic Malignancy & Immune Markers",
+      "questionNumber": 86
+    },
+    {
+      "id": "pio201-wbc-87",
+      "text": "Which of the following cell types is classically recognized for possessing high-affinity Fc receptors for IgE (Fc-epsilon-RI) and storing large amounts of histamine?",
+      "options": [
+        "Neutrophils",
+        "Eosinophils",
+        "Macrophages",
+        "Mast cells"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Mast cells",
+      "explanation": "Mast cells heavily populate connective tissues and mucosal linings. They constitutively express high-affinity IgE receptors and degranulate upon antigen cross-linking, driving acute allergic reactions.",
+      "section": "Leukemia, Hematologic Malignancy & Immune Markers",
+      "questionNumber": 87
+    },
+    {
+      "id": "pio201-wbc-88",
+      "text": "A diagnostic finding of the Philadelphia chromosome (t(9;22)) is most strongly associated with the pathogenesis of which disease?",
+      "options": [
+        "Acute lymphoblastic leukemia (ALL)",
+        "Chronic myeloid leukemia (CML)",
+        "Multiple myeloma",
+        "Aplastic anemia"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Chronic myeloid leukemia (CML)",
+      "explanation": "The Philadelphia chromosome, resulting from a reciprocal translocation between chromosomes 9 and 22, creates the BCR-ABL fusion gene, which is the molecular hallmark and driving mutation of Chronic Myeloid Leukemia (CML).",
+      "section": "Leukemia, Hematologic Malignancy & Immune Markers",
+      "questionNumber": 88
+    },
+    {
+      "id": "pio201-wbc-89",
+      "text": "Which specialized molecule, secreted by Cytotoxic T cells and NK cells, creates pores in the target cell membrane, allowing granzymes to enter and trigger apoptosis?",
+      "options": [
+        "Defensin",
+        "Perforin",
+        "Lysozyme",
+        "Cathelicidin"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Perforin",
+      "explanation": "Perforin is a pore-forming protein released from the granules of CD8+ T cells and NK cells. It polymerizes in the target cell membrane, creating channels that facilitate the entry of pro-apoptotic granzymes.",
+      "section": "Leukemia, Hematologic Malignancy & Immune Markers",
+      "questionNumber": 89
+    },
+    {
+      "id": "pio201-wbc-90",
+      "text": "Opsonization greatly enhances the efficiency of phagocytosis. Aside from IgG antibodies, which complement protein is a highly effective primary opsonin?",
+      "options": [
+        "C3a",
+        "C5a",
+        "C3b",
+        "C5b"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. C3b",
+      "explanation": "C3b is a major opsonin. When it coats a bacterial surface, phagocytes bearing C3b receptors can easily bind to and ingest the pathogen.",
+      "section": "Leukemia, Hematologic Malignancy & Immune Markers",
+      "questionNumber": 90
+    },
+    {
+      "id": "pio201-wbc-91",
+      "text": "T cells mature and undergo central tolerance (positive and negative selection) in which specific primary lymphoid organ?",
+      "options": [
+        "Bone marrow",
+        "Spleen",
+        "Thymus",
+        "Lymph nodes"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Thymus",
+      "explanation": "While T-cell precursors originate in the bone marrow, they migrate to the thymus to undergo comprehensive maturation, selection, and differentiation into mature CD4+ or CD8+ T cells.",
+      "section": "Complement, Immunodeficiency & Clinical Correlations",
+      "questionNumber": 91
+    },
+    {
+      "id": "pio201-wbc-92",
+      "text": "Which of the following leukocytic enzymes is used clinically as a marker to differentiate myeloid blasts (positive) from lymphoid blasts (negative) during the diagnosis of acute leukemia?",
+      "options": [
+        "Terminal deoxynucleotidyl transferase (TdT)",
+        "Myeloperoxidase (MPO)",
+        "Alkaline phosphatase",
+        "Acid phosphatase"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Myeloperoxidase (MPO)",
+      "explanation": "Myeloperoxidase (MPO) is heavily expressed in the primary granules of the myeloid lineage. Its presence differentiates Acute Myeloid Leukemia (AML) from Acute Lymphoblastic Leukemia (ALL), which is MPO-negative.",
+      "section": "Complement, Immunodeficiency & Clinical Correlations",
+      "questionNumber": 92
+    },
+    {
+      "id": "pio201-wbc-93",
+      "text": "What is the primary immunological function of the Major Histocompatibility Complex (MHC) Class II molecules?",
+      "options": [
+        "To present endogenously synthesized viral peptides to CD8+ T cells",
+        "To present exogenously acquired peptide fragments to CD4+ T cells",
+        "To act as a direct receptor for circulating immunoglobulins",
+        "To inhibit Natural Killer cell activation"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. To present exogenously acquired peptide fragments to CD4+ T cells",
+      "explanation": "MHC Class II molecules, found only on professional antigen-presenting cells (dendritic cells, macrophages, B cells), present extracellularly derived peptides to CD4+ Helper T cells to orchestrate the adaptive immune response.",
+      "section": "Complement, Immunodeficiency & Clinical Correlations",
+      "questionNumber": 93
+    },
+    {
+      "id": "pio201-wbc-94",
+      "text": "In the context of the complete blood count (CBC), what is an \"absolute\" leukocyte count?",
+      "options": [
+        "The simple percentage of a specific cell type relative to the total WBCs",
+        "The total number of all combined leukocytes per cubic millimeter of blood",
+        "The specific number of a particular cell type per cubic millimeter of blood",
+        "The ratio of neutrophils to lymphocytes"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The specific number of a particular cell type per cubic millimeter of blood",
+      "explanation": "The absolute count is calculated by multiplying the total WBC count by the percentage of a specific cell type. It provides the actual number of specific cells (e.g., absolute neutrophil count), which is far more clinically relevant than the percentage alone.",
+      "section": "Complement, Immunodeficiency & Clinical Correlations",
+      "questionNumber": 94
+    },
+    {
+      "id": "pio201-wbc-95",
+      "text": "Which of the following is a classic hematological finding seen in Multiple Myeloma, a plasma cell malignancy?",
+      "options": [
+        "Massive peripheral blood neutrophilia",
+        "Rouleaux formation of red blood cells",
+        "Agranulocytosis",
+        "Presence of Auer rods"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Rouleaux formation of red blood cells",
+      "explanation": "Multiple Myeloma involves the overproduction of monoclonal immunoglobulins by malignant plasma cells. High levels of these proteins in the blood reduce the negative charge between RBCs, causing them to stack together like coins, a phenomenon called Rouleaux formation.",
+      "section": "Complement, Immunodeficiency & Clinical Correlations",
+      "questionNumber": 95
+    },
+    {
+      "id": "pio201-wbc-96",
+      "text": "Interferon-alpha (IFN-alpha) and Interferon-beta (IFN-beta) are cytokines produced by many cell types. What is their primary, immediate effect on adjacent host cells during an infection?",
+      "options": [
+        "To induce an antiviral state that inhibits viral replication",
+        "To trigger massive mast cell degranulation",
+        "To stimulate the proliferation of the bacterial cell wall",
+        "To suppress the activity of Natural Killer cells"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. To induce an antiviral state that inhibits viral replication",
+      "explanation": "Type I interferons (IFN-alpha and IFN-beta) are produced by virally infected cells. They bind to neighboring healthy cells, inducing the synthesis of enzymes that degrade viral RNA and inhibit viral protein translation, creating an \"antiviral state.\"",
+      "section": "Complement, Immunodeficiency & Clinical Correlations",
+      "questionNumber": 96
+    },
+    {
+      "id": "pio201-wbc-97",
+      "text": "Which primary immunodeficiency is caused by a failure of B cells to mature, resulting in a near-complete absence of immunoglobulins (antibodies) in the blood?",
+      "options": [
+        "DiGeorge syndrome",
+        "Severe Combined Immunodeficiency (SCID)",
+        "X-linked agammaglobulinemia (Bruton's disease)",
+        "Wiskott-Aldrich syndrome"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. X-linked agammaglobulinemia (Bruton's disease)",
+      "explanation": "X-linked agammaglobulinemia is caused by a mutation in Bruton's tyrosine kinase (BTK), which halts B cell development at the pre-B stage, leading to a lack of mature B cells and an absence of circulating antibodies.",
+      "section": "Complement, Immunodeficiency & Clinical Correlations",
+      "questionNumber": 97
+    },
+    {
+      "id": "pio201-wbc-98",
+      "text": "Which specific leukocyte is the predominant cellular component found within the core of a mature, caseating granuloma caused by Mycobacterium tuberculosis?",
+      "options": [
+        "Neutrophil",
+        "Epitheloid macrophage",
+        "Basophil",
+        "Eosinophil"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Epitheloid macrophage",
+      "explanation": "Granulomas are chronic inflammatory structures formed to wall off indestructible pathogens. Their core consists predominantly of modified, fused tissue macrophages known as epithelioid cells and multinucleated giant cells.",
+      "section": "Complement, Immunodeficiency & Clinical Correlations",
+      "questionNumber": 98
+    },
+    {
+      "id": "pio201-wbc-99",
+      "text": "The primary function of the alternative complement pathway is to:",
+      "options": [
+        "Be activated directly by antigen-antibody complexes",
+        "Be activated spontaneously by microbial surfaces without the need for antibodies",
+        "Inhibit the formation of the membrane attack complex",
+        "Bind exclusively to intracellular viral particles"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Be activated spontaneously by microbial surfaces without the need for antibodies",
+      "explanation": "Unlike the classical pathway which requires antibody binding, the alternative pathway is an innate immune mechanism that is activated directly by contact with foreign surface structures (like bacterial endotoxins), providing immediate defense.",
+      "section": "Complement, Immunodeficiency & Clinical Correlations",
+      "questionNumber": 99
+    },
+    {
+      "id": "pio201-wbc-100",
+      "text": "DiGeorge syndrome involves the maldevelopment of the 3rd and 4th pharyngeal pouches. Which profound immune defect characterizes this syndrome?",
+      "options": [
+        "A complete lack of mature B lymphocytes",
+        "T-cell deficiency due to thymic hypoplasia or aplasia",
+        "Severe neutropenia",
+        "The inability to form complement proteins"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. T-cell deficiency due to thymic hypoplasia or aplasia",
+      "explanation": "The thymus develops from the 3rd pharyngeal pouch. In DiGeorge syndrome, thymic hypoplasia or aplasia prevents the normal maturation of T cells, leading to a profound deficiency in cell-mediated immunity.",
+      "section": "Complement, Immunodeficiency & Clinical Correlations",
+      "questionNumber": 100
+    }
+  ]
+}

@@ -18,7 +18,8 @@
         {
           "id": "pio-wbc",
           "title": "White Blood Cell",
-          "status": "coming-soon"
+          "status": "available",
+          "dataFile": "data/university/physiology/200/questions-pio201-wbc.json"
         },
         {
           "id": "pio-plasma-protein",
