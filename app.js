@@ -9,6 +9,7 @@ import { challengeAnalysisPanel, challengeHubPage, challengeComposerPage, challe
 import { cancelPostPracticeFeedback, closeStudentDialogs, eligibleForUniversityOffer, maybeShowUniversityIntroduction, openStudentDialog, schedulePostPracticeFeedback, showFeedbackPanel } from "./student-engagement.js";
 import { landingNavigation, landingPage } from "./landing-page.js";
 const SUBJECTS = [
+  { id: "agricultural-science", name: "Agricultural Science", description: "Crop production, soil science, animal husbandry, agricultural economics and extension" },
   { id: "biology", name: "Biology", description: "JAMB cell biology, physiology, ecology, genetics and evolution" },
   { id: "chemistry", name: "Chemistry", description: "JAMB physical, inorganic and organic chemistry" },
   { id: "civic-education", name: "Civic Education", description: "WAEC & JAMB citizenship, human rights, democracy and governance" },
@@ -25,14 +26,14 @@ const SUBJECTS = [
   { id: "music", name: "Music", description: "JAMB music theory, African music and Western art music" },
   { id: "physics", name: "Physics", description: "JAMB mechanics, waves, electricity and modern physics" },
 ];
-const ALL_SUBJECT_ORDER = ["biology", "chemistry", "civic-education", "computer-studies", "economics", "english", "further-mathematics", "general-paper", "government", "history", "literature-in-english", "marketing", "mathematics", "music", "physics"].map(id => SUBJECTS.find(subject => subject.id === id));
+const ALL_SUBJECT_ORDER = ["agricultural-science", "biology", "chemistry", "civic-education", "computer-studies", "economics", "english", "further-mathematics", "general-paper", "government", "history", "literature-in-english", "marketing", "mathematics", "music", "physics"].map(id => SUBJECTS.find(subject => subject.id === id));
 
 const FAQS = [
   { group: "Getting started", q: "What is Seomtorch designed for?", a: "Seomtorch is a personal study companion for structured JAMB, WAEC, NECO and Post-UTME preparation. It helps you practise by topic, learn from corrections and see where your next study session will matter most." },
   { group: "Getting started", q: "Do I need an account or internet connection?", a: "Use an account and an internet connection to save answers, XP and test results across devices. Questions already cached on this device can be practised offline, but those answers remain on this device and do not update your account." },
   { group: "Getting started", q: "Can I install Seomtorch on my device?", a: "Yes. Use the Install app button. On iPhone or iPad, open Seomtorch in Safari, tap Share, then choose Add to Home Screen." },
   { group: "Practice and review", q: "How are questions selected?", a: "Sessions prioritise questions you have not seen, topics where your accuracy is lower, and questions you previously missed. Recently answered questions receive less priority, which reduces unnecessary repetition." },
-  { group: "Practice and review", q: "Which subjects are available?", a: "Biology, Chemistry, Civic Education, Computer Studies, Economics, English Language, Further Mathematics, General Paper, Government, History, Literature in English, Marketing, Mathematics, Music and Physics are available. Explanation coverage varies by question; you can report an answer or explanation that needs review." },
+  { group: "Practice and review", q: "Which subjects are available?", a: "Agricultural Science, Biology, Chemistry, Civic Education, Computer Studies, Economics, English Language, Further Mathematics, General Paper, Government, History, Literature in English, Marketing, Mathematics, Music and Physics are available. Explanation coverage varies by question; you can report an answer or explanation that needs review." },
   { group: "Practice and review", q: "Can I practise one topic only?", a: "Yes. Open Practice, select a subject, then choose a listed topic. You can also choose All topics for a mixed session within that subject." },
   { group: "Practice and review", q: "How do timed sessions work?", a: "Choose any question count from 10 to 100 and enter the number of minutes you want to study. One overall countdown runs across the complete session." },
   { group: "Practice and review", q: "Can I practise every subject together?", a: "Yes. Choose All subjects to build one balanced session. Questions are grouped into clear subject sections under one overall timer." },

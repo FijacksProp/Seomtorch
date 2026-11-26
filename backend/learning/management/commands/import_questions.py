@@ -10,6 +10,7 @@ from django.utils.text import slugify
 from learning.models import Question, QuestionBankRelease, Subject, Topic
 
 SUBJECT_DETAILS = {
+    "agricultural-science": ("Agricultural Science", "Crop production, soil science, animal husbandry, agricultural economics and extension", 16),
     "biology": ("Biology", "JAMB cell biology, physiology, ecology, genetics and evolution", 1),
     "chemistry": ("Chemistry", "JAMB physical, inorganic and organic chemistry", 2),
     "civic-education": ("Civic Education", "WAEC & JAMB citizenship, human rights, democracy and governance", 3),

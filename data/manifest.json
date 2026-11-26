@@ -1,6 +1,11 @@
 {
-  "version": 16,
+  "version": 17,
   "packs": [
+    {
+      "id": "agricultural-science",
+      "name": "Agricultural Science",
+      "file": "data/questions-agricultural-science.json"
+    },
     {
       "id": "biology",
       "name": "Biology",
