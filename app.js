@@ -108,6 +108,25 @@ function hideLoadingOverlay() {
   }
 }
 
+function renderSkeleton(variant = "list", label = "Loading content") {
+  const row = (withIcon = true) => `<div class="sk-row">${withIcon ? '<span class="sk-bone sk-circle lg"></span>' : ""}<div class="sk-row-copy"><span class="sk-bone sk-line md"></span><span class="sk-bone sk-line sm"></span></div><span class="sk-bone sk-pill"></span></div>`;
+  let body = "";
+  if (variant === "uni-departments" || variant === "uni-courses") {
+    body = `<div class="sk-card"><span class="sk-bone sk-line sm"></span><span class="sk-bone sk-line xl"></span><span class="sk-bone sk-line md"></span></div>${Array.from({ length: 4 }, () => row(true)).join("")}`;
+  } else if (variant === "uni-levels") {
+    body = `<div class="sk-hero"><span class="sk-bone sk-circle lg"></span><span class="sk-bone sk-line lg"></span><span class="sk-bone sk-line md"></span></div><div class="sk-grid-3">${Array.from({ length: 3 }, () => '<div class="sk-card"><span class="sk-bone sk-line lg"></span><span class="sk-bone sk-line sm"></span></div>').join("")}</div>`;
+  } else if (variant === "uni-course") {
+    body = `<div class="sk-hero"><span class="sk-bone sk-line sm"></span><span class="sk-bone sk-line xl"></span><span class="sk-bone sk-line md"></span></div>${Array.from({ length: 2 }, () => `<div class="sk-card"><span class="sk-bone sk-line md"></span>${row(false)}${row(false)}</div>`).join("")}`;
+  } else if (variant === "uni-note") {
+    body = `<div class="sk-hero"><span class="sk-bone sk-line sm"></span><span class="sk-bone sk-line xl"></span><span class="sk-bone sk-line md"></span></div>${Array.from({ length: 4 }, () => '<div class="sk-card"><span class="sk-bone sk-line md"></span><span class="sk-bone sk-line"></span><span class="sk-bone sk-line"></span><span class="sk-bone sk-line sm"></span></div>').join("")}`;
+  } else if (variant === "progress") {
+    body = `<div class="sk-grid-4">${Array.from({ length: 4 }, () => '<div class="sk-card"><span class="sk-bone sk-line sm"></span><span class="sk-bone sk-line lg"></span></div>').join("")}</div><div class="sk-card"><span class="sk-bone sk-line md"></span><span class="sk-bone sk-chart"></span></div>${Array.from({ length: 3 }, () => row(false)).join("")}`;
+  } else {
+    body = Array.from({ length: 4 }, () => row(true)).join("");
+  }
+  return `<div class="sk-screen" role="status" aria-live="polite" aria-busy="true" aria-label="${escapeHtml(label)}">${body}</div>`;
+}
+
 let db;
 let questions = [];
 let profile = null;
@@ -2776,7 +2795,7 @@ function renderProgress() {
     loadProgress();
   }
   if (!progressData && !completedTests.length && !attempts.length) {
-    app.innerHTML = shell(`<section class="page"><p class="eyebrow">Progress</p><h1>Your test record.</h1><p class="lede">Preparing completed papers, score trends and subject analysis.</p><div class="progress-loading"><i></i><i></i><i></i></div></section>`);
+    app.innerHTML = shell(`<section class="page progress-page"><p class="eyebrow">Progress</p><h1>Insights</h1><p class="lede">Preparing completed papers, score trends and subject analysis.</p>${renderSkeleton("progress", "Loading insights")}</section>`);
     bindShell(); loadProgress(); return;
   }
   const xp = xpState();
@@ -4170,14 +4189,14 @@ function badgeArtwork(item, className = "") {
 
 
 function renderAchievementSummary() {
-  if (!achievementsData) return `<section class="achievement-summary loading"><div><p class="eyebrow">Achievements</p><h2>Your record is loading.</h2></div><div class="achievement-loading"><i></i><i></i><i></i></div></section>`;
+  if (!achievementsData) return `<section class="achievement-summary loading" role="status" aria-busy="true" aria-label="Loading achievements"><div><p class="eyebrow">Achievements</p><h2>Your record is loading.</h2></div><div class="sk-row-copy" style="min-width:140px"><span class="sk-bone sk-line md"></span><span class="sk-bone sk-line sm"></span></div></section>`;
   const earned = achievementsData.badges.filter(item => item.earned).slice(0, 7);
   return `<section class="achievement-summary"><div class="achievement-summary-copy"><p class="eyebrow">Achievements</p><h2>${achievementsData.earned_count ? `${achievementsData.earned_count} earned so far.` : "Your first badge is ahead."}</h2><p>${achievementsData.earned_count ? "A compact record of the work you have already put in." : "Every completed session moves an achievement closer."}</p></div><div class="earned-badge-strip">${earned.length ? earned.map(item => `<span class="mini-badge ${escapeHtml(item.tier)}" title="${escapeHtml(item.name)}">${badgeArtwork(item)}<small>${escapeHtml(item.name)}</small></span>`).join("") : '<span class="no-badges-yet">No badges earned yet</span>'}</div><button class="achievement-open" id="open-achievements"><span>Explore all badges</span><strong>${achievementsData.earned_count} / ${achievementsData.total_count}</strong><i aria-hidden="true">→</i></button></section>`;
 }
 
 function renderAchievements() {
   if (!achievementsData) {
-    app.innerHTML = shell(`<section class="page achievements-page"><button class="button outline" data-route="profile">← Profile</button><div class="achievement-page-head"><p class="eyebrow">Personal record</p><h1>Achievements.</h1><p class="lede">A clear record of consistency, learning habits and milestones—not a public ranking.</p></div><div class="achievement-loading page-loading"><i></i><i></i><i></i></div></section>`);
+    app.innerHTML = shell(`<section class="page achievements-page"><button class="button outline" data-route="profile">← Profile</button><div class="achievement-page-head"><p class="eyebrow">Personal record</p><h1>Achievements.</h1><p class="lede">A clear record of consistency, learning habits and milestones—not a public ranking.</p></div>${renderSkeleton("list", "Loading achievements")}</section>`);
     bindShell(); loadAchievements(); return;
   }
   const categories = [...new Set(achievementsData.badges.map(item => item.category))];
@@ -4684,7 +4703,12 @@ async function renderUniversity() {
 }
 
 async function renderUniDepartments() {
-  const data = await fetchUniJson("data/university/index.json");
+  const indexPath = "data/university/index.json";
+  if (!uniContentCache[indexPath]) {
+    app.innerHTML = uniShell(renderSkeleton("uni-departments", "Loading departments"), [{ label: "University" }]);
+    bindShell();
+  }
+  const data = await fetchUniJson(indexPath);
   if (!data) {
     app.innerHTML = uniShell(`<div class="uni-empty"><h2>Unable to load departments</h2><p>Please check your connection and try again.</p><button class="button uni-btn" id="uni-retry">Retry</button></div>`);
     bindShell();
@@ -4711,7 +4735,17 @@ async function renderUniLevels() {
   const dept = uniDepartments?.find(d => d.id === uniDeptId);
   if (!dept) { uniRoute = "departments"; return renderUniDepartments(); }
 
-  const meta = await fetchUniJson(`data/university/${uniDeptId}/meta.json`);
+  const metaPath = `data/university/${uniDeptId}/meta.json`;
+  if (!uniContentCache[metaPath]) {
+    const loadingBreadcrumbs = [
+      { label: "University", action: () => { uniRoute = "departments"; uniDeptId = null; } },
+      { label: dept.name }
+    ];
+    app.innerHTML = uniShell(renderSkeleton("uni-levels", `Loading ${dept.name} levels`), loadingBreadcrumbs);
+    bindShell();
+    bindUniCrumbs(loadingBreadcrumbs);
+  }
+  const meta = await fetchUniJson(metaPath);
   const description = meta?.description || dept.tagline;
   const levels = dept.levels;
 
@@ -4740,7 +4774,18 @@ async function renderUniCourses() {
   const dept = uniDepartments?.find(d => d.id === uniDeptId);
   if (!dept) { uniRoute = "departments"; return renderUniDepartments(); }
 
-  const data = await fetchUniJson(`data/university/${uniDeptId}/${uniLevel}/courses.json`);
+  const coursesPath = `data/university/${uniDeptId}/${uniLevel}/courses.json`;
+  if (!uniContentCache[coursesPath]) {
+    const loadingBreadcrumbs = [
+      { label: "University", action: () => { uniRoute = "departments"; uniDeptId = null; uniLevel = null; } },
+      { label: dept.name, action: () => { uniRoute = "levels"; uniLevel = null; } },
+      { label: `${uniLevel} Level` }
+    ];
+    app.innerHTML = uniShell(renderSkeleton("uni-courses", "Loading courses"), loadingBreadcrumbs);
+    bindShell();
+    bindUniCrumbs(loadingBreadcrumbs);
+  }
+  const data = await fetchUniJson(coursesPath);
   if (!data || !data.courses.length) {
     const breadcrumbs = [
       { label: "University", action: () => { uniRoute = "departments"; uniDeptId = null; uniLevel = null; } },
@@ -4778,16 +4823,19 @@ async function renderUniCourse() {
   const dept = uniDepartments?.find(d => d.id === uniDeptId);
   if (!dept) { uniRoute = "departments"; return renderUniDepartments(); }
 
-  const loadingBreadcrumbs = [
-    { label: "University", action: () => { uniRoute = "departments"; uniDeptId = null; uniLevel = null; uniCourseId = null; } },
-    { label: dept.name, action: () => { uniRoute = "levels"; uniCourseId = null; } },
-    { label: `${uniLevel} Level`, action: () => { uniRoute = "courses"; uniCourseId = null; } },
-    { label: "Opening course" }
-  ];
-  app.innerHTML = uniShell(`<section class="uni-course-loading" role="status" aria-live="polite" aria-busy="true"><span class="eyebrow">Course materials</span><h2>Opening ${escapeHtml(String(uniCourseId || "course").toUpperCase())}</h2><p>Preparing the course outline and study options…</p><div aria-hidden="true"><i></i><i></i><i></i></div></section>`, loadingBreadcrumbs);
-  bindShell(); bindUniCrumbs(loadingBreadcrumbs);
+  const coursePath = `data/university/${uniDeptId}/${uniLevel}/${uniCourseId}.json`;
+  if (!uniContentCache[coursePath]) {
+    const loadingBreadcrumbs = [
+      { label: "University", action: () => { uniRoute = "departments"; uniDeptId = null; uniLevel = null; uniCourseId = null; } },
+      { label: dept.name, action: () => { uniRoute = "levels"; uniCourseId = null; } },
+      { label: `${uniLevel} Level`, action: () => { uniRoute = "courses"; uniCourseId = null; } },
+      { label: "Opening course" }
+    ];
+    app.innerHTML = uniShell(renderSkeleton("uni-course", `Opening ${String(uniCourseId || "course").toUpperCase()}`), loadingBreadcrumbs);
+    bindShell(); bindUniCrumbs(loadingBreadcrumbs);
+  }
 
-  const data = await fetchUniJson(`data/university/${uniDeptId}/${uniLevel}/${uniCourseId}.json`);
+  const data = await fetchUniJson(coursePath);
   if (!data) {
     const breadcrumbs = [
       { label: "University", action: () => { uniRoute = "departments"; uniDeptId = null; uniLevel = null; uniCourseId = null; } },
@@ -6627,6 +6675,17 @@ async function renderUniNote() {
   const dept = uniDepartments?.find(d => d.id === uniDeptId);
   if (!dept) { uniRoute = "departments"; return renderUniDepartments(); }
 
+  if (!uniContentCache[uniNoteFile]) {
+    const loadingBreadcrumbs = [
+      { label: "University", action: () => { uniRoute = "departments"; uniDeptId = null; uniLevel = null; uniCourseId = null; uniNoteFile = null; stopUniNoteAudio(); } },
+      { label: dept.name, action: () => { uniRoute = "levels"; uniLevel = null; uniCourseId = null; uniNoteFile = null; stopUniNoteAudio(); } },
+      { label: `${uniLevel} Level`, action: () => { uniRoute = "courses"; uniCourseId = null; uniNoteFile = null; stopUniNoteAudio(); } },
+      { label: uniCourseId ? uniCourseId.toUpperCase() : "Course", action: () => { uniRoute = "course"; uniNoteFile = null; stopUniNoteAudio(); } },
+      { label: "Notebook" }
+    ];
+    app.innerHTML = uniShell(renderSkeleton("uni-note", "Loading notebook"), loadingBreadcrumbs);
+    bindShell(); bindUniCrumbs(loadingBreadcrumbs);
+  }
   const noteData = await fetchUniJson(uniNoteFile);
   if (!noteData) {
     const breadcrumbs = [
