@@ -1,7 +1,7 @@
 {
   "title": "Transport Mechanism and Homeostasis",
   "course": "PIO 201",
-  "totalQuestions": 70,
+  "totalQuestions": 120,
   "sections": [
     "Foundations of Homeostasis & Control Systems (Q1-Q15)",
     "Body Fluid Compartments & Measurement (Q16-Q30)",
@@ -9,7 +9,8 @@
     "Osmosis, Osmolality & Tonicity (Q43-Q52)",
     "Carrier-Mediated Transport & Ion Channels (Q53-Q60)",
     "Primary & Secondary Active Transport (Q61-Q69)",
-    "Intercellular Junctions & Vesicular Transport (Q70)"
+    "Intercellular Junctions & Vesicular Transport (Q70)",
+    "Additional Homeostasis & Membrane Transport (Q71-Q120)"
   ],
   "questions": [
     {
@@ -1061,6 +1062,756 @@
       "explanation": "Desmosomes (macula adherens) connect the intermediate filaments of two adjacent cells. They function like spot welds to provide immense mechanical strength, particularly in tissues subjected to high stress like the skin and myocardium.",
       "section": "Intercellular Junctions & Vesicular Transport",
       "questionNumber": 70
+    },
+    {
+      "id": "pio201-th-71",
+      "text": "Which of the following best describes homeostasis?",
+      "options": [
+        "Maintenance of all body variables at completely constant values",
+        "Maintenance of a relatively stable internal environment despite external changes",
+        "Prevention of all changes in the internal environment",
+        "Maintenance of body temperature alone"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Maintenance of a relatively stable internal environment despite external changes",
+      "explanation": "Homeostasis is the ability of the body to maintain a relatively constant internal environment despite changes in the external environment. It does not mean that all body variables remain completely constant. Rather, they fluctuate within normal physiological limits.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 71
+    },
+    {
+      "id": "pio201-th-72",
+      "text": "The fluid mosaic model of the plasma membrane describes the membrane as:",
+      "options": [
+        "A rigid structure composed entirely of phospholipids",
+        "A phospholipid bilayer with proteins embedded within or associated with it",
+        "A protein bilayer surrounded by carbohydrates",
+        "A continuous layer of cholesterol molecules"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A phospholipid bilayer with proteins embedded within or associated with it",
+      "explanation": "The fluid mosaic model describes the plasma membrane as a flexible phospholipid bilayer containing proteins. The phospholipids form the basic structure, while proteins perform functions such as transport, cell signalling and receptor activity.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 72
+    },
+    {
+      "id": "pio201-th-73",
+      "text": "Which of the following is the primary function of negative feedback in physiological regulation?",
+      "options": [
+        "Amplification of an initial stimulus",
+        "Prevention of receptor activation",
+        "Reversal or reduction of an initial disturbance",
+        "Production of continuous physiological changes"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Reversal or reduction of an initial disturbance",
+      "explanation": "Negative feedback works by opposing the original change in a physiological variable. For example, when blood glucose rises, insulin is released to reduce it. This helps restore the variable towards its normal range.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 73
+    },
+    {
+      "id": "pio201-th-74",
+      "text": "Which component of the plasma membrane is primarily responsible for forming its basic structural framework?",
+      "options": [
+        "Glycoproteins",
+        "Phospholipids",
+        "Peripheral proteins",
+        "Carbohydrates"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Phospholipids",
+      "explanation": "Phospholipids form the basic structural framework of the plasma membrane. Each phospholipid has a hydrophilic head and two hydrophobic fatty acid tails. They arrange themselves into a bilayer.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 74
+    },
+    {
+      "id": "pio201-th-75",
+      "text": "During childbirth, cervical stretching stimulates oxytocin release, which increases uterine contractions and causes further cervical stretching. This is an example of:",
+      "options": [
+        "Negative feedback",
+        "Positive feedback",
+        "Feedforward inhibition",
+        "Homeostatic adaptation"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Positive feedback",
+      "explanation": "During childbirth, cervical stretching stimulates the release of oxytocin from the posterior pituitary. Oxytocin increases uterine contractions, which produce further cervical stretching. This causes more oxytocin release, amplifying the original response until delivery occurs.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 75
+    },
+    {
+      "id": "pio201-th-76",
+      "text": "Which of the following statements correctly describes the arrangement of phospholipids in the cell membrane?",
+      "options": [
+        "Hydrophilic heads face the interior of the bilayer",
+        "Hydrophobic tails face the extracellular fluid",
+        "Hydrophilic heads face the aqueous environments on both sides",
+        "Both heads and tails face the extracellular fluid"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Hydrophilic heads face the aqueous environments on both sides",
+      "explanation": "The phospholipid bilayer has two layers of phospholipids. Their hydrophilic heads face the extracellular fluid and intracellular fluid, while their hydrophobic tails face each other in the centre of the membrane.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 76
+    },
+    {
+      "id": "pio201-th-77",
+      "text": "In a homeostatic control system, which component detects changes in a regulated variable?",
+      "options": [
+        "Effector",
+        "Receptor",
+        "Integrating centre",
+        "Target organ"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Receptor",
+      "explanation": "The receptor, also called the sensor, detects changes in a regulated variable. It sends information to the integrating centre, which processes the information and coordinates an appropriate response.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 77
+    },
+    {
+      "id": "pio201-th-78",
+      "text": "Which of the following substances can pass directly through the phospholipid bilayer most readily?",
+      "options": [
+        "Sodium ions",
+        "Glucose",
+        "Oxygen",
+        "Large plasma proteins"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Oxygen",
+      "explanation": "Oxygen is a small, non-polar molecule. It can pass directly through the hydrophobic region of the phospholipid bilayer by simple diffusion. Sodium ions and glucose require specific membrane transport mechanisms.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 78
+    },
+    {
+      "id": "pio201-th-79",
+      "text": "A sudden increase in body temperature stimulates sweating, which subsequently reduces body temperature. This is an example of:",
+      "options": [
+        "Positive feedback",
+        "Negative feedback",
+        "Feedforward control",
+        "Neural summation"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Negative feedback",
+      "explanation": "An increase in body temperature stimulates the hypothalamus, which activates sweat production. Evaporation of sweat removes heat from the body, reducing body temperature. The response opposes the initial change.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 79
+    },
+    {
+      "id": "pio201-th-80",
+      "text": "The cholesterol molecules present in the plasma membrane primarily function to:",
+      "options": [
+        "Generate ATP for membrane transport",
+        "Regulate membrane fluidity and stability",
+        "Form channels for sodium ions",
+        "Produce membrane carbohydrates"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Regulate membrane fluidity and stability",
+      "explanation": "Cholesterol is located between phospholipid molecules. It helps regulate membrane fluidity and reduces excessive changes in membrane permeability. Its effect depends on temperature.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 80
+    },
+    {
+      "id": "pio201-th-81",
+      "text": "Which of the following correctly represents the sequence of events in a typical homeostatic control system?",
+      "options": [
+        "Effector → Receptor → Control centre",
+        "Receptor → Control centre → Effector",
+        "Control centre → Receptor → Effector",
+        "Receptor → Effector → Control centre"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Receptor → Control centre → Effector",
+      "explanation": "A typical homeostatic system operates in three major stages:\n\n1. Receptor: Detects a change.\n2. Control centre: Processes the information and determines the response.\n3. Effector: Carries out the corrective response.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 81
+    },
+    {
+      "id": "pio201-th-82",
+      "text": "The glycocalyx of the plasma membrane is mainly formed by:",
+      "options": [
+        "Phospholipids and cholesterol",
+        "Glycoproteins and glycolipids",
+        "Actin and myosin",
+        "Sodium and potassium ions"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Glycoproteins and glycolipids",
+      "explanation": "The glycocalyx is a carbohydrate-rich coating on the extracellular surface of the plasma membrane. It is formed mainly by carbohydrate chains attached to membrane proteins and lipids. It contributes to cell recognition, adhesion and protection.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 82
+    },
+    {
+      "id": "pio201-th-83",
+      "text": "Which of the following is an important function of membrane proteins?",
+      "options": [
+        "Preventing all substances from crossing the membrane",
+        "Facilitating transport and acting as receptors",
+        "Producing the phospholipid bilayer",
+        "Preventing membrane fluidity"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Facilitating transport and acting as receptors",
+      "explanation": "Membrane proteins perform several important functions, including: transport of ions and molecules, reception of chemical signals, enzymatic activity, cell adhesion, and cell recognition.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 83
+    },
+    {
+      "id": "pio201-th-84",
+      "text": "The hypothalamus contributes to homeostasis primarily by:",
+      "options": [
+        "Regulating autonomic and endocrine functions",
+        "Producing all circulating plasma proteins",
+        "Controlling all voluntary movements",
+        "Preventing changes in blood composition"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Regulating autonomic and endocrine functions",
+      "explanation": "The hypothalamus is an important homeostatic control centre. It regulates body temperature, thirst, hunger, water balance and autonomic functions. It also controls pituitary hormone secretion.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 84
+    },
+    {
+      "id": "pio201-th-85",
+      "text": "Which of the following transport mechanisms requires energy directly from ATP hydrolysis?",
+      "options": [
+        "Simple diffusion",
+        "Osmosis",
+        "Primary active transport",
+        "Facilitated diffusion"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Primary active transport",
+      "explanation": "Primary active transport uses energy directly from ATP hydrolysis to move substances against their electrochemical gradients. A good example is the sodium-potassium ATPase pump.",
+      "section": "Primary & Secondary Active Transport",
+      "questionNumber": 85
+    },
+    {
+      "id": "pio201-th-86",
+      "text": "Which of the following is the best example of a negative feedback mechanism?",
+      "options": [
+        "Oxytocin release during labour",
+        "Platelet activation during blood clotting",
+        "Regulation of blood glucose by insulin",
+        "Opening of voltage-gated sodium channels during an action potential"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Regulation of blood glucose by insulin",
+      "explanation": "When blood glucose increases, pancreatic beta cells release insulin. Insulin promotes glucose uptake and storage, thereby reducing blood glucose towards its normal range. This is negative feedback.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 86
+    },
+    {
+      "id": "pio201-th-87",
+      "text": "Integral membrane proteins differ from peripheral membrane proteins because integral proteins:",
+      "options": [
+        "Are found only on the extracellular surface",
+        "Are embedded within the lipid bilayer",
+        "Are composed entirely of carbohydrates",
+        "Cannot participate in transport"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Are embedded within the lipid bilayer",
+      "explanation": "Integral proteins are embedded within the phospholipid bilayer. Some extend across the entire membrane and are called transmembrane proteins. Peripheral proteins, in contrast, are associated with the membrane surface.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 87
+    },
+    {
+      "id": "pio201-th-88",
+      "text": "The maintenance of blood glucose concentration within a normal physiological range is an example of:",
+      "options": [
+        "Homeostatic regulation",
+        "Positive feedback",
+        "Uncontrolled physiological activity",
+        "Structural adaptation"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Homeostatic regulation",
+      "explanation": "Blood glucose regulation is an example of homeostasis because the body uses hormonal mechanisms to maintain glucose concentration within a relatively narrow physiological range.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 88
+    },
+    {
+      "id": "pio201-th-89",
+      "text": "Which of the following best explains facilitated diffusion?",
+      "options": [
+        "Movement of substances against their concentration gradient using ATP",
+        "Movement of substances down their concentration gradient through membrane proteins",
+        "Movement of substances through the lipid bilayer without proteins",
+        "Movement of substances through vesicles using ATP"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Movement of substances down their concentration gradient through membrane proteins",
+      "explanation": "Facilitated diffusion is a passive transport process. Substances move down their concentration or electrochemical gradients with the assistance of channel or carrier proteins. It does not require ATP directly.",
+      "section": "Carrier-Mediated Transport & Ion Channels",
+      "questionNumber": 89
+    },
+    {
+      "id": "pio201-th-90",
+      "text": "Which of the following is NOT a characteristic of the plasma membrane?",
+      "options": [
+        "Selective permeability",
+        "Dynamic organisation",
+        "Presence of membrane proteins",
+        "Complete impermeability to all polar substances"
+      ],
+      "correct": 3,
+      "correctAnswer": "D. Complete impermeability to all polar substances",
+      "explanation": "The plasma membrane is selectively permeable, not completely impermeable. Some polar substances can cross through specific channels or carrier proteins. For example, glucose crosses through glucose transporters.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 90
+    },
+    {
+      "id": "pio201-th-91",
+      "text": "In a typical negative feedback system, the integrating centre is responsible for:",
+      "options": [
+        "Detecting the initial stimulus",
+        "Comparing incoming information with the regulated level and coordinating a response",
+        "Producing the original disturbance",
+        "Carrying out the final corrective response"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Comparing incoming information with the regulated level and coordinating a response",
+      "explanation": "The integrating centre receives information from receptors, evaluates the change and coordinates an appropriate response. The hypothalamus is an example of an integrating centre in temperature regulation.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 91
+    },
+    {
+      "id": "pio201-th-92",
+      "text": "Which of the following best describes osmosis?",
+      "options": [
+        "Movement of solute particles from low to high concentration",
+        "Movement of water across a selectively permeable membrane towards the side with higher effective solute concentration",
+        "Movement of ions through ATP-dependent pumps",
+        "Movement of water against its osmotic gradient using ATP"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Movement of water across a selectively permeable membrane towards the side with higher effective solute concentration",
+      "explanation": "Osmosis is the net movement of water across a selectively permeable membrane from a region of higher water potential to a region of lower water potential. In simple terms, water moves towards the side with higher effective solute concentration.",
+      "section": "Osmosis, Osmolality & Tonicity",
+      "questionNumber": 92
+    },
+    {
+      "id": "pio201-th-93",
+      "text": "Which membrane component is most directly involved in cell recognition?",
+      "options": [
+        "Glycoproteins",
+        "Triglycerides",
+        "Cholesterol",
+        "Phosphatidic acid alone"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Glycoproteins",
+      "explanation": "Glycoproteins contain carbohydrate chains attached to proteins. These carbohydrate portions are important in cell recognition, immune identification and communication between cells.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 93
+    },
+    {
+      "id": "pio201-th-94",
+      "text": "When a person experiences a sudden decrease in blood pressure upon standing, baroreceptors initiate compensatory responses. This is an example of:",
+      "options": [
+        "Positive feedback",
+        "Negative feedback",
+        "Feedforward inhibition",
+        "Unregulated physiological activity"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Negative feedback",
+      "explanation": "When a person stands suddenly, blood pressure may fall temporarily. Baroreceptors detect the reduction in arterial pressure and send signals to the cardiovascular control centres. These centres increase sympathetic activity, helping restore blood pressure.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 94
+    },
+    {
+      "id": "pio201-th-95",
+      "text": "The sodium-potassium ATPase pump normally transports:",
+      "options": [
+        "Three sodium ions into the cell and two potassium ions out",
+        "Two sodium ions out of the cell and three potassium ions in",
+        "Three sodium ions out of the cell and two potassium ions in",
+        "Equal numbers of sodium and potassium ions in opposite directions"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Three sodium ions out of the cell and two potassium ions in",
+      "explanation": "The sodium-potassium ATPase pump moves 3 Na+ out of the cell and 2 K+ into the cell. This process uses one ATP molecule per cycle. It helps maintain ionic concentration gradients and contributes to the resting membrane potential.",
+      "section": "Primary & Secondary Active Transport",
+      "questionNumber": 95
+    },
+    {
+      "id": "pio201-th-96",
+      "text": "Which of the following best explains why the plasma membrane is described as selectively permeable?",
+      "options": [
+        "It allows every substance to cross freely",
+        "It permits certain substances to cross more readily than others",
+        "It prevents all charged particles from crossing",
+        "It allows only water molecules to cross"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It permits certain substances to cross more readily than others",
+      "explanation": "Selective permeability means that the plasma membrane controls what enters and leaves the cell. Small non-polar molecules cross relatively easily, while ions and many polar molecules require transport proteins.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 96
+    },
+    {
+      "id": "pio201-th-97",
+      "text": "Which of the following is an example of positive feedback?",
+      "options": [
+        "Regulation of blood pressure by baroreceptors",
+        "Reduction of body temperature through sweating",
+        "Amplification of platelet activation during blood clotting",
+        "Regulation of blood calcium concentration"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Amplification of platelet activation during blood clotting",
+      "explanation": "During blood clotting, activated platelets release substances that recruit and activate additional platelets. This amplifies the response until a platelet plug is formed.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 97
+    },
+    {
+      "id": "pio201-th-98",
+      "text": "The hydrophobic region of the phospholipid bilayer is formed by:",
+      "options": [
+        "Phosphate groups",
+        "Fatty acid tails",
+        "Carbohydrate chains",
+        "Glycoprotein heads"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Fatty acid tails",
+      "explanation": "The fatty acid tails are hydrophobic, meaning they repel or do not interact favourably with water. They face inward towards one another, forming the non-polar interior of the phospholipid bilayer.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 98
+    },
+    {
+      "id": "pio201-th-99",
+      "text": "Which of the following statements about membrane fluidity is correct?",
+      "options": [
+        "Increased saturated fatty acid content generally increases membrane fluidity",
+        "Unsaturated fatty acid tails generally increase membrane fluidity",
+        "Cholesterol always makes membranes more fluid",
+        "Membrane fluidity is independent of temperature"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Unsaturated fatty acid tails generally increase membrane fluidity",
+      "explanation": "Unsaturated fatty acid tails contain double bonds that introduce bends or kinks. These kinks prevent phospholipids from packing closely together, thereby increasing membrane fluidity.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 99
+    },
+    {
+      "id": "pio201-th-100",
+      "text": "A cell is placed in a hypertonic solution. What is the most likely outcome?",
+      "options": [
+        "Water enters the cell, causing it to swell",
+        "Water leaves the cell, causing it to shrink",
+        "There is no net movement of water",
+        "Solutes move into the cell until it bursts"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Water leaves the cell, causing it to shrink",
+      "explanation": "A hypertonic solution has a higher effective solute concentration than the cell interior. Water moves out of the cell by osmosis, causing the cell to shrink.",
+      "section": "Osmosis, Osmolality & Tonicity",
+      "questionNumber": 100
+    },
+    {
+      "id": "pio201-th-101",
+      "text": "Which of the following physiological variables is primarily regulated by the kidneys?",
+      "options": [
+        "Visual acuity",
+        "Plasma electrolyte concentration",
+        "Hearing sensitivity",
+        "Voluntary muscle activity"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Plasma electrolyte concentration",
+      "explanation": "The kidneys regulate electrolyte balance by controlling the reabsorption and excretion of ions such as sodium, potassium, calcium and chloride. They also contribute to water balance and acid-base regulation.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 101
+    },
+    {
+      "id": "pio201-th-102",
+      "text": "Which of the following is a characteristic of primary active transport?",
+      "options": [
+        "It moves substances down their concentration gradient",
+        "It requires ATP directly",
+        "It occurs exclusively through lipid diffusion",
+        "It does not involve membrane proteins"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It requires ATP directly",
+      "explanation": "Primary active transport uses energy directly from ATP hydrolysis to move substances against their electrochemical gradients. The sodium-potassium ATPase is a classic example.",
+      "section": "Primary & Secondary Active Transport",
+      "questionNumber": 102
+    },
+    {
+      "id": "pio201-th-103",
+      "text": "The plasma membrane contributes to the maintenance of resting membrane potential mainly through:",
+      "options": [
+        "Its selective permeability to ions and the activity of ion pumps",
+        "The complete absence of charged particles",
+        "The unrestricted movement of all ions",
+        "The continuous breakdown of membrane proteins"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Its selective permeability to ions and the activity of ion pumps",
+      "explanation": "The resting membrane potential results from unequal ion distribution across the membrane and selective membrane permeability, particularly to potassium. The sodium-potassium pump maintains the concentration gradients that support this electrical potential.",
+      "section": "Carrier-Mediated Transport & Ion Channels",
+      "questionNumber": 103
+    },
+    {
+      "id": "pio201-th-104",
+      "text": "Which of the following best describes the concept of a set point in homeostasis?",
+      "options": [
+        "The maximum concentration a substance can attain",
+        "The reference level around which a regulated variable is maintained",
+        "The point at which physiological activity permanently stops",
+        "The minimum possible value of a physiological variable"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. The reference level around which a regulated variable is maintained",
+      "explanation": "A set point is the reference value used by a regulatory system. For example, normal body temperature is approximately 37°C, although it naturally fluctuates around this value.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 104
+    },
+    {
+      "id": "pio201-th-105",
+      "text": "Which membrane structure is primarily responsible for forming channels that allow selected ions to cross the plasma membrane?",
+      "options": [
+        "Glycolipids",
+        "Channel proteins",
+        "Cholesterol molecules",
+        "Carbohydrate chains"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Channel proteins",
+      "explanation": "Channel proteins form selective pathways through the membrane, allowing particular ions or molecules to cross. Examples include sodium channels, potassium channels and aquaporins.",
+      "section": "Carrier-Mediated Transport & Ion Channels",
+      "questionNumber": 105
+    },
+    {
+      "id": "pio201-th-106",
+      "text": "Which of the following statements about the fluid mosaic model is INCORRECT?",
+      "options": [
+        "The membrane contains a phospholipid bilayer",
+        "Proteins may move laterally within the membrane",
+        "The membrane is a completely rigid and immovable structure",
+        "Cholesterol influences membrane properties"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. The membrane is a completely rigid and immovable structure",
+      "explanation": "The fluid mosaic model describes the plasma membrane as a dynamic and flexible structure. Many membrane proteins and phospholipids can move laterally within the bilayer.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 106
+    },
+    {
+      "id": "pio201-th-107",
+      "text": "A rise in blood glucose concentration stimulates insulin secretion, which subsequently reduces blood glucose concentration. The reduction in glucose acts to:",
+      "options": [
+        "Amplify insulin secretion indefinitely",
+        "Reduce the original stimulus for insulin secretion",
+        "Activate positive feedback",
+        "Prevent glucose uptake by body cells"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Reduce the original stimulus for insulin secretion",
+      "explanation": "As insulin lowers blood glucose, the stimulus responsible for insulin secretion decreases. Consequently, insulin secretion also reduces. This is a negative feedback mechanism.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 107
+    },
+    {
+      "id": "pio201-th-108",
+      "text": "Which of the following is an example of secondary active transport?",
+      "options": [
+        "Sodium-potassium ATPase activity",
+        "Sodium-glucose cotransport",
+        "Simple diffusion of oxygen",
+        "Osmosis through aquaporins"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Sodium-glucose cotransport",
+      "explanation": "Secondary active transport uses energy stored in an ion gradient, rather than directly hydrolysing ATP at the cotransporter itself. In sodium-glucose cotransport, sodium moves down its electrochemical gradient and provides the energy needed to move glucose against its concentration gradient.",
+      "section": "Primary & Secondary Active Transport",
+      "questionNumber": 108
+    },
+    {
+      "id": "pio201-th-109",
+      "text": "The primary function of peripheral membrane proteins is best described as:",
+      "options": [
+        "Forming the hydrophobic core of the membrane",
+        "Performing various regulatory and structural functions at the membrane surface",
+        "Forming the fatty acid tails of phospholipids",
+        "Preventing all movement of membrane components"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Performing various regulatory and structural functions at the membrane surface",
+      "explanation": "Peripheral membrane proteins are loosely associated with the inner or outer surface of the plasma membrane. They may function in cell signalling, enzymatic reactions and structural support.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 109
+    },
+    {
+      "id": "pio201-th-110",
+      "text": "Which of the following best describes homeostatic equilibrium in the human body?",
+      "options": [
+        "Complete absence of physiological changes",
+        "A dynamic state in which physiological variables fluctuate within acceptable limits",
+        "Permanent maintenance of every body variable at one exact value",
+        "A condition in which all body systems operate independently"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. A dynamic state in which physiological variables fluctuate within acceptable limits",
+      "explanation": "Homeostasis is dynamic rather than static. Physiological variables such as blood glucose, temperature and blood pressure continuously fluctuate, but regulatory mechanisms keep them within acceptable limits.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 110
+    },
+    {
+      "id": "pio201-th-111",
+      "text": "Which of the following substances would require a specific transport protein to cross the plasma membrane efficiently?",
+      "options": [
+        "Oxygen",
+        "Carbon dioxide",
+        "Glucose",
+        "Steroid hormones"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. Glucose",
+      "explanation": "Glucose is relatively large and polar, making direct passage through the hydrophobic lipid bilayer difficult. It crosses cell membranes through specific glucose transport proteins, such as GLUT transporters.",
+      "section": "Carrier-Mediated Transport & Ion Channels",
+      "questionNumber": 111
+    },
+    {
+      "id": "pio201-th-112",
+      "text": "Which of the following is the most appropriate description of an effector in a homeostatic control system?",
+      "options": [
+        "A structure that detects changes in the environment",
+        "A structure that compares the actual value with the set point",
+        "A structure that produces a response to correct a disturbance",
+        "A structure that generates the original stimulus"
+      ],
+      "correct": 2,
+      "correctAnswer": "C. A structure that produces a response to correct a disturbance",
+      "explanation": "An effector is the organ, tissue or cell that carries out the corrective response. For example, sweat glands act as effectors during temperature regulation.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 112
+    },
+    {
+      "id": "pio201-th-113",
+      "text": "The membrane carbohydrates are generally located:",
+      "options": [
+        "Exclusively on the cytoplasmic surface",
+        "On the extracellular surface of the plasma membrane",
+        "Between the hydrophobic fatty acid tails",
+        "Exclusively within the nucleus"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. On the extracellular surface of the plasma membrane",
+      "explanation": "Carbohydrate chains attached to membrane proteins and lipids are generally found on the extracellular surface. They form part of the glycocalyx and are involved in cell recognition and adhesion.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 113
+    },
+    {
+      "id": "pio201-th-114",
+      "text": "Which of the following is a major physiological consequence of failure of homeostatic regulation?",
+      "options": [
+        "Improved cellular function",
+        "Development of disturbances in the internal environment",
+        "Permanent stability of body variables",
+        "Increased efficiency of all organ systems"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Development of disturbances in the internal environment",
+      "explanation": "Failure of homeostatic regulation can disrupt normal physiological conditions. This may result in disease, impaired cellular function or, in severe cases, death.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 114
+    },
+    {
+      "id": "pio201-th-115",
+      "text": "Which of the following statements correctly distinguishes simple diffusion from facilitated diffusion?",
+      "options": [
+        "Simple diffusion requires ATP, while facilitated diffusion does not",
+        "Simple diffusion occurs through the lipid bilayer, while facilitated diffusion involves membrane proteins",
+        "Both processes require ATP hydrolysis",
+        "Facilitated diffusion always moves substances against their concentration gradients"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Simple diffusion occurs through the lipid bilayer, while facilitated diffusion involves membrane proteins",
+      "explanation": "Both processes are passive and do not require ATP. Simple diffusion moves substances directly through the phospholipid bilayer, whereas facilitated diffusion moves substances through specific channel or carrier proteins down their concentration or electrochemical gradients.",
+      "section": "Carrier-Mediated Transport & Ion Channels",
+      "questionNumber": 115
+    },
+    {
+      "id": "pio201-th-116",
+      "text": "Which of the following best explains the role of the sodium-potassium pump in maintaining cellular function?",
+      "options": [
+        "It produces glucose for cellular metabolism",
+        "It maintains sodium and potassium concentration gradients across the membrane",
+        "It allows unrestricted movement of sodium and potassium",
+        "It directly synthesises membrane phospholipids"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. It maintains sodium and potassium concentration gradients across the membrane",
+      "explanation": "The sodium-potassium pump maintains high intracellular potassium and high extracellular sodium concentrations. These gradients are essential for nerve impulses, muscle contraction, cell volume regulation and secondary active transport.",
+      "section": "Primary & Secondary Active Transport",
+      "questionNumber": 116
+    },
+    {
+      "id": "pio201-th-117",
+      "text": "Which of the following is an example of feedforward regulation?",
+      "options": [
+        "Sweating after an increase in body temperature",
+        "Increased salivation in response to the sight or smell of food before eating",
+        "Insulin release following an increase in blood glucose",
+        "Increased heart rate following a fall in blood pressure"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Increased salivation in response to the sight or smell of food before eating",
+      "explanation": "Feedforward regulation involves anticipating a physiological demand and initiating a response before the actual disturbance occurs. Seeing or smelling food can stimulate salivation in preparation for digestion.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 117
+    },
+    {
+      "id": "pio201-th-118",
+      "text": "Which of the following membrane components is amphipathic?",
+      "options": [
+        "Phospholipid",
+        "Triglyceride",
+        "Glycogen",
+        "Cholesterol ester"
+      ],
+      "correct": 0,
+      "correctAnswer": "A. Phospholipid",
+      "explanation": "Phospholipids are amphipathic molecules because they contain both a hydrophilic phosphate-containing head and hydrophobic fatty acid tails. This property allows them to form a bilayer in an aqueous environment.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 118
+    },
+    {
+      "id": "pio201-th-119",
+      "text": "Which of the following statements about receptor proteins in the plasma membrane is correct?",
+      "options": [
+        "They only transport water molecules",
+        "They recognise specific signalling molecules and initiate cellular responses",
+        "They prevent communication between cells",
+        "They are found exclusively within the cytoplasm"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. They recognise specific signalling molecules and initiate cellular responses",
+      "explanation": "Receptor proteins bind specific signalling molecules called ligands. Binding activates signalling pathways that produce appropriate cellular responses. Examples include receptors for insulin and various neurotransmitters.",
+      "section": "Membrane Structure, Permeability & Simple Diffusion",
+      "questionNumber": 119
+    },
+    {
+      "id": "pio201-th-120",
+      "text": "The principal reason why positive feedback mechanisms are relatively uncommon in the maintenance of homeostasis is that they:",
+      "options": [
+        "Always decrease the magnitude of an initial stimulus",
+        "Tend to amplify deviations rather than restore the original condition",
+        "Prevent the activation of receptors",
+        "Always require ATP for their operation"
+      ],
+      "correct": 1,
+      "correctAnswer": "B. Tend to amplify deviations rather than restore the original condition",
+      "explanation": "Positive feedback amplifies an initial stimulus rather than opposing it. This makes it unsuitable for most routine homeostatic regulation, which requires stability. However, positive feedback is useful in specific processes such as childbirth and blood clotting.",
+      "section": "Foundations of Homeostasis & Control Systems",
+      "questionNumber": 120
     }
   ]
 }
